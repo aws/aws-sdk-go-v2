@@ -2,6 +2,30 @@
 
 package types
 
+type AccessorNetworkType string
+
+// Enum values for AccessorNetworkType
+const (
+	AccessorNetworkTypeEthereumGoerli           AccessorNetworkType = "ETHEREUM_GOERLI"
+	AccessorNetworkTypeEthereumMainnet          AccessorNetworkType = "ETHEREUM_MAINNET"
+	AccessorNetworkTypeEthereumMainnetAndGoerli AccessorNetworkType = "ETHEREUM_MAINNET_AND_GOERLI"
+	AccessorNetworkTypePolygonMainnet           AccessorNetworkType = "POLYGON_MAINNET"
+	AccessorNetworkTypePolygonMumbai            AccessorNetworkType = "POLYGON_MUMBAI"
+)
+
+// Values returns all known values for AccessorNetworkType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessorNetworkType) Values() []AccessorNetworkType {
+	return []AccessorNetworkType{
+		"ETHEREUM_GOERLI",
+		"ETHEREUM_MAINNET",
+		"ETHEREUM_MAINNET_AND_GOERLI",
+		"POLYGON_MAINNET",
+		"POLYGON_MUMBAI",
+	}
+}
+
 type AccessorStatus string
 
 // Enum values for AccessorStatus

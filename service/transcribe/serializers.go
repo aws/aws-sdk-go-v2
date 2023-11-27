@@ -2216,6 +2216,13 @@ func awsAwsjson11_serializeDocumentCallAnalyticsJobSettings(v *types.CallAnalyti
 		}
 	}
 
+	if v.Summarization != nil {
+		ok := object.Key("Summarization")
+		if err := awsAwsjson11_serializeDocumentSummarization(v.Summarization, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.VocabularyFilterMethod) > 0 {
 		ok := object.Key("VocabularyFilterMethod")
 		ok.String(string(v.VocabularyFilterMethod))
@@ -2751,6 +2758,18 @@ func awsAwsjson11_serializeDocumentSubtitles(v *types.Subtitles, value smithyjso
 	if v.OutputStartIndex != nil {
 		ok := object.Key("OutputStartIndex")
 		ok.Integer(*v.OutputStartIndex)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSummarization(v *types.Summarization, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GenerateAbstractiveSummary != nil {
+		ok := object.Key("GenerateAbstractiveSummary")
+		ok.Boolean(*v.GenerateAbstractiveSummary)
 	}
 
 	return nil

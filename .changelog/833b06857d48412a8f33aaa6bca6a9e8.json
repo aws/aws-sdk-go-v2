@@ -1,0 +1,8 @@
+{
+    "id": "833b0685-7d48-412a-8f33-aaa6bca6a9e8",
+    "type": "feature",
+    "description": "This release introduces support for interpretationSource in the runtime service response.",
+    "modules": [
+        "service/lexruntimev2"
+    ]
+}

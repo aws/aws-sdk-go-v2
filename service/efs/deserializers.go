@@ -7101,6 +7101,19 @@ func awsRestjson1_deserializeDocumentFileSystemSize(v **types.FileSystemSize, va
 				sv.Value = i64
 			}
 
+		case "ValueInArchive":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected FileSystemNullableSizeValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ValueInArchive = ptr.Int64(i64)
+			}
+
 		case "ValueInIA":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7486,6 +7499,15 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 
 	for key, value := range shape {
 		switch key {
+		case "TransitionToArchive":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TransitionToArchiveRules to be of type string, got %T instead", value)
+				}
+				sv.TransitionToArchive = types.TransitionToArchiveRules(jtv)
+			}
+
 		case "TransitionToIA":
 			if value != nil {
 				jtv, ok := value.(string)

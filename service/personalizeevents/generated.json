@@ -9,6 +9,8 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_PutActionInteractions.go",
+        "api_op_PutActions.go",
         "api_op_PutEvents.go",
         "api_op_PutItems.go",
         "api_op_PutUsers.go",

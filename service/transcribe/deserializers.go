@@ -5092,6 +5092,11 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSettings(v **types.CallAnal
 				return err
 			}
 
+		case "Summarization":
+			if err := awsAwsjson11_deserializeDocumentSummarization(&sv.Summarization, value); err != nil {
+				return err
+			}
+
 		case "VocabularyFilterMethod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7507,6 +7512,46 @@ func awsAwsjson11_deserializeDocumentSubtitlesOutput(v **types.SubtitlesOutput, 
 		case "SubtitleFileUris":
 			if err := awsAwsjson11_deserializeDocumentSubtitleFileUris(&sv.SubtitleFileUris, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSummarization(v **types.Summarization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Summarization
+	if *v == nil {
+		sv = &types.Summarization{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GenerateAbstractiveSummary":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.GenerateAbstractiveSummary = ptr.Bool(jtv)
 			}
 
 		default:

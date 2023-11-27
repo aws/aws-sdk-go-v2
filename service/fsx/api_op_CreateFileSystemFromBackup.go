@@ -122,7 +122,7 @@ type CreateFileSystemFromBackupInput struct {
 	// parameter, the default is the backup's StorageCapacity value. If used to create
 	// a file system other than OpenZFS, you must provide a value that matches the
 	// backup's StorageCapacity value. If you provide any other value, Amazon FSx
-	// responds with a 400 Bad Request.
+	// responds with with an HTTP status code 400 Bad Request.
 	StorageCapacity *int32
 
 	// Sets the storage type for the Windows or OpenZFS file system that you're

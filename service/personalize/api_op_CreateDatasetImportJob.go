@@ -18,6 +18,10 @@ import (
 // read from the data source, as Amazon Personalize makes a copy of your data and
 // processes it internally. For information on granting access to your Amazon S3
 // bucket, see Giving Amazon Personalize Access to Amazon S3 Resources (https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html)
+// . If you already created a recommender or deployed a custom solution version
+// with a campaign, how new bulk records influence recommendations depends on the
+// domain use case or recipe that you use. For more information, see How new data
+// influences real-time recommendations (https://docs.aws.amazon.com/personalize/latest/dg/how-new-data-influences-recommendations.html)
 // . By default, a dataset import job replaces any existing data in the dataset
 // that you imported in bulk. To add new records without replacing existing data,
 // specify INCREMENTAL for the import mode in the CreateDatasetImportJob operation.

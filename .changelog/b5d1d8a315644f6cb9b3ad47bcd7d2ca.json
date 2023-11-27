@@ -1,0 +1,8 @@
+{
+    "id": "b5d1d8a3-1564-4f6c-b9b3-ad47bcd7d2ca",
+    "type": "feature",
+    "description": "This release adds support for the CloudFormation Git sync feature. Git sync enables updating a CloudFormation stack from a template stored in a Git repository.",
+    "modules": [
+        "service/codestarconnections"
+    ]
+}

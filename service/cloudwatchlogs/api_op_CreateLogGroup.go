@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,7 +51,7 @@ func (c *Client) CreateLogGroup(ctx context.Context, params *CreateLogGroupInput
 
 type CreateLogGroupInput struct {
 
-	// The name of the log group.
+	// A name for the log group.
 	//
 	// This member is required.
 	LogGroupName *string
@@ -59,6 +60,15 @@ type CreateLogGroupInput struct {
 	// For more information, see Amazon Resource Names (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms)
 	// .
 	KmsKeyId *string
+
+	// Use this parameter to specify the log group class for this log group. There are
+	// two classes:
+	//   - The Standard log class supports all CloudWatch Logs features.
+	//   - The Infrequent Access log class supports a subset of CloudWatch Logs
+	//   features and incurs lower costs.
+	// If you omit this parameter, the default of STANDARD is used. For details about
+	// the features supported by each class, see Log classes (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)
+	LogGroupClass types.LogGroupClass
 
 	// The key-value pairs to use for the tags. You can grant users access to certain
 	// log groups while preventing them from accessing other log groups. To do so, tag

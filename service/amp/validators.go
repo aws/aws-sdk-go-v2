@@ -5,6 +5,7 @@ package amp
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -69,6 +70,26 @@ func (m *validateOpCreateRuleGroupsNamespace) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateScraper struct {
+}
+
+func (*validateOpCreateScraper) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateScraper) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateScraperInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateScraperInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAlertManagerDefinition struct {
 }
 
@@ -124,6 +145,26 @@ func (m *validateOpDeleteRuleGroupsNamespace) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRuleGroupsNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteScraper struct {
+}
+
+func (*validateOpDeleteScraper) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteScraper) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteScraperInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteScraperInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -204,6 +245,26 @@ func (m *validateOpDescribeRuleGroupsNamespace) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeRuleGroupsNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeScraper struct {
+}
+
+func (*validateOpDescribeScraper) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeScraper) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeScraperInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeScraperInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -401,6 +462,10 @@ func addOpCreateRuleGroupsNamespaceValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpCreateRuleGroupsNamespace{}, middleware.After)
 }
 
+func addOpCreateScraperValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateScraper{}, middleware.After)
+}
+
 func addOpDeleteAlertManagerDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlertManagerDefinition{}, middleware.After)
 }
@@ -411,6 +476,10 @@ func addOpDeleteLoggingConfigurationValidationMiddleware(stack *middleware.Stack
 
 func addOpDeleteRuleGroupsNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRuleGroupsNamespace{}, middleware.After)
+}
+
+func addOpDeleteScraperValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteScraper{}, middleware.After)
 }
 
 func addOpDeleteWorkspaceValidationMiddleware(stack *middleware.Stack) error {
@@ -427,6 +496,10 @@ func addOpDescribeLoggingConfigurationValidationMiddleware(stack *middleware.Sta
 
 func addOpDescribeRuleGroupsNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRuleGroupsNamespace{}, middleware.After)
+}
+
+func addOpDescribeScraperValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeScraper{}, middleware.After)
 }
 
 func addOpDescribeWorkspaceValidationMiddleware(stack *middleware.Stack) error {
@@ -463,6 +536,77 @@ func addOpUpdateLoggingConfigurationValidationMiddleware(stack *middleware.Stack
 
 func addOpUpdateWorkspaceAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkspaceAlias{}, middleware.After)
+}
+
+func validateAmpConfiguration(v *types.AmpConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AmpConfiguration"}
+	if v.WorkspaceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestination(v types.Destination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Destination"}
+	switch uv := v.(type) {
+	case *types.DestinationMemberAmpConfiguration:
+		if err := validateAmpConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[ampConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksConfiguration(v *types.EksConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksConfiguration"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSource(v types.Source) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Source"}
+	switch uv := v.(type) {
+	case *types.SourceMemberEksConfiguration:
+		if err := validateEksConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[eksConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCreateAlertManagerDefinitionInput(v *CreateAlertManagerDefinitionInput) error {
@@ -522,6 +666,35 @@ func validateOpCreateRuleGroupsNamespaceInput(v *CreateRuleGroupsNamespaceInput)
 	}
 }
 
+func validateOpCreateScraperInput(v *CreateScraperInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateScraperInput"}
+	if v.ScrapeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScrapeConfiguration"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAlertManagerDefinitionInput(v *DeleteAlertManagerDefinitionInput) error {
 	if v == nil {
 		return nil
@@ -562,6 +735,21 @@ func validateOpDeleteRuleGroupsNamespaceInput(v *DeleteRuleGroupsNamespaceInput)
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteScraperInput(v *DeleteScraperInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteScraperInput"}
+	if v.ScraperId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScraperId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -625,6 +813,21 @@ func validateOpDescribeRuleGroupsNamespaceInput(v *DescribeRuleGroupsNamespaceIn
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeScraperInput(v *DescribeScraperInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeScraperInput"}
+	if v.ScraperId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScraperId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

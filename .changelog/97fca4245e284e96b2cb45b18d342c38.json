@@ -1,0 +1,8 @@
+{
+    "id": "97fca424-5e28-4e96-b2cb-45b18d342c38",
+    "type": "feature",
+    "description": "Enables metadata in recommendations and next best action recommendations",
+    "modules": [
+        "service/personalizeruntime"
+    ]
+}

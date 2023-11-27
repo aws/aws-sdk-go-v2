@@ -670,6 +670,26 @@ func (m *validateOpGetMembers) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSecurityControlDefinition struct {
+}
+
+func (*validateOpGetSecurityControlDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSecurityControlDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSecurityControlDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSecurityControlDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInviteMembers struct {
 }
 
@@ -870,6 +890,26 @@ func (m *validateOpUpdateOrganizationConfiguration) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSecurityControl struct {
+}
+
+func (*validateOpUpdateSecurityControl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSecurityControl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSecurityControlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSecurityControlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateStandardsControl struct {
 }
 
@@ -1022,6 +1062,10 @@ func addOpGetMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMembers{}, middleware.After)
 }
 
+func addOpGetSecurityControlDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSecurityControlDefinition{}, middleware.After)
+}
+
 func addOpInviteMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInviteMembers{}, middleware.After)
 }
@@ -1060,6 +1104,10 @@ func addOpUpdateInsightValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateOrganizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateOrganizationConfiguration{}, middleware.After)
+}
+
+func addOpUpdateSecurityControlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSecurityControl{}, middleware.After)
 }
 
 func addOpUpdateStandardsControlValidationMiddleware(stack *middleware.Stack) error {
@@ -1384,6 +1432,39 @@ func validateNoteUpdate(v *types.NoteUpdate) error {
 	}
 	if v.UpdatedBy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdatedBy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameterConfiguration(v *types.ParameterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParameterConfiguration"}
+	if len(v.ValueType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameters(v map[string]types.ParameterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Parameters"}
+	for key := range v {
+		value := v[key]
+		if err := validateParameterConfiguration(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2274,6 +2355,21 @@ func validateOpGetMembersInput(v *GetMembersInput) error {
 	}
 }
 
+func validateOpGetSecurityControlDefinitionInput(v *GetSecurityControlDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSecurityControlDefinitionInput"}
+	if v.SecurityControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityControlId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpInviteMembersInput(v *InviteMembersInput) error {
 	if v == nil {
 		return nil
@@ -2430,6 +2526,28 @@ func validateOpUpdateOrganizationConfigurationInput(v *UpdateOrganizationConfigu
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOrganizationConfigurationInput"}
 	if v.AutoEnable == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoEnable"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSecurityControlInput(v *UpdateSecurityControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSecurityControlInput"}
+	if v.SecurityControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityControlId"))
+	}
+	if v.Parameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
+	} else if v.Parameters != nil {
+		if err := validateParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

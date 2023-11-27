@@ -1,0 +1,8 @@
+{
+    "id": "dcddb56f-5f5d-4ce8-9a25-346ab338b236",
+    "type": "feature",
+    "description": "The release introduces Multi-Region Resilience one-way data replication that allows you to replicate data from your primary WorkSpace to a standby WorkSpace in another AWS Region. DescribeWorkspaces now returns the status of data replication.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

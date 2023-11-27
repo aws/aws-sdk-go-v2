@@ -15,11 +15,12 @@ import (
 // event data store ARN. After you run DeleteEventDataStore , the event data store
 // enters a PENDING_DELETION state, and is automatically deleted after a wait
 // period of seven days. TerminationProtectionEnabled must be set to False on the
-// event data store; this operation cannot work if TerminationProtectionEnabled is
-// True . After you run DeleteEventDataStore on an event data store, you cannot
-// run ListQueries , DescribeQuery , or GetQueryResults on queries that are using
-// an event data store in a PENDING_DELETION state. An event data store in the
-// PENDING_DELETION state does not incur costs.
+// event data store and the FederationStatus must be DISABLED . You cannot delete
+// an event data store if TerminationProtectionEnabled is True or the
+// FederationStatus is ENABLED . After you run DeleteEventDataStore on an event
+// data store, you cannot run ListQueries , DescribeQuery , or GetQueryResults on
+// queries that are using an event data store in a PENDING_DELETION state. An
+// event data store in the PENDING_DELETION state does not incur costs.
 func (c *Client) DeleteEventDataStore(ctx context.Context, params *DeleteEventDataStoreInput, optFns ...func(*Options)) (*DeleteEventDataStoreOutput, error) {
 	if params == nil {
 		params = &DeleteEventDataStoreInput{}

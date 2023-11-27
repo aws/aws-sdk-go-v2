@@ -50,6 +50,46 @@ func (m *validateOpCreateHost) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRepositoryLink struct {
+}
+
+func (*validateOpCreateRepositoryLink) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRepositoryLink) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRepositoryLinkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRepositoryLinkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSyncConfiguration struct {
+}
+
+func (*validateOpCreateSyncConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSyncConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSyncConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSyncConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteConnection struct {
 }
 
@@ -90,6 +130,46 @@ func (m *validateOpDeleteHost) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteRepositoryLink struct {
+}
+
+func (*validateOpDeleteRepositoryLink) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRepositoryLink) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRepositoryLinkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRepositoryLinkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSyncConfiguration struct {
+}
+
+func (*validateOpDeleteSyncConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSyncConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSyncConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSyncConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetConnection struct {
 }
 
@@ -125,6 +205,146 @@ func (m *validateOpGetHost) HandleInitialize(ctx context.Context, in middleware.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetHostInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRepositoryLink struct {
+}
+
+func (*validateOpGetRepositoryLink) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRepositoryLink) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRepositoryLinkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRepositoryLinkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRepositorySyncStatus struct {
+}
+
+func (*validateOpGetRepositorySyncStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRepositorySyncStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRepositorySyncStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRepositorySyncStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResourceSyncStatus struct {
+}
+
+func (*validateOpGetResourceSyncStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceSyncStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceSyncStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceSyncStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSyncBlockerSummary struct {
+}
+
+func (*validateOpGetSyncBlockerSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSyncBlockerSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSyncBlockerSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSyncBlockerSummaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSyncConfiguration struct {
+}
+
+func (*validateOpGetSyncConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSyncConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSyncConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSyncConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRepositorySyncDefinitions struct {
+}
+
+func (*validateOpListRepositorySyncDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRepositorySyncDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRepositorySyncDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRepositorySyncDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSyncConfigurations struct {
+}
+
+func (*validateOpListSyncConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSyncConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSyncConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSyncConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,12 +430,80 @@ func (m *validateOpUpdateHost) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRepositoryLink struct {
+}
+
+func (*validateOpUpdateRepositoryLink) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRepositoryLink) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRepositoryLinkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRepositoryLinkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSyncBlocker struct {
+}
+
+func (*validateOpUpdateSyncBlocker) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSyncBlocker) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSyncBlockerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSyncBlockerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSyncConfiguration struct {
+}
+
+func (*validateOpUpdateSyncConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSyncConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSyncConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSyncConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConnection{}, middleware.After)
 }
 
 func addOpCreateHostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHost{}, middleware.After)
+}
+
+func addOpCreateRepositoryLinkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRepositoryLink{}, middleware.After)
+}
+
+func addOpCreateSyncConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSyncConfiguration{}, middleware.After)
 }
 
 func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -226,12 +514,48 @@ func addOpDeleteHostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteHost{}, middleware.After)
 }
 
+func addOpDeleteRepositoryLinkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRepositoryLink{}, middleware.After)
+}
+
+func addOpDeleteSyncConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSyncConfiguration{}, middleware.After)
+}
+
 func addOpGetConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConnection{}, middleware.After)
 }
 
 func addOpGetHostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetHost{}, middleware.After)
+}
+
+func addOpGetRepositoryLinkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRepositoryLink{}, middleware.After)
+}
+
+func addOpGetRepositorySyncStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRepositorySyncStatus{}, middleware.After)
+}
+
+func addOpGetResourceSyncStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceSyncStatus{}, middleware.After)
+}
+
+func addOpGetSyncBlockerSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSyncBlockerSummary{}, middleware.After)
+}
+
+func addOpGetSyncConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSyncConfiguration{}, middleware.After)
+}
+
+func addOpListRepositorySyncDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRepositorySyncDefinitions{}, middleware.After)
+}
+
+func addOpListSyncConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSyncConfigurations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -248,6 +572,18 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateHostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateHost{}, middleware.After)
+}
+
+func addOpUpdateRepositoryLinkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRepositoryLink{}, middleware.After)
+}
+
+func addOpUpdateSyncBlockerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSyncBlocker{}, middleware.After)
+}
+
+func addOpUpdateSyncConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSyncConfiguration{}, middleware.After)
 }
 
 func validateTag(v *types.Tag) error {
@@ -357,6 +693,62 @@ func validateOpCreateHostInput(v *CreateHostInput) error {
 	}
 }
 
+func validateOpCreateRepositoryLinkInput(v *CreateRepositoryLinkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRepositoryLinkInput"}
+	if v.ConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionArn"))
+	}
+	if v.OwnerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwnerId"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSyncConfigurationInput(v *CreateSyncConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSyncConfigurationInput"}
+	if v.Branch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Branch"))
+	}
+	if v.ConfigFile == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigFile"))
+	}
+	if v.RepositoryLinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryLinkId"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
 	if v == nil {
 		return nil
@@ -387,6 +779,39 @@ func validateOpDeleteHostInput(v *DeleteHostInput) error {
 	}
 }
 
+func validateOpDeleteRepositoryLinkInput(v *DeleteRepositoryLinkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRepositoryLinkInput"}
+	if v.RepositoryLinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryLinkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSyncConfigurationInput(v *DeleteSyncConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSyncConfigurationInput"}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetConnectionInput(v *GetConnectionInput) error {
 	if v == nil {
 		return nil
@@ -409,6 +834,132 @@ func validateOpGetHostInput(v *GetHostInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetHostInput"}
 	if v.HostArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HostArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRepositoryLinkInput(v *GetRepositoryLinkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRepositoryLinkInput"}
+	if v.RepositoryLinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryLinkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRepositorySyncStatusInput(v *GetRepositorySyncStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRepositorySyncStatusInput"}
+	if v.Branch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Branch"))
+	}
+	if v.RepositoryLinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryLinkId"))
+	}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourceSyncStatusInput(v *GetResourceSyncStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceSyncStatusInput"}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSyncBlockerSummaryInput(v *GetSyncBlockerSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSyncBlockerSummaryInput"}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSyncConfigurationInput(v *GetSyncConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSyncConfigurationInput"}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRepositorySyncDefinitionsInput(v *ListRepositorySyncDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRepositorySyncDefinitionsInput"}
+	if v.RepositoryLinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryLinkId"))
+	}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSyncConfigurationsInput(v *ListSyncConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSyncConfigurationsInput"}
+	if v.RepositoryLinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryLinkId"))
+	}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -484,6 +1035,63 @@ func validateOpUpdateHostInput(v *UpdateHostInput) error {
 		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRepositoryLinkInput(v *UpdateRepositoryLinkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRepositoryLinkInput"}
+	if v.RepositoryLinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryLinkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSyncBlockerInput(v *UpdateSyncBlockerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSyncBlockerInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if v.ResolvedReason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolvedReason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSyncConfigurationInput(v *UpdateSyncConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSyncConfigurationInput"}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

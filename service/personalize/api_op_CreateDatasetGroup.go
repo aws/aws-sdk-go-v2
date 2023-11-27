@@ -15,9 +15,11 @@ import (
 // Creates an empty dataset group. A dataset group is a container for Amazon
 // Personalize resources. A dataset group can contain at most three datasets, one
 // for each type of dataset:
-//   - Interactions
+//   - Item interactions
 //   - Items
 //   - Users
+//   - Actions
+//   - Action interactions
 //
 // A dataset group can be a Domain dataset group, where you specify a domain and
 // use pre-configured resources like recommenders, or a Custom dataset group, where

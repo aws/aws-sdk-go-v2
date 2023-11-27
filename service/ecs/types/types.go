@@ -3335,6 +3335,12 @@ type Setting struct {
 	// field is omitted, the authenticated user is assumed.
 	PrincipalArn *string
 
+	// Indicates whether Amazon Web Services manages the account setting, or if the
+	// user manages it. aws_managed account settings are read-only, as Amazon Web
+	// Services manages such on the customer's behalf. Currently, the guardDutyActivate
+	// account setting is the only one Amazon Web Services manages.
+	Type SettingType
+
 	// Determines whether the account setting is on or off for the specified resource.
 	Value *string
 

@@ -55,7 +55,9 @@ type SearchTablesByLFTagsInput struct {
 
 type SearchTablesByLFTagsOutput struct {
 
-	// A continuation token, present if the current list segment is not the last.
+	// A continuation token, present if the current list segment is not the last. On
+	// the first run, if you include a not null (a value) token you can get empty
+	// pages.
 	NextToken *string
 
 	// A list of tables that meet the LF-tag conditions.

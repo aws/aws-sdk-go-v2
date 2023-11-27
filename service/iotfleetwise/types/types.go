@@ -47,6 +47,11 @@ type Actuator struct {
 	// The specified possible minimum value of an actuator.
 	Min *float64
 
+	// The fully qualified name of the struct node for the actuator if the data type
+	// of the actuator is Struct or StructArray . For example, the struct fully
+	// qualified name of an actuator might be Vehicle.Door.LockStruct .
+	StructFullyQualifiedName *string
+
 	// The scientific unit for the actuator.
 	Unit *string
 
@@ -169,7 +174,8 @@ type CampaignSummary struct {
 type CanDbcDefinition struct {
 
 	// A list of DBC files. You can upload only one DBC file for each network
-	// interface and specify up to five (inclusive) files in the list.
+	// interface and specify up to five (inclusive) files in the list. The DBC file can
+	// be a maximum size of 200 MB.
 	//
 	// This member is required.
 	CanDbcFiles [][]byte
@@ -387,6 +393,63 @@ type CreateVehicleResponseItem struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a member of the complex data structure. The data type of the
+// property can be either primitive or another struct .
+type CustomProperty struct {
+
+	// The data type for the custom property.
+	//
+	// This member is required.
+	DataType NodeDataType
+
+	// The fully qualified name of the custom property. For example, the fully
+	// qualified name of a custom property might be
+	// ComplexDataTypes.VehicleDataTypes.SVMCamera.FPS .
+	//
+	// This member is required.
+	FullyQualifiedName *string
+
+	// A comment in addition to the description.
+	Comment *string
+
+	// Indicates whether the property is binary data.
+	DataEncoding NodeDataEncoding
+
+	// The deprecation message for the node or the branch that was moved or deleted.
+	DeprecationMessage *string
+
+	// A brief description of the custom property.
+	Description *string
+
+	// The fully qualified name of the struct node for the custom property if the data
+	// type of the custom property is Struct or StructArray .
+	StructFullyQualifiedName *string
+
+	noSmithyDocumentSerde
+}
+
+// The custom structure represents a complex or higher-order data structure.
+type CustomStruct struct {
+
+	// The fully qualified name of the custom structure. For example, the fully
+	// qualified name of a custom structure might be
+	// ComplexDataTypes.VehicleDataTypes.SVMCamera .
+	//
+	// This member is required.
+	FullyQualifiedName *string
+
+	// A comment in addition to the description.
+	Comment *string
+
+	// The deprecation message for the node or the branch that was moved or deleted.
+	DeprecationMessage *string
+
+	// A brief description of the custom structure.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // The destination where the Amazon Web Services IoT FleetWise campaign sends
 // data. You can send data to be stored in Amazon S3 or Amazon Timestream.
 //
@@ -439,6 +502,10 @@ type DecoderManifestSummary struct {
 
 	// A brief description of the decoder manifest.
 	Description *string
+
+	// The detailed message for the decoder manifest. When a decoder manifest is in an
+	// INVALID status, the message contains detailed reason and help information.
+	Message *string
 
 	// The ARN of a vehicle model (model manifest) associated with the decoder
 	// manifest.
@@ -574,11 +641,33 @@ type InvalidSignal struct {
 // A reason that a signal decoder isn't valid.
 type InvalidSignalDecoder struct {
 
+	// The possible cause for the invalid signal decoder.
+	Hint *string
+
 	// The name of a signal decoder that isn't valid.
 	Name *string
 
 	// A message about why the signal decoder isn't valid.
 	Reason SignalDecoderFailureReason
+
+	noSmithyDocumentSerde
+}
+
+// The decoding information for a specific message which support higher order data
+// types.
+type MessageSignal struct {
+
+	// The structured message for the message signal. It can be defined with either a
+	// primitiveMessageDefinition , structuredMessageListDefinition , or
+	// structuredMessageDefinition recursively.
+	//
+	// This member is required.
+	StructuredMessage StructuredMessage
+
+	// The topic name for the message signal. It corresponds to topics in ROS 2.
+	//
+	// This member is required.
+	TopicName *string
 
 	noSmithyDocumentSerde
 }
@@ -664,6 +753,10 @@ type NetworkInterface struct {
 	// (OBD) II protocol.
 	ObdInterface *ObdInterface
 
+	// The vehicle middleware defined as a type of network interface. Examples of
+	// vehicle middleware include ROS2 and SOME/IP .
+	VehicleMiddleware *VehicleMiddleware
+
 	noSmithyDocumentSerde
 }
 
@@ -675,7 +768,9 @@ type NetworkInterface struct {
 //	NodeMemberActuator
 //	NodeMemberAttribute
 //	NodeMemberBranch
+//	NodeMemberProperty
 //	NodeMemberSensor
+//	NodeMemberStruct
 type Node interface {
 	isNode()
 }
@@ -710,6 +805,16 @@ type NodeMemberBranch struct {
 
 func (*NodeMemberBranch) isNode() {}
 
+// Represents a member of the complex data structure. The datatype of the property
+// can be either primitive or another struct .
+type NodeMemberProperty struct {
+	Value CustomProperty
+
+	noSmithyDocumentSerde
+}
+
+func (*NodeMemberProperty) isNode() {}
+
 // An input component that reports the environmental condition of a vehicle. You
 // can collect data about fluid levels, temperatures, vibrations, or battery
 // voltage from sensors.
@@ -720,6 +825,15 @@ type NodeMemberSensor struct {
 }
 
 func (*NodeMemberSensor) isNode() {}
+
+// Represents a complex or higher-order data structure.
+type NodeMemberStruct struct {
+	Value CustomStruct
+
+	noSmithyDocumentSerde
+}
+
+func (*NodeMemberStruct) isNode() {}
 
 // Information about the number of nodes and node types in a vehicle network.
 type NodeCounts struct {
@@ -736,8 +850,14 @@ type NodeCounts struct {
 	// The total number of nodes in a vehicle network.
 	TotalNodes int32
 
+	// The total properties for the node.
+	TotalProperties int32
+
 	// The total number of nodes in a vehicle network that represent sensors.
 	TotalSensors int32
+
+	// The total structure for the node.
+	TotalStructs int32
 
 	noSmithyDocumentSerde
 }
@@ -797,7 +917,7 @@ type ObdSignal struct {
 	// The length of the requested data.
 	//
 	// This member is required.
-	PidResponseLength int32
+	PidResponseLength *int32
 
 	// A multiplier used to decode the message.
 	//
@@ -819,6 +939,49 @@ type ObdSignal struct {
 
 	// The number of positions to shift bits in the message.
 	BitRightShift int32
+
+	noSmithyDocumentSerde
+}
+
+// Represents a primitive type node of the complex data structure.
+//
+// The following types satisfy this interface:
+//
+//	PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition
+type PrimitiveMessageDefinition interface {
+	isPrimitiveMessageDefinition()
+}
+
+// Information about a PrimitiveMessage using a ROS 2 compliant primitive type
+// message of the complex data structure.
+type PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition struct {
+	Value ROS2PrimitiveMessageDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition) isPrimitiveMessageDefinition() {
+}
+
+// Represents a ROS 2 compliant primitive type message of the complex data
+// structure.
+type ROS2PrimitiveMessageDefinition struct {
+
+	// The primitive type (integer, floating point, boolean, etc.) for the ROS 2
+	// primitive message definition.
+	//
+	// This member is required.
+	PrimitiveType ROS2PrimitiveType
+
+	// The offset used to calculate the signal value. Combined with scaling, the
+	// calculation is value = raw_value * scaling + offset .
+	Offset *float64
+
+	// A multiplier used to decode the message.
+	Scaling *float64
+
+	// An optional attribute specifying the upper bound for STRING and WSTRING .
+	UpperBound *int64
 
 	noSmithyDocumentSerde
 }
@@ -895,6 +1058,11 @@ type Sensor struct {
 	// The specified possible minimum value of the sensor.
 	Min *float64
 
+	// The fully qualified name of the struct node for a sensor if the data type of
+	// the actuator is Struct or StructArray . For example, the struct fully qualified
+	// name of a sensor might be Vehicle.ADAS.CameraStruct .
+	StructFullyQualifiedName *string
+
 	// The scientific unit of measurement for data collected by the sensor.
 	Unit *string
 
@@ -948,6 +1116,10 @@ type SignalDecoder struct {
 	// protocol.
 	CanSignal *CanSignal
 
+	// The decoding information for a specific message which supports higher order
+	// data types.
+	MessageSignal *MessageSignal
+
 	// Information about signal decoder using the On-board diagnostic (OBD) II
 	// protocol.
 	ObdSignal *ObdSignal
@@ -970,6 +1142,88 @@ type SignalInformation struct {
 	// collect data. If a signal changes often, you might want to collect data at a
 	// slower rate.
 	MinimumSamplingIntervalMs *int64
+
+	noSmithyDocumentSerde
+}
+
+// The structured message for the message signal. It can be defined with either a
+// primitiveMessageDefinition , structuredMessageListDefinition , or
+// structuredMessageDefinition recursively.
+//
+// The following types satisfy this interface:
+//
+//	StructuredMessageMemberPrimitiveMessageDefinition
+//	StructuredMessageMemberStructuredMessageDefinition
+//	StructuredMessageMemberStructuredMessageListDefinition
+type StructuredMessage interface {
+	isStructuredMessage()
+}
+
+// Represents a primitive type node of the complex data structure.
+type StructuredMessageMemberPrimitiveMessageDefinition struct {
+	Value PrimitiveMessageDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*StructuredMessageMemberPrimitiveMessageDefinition) isStructuredMessage() {}
+
+// Represents a struct type node of the complex data structure.
+type StructuredMessageMemberStructuredMessageDefinition struct {
+	Value []StructuredMessageFieldNameAndDataTypePair
+
+	noSmithyDocumentSerde
+}
+
+func (*StructuredMessageMemberStructuredMessageDefinition) isStructuredMessage() {}
+
+// Represents a list type node of the complex data structure.
+type StructuredMessageMemberStructuredMessageListDefinition struct {
+	Value StructuredMessageListDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*StructuredMessageMemberStructuredMessageListDefinition) isStructuredMessage() {}
+
+// Represents a StructureMessageName to DataType map element.
+type StructuredMessageFieldNameAndDataTypePair struct {
+
+	// The data type.
+	//
+	// This member is required.
+	DataType StructuredMessage
+
+	// The field name of the structured message. It determines how a data value is
+	// referenced in the target language.
+	//
+	// This member is required.
+	FieldName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a list type node of the complex data structure.
+type StructuredMessageListDefinition struct {
+
+	// The type of list of the structured message list definition.
+	//
+	// This member is required.
+	ListType StructuredMessageListType
+
+	// The member type of the structured message list definition.
+	//
+	// This member is required.
+	MemberType StructuredMessage
+
+	// The name of the structured message list definition.
+	//
+	// This member is required.
+	Name *string
+
+	// The capacity of the structured message list definition when the list type is
+	// FIXED_CAPACITY or DYNAMIC_BOUNDED_CAPACITY .
+	Capacity int32
 
 	noSmithyDocumentSerde
 }
@@ -1146,6 +1400,23 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// The vehicle middleware defined as a type of network interface. Examples of
+// vehicle middleware include ROS2 and SOME/IP .
+type VehicleMiddleware struct {
+
+	// The name of the vehicle middleware.
+	//
+	// This member is required.
+	Name *string
+
+	// The protocol name of the vehicle middleware.
+	//
+	// This member is required.
+	ProtocolName VehicleMiddlewareProtocol
+
+	noSmithyDocumentSerde
+}
+
 // Information about the state of a vehicle and how it relates to the status of a
 // campaign.
 type VehicleStatus struct {
@@ -1219,8 +1490,10 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isCollectionScheme()      {}
-func (*UnknownUnionMember) isDataDestinationConfig() {}
-func (*UnknownUnionMember) isFormattedVss()          {}
-func (*UnknownUnionMember) isNetworkFileDefinition() {}
-func (*UnknownUnionMember) isNode()                  {}
+func (*UnknownUnionMember) isCollectionScheme()           {}
+func (*UnknownUnionMember) isDataDestinationConfig()      {}
+func (*UnknownUnionMember) isFormattedVss()               {}
+func (*UnknownUnionMember) isNetworkFileDefinition()      {}
+func (*UnknownUnionMember) isNode()                       {}
+func (*UnknownUnionMember) isPrimitiveMessageDefinition() {}
+func (*UnknownUnionMember) isStructuredMessage()          {}

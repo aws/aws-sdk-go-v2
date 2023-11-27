@@ -178,6 +178,36 @@ func (e *ResourceConflictException) ErrorCode() string {
 }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request was rejected because it conflicts with the resource's availability.
+// For example, you tried to update a security control that's currently in the
+// UPDATING state.
+type ResourceInUseException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceInUseException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceInUseException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request was rejected because we can't find the specified resource.
 type ResourceNotFoundException struct {
 	Message *string

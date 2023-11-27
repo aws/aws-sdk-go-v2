@@ -4507,6 +4507,11 @@ func awsAwsjson11_serializeDocumentStandbyWorkspace(v *types.StandbyWorkspace, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.DataReplication) > 0 {
+		ok := object.Key("DataReplication")
+		ok.String(string(v.DataReplication))
+	}
+
 	if v.DirectoryId != nil {
 		ok := object.Key("DirectoryId")
 		ok.String(*v.DirectoryId)
@@ -6177,6 +6182,11 @@ func awsAwsjson11_serializeOpDocumentModifyWorkspaceCreationPropertiesInput(v *M
 func awsAwsjson11_serializeOpDocumentModifyWorkspacePropertiesInput(v *ModifyWorkspacePropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.DataReplication) > 0 {
+		ok := object.Key("DataReplication")
+		ok.String(string(v.DataReplication))
+	}
 
 	if v.WorkspaceId != nil {
 		ok := object.Key("WorkspaceId")

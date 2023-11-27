@@ -50,6 +50,26 @@ func (m *validateOpAddTags) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAddTrustStoreRevocations struct {
+}
+
+func (*validateOpAddTrustStoreRevocations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddTrustStoreRevocations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddTrustStoreRevocationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddTrustStoreRevocationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateListener struct {
 }
 
@@ -130,6 +150,26 @@ func (m *validateOpCreateTargetGroup) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTrustStore struct {
+}
+
+func (*validateOpCreateTrustStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTrustStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTrustStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTrustStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteListener struct {
 }
 
@@ -205,6 +245,26 @@ func (m *validateOpDeleteTargetGroup) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTargetGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTrustStore struct {
+}
+
+func (*validateOpDeleteTrustStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTrustStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTrustStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTrustStoreInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +390,86 @@ func (m *validateOpDescribeTargetHealth) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTrustStoreAssociations struct {
+}
+
+func (*validateOpDescribeTrustStoreAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTrustStoreAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTrustStoreAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTrustStoreAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeTrustStoreRevocations struct {
+}
+
+func (*validateOpDescribeTrustStoreRevocations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTrustStoreRevocations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTrustStoreRevocationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTrustStoreRevocationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTrustStoreCaCertificatesBundle struct {
+}
+
+func (*validateOpGetTrustStoreCaCertificatesBundle) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTrustStoreCaCertificatesBundle) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTrustStoreCaCertificatesBundleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTrustStoreCaCertificatesBundleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTrustStoreRevocationContent struct {
+}
+
+func (*validateOpGetTrustStoreRevocationContent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTrustStoreRevocationContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTrustStoreRevocationContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTrustStoreRevocationContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyListener struct {
 }
 
@@ -430,6 +570,26 @@ func (m *validateOpModifyTargetGroup) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyTrustStore struct {
+}
+
+func (*validateOpModifyTrustStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyTrustStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyTrustStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyTrustStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterTargets struct {
 }
 
@@ -485,6 +645,26 @@ func (m *validateOpRemoveTags) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRemoveTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveTrustStoreRevocations struct {
+}
+
+func (*validateOpRemoveTrustStoreRevocations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveTrustStoreRevocations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveTrustStoreRevocationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveTrustStoreRevocationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -578,6 +758,10 @@ func addOpAddTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTags{}, middleware.After)
 }
 
+func addOpAddTrustStoreRevocationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddTrustStoreRevocations{}, middleware.After)
+}
+
 func addOpCreateListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateListener{}, middleware.After)
 }
@@ -594,6 +778,10 @@ func addOpCreateTargetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTargetGroup{}, middleware.After)
 }
 
+func addOpCreateTrustStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTrustStore{}, middleware.After)
+}
+
 func addOpDeleteListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteListener{}, middleware.After)
 }
@@ -608,6 +796,10 @@ func addOpDeleteRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteTargetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTargetGroup{}, middleware.After)
+}
+
+func addOpDeleteTrustStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTrustStore{}, middleware.After)
 }
 
 func addOpDeregisterTargetsValidationMiddleware(stack *middleware.Stack) error {
@@ -634,6 +826,22 @@ func addOpDescribeTargetHealthValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDescribeTargetHealth{}, middleware.After)
 }
 
+func addOpDescribeTrustStoreAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTrustStoreAssociations{}, middleware.After)
+}
+
+func addOpDescribeTrustStoreRevocationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTrustStoreRevocations{}, middleware.After)
+}
+
+func addOpGetTrustStoreCaCertificatesBundleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTrustStoreCaCertificatesBundle{}, middleware.After)
+}
+
+func addOpGetTrustStoreRevocationContentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTrustStoreRevocationContent{}, middleware.After)
+}
+
 func addOpModifyListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyListener{}, middleware.After)
 }
@@ -654,6 +862,10 @@ func addOpModifyTargetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyTargetGroup{}, middleware.After)
 }
 
+func addOpModifyTrustStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyTrustStore{}, middleware.After)
+}
+
 func addOpRegisterTargetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterTargets{}, middleware.After)
 }
@@ -664,6 +876,10 @@ func addOpRemoveListenerCertificatesValidationMiddleware(stack *middleware.Stack
 
 func addOpRemoveTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveTags{}, middleware.After)
+}
+
+func addOpRemoveTrustStoreRevocationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveTrustStoreRevocations{}, middleware.After)
 }
 
 func addOpSetIpAddressTypeValidationMiddleware(stack *middleware.Stack) error {
@@ -916,6 +1132,21 @@ func validateOpAddTagsInput(v *AddTagsInput) error {
 	}
 }
 
+func validateOpAddTrustStoreRevocationsInput(v *AddTrustStoreRevocationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddTrustStoreRevocationsInput"}
+	if v.TrustStoreArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateListenerInput(v *CreateListenerInput) error {
 	if v == nil {
 		return nil
@@ -1016,6 +1247,32 @@ func validateOpCreateTargetGroupInput(v *CreateTargetGroupInput) error {
 	}
 }
 
+func validateOpCreateTrustStoreInput(v *CreateTrustStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTrustStoreInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.CaCertificatesBundleS3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaCertificatesBundleS3Bucket"))
+	}
+	if v.CaCertificatesBundleS3Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaCertificatesBundleS3Key"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteListenerInput(v *DeleteListenerInput) error {
 	if v == nil {
 		return nil
@@ -1068,6 +1325,21 @@ func validateOpDeleteTargetGroupInput(v *DeleteTargetGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTargetGroupInput"}
 	if v.TargetGroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTrustStoreInput(v *DeleteTrustStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTrustStoreInput"}
+	if v.TrustStoreArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1178,6 +1450,69 @@ func validateOpDescribeTargetHealthInput(v *DescribeTargetHealthInput) error {
 	}
 }
 
+func validateOpDescribeTrustStoreAssociationsInput(v *DescribeTrustStoreAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrustStoreAssociationsInput"}
+	if v.TrustStoreArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeTrustStoreRevocationsInput(v *DescribeTrustStoreRevocationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrustStoreRevocationsInput"}
+	if v.TrustStoreArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTrustStoreCaCertificatesBundleInput(v *GetTrustStoreCaCertificatesBundleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTrustStoreCaCertificatesBundleInput"}
+	if v.TrustStoreArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTrustStoreRevocationContentInput(v *GetTrustStoreRevocationContentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTrustStoreRevocationContentInput"}
+	if v.TrustStoreArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
+	}
+	if v.RevocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevocationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpModifyListenerInput(v *ModifyListenerInput) error {
 	if v == nil {
 		return nil
@@ -1269,6 +1604,27 @@ func validateOpModifyTargetGroupInput(v *ModifyTargetGroupInput) error {
 	}
 }
 
+func validateOpModifyTrustStoreInput(v *ModifyTrustStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyTrustStoreInput"}
+	if v.TrustStoreArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
+	}
+	if v.CaCertificatesBundleS3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaCertificatesBundleS3Bucket"))
+	}
+	if v.CaCertificatesBundleS3Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaCertificatesBundleS3Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRegisterTargetsInput(v *RegisterTargetsInput) error {
 	if v == nil {
 		return nil
@@ -1319,6 +1675,24 @@ func validateOpRemoveTagsInput(v *RemoveTagsInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveTrustStoreRevocationsInput(v *RemoveTrustStoreRevocationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveTrustStoreRevocationsInput"}
+	if v.TrustStoreArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
+	}
+	if v.RevocationIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevocationIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "1b58fffa-2d60-4f8e-9976-f76cbac20b36",
+    "type": "feature",
+    "description": "IAM Access Analyzer now continuously monitors IAM roles and users in your AWS account or organization to generate findings for unused access. Additionally, IAM Access Analyzer now provides custom policy checks to validate that IAM policies adhere to your security standards ahead of deployments.",
+    "modules": [
+        "service/accessanalyzer"
+    ]
+}

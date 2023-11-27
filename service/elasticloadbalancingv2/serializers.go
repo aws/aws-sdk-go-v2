@@ -144,6 +144,70 @@ func (m *awsAwsquery_serializeOpAddTags) HandleSerialize(ctx context.Context, in
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpAddTrustStoreRevocations struct {
+}
+
+func (*awsAwsquery_serializeOpAddTrustStoreRevocations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpAddTrustStoreRevocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AddTrustStoreRevocationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("AddTrustStoreRevocations")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentAddTrustStoreRevocationsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpCreateListener struct {
 }
 
@@ -400,6 +464,70 @@ func (m *awsAwsquery_serializeOpCreateTargetGroup) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpCreateTrustStore struct {
+}
+
+func (*awsAwsquery_serializeOpCreateTrustStore) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCreateTrustStore) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateTrustStoreInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateTrustStore")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentCreateTrustStoreInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDeleteListener struct {
 }
 
@@ -636,6 +764,70 @@ func (m *awsAwsquery_serializeOpDeleteTargetGroup) HandleSerialize(ctx context.C
 	body.Key("Version").String("2015-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentDeleteTargetGroupInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDeleteTrustStore struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteTrustStore) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteTrustStore) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteTrustStoreInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteTrustStore")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteTrustStoreInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,6 +1616,326 @@ func (m *awsAwsquery_serializeOpDescribeTargetHealth) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDescribeTrustStoreAssociations struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeTrustStoreAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeTrustStoreAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeTrustStoreAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeTrustStoreAssociations")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeTrustStoreAssociationsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDescribeTrustStoreRevocations struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeTrustStoreRevocations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeTrustStoreRevocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeTrustStoreRevocationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeTrustStoreRevocations")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeTrustStoreRevocationsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDescribeTrustStores struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeTrustStores) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeTrustStores) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeTrustStoresInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeTrustStores")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeTrustStoresInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpGetTrustStoreCaCertificatesBundle struct {
+}
+
+func (*awsAwsquery_serializeOpGetTrustStoreCaCertificatesBundle) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpGetTrustStoreCaCertificatesBundle) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTrustStoreCaCertificatesBundleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetTrustStoreCaCertificatesBundle")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentGetTrustStoreCaCertificatesBundleInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpGetTrustStoreRevocationContent struct {
+}
+
+func (*awsAwsquery_serializeOpGetTrustStoreRevocationContent) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpGetTrustStoreRevocationContent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTrustStoreRevocationContentInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetTrustStoreRevocationContent")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentGetTrustStoreRevocationContentInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpModifyListener struct {
 }
 
@@ -1744,6 +2256,70 @@ func (m *awsAwsquery_serializeOpModifyTargetGroupAttributes) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpModifyTrustStore struct {
+}
+
+func (*awsAwsquery_serializeOpModifyTrustStore) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyTrustStore) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyTrustStoreInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyTrustStore")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentModifyTrustStoreInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpRegisterTargets struct {
 }
 
@@ -1916,6 +2492,70 @@ func (m *awsAwsquery_serializeOpRemoveTags) HandleSerialize(ctx context.Context,
 	body.Key("Version").String("2015-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentRemoveTagsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpRemoveTrustStoreRevocations struct {
+}
+
+func (*awsAwsquery_serializeOpRemoveTrustStoreRevocations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpRemoveTrustStoreRevocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveTrustStoreRevocationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("RemoveTrustStoreRevocations")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentRemoveTrustStoreRevocationsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2555,6 +3195,16 @@ func awsAwsquery_serializeDocumentListenerArns(v []string, value query.Value) er
 	return nil
 }
 
+func awsAwsquery_serializeDocumentListOfDescribeTargetHealthIncludeOptions(v []types.DescribeTargetHealthInputIncludeEnum, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentListOfString(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -2626,6 +3276,28 @@ func awsAwsquery_serializeDocumentMatcher(v *types.Matcher, value query.Value) e
 	if v.HttpCode != nil {
 		objectKey := object.Key("HttpCode")
 		objectKey.String(*v.HttpCode)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMutualAuthenticationAttributes(v *types.MutualAuthenticationAttributes, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.IgnoreClientCertificateExpiry != nil {
+		objectKey := object.Key("IgnoreClientCertificateExpiry")
+		objectKey.Boolean(*v.IgnoreClientCertificateExpiry)
+	}
+
+	if v.Mode != nil {
+		objectKey := object.Key("Mode")
+		objectKey.String(*v.Mode)
+	}
+
+	if v.TrustStoreArn != nil {
+		objectKey := object.Key("TrustStoreArn")
+		objectKey.String(*v.TrustStoreArn)
 	}
 
 	return nil
@@ -2731,6 +3403,55 @@ func awsAwsquery_serializeDocumentResourceArns(v []string, value query.Value) er
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentRevocationContent(v *types.RevocationContent, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.RevocationType) > 0 {
+		objectKey := object.Key("RevocationType")
+		objectKey.String(string(v.RevocationType))
+	}
+
+	if v.S3Bucket != nil {
+		objectKey := object.Key("S3Bucket")
+		objectKey.String(*v.S3Bucket)
+	}
+
+	if v.S3Key != nil {
+		objectKey := object.Key("S3Key")
+		objectKey.String(*v.S3Key)
+	}
+
+	if v.S3ObjectVersion != nil {
+		objectKey := object.Key("S3ObjectVersion")
+		objectKey.String(*v.S3ObjectVersion)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentRevocationContents(v []types.RevocationContent, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentRevocationContent(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentRevocationIds(v []int64, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.Long(v[i])
 	}
 	return nil
 }
@@ -3098,6 +3819,26 @@ func awsAwsquery_serializeDocumentTargetGroupTuple(v *types.TargetGroupTuple, va
 	return nil
 }
 
+func awsAwsquery_serializeDocumentTrustStoreArns(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentTrustStoreNames(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentAddListenerCertificatesInput(v *AddListenerCertificatesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -3138,6 +3879,25 @@ func awsAwsquery_serializeOpDocumentAddTagsInput(v *AddTagsInput, value query.Va
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentAddTrustStoreRevocationsInput(v *AddTrustStoreRevocationsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.RevocationContents != nil {
+		objectKey := object.Key("RevocationContents")
+		if err := awsAwsquery_serializeDocumentRevocationContents(v.RevocationContents, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TrustStoreArn != nil {
+		objectKey := object.Key("TrustStoreArn")
+		objectKey.String(*v.TrustStoreArn)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentCreateListenerInput(v *CreateListenerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -3166,6 +3926,13 @@ func awsAwsquery_serializeOpDocumentCreateListenerInput(v *CreateListenerInput, 
 	if v.LoadBalancerArn != nil {
 		objectKey := object.Key("LoadBalancerArn")
 		objectKey.String(*v.LoadBalancerArn)
+	}
+
+	if v.MutualAuthentication != nil {
+		objectKey := object.Key("MutualAuthentication")
+		if err := awsAwsquery_serializeDocumentMutualAuthenticationAttributes(v.MutualAuthentication, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Port != nil {
@@ -3387,6 +4154,40 @@ func awsAwsquery_serializeOpDocumentCreateTargetGroupInput(v *CreateTargetGroupI
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentCreateTrustStoreInput(v *CreateTrustStoreInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CaCertificatesBundleS3Bucket != nil {
+		objectKey := object.Key("CaCertificatesBundleS3Bucket")
+		objectKey.String(*v.CaCertificatesBundleS3Bucket)
+	}
+
+	if v.CaCertificatesBundleS3Key != nil {
+		objectKey := object.Key("CaCertificatesBundleS3Key")
+		objectKey.String(*v.CaCertificatesBundleS3Key)
+	}
+
+	if v.CaCertificatesBundleS3ObjectVersion != nil {
+		objectKey := object.Key("CaCertificatesBundleS3ObjectVersion")
+		objectKey.String(*v.CaCertificatesBundleS3ObjectVersion)
+	}
+
+	if v.Name != nil {
+		objectKey := object.Key("Name")
+		objectKey.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDeleteListenerInput(v *DeleteListenerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -3430,6 +4231,18 @@ func awsAwsquery_serializeOpDocumentDeleteTargetGroupInput(v *DeleteTargetGroupI
 	if v.TargetGroupArn != nil {
 		objectKey := object.Key("TargetGroupArn")
 		objectKey.String(*v.TargetGroupArn)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeleteTrustStoreInput(v *DeleteTrustStoreInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.TrustStoreArn != nil {
+		objectKey := object.Key("TrustStoreArn")
+		objectKey.String(*v.TrustStoreArn)
 	}
 
 	return nil
@@ -3689,6 +4502,13 @@ func awsAwsquery_serializeOpDocumentDescribeTargetHealthInput(v *DescribeTargetH
 	object := value.Object()
 	_ = object
 
+	if v.Include != nil {
+		objectKey := object.Key("Include")
+		if err := awsAwsquery_serializeDocumentListOfDescribeTargetHealthIncludeOptions(v.Include, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetGroupArn != nil {
 		objectKey := object.Key("TargetGroupArn")
 		objectKey.String(*v.TargetGroupArn)
@@ -3699,6 +4519,117 @@ func awsAwsquery_serializeOpDocumentDescribeTargetHealthInput(v *DescribeTargetH
 		if err := awsAwsquery_serializeDocumentTargetDescriptions(v.Targets, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDescribeTrustStoreAssociationsInput(v *DescribeTrustStoreAssociationsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.PageSize != nil {
+		objectKey := object.Key("PageSize")
+		objectKey.Integer(*v.PageSize)
+	}
+
+	if v.TrustStoreArn != nil {
+		objectKey := object.Key("TrustStoreArn")
+		objectKey.String(*v.TrustStoreArn)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDescribeTrustStoreRevocationsInput(v *DescribeTrustStoreRevocationsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.PageSize != nil {
+		objectKey := object.Key("PageSize")
+		objectKey.Integer(*v.PageSize)
+	}
+
+	if v.RevocationIds != nil {
+		objectKey := object.Key("RevocationIds")
+		if err := awsAwsquery_serializeDocumentRevocationIds(v.RevocationIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TrustStoreArn != nil {
+		objectKey := object.Key("TrustStoreArn")
+		objectKey.String(*v.TrustStoreArn)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDescribeTrustStoresInput(v *DescribeTrustStoresInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.Names != nil {
+		objectKey := object.Key("Names")
+		if err := awsAwsquery_serializeDocumentTrustStoreNames(v.Names, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.PageSize != nil {
+		objectKey := object.Key("PageSize")
+		objectKey.Integer(*v.PageSize)
+	}
+
+	if v.TrustStoreArns != nil {
+		objectKey := object.Key("TrustStoreArns")
+		if err := awsAwsquery_serializeDocumentTrustStoreArns(v.TrustStoreArns, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentGetTrustStoreCaCertificatesBundleInput(v *GetTrustStoreCaCertificatesBundleInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.TrustStoreArn != nil {
+		objectKey := object.Key("TrustStoreArn")
+		objectKey.String(*v.TrustStoreArn)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentGetTrustStoreRevocationContentInput(v *GetTrustStoreRevocationContentInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.RevocationId != nil {
+		objectKey := object.Key("RevocationId")
+		objectKey.Long(*v.RevocationId)
+	}
+
+	if v.TrustStoreArn != nil {
+		objectKey := object.Key("TrustStoreArn")
+		objectKey.String(*v.TrustStoreArn)
 	}
 
 	return nil
@@ -3732,6 +4663,13 @@ func awsAwsquery_serializeOpDocumentModifyListenerInput(v *ModifyListenerInput, 
 	if v.ListenerArn != nil {
 		objectKey := object.Key("ListenerArn")
 		objectKey.String(*v.ListenerArn)
+	}
+
+	if v.MutualAuthentication != nil {
+		objectKey := object.Key("MutualAuthentication")
+		if err := awsAwsquery_serializeDocumentMutualAuthenticationAttributes(v.MutualAuthentication, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Port != nil {
@@ -3875,6 +4813,33 @@ func awsAwsquery_serializeOpDocumentModifyTargetGroupInput(v *ModifyTargetGroupI
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentModifyTrustStoreInput(v *ModifyTrustStoreInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CaCertificatesBundleS3Bucket != nil {
+		objectKey := object.Key("CaCertificatesBundleS3Bucket")
+		objectKey.String(*v.CaCertificatesBundleS3Bucket)
+	}
+
+	if v.CaCertificatesBundleS3Key != nil {
+		objectKey := object.Key("CaCertificatesBundleS3Key")
+		objectKey.String(*v.CaCertificatesBundleS3Key)
+	}
+
+	if v.CaCertificatesBundleS3ObjectVersion != nil {
+		objectKey := object.Key("CaCertificatesBundleS3ObjectVersion")
+		objectKey.String(*v.CaCertificatesBundleS3ObjectVersion)
+	}
+
+	if v.TrustStoreArn != nil {
+		objectKey := object.Key("TrustStoreArn")
+		objectKey.String(*v.TrustStoreArn)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentRegisterTargetsInput(v *RegisterTargetsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -3929,6 +4894,25 @@ func awsAwsquery_serializeOpDocumentRemoveTagsInput(v *RemoveTagsInput, value qu
 		if err := awsAwsquery_serializeDocumentTagKeys(v.TagKeys, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentRemoveTrustStoreRevocationsInput(v *RemoveTrustStoreRevocationsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.RevocationIds != nil {
+		objectKey := object.Key("RevocationIds")
+		if err := awsAwsquery_serializeDocumentRevocationIds(v.RevocationIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TrustStoreArn != nil {
+		objectKey := object.Key("TrustStoreArn")
+		objectKey.String(*v.TrustStoreArn)
 	}
 
 	return nil

@@ -1,0 +1,8 @@
+{
+    "id": "fa101374-1bae-408e-843d-cdd5875fe88e",
+    "type": "feature",
+    "description": "This release enables PutActions and PutActionInteractions",
+    "modules": [
+        "service/personalizeevents"
+    ]
+}

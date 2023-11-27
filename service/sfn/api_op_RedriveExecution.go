@@ -24,14 +24,14 @@ import (
 // or Parallel (https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html)
 // state, RedriveExecution API action reschedules and redrives only the iterations
 // and branches that failed or aborted. To redrive a workflow that includes a
-// Distributed Map state with failed child workflow executions, you must redrive
-// the parent workflow (https://docs.aws.amazon.com/step-functions/latest/dg/use-dist-map-orchestrate-large-scale-parallel-workloads.html#dist-map-orchestrate-parallel-workloads-key-terms)
-// . The parent workflow redrives all the unsuccessful states, including
-// Distributed Map. This API action is not supported by EXPRESS state machines.
-// However, you can restart the unsuccessful executions of Express child workflows
-// in a Distributed Map by redriving its Map Run. When you redrive a Map Run, the
-// Express child workflows are rerun using the StartExecution API action. For more
-// information, see Redriving Map Runs (https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html)
+// Distributed Map state whose Map Run failed, you must redrive the parent workflow (https://docs.aws.amazon.com/step-functions/latest/dg/use-dist-map-orchestrate-large-scale-parallel-workloads.html#dist-map-orchestrate-parallel-workloads-key-terms)
+// . The parent workflow redrives all the unsuccessful states, including a failed
+// Map Run. If a Map Run was not started in the original execution attempt, the
+// redriven parent workflow starts the Map Run. This API action is not supported by
+// EXPRESS state machines. However, you can restart the unsuccessful executions of
+// Express child workflows in a Distributed Map by redriving its Map Run. When you
+// redrive a Map Run, the Express child workflows are rerun using the
+// StartExecution API action. For more information, see Redriving Map Runs (https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html)
 // . You can redrive executions if your original execution meets the following
 // conditions:
 //   - The execution status isn't SUCCEEDED .
@@ -72,7 +72,9 @@ type RedriveExecutionInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
-	// idempotency. The API uses one of the last 10 client tokens provided.
+	// idempotency. The API will return idempotent responses for the last 10 client
+	// tokens used to successfully redrive the execution. These client tokens are valid
+	// for up to 15 minutes after they are first used.
 	ClientToken *string
 
 	noSmithyDocumentSerde

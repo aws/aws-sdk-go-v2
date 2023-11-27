@@ -29,6 +29,27 @@ type AccessControlTranslation struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration options of the S3 Access Grants location. It contains the
+// S3SubPrefix field. The grant scope, the data to which you are granting access,
+// is the result of appending the Subprefix field to the scope of the registered
+// location.
+type AccessGrantsLocationConfiguration struct {
+
+	// The S3SubPrefix is appended to the location scope creating the grant scope. Use
+	// this field to narrow the scope of the grant to a subset of the location scope.
+	// This field is required if the location scope is the default location s3://
+	// because you cannot create a grant for all of your S3 data in the Region and must
+	// narrow the scope. For example, if the location scope is the default location
+	// s3:// , the S3SubPrefx can be a /*, so the full grant scope path would be
+	// s3:///* . Or the S3SubPrefx can be /* , so the full grant scope path would be or
+	// s3:///* . If the S3SubPrefix includes a prefix, append the wildcard character *
+	// after the prefix to indicate that you want to include all object key names in
+	// the bucket that start with that prefix.
+	S3SubPrefix *string
+
+	noSmithyDocumentSerde
+}
+
 // An access point used to access a bucket.
 type AccessPoint struct {
 
@@ -318,6 +339,29 @@ type CreateMultiRegionAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Web Services Security Token Service temporary credential that S3
+// Access Grants vends to grantees and client applications.
+type Credentials struct {
+
+	// The unique access key ID of the Amazon Web Services STS temporary credential
+	// that S3 Access Grants vends to grantees and client applications.
+	AccessKeyId *string
+
+	// The expiration date and time of the temporary credential that S3 Access Grants
+	// vends to grantees and client applications.
+	Expiration *time.Time
+
+	// The secret access key of the Amazon Web Services STS temporary credential that
+	// S3 Access Grants vends to grantees and client applications.
+	SecretAccessKey *string
+
+	// The Amazon Web Services STS temporary credential that S3 Access Grants vends to
+	// grantees and client applications.
+	SessionToken *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies whether S3 on Outposts replicates delete markers. If you specify a
 // Filter element in your replication configuration, you must also include a
 // DeleteMarkerReplication element. If your Filter includes a Tag element, the
@@ -471,6 +515,36 @@ type GeneratedManifestEncryption struct {
 
 	// Specifies the use of SSE-S3 to encrypt generated manifest objects.
 	SSES3 *SSES3Encryption
+
+	noSmithyDocumentSerde
+}
+
+// The user, group, or role to which you are granting access. You can grant access
+// to an IAM user or role. If you have added your corporate directory to Amazon Web
+// Services IAM Identity Center and associated your Identity Center instance with
+// your S3 Access Grants instance, the grantee can also be a corporate directory
+// user or group.
+type Grantee struct {
+
+	// The unique identifier of the Grantee . If the grantee type is IAM , the
+	// identifier is the IAM Amazon Resource Name (ARN) of the user or role. If the
+	// grantee type is a directory user or group, the identifier is 128-bit universally
+	// unique identifier (UUID) in the format a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	// You can obtain this UUID from your Amazon Web Services IAM Identity Center
+	// instance.
+	GranteeIdentifier *string
+
+	// The type of the grantee to which access has been granted. It can be one of the
+	// following values:
+	//   - IAM - An IAM user or role.
+	//   - DIRECTORY_USER - Your corporate directory user. You can use this option if
+	//   you have added your corporate identity directory to IAM Identity Center and
+	//   associated the IAM Identity Center instance with your S3 Access Grants instance.
+	//
+	//   - DIRECTORY_GROUP - Your corporate directory group. You can use this option if
+	//   you have added your corporate identity directory to IAM Identity Center and
+	//   associated the IAM Identity Center instance with your S3 Access Grants instance.
+	GranteeType GranteeType
 
 	noSmithyDocumentSerde
 }
@@ -972,6 +1046,109 @@ type LifecycleRuleFilter struct {
 
 	// A container for a key-value name pair.
 	Tag *S3Tag
+
+	noSmithyDocumentSerde
+}
+
+// Information about the access grant.
+type ListAccessGrantEntry struct {
+
+	// The Amazon Resource Name (ARN) of the access grant.
+	AccessGrantArn *string
+
+	// The ID of the access grant. S3 Access Grants auto-generates this ID when you
+	// create the access grant.
+	AccessGrantId *string
+
+	// The configuration options of the grant location. The grant location is the S3
+	// path to the data to which you are granting access.
+	AccessGrantsLocationConfiguration *AccessGrantsLocationConfiguration
+
+	// The ID of the registered location to which you are granting access. S3 Access
+	// Grants assigns this ID when you register the location. S3 Access Grants assigns
+	// the ID default to the default location s3:// and assigns an auto-generated ID
+	// to other locations that you register.
+	AccessGrantsLocationId *string
+
+	// The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center
+	// application associated with your Identity Center instance. If the grant includes
+	// an application ARN, the grantee can only access the S3 data through this
+	// application.
+	ApplicationArn *string
+
+	// The date and time when you created the S3 Access Grants instance.
+	CreatedAt *time.Time
+
+	// The S3 path of the data to which you are granting access. It is the result of
+	// appending the Subprefix to the location scope.
+	GrantScope *string
+
+	// The user, group, or role to which you are granting access. You can grant access
+	// to an IAM user or role. If you have added your corporate directory to Amazon Web
+	// Services IAM Identity Center and associated your Identity Center instance with
+	// your S3 Access Grants instance, the grantee can also be a corporate directory
+	// user or group.
+	Grantee *Grantee
+
+	// The type of access granted to your S3 data, which can be set to one of the
+	// following values:
+	//   - READ – Grant read-only access to the S3 data.
+	//   - WRITE – Grant write-only access to the S3 data.
+	//   - READWRITE – Grant both read and write access to the S3 data.
+	Permission Permission
+
+	noSmithyDocumentSerde
+}
+
+// Information about the S3 Access Grants instance.
+type ListAccessGrantsInstanceEntry struct {
+
+	// The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+	AccessGrantsInstanceArn *string
+
+	// The ID of the S3 Access Grants instance. The ID is default . You can have one S3
+	// Access Grants instance per Region per account.
+	AccessGrantsInstanceId *string
+
+	// The date and time when you created the S3 Access Grants instance.
+	CreatedAt *time.Time
+
+	// If you associated your S3 Access Grants instance with an Amazon Web Services
+	// IAM Identity Center instance, this field returns the Amazon Resource Name (ARN)
+	// of the IAM Identity Center instance application; a subresource of the original
+	// Identity Center instance. S3 Access Grants creates this Identity Center
+	// application for the specific S3 Access Grants instance.
+	IdentityCenterArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A container for information about the registered location.
+type ListAccessGrantsLocationsEntry struct {
+
+	// The Amazon Resource Name (ARN) of the registered location.
+	AccessGrantsLocationArn *string
+
+	// The ID of the registered location to which you are granting access. S3 Access
+	// Grants assigns this ID when you register the location. S3 Access Grants assigns
+	// the ID default to the default location s3:// and assigns an auto-generated ID
+	// to other locations that you register.
+	AccessGrantsLocationId *string
+
+	// The date and time when you registered the location.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role for the registered location. S3
+	// Access Grants assumes this role to manage access to the registered location.
+	IAMRoleArn *string
+
+	// The S3 path to the location that you are registering. The location scope can be
+	// the default S3 location s3:// , the S3 path to a bucket s3:// , or the S3 path
+	// to a bucket and prefix s3:/// . A prefix in S3 is a string of characters at the
+	// beginning of an object key name used to organize the objects that you store in
+	// your S3 buckets. For example, object key names that start with the engineering/
+	// prefix or object key names that start with the marketing/campaigns/ prefix.
+	LocationScope *string
 
 	noSmithyDocumentSerde
 }
@@ -2442,19 +2619,22 @@ type StorageLensTag struct {
 
 // An Amazon Web Services resource tag that's associated with your S3 resource.
 // You can add tags to new objects when you upload them, or you can add object tags
-// to existing objects. This data type is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
-// .
+// to existing objects. This operation is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
+// and for S3 Access Grants (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html)
+// . The tagged resource can be an S3 Storage Lens group or S3 Access Grants
+// instance, registered location, or grant.
 type Tag struct {
 
-	// The tag key for your Amazon Web Services resource. A tag key can be up to 128
-	// Unicode characters in length and is case-sensitive. System created tags that
-	// begin with aws: aren’t supported.
+	// The key of the key-value pair of a tag added to your Amazon Web Services
+	// resource. A tag key can be up to 128 Unicode characters in length and is
+	// case-sensitive. System created tags that begin with aws: aren’t supported.
 	//
 	// This member is required.
 	Key *string
 
-	// The tag value for your Amazon Web Services resource. A tag value can be up to
-	// 256 Unicode characters in length and is case-sensitive.
+	// The value of the key-value pair of a tag added to your Amazon Web Services
+	// resource. A tag value can be up to 256 Unicode characters in length and is
+	// case-sensitive.
 	//
 	// This member is required.
 	Value *string

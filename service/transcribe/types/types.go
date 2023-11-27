@@ -205,6 +205,10 @@ type CallAnalyticsJobSettings struct {
 	// must be encoded at a sample rate of 16,000 Hz or higher.
 	LanguageOptions []LanguageCode
 
+	// Contains GenerateAbstractiveSummary , which is a required parameter if you want
+	// to enable Generative call summarization in your Call Analytics request.
+	Summarization *Summarization
+
 	// Specify how you want your custom vocabulary filter applied to your transcript.
 	// To replace words with *** , choose mask . To delete words, choose remove . To
 	// flag words without changing them, choose tag .
@@ -1133,6 +1137,22 @@ type SubtitlesOutput struct {
 	// minutes. If you get an AccesDenied error, you can get a new temporary URI by
 	// running a GetTranscriptionJob or ListTranscriptionJob request.
 	SubtitleFileUris []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains GenerateAbstractiveSummary , which is a required parameter if you want
+// to enable Generative call summarization in your Call Analytics request.
+type Summarization struct {
+
+	// Enables Generative call summarization in your Call Analytics request Generative
+	// call summarization provides a summary of the transcript including important
+	// components discussed in the conversation. For more information, see Enabling
+	// generative call summarization (https://docs.aws.amazon.com/transcribe/latest/dg/tca-enable-summarization.html)
+	// .
+	//
+	// This member is required.
+	GenerateAbstractiveSummary *bool
 
 	noSmithyDocumentSerde
 }

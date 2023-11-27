@@ -71,6 +71,32 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	// in the Compute Optimizer User Guide.
 	ExternalMetricsPreference *types.ExternalMetricsPreference
 
+	// The number of days the utilization metrics of the Amazon Web Services resource
+	// are analyzed. To validate that the preference is applied to your last generated
+	// set of recommendations, review the effectiveRecommendationPreferences value in
+	// the response of the GetAutoScalingGroupRecommendations or
+	// GetEC2InstanceRecommendations actions.
+	LookBackPeriod types.LookBackPeriodPreference
+
+	// The resource type values that are considered as candidates when generating
+	// rightsizing recommendations. This object resolves any wildcard expressions and
+	// returns the effective list of candidate resource type values. It also considers
+	// all applicable preferences that you set at the resource, account, and
+	// organization level. To validate that the preference is applied to your last
+	// generated set of recommendations, review the effectiveRecommendationPreferences
+	// value in the response of the GetAutoScalingGroupRecommendations or
+	// GetEC2InstanceRecommendations actions.
+	PreferredResources []types.EffectivePreferredResource
+
+	// The resource’s CPU utilization threshold preferences, such as threshold and
+	// headroom, that were used to generate rightsizing recommendations. It considers
+	// all applicable preferences that you set at the resource, account, and
+	// organization level. To validate that the preference is applied to your last
+	// generated set of recommendations, review the effectiveRecommendationPreferences
+	// value in the response of the GetAutoScalingGroupRecommendations or
+	// GetEC2InstanceRecommendations actions.
+	UtilizationPreferences []types.UtilizationPreference
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -291,6 +291,24 @@ func (ConnectionState) Values() []ConnectionState {
 	}
 }
 
+type DataReplication string
+
+// Enum values for DataReplication
+const (
+	DataReplicationNoReplication   DataReplication = "NO_REPLICATION"
+	DataReplicationPrimaryAsSource DataReplication = "PRIMARY_AS_SOURCE"
+)
+
+// Values returns all known values for DataReplication. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataReplication) Values() []DataReplication {
+	return []DataReplication{
+		"NO_REPLICATION",
+		"PRIMARY_AS_SOURCE",
+	}
+}
+
 type DedicatedTenancyModificationStateEnum string
 
 // Enum values for DedicatedTenancyModificationStateEnum

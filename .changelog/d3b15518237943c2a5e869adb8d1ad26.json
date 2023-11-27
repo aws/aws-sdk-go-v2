@@ -1,0 +1,8 @@
+{
+    "id": "d3b15518-2379-43c2-a5e8-69adb8d1ad26",
+    "type": "feature",
+    "description": "AWS Secrets Manager has released the BatchGetSecretValue API, which allows customers to fetch up to 20 Secrets with a single request using a list of secret names or filters.",
+    "modules": [
+        "service/secretsmanager"
+    ]
+}

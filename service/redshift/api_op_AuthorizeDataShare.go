@@ -44,6 +44,9 @@ type AuthorizeDataShareInput struct {
 	// This member is required.
 	DataShareArn *string
 
+	// If set to true, allows write operations for a datashare.
+	AllowWrites *bool
+
 	noSmithyDocumentSerde
 }
 

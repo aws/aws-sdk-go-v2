@@ -2529,9 +2529,6 @@ func validateOpModifyWorkspacePropertiesInput(v *ModifyWorkspacePropertiesInput)
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
 	}
-	if v.WorkspaceProperties == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceProperties"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

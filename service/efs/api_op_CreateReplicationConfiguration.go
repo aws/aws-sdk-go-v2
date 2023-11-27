@@ -32,9 +32,9 @@ import (
 //     more information, see Managing Amazon Web Services Regions (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)
 //     in the Amazon Web Services General Reference Reference Guide
 //   - Availability Zone - If you want the destination file system to use EFS One
-//     Zone availability and durability, you must specify the Availability Zone to
-//     create the file system in. For more information about EFS storage classes, see
-//     Amazon EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
+//     Zone availability, you must specify the Availability Zone to create the file
+//     system in. For more information about EFS storage classes, see Amazon EFS
+//     storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
 //     in the Amazon EFS User Guide.
 //   - Encryption - All destination file systems are created with encryption at
 //     rest enabled. You can specify the Key Management Service (KMS) key that is used
@@ -52,11 +52,10 @@ import (
 //     the throughput mode.
 //
 // The following properties are turned off by default:
-//   - Lifecycle management - EFS lifecycle management and EFS Intelligent-Tiering
-//     are not enabled on the destination file system. After the destination file
-//     system is created, you can enable EFS lifecycle management and EFS
-//     Intelligent-Tiering.
-//   - Automatic backups - Automatic daily backups are enabled on the destination
+//   - Lifecycle management – Lifecycle management is not enabled on the
+//     destination file system. After the destination file system is created, you can
+//     enable it.
+//   - Automatic backups – Automatic daily backups are enabled on the destination
 //     file system. After the file system is created, you can change this setting.
 //
 // For more information, see Amazon EFS replication (https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html)
@@ -107,8 +106,8 @@ type CreateReplicationConfigurationOutput struct {
 	// This member is required.
 	Destinations []types.Destination
 
-	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system in
-	// the replication configuration.
+	// The Amazon Resource Name (ARN) of the original source EFS file system in the
+	// replication configuration.
 	//
 	// This member is required.
 	OriginalSourceFileSystemArn *string
@@ -124,8 +123,7 @@ type CreateReplicationConfigurationOutput struct {
 	// This member is required.
 	SourceFileSystemId *string
 
-	// The Amazon Web Services Region in which the source Amazon EFS file system is
-	// located.
+	// The Amazon Web Services Region in which the source EFS file system is located.
 	//
 	// This member is required.
 	SourceFileSystemRegion *string

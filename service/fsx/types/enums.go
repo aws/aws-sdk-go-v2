@@ -40,6 +40,8 @@ const (
 	AdministrativeActionTypeIopsOptimization              AdministrativeActionType = "IOPS_OPTIMIZATION"
 	AdministrativeActionTypeStorageTypeOptimization       AdministrativeActionType = "STORAGE_TYPE_OPTIMIZATION"
 	AdministrativeActionTypeMisconfiguredStateRecovery    AdministrativeActionType = "MISCONFIGURED_STATE_RECOVERY"
+	AdministrativeActionTypeVolumeUpdateWithSnapshot      AdministrativeActionType = "VOLUME_UPDATE_WITH_SNAPSHOT"
+	AdministrativeActionTypeVolumeInitializeWithSnapshot  AdministrativeActionType = "VOLUME_INITIALIZE_WITH_SNAPSHOT"
 )
 
 // Values returns all known values for AdministrativeActionType. Note that this
@@ -59,6 +61,8 @@ func (AdministrativeActionType) Values() []AdministrativeActionType {
 		"IOPS_OPTIMIZATION",
 		"STORAGE_TYPE_OPTIMIZATION",
 		"MISCONFIGURED_STATE_RECOVERY",
+		"VOLUME_UPDATE_WITH_SNAPSHOT",
+		"VOLUME_INITIALIZE_WITH_SNAPSHOT",
 	}
 }
 
@@ -644,6 +648,7 @@ type OntapDeploymentType string
 const (
 	OntapDeploymentTypeMultiAz1  OntapDeploymentType = "MULTI_AZ_1"
 	OntapDeploymentTypeSingleAz1 OntapDeploymentType = "SINGLE_AZ_1"
+	OntapDeploymentTypeSingleAz2 OntapDeploymentType = "SINGLE_AZ_2"
 )
 
 // Values returns all known values for OntapDeploymentType. Note that this can be
@@ -653,6 +658,7 @@ func (OntapDeploymentType) Values() []OntapDeploymentType {
 	return []OntapDeploymentType{
 		"MULTI_AZ_1",
 		"SINGLE_AZ_1",
+		"SINGLE_AZ_2",
 	}
 }
 
@@ -680,8 +686,9 @@ type OpenZFSCopyStrategy string
 
 // Enum values for OpenZFSCopyStrategy
 const (
-	OpenZFSCopyStrategyClone    OpenZFSCopyStrategy = "CLONE"
-	OpenZFSCopyStrategyFullCopy OpenZFSCopyStrategy = "FULL_COPY"
+	OpenZFSCopyStrategyClone           OpenZFSCopyStrategy = "CLONE"
+	OpenZFSCopyStrategyFullCopy        OpenZFSCopyStrategy = "FULL_COPY"
+	OpenZFSCopyStrategyIncrementalCopy OpenZFSCopyStrategy = "INCREMENTAL_COPY"
 )
 
 // Values returns all known values for OpenZFSCopyStrategy. Note that this can be
@@ -691,6 +698,7 @@ func (OpenZFSCopyStrategy) Values() []OpenZFSCopyStrategy {
 	return []OpenZFSCopyStrategy{
 		"CLONE",
 		"FULL_COPY",
+		"INCREMENTAL_COPY",
 	}
 }
 
@@ -1150,6 +1158,26 @@ func (Unit) Values() []Unit {
 	}
 }
 
+type UpdateOpenZFSVolumeOption string
+
+// Enum values for UpdateOpenZFSVolumeOption
+const (
+	UpdateOpenZFSVolumeOptionDeleteIntermediateSnapshots UpdateOpenZFSVolumeOption = "DELETE_INTERMEDIATE_SNAPSHOTS"
+	UpdateOpenZFSVolumeOptionDeleteClonedVolumes         UpdateOpenZFSVolumeOption = "DELETE_CLONED_VOLUMES"
+	UpdateOpenZFSVolumeOptionDeleteIntermediateData      UpdateOpenZFSVolumeOption = "DELETE_INTERMEDIATE_DATA"
+)
+
+// Values returns all known values for UpdateOpenZFSVolumeOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateOpenZFSVolumeOption) Values() []UpdateOpenZFSVolumeOption {
+	return []UpdateOpenZFSVolumeOption{
+		"DELETE_INTERMEDIATE_SNAPSHOTS",
+		"DELETE_CLONED_VOLUMES",
+		"DELETE_INTERMEDIATE_DATA",
+	}
+}
+
 type VolumeFilterName string
 
 // Enum values for VolumeFilterName
@@ -1193,6 +1221,24 @@ func (VolumeLifecycle) Values() []VolumeLifecycle {
 		"MISCONFIGURED",
 		"PENDING",
 		"AVAILABLE",
+	}
+}
+
+type VolumeStyle string
+
+// Enum values for VolumeStyle
+const (
+	VolumeStyleFlexvol   VolumeStyle = "FLEXVOL"
+	VolumeStyleFlexgroup VolumeStyle = "FLEXGROUP"
+)
+
+// Values returns all known values for VolumeStyle. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VolumeStyle) Values() []VolumeStyle {
+	return []VolumeStyle{
+		"FLEXVOL",
+		"FLEXGROUP",
 	}
 }
 

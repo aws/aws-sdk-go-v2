@@ -65,6 +65,28 @@ type PutRecommendationPreferencesInput struct {
 	// in the Compute Optimizer User Guide.
 	InferredWorkloadTypes types.InferredWorkloadTypesPreference
 
+	// The preference to control the number of days the utilization metrics of the
+	// Amazon Web Services resource are analyzed. When this preference isn't specified,
+	// we use the default value DAYS_14 . You can only set this preference for the
+	// Amazon EC2 instance and Auto Scaling group resource types.
+	LookBackPeriod types.LookBackPeriodPreference
+
+	// The preference to control which resource type values are considered when
+	// generating rightsizing recommendations. You can specify this preference as a
+	// combination of include and exclude lists. You must specify either an includeList
+	// or excludeList . If the preference is an empty set of resource type values, an
+	// error occurs. You can only set this preference for the Amazon EC2 instance and
+	// Auto Scaling group resource types.
+	PreferredResources []types.PreferredResource
+
+	// The status of the savings estimation mode preference to create or update.
+	// Specify the AfterDiscounts status to activate the preference, or specify
+	// BeforeDiscounts to deactivate the preference. Only the account manager or
+	// delegated administrator of your organization can activate this preference. For
+	// more information, see Savings estimation mode (https://docs.aws.amazon.com/compute-optimizer/latest/ug/savings-estimation-mode.html)
+	// in the Compute Optimizer User Guide.
+	SavingsEstimationMode types.SavingsEstimationMode
+
 	// An object that describes the scope of the recommendation preference to create.
 	// You can create recommendation preferences at the organization level (for
 	// management accounts of an organization only), account level, and resource level.
@@ -79,6 +101,14 @@ type PutRecommendationPreferencesInput struct {
 	// instances that are part of an Auto Scaling group. You can create recommendation
 	// preferences at the resource level only for standalone instances.
 	Scope *types.Scope
+
+	// The preference to control the resource’s CPU utilization thresholds - threshold
+	// and headroom. When this preference isn't specified, we use the following default
+	// values:
+	//   - P99_5 for threshold
+	//   - PERCENT_17 for headroom
+	// You can only set this preference for the Amazon EC2 instance resource type.
+	UtilizationPreferences []types.UtilizationPreference
 
 	noSmithyDocumentSerde
 }

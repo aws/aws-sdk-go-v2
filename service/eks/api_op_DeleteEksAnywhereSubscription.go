@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an expired / inactive subscription. Deleting inactive subscriptions
+// Deletes an expired or inactive subscription. Deleting inactive subscriptions
 // removes them from the Amazon Web Services Management Console view and from
 // list/describe API responses. Subscriptions can only be cancelled within 7 days
-// of creation, and are cancelled by creating a ticket in the Amazon Web Services
+// of creation and are cancelled by creating a ticket in the Amazon Web Services
 // Support Center.
 func (c *Client) DeleteEksAnywhereSubscription(ctx context.Context, params *DeleteEksAnywhereSubscriptionInput, optFns ...func(*Options)) (*DeleteEksAnywhereSubscriptionOutput, error) {
 	if params == nil {

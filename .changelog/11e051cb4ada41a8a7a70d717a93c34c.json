@@ -1,0 +1,8 @@
+{
+    "id": "11e051cb-4ada-41a8-a7a7-0d717a93c34c",
+    "type": "feature",
+    "description": "CloudTrail Lake now supports federating event data stores. giving users the ability to run queries against their event data using Amazon Athena.",
+    "modules": [
+        "service/cloudtrail"
+    ]
+}

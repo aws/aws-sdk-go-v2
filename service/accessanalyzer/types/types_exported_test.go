@@ -29,6 +29,24 @@ func ExampleAclGrantee_outputUsage() {
 var _ *string
 var _ *string
 
+func ExampleAnalyzerConfiguration_outputUsage() {
+	var union types.AnalyzerConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AnalyzerConfigurationMemberUnusedAccess:
+		_ = v.Value // Value is types.UnusedAccessConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UnusedAccessConfiguration
+
 func ExampleConfiguration_outputUsage() {
 	var union types.Configuration
 	// type switches can be used to check the union value
@@ -86,6 +104,40 @@ var _ *types.EfsFileSystemConfiguration
 var _ *types.S3BucketConfiguration
 var _ *types.KmsKeyConfiguration
 var _ *types.EbsSnapshotConfiguration
+
+func ExampleFindingDetails_outputUsage() {
+	var union types.FindingDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FindingDetailsMemberExternalAccessDetails:
+		_ = v.Value // Value is types.ExternalAccessDetails
+
+	case *types.FindingDetailsMemberUnusedIamRoleDetails:
+		_ = v.Value // Value is types.UnusedIamRoleDetails
+
+	case *types.FindingDetailsMemberUnusedIamUserAccessKeyDetails:
+		_ = v.Value // Value is types.UnusedIamUserAccessKeyDetails
+
+	case *types.FindingDetailsMemberUnusedIamUserPasswordDetails:
+		_ = v.Value // Value is types.UnusedIamUserPasswordDetails
+
+	case *types.FindingDetailsMemberUnusedPermissionDetails:
+		_ = v.Value // Value is types.UnusedPermissionDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ExternalAccessDetails
+var _ *types.UnusedIamRoleDetails
+var _ *types.UnusedPermissionDetails
+var _ *types.UnusedIamUserAccessKeyDetails
+var _ *types.UnusedIamUserPasswordDetails
 
 func ExampleNetworkOriginConfiguration_outputUsage() {
 	var union types.NetworkOriginConfiguration

@@ -1,0 +1,8 @@
+{
+    "id": "3d6b2b8b-5e39-47b1-890a-c6e231a382cd",
+    "type": "feature",
+    "description": "Support Periodic Recording for Configuration Recorder",
+    "modules": [
+        "service/configservice"
+    ]
+}

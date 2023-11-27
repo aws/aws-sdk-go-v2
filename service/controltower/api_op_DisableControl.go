@@ -12,9 +12,10 @@ import (
 )
 
 // This API call turns off a control. It starts an asynchronous operation that
-// deletes AWS resources on the specified organizational unit and the accounts it
-// contains. The resources will vary according to the control that you specify. For
-// usage examples, see the AWS Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
+// deletes Amazon Web Services resources on the specified organizational unit and
+// the accounts it contains. The resources will vary according to the control that
+// you specify. For usage examples, see the Amazon Web Services Control Tower User
+// Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
 // .
 func (c *Client) DisableControl(ctx context.Context, params *DisableControlInput, optFns ...func(*Options)) (*DisableControlOutput, error) {
 	if params == nil {

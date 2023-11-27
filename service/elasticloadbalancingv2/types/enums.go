@@ -26,6 +26,24 @@ func (ActionTypeEnum) Values() []ActionTypeEnum {
 	}
 }
 
+type AnomalyResultEnum string
+
+// Enum values for AnomalyResultEnum
+const (
+	AnomalyResultEnumAnomalous AnomalyResultEnum = "anomalous"
+	AnomalyResultEnumNormal    AnomalyResultEnum = "normal"
+)
+
+// Values returns all known values for AnomalyResultEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnomalyResultEnum) Values() []AnomalyResultEnum {
+	return []AnomalyResultEnum{
+		"anomalous",
+		"normal",
+	}
+}
+
 type AuthenticateCognitoActionConditionalBehaviorEnum string
 
 // Enum values for AuthenticateCognitoActionConditionalBehaviorEnum
@@ -65,6 +83,25 @@ func (AuthenticateOidcActionConditionalBehaviorEnum) Values() []AuthenticateOidc
 		"deny",
 		"allow",
 		"authenticate",
+	}
+}
+
+type DescribeTargetHealthInputIncludeEnum string
+
+// Enum values for DescribeTargetHealthInputIncludeEnum
+const (
+	DescribeTargetHealthInputIncludeEnumAnomaly DescribeTargetHealthInputIncludeEnum = "AnomalyDetection"
+	DescribeTargetHealthInputIncludeEnumAll     DescribeTargetHealthInputIncludeEnum = "All"
+)
+
+// Values returns all known values for DescribeTargetHealthInputIncludeEnum. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DescribeTargetHealthInputIncludeEnum) Values() []DescribeTargetHealthInputIncludeEnum {
+	return []DescribeTargetHealthInputIncludeEnum{
+		"AnomalyDetection",
+		"All",
 	}
 }
 
@@ -165,6 +202,24 @@ func (LoadBalancerTypeEnum) Values() []LoadBalancerTypeEnum {
 	}
 }
 
+type MitigationInEffectEnum string
+
+// Enum values for MitigationInEffectEnum
+const (
+	MitigationInEffectEnumYes MitigationInEffectEnum = "yes"
+	MitigationInEffectEnumNo  MitigationInEffectEnum = "no"
+)
+
+// Values returns all known values for MitigationInEffectEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MitigationInEffectEnum) Values() []MitigationInEffectEnum {
+	return []MitigationInEffectEnum{
+		"yes",
+		"no",
+	}
+}
+
 type ProtocolEnum string
 
 // Enum values for ProtocolEnum
@@ -209,6 +264,22 @@ func (RedirectActionStatusCodeEnum) Values() []RedirectActionStatusCodeEnum {
 	return []RedirectActionStatusCodeEnum{
 		"HTTP_301",
 		"HTTP_302",
+	}
+}
+
+type RevocationType string
+
+// Enum values for RevocationType
+const (
+	RevocationTypeCrl RevocationType = "CRL"
+)
+
+// Values returns all known values for RevocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RevocationType) Values() []RevocationType {
+	return []RevocationType{
+		"CRL",
 	}
 }
 
@@ -314,5 +385,23 @@ func (TargetTypeEnum) Values() []TargetTypeEnum {
 		"ip",
 		"lambda",
 		"alb",
+	}
+}
+
+type TrustStoreStatus string
+
+// Enum values for TrustStoreStatus
+const (
+	TrustStoreStatusActive   TrustStoreStatus = "ACTIVE"
+	TrustStoreStatusCreating TrustStoreStatus = "CREATING"
+)
+
+// Values returns all known values for TrustStoreStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TrustStoreStatus) Values() []TrustStoreStatus {
+	return []TrustStoreStatus{
+		"ACTIVE",
+		"CREATING",
 	}
 }

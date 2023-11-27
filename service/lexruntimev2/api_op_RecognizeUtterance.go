@@ -156,7 +156,8 @@ type RecognizeUtteranceOutput struct {
 	// Content type as specified in the responseContentType in the request.
 	ContentType *string
 
-	// Indicates whether the input mode to the operation was text or speech.
+	// Indicates whether the input mode to the operation was text, speech, or from a
+	// touch-tone keypad.
 	InputMode *string
 
 	// The text used to process the request. If the input was an audio stream, the

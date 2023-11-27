@@ -124,6 +124,9 @@ func awsAwsjson10_deserializeOpErrorAssociateVehicleFleet(response *smithyhttp.R
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -7039,6 +7042,15 @@ func awsAwsjson10_deserializeDocumentActuator(v **types.Actuator, value interfac
 				}
 			}
 
+		case "structFullyQualifiedName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodePath to be of type string, got %T instead", value)
+				}
+				sv.StructFullyQualifiedName = ptr.String(jtv)
+			}
+
 		case "unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7605,7 +7617,7 @@ func awsAwsjson10_deserializeDocumentCanSignal(v **types.CanSignal, value interf
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.IsBigEndian = jtv
 			}
@@ -7614,7 +7626,7 @@ func awsAwsjson10_deserializeDocumentCanSignal(v **types.CanSignal, value interf
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.IsSigned = jtv
 			}
@@ -8126,6 +8138,167 @@ func awsAwsjson10_deserializeDocumentCreateVehicleResponses(v *[]types.CreateVeh
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCustomProperty(v **types.CustomProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomProperty
+	if *v == nil {
+		sv = &types.CustomProperty{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "comment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.Comment = ptr.String(jtv)
+			}
+
+		case "dataEncoding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeDataEncoding to be of type string, got %T instead", value)
+				}
+				sv.DataEncoding = types.NodeDataEncoding(jtv)
+			}
+
+		case "dataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeDataType to be of type string, got %T instead", value)
+				}
+				sv.DataType = types.NodeDataType(jtv)
+			}
+
+		case "deprecationMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.DeprecationMessage = ptr.String(jtv)
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "fullyQualifiedName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.FullyQualifiedName = ptr.String(jtv)
+			}
+
+		case "structFullyQualifiedName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodePath to be of type string, got %T instead", value)
+				}
+				sv.StructFullyQualifiedName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCustomStruct(v **types.CustomStruct, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomStruct
+	if *v == nil {
+		sv = &types.CustomStruct{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "comment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.Comment = ptr.String(jtv)
+			}
+
+		case "deprecationMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.DeprecationMessage = ptr.String(jtv)
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "fullyQualifiedName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.FullyQualifiedName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentDataDestinationConfig(v *types.DataDestinationConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8348,6 +8521,15 @@ func awsAwsjson10_deserializeDocumentDecoderManifestSummary(v **types.DecoderMan
 					return fmt.Errorf("expected timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "modelManifestArn":
@@ -8964,6 +9146,15 @@ func awsAwsjson10_deserializeDocumentInvalidSignalDecoder(v **types.InvalidSigna
 
 	for key, value := range shape {
 		switch key {
+		case "hint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.Hint = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9198,6 +9389,51 @@ func awsAwsjson10_deserializeDocumentListOfStrings(v *[]string, value interface{
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentMessageSignal(v **types.MessageSignal, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MessageSignal
+	if *v == nil {
+		sv = &types.MessageSignal{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "structuredMessage":
+			if err := awsAwsjson10_deserializeDocumentStructuredMessage(&sv.StructuredMessage, value); err != nil {
+				return err
+			}
+
+		case "topicName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TopicName to be of type string, got %T instead", value)
+				}
+				sv.TopicName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentModelManifestSummaries(v *[]types.ModelManifestSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9390,6 +9626,11 @@ func awsAwsjson10_deserializeDocumentNetworkInterface(v **types.NetworkInterface
 				sv.Type = types.NetworkInterfaceType(jtv)
 			}
 
+		case "vehicleMiddleware":
+			if err := awsAwsjson10_deserializeDocumentVehicleMiddleware(&sv.VehicleMiddleware, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9483,6 +9724,16 @@ loop:
 			uv = &types.NodeMemberBranch{Value: mv}
 			break loop
 
+		case "property":
+			var mv types.CustomProperty
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentCustomProperty(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.NodeMemberProperty{Value: mv}
+			break loop
+
 		case "sensor":
 			var mv types.Sensor
 			destAddr := &mv
@@ -9491,6 +9742,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.NodeMemberSensor{Value: mv}
+			break loop
+
+		case "struct":
+			var mv types.CustomStruct
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentCustomStruct(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.NodeMemberStruct{Value: mv}
 			break loop
 
 		default:
@@ -9577,6 +9838,19 @@ func awsAwsjson10_deserializeDocumentNodeCounts(v **types.NodeCounts, value inte
 				sv.TotalNodes = int32(i64)
 			}
 
+		case "totalProperties":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected number to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalProperties = int32(i64)
+			}
+
 		case "totalSensors":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9588,6 +9862,19 @@ func awsAwsjson10_deserializeDocumentNodeCounts(v **types.NodeCounts, value inte
 					return err
 				}
 				sv.TotalSensors = int32(i64)
+			}
+
+		case "totalStructs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected number to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalStructs = int32(i64)
 			}
 
 		default:
@@ -9670,7 +9957,7 @@ func awsAwsjson10_deserializeDocumentObdInterface(v **types.ObdInterface, value 
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.HasTransmissionEcu = jtv
 			}
@@ -9723,7 +10010,7 @@ func awsAwsjson10_deserializeDocumentObdInterface(v **types.ObdInterface, value 
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.UseExtendedIds = jtv
 			}
@@ -9855,7 +10142,7 @@ func awsAwsjson10_deserializeDocumentObdSignal(v **types.ObdSignal, value interf
 				if err != nil {
 					return err
 				}
-				sv.PidResponseLength = int32(i64)
+				sv.PidResponseLength = ptr.Int32(int32(i64))
 			}
 
 		case "scaling":
@@ -9927,6 +10214,46 @@ func awsAwsjson10_deserializeDocumentObdSignal(v **types.ObdSignal, value interf
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentPrimitiveMessageDefinition(v *types.PrimitiveMessageDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.PrimitiveMessageDefinition
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "ros2PrimitiveMessageDefinition":
+			var mv types.ROS2PrimitiveMessageDefinition
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentROS2PrimitiveMessageDefinition(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9974,6 +10301,127 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentROS2PrimitiveMessageDefinition(v **types.ROS2PrimitiveMessageDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ROS2PrimitiveMessageDefinition
+	if *v == nil {
+		sv = &types.ROS2PrimitiveMessageDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "offset":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Offset = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Offset = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "primitiveType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ROS2PrimitiveType to be of type string, got %T instead", value)
+				}
+				sv.PrimitiveType = types.ROS2PrimitiveType(jtv)
+			}
+
+		case "scaling":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Scaling = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Scaling = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "upperBound":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected maxStringSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UpperBound = ptr.Int64(i64)
 			}
 
 		default:
@@ -10192,6 +10640,15 @@ func awsAwsjson10_deserializeDocumentSensor(v **types.Sensor, value interface{})
 				}
 			}
 
+		case "structFullyQualifiedName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodePath to be of type string, got %T instead", value)
+				}
+				sv.StructFullyQualifiedName = ptr.String(jtv)
+			}
+
 		case "unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10370,6 +10827,11 @@ func awsAwsjson10_deserializeDocumentSignalDecoder(v **types.SignalDecoder, valu
 				sv.InterfaceId = ptr.String(jtv)
 			}
 
+		case "messageSignal":
+			if err := awsAwsjson10_deserializeDocumentMessageSignal(&sv.MessageSignal, value); err != nil {
+				return err
+			}
+
 		case "obdSignal":
 			if err := awsAwsjson10_deserializeDocumentObdSignal(&sv.ObdSignal, value); err != nil {
 				return err
@@ -10524,6 +10986,208 @@ func awsAwsjson10_deserializeDocumentSignalInformationList(v *[]types.SignalInfo
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentStructuredMessage(v *types.StructuredMessage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.StructuredMessage
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "primitiveMessageDefinition":
+			var mv types.PrimitiveMessageDefinition
+			if err := awsAwsjson10_deserializeDocumentPrimitiveMessageDefinition(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.StructuredMessageMemberPrimitiveMessageDefinition{Value: mv}
+			break loop
+
+		case "structuredMessageDefinition":
+			var mv []types.StructuredMessageFieldNameAndDataTypePair
+			if err := awsAwsjson10_deserializeDocumentStructuredMessageDefinition(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.StructuredMessageMemberStructuredMessageDefinition{Value: mv}
+			break loop
+
+		case "structuredMessageListDefinition":
+			var mv types.StructuredMessageListDefinition
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentStructuredMessageListDefinition(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.StructuredMessageMemberStructuredMessageListDefinition{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentStructuredMessageDefinition(v *[]types.StructuredMessageFieldNameAndDataTypePair, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StructuredMessageFieldNameAndDataTypePair
+	if *v == nil {
+		cv = []types.StructuredMessageFieldNameAndDataTypePair{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StructuredMessageFieldNameAndDataTypePair
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentStructuredMessageFieldNameAndDataTypePair(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentStructuredMessageFieldNameAndDataTypePair(v **types.StructuredMessageFieldNameAndDataTypePair, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StructuredMessageFieldNameAndDataTypePair
+	if *v == nil {
+		sv = &types.StructuredMessageFieldNameAndDataTypePair{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dataType":
+			if err := awsAwsjson10_deserializeDocumentStructuredMessage(&sv.DataType, value); err != nil {
+				return err
+			}
+
+		case "fieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StructureMessageName to be of type string, got %T instead", value)
+				}
+				sv.FieldName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentStructuredMessageListDefinition(v **types.StructuredMessageListDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StructuredMessageListDefinition
+	if *v == nil {
+		sv = &types.StructuredMessageListDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected nonNegativeInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Capacity = int32(i64)
+			}
+
+		case "listType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StructuredMessageListType to be of type string, got %T instead", value)
+				}
+				sv.ListType = types.StructuredMessageListType(jtv)
+			}
+
+		case "memberType":
+			if err := awsAwsjson10_deserializeDocumentStructuredMessage(&sv.MemberType, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StructureMessageName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -11221,6 +11885,55 @@ func awsAwsjson10_deserializeDocumentValidationExceptionFieldList(v *[]types.Val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentVehicleMiddleware(v **types.VehicleMiddleware, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VehicleMiddleware
+	if *v == nil {
+		sv = &types.VehicleMiddleware{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VehicleMiddlewareName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "protocolName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VehicleMiddlewareProtocol to be of type string, got %T instead", value)
+				}
+				sv.ProtocolName = types.VehicleMiddlewareProtocol(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -12518,6 +13231,15 @@ func awsAwsjson10_deserializeOpDocumentGetDecoderManifestOutput(v **GetDecoderMa
 					return fmt.Errorf("expected timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "modelManifestArn":

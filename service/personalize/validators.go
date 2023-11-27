@@ -1329,6 +1329,21 @@ func validateDatasetExportJobOutput(v *types.DatasetExportJobOutput) error {
 	}
 }
 
+func validateFieldsForThemeGeneration(v *types.FieldsForThemeGeneration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldsForThemeGeneration"}
+	if v.ItemName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ItemName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricAttribute(v *types.MetricAttribute) error {
 	if v == nil {
 		return nil
@@ -1437,6 +1452,25 @@ func validateTags(v []types.Tag) error {
 	}
 }
 
+func validateThemeGenerationConfig(v *types.ThemeGenerationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ThemeGenerationConfig"}
+	if v.FieldsForThemeGeneration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldsForThemeGeneration"))
+	} else if v.FieldsForThemeGeneration != nil {
+		if err := validateFieldsForThemeGeneration(v.FieldsForThemeGeneration); err != nil {
+			invalidParams.AddNested("FieldsForThemeGeneration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateBatchInferenceJobInput(v *CreateBatchInferenceJobInput) error {
 	if v == nil {
 		return nil
@@ -1468,6 +1502,11 @@ func validateOpCreateBatchInferenceJobInput(v *CreateBatchInferenceJobInput) err
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ThemeGenerationConfig != nil {
+		if err := validateThemeGenerationConfig(v.ThemeGenerationConfig); err != nil {
+			invalidParams.AddNested("ThemeGenerationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -326,6 +326,24 @@ func (NetworkDirection) Values() []NetworkDirection {
 	}
 }
 
+type ParameterValueType string
+
+// Enum values for ParameterValueType
+const (
+	ParameterValueTypeDefault ParameterValueType = "DEFAULT"
+	ParameterValueTypeCustom  ParameterValueType = "CUSTOM"
+)
+
+// Values returns all known values for ParameterValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterValueType) Values() []ParameterValueType {
+	return []ParameterValueType{
+		"DEFAULT",
+		"CUSTOM",
+	}
+}
+
 type Partition string
 
 // Enum values for Partition
@@ -397,6 +415,22 @@ func (RuleStatus) Values() []RuleStatus {
 	return []RuleStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type SecurityControlProperty string
+
+// Enum values for SecurityControlProperty
+const (
+	SecurityControlPropertyParameters SecurityControlProperty = "Parameters"
+)
+
+// Values returns all known values for SecurityControlProperty. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityControlProperty) Values() []SecurityControlProperty {
+	return []SecurityControlProperty{
+		"Parameters",
 	}
 }
 
@@ -614,6 +648,24 @@ func (UnprocessedErrorCode) Values() []UnprocessedErrorCode {
 		"ACCESS_DENIED",
 		"NOT_FOUND",
 		"LIMIT_EXCEEDED",
+	}
+}
+
+type UpdateStatus string
+
+// Enum values for UpdateStatus
+const (
+	UpdateStatusReady    UpdateStatus = "READY"
+	UpdateStatusUpdating UpdateStatus = "UPDATING"
+)
+
+// Values returns all known values for UpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateStatus) Values() []UpdateStatus {
+	return []UpdateStatus{
+		"READY",
+		"UPDATING",
 	}
 }
 

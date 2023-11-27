@@ -2514,8 +2514,8 @@ type AwsCloudFrontDistributionOriginGroups struct {
 }
 
 // A complex type that describes the Amazon S3 bucket, HTTP server (for example, a
-// web server), AWS Elemental MediaStore, or other server from which CloudFront
-// gets your files.
+// web server), Elemental MediaStore, or other server from which CloudFront gets
+// your files.
 type AwsCloudFrontDistributionOriginItem struct {
 
 	// An origin that is not an Amazon S3 bucket, with one exception. If the Amazon S3
@@ -11253,10 +11253,9 @@ type AwsSecurityFinding struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of attributes that are applied to all active Security
-// Hub-aggregated findings and that result in a subset of findings that are
-// included in this insight. You can filter by up to 10 finding attributes. For
-// each attribute, you can provide up to 20 filter values.
+// A collection of filters that are applied to all active findings aggregated by
+// Security Hub. You can filter by up to ten finding attributes. For each
+// attribute, you can provide up to 20 filter values.
 type AwsSecurityFindingFilters struct {
 
 	// The Amazon Web Services account ID that a finding is generated in.
@@ -11275,6 +11274,12 @@ type AwsSecurityFindingFilters struct {
 	// The unique identifier of a control across standards. Values for this field
 	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
 	ComplianceSecurityControlId []StringFilter
+
+	// The name of a security control parameter.
+	ComplianceSecurityControlParametersName []StringFilter
+
+	// The current value of a security control parameter.
+	ComplianceSecurityControlParametersValue []StringFilter
 
 	// Exclusive to findings that are generated as the result of a check run against a
 	// specific rule in a supported standard, such as CIS Amazon Web Services
@@ -11625,6 +11630,16 @@ type AwsSecurityFindingFilters struct {
 
 	// The veracity of a finding.
 	VerificationState []StringFilter
+
+	// Indicates whether a software vulnerability in your environment has a known
+	// exploit. You can filter findings by this field only if you use Security Hub and
+	// Amazon Inspector.
+	VulnerabilitiesExploitAvailable []StringFilter
+
+	// Indicates whether a vulnerability is fixed in a newer version of the affected
+	// software packages. You can filter findings by this field only if you use
+	// Security Hub and Amazon Inspector.
+	VulnerabilitiesFixAvailable []StringFilter
 
 	// The workflow state of a finding. Note that this field is deprecated. To search
 	// for a finding based on its workflow status, use WorkflowStatus .
@@ -12705,6 +12720,16 @@ type BatchUpdateFindingsUnprocessedFinding struct {
 	noSmithyDocumentSerde
 }
 
+// The options for customizing a security control parameter with a boolean. For a
+// boolean parameter, the options are true and false .
+type BooleanConfigurationOptions struct {
+
+	// The Security Hub default value for a boolean parameter.
+	DefaultValue *bool
+
+	noSmithyDocumentSerde
+}
+
 // Boolean filter for querying findings.
 type BooleanFilter struct {
 
@@ -12853,6 +12878,9 @@ type Compliance struct {
 	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
 	SecurityControlId *string
 
+	// An object that includes security control parameter names and values.
+	SecurityControlParameters []SecurityControlParameter
+
 	// The result of a standards check. The valid values for Status are as follows.
 	//   - PASSED - Standards check passed for all evaluated resources.
 	//   - WARNING - Some information is missing or this check is not supported for
@@ -12872,6 +12900,99 @@ type Compliance struct {
 
 	noSmithyDocumentSerde
 }
+
+// The options for customizing a security control parameter.
+//
+// The following types satisfy this interface:
+//
+//	ConfigurationOptionsMemberBoolean
+//	ConfigurationOptionsMemberDouble
+//	ConfigurationOptionsMemberEnum
+//	ConfigurationOptionsMemberEnumList
+//	ConfigurationOptionsMemberInteger
+//	ConfigurationOptionsMemberIntegerList
+//	ConfigurationOptionsMemberString
+//	ConfigurationOptionsMemberStringList
+type ConfigurationOptions interface {
+	isConfigurationOptions()
+}
+
+// The options for customizing a security control parameter that is a boolean. For
+// a boolean parameter, the options are true and false .
+type ConfigurationOptionsMemberBoolean struct {
+	Value BooleanConfigurationOptions
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationOptionsMemberBoolean) isConfigurationOptions() {}
+
+// The options for customizing a security control parameter that is a double.
+type ConfigurationOptionsMemberDouble struct {
+	Value DoubleConfigurationOptions
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationOptionsMemberDouble) isConfigurationOptions() {}
+
+// The options for customizing a security control parameter that is an enum.
+type ConfigurationOptionsMemberEnum struct {
+	Value EnumConfigurationOptions
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationOptionsMemberEnum) isConfigurationOptions() {}
+
+// The options for customizing a security control parameter that is a list of
+// enums.
+type ConfigurationOptionsMemberEnumList struct {
+	Value EnumListConfigurationOptions
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationOptionsMemberEnumList) isConfigurationOptions() {}
+
+// The options for customizing a security control parameter that is an integer.
+type ConfigurationOptionsMemberInteger struct {
+	Value IntegerConfigurationOptions
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationOptionsMemberInteger) isConfigurationOptions() {}
+
+// The options for customizing a security control parameter that is a list of
+// integers.
+type ConfigurationOptionsMemberIntegerList struct {
+	Value IntegerListConfigurationOptions
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationOptionsMemberIntegerList) isConfigurationOptions() {}
+
+// The options for customizing a security control parameter that is a string data
+// type.
+type ConfigurationOptionsMemberString struct {
+	Value StringConfigurationOptions
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationOptionsMemberString) isConfigurationOptions() {}
+
+// The options for customizing a security control parameter that is a list of
+// strings.
+type ConfigurationOptionsMemberStringList struct {
+	Value StringListConfigurationOptions
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationOptionsMemberStringList) isConfigurationOptions() {}
 
 // Container details related to a finding.
 type ContainerDetails struct {
@@ -13027,6 +13148,49 @@ type DnsRequestAction struct {
 
 	// The protocol that was used for the DNS request.
 	Protocol *string
+
+	noSmithyDocumentSerde
+}
+
+// The options for customizing a security control parameter that is a double.
+type DoubleConfigurationOptions struct {
+
+	// The Security Hub default value for a control parameter that is a double.
+	DefaultValue *float64
+
+	// The maximum valid value for a control parameter that is a double.
+	Max *float64
+
+	// The minimum valid value for a control parameter that is a double.
+	Min *float64
+
+	noSmithyDocumentSerde
+}
+
+// The options for customizing a security control parameter that is an enum.
+type EnumConfigurationOptions struct {
+
+	// The valid values for a control parameter that is an enum.
+	AllowedValues []string
+
+	// The Security Hub default value for a control parameter that is an enum.
+	DefaultValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The options for customizing a security control parameter that is a list of
+// enums.
+type EnumListConfigurationOptions struct {
+
+	// The valid values for a control parameter that is a list of enums.
+	AllowedValues []string
+
+	// The Security Hub default value for a control parameter that is a list of enums.
+	DefaultValue []string
+
+	// The maximum number of list items that an enum list control parameter can accept.
+	MaxItems *int32
 
 	noSmithyDocumentSerde
 }
@@ -13375,6 +13539,42 @@ type InsightResultValue struct {
 	//
 	// This member is required.
 	GroupByAttributeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The options for customizing a security control parameter that is an integer.
+type IntegerConfigurationOptions struct {
+
+	// The Security Hub default value for a control parameter that is an integer.
+	DefaultValue *int32
+
+	// The maximum valid value for a control parameter that is an integer.
+	Max *int32
+
+	// The minimum valid value for a control parameter that is an integer.
+	Min *int32
+
+	noSmithyDocumentSerde
+}
+
+// The options for customizing a security control parameter that is a list of
+// integers.
+type IntegerListConfigurationOptions struct {
+
+	// The Security Hub default value for a control parameter that is a list of
+	// integers.
+	DefaultValue []int32
+
+	// The maximum valid value for a control parameter that is a list of integers.
+	Max *int32
+
+	// The maximum number of list items that an interger list control parameter can
+	// accept.
+	MaxItems *int32
+
+	// The minimum valid value for a control parameter that is a list of integers.
+	Min *int32
 
 	noSmithyDocumentSerde
 }
@@ -13755,9 +13955,17 @@ type NumberFilter struct {
 	// findings.
 	Eq *float64
 
+	// The greater-than condition to be applied to a single field when querying for
+	// findings.
+	Gt *float64
+
 	// The greater-than-equal condition to be applied to a single field when querying
 	// for findings.
 	Gte *float64
+
+	// The less-than condition to be applied to a single field when querying for
+	// findings.
+	Lt *float64
 
 	// The less-than-equal condition to be applied to a single field when querying for
 	// findings.
@@ -13807,6 +14015,129 @@ type Page struct {
 
 	noSmithyDocumentSerde
 }
+
+// An object that provides the current value of a security control parameter and
+// identifies whether it has been customized.
+type ParameterConfiguration struct {
+
+	// Identifies whether a control parameter uses a custom user-defined value or the
+	// Security Hub default value.
+	//
+	// This member is required.
+	ValueType ParameterValueType
+
+	// The current value of a control parameter.
+	Value ParameterValue
+
+	noSmithyDocumentSerde
+}
+
+// An object that describes a security control parameter and the options for
+// customizing it.
+type ParameterDefinition struct {
+
+	// The options for customizing a control parameter. Customization options vary
+	// based on the data type of the parameter.
+	//
+	// This member is required.
+	ConfigurationOptions ConfigurationOptions
+
+	// Description of a control parameter.
+	//
+	// This member is required.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that includes the data type of a security control parameter and its
+// current value.
+//
+// The following types satisfy this interface:
+//
+//	ParameterValueMemberBoolean
+//	ParameterValueMemberDouble
+//	ParameterValueMemberEnum
+//	ParameterValueMemberEnumList
+//	ParameterValueMemberInteger
+//	ParameterValueMemberIntegerList
+//	ParameterValueMemberString
+//	ParameterValueMemberStringList
+type ParameterValue interface {
+	isParameterValue()
+}
+
+// A control parameter that is a boolean.
+type ParameterValueMemberBoolean struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*ParameterValueMemberBoolean) isParameterValue() {}
+
+// A control parameter that is a double.
+type ParameterValueMemberDouble struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*ParameterValueMemberDouble) isParameterValue() {}
+
+// A control parameter that is an enum.
+type ParameterValueMemberEnum struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ParameterValueMemberEnum) isParameterValue() {}
+
+// A control parameter that is a list of enums.
+type ParameterValueMemberEnumList struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*ParameterValueMemberEnumList) isParameterValue() {}
+
+// A control parameter that is an integer.
+type ParameterValueMemberInteger struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*ParameterValueMemberInteger) isParameterValue() {}
+
+// A control parameter that is a list of integers.
+type ParameterValueMemberIntegerList struct {
+	Value []int32
+
+	noSmithyDocumentSerde
+}
+
+func (*ParameterValueMemberIntegerList) isParameterValue() {}
+
+// A control parameter that is a string.
+type ParameterValueMemberString struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ParameterValueMemberString) isParameterValue() {}
+
+// A control parameter that is a list of strings.
+type ParameterValueMemberStringList struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*ParameterValueMemberStringList) isParameterValue() {}
 
 // Provides an overview of the patch compliance status for an instance against a
 // selected compliance standard.
@@ -14854,6 +15185,24 @@ type SecurityControl struct {
 	// This member is required.
 	Title *string
 
+	// The most recent reason for updating the customizable properties of a security
+	// control. This differs from the UpdateReason field of the
+	// BatchUpdateStandardsControlAssociations (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html)
+	// API, which tracks the reason for updating the enablement status of a control.
+	// This field accepts alphanumeric characters in addition to white spaces, dashes,
+	// and underscores.
+	LastUpdateReason *string
+
+	// An object that identifies the name of a control parameter, its current value,
+	// and whether it has been customized.
+	Parameters map[string]ParameterConfiguration
+
+	// Identifies whether customizable properties of a security control are reflected
+	// in Security Hub findings. A status of READY indicates findings include the
+	// current parameter values. A status of UPDATING indicates that all findings may
+	// not include the current parameter values.
+	UpdateStatus UpdateStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -14903,6 +15252,28 @@ type SecurityControlDefinition struct {
 	//
 	// This member is required.
 	Title *string
+
+	// Security control properties that you can customize. Currently, only parameter
+	// customization is supported for select controls. An empty array is returned for
+	// controls that don’t support custom properties.
+	CustomizableProperties []SecurityControlProperty
+
+	// An object that provides a security control parameter name, description, and the
+	// options for customizing it. This object is excluded for a control that doesn't
+	// support custom parameters.
+	ParameterDefinitions map[string]ParameterDefinition
+
+	noSmithyDocumentSerde
+}
+
+// A parameter that a security control accepts.
+type SecurityControlParameter struct {
+
+	// The name of a
+	Name *string
+
+	// The current value of a control parameter.
+	Value []string
 
 	noSmithyDocumentSerde
 }
@@ -14964,10 +15335,9 @@ type Severity struct {
 	//   - 90–100 - CRITICAL
 	Label SeverityLabel
 
-	// Deprecated. The normalized severity of a finding. This attribute is being
-	// deprecated. Instead of providing Normalized , provide Label . If you provide
-	// Label and do not provide Normalized , then Normalized is set automatically as
-	// follows.
+	// Deprecated. The normalized severity of a finding. Instead of providing
+	// Normalized , provide Label . If you provide Label and do not provide Normalized
+	// , then Normalized is set automatically as follows.
 	//   - INFORMATIONAL - 0
 	//   - LOW - 1
 	//   - MEDIUM - 40
@@ -14978,9 +15348,9 @@ type Severity struct {
 	// The native severity from the finding product that generated the finding.
 	Original *string
 
-	// Deprecated. This attribute is being deprecated. Instead of providing Product ,
-	// provide Original . The native severity as defined by the Amazon Web Services
-	// service or integrated partner product that generated the finding.
+	// Deprecated. This attribute isn't included in findings. Instead of providing
+	// Product , provide Original . The native severity as defined by the Amazon Web
+	// Services service or integrated partner product that generated the finding.
 	Product *float64
 
 	noSmithyDocumentSerde
@@ -15411,6 +15781,22 @@ type StatusReason struct {
 	noSmithyDocumentSerde
 }
 
+// The options for customizing a security control parameter that is a string.
+type StringConfigurationOptions struct {
+
+	// The Security Hub default value for a control parameter that is a string.
+	DefaultValue *string
+
+	// The description of the RE2 regular expression.
+	ExpressionDescription *string
+
+	// An RE2 regular expression that Security Hub uses to validate a user-provided
+	// control parameter string.
+	Re2Expression *string
+
+	noSmithyDocumentSerde
+}
+
 // A string filter for filtering Security Hub findings.
 type StringFilter struct {
 
@@ -15472,6 +15858,28 @@ type StringFilter struct {
 	// product name for control-based findings is Security Hub . If you provide
 	// security hub as the filter value, there's no match.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The options for customizing a security control parameter that is a list of
+// strings.
+type StringListConfigurationOptions struct {
+
+	// The Security Hub default value for a control parameter that is a list of
+	// strings.
+	DefaultValue []string
+
+	// The description of the RE2 regular expression.
+	ExpressionDescription *string
+
+	// The maximum number of list items that a string list control parameter can
+	// accept.
+	MaxItems *int32
+
+	// An RE2 regular expression that Security Hub uses to validate a user-provided
+	// list of strings for a control parameter.
+	Re2Expression *string
 
 	noSmithyDocumentSerde
 }
@@ -15892,3 +16300,15 @@ type WorkflowUpdate struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isConfigurationOptions() {}
+func (*UnknownUnionMember) isParameterValue()       {}

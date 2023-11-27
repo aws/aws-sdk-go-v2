@@ -10639,6 +10639,62 @@ func awsAwsjson11_deserializeDocumentConnectionAliasPermissions(v *[]types.Conne
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDataReplicationSettings(v **types.DataReplicationSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataReplicationSettings
+	if *v == nil {
+		sv = &types.DataReplicationSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataReplication":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataReplication to be of type string, got %T instead", value)
+				}
+				sv.DataReplication = types.DataReplication(jtv)
+			}
+
+		case "RecoverySnapshotTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RecoverySnapshotTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDedicatedTenancyCidrRangeList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13058,6 +13114,15 @@ func awsAwsjson11_deserializeDocumentStandbyWorkspace(v **types.StandbyWorkspace
 
 	for key, value := range shape {
 		switch key {
+		case "DataReplication":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataReplication to be of type string, got %T instead", value)
+				}
+				sv.DataReplication = types.DataReplication(jtv)
+			}
+
 		case "DirectoryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13096,6 +13161,105 @@ func awsAwsjson11_deserializeDocumentStandbyWorkspace(v **types.StandbyWorkspace
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStandbyWorkspacesProperties(v **types.StandbyWorkspacesProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StandbyWorkspacesProperties
+	if *v == nil {
+		sv = &types.StandbyWorkspacesProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataReplication":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataReplication to be of type string, got %T instead", value)
+				}
+				sv.DataReplication = types.DataReplication(jtv)
+			}
+
+		case "RecoverySnapshotTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RecoverySnapshotTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "StandbyWorkspaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceId to be of type string, got %T instead", value)
+				}
+				sv.StandbyWorkspaceId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStandbyWorkspacesPropertiesList(v *[]types.StandbyWorkspacesProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StandbyWorkspacesProperties
+	if *v == nil {
+		cv = []types.StandbyWorkspacesProperties{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StandbyWorkspacesProperties
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentStandbyWorkspacesProperties(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -13427,6 +13591,11 @@ func awsAwsjson11_deserializeDocumentWorkspace(v **types.Workspace, value interf
 				sv.ComputerName = ptr.String(jtv)
 			}
 
+		case "DataReplicationSettings":
+			if err := awsAwsjson11_deserializeDocumentDataReplicationSettings(&sv.DataReplicationSettings, value); err != nil {
+				return err
+			}
+
 		case "DirectoryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13480,6 +13649,11 @@ func awsAwsjson11_deserializeDocumentWorkspace(v **types.Workspace, value interf
 					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
 				}
 				sv.RootVolumeEncryptionEnabled = ptr.Bool(jtv)
+			}
+
+		case "StandbyWorkspacesProperties":
+			if err := awsAwsjson11_deserializeDocumentStandbyWorkspacesPropertiesList(&sv.StandbyWorkspacesProperties, value); err != nil {
+				return err
 			}
 
 		case "State":

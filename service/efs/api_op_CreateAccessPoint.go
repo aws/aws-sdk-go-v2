@@ -64,16 +64,16 @@ type CreateAccessPointInput struct {
 	// using the access point.
 	PosixUser *types.PosixUser
 
-	// Specifies the directory on the Amazon EFS file system that the access point
-	// exposes as the root directory of your file system to NFS clients using the
-	// access point. The clients using the access point can only access the root
-	// directory and below. If the RootDirectory > Path specified does not exist, EFS
-	// creates it and applies the CreationInfo settings when a client connects to an
-	// access point. When specifying a RootDirectory , you must provide the Path , and
-	// the CreationInfo . Amazon EFS creates a root directory only if you have provided
-	// the CreationInfo: OwnUid, OwnGID, and permissions for the directory. If you do
-	// not provide this information, Amazon EFS does not create the root directory. If
-	// the root directory does not exist, attempts to mount using the access point will
+	// Specifies the directory on the EFS file system that the access point exposes as
+	// the root directory of your file system to NFS clients using the access point.
+	// The clients using the access point can only access the root directory and below.
+	// If the RootDirectory > Path specified does not exist, Amazon EFS creates it and
+	// applies the CreationInfo settings when a client connects to an access point.
+	// When specifying a RootDirectory , you must provide the Path , and the
+	// CreationInfo . Amazon EFS creates a root directory only if you have provided the
+	// CreationInfo: OwnUid, OwnGID, and permissions for the directory. If you do not
+	// provide this information, Amazon EFS does not create the root directory. If the
+	// root directory does not exist, attempts to mount using the access point will
 	// fail.
 	RootDirectory *types.RootDirectory
 
@@ -115,8 +115,8 @@ type CreateAccessPointOutput struct {
 	// using the access point.
 	PosixUser *types.PosixUser
 
-	// The directory on the Amazon EFS file system that the access point exposes as
-	// the root directory to NFS clients using the access point.
+	// The directory on the EFS file system that the access point exposes as the root
+	// directory to NFS clients using the access point.
 	RootDirectory *types.RootDirectory
 
 	// The tags associated with the access point, presented as an array of Tag objects.

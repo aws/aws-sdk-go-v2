@@ -2498,6 +2498,11 @@ func awsRestjson1_serializeDocumentLifecyclePolicy(v *types.LifecyclePolicy, val
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.TransitionToArchive) > 0 {
+		ok := object.Key("TransitionToArchive")
+		ok.String(string(v.TransitionToArchive))
+	}
+
 	if len(v.TransitionToIA) > 0 {
 		ok := object.Key("TransitionToIA")
 		ok.String(string(v.TransitionToIA))

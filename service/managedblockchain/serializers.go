@@ -91,6 +91,11 @@ func awsRestjson1_serializeOpDocumentCreateAccessorInput(v *CreateAccessorInput,
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentInputTagMap(v.Tags, ok); err != nil {
@@ -1171,6 +1176,10 @@ func awsRestjson1_serializeOpHttpBindingsListAccessorsInput(v *ListAccessorsInpu
 
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if len(v.NetworkType) > 0 {
+		encoder.SetQuery("networkType").String(string(v.NetworkType))
 	}
 
 	if v.NextToken != nil {

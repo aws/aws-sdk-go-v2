@@ -47,6 +47,54 @@ type AlertManagerDefinitionStatus struct {
 	noSmithyDocumentSerde
 }
 
+// A representation of an AMP destination.
+type AmpConfiguration struct {
+
+	// The ARN of an AMP workspace.
+	//
+	// This member is required.
+	WorkspaceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A representation of a destination that a scraper can produce metrics to.
+//
+// The following types satisfy this interface:
+//
+//	DestinationMemberAmpConfiguration
+type Destination interface {
+	isDestination()
+}
+
+// A representation of an AMP destination.
+type DestinationMemberAmpConfiguration struct {
+	Value AmpConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DestinationMemberAmpConfiguration) isDestination() {}
+
+// A representation of an EKS source.
+type EksConfiguration struct {
+
+	// The ARN of an EKS cluster.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// A list of subnet IDs specified for VPC configuration.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// A list of security group IDs specified for VPC configuration.
+	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
+}
+
 // Represents the properties of a logging configuration metadata.
 type LoggingConfigurationMetadata struct {
 
@@ -179,6 +227,171 @@ type RuleGroupsNamespaceSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A representation of a Prometheus configuration file.
+//
+// The following types satisfy this interface:
+//
+//	ScrapeConfigurationMemberConfigurationBlob
+type ScrapeConfiguration interface {
+	isScrapeConfiguration()
+}
+
+// Binary data representing a Prometheus configuration file.
+type ScrapeConfigurationMemberConfigurationBlob struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*ScrapeConfigurationMemberConfigurationBlob) isScrapeConfiguration() {}
+
+// Represents the properties of a scraper.
+type ScraperDescription struct {
+
+	// The Amazon Resource Name (ARN) of this scraper.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time when the scraper was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The destination that the scraper is producing metrics to.
+	//
+	// This member is required.
+	Destination Destination
+
+	// The time when the scraper was last modified.
+	//
+	// This member is required.
+	LastModifiedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
+	// the scraper to dsicover, collect, and produce metrics on your behalf.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The configuration used to create the scraper.
+	//
+	// This member is required.
+	ScrapeConfiguration ScrapeConfiguration
+
+	// Unique string identifying this scraper.
+	//
+	// This member is required.
+	ScraperId *string
+
+	// The source that the scraper is discovering and collecting metrics from.
+	//
+	// This member is required.
+	Source Source
+
+	// The status of this scraper.
+	//
+	// This member is required.
+	Status *ScraperStatus
+
+	// Alias of this scraper.
+	Alias *string
+
+	// The reason for failure if any.
+	StatusReason *string
+
+	// The tags of this scraper.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the status of a scraper.
+type ScraperStatus struct {
+
+	// Status code of this scraper.
+	//
+	// This member is required.
+	StatusCode ScraperStatusCode
+
+	noSmithyDocumentSerde
+}
+
+// Represents a summary of the properties of a scraper.
+type ScraperSummary struct {
+
+	// The Amazon Resource Name (ARN) of this scraper.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time when the scraper was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The destination that the scraper is producing metrics to.
+	//
+	// This member is required.
+	Destination Destination
+
+	// The time when the scraper was last modified.
+	//
+	// This member is required.
+	LastModifiedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
+	// the scraper to dsicover, collect, and produce metrics on your behalf.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// Unique string identifying this scraper.
+	//
+	// This member is required.
+	ScraperId *string
+
+	// The source that the scraper is discovering and collecting metrics from.
+	//
+	// This member is required.
+	Source Source
+
+	// The status of this scraper.
+	//
+	// This member is required.
+	Status *ScraperStatus
+
+	// Alias of this scraper.
+	Alias *string
+
+	// The reason for failure if any.
+	StatusReason *string
+
+	// The tags of this scraper.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A representation of a source that a scraper can discover and collect metrics
+// from.
+//
+// The following types satisfy this interface:
+//
+//	SourceMemberEksConfiguration
+type Source interface {
+	isSource()
+}
+
+// A representation of an EKS source.
+type SourceMemberEksConfiguration struct {
+	Value EksConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceMemberEksConfiguration) isSource() {}
+
 // Stores information about a field passed inside a request that resulted in an
 // exception.
 type ValidationExceptionField struct {
@@ -275,3 +488,16 @@ type WorkspaceSummary struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isDestination()         {}
+func (*UnknownUnionMember) isScrapeConfiguration() {}
+func (*UnknownUnionMember) isSource()              {}

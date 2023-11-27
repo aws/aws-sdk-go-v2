@@ -64,6 +64,9 @@ type CreateListenerInput struct {
 	// do not set IsDefault .
 	Certificates []types.Certificate
 
+	// The mutual authentication configuration information.
+	MutualAuthentication *types.MutualAuthenticationAttributes
+
 	// The port on which the load balancer is listening. You cannot specify a port for
 	// a Gateway Load Balancer.
 	Port *int32

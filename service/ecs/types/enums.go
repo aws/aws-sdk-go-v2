@@ -896,6 +896,7 @@ const (
 	SettingNameFargateFipsMode                 SettingName = "fargateFIPSMode"
 	SettingNameTagResourceAuthorization        SettingName = "tagResourceAuthorization"
 	SettingNameFargateTaskRetirementWaitPeriod SettingName = "fargateTaskRetirementWaitPeriod"
+	SettingNameGuardDutyActivate               SettingName = "guardDutyActivate"
 )
 
 // Values returns all known values for SettingName. Note that this can be expanded
@@ -911,6 +912,25 @@ func (SettingName) Values() []SettingName {
 		"fargateFIPSMode",
 		"tagResourceAuthorization",
 		"fargateTaskRetirementWaitPeriod",
+		"guardDutyActivate",
+	}
+}
+
+type SettingType string
+
+// Enum values for SettingType
+const (
+	SettingTypeUser       SettingType = "user"
+	SettingTypeAwsManaged SettingType = "aws_managed"
+)
+
+// Values returns all known values for SettingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SettingType) Values() []SettingType {
+	return []SettingType{
+		"user",
+		"aws_managed",
 	}
 }
 

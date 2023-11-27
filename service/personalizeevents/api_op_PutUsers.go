@@ -13,7 +13,7 @@ import (
 )
 
 // Adds one or more users to a Users dataset. For more information see Importing
-// Users Incrementally (https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html)
+// users individually (https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html)
 // .
 func (c *Client) PutUsers(ctx context.Context, params *PutUsersInput, optFns ...func(*Options)) (*PutUsersOutput, error) {
 	if params == nil {

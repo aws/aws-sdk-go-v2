@@ -161,6 +161,100 @@ func (c *Client) addOperationDescribeMountTargetsMiddlewares(stack *middleware.S
 	return nil
 }
 
+// DescribeMountTargetsAPIClient is a client that implements the
+// DescribeMountTargets operation.
+type DescribeMountTargetsAPIClient interface {
+	DescribeMountTargets(context.Context, *DescribeMountTargetsInput, ...func(*Options)) (*DescribeMountTargetsOutput, error)
+}
+
+var _ DescribeMountTargetsAPIClient = (*Client)(nil)
+
+// DescribeMountTargetsPaginatorOptions is the paginator options for
+// DescribeMountTargets
+type DescribeMountTargetsPaginatorOptions struct {
+	// (Optional) Maximum number of mount targets to return in the response.
+	// Currently, this number is automatically set to 10, and other values are ignored.
+	// The response is paginated at 100 per page if you have more than 100 mount
+	// targets.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeMountTargetsPaginator is a paginator for DescribeMountTargets
+type DescribeMountTargetsPaginator struct {
+	options   DescribeMountTargetsPaginatorOptions
+	client    DescribeMountTargetsAPIClient
+	params    *DescribeMountTargetsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeMountTargetsPaginator returns a new DescribeMountTargetsPaginator
+func NewDescribeMountTargetsPaginator(client DescribeMountTargetsAPIClient, params *DescribeMountTargetsInput, optFns ...func(*DescribeMountTargetsPaginatorOptions)) *DescribeMountTargetsPaginator {
+	if params == nil {
+		params = &DescribeMountTargetsInput{}
+	}
+
+	options := DescribeMountTargetsPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeMountTargetsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeMountTargetsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeMountTargets page.
+func (p *DescribeMountTargetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeMountTargetsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.DescribeMountTargets(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opDescribeMountTargets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -41,7 +41,7 @@ type GetEncryptionConfigurationOutput struct {
 	// This member is required.
 	EncryptionStatus types.EncryptionStatus
 
-	// The type of encryption. Set to KMS_BASED_ENCRYPTION to use an KMS key that you
+	// The type of encryption. Set to KMS_BASED_ENCRYPTION to use a KMS key that you
 	// own and manage. Set to FLEETWISE_DEFAULT_ENCRYPTION to use an Amazon Web
 	// Services managed key that is owned by the Amazon Web Services IoT FleetWise
 	// service account.

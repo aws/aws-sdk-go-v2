@@ -65,14 +65,19 @@ type CreateSolutionVersionInput struct {
 	Tags []types.Tag
 
 	// The scope of training to be performed when creating the solution version. The
-	// FULL option trains the solution version based on the entirety of the input
-	// solution's training data, while the UPDATE option processes only the data that
-	// has changed in comparison to the input solution. Choose UPDATE when you want to
-	// incrementally update your solution version instead of creating an entirely new
-	// one. The UPDATE option can only be used when you already have an active
-	// solution version created from the input solution using the FULL option and the
-	// input solution was trained with the User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
-	// recipe or the HRNN-Coldstart (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
+	// default is FULL . This creates a completely new model based on the entirety of
+	// the training data from the datasets in your dataset group. If you use
+	// User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
+	// , you can specify a training mode of UPDATE . This updates the model to consider
+	// new items for recommendations. It is not a full retraining. You should still
+	// complete a full retraining weekly. If you specify UPDATE , Amazon Personalize
+	// will stop automatic updates for the solution version. To resume updates, create
+	// a new solution with training mode set to FULL and deploy it in a campaign. For
+	// more information about automatic updates, see Automatic updates (https://docs.aws.amazon.com/personalize/latest/dg/use-case-recipe-features.html#maintaining-with-automatic-updates)
+	// . The UPDATE option can only be used when you already have an active solution
+	// version created from the input solution using the FULL option and the input
+	// solution was trained with the User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
+	// recipe or the legacy HRNN-Coldstart (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
 	// recipe.
 	TrainingMode types.TrainingMode
 

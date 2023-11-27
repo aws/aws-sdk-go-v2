@@ -15,6 +15,61 @@ import (
 	"path"
 )
 
+type awsAwsjson11_serializeOpBatchGetSecretValue struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchGetSecretValue) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchGetSecretValue) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetSecretValueInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("secretsmanager.BatchGetSecretValue")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchGetSecretValueInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCancelRotateSecret struct {
 }
 
@@ -1330,6 +1385,17 @@ func awsAwsjson11_serializeDocumentRotationRulesType(v *types.RotationRulesType,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSecretIdListType(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSecretVersionStagesType(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1379,6 +1445,37 @@ func awsAwsjson11_serializeDocumentTagListType(v []types.Tag, value smithyjson.V
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentBatchGetSecretValueInput(v *BatchGetSecretValueInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentFiltersListType(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.SecretIdList != nil {
+		ok := object.Key("SecretIdList")
+		if err := awsAwsjson11_serializeDocumentSecretIdListType(v.SecretIdList, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

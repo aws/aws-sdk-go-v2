@@ -1,0 +1,8 @@
+{
+    "id": "bfc3db4c-c39d-4a77-b673-18f9441716fb",
+    "type": "feature",
+    "description": "Added support for FSx for ONTAP scale-out file systems and FlexGroup volumes. Added the HAPairs field and ThroughputCapacityPerHAPair for filesystem. Added AggregateConfiguration (containing Aggregates and ConstituentsPerAggregate) and SizeInBytes for volume.",
+    "modules": [
+        "service/fsx"
+    ]
+}

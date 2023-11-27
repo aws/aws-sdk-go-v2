@@ -57,6 +57,7 @@
         "api_op_GetInvitationsCount.go",
         "api_op_GetMasterAccount.go",
         "api_op_GetMembers.go",
+        "api_op_GetSecurityControlDefinition.go",
         "api_op_InviteMembers.go",
         "api_op_ListAutomationRules.go",
         "api_op_ListEnabledProductsForImport.go",
@@ -74,6 +75,7 @@
         "api_op_UpdateFindings.go",
         "api_op_UpdateInsight.go",
         "api_op_UpdateOrganizationConfiguration.go",
+        "api_op_UpdateSecurityControl.go",
         "api_op_UpdateSecurityHubConfiguration.go",
         "api_op_UpdateStandardsControl.go",
         "auth.go",
@@ -91,6 +93,7 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.15",

@@ -26,8 +26,13 @@ import (
 // your cluster's Kubernetes API server endpoint. By default, public access is
 // enabled, and private access is disabled. For more information, see Amazon EKS
 // cluster endpoint access control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-// in the Amazon EKS User Guide . You can't update the subnets or security group
-// IDs for an existing cluster. Cluster updates are asynchronous, and they should
+// in the Amazon EKS User Guide . You can also use this API operation to choose
+// different subnets and security groups for the cluster. You must specify at least
+// two subnets that are in different Availability Zones. You can't change which VPC
+// the subnets are from, the subnets must be in the same VPC as the subnets that
+// the cluster was created with. For more information about the VPC requirements,
+// see https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html (https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
+// in the Amazon EKS User Guide . Cluster updates are asynchronous, and they should
 // finish within a few minutes. During an update, the cluster status moves to
 // UPDATING (this status transition is eventually consistent). When the update is
 // complete (either Failed or Successful ), the cluster status moves to Active .

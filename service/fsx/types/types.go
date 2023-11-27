@@ -29,7 +29,7 @@ type ActiveDirectoryBackupAttributes struct {
 }
 
 // Describes a specific Amazon FSx administrative action for the current Windows,
-// Lustre, or OpenZFS file system.
+// Lustre, OpenZFS, or ONTAP file system or volume.
 type AdministrativeAction struct {
 
 	// Describes the type of administrative action, as follows:
@@ -80,9 +80,9 @@ type AdministrativeAction struct {
 	//   progress using the ProgressPercent property. When STORAGE_TYPE_OPTIMIZATION
 	//   has been completed successfully, the parent FILE_SYSTEM_UPDATE action status
 	//   changes to COMPLETED .
-	//   - VOLUME_UPDATE - A volume update to an Amazon FSx for NetApp ONTAP or Amazon
-	//   FSx for OpenZFS volume initiated from the Amazon FSx console, API (
-	//   UpdateVolume ), or CLI ( update-volume ).
+	//   - VOLUME_UPDATE - A volume update to an Amazon FSx for OpenZFS volume
+	//   initiated from the Amazon FSx console, API ( UpdateVolume ), or CLI (
+	//   update-volume ).
 	//   - VOLUME_RESTORE - An Amazon FSx for OpenZFS volume is returned to the state
 	//   saved by the specified snapshot, initiated from an API (
 	//   RestoreVolumeFromSnapshot ) or CLI ( restore-volume-from-snapshot ).
@@ -91,6 +91,14 @@ type AdministrativeAction struct {
 	//   update-snapshot ).
 	//   - RELEASE_NFS_V3_LOCKS - Tracks the release of Network File System (NFS) V3
 	//   locks on an Amazon FSx for OpenZFS file system.
+	//   - VOLUME_INITIALIZE_WITH_SNAPSHOT - A volume is being created from a snapshot
+	//   on a different FSx for OpenZFS file system. You can initiate this from the
+	//   Amazon FSx console, API ( CreateVolume ), or CLI ( create-volume ) when using
+	//   the using the FULL_COPY strategy.
+	//   - VOLUME_UPDATE_WITH_SNAPSHOT - A volume is being updated from a snapshot on a
+	//   different FSx for OpenZFS file system. You can initiate this from the Amazon FSx
+	//   console, API ( CopySnapshotAndUpdateVolume ), or CLI (
+	//   copy-snapshot-and-update-volume ).
 	AdministrativeActionType AdministrativeActionType
 
 	// Provides information about a failed administrative action.
@@ -100,10 +108,14 @@ type AdministrativeAction struct {
 	// Does not apply to any other administrative action type.
 	ProgressPercent *int32
 
+	// The remaining bytes to transfer for the FSx for OpenZFS snapshot that you're
+	// copying.
+	RemainingTransferBytes *int64
+
 	// The time that the administrative action request was received.
 	RequestTime *time.Time
 
-	// Describes the status of the administrative action, as follows:
+	// The status of the administrative action, as follows:
 	//   - FAILED - Amazon FSx failed to process the administrative action
 	//   successfully.
 	//   - IN_PROGRESS - Amazon FSx is processing the administrative action.
@@ -114,16 +126,19 @@ type AdministrativeAction struct {
 	//   storage-optimization process.
 	Status Status
 
-	// Describes the target value for the administration action, provided in the
-	// UpdateFileSystem operation. Returned for FILE_SYSTEM_UPDATE administrative
-	// actions.
+	// The target value for the administration action, provided in the UpdateFileSystem
+	// operation. Returned for FILE_SYSTEM_UPDATE administrative actions.
 	TargetFileSystemValues *FileSystem
 
 	// A snapshot of an Amazon FSx for OpenZFS volume.
 	TargetSnapshotValues *Snapshot
 
-	// Describes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS volume.
+	// Describes an Amazon FSx volume.
 	TargetVolumeValues *Volume
+
+	// The number of bytes that have transferred for the FSx for OpenZFS snapshot that
+	// you're copying.
+	TotalTransferBytes *int64
 
 	noSmithyDocumentSerde
 }
@@ -133,6 +148,30 @@ type AdministrativeActionFailureDetails struct {
 
 	// Error message providing details about the failed administrative action.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Used to specify configuration options for a volume’s storage aggregate or
+// aggregates.
+type AggregateConfiguration struct {
+
+	// The list of aggregates that this volume resides on. Aggregates are storage
+	// pools which make up your primary storage tier. Each high-availability (HA) pair
+	// has one aggregate. The names of the aggregates map to the names of the
+	// aggregates in the ONTAP CLI and REST API. For FlexVols, there will always be a
+	// single entry. Amazon FSx responds with an HTTP status code 400 (Bad Request) for
+	// the following conditions:
+	//   - The strings in the value of Aggregates are not are not formatted as aggrX ,
+	//   where X is a number between 1 and 6.
+	//   - The value of Aggregates contains aggregates that are not present.
+	//   - One or more of the aggregates supplied are too close to the volume limit to
+	//   support adding more volumes.
+	Aggregates []string
+
+	// The total number of constituents this FlexGroup volume has. Not applicable for
+	// FlexVols.
+	TotalConstituents *int32
 
 	noSmithyDocumentSerde
 }
@@ -316,7 +355,7 @@ type Backup struct {
 	// The tags associated with a particular file system.
 	Tags []Tag
 
-	// Describes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS volume.
+	// Describes an Amazon FSx volume.
 	Volume *Volume
 
 	noSmithyDocumentSerde
@@ -366,6 +405,22 @@ type CompletionReport struct {
 	// FAILED_FILES_ONLY , the CompletionReport only contains information about files
 	// that the data repository task failed to process.
 	Scope ReportScope
+
+	noSmithyDocumentSerde
+}
+
+// Used to specify the configuration options for a volume's storage aggregate or
+// aggregates.
+type CreateAggregateConfiguration struct {
+
+	// Used to specify the names of aggregates on which the volume will be created.
+	Aggregates []string
+
+	// Used to explicitly set the number of constituents within the FlexGroup per
+	// storage aggregate. This field is optional when creating a FlexGroup volume. If
+	// unspecified, the default value will be 8. This field cannot be provided when
+	// creating a FlexVol volume.
+	ConstituentsPerAggregate *int32
 
 	noSmithyDocumentSerde
 }
@@ -569,18 +624,14 @@ type CreateFileSystemOntapConfiguration struct {
 	//   Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.
 	//
 	//   - SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.
+	//   - SINGLE_AZ_2 - A file system configured with multiple high-availability (HA)
+	//   pairs for Single-AZ redundancy.
 	// For information about the use cases for Multi-AZ and Single-AZ deployments,
 	// refer to Choosing a file system deployment type (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-AZ.html)
 	// .
 	//
 	// This member is required.
 	DeploymentType OntapDeploymentType
-
-	// Sets the throughput capacity for the file system that you're creating. Valid
-	// values are 128, 256, 512, 1024, 2048, and 4096 MBps.
-	//
-	// This member is required.
-	ThroughputCapacity *int32
 
 	// The number of days to retain automatic backups. Setting this property to 0
 	// disables automatic backups. You can retain automatic backups for a maximum of 90
@@ -608,6 +659,17 @@ type CreateFileSystemOntapConfiguration struct {
 	// administer your file system using the NetApp ONTAP CLI and REST API.
 	FsxAdminPassword *string
 
+	// Specifies how many high-availability (HA) pairs the file system will have. The
+	// default value is 1. The value of this property affects the values of
+	// StorageCapacity , Iops , and ThroughputCapacity . For more information, see
+	// High-availability (HA) pairs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html)
+	// in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code
+	// 400 (Bad Request) for the following conditions:
+	//   - The value of HAPairs is less than 1 or greater than 6.
+	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
+	//   SINGLE_AZ_1 or MULTI_AZ_1 .
+	HAPairs *int32
+
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
 	// which you want the preferred file server to be located.
 	PreferredSubnetId *string
@@ -618,6 +680,31 @@ type CreateFileSystemOntapConfiguration struct {
 	// your clients are located. By default, Amazon FSx selects your VPC's default
 	// route table.
 	RouteTableIds []string
+
+	// Sets the throughput capacity for the file system that you're creating in
+	// megabytes per second (MBps). For more information, see Managing throughput
+	// capacity (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-throughput-capacity.html)
+	// in the FSx for ONTAP User Guide. Amazon FSx responds with an HTTP status code
+	// 400 (Bad Request) for the following conditions:
+	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
+	//   same value.
+	//   - The value of ThroughputCapacity when divided by the value of HAPairs is
+	//   outside of the valid range for ThroughputCapacity .
+	ThroughputCapacity *int32
+
+	// Use to choose the throughput capacity per HA pair, rather than the total
+	// throughput for the file system. This field and ThroughputCapacity cannot be
+	// defined in the same API call, but one is required. This field and
+	// ThroughputCapacity are the same for file systems with one HA pair.
+	//   - For SINGLE_AZ_1 and MULTI_AZ_1 , valid values are 128, 256, 512, 1024, 2048,
+	//   or 4096 MBps.
+	//   - For SINGLE_AZ_2 , valid values are 3072 or 6144 MBps.
+	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
+	// following conditions:
+	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
+	//   same value
+	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
+	ThroughputCapacityPerHAPair *int32
 
 	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
 	// which 1 represents Monday and 7 represents Sunday. For further details, see the
@@ -843,15 +930,14 @@ type CreateFileSystemWindowsConfiguration struct {
 // Specifies the configuration of the ONTAP volume that you are creating.
 type CreateOntapVolumeConfiguration struct {
 
-	// Specifies the size of the volume, in megabytes (MB), that you are creating.
-	//
-	// This member is required.
-	SizeInMegabytes *int32
-
 	// Specifies the ONTAP SVM in which to create the volume.
 	//
 	// This member is required.
 	StorageVirtualMachineId *string
+
+	// Use to specify configuration options for a volume’s storage aggregate or
+	// aggregates.
+	AggregateConfiguration *CreateAggregateConfiguration
 
 	// A boolean flag indicating whether tags for the volume should be copied to
 	// backups. This value defaults to false. If it's set to true, all tags for the
@@ -890,6 +976,14 @@ type CreateOntapVolumeConfiguration struct {
 	//   - MIXED if the file system is managed by both UNIX and Windows administrators
 	//   and users consist of both NFS and SMB clients.
 	SecurityStyle SecurityStyle
+
+	// The configured size of the volume, in bytes.
+	SizeInBytes *int64
+
+	// Specifies the size of the volume, in megabytes (MB), that you are creating.
+	//
+	// Deprecated: This property is deprecated, use SizeInBytes instead
+	SizeInMegabytes *int32
 
 	// Specifies the SnapLock configuration for an FSx for ONTAP volume.
 	SnaplockConfiguration *CreateSnaplockConfiguration
@@ -931,19 +1025,31 @@ type CreateOntapVolumeConfiguration struct {
 	//   being moved to the capacity pool tier.
 	TieringPolicy *TieringPolicy
 
+	// Use to specify the style of an ONTAP volume. For more information about
+	// FlexVols and FlexGroups, see Volume types (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types.html)
+	// in Amazon FSx for NetApp ONTAP User Guide.
+	VolumeStyle VolumeStyle
+
 	noSmithyDocumentSerde
 }
 
-// The snapshot configuration to use when creating an OpenZFS volume from a
-// snapshot.
+// The snapshot configuration to use when creating an Amazon FSx for OpenZFS
+// volume from a snapshot.
 type CreateOpenZFSOriginSnapshotConfiguration struct {
 
-	// The strategy used when copying data from the snapshot to the new volume.
+	// Specifies the strategy used when copying data from the snapshot to the new
+	// volume.
 	//   - CLONE - The new volume references the data in the origin snapshot. Cloning a
 	//   snapshot is faster than copying data from the snapshot to a new volume and
 	//   doesn't consume disk throughput. However, the origin snapshot can't be deleted
 	//   if there is a volume using its copied data.
-	//   - FULL_COPY - Copies all data from the snapshot to the new volume.
+	//   - FULL_COPY - Copies all data from the snapshot to the new volume. Specify
+	//   this option to create the volume from a snapshot on another FSx for OpenZFS file
+	//   system.
+	// The INCREMENTAL_COPY option is only for updating an existing volume by using a
+	// snapshot from another FSx for OpenZFS file system. For more information, see
+	// CopySnapshotAndUpdateVolume (https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html)
+	// .
 	//
 	// This member is required.
 	CopyStrategy OpenZFSCopyStrategy
@@ -1651,7 +1757,12 @@ type DeleteVolumeOpenZFSConfiguration struct {
 // was provisioned, or the mode (by the customer or by Amazon FSx).
 type DiskIopsConfiguration struct {
 
-	// The total number of SSD IOPS provisioned for the file system.
+	// The total number of SSD IOPS provisioned for the file system. The minimum and
+	// maximum values for this property depend on the value of HAPairs and
+	// StorageCapacity . The minimum value is calculated as StorageCapacity * 3 *
+	// HAPairs (3 IOPS per GB of StorageCapacity ). The maximum value is calculated as
+	// 200,000 * HAPairs . Amazon FSx responds with an HTTP status code 400 (Bad
+	// Request) if the value of Iops is outside of the minimum or maximum values.
 	Iops *int64
 
 	// Specifies whether the file system is using the AUTOMATIC setting of SSD IOPS of
@@ -2057,7 +2168,9 @@ type FileSystem struct {
 	// The Amazon Resource Name (ARN) of the file system resource.
 	ResourceARN *string
 
-	// The storage capacity of the file system in gibibytes (GiB).
+	// The storage capacity of the file system in gibibytes (GiB). Amazon FSx responds
+	// with an HTTP status code 400 (Bad Request) if the value of StorageCapacity is
+	// outside of the minimum or maximum values.
 	StorageCapacity *int32
 
 	// The type of storage the file system is using. If set to SSD , the file system
@@ -2379,6 +2492,8 @@ type OntapFileSystemConfiguration struct {
 	//   Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.
 	//
 	//   - SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.
+	//   - SINGLE_AZ_2 - A file system configured with multiple high-availability (HA)
+	//   pairs for Single-AZ redundancy.
 	// For information about the use cases for Multi-AZ and Single-AZ deployments,
 	// refer to Choosing Multi-AZ or Single-AZ file system deployment (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html)
 	// .
@@ -2406,6 +2521,17 @@ type OntapFileSystemConfiguration struct {
 	// API. The password value is always redacted in the response.
 	FsxAdminPassword *string
 
+	// Specifies how many high-availability (HA) file server pairs the file system
+	// will have. The default value is 1. The value of this property affects the values
+	// of StorageCapacity , Iops , and ThroughputCapacity . For more information, see
+	// High-availability (HA) pairs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html)
+	// in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code
+	// 400 (Bad Request) for the following conditions:
+	//   - The value of HAPairs is less than 1 or greater than 6.
+	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
+	//   SINGLE_AZ_1 or MULTI_AZ_1 .
+	HAPairs *int32
+
 	// The ID for a subnet. A subnet is a range of IP addresses in your virtual
 	// private cloud (VPC). For more information, see VPC and subnets (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html)
 	// in the Amazon VPC User Guide.
@@ -2419,6 +2545,23 @@ type OntapFileSystemConfiguration struct {
 	// (MBps).
 	ThroughputCapacity *int32
 
+	// Use to choose the throughput capacity per HA pair. When the value of HAPairs is
+	// equal to 1, the value of ThroughputCapacityPerHAPair is the total throughput
+	// for the file system. This field and ThroughputCapacity cannot be defined in the
+	// same API call, but one is required. This field and ThroughputCapacity are the
+	// same for file systems with one HA pair.
+	//   - For SINGLE_AZ_1 and MULTI_AZ_1 , valid values are 128, 256, 512, 1024, 2048,
+	//   or 4096 MBps.
+	//   - For SINGLE_AZ_2 , valid values are 3072 or 6144 MBps.
+	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
+	// following conditions:
+	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
+	//   same value.
+	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
+	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).
+	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
+	ThroughputCapacityPerHAPair *int32
+
 	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
 	// which 1 represents Monday and 7 represents Sunday. For further details, see the
 	// ISO-8601 spec as described on Wikipedia (https://en.wikipedia.org/wiki/ISO_week_date)
@@ -2431,6 +2574,10 @@ type OntapFileSystemConfiguration struct {
 
 // The configuration of an Amazon FSx for NetApp ONTAP volume.
 type OntapVolumeConfiguration struct {
+
+	// This structure specifies configuration options for a volume’s storage aggregate
+	// or aggregates.
+	AggregateConfiguration *AggregateConfiguration
 
 	// A boolean flag indicating whether tags for the volume should be copied to
 	// backups. This value defaults to false. If it's set to true, all tags for the
@@ -2470,6 +2617,9 @@ type OntapVolumeConfiguration struct {
 
 	// The security style for the volume, which can be UNIX , NTFS , or MIXED .
 	SecurityStyle SecurityStyle
+
+	// The configured size of the volume, in bytes.
+	SizeInBytes *int64
 
 	// The configured size of the volume, in megabytes (MBs).
 	SizeInMegabytes *int32
@@ -2511,6 +2661,11 @@ type OntapVolumeConfiguration struct {
 
 	// The volume's universally unique identifier (UUID).
 	UUID *string
+
+	// Use to specify the style of an ONTAP volume. For more information about
+	// FlexVols and FlexGroups, see Volume types (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types.html)
+	// in Amazon FSx for NetApp ONTAP User Guide.
+	VolumeStyle VolumeStyle
 
 	noSmithyDocumentSerde
 }
@@ -2680,8 +2835,8 @@ type OpenZFSNfsExport struct {
 	noSmithyDocumentSerde
 }
 
-// The snapshot configuration to use when creating an OpenZFS volume from a
-// snapshot.
+// The snapshot configuration used when creating an Amazon FSx for OpenZFS volume
+// from a snapshot.
 type OpenZFSOriginSnapshotConfiguration struct {
 
 	// The strategy used when copying data from the snapshot to the new volume.
@@ -2690,6 +2845,10 @@ type OpenZFSOriginSnapshotConfiguration struct {
 	//   doesn't consume disk throughput. However, the origin snapshot can't be deleted
 	//   if there is a volume using its copied data.
 	//   - FULL_COPY - Copies all data from the snapshot to the new volume.
+	// The INCREMENTAL_COPY option is only for updating an existing volume by using a
+	// snapshot from another FSx for OpenZFS file system. For more information, see
+	// CopySnapshotAndUpdateVolume (https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html)
+	// .
 	CopyStrategy OpenZFSCopyStrategy
 
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
@@ -2750,9 +2909,18 @@ type OpenZFSVolumeConfiguration struct {
 	// snapshot.
 	DeleteClonedVolumes *bool
 
+	// A Boolean value indicating whether snapshot data that differs between the
+	// current state and the specified snapshot should be overwritten when a volume is
+	// restored from a snapshot.
+	DeleteIntermediateData *bool
+
 	// A Boolean value indicating whether snapshots between the current state and the
 	// specified snapshot should be deleted when a volume is restored from snapshot.
 	DeleteIntermediateSnaphots *bool
+
+	// The ID of the snapshot that's being copied or was most recently copied to the
+	// destination volume.
+	DestinationSnapshot *string
 
 	// The configuration object for mounting a Network File System (NFS) file system.
 	NfsExports []OpenZFSNfsExport
@@ -2775,6 +2943,13 @@ type OpenZFSVolumeConfiguration struct {
 
 	// Specifies the ID of the snapshot to which the volume was restored.
 	RestoreToSnapshot *string
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// Amazon Web Services resources. We require an ARN when you need to specify a
+	// resource unambiguously across all of Amazon Web Services. For more information,
+	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference.
+	SourceSnapshotARN *string
 
 	// The maximum amount of storage in gibibtyes (GiB) that the volume can use from
 	// its parent. You can specify a quota larger than the storage on the parent
@@ -3443,11 +3618,28 @@ type UpdateFileSystemOntapConfiguration struct {
 	RemoveRouteTableIds []string
 
 	// Enter a new value to change the amount of throughput capacity for the file
-	// system. Throughput capacity is measured in megabytes per second (MBps). Valid
-	// values are 128, 256, 512, 1024, 2048, and 4096 MBps. For more information, see
-	// Managing throughput capacity (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-throughput-capacity.html)
-	// in the FSx for ONTAP User Guide.
+	// system in megabytes per second (MBps). For more information, see Managing
+	// throughput capacity (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-throughput-capacity.html)
+	// in the FSx for ONTAP User Guide. Amazon FSx responds with an HTTP status code
+	// 400 (Bad Request) for the following conditions:
+	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
+	//   same value.
+	//   - The value of ThroughputCapacity when divided by the value of HAPairs is
+	//   outside of the valid range for ThroughputCapacity .
 	ThroughputCapacity *int32
+
+	// Use to choose the throughput capacity per HA pair, rather than the total
+	// throughput for the file system. This field and ThroughputCapacity cannot be
+	// defined in the same API call, but one is required. This field and
+	// ThroughputCapacity are the same for file systems with one HA pair.
+	//   - For SINGLE_AZ_1 and MULTI_AZ_1 , valid values are 128, 256, 512, 1024, 2048,
+	//   or 4096 MBps.
+	//   - For SINGLE_AZ_2 , valid values are 3072 or 6144 MBps.
+	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
+	// following conditions: The value of ThroughputCapacity and
+	// ThroughputCapacityPerHAPair are not the same value. The value of
+	// ThroughputCapacityPerHAPair is not a valid value.
+	ThroughputCapacityPerHAPair *int32
 
 	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
 	// which 1 represents Monday and 7 represents Sunday. For further details, see the
@@ -3596,6 +3788,9 @@ type UpdateOntapVolumeConfiguration struct {
 	// The security style for the volume, which can be UNIX , NTFS , or MIXED .
 	SecurityStyle SecurityStyle
 
+	// The configured size of the volume, in bytes.
+	SizeInBytes *int64
+
 	// Specifies the size of the volume in megabytes.
 	SizeInMegabytes *int32
 
@@ -3730,7 +3925,7 @@ type UpdateSvmActiveDirectoryConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS volume.
+// Describes an Amazon FSx volume.
 type Volume struct {
 
 	// A list of administrative actions for the volume that are in process or waiting

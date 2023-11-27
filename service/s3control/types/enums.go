@@ -188,6 +188,26 @@ func (GeneratedManifestFormat) Values() []GeneratedManifestFormat {
 	}
 }
 
+type GranteeType string
+
+// Enum values for GranteeType
+const (
+	GranteeTypeDirectoryUser  GranteeType = "DIRECTORY_USER"
+	GranteeTypeDirectoryGroup GranteeType = "DIRECTORY_GROUP"
+	GranteeTypeIam            GranteeType = "IAM"
+)
+
+// Values returns all known values for GranteeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (GranteeType) Values() []GranteeType {
+	return []GranteeType{
+		"DIRECTORY_USER",
+		"DIRECTORY_GROUP",
+		"IAM",
+	}
+}
+
 type JobManifestFieldName string
 
 // Enum values for JobManifestFieldName
@@ -529,6 +549,44 @@ func (OwnerOverride) Values() []OwnerOverride {
 	}
 }
 
+type Permission string
+
+// Enum values for Permission
+const (
+	PermissionRead      Permission = "READ"
+	PermissionWrite     Permission = "WRITE"
+	PermissionReadwrite Permission = "READWRITE"
+)
+
+// Values returns all known values for Permission. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Permission) Values() []Permission {
+	return []Permission{
+		"READ",
+		"WRITE",
+		"READWRITE",
+	}
+}
+
+type Privilege string
+
+// Enum values for Privilege
+const (
+	PrivilegeMinimal Privilege = "Minimal"
+	PrivilegeDefault Privilege = "Default"
+)
+
+// Values returns all known values for Privilege. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Privilege) Values() []Privilege {
+	return []Privilege{
+		"Minimal",
+		"Default",
+	}
+}
+
 type ReplicaModificationsStatus string
 
 // Enum values for ReplicaModificationsStatus
@@ -836,6 +894,22 @@ func (S3Permission) Values() []S3Permission {
 		"WRITE",
 		"READ_ACP",
 		"WRITE_ACP",
+	}
+}
+
+type S3PrefixType string
+
+// Enum values for S3PrefixType
+const (
+	S3PrefixTypeObject S3PrefixType = "Object"
+)
+
+// Values returns all known values for S3PrefixType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3PrefixType) Values() []S3PrefixType {
+	return []S3PrefixType{
+		"Object",
 	}
 }
 

@@ -764,6 +764,11 @@ func validateCallAnalyticsJobSettings(v *types.CallAnalyticsJobSettings) error {
 			invalidParams.AddNested("ContentRedaction", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Summarization != nil {
+		if err := validateSummarization(v.Summarization); err != nil {
+			invalidParams.AddNested("Summarization", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -855,6 +860,21 @@ func validateSentimentFilter(v *types.SentimentFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SentimentFilter"}
 	if v.Sentiments == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sentiments"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSummarization(v *types.Summarization) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Summarization"}
+	if v.GenerateAbstractiveSummary == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GenerateAbstractiveSummary"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

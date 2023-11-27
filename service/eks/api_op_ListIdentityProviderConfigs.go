@@ -59,10 +59,10 @@ type ListIdentityProviderConfigsOutput struct {
 	// The identity provider configurations for the cluster.
 	IdentityProviderConfigs []types.IdentityProviderConfig
 
-	// The nextToken value returned from a previous paginated
-	// ListIdentityProviderConfigsResponse where maxResults was used and the results
-	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value.
+	// The nextToken value to include in a future ListIdentityProviderConfigsResponse
+	// request. When the results of a ListIdentityProviderConfigsResponse request
+	// exceed maxResults , you can use this value to retrieve the next page of results.
+	// This value is null when there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

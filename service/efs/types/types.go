@@ -36,8 +36,8 @@ type AccessPointDescription struct {
 	// using the access point.
 	PosixUser *PosixUser
 
-	// The directory on the Amazon EFS file system that the access point exposes as
-	// the root directory to NFS clients using the access point.
+	// The directory on the EFS file system that the access point exposes as the root
+	// directory to NFS clients using the access point.
 	RootDirectory *RootDirectory
 
 	// The tags associated with the access point, presented as an array of Tag objects.
@@ -53,10 +53,10 @@ type AccessPointDescription struct {
 type BackupPolicy struct {
 
 	// Describes the status of the file system's backup policy.
-	//   - ENABLED - EFS is automatically backing up the file system.
-	//   - ENABLING - EFS is turning on automatic backups for the file system.
-	//   - DISABLED - Automatic back ups are turned off for the file system.
-	//   - DISABLING - EFS is turning off automatic backups for the file system.
+	//   - ENABLED – EFS is automatically backing up the file system.
+	//   - ENABLING – EFS is turning on automatic backups for the file system.
+	//   - DISABLED – Automatic back ups are turned off for the file system.
+	//   - DISABLING – EFS is turning off automatic backups for the file system.
 	//
 	// This member is required.
 	Status Status
@@ -111,7 +111,7 @@ type Destination struct {
 	// This member is required.
 	Region *string
 
-	// Describes the status of the destination Amazon EFS file system.
+	// Describes the status of the destination EFS file system.
 	//   - The Paused state occurs as a result of opting out of the source or
 	//   destination Region after the replication configuration was created. To resume
 	//   replication for the file system, you need to again opt in to the Amazon Web
@@ -142,7 +142,7 @@ type Destination struct {
 // configuration.
 type DestinationToCreate struct {
 
-	// To create a file system that uses EFS One Zone storage, specify the name of the
+	// To create a file system that uses One Zone storage, specify the name of the
 	// Availability Zone in which to create the destination file system.
 	AvailabilityZoneName *string
 
@@ -202,7 +202,7 @@ type FileSystemDescription struct {
 	// This member is required.
 	OwnerId *string
 
-	// The performance mode of the file system.
+	// The Performance mode of the file system.
 	//
 	// This member is required.
 	PerformanceMode PerformanceMode
@@ -226,14 +226,14 @@ type FileSystemDescription struct {
 	Tags []Tag
 
 	// The unique and consistent identifier of the Availability Zone in which the file
-	// system's One Zone storage classes exist. For example, use1-az1 is an
-	// Availability Zone ID for the us-east-1 Amazon Web Services Region, and it has
-	// the same location in every Amazon Web Services account.
+	// system is located, and is valid only for One Zone file systems. For example,
+	// use1-az1 is an Availability Zone ID for the us-east-1 Amazon Web Services
+	// Region, and it has the same location in every Amazon Web Services account.
 	AvailabilityZoneId *string
 
 	// Describes the Amazon Web Services Availability Zone in which the file system is
-	// located, and is valid only for file systems using One Zone storage classes. For
-	// more information, see Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
+	// located, and is valid only for One Zone file systems. For more information, see
+	// Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
 	// in the Amazon EFS User Guide.
 	AvailabilityZoneName *string
 
@@ -285,6 +285,10 @@ type FileSystemSize struct {
 	// 1970-01-01T00:00:00Z.
 	Timestamp *time.Time
 
+	// The latest known metered size (in bytes) of data stored in the Archive storage
+	// class.
+	ValueInArchive *int64
+
 	// The latest known metered size (in bytes) of data stored in the Infrequent
 	// Access storage class.
 	ValueInIA *int64
@@ -296,27 +300,32 @@ type FileSystemSize struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a policy used by EFS lifecycle management and EFS Intelligent-Tiering
-// that specifies when to transition files into and out of the file system's
-// Infrequent Access (IA) storage class. For more information, see EFS
-// Intelligent‐Tiering and EFS Lifecycle Management (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html)
+// Describes a policy used by Lifecycle management that specifies when to
+// transition files into and out of the Infrequent Access (IA) and Archive storage
+// classes. For more information, see Managing file system storage (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html)
 // . When using the put-lifecycle-configuration CLI command or the
 // PutLifecycleConfiguration API action, Amazon EFS requires that each
 // LifecyclePolicy object have only a single transition. This means that in a
 // request body, LifecyclePolicies must be structured as an array of
-// LifecyclePolicy objects, one object for each transition, TransitionToIA ,
-// TransitionToPrimaryStorageClass . For more information, see the request examples
-// in PutLifecycleConfiguration .
+// LifecyclePolicy objects, one object for each transition. For more information,
+// see the request examples in PutLifecycleConfiguration .
 type LifecyclePolicy struct {
 
-	// Describes the period of time that a file is not accessed, after which it
-	// transitions to IA storage. Metadata operations such as listing the contents of a
-	// directory don't count as file access events.
-	TransitionToIA TransitionToIARules
+	// The number of days after files were last accessed in primary storage (the
+	// Standard storage class) files at which to move them to Archive storage. Metadata
+	// operations such as listing the contents of a directory don't count as file
+	// access events.
+	TransitionToArchive TransitionToArchiveRules
 
-	// Describes when to transition a file from IA storage to primary storage.
+	// The number of days after files were last accessed in primary storage (the
+	// Standard storage class) at which to move them to Infrequent Access (IA) storage.
 	// Metadata operations such as listing the contents of a directory don't count as
 	// file access events.
+	TransitionToIA TransitionToIARules
+
+	// Whether to move files back to primary (Standard) storage after they are
+	// accessed in IA or Archive storage. Metadata operations such as listing the
+	// contents of a directory don't count as file access events.
 	TransitionToPrimaryStorageClass TransitionToPrimaryStorageClassRules
 
 	noSmithyDocumentSerde
@@ -408,8 +417,8 @@ type ReplicationConfigurationDescription struct {
 	// This member is required.
 	Destinations []Destination
 
-	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system in
-	// the replication configuration.
+	// The Amazon Resource Name (ARN) of the original source EFS file system in the
+	// replication configuration.
 	//
 	// This member is required.
 	OriginalSourceFileSystemArn *string
@@ -425,8 +434,7 @@ type ReplicationConfigurationDescription struct {
 	// This member is required.
 	SourceFileSystemId *string
 
-	// The Amazon Web Services Region in which the source Amazon EFS file system is
-	// located.
+	// The Amazon Web Services Region in which the source EFS file system is located.
 	//
 	// This member is required.
 	SourceFileSystemRegion *string

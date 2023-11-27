@@ -1,0 +1,8 @@
+{
+    "id": "28b92aca-a6d9-4503-8d6e-fd00b0140e0a",
+    "type": "feature",
+    "description": "Add APIs to create and manage a landing zone.",
+    "modules": [
+        "service/controltower"
+    ]
+}

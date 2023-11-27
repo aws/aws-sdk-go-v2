@@ -19,12 +19,12 @@ import (
 // have multiple subnets in an Availability Zone, you create a mount target in one
 // of the subnets. EC2 instances do not need to be in the same subnet as the mount
 // target in order to access their file system. You can create only one mount
-// target for an EFS file system using One Zone storage classes. You must create
-// that mount target in the same Availability Zone in which the file system is
-// located. Use the AvailabilityZoneName and AvailabiltyZoneId properties in the
-// DescribeFileSystems response object to get this information. Use the subnetId
-// associated with the file system's Availability Zone when creating the mount
-// target. For more information, see Amazon EFS: How it Works (https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html)
+// target for a One Zone file system. You must create that mount target in the same
+// Availability Zone in which the file system is located. Use the
+// AvailabilityZoneName and AvailabiltyZoneId properties in the DescribeFileSystems
+// response object to get this information. Use the subnetId associated with the
+// file system's Availability Zone when creating the mount target. For more
+// information, see Amazon EFS: How it Works (https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html)
 // . To create a mount target for a file system, the file system's lifecycle state
 // must be available . For more information, see DescribeFileSystems . In the
 // request, provide the following:
@@ -110,9 +110,8 @@ type CreateMountTargetInput struct {
 	// This member is required.
 	FileSystemId *string
 
-	// The ID of the subnet to add the mount target in. For file systems that use One
-	// Zone storage classes, use the subnet that is associated with the file system's
-	// Availability Zone.
+	// The ID of the subnet to add the mount target in. For One Zone file systems, use
+	// the subnet that is associated with the file system's Availability Zone.
 	//
 	// This member is required.
 	SubnetId *string

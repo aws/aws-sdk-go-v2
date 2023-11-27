@@ -1,0 +1,8 @@
+{
+    "id": "22b7a889-d2f8-492a-ac6e-46cce7d6d532",
+    "type": "feature",
+    "description": "Enables metadata in recommendations, recommendations with themes, and next best action recommendations",
+    "modules": [
+        "service/personalize"
+    ]
+}

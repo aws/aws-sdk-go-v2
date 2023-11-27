@@ -1045,8 +1045,14 @@ func awsAwsjson11_deserializeOpErrorDeleteEventDataStore(response *smithyhttp.Re
 	case strings.EqualFold("ChannelExistsForEDSException", errorCode):
 		return awsAwsjson11_deserializeErrorChannelExistsForEDSException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("EventDataStoreARNInvalidException", errorCode):
 		return awsAwsjson11_deserializeErrorEventDataStoreARNInvalidException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreFederationEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreFederationEnabledException(response, errorBody)
 
 	case strings.EqualFold("EventDataStoreHasOngoingImportException", errorCode):
 		return awsAwsjson11_deserializeErrorEventDataStoreHasOngoingImportException(response, errorBody)
@@ -1734,6 +1740,309 @@ func awsAwsjson11_deserializeOpErrorDescribeTrails(response *smithyhttp.Response
 
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDisableFederation struct {
+}
+
+func (*awsAwsjson11_deserializeOpDisableFederation) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDisableFederation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDisableFederation(response, &metadata)
+	}
+	output := &DisableFederationOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDisableFederationOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDisableFederation(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("CloudTrailAccessNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreARNInvalidException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreNotFoundException(response, errorBody)
+
+	case strings.EqualFold("InactiveEventDataStoreException", errorCode):
+		return awsAwsjson11_deserializeErrorInactiveEventDataStoreException(response, errorBody)
+
+	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
+	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
+		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("OrganizationNotInAllFeaturesModeException", errorCode):
+		return awsAwsjson11_deserializeErrorOrganizationNotInAllFeaturesModeException(response, errorBody)
+
+	case strings.EqualFold("OrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpEnableFederation struct {
+}
+
+func (*awsAwsjson11_deserializeOpEnableFederation) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpEnableFederation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorEnableFederation(response, &metadata)
+	}
+	output := &EnableFederationOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentEnableFederationOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorEnableFederation(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("CloudTrailAccessNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreARNInvalidException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreFederationEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreFederationEnabledException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreNotFoundException(response, errorBody)
+
+	case strings.EqualFold("InactiveEventDataStoreException", errorCode):
+		return awsAwsjson11_deserializeErrorInactiveEventDataStoreException(response, errorBody)
+
+	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
+	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
+		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("OrganizationNotInAllFeaturesModeException", errorCode):
+		return awsAwsjson11_deserializeErrorOrganizationNotInAllFeaturesModeException(response, errorBody)
+
+	case strings.EqualFold("OrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
@@ -6374,6 +6683,41 @@ func awsAwsjson11_deserializeOpErrorUpdateTrail(response *smithyhttp.Response, m
 	}
 }
 
+func awsAwsjson11_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.AccessDeniedException{}
+	err := awsAwsjson11_deserializeDocumentAccessDeniedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorAccountHasOngoingImportException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -6864,6 +7208,41 @@ func awsAwsjson11_deserializeErrorCloudWatchLogsDeliveryUnavailableException(res
 	return output
 }
 
+func awsAwsjson11_deserializeErrorConcurrentModificationException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ConcurrentModificationException{}
+	err := awsAwsjson11_deserializeDocumentConcurrentModificationException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorConflictException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -6989,6 +7368,41 @@ func awsAwsjson11_deserializeErrorEventDataStoreARNInvalidException(response *sm
 
 	output := &types.EventDataStoreARNInvalidException{}
 	err := awsAwsjson11_deserializeDocumentEventDataStoreARNInvalidException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorEventDataStoreFederationEnabledException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.EventDataStoreFederationEnabledException{}
+	err := awsAwsjson11_deserializeDocumentEventDataStoreFederationEnabledException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -9174,6 +9588,46 @@ func awsAwsjson11_deserializeErrorUnsupportedOperationException(response *smithy
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDeniedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessDeniedException
+	if *v == nil {
+		sv = &types.AccessDeniedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAccountHasOngoingImportException(v **types.AccountHasOngoingImportException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10000,6 +10454,46 @@ func awsAwsjson11_deserializeDocumentCloudWatchLogsDeliveryUnavailableException(
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.ConcurrentModificationException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConcurrentModificationException
+	if *v == nil {
+		sv = &types.ConcurrentModificationException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10584,6 +11078,46 @@ func awsAwsjson11_deserializeDocumentEventDataStoreARNInvalidException(v **types
 	var sv *types.EventDataStoreARNInvalidException
 	if *v == nil {
 		sv = &types.EventDataStoreARNInvalidException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEventDataStoreFederationEnabledException(v **types.EventDataStoreFederationEnabledException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EventDataStoreFederationEnabledException
+	if *v == nil {
+		sv = &types.EventDataStoreFederationEnabledException{}
 	} else {
 		sv = *v
 	}
@@ -15761,6 +16295,113 @@ func awsAwsjson11_deserializeOpDocumentDescribeTrailsOutput(v **DescribeTrailsOu
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentDisableFederationOutput(v **DisableFederationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DisableFederationOutput
+	if *v == nil {
+		sv = &DisableFederationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EventDataStoreArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
+				}
+				sv.EventDataStoreArn = ptr.String(jtv)
+			}
+
+		case "FederationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationStatus to be of type string, got %T instead", value)
+				}
+				sv.FederationStatus = types.FederationStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentEnableFederationOutput(v **EnableFederationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *EnableFederationOutput
+	if *v == nil {
+		sv = &EnableFederationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EventDataStoreArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
+				}
+				sv.EventDataStoreArn = ptr.String(jtv)
+			}
+
+		case "FederationRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationRoleArn to be of type string, got %T instead", value)
+				}
+				sv.FederationRoleArn = ptr.String(jtv)
+			}
+
+		case "FederationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationStatus to be of type string, got %T instead", value)
+				}
+				sv.FederationStatus = types.FederationStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentGetChannelOutput(v **GetChannelOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15893,6 +16534,24 @@ func awsAwsjson11_deserializeOpDocumentGetEventDataStoreOutput(v **GetEventDataS
 					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
 				}
 				sv.EventDataStoreArn = ptr.String(jtv)
+			}
+
+		case "FederationRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationRoleArn to be of type string, got %T instead", value)
+				}
+				sv.FederationRoleArn = ptr.String(jtv)
+			}
+
+		case "FederationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationStatus to be of type string, got %T instead", value)
+				}
+				sv.FederationStatus = types.FederationStatus(jtv)
 			}
 
 		case "KmsKeyId":
@@ -17926,6 +18585,24 @@ func awsAwsjson11_deserializeOpDocumentUpdateEventDataStoreOutput(v **UpdateEven
 					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
 				}
 				sv.EventDataStoreArn = ptr.String(jtv)
+			}
+
+		case "FederationRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationRoleArn to be of type string, got %T instead", value)
+				}
+				sv.FederationRoleArn = ptr.String(jtv)
+			}
+
+		case "FederationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FederationStatus to be of type string, got %T instead", value)
+				}
+				sv.FederationStatus = types.FederationStatus(jtv)
 			}
 
 		case "KmsKeyId":

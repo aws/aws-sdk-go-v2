@@ -93,17 +93,17 @@ type PutSessionOutput struct {
 	// the messages are defined in the bot.
 	Messages *string
 
-	// Request-specific information passed between the client application and Amazon
-	// Lex V2. These are the same as the requestAttribute parameter in the call to the
-	// PutSession operation.
+	// A base-64-encoded gzipped field that provides request-specific information
+	// passed between the client application and Amazon Lex V2. These are the same as
+	// the requestAttribute parameter in the call to the PutSession operation.
 	RequestAttributes *string
 
 	// The identifier of the session that received the data.
 	SessionId *string
 
-	// Represents the current state of the dialog between the user and the bot. Use
-	// this to determine the progress of the conversation and what the next action may
-	// be.
+	// A base-64-encoded gzipped field that represents the current state of the dialog
+	// between the user and the bot. Use this to determine the progress of the
+	// conversation and what the next action may be.
 	SessionState *string
 
 	// Metadata pertaining to the operation's result.

@@ -2,6 +2,24 @@
 
 package types
 
+type AccessCheckPolicyType string
+
+// Enum values for AccessCheckPolicyType
+const (
+	AccessCheckPolicyTypeIdentityPolicy AccessCheckPolicyType = "IDENTITY_POLICY"
+	AccessCheckPolicyTypeResourcePolicy AccessCheckPolicyType = "RESOURCE_POLICY"
+)
+
+// Values returns all known values for AccessCheckPolicyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessCheckPolicyType) Values() []AccessCheckPolicyType {
+	return []AccessCheckPolicyType{
+		"IDENTITY_POLICY",
+		"RESOURCE_POLICY",
+	}
+}
+
 type AccessPreviewStatus string
 
 // Enum values for AccessPreviewStatus
@@ -87,6 +105,42 @@ func (AnalyzerStatus) Values() []AnalyzerStatus {
 	}
 }
 
+type CheckAccessNotGrantedResult string
+
+// Enum values for CheckAccessNotGrantedResult
+const (
+	CheckAccessNotGrantedResultPass CheckAccessNotGrantedResult = "PASS"
+	CheckAccessNotGrantedResultFail CheckAccessNotGrantedResult = "FAIL"
+)
+
+// Values returns all known values for CheckAccessNotGrantedResult. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CheckAccessNotGrantedResult) Values() []CheckAccessNotGrantedResult {
+	return []CheckAccessNotGrantedResult{
+		"PASS",
+		"FAIL",
+	}
+}
+
+type CheckNoNewAccessResult string
+
+// Enum values for CheckNoNewAccessResult
+const (
+	CheckNoNewAccessResultPass CheckNoNewAccessResult = "PASS"
+	CheckNoNewAccessResultFail CheckNoNewAccessResult = "FAIL"
+)
+
+// Values returns all known values for CheckNoNewAccessResult. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CheckNoNewAccessResult) Values() []CheckNoNewAccessResult {
+	return []CheckNoNewAccessResult{
+		"PASS",
+		"FAIL",
+	}
+}
+
 type FindingChangeType string
 
 // Enum values for FindingChangeType
@@ -164,6 +218,30 @@ func (FindingStatusUpdate) Values() []FindingStatusUpdate {
 	return []FindingStatusUpdate{
 		"ACTIVE",
 		"ARCHIVED",
+	}
+}
+
+type FindingType string
+
+// Enum values for FindingType
+const (
+	FindingTypeExternalAccess         FindingType = "ExternalAccess"
+	FindingTypeUnusedIamRole          FindingType = "UnusedIAMRole"
+	FindingTypeUnusedIamUserAccessKey FindingType = "UnusedIAMUserAccessKey"
+	FindingTypeUnusedIamUserPassword  FindingType = "UnusedIAMUserPassword"
+	FindingTypeUnusedPermission       FindingType = "UnusedPermission"
+)
+
+// Values returns all known values for FindingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FindingType) Values() []FindingType {
+	return []FindingType{
+		"ExternalAccess",
+		"UnusedIAMRole",
+		"UnusedIAMUserAccessKey",
+		"UnusedIAMUserPassword",
+		"UnusedPermission",
 	}
 }
 
@@ -391,8 +469,10 @@ type Type string
 
 // Enum values for Type
 const (
-	TypeAccount      Type = "ACCOUNT"
-	TypeOrganization Type = "ORGANIZATION"
+	TypeAccount                  Type = "ACCOUNT"
+	TypeOrganization             Type = "ORGANIZATION"
+	TypeAccountUnusedAccess      Type = "ACCOUNT_UNUSED_ACCESS"
+	TypeOrganizationUnusedAccess Type = "ORGANIZATION_UNUSED_ACCESS"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
@@ -402,6 +482,8 @@ func (Type) Values() []Type {
 	return []Type{
 		"ACCOUNT",
 		"ORGANIZATION",
+		"ACCOUNT_UNUSED_ACCESS",
+		"ORGANIZATION_UNUSED_ACCESS",
 	}
 }
 

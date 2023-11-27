@@ -100,8 +100,14 @@ func ExampleNode_outputUsage() {
 	case *types.NodeMemberBranch:
 		_ = v.Value // Value is types.Branch
 
+	case *types.NodeMemberProperty:
+		_ = v.Value // Value is types.CustomProperty
+
 	case *types.NodeMemberSensor:
 		_ = v.Value // Value is types.Sensor
+
+	case *types.NodeMemberStruct:
+		_ = v.Value // Value is types.CustomStruct
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -113,6 +119,52 @@ func ExampleNode_outputUsage() {
 }
 
 var _ *types.Branch
+var _ *types.CustomStruct
 var _ *types.Actuator
 var _ *types.Sensor
 var _ *types.Attribute
+var _ *types.CustomProperty
+
+func ExamplePrimitiveMessageDefinition_outputUsage() {
+	var union types.PrimitiveMessageDefinition
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition:
+		_ = v.Value // Value is types.ROS2PrimitiveMessageDefinition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ROS2PrimitiveMessageDefinition
+
+func ExampleStructuredMessage_outputUsage() {
+	var union types.StructuredMessage
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.StructuredMessageMemberPrimitiveMessageDefinition:
+		_ = v.Value // Value is types.PrimitiveMessageDefinition
+
+	case *types.StructuredMessageMemberStructuredMessageDefinition:
+		_ = v.Value // Value is []types.StructuredMessageFieldNameAndDataTypePair
+
+	case *types.StructuredMessageMemberStructuredMessageListDefinition:
+		_ = v.Value // Value is types.StructuredMessageListDefinition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.PrimitiveMessageDefinition
+var _ []types.StructuredMessageFieldNameAndDataTypePair
+var _ *types.StructuredMessageListDefinition

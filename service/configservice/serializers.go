@@ -5403,6 +5403,13 @@ func awsAwsjson11_serializeDocumentConfigurationRecorder(v *types.ConfigurationR
 		}
 	}
 
+	if v.RecordingMode != nil {
+		ok := object.Key("recordingMode")
+		if err := awsAwsjson11_serializeDocumentRecordingMode(v.RecordingMode, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleARN != nil {
 		ok := object.Key("roleARN")
 		ok.String(*v.RoleARN)
@@ -6112,6 +6119,73 @@ func awsAwsjson11_serializeDocumentRecordingGroup(v *types.RecordingGroup, value
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecordingMode(v *types.RecordingMode, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RecordingFrequency) > 0 {
+		ok := object.Key("recordingFrequency")
+		ok.String(string(v.RecordingFrequency))
+	}
+
+	if v.RecordingModeOverrides != nil {
+		ok := object.Key("recordingModeOverrides")
+		if err := awsAwsjson11_serializeDocumentRecordingModeOverrides(v.RecordingModeOverrides, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecordingModeOverride(v *types.RecordingModeOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if len(v.RecordingFrequency) > 0 {
+		ok := object.Key("recordingFrequency")
+		ok.String(string(v.RecordingFrequency))
+	}
+
+	if v.ResourceTypes != nil {
+		ok := object.Key("resourceTypes")
+		if err := awsAwsjson11_serializeDocumentRecordingModeResourceTypesList(v.ResourceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecordingModeOverrides(v []types.RecordingModeOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentRecordingModeOverride(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecordingModeResourceTypesList(v []types.ResourceType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

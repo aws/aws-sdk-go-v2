@@ -1,0 +1,8 @@
+{
+    "id": "be394c00-0b5c-421d-aea6-3df18df62b29",
+    "type": "feature",
+    "description": "This release adds support for the Amazon Managed Service for Prometheus collector, a fully managed, agentless Prometheus metrics scraping capability.",
+    "modules": [
+        "service/amp"
+    ]
+}

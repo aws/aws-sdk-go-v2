@@ -1,0 +1,8 @@
+{
+    "id": "8d79723d-d964-4f36-8a81-ebbf00c27654",
+    "type": "feature",
+    "description": "Initial release of AWS re:Post Private",
+    "modules": [
+        "service/repostspace"
+    ]
+}

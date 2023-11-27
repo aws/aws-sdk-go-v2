@@ -7,6 +7,25 @@ import (
 	"time"
 )
 
+// The error Secrets Manager encountered while retrieving an individual secret as
+// part of BatchGetSecretValue .
+type APIErrorType struct {
+
+	// The error Secrets Manager encountered while retrieving an individual secret as
+	// part of BatchGetSecretValue , for example ResourceNotFoundException ,
+	// InvalidParameterException , InvalidRequestException , DecryptionFailure , or
+	// AccessDeniedException .
+	ErrorCode *string
+
+	// A message describing the error.
+	Message *string
+
+	// The ARN or name of the secret.
+	SecretId *string
+
+	noSmithyDocumentSerde
+}
+
 // Allows you to add filters when you use the search function in Secrets Manager.
 // For more information, see Find secrets in Secrets Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_search-secret.html)
 // .
@@ -155,10 +174,7 @@ type SecretListEntry struct {
 	// successfully completed. This value is null if the secret hasn't ever rotated.
 	LastRotatedDate *time.Time
 
-	// The friendly name of the secret. You can use forward slashes in the name to
-	// represent a path hierarchy. For example, /prod/databases/dbserver1 could
-	// represent the secret for a server named dbserver1 in the folder databases in
-	// the folder prod .
+	// The friendly name of the secret.
 	Name *string
 
 	// The next rotation is scheduled to occur on or before this date. If the secret
@@ -195,6 +211,37 @@ type SecretListEntry struct {
 	// . To remove tags, use UntagResource (https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_UntagResource.html)
 	// .
 	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the secret value and other details for a secret.
+type SecretValueEntry struct {
+
+	// The Amazon Resource Name (ARN) of the secret.
+	ARN *string
+
+	// The date the secret was created.
+	CreatedDate *time.Time
+
+	// The friendly name of the secret.
+	Name *string
+
+	// The decrypted secret value, if the secret value was originally provided as
+	// binary data in the form of a byte array. The parameter represents the binary
+	// data as a base64-encoded (https://tools.ietf.org/html/rfc4648#section-4) string.
+	SecretBinary []byte
+
+	// The decrypted secret value, if the secret value was originally provided as a
+	// string or through the Secrets Manager console.
+	SecretString *string
+
+	// The unique version identifier of this version of the secret.
+	VersionId *string
+
+	// A list of all of the staging labels currently attached to this version of the
+	// secret.
+	VersionStages []string
 
 	noSmithyDocumentSerde
 }

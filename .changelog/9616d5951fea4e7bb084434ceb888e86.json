@@ -1,0 +1,8 @@
+{
+    "id": "9616d595-1fea-4e7b-b084-434ceb888e86",
+    "type": "feature",
+    "description": "Adds a new 'type' property to the Setting structure. Adds a new AccountSetting - guardDutyActivate for ECS.",
+    "modules": [
+        "service/ecs"
+    ]
+}
