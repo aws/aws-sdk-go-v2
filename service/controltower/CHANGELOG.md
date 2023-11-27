@@ -1,3 +1,7 @@
+# v1.9.0 (2023-11-27.2)
+
+* **Feature**: This release adds the following support: 1. The EnableControl API can configure controls that are configurable.  2. The GetEnabledControl API shows the configured parameters on an enabled control. 3. The new UpdateEnabledControl API can change parameters on an enabled control.
+
 # v1.8.0 (2023-11-27)
 
 * **Feature**: Add APIs to create and manage a landing zone.

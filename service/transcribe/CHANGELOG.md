@@ -1,3 +1,7 @@
+# v1.33.0 (2023-11-27.2)
+
+* **Feature**: This release adds support for AWS HealthScribe APIs within Amazon Transcribe
+
 # v1.32.0 (2023-11-27)
 
 * **Feature**: This release adds support for transcriptions from audio sources in 64 new languages and introduces generative call summarization in Transcribe Call Analytics (Post call)

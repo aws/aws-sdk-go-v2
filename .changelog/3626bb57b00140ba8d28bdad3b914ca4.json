@@ -1,8 +1,0 @@
-{
-    "id": "3626bb57-b001-40ba-8d28-bdad3b914ca4",
-    "type": "feature",
-    "description": "add observations support to DQ CodeGen config model + update document for connectiontypes supported by ConnectorData entities",
-    "modules": [
-        "service/glue"
-    ]
-}

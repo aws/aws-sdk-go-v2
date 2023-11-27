@@ -1,3 +1,27 @@
+# Release (2023-11-27.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.25.0](service/appsync/CHANGELOG.md#v1250-2023-11-272)
+  * **Feature**: This update enables introspection of Aurora cluster databases using the RDS Data API
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview](service/b2bi/CHANGELOG.md#v100-preview-2023-11-272)
+  * **Feature**: This is the initial SDK release for AWS B2B Data Interchange.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.29.0](service/backup/CHANGELOG.md#v1290-2023-11-272)
+  * **Feature**: AWS Backup now supports restore testing, a new feature that allows customers to automate restore testing and validating their backups. Additionally, this release adds support for EBS Snapshots Archive tier.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.9.0](service/controltower/CHANGELOG.md#v190-2023-11-272)
+  * **Feature**: This release adds the following support: 1. The EnableControl API can configure controls that are configurable.  2. The GetEnabledControl API shows the configured parameters on an enabled control. 3. The new UpdateEnabledControl API can change parameters on an enabled control.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.25.0](service/efs/CHANGELOG.md#v1250-2023-11-272)
+  * **Feature**: Adding support for EFS Replication to existing file system.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.20.0](service/fis/CHANGELOG.md#v1200-2023-11-272)
+  * **Feature**: AWS FIS adds support for multi-account experiments & empty target resolution. This release also introduces the CreateTargetAccountConfiguration API that allows experiments across multiple AWS accounts, and the ListExperimentResolvedTargets API to list target details.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.70.0](service/glue/CHANGELOG.md#v1700-2023-11-272)
+  * **Feature**: add observations support to DQ CodeGen config model + update document for connectiontypes supported by ConnectorData entities
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.63.3](service/rds/CHANGELOG.md#v1633-2023-11-272)
+  * **Documentation**: Updates Amazon RDS documentation for support for RDS for Db2.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.42.0](service/securityhub/CHANGELOG.md#v1420-2023-11-272)
+  * **Feature**: Adds and updates APIs to support central configuration. This feature allows the Security Hub delegated administrator to configure Security Hub for their entire AWS Org across multiple regions from a home Region. With this release, findings also include account name and application metadata.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.33.0](service/transcribe/CHANGELOG.md#v1330-2023-11-272)
+  * **Feature**: This release adds support for AWS HealthScribe APIs within Amazon Transcribe
+
 # Release (2023-11-27)
 
 ## General Highlights

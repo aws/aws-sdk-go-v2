@@ -1,3 +1,7 @@
+# v1.29.0 (2023-11-27.2)
+
+* **Feature**: AWS Backup now supports restore testing, a new feature that allows customers to automate restore testing and validating their backups. Additionally, this release adds support for EBS Snapshots Archive tier.
+
 # v1.28.2 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

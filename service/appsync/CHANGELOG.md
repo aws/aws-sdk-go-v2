@@ -1,3 +1,7 @@
+# v1.25.0 (2023-11-27.2)
+
+* **Feature**: This update enables introspection of Aurora cluster databases using the RDS Data API
+
 # v1.24.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

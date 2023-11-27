@@ -34,7 +34,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.137.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.34.0
-	github.com/aws/aws-sdk-go-v2/service/efs v1.24.0
+	github.com/aws/aws-sdk-go-v2/service/efs v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.32.3
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.20.3
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.18.3
-	github.com/aws/aws-sdk-go-v2/service/glue v1.69.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.70.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/iam v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.18.3
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.16.3
 	github.com/aws/aws-sdk-go-v2/service/polly v1.35.1
-	github.com/aws/aws-sdk-go-v2/service/rds v1.63.2
+	github.com/aws/aws-sdk-go-v2/service/rds v1.63.3
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.34.3
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.34.3

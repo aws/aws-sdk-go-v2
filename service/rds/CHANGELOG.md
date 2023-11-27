@@ -1,3 +1,7 @@
+# v1.63.3 (2023-11-27.2)
+
+* **Documentation**: Updates Amazon RDS documentation for support for RDS for Db2.
+
 # v1.63.2 (2023-11-27)
 
 * No change notes available for this release.

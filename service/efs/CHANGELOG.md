@@ -1,3 +1,7 @@
+# v1.25.0 (2023-11-27.2)
+
+* **Feature**: Adding support for EFS Replication to existing file system.
+
 # v1.24.0 (2023-11-27)
 
 * **Feature**: Adding support for EFS Archive lifecycle configuration.
