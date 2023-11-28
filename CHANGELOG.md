@@ -1,3 +1,13 @@
+# Release (2023-11-28)
+
+## General Highlights
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.33.0](service/elasticache/CHANGELOG.md#v1330-2023-11-28)
+  * **Feature**: Launching Amazon ElastiCache Serverless that enables you to create a cache in under a minute without any capacity management. ElastiCache Serverless monitors the cache's memory, CPU, and network usage and scales both vertically and horizontally to support your application's requirements.
+
 # Release (2023-11-27.2)
 
 ## Module Highlights

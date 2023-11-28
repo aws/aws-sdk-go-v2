@@ -1,3 +1,7 @@
+# v1.137.2 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.137.1 (2023-11-21)
 
 * **Documentation**: Documentation updates for Amazon EC2.

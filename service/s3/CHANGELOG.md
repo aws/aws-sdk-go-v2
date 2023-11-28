@@ -1,3 +1,7 @@
+# v1.45.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.45.0 (2023-11-27)
 
 * **Feature**: Adding new params - Key and Prefix, to S3 API operations for supporting S3 Access Grants. Note - These updates will not change any of the existing S3 API functionality.

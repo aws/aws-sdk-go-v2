@@ -1,3 +1,7 @@
+# v1.25.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.25.0 (2023-11-27.2)
 
 * **Feature**: This update enables introspection of Aurora cluster databases using the RDS Data API

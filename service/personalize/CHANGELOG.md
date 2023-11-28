@@ -1,3 +1,7 @@
+# v1.29.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.29.0 (2023-11-27)
 
 * **Feature**: Enables metadata in recommendations, recommendations with themes, and next best action recommendations

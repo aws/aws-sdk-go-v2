@@ -1,3 +1,7 @@
+# v1.24.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.24.0 (2023-11-27)
 
 * **Feature**: Added new APIs in Detective to support resource investigations

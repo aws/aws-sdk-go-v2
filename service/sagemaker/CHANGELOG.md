@@ -1,3 +1,7 @@
+# v1.118.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.118.0 (2023-11-22)
 
 * **Feature**: This feature adds the end user license agreement status as a model access configuration parameter.

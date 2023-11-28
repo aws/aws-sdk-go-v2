@@ -1,3 +1,7 @@
+# v1.25.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.25.0 (2023-11-27)
 
 * **Feature**: This release enables both mutual authentication (mTLS), and Automatic Target Weights (ATW) for Application Load Balancers.

@@ -1,3 +1,7 @@
+# v1.5.5 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.5.4 (2023-11-27)
 
 * No change notes available for this release.

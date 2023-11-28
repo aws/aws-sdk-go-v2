@@ -1,3 +1,7 @@
+# v1.23.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.23.0 (2023-11-22)
 
 * **Feature**: This release adds support for resource based policies on streams and consumers.

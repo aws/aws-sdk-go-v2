@@ -1,3 +1,7 @@
+# v1.22.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.22.0 (2023-11-27)
 
 * **Feature**: This release introduces support for interpretationSource in the runtime service response.

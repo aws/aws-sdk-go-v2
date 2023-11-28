@@ -1,3 +1,7 @@
+# v1.70.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.70.0 (2023-11-27.2)
 
 * **Feature**: add observations support to DQ CodeGen config model + update document for connectiontypes supported by ConnectorData entities

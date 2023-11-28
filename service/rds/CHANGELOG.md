@@ -1,3 +1,7 @@
+# v1.63.4 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.63.3 (2023-11-27.2)
 
 * **Documentation**: Updates Amazon RDS documentation for support for RDS for Db2.

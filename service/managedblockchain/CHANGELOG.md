@@ -1,3 +1,7 @@
+# v1.19.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.19.0 (2023-11-27)
 
 * **Feature**: Add optional NetworkType property to Accessor APIs

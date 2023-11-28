@@ -1,3 +1,7 @@
+# v1.31.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.31.0 (2023-11-21)
 
 * **Feature**: This release adds support for CloudFront KeyValueStore, a globally managed key value datastore associated with CloudFront Functions.
