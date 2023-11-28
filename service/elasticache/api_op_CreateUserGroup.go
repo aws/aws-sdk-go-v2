@@ -42,7 +42,8 @@ type CreateUserGroupInput struct {
 	UserGroupId *string
 
 	// A list of tags to be added to this resource. A tag is a key-value pair. A tag
-	// key must be accompanied by a tag value, although null is accepted.
+	// key must be accompanied by a tag value, although null is accepted. Available for
+	// Redis only.
 	Tags []types.Tag
 
 	// The list of user IDs that belong to the user group.
@@ -67,6 +68,10 @@ type CreateUserGroupOutput struct {
 
 	// A list of replication groups that the user group can access.
 	ReplicationGroups []string
+
+	// Indicates which serverless caches the specified user group is associated with.
+	// Available for Redis only.
+	ServerlessCaches []string
 
 	// Indicates user group status. Can be "creating", "active", "modifying",
 	// "deleting".

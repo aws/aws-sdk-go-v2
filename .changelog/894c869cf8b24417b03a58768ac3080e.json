@@ -1,0 +1,8 @@
+{
+    "id": "894c869c-f8b2-4417-b03a-58768ac3080e",
+    "type": "feature",
+    "description": "Launching Amazon ElastiCache Serverless that enables you to create a cache in under a minute without any capacity management. ElastiCache Serverless monitors the cache's memory, CPU, and network usage and scales both vertically and horizontally to support your application's requirements.",
+    "modules": [
+        "service/elasticache"
+    ]
+}

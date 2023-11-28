@@ -12,68 +12,52 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the list of users that belong to the user group.
-func (c *Client) ModifyUserGroup(ctx context.Context, params *ModifyUserGroupInput, optFns ...func(*Options)) (*ModifyUserGroupOutput, error) {
+// Creates a copy of an existing serverless cache’s snapshot. Available for Redis
+// only.
+func (c *Client) CopyServerlessCacheSnapshot(ctx context.Context, params *CopyServerlessCacheSnapshotInput, optFns ...func(*Options)) (*CopyServerlessCacheSnapshotOutput, error) {
 	if params == nil {
-		params = &ModifyUserGroupInput{}
+		params = &CopyServerlessCacheSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyUserGroup", params, optFns, c.addOperationModifyUserGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyServerlessCacheSnapshot", params, optFns, c.addOperationCopyServerlessCacheSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ModifyUserGroupOutput)
+	out := result.(*CopyServerlessCacheSnapshotOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ModifyUserGroupInput struct {
+type CopyServerlessCacheSnapshotInput struct {
 
-	// The ID of the user group.
+	// The identifier of the existing serverless cache’s snapshot to be copied.
+	// Available for Redis only.
 	//
 	// This member is required.
-	UserGroupId *string
+	SourceServerlessCacheSnapshotName *string
 
-	// The list of user IDs to add to the user group.
-	UserIdsToAdd []string
+	// The identifier for the snapshot to be created. Available for Redis only.
+	//
+	// This member is required.
+	TargetServerlessCacheSnapshotName *string
 
-	// The list of user IDs to remove from the user group.
-	UserIdsToRemove []string
+	// The identifier of the KMS key used to encrypt the target snapshot. Available
+	// for Redis only.
+	KmsKeyId *string
+
+	// A list of tags to be added to the target snapshot resource. A tag is a
+	// key-value pair. Available for Redis only. Default: NULL
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
-type ModifyUserGroupOutput struct {
+type CopyServerlessCacheSnapshotOutput struct {
 
-	// The Amazon Resource Name (ARN) of the user group.
-	ARN *string
-
-	// The current supported value is Redis.
-	Engine *string
-
-	// The minimum engine version required, which is Redis 6.0
-	MinimumEngineVersion *string
-
-	// A list of updates being applied to the user group.
-	PendingChanges *types.UserGroupPendingChanges
-
-	// A list of replication groups that the user group can access.
-	ReplicationGroups []string
-
-	// Indicates which serverless caches the specified user group is associated with.
-	// Available for Redis only.
-	ServerlessCaches []string
-
-	// Indicates user group status. Can be "creating", "active", "modifying",
-	// "deleting".
-	Status *string
-
-	// The ID of the user group.
-	UserGroupId *string
-
-	// The list of user IDs that belong to the user group.
-	UserIds []string
+	// The response for the attempt to copy the serverless cache snapshot. Available
+	// for Redis only.
+	ServerlessCacheSnapshot *types.ServerlessCacheSnapshot
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,19 +65,19 @@ type ModifyUserGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationModifyUserGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyServerlessCacheSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyUserGroup{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyServerlessCacheSnapshot{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyUserGroup{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCopyServerlessCacheSnapshot{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyUserGroup"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyServerlessCacheSnapshot"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -136,10 +120,10 @@ func (c *Client) addOperationModifyUserGroupMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpModifyUserGroupValidationMiddleware(stack); err != nil {
+	if err = addOpCopyServerlessCacheSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyUserGroup(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyServerlessCacheSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -160,10 +144,10 @@ func (c *Client) addOperationModifyUserGroupMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opModifyUserGroup(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCopyServerlessCacheSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ModifyUserGroup",
+		OperationName: "CopyServerlessCacheSnapshot",
 	}
 }

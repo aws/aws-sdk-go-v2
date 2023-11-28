@@ -83,19 +83,20 @@ type CacheCluster struct {
 	// current generation types provide more memory and computational power at lower
 	// cost when compared to their equivalent previous generation counterparts.
 	//   - General purpose:
-	//   - Current generation: M6g node types (available only for Redis engine version
-	//   5.0.6 onward and for Memcached engine version 1.5.16 onward): cache.m6g.large
-	//   , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge
-	//   , cache.m6g.12xlarge , cache.m6g.16xlarge For region availability, see
-	//   Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge ,
-	//   cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4 node types:
-	//   cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge , cache.m4.4xlarge ,
-	//   cache.m4.10xlarge T4g node types (available only for Redis engine version
-	//   5.0.6 onward and Memcached engine version 1.5.16 onward): cache.t4g.micro ,
-	//   cache.t4g.small , cache.t4g.medium T3 node types: cache.t3.micro ,
-	//   cache.t3.small , cache.t3.medium T2 node types: cache.t2.micro ,
-	//   cache.t2.small , cache.t2.medium
+	//   - Current generation: M7g node types: cache.m7g.large , cache.m7g.xlarge ,
+	//   cache.m7g.2xlarge , cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge
+	//   , cache.m7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+	//   M6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge ,
+	//   cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge
+	//   , cache.m6g.16xlarge M5 node types: cache.m5.large , cache.m5.xlarge ,
+	//   cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4
+	//   node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
+	//   cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis
+	//   engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
+	//   cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types:
+	//   cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types:
+	//   cache.t2.micro , cache.t2.small , cache.t2.medium
 	//   - Previous generation: (not recommended. Existing clusters are still
 	//   supported but creation of new clusters is not supported for these types.) T1
 	//   node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium ,
@@ -106,15 +107,16 @@ type CacheCluster struct {
 	//   supported but creation of new clusters is not supported for these types.) C1
 	//   node types: cache.c1.xlarge
 	//   - Memory optimized:
-	//   - Current generation: R6g node types (available only for Redis engine version
-	//   5.0.6 onward and for Memcached engine version 1.5.16 onward). cache.r6g.large
-	//   , cache.r6g.xlarge , cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge
-	//   , cache.r6g.12xlarge , cache.r6g.16xlarge For region availability, see
-	//   Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
-	//   cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4 node types:
-	//   cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge , cache.r4.4xlarge ,
-	//   cache.r4.8xlarge , cache.r4.16xlarge
+	//   - Current generation: R7g node types: cache.r7g.large , cache.r7g.xlarge ,
+	//   cache.r7g.2xlarge , cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge
+	//   , cache.r7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+	//   R6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
+	//   cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
+	//   , cache.r6g.16xlarge R5 node types: cache.r5.large , cache.r5.xlarge ,
+	//   cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4
+	//   node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
+	//   cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
 	//   - Previous generation: (not recommended. Existing clusters are still
 	//   supported but creation of new clusters is not supported for these types.) M2
 	//   node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node
@@ -269,19 +271,20 @@ type CacheEngineVersion struct {
 // computational power at lower cost when compared to their equivalent previous
 // generation counterparts.
 //   - General purpose:
-//   - Current generation: M6g node types (available only for Redis engine version
-//     5.0.6 onward and for Memcached engine version 1.5.16 onward): cache.m6g.large
-//     , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge
-//     , cache.m6g.12xlarge , cache.m6g.16xlarge For region availability, see
-//     Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-//     M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge ,
-//     cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4 node types:
-//     cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge , cache.m4.4xlarge ,
-//     cache.m4.10xlarge T4g node types (available only for Redis engine version
-//     5.0.6 onward and Memcached engine version 1.5.16 onward): cache.t4g.micro ,
-//     cache.t4g.small , cache.t4g.medium T3 node types: cache.t3.micro ,
-//     cache.t3.small , cache.t3.medium T2 node types: cache.t2.micro ,
-//     cache.t2.small , cache.t2.medium
+//   - Current generation: M7g node types: cache.m7g.large , cache.m7g.xlarge ,
+//     cache.m7g.2xlarge , cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge
+//     , cache.m7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+//     M6g node types (available only for Redis engine version 5.0.6 onward and for
+//     Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge ,
+//     cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge
+//     , cache.m6g.16xlarge M5 node types: cache.m5.large , cache.m5.xlarge ,
+//     cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4
+//     node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
+//     cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis
+//     engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
+//     cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types:
+//     cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types:
+//     cache.t2.micro , cache.t2.small , cache.t2.medium
 //   - Previous generation: (not recommended. Existing clusters are still
 //     supported but creation of new clusters is not supported for these types.) T1
 //     node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium ,
@@ -292,15 +295,16 @@ type CacheEngineVersion struct {
 //     supported but creation of new clusters is not supported for these types.) C1
 //     node types: cache.c1.xlarge
 //   - Memory optimized:
-//   - Current generation: R6g node types (available only for Redis engine version
-//     5.0.6 onward and for Memcached engine version 1.5.16 onward). cache.r6g.large
-//     , cache.r6g.xlarge , cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge
-//     , cache.r6g.12xlarge , cache.r6g.16xlarge For region availability, see
-//     Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-//     R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
-//     cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4 node types:
-//     cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge , cache.r4.4xlarge ,
-//     cache.r4.8xlarge , cache.r4.16xlarge
+//   - Current generation: R7g node types: cache.r7g.large , cache.r7g.xlarge ,
+//     cache.r7g.2xlarge , cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge
+//     , cache.r7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+//     R6g node types (available only for Redis engine version 5.0.6 onward and for
+//     Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
+//     cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
+//     , cache.r6g.16xlarge R5 node types: cache.r5.large , cache.r5.xlarge ,
+//     cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4
+//     node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
+//     cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
 //   - Previous generation: (not recommended. Existing clusters are still
 //     supported but creation of new clusters is not supported for these types.) M2
 //     node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node
@@ -535,6 +539,19 @@ type CacheSubnetGroup struct {
 	noSmithyDocumentSerde
 }
 
+// The usage limits for storage and ElastiCache Processing Units for the cache.
+type CacheUsageLimits struct {
+
+	// The maximum data storage limit in the cache, expressed in Gigabytes.
+	DataStorage *DataStorage
+
+	// The configuration for the number of ElastiCache Processing Units (ECPU) the
+	// cache can consume per second.
+	ECPUPerSecond *ECPUPerSecond
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details of the CloudWatch Logs destination.
 type CloudWatchLogsDestinationDetails struct {
 
@@ -596,6 +613,22 @@ type CustomerNodeEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// The data storage limit.
+type DataStorage struct {
+
+	// The upper limit for data storage the cache is set to use.
+	//
+	// This member is required.
+	Maximum *int32
+
+	// The unit that the storage is measured in, in GB.
+	//
+	// This member is required.
+	Unit DataStorageUnit
+
+	noSmithyDocumentSerde
+}
+
 // Configuration details of either a CloudWatch Logs destination or Kinesis Data
 // Firehose destination.
 type DestinationDetails struct {
@@ -620,6 +653,19 @@ type EC2SecurityGroup struct {
 
 	// The status of the Amazon EC2 security group.
 	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the number of ElastiCache Processing Units (ECPU) the
+// cache can consume per second.
+type ECPUPerSecond struct {
+
+	// The configuration for the maximum number of ECPUs the cache can consume per
+	// second.
+	//
+	// This member is required.
+	Maximum *int32
 
 	noSmithyDocumentSerde
 }
@@ -1391,19 +1437,20 @@ type ReservedCacheNode struct {
 	// provide more memory and computational power at lower cost when compared to their
 	// equivalent previous generation counterparts.
 	//   - General purpose:
-	//   - Current generation: M6g node types (available only for Redis engine version
-	//   5.0.6 onward and for Memcached engine version 1.5.16 onward): cache.m6g.large
-	//   , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge
-	//   , cache.m6g.12xlarge , cache.m6g.16xlarge For region availability, see
-	//   Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge ,
-	//   cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4 node types:
-	//   cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge , cache.m4.4xlarge ,
-	//   cache.m4.10xlarge T4g node types (available only for Redis engine version
-	//   5.0.6 onward and Memcached engine version 1.5.16 onward): cache.t4g.micro ,
-	//   cache.t4g.small , cache.t4g.medium T3 node types: cache.t3.micro ,
-	//   cache.t3.small , cache.t3.medium T2 node types: cache.t2.micro ,
-	//   cache.t2.small , cache.t2.medium
+	//   - Current generation: M7g node types: cache.m7g.large , cache.m7g.xlarge ,
+	//   cache.m7g.2xlarge , cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge
+	//   , cache.m7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+	//   M6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge ,
+	//   cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge
+	//   , cache.m6g.16xlarge M5 node types: cache.m5.large , cache.m5.xlarge ,
+	//   cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4
+	//   node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
+	//   cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis
+	//   engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
+	//   cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types:
+	//   cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types:
+	//   cache.t2.micro , cache.t2.small , cache.t2.medium
 	//   - Previous generation: (not recommended. Existing clusters are still
 	//   supported but creation of new clusters is not supported for these types.) T1
 	//   node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium ,
@@ -1414,15 +1461,16 @@ type ReservedCacheNode struct {
 	//   supported but creation of new clusters is not supported for these types.) C1
 	//   node types: cache.c1.xlarge
 	//   - Memory optimized:
-	//   - Current generation: R6g node types (available only for Redis engine version
-	//   5.0.6 onward and for Memcached engine version 1.5.16 onward). cache.r6g.large
-	//   , cache.r6g.xlarge , cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge
-	//   , cache.r6g.12xlarge , cache.r6g.16xlarge For region availability, see
-	//   Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
-	//   cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4 node types:
-	//   cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge , cache.r4.4xlarge ,
-	//   cache.r4.8xlarge , cache.r4.16xlarge
+	//   - Current generation: R7g node types: cache.r7g.large , cache.r7g.xlarge ,
+	//   cache.r7g.2xlarge , cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge
+	//   , cache.r7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+	//   R6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
+	//   cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
+	//   , cache.r6g.16xlarge R5 node types: cache.r5.large , cache.r5.xlarge ,
+	//   cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4
+	//   node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
+	//   cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
 	//   - Previous generation: (not recommended. Existing clusters are still
 	//   supported but creation of new clusters is not supported for these types.) M2
 	//   node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node
@@ -1482,19 +1530,20 @@ type ReservedCacheNodesOffering struct {
 	// provide more memory and computational power at lower cost when compared to their
 	// equivalent previous generation counterparts.
 	//   - General purpose:
-	//   - Current generation: M6g node types (available only for Redis engine version
-	//   5.0.6 onward and for Memcached engine version 1.5.16 onward): cache.m6g.large
-	//   , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge
-	//   , cache.m6g.12xlarge , cache.m6g.16xlarge For region availability, see
-	//   Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge ,
-	//   cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4 node types:
-	//   cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge , cache.m4.4xlarge ,
-	//   cache.m4.10xlarge T4g node types (available only for Redis engine version
-	//   5.0.6 onward and Memcached engine version 1.5.16 onward): cache.t4g.micro ,
-	//   cache.t4g.small , cache.t4g.medium T3 node types: cache.t3.micro ,
-	//   cache.t3.small , cache.t3.medium T2 node types: cache.t2.micro ,
-	//   cache.t2.small , cache.t2.medium
+	//   - Current generation: M7g node types: cache.m7g.large , cache.m7g.xlarge ,
+	//   cache.m7g.2xlarge , cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge
+	//   , cache.m7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+	//   M6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge ,
+	//   cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge
+	//   , cache.m6g.16xlarge M5 node types: cache.m5.large , cache.m5.xlarge ,
+	//   cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4
+	//   node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
+	//   cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis
+	//   engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
+	//   cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types:
+	//   cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types:
+	//   cache.t2.micro , cache.t2.small , cache.t2.medium
 	//   - Previous generation: (not recommended. Existing clusters are still
 	//   supported but creation of new clusters is not supported for these types.) T1
 	//   node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium ,
@@ -1505,15 +1554,16 @@ type ReservedCacheNodesOffering struct {
 	//   supported but creation of new clusters is not supported for these types.) C1
 	//   node types: cache.c1.xlarge
 	//   - Memory optimized:
-	//   - Current generation: R6g node types (available only for Redis engine version
-	//   5.0.6 onward and for Memcached engine version 1.5.16 onward). cache.r6g.large
-	//   , cache.r6g.xlarge , cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge
-	//   , cache.r6g.12xlarge , cache.r6g.16xlarge For region availability, see
-	//   Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
-	//   cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4 node types:
-	//   cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge , cache.r4.4xlarge ,
-	//   cache.r4.8xlarge , cache.r4.16xlarge
+	//   - Current generation: R7g node types: cache.r7g.large , cache.r7g.xlarge ,
+	//   cache.r7g.2xlarge , cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge
+	//   , cache.r7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+	//   R6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
+	//   cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
+	//   , cache.r6g.16xlarge R5 node types: cache.r5.large , cache.r5.xlarge ,
+	//   cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4
+	//   node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
+	//   cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
 	//   - Previous generation: (not recommended. Existing clusters are still
 	//   supported but creation of new clusters is not supported for these types.) M2
 	//   node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node
@@ -1584,6 +1634,129 @@ type SecurityGroupMembership struct {
 	// The status of the cache security group membership. The status changes whenever
 	// a cache security group is modified, or when the cache security groups assigned
 	// to a cluster are modified.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The resource representing a serverless cache.
+type ServerlessCache struct {
+
+	// The Amazon Resource Name (ARN) of the serverless cache.
+	ARN *string
+
+	// The cache usage limit for the serverless cache.
+	CacheUsageLimits *CacheUsageLimits
+
+	// When the serverless cache was created.
+	CreateTime *time.Time
+
+	// The daily time that a cache snapshot will be created. Default is NULL, i.e.
+	// snapshots will not be created at a specific time on a daily basis. Available for
+	// Redis only.
+	DailySnapshotTime *string
+
+	// A description of the serverless cache.
+	Description *string
+
+	// Represents the information required for client programs to connect to a cache
+	// node.
+	Endpoint *Endpoint
+
+	// The engine the serverless cache is compatible with.
+	Engine *string
+
+	// The name and version number of the engine the serverless cache is compatible
+	// with.
+	FullEngineVersion *string
+
+	// The ID of the Amazon Web Services Key Management Service (KMS) key that is used
+	// to encrypt data at rest in the serverless cache.
+	KmsKeyId *string
+
+	// The version number of the engine the serverless cache is compatible with.
+	MajorEngineVersion *string
+
+	// Represents the information required for client programs to connect to a cache
+	// node.
+	ReaderEndpoint *Endpoint
+
+	// The IDs of the EC2 security groups associated with the serverless cache.
+	SecurityGroupIds []string
+
+	// The unique identifier of the serverless cache.
+	ServerlessCacheName *string
+
+	// The current setting for the number of serverless cache snapshots the system
+	// will retain. Available for Redis only.
+	SnapshotRetentionLimit *int32
+
+	// The current status of the serverless cache. The allowed values are CREATING,
+	// AVAILABLE, DELETING, CREATE-FAILED and MODIFYING.
+	Status *string
+
+	// If no subnet IDs are given and your VPC is in SFO, then ElastiCache will select
+	// 2 default subnets across AZs in your VPC. For all other Regions, if no subnet
+	// IDs are given then ElastiCache will select 3 default subnets across AZs in your
+	// default VPC.
+	SubnetIds []string
+
+	// The identifier of the user group associated with the serverless cache.
+	// Available for Redis only. Default is NULL.
+	UserGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration settings for a specific serverless cache.
+type ServerlessCacheConfiguration struct {
+
+	// The engine that the serverless cache is configured with.
+	Engine *string
+
+	// The engine version number that the serverless cache is configured with.
+	MajorEngineVersion *string
+
+	// The identifier of a serverless cache.
+	ServerlessCacheName *string
+
+	noSmithyDocumentSerde
+}
+
+// The resource representing a serverless cache snapshot. Available for Redis only.
+type ServerlessCacheSnapshot struct {
+
+	// The Amazon Resource Name (ARN) of a serverless cache snapshot. Available for
+	// Redis only.
+	ARN *string
+
+	// The total size of a serverless cache snapshot, in bytes. Available for Redis
+	// only.
+	BytesUsedForCache *string
+
+	// The date and time that the source serverless cache's metadata and cache data
+	// set was obtained for the snapshot. Available for Redis only.
+	CreateTime *time.Time
+
+	// The time that the serverless cache snapshot will expire. Available for Redis
+	// only.
+	ExpiryTime *time.Time
+
+	// The ID of the Amazon Web Services Key Management Service (KMS) key of a
+	// serverless cache snapshot. Available for Redis only.
+	KmsKeyId *string
+
+	// The configuration of the serverless cache, at the time the snapshot was taken.
+	// Available for Redis only.
+	ServerlessCacheConfiguration *ServerlessCacheConfiguration
+
+	// The identifier of a serverless cache snapshot. Available for Redis only.
+	ServerlessCacheSnapshotName *string
+
+	// The type of snapshot of serverless cache. Available for Redis only.
+	SnapshotType *string
+
+	// The current status of the serverless cache. Available for Redis only.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1672,19 +1845,20 @@ type Snapshot struct {
 	// current generation types provide more memory and computational power at lower
 	// cost when compared to their equivalent previous generation counterparts.
 	//   - General purpose:
-	//   - Current generation: M6g node types (available only for Redis engine version
-	//   5.0.6 onward and for Memcached engine version 1.5.16 onward): cache.m6g.large
-	//   , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge
-	//   , cache.m6g.12xlarge , cache.m6g.16xlarge For region availability, see
-	//   Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge ,
-	//   cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4 node types:
-	//   cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge , cache.m4.4xlarge ,
-	//   cache.m4.10xlarge T4g node types (available only for Redis engine version
-	//   5.0.6 onward and Memcached engine version 1.5.16 onward): cache.t4g.micro ,
-	//   cache.t4g.small , cache.t4g.medium T3 node types: cache.t3.micro ,
-	//   cache.t3.small , cache.t3.medium T2 node types: cache.t2.micro ,
-	//   cache.t2.small , cache.t2.medium
+	//   - Current generation: M7g node types: cache.m7g.large , cache.m7g.xlarge ,
+	//   cache.m7g.2xlarge , cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge
+	//   , cache.m7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+	//   M6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge ,
+	//   cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge
+	//   , cache.m6g.16xlarge M5 node types: cache.m5.large , cache.m5.xlarge ,
+	//   cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4
+	//   node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
+	//   cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis
+	//   engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
+	//   cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types:
+	//   cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types:
+	//   cache.t2.micro , cache.t2.small , cache.t2.medium
 	//   - Previous generation: (not recommended. Existing clusters are still
 	//   supported but creation of new clusters is not supported for these types.) T1
 	//   node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium ,
@@ -1695,15 +1869,16 @@ type Snapshot struct {
 	//   supported but creation of new clusters is not supported for these types.) C1
 	//   node types: cache.c1.xlarge
 	//   - Memory optimized:
-	//   - Current generation: R6g node types (available only for Redis engine version
-	//   5.0.6 onward and for Memcached engine version 1.5.16 onward). cache.r6g.large
-	//   , cache.r6g.xlarge , cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge
-	//   , cache.r6g.12xlarge , cache.r6g.16xlarge For region availability, see
-	//   Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
-	//   cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4 node types:
-	//   cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge , cache.r4.4xlarge ,
-	//   cache.r4.8xlarge , cache.r4.16xlarge
+	//   - Current generation: R7g node types: cache.r7g.large , cache.r7g.xlarge ,
+	//   cache.r7g.2xlarge , cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge
+	//   , cache.r7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+	//   R6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
+	//   cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
+	//   , cache.r6g.16xlarge R5 node types: cache.r5.large , cache.r5.xlarge ,
+	//   cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4
+	//   node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
+	//   cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
 	//   - Previous generation: (not recommended. Existing clusters are still
 	//   supported but creation of new clusters is not supported for these types.) M2
 	//   node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node
@@ -2008,6 +2183,10 @@ type UserGroup struct {
 
 	// A list of replication groups that the user group can access.
 	ReplicationGroups []string
+
+	// Indicates which serverless caches the specified user group is associated with.
+	// Available for Redis only.
+	ServerlessCaches []string
 
 	// Indicates user group status. Can be "creating", "active", "modifying",
 	// "deleting".

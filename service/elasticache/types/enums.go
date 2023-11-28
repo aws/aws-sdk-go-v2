@@ -138,6 +138,22 @@ func (ClusterMode) Values() []ClusterMode {
 	}
 }
 
+type DataStorageUnit string
+
+// Enum values for DataStorageUnit
+const (
+	DataStorageUnitGb DataStorageUnit = "GB"
+)
+
+// Values returns all known values for DataStorageUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataStorageUnit) Values() []DataStorageUnit {
+	return []DataStorageUnit{
+		"GB",
+	}
+}
+
 type DataTieringStatus string
 
 // Enum values for DataTieringStatus
@@ -474,13 +490,15 @@ type SourceType string
 
 // Enum values for SourceType
 const (
-	SourceTypeCacheCluster        SourceType = "cache-cluster"
-	SourceTypeCacheParameterGroup SourceType = "cache-parameter-group"
-	SourceTypeCacheSecurityGroup  SourceType = "cache-security-group"
-	SourceTypeCacheSubnetGroup    SourceType = "cache-subnet-group"
-	SourceTypeReplicationGroup    SourceType = "replication-group"
-	SourceTypeUser                SourceType = "user"
-	SourceTypeUserGroup           SourceType = "user-group"
+	SourceTypeCacheCluster            SourceType = "cache-cluster"
+	SourceTypeCacheParameterGroup     SourceType = "cache-parameter-group"
+	SourceTypeCacheSecurityGroup      SourceType = "cache-security-group"
+	SourceTypeCacheSubnetGroup        SourceType = "cache-subnet-group"
+	SourceTypeReplicationGroup        SourceType = "replication-group"
+	SourceTypeServerlessCache         SourceType = "serverless-cache"
+	SourceTypeServerlessCacheSnapshot SourceType = "serverless-cache-snapshot"
+	SourceTypeUser                    SourceType = "user"
+	SourceTypeUserGroup               SourceType = "user-group"
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
@@ -493,6 +511,8 @@ func (SourceType) Values() []SourceType {
 		"cache-security-group",
 		"cache-subnet-group",
 		"replication-group",
+		"serverless-cache",
+		"serverless-cache-snapshot",
 		"user",
 		"user-group",
 	}

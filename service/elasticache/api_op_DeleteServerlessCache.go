@@ -12,68 +12,41 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the list of users that belong to the user group.
-func (c *Client) ModifyUserGroup(ctx context.Context, params *ModifyUserGroupInput, optFns ...func(*Options)) (*ModifyUserGroupOutput, error) {
+// Deletes a specified existing serverless cache.
+func (c *Client) DeleteServerlessCache(ctx context.Context, params *DeleteServerlessCacheInput, optFns ...func(*Options)) (*DeleteServerlessCacheOutput, error) {
 	if params == nil {
-		params = &ModifyUserGroupInput{}
+		params = &DeleteServerlessCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyUserGroup", params, optFns, c.addOperationModifyUserGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteServerlessCache", params, optFns, c.addOperationDeleteServerlessCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ModifyUserGroupOutput)
+	out := result.(*DeleteServerlessCacheOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ModifyUserGroupInput struct {
+type DeleteServerlessCacheInput struct {
 
-	// The ID of the user group.
+	// The identifier of the serverless cache to be deleted.
 	//
 	// This member is required.
-	UserGroupId *string
+	ServerlessCacheName *string
 
-	// The list of user IDs to add to the user group.
-	UserIdsToAdd []string
-
-	// The list of user IDs to remove from the user group.
-	UserIdsToRemove []string
+	// Name of the final snapshot to be taken before the serverless cache is deleted.
+	// Available for Redis only. Default: NULL, i.e. a final snapshot is not taken.
+	FinalSnapshotName *string
 
 	noSmithyDocumentSerde
 }
 
-type ModifyUserGroupOutput struct {
+type DeleteServerlessCacheOutput struct {
 
-	// The Amazon Resource Name (ARN) of the user group.
-	ARN *string
-
-	// The current supported value is Redis.
-	Engine *string
-
-	// The minimum engine version required, which is Redis 6.0
-	MinimumEngineVersion *string
-
-	// A list of updates being applied to the user group.
-	PendingChanges *types.UserGroupPendingChanges
-
-	// A list of replication groups that the user group can access.
-	ReplicationGroups []string
-
-	// Indicates which serverless caches the specified user group is associated with.
-	// Available for Redis only.
-	ServerlessCaches []string
-
-	// Indicates user group status. Can be "creating", "active", "modifying",
-	// "deleting".
-	Status *string
-
-	// The ID of the user group.
-	UserGroupId *string
-
-	// The list of user IDs that belong to the user group.
-	UserIds []string
+	// Provides the details of the specified serverless cache that is about to be
+	// deleted.
+	ServerlessCache *types.ServerlessCache
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,19 +54,19 @@ type ModifyUserGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationModifyUserGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteServerlessCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyUserGroup{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteServerlessCache{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyUserGroup{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteServerlessCache{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyUserGroup"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteServerlessCache"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -136,10 +109,10 @@ func (c *Client) addOperationModifyUserGroupMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpModifyUserGroupValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteServerlessCacheValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyUserGroup(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteServerlessCache(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -160,10 +133,10 @@ func (c *Client) addOperationModifyUserGroupMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opModifyUserGroup(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteServerlessCache(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ModifyUserGroup",
+		OperationName: "DeleteServerlessCache",
 	}
 }
