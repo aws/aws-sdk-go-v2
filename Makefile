@@ -4,6 +4,7 @@ LINT_IGNORE_S3MANAGER_INPUT='feature/s3/manager/upload.go:.+struct field SSEKMSK
 # Names of these are tied to endpoint rules and they're internal so ignore them
 LINT_IGNORE_AWSRULESFN_ARN='internal/endpoints/awsrulesfn/arn.go'
 LINT_IGNORE_AWSRULESFN_PARTITION='internal/endpoints/awsrulesfn/partition.go'
+LINT_IGNORE_PRIVATE_METRICS='aws/middleware/private/metrics'
 
 UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
@@ -472,7 +473,8 @@ lint:
 	-e ${LINT_IGNORE_S3MANAGER_INPUT} \
 	-e ${LINTIGNORESINGLEFIGHT} \
 	-e ${LINT_IGNORE_AWSRULESFN_ARN} \
-	-e ${LINT_IGNORE_AWSRULESFN_PARTITION}`; \
+	-e ${LINT_IGNORE_AWSRULESFN_PARTITION} \
+	-e ${LINT_IGNORE_PRIVATE_METRICS}`; \
 	echo "$$dolint"; \
 	if [ "$$dolint" != "" ]; then exit 1; fi
 

@@ -73,3 +73,29 @@ func TestV4A(t *testing.T) {
 	}
 
 }
+
+func TestV4S3Express(t *testing.T) {
+	props := smithy.Properties{}
+	props.Set("authSchemes", []interface{}{
+		map[string]interface{}{
+			"name":                  SigV4S3Express,
+			"signingName":           "s3",
+			"signingRegion":         "us-east-1",
+			"disableDoubleEncoding": true,
+		},
+	})
+
+	result, err := GetAuthenticationSchemes(&props)
+	if err != nil {
+		t.Fatalf("Did not expect error, got %v", err)
+	}
+
+	scheme, ok := result[0].(*AuthenticationSchemeV4)
+	if !ok {
+		t.Fatalf("Did not get expected AuthenticationSchemeV4. %v", result[0])
+	}
+
+	if scheme.Name != SigV4S3Express {
+		t.Fatalf("expected %s, got %s", SigV4S3Express, scheme.Name)
+	}
+}

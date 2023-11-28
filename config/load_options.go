@@ -206,6 +206,9 @@ type LoadOptions struct {
 
 	// The sdk app ID retrieved from env var or shared config to be added to request user agent header
 	AppID string
+
+	// Whether S3 S3Beta2022a auth is disabled.
+	S3DisableS3Beta2022aAuth *bool
 }
 
 func (o LoadOptions) getDefaultsMode(ctx context.Context) (aws.DefaultsMode, bool, error) {
@@ -1041,6 +1044,25 @@ func WithDefaultsMode(mode aws.DefaultsMode, optFns ...func(options *DefaultsMod
 	}
 	return func(options *LoadOptions) error {
 		options.DefaultsModeOptions = do
+		return nil
+	}
+}
+
+// GetS3DisableS3Beta2022aAuth returns the configured value for
+// [EnvConfig.S3DisableS3Beta2022aAuth].
+func (o LoadOptions) GetS3DisableS3Beta2022aAuth() (value, ok bool) {
+	if o.S3DisableS3Beta2022aAuth == nil {
+		return false, false
+	}
+
+	return *o.S3DisableS3Beta2022aAuth, true
+}
+
+// WithS3DisableS3Beta2022aAuth sets [LoadOptions.S3DisableS3Beta2022aAuth]
+// to the value provided.
+func WithS3DisableS3Beta2022aAuth(v bool) LoadOptionsFunc {
+	return func(o *LoadOptions) error {
+		o.S3DisableS3Beta2022aAuth = &v
 		return nil
 	}
 }
