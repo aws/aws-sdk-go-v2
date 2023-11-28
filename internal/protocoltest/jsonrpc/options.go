@@ -70,8 +70,8 @@ type Options struct {
 	// The region to send requests to. (Required)
 	Region string
 
-	// Inclusive threshold request body size to trigger compression, default to 10240
-	// and must be within 0 and 10485760 bytes inclusively
+	// The minimum request body size, in bytes, at which compression should occur. The
+	// default value is 10 KiB. Values must fall within [0, 1MiB].
 	RequestMinCompressSizeBytes int64
 
 	// RetryMaxAttempts specifies the maximum number attempts an API client will call
