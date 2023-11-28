@@ -1060,7 +1060,7 @@ func (o LoadOptions) GetS3DisableExpressAuth() (value, ok bool) {
 
 // WithS3DisableExpressAuth sets [LoadOptions.S3DisableExpressAuth]
 // to the value provided.
-func WithS3DisableS3ExpressAuth(v bool) LoadOptionsFunc {
+func WithS3DisableExpressAuth(v bool) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.S3DisableExpressAuth = &v
 		return nil
