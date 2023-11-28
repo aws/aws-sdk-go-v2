@@ -46,7 +46,7 @@
                     "name": "bedrock"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Describes the API operations for creating and managing Bedrock models.</p>",
+                "smithy.api#documentation": "<p>Describes the API operations for creating and managing Amazon Bedrock models.</p>",
                 "smithy.api#title": "Amazon Bedrock",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -90,7 +90,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -109,7 +108,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -137,13 +135,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -156,7 +155,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -170,7 +168,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -193,7 +190,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -228,11 +224,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -243,16 +237,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -266,14 +263,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -282,15 +277,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -301,16 +295,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -324,7 +321,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -344,11 +340,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -359,20 +353,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -383,18 +379,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -721,7 +721,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$"
             }
         },
         "com.amazonaws.bedrock#BedrockModelId": {
@@ -845,16 +845,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a fine-tuning job to customize a base model.</p>\n         <p>You specify the base foundation model and the location of the training data.\n            After the  model-customization job completes successfully, your custom model resource will be ready to use. Training data\n            contains input and output text for each record in a JSONL format. Optionally, you can specify validation data\n            in the same format as the training data. Bedrock returns validation loss metrics and output generations\n            after the job completes.\n        </p>\n         <p>\n            Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size.\n            To monitor a job, use the <code>GetModelCustomizationJob</code> operation to retrieve the job status.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html\">Custom models</a> in the Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Creates a fine-tuning job to customize a base model.</p>\n         <p>You specify the base foundation model and the location of the training data.\n         After the  model-customization job completes successfully, your custom model resource will be ready to use. Training data\n         contains input and output text for each record in a JSONL format. Optionally, you can specify validation data\n         in the same format as the training data. Amazon Bedrock returns validation loss metrics and output generations \n         after the job completes.\n      </p>\n         <p>\n       Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size.\n       To monitor a job, use the <code>GetModelCustomizationJob</code> operation to retrieve the job status.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html\">Custom models</a> in the Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
                     "uri": "/model-customization-jobs"
                 },
-                "smithy.api#idempotent": {},
-                "smithy.api#tags": [
-                    "model-customization"
-                ]
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.bedrock#CreateModelCustomizationJobRequest": {
@@ -877,7 +874,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.bedrock#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Bedrock can assume to perform tasks on your behalf.\n            For example, during model training, Bedrock needs your permission to read input data from an S3 bucket, write model artifacts to an S3 bucket.\n            To pass this role to Bedrock, the caller of this API must have the <code>iam:PassRole</code> permission.\n        </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon Bedrock can assume to perform tasks on your behalf.\n         For example, during model training, Amazon Bedrock needs your permission to read input data from an S3 bucket, write model artifacts to an S3 bucket.\n         To pass this role to Amazon Bedrock, the caller of this API must have the <code>iam:PassRole</code> permission.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -895,13 +892,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "customizationType": {
+                    "target": "com.amazonaws.bedrock#CustomizationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customization type.</p>"
+                    }
+                },
                 "customModelKmsKeyId": {
                     "target": "com.amazonaws.bedrock#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom model is encrypted at rest using this key.</p>",
-                        "smithy.api#tags": [
-                            "customer-managed-key"
-                        ]
+                        "smithy.api#documentation": "<p>The custom model is encrypted at rest using this key.</p>"
                     }
                 },
                 "jobTags": {
@@ -946,10 +946,7 @@
                 "vpcConfig": {
                     "target": "com.amazonaws.bedrock#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>VPC configuration (optional). Configuration parameters for the\n            private Virtual Private Cloud (VPC) that contains the resources you are using for this job.</p>",
-                        "smithy.api#tags": [
-                            "model-customization-vpc"
-                        ]
+                        "smithy.api#documentation": "<p>VPC configuration (optional). Configuration parameters for the\n           private Virtual Private Cloud (VPC) that contains the resources you are using for this job.</p>"
                     }
                 }
             },
@@ -1019,7 +1016,7 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.bedrock#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique token value that you can provide. If this token matches a previous request,\n            Bedrock ignores the request, but does not return an error.</p>",
+                        "smithy.api#documentation": "<p>Unique token value that you can provide. If this token matches a previous request,\n          Amazon Bedrock ignores the request, but does not return an error.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1133,6 +1130,12 @@
                         "smithy.api#documentation": "<p>The base model name.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "customizationType": {
+                    "target": "com.amazonaws.bedrock#CustomizationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to carry out continued pre-training of a model or whether to fine-tune it. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html\">Custom models</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1143,6 +1146,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrock#CustomModelSummary"
+            }
+        },
+        "com.amazonaws.bedrock#CustomizationType": {
+            "type": "enum",
+            "members": {
+                "FINE_TUNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINE_TUNING"
+                    }
+                },
+                "CONTINUED_PRE_TRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUED_PRE_TRAINING"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrock#DeleteCustomModel": {
@@ -1180,10 +1200,7 @@
                     "method": "DELETE",
                     "uri": "/custom-models/{modelIdentifier}"
                 },
-                "smithy.api#idempotent": {},
-                "smithy.api#tags": [
-                    "model-customization"
-                ]
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.bedrock#DeleteCustomModelRequest": {
@@ -1420,10 +1437,48 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The inference types that the model supports.</p>"
                     }
+                },
+                "modelLifecycle": {
+                    "target": "com.amazonaws.bedrock#FoundationModelLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about whether a model version is available or deprecated</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a foundation model.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#FoundationModelLifecycle": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.bedrock#FoundationModelLifecycleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a model version is available (<code>ACTIVE</code>) or deprecated (<code>LEGACY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about whether a model version is available or deprecated.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#FoundationModelLifecycleStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "LEGACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEGACY"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrock#FoundationModelSummary": {
@@ -1484,6 +1539,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The inference types that the model supports.</p>"
                     }
+                },
+                "modelLifecycle": {
+                    "target": "com.amazonaws.bedrock#FoundationModelLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about whether a model version is available or deprecated.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1522,16 +1583,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get the properties associated with a Bedrock custom model that you have created.For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html\">Custom models</a> in the Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Get the properties associated with a Amazon Bedrock custom model that you have created.For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html\">Custom models</a> in the Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
                     "uri": "/custom-models/{modelIdentifier}"
                 },
-                "smithy.api#readonly": {},
-                "smithy.api#tags": [
-                    "model-customization"
-                ]
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.bedrock#GetCustomModelRequest": {
@@ -1587,13 +1645,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "customizationType": {
+                    "target": "com.amazonaws.bedrock#CustomizationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of model customization.</p>"
+                    }
+                },
                 "modelKmsKeyArn": {
                     "target": "com.amazonaws.bedrock#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom model is encrypted at rest using this key.</p>",
-                        "smithy.api#tags": [
-                            "customer-managed-key"
-                        ]
+                        "smithy.api#documentation": "<p>The custom model is encrypted at rest using this key.</p>"
                     }
                 },
                 "hyperParameters": {
@@ -1669,7 +1730,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get details about a Bedrock foundation model.</p>",
+                "smithy.api#documentation": "<p>Get details about a Amazon Bedrock foundation model.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1734,16 +1795,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the properties associated with a model-customization job, including the status of the job.\n            For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html\">Custom models</a> in the Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Retrieves the properties associated with a model-customization job, including the status of the job.\n      For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html\">Custom models</a> in the Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
                     "uri": "/model-customization-jobs/{jobIdentifier}"
                 },
-                "smithy.api#readonly": {},
-                "smithy.api#tags": [
-                    "model-customization"
-                ]
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.bedrock#GetModelCustomizationJobRequest": {
@@ -1808,7 +1866,7 @@
                 "status": {
                     "target": "com.amazonaws.bedrock#ModelCustomizationJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the job. A successful job transitions from in-progress to completed when the output model is ready to use.\n            If the job failed, the failure message contains information about why the job failed.</p>"
+                        "smithy.api#documentation": "<p>The status of the job. A successful job transitions from in-progress to completed when the output model is ready to use.\n      If the job failed, the failure message contains information about why the job failed.</p>"
                     }
                 },
                 "failureMessage": {
@@ -1846,7 +1904,7 @@
                 "hyperParameters": {
                     "target": "com.amazonaws.bedrock#ModelCustomizationHyperParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hyperparameter values for the job.</p>",
+                        "smithy.api#documentation": "<p>The hyperparameter values for the job. For information about hyperparameters for specific models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-guidelines.html\">Guidelines for model customization</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1869,13 +1927,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "customizationType": {
+                    "target": "com.amazonaws.bedrock#CustomizationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of model customization.</p>"
+                    }
+                },
                 "outputModelKmsKeyArn": {
                     "target": "com.amazonaws.bedrock#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom model is encrypted at rest using this key.</p>",
-                        "smithy.api#tags": [
-                            "customer-managed-key"
-                        ]
+                        "smithy.api#documentation": "<p>The custom model is encrypted at rest using this key.</p>"
                     }
                 },
                 "trainingMetrics": {
@@ -1890,10 +1951,7 @@
                 "vpcConfig": {
                     "target": "com.amazonaws.bedrock#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>VPC configuration for the custom model job.</p>",
-                        "smithy.api#tags": [
-                            "model-customization-vpc"
-                        ]
+                        "smithy.api#documentation": "<p>VPC configuration for the custom model job.</p>"
                     }
                 }
             },
@@ -2217,10 +2275,7 @@
                     "pageSize": "maxResults",
                     "items": "modelSummaries"
                 },
-                "smithy.api#readonly": {},
-                "smithy.api#tags": [
-                    "model-customization"
-                ]
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.bedrock#ListCustomModelsRequest": {
@@ -2271,7 +2326,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.bedrock#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Continuation token from the previous response, for Bedrock to list the next set of results.</p>",
+                        "smithy.api#documentation": "<p>Continuation token from the previous response, for Amazon Bedrock to list the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -2337,7 +2392,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List of Bedrock foundation models that you can use. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html\">Foundation models</a> in the Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>List of Amazon Bedrock foundation models that you can use. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html\">Foundation models</a> in the Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2352,7 +2407,7 @@
                 "byProvider": {
                     "target": "com.amazonaws.bedrock#Provider",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Bedrock model provider.</p>",
+                        "smithy.api#documentation": "<p>A Amazon Bedrock model provider.</p>",
                         "smithy.api#httpQuery": "byProvider"
                     }
                 },
@@ -2388,7 +2443,7 @@
                 "modelSummaries": {
                     "target": "com.amazonaws.bedrock#FoundationModelSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of bedrock foundation models.</p>"
+                        "smithy.api#documentation": "<p>A list of Amazon Bedrock foundation models.</p>"
                     }
                 }
             },
@@ -2419,7 +2474,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of model customization jobs that you have submitted. You can filter the jobs to return based on\n            one or more criteria.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html\">Custom models</a> in the Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Returns a list of model customization jobs that you have submitted. You can filter the jobs to return based on\n      one or more criteria.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html\">Custom models</a> in the Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2431,10 +2486,7 @@
                     "pageSize": "maxResults",
                     "items": "modelCustomizationJobSummaries"
                 },
-                "smithy.api#readonly": {},
-                "smithy.api#tags": [
-                    "model-customization"
-                ]
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.bedrock#ListModelCustomizationJobsRequest": {
@@ -2478,7 +2530,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.bedrock#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Continuation token from the previous response, for Bedrock to list the next set of results.</p>",
+                        "smithy.api#documentation": "<p>Continuation token from the previous response, for Amazon Bedrock to list the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -2607,7 +2659,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.bedrock#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Continuation token from the previous response, for Bedrock to list the next set of results.</p>",
+                        "smithy.api#documentation": "<p>Continuation token from the previous response, for Amazon Bedrock to list the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -2681,10 +2733,7 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/listTagsForResource"
-                },
-                "smithy.api#tags": [
-                    "tagging"
-                ]
+                }
             }
         },
         "com.amazonaws.bedrock#ListTagsForResourceRequest": {
@@ -2806,6 +2855,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FINE_TUNING"
+                    }
+                },
+                "CONTINUED_PRE_TRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUED_PRE_TRAINING"
                     }
                 }
             }
@@ -2939,6 +2994,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Name of the custom model.</p>"
                     }
+                },
+                "customizationType": {
+                    "target": "com.amazonaws.bedrock#CustomizationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to carry out continued pre-training of a model or whether to fine-tune it. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html\">Custom models</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3062,7 +3123,7 @@
         "com.amazonaws.bedrock#Provider": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-z0-9-]{1,63}$"
+                "smithy.api#pattern": "^[A-Za-z0-9- ]{1,63}$"
             }
         },
         "com.amazonaws.bedrock#ProvisionedModelArn": {
@@ -3345,10 +3406,7 @@
                 "smithy.api#length": {
                     "max": 32
                 },
-                "smithy.api#pattern": "^[-0-9a-zA-Z]+$",
-                "smithy.api#tags": [
-                    "model-customization-vpc"
-                ]
+                "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.bedrock#SecurityGroupIds": {
@@ -3360,10 +3418,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 5
-                },
-                "smithy.api#tags": [
-                    "model-customization-vpc"
-                ]
+                }
             }
         },
         "com.amazonaws.bedrock#ServiceQuotaExceededException": {
@@ -3464,10 +3519,7 @@
                     "method": "POST",
                     "uri": "/model-customization-jobs/{jobIdentifier}/stop"
                 },
-                "smithy.api#idempotent": {},
-                "smithy.api#tags": [
-                    "model-customization"
-                ]
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.bedrock#StopModelCustomizationJobRequest": {
@@ -3499,10 +3551,7 @@
                 "smithy.api#length": {
                     "max": 32
                 },
-                "smithy.api#pattern": "^[-0-9a-zA-Z]+$",
-                "smithy.api#tags": [
-                    "model-customization-vpc"
-                ]
+                "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.bedrock#SubnetIds": {
@@ -3514,10 +3563,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 16
-                },
-                "smithy.api#tags": [
-                    "model-customization-vpc"
-                ]
+                }
             }
         },
         "com.amazonaws.bedrock#SubscriptionResource": {
@@ -3613,10 +3659,7 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/tagResource"
-                },
-                "smithy.api#tags": [
-                    "tagging"
-                ]
+                }
             }
         },
         "com.amazonaws.bedrock#TagResourceRequest": {
@@ -3715,7 +3758,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request contains more tags than can be associated with a resource (50 tags per resource).\n            The maximum number of tags includes both existing tags and those included in your current request. </p>",
+                "smithy.api#documentation": "<p>The request contains more tags than can be associated with a resource (50 tags per resource). \n         The maximum number of tags includes both existing tags and those included in your current request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3797,10 +3840,7 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/untagResource"
-                },
-                "smithy.api#tags": [
-                    "tagging"
-                ]
+                }
             }
         },
         "com.amazonaws.bedrock#UntagResourceRequest": {
@@ -3995,10 +4035,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>VPC configuration.</p>",
-                "smithy.api#tags": [
-                    "model-customization-vpc"
-                ]
+                "smithy.api#documentation": "<p>VPC configuration.</p>"
             }
         }
     }

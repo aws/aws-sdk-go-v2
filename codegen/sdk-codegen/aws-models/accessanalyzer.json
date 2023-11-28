@@ -2331,7 +2331,7 @@
                 "s3Bucket": {
                     "target": "com.amazonaws.accessanalyzer#S3BucketConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The access control configuration is for an Amazon S3 Bucket. </p>"
+                        "smithy.api#documentation": "<p>The access control configuration is for an Amazon S3 bucket. </p>"
                     }
                 },
                 "snsTopic": {
@@ -2344,6 +2344,12 @@
                     "target": "com.amazonaws.accessanalyzer#SqsQueueConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The access control configuration is for an Amazon SQS queue. </p>"
+                    }
+                },
+                "s3ExpressDirectoryBucket": {
+                    "target": "com.amazonaws.accessanalyzer#S3ExpressDirectoryBucketConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access control configuration is for an Amazon S3 directory bucket.</p>"
                     }
                 }
             },
@@ -5838,6 +5844,10 @@
                     {
                         "value": "AWS::SNS::Topic",
                         "name": "AWS_SNS_TOPIC"
+                    },
+                    {
+                        "value": "AWS::S3Express::DirectoryBucket",
+                        "name": "AWS_S3EXPRESS_DIRECTORYBUCKET"
                     }
                 ]
             }
@@ -5947,6 +5957,23 @@
             }
         },
         "com.amazonaws.accessanalyzer#S3BucketPolicy": {
+            "type": "string"
+        },
+        "com.amazonaws.accessanalyzer#S3ExpressDirectoryBucketConfiguration": {
+            "type": "structure",
+            "members": {
+                "bucketPolicy": {
+                    "target": "com.amazonaws.accessanalyzer#S3ExpressDirectoryBucketPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed bucket policy for the Amazon S3 directory bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Proposed access control configuration for an Amazon S3 directory bucket. You can propose a\n         configuration for a new Amazon S3 directory bucket or an existing Amazon S3 directory bucket that you\n         own by specifying the Amazon S3 bucket policy. If the configuration is for an existing Amazon S3\n         directory bucket and you do not specify the Amazon S3 bucket policy, the access preview uses the\n         existing policy attached to the directory bucket. If the access preview is for a new\n         resource and you do not specify the Amazon S3 bucket policy, the access preview assumes an\n         directory bucket without a policy. To propose deletion of an existing bucket policy, you\n         can specify an empty string. For more information about bucket policy limits, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html\">Example bucket policies</a>.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#S3ExpressDirectoryBucketPolicy": {
             "type": "string"
         },
         "com.amazonaws.accessanalyzer#S3PublicAccessBlockConfiguration": {

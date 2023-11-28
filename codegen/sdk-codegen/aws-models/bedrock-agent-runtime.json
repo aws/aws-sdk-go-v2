@@ -1,0 +1,2454 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.bedrockagentruntime#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when a request is denied per access permissions",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ActionGroupInvocationInput": {
+            "type": "structure",
+            "members": {
+                "actionGroupName": {
+                    "target": "com.amazonaws.bedrockagentruntime#ActionGroupName"
+                },
+                "verb": {
+                    "target": "com.amazonaws.bedrockagentruntime#Verb"
+                },
+                "apiPath": {
+                    "target": "com.amazonaws.bedrockagentruntime#ApiPath"
+                },
+                "parameters": {
+                    "target": "com.amazonaws.bedrockagentruntime#Parameters"
+                },
+                "requestBody": {
+                    "target": "com.amazonaws.bedrockagentruntime#RequestBody"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "input to lambda used in action group"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ActionGroupInvocationOutput": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.bedrockagentruntime#ActionGroupOutputString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "output from lambda used in action group"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ActionGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Agent Trace Action Group Name",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ActionGroupOutputString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Agent Trace Action Group Lambda Invocation Output String",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#AgentAliasId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier of the agent alias.",
+                "smithy.api#length": {
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#AgentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier of the agent.",
+                "smithy.api#length": {
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#AmazonBedrockAgentRunTimeService": {
+            "type": "service",
+            "version": "2023-07-26",
+            "resources": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InferenceResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Bedrock Agent Runtime",
+                    "arnNamespace": "bedrock",
+                    "endpointPrefix": "bedrock-agent-runtime",
+                    "cloudTrailEventSource": "bedrock.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "bedrock"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "Amazon Bedrock Agent",
+                "smithy.api#title": "Agents for Amazon Bedrock Runtime",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://bedrock-agent-runtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://bedrock-agent-runtime-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://bedrock-agent-runtime.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://bedrock-agent-runtime.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-agent-runtime.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ApiPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Agent Trace Action Group API path",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Attribution": {
+            "type": "structure",
+            "members": {
+                "citations": {
+                    "target": "com.amazonaws.bedrockagentruntime#Citations"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Citations associated with final agent response"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#BadGatewayException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                },
+                "resourceName": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when a request fails due to dependency like Lambda, Bedrock, STS resource",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 502
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#BedrockModelArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Arn of a Bedrock model.",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}))$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Citation": {
+            "type": "structure",
+            "members": {
+                "generatedResponsePart": {
+                    "target": "com.amazonaws.bedrockagentruntime#GeneratedResponsePart"
+                },
+                "retrievedReferences": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievedReferences"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Citation associated with the agent response"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Citations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#Citation"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of citations"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when there is a conflict performing an operation",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ContentMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagentruntime#Parameters"
+            },
+            "traits": {
+                "smithy.api#documentation": "Content type paramter map"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CreationMode": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "OVERRIDDEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERRIDDEN"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "indicates if agent uses default prompt or overriden prompt"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#DependencyFailedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                },
+                "resourceName": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when a request fails due to dependency like Lambda, Bedrock, STS resource due to a customer fault (i.e. bad configuration)",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 424
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FailureReasonString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Agent Trace Failed Reason String",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FailureTrace": {
+            "type": "structure",
+            "members": {
+                "traceId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceId"
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.bedrockagentruntime#FailureReasonString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which is emitted when agent trace could not be generated",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FinalResponse": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.bedrockagentruntime#FinalResponseString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Agent finish output"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FinalResponseString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Agent Trace Action Group Lambda Invocation Output String",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GeneratedResponsePart": {
+            "type": "structure",
+            "members": {
+                "textResponsePart": {
+                    "target": "com.amazonaws.bedrockagentruntime#TextResponsePart"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Generate response part"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InferenceConfiguration": {
+            "type": "structure",
+            "members": {
+                "temperature": {
+                    "target": "com.amazonaws.bedrockagentruntime#Temperature"
+                },
+                "topP": {
+                    "target": "com.amazonaws.bedrockagentruntime#TopP"
+                },
+                "topK": {
+                    "target": "com.amazonaws.bedrockagentruntime#TopK"
+                },
+                "maximumLength": {
+                    "target": "com.amazonaws.bedrockagentruntime#MaximumLength"
+                },
+                "stopSequences": {
+                    "target": "com.amazonaws.bedrockagentruntime#StopSequences"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configurations for controlling the inference response of an InvokeAgent API call"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InferenceResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InvokeAgent"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentruntime#InputText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Model text input",
+                "smithy.api#length": {
+                    "max": 25000000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown if there was an unexpected error during processing of request",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationInput": {
+            "type": "structure",
+            "members": {
+                "traceId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceId"
+                },
+                "invocationType": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationType"
+                },
+                "actionGroupInvocationInput": {
+                    "target": "com.amazonaws.bedrockagentruntime#ActionGroupInvocationInput"
+                },
+                "knowledgeBaseLookupInput": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseLookupInput"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains input details for action group or knowledge base",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationType": {
+            "type": "enum",
+            "members": {
+                "ACTION_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_GROUP"
+                    }
+                },
+                "KNOWLEDGE_BASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE"
+                    }
+                },
+                "FINISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINISH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "types of invocations"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvokeAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#InvokeAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#InvokeAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#DependencyFailedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Invokes the specified Bedrock model to run inference using the input provided in the request body.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/agents/{agentId}/agentAliases/{agentAliasId}/sessions/{sessionId}/text"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvokeAgentRequest": {
+            "type": "structure",
+            "members": {
+                "sessionState": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionState",
+                    "traits": {
+                        "smithy.api#documentation": "Session state passed by customer. Base64 encoded json string representation of SessionState."
+                    }
+                },
+                "agentId": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier for Agent",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentAliasId": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgentAliasId",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier for Agent Alias",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier used for the current session",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "endSession": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "End current session"
+                    }
+                },
+                "enableTrace": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Enable agent trace events for improved debugging"
+                    }
+                },
+                "inputText": {
+                    "target": "com.amazonaws.bedrockagentruntime#InputText",
+                    "traits": {
+                        "smithy.api#documentation": "Input data in the format specified in the Content-Type request header.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "InvokeAgent Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvokeAgentResponse": {
+            "type": "structure",
+            "members": {
+                "completion": {
+                    "target": "com.amazonaws.bedrockagentruntime#ResponseStream",
+                    "traits": {
+                        "smithy.api#documentation": "Inference response from the model in the format specified in the Content-Type response header.",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.bedrockagentruntime#MimeType",
+                    "traits": {
+                        "smithy.api#documentation": "streaming response mimetype of the model",
+                        "smithy.api#httpHeader": "x-amzn-bedrock-agent-content-type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "streaming response mimetype of the model",
+                        "smithy.api#httpHeader": "x-amz-bedrock-agent-session-id",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "InvokeAgent Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A KMS key ARN",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier of the KnowledgeBase",
+                "smithy.api#length": {
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseLookupInput": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseLookupInputString"
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceKnowledgeBaseId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input to lambda used in action group"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseLookupInputString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Agent Trace Action Group Lambda Invocation Output String",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseLookupOutput": {
+            "type": "structure",
+            "members": {
+                "retrievedReferences": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievedReferences"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input to lambda used in action group"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseQuery": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Knowledge base input query in text",
+                        "smithy.api#length": {
+                            "max": 1000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Knowledge base input query.",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalConfiguration": {
+            "type": "structure",
+            "members": {
+                "vectorSearchConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseVectorSearchConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Search parameters for retrieving from knowledge base."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalResult": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievalResultContent",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "location": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievalResultLocation"
+                },
+                "score": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "The relevance score of a result."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Result item returned from a knowledge base retrieval."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of knowledge base retrieval results",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrieveAndGenerateConfiguration": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configurations for retrieval and generation for knowledge base."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#KnowledgeBaseVectorSearchConfiguration": {
+            "type": "structure",
+            "members": {
+                "numberOfResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Top-K results to retrieve from knowledge base.",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Knowledge base vector search configuration"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#LambdaArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN of a Lambda."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#MaximumLength": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Maximum length of output",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#MimeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Content type of the request"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ModelInvocationInput": {
+            "type": "structure",
+            "members": {
+                "traceId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceId"
+                },
+                "text": {
+                    "target": "com.amazonaws.bedrockagentruntime#PromptText"
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#PromptType"
+                },
+                "inferenceConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#InferenceConfiguration"
+                },
+                "overrideLambda": {
+                    "target": "com.amazonaws.bedrockagentruntime#LambdaArn"
+                },
+                "promptCreationMode": {
+                    "target": "com.amazonaws.bedrockagentruntime#CreationMode"
+                },
+                "parserMode": {
+                    "target": "com.amazonaws.bedrockagentruntime#CreationMode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains information used to call Invoke Model",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Opaque continuation token of previous paginated response.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^\\S*$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#NonBlankString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Non Blank String",
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Observation": {
+            "type": "structure",
+            "members": {
+                "traceId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceId"
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#Type"
+                },
+                "actionGroupInvocationOutput": {
+                    "target": "com.amazonaws.bedrockagentruntime#ActionGroupInvocationOutput"
+                },
+                "knowledgeBaseLookupOutput": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseLookupOutput"
+                },
+                "finalResponse": {
+                    "target": "com.amazonaws.bedrockagentruntime#FinalResponse"
+                },
+                "repromptResponse": {
+                    "target": "com.amazonaws.bedrockagentruntime#RepromptResponse"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains output details for action group or knowledge base or final response",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#OrchestrationTrace": {
+            "type": "union",
+            "members": {
+                "rationale": {
+                    "target": "com.amazonaws.bedrockagentruntime#Rationale"
+                },
+                "invocationInput": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationInput"
+                },
+                "observation": {
+                    "target": "com.amazonaws.bedrockagentruntime#Observation"
+                },
+                "modelInvocationInput": {
+                    "target": "com.amazonaws.bedrockagentruntime#ModelInvocationInput"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace contains intermidate response during orchestration",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#OutputString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Agent Trace Output String",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Parameter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Name of parameter"
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Type of parameter"
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Value of parameter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "parameters included in action group invocation"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Parameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#Parameter"
+            },
+            "traits": {
+                "smithy.api#documentation": "list of parameters included in action group invocation"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PartBody": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "PartBody of the payload in bytes",
+                "smithy.api#length": {
+                    "max": 1000000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PayloadPart": {
+            "type": "structure",
+            "members": {
+                "bytes": {
+                    "target": "com.amazonaws.bedrockagentruntime#PartBody"
+                },
+                "attribution": {
+                    "target": "com.amazonaws.bedrockagentruntime#Attribution"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Base 64 endoded byte response",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PostProcessingModelInvocationOutput": {
+            "type": "structure",
+            "members": {
+                "traceId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceId"
+                },
+                "parsedResponse": {
+                    "target": "com.amazonaws.bedrockagentruntime#PostProcessingParsedResponse"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains information related to postprocessing",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PostProcessingParsedResponse": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.bedrockagentruntime#OutputString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains information if preprocessing was successful",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PostProcessingTrace": {
+            "type": "union",
+            "members": {
+                "modelInvocationInput": {
+                    "target": "com.amazonaws.bedrockagentruntime#ModelInvocationInput"
+                },
+                "modelInvocationOutput": {
+                    "target": "com.amazonaws.bedrockagentruntime#PostProcessingModelInvocationOutput"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains information related to post processing step",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PreProcessingModelInvocationOutput": {
+            "type": "structure",
+            "members": {
+                "traceId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceId"
+                },
+                "parsedResponse": {
+                    "target": "com.amazonaws.bedrockagentruntime#PreProcessingParsedResponse"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains information related to preprocessing",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PreProcessingParsedResponse": {
+            "type": "structure",
+            "members": {
+                "rationale": {
+                    "target": "com.amazonaws.bedrockagentruntime#RationaleString"
+                },
+                "isValid": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Boolean value"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains information if preprocessing was successful",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PreProcessingTrace": {
+            "type": "union",
+            "members": {
+                "modelInvocationInput": {
+                    "target": "com.amazonaws.bedrockagentruntime#ModelInvocationInput"
+                },
+                "modelInvocationOutput": {
+                    "target": "com.amazonaws.bedrockagentruntime#PreProcessingModelInvocationOutput"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains information related to preprocessing step",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PromptSessionAttributesMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "Session attributes that go to the prompt"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PromptText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Prompt Message",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PromptType": {
+            "type": "enum",
+            "members": {
+                "PRE_PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_PROCESSING"
+                    }
+                },
+                "ORCHESTRATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORCHESTRATION"
+                    }
+                },
+                "KNOWLEDGE_BASE_RESPONSE_GENERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE_RESPONSE_GENERATION"
+                    }
+                },
+                "POST_PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST_PROCESSING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "types of prompts"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Rationale": {
+            "type": "structure",
+            "members": {
+                "traceId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceId"
+                },
+                "text": {
+                    "target": "com.amazonaws.bedrockagentruntime#RationaleString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains information related to reasoning",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RationaleString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Agent Trace Rationale String",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RepromptResponse": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Reprompt response text"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockagentruntime#Source"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Observation information if there were reprompts",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RequestBody": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.bedrockagentruntime#ContentMap"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request Body Content Map"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when a resource referenced by the operation does not exist",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ResponseStream": {
+            "type": "union",
+            "members": {
+                "chunk": {
+                    "target": "com.amazonaws.bedrockagentruntime#PayloadPart"
+                },
+                "trace": {
+                    "target": "com.amazonaws.bedrockagentruntime#TracePart"
+                },
+                "internalServerException": {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                "validationException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                },
+                "resourceNotFoundException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                "serviceQuotaExceededException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException"
+                },
+                "throttlingException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                "accessDeniedException": {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                "conflictException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                "dependencyFailedException": {
+                    "target": "com.amazonaws.bedrockagentruntime#DependencyFailedException"
+                },
+                "badGatewayException": {
+                    "target": "com.amazonaws.bedrockagentruntime#BadGatewayException"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response body of is a stream",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrievalResultContent": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Content of a retrieval result in text",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Content of a retrieval result."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrievalResultLocation": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievalResultLocationType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievalResultS3Location"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The source location of a retrieval result."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrievalResultLocationType": {
+            "type": "enum",
+            "members": {
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The location type of a retrieval result."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrievalResultS3Location": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "URI of S3 location"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The S3 location of a retrieval result."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Retrieve": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#RetrieveRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#RetrieveResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#DependencyFailedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Retrieve from knowledge base.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/knowledgebases/{knowledgeBaseId}/retrieve"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "retrievalResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#DependencyFailedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "RetrieveAndGenerate API",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/retrieveAndGenerate"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrieveAndGenerateConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configures the retrieval and generation for the session."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateInput": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Customer input of the turn in text",
+                        "smithy.api#length": {
+                            "max": 1000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Customer input of the turn",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateOutput": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service response of the turn in text",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Service response of the turn",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateRequest": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionId"
+                },
+                "input": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateInput",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "retrieveAndGenerateConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateConfiguration"
+                },
+                "sessionConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateSessionConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerate"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateResponse": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "output": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateOutput",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "citations": {
+                    "target": "com.amazonaws.bedrockagentruntime#Citations"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateSessionConfiguration": {
+            "type": "structure",
+            "members": {
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "The KMS key arn to encrypt the customer data of the session.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configures common parameters of the session."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateType": {
+            "type": "enum",
+            "members": {
+                "KNOWLEDGE_BASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The type of RetrieveAndGenerate."
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "retrievalQuery": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseQuery",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "retrievalConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalConfiguration"
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentruntime#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#Retrieve"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveResponse": {
+            "type": "structure",
+            "members": {
+                "retrievalResults": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalResults",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentruntime#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrievedReference": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievalResultContent"
+                },
+                "location": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievalResultLocation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Retrieved reference"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrievedReferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#RetrievedReference"
+            },
+            "traits": {
+                "smithy.api#documentation": "list of retrieved references"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when a request is made beyond the service quota",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionAttributesMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "Session attributes are pass through attributes passed to the action group"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier of the session.",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._:-]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionState": {
+            "type": "structure",
+            "members": {
+                "sessionAttributes": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionAttributesMap",
+                    "traits": {
+                        "smithy.api#documentation": "Session Attributes"
+                    }
+                },
+                "promptSessionAttributes": {
+                    "target": "com.amazonaws.bedrockagentruntime#PromptSessionAttributesMap",
+                    "traits": {
+                        "smithy.api#documentation": "Prompt Session Attributes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Session state provided"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Source": {
+            "type": "enum",
+            "members": {
+                "ACTION_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_GROUP"
+                    }
+                },
+                "KNOWLEDGE_BASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE"
+                    }
+                },
+                "PARSER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARSER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Parsing error source",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Span": {
+            "type": "structure",
+            "members": {
+                "start": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Start of span",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "end": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "End of span",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Span of text"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#StopSequences": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of stop sequences",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Temperature": {
+            "type": "float",
+            "traits": {
+                "smithy.api#documentation": "Controls randomness, higher values increase diversity",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TextResponsePart": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Response part in text"
+                    }
+                },
+                "span": {
+                    "target": "com.amazonaws.bedrockagentruntime#Span"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Text response part"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when the number of requests exceeds the limit",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TopK": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Sample from the k most likely next tokens",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TopP": {
+            "type": "float",
+            "traits": {
+                "smithy.api#documentation": "Cumulative probability cutoff for token selection",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Trace": {
+            "type": "union",
+            "members": {
+                "preProcessingTrace": {
+                    "target": "com.amazonaws.bedrockagentruntime#PreProcessingTrace"
+                },
+                "orchestrationTrace": {
+                    "target": "com.amazonaws.bedrockagentruntime#OrchestrationTrace"
+                },
+                "postProcessingTrace": {
+                    "target": "com.amazonaws.bedrockagentruntime#PostProcessingTrace"
+                },
+                "failureTrace": {
+                    "target": "com.amazonaws.bedrockagentruntime#FailureTrace"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace contains intermidate response for customer",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TraceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier for trace",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 16
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TraceKnowledgeBaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Agent Trace Action Group Knowledge Base Id",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TracePart": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgentId"
+                },
+                "agentAliasId": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgentAliasId"
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionId"
+                },
+                "trace": {
+                    "target": "com.amazonaws.bedrockagentruntime#Trace"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Trace Part which contains intermidate response for customer",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Type": {
+            "type": "enum",
+            "members": {
+                "ACTION_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_GROUP"
+                    }
+                },
+                "KNOWLEDGE_BASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE"
+                    }
+                },
+                "FINISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINISH"
+                    }
+                },
+                "ASK_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASK_USER"
+                    }
+                },
+                "REPROMPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPROMPT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "types of observations"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when the request's input validation fails",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Verb": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Agent Trace Action Group Action verb",
+                "smithy.api#sensitive": {}
+            }
+        }
+    }
+}
