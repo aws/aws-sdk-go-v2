@@ -1,3 +1,12 @@
+# Release (2023-11-28.3)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.25.8](config/CHANGELOG.md#v1258-2023-11-283)
+  * **Bug Fix**: Correct resolution of S3Express auth disable toggle.
+
 # Release (2023-11-28.2)
 
 ## General Highlights

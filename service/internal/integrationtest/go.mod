@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.23.2
-	github.com/aws/aws-sdk-go-v2/config v1.25.7
+	github.com/aws/aws-sdk-go-v2/config v1.25.8
 	github.com/aws/aws-sdk-go-v2/service/acm v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.20.5
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.24.5
