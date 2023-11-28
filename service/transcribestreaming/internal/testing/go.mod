@@ -15,8 +15,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.16.6 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.5 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.5 // indirect
-	golang.org/x/net v0.1.0 // indirect
-	golang.org/x/text v0.4.0 // indirect
+	golang.org/x/net v0.19.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../
