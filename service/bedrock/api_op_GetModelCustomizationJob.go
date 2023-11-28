@@ -53,7 +53,9 @@ type GetModelCustomizationJobOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The hyperparameter values for the job.
+	// The hyperparameter values for the job. For information about hyperparameters
+	// for specific models, see Guidelines for model customization (https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-guidelines.html)
+	// .
 	//
 	// This member is required.
 	HyperParameters map[string]string
@@ -95,6 +97,9 @@ type GetModelCustomizationJobOutput struct {
 
 	// The token that you specified in the CreateCustomizationJob request.
 	ClientRequestToken *string
+
+	// The type of model customization.
+	CustomizationType types.CustomizationType
 
 	// Time that the resource transitioned to terminal state.
 	EndTime *time.Time

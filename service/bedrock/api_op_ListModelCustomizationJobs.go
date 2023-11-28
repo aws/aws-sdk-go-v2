@@ -46,8 +46,8 @@ type ListModelCustomizationJobsInput struct {
 	// Return customization jobs only if the job name contains these characters.
 	NameContains *string
 
-	// Continuation token from the previous response, for Bedrock to list the next set
-	// of results.
+	// Continuation token from the previous response, for Amazon Bedrock to list the
+	// next set of results.
 	NextToken *string
 
 	// The field to sort by in the returned list of jobs.

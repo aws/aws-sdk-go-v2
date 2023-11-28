@@ -506,7 +506,7 @@ func (m *presignContextPolyfillMiddleware) HandleFinalize(ctx context.Context, i
 
 	schemeID := rscheme.Scheme.SchemeID()
 
-	if schemeID == "aws.auth#sigv4" {
+	if schemeID == "aws.auth#sigv4" || schemeID == "com.amazonaws.s3#sigv4express" {
 		if sn, ok := smithyhttp.GetSigV4SigningName(&rscheme.SignerProperties); ok {
 			ctx = awsmiddleware.SetSigningName(ctx, sn)
 		}

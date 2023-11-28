@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List of Bedrock foundation models that you can use. For more information, see
-// Foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html)
+// List of Amazon Bedrock foundation models that you can use. For more
+// information, see Foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html)
 // in the Bedrock User Guide.
 func (c *Client) ListFoundationModels(ctx context.Context, params *ListFoundationModelsInput, optFns ...func(*Options)) (*ListFoundationModelsOutput, error) {
 	if params == nil {
@@ -41,7 +41,7 @@ type ListFoundationModelsInput struct {
 	// List by output modality type.
 	ByOutputModality types.ModelModality
 
-	// A Bedrock model provider.
+	// A Amazon Bedrock model provider.
 	ByProvider *string
 
 	noSmithyDocumentSerde
@@ -49,7 +49,7 @@ type ListFoundationModelsInput struct {
 
 type ListFoundationModelsOutput struct {
 
-	// A list of bedrock foundation models.
+	// A list of Amazon Bedrock foundation models.
 	ModelSummaries []types.FoundationModelSummary
 
 	// Metadata pertaining to the operation's result.

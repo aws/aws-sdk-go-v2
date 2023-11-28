@@ -347,7 +347,7 @@ type EndpointParameters struct {
 	// Parameter is required.
 	UseS3ExpressControlEndpoint *bool
 
-	// Internal parameter to indicate whether S3Express session auth should be
+	// Parameter to indicate whether S3Express session auth should be
 	// disabled
 	//
 	// Parameter is required.

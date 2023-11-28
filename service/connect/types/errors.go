@@ -379,6 +379,34 @@ func (e *OutboundContactNotPermittedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// Thrown for analyzed content when requested OutputType was not enabled for a
+// given contact. For example, if an OutputType.Raw was requested for a contact
+// that had `RedactedOnly` Redaction policy set in Contact flow.
+type OutputTypeNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *OutputTypeNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OutputTypeNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OutputTypeNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "OutputTypeNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *OutputTypeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The property is not valid.
 type PropertyValidationException struct {
 	Message *string

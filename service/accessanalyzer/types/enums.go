@@ -429,19 +429,20 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeAwsS3Bucket             ResourceType = "AWS::S3::Bucket"
-	ResourceTypeAwsIamRole              ResourceType = "AWS::IAM::Role"
-	ResourceTypeAwsSqsQueue             ResourceType = "AWS::SQS::Queue"
-	ResourceTypeAwsLambdaFunction       ResourceType = "AWS::Lambda::Function"
-	ResourceTypeAwsLambdaLayerversion   ResourceType = "AWS::Lambda::LayerVersion"
-	ResourceTypeAwsKmsKey               ResourceType = "AWS::KMS::Key"
-	ResourceTypeAwsSecretsmanagerSecret ResourceType = "AWS::SecretsManager::Secret"
-	ResourceTypeAwsEfsFilesystem        ResourceType = "AWS::EFS::FileSystem"
-	ResourceTypeAwsEc2Snapshot          ResourceType = "AWS::EC2::Snapshot"
-	ResourceTypeAwsEcrRepository        ResourceType = "AWS::ECR::Repository"
-	ResourceTypeAwsRdsDbsnapshot        ResourceType = "AWS::RDS::DBSnapshot"
-	ResourceTypeAwsRdsDbclustersnapshot ResourceType = "AWS::RDS::DBClusterSnapshot"
-	ResourceTypeAwsSnsTopic             ResourceType = "AWS::SNS::Topic"
+	ResourceTypeAwsS3Bucket                 ResourceType = "AWS::S3::Bucket"
+	ResourceTypeAwsIamRole                  ResourceType = "AWS::IAM::Role"
+	ResourceTypeAwsSqsQueue                 ResourceType = "AWS::SQS::Queue"
+	ResourceTypeAwsLambdaFunction           ResourceType = "AWS::Lambda::Function"
+	ResourceTypeAwsLambdaLayerversion       ResourceType = "AWS::Lambda::LayerVersion"
+	ResourceTypeAwsKmsKey                   ResourceType = "AWS::KMS::Key"
+	ResourceTypeAwsSecretsmanagerSecret     ResourceType = "AWS::SecretsManager::Secret"
+	ResourceTypeAwsEfsFilesystem            ResourceType = "AWS::EFS::FileSystem"
+	ResourceTypeAwsEc2Snapshot              ResourceType = "AWS::EC2::Snapshot"
+	ResourceTypeAwsEcrRepository            ResourceType = "AWS::ECR::Repository"
+	ResourceTypeAwsRdsDbsnapshot            ResourceType = "AWS::RDS::DBSnapshot"
+	ResourceTypeAwsRdsDbclustersnapshot     ResourceType = "AWS::RDS::DBClusterSnapshot"
+	ResourceTypeAwsSnsTopic                 ResourceType = "AWS::SNS::Topic"
+	ResourceTypeAwsS3expressDirectorybucket ResourceType = "AWS::S3Express::DirectoryBucket"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -462,6 +463,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::RDS::DBSnapshot",
 		"AWS::RDS::DBClusterSnapshot",
 		"AWS::SNS::Topic",
+		"AWS::S3Express::DirectoryBucket",
 	}
 }
 

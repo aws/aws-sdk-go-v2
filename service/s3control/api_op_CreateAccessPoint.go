@@ -16,8 +16,9 @@ import (
 	"strings"
 )
 
-// Creates an access point and associates it with the specified bucket. For more
-// information, see Managing Data Access with Amazon S3 Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html)
+// This operation is not supported by directory buckets. Creates an access point
+// and associates it with the specified bucket. For more information, see Managing
+// Data Access with Amazon S3 Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html)
 // in the Amazon S3 User Guide. S3 on Outposts only supports VPC-style access
 // points. For more information, see Accessing Amazon S3 on Outposts using virtual
 // private cloud (VPC) only access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)

@@ -430,7 +430,7 @@ type Destination struct {
 	// The storage class to use when replicating objects. All objects stored on S3 on
 	// Outposts are stored in the OUTPOSTS storage class. S3 on Outposts uses the
 	// OUTPOSTS storage class to create the object replicas. Values other than OUTPOSTS
-	// are not supported by Amazon S3 on Outposts.
+	// aren't supported by Amazon S3 on Outposts.
 	StorageClass ReplicationStorageClass
 
 	noSmithyDocumentSerde
@@ -689,6 +689,9 @@ type JobListDescriptor struct {
 type JobManifest struct {
 
 	// Contains the information required to locate the specified job's manifest.
+	// Manifests can't be imported from directory buckets. For more information, see
+	// Directory buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
+	// .
 	//
 	// This member is required.
 	Location *JobManifestLocation
@@ -759,7 +762,9 @@ type JobManifestGeneratorFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the information required to locate a manifest object.
+// Contains the information required to locate a manifest object. Manifests can't
+// be imported from directory buckets. For more information, see Directory buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
+// .
 type JobManifestLocation struct {
 
 	// The ETag for the specified manifest object.
@@ -808,15 +813,17 @@ type JobOperation struct {
 	LambdaInvoke *LambdaInvokeOperation
 
 	// Directs the specified job to execute a DELETE Object tagging call on every
-	// object in the manifest.
+	// object in the manifest. This functionality is not supported by directory
+	// buckets.
 	S3DeleteObjectTagging *S3DeleteObjectTaggingOperation
 
 	// Directs the specified job to initiate restore requests for every archived
-	// object in the manifest.
+	// object in the manifest. This functionality is not supported by directory
+	// buckets.
 	S3InitiateRestoreObject *S3InitiateRestoreObjectOperation
 
 	// Directs the specified job to run a PutObjectAcl call on every object in the
-	// manifest.
+	// manifest. This functionality is not supported by directory buckets.
 	S3PutObjectAcl *S3SetObjectAclOperation
 
 	// Directs the specified job to run a PUT Copy object call on every object in the
@@ -827,22 +834,24 @@ type JobOperation struct {
 	// S3 Batch Operations job passes to every object to the underlying
 	// PutObjectLegalHold API operation. For more information, see Using S3 Object
 	// Lock legal hold with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html)
-	// in the Amazon S3 User Guide.
+	// in the Amazon S3 User Guide. This functionality is not supported by directory
+	// buckets.
 	S3PutObjectLegalHold *S3SetObjectLegalHoldOperation
 
 	// Contains the configuration parameters for the Object Lock retention action for
 	// an S3 Batch Operations job. Batch Operations passes every object to the
 	// underlying PutObjectRetention API operation. For more information, see Using S3
 	// Object Lock retention with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-	// in the Amazon S3 User Guide.
+	// in the Amazon S3 User Guide. This functionality is not supported by directory
+	// buckets.
 	S3PutObjectRetention *S3SetObjectRetentionOperation
 
 	// Directs the specified job to run a PUT Object tagging call on every object in
-	// the manifest.
+	// the manifest. This functionality is not supported by directory buckets.
 	S3PutObjectTagging *S3SetObjectTaggingOperation
 
 	// Directs the specified job to invoke ReplicateObject on every object in the
-	// job's manifest.
+	// job's manifest. This functionality is not supported by directory buckets.
 	S3ReplicateObject *S3ReplicateObjectOperation
 
 	noSmithyDocumentSerde
@@ -876,7 +885,8 @@ type JobReport struct {
 	Enabled bool
 
 	// The Amazon Resource Name (ARN) for the bucket where specified job-completion
-	// report will be stored.
+	// report will be stored. Directory buckets - Directory buckets aren't supported as
+	// a location for Batch Operations to store job completion reports.
 	Bucket *string
 
 	// The format of the specified job-completion report.
@@ -929,6 +939,27 @@ type LambdaInvokeOperation struct {
 	// The Amazon Resource Name (ARN) for the Lambda function that the specified job
 	// will invoke on every object in the manifest.
 	FunctionArn *string
+
+	// Specifies the schema version for the payload that Batch Operations sends when
+	// invoking an Lambda function. Version 1.0 is the default. Version 2.0 is
+	// required when you use Batch Operations to invoke Lambda functions that act on
+	// directory buckets, or if you need to specify UserArguments . For more
+	// information, see Using Lambda with Amazon S3 Batch Operations and Amazon S3
+	// Express One Zone (https://aws.amazon.com/blogs/storage/using-lambda-with-s3-batch-operations-and-s3-express-one-zone/)
+	// in the Amazon Web Services Storage Blog. Ensure that your Lambda function code
+	// expects InvocationSchemaVersion 2.0 and uses bucket name rather than bucket
+	// ARN. If the InvocationSchemaVersion does not match what your Lambda function
+	// expects, your function might not work as expected. Directory buckets - To
+	// initiate Amazon Web Services Lambda function to perform custom actions on
+	// objects in directory buckets, you must specify 2.0 .
+	InvocationSchemaVersion *string
+
+	// Key-value pairs that are passed in the payload that Batch Operations sends when
+	// invoking an Lambda function. You must specify InvocationSchemaVersion 2.0 for
+	// LambdaInvoke operations that include UserArguments . For more information, see
+	// Using Lambda with Amazon S3 Batch Operations and Amazon S3 Express One Zone (https://aws.amazon.com/blogs/storage/using-lambda-with-s3-batch-operations-and-s3-express-one-zone/)
+	// in the Amazon Web Services Storage Blog.
+	UserArguments map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -1921,17 +1952,18 @@ type S3BucketDestination struct {
 // .
 type S3CopyObjectOperation struct {
 
-	//
+	// This functionality is not supported by directory buckets.
 	AccessControlGrants []S3Grant
 
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
 	// with server-side encryption using Amazon Web Services KMS (SSE-KMS). Setting
 	// this header to true causes Amazon S3 to use an S3 Bucket Key for object
 	// encryption with SSE-KMS. Specifying this header with an object action doesn’t
-	// affect bucket-level settings for S3 Bucket Key.
+	// affect bucket-level settings for S3 Bucket Key. This functionality is not
+	// supported by directory buckets.
 	BucketKeyEnabled bool
 
-	//
+	// This functionality is not supported by directory buckets.
 	CannedAccessControlList S3CannedAccessControlList
 
 	// Indicates the algorithm that you want Amazon S3 to use to create the checksum.
@@ -1950,31 +1982,42 @@ type S3CopyObjectOperation struct {
 	// tags. Otherwise, Amazon S3 assigns the supplied tags to the new objects.
 	NewObjectMetadata *S3ObjectMetadata
 
-	//
+	// Specifies a list of tags to add to the destination objects after they are
+	// copied. If NewObjectTagging is not specified, the tags of the source objects
+	// are copied to destination objects by default. Directory buckets - Tags aren't
+	// supported by directory buckets. If your source objects have tags and your
+	// destination bucket is a directory bucket, specify an empty tag set in the
+	// NewObjectTagging field to prevent copying the source object tags to the
+	// directory bucket.
 	NewObjectTagging []S3Tag
 
 	// The legal hold status to be applied to all objects in the Batch Operations job.
+	// This functionality is not supported by directory buckets.
 	ObjectLockLegalHoldStatus S3ObjectLockLegalHoldStatus
 
 	// The retention mode to be applied to all objects in the Batch Operations job.
+	// This functionality is not supported by directory buckets.
 	ObjectLockMode S3ObjectLockMode
 
 	// The date when the applied object retention configuration expires on all objects
-	// in the Batch Operations job.
+	// in the Batch Operations job. This functionality is not supported by directory
+	// buckets.
 	ObjectLockRetainUntilDate *time.Time
 
-	// Specifies an optional metadata property for website redirects,
-	// x-amz-website-redirect-location . Allows webpage redirects if the object is
-	// accessed through a website endpoint.
+	// If the destination bucket is configured as a website, specifies an optional
+	// metadata property for website redirects, x-amz-website-redirect-location .
+	// Allows webpage redirects if the object copy is accessed through a website
+	// endpoint. This functionality is not supported by directory buckets.
 	RedirectLocation *string
 
-	//
+	// This functionality is not supported by directory buckets.
 	RequesterPays bool
 
-	//
+	// This functionality is not supported by directory buckets.
 	SSEAwsKmsKeyId *string
 
-	//
+	// Specify the storage class for the destination objects in a Copy operation.
+	// Directory buckets - This functionality is not supported by directory buckets.
 	StorageClass S3StorageClass
 
 	// Specifies the folder prefix that you want the objects to be copied into. For
@@ -1983,8 +2026,15 @@ type S3CopyObjectOperation struct {
 	TargetKeyPrefix *string
 
 	// Specifies the destination bucket Amazon Resource Name (ARN) for the batch copy
-	// operation. For example, to copy objects to a bucket named destinationBucket ,
-	// set the TargetResource property to arn:aws:s3:::destinationBucket .
+	// operation.
+	//   - General purpose buckets - For example, to copy objects to a general purpose
+	//   bucket named destinationBucket , set the TargetResource property to
+	//   arn:aws:s3:::destinationBucket .
+	//   - Directory buckets - For example, to copy objects to a directory bucket
+	//   named destinationBucket in the Availability Zone; identified by the AZ ID
+	//   usw2-az2 , set the TargetResource property to
+	//   arn:aws:s3express:region:account_id:/bucket/destination_bucket_base_name--usw2-az2--x-s3
+	//   .
 	TargetResource *string
 
 	//
@@ -2008,7 +2058,9 @@ type S3GeneratedManifestDescriptor struct {
 	// The format of the generated manifest.
 	Format GeneratedManifestFormat
 
-	// Contains the information required to locate a manifest object.
+	// Contains the information required to locate a manifest object. Manifests can't
+	// be imported from directory buckets. For more information, see Directory buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
+	// .
 	Location *JobManifestLocation
 
 	noSmithyDocumentSerde
@@ -2074,7 +2126,9 @@ type S3JobManifestGenerator struct {
 	// This member is required.
 	EnableManifestOutput bool
 
-	// The source bucket used by the ManifestGenerator.
+	// The source bucket used by the ManifestGenerator. Directory buckets - Directory
+	// buckets aren't supported as the source buckets used by S3JobManifestGenerator
+	// to generate the job manifest.
 	//
 	// This member is required.
 	SourceBucket *string
@@ -2084,12 +2138,15 @@ type S3JobManifestGenerator struct {
 	// Services account ID must match this value, else the job fails.
 	ExpectedBucketOwner *string
 
-	// Specifies rules the S3JobManifestGenerator should use to use to decide whether
-	// an object in the source bucket should or should not be included in the generated
+	// Specifies rules the S3JobManifestGenerator should use to decide whether an
+	// object in the source bucket should or should not be included in the generated
 	// job manifest.
 	Filter *JobManifestGeneratorFilter
 
-	// Specifies the location the generated manifest will be written to.
+	// Specifies the location the generated manifest will be written to. Manifests
+	// can't be written to directory buckets. For more information, see Directory
+	// buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
+	// .
 	ManifestOutputLocation *S3ManifestOutputLocation
 
 	noSmithyDocumentSerde
@@ -2098,7 +2155,9 @@ type S3JobManifestGenerator struct {
 // Location details for where the generated manifest should be written.
 type S3ManifestOutputLocation struct {
 
-	// The bucket ARN the generated manifest should be written to.
+	// The bucket ARN the generated manifest should be written to. Directory buckets -
+	// Directory buckets aren't supported as the buckets to store the generated
+	// manifest.
 	//
 	// This member is required.
 	Bucket *string
@@ -2148,10 +2207,10 @@ type S3ObjectMetadata struct {
 	//
 	ContentLanguage *string
 
-	//
+	// This member has been deprecated.
 	ContentLength *int64
 
-	//
+	// This member has been deprecated.
 	ContentMD5 *string
 
 	//
@@ -2160,10 +2219,11 @@ type S3ObjectMetadata struct {
 	//
 	HttpExpiresDate *time.Time
 
-	//
+	// This member has been deprecated.
 	RequesterCharged bool
 
-	//
+	// For directory buckets, only the server-side encryption with Amazon S3 managed
+	// keys (SSE-S3) ( AES256 ) is supported.
 	SSEAlgorithm S3SSEAlgorithm
 
 	//
@@ -2223,7 +2283,8 @@ type S3SetObjectAclOperation struct {
 // S3 Batch Operations job passes to every object to the underlying
 // PutObjectLegalHold API operation. For more information, see Using S3 Object
 // Lock legal hold with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html)
-// in the Amazon S3 User Guide.
+// in the Amazon S3 User Guide. This functionality is not supported by directory
+// buckets.
 type S3SetObjectLegalHoldOperation struct {
 
 	// Contains the Object Lock legal hold status to be applied to all objects in the
@@ -2239,7 +2300,8 @@ type S3SetObjectLegalHoldOperation struct {
 // an S3 Batch Operations job. Batch Operations passes every object to the
 // underlying PutObjectRetention API operation. For more information, see Using S3
 // Object Lock retention with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-// in the Amazon S3 User Guide.
+// in the Amazon S3 User Guide. This functionality is not supported by directory
+// buckets.
 type S3SetObjectRetentionOperation struct {
 
 	// Contains the Object Lock retention mode to be applied to all objects in the

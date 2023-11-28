@@ -1,0 +1,8 @@
+{
+    "id": "e094391f-bd72-4700-9901-52b108873389",
+    "type": "feature",
+    "description": "Adds support for S3 Express One Zone, and InvocationSchemaVersion 2.0 for S3 Batch Operations.",
+    "modules": [
+        "service/s3control"
+    ]
+}

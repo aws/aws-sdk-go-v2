@@ -1,0 +1,8 @@
+{
+    "id": "09f38f05-0840-4eb1-9247-d3091324936c",
+    "type": "feature",
+    "description": "This release adds support for minor versions/aliases for invoke model identifier.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

@@ -474,6 +474,7 @@ type CloudTrailProperties struct {
 //	ConfigurationMemberRdsDbClusterSnapshot
 //	ConfigurationMemberRdsDbSnapshot
 //	ConfigurationMemberS3Bucket
+//	ConfigurationMemberS3ExpressDirectoryBucket
 //	ConfigurationMemberSecretsManagerSecret
 //	ConfigurationMemberSnsTopic
 //	ConfigurationMemberSqsQueue
@@ -544,7 +545,7 @@ type ConfigurationMemberRdsDbSnapshot struct {
 
 func (*ConfigurationMemberRdsDbSnapshot) isConfiguration() {}
 
-// The access control configuration is for an Amazon S3 Bucket.
+// The access control configuration is for an Amazon S3 bucket.
 type ConfigurationMemberS3Bucket struct {
 	Value S3BucketConfiguration
 
@@ -552,6 +553,15 @@ type ConfigurationMemberS3Bucket struct {
 }
 
 func (*ConfigurationMemberS3Bucket) isConfiguration() {}
+
+// The access control configuration is for an Amazon S3 directory bucket.
+type ConfigurationMemberS3ExpressDirectoryBucket struct {
+	Value S3ExpressDirectoryBucketConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberS3ExpressDirectoryBucket) isConfiguration() {}
 
 // The access control configuration is for a Secrets Manager secret.
 type ConfigurationMemberSecretsManagerSecret struct {
@@ -1587,6 +1597,25 @@ type S3BucketConfiguration struct {
 
 	// The proposed block public access configuration for the Amazon S3 bucket.
 	BucketPublicAccessBlock *S3PublicAccessBlockConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Proposed access control configuration for an Amazon S3 directory bucket. You
+// can propose a configuration for a new Amazon S3 directory bucket or an existing
+// Amazon S3 directory bucket that you own by specifying the Amazon S3 bucket
+// policy. If the configuration is for an existing Amazon S3 directory bucket and
+// you do not specify the Amazon S3 bucket policy, the access preview uses the
+// existing policy attached to the directory bucket. If the access preview is for a
+// new resource and you do not specify the Amazon S3 bucket policy, the access
+// preview assumes an directory bucket without a policy. To propose deletion of an
+// existing bucket policy, you can specify an empty string. For more information
+// about bucket policy limits, see Example bucket policies (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
+// .
+type S3ExpressDirectoryBucketConfiguration struct {
+
+	// The proposed bucket policy for the Amazon S3 directory bucket.
+	BucketPolicy *string
 
 	noSmithyDocumentSerde
 }

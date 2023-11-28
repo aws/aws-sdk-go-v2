@@ -1,0 +1,8 @@
+{
+    "id": "a7965a1b-16ac-4363-b1b2-aa6e0e97227e",
+    "type": "feature",
+    "description": "This release introduces DetectProfileObjectType API to auto generate object type mapping.",
+    "modules": [
+        "service/customerprofiles"
+    ]
+}

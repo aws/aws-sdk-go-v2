@@ -75,6 +75,9 @@ func ExampleConfiguration_outputUsage() {
 	case *types.ConfigurationMemberS3Bucket:
 		_ = v.Value // Value is types.S3BucketConfiguration
 
+	case *types.ConfigurationMemberS3ExpressDirectoryBucket:
+		_ = v.Value // Value is types.S3ExpressDirectoryBucketConfiguration
+
 	case *types.ConfigurationMemberSecretsManagerSecret:
 		_ = v.Value // Value is types.SecretsManagerSecretConfiguration
 
@@ -93,6 +96,7 @@ func ExampleConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.S3ExpressDirectoryBucketConfiguration
 var _ *types.SnsTopicConfiguration
 var _ *types.SqsQueueConfiguration
 var _ *types.EcrRepositoryConfiguration

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get details about a Bedrock foundation model.
+// Get details about a Amazon Bedrock foundation model.
 func (c *Client) GetFoundationModel(ctx context.Context, params *GetFoundationModelInput, optFns ...func(*Options)) (*GetFoundationModelOutput, error) {
 	if params == nil {
 		params = &GetFoundationModelInput{}

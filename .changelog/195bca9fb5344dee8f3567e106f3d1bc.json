@@ -1,0 +1,8 @@
+{
+    "id": "195bca9f-b534-4dee-8f35-67e106f3d1bc",
+    "type": "feature",
+    "description": "Amazon Q in Connect, an LLM-enhanced evolution of Amazon Connect Wisdom. This release adds generative AI support to Amazon Q Connect QueryAssistant and GetRecommendations APIs.",
+    "modules": [
+        "service/qconnect"
+    ]
+}

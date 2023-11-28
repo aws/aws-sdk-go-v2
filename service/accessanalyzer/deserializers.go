@@ -6398,6 +6398,16 @@ loop:
 			uv = &types.ConfigurationMemberS3Bucket{Value: mv}
 			break loop
 
+		case "s3ExpressDirectoryBucket":
+			var mv types.S3ExpressDirectoryBucketConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3ExpressDirectoryBucketConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationMemberS3ExpressDirectoryBucket{Value: mv}
+			break loop
+
 		case "secretsManagerSecret":
 			var mv types.SecretsManagerSecretConfiguration
 			destAddr := &mv
@@ -9548,6 +9558,46 @@ func awsRestjson1_deserializeDocumentS3BucketConfiguration(v **types.S3BucketCon
 		case "bucketPublicAccessBlock":
 			if err := awsRestjson1_deserializeDocumentS3PublicAccessBlockConfiguration(&sv.BucketPublicAccessBlock, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3ExpressDirectoryBucketConfiguration(v **types.S3ExpressDirectoryBucketConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3ExpressDirectoryBucketConfiguration
+	if *v == nil {
+		sv = &types.S3ExpressDirectoryBucketConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ExpressDirectoryBucketPolicy to be of type string, got %T instead", value)
+				}
+				sv.BucketPolicy = ptr.String(jtv)
 			}
 
 		default:

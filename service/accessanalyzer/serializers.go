@@ -2799,6 +2799,12 @@ func awsRestjson1_serializeDocumentConfiguration(v types.Configuration, value sm
 			return err
 		}
 
+	case *types.ConfigurationMemberS3ExpressDirectoryBucket:
+		av := object.Key("s3ExpressDirectoryBucket")
+		if err := awsRestjson1_serializeDocumentS3ExpressDirectoryBucketConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConfigurationMemberSecretsManagerSecret:
 		av := object.Key("secretsManagerSecret")
 		if err := awsRestjson1_serializeDocumentSecretsManagerSecretConfiguration(&uv.Value, av); err != nil {
@@ -3420,6 +3426,18 @@ func awsRestjson1_serializeDocumentS3BucketConfiguration(v *types.S3BucketConfig
 		if err := awsRestjson1_serializeDocumentS3PublicAccessBlockConfiguration(v.BucketPublicAccessBlock, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3ExpressDirectoryBucketConfiguration(v *types.S3ExpressDirectoryBucketConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketPolicy != nil {
+		ok := object.Key("bucketPolicy")
+		ok.String(*v.BucketPolicy)
 	}
 
 	return nil

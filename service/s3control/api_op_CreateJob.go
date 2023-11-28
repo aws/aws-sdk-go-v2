@@ -16,11 +16,14 @@ import (
 	"strings"
 )
 
-// You can use S3 Batch Operations to perform large-scale batch actions on Amazon
-// S3 objects. Batch Operations can run a single action on lists of Amazon S3
-// objects that you specify. For more information, see S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html)
-// in the Amazon S3 User Guide. This action creates a S3 Batch Operations job.
-// Related actions include:
+// This operation creates an S3 Batch Operations job. You can use S3 Batch
+// Operations to perform large-scale batch actions on Amazon S3 objects. Batch
+// Operations can run a single action on lists of Amazon S3 objects that you
+// specify. For more information, see S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html)
+// in the Amazon S3 User Guide. Permissions For information about permissions
+// required to use the Batch Operations, see Granting permissions for S3 Batch
+// Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
+// in the Amazon S3 User Guide. Related actions include:
 //   - DescribeJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
 //   - ListJobs (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
 //   - UpdateJobPriority (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)

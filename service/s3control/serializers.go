@@ -8791,6 +8791,30 @@ func awsRestxml_serializeDocumentLambdaInvokeOperation(v *types.LambdaInvokeOper
 		el := value.MemberElement(root)
 		el.String(*v.FunctionArn)
 	}
+	if v.InvocationSchemaVersion != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "InvocationSchemaVersion",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.InvocationSchemaVersion)
+	}
+	if v.UserArguments != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "UserArguments",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentUserArguments(v.UserArguments, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -11877,6 +11901,34 @@ func awsRestxml_serializeDocumentTransitionList(v []types.Transition, value smit
 		if err := awsRestxml_serializeDocumentTransition(&v[i], am); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentUserArguments(v map[string]string, value smithyxml.Value) error {
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	m := value.Map()
+	for key := range v {
+		entry := m.Entry()
+		keyElementAttr := []smithyxml.Attr{}
+		keyElement := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "key",
+			},
+			Attr: keyElementAttr,
+		}
+		entry.MemberElement(keyElement).String(key)
+		valueElementAttr := []smithyxml.Attr{}
+		valueElement := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "value",
+			},
+			Attr: valueElementAttr,
+		}
+		entry.MemberElement(valueElement).String(v[key])
+		entry.Close()
 	}
 	return nil
 }

@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Get the properties associated with a Bedrock custom model that you have
+// Get the properties associated with a Amazon Bedrock custom model that you have
 // created.For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
 // in the Bedrock User Guide.
 func (c *Client) GetCustomModel(ctx context.Context, params *GetCustomModelInput, optFns ...func(*Options)) (*GetCustomModelOutput, error) {
@@ -77,6 +77,9 @@ type GetCustomModelOutput struct {
 	//
 	// This member is required.
 	TrainingDataConfig *types.TrainingDataConfig
+
+	// The type of model customization.
+	CustomizationType types.CustomizationType
 
 	// Hyperparameter values associated with this model.
 	HyperParameters map[string]string
