@@ -217,10 +217,11 @@ func addOpUpdateTableDiscoverEndpointMiddleware(stack *middleware.Stack, o Optio
 		DiscoverOperation:            c.fetchOpUpdateTableDiscoverEndpoint,
 		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
+		Region:                       o.Region,
 	}, "ResolveEndpointV2", middleware.After)
 }
 
-func (c *Client) fetchOpUpdateTableDiscoverEndpoint(ctx context.Context, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+func (c *Client) fetchOpUpdateTableDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
 	input := getOperationInput(ctx)
 	in, ok := input.(*UpdateTableInput)
 	if !ok {
@@ -229,6 +230,7 @@ func (c *Client) fetchOpUpdateTableDiscoverEndpoint(ctx context.Context, optFns 
 	_ = in
 
 	identifierMap := make(map[string]string, 0)
+	identifierMap["sdk#Region"] = region
 
 	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
 
@@ -243,7 +245,7 @@ func (c *Client) fetchOpUpdateTableDiscoverEndpoint(ctx context.Context, optFns 
 		fn(&opt)
 	}
 
-	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	return internalEndpointDiscovery.WeightedAddress{}, nil
 }
 

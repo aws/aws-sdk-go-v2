@@ -38,7 +38,7 @@ type DiscoverEndpoint struct {
 
 	// DiscoverOperation represents the endpoint discovery operation that
 	// returns an Endpoint or error.
-	DiscoverOperation func(ctx context.Context, options ...func(*DiscoverEndpointOptions)) (WeightedAddress, error)
+	DiscoverOperation func(ctx context.Context, region string, options ...func(*DiscoverEndpointOptions)) (WeightedAddress, error)
 
 	// EndpointDiscoveryEnableState represents the customer configuration for endpoint
 	// discovery feature.
@@ -47,6 +47,9 @@ type DiscoverEndpoint struct {
 	// EndpointDiscoveryRequired states if an operation requires to perform
 	// endpoint discovery.
 	EndpointDiscoveryRequired bool
+
+	// The client region
+	Region string
 }
 
 // ID represents the middleware identifier
@@ -79,7 +82,7 @@ func (d *DiscoverEndpoint) HandleFinalize(
 		return next.HandleFinalize(ctx, in)
 	}
 
-	weightedAddress, err := d.DiscoverOperation(ctx, d.Options...)
+	weightedAddress, err := d.DiscoverOperation(ctx, d.Region, d.Options...)
 	if err != nil {
 		return middleware.FinalizeOutput{}, middleware.Metadata{}, err
 	}

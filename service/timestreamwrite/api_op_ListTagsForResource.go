@@ -145,10 +145,11 @@ func addOpListTagsForResourceDiscoverEndpointMiddleware(stack *middleware.Stack,
 		DiscoverOperation:            c.fetchOpListTagsForResourceDiscoverEndpoint,
 		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    true,
+		Region:                       o.Region,
 	}, "ResolveEndpointV2", middleware.After)
 }
 
-func (c *Client) fetchOpListTagsForResourceDiscoverEndpoint(ctx context.Context, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+func (c *Client) fetchOpListTagsForResourceDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
 	input := getOperationInput(ctx)
 	in, ok := input.(*ListTagsForResourceInput)
 	if !ok {
@@ -157,6 +158,7 @@ func (c *Client) fetchOpListTagsForResourceDiscoverEndpoint(ctx context.Context,
 	_ = in
 
 	identifierMap := make(map[string]string, 0)
+	identifierMap["sdk#Region"] = region
 
 	key := fmt.Sprintf("Timestream Write.%v", identifierMap)
 
@@ -171,7 +173,7 @@ func (c *Client) fetchOpListTagsForResourceDiscoverEndpoint(ctx context.Context,
 		fn(&opt)
 	}
 
-	endpoint, err := c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	endpoint, err := c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	if err != nil {
 		return internalEndpointDiscovery.WeightedAddress{}, err
 	}

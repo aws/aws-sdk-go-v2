@@ -1,0 +1,11 @@
+{
+    "id": "e50b13c4-d099-4557-a1f0-098adce2c23e",
+    "type": "bugfix",
+    "description": "Respect caller region overrides in endpoint discovery.",
+    "modules": [
+        "service/dynamodb",
+        "service/internal/endpoint-discovery",
+        "service/timestreamquery",
+        "service/timestreamwrite"
+    ]
+}
