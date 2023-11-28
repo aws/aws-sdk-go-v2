@@ -486,6 +486,7 @@ func TestNewEnvConfig(t *testing.T) {
 			},
 			WantErr: true,
 		},
+		// expect err detected due to AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES exceeding max 10485760
 		45: {
 			Env: map[string]string{
 				"AWS_DISABLE_REQUEST_COMPRESSION":        "false",

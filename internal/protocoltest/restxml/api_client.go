@@ -16,7 +16,6 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
-	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
@@ -386,11 +385,6 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 		o.EndpointOptions.UseFIPSEndpoint = value
 	}
 	return nil
-}
-
-func addRequestCompression(stack *middleware.Stack, options Options) error {
-	return smithyrequestcompression.AddRequestCompression(stack, options.DisableRequestCompression, options.RequestMinCompressSizeBytes,
-		"gzip")
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token
