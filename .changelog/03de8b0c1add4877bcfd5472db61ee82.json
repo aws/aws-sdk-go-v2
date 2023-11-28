@@ -1,0 +1,8 @@
+{
+    "id": "03de8b0c-1add-4877-bcfd-5472db61ee82",
+    "type": "bugfix",
+    "description": "Correct resolution of S3Express auth disable toggle.",
+    "modules": [
+        "config"
+    ]
+}
