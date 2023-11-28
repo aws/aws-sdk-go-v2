@@ -336,6 +336,70 @@ func (m *awsAwsquery_serializeOpCompleteMigration) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpCopyServerlessCacheSnapshot struct {
+}
+
+func (*awsAwsquery_serializeOpCopyServerlessCacheSnapshot) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCopyServerlessCacheSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CopyServerlessCacheSnapshotInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CopyServerlessCacheSnapshot")
+	body.Key("Version").String("2015-02-02")
+
+	if err := awsAwsquery_serializeOpDocumentCopyServerlessCacheSnapshotInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpCopySnapshot struct {
 }
 
@@ -764,6 +828,134 @@ func (m *awsAwsquery_serializeOpCreateReplicationGroup) HandleSerialize(ctx cont
 	body.Key("Version").String("2015-02-02")
 
 	if err := awsAwsquery_serializeOpDocumentCreateReplicationGroupInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpCreateServerlessCache struct {
+}
+
+func (*awsAwsquery_serializeOpCreateServerlessCache) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCreateServerlessCache) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateServerlessCacheInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateServerlessCache")
+	body.Key("Version").String("2015-02-02")
+
+	if err := awsAwsquery_serializeOpDocumentCreateServerlessCacheInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpCreateServerlessCacheSnapshot struct {
+}
+
+func (*awsAwsquery_serializeOpCreateServerlessCacheSnapshot) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCreateServerlessCacheSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateServerlessCacheSnapshotInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateServerlessCacheSnapshot")
+	body.Key("Version").String("2015-02-02")
+
+	if err := awsAwsquery_serializeOpDocumentCreateServerlessCacheSnapshotInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1468,6 +1660,134 @@ func (m *awsAwsquery_serializeOpDeleteReplicationGroup) HandleSerialize(ctx cont
 	body.Key("Version").String("2015-02-02")
 
 	if err := awsAwsquery_serializeOpDocumentDeleteReplicationGroupInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDeleteServerlessCache struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteServerlessCache) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteServerlessCache) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteServerlessCacheInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteServerlessCache")
+	body.Key("Version").String("2015-02-02")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteServerlessCacheInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDeleteServerlessCacheSnapshot struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteServerlessCacheSnapshot) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteServerlessCacheSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteServerlessCacheSnapshotInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteServerlessCacheSnapshot")
+	body.Key("Version").String("2015-02-02")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteServerlessCacheSnapshotInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2448,6 +2768,134 @@ func (m *awsAwsquery_serializeOpDescribeReservedCacheNodesOfferings) HandleSeria
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDescribeServerlessCaches struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeServerlessCaches) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeServerlessCaches) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeServerlessCachesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeServerlessCaches")
+	body.Key("Version").String("2015-02-02")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeServerlessCachesInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDescribeServerlessCacheSnapshots struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeServerlessCacheSnapshots) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeServerlessCacheSnapshots) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeServerlessCacheSnapshotsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeServerlessCacheSnapshots")
+	body.Key("Version").String("2015-02-02")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeServerlessCacheSnapshotsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDescribeServiceUpdates struct {
 }
 
@@ -2812,6 +3260,70 @@ func (m *awsAwsquery_serializeOpDisassociateGlobalReplicationGroup) HandleSerial
 	body.Key("Version").String("2015-02-02")
 
 	if err := awsAwsquery_serializeOpDocumentDisassociateGlobalReplicationGroupInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpExportServerlessCacheSnapshot struct {
+}
+
+func (*awsAwsquery_serializeOpExportServerlessCacheSnapshot) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpExportServerlessCacheSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ExportServerlessCacheSnapshotInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ExportServerlessCacheSnapshot")
+	body.Key("Version").String("2015-02-02")
+
+	if err := awsAwsquery_serializeOpDocumentExportServerlessCacheSnapshotInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3516,6 +4028,70 @@ func (m *awsAwsquery_serializeOpModifyReplicationGroupShardConfiguration) Handle
 	body.Key("Version").String("2015-02-02")
 
 	if err := awsAwsquery_serializeOpDocumentModifyReplicationGroupShardConfigurationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpModifyServerlessCache struct {
+}
+
+func (*awsAwsquery_serializeOpModifyServerlessCache) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyServerlessCache) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyServerlessCacheInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyServerlessCache")
+	body.Key("Version").String("2015-02-02")
+
+	if err := awsAwsquery_serializeOpDocumentModifyServerlessCacheInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4298,6 +4874,27 @@ func awsAwsquery_serializeDocumentCacheSecurityGroupNameList(v []string, value q
 	return nil
 }
 
+func awsAwsquery_serializeDocumentCacheUsageLimits(v *types.CacheUsageLimits, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DataStorage != nil {
+		objectKey := object.Key("DataStorage")
+		if err := awsAwsquery_serializeDocumentDataStorage(v.DataStorage, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ECPUPerSecond != nil {
+		objectKey := object.Key("ECPUPerSecond")
+		if err := awsAwsquery_serializeDocumentECPUPerSecond(v.ECPUPerSecond, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentCloudWatchLogsDestinationDetails(v *types.CloudWatchLogsDestinationDetails, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4370,6 +4967,23 @@ func awsAwsquery_serializeDocumentCustomerNodeEndpointList(v []types.CustomerNod
 	return nil
 }
 
+func awsAwsquery_serializeDocumentDataStorage(v *types.DataStorage, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Maximum != nil {
+		objectKey := object.Key("Maximum")
+		objectKey.Integer(*v.Maximum)
+	}
+
+	if len(v.Unit) > 0 {
+		objectKey := object.Key("Unit")
+		objectKey.String(string(v.Unit))
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentDestinationDetails(v *types.DestinationDetails, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4386,6 +5000,18 @@ func awsAwsquery_serializeDocumentDestinationDetails(v *types.DestinationDetails
 		if err := awsAwsquery_serializeDocumentKinesisFirehoseDestinationDetails(v.KinesisFirehoseDetails, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentECPUPerSecond(v *types.ECPUPerSecond, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Maximum != nil {
+		objectKey := object.Key("Maximum")
+		objectKey.Integer(*v.Maximum)
 	}
 
 	return nil
@@ -4796,6 +5422,16 @@ func awsAwsquery_serializeDocumentSubnetIdentifierList(v []string, value query.V
 	return nil
 }
 
+func awsAwsquery_serializeDocumentSubnetIdsList(v []string, value query.Value) error {
+	array := value.Array("SubnetId")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4987,6 +5623,35 @@ func awsAwsquery_serializeOpDocumentCompleteMigrationInput(v *CompleteMigrationI
 	if v.ReplicationGroupId != nil {
 		objectKey := object.Key("ReplicationGroupId")
 		objectKey.String(*v.ReplicationGroupId)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentCopyServerlessCacheSnapshotInput(v *CopyServerlessCacheSnapshotInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.KmsKeyId != nil {
+		objectKey := object.Key("KmsKeyId")
+		objectKey.String(*v.KmsKeyId)
+	}
+
+	if v.SourceServerlessCacheSnapshotName != nil {
+		objectKey := object.Key("SourceServerlessCacheSnapshotName")
+		objectKey.String(*v.SourceServerlessCacheSnapshotName)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetServerlessCacheSnapshotName != nil {
+		objectKey := object.Key("TargetServerlessCacheSnapshotName")
+		objectKey.String(*v.TargetServerlessCacheSnapshotName)
 	}
 
 	return nil
@@ -5467,6 +6132,11 @@ func awsAwsquery_serializeOpDocumentCreateReplicationGroupInput(v *CreateReplica
 		}
 	}
 
+	if v.ServerlessCacheSnapshotName != nil {
+		objectKey := object.Key("ServerlessCacheSnapshotName")
+		objectKey.String(*v.ServerlessCacheSnapshotName)
+	}
+
 	if v.SnapshotArns != nil {
 		objectKey := object.Key("SnapshotArns")
 		if err := awsAwsquery_serializeDocumentSnapshotArnsList(v.SnapshotArns, objectKey); err != nil {
@@ -5509,6 +6179,117 @@ func awsAwsquery_serializeOpDocumentCreateReplicationGroupInput(v *CreateReplica
 	if v.UserGroupIds != nil {
 		objectKey := object.Key("UserGroupIds")
 		if err := awsAwsquery_serializeDocumentUserGroupIdListInput(v.UserGroupIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentCreateServerlessCacheInput(v *CreateServerlessCacheInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CacheUsageLimits != nil {
+		objectKey := object.Key("CacheUsageLimits")
+		if err := awsAwsquery_serializeDocumentCacheUsageLimits(v.CacheUsageLimits, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DailySnapshotTime != nil {
+		objectKey := object.Key("DailySnapshotTime")
+		objectKey.String(*v.DailySnapshotTime)
+	}
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
+	}
+
+	if v.KmsKeyId != nil {
+		objectKey := object.Key("KmsKeyId")
+		objectKey.String(*v.KmsKeyId)
+	}
+
+	if v.MajorEngineVersion != nil {
+		objectKey := object.Key("MajorEngineVersion")
+		objectKey.String(*v.MajorEngineVersion)
+	}
+
+	if v.SecurityGroupIds != nil {
+		objectKey := object.Key("SecurityGroupIds")
+		if err := awsAwsquery_serializeDocumentSecurityGroupIdsList(v.SecurityGroupIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ServerlessCacheName != nil {
+		objectKey := object.Key("ServerlessCacheName")
+		objectKey.String(*v.ServerlessCacheName)
+	}
+
+	if v.SnapshotArnsToRestore != nil {
+		objectKey := object.Key("SnapshotArnsToRestore")
+		if err := awsAwsquery_serializeDocumentSnapshotArnsList(v.SnapshotArnsToRestore, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.SnapshotRetentionLimit != nil {
+		objectKey := object.Key("SnapshotRetentionLimit")
+		objectKey.Integer(*v.SnapshotRetentionLimit)
+	}
+
+	if v.SubnetIds != nil {
+		objectKey := object.Key("SubnetIds")
+		if err := awsAwsquery_serializeDocumentSubnetIdsList(v.SubnetIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.UserGroupId != nil {
+		objectKey := object.Key("UserGroupId")
+		objectKey.String(*v.UserGroupId)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentCreateServerlessCacheSnapshotInput(v *CreateServerlessCacheSnapshotInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.KmsKeyId != nil {
+		objectKey := object.Key("KmsKeyId")
+		objectKey.String(*v.KmsKeyId)
+	}
+
+	if v.ServerlessCacheName != nil {
+		objectKey := object.Key("ServerlessCacheName")
+		objectKey.String(*v.ServerlessCacheName)
+	}
+
+	if v.ServerlessCacheSnapshotName != nil {
+		objectKey := object.Key("ServerlessCacheSnapshotName")
+		objectKey.String(*v.ServerlessCacheSnapshotName)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
 			return err
 		}
 	}
@@ -5793,6 +6574,35 @@ func awsAwsquery_serializeOpDocumentDeleteReplicationGroupInput(v *DeleteReplica
 	if v.RetainPrimaryCluster != nil {
 		objectKey := object.Key("RetainPrimaryCluster")
 		objectKey.Boolean(*v.RetainPrimaryCluster)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeleteServerlessCacheInput(v *DeleteServerlessCacheInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.FinalSnapshotName != nil {
+		objectKey := object.Key("FinalSnapshotName")
+		objectKey.String(*v.FinalSnapshotName)
+	}
+
+	if v.ServerlessCacheName != nil {
+		objectKey := object.Key("ServerlessCacheName")
+		objectKey.String(*v.ServerlessCacheName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeleteServerlessCacheSnapshotInput(v *DeleteServerlessCacheSnapshotInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ServerlessCacheSnapshotName != nil {
+		objectKey := object.Key("ServerlessCacheSnapshotName")
+		objectKey.String(*v.ServerlessCacheSnapshotName)
 	}
 
 	return nil
@@ -6198,6 +7008,60 @@ func awsAwsquery_serializeOpDocumentDescribeReservedCacheNodesOfferingsInput(v *
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentDescribeServerlessCachesInput(v *DescribeServerlessCachesInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	if v.ServerlessCacheName != nil {
+		objectKey := object.Key("ServerlessCacheName")
+		objectKey.String(*v.ServerlessCacheName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDescribeServerlessCacheSnapshotsInput(v *DescribeServerlessCacheSnapshotsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	if v.ServerlessCacheName != nil {
+		objectKey := object.Key("ServerlessCacheName")
+		objectKey.String(*v.ServerlessCacheName)
+	}
+
+	if v.ServerlessCacheSnapshotName != nil {
+		objectKey := object.Key("ServerlessCacheSnapshotName")
+		objectKey.String(*v.ServerlessCacheSnapshotName)
+	}
+
+	if v.SnapshotType != nil {
+		objectKey := object.Key("SnapshotType")
+		objectKey.String(*v.SnapshotType)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDescribeServiceUpdatesInput(v *DescribeServiceUpdatesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -6409,6 +7273,23 @@ func awsAwsquery_serializeOpDocumentDisassociateGlobalReplicationGroupInput(v *D
 	if v.ReplicationGroupRegion != nil {
 		objectKey := object.Key("ReplicationGroupRegion")
 		objectKey.String(*v.ReplicationGroupRegion)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentExportServerlessCacheSnapshotInput(v *ExportServerlessCacheSnapshotInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.S3BucketName != nil {
+		objectKey := object.Key("S3BucketName")
+		objectKey.String(*v.S3BucketName)
+	}
+
+	if v.ServerlessCacheSnapshotName != nil {
+		objectKey := object.Key("ServerlessCacheSnapshotName")
+		objectKey.String(*v.ServerlessCacheSnapshotName)
 	}
 
 	return nil
@@ -6930,6 +7811,57 @@ func awsAwsquery_serializeOpDocumentModifyReplicationGroupShardConfigurationInpu
 		if err := awsAwsquery_serializeDocumentReshardingConfigurationList(v.ReshardingConfiguration, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentModifyServerlessCacheInput(v *ModifyServerlessCacheInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CacheUsageLimits != nil {
+		objectKey := object.Key("CacheUsageLimits")
+		if err := awsAwsquery_serializeDocumentCacheUsageLimits(v.CacheUsageLimits, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DailySnapshotTime != nil {
+		objectKey := object.Key("DailySnapshotTime")
+		objectKey.String(*v.DailySnapshotTime)
+	}
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.RemoveUserGroup != nil {
+		objectKey := object.Key("RemoveUserGroup")
+		objectKey.Boolean(*v.RemoveUserGroup)
+	}
+
+	if v.SecurityGroupIds != nil {
+		objectKey := object.Key("SecurityGroupIds")
+		if err := awsAwsquery_serializeDocumentSecurityGroupIdsList(v.SecurityGroupIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ServerlessCacheName != nil {
+		objectKey := object.Key("ServerlessCacheName")
+		objectKey.String(*v.ServerlessCacheName)
+	}
+
+	if v.SnapshotRetentionLimit != nil {
+		objectKey := object.Key("SnapshotRetentionLimit")
+		objectKey.Integer(*v.SnapshotRetentionLimit)
+	}
+
+	if v.UserGroupId != nil {
+		objectKey := object.Key("UserGroupId")
+		objectKey.String(*v.UserGroupId)
 	}
 
 	return nil

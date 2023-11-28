@@ -29,6 +29,23 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.fis#AccountTargeting": {
+            "type": "enum",
+            "members": {
+                "SINGLE_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "single-account"
+                    }
+                },
+                "MULTI_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "multi-account"
+                    }
+                }
+            }
+        },
         "com.amazonaws.fis#Action": {
             "type": "structure",
             "members": {
@@ -274,7 +291,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an experiment template. </p>\n         <p>An experiment template includes the following components:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Targets</b>: A target can be a specific resource in \n               your Amazon Web Services environment, or one or more resources that match criteria that you\n               specify, for example, resources that have specific tags.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Actions</b>: The actions to carry out on the\n               target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Stop conditions</b>: If a stop condition is\n               triggered while an experiment is running, the experiment is automatically\n               stopped. You can define a stop condition as a CloudWatch alarm.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html\">Experiment templates</a>\n         in the <i>Fault Injection Simulator User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an experiment template. </p>\n         <p>An experiment template includes the following components:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Targets</b>: A target can be a specific resource in \n               your Amazon Web Services environment, or one or more resources that match criteria that you\n               specify, for example, resources that have specific tags.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Actions</b>: The actions to carry out on the\n               target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Stop conditions</b>: If a stop condition is\n               triggered while an experiment is running, the experiment is automatically\n               stopped. You can define a stop condition as a CloudWatch alarm.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html\">experiment templates</a>\n         in the <i>Fault Injection Simulator User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/experimentTemplates",
@@ -328,6 +345,26 @@
             },
             "value": {
                 "target": "com.amazonaws.fis#CreateExperimentTemplateActionInput"
+            }
+        },
+        "com.amazonaws.fis#CreateExperimentTemplateExperimentOptionsInput": {
+            "type": "structure",
+            "members": {
+                "accountTargeting": {
+                    "target": "com.amazonaws.fis#AccountTargeting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the account targeting setting for experiment options.</p>"
+                    }
+                },
+                "emptyTargetResolutionMode": {
+                    "target": "com.amazonaws.fis#EmptyTargetResolutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the empty target resolution mode for experiment options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies experiment options for an experiment template.</p>"
             }
         },
         "com.amazonaws.fis#CreateExperimentTemplateLogConfigurationInput": {
@@ -412,6 +449,12 @@
                     "target": "com.amazonaws.fis#CreateExperimentTemplateLogConfigurationInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for experiment logging.</p>"
+                    }
+                },
+                "experimentOptions": {
+                    "target": "com.amazonaws.fis#CreateExperimentTemplateExperimentOptionsInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The experiment options for the experiment template.</p>"
                     }
                 }
             },
@@ -515,6 +558,95 @@
                 "target": "com.amazonaws.fis#CreateExperimentTemplateTargetInput"
             }
         },
+        "com.amazonaws.fis#CreateTargetAccountConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fis#CreateTargetAccountConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fis#CreateTargetAccountConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fis#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a target account configuration for the experiment template. A target account configuration\n      is required when <code>accountTargeting</code> of <code>experimentOptions</code> is set to <code>multi-account</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/experiment-options.html\">experiment options</a>\n      in the <i>Fault Injection Simulator User Guide</i>.\n      </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.fis#CreateTargetAccountConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.fis#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "experimentTemplateId": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The experiment template ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.fis#TargetAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the target account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.fis#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role for the target account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.fis#TargetAccountConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the target account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fis#CreateTargetAccountConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "targetAccountConfiguration": {
+                    "target": "com.amazonaws.fis#TargetAccountConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the target account configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.fis#CreationTime": {
             "type": "timestamp"
         },
@@ -571,6 +703,86 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.fis#DeleteTargetAccountConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fis#DeleteTargetAccountConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fis#DeleteTargetAccountConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified target account configuration of the experiment template.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.fis#DeleteTargetAccountConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "experimentTemplateId": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the experiment template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.fis#TargetAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the target account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fis#DeleteTargetAccountConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "targetAccountConfiguration": {
+                    "target": "com.amazonaws.fis#TargetAccountConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the target account configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.fis#EmptyTargetResolutionMode": {
+            "type": "enum",
+            "members": {
+                "FAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fail"
+                    }
+                },
+                "SKIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "skip"
+                    }
+                }
             }
         },
         "com.amazonaws.fis#ExceptionMessage": {
@@ -656,6 +868,18 @@
                     "target": "com.amazonaws.fis#ExperimentLogConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for experiment logging.</p>"
+                    }
+                },
+                "experimentOptions": {
+                    "target": "com.amazonaws.fis#ExperimentOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The experiment options for the experiment.</p>"
+                    }
+                },
+                "targetAccountConfigurationsCount": {
+                    "target": "com.amazonaws.fis#TargetAccountConfigurationsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The count of target account configurations for the experiment.</p>"
                     }
                 }
             },
@@ -869,6 +1093,12 @@
                     "traits": {
                         "smithy.api#enumValue": "failed"
                     }
+                },
+                "skipped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "skipped"
+                    }
                 }
             }
         },
@@ -952,6 +1182,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the configuration for experiment logging.</p>"
+            }
+        },
+        "com.amazonaws.fis#ExperimentOptions": {
+            "type": "structure",
+            "members": {
+                "accountTargeting": {
+                    "target": "com.amazonaws.fis#AccountTargeting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account targeting setting for an experiment.</p>"
+                    }
+                },
+                "emptyTargetResolutionMode": {
+                    "target": "com.amazonaws.fis#EmptyTargetResolutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The empty target resolution mode for an experiment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the options for an experiment.</p>"
             }
         },
         "com.amazonaws.fis#ExperimentS3LogConfiguration": {
@@ -1168,6 +1418,64 @@
                 "smithy.api#documentation": "<p>Describes a target for an experiment.</p>"
             }
         },
+        "com.amazonaws.fis#ExperimentTargetAccountConfiguration": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.fis#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role for the target account.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.fis#TargetAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the target account.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.fis#TargetAccountConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the target account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a target account configuration for an experiment.</p>"
+            }
+        },
+        "com.amazonaws.fis#ExperimentTargetAccountConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fis#ExperimentTargetAccountConfigurationSummary"
+            }
+        },
+        "com.amazonaws.fis#ExperimentTargetAccountConfigurationSummary": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.fis#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role for the target account.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.fis#TargetAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the target account.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.fis#TargetAccountConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the target account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of a target account configuration.</p>"
+            }
+        },
         "com.amazonaws.fis#ExperimentTargetFilter": {
             "type": "structure",
             "members": {
@@ -1338,6 +1646,18 @@
                     "target": "com.amazonaws.fis#ExperimentTemplateLogConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for experiment logging.</p>"
+                    }
+                },
+                "experimentOptions": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateExperimentOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The experiment options for an experiment template.</p>"
+                    }
+                },
+                "targetAccountConfigurationsCount": {
+                    "target": "com.amazonaws.fis#TargetAccountConfigurationsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The count of target account configurations for the experiment template.</p>"
                     }
                 }
             },
@@ -1513,6 +1833,26 @@
                     "max": 512
                 },
                 "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#ExperimentTemplateExperimentOptions": {
+            "type": "structure",
+            "members": {
+                "accountTargeting": {
+                    "target": "com.amazonaws.fis#AccountTargeting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account targeting setting for an experiment template. </p>"
+                    }
+                },
+                "emptyTargetResolutionMode": {
+                    "target": "com.amazonaws.fis#EmptyTargetResolutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The empty target resolution mode for an experiment template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the experiment options for an experiment template.</p>"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateId": {
@@ -1852,7 +2192,13 @@
                     "target": "com.amazonaws.fis#CreateExperimentTemplate"
                 },
                 {
+                    "target": "com.amazonaws.fis#CreateTargetAccountConfiguration"
+                },
+                {
                     "target": "com.amazonaws.fis#DeleteExperimentTemplate"
+                },
+                {
+                    "target": "com.amazonaws.fis#DeleteTargetAccountConfiguration"
                 },
                 {
                     "target": "com.amazonaws.fis#GetAction"
@@ -1861,7 +2207,13 @@
                     "target": "com.amazonaws.fis#GetExperiment"
                 },
                 {
+                    "target": "com.amazonaws.fis#GetExperimentTargetAccountConfiguration"
+                },
+                {
                     "target": "com.amazonaws.fis#GetExperimentTemplate"
+                },
+                {
+                    "target": "com.amazonaws.fis#GetTargetAccountConfiguration"
                 },
                 {
                     "target": "com.amazonaws.fis#GetTargetResourceType"
@@ -1870,13 +2222,22 @@
                     "target": "com.amazonaws.fis#ListActions"
                 },
                 {
+                    "target": "com.amazonaws.fis#ListExperimentResolvedTargets"
+                },
+                {
                     "target": "com.amazonaws.fis#ListExperiments"
+                },
+                {
+                    "target": "com.amazonaws.fis#ListExperimentTargetAccountConfigurations"
                 },
                 {
                     "target": "com.amazonaws.fis#ListExperimentTemplates"
                 },
                 {
                     "target": "com.amazonaws.fis#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.fis#ListTargetAccountConfigurations"
                 },
                 {
                     "target": "com.amazonaws.fis#ListTargetResourceTypes"
@@ -1895,6 +2256,9 @@
                 },
                 {
                     "target": "com.amazonaws.fis#UpdateExperimentTemplate"
+                },
+                {
+                    "target": "com.amazonaws.fis#UpdateTargetAccountConfiguration"
                 }
             ],
             "traits": {
@@ -2702,6 +3066,69 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.fis#GetExperimentTargetAccountConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fis#GetExperimentTargetAccountConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fis#GetExperimentTargetAccountConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specified target account configuration of the experiment.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/experiments/{experimentId}/targetAccountConfigurations/{accountId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.fis#GetExperimentTargetAccountConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "experimentId": {
+                    "target": "com.amazonaws.fis#ExperimentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the experiment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.fis#TargetAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the target account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fis#GetExperimentTargetAccountConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "targetAccountConfiguration": {
+                    "target": "com.amazonaws.fis#ExperimentTargetAccountConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the target account configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.fis#GetExperimentTemplate": {
             "type": "operation",
             "input": {
@@ -2750,6 +3177,69 @@
                     "target": "com.amazonaws.fis#ExperimentTemplate",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the experiment template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.fis#GetTargetAccountConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fis#GetTargetAccountConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fis#GetTargetAccountConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specified target account configuration of the experiment template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.fis#GetTargetAccountConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "experimentTemplateId": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the experiment template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.fis#TargetAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the target account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fis#GetTargetAccountConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "targetAccountConfiguration": {
+                    "target": "com.amazonaws.fis#TargetAccountConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the target account configuration.</p>"
                     }
                 }
             },
@@ -2886,6 +3376,170 @@
                     "target": "com.amazonaws.fis#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.fis#ListExperimentResolvedTargets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fis#ListExperimentResolvedTargetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fis#ListExperimentResolvedTargetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the resolved targets information of the specified experiment.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/experiments/{experimentId}/resolvedTargets",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.fis#ListExperimentResolvedTargetsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.fis#ListExperimentResolvedTargetsRequest": {
+            "type": "structure",
+            "members": {
+                "experimentId": {
+                    "target": "com.amazonaws.fis#ExperimentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the experiment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.fis#ListExperimentResolvedTargetsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, \n      make another call with the returned nextToken value.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.fis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "targetName": {
+                    "target": "com.amazonaws.fis#TargetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target.</p>",
+                        "smithy.api#httpQuery": "targetName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fis#ListExperimentResolvedTargetsResponse": {
+            "type": "structure",
+            "members": {
+                "resolvedTargets": {
+                    "target": "com.amazonaws.fis#ResolvedTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resolved targets.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.fis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. \n      This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.fis#ListExperimentTargetAccountConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fis#ListExperimentTargetAccountConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fis#ListExperimentTargetAccountConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the target account configurations of the specified experiment.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/experiments/{experimentId}/targetAccountConfigurations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.fis#ListExperimentTargetAccountConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "experimentId": {
+                    "target": "com.amazonaws.fis#ExperimentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the experiment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.fis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fis#ListExperimentTargetAccountConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "targetAccountConfigurations": {
+                    "target": "com.amazonaws.fis#ExperimentTargetAccountConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target account configurations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.fis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. \n      This value is null when there are no more results to return.</p>"
                     }
                 }
             },
@@ -3096,6 +3750,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.fis#ListTargetAccountConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fis#ListTargetAccountConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fis#ListTargetAccountConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the target account configurations of the specified experiment template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.fis#ListTargetAccountConfigurationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.fis#ListTargetAccountConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "experimentTemplateId": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the experiment template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.fis#ListTargetAccountConfigurationsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, \n      make another call with the returned nextToken value.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.fis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fis#ListTargetAccountConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "targetAccountConfigurations": {
+                    "target": "com.amazonaws.fis#TargetAccountConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target account configurations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.fis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. \n      This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.fis#ListTargetResourceTypes": {
             "type": "operation",
             "input": {
@@ -3185,6 +3928,38 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#ResolvedTarget": {
+            "type": "structure",
+            "members": {
+                "resourceType": {
+                    "target": "com.amazonaws.fis#TargetResourceTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the target.</p>"
+                    }
+                },
+                "targetName": {
+                    "target": "com.amazonaws.fis#TargetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target.</p>"
+                    }
+                },
+                "targetInformation": {
+                    "target": "com.amazonaws.fis#TargetInformationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a resolved target.</p>"
+            }
+        },
+        "com.amazonaws.fis#ResolvedTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fis#ResolvedTarget"
             }
         },
         "com.amazonaws.fis#ResourceArn": {
@@ -3510,6 +4285,131 @@
                 "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
+        "com.amazonaws.fis#TargetAccountConfiguration": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.fis#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role for the target account.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.fis#TargetAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the target account.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.fis#TargetAccountConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the target account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a target account configuration.</p>"
+            }
+        },
+        "com.amazonaws.fis#TargetAccountConfigurationDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.fis#TargetAccountConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fis#TargetAccountConfigurationSummary"
+            }
+        },
+        "com.amazonaws.fis#TargetAccountConfigurationSummary": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.fis#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role for the target account.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.fis#TargetAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the target account.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.fis#TargetAccountConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the target account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of a target account configuration.</p>"
+            }
+        },
+        "com.amazonaws.fis#TargetAccountConfigurationsCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.fis#TargetAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 48
+                },
+                "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#TargetInformationKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#TargetInformationMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.fis#TargetInformationKey"
+            },
+            "value": {
+                "target": "com.amazonaws.fis#TargetInformationValue"
+            }
+        },
+        "com.amazonaws.fis#TargetInformationValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#TargetName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
         "com.amazonaws.fis#TargetResourceType": {
             "type": "structure",
             "members": {
@@ -3760,6 +4660,20 @@
                 "target": "com.amazonaws.fis#UpdateExperimentTemplateActionInputItem"
             }
         },
+        "com.amazonaws.fis#UpdateExperimentTemplateExperimentOptionsInput": {
+            "type": "structure",
+            "members": {
+                "emptyTargetResolutionMode": {
+                    "target": "com.amazonaws.fis#EmptyTargetResolutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The empty target resolution mode of the experiment template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an experiment option for an experiment template.</p>"
+            }
+        },
         "com.amazonaws.fis#UpdateExperimentTemplateLogConfigurationInput": {
             "type": "structure",
             "members": {
@@ -3831,6 +4745,12 @@
                     "target": "com.amazonaws.fis#UpdateExperimentTemplateLogConfigurationInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for experiment logging.</p>"
+                    }
+                },
+                "experimentOptions": {
+                    "target": "com.amazonaws.fis#UpdateExperimentTemplateExperimentOptionsInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The experiment options for the experiment template.</p>"
                     }
                 }
             },
@@ -3932,6 +4852,81 @@
             },
             "value": {
                 "target": "com.amazonaws.fis#UpdateExperimentTemplateTargetInput"
+            }
+        },
+        "com.amazonaws.fis#UpdateTargetAccountConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fis#UpdateTargetAccountConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fis#UpdateTargetAccountConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the target account configuration for the specified experiment template.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.fis#UpdateTargetAccountConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "experimentTemplateId": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the experiment template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.fis#TargetAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the target account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.fis#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role for the target account.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.fis#TargetAccountConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the target account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fis#UpdateTargetAccountConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "targetAccountConfiguration": {
+                    "target": "com.amazonaws.fis#TargetAccountConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the target account configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.fis#ValidationException": {

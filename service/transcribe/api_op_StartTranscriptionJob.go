@@ -28,7 +28,7 @@ import (
 //   - One of LanguageCode , IdentifyLanguage , or IdentifyMultipleLanguages : If
 //     you know the language of your media file, specify it using the LanguageCode
 //     parameter; you can find all valid language codes in the Supported languages (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-//     table. If you don't know the languages spoken in your media, use either
+//     table. If you do not know the languages spoken in your media, use either
 //     IdentifyLanguage or IdentifyMultipleLanguages and let Amazon Transcribe
 //     identify the languages for you.
 func (c *Client) StartTranscriptionJob(ctx context.Context, params *StartTranscriptionJobInput, optFns ...func(*Options)) (*StartTranscriptionJobOutput, error) {
@@ -66,8 +66,10 @@ type StartTranscriptionJobInput struct {
 
 	// Makes it possible to redact or flag specified personally identifiable
 	// information (PII) in your transcript. If you use ContentRedaction , you must
-	// also include the sub-parameters: PiiEntityTypes , RedactionOutput , and
-	// RedactionType .
+	// also include the sub-parameters: RedactionOutput and RedactionType . You can
+	// optionally include PiiEntityTypes to choose which types of PII you want to
+	// redact. If you do not include PiiEntityTypes in your request, all PII is
+	// redacted.
 	ContentRedaction *types.ContentRedaction
 
 	// Enables automatic language identification in your transcription job request.
@@ -166,8 +168,8 @@ type StartTranscriptionJobInput struct {
 	MediaFormat types.MediaFormat
 
 	// The sample rate, in hertz, of the audio track in your input media file. If you
-	// don't specify the media sample rate, Amazon Transcribe determines it for you. If
-	// you specify the sample rate, it must match the rate detected by Amazon
+	// do not specify the media sample rate, Amazon Transcribe determines it for you.
+	// If you specify the sample rate, it must match the rate detected by Amazon
 	// Transcribe. If there's a mismatch between the value that you specify and the
 	// value detected, your job fails. In most cases, you can omit MediaSampleRateHertz
 	// and let Amazon Transcribe determine the sample rate.
@@ -191,7 +193,7 @@ type StartTranscriptionJobInput struct {
 	// to use the specified location. You can change Amazon S3 permissions using the
 	// Amazon Web Services Management Console (https://console.aws.amazon.com/s3) . See
 	// also Permissions Required for IAM User Roles (https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user)
-	// . If you don't specify OutputBucketName , your transcript is placed in a
+	// . If you do not specify OutputBucketName , your transcript is placed in a
 	// service-managed Amazon S3 bucket and you are provided with a URI to access your
 	// transcript.
 	OutputBucketName *string
@@ -213,7 +215,7 @@ type StartTranscriptionJobInput struct {
 	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
 	//   - Use the ARN for the KMS key alias. For example,
 	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
-	// If you don't specify an encryption key, your output is encrypted with the
+	// If you do not specify an encryption key, your output is encrypted with the
 	// default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output,
 	// you must also specify an output location using the OutputLocation parameter.
 	// Note that the role making the request must have permission to use the specified

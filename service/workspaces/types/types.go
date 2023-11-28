@@ -243,6 +243,20 @@ type ConnectionAliasPermission struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the data replication settings.
+type DataReplicationSettings struct {
+
+	// Indicates whether data replication is enabled, and if enabled, the type of data
+	// replication.
+	DataReplication DataReplication
+
+	// The date and time at which the last successful snapshot was taken of the
+	// primary WorkSpace used for replicating data.
+	RecoverySnapshotTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Returns default client branding attributes that were imported. These attributes
 // display on the client login screen. Client branding attributes are public
 // facing. Ensure that you don't include sensitive information.
@@ -756,11 +770,32 @@ type StandbyWorkspace struct {
 	// This member is required.
 	PrimaryWorkspaceId *string
 
+	// Indicates whether data replication is enabled, and if enabled, the type of data
+	// replication.
+	DataReplication DataReplication
+
 	// The tags associated with the standby WorkSpace.
 	Tags []Tag
 
 	// The volume encryption key of the standby WorkSpace.
 	VolumeEncryptionKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the properties of the related standby WorkSpaces.
+type StandbyWorkspacesProperties struct {
+
+	// Indicates whether data replication is enabled, and if enabled, the type of data
+	// replication.
+	DataReplication DataReplication
+
+	// The date and time at which the last successful snapshot was taken of the
+	// primary WorkSpace used for replicating data.
+	RecoverySnapshotTime *time.Time
+
+	// The identifier of the standby WorkSpace
+	StandbyWorkspaceId *string
 
 	noSmithyDocumentSerde
 }
@@ -844,6 +879,9 @@ type Workspace struct {
 	// .
 	ComputerName *string
 
+	// Indicates the settings of the data replication.
+	DataReplicationSettings *DataReplicationSettings
+
 	// The identifier of the Directory Service directory for the WorkSpace.
 	DirectoryId *string
 
@@ -865,6 +903,9 @@ type Workspace struct {
 
 	// Indicates whether the data stored on the root volume is encrypted.
 	RootVolumeEncryptionEnabled *bool
+
+	// The properties of the standby WorkSpace
+	StandbyWorkspacesProperties []StandbyWorkspacesProperties
 
 	// The operational state of the WorkSpace. After a WorkSpace is terminated, the
 	// TERMINATED state is returned only briefly before the WorkSpace directory

@@ -751,6 +751,32 @@ func (e *InvalidCacheSecurityGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// You must enter valid credentials.
+type InvalidCredentialsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidCredentialsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidCredentialsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidCredentialsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidCredentialsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidCredentialsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The Global datastore is not available or in primary-only state.
 type InvalidGlobalReplicationGroupStateFault struct {
 	Message *string
@@ -884,6 +910,61 @@ func (e *InvalidReplicationGroupStateFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidReplicationGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The state of the serverless cache snapshot was not received. Available for
+// Redis only.
+type InvalidServerlessCacheSnapshotStateFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidServerlessCacheSnapshotStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidServerlessCacheSnapshotStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidServerlessCacheSnapshotStateFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidServerlessCacheSnapshotStateFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidServerlessCacheSnapshotStateFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The account for these credentials is not currently active.
+type InvalidServerlessCacheStateFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidServerlessCacheStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidServerlessCacheStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidServerlessCacheStateFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidServerlessCacheStateFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidServerlessCacheStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The current state of the snapshot does not allow the requested operation to
 // occur.
@@ -1372,6 +1453,173 @@ func (e *ReservedCacheNodesOfferingNotFoundFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ReservedCacheNodesOfferingNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// A serverless cache with this name already exists.
+type ServerlessCacheAlreadyExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServerlessCacheAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServerlessCacheAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServerlessCacheAlreadyExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServerlessCacheAlreadyExistsFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServerlessCacheAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The serverless cache was not found or does not exist.
+type ServerlessCacheNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServerlessCacheNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServerlessCacheNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServerlessCacheNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServerlessCacheNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServerlessCacheNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The number of serverless caches exceeds the customer quota.
+type ServerlessCacheQuotaForCustomerExceededFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServerlessCacheQuotaForCustomerExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServerlessCacheQuotaForCustomerExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServerlessCacheQuotaForCustomerExceededFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServerlessCacheQuotaForCustomerExceededFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServerlessCacheQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// A serverless cache snapshot with this name already exists. Available for Redis
+// only.
+type ServerlessCacheSnapshotAlreadyExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServerlessCacheSnapshotAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServerlessCacheSnapshotAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServerlessCacheSnapshotAlreadyExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServerlessCacheSnapshotAlreadyExistsFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServerlessCacheSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// This serverless cache snapshot could not be found or does not exist. Available
+// for Redis only.
+type ServerlessCacheSnapshotNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServerlessCacheSnapshotNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServerlessCacheSnapshotNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServerlessCacheSnapshotNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServerlessCacheSnapshotNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServerlessCacheSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The number of serverless cache snapshots exceeds the customer snapshot quota.
+// Available for Redis only.
+type ServerlessCacheSnapshotQuotaExceededFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServerlessCacheSnapshotQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServerlessCacheSnapshotQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServerlessCacheSnapshotQuotaExceededFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServerlessCacheSnapshotQuotaExceededFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServerlessCacheSnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 

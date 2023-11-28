@@ -5,6 +5,7 @@ package types_test
 import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	"time"
 )
 
 func ExampleEvaluationAnswerData_outputUsage() {
@@ -134,6 +135,58 @@ func ExampleParticipantTimerValue_outputUsage() {
 
 var _ *int32
 var _ types.ParticipantTimerAction
+
+func ExampleRealtimeContactAnalysisSegment_outputUsage() {
+	var union types.RealtimeContactAnalysisSegment
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RealtimeContactAnalysisSegmentMemberAttachments:
+		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentAttachments
+
+	case *types.RealtimeContactAnalysisSegmentMemberCategories:
+		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentCategories
+
+	case *types.RealtimeContactAnalysisSegmentMemberEvent:
+		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentEvent
+
+	case *types.RealtimeContactAnalysisSegmentMemberIssues:
+		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentIssues
+
+	case *types.RealtimeContactAnalysisSegmentMemberTranscript:
+		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentTranscript
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RealTimeContactAnalysisSegmentEvent
+var _ *types.RealTimeContactAnalysisSegmentIssues
+var _ *types.RealTimeContactAnalysisSegmentCategories
+var _ *types.RealTimeContactAnalysisSegmentAttachments
+var _ *types.RealTimeContactAnalysisSegmentTranscript
+
+func ExampleRealTimeContactAnalysisTimeData_outputUsage() {
+	var union types.RealTimeContactAnalysisTimeData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RealTimeContactAnalysisTimeDataMemberAbsoluteTime:
+		_ = v.Value // Value is time.Time
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *time.Time
 
 func ExampleReferenceSummary_outputUsage() {
 	var union types.ReferenceSummary

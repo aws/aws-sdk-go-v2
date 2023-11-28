@@ -1,3 +1,12 @@
+# v1.4.0 (2023-11-28.2)
+
+* **Feature**: This release adds support for minor versions/aliases for invoke model identifier.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.4 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.3.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

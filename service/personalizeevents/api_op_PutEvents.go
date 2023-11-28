@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Records user interaction event data. For more information see Recording Events (https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html)
+// Records item interaction event data. For more information see Recording item
+// interaction events (https://docs.aws.amazon.com/personalize/latest/dg/recording-item-interaction-events.html)
 // .
 func (c *Client) PutEvents(ctx context.Context, params *PutEventsInput, optFns ...func(*Options)) (*PutEventsOutput, error) {
 	if params == nil {
@@ -39,7 +40,7 @@ type PutEventsInput struct {
 	// The session ID associated with the user's visit. Your application generates the
 	// sessionId when a user first visits your website or uses your application. Amazon
 	// Personalize uses the sessionId to associate events with the user before they log
-	// in. For more information, see Recording Events (https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html)
+	// in. For more information, see Recording item interaction events (https://docs.aws.amazon.com/personalize/latest/dg/recording-item-interaction-events.html)
 	// .
 	//
 	// This member is required.

@@ -17,7 +17,7 @@ import (
 // database, store it on Amazon Simple Storage Service (Amazon S3), and then
 // restore the backup file onto a new Amazon RDS DB instance running MySQL. For
 // more information, see Importing Data into an Amazon RDS MySQL DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html)
-// in the Amazon RDS User Guide. This command doesn't apply to RDS Custom.
+// in the Amazon RDS User Guide. This operation doesn't apply to RDS Custom.
 func (c *Client) RestoreDBInstanceFromS3(ctx context.Context, params *RestoreDBInstanceFromS3Input, optFns ...func(*Options)) (*RestoreDBInstanceFromS3Output, error) {
 	if params == nil {
 		params = &RestoreDBInstanceFromS3Input{}
@@ -190,13 +190,18 @@ type RestoreDBInstanceFromS3Input struct {
 	//   Manager if MasterUserPassword is specified.
 	ManageMasterUserPassword *bool
 
-	// The password for the master user. The password can include any printable ASCII
-	// character except "/", """, or "@". Constraints: Can't be specified if
-	// ManageMasterUserPassword is turned on. MariaDB Constraints: Must contain from 8
-	// to 41 characters. Microsoft SQL Server Constraints: Must contain from 8 to 128
-	// characters. MySQL Constraints: Must contain from 8 to 41 characters. Oracle
-	// Constraints: Must contain from 8 to 30 characters. PostgreSQL Constraints: Must
-	// contain from 8 to 128 characters.
+	// The password for the master user. Constraints:
+	//   - Can't be specified if ManageMasterUserPassword is turned on.
+	//   - Can include any printable ASCII character except "/", """, or "@". For RDS
+	//   for Oracle, can't include the "&" (ampersand) or the "'" (single quotes)
+	//   character.
+	// Length Constraints:
+	//   - RDS for Db2 - Must contain from 8 to 128 characters.
+	//   - RDS for MariaDB - Must contain from 8 to 41 characters.
+	//   - RDS for Microsoft SQL Server - Must contain from 8 to 128 characters.
+	//   - RDS for MySQL - Must contain from 8 to 41 characters.
+	//   - RDS for Oracle - Must contain from 8 to 30 characters.
+	//   - RDS for PostgreSQL - Must contain from 8 to 128 characters.
 	MasterUserPassword *string
 
 	// The Amazon Web Services KMS key identifier to encrypt a secret that is

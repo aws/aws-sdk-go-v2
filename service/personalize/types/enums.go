@@ -2,6 +2,24 @@
 
 package types
 
+type BatchInferenceJobMode string
+
+// Enum values for BatchInferenceJobMode
+const (
+	BatchInferenceJobModeBatchInference  BatchInferenceJobMode = "BATCH_INFERENCE"
+	BatchInferenceJobModeThemeGeneration BatchInferenceJobMode = "THEME_GENERATION"
+)
+
+// Values returns all known values for BatchInferenceJobMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BatchInferenceJobMode) Values() []BatchInferenceJobMode {
+	return []BatchInferenceJobMode{
+		"BATCH_INFERENCE",
+		"THEME_GENERATION",
+	}
+}
+
 type Domain string
 
 // Enum values for Domain

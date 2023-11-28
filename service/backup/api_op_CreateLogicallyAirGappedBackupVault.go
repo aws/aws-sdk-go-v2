@@ -66,7 +66,8 @@ type CreateLogicallyAirGappedBackupVaultInput struct {
 	// These are the tags that will be included in the newly-created vault.
 	BackupVaultTags map[string]string
 
-	// This is the ID of the creation request.
+	// This is the ID of the creation request. This parameter is optional. If used,
+	// this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	noSmithyDocumentSerde

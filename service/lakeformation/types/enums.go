@@ -2,6 +2,24 @@
 
 package types
 
+type ApplicationStatus string
+
+// Enum values for ApplicationStatus
+const (
+	ApplicationStatusEnabled  ApplicationStatus = "ENABLED"
+	ApplicationStatusDisabled ApplicationStatus = "DISABLED"
+)
+
+// Values returns all known values for ApplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationStatus) Values() []ApplicationStatus {
+	return []ApplicationStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -65,6 +83,24 @@ func (DataLakeResourceType) Values() []DataLakeResourceType {
 		"LF_TAG_POLICY",
 		"LF_TAG_POLICY_DATABASE",
 		"LF_TAG_POLICY_TABLE",
+	}
+}
+
+type EnableStatus string
+
+// Enum values for EnableStatus
+const (
+	EnableStatusEnabled  EnableStatus = "ENABLED"
+	EnableStatusDisabled EnableStatus = "DISABLED"
+)
+
+// Values returns all known values for EnableStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnableStatus) Values() []EnableStatus {
+	return []EnableStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

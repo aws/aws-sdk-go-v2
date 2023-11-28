@@ -391,6 +391,21 @@ type DestinationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains ProfileObjectType mapping information from the model.
+type DetectedProfileObjectType struct {
+
+	// A map of the name and the ObjectType field.
+	Fields map[string]ObjectTypeField
+
+	// A list of unique keys that can be used to map data to a profile.
+	Keys map[string][]ObjectTypeKey
+
+	// The format of sourceLastUpdatedTimestamp that was detected in fields.
+	SourceLastUpdatedTimestampFormat *string
+
+	noSmithyDocumentSerde
+}
+
 // Usage-specific statistics about the domain.
 type DomainStats struct {
 

@@ -72,7 +72,19 @@ type GetRecommendationsInput struct {
 	// type.
 	ItemId *string
 
-	// The number of results to return. The default is 25. The maximum is 500.
+	// If you enabled metadata in recommendations when you created or updated the
+	// campaign or recommender, specify the metadata columns from your Items dataset to
+	// include in item recommendations. The map key is ITEMS and the value is a list
+	// of column names from your Items dataset. The maximum number of columns you can
+	// provide is 10. For information about enabling metadata for a campaign, see
+	// Enabling metadata in recommendations for a campaign (https://docs.aws.amazon.com/personalize/latest/dg/create-campaign-return-metadata.html)
+	// . For information about enabling metadata for a recommender, see Enabling
+	// metadata in recommendations for a recommender (https://docs.aws.amazon.com/personalize/latest/dg/create-recommender-return-metadata.html)
+	// .
+	MetadataColumns map[string][]string
+
+	// The number of results to return. The default is 25. If you are including
+	// metadata in recommendations, the maximum is 50. Otherwise, the maximum is 500.
 	NumResults int32
 
 	// The promotions to apply to the recommendation request. A promotion defines

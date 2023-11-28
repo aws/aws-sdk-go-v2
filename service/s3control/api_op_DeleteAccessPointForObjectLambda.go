@@ -15,8 +15,9 @@ import (
 	"strings"
 )
 
-// Deletes the specified Object Lambda Access Point. The following actions are
-// related to DeleteAccessPointForObjectLambda :
+// This operation is not supported by directory buckets. Deletes the specified
+// Object Lambda Access Point. The following actions are related to
+// DeleteAccessPointForObjectLambda :
 //   - CreateAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
 //   - GetAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html)
 //   - ListAccessPointsForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)

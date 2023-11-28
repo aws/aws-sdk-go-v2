@@ -645,6 +645,9 @@ type DataShare struct {
 // The association of a datashare from a producer account with a data consumer.
 type DataShareAssociation struct {
 
+	// Specifies whether write operations were allowed during data share association.
+	ConsumerAcceptedWrites *bool
+
 	// The name of the consumer accounts that have an association with a producer
 	// datashare.
 	ConsumerIdentifier *string
@@ -655,6 +658,9 @@ type DataShareAssociation struct {
 
 	// The creation date of the datashare that is associated.
 	CreatedDate *time.Time
+
+	// Specifies whether write operations were allowed during data share authorization.
+	ProducerAllowedWrites *bool
 
 	// The status of the datashare that is associated.
 	Status DataShareStatus

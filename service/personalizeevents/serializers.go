@@ -16,6 +16,170 @@ import (
 	"math"
 )
 
+type awsRestjson1_serializeOpPutActionInteractions struct {
+}
+
+func (*awsRestjson1_serializeOpPutActionInteractions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutActionInteractions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutActionInteractionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/action-interactions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutActionInteractionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutActionInteractionsInput(v *PutActionInteractionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutActionInteractionsInput(v *PutActionInteractionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActionInteractions != nil {
+		ok := object.Key("actionInteractions")
+		if err := awsRestjson1_serializeDocumentActionInteractionsList(v.ActionInteractions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TrackingId != nil {
+		ok := object.Key("trackingId")
+		ok.String(*v.TrackingId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutActions struct {
+}
+
+func (*awsRestjson1_serializeOpPutActions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutActions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutActionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/actions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutActionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutActionsInput(v *PutActionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutActionsInput(v *PutActionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Actions != nil {
+		ok := object.Key("actions")
+		if err := awsRestjson1_serializeDocumentActionList(v.Actions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DatasetArn != nil {
+		ok := object.Key("datasetArn")
+		ok.String(*v.DatasetArn)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPutEvents struct {
 }
 
@@ -269,6 +433,114 @@ func awsRestjson1_serializeOpDocumentPutUsersInput(v *PutUsersInput, value smith
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAction(v *types.Action, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActionId != nil {
+		ok := object.Key("actionId")
+		ok.String(*v.ActionId)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("properties")
+		ok.String(*v.Properties)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActionImpression(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActionInteraction(v *types.ActionInteraction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActionId != nil {
+		ok := object.Key("actionId")
+		ok.String(*v.ActionId)
+	}
+
+	if v.EventId != nil {
+		ok := object.Key("eventId")
+		ok.String(*v.EventId)
+	}
+
+	if v.EventType != nil {
+		ok := object.Key("eventType")
+		ok.String(*v.EventType)
+	}
+
+	if v.Impression != nil {
+		ok := object.Key("impression")
+		if err := awsRestjson1_serializeDocumentActionImpression(v.Impression, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("properties")
+		ok.String(*v.Properties)
+	}
+
+	if v.RecommendationId != nil {
+		ok := object.Key("recommendationId")
+		ok.String(*v.RecommendationId)
+	}
+
+	if v.SessionId != nil {
+		ok := object.Key("sessionId")
+		ok.String(*v.SessionId)
+	}
+
+	if v.Timestamp != nil {
+		ok := object.Key("timestamp")
+		ok.Double(smithytime.FormatEpochSeconds(*v.Timestamp))
+	}
+
+	if v.UserId != nil {
+		ok := object.Key("userId")
+		ok.String(*v.UserId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActionInteractionsList(v []types.ActionInteraction, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentActionInteraction(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActionList(v []types.Action, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAction(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

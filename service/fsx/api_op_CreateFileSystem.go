@@ -79,11 +79,12 @@ type CreateFileSystemInput struct {
 	//   - For SCRATCH_1 deployment type, valid values are 1200 GiB, 2400 GiB, and
 	//   increments of 3600 GiB.
 	// FSx for ONTAP file systems - The amount of storage capacity that you can
-	// configure is from 1024 GiB up to 196,608 GiB (192 TiB). FSx for OpenZFS file
-	// systems - The amount of storage capacity that you can configure is from 64 GiB
-	// up to 524,288 GiB (512 TiB). FSx for Windows File Server file systems - The
-	// amount of storage capacity that you can configure depends on the value that you
-	// set for StorageType as follows:
+	// configure depends on the value of the HAPairs property. The minimum value is
+	// calculated as 1,024 * HAPairs and the maxium is calculated as 524,288 * HAPairs
+	// .. FSx for OpenZFS file systems - The amount of storage capacity that you can
+	// configure is from 64 GiB up to 524,288 GiB (512 TiB). FSx for Windows File
+	// Server file systems - The amount of storage capacity that you can configure
+	// depends on the value that you set for StorageType as follows:
 	//   - For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).
 	//   - For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).
 	//

@@ -40,7 +40,8 @@ type GetPersonalizedRankingInput struct {
 	CampaignArn *string
 
 	// A list of items (by itemId ) to rank. If an item was not included in the
-	// training dataset, the item is appended to the end of the reranked list. The
+	// training dataset, the item is appended to the end of the reranked list. If you
+	// are including metadata in recommendations, the maximum is 50. Otherwise, the
 	// maximum is 500.
 	//
 	// This member is required.
@@ -74,6 +75,15 @@ type GetPersonalizedRankingInput struct {
 	// recommendations. For more information, see Filtering Recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter.html)
 	// .
 	FilterValues map[string]string
+
+	// If you enabled metadata in recommendations when you created or updated the
+	// campaign, specify metadata columns from your Items dataset to include in the
+	// personalized ranking. The map key is ITEMS and the value is a list of column
+	// names from your Items dataset. The maximum number of columns you can provide is
+	// 10. For information about enabling metadata for a campaign, see Enabling
+	// metadata in recommendations for a campaign (https://docs.aws.amazon.com/personalize/latest/dg/create-campaign-return-metadata.html)
+	// .
+	MetadataColumns map[string][]string
 
 	noSmithyDocumentSerde
 }

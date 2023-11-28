@@ -18,45 +18,51 @@ import (
 // replication (https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html) in
 // the Amazon EFS User Guide. The replication configuration specifies the
 // following:
-//   - Source file system - An existing EFS file system that you want replicated.
-//     The source file system cannot be a destination file system in an existing
+//   - Source file system – The EFS file system that you want replicated. The
+//     source file system cannot be a destination file system in an existing
 //     replication configuration.
-//   - Destination file system configuration - The configuration of the
+//   - Amazon Web Services Region – The Amazon Web Services Region in which the
+//     destination file system is created. Amazon EFS replication is available in all
+//     Amazon Web Services Regions in which EFS is available. The Region must be
+//     enabled. For more information, see Managing Amazon Web Services Regions (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)
+//     in the Amazon Web Services General Reference Reference Guide.
+//   - Destination file system configuration – The configuration of the
 //     destination file system to which the source file system will be replicated.
 //     There can only be one destination file system in a replication configuration.
-//     The destination file system configuration consists of the following properties:
-//   - Amazon Web Services Region - The Amazon Web Services Region in which the
-//     destination file system is created. Amazon EFS replication is available in all
-//     Amazon Web Services Regions in which EFS is available. To use EFS replication in
-//     a Region that is disabled by default, you must first opt in to the Region. For
-//     more information, see Managing Amazon Web Services Regions (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)
-//     in the Amazon Web Services General Reference Reference Guide
-//   - Availability Zone - If you want the destination file system to use EFS One
-//     Zone availability and durability, you must specify the Availability Zone to
-//     create the file system in. For more information about EFS storage classes, see
-//     Amazon EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
+//     Parameters for the replication configuration include:
+//   - File system ID – The ID of the destination file system for the replication.
+//     If no ID is provided, then EFS creates a new file system with the default
+//     settings. For existing file systems, the file system's replication overwrite
+//     protection must be disabled. For more information, see Replicating to an
+//     existing file system (https://docs.aws.amazon.com/efs/latest/ug/efs-replication#replicate-existing-destination)
+//     .
+//   - Availability Zone – If you want the destination file system to use One Zone
+//     storage, you must specify the Availability Zone to create the file system in.
+//     For more information, see EFS file system types (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
 //     in the Amazon EFS User Guide.
-//   - Encryption - All destination file systems are created with encryption at
+//   - Encryption – All destination file systems are created with encryption at
 //     rest enabled. You can specify the Key Management Service (KMS) key that is used
 //     to encrypt the destination file system. If you don't specify a KMS key, your
 //     service-managed KMS key for Amazon EFS is used. After the file system is
 //     created, you cannot change the KMS key.
 //
-// The following properties are set by default:
+// After the file system is created, you cannot change the KMS key. For new
+// destination file systems, the following properties are set by default:
+//
 //   - Performance mode - The destination file system's performance mode matches
 //     that of the source file system, unless the destination file system uses EFS One
 //     Zone storage. In that case, the General Purpose performance mode is used. The
 //     performance mode cannot be changed.
+//
 //   - Throughput mode - The destination file system's throughput mode matches
 //     that of the source file system. After the file system is created, you can modify
 //     the throughput mode.
 //
-// The following properties are turned off by default:
-//   - Lifecycle management - EFS lifecycle management and EFS Intelligent-Tiering
-//     are not enabled on the destination file system. After the destination file
-//     system is created, you can enable EFS lifecycle management and EFS
-//     Intelligent-Tiering.
-//   - Automatic backups - Automatic daily backups are enabled on the destination
+//   - Lifecycle management – Lifecycle management is not enabled on the
+//     destination file system. After the destination file system is created, you can
+//     enable lifecycle management.
+//
+//   - Automatic backups – Automatic daily backups are enabled on the destination
 //     file system. After the file system is created, you can change this setting.
 //
 // For more information, see Amazon EFS replication (https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html)
@@ -107,8 +113,8 @@ type CreateReplicationConfigurationOutput struct {
 	// This member is required.
 	Destinations []types.Destination
 
-	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system in
-	// the replication configuration.
+	// The Amazon Resource Name (ARN) of the original source EFS file system in the
+	// replication configuration.
 	//
 	// This member is required.
 	OriginalSourceFileSystemArn *string
@@ -124,8 +130,7 @@ type CreateReplicationConfigurationOutput struct {
 	// This member is required.
 	SourceFileSystemId *string
 
-	// The Amazon Web Services Region in which the source Amazon EFS file system is
-	// located.
+	// The Amazon Web Services Region in which the source EFS file system is located.
 	//
 	// This member is required.
 	SourceFileSystemRegion *string

@@ -38,6 +38,9 @@ type AssociateDataShareConsumerInput struct {
 	// This member is required.
 	DataShareArn *string
 
+	// If set to true, allows write operations for a datashare.
+	AllowWrites *bool
+
 	// A value that specifies whether the datashare is associated with the entire
 	// account.
 	AssociateEntireAccount *bool

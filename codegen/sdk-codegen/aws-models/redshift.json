@@ -359,6 +359,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>From a datashare consumer account, associates a datashare with all existing and future namespaces in the specified Amazon Web Services Region.</p>"
                     }
+                },
+                "AllowWrites": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to true, allows write operations for a datashare.</p>"
+                    }
                 }
             },
             "traits": {
@@ -711,6 +717,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AllowWrites": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to true, allows write operations for a datashare.</p>"
                     }
                 }
             },
@@ -4454,6 +4466,18 @@
                     "target": "com.amazonaws.redshift#TStamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The status change data of the datashare that is associated.</p>"
+                    }
+                },
+                "ProducerAllowedWrites": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether write operations were allowed during data share authorization.</p>"
+                    }
+                },
+                "ConsumerAcceptedWrites": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether write operations were allowed during data share association.</p>"
                     }
                 }
             },

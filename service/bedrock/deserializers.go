@@ -813,6 +813,15 @@ func awsRestjson1_deserializeOpDocumentGetCustomModelOutput(v **GetCustomModelOu
 				sv.CreationTime = ptr.Time(t)
 			}
 
+		case "customizationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomizationType to be of type string, got %T instead", value)
+				}
+				sv.CustomizationType = types.CustomizationType(jtv)
+			}
+
 		case "hyperParameters":
 			if err := awsRestjson1_deserializeDocumentModelCustomizationHyperParameters(&sv.HyperParameters, value); err != nil {
 				return err
@@ -1230,6 +1239,15 @@ func awsRestjson1_deserializeOpDocumentGetModelCustomizationJobOutput(v **GetMod
 					return err
 				}
 				sv.CreationTime = ptr.Time(t)
+			}
+
+		case "customizationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomizationType to be of type string, got %T instead", value)
+				}
+				sv.CustomizationType = types.CustomizationType(jtv)
 			}
 
 		case "endTime":
@@ -3581,6 +3599,15 @@ func awsRestjson1_deserializeDocumentCustomModelSummary(v **types.CustomModelSum
 				sv.CreationTime = ptr.Time(t)
 			}
 
+		case "customizationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomizationType to be of type string, got %T instead", value)
+				}
+				sv.CustomizationType = types.CustomizationType(jtv)
+			}
+
 		case "modelArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3697,6 +3724,11 @@ func awsRestjson1_deserializeDocumentFoundationModelDetails(v **types.Foundation
 				sv.ModelId = ptr.String(jtv)
 			}
 
+		case "modelLifecycle":
+			if err := awsRestjson1_deserializeDocumentFoundationModelLifecycle(&sv.ModelLifecycle, value); err != nil {
+				return err
+			}
+
 		case "modelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3727,6 +3759,46 @@ func awsRestjson1_deserializeDocumentFoundationModelDetails(v **types.Foundation
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.ResponseStreamingSupported = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFoundationModelLifecycle(v **types.FoundationModelLifecycle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FoundationModelLifecycle
+	if *v == nil {
+		sv = &types.FoundationModelLifecycle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FoundationModelLifecycleStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.FoundationModelLifecycleStatus(jtv)
 			}
 
 		default:
@@ -3791,6 +3863,11 @@ func awsRestjson1_deserializeDocumentFoundationModelSummary(v **types.Foundation
 					return fmt.Errorf("expected BedrockModelId to be of type string, got %T instead", value)
 				}
 				sv.ModelId = ptr.String(jtv)
+			}
+
+		case "modelLifecycle":
+			if err := awsRestjson1_deserializeDocumentFoundationModelLifecycle(&sv.ModelLifecycle, value); err != nil {
+				return err
 			}
 
 		case "modelName":
@@ -4124,6 +4201,15 @@ func awsRestjson1_deserializeDocumentModelCustomizationJobSummary(v **types.Mode
 					return err
 				}
 				sv.CreationTime = ptr.Time(t)
+			}
+
+		case "customizationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomizationType to be of type string, got %T instead", value)
+				}
+				sv.CustomizationType = types.CustomizationType(jtv)
 			}
 
 		case "customModelArn":

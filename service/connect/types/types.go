@@ -146,6 +146,38 @@ type AgentStatusSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the capabilities enabled for participants of the contact.
+type AllowedCapabilities struct {
+
+	// Information about the agent's video sharing capabilities.
+	Agent *ParticipantCapabilities
+
+	// Information about the customer's video sharing capabilities.
+	Customer *ParticipantCapabilities
+
+	noSmithyDocumentSerde
+}
+
+// This API is in preview release for Amazon Connect and is subject to change.
+// Information about associations that are successfully created: DataSetId ,
+// TargetAccountId , ResourceShareId , ResourceShareArn .
+type AnalyticsDataAssociationResult struct {
+
+	// The identifier of the dataset.
+	DataSetId *string
+
+	// The Amazon Resource Name (ARN) of the Resource Access Manager share.
+	ResourceShareArn *string
+
+	// The Resource Access Manager share ID.
+	ResourceShareId *string
+
+	// The identifier of the target account.
+	TargetAccountId *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration of the answering machine detection.
 type AnswerMachineDetectionConfig struct {
 
@@ -175,8 +207,8 @@ type Application struct {
 
 // This action must be set if TriggerEventSource is one of the following values:
 // OnPostCallAnalysisAvailable | OnRealTimeCallAnalysisAvailable |
-// OnPostChatAnalysisAvailable . Contact is categorized using the rule name.
-// RuleName is used as ContactCategory .
+// OnRealTimeChatAnalysisAvailable | OnPostChatAnalysisAvailable . Contact is
+// categorized using the rule name. RuleName is used as ContactCategory .
 type AssignContactCategoryActionDefinition struct {
 	noSmithyDocumentSerde
 }
@@ -197,6 +229,18 @@ type AttachmentReference struct {
 	noSmithyDocumentSerde
 }
 
+// The attendee information, including attendee ID and join token.
+type Attendee struct {
+
+	// The Amazon Chime SDK attendee ID.
+	AttendeeId *string
+
+	// The join token used by the Amazon Chime SDK attendee.
+	JoinToken *string
+
+	noSmithyDocumentSerde
+}
+
 // A toggle for an individual feature at the instance level.
 type Attribute struct {
 
@@ -205,6 +249,15 @@ type Attribute struct {
 
 	// The value of the attribute.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Has audio-specific configurations as the operating parameter for Echo Reduction.
+type AudioFeatures struct {
+
+	// Makes echo reduction available to clients who connect to the meeting.
+	EchoReduction MeetingFeatureStatus
 
 	noSmithyDocumentSerde
 }
@@ -230,6 +283,38 @@ type Campaign struct {
 
 	// A unique identifier for a campaign.
 	CampaignId *string
+
+	noSmithyDocumentSerde
+}
+
+// Chat integration event containing payload to perform different chat actions
+// such as:
+//   - Sending a chat message
+//   - Sending a chat event, such as typing
+//   - Disconnecting from a chat
+type ChatEvent struct {
+
+	// Type of chat integration event.
+	//
+	// This member is required.
+	Type ChatEventType
+
+	// Content of the message or event. This is required when Type is MESSAGE and for
+	// certain ContentTypes when Type is EVENT .
+	//   - For allowed message content, see the Content parameter in the SendMessage (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendMessage.html)
+	//   topic in the Amazon Connect Participant Service API Reference.
+	//   - For allowed event content, see the Content parameter in the SendEvent (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html)
+	//   topic in the Amazon Connect Participant Service API Reference.
+	Content *string
+
+	// Type of content. This is required when Type is MESSAGE or EVENT .
+	//   - For allowed message content types, see the ContentType parameter in the
+	//   SendMessage (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendMessage.html)
+	//   topic in the Amazon Connect Participant Service API Reference.
+	//   - For allowed event content types, see the ContentType parameter in the
+	//   SendEvent (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html)
+	//   topic in the Amazon Connect Participant Service API Reference.
+	ContentType *string
 
 	noSmithyDocumentSerde
 }
@@ -333,6 +418,11 @@ type ClaimedPhoneNumberSummary struct {
 	// The type of phone number.
 	PhoneNumberType PhoneNumberType
 
+	// The claimed phone number ARN that was previously imported from the external
+	// service, such as Amazon Pinpoint. If it is from Amazon Pinpoint, it looks like
+	// the ARN of the phone number that was imported from Amazon Pinpoint.
+	SourcePhoneNumberArn *string
+
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
@@ -340,6 +430,18 @@ type ClaimedPhoneNumberSummary struct {
 	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
 	// distribution groups that phone number inbound traffic is routed through.
 	TargetArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information required to join the call.
+type ConnectionData struct {
+
+	// The attendee information, including attendee ID and join token.
+	Attendee *Attendee
+
+	// A meeting created using the Amazon Chime SDK.
+	Meeting *Meeting
 
 	noSmithyDocumentSerde
 }
@@ -777,6 +879,19 @@ type Endpoint struct {
 
 	// Type of the endpoint.
 	Type EndpointType
+
+	noSmithyDocumentSerde
+}
+
+// This API is in preview release for Amazon Connect and is subject to change.
+// List of errors for dataset association failures.
+type ErrorResult struct {
+
+	// The error code.
+	ErrorCode *string
+
+	// The corresponding error message for the error code.
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -2207,11 +2322,19 @@ type ListPhoneNumbersSummary struct {
 	// The ISO country code.
 	PhoneNumberCountryCode PhoneNumberCountryCode
 
+	// The description of the phone number.
+	PhoneNumberDescription *string
+
 	// A unique identifier for the phone number.
 	PhoneNumberId *string
 
 	// The type of phone number.
 	PhoneNumberType PhoneNumberType
+
+	// The claimed phone number ARN that was previously imported from the external
+	// service, such as Amazon Pinpoint. If it is from Amazon Pinpoint, it looks like
+	// the ARN of the phone number that was imported from Amazon Pinpoint.
+	SourcePhoneNumberArn *string
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
 	// distribution groups that phone number inbound traffic is routed through.
@@ -2242,6 +2365,55 @@ type MediaConcurrency struct {
 	// contact from another channel when they are currently working with a contact from
 	// a Voice channel.
 	CrossChannelBehavior *CrossChannelBehavior
+
+	noSmithyDocumentSerde
+}
+
+// A set of endpoints used by clients to connect to the media service group for an
+// Amazon Chime SDK meeting.
+type MediaPlacement struct {
+
+	// The audio fallback URL.
+	AudioFallbackUrl *string
+
+	// The audio host URL.
+	AudioHostUrl *string
+
+	// The event ingestion URL to which you send client meeting events.
+	EventIngestionUrl *string
+
+	// The signaling URL.
+	SignalingUrl *string
+
+	// The turn control URL.
+	TurnControlUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// A meeting created using the Amazon Chime SDK.
+type Meeting struct {
+
+	// The media placement for the meeting.
+	MediaPlacement *MediaPlacement
+
+	// The Amazon Web Services Region in which you create the meeting.
+	MediaRegion *string
+
+	// The configuration settings of the features available to a meeting.
+	MeetingFeatures *MeetingFeaturesConfiguration
+
+	// The Amazon Chime SDK meeting ID.
+	MeetingId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration settings of the features available to a meeting.
+type MeetingFeaturesConfiguration struct {
+
+	// The configuration settings for the audio features available to a meeting.
+	Audio *AudioFeatures
 
 	noSmithyDocumentSerde
 }
@@ -2336,6 +2508,36 @@ type MetricV2 struct {
 	noSmithyDocumentSerde
 }
 
+// Payload of chat properties to apply when starting a new contact.
+type NewSessionDetails struct {
+
+	// A custom key-value pair using an attribute map. The attributes are standard
+	// Amazon Connect attributes. They can be accessed in flows just like any other
+	// contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value
+	// pairs per contact. Attribute keys can include only alphanumeric, dash, and
+	// underscore characters.
+	Attributes map[string]string
+
+	// The customer's details.
+	ParticipantDetails *ParticipantDetails
+
+	// The streaming configuration, such as the Amazon SNS streaming endpoint.
+	StreamingConfiguration *ChatStreamingConfiguration
+
+	// The supported chat message content types. Supported types are text/plain ,
+	// text/markdown , application/json ,
+	// application/vnd.amazonaws.connect.message.interactive , and
+	// application/vnd.amazonaws.connect.message.interactive.response . Content types
+	// must always contain text/plain . You can then put any other supported type in
+	// the list. For example, all the following lists are valid because they contain
+	// text/plain : [text/plain, text/markdown, application/json] ,  [text/markdown,
+	// text/plain] , [text/plain, application/json,
+	// application/vnd.amazonaws.connect.message.interactive.response] .
+	SupportedMessagingContentTypes []string
+
+	noSmithyDocumentSerde
+}
+
 // The type of notification recipient.
 type NotificationRecipientType struct {
 
@@ -2392,6 +2594,17 @@ type OutboundCallerConfig struct {
 
 	// The outbound whisper flow to be used during an outbound call.
 	OutboundFlowId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the allowed capabilities for participants present over
+// the call.
+type ParticipantCapabilities struct {
+
+	// The configuration having the video sharing capabilities for participants over
+	// the call.
+	Video VideoCapability
 
 	noSmithyDocumentSerde
 }
@@ -2864,8 +3077,8 @@ type QuickConnect struct {
 // Contains configuration settings for a quick connect.
 type QuickConnectConfig struct {
 
-	// The type of quick connect. In the Amazon Connect console, when you create a
-	// quick connect, you are prompted to assign one of the following types: Agent
+	// The type of quick connect. In the Amazon Connect admin website, when you create
+	// a quick connect, you are prompted to assign one of the following types: Agent
 	// (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 	//
 	// This member is required.
@@ -2931,8 +3144,8 @@ type QuickConnectSummary struct {
 	// The name of the quick connect.
 	Name *string
 
-	// The type of quick connect. In the Amazon Connect console, when you create a
-	// quick connect, you are prompted to assign one of the following types: Agent
+	// The type of quick connect. In the Amazon Connect admin website, when you create
+	// a quick connect, you are prompted to assign one of the following types: Agent
 	// (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 	QuickConnectType QuickConnectType
 
@@ -2944,6 +3157,342 @@ type ReadOnlyFieldInfo struct {
 
 	// Identifier of the read-only field.
 	Id *TaskTemplateFieldIdentifier
+
+	noSmithyDocumentSerde
+}
+
+// Object that describes attached file.
+type RealTimeContactAnalysisAttachment struct {
+
+	// A unique identifier for the attachment.
+	//
+	// This member is required.
+	AttachmentId *string
+
+	// A case-sensitive name of the attachment being uploaded. Can be redacted.
+	//
+	// This member is required.
+	AttachmentName *string
+
+	// Describes the MIME file type of the attachment. For a list of supported file
+	// types, see Feature specifications (https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html)
+	// in the Amazon Connect Administrator Guide.
+	ContentType *string
+
+	// Status of the attachment.
+	Status ArtifactStatus
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the category rule that was matched.
+type RealTimeContactAnalysisCategoryDetails struct {
+
+	// List of PointOfInterest - objects describing a single match of a rule.
+	//
+	// This member is required.
+	PointsOfInterest []RealTimeContactAnalysisPointOfInterest
+
+	noSmithyDocumentSerde
+}
+
+// Begin and end offsets for a part of text.
+type RealTimeContactAnalysisCharacterInterval struct {
+
+	// The beginning of the character interval.
+	//
+	// This member is required.
+	BeginOffsetChar int32
+
+	// The end of the character interval.
+	//
+	// This member is required.
+	EndOffsetChar int32
+
+	noSmithyDocumentSerde
+}
+
+// Potential issues that are detected based on an artificial intelligence analysis
+// of each turn in the conversation.
+type RealTimeContactAnalysisIssueDetected struct {
+
+	// List of the transcript items (segments) that are associated with a given issue.
+	//
+	// This member is required.
+	TranscriptItems []RealTimeContactAnalysisTranscriptItemWithContent
+
+	noSmithyDocumentSerde
+}
+
+// The section of the contact transcript segment that category rule was detected.
+type RealTimeContactAnalysisPointOfInterest struct {
+
+	// List of the transcript items (segments) that are associated with a given point
+	// of interest.
+	TranscriptItems []RealTimeContactAnalysisTranscriptItemWithCharacterOffsets
+
+	noSmithyDocumentSerde
+}
+
+// An analyzed segment for a real-time analysis session.
+//
+// The following types satisfy this interface:
+//
+//	RealtimeContactAnalysisSegmentMemberAttachments
+//	RealtimeContactAnalysisSegmentMemberCategories
+//	RealtimeContactAnalysisSegmentMemberEvent
+//	RealtimeContactAnalysisSegmentMemberIssues
+//	RealtimeContactAnalysisSegmentMemberTranscript
+type RealtimeContactAnalysisSegment interface {
+	isRealtimeContactAnalysisSegment()
+}
+
+// The analyzed attachments.
+type RealtimeContactAnalysisSegmentMemberAttachments struct {
+	Value RealTimeContactAnalysisSegmentAttachments
+
+	noSmithyDocumentSerde
+}
+
+func (*RealtimeContactAnalysisSegmentMemberAttachments) isRealtimeContactAnalysisSegment() {}
+
+// The matched category rules.
+type RealtimeContactAnalysisSegmentMemberCategories struct {
+	Value RealTimeContactAnalysisSegmentCategories
+
+	noSmithyDocumentSerde
+}
+
+func (*RealtimeContactAnalysisSegmentMemberCategories) isRealtimeContactAnalysisSegment() {}
+
+// Segment type describing a contact event.
+type RealtimeContactAnalysisSegmentMemberEvent struct {
+	Value RealTimeContactAnalysisSegmentEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*RealtimeContactAnalysisSegmentMemberEvent) isRealtimeContactAnalysisSegment() {}
+
+// Segment type containing a list of detected issues.
+type RealtimeContactAnalysisSegmentMemberIssues struct {
+	Value RealTimeContactAnalysisSegmentIssues
+
+	noSmithyDocumentSerde
+}
+
+func (*RealtimeContactAnalysisSegmentMemberIssues) isRealtimeContactAnalysisSegment() {}
+
+// The analyzed transcript segment.
+type RealtimeContactAnalysisSegmentMemberTranscript struct {
+	Value RealTimeContactAnalysisSegmentTranscript
+
+	noSmithyDocumentSerde
+}
+
+func (*RealtimeContactAnalysisSegmentMemberTranscript) isRealtimeContactAnalysisSegment() {}
+
+// Segment containing list of attachments.
+type RealTimeContactAnalysisSegmentAttachments struct {
+
+	// List of objects describing an individual attachment.
+	//
+	// This member is required.
+	Attachments []RealTimeContactAnalysisAttachment
+
+	// The identifier of the segment.
+	//
+	// This member is required.
+	Id *string
+
+	// The identifier of the participant.
+	//
+	// This member is required.
+	ParticipantId *string
+
+	// The role of the participant. For example, is it a customer, agent, or system.
+	//
+	// This member is required.
+	ParticipantRole ParticipantRole
+
+	// Field describing the time of the event. It can have different representations
+	// of time.
+	//
+	// This member is required.
+	Time RealTimeContactAnalysisTimeData
+
+	// The display name of the participant. Can be redacted.
+	DisplayName *string
+
+	noSmithyDocumentSerde
+}
+
+// The matched category rules.
+type RealTimeContactAnalysisSegmentCategories struct {
+
+	// Map between the name of the matched rule and
+	// RealTimeContactAnalysisCategoryDetails.
+	//
+	// This member is required.
+	MatchedDetails map[string]RealTimeContactAnalysisCategoryDetails
+
+	noSmithyDocumentSerde
+}
+
+// Segment type describing a contact event.
+type RealTimeContactAnalysisSegmentEvent struct {
+
+	// Type of the event. For example,
+	// application/vnd.amazonaws.connect.event.participant.left .
+	//
+	// This member is required.
+	EventType *string
+
+	// The identifier of the contact event.
+	//
+	// This member is required.
+	Id *string
+
+	// Field describing the time of the event. It can have different representations
+	// of time.
+	//
+	// This member is required.
+	Time RealTimeContactAnalysisTimeData
+
+	// The display name of the participant. Can be redacted.
+	DisplayName *string
+
+	// The identifier of the participant.
+	ParticipantId *string
+
+	// The role of the participant. For example, is it a customer, agent, or system.
+	ParticipantRole ParticipantRole
+
+	noSmithyDocumentSerde
+}
+
+// Segment type containing a list of detected issues.
+type RealTimeContactAnalysisSegmentIssues struct {
+
+	// List of the issues detected.
+	//
+	// This member is required.
+	IssuesDetected []RealTimeContactAnalysisIssueDetected
+
+	noSmithyDocumentSerde
+}
+
+// The analyzed transcript segment.
+type RealTimeContactAnalysisSegmentTranscript struct {
+
+	// The content of the transcript. Can be redacted.
+	//
+	// This member is required.
+	Content *string
+
+	// The identifier of the transcript.
+	//
+	// This member is required.
+	Id *string
+
+	// The identifier of the participant.
+	//
+	// This member is required.
+	ParticipantId *string
+
+	// The role of the participant. For example, is it a customer, agent, or system.
+	//
+	// This member is required.
+	ParticipantRole ParticipantRole
+
+	// Field describing the time of the event. It can have different representations
+	// of time.
+	//
+	// This member is required.
+	Time RealTimeContactAnalysisTimeData
+
+	// The type of content of the item. For example, text/plain .
+	ContentType *string
+
+	// The display name of the participant.
+	DisplayName *string
+
+	// Object describing redaction that was applied to the transcript. If transcript
+	// has the field it means part of the transcript was redacted.
+	Redaction *RealTimeContactAnalysisTranscriptItemRedaction
+
+	// The sentiment detected for this piece of transcript.
+	Sentiment RealTimeContactAnalysisSentimentLabel
+
+	noSmithyDocumentSerde
+}
+
+// Object describing time with which the segment is associated. It can have
+// different representations of time. Currently supported: absoluteTime
+//
+// The following types satisfy this interface:
+//
+//	RealTimeContactAnalysisTimeDataMemberAbsoluteTime
+type RealTimeContactAnalysisTimeData interface {
+	isRealTimeContactAnalysisTimeData()
+}
+
+// Time represented in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+// 2019-11-08T02:41:28.172Z.
+type RealTimeContactAnalysisTimeDataMemberAbsoluteTime struct {
+	Value time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (*RealTimeContactAnalysisTimeDataMemberAbsoluteTime) isRealTimeContactAnalysisTimeData() {}
+
+// Object describing redaction applied to the segment.
+type RealTimeContactAnalysisTranscriptItemRedaction struct {
+
+	// List of character intervals each describing a part of the text that was
+	// redacted. For OutputType.Raw , part of the original text that contains data that
+	// can be redacted. For OutputType.Redacted , part of the string with redaction tag.
+	CharacterOffsets []RealTimeContactAnalysisCharacterInterval
+
+	noSmithyDocumentSerde
+}
+
+// Transcript representation containing Id and list of character intervals that
+// are associated with analysis data. For example, this object within a
+// RealTimeContactAnalysisPointOfInterest in Category.MatchedDetails would have
+// character interval describing part of the text that matched category.
+type RealTimeContactAnalysisTranscriptItemWithCharacterOffsets struct {
+
+	// Transcript identifier. Matches the identifier from one of the
+	// TranscriptSegments.
+	//
+	// This member is required.
+	Id *string
+
+	// List of character intervals within transcript content/text.
+	CharacterOffsets *RealTimeContactAnalysisCharacterInterval
+
+	noSmithyDocumentSerde
+}
+
+// Transcript representation containing Id, Content and list of character
+// intervals that are associated with analysis data. For example, this object
+// within an issue detected would describe both content that contains identified
+// issue and intervals where that content is taken from.
+type RealTimeContactAnalysisTranscriptItemWithContent struct {
+
+	// Transcript identifier. Matches the identifier from one of the
+	// TranscriptSegments.
+	//
+	// This member is required.
+	Id *string
+
+	// Begin and end offsets for a part of text.
+	CharacterOffsets *RealTimeContactAnalysisCharacterInterval
+
+	// Part of the transcript content that contains identified issue. Can be redacted
+	Content *string
 
 	noSmithyDocumentSerde
 }
@@ -3325,19 +3874,21 @@ type RuleAction struct {
 
 	// Information about the contact category action. Supported only for
 	// TriggerEventSource values: OnPostCallAnalysisAvailable |
-	// OnRealTimeCallAnalysisAvailable | OnPostChatAnalysisAvailable |
-	// OnZendeskTicketCreate | OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate
+	// OnRealTimeCallAnalysisAvailable | OnRealTimeChatAnalysisAvailable |
+	// OnPostChatAnalysisAvailable | OnZendeskTicketCreate |
+	// OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate
 	AssignContactCategoryAction *AssignContactCategoryActionDefinition
 
 	// Information about the EventBridge action. Supported only for TriggerEventSource
 	// values: OnPostCallAnalysisAvailable | OnRealTimeCallAnalysisAvailable |
-	// OnPostChatAnalysisAvailable | OnContactEvaluationSubmit | OnMetricDataUpdate
+	// OnRealTimeChatAnalysisAvailable | OnPostChatAnalysisAvailable |
+	// OnContactEvaluationSubmit | OnMetricDataUpdate
 	EventBridgeAction *EventBridgeActionDefinition
 
 	// Information about the send notification action. Supported only for
 	// TriggerEventSource values: OnPostCallAnalysisAvailable |
-	// OnRealTimeCallAnalysisAvailable | OnPostChatAnalysisAvailable |
-	// OnContactEvaluationSubmit | OnMetricDataUpdate
+	// OnRealTimeCallAnalysisAvailable | OnRealTimeChatAnalysisAvailable |
+	// OnPostChatAnalysisAvailable | OnContactEvaluationSubmit | OnMetricDataUpdate
 	SendNotificationAction *SendNotificationActionDefinition
 
 	// Information about the task action. This field is required if TriggerEventSource
@@ -4588,5 +5139,7 @@ func (*UnknownUnionMember) isEvaluationFormNumericQuestionAutomation()          
 func (*UnknownUnionMember) isEvaluationFormQuestionTypeProperties()               {}
 func (*UnknownUnionMember) isEvaluationFormSingleSelectQuestionAutomationOption() {}
 func (*UnknownUnionMember) isParticipantTimerValue()                              {}
+func (*UnknownUnionMember) isRealtimeContactAnalysisSegment()                     {}
+func (*UnknownUnionMember) isRealTimeContactAnalysisTimeData()                    {}
 func (*UnknownUnionMember) isReferenceSummary()                                   {}
 func (*UnknownUnionMember) isUpdateParticipantRoleConfigChannelInfo()             {}

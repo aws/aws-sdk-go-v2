@@ -58,6 +58,10 @@ type DeleteUserGroupOutput struct {
 	// A list of replication groups that the user group can access.
 	ReplicationGroups []string
 
+	// Indicates which serverless caches the specified user group is associated with.
+	// Available for Redis only.
+	ServerlessCaches []string
+
 	// Indicates user group status. Can be "creating", "active", "modifying",
 	// "deleting".
 	Status *string

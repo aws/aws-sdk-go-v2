@@ -26,8 +26,9 @@ type ControlOperationType string
 
 // Enum values for ControlOperationType
 const (
-	ControlOperationTypeEnableControl  ControlOperationType = "ENABLE_CONTROL"
-	ControlOperationTypeDisableControl ControlOperationType = "DISABLE_CONTROL"
+	ControlOperationTypeEnableControl        ControlOperationType = "ENABLE_CONTROL"
+	ControlOperationTypeDisableControl       ControlOperationType = "DISABLE_CONTROL"
+	ControlOperationTypeUpdateEnabledControl ControlOperationType = "UPDATE_ENABLED_CONTROL"
 )
 
 // Values returns all known values for ControlOperationType. Note that this can be
@@ -37,6 +38,7 @@ func (ControlOperationType) Values() []ControlOperationType {
 	return []ControlOperationType{
 		"ENABLE_CONTROL",
 		"DISABLE_CONTROL",
+		"UPDATE_ENABLED_CONTROL",
 	}
 }
 
@@ -79,5 +81,85 @@ func (EnablementStatus) Values() []EnablementStatus {
 		"SUCCEEDED",
 		"FAILED",
 		"UNDER_CHANGE",
+	}
+}
+
+type LandingZoneDriftStatus string
+
+// Enum values for LandingZoneDriftStatus
+const (
+	LandingZoneDriftStatusDrifted LandingZoneDriftStatus = "DRIFTED"
+	LandingZoneDriftStatusInSync  LandingZoneDriftStatus = "IN_SYNC"
+)
+
+// Values returns all known values for LandingZoneDriftStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LandingZoneDriftStatus) Values() []LandingZoneDriftStatus {
+	return []LandingZoneDriftStatus{
+		"DRIFTED",
+		"IN_SYNC",
+	}
+}
+
+type LandingZoneOperationStatus string
+
+// Enum values for LandingZoneOperationStatus
+const (
+	LandingZoneOperationStatusSucceeded  LandingZoneOperationStatus = "SUCCEEDED"
+	LandingZoneOperationStatusFailed     LandingZoneOperationStatus = "FAILED"
+	LandingZoneOperationStatusInProgress LandingZoneOperationStatus = "IN_PROGRESS"
+)
+
+// Values returns all known values for LandingZoneOperationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LandingZoneOperationStatus) Values() []LandingZoneOperationStatus {
+	return []LandingZoneOperationStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"IN_PROGRESS",
+	}
+}
+
+type LandingZoneOperationType string
+
+// Enum values for LandingZoneOperationType
+const (
+	LandingZoneOperationTypeDelete LandingZoneOperationType = "DELETE"
+	LandingZoneOperationTypeCreate LandingZoneOperationType = "CREATE"
+	LandingZoneOperationTypeUpdate LandingZoneOperationType = "UPDATE"
+	LandingZoneOperationTypeReset  LandingZoneOperationType = "RESET"
+)
+
+// Values returns all known values for LandingZoneOperationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LandingZoneOperationType) Values() []LandingZoneOperationType {
+	return []LandingZoneOperationType{
+		"DELETE",
+		"CREATE",
+		"UPDATE",
+		"RESET",
+	}
+}
+
+type LandingZoneStatus string
+
+// Enum values for LandingZoneStatus
+const (
+	LandingZoneStatusActive     LandingZoneStatus = "ACTIVE"
+	LandingZoneStatusProcessing LandingZoneStatus = "PROCESSING"
+	LandingZoneStatusFailed     LandingZoneStatus = "FAILED"
+)
+
+// Values returns all known values for LandingZoneStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LandingZoneStatus) Values() []LandingZoneStatus {
+	return []LandingZoneStatus{
+		"ACTIVE",
+		"PROCESSING",
+		"FAILED",
 	}
 }

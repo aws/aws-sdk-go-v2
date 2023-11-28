@@ -16,15 +16,15 @@ import (
 // bucket. Amazon RDS must be authorized to access the Amazon S3 bucket and the
 // data must be created using the Percona XtraBackup utility as described in
 // Migrating Data from MySQL by Using an Amazon S3 Bucket (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html#AuroraMySQL.Migrating.ExtMySQL.S3)
-// in the Amazon Aurora User Guide. This action only restores the DB cluster, not
-// the DB instances for that DB cluster. You must invoke the CreateDBInstance
-// action to create DB instances for the restored DB cluster, specifying the
+// in the Amazon Aurora User Guide. This operation only restores the DB cluster,
+// not the DB instances for that DB cluster. You must invoke the CreateDBInstance
+// operation to create DB instances for the restored DB cluster, specifying the
 // identifier of the restored DB cluster in DBClusterIdentifier . You can create DB
-// instances only after the RestoreDBClusterFromS3 action has completed and the DB
-// cluster is available. For more information on Amazon Aurora, see What is Amazon
-// Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
-// The source DB engine must be MySQL.
+// instances only after the RestoreDBClusterFromS3 operation has completed and the
+// DB cluster is available. For more information on Amazon Aurora, see What is
+// Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// in the Amazon Aurora User Guide. This operation only applies to Aurora DB
+// clusters. The source DB engine must be MySQL.
 func (c *Client) RestoreDBClusterFromS3(ctx context.Context, params *RestoreDBClusterFromS3Input, optFns ...func(*Options)) (*RestoreDBClusterFromS3Output, error) {
 	if params == nil {
 		params = &RestoreDBClusterFromS3Input{}

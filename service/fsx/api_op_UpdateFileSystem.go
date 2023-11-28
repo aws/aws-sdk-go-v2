@@ -42,9 +42,11 @@ import (
 //   - DailyAutomaticBackupStartTime
 //   - DiskIopsConfiguration
 //   - FsxAdminPassword
+//   - HAPairs
 //   - RemoveRouteTableIds
 //   - StorageCapacity
 //   - ThroughputCapacity
+//   - ThroughputCapacityPerHAPair
 //   - WeeklyMaintenanceStartTime
 //
 // For FSx for OpenZFS file systems, you can update the following properties:

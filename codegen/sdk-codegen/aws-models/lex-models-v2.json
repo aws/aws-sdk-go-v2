@@ -2626,6 +2626,27 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lexmodelsv2#BedrockModelArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model\\/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BedrockModelSpecification": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.lexmodelsv2#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the foundation model used in descriptive bot building.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon Bedrock model used to interpret the prompt used in descriptive bot building.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#Boolean": {
             "type": "boolean",
             "traits": {
@@ -3877,6 +3898,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lexmodelsv2#BuildtimeSettings": {
+            "type": "structure",
+            "members": {
+                "descriptiveBotBuilder": {
+                    "target": "com.amazonaws.lexmodelsv2#DescriptiveBotBuilderSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing specifications for the descriptive bot building feature.</p>"
+                    }
+                },
+                "sampleUtteranceGeneration": {
+                    "target": "com.amazonaws.lexmodelsv2#SampleUtteranceGenerationSpecification"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains specifications about the Amazon Lex build time generative AI capabilities from Amazon Bedrock that you can turn on for your bot.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#BuiltInIntentSortAttribute": {
             "type": "enum",
             "members": {
@@ -4905,6 +4943,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the\n         user.</p>"
                     }
+                },
+                "generativeAISettings": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings"
                 }
             },
             "traits": {
@@ -4967,6 +5008,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp specifying the date and time that the bot locale was\n         created.</p>"
                     }
+                },
+                "generativeAISettings": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings"
                 }
             },
             "traits": {
@@ -5148,7 +5192,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new version of the bot based on the <code>DRAFT</code>\n         version. If the <code>DRAFT</code> version of this resource hasn't\n         changed since you created the last version, Amazon Lex doesn't create a new\n         version, it returns the last created version.</p>\n         <p>When you create the first version of a bot, Amazon Lex sets the version\n         to 1. Subsequent versions increment by 1.</p>",
+                "smithy.api#documentation": "<p>Creates an immutable version of the bot. When you create the first \n         version of a bot, Amazon Lex sets the version number to 1. Subsequent bot versions increase \n         in an increment of 1. The version number will always represent the total number \n         of versions created of the bot, not the current number of versions. If a bot version\n         is deleted, that bot version number will not be reused.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/bots/{botId}/botversions",
@@ -8346,6 +8390,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Recommended actions to take to resolve an error in the\n            <code>failureReasons</code> field.</p>"
                     }
+                },
+                "generativeAISettings": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains settings for Amazon Bedrock's generative AI features for your bot locale.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8511,6 +8561,151 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotResourceGeneration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeBotResourceGenerationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeBotResourceGenerationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a request to generate a bot through natural language description, made through \n      the <code>StartBotResource</code> API. Use the <code>generatedBotLocaleUrl</code> \n      to retrieve the Amazon S3 object containing the bot locale configuration. You can \n      then modify and import this configuration.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generations/{generationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotResourceGenerationRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot for which to return the generation details.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot for which to return the generation details.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the bot for which to return the generation details.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "generationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the generation request for which to \n         return the generation details.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotResourceGenerationResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot for which the generation request was \n      made.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot for which the generation request was made.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the bot for which the generation request was made.</p>"
+                    }
+                },
+                "generationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation ID for which to return the generation details.</p>"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.lexmodelsv2#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of reasons why the generation of bot resources through natural language description failed.</p>"
+                    }
+                },
+                "generationStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the generation request.</p>"
+                    }
+                },
+                "generationInputPrompt": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prompt used in the generation request.</p>"
+                    }
+                },
+                "generatedBotLocaleUrl": {
+                    "target": "com.amazonaws.lexmodelsv2#PresignedS3Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the generated bot locale configuration.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the item was generated.</p>"
+                    }
+                },
+                "modelArn": {
+                    "target": "com.amazonaws.lexmodelsv2#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model used to generate the bot resources.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the generated item was updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lexmodelsv2#DescribeBotResponse": {
@@ -10257,6 +10452,28 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#DescriptiveBotBuilderSpecification": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the descriptive bot building feature is activated or not.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bedrockModelSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#BedrockModelSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing information about the Amazon Bedrock model used to interpret the prompt used in descriptive bot building.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains specifications for the descriptive bot building feature.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#DialogAction": {
             "type": "structure",
             "members": {
@@ -10460,6 +10677,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Settings that specify the dialog code hook that is called by Amazon Lex between eliciting slot values.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#Enabled": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.lexmodelsv2#EncryptionSetting": {
@@ -10993,6 +11216,246 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information for updating the user on the progress of\n         fulfilling an intent.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GenerateBotElement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#GenerateBotElementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#GenerateBotElementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates sample utterances for an intent.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generate",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GenerateBotElementRequest": {
+            "type": "structure",
+            "members": {
+                "intentId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The intent unique Id for the bot request to generate utterances.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot unique Id for the bot request to generate utterances.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version for the bot request to generate utterances.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique locale Id for the bot request to generate utterances.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GenerateBotElementResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique bot Id for the bot which received the response.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique bot version for the bot which received the response.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique locale Id for the bot which received the response.</p>"
+                    }
+                },
+                "intentId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique intent Id for the bot which received the response.</p>"
+                    }
+                },
+                "sampleUtterances": {
+                    "target": "com.amazonaws.lexmodelsv2#SampleUtterancesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sample utterances for the bot which received the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GenerationInput": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 100,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GenerationSortBy": {
+            "type": "structure",
+            "members": {
+                "attribute": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerationSortByAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute by which to sort the generation request information. You can sort by the following attributes.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>creationStartTime</code> – The time at which the generation request was created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>lastUpdatedTime</code> – The time at which the generation request was last updated.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order by which to sort the generation request information.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the attribute and method by which to sort the generation request information.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GenerationSortByAttribute": {
+            "type": "enum",
+            "members": {
+                "creationStartTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "creationStartTime"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lastUpdatedTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GenerationStatus": {
+            "type": "enum",
+            "members": {
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Complete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Complete"
+                    }
+                },
+                "InProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GenerationSummary": {
+            "type": "structure",
+            "members": {
+                "generationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the generation request.</p>"
+                    }
+                },
+                "generationStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the generation request.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the generation request was made.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the generation request was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a generation request made for the bot locale.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GenerationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#GenerationSummary"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GenerativeAISettings": {
+            "type": "structure",
+            "members": {
+                "runtimeSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#RuntimeSettings"
+                },
+                "buildtimeSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#BuildtimeSettings"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains specifications about the generative AI capabilities from Amazon Bedrock that you can turn on for your bot.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#GetTestExecutionArtifactsUrl": {
@@ -12234,6 +12697,9 @@
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotRecommendation"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#DescribeBotResourceGeneration"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotVersion"
                 },
                 {
@@ -12270,6 +12736,9 @@
                     "target": "com.amazonaws.lexmodelsv2#DescribeTestSetGeneration"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#GenerateBotElement"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#GetTestExecutionArtifactsUrl"
                 },
                 {
@@ -12283,6 +12752,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListBotRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListBotResourceGenerations"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListBots"
@@ -12358,6 +12830,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#StartBotRecommendation"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#StartBotResourceGeneration"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#StartImport"
@@ -13684,6 +14159,130 @@
                     "target": "com.amazonaws.lexmodelsv2#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token that indicates whether there are more results to return in a\n         response to the ListBotRecommendations operation. If the nextToken\n         field is present, you send the contents as the nextToken parameter of a\n         ListBotRecommendations operation request to get the next page of\n         results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotResourceGenerations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotResourceGenerationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotResourceGenerationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the generation requests made for a bot locale.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotResourceGenerationsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot whose generation \n      requests you want to view.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot whose generation \n         requests you want to view.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the bot whose generation \n         requests you want to view.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerationSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing information about the attribute and the \n      method by which to sort the results</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the number \n      specified in the <code>maxResults</code>, the response returns a token \n      in the <code>nextToken</code> field. Use this token when making a request to \n      return the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotResourceGenerationsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot for which the generation requests were made.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot for which the generation requests were made.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the bot for which the generation requests were made.</p>"
+                    }
+                },
+                "generationSummaries": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each containing information about a generation request for the bot locale.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the number \n         specified in the <code>maxResults</code>, the response returns a token \n         in the <code>nextToken</code> field. Use this token when making a request to \n         return the next batch of results.</p>"
                     }
                 }
             },
@@ -17260,6 +17859,20 @@
                 "smithy.api#documentation": "<p>You can provide Amazon Lex with hints to the phrases that a customer is\n likely to use for a slot. When a slot with hints is resolved, the\n phrases in the runtime hints are preferred in the resolution. You can\n provide hints for a maximum of 100 intents. You can provide a maximum\n of 100 slots.</p>\n         <p>Before you can use runtime hints with an existing bot, you must\n first rebuild the bot.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html\">Using runtime hints to\n improve recognition of slot values</a>.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#RuntimeSettings": {
+            "type": "structure",
+            "members": {
+                "slotResolutionImprovement": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotResolutionImprovementSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing specifications for the assisted slot resolution feature.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains specifications about the Amazon Lex runtime generative AI capabilities from Amazon Bedrock that you can turn on for your bot.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#S3BucketArn": {
             "type": "string",
             "traits": {
@@ -17395,6 +18008,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A sample utterance that invokes an intent or respond to a slot\n         elicitation prompt.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SampleUtteranceGenerationSpecification": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to enable sample utterance generation or not.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bedrockModelSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#BedrockModelSpecification"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains specifications for the sample utterance generation feature.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#SampleUtterancesCount": {
@@ -17998,6 +18630,60 @@
                 "smithy.api#documentation": "<p>Sets the priority that Amazon Lex should use when eliciting slot values\n         from a user.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#SlotResolutionImprovementSpecification": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Enabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether assisted slot resolution is turned on or off.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bedrockModelSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#BedrockModelSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing information about the Amazon Bedrock model used to assist slot resolution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains specifications for the assisted slot resolution feature.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SlotResolutionSetting": {
+            "type": "structure",
+            "members": {
+                "slotResolutionStrategy": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotResolutionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether assisted slot resolution is turned on for the slot or not. If the value is <code>EnhancedFallback</code>, assisted slot resolution is activated when Amazon Lex defaults to the <code>AMAZON.FallbackIntent</code>. If the value is <code>Default</code>, assisted slot resolution is turned off.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about whether assisted slot resolution is turned on for the slot or not.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SlotResolutionStrategy": {
+            "type": "enum",
+            "members": {
+                "EnhancedFallback": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EnhancedFallback"
+                    }
+                },
+                "Default": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Default"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#SlotResolutionTestResultItem": {
             "type": "structure",
             "members": {
@@ -18458,6 +19144,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the settings that Amazon Lex uses when a slot\n         value is successfully entered by a user.</p>"
                     }
+                },
+                "slotResolutionSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotResolutionSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing information about whether assisted slot resolution is turned on for the slot or not.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18743,6 +19435,133 @@
                     "target": "com.amazonaws.lexmodelsv2#EncryptionSetting",
                     "traits": {
                         "smithy.api#documentation": "<p>The object representing the passwords that were used to encrypt the\n         data related to the bot recommendation results, as well as the KMS key\n         ARN used to encrypt the associated metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotResourceGeneration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#StartBotResourceGenerationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#StartBotResourceGenerationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a request for the descriptive bot builder to generate a bot locale configuration \n         based on the prompt you provide it. After you make this call, use the <code>DescribeBotResourceGeneration</code> \n         operation to check on the status of the generation and for the <code>generatedBotLocaleUrl</code> when the \n         generation is complete. Use that value to retrieve the Amazon S3 object containing the bot locale configuration. You can \n         then modify and import this configuration.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/startgeneration",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotResourceGenerationRequest": {
+            "type": "structure",
+            "members": {
+                "generationInputPrompt": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prompt to generate intents and slot types for the bot locale. Your description should be both <i>detailed</i> and <i>precise</i> to help generate appropriate and sufficient intents for your bot. Include a list of actions to improve the intent creation process.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot for which to generate intents and slot types.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot for which to generate intents and slot types.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the bot for which to generate intents and slot types.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotResourceGenerationResponse": {
+            "type": "structure",
+            "members": {
+                "generationInputPrompt": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prompt that was used generate intents and slot types for the bot locale.</p>"
+                    }
+                },
+                "generationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the generation request.</p>"
+                    }
+                },
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot for which the generation request was made.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot for which the generation request was made.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the bot for which the generation request was made.</p>"
+                    }
+                },
+                "generationStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the generation request.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the generation request was made.</p>"
                     }
                 }
             },
@@ -20995,6 +21814,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The new Amazon Polly voice Amazon Lex should use for voice interaction with the\n         user.</p>"
                     }
+                },
+                "generativeAISettings": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing \n      may differ if you turn a feature on. For more information, see LINK.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21074,6 +21899,12 @@
                     "target": "com.amazonaws.lexmodelsv2#RecommendedActions",
                     "traits": {
                         "smithy.api#documentation": "<p>Recommended actions to take to resolve an error in the\n            <code>failureReasons</code> field.</p>"
+                    }
+                },
+                "generativeAISettings": {
+                    "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale.</p>"
                     }
                 }
             },

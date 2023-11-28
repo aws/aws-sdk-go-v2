@@ -2,6 +2,42 @@
 
 package types
 
+type AccountTargeting string
+
+// Enum values for AccountTargeting
+const (
+	AccountTargetingSingleAccount AccountTargeting = "single-account"
+	AccountTargetingMultiAccount  AccountTargeting = "multi-account"
+)
+
+// Values returns all known values for AccountTargeting. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccountTargeting) Values() []AccountTargeting {
+	return []AccountTargeting{
+		"single-account",
+		"multi-account",
+	}
+}
+
+type EmptyTargetResolutionMode string
+
+// Enum values for EmptyTargetResolutionMode
+const (
+	EmptyTargetResolutionModeFail EmptyTargetResolutionMode = "fail"
+	EmptyTargetResolutionModeSkip EmptyTargetResolutionMode = "skip"
+)
+
+// Values returns all known values for EmptyTargetResolutionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmptyTargetResolutionMode) Values() []EmptyTargetResolutionMode {
+	return []EmptyTargetResolutionMode{
+		"fail",
+		"skip",
+	}
+}
+
 type ExperimentActionStatus string
 
 // Enum values for ExperimentActionStatus
@@ -14,6 +50,7 @@ const (
 	ExperimentActionStatusStopping   ExperimentActionStatus = "stopping"
 	ExperimentActionStatusStopped    ExperimentActionStatus = "stopped"
 	ExperimentActionStatusFailed     ExperimentActionStatus = "failed"
+	ExperimentActionStatusSkipped    ExperimentActionStatus = "skipped"
 )
 
 // Values returns all known values for ExperimentActionStatus. Note that this can
@@ -29,6 +66,7 @@ func (ExperimentActionStatus) Values() []ExperimentActionStatus {
 		"stopping",
 		"stopped",
 		"failed",
+		"skipped",
 	}
 }
 

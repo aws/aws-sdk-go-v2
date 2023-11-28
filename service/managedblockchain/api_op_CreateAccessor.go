@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new accessor for use with Managed Blockchain Ethereum nodes. An
-// accessor contains information required for token based access to your Ethereum
-// nodes.
+// Creates a new accessor for use with Amazon Managed Blockchain service that
+// supports token based access. The accessor contains information required for
+// token based access.
 func (c *Client) CreateAccessor(ctx context.Context, params *CreateAccessorInput, optFns ...func(*Options)) (*CreateAccessorOutput, error) {
 	if params == nil {
 		params = &CreateAccessorInput{}
@@ -46,6 +46,16 @@ type CreateAccessorInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
+	// The blockchain network that the Accessor token is created for. We recommend
+	// using the appropriate networkType value for the blockchain network that you are
+	// creating the Accessor token for. You cannnot use the value
+	// ETHEREUM_MAINNET_AND_GOERLI to specify a networkType for your Accessor token.
+	// The default value of ETHEREUM_MAINNET_AND_GOERLI is only applied:
+	//   - when the CreateAccessor action does not set a networkType .
+	//   - to all existing Accessor tokens that were created before the networkType
+	//   property was introduced.
+	NetworkType types.AccessorNetworkType
+
 	// Tags to assign to the Accessor. Each tag consists of a key and an optional
 	// value. You can specify multiple key-value pairs in a single request with an
 	// overall maximum of 50 tags allowed per resource. For more information about
@@ -62,11 +72,13 @@ type CreateAccessorOutput struct {
 	// The unique identifier of the accessor.
 	AccessorId *string
 
-	// The billing token is a property of the Accessor. Use this token to make
-	// Ethereum API calls to your Ethereum node. The billing token is used to track
-	// your accessor object for billing Ethereum API requests made to your Ethereum
-	// nodes.
+	// The billing token is a property of the Accessor. Use this token to when making
+	// calls to the blockchain network. The billing token is used to track your
+	// accessor token for billing requests.
 	BillingToken *string
+
+	// The blockchain network that the accessor token is created for.
+	NetworkType types.AccessorNetworkType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -70,6 +70,26 @@ func (m *validateOpCopyBackup) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCopySnapshotAndUpdateVolume struct {
+}
+
+func (*validateOpCopySnapshotAndUpdateVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCopySnapshotAndUpdateVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CopySnapshotAndUpdateVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCopySnapshotAndUpdateVolumeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateBackup struct {
 }
 
@@ -702,6 +722,10 @@ func addOpCopyBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopyBackup{}, middleware.After)
 }
 
+func addOpCopySnapshotAndUpdateVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCopySnapshotAndUpdateVolume{}, middleware.After)
+}
+
 func addOpCreateBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBackup{}, middleware.After)
 }
@@ -923,9 +947,6 @@ func validateCreateFileSystemOntapConfiguration(v *types.CreateFileSystemOntapCo
 	if len(v.DeploymentType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentType"))
 	}
-	if v.ThroughputCapacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ThroughputCapacity"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -986,9 +1007,6 @@ func validateCreateOntapVolumeConfiguration(v *types.CreateOntapVolumeConfigurat
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateOntapVolumeConfiguration"}
-	if v.SizeInMegabytes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SizeInMegabytes"))
-	}
 	if v.StorageVirtualMachineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachineId"))
 	}
@@ -1629,6 +1647,24 @@ func validateOpCopyBackupInput(v *CopyBackupInput) error {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCopySnapshotAndUpdateVolumeInput(v *CopySnapshotAndUpdateVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CopySnapshotAndUpdateVolumeInput"}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if v.SourceSnapshotARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceSnapshotARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,3 +1,19 @@
+# v1.42.2 (2023-11-28.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
+# v1.42.0 (2023-11-27.2)
+
+* **Feature**: Adds and updates APIs to support central configuration. This feature allows the Security Hub delegated administrator to configure Security Hub for their entire AWS Org across multiple regions from a home Region. With this release, findings also include account name and application metadata.
+
+# v1.41.0 (2023-11-27)
+
+* **Feature**: Adds and updates APIs to support customizable security controls. This feature allows Security Hub customers to provide custom parameters for security controls. With this release, findings for controls that support custom parameters will include the parameters used to generate the findings.
+
 # v1.40.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

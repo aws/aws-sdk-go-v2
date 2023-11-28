@@ -202,6 +202,26 @@ func (HistoryEventType) Values() []HistoryEventType {
 	}
 }
 
+type InspectionLevel string
+
+// Enum values for InspectionLevel
+const (
+	InspectionLevelInfo  InspectionLevel = "INFO"
+	InspectionLevelDebug InspectionLevel = "DEBUG"
+	InspectionLevelTrace InspectionLevel = "TRACE"
+)
+
+// Values returns all known values for InspectionLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InspectionLevel) Values() []InspectionLevel {
+	return []InspectionLevel{
+		"INFO",
+		"DEBUG",
+		"TRACE",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel
@@ -299,6 +319,28 @@ func (SyncExecutionStatus) Values() []SyncExecutionStatus {
 		"SUCCEEDED",
 		"FAILED",
 		"TIMED_OUT",
+	}
+}
+
+type TestExecutionStatus string
+
+// Enum values for TestExecutionStatus
+const (
+	TestExecutionStatusSucceeded   TestExecutionStatus = "SUCCEEDED"
+	TestExecutionStatusFailed      TestExecutionStatus = "FAILED"
+	TestExecutionStatusRetriable   TestExecutionStatus = "RETRIABLE"
+	TestExecutionStatusCaughtError TestExecutionStatus = "CAUGHT_ERROR"
+)
+
+// Values returns all known values for TestExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestExecutionStatus) Values() []TestExecutionStatus {
+	return []TestExecutionStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"RETRIABLE",
+		"CAUGHT_ERROR",
 	}
 }
 

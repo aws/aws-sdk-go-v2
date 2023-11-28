@@ -16,8 +16,8 @@ import (
 	"strings"
 )
 
-// Returns the status of the resource policy associated with an Object Lambda
-// Access Point.
+// This operation is not supported by directory buckets. Returns the status of the
+// resource policy associated with an Object Lambda Access Point.
 func (c *Client) GetAccessPointPolicyStatusForObjectLambda(ctx context.Context, params *GetAccessPointPolicyStatusForObjectLambdaInput, optFns ...func(*Options)) (*GetAccessPointPolicyStatusForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &GetAccessPointPolicyStatusForObjectLambdaInput{}

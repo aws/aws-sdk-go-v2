@@ -29,6 +29,27 @@ type AccessControlTranslation struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration options of the S3 Access Grants location. It contains the
+// S3SubPrefix field. The grant scope, the data to which you are granting access,
+// is the result of appending the Subprefix field to the scope of the registered
+// location.
+type AccessGrantsLocationConfiguration struct {
+
+	// The S3SubPrefix is appended to the location scope creating the grant scope. Use
+	// this field to narrow the scope of the grant to a subset of the location scope.
+	// This field is required if the location scope is the default location s3://
+	// because you cannot create a grant for all of your S3 data in the Region and must
+	// narrow the scope. For example, if the location scope is the default location
+	// s3:// , the S3SubPrefx can be a /*, so the full grant scope path would be
+	// s3:///* . Or the S3SubPrefx can be /* , so the full grant scope path would be or
+	// s3:///* . If the S3SubPrefix includes a prefix, append the wildcard character *
+	// after the prefix to indicate that you want to include all object key names in
+	// the bucket that start with that prefix.
+	S3SubPrefix *string
+
+	noSmithyDocumentSerde
+}
+
 // An access point used to access a bucket.
 type AccessPoint struct {
 
@@ -318,6 +339,29 @@ type CreateMultiRegionAccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Web Services Security Token Service temporary credential that S3
+// Access Grants vends to grantees and client applications.
+type Credentials struct {
+
+	// The unique access key ID of the Amazon Web Services STS temporary credential
+	// that S3 Access Grants vends to grantees and client applications.
+	AccessKeyId *string
+
+	// The expiration date and time of the temporary credential that S3 Access Grants
+	// vends to grantees and client applications.
+	Expiration *time.Time
+
+	// The secret access key of the Amazon Web Services STS temporary credential that
+	// S3 Access Grants vends to grantees and client applications.
+	SecretAccessKey *string
+
+	// The Amazon Web Services STS temporary credential that S3 Access Grants vends to
+	// grantees and client applications.
+	SessionToken *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies whether S3 on Outposts replicates delete markers. If you specify a
 // Filter element in your replication configuration, you must also include a
 // DeleteMarkerReplication element. If your Filter includes a Tag element, the
@@ -386,7 +430,7 @@ type Destination struct {
 	// The storage class to use when replicating objects. All objects stored on S3 on
 	// Outposts are stored in the OUTPOSTS storage class. S3 on Outposts uses the
 	// OUTPOSTS storage class to create the object replicas. Values other than OUTPOSTS
-	// are not supported by Amazon S3 on Outposts.
+	// aren't supported by Amazon S3 on Outposts.
 	StorageClass ReplicationStorageClass
 
 	noSmithyDocumentSerde
@@ -471,6 +515,36 @@ type GeneratedManifestEncryption struct {
 
 	// Specifies the use of SSE-S3 to encrypt generated manifest objects.
 	SSES3 *SSES3Encryption
+
+	noSmithyDocumentSerde
+}
+
+// The user, group, or role to which you are granting access. You can grant access
+// to an IAM user or role. If you have added your corporate directory to Amazon Web
+// Services IAM Identity Center and associated your Identity Center instance with
+// your S3 Access Grants instance, the grantee can also be a corporate directory
+// user or group.
+type Grantee struct {
+
+	// The unique identifier of the Grantee . If the grantee type is IAM , the
+	// identifier is the IAM Amazon Resource Name (ARN) of the user or role. If the
+	// grantee type is a directory user or group, the identifier is 128-bit universally
+	// unique identifier (UUID) in the format a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	// You can obtain this UUID from your Amazon Web Services IAM Identity Center
+	// instance.
+	GranteeIdentifier *string
+
+	// The type of the grantee to which access has been granted. It can be one of the
+	// following values:
+	//   - IAM - An IAM user or role.
+	//   - DIRECTORY_USER - Your corporate directory user. You can use this option if
+	//   you have added your corporate identity directory to IAM Identity Center and
+	//   associated the IAM Identity Center instance with your S3 Access Grants instance.
+	//
+	//   - DIRECTORY_GROUP - Your corporate directory group. You can use this option if
+	//   you have added your corporate identity directory to IAM Identity Center and
+	//   associated the IAM Identity Center instance with your S3 Access Grants instance.
+	GranteeType GranteeType
 
 	noSmithyDocumentSerde
 }
@@ -615,6 +689,9 @@ type JobListDescriptor struct {
 type JobManifest struct {
 
 	// Contains the information required to locate the specified job's manifest.
+	// Manifests can't be imported from directory buckets. For more information, see
+	// Directory buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
+	// .
 	//
 	// This member is required.
 	Location *JobManifestLocation
@@ -685,7 +762,9 @@ type JobManifestGeneratorFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the information required to locate a manifest object.
+// Contains the information required to locate a manifest object. Manifests can't
+// be imported from directory buckets. For more information, see Directory buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
+// .
 type JobManifestLocation struct {
 
 	// The ETag for the specified manifest object.
@@ -734,15 +813,17 @@ type JobOperation struct {
 	LambdaInvoke *LambdaInvokeOperation
 
 	// Directs the specified job to execute a DELETE Object tagging call on every
-	// object in the manifest.
+	// object in the manifest. This functionality is not supported by directory
+	// buckets.
 	S3DeleteObjectTagging *S3DeleteObjectTaggingOperation
 
 	// Directs the specified job to initiate restore requests for every archived
-	// object in the manifest.
+	// object in the manifest. This functionality is not supported by directory
+	// buckets.
 	S3InitiateRestoreObject *S3InitiateRestoreObjectOperation
 
 	// Directs the specified job to run a PutObjectAcl call on every object in the
-	// manifest.
+	// manifest. This functionality is not supported by directory buckets.
 	S3PutObjectAcl *S3SetObjectAclOperation
 
 	// Directs the specified job to run a PUT Copy object call on every object in the
@@ -753,22 +834,24 @@ type JobOperation struct {
 	// S3 Batch Operations job passes to every object to the underlying
 	// PutObjectLegalHold API operation. For more information, see Using S3 Object
 	// Lock legal hold with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html)
-	// in the Amazon S3 User Guide.
+	// in the Amazon S3 User Guide. This functionality is not supported by directory
+	// buckets.
 	S3PutObjectLegalHold *S3SetObjectLegalHoldOperation
 
 	// Contains the configuration parameters for the Object Lock retention action for
 	// an S3 Batch Operations job. Batch Operations passes every object to the
 	// underlying PutObjectRetention API operation. For more information, see Using S3
 	// Object Lock retention with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-	// in the Amazon S3 User Guide.
+	// in the Amazon S3 User Guide. This functionality is not supported by directory
+	// buckets.
 	S3PutObjectRetention *S3SetObjectRetentionOperation
 
 	// Directs the specified job to run a PUT Object tagging call on every object in
-	// the manifest.
+	// the manifest. This functionality is not supported by directory buckets.
 	S3PutObjectTagging *S3SetObjectTaggingOperation
 
 	// Directs the specified job to invoke ReplicateObject on every object in the
-	// job's manifest.
+	// job's manifest. This functionality is not supported by directory buckets.
 	S3ReplicateObject *S3ReplicateObjectOperation
 
 	noSmithyDocumentSerde
@@ -802,7 +885,8 @@ type JobReport struct {
 	Enabled bool
 
 	// The Amazon Resource Name (ARN) for the bucket where specified job-completion
-	// report will be stored.
+	// report will be stored. Directory buckets - Directory buckets aren't supported as
+	// a location for Batch Operations to store job completion reports.
 	Bucket *string
 
 	// The format of the specified job-completion report.
@@ -855,6 +939,27 @@ type LambdaInvokeOperation struct {
 	// The Amazon Resource Name (ARN) for the Lambda function that the specified job
 	// will invoke on every object in the manifest.
 	FunctionArn *string
+
+	// Specifies the schema version for the payload that Batch Operations sends when
+	// invoking an Lambda function. Version 1.0 is the default. Version 2.0 is
+	// required when you use Batch Operations to invoke Lambda functions that act on
+	// directory buckets, or if you need to specify UserArguments . For more
+	// information, see Using Lambda with Amazon S3 Batch Operations and Amazon S3
+	// Express One Zone (https://aws.amazon.com/blogs/storage/using-lambda-with-s3-batch-operations-and-s3-express-one-zone/)
+	// in the Amazon Web Services Storage Blog. Ensure that your Lambda function code
+	// expects InvocationSchemaVersion 2.0 and uses bucket name rather than bucket
+	// ARN. If the InvocationSchemaVersion does not match what your Lambda function
+	// expects, your function might not work as expected. Directory buckets - To
+	// initiate Amazon Web Services Lambda function to perform custom actions on
+	// objects in directory buckets, you must specify 2.0 .
+	InvocationSchemaVersion *string
+
+	// Key-value pairs that are passed in the payload that Batch Operations sends when
+	// invoking an Lambda function. You must specify InvocationSchemaVersion 2.0 for
+	// LambdaInvoke operations that include UserArguments . For more information, see
+	// Using Lambda with Amazon S3 Batch Operations and Amazon S3 Express One Zone (https://aws.amazon.com/blogs/storage/using-lambda-with-s3-batch-operations-and-s3-express-one-zone/)
+	// in the Amazon Web Services Storage Blog.
+	UserArguments map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -972,6 +1077,109 @@ type LifecycleRuleFilter struct {
 
 	// A container for a key-value name pair.
 	Tag *S3Tag
+
+	noSmithyDocumentSerde
+}
+
+// Information about the access grant.
+type ListAccessGrantEntry struct {
+
+	// The Amazon Resource Name (ARN) of the access grant.
+	AccessGrantArn *string
+
+	// The ID of the access grant. S3 Access Grants auto-generates this ID when you
+	// create the access grant.
+	AccessGrantId *string
+
+	// The configuration options of the grant location. The grant location is the S3
+	// path to the data to which you are granting access.
+	AccessGrantsLocationConfiguration *AccessGrantsLocationConfiguration
+
+	// The ID of the registered location to which you are granting access. S3 Access
+	// Grants assigns this ID when you register the location. S3 Access Grants assigns
+	// the ID default to the default location s3:// and assigns an auto-generated ID
+	// to other locations that you register.
+	AccessGrantsLocationId *string
+
+	// The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center
+	// application associated with your Identity Center instance. If the grant includes
+	// an application ARN, the grantee can only access the S3 data through this
+	// application.
+	ApplicationArn *string
+
+	// The date and time when you created the S3 Access Grants instance.
+	CreatedAt *time.Time
+
+	// The S3 path of the data to which you are granting access. It is the result of
+	// appending the Subprefix to the location scope.
+	GrantScope *string
+
+	// The user, group, or role to which you are granting access. You can grant access
+	// to an IAM user or role. If you have added your corporate directory to Amazon Web
+	// Services IAM Identity Center and associated your Identity Center instance with
+	// your S3 Access Grants instance, the grantee can also be a corporate directory
+	// user or group.
+	Grantee *Grantee
+
+	// The type of access granted to your S3 data, which can be set to one of the
+	// following values:
+	//   - READ – Grant read-only access to the S3 data.
+	//   - WRITE – Grant write-only access to the S3 data.
+	//   - READWRITE – Grant both read and write access to the S3 data.
+	Permission Permission
+
+	noSmithyDocumentSerde
+}
+
+// Information about the S3 Access Grants instance.
+type ListAccessGrantsInstanceEntry struct {
+
+	// The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+	AccessGrantsInstanceArn *string
+
+	// The ID of the S3 Access Grants instance. The ID is default . You can have one S3
+	// Access Grants instance per Region per account.
+	AccessGrantsInstanceId *string
+
+	// The date and time when you created the S3 Access Grants instance.
+	CreatedAt *time.Time
+
+	// If you associated your S3 Access Grants instance with an Amazon Web Services
+	// IAM Identity Center instance, this field returns the Amazon Resource Name (ARN)
+	// of the IAM Identity Center instance application; a subresource of the original
+	// Identity Center instance. S3 Access Grants creates this Identity Center
+	// application for the specific S3 Access Grants instance.
+	IdentityCenterArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A container for information about the registered location.
+type ListAccessGrantsLocationsEntry struct {
+
+	// The Amazon Resource Name (ARN) of the registered location.
+	AccessGrantsLocationArn *string
+
+	// The ID of the registered location to which you are granting access. S3 Access
+	// Grants assigns this ID when you register the location. S3 Access Grants assigns
+	// the ID default to the default location s3:// and assigns an auto-generated ID
+	// to other locations that you register.
+	AccessGrantsLocationId *string
+
+	// The date and time when you registered the location.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role for the registered location. S3
+	// Access Grants assumes this role to manage access to the registered location.
+	IAMRoleArn *string
+
+	// The S3 path to the location that you are registering. The location scope can be
+	// the default S3 location s3:// , the S3 path to a bucket s3:// , or the S3 path
+	// to a bucket and prefix s3:/// . A prefix in S3 is a string of characters at the
+	// beginning of an object key name used to organize the objects that you store in
+	// your S3 buckets. For example, object key names that start with the engineering/
+	// prefix or object key names that start with the marketing/campaigns/ prefix.
+	LocationScope *string
 
 	noSmithyDocumentSerde
 }
@@ -1744,17 +1952,18 @@ type S3BucketDestination struct {
 // .
 type S3CopyObjectOperation struct {
 
-	//
+	// This functionality is not supported by directory buckets.
 	AccessControlGrants []S3Grant
 
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
 	// with server-side encryption using Amazon Web Services KMS (SSE-KMS). Setting
 	// this header to true causes Amazon S3 to use an S3 Bucket Key for object
 	// encryption with SSE-KMS. Specifying this header with an object action doesn’t
-	// affect bucket-level settings for S3 Bucket Key.
+	// affect bucket-level settings for S3 Bucket Key. This functionality is not
+	// supported by directory buckets.
 	BucketKeyEnabled bool
 
-	//
+	// This functionality is not supported by directory buckets.
 	CannedAccessControlList S3CannedAccessControlList
 
 	// Indicates the algorithm that you want Amazon S3 to use to create the checksum.
@@ -1773,31 +1982,42 @@ type S3CopyObjectOperation struct {
 	// tags. Otherwise, Amazon S3 assigns the supplied tags to the new objects.
 	NewObjectMetadata *S3ObjectMetadata
 
-	//
+	// Specifies a list of tags to add to the destination objects after they are
+	// copied. If NewObjectTagging is not specified, the tags of the source objects
+	// are copied to destination objects by default. Directory buckets - Tags aren't
+	// supported by directory buckets. If your source objects have tags and your
+	// destination bucket is a directory bucket, specify an empty tag set in the
+	// NewObjectTagging field to prevent copying the source object tags to the
+	// directory bucket.
 	NewObjectTagging []S3Tag
 
 	// The legal hold status to be applied to all objects in the Batch Operations job.
+	// This functionality is not supported by directory buckets.
 	ObjectLockLegalHoldStatus S3ObjectLockLegalHoldStatus
 
 	// The retention mode to be applied to all objects in the Batch Operations job.
+	// This functionality is not supported by directory buckets.
 	ObjectLockMode S3ObjectLockMode
 
 	// The date when the applied object retention configuration expires on all objects
-	// in the Batch Operations job.
+	// in the Batch Operations job. This functionality is not supported by directory
+	// buckets.
 	ObjectLockRetainUntilDate *time.Time
 
-	// Specifies an optional metadata property for website redirects,
-	// x-amz-website-redirect-location . Allows webpage redirects if the object is
-	// accessed through a website endpoint.
+	// If the destination bucket is configured as a website, specifies an optional
+	// metadata property for website redirects, x-amz-website-redirect-location .
+	// Allows webpage redirects if the object copy is accessed through a website
+	// endpoint. This functionality is not supported by directory buckets.
 	RedirectLocation *string
 
-	//
+	// This functionality is not supported by directory buckets.
 	RequesterPays bool
 
-	//
+	// This functionality is not supported by directory buckets.
 	SSEAwsKmsKeyId *string
 
-	//
+	// Specify the storage class for the destination objects in a Copy operation.
+	// Directory buckets - This functionality is not supported by directory buckets.
 	StorageClass S3StorageClass
 
 	// Specifies the folder prefix that you want the objects to be copied into. For
@@ -1806,8 +2026,15 @@ type S3CopyObjectOperation struct {
 	TargetKeyPrefix *string
 
 	// Specifies the destination bucket Amazon Resource Name (ARN) for the batch copy
-	// operation. For example, to copy objects to a bucket named destinationBucket ,
-	// set the TargetResource property to arn:aws:s3:::destinationBucket .
+	// operation.
+	//   - General purpose buckets - For example, to copy objects to a general purpose
+	//   bucket named destinationBucket , set the TargetResource property to
+	//   arn:aws:s3:::destinationBucket .
+	//   - Directory buckets - For example, to copy objects to a directory bucket
+	//   named destinationBucket in the Availability Zone; identified by the AZ ID
+	//   usw2-az2 , set the TargetResource property to
+	//   arn:aws:s3express:region:account_id:/bucket/destination_bucket_base_name--usw2-az2--x-s3
+	//   .
 	TargetResource *string
 
 	//
@@ -1831,7 +2058,9 @@ type S3GeneratedManifestDescriptor struct {
 	// The format of the generated manifest.
 	Format GeneratedManifestFormat
 
-	// Contains the information required to locate a manifest object.
+	// Contains the information required to locate a manifest object. Manifests can't
+	// be imported from directory buckets. For more information, see Directory buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
+	// .
 	Location *JobManifestLocation
 
 	noSmithyDocumentSerde
@@ -1897,7 +2126,9 @@ type S3JobManifestGenerator struct {
 	// This member is required.
 	EnableManifestOutput bool
 
-	// The source bucket used by the ManifestGenerator.
+	// The source bucket used by the ManifestGenerator. Directory buckets - Directory
+	// buckets aren't supported as the source buckets used by S3JobManifestGenerator
+	// to generate the job manifest.
 	//
 	// This member is required.
 	SourceBucket *string
@@ -1907,12 +2138,15 @@ type S3JobManifestGenerator struct {
 	// Services account ID must match this value, else the job fails.
 	ExpectedBucketOwner *string
 
-	// Specifies rules the S3JobManifestGenerator should use to use to decide whether
-	// an object in the source bucket should or should not be included in the generated
+	// Specifies rules the S3JobManifestGenerator should use to decide whether an
+	// object in the source bucket should or should not be included in the generated
 	// job manifest.
 	Filter *JobManifestGeneratorFilter
 
-	// Specifies the location the generated manifest will be written to.
+	// Specifies the location the generated manifest will be written to. Manifests
+	// can't be written to directory buckets. For more information, see Directory
+	// buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
+	// .
 	ManifestOutputLocation *S3ManifestOutputLocation
 
 	noSmithyDocumentSerde
@@ -1921,7 +2155,9 @@ type S3JobManifestGenerator struct {
 // Location details for where the generated manifest should be written.
 type S3ManifestOutputLocation struct {
 
-	// The bucket ARN the generated manifest should be written to.
+	// The bucket ARN the generated manifest should be written to. Directory buckets -
+	// Directory buckets aren't supported as the buckets to store the generated
+	// manifest.
 	//
 	// This member is required.
 	Bucket *string
@@ -1971,10 +2207,10 @@ type S3ObjectMetadata struct {
 	//
 	ContentLanguage *string
 
-	//
+	// This member has been deprecated.
 	ContentLength *int64
 
-	//
+	// This member has been deprecated.
 	ContentMD5 *string
 
 	//
@@ -1983,10 +2219,11 @@ type S3ObjectMetadata struct {
 	//
 	HttpExpiresDate *time.Time
 
-	//
+	// This member has been deprecated.
 	RequesterCharged bool
 
-	//
+	// For directory buckets, only the server-side encryption with Amazon S3 managed
+	// keys (SSE-S3) ( AES256 ) is supported.
 	SSEAlgorithm S3SSEAlgorithm
 
 	//
@@ -2046,7 +2283,8 @@ type S3SetObjectAclOperation struct {
 // S3 Batch Operations job passes to every object to the underlying
 // PutObjectLegalHold API operation. For more information, see Using S3 Object
 // Lock legal hold with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html)
-// in the Amazon S3 User Guide.
+// in the Amazon S3 User Guide. This functionality is not supported by directory
+// buckets.
 type S3SetObjectLegalHoldOperation struct {
 
 	// Contains the Object Lock legal hold status to be applied to all objects in the
@@ -2062,7 +2300,8 @@ type S3SetObjectLegalHoldOperation struct {
 // an S3 Batch Operations job. Batch Operations passes every object to the
 // underlying PutObjectRetention API operation. For more information, see Using S3
 // Object Lock retention with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-// in the Amazon S3 User Guide.
+// in the Amazon S3 User Guide. This functionality is not supported by directory
+// buckets.
 type S3SetObjectRetentionOperation struct {
 
 	// Contains the Object Lock retention mode to be applied to all objects in the
@@ -2442,19 +2681,22 @@ type StorageLensTag struct {
 
 // An Amazon Web Services resource tag that's associated with your S3 resource.
 // You can add tags to new objects when you upload them, or you can add object tags
-// to existing objects. This data type is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
-// .
+// to existing objects. This operation is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
+// and for S3 Access Grants (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html)
+// . The tagged resource can be an S3 Storage Lens group or S3 Access Grants
+// instance, registered location, or grant.
 type Tag struct {
 
-	// The tag key for your Amazon Web Services resource. A tag key can be up to 128
-	// Unicode characters in length and is case-sensitive. System created tags that
-	// begin with aws: aren’t supported.
+	// The key of the key-value pair of a tag added to your Amazon Web Services
+	// resource. A tag key can be up to 128 Unicode characters in length and is
+	// case-sensitive. System created tags that begin with aws: aren’t supported.
 	//
 	// This member is required.
 	Key *string
 
-	// The tag value for your Amazon Web Services resource. A tag value can be up to
-	// 256 Unicode characters in length and is case-sensitive.
+	// The value of the key-value pair of a tag added to your Amazon Web Services
+	// resource. A tag value can be up to 256 Unicode characters in length and is
+	// case-sensitive.
 	//
 	// This member is required.
 	Value *string

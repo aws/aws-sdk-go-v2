@@ -40,8 +40,8 @@ type ListDatasetsInput struct {
 	// The maximum number of datasets to return.
 	MaxResults *int32
 
-	// A token returned from the previous call to ListDatasetImportJobs for getting
-	// the next set of dataset import jobs (if they exist).
+	// A token returned from the previous call to ListDatasets for getting the next
+	// set of dataset import jobs (if they exist).
 	NextToken *string
 
 	noSmithyDocumentSerde

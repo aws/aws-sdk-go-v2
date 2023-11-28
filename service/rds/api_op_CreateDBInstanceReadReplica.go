@@ -15,8 +15,8 @@ import (
 
 // Creates a new DB instance that acts as a read replica for an existing source DB
 // instance or Multi-AZ DB cluster. You can create a read replica for a DB instance
-// running MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server. You can create a read
-// replica for a Multi-AZ DB cluster running MySQL or PostgreSQL. For more
+// running Db2, MariaDB, MySQL, Oracle, PostgreSQL, or SQL Server. You can create a
+// read replica for a Multi-AZ DB cluster running MySQL or PostgreSQL. For more
 // information, see Working with read replicas (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)
 // and Migrating from a Multi-AZ DB cluster to a DB instance using a read replica (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html#multi-az-db-clusters-migrating-to-instance-with-read-replica)
 // in the Amazon RDS User Guide. Amazon Aurora doesn't support this operation. To
@@ -384,8 +384,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The identifier of the DB instance that will act as the source for the read
 	// replica. Each DB instance can have up to 15 read replicas, with the exception of
 	// Oracle and SQL Server, which can have up to five. Constraints:
-	//   - Must be the identifier of an existing MySQL, MariaDB, Oracle, PostgreSQL,
-	//   or SQL Server DB instance.
+	//   - Must be the identifier of an existing Db2, MariaDB, MySQL, Oracle,
+	//   PostgreSQL, or SQL Server DB instance.
 	//   - Can't be specified if the SourceDBClusterIdentifier parameter is also
 	//   specified.
 	//   - For the limitations of Oracle read replicas, see Version and licensing

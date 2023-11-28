@@ -41,7 +41,7 @@ type ListBackupPlanVersionsInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return MaxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -55,7 +55,7 @@ type ListBackupPlanVersionsOutput struct {
 	BackupPlanVersionsList []types.BackupPlansListMember
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return MaxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string

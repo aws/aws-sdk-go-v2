@@ -130,6 +130,26 @@ func (m *validateOpBatchGetAutomationRules) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetConfigurationPolicyAssociations struct {
+}
+
+func (*validateOpBatchGetConfigurationPolicyAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetConfigurationPolicyAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetConfigurationPolicyAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetConfigurationPolicyAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetSecurityControls struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpCreateAutomationRule) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConfigurationPolicy struct {
+}
+
+func (*validateOpCreateConfigurationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConfigurationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConfigurationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConfigurationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFindingAggregator struct {
 }
 
@@ -385,6 +425,26 @@ func (m *validateOpDeleteActionTarget) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteActionTargetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConfigurationPolicy struct {
+}
+
+func (*validateOpDeleteConfigurationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConfigurationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConfigurationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConfigurationPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +650,46 @@ func (m *validateOpEnableOrganizationAdminAccount) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetConfigurationPolicyAssociation struct {
+}
+
+func (*validateOpGetConfigurationPolicyAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfigurationPolicyAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfigurationPolicyAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfigurationPolicyAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConfigurationPolicy struct {
+}
+
+func (*validateOpGetConfigurationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfigurationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfigurationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfigurationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFindingAggregator struct {
 }
 
@@ -670,6 +770,26 @@ func (m *validateOpGetMembers) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSecurityControlDefinition struct {
+}
+
+func (*validateOpGetSecurityControlDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSecurityControlDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSecurityControlDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSecurityControlDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInviteMembers struct {
 }
 
@@ -730,6 +850,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartConfigurationPolicyAssociation struct {
+}
+
+func (*validateOpStartConfigurationPolicyAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartConfigurationPolicyAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartConfigurationPolicyAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartConfigurationPolicyAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartConfigurationPolicyDisassociation struct {
+}
+
+func (*validateOpStartConfigurationPolicyDisassociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartConfigurationPolicyDisassociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartConfigurationPolicyDisassociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartConfigurationPolicyDisassociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -785,6 +945,26 @@ func (m *validateOpUpdateActionTarget) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateActionTargetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateConfigurationPolicy struct {
+}
+
+func (*validateOpUpdateConfigurationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConfigurationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConfigurationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConfigurationPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,6 +1050,26 @@ func (m *validateOpUpdateOrganizationConfiguration) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSecurityControl struct {
+}
+
+func (*validateOpUpdateSecurityControl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSecurityControl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSecurityControlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSecurityControlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateStandardsControl struct {
 }
 
@@ -914,6 +1114,10 @@ func addOpBatchGetAutomationRulesValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpBatchGetAutomationRules{}, middleware.After)
 }
 
+func addOpBatchGetConfigurationPolicyAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetConfigurationPolicyAssociations{}, middleware.After)
+}
+
 func addOpBatchGetSecurityControlsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetSecurityControls{}, middleware.After)
 }
@@ -946,6 +1150,10 @@ func addOpCreateAutomationRuleValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateAutomationRule{}, middleware.After)
 }
 
+func addOpCreateConfigurationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConfigurationPolicy{}, middleware.After)
+}
+
 func addOpCreateFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFindingAggregator{}, middleware.After)
 }
@@ -964,6 +1172,10 @@ func addOpDeclineInvitationsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteActionTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteActionTarget{}, middleware.After)
+}
+
+func addOpDeleteConfigurationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConfigurationPolicy{}, middleware.After)
 }
 
 func addOpDeleteFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
@@ -1006,6 +1218,14 @@ func addOpEnableOrganizationAdminAccountValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpEnableOrganizationAdminAccount{}, middleware.After)
 }
 
+func addOpGetConfigurationPolicyAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfigurationPolicyAssociation{}, middleware.After)
+}
+
+func addOpGetConfigurationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfigurationPolicy{}, middleware.After)
+}
+
 func addOpGetFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFindingAggregator{}, middleware.After)
 }
@@ -1022,6 +1242,10 @@ func addOpGetMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMembers{}, middleware.After)
 }
 
+func addOpGetSecurityControlDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSecurityControlDefinition{}, middleware.After)
+}
+
 func addOpInviteMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInviteMembers{}, middleware.After)
 }
@@ -1034,6 +1258,14 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpStartConfigurationPolicyAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartConfigurationPolicyAssociation{}, middleware.After)
+}
+
+func addOpStartConfigurationPolicyDisassociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartConfigurationPolicyDisassociation{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -1044,6 +1276,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateActionTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateActionTarget{}, middleware.After)
+}
+
+func addOpUpdateConfigurationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConfigurationPolicy{}, middleware.After)
 }
 
 func addOpUpdateFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
@@ -1060,6 +1296,10 @@ func addOpUpdateInsightValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateOrganizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateOrganizationConfiguration{}, middleware.After)
+}
+
+func addOpUpdateSecurityControlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSecurityControl{}, middleware.After)
 }
 
 func addOpUpdateStandardsControlValidationMiddleware(stack *middleware.Stack) error {
@@ -1392,6 +1632,39 @@ func validateNoteUpdate(v *types.NoteUpdate) error {
 	}
 }
 
+func validateParameterConfiguration(v *types.ParameterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParameterConfiguration"}
+	if len(v.ValueType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameters(v map[string]types.ParameterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Parameters"}
+	for key := range v {
+		value := v[key]
+		if err := validateParameterConfiguration(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePatchSummary(v *types.PatchSummary) error {
 	if v == nil {
 		return nil
@@ -1399,6 +1672,25 @@ func validatePatchSummary(v *types.PatchSummary) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PatchSummary"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicy(v types.Policy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Policy"}
+	switch uv := v.(type) {
+	case *types.PolicyMemberSecurityHub:
+		if err := validateSecurityHubPolicy(&uv.Value); err != nil {
+			invalidParams.AddNested("[SecurityHub]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1468,6 +1760,74 @@ func validateResourceList(v []types.Resource) error {
 	for i := range v {
 		if err := validateResource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecurityControlCustomParameter(v *types.SecurityControlCustomParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecurityControlCustomParameter"}
+	if v.Parameters != nil {
+		if err := validateParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecurityControlCustomParametersList(v []types.SecurityControlCustomParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecurityControlCustomParametersList"}
+	for i := range v {
+		if err := validateSecurityControlCustomParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecurityControlsConfiguration(v *types.SecurityControlsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecurityControlsConfiguration"}
+	if v.SecurityControlCustomParameters != nil {
+		if err := validateSecurityControlCustomParametersList(v.SecurityControlCustomParameters); err != nil {
+			invalidParams.AddNested("SecurityControlCustomParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecurityHubPolicy(v *types.SecurityHubPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecurityHubPolicy"}
+	if v.SecurityControlsConfiguration != nil {
+		if err := validateSecurityControlsConfiguration(v.SecurityControlsConfiguration); err != nil {
+			invalidParams.AddNested("SecurityControlsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1803,6 +2163,21 @@ func validateOpBatchGetAutomationRulesInput(v *BatchGetAutomationRulesInput) err
 	}
 }
 
+func validateOpBatchGetConfigurationPolicyAssociationsInput(v *BatchGetConfigurationPolicyAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetConfigurationPolicyAssociationsInput"}
+	if v.ConfigurationPolicyAssociationIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationPolicyAssociationIdentifiers"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetSecurityControlsInput(v *BatchGetSecurityControlsInput) error {
 	if v == nil {
 		return nil
@@ -1975,6 +2350,28 @@ func validateOpCreateAutomationRuleInput(v *CreateAutomationRuleInput) error {
 	}
 }
 
+func validateOpCreateConfigurationPolicyInput(v *CreateConfigurationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConfigurationPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConfigurationPolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationPolicy"))
+	} else if v.ConfigurationPolicy != nil {
+		if err := validatePolicy(v.ConfigurationPolicy); err != nil {
+			invalidParams.AddNested("ConfigurationPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFindingAggregatorInput(v *CreateFindingAggregatorInput) error {
 	if v == nil {
 		return nil
@@ -2052,6 +2449,21 @@ func validateOpDeleteActionTargetInput(v *DeleteActionTargetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteActionTargetInput"}
 	if v.ActionTargetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionTargetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConfigurationPolicyInput(v *DeleteConfigurationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfigurationPolicyInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2210,6 +2622,36 @@ func validateOpEnableOrganizationAdminAccountInput(v *EnableOrganizationAdminAcc
 	}
 }
 
+func validateOpGetConfigurationPolicyAssociationInput(v *GetConfigurationPolicyAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfigurationPolicyAssociationInput"}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConfigurationPolicyInput(v *GetConfigurationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfigurationPolicyInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetFindingAggregatorInput(v *GetFindingAggregatorInput) error {
 	if v == nil {
 		return nil
@@ -2274,6 +2716,21 @@ func validateOpGetMembersInput(v *GetMembersInput) error {
 	}
 }
 
+func validateOpGetSecurityControlDefinitionInput(v *GetSecurityControlDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSecurityControlDefinitionInput"}
+	if v.SecurityControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityControlId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpInviteMembersInput(v *InviteMembersInput) error {
 	if v == nil {
 		return nil
@@ -2311,6 +2768,39 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartConfigurationPolicyAssociationInput(v *StartConfigurationPolicyAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartConfigurationPolicyAssociationInput"}
+	if v.ConfigurationPolicyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationPolicyIdentifier"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartConfigurationPolicyDisassociationInput(v *StartConfigurationPolicyDisassociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartConfigurationPolicyDisassociationInput"}
+	if v.ConfigurationPolicyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationPolicyIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2362,6 +2852,26 @@ func validateOpUpdateActionTargetInput(v *UpdateActionTargetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateActionTargetInput"}
 	if v.ActionTargetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionTargetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConfigurationPolicyInput(v *UpdateConfigurationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationPolicyInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.ConfigurationPolicy != nil {
+		if err := validatePolicy(v.ConfigurationPolicy); err != nil {
+			invalidParams.AddNested("ConfigurationPolicy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2430,6 +2940,28 @@ func validateOpUpdateOrganizationConfigurationInput(v *UpdateOrganizationConfigu
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOrganizationConfigurationInput"}
 	if v.AutoEnable == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoEnable"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSecurityControlInput(v *UpdateSecurityControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSecurityControlInput"}
+	if v.SecurityControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityControlId"))
+	}
+	if v.Parameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
+	} else if v.Parameters != nil {
+		if err := validateParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

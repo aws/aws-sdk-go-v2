@@ -9,6 +9,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_BatchGetSecretValue.go",
         "api_op_CancelRotateSecret.go",
         "api_op_CreateSecret.go",
         "api_op_DeleteResourcePolicy.go",

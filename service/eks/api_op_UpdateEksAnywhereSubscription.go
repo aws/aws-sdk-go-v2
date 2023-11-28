@@ -36,7 +36,7 @@ type UpdateEksAnywhereSubscriptionInput struct {
 	// This member is required.
 	AutoRenew bool
 
-	//
+	// The ID of the subscription.
 	//
 	// This member is required.
 	Id *string

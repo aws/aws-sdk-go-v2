@@ -1,3 +1,11 @@
+# v1.22.5 (2023-11-28.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.4 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
 # v1.22.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

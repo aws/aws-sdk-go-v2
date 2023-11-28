@@ -17,8 +17,9 @@ import (
 	"time"
 )
 
-// Returns configuration information about the specified Object Lambda Access
-// Point The following actions are related to GetAccessPointForObjectLambda :
+// This operation is not supported by directory buckets. Returns configuration
+// information about the specified Object Lambda Access Point The following actions
+// are related to GetAccessPointForObjectLambda :
 //   - CreateAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
 //   - DeleteAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html)
 //   - ListAccessPointsForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)

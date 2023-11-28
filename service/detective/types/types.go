@@ -67,6 +67,60 @@ type DatasourcePackageUsageInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details on the time range used to filter data.
+type DateFilter struct {
+
+	// A timestamp representing the end date of the time period until when data is
+	// filtered , including the end date.
+	//
+	// This member is required.
+	EndInclusive *time.Time
+
+	// A timestamp representing the start of the time period from when data is
+	// filtered, including the start date.
+	//
+	// This member is required.
+	StartInclusive *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Details on the criteria used to define the filter for investigation results.
+type FilterCriteria struct {
+
+	// Filter the investigation results based on when the investigation was created.
+	CreatedTime *DateFilter
+
+	// Filter the investigation results based on the Amazon Resource Name (ARN) of the
+	// entity.
+	EntityArn *StringFilter
+
+	// Filter the investigation results based on the severity.
+	Severity *StringFilter
+
+	// Filter the investigation results based on the state.
+	State *StringFilter
+
+	// Filter the investigation results based on the status.
+	Status *StringFilter
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on suspicious IP addresses identified as indicators of
+// compromise. This indicator is derived from Amazon Web Services threat
+// intelligence.
+type FlaggedIpAddressDetail struct {
+
+	// IP address of the suspicious entity.
+	IpAddress *string
+
+	// Details the reason the IP address was flagged as suspicious.
+	Reason Reason
+
+	noSmithyDocumentSerde
+}
+
 // A behavior graph in Detective.
 type Graph struct {
 
@@ -76,6 +130,106 @@ type Graph struct {
 	// The date and time that the behavior graph was created. The value is an ISO8601
 	// formatted string. For example, 2021-08-18T16:35:56.284Z .
 	CreatedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on unusual and impossible travel in an account.
+type ImpossibleTravelDetail struct {
+
+	// IP address where the resource was last used in the impossible travel.
+	EndingIpAddress *string
+
+	// Location where the resource was last used in the impossible travel.
+	EndingLocation *string
+
+	// Returns the time difference between the first and last timestamp the resource
+	// was used.
+	HourlyTimeDelta *int32
+
+	// IP address where the resource was first used in the impossible travel
+	StartingIpAddress *string
+
+	// Location where the resource was first used in the impossible travel
+	StartingLocation *string
+
+	noSmithyDocumentSerde
+}
+
+// Investigations triages indicators of compromises such as a finding and surfaces
+// only the most critical and suspicious issues, so you can focus on high-level
+// investigations.
+type Indicator struct {
+
+	// Details about the indicator of compromise.
+	IndicatorDetail *IndicatorDetail
+
+	// The type of indicator.
+	IndicatorType IndicatorType
+
+	noSmithyDocumentSerde
+}
+
+// Details about the indicators of compromise which are used to determine if a
+// resource is involved in a security incident.
+type IndicatorDetail struct {
+
+	// Suspicious IP addresses that are flagged, which indicates critical or severe
+	// threats based on threat intelligence by Detective. This indicator is derived
+	// from AWS threat intelligence.
+	FlaggedIpAddressDetail *FlaggedIpAddressDetail
+
+	// Identifies unusual and impossible user activity for an account.
+	ImpossibleTravelDetail *ImpossibleTravelDetail
+
+	// Contains details about the new Autonomous System Organization (ASO).
+	NewAsoDetail *NewAsoDetail
+
+	// Contains details about the new geographic location.
+	NewGeolocationDetail *NewGeolocationDetail
+
+	// Contains details about the new user agent.
+	NewUserAgentDetail *NewUserAgentDetail
+
+	// Contains details about related findings.
+	RelatedFindingDetail *RelatedFindingDetail
+
+	// Contains details about related finding groups.
+	RelatedFindingGroupDetail *RelatedFindingGroupDetail
+
+	// Details about the indicator of compromise.
+	TTPsObservedDetail *TTPsObservedDetail
+
+	noSmithyDocumentSerde
+}
+
+// Details about the investigation related to a potential security event
+// identified by Detective
+type InvestigationDetail struct {
+
+	// The UTC time stamp of the creation time of the investigation report.
+	CreatedTime *time.Time
+
+	// The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
+	EntityArn *string
+
+	// Type of entity. For example, Amazon Web Services accounts, such as IAM user and
+	// role.
+	EntityType EntityType
+
+	// The investigation ID of the investigation report.
+	InvestigationId *string
+
+	// Severity based on the likelihood and impact of the indicators of compromise
+	// discovered in the investigation.
+	Severity Severity
+
+	// The current state of the investigation. An archived investigation indicates you
+	// have completed reviewing the investigation.
+	State State
+
+	// Status based on the completion status of the investigation.
+	Status Status
 
 	noSmithyDocumentSerde
 }
@@ -210,12 +364,134 @@ type MembershipDatasources struct {
 	noSmithyDocumentSerde
 }
 
+// Details new Autonomous System Organizations (ASOs) used either at the resource
+// or account level.
+type NewAsoDetail struct {
+
+	// Details about the new Autonomous System Organization (ASO).
+	Aso *string
+
+	// Checks if the ASO is for new for the entire account.
+	IsNewForEntireAccount bool
+
+	noSmithyDocumentSerde
+}
+
+// Details new geolocations used either at the resource or account level. For
+// example, lists an observed geolocation that is an infrequent or unused location
+// based on previous user activity.
+type NewGeolocationDetail struct {
+
+	// IP address using which the resource was accessed.
+	IpAddress *string
+
+	// Checks if the gelocation is new for the entire account.
+	IsNewForEntireAccount bool
+
+	// Location where the resource was accessed.
+	Location *string
+
+	noSmithyDocumentSerde
+}
+
+// Details new user agents used either at the resource or account level.
+type NewUserAgentDetail struct {
+
+	// Checks if the user agent is new for the entire account.
+	IsNewForEntireAccount bool
+
+	// New user agent which accessed the resource.
+	UserAgent *string
+
+	noSmithyDocumentSerde
+}
+
+// Details related activities associated with a potential security event. Lists
+// all distinct categories of evidence that are connected to the resource or the
+// finding group.
+type RelatedFindingDetail struct {
+
+	// The ARN of the related finding.
+	Arn *string
+
+	// The IP address of the finding.
+	IpAddress *string
+
+	// The type of finding.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Details multiple activities as they related to a potential security event.
+// Detective uses graph analysis technique that infers relationships between
+// findings and entities, and groups them together as a finding group.
+type RelatedFindingGroupDetail struct {
+
+	// The unique identifier for the finding group.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the criteria used for sorting investigations.
+type SortCriteria struct {
+
+	// Represents the Field attribute to sort investigations.
+	Field Field
+
+	// The order by which the sorted findings are displayed.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// A string for filtering Detective investigations.
+type StringFilter struct {
+
+	// The string filter value.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Details on when data collection began for a source package.
 type TimestampForCollection struct {
 
 	// The data and time when data collection began for a source package. The value is
 	// an ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z .
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Details tactics, techniques, and procedures (TTPs) used in a potential security
+// event. Tactics are based on MITRE ATT&CK Matrix for Enterprise (https://attack.mitre.org/matrices/enterprise/)
+// .
+type TTPsObservedDetail struct {
+
+	// The total number of failed API requests.
+	APIFailureCount int64
+
+	// The name of the API where the TTP was observed.
+	APIName *string
+
+	// The total number of successful API requests.
+	APISuccessCount int64
+
+	// The IP address where the TTP was observed.
+	IpAddress *string
+
+	// The procedure used, identified by the investigation.
+	Procedure *string
+
+	// The tactic used, identified by the investigation.
+	Tactic *string
+
+	// The technique used, identified by the investigation.
+	Technique *string
 
 	noSmithyDocumentSerde
 }

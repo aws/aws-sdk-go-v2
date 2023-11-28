@@ -157,6 +157,35 @@ func (e *BadRequest) ErrorCode() string {
 }
 func (e *BadRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Returned if the source file system in a replication is encrypted but the
+// destination file system is unencrypted.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ErrorCode_ *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The service timed out trying to fulfill the request, and the client should try
 // the call again.
 type DependencyTimeout struct {
@@ -625,6 +654,34 @@ func (e *PolicyNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Returned if the file system is already included in a replication configuration.>
+type ReplicationAlreadyExists struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ErrorCode_ *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReplicationAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReplicationAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReplicationAlreadyExists) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ReplicationAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ReplicationAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the specified file system does not have a replication configuration.
 type ReplicationNotFound struct {

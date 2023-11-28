@@ -3804,6 +3804,11 @@ func awsAwsjson11_serializeDocumentCampaignConfig(v *types.CampaignConfig, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableMetadataWithRecommendations != nil {
+		ok := object.Key("enableMetadataWithRecommendations")
+		ok.Boolean(*v.EnableMetadataWithRecommendations)
+	}
+
 	if v.ItemExplorationConfig != nil {
 		ok := object.Key("itemExplorationConfig")
 		if err := awsAwsjson11_serializeDocumentHyperParameters(v.ItemExplorationConfig, ok); err != nil {
@@ -3979,6 +3984,18 @@ func awsAwsjson11_serializeDocumentFeatureTransformationParameters(v map[string]
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFieldsForThemeGeneration(v *types.FieldsForThemeGeneration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ItemName != nil {
+		ok := object.Key("itemName")
+		ok.String(*v.ItemName)
+	}
+
 	return nil
 }
 
@@ -4209,6 +4226,11 @@ func awsAwsjson11_serializeDocumentRecommenderConfig(v *types.RecommenderConfig,
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableMetadataWithRecommendations != nil {
+		ok := object.Key("enableMetadataWithRecommendations")
+		ok.Boolean(*v.EnableMetadataWithRecommendations)
+	}
+
 	if v.ItemExplorationConfig != nil {
 		ok := object.Key("itemExplorationConfig")
 		if err := awsAwsjson11_serializeDocumentHyperParameters(v.ItemExplorationConfig, ok); err != nil {
@@ -4343,6 +4365,20 @@ func awsAwsjson11_serializeDocumentTags(v []types.Tag, value smithyjson.Value) e
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentThemeGenerationConfig(v *types.ThemeGenerationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldsForThemeGeneration != nil {
+		ok := object.Key("fieldsForThemeGeneration")
+		if err := awsAwsjson11_serializeDocumentFieldsForThemeGeneration(v.FieldsForThemeGeneration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTrainingDataConfig(v *types.TrainingDataConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4366,6 +4402,11 @@ func awsAwsjson11_serializeOpDocumentCreateBatchInferenceJobInput(v *CreateBatch
 		if err := awsAwsjson11_serializeDocumentBatchInferenceJobConfig(v.BatchInferenceJobConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.BatchInferenceJobMode) > 0 {
+		ok := object.Key("batchInferenceJobMode")
+		ok.String(string(v.BatchInferenceJobMode))
 	}
 
 	if v.FilterArn != nil {
@@ -4410,6 +4451,13 @@ func awsAwsjson11_serializeOpDocumentCreateBatchInferenceJobInput(v *CreateBatch
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ThemeGenerationConfig != nil {
+		ok := object.Key("themeGenerationConfig")
+		if err := awsAwsjson11_serializeDocumentThemeGenerationConfig(v.ThemeGenerationConfig, ok); err != nil {
 			return err
 		}
 	}

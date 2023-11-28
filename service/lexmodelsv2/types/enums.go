@@ -1104,6 +1104,44 @@ func (ExportStatus) Values() []ExportStatus {
 	}
 }
 
+type GenerationSortByAttribute string
+
+// Enum values for GenerationSortByAttribute
+const (
+	GenerationSortByAttributeCreationStartTime GenerationSortByAttribute = "creationStartTime"
+	GenerationSortByAttributeLastUpdatedTime   GenerationSortByAttribute = "lastUpdatedTime"
+)
+
+// Values returns all known values for GenerationSortByAttribute. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GenerationSortByAttribute) Values() []GenerationSortByAttribute {
+	return []GenerationSortByAttribute{
+		"creationStartTime",
+		"lastUpdatedTime",
+	}
+}
+
+type GenerationStatus string
+
+// Enum values for GenerationStatus
+const (
+	GenerationStatusFailed     GenerationStatus = "Failed"
+	GenerationStatusComplete   GenerationStatus = "Complete"
+	GenerationStatusInProgress GenerationStatus = "InProgress"
+)
+
+// Values returns all known values for GenerationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GenerationStatus) Values() []GenerationStatus {
+	return []GenerationStatus{
+		"Failed",
+		"Complete",
+		"InProgress",
+	}
+}
+
 type ImportExportFileFormat string
 
 // Enum values for ImportExportFileFormat
@@ -1445,6 +1483,24 @@ func (SlotFilterOperator) Values() []SlotFilterOperator {
 	return []SlotFilterOperator{
 		"CO",
 		"EQ",
+	}
+}
+
+type SlotResolutionStrategy string
+
+// Enum values for SlotResolutionStrategy
+const (
+	SlotResolutionStrategyEnhancedFallback SlotResolutionStrategy = "EnhancedFallback"
+	SlotResolutionStrategyDefault          SlotResolutionStrategy = "Default"
+)
+
+// Values returns all known values for SlotResolutionStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SlotResolutionStrategy) Values() []SlotResolutionStrategy {
+	return []SlotResolutionStrategy{
+		"EnhancedFallback",
+		"Default",
 	}
 }
 

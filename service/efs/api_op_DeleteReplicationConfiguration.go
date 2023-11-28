@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing replication configuration. Deleting a replication
-// configuration ends the replication process. After a replication configuration is
-// deleted, the destination file system is no longer read-only. You can write to
-// the destination file system after its status becomes Writeable .
+// Deletes a replication configuration. Deleting a replication configuration ends
+// the replication process. After a replication configuration is deleted, the
+// destination file system becomes Writeable and its replication overwrite
+// protection is re-enabled. For more information, see Delete a replication
+// configuration (https://docs.aws.amazon.com/efs/latest/ug/delete-replications.html)
+// . This operation requires permissions for the
+// elasticfilesystem:DeleteReplicationConfiguration action.
 func (c *Client) DeleteReplicationConfiguration(ctx context.Context, params *DeleteReplicationConfigurationInput, optFns ...func(*Options)) (*DeleteReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteReplicationConfigurationInput{}

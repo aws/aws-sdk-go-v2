@@ -363,6 +363,26 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "fips-us-iso-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "datasync-fips.us-iso-west-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-iso-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-iso-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "datasync-fips.us-iso-west-1.c2s.ic.gov",
+			},
+		},
 	},
 	{
 		ID: "aws-iso-b",

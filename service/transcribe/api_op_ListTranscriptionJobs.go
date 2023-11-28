@@ -38,7 +38,7 @@ type ListTranscriptionJobsInput struct {
 
 	// The maximum number of transcription jobs to return in each page of results. If
 	// there are fewer results than the value that you specify, only the actual results
-	// are returned. If you don't specify a value, a default of 5 is used.
+	// are returned. If you do not specify a value, a default of 5 is used.
 	MaxResults *int32
 
 	// If your ListTranscriptionJobs request returns more results than can be
@@ -49,7 +49,7 @@ type ListTranscriptionJobsInput struct {
 	NextToken *string
 
 	// Returns only transcription jobs with the specified status. Jobs are ordered by
-	// creation date, with the newest job first. If you don't include Status , all
+	// creation date, with the newest job first. If you do not include Status , all
 	// transcription jobs are returned.
 	Status types.TranscriptionJobStatus
 
@@ -167,7 +167,7 @@ var _ ListTranscriptionJobsAPIClient = (*Client)(nil)
 type ListTranscriptionJobsPaginatorOptions struct {
 	// The maximum number of transcription jobs to return in each page of results. If
 	// there are fewer results than the value that you specify, only the actual results
-	// are returned. If you don't specify a value, a default of 5 is used.
+	// are returned. If you do not specify a value, a default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -2412,6 +2412,94 @@ func awsRestjson1_serializeOpDocumentUpdateFileSystemInput(v *UpdateFileSystemIn
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateFileSystemProtection struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateFileSystemProtection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateFileSystemProtection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateFileSystemProtectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2015-02-01/file-systems/{FileSystemId}/protection")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateFileSystemProtectionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateFileSystemProtectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateFileSystemProtectionInput(v *UpdateFileSystemProtectionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
+	}
+	if v.FileSystemId != nil {
+		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateFileSystemProtectionInput(v *UpdateFileSystemProtectionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ReplicationOverwriteProtection) > 0 {
+		ok := object.Key("ReplicationOverwriteProtection")
+		ok.String(string(v.ReplicationOverwriteProtection))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBackupPolicy(v *types.BackupPolicy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2468,6 +2556,11 @@ func awsRestjson1_serializeDocumentDestinationToCreate(v *types.DestinationToCre
 		ok.String(*v.AvailabilityZoneName)
 	}
 
+	if v.FileSystemId != nil {
+		ok := object.Key("FileSystemId")
+		ok.String(*v.FileSystemId)
+	}
+
 	if v.KmsKeyId != nil {
 		ok := object.Key("KmsKeyId")
 		ok.String(*v.KmsKeyId)
@@ -2497,6 +2590,11 @@ func awsRestjson1_serializeDocumentLifecyclePolicies(v []types.LifecyclePolicy, 
 func awsRestjson1_serializeDocumentLifecyclePolicy(v *types.LifecyclePolicy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.TransitionToArchive) > 0 {
+		ok := object.Key("TransitionToArchive")
+		ok.String(string(v.TransitionToArchive))
+	}
 
 	if len(v.TransitionToIA) > 0 {
 		ok := object.Key("TransitionToIA")

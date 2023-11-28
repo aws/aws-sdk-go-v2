@@ -110,6 +110,8 @@ const (
 
 	disableRequestCompression      = "disable_request_compression"
 	requestMinCompressionSizeBytes = "request_min_compression_size_bytes"
+
+	s3DisableExpressSessionAuthKey = "s3_disable_express_session_auth"
 )
 
 // defaultSharedConfigProfile allows for swapping the default profile for testing
@@ -328,6 +330,13 @@ type SharedConfig struct {
 	// default to 10240 and must be within 0 and 10485760 bytes inclusive
 	// retrieved from config file's profile field request_min_compression_size_bytes
 	RequestMinCompressSizeBytes *int64
+
+	// Whether S3Express auth is disabled.
+	//
+	// This will NOT prevent requests from being made to S3Express buckets, it
+	// will only bypass the modified endpoint routing and signing behaviors
+	// associated with the feature.
+	S3DisableExpressAuth *bool
 }
 
 func (c SharedConfig) getDefaultsMode(ctx context.Context) (value aws.DefaultsMode, ok bool, err error) {
@@ -445,6 +454,16 @@ func (c SharedConfig) GetUseFIPSEndpoint(ctx context.Context) (value aws.FIPSEnd
 	}
 
 	return c.UseFIPSEndpoint, true, nil
+}
+
+// GetS3DisableExpressAuth returns the configured value for
+// [SharedConfig.S3DisableExpressAuth].
+func (c SharedConfig) GetS3DisableExpressAuth() (value, ok bool) {
+	if c.S3DisableExpressAuth == nil {
+		return false, false
+	}
+
+	return *c.S3DisableExpressAuth, true
 }
 
 // GetCustomCABundle returns the custom CA bundle's PEM bytes if the file was
@@ -1066,6 +1085,7 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	updateEndpointDiscoveryType(&c.EnableEndpointDiscovery, section, enableEndpointDiscoveryKey)
 	updateBoolPtr(&c.S3UseARNRegion, section, s3UseARNRegionKey)
 	updateBoolPtr(&c.S3DisableMultiRegionAccessPoints, section, s3DisableMultiRegionAccessPointsKey)
+	updateBoolPtr(&c.S3DisableExpressAuth, section, s3DisableExpressSessionAuthKey)
 
 	if err := updateEC2MetadataServiceEndpointMode(&c.EC2IMDSEndpointMode, section, ec2MetadataServiceEndpointModeKey); err != nil {
 		return fmt.Errorf("failed to load %s from shared config, %v", ec2MetadataServiceEndpointModeKey, err)

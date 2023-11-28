@@ -35,6 +35,11 @@ type ListAccessorsInput struct {
 	// The maximum number of accessors to list.
 	MaxResults *int32
 
+	// The blockchain network that the Accessor token is created for. Use the value
+	// ETHEREUM_MAINNET_AND_GOERLI for all existing Accessors tokens that were created
+	// before the networkType property was introduced.
+	NetworkType types.AccessorNetworkType
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 

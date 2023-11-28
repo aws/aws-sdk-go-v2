@@ -41,6 +41,9 @@ type DescribeTargetHealthInput struct {
 	// This member is required.
 	TargetGroupArn *string
 
+	// Used to inclue anomaly detection information.
+	Include []types.DescribeTargetHealthInputIncludeEnum
+
 	// The targets.
 	Targets []types.TargetDescription
 

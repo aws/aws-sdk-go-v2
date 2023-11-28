@@ -90,6 +90,26 @@ func (m *validateOpCreateExportTask) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLogAnomalyDetector struct {
+}
+
+func (*validateOpCreateLogAnomalyDetector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLogAnomalyDetector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLogAnomalyDetectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLogAnomalyDetectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLogGroup struct {
 }
 
@@ -265,6 +285,26 @@ func (m *validateOpDeleteDestination) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLogAnomalyDetector struct {
+}
+
+func (*validateOpDeleteLogAnomalyDetector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLogAnomalyDetector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLogAnomalyDetectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLogAnomalyDetectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -525,6 +565,26 @@ func (m *validateOpGetDeliverySource) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDeliverySourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLogAnomalyDetector struct {
+}
+
+func (*validateOpGetLogAnomalyDetector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLogAnomalyDetector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLogAnomalyDetectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLogAnomalyDetectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1070,46 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAnomaly struct {
+}
+
+func (*validateOpUpdateAnomaly) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAnomaly) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAnomalyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAnomalyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLogAnomalyDetector struct {
+}
+
+func (*validateOpUpdateLogAnomalyDetector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLogAnomalyDetector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLogAnomalyDetectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLogAnomalyDetectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateKmsKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateKmsKey{}, middleware.After)
 }
@@ -1024,6 +1124,10 @@ func addOpCreateDeliveryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateExportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateExportTask{}, middleware.After)
+}
+
+func addOpCreateLogAnomalyDetectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLogAnomalyDetector{}, middleware.After)
 }
 
 func addOpCreateLogGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1060,6 +1164,10 @@ func addOpDeleteDeliverySourceValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeleteDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDestination{}, middleware.After)
+}
+
+func addOpDeleteLogAnomalyDetectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLogAnomalyDetector{}, middleware.After)
 }
 
 func addOpDeleteLogGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1112,6 +1220,10 @@ func addOpGetDeliveryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDeliverySourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDeliverySource{}, middleware.After)
+}
+
+func addOpGetLogAnomalyDetectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLogAnomalyDetector{}, middleware.After)
 }
 
 func addOpGetLogEventsValidationMiddleware(stack *middleware.Stack) error {
@@ -1208,6 +1320,14 @@ func addOpUntagLogGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAnomalyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAnomaly{}, middleware.After)
+}
+
+func addOpUpdateLogAnomalyDetectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLogAnomalyDetector{}, middleware.After)
 }
 
 func validateDeliveryDestinationConfiguration(v *types.DeliveryDestinationConfiguration) error {
@@ -1370,6 +1490,21 @@ func validateOpCreateExportTaskInput(v *CreateExportTaskInput) error {
 	}
 }
 
+func validateOpCreateLogAnomalyDetectorInput(v *CreateLogAnomalyDetectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLogAnomalyDetectorInput"}
+	if v.LogGroupArnList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArnList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLogGroupInput(v *CreateLogGroupInput) error {
 	if v == nil {
 		return nil
@@ -1503,6 +1638,21 @@ func validateOpDeleteDestinationInput(v *DeleteDestinationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDestinationInput"}
 	if v.DestinationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLogAnomalyDetectorInput(v *DeleteLogAnomalyDetectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLogAnomalyDetectorInput"}
+	if v.AnomalyDetectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyDetectorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1707,6 +1857,21 @@ func validateOpGetDeliverySourceInput(v *GetDeliverySourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDeliverySourceInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLogAnomalyDetectorInput(v *GetLogAnomalyDetectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLogAnomalyDetectorInput"}
+	if v.AnomalyDetectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyDetectorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2160,6 +2325,39 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAnomalyInput(v *UpdateAnomalyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAnomalyInput"}
+	if v.AnomalyDetectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyDetectorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLogAnomalyDetectorInput(v *UpdateLogAnomalyDetectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLogAnomalyDetectorInput"}
+	if v.AnomalyDetectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyDetectorArn"))
+	}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

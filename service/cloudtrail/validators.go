@@ -210,6 +210,46 @@ func (m *validateOpDeregisterOrganizationDelegatedAdmin) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableFederation struct {
+}
+
+func (*validateOpDisableFederation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableFederation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableFederationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableFederationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableFederation struct {
+}
+
+func (*validateOpEnableFederation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableFederation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableFederationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableFederationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetChannel struct {
 }
 
@@ -790,6 +830,14 @@ func addOpDeregisterOrganizationDelegatedAdminValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpDeregisterOrganizationDelegatedAdmin{}, middleware.After)
 }
 
+func addOpDisableFederationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableFederation{}, middleware.After)
+}
+
+func addOpEnableFederationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableFederation{}, middleware.After)
+}
+
 func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetChannel{}, middleware.After)
 }
@@ -1290,6 +1338,39 @@ func validateOpDeregisterOrganizationDelegatedAdminInput(v *DeregisterOrganizati
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterOrganizationDelegatedAdminInput"}
 	if v.DelegatedAdminAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DelegatedAdminAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisableFederationInput(v *DisableFederationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableFederationInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableFederationInput(v *EnableFederationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableFederationInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
+	}
+	if v.FederationRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FederationRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

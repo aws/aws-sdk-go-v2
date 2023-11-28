@@ -59,6 +59,11 @@ type UpdateBotLocaleInput struct {
 	// The new description of the locale.
 	Description *string
 
+	// Contains settings for generative AI features powered by Amazon Bedrock for your
+	// bot locale. Use this object to turn generative AI features on and off. Pricing
+	// may differ if you turn a feature on. For more information, see LINK.
+	GenerativeAISettings *types.GenerativeAISettings
+
 	// The new Amazon Polly voice Amazon Lex should use for voice interaction with the
 	// user.
 	VoiceSettings *types.VoiceSettings
@@ -87,6 +92,10 @@ type UpdateBotLocaleOutput struct {
 	// If the botLocaleStatus is Failed , the failureReasons field lists the errors
 	// that occurred while building the bot.
 	FailureReasons []string
+
+	// Contains settings for generative AI features powered by Amazon Bedrock for your
+	// bot locale.
+	GenerativeAISettings *types.GenerativeAISettings
 
 	// A timestamp of the date and time that the locale was last updated.
 	LastUpdatedDateTime *time.Time

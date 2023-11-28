@@ -19,9 +19,9 @@ import (
 // adds flags to personal health information (PHI). To learn more about these
 // features, refer to How Amazon Transcribe Medical works (https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works-med.html)
 // . To make a StartMedicalTranscriptionJob request, you must first upload your
-// media file into an Amazon S3 bucket; you can then specify the S3 location of the
-// file using the Media parameter. You must include the following parameters in
-// your StartMedicalTranscriptionJob request:
+// media file into an Amazon S3 bucket; you can then specify the Amazon S3 location
+// of the file using the Media parameter. You must include the following
+// parameters in your StartMedicalTranscriptionJob request:
 //   - region : The Amazon Web Services Region where you are making your request.
 //     For a list of Amazon Web Services Regions supported with Amazon Transcribe,
 //     refer to Amazon Transcribe endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html)
@@ -60,7 +60,7 @@ type StartMedicalTranscriptionJobInput struct {
 	LanguageCode types.LanguageCode
 
 	// Describes the Amazon S3 location of the media file you want to use in your
-	// request. For information on supported media formats, refer to the MediaFormat (https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat)
+	// request. For information on supported media formats, refer to the MediaFormat
 	// parameter or the Media formats (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
 	// section in the Amazon S3 Developer Guide.
 	//
@@ -125,12 +125,12 @@ type StartMedicalTranscriptionJobInput struct {
 	MediaFormat types.MediaFormat
 
 	// The sample rate, in hertz, of the audio track in your input media file. If you
-	// don't specify the media sample rate, Amazon Transcribe Medical determines it for
-	// you. If you specify the sample rate, it must match the rate detected by Amazon
-	// Transcribe Medical; if there's a mismatch between the value that you specify and
-	// the value detected, your job fails. Therefore, in most cases, it's advised to
-	// omit MediaSampleRateHertz and let Amazon Transcribe Medical determine the
-	// sample rate.
+	// do not specify the media sample rate, Amazon Transcribe Medical determines it
+	// for you. If you specify the sample rate, it must match the rate detected by
+	// Amazon Transcribe Medical; if there's a mismatch between the value that you
+	// specify and the value detected, your job fails. Therefore, in most cases, it's
+	// advised to omit MediaSampleRateHertz and let Amazon Transcribe Medical
+	// determine the sample rate.
 	MediaSampleRateHertz *int32
 
 	// The KMS key you want to use to encrypt your medical transcription output. If
@@ -150,7 +150,7 @@ type StartMedicalTranscriptionJobInput struct {
 	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
 	//   - Use the ARN for the KMS key alias. For example,
 	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
-	// If you don't specify an encryption key, your output is encrypted with the
+	// If you do not specify an encryption key, your output is encrypted with the
 	// default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output,
 	// you must also specify an output location using the OutputLocation parameter.
 	// Note that the role making the request must have permission to use the specified

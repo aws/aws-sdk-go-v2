@@ -150,6 +150,26 @@ func (m *validateOpCreateNodegroup) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePodIdentityAssociation struct {
+}
+
+func (*validateOpCreatePodIdentityAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePodIdentityAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePodIdentityAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePodIdentityAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAddon struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpDeleteNodegroup) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteNodegroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePodIdentityAssociation struct {
+}
+
+func (*validateOpDeletePodIdentityAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePodIdentityAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePodIdentityAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePodIdentityAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +450,26 @@ func (m *validateOpDescribeNodegroup) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribePodIdentityAssociation struct {
+}
+
+func (*validateOpDescribePodIdentityAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePodIdentityAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePodIdentityAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePodIdentityAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeUpdate struct {
 }
 
@@ -525,6 +585,26 @@ func (m *validateOpListNodegroups) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListNodegroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPodIdentityAssociations struct {
+}
+
+func (*validateOpListPodIdentityAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPodIdentityAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPodIdentityAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPodIdentityAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +830,26 @@ func (m *validateOpUpdateNodegroupVersion) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePodIdentityAssociation struct {
+}
+
+func (*validateOpUpdatePodIdentityAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePodIdentityAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePodIdentityAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePodIdentityAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateEncryptionConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateEncryptionConfig{}, middleware.After)
 }
@@ -778,6 +878,10 @@ func addOpCreateNodegroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateNodegroup{}, middleware.After)
 }
 
+func addOpCreatePodIdentityAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePodIdentityAssociation{}, middleware.After)
+}
+
 func addOpDeleteAddonValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAddon{}, middleware.After)
 }
@@ -796,6 +900,10 @@ func addOpDeleteFargateProfileValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeleteNodegroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNodegroup{}, middleware.After)
+}
+
+func addOpDeletePodIdentityAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePodIdentityAssociation{}, middleware.After)
 }
 
 func addOpDeregisterClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -830,6 +938,10 @@ func addOpDescribeNodegroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNodegroup{}, middleware.After)
 }
 
+func addOpDescribePodIdentityAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePodIdentityAssociation{}, middleware.After)
+}
+
 func addOpDescribeUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeUpdate{}, middleware.After)
 }
@@ -852,6 +964,10 @@ func addOpListIdentityProviderConfigsValidationMiddleware(stack *middleware.Stac
 
 func addOpListNodegroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNodegroups{}, middleware.After)
+}
+
+func addOpListPodIdentityAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPodIdentityAssociations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -896,6 +1012,10 @@ func addOpUpdateNodegroupConfigValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateNodegroupVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNodegroupVersion{}, middleware.After)
+}
+
+func addOpUpdatePodIdentityAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePodIdentityAssociation{}, middleware.After)
 }
 
 func validateConnectorConfigRequest(v *types.ConnectorConfigRequest) error {
@@ -1120,6 +1240,30 @@ func validateOpCreateNodegroupInput(v *CreateNodegroupInput) error {
 	}
 }
 
+func validateOpCreatePodIdentityAssociationInput(v *CreatePodIdentityAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePodIdentityAssociationInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.ServiceAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccount"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAddonInput(v *DeleteAddonInput) error {
 	if v == nil {
 		return nil
@@ -1196,6 +1340,24 @@ func validateOpDeleteNodegroupInput(v *DeleteNodegroupInput) error {
 	}
 	if v.NodegroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePodIdentityAssociationInput(v *DeletePodIdentityAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePodIdentityAssociationInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1343,6 +1505,24 @@ func validateOpDescribeNodegroupInput(v *DescribeNodegroupInput) error {
 	}
 }
 
+func validateOpDescribePodIdentityAssociationInput(v *DescribePodIdentityAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePodIdentityAssociationInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeUpdateInput(v *DescribeUpdateInput) error {
 	if v == nil {
 		return nil
@@ -1433,6 +1613,21 @@ func validateOpListNodegroupsInput(v *ListNodegroupsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListNodegroupsInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPodIdentityAssociationsInput(v *ListPodIdentityAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPodIdentityAssociationsInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
@@ -1625,6 +1820,24 @@ func validateOpUpdateNodegroupVersionInput(v *UpdateNodegroupVersionInput) error
 	}
 	if v.NodegroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePodIdentityAssociationInput(v *UpdatePodIdentityAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePodIdentityAssociationInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

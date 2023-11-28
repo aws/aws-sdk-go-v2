@@ -3195,6 +3195,38 @@
                 "target": "com.amazonaws.quicksight#AuthorSpecifiedAggregation"
             }
         },
+        "com.amazonaws.quicksight#AuthorizedTargetsByService": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "com.amazonaws.quicksight#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services service.</p>"
+                    }
+                },
+                "AuthorizedTargets": {
+                    "target": "com.amazonaws.quicksight#AuthorizedTargetsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Aist of authorized targets that are represented by IAM Identity Center application ARNs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The authorized targets that are associated with a service.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AuthorizedTargetsByServices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AuthorizedTargetsByService"
+            }
+        },
+        "com.amazonaws.quicksight#AuthorizedTargetsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#String"
+            }
+        },
         "com.amazonaws.quicksight#AwsAccountId": {
             "type": "string",
             "traits": {
@@ -14505,6 +14537,86 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DeleteIdentityPropagationConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteIdentityPropagationConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteIdentityPropagationConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes all access scopes and authorized targets that are associated with a service from the Amazon QuickSight IAM Identity Center application.</p>\n         <p>This operation is only supported for Amazon QuickSight accounts that use IAM Identity Center.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/identity-propagation-config/{Service}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteIdentityPropagationConfigRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that you want to delete an identity propagation configuration from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.quicksight#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services service that you want to delete the associated access scopes and authorized targets from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteIdentityPropagationConfigResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DeleteNamespace": {
             "type": "operation",
             "input": {
@@ -25633,6 +25745,21 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#IdentityCenterConfiguration": {
+            "type": "structure",
+            "members": {
+                "EnableIdentityPropagation": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters for an IAM Identity Center configuration.</p>"
+            }
+        },
         "com.amazonaws.quicksight#IdentityMap": {
             "type": "map",
             "key": {
@@ -29437,6 +29564,115 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListIdentityPropagationConfigs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListIdentityPropagationConfigsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListIdentityPropagationConfigsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all services and authorized targets that the Amazon QuickSight IAM Identity Center application can access.</p>\n         <p>This operation is only supported for Amazon QuickSight accounts that use IAM Identity Center.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/identity-propagation-config",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListIdentityPropagationConfigsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contain the identity propagation configurations of.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#ListIdentityPropagationMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListIdentityPropagationConfigsResponse": {
+            "type": "structure",
+            "members": {
+                "Services": {
+                    "target": "com.amazonaws.quicksight#AuthorizedTargetsByServices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of services and their authorized targets that the Amazon QuickSight IAM Identity Center application can access.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListIdentityPropagationMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.quicksight#ListIngestions": {
@@ -35662,6 +35898,9 @@
                     "target": "com.amazonaws.quicksight#DeleteIAMPolicyAssignment"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DeleteIdentityPropagationConfig"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DeleteNamespace"
                 },
                 {
@@ -35878,6 +36117,9 @@
                     "target": "com.amazonaws.quicksight#ListIAMPolicyAssignmentsForUser"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#ListIdentityPropagationConfigs"
+                },
+                {
                     "target": "com.amazonaws.quicksight#ListIngestions"
                 },
                 {
@@ -36011,6 +36253,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateIAMPolicyAssignment"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateIdentityPropagationConfig"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateIpRestriction"
@@ -37358,6 +37603,12 @@
                     "target": "com.amazonaws.quicksight#RedshiftIAMParameters",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional parameter that uses IAM authentication to grant Amazon QuickSight access to your cluster. This parameter can be used instead of <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html\">DataSourceCredentials</a>.</p>"
+                    }
+                },
+                "IdentityCenterConfiguration": {
+                    "target": "com.amazonaws.quicksight#IdentityCenterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that configures IAM Identity Center authentication to grant Amazon QuickSight access to your cluster.</p>\n         <p>This parameter can only be specified if your Amazon QuickSight account is configured with IAM Identity Center.</p>"
                     }
                 }
             },
@@ -40675,6 +40926,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The parameters for ServiceNow.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ServiceType": {
+            "type": "enum",
+            "members": {
+                "REDSHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REDSHIFT"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#SessionLifetimeInMinutes": {
@@ -49328,6 +49590,92 @@
                         "smithy.api#documentation": "<p>The status of the assignment. Possible values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> - Anything specified in this assignment is used when\n\t\t\t\t\tcreating the data source.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - This assignment isn't used when creating the data\n\t\t\t\t\tsource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DRAFT</code> - This assignment is an unfinished draft and isn't used\n\t\t\t\t\twhen creating the data source.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateIdentityPropagationConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateIdentityPropagationConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateIdentityPropagationConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or updates services and authorized targets to configure what the Amazon QuickSight IAM Identity Center application can access.</p>\n         <p>This operation is only supported for Amazon QuickSight accounts using IAM Identity Center</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/identity-propagation-config/{Service}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateIdentityPropagationConfigRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the identity propagation configuration that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.quicksight#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services service that contains the authorized targets that you want to add or update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuthorizedTargets": {
+                    "target": "com.amazonaws.quicksight#AuthorizedTargetsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a list of application ARNs that represent the authorized targets for a service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateIdentityPropagationConfigResponse": {
+            "type": "structure",
+            "members": {
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {

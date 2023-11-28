@@ -24,6 +24,7 @@
         "api_op_DeleteProfileObject.go",
         "api_op_DeleteProfileObjectType.go",
         "api_op_DeleteWorkflow.go",
+        "api_op_DetectProfileObjectType.go",
         "api_op_GetAutoMergingPreview.go",
         "api_op_GetCalculatedAttributeDefinition.go",
         "api_op_GetCalculatedAttributeForProfile.go",

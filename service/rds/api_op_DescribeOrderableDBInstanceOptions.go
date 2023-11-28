@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of orderable DB instance options for the specified DB engine, DB
-// engine version, and DB instance class.
+// Describes the orderable DB instance options for a specified DB engine.
 func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params *DescribeOrderableDBInstanceOptionsInput, optFns ...func(*Options)) (*DescribeOrderableDBInstanceOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeOrderableDBInstanceOptionsInput{}
@@ -31,10 +30,12 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 
 type DescribeOrderableDBInstanceOptionsInput struct {
 
-	// The name of the engine to retrieve DB instance options for. Valid Values:
+	// The name of the engine to describe DB instance options for. Valid Values:
 	//   - aurora-mysql
 	//   - aurora-postgresql
 	//   - custom-oracle-ee
+	//   - db2-ae
+	//   - db2-se
 	//   - mariadb
 	//   - mysql
 	//   - oracle-ee
@@ -51,25 +52,23 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	Engine *string
 
 	// The Availability Zone group associated with a Local Zone. Specify this
-	// parameter to retrieve available offerings for the Local Zones in the group. Omit
-	// this parameter to show the available offerings in the specified Amazon Web
-	// Services Region. This setting doesn't apply to RDS Custom.
+	// parameter to retrieve available options for the Local Zones in the group. Omit
+	// this parameter to show the available options in the specified Amazon Web
+	// Services Region. This setting doesn't apply to RDS Custom DB instances.
 	AvailabilityZoneGroup *string
 
-	// The DB instance class filter value. Specify this parameter to show only the
-	// available offerings matching the specified DB instance class.
+	// A filter to include only the available options for the specified DB instance
+	// class.
 	DBInstanceClass *string
 
-	// The engine version filter value. Specify this parameter to show only the
-	// available offerings matching the specified engine version.
+	// A filter to include only the available options for the specified engine version.
 	EngineVersion *string
 
 	// This parameter isn't currently supported.
 	Filters []types.Filter
 
-	// The license model filter value. Specify this parameter to show only the
-	// available offerings matching the specified license model. RDS Custom supports
-	// only the BYOL licensing model.
+	// A filter to include only the available options for the specified license model.
+	// RDS Custom supports only the BYOL licensing model.
 	LicenseModel *string
 
 	// An optional pagination token provided by a previous

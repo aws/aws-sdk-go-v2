@@ -64,7 +64,9 @@ type DescribeBackupVaultOutput struct {
 	CreationDate *time.Time
 
 	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of running the operation twice.
+	// retried without the risk of running the operation twice. This parameter is
+	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
 	CreatorRequestId *string
 
 	// The server-side encryption key that is used to protect your backups; for

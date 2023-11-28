@@ -455,6 +455,61 @@ func (m *awsAwsjson11_serializeOpDeleteLanguageModel) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDeleteMedicalScribeJob struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteMedicalScribeJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteMedicalScribeJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteMedicalScribeJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.DeleteMedicalScribeJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteMedicalScribeJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeleteMedicalTranscriptionJob struct {
 }
 
@@ -880,6 +935,61 @@ func (m *awsAwsjson11_serializeOpGetCallAnalyticsJob) HandleSerialize(ctx contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetCallAnalyticsJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetMedicalScribeJob struct {
+}
+
+func (*awsAwsjson11_serializeOpGetMedicalScribeJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetMedicalScribeJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetMedicalScribeJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.GetMedicalScribeJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetMedicalScribeJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1335,6 +1445,61 @@ func (m *awsAwsjson11_serializeOpListLanguageModels) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListMedicalScribeJobs struct {
+}
+
+func (*awsAwsjson11_serializeOpListMedicalScribeJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListMedicalScribeJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMedicalScribeJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.ListMedicalScribeJobs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListMedicalScribeJobsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListMedicalTranscriptionJobs struct {
 }
 
@@ -1705,6 +1870,61 @@ func (m *awsAwsjson11_serializeOpStartCallAnalyticsJob) HandleSerialize(ctx cont
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentStartCallAnalyticsJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpStartMedicalScribeJob struct {
+}
+
+func (*awsAwsjson11_serializeOpStartMedicalScribeJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStartMedicalScribeJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartMedicalScribeJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.StartMedicalScribeJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStartMedicalScribeJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2216,6 +2436,13 @@ func awsAwsjson11_serializeDocumentCallAnalyticsJobSettings(v *types.CallAnalyti
 		}
 	}
 
+	if v.Summarization != nil {
+		ok := object.Key("Summarization")
+		if err := awsAwsjson11_serializeDocumentSummarization(v.Summarization, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.VocabularyFilterMethod) > 0 {
 		ok := object.Key("VocabularyFilterMethod")
 		ok.String(string(v.VocabularyFilterMethod))
@@ -2433,6 +2660,73 @@ func awsAwsjson11_serializeDocumentMedia(v *types.Media, value smithyjson.Value)
 	if v.RedactedMediaFileUri != nil {
 		ok := object.Key("RedactedMediaFileUri")
 		ok.String(*v.RedactedMediaFileUri)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMedicalScribeChannelDefinition(v *types.MedicalScribeChannelDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("ChannelId")
+		ok.Integer(v.ChannelId)
+	}
+
+	if len(v.ParticipantRole) > 0 {
+		ok := object.Key("ParticipantRole")
+		ok.String(string(v.ParticipantRole))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMedicalScribeChannelDefinitions(v []types.MedicalScribeChannelDefinition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentMedicalScribeChannelDefinition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMedicalScribeSettings(v *types.MedicalScribeSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelIdentification != nil {
+		ok := object.Key("ChannelIdentification")
+		ok.Boolean(*v.ChannelIdentification)
+	}
+
+	if v.MaxSpeakerLabels != nil {
+		ok := object.Key("MaxSpeakerLabels")
+		ok.Integer(*v.MaxSpeakerLabels)
+	}
+
+	if v.ShowSpeakerLabels != nil {
+		ok := object.Key("ShowSpeakerLabels")
+		ok.Boolean(*v.ShowSpeakerLabels)
+	}
+
+	if len(v.VocabularyFilterMethod) > 0 {
+		ok := object.Key("VocabularyFilterMethod")
+		ok.String(string(v.VocabularyFilterMethod))
+	}
+
+	if v.VocabularyFilterName != nil {
+		ok := object.Key("VocabularyFilterName")
+		ok.String(*v.VocabularyFilterName)
+	}
+
+	if v.VocabularyName != nil {
+		ok := object.Key("VocabularyName")
+		ok.String(*v.VocabularyName)
 	}
 
 	return nil
@@ -2751,6 +3045,18 @@ func awsAwsjson11_serializeDocumentSubtitles(v *types.Subtitles, value smithyjso
 	if v.OutputStartIndex != nil {
 		ok := object.Key("OutputStartIndex")
 		ok.Integer(*v.OutputStartIndex)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSummarization(v *types.Summarization, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GenerateAbstractiveSummary != nil {
+		ok := object.Key("GenerateAbstractiveSummary")
+		ok.Boolean(*v.GenerateAbstractiveSummary)
 	}
 
 	return nil
@@ -3096,6 +3402,18 @@ func awsAwsjson11_serializeOpDocumentDeleteLanguageModelInput(v *DeleteLanguageM
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeleteMedicalScribeJobInput(v *DeleteMedicalScribeJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MedicalScribeJobName != nil {
+		ok := object.Key("MedicalScribeJobName")
+		ok.String(*v.MedicalScribeJobName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeleteMedicalTranscriptionJobInput(v *DeleteMedicalTranscriptionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3187,6 +3505,18 @@ func awsAwsjson11_serializeOpDocumentGetCallAnalyticsJobInput(v *GetCallAnalytic
 	if v.CallAnalyticsJobName != nil {
 		ok := object.Key("CallAnalyticsJobName")
 		ok.String(*v.CallAnalyticsJobName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetMedicalScribeJobInput(v *GetMedicalScribeJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MedicalScribeJobName != nil {
+		ok := object.Key("MedicalScribeJobName")
+		ok.String(*v.MedicalScribeJobName)
 	}
 
 	return nil
@@ -3318,6 +3648,33 @@ func awsAwsjson11_serializeOpDocumentListLanguageModelsInput(v *ListLanguageMode
 	if len(v.StatusEquals) > 0 {
 		ok := object.Key("StatusEquals")
 		ok.String(string(v.StatusEquals))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListMedicalScribeJobsInput(v *ListMedicalScribeJobsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobNameContains != nil {
+		ok := object.Key("JobNameContains")
+		ok.String(*v.JobNameContains)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
 	}
 
 	return nil
@@ -3506,6 +3863,68 @@ func awsAwsjson11_serializeOpDocumentStartCallAnalyticsJobInput(v *StartCallAnal
 	if v.Settings != nil {
 		ok := object.Key("Settings")
 		if err := awsAwsjson11_serializeDocumentCallAnalyticsJobSettings(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentStartMedicalScribeJobInput(v *StartMedicalScribeJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelDefinitions != nil {
+		ok := object.Key("ChannelDefinitions")
+		if err := awsAwsjson11_serializeDocumentMedicalScribeChannelDefinitions(v.ChannelDefinitions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
+	}
+
+	if v.KMSEncryptionContext != nil {
+		ok := object.Key("KMSEncryptionContext")
+		if err := awsAwsjson11_serializeDocumentKMSEncryptionContextMap(v.KMSEncryptionContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Media != nil {
+		ok := object.Key("Media")
+		if err := awsAwsjson11_serializeDocumentMedia(v.Media, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MedicalScribeJobName != nil {
+		ok := object.Key("MedicalScribeJobName")
+		ok.String(*v.MedicalScribeJobName)
+	}
+
+	if v.OutputBucketName != nil {
+		ok := object.Key("OutputBucketName")
+		ok.String(*v.OutputBucketName)
+	}
+
+	if v.OutputEncryptionKMSKeyId != nil {
+		ok := object.Key("OutputEncryptionKMSKeyId")
+		ok.String(*v.OutputEncryptionKMSKeyId)
+	}
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentMedicalScribeSettings(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
 	}

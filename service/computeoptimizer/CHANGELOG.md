@@ -1,3 +1,15 @@
+# v1.30.2 (2023-11-28.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.30.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
+# v1.30.0 (2023-11-27)
+
+* **Feature**: This release enables AWS Compute Optimizer to analyze and generate recommendations with customization and discounts preferences.
+
 # v1.29.4 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

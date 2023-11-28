@@ -29,6 +29,21 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.detective#APIFailureCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.detective#APIName": {
+            "type": "string"
+        },
+        "com.amazonaws.detective#APISuccessCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.detective#AcceptInvitation": {
             "type": "operation",
             "input": {
@@ -215,6 +230,15 @@
                 "target": "com.amazonaws.detective#Administrator"
             }
         },
+        "com.amazonaws.detective#AiPaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.detective#AmazonDetective": {
             "type": "service",
             "version": "2018-10-26",
@@ -253,6 +277,9 @@
                     "target": "com.amazonaws.detective#EnableOrganizationAdminAccount"
                 },
                 {
+                    "target": "com.amazonaws.detective#GetInvestigation"
+                },
+                {
                     "target": "com.amazonaws.detective#GetMembers"
                 },
                 {
@@ -260,6 +287,12 @@
                 },
                 {
                     "target": "com.amazonaws.detective#ListGraphs"
+                },
+                {
+                    "target": "com.amazonaws.detective#ListIndicators"
+                },
+                {
+                    "target": "com.amazonaws.detective#ListInvestigations"
                 },
                 {
                     "target": "com.amazonaws.detective#ListInvitations"
@@ -277,6 +310,9 @@
                     "target": "com.amazonaws.detective#RejectInvitation"
                 },
                 {
+                    "target": "com.amazonaws.detective#StartInvestigation"
+                },
+                {
                     "target": "com.amazonaws.detective#StartMonitoringMember"
                 },
                 {
@@ -287,6 +323,9 @@
                 },
                 {
                     "target": "com.amazonaws.detective#UpdateDatasourcePackages"
+                },
+                {
+                    "target": "com.amazonaws.detective#UpdateInvestigationState"
                 },
                 {
                     "target": "com.amazonaws.detective#UpdateOrganizationConfiguration"
@@ -348,7 +387,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -391,7 +429,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -404,7 +443,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -418,7 +456,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -441,7 +478,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -476,7 +512,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -487,14 +522,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -508,14 +545,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -524,11 +559,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -539,14 +574,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -560,7 +597,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -580,7 +616,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -591,14 +626,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -609,9 +646,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1248,6 +1287,9 @@
                 }
             }
         },
+        "com.amazonaws.detective#Aso": {
+            "type": "string"
+        },
         "com.amazonaws.detective#BatchGetGraphMemberDatasources": {
             "type": "operation",
             "input": {
@@ -1494,7 +1536,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <code>CreateMembers</code> is used to send invitations to accounts. For the organization\n         behavior graph, the Detective administrator account uses\n            <code>CreateMembers</code> to enable organization accounts as member accounts.</p>\n         <p>For invited accounts, <code>CreateMembers</code> sends a request to invite the specified\n            Amazon Web Services accounts to be member accounts in the behavior graph. This operation\n         can only be called by the administrator account for a behavior graph. </p>\n         <p>\n            <code>CreateMembers</code> verifies the accounts and then invites the verified accounts.\n         The administrator can optionally specify to not send invitation emails to the member\n         accounts. This would be used when the administrator manages their member accounts\n         centrally.</p>\n         <p>For organization accounts in the organization behavior graph, <code>CreateMembers</code>\n         attempts to enable the accounts. The organization accounts do not receive\n         invitations.</p>\n         <p>The request provides the behavior graph ARN and the list of accounts to invite or to\n         enable.</p>\n         <p>The response separates the requested accounts into two lists:</p>\n         <ul>\n            <li>\n               <p>The accounts that <code>CreateMembers</code> was able to process. For invited\n               accounts, includes member accounts that are being verified, that have passed\n               verification and are to be invited, and that have failed verification. For\n               organization accounts in the organization behavior graph, includes accounts that can\n               be enabled and that cannot be enabled.</p>\n            </li>\n            <li>\n               <p>The accounts that <code>CreateMembers</code> was unable to process. This list\n               includes accounts that were already invited to be member accounts in the behavior\n               graph.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>\n            <code>CreateMembers</code> is used to send invitations to accounts. For the organization\n         behavior graph, the Detective administrator account uses\n         <code>CreateMembers</code> to enable organization accounts as member accounts.</p>\n         <p>For invited accounts, <code>CreateMembers</code> sends a request to invite the specified\n         Amazon Web Services accounts to be member accounts in the behavior graph. This operation\n         can only be called by the administrator account for a behavior graph. </p>\n         <p>\n            <code>CreateMembers</code> verifies the accounts and then invites the verified accounts.\n         The administrator can optionally specify to not send invitation emails to the member\n         accounts. This would be used when the administrator manages their member accounts\n         centrally.</p>\n         <p>For organization accounts in the organization behavior graph, <code>CreateMembers</code>\n         attempts to enable the accounts. The organization accounts do not receive\n         invitations.</p>\n         <p>The request provides the behavior graph ARN and the list of accounts to invite or to\n         enable.</p>\n         <p>The response separates the requested accounts into two lists:</p>\n         <ul>\n            <li>\n               <p>The accounts that <code>CreateMembers</code> was able to process. For invited\n               accounts, includes member accounts that are being verified, that have passed\n               verification and are to be invited, and that have failed verification. For\n               organization accounts in the organization behavior graph, includes accounts that can\n               be enabled and that cannot be enabled.</p>\n            </li>\n            <li>\n               <p>The accounts that <code>CreateMembers</code> was unable to process. This list\n               includes accounts that were already invited to be member accounts in the behavior\n               graph.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/graph/members",
@@ -1680,6 +1722,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information on the usage of a data source package in the behavior graph.</p>"
+            }
+        },
+        "com.amazonaws.detective#DateFilter": {
+            "type": "structure",
+            "members": {
+                "StartInclusive": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp representing the start of the time period from when data is filtered, including the start date.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndInclusive": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp representing the end date of the time period until when data is filtered , including the end date.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details on the time range used to filter data.</p>"
             }
         },
         "com.amazonaws.detective#DeleteGraph": {
@@ -2012,6 +2076,29 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.detective#EntityArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:"
+            }
+        },
+        "com.amazonaws.detective#EntityType": {
+            "type": "enum",
+            "members": {
+                "IAM_ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_ROLE"
+                    }
+                },
+                "IAM_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_USER"
+                    }
+                }
+            }
+        },
         "com.amazonaws.detective#ErrorCode": {
             "type": "enum",
             "members": {
@@ -2040,6 +2127,211 @@
         },
         "com.amazonaws.detective#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.detective#Field": {
+            "type": "enum",
+            "members": {
+                "SEVERITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEVERITY"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATUS"
+                    }
+                },
+                "CREATED_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED_TIME"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#FilterCriteria": {
+            "type": "structure",
+            "members": {
+                "Severity": {
+                    "target": "com.amazonaws.detective#StringFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the investigation results based on the severity.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.detective#StringFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the investigation results based on the status.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.detective#StringFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the investigation results based on the state.</p>"
+                    }
+                },
+                "EntityArn": {
+                    "target": "com.amazonaws.detective#StringFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the investigation results based on the Amazon Resource Name (ARN) of the entity.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.detective#DateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the investigation results based on when the investigation was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details on the criteria used to define the filter for investigation results.</p>"
+            }
+        },
+        "com.amazonaws.detective#FlaggedIpAddressDetail": {
+            "type": "structure",
+            "members": {
+                "IpAddress": {
+                    "target": "com.amazonaws.detective#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IP address of the suspicious entity.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.detective#Reason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details the reason the IP address was flagged as suspicious.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on suspicious IP addresses identified as indicators of compromise. This indicator is derived from Amazon Web Services threat intelligence.</p>"
+            }
+        },
+        "com.amazonaws.detective#GetInvestigation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#GetInvestigationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.detective#GetInvestigationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the investigation results of an investigation for a behavior graph. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/investigations/getInvestigation",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.detective#GetInvestigationRequest": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvestigationId": {
+                    "target": "com.amazonaws.detective#InvestigationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The investigation ID of the investigation report.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.detective#GetInvestigationResponse": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>"
+                    }
+                },
+                "InvestigationId": {
+                    "target": "com.amazonaws.detective#InvestigationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The investigation ID of the investigation report.</p>"
+                    }
+                },
+                "EntityArn": {
+                    "target": "com.amazonaws.detective#EntityArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) of the IAM user and IAM role.</p>"
+                    }
+                },
+                "EntityType": {
+                    "target": "com.amazonaws.detective#EntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of entity. For example, Amazon Web Services accounts, such as IAM user and role.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The UTC time stamp of the creation time of the investigation report.</p>"
+                    }
+                },
+                "ScopeStartTime": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date and time for the scope time set to generate the investigation report.</p>"
+                    }
+                },
+                "ScopeEndTime": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data and time when the investigation began. The value is an UTC ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.detective#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status based on the completion status of the investigation.</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.detective#Severity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Severity based on the likelihood and impact of the indicators of compromise discovered in the investigation.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.detective#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the investigation. An archived investigation indicates you have completed reviewing the investigation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.detective#GetMembers": {
             "type": "operation",
@@ -2158,6 +2450,185 @@
                 "target": "com.amazonaws.detective#Graph"
             }
         },
+        "com.amazonaws.detective#HourlyTimeDelta": {
+            "type": "integer"
+        },
+        "com.amazonaws.detective#Id": {
+            "type": "string"
+        },
+        "com.amazonaws.detective#ImpossibleTravelDetail": {
+            "type": "structure",
+            "members": {
+                "StartingIpAddress": {
+                    "target": "com.amazonaws.detective#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IP address where the resource was first used in the impossible travel</p>"
+                    }
+                },
+                "EndingIpAddress": {
+                    "target": "com.amazonaws.detective#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IP address where the resource was last used in the impossible travel.</p>"
+                    }
+                },
+                "StartingLocation": {
+                    "target": "com.amazonaws.detective#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Location where the resource was first used in the impossible travel</p>"
+                    }
+                },
+                "EndingLocation": {
+                    "target": "com.amazonaws.detective#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Location where the resource was last used in the impossible travel.</p>"
+                    }
+                },
+                "HourlyTimeDelta": {
+                    "target": "com.amazonaws.detective#HourlyTimeDelta",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the time difference between the first and last timestamp the resource was used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on unusual and impossible travel in an account.</p>"
+            }
+        },
+        "com.amazonaws.detective#Indicator": {
+            "type": "structure",
+            "members": {
+                "IndicatorType": {
+                    "target": "com.amazonaws.detective#IndicatorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of indicator.</p>"
+                    }
+                },
+                "IndicatorDetail": {
+                    "target": "com.amazonaws.detective#IndicatorDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the indicator of compromise.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Investigations triages indicators of compromises such as a finding and surfaces only the most critical and suspicious issues, so you can focus on high-level investigations. </p>"
+            }
+        },
+        "com.amazonaws.detective#IndicatorDetail": {
+            "type": "structure",
+            "members": {
+                "TTPsObservedDetail": {
+                    "target": "com.amazonaws.detective#TTPsObservedDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the indicator of compromise.</p>"
+                    }
+                },
+                "ImpossibleTravelDetail": {
+                    "target": "com.amazonaws.detective#ImpossibleTravelDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies unusual and impossible user activity for an account. </p>"
+                    }
+                },
+                "FlaggedIpAddressDetail": {
+                    "target": "com.amazonaws.detective#FlaggedIpAddressDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Suspicious IP addresses that are flagged, which indicates critical or severe threats based on threat intelligence by Detective. This indicator is derived from AWS threat intelligence.</p>"
+                    }
+                },
+                "NewGeolocationDetail": {
+                    "target": "com.amazonaws.detective#NewGeolocationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the new geographic location.</p>"
+                    }
+                },
+                "NewAsoDetail": {
+                    "target": "com.amazonaws.detective#NewAsoDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the new Autonomous System Organization (ASO).</p>"
+                    }
+                },
+                "NewUserAgentDetail": {
+                    "target": "com.amazonaws.detective#NewUserAgentDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the new user agent.</p>"
+                    }
+                },
+                "RelatedFindingDetail": {
+                    "target": "com.amazonaws.detective#RelatedFindingDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about related findings.</p>"
+                    }
+                },
+                "RelatedFindingGroupDetail": {
+                    "target": "com.amazonaws.detective#RelatedFindingGroupDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about related finding groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the indicators of compromise which are used to determine if a resource is involved in a security incident. </p>"
+            }
+        },
+        "com.amazonaws.detective#IndicatorType": {
+            "type": "enum",
+            "members": {
+                "TTP_OBSERVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TTP_OBSERVED"
+                    }
+                },
+                "IMPOSSIBLE_TRAVEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPOSSIBLE_TRAVEL"
+                    }
+                },
+                "FLAGGED_IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLAGGED_IP_ADDRESS"
+                    }
+                },
+                "NEW_GEOLOCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_GEOLOCATION"
+                    }
+                },
+                "NEW_ASO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_ASO"
+                    }
+                },
+                "NEW_USER_AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_USER_AGENT"
+                    }
+                },
+                "RELATED_FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RELATED_FINDING"
+                    }
+                },
+                "RELATED_FINDING_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RELATED_FINDING_GROUP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#Indicators": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.detective#Indicator"
+            }
+        },
         "com.amazonaws.detective#InternalServerException": {
             "type": "structure",
             "members": {
@@ -2169,6 +2640,72 @@
                 "smithy.api#documentation": "<p>The request was valid but failed because of a problem with the service.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.detective#InvestigationDetail": {
+            "type": "structure",
+            "members": {
+                "InvestigationId": {
+                    "target": "com.amazonaws.detective#InvestigationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The investigation ID of the investigation report.</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.detective#Severity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Severity based on the likelihood and impact of the indicators of compromise discovered in the investigation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.detective#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status based on the completion status of the investigation.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.detective#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the investigation. An archived investigation indicates you have completed reviewing the investigation.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The UTC time stamp of the creation time of the investigation report.</p>"
+                    }
+                },
+                "EntityArn": {
+                    "target": "com.amazonaws.detective#EntityArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) of the IAM user and IAM role.</p>"
+                    }
+                },
+                "EntityType": {
+                    "target": "com.amazonaws.detective#EntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of entity. For example, Amazon Web Services accounts, such as IAM user and role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the investigation related to a potential security event identified by Detective</p>"
+            }
+        },
+        "com.amazonaws.detective#InvestigationDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.detective#InvestigationDetail"
+            }
+        },
+        "com.amazonaws.detective#InvestigationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 21,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^[0-9]+$"
             }
         },
         "com.amazonaws.detective#InvitationType": {
@@ -2186,6 +2723,15 @@
                         "smithy.api#enumValue": "ORGANIZATION"
                     }
                 }
+            }
+        },
+        "com.amazonaws.detective#IpAddress": {
+            "type": "string"
+        },
+        "com.amazonaws.detective#IsNewForEntireAccount": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.detective#LastIngestStateChangeDates": {
@@ -2346,6 +2892,205 @@
                     "target": "com.amazonaws.detective#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are more behavior graphs remaining in the results, then this is the pagination\n         token to use to request the next page of behavior graphs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.detective#ListIndicators": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#ListIndicatorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.detective#ListIndicatorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the indicators from an investigation</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/investigations/listIndicators",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.detective#ListIndicatorsRequest": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvestigationId": {
+                    "target": "com.amazonaws.detective#InvestigationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The investigation ID of the investigation report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndicatorType": {
+                    "target": "com.amazonaws.detective#IndicatorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>See <a href=\"https://docs.aws.amazon.com/detective/latest/userguide/detective-investigations.html\">Detective investigations.</a>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.detective#AiPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged.</p>\n         <p>Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.detective#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List the maximum number of indicators in a page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.detective#ListIndicatorsResponse": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>"
+                    }
+                },
+                "InvestigationId": {
+                    "target": "com.amazonaws.detective#InvestigationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The investigation ID of the investigation report.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.detective#AiPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged.</p>\n         <p>Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.</p>"
+                    }
+                },
+                "Indicators": {
+                    "target": "com.amazonaws.detective#Indicators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicators of compromise listed based on severity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.detective#ListInvestigations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#ListInvestigationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.detective#ListInvestigationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all Investigations.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/investigations/listInvestigations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.detective#ListInvestigationsRequest": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.detective#AiPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged.</p>\n         <p>Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.detective#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List the maximum number of investigations in a page.</p>"
+                    }
+                },
+                "FilterCriteria": {
+                    "target": "com.amazonaws.detective#FilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the investigation results based on a criteria.</p>"
+                    }
+                },
+                "SortCriteria": {
+                    "target": "com.amazonaws.detective#SortCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sorts the investigation results based on a criteria.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.detective#ListInvestigationsResponse": {
+            "type": "structure",
+            "members": {
+                "InvestigationDetails": {
+                    "target": "com.amazonaws.detective#InvestigationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Investigations details lists the summary of uncommon behavior or malicious activity which indicates a compromise.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.detective#AiPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged.</p>\n         <p>Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>"
                     }
                 }
             },
@@ -2646,6 +3391,18 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.detective#Location": {
+            "type": "string"
+        },
+        "com.amazonaws.detective#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.detective#MemberDetail": {
             "type": "structure",
             "members": {
@@ -2864,6 +3621,75 @@
                 "target": "com.amazonaws.detective#MembershipDatasources"
             }
         },
+        "com.amazonaws.detective#NewAsoDetail": {
+            "type": "structure",
+            "members": {
+                "Aso": {
+                    "target": "com.amazonaws.detective#Aso",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the new Autonomous System Organization (ASO).</p>"
+                    }
+                },
+                "IsNewForEntireAccount": {
+                    "target": "com.amazonaws.detective#IsNewForEntireAccount",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Checks if the ASO is for new for the entire account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details new Autonomous System Organizations (ASOs) used either at the resource or account level. </p>"
+            }
+        },
+        "com.amazonaws.detective#NewGeolocationDetail": {
+            "type": "structure",
+            "members": {
+                "Location": {
+                    "target": "com.amazonaws.detective#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Location where the resource was accessed.</p>"
+                    }
+                },
+                "IpAddress": {
+                    "target": "com.amazonaws.detective#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IP address using which the resource was accessed.</p>"
+                    }
+                },
+                "IsNewForEntireAccount": {
+                    "target": "com.amazonaws.detective#IsNewForEntireAccount",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Checks if the gelocation is new for the entire account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details new geolocations used either at the resource or account level. For example, lists an observed geolocation that is an infrequent or unused location based on previous user activity.</p>"
+            }
+        },
+        "com.amazonaws.detective#NewUserAgentDetail": {
+            "type": "structure",
+            "members": {
+                "UserAgent": {
+                    "target": "com.amazonaws.detective#UserAgent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>New user agent which accessed the resource.</p>"
+                    }
+                },
+                "IsNewForEntireAccount": {
+                    "target": "com.amazonaws.detective#IsNewForEntireAccount",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Checks if the user agent is new for the entire account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details new user agents used either at the resource or account level.</p>"
+            }
+        },
         "com.amazonaws.detective#PaginationToken": {
             "type": "string",
             "traits": {
@@ -2875,6 +3701,20 @@
         },
         "com.amazonaws.detective#Percentage": {
             "type": "double"
+        },
+        "com.amazonaws.detective#Procedure": {
+            "type": "string"
+        },
+        "com.amazonaws.detective#Reason": {
+            "type": "enum",
+            "members": {
+                "AWS_THREAT_INTELLIGENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_THREAT_INTELLIGENCE"
+                    }
+                }
+            }
         },
         "com.amazonaws.detective#RejectInvitation": {
             "type": "operation",
@@ -2923,6 +3763,46 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.detective#RelatedFindingDetail": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.detective#EntityArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the related finding.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.detective#Type",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of finding.</p>"
+                    }
+                },
+                "IpAddress": {
+                    "target": "com.amazonaws.detective#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the finding.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details related activities associated with a potential security event. Lists all distinct categories of evidence that are connected to the resource or the finding group.</p>"
+            }
+        },
+        "com.amazonaws.detective#RelatedFindingGroupDetail": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.detective#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the finding group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details multiple activities as they related to a potential security event. Detective uses graph analysis technique that infers relationships between findings and entities, and groups them together as a finding group.</p>"
             }
         },
         "com.amazonaws.detective#Resource": {
@@ -2976,6 +3856,162 @@
                 "smithy.api#documentation": "<p>This request cannot be completed for one of the following reasons.</p>\n         <ul>\n            <li>\n               <p>The request would cause the number of member accounts in the behavior graph to\n               exceed the maximum allowed. A behavior graph cannot have more than 1200 member\n               accounts.</p>\n            </li>\n            <li>\n               <p>The request would cause the data rate for the behavior graph to exceed the maximum\n               allowed.</p>\n            </li>\n            <li>\n               <p>Detective is unable to verify the data rate for the member account. This\n               is usually because the member account is not enrolled in Amazon GuardDuty.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.detective#Severity": {
+            "type": "enum",
+            "members": {
+                "INFORMATIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFORMATIONAL"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRITICAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#SortCriteria": {
+            "type": "structure",
+            "members": {
+                "Field": {
+                    "target": "com.amazonaws.detective#Field",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the <code>Field</code> attribute to sort investigations.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.detective#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order by which the sorted findings are displayed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the criteria used for sorting investigations.</p>"
+            }
+        },
+        "com.amazonaws.detective#SortOrder": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#StartInvestigation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#StartInvestigationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.detective#StartInvestigationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>initiate an investigation on an entity in a graph</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/investigations/startInvestigation",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.detective#StartInvestigationRequest": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityArn": {
+                    "target": "com.amazonaws.detective#EntityArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) of the IAM user and IAM role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScopeStartTime": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data and time when the investigation began. The value is an UTC ISO8601 formatted string. For example, <code>2021-08-18T16:35:56.284Z</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScopeEndTime": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data and time when the investigation began. The value is an UTC ISO8601 formatted\n         string. For example, <code>2021-08-18T16:35:56.284Z</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.detective#StartInvestigationResponse": {
+            "type": "structure",
+            "members": {
+                "InvestigationId": {
+                    "target": "com.amazonaws.detective#InvestigationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The investigation ID of the investigation report.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.detective#StartMonitoringMember": {
@@ -3036,6 +4072,116 @@
             "traits": {
                 "smithy.api#input": {}
             }
+        },
+        "com.amazonaws.detective#State": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#Status": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESSFUL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#StringFilter": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.detective#Value",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string filter value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A string for filtering Detective investigations.</p>"
+            }
+        },
+        "com.amazonaws.detective#TTPsObservedDetail": {
+            "type": "structure",
+            "members": {
+                "Tactic": {
+                    "target": "com.amazonaws.detective#Tactic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tactic used, identified by the investigation.</p>"
+                    }
+                },
+                "Technique": {
+                    "target": "com.amazonaws.detective#Technique",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The technique used, identified by the investigation. </p>"
+                    }
+                },
+                "Procedure": {
+                    "target": "com.amazonaws.detective#Procedure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The procedure used, identified by the investigation.</p>"
+                    }
+                },
+                "IpAddress": {
+                    "target": "com.amazonaws.detective#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address where the TTP was observed.</p>"
+                    }
+                },
+                "APIName": {
+                    "target": "com.amazonaws.detective#APIName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API where the TTP was observed.</p>"
+                    }
+                },
+                "APISuccessCount": {
+                    "target": "com.amazonaws.detective#APISuccessCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of successful API requests.</p>"
+                    }
+                },
+                "APIFailureCount": {
+                    "target": "com.amazonaws.detective#APIFailureCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of failed API requests.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details tactics, techniques, and procedures (TTPs) used in a potential security event. Tactics are based on <a href=\"https://attack.mitre.org/matrices/enterprise/\">MITRE ATT&CK Matrix for\n         Enterprise</a>. </p>"
+            }
+        },
+        "com.amazonaws.detective#Tactic": {
+            "type": "string"
         },
         "com.amazonaws.detective#TagKey": {
             "type": "string",
@@ -3144,6 +4290,9 @@
                 }
             }
         },
+        "com.amazonaws.detective#Technique": {
+            "type": "string"
+        },
         "com.amazonaws.detective#Timestamp": {
             "type": "timestamp",
             "traits": {
@@ -3176,6 +4325,9 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
+        },
+        "com.amazonaws.detective#Type": {
+            "type": "string"
         },
         "com.amazonaws.detective#UnprocessedAccount": {
             "type": "structure",
@@ -3350,6 +4502,69 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.detective#UpdateInvestigationState": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#UpdateInvestigationStateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the state of an investigation.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/investigations/updateInvestigationState",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.detective#UpdateInvestigationStateRequest": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvestigationId": {
+                    "target": "com.amazonaws.detective#InvestigationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The investigation ID of the investigation report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.detective#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the investigation. An archived investigation indicates you have completed reviewing the investigation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.detective#UpdateOrganizationConfiguration": {
             "type": "operation",
             "input": {
@@ -3403,6 +4618,9 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.detective#UserAgent": {
+            "type": "string"
+        },
         "com.amazonaws.detective#ValidationException": {
             "type": "structure",
             "members": {
@@ -3426,6 +4644,15 @@
                 "smithy.api#documentation": "<p>The request parameters are invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.detective#Value": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
             }
         },
         "com.amazonaws.detective#VolumeUsageByDatasourcePackage": {

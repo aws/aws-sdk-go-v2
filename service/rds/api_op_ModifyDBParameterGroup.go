@@ -17,7 +17,7 @@ import (
 // ApplyMethod . A maximum of 20 parameters can be modified in a single request.
 // After you modify a DB parameter group, you should wait at least 5 minutes before
 // creating your first DB instance that uses that DB parameter group as the default
-// parameter group. This allows Amazon RDS to fully complete the modify action
+// parameter group. This allows Amazon RDS to fully complete the modify operation
 // before the parameter group is used as the default for a new DB instance. This is
 // especially important for parameters that are critical when creating the default
 // database for a DB instance, such as the character set for the default database
@@ -71,7 +71,7 @@ type ModifyDBParameterGroupInput struct {
 }
 
 // Contains the result of a successful invocation of the ModifyDBParameterGroup or
-// ResetDBParameterGroup action.
+// ResetDBParameterGroup operation.
 type ModifyDBParameterGroupOutput struct {
 
 	// The name of the DB parameter group.

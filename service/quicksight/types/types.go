@@ -1451,6 +1451,19 @@ type AuroraPostgreSqlParameters struct {
 	noSmithyDocumentSerde
 }
 
+// The authorized targets that are associated with a service.
+type AuthorizedTargetsByService struct {
+
+	// Aist of authorized targets that are represented by IAM Identity Center
+	// application ARNs.
+	AuthorizedTargets []string
+
+	// The name of the Amazon Web Services service.
+	Service ServiceType
+
+	noSmithyDocumentSerde
+}
+
 // The parameters for IoT Analytics.
 type AwsIotAnalyticsParameters struct {
 
@@ -7098,6 +7111,16 @@ type IAMPolicyAssignmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The parameters for an IAM Identity Center configuration.
+type IdentityCenterConfiguration struct {
+
+	// A Boolean option that controls whether Trusted Identity Propagation should be
+	// used.
+	EnableIdentityPropagation *bool
+
+	noSmithyDocumentSerde
+}
+
 // The incremental refresh configuration for a dataset.
 type IncrementalRefresh struct {
 
@@ -10019,6 +10042,12 @@ type RedshiftParameters struct {
 	// DataSourceCredentials (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html)
 	// .
 	IAMParameters *RedshiftIAMParameters
+
+	// An optional parameter that configures IAM Identity Center authentication to
+	// grant Amazon QuickSight access to your cluster. This parameter can only be
+	// specified if your Amazon QuickSight account is configured with IAM Identity
+	// Center.
+	IdentityCenterConfiguration *IdentityCenterConfiguration
 
 	// Port. This field can be blank if the ClusterId is provided.
 	Port int32

@@ -9,6 +9,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_GetActionRecommendations.go",
         "api_op_GetPersonalizedRanking.go",
         "api_op_GetRecommendations.go",
         "auth.go",

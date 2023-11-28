@@ -16,7 +16,7 @@ import (
 // source and a logical delivery destination that you have already created. Only
 // some Amazon Web Services services support being configured as a delivery source
 // using this operation. These services are listed as Supported [V2 Permissions] in
-// the table at Enabling logging from Amazon Web Services services. (https://docs.aws.amazon.com/     AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions)
+// the table at Enabling logging from Amazon Web Services services. (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html)
 // A delivery destination can represent a log group in CloudWatch Logs, an Amazon
 // S3 bucket, or a delivery stream in Kinesis Data Firehose. To configure logs
 // delivery between a supported Amazon Web Services service and a destination, you

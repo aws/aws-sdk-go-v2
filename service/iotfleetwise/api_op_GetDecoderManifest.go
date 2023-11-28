@@ -66,6 +66,10 @@ type GetDecoderManifestOutput struct {
 	// A brief description of the decoder manifest.
 	Description *string
 
+	// The detailed message for the decoder manifest. When a decoder manifest is in an
+	// INVALID status, the message contains detailed reason and help information.
+	Message *string
+
 	// The ARN of a vehicle model (model manifest) associated with the decoder
 	// manifest.
 	ModelManifestArn *string

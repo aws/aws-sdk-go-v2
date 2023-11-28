@@ -13,7 +13,7 @@ import (
 )
 
 // Adds one or more items to an Items dataset. For more information see Importing
-// Items Incrementally (https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html)
+// items individually (https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html)
 // .
 func (c *Client) PutItems(ctx context.Context, params *PutItemsInput, optFns ...func(*Options)) (*PutItemsOutput, error) {
 	if params == nil {

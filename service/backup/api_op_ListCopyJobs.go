@@ -54,12 +54,12 @@ type ListCopyJobsInput struct {
 	// .
 	ByDestinationVaultArn *string
 
-	// This parameter returns the job count for the specified message category.
-	// Example accepted strings include AccessDenied , Success , and InvalidParameters
-	// . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of accepted MessageCategory strings. The the value ANY returns count
-	// of all message categories. AGGREGATE_ALL aggregates job counts for all message
-	// categories and returns the sum.
+	// This is an optional parameter that can be used to filter out jobs with a
+	// MessageCategory which matches the value you input. Example strings may include
+	// AccessDenied , SUCCESS , AGGREGATE_ALL , and INVALIDPARAMETERS . View Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
+	// for a list of accepted strings. The the value ANY returns count of all message
+	// categories. AGGREGATE_ALL aggregates job counts for all message categories and
+	// returns the sum.
 	ByMessageCategory *string
 
 	// This is a filter to list child (nested) jobs based on parent job ID.
@@ -91,7 +91,7 @@ type ListCopyJobsInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return MaxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -106,7 +106,7 @@ type ListCopyJobsOutput struct {
 	CopyJobs []types.CopyJob
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return MaxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string

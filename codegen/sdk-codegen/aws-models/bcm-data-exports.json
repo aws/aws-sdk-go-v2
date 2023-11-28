@@ -1,0 +1,2294 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.bcmdataexports#AWSBillingAndCostManagementDataExports": {
+            "type": "service",
+            "version": "2023-11-26",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#CreateExport"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#DeleteExport"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#GetExecution"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#GetExport"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#GetTable"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ListExecutions"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ListExports"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ListTables"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#UpdateExport"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "BCM Data Exports",
+                    "arnNamespace": "bcm-data-exports",
+                    "cloudTrailEventSource": "bcm-data-exports.amazonaws.com",
+                    "endpointPrefix": "bcm-data-exports"
+                },
+                "aws.auth#sigv4": {
+                    "name": "bcm-data-exports"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>You can use the Data Exports API to create customized exports from multiple Amazon Web Services cost management and billing datasets, such as cost and usage data and cost\n      optimization recommendations.</p>\n         <p>The Data Exports API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p>https://bcm-data-exports.us-east-1.api.aws</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Billing and Cost Management Data Exports",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        },
+                                                        "aws"
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://bcm-data-exports-fips.{Region}.api.aws",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://bcm-data-exports.us-east-1.api.aws",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingName": "bcm-data-exports",
+                                                                    "signingRegion": "us-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://bcm-data-exports-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://bcm-data-exports.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://bcm-data-exports-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://bcm-data-exports.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region aws-global with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "bcm-data-exports",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://bcm-data-exports.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "aws-global",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bcm-data-exports-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "bcm-data-exports",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://bcm-data-exports.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bcm-data-exports-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bcm-data-exports.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bcm-data-exports-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bcm-data-exports.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:[-a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
+            }
+        },
+        "com.amazonaws.bcmdataexports#Column": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column name.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The kind of data a column stores.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for a column.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Includes basic information for a data column such as its description, name, and\n      type.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ColumnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmdataexports#Column"
+            }
+        },
+        "com.amazonaws.bcmdataexports#CompressionOption": {
+            "type": "enum",
+            "members": {
+                "GZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GZIP"
+                    }
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#CreateExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#CreateExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#CreateExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a data export and specifies the data query, the delivery preference, and any\n      optional resource tags.</p>\n         <p>A <code>DataQuery</code> consists of both a <code>QueryStatement</code> and\n        <code>TableConfigurations</code>.</p>\n         <p>The <code>QueryStatement</code> is an SQL statement. Data Exports only supports a limited\n      subset of the SQL syntax. For more information on the SQL syntax that is supported, see <a href=\"https://docs.aws.amazon.com/cur/latest/userguide/de-data-query.html\">Data query</a>. To\n      view the available tables and columns, see the <a href=\"https://docs.aws.amazon.com/cur/latest/userguide/de-table-dictionary.html\">Data Exports table\n        dictionary</a>.</p>\n         <p>The <code>TableConfigurations</code> is a collection of specified\n        <code>TableProperties</code> for the table being queried in the <code>QueryStatement</code>.\n      TableProperties are additional configurations you can provide to change the data and schema of\n      a table. Each table can have different TableProperties. However, tables are not required to\n      have any TableProperties. Each table property has a default value that it assumes if not\n      specified. For more information on table configurations, see <a href=\"https://docs.aws.amazon.com/cur/latest/userguide/de-data-query.html\">Data query</a>. To\n      view the table properties available for each table, see the <a href=\"https://docs.aws.amazon.com/cur/latest/userguide/de-table-dictionary.html\">Data Exports table\n        dictionary</a> or use the <code>ListTables</code> API to get a response of all tables\n      and their available properties.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#CreateExportRequest": {
+            "type": "structure",
+            "members": {
+                "Export": {
+                    "target": "com.amazonaws.bcmdataexports#Export",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the export, including data query, name, description, and destination\n      configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.bcmdataexports#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of tags to associate with the specified export. Each tag consists of a\n      key and a value, and each key must be unique for the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#CreateExportResponse": {
+            "type": "structure",
+            "members": {
+                "ExportArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this export.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#DataQuery": {
+            "type": "structure",
+            "members": {
+                "QueryStatement": {
+                    "target": "com.amazonaws.bcmdataexports#QueryStatement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableConfigurations": {
+                    "target": "com.amazonaws.bcmdataexports#TableConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The table configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SQL query of column selections and row filters from the data table you want.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#DeleteExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#DeleteExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#DeleteExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing data export.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#DeleteExportRequest": {
+            "type": "structure",
+            "members": {
+                "ExportArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this export.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#DeleteExportResponse": {
+            "type": "structure",
+            "members": {
+                "ExportArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this export.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#DestinationConfigurations": {
+            "type": "structure",
+            "members": {
+                "S3Destination": {
+                    "target": "com.amazonaws.bcmdataexports#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the destination of the data exports file.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destinations used for data exports.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ExecutionReference": {
+            "type": "structure",
+            "members": {
+                "ExecutionId": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for this specific execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionStatus": {
+                    "target": "com.amazonaws.bcmdataexports#ExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of this specific execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reference for the data export update.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ExecutionReferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmdataexports#ExecutionReference"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ExecutionStatus": {
+            "type": "structure",
+            "members": {
+                "StatusCode": {
+                    "target": "com.amazonaws.bcmdataexports#ExecutionStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the status of the execution.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.bcmdataexports#ExecutionStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the failed status.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the execution was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "CompletedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the execution was completed.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the execution was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the execution.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ExecutionStatusCode": {
+            "type": "enum",
+            "members": {
+                "INITIATION_IN_PROCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIATION_IN_PROCESS"
+                    }
+                },
+                "QUERY_QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_QUEUED"
+                    }
+                },
+                "QUERY_IN_PROCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_IN_PROCESS"
+                    }
+                },
+                "QUERY_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_FAILURE"
+                    }
+                },
+                "DELIVERY_IN_PROCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERY_IN_PROCESS"
+                    }
+                },
+                "DELIVERY_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERY_SUCCESS"
+                    }
+                },
+                "DELIVERY_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERY_FAILURE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#ExecutionStatusReason": {
+            "type": "enum",
+            "members": {
+                "INSUFFICIENT_PERMISSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_PERMISSION"
+                    }
+                },
+                "BILL_OWNER_CHANGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILL_OWNER_CHANGED"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#Export": {
+            "type": "structure",
+            "members": {
+                "ExportArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this export.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.bcmdataexports#ExportName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this specific data export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for this specific data export.</p>"
+                    }
+                },
+                "DataQuery": {
+                    "target": "com.amazonaws.bcmdataexports#DataQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data query for this specific data export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationConfigurations": {
+                    "target": "com.amazonaws.bcmdataexports#DestinationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination configuration for this specific data export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RefreshCadence": {
+                    "target": "com.amazonaws.bcmdataexports#RefreshCadence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cadence for Amazon Web Services to update the export in your S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details that are available for an export.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ExportName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z!\\-_.*\\'()]+$"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ExportReference": {
+            "type": "structure",
+            "members": {
+                "ExportArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExportName": {
+                    "target": "com.amazonaws.bcmdataexports#ExportName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this specific data export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExportStatus": {
+                    "target": "com.amazonaws.bcmdataexports#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of this specific data export.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reference details for a given export.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ExportReferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmdataexports#ExportReference"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ExportStatus": {
+            "type": "structure",
+            "members": {
+                "StatusCode": {
+                    "target": "com.amazonaws.bcmdataexports#ExportStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status code for the request.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.bcmdataexports#ExecutionStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the status code.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the export  was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the export  was updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "LastRefreshedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the export was last generated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the data export.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ExportStatusCode": {
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#FormatOption": {
+            "type": "enum",
+            "members": {
+                "TEXT_OR_CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT_OR_CSV"
+                    }
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#FrequencyOption": {
+            "type": "enum",
+            "members": {
+                "SYNCHRONOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYNCHRONOUS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#GenericString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.bcmdataexports#GenericStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmdataexports#GenericString"
+            }
+        },
+        "com.amazonaws.bcmdataexports#GetExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#GetExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#GetExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exports data based on the source data update.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#GetExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "ExportArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Export object that generated this specific\n      execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionId": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for this specific execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#GetExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "ExecutionId": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for this specific execution.</p>"
+                    }
+                },
+                "Export": {
+                    "target": "com.amazonaws.bcmdataexports#Export",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export data for this specific execution. This export data is a snapshot from when the\n      execution was generated. The data could be different from the current export data if the\n      export was updated since the execution was generated.</p>"
+                    }
+                },
+                "ExecutionStatus": {
+                    "target": "com.amazonaws.bcmdataexports#ExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of this specific execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#GetExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#GetExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#GetExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Views the definition of an existing data export.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#GetExportRequest": {
+            "type": "structure",
+            "members": {
+                "ExportArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this export.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#GetExportResponse": {
+            "type": "structure",
+            "members": {
+                "Export": {
+                    "target": "com.amazonaws.bcmdataexports#Export",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data for this specific export.</p>"
+                    }
+                },
+                "ExportStatus": {
+                    "target": "com.amazonaws.bcmdataexports#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of this specific export.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#GetTable": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#GetTableRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#GetTableResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the metadata for the specified table and table properties. This includes the list\n      of columns in the table schema, their data types, and column descriptions.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#GetTableRequest": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.bcmdataexports#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableProperties": {
+                    "target": "com.amazonaws.bcmdataexports#TableProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TableProperties are additional configurations you can provide to change the data and\n      schema of a table. Each table can have different TableProperties. Tables are not required to\n      have any TableProperties. Each table property has a default value that it assumes if not\n      specified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#GetTableResponse": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.bcmdataexports#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The table description.</p>"
+                    }
+                },
+                "TableProperties": {
+                    "target": "com.amazonaws.bcmdataexports#TableProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TableProperties are additional configurations you can provide to change the data and\n      schema of a table. Each table can have different TableProperties. Tables are not required to\n      have any TableProperties. Each table property has a default value that it assumes if not\n      specified.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.bcmdataexports#ColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema of the table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error on the server occurred during the processing of your request. Try again\n      later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#ListExecutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#ListExecutionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the historical executions for the export.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Executions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListExecutionsRequest": {
+            "type": "structure",
+            "members": {
+                "ExportArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.bcmdataexports#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of objects that are returned for the request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.bcmdataexports#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListExecutionsResponse": {
+            "type": "structure",
+            "members": {
+                "Executions": {
+                    "target": "com.amazonaws.bcmdataexports#ExecutionReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of executions.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.bcmdataexports#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListExports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#ListExportsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#ListExportsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all data export definitions.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Exports"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListExportsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.bcmdataexports#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of objects that are returned for the request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.bcmdataexports#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListExportsResponse": {
+            "type": "structure",
+            "members": {
+                "Exports": {
+                    "target": "com.amazonaws.bcmdataexports#ExportReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the exports, including name and export status.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.bcmdataexports#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListTables": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#ListTablesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#ListTablesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all available tables in data exports.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Tables"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListTablesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.bcmdataexports#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.bcmdataexports#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of objects that are returned for the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListTablesResponse": {
+            "type": "structure",
+            "members": {
+                "Tables": {
+                    "target": "com.amazonaws.bcmdataexports#TableList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tables.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.bcmdataexports#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List tags associated with an existing data export.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.bcmdataexports#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of objects that are returned for the request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.bcmdataexports#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceTags": {
+                    "target": "com.amazonaws.bcmdataexports#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of tags to associate with the specified export. Each tag consists of a\n      key and a value, and each key must be unique for the resource.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.bcmdataexports#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#NextPageToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.bcmdataexports#OverwriteOption": {
+            "type": "enum",
+            "members": {
+                "CREATE_NEW_REPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_NEW_REPORT"
+                    }
+                },
+                "OVERWRITE_REPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERWRITE_REPORT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#QueryStatement": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36000
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.bcmdataexports#RefreshCadence": {
+            "type": "structure",
+            "members": {
+                "Frequency": {
+                    "target": "com.amazonaws.bcmdataexports#FrequencyOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency that data exports are updated. The export refreshes each time the source\n      data updates, up to three times daily.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The cadence for Amazon Web Services to update the data export in your S3 bucket.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the resource that was not found.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource that was not found.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified Amazon Resource Name (ARN) in the request doesn't exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.bcmdataexports#ResourceTag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.bcmdataexports#ResourceTagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key that's associated with the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.bcmdataexports#ResourceTagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that's associated with the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tag structure that contains a tag key and value.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ResourceTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#ResourceTagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmdataexports#ResourceTagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#ResourceTagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmdataexports#ResourceTag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#ResourceTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#S3Destination": {
+            "type": "structure",
+            "members": {
+                "S3Bucket": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket used as the destination of a data export file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Prefix": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path prefix you want prepended to the name of your data export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Region": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3OutputConfigurations": {
+                    "target": "com.amazonaws.bcmdataexports#S3OutputConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output configuration for the data export.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object\n      keys of a data exports file.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#S3OutputConfigurations": {
+            "type": "structure",
+            "members": {
+                "OutputType": {
+                    "target": "com.amazonaws.bcmdataexports#S3OutputType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output type for the data export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.bcmdataexports#FormatOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file format for the data export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Compression": {
+                    "target": "com.amazonaws.bcmdataexports#CompressionOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compression type for the data export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Overwrite": {
+                    "target": "com.amazonaws.bcmdataexports#OverwriteOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule to follow when generating a version of the data export file. You have the choice\n      to overwrite the previous version or to be delivered in addition to the previous versions.\n      Overwriting exports can save on Amazon S3 storage costs. Creating new export versions allows\n      you to track the changes in cost and usage data over time.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The compression type, file format, and overwrite preference for the data export.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#S3OutputType": {
+            "type": "enum",
+            "members": {
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmdataexports#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the resource that exceeded quota.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource that exceeded quota.</p>"
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota code that was exceeded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service code that exceeded quota. It will always be\n      “AWSBillingAndCostManagementDataExports”.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You've reached the limit on the number of resources you can create, or exceeded the size\n      of an individual resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.bcmdataexports#Table": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.bcmdataexports#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the table.</p>"
+                    }
+                },
+                "TableProperties": {
+                    "target": "com.amazonaws.bcmdataexports#TablePropertyDescriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties for the table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for the data export table.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#TableConfigurations": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bcmdataexports#TableName"
+            },
+            "value": {
+                "target": "com.amazonaws.bcmdataexports#TableProperties"
+            }
+        },
+        "com.amazonaws.bcmdataexports#TableList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmdataexports#Table"
+            }
+        },
+        "com.amazonaws.bcmdataexports#TableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.bcmdataexports#TableProperties": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bcmdataexports#TableProperty"
+            },
+            "value": {
+                "target": "com.amazonaws.bcmdataexports#GenericString"
+            }
+        },
+        "com.amazonaws.bcmdataexports#TableProperty": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.bcmdataexports#TablePropertyDescription": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>"
+                    }
+                },
+                "ValidValues": {
+                    "target": "com.amazonaws.bcmdataexports#GenericStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The valid values for the table.</p>"
+                    }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value for the table.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties for the data export table.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#TablePropertyDescriptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmdataexports#TablePropertyDescription"
+            }
+        },
+        "com.amazonaws.bcmdataexports#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds tags for an existing data export definition.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.bcmdataexports#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to associate with the resource. Each tag consists of a key and a value, and each\n      key must be unique for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota code that exceeded the throttling limit.</p>"
+                    }
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service code that exceeded the throttling limit. It will always be\n      “AWSBillingAndCostManagementDataExports”.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.bcmdataexports#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes tags associated with an existing data export definition.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTagKeys": {
+                    "target": "com.amazonaws.bcmdataexports#ResourceTagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys that are associated with the resource ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#UpdateExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmdataexports#UpdateExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmdataexports#UpdateExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmdataexports#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmdataexports#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing data export by overwriting all export parameters. All export\n      parameters must be provided in the UpdateExport request.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#UpdateExportRequest": {
+            "type": "structure",
+            "members": {
+                "ExportArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Export": {
+                    "target": "com.amazonaws.bcmdataexports#Export",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name and query details for the export.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#UpdateExportResponse": {
+            "type": "structure",
+            "members": {
+                "ExportArn": {
+                    "target": "com.amazonaws.bcmdataexports#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this export.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmdataexports#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.bcmdataexports#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the validation exception.</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.bcmdataexports#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of fields that are invalid.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services\n      service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bcmdataexports#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field name where the invalid entry was detected.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.bcmdataexports#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message with the reason for the validation exception error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input failed to meet the constraints specified by the Amazon Web Services service in a\n      specified field.</p>"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmdataexports#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.bcmdataexports#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknownOperation"
+                    }
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cannotParse"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "other"
+                    }
+                }
+            }
+        }
+    }
+}

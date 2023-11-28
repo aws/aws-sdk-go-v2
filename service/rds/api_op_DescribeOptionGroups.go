@@ -30,8 +30,10 @@ func (c *Client) DescribeOptionGroups(ctx context.Context, params *DescribeOptio
 
 type DescribeOptionGroupsInput struct {
 
-	// Filters the list of option groups to only include groups associated with a
-	// specific database engine. Valid Values:
+	// A filter to only include option groups associated with this database engine.
+	// Valid Values:
+	//   - db2-ae
+	//   - db2-se
 	//   - mariadb
 	//   - mysql
 	//   - oracle-ee

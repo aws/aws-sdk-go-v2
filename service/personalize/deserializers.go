@@ -8260,6 +8260,15 @@ func awsAwsjson11_deserializeDocumentBatchInferenceJob(v **types.BatchInferenceJ
 				return err
 			}
 
+		case "batchInferenceJobMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchInferenceJobMode to be of type string, got %T instead", value)
+				}
+				sv.BatchInferenceJobMode = types.BatchInferenceJobMode(jtv)
+			}
+
 		case "creationDateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8367,6 +8376,11 @@ func awsAwsjson11_deserializeDocumentBatchInferenceJob(v **types.BatchInferenceJ
 					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
 				}
 				sv.Status = ptr.String(jtv)
+			}
+
+		case "themeGenerationConfig":
+			if err := awsAwsjson11_deserializeDocumentThemeGenerationConfig(&sv.ThemeGenerationConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -8549,6 +8563,15 @@ func awsAwsjson11_deserializeDocumentBatchInferenceJobSummary(v **types.BatchInf
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.BatchInferenceJobArn = ptr.String(jtv)
+			}
+
+		case "batchInferenceJobMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchInferenceJobMode to be of type string, got %T instead", value)
+				}
+				sv.BatchInferenceJobMode = types.BatchInferenceJobMode(jtv)
 			}
 
 		case "creationDateTime":
@@ -9144,6 +9167,15 @@ func awsAwsjson11_deserializeDocumentCampaignConfig(v **types.CampaignConfig, va
 
 	for key, value := range shape {
 		switch key {
+		case "enableMetadataWithRecommendations":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableMetadataWithRecommendations = ptr.Bool(jtv)
+			}
+
 		case "itemExplorationConfig":
 			if err := awsAwsjson11_deserializeDocumentHyperParameters(&sv.ItemExplorationConfig, value); err != nil {
 				return err
@@ -9803,6 +9835,15 @@ func awsAwsjson11_deserializeDocumentDataset(v **types.Dataset, value interface{
 					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
 				}
 				sv.Status = ptr.String(jtv)
+			}
+
+		case "trackingId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrackingId to be of type string, got %T instead", value)
+				}
+				sv.TrackingId = ptr.String(jtv)
 			}
 
 		default:
@@ -11952,6 +11993,46 @@ func awsAwsjson11_deserializeDocumentFeaturizationParameters(v *map[string]strin
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFieldsForThemeGeneration(v **types.FieldsForThemeGeneration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FieldsForThemeGeneration
+	if *v == nil {
+		sv = &types.FieldsForThemeGeneration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "itemName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+				}
+				sv.ItemName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentFilter(v **types.Filter, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13572,6 +13653,15 @@ func awsAwsjson11_deserializeDocumentRecommenderConfig(v **types.RecommenderConf
 
 	for key, value := range shape {
 		switch key {
+		case "enableMetadataWithRecommendations":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableMetadataWithRecommendations = ptr.Bool(jtv)
+			}
+
 		case "itemExplorationConfig":
 			if err := awsAwsjson11_deserializeDocumentHyperParameters(&sv.ItemExplorationConfig, value); err != nil {
 				return err
@@ -14839,6 +14929,42 @@ func awsAwsjson11_deserializeDocumentTags(v *[]types.Tag, value interface{}) err
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentThemeGenerationConfig(v **types.ThemeGenerationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThemeGenerationConfig
+	if *v == nil {
+		sv = &types.ThemeGenerationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fieldsForThemeGeneration":
+			if err := awsAwsjson11_deserializeDocumentFieldsForThemeGeneration(&sv.FieldsForThemeGeneration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

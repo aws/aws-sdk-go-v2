@@ -7,6 +7,32 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// You do not have sufficient access to perform this action.
+type AccessDeniedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when you start a new import and a previous import is
 // still in progress.
 type AccountHasOngoingImportException struct {
@@ -398,6 +424,34 @@ func (e *CloudWatchLogsDeliveryUnavailableException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
+// You are trying to update a resource when another request is in progress. Allow
+// sufficient wait time for the previous request to complete, then retry your
+// request.
+type ConcurrentModificationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConcurrentModificationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConcurrentModificationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConcurrentModificationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when the specified resource is not ready for an
 // operation. This can occur when you try to run an operation on a resource before
 // CloudTrail has time to fully load the resource, or because another operation is
@@ -511,6 +565,36 @@ func (e *EventDataStoreARNInvalidException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EventDataStoreARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You cannot delete the event data store because Lake query federation is
+// enabled. To delete the event data store, run the DisableFederation operation to
+// disable Lake query federation on the event data store.
+type EventDataStoreFederationEnabledException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EventDataStoreFederationEnabledException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EventDataStoreFederationEnabledException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EventDataStoreFederationEnabledException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "EventDataStoreFederationEnabledException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *EventDataStoreFederationEnabledException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // This exception is thrown when you try to update or delete an event data store
 // that currently has an import in progress.

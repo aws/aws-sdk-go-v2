@@ -12,14 +12,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a campaign by either deploying a new solution or changing the value of
-// the campaign's minProvisionedTPS parameter. To update a campaign, the campaign
-// status must be ACTIVE or CREATE FAILED. Check the campaign status using the
-// DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
+// Updates a campaign to deploy a retrained solution version with an existing
+// campaign, change your campaign's minProvisionedTPS , or modify your campaign's
+// configuration, such as the exploration configuration. To update a campaign, the
+// campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using
+// the DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
 // operation. You can still get recommendations from a campaign while an update is
 // in progress. The campaign will use the previous solution version and campaign
 // configuration to generate recommendations until the latest campaign update
-// status is Active . For more information on campaigns, see CreateCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html)
+// status is Active . For more information about updating a campaign, including
+// code samples, see Updating a campaign (https://docs.aws.amazon.com/personalize/latest/dg/update-campaigns.html)
+// . For more information about campaigns, see Creating a campaign (https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html)
 // .
 func (c *Client) UpdateCampaign(ctx context.Context, params *UpdateCampaignInput, optFns ...func(*Options)) (*UpdateCampaignOutput, error) {
 	if params == nil {

@@ -74,6 +74,10 @@ type CreateBotLocaleInput struct {
 	// lists.
 	Description *string
 
+	// Contains specifications about the generative AI capabilities from Amazon
+	// Bedrock that you can turn on for your bot.
+	GenerativeAISettings *types.GenerativeAISettings
+
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
 	// user.
 	VoiceSettings *types.VoiceSettings
@@ -103,6 +107,10 @@ type CreateBotLocaleOutput struct {
 
 	// The specified description of the bot locale.
 	Description *string
+
+	// Contains specifications about the generative AI capabilities from Amazon
+	// Bedrock that you can turn on for your bot.
+	GenerativeAISettings *types.GenerativeAISettings
 
 	// The specified locale identifier.
 	LocaleId *string

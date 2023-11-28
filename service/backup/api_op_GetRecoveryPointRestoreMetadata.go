@@ -62,6 +62,9 @@ type GetRecoveryPointRestoreMetadataOutput struct {
 	// .
 	RecoveryPointArn *string
 
+	// This is the resource type associated with the recovery point.
+	ResourceType *string
+
 	// The set of metadata key-value pairs that describe the original configuration of
 	// the backed-up resource. These values vary depending on the service that is being
 	// restored.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes tags from a resource. For usage examples, see  the AWS Control Tower
-// User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
+// Removes tags from a resource. For usage examples, see  the Amazon Web Services
+// Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
 // .
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {

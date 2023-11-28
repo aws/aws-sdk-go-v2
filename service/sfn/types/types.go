@@ -222,8 +222,8 @@ type ExecutionListItem struct {
 	MapRunArn *string
 
 	// The number of times you've redriven an execution. If you have not yet redriven
-	// an execution, the redriveCount is 0. This count is not updated for redrives
-	// that failed to start or are pending to be redriven.
+	// an execution, the redriveCount is 0. This count is only updated when you
+	// successfully redrive an execution.
 	RedriveCount *int32
 
 	// The date the execution was last redriven.
@@ -456,6 +456,87 @@ type HistoryEventExecutionDataDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains additional details about the state's execution, including its input
+// and output data processing flow, and HTTP request and response information.
+type InspectionData struct {
+
+	// The input after Step Functions applies the InputPath (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-inputpath)
+	// filter.
+	AfterInputPath *string
+
+	// The effective input after Step Functions applies the Parameters (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-parameters)
+	// filter.
+	AfterParameters *string
+
+	// The effective result combined with the raw state input after Step Functions
+	// applies the ResultPath (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultpath.html)
+	// filter.
+	AfterResultPath *string
+
+	// The effective result after Step Functions applies the ResultSelector (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-resultselector)
+	// filter.
+	AfterResultSelector *string
+
+	// The raw state input.
+	Input *string
+
+	// The raw HTTP request that is sent when you test an HTTP Task.
+	Request *InspectionDataRequest
+
+	// The raw HTTP response that is returned when you test an HTTP Task.
+	Response *InspectionDataResponse
+
+	// The state's raw result.
+	Result *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains additional details about the state's execution, including its input
+// and output data processing flow, and HTTP request information.
+type InspectionDataRequest struct {
+
+	// The request body for the HTTP request.
+	Body *string
+
+	// The request headers associated with the HTTP request.
+	Headers *string
+
+	// The HTTP method used for the HTTP request.
+	Method *string
+
+	// The protocol used to make the HTTP request.
+	Protocol *string
+
+	// The API endpoint used for the HTTP request.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains additional details about the state's execution, including its input
+// and output data processing flow, and HTTP response information. The
+// inspectionLevel request parameter specifies which details are returned.
+type InspectionDataResponse struct {
+
+	// The HTTP response returned.
+	Body *string
+
+	// The response headers associated with the HTTP response.
+	Headers *string
+
+	// The protocol used to return the HTTP response.
+	Protocol *string
+
+	// The HTTP response status code for the HTTP response.
+	StatusCode *string
+
+	// The message associated with the HTTP status code.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a Lambda function that failed during an execution.
 type LambdaFunctionFailedEventDetails struct {
 
@@ -638,10 +719,9 @@ type MapRunExecutionCounts struct {
 	Total int64
 
 	// The number of FAILED , ABORTED , or TIMED_OUT child workflow executions that
-	// cannot be redriven because their execution status is terminal. For example, if
-	// your execution event history contains 25,000 entries, or the
-	// toleratedFailureCount or toleratedFailurePercentage for the Distributed Map has
-	// exceeded.
+	// cannot be redriven because their execution status is terminal. For example,
+	// child workflows with an execution status of FAILED , ABORTED , or TIMED_OUT and
+	// a redriveStatus of NOT_REDRIVABLE .
 	FailuresNotRedrivable *int64
 
 	// The number of unsuccessful child workflow executions currently waiting to be
@@ -721,9 +801,8 @@ type MapRunItemCounts struct {
 
 	// The number of FAILED , ABORTED , or TIMED_OUT items in child workflow
 	// executions that cannot be redriven because the execution status of those child
-	// workflows is terminal. For example, if your execution event history contains
-	// 25,000 entries, or the toleratedFailureCount or toleratedFailurePercentage for
-	// the Distributed Map has exceeded.
+	// workflows is terminal. For example, child workflows with an execution status of
+	// FAILED , ABORTED , or TIMED_OUT and a redriveStatus of NOT_REDRIVABLE .
 	FailuresNotRedrivable *int64
 
 	// The number of unsuccessful items in child workflow executions currently waiting

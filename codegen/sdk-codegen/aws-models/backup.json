@@ -268,10 +268,16 @@
                         "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
                     }
                 },
+                "InitiationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the date on which the backup \n         job was initiated.</p>"
+                    }
+                },
                 "MessageCategory": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter is the job count for the specified \n         message category.</p>\n         <p>Example strings include <code>AccessDenied</code>, \n         <code>Success</code>, and <code>InvalidParameters</code>. See \n         <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a> \n         for a list of MessageCategory strings.</p>\n         <p>The the value ANY returns count of all message categories.</p>\n         <p>\n            <code>AGGREGATE_ALL</code> aggregates job counts \n         for all message categories and returns the sum.</p>"
+                        "smithy.api#documentation": "<p>This parameter is the job count for the specified \n         message category.</p>\n         <p>Example strings may include <code>AccessDenied</code>, \n      <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and \n      <code>INVALIDPARAMETERS</code>. See \n         <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a> \n         for a list of MessageCategory strings.</p>\n         <p>The the value ANY returns count of all message categories.</p>\n         <p>\n            <code>AGGREGATE_ALL</code> aggregates job counts \n         for all message categories and returns the sum.</p>"
                     }
                 }
             },
@@ -857,7 +863,7 @@
                 "ListOfTags": {
                     "target": "com.amazonaws.backup#ListOfTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions that you define to assign resources to your backup plans using\n         tags. For example, <code>\"StringEquals\":  {\n            \"ConditionKey\": \"aws:ResourceTag/CreatedByCryo\",\n            \"ConditionValue\": \"true\"\n            },</code>. Condition\n         operators are case sensitive.</p>\n         <p>\n            <code>ListOfTags</code> differs from <code>Conditions</code> as follows:</p>\n         <ul>\n            <li>\n               <p>When you specify more than one condition, you assign all resources that match AT\n               LEAST ONE condition (using OR logic).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListOfTags</code> only supports <code>StringEquals</code>.\n                  <code>Conditions</code> supports <code>StringEquals</code>,\n                  <code>StringLike</code>, <code>StringNotEquals</code>, and\n                  <code>StringNotLike</code>. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list of conditions that you define to assign resources to your backup plans using\n         tags. For example, <code>\"StringEquals\":  {\n            \"Key\": \"aws:ResourceTag/CreatedByCryo\",\n            \"Value\": \"true\"\n            },</code>. Condition\n         operators are case sensitive.</p>\n         <p>\n            <code>ListOfTags</code> differs from <code>Conditions</code> as follows:</p>\n         <ul>\n            <li>\n               <p>When you specify more than one condition, you assign all resources that match AT\n               LEAST ONE condition (using OR logic).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListOfTags</code> only supports <code>StringEquals</code>.\n                  <code>Conditions</code> supports <code>StringEquals</code>,\n                  <code>StringLike</code>, <code>StringNotEquals</code>, and\n                  <code>StringNotLike</code>. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NotResources": {
@@ -869,7 +875,7 @@
                 "Conditions": {
                     "target": "com.amazonaws.backup#Conditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions that you define to assign resources to your backup plans using\n         tags. For example, <code>\"StringEquals\":  {\n            \"ConditionKey\": \"aws:ResourceTag/CreatedByCryo\",\n            \"ConditionValue\": \"true\"\n            },</code>. Condition\n         operators are case sensitive.</p>\n         <p>\n            <code>Conditions</code> differs from <code>ListOfTags</code> as follows:</p>\n         <ul>\n            <li>\n               <p>When you specify more than one condition, you only assign the resources that match\n               ALL conditions (using AND logic).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Conditions</code> supports <code>StringEquals</code>,\n                  <code>StringLike</code>, <code>StringNotEquals</code>, and\n                  <code>StringNotLike</code>. <code>ListOfTags</code> only supports\n                  <code>StringEquals</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list of conditions that you define to assign resources to your backup plans using\n         tags. For example, <code>\"StringEquals\":  {\n            \"Key\": \"aws:ResourceTag/CreatedByCryo\",\n            \"Value\": \"true\"\n            },</code>. Condition\n         operators are case sensitive.</p>\n         <p>\n            <code>Conditions</code> differs from <code>ListOfTags</code> as follows:</p>\n         <ul>\n            <li>\n               <p>When you specify more than one condition, you only assign the resources that match\n               ALL conditions (using AND logic).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Conditions</code> supports <code>StringEquals</code>,\n                  <code>StringLike</code>, <code>StringNotEquals</code>, and\n                  <code>StringNotLike</code>. <code>ListOfTags</code> only supports\n                  <code>StringEquals</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1586,7 +1592,7 @@
                 "MessageCategory": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter is the job count for the specified \n         message category.</p>\n         <p>Example strings include <code>AccessDenied</code>, \n         <code>Success</code>, and <code>InvalidParameters</code>. See \n         <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a> \n         for a list of MessageCategory strings.</p>\n         <p>The the value ANY returns count of all message categories.</p>\n         <p>\n            <code>AGGREGATE_ALL</code> aggregates job counts \n         for all message categories and returns the sum</p>"
+                        "smithy.api#documentation": "<p>This parameter is the job count for the specified \n         message category.</p>\n         <p>Example strings may include <code>AccessDenied</code>, \n         <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and \n         <code>InvalidParameters</code>. See \n         <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a> \n         for a list of MessageCategory strings.</p>\n         <p>The the value ANY returns count of all message categories.</p>\n         <p>\n            <code>AGGREGATE_ALL</code> aggregates job counts \n         for all message categories and returns the sum</p>"
                     }
                 }
             },
@@ -2339,7 +2345,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the ID of the creation request.</p>"
+                        "smithy.api#documentation": "<p>This is the ID of the creation request.</p>\n         <p>This parameter is optional. If used, this parameter must contain \n         1 to 50 alphanumeric or '-_.' characters.</p>"
                     }
                 },
                 "MinRetentionDays": {
@@ -2502,6 +2508,203 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.backup#CreateRestoreTestingPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#CreateRestoreTestingPlanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#CreateRestoreTestingPlanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This is the first of two steps to create a restore testing \n         plan; once this request is successful, finish the procedure with \n         request CreateRestoreTestingSelection.</p>\n         <p>You must include the parameter RestoreTestingPlan. You may \n         optionally include CreatorRequestId and Tags.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/restore-testing/plans",
+                    "code": 201
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#CreateRestoreTestingPlanInput": {
+            "type": "structure",
+            "members": {
+                "CreatorRequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a unique string that identifies the request and \n         allows failed requests to be retriedwithout the risk of running \n         the operation twice. This parameter is optional. If used, this \n         parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>"
+                    }
+                },
+                "RestoreTestingPlan": {
+                    "target": "com.amazonaws.backup#RestoreTestingPlanForCreate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A restore testing plan must contain a unique <code>RestoreTestingPlanName</code> string\n         you create and must contain a <code>ScheduleExpression</code> cron. You may optionally\n         include a <code>StartWindowHours</code> integer and a <code>CreatorRequestId</code>\n         string.</p>\n         <p>The <code>RestoreTestingPlanName</code> is a unique string that is the name of the\n         restore testing plan. This cannot be changed after creation, and it must consist of only\n         alphanumeric characters and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.backup#SensitiveStringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional tags to include. A tag is a key-value pair you can use to \n         manage, filter, and search for your resources. Allowed characters include \n         UTF-8 letters,numbers, spaces, and the following characters: \n         + - = . _ : /.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#CreateRestoreTestingPlanOutput": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a restore testing plan was created, in Unix format \n         and Coordinated Universal Time (UTC). The value of <code>CreationTime</code> \n         is accurate to milliseconds. For example, the value 1516925490.087 represents \n         Friday, January 26, 2018 12:11:30.087AM.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the created \n         restore testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This unique string is the name of the restore testing plan.</p>\n         <p>The name cannot be changed after creation. The name consists of only \n         alphanumeric characters and underscores. Maximum length is 50.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#CreateRestoreTestingSelection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#CreateRestoreTestingSelectionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#CreateRestoreTestingSelectionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This request can be sent after CreateRestoreTestingPlan request \n         returns successfully. This is the second part of creating a resource testing \n         plan, and it must be completed sequentially.</p>\n         <p>This consists of <code>RestoreTestingSelectionName</code>,\n         <code>ProtectedResourceType</code>, and one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ProtectedResourceArns</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ProtectedResourceConditions</code>\n               </p>\n            </li>\n         </ul>\n         <p>Each protected resource type can have one single value.</p>\n         <p>A restore testing selection can include a wildcard value (\"*\") for\n         <code>ProtectedResourceArns</code> along with <code>ProtectedResourceConditions</code>.\n         Alternatively, you can include up to 30 specific protected resource ARNs in\n         <code>ProtectedResourceArns</code>.</p>\n         <p>Cannot select by both protected resource types AND specific ARNs. \n         Request will fail if both are included.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/restore-testing/plans/{RestoreTestingPlanName}/selections",
+                    "code": 201
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#CreateRestoreTestingSelectionInput": {
+            "type": "structure",
+            "members": {
+                "CreatorRequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an optional unique string that identifies the request and allows \n         failed requests to be retried without the risk of running the operation \n         twice. If used, this parameter must contain \n         1 to 50 alphanumeric or '-_.' characters.</p>"
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input the restore testing plan name that was returned from the \n         related CreateRestoreTestingPlan request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingSelection": {
+                    "target": "com.amazonaws.backup#RestoreTestingSelectionForCreate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This consists of <code>RestoreTestingSelectionName</code>,\n            <code>ProtectedResourceType</code>, and one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ProtectedResourceArns</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ProtectedResourceConditions</code>\n               </p>\n            </li>\n         </ul>\n         <p>Each protected resource type can have one single value.</p>\n         <p>A restore testing selection can include a wildcard value (\"*\") for\n            <code>ProtectedResourceArns</code> along with <code>ProtectedResourceConditions</code>.\n         Alternatively, you can include up to 30 specific protected resource ARNs in\n            <code>ProtectedResourceArns</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#CreateRestoreTestingSelectionOutput": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the time the resource testing selection was created successfully.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the ARN of the restore testing plan with which the restore \n      testing selection is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique string that is the name of the restore testing plan.</p>\n         <p>The name cannot be changed after creation. The name consists of only \n         alphanumeric characters and underscores. Maximum length is 50.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingSelectionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the unique name of the restore testing selection that belongs to \n         the related restore testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.backup#CronExpression": {
             "type": "string"
         },
@@ -2534,6 +2737,12 @@
                     "target": "com.amazonaws.backup#CreateReportPlan"
                 },
                 {
+                    "target": "com.amazonaws.backup#CreateRestoreTestingPlan"
+                },
+                {
+                    "target": "com.amazonaws.backup#CreateRestoreTestingSelection"
+                },
+                {
                     "target": "com.amazonaws.backup#DeleteBackupPlan"
                 },
                 {
@@ -2559,6 +2768,12 @@
                 },
                 {
                     "target": "com.amazonaws.backup#DeleteReportPlan"
+                },
+                {
+                    "target": "com.amazonaws.backup#DeleteRestoreTestingPlan"
+                },
+                {
+                    "target": "com.amazonaws.backup#DeleteRestoreTestingSelection"
                 },
                 {
                     "target": "com.amazonaws.backup#DescribeBackupJob"
@@ -2627,6 +2842,18 @@
                     "target": "com.amazonaws.backup#GetRecoveryPointRestoreMetadata"
                 },
                 {
+                    "target": "com.amazonaws.backup#GetRestoreJobMetadata"
+                },
+                {
+                    "target": "com.amazonaws.backup#GetRestoreTestingInferredMetadata"
+                },
+                {
+                    "target": "com.amazonaws.backup#GetRestoreTestingPlan"
+                },
+                {
+                    "target": "com.amazonaws.backup#GetRestoreTestingSelection"
+                },
+                {
                     "target": "com.amazonaws.backup#GetSupportedResourceTypes"
                 },
                 {
@@ -2687,7 +2914,16 @@
                     "target": "com.amazonaws.backup#ListRestoreJobs"
                 },
                 {
+                    "target": "com.amazonaws.backup#ListRestoreJobsByProtectedResource"
+                },
+                {
                     "target": "com.amazonaws.backup#ListRestoreJobSummaries"
+                },
+                {
+                    "target": "com.amazonaws.backup#ListRestoreTestingPlans"
+                },
+                {
+                    "target": "com.amazonaws.backup#ListRestoreTestingSelections"
                 },
                 {
                     "target": "com.amazonaws.backup#ListTags"
@@ -2700,6 +2936,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#PutBackupVaultNotifications"
+                },
+                {
+                    "target": "com.amazonaws.backup#PutRestoreValidationResult"
                 },
                 {
                     "target": "com.amazonaws.backup#StartBackupJob"
@@ -2739,6 +2978,12 @@
                 },
                 {
                     "target": "com.amazonaws.backup#UpdateReportPlan"
+                },
+                {
+                    "target": "com.amazonaws.backup#UpdateRestoreTestingPlan"
+                },
+                {
+                    "target": "com.amazonaws.backup#UpdateRestoreTestingSelection"
                 }
             ],
             "traits": {
@@ -3678,17 +3923,6 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
-                        },
-                        {
-                            "documentation": "Partition doesn't support DualStack",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
                         }
                     ],
                     "version": "1.0"
@@ -4214,6 +4448,98 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.backup#DeleteRestoreTestingPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DeleteRestoreTestingPlanInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This request deletes the specified restore testing plan.</p>\n         <p>Deletion can only successfully occur if all associated \n         restore testing selections are deleted first.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/restore-testing/plans/{RestoreTestingPlanName}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#DeleteRestoreTestingPlanInput": {
+            "type": "structure",
+            "members": {
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required unique name of the restore testing plan you wish \n         to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#DeleteRestoreTestingSelection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DeleteRestoreTestingSelectionInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Input the Restore Testing Plan name and Restore Testing Selection \n         name.</p>\n         <p>All testing selections associated with a restore testing plan must \n         be deleted before the restore testing plan can be deleted.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#DeleteRestoreTestingSelectionInput": {
+            "type": "structure",
+            "members": {
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required unique name of the restore testing plan that contains the \n         restore testing selection you wish to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingSelectionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required unique name of the restore testing selection you \n         wish to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.backup#DependencyFailureException": {
             "type": "structure",
             "members": {
@@ -4446,10 +4772,16 @@
                         "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
                     }
                 },
+                "InitiationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the date a backup job was initiated.</p>"
+                    }
+                },
                 "MessageCategory": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the job count for the specified \n         message category.</p>\n         <p>Example strings may include <code>AccessDenied</code>, \n         <code>Success</code>, and <code>InvalidParameters</code>. See \n         <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a> \n         for a list of MessageCategory strings.</p>"
+                        "smithy.api#documentation": "<p>This is the job count for the specified \n         message category.</p>\n         <p>Example strings may include <code>AccessDenied</code>, <code>SUCCESS</code>,\n            <code>AGGREGATE_ALL</code>, and <code>INVALIDPARAMETERS</code>. View <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a>\n         for a list of accepted MessageCategory strings.</p>"
                     }
                 }
             },
@@ -4548,7 +4880,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice.</p>"
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice. This parameter is optional. If used, this\n         parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>"
                     }
                 },
                 "NumberOfRecoveryPoints": {
@@ -4877,6 +5209,36 @@
                     "target": "com.amazonaws.backup#string",
                     "traits": {
                         "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
+                    }
+                },
+                "LastBackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the ARN (Amazon Resource Name) of the backup vault \n         that contains the most recent backup recovery point.</p>"
+                    }
+                },
+                "LastRecoveryPointArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the ARN (Amazon Resource Name) of the most recent \n         recovery point.</p>"
+                    }
+                },
+                "LatestRestoreExecutionTimeMinutes": {
+                    "target": "com.amazonaws.backup#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the time in minutes the most recent restore \n         job took to complete.</p>"
+                    }
+                },
+                "LatestRestoreJobCreationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the creation date of the most recent restore job.</p>"
+                    }
+                },
+                "LatestRestoreRecoveryPointCreationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the date the most recent recovery point was created.</p>"
                     }
                 }
             },
@@ -5394,6 +5756,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns metadata associated with a restore job listed by resource type.</p>"
                     }
+                },
+                "RecoveryPointCreationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the creation date of the recovery point made by the specifed restore job.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.backup#RestoreJobCreator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains identifying information about the creation of a restore job.</p>"
+                    }
+                },
+                "ValidationStatus": {
+                    "target": "com.amazonaws.backup#RestoreValidationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the status of validation run on the indicated \n         restore job.</p>"
+                    }
+                },
+                "ValidationStatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This describes the status of validation run on the \n         indicated restore job.</p>"
+                    }
+                },
+                "DeletionStatus": {
+                    "target": "com.amazonaws.backup#RestoreDeletionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This notes the status of the data generated by the restore test. \n         The status may be <code>Deleting</code>, <code>Failed</code>,  \n         or <code>Successful</code>.</p>"
+                    }
+                },
+                "DeletionStatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This describes the restore job deletion status.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5899,7 +6297,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice.</p>"
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and allows failed requests to be retried\n         without the risk of running the operation twice. </p>"
                     }
                 },
                 "CreationDate": {
@@ -6378,6 +6776,276 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The set of metadata key-value pairs that describe the original configuration of the\n         backed-up resource. These values vary depending on the service that is being\n         restored.</p>"
                     }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.backup#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the resource type associated with the recovery point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#GetRestoreJobMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#GetRestoreJobMetadataInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#GetRestoreJobMetadataOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This request returns the metadata for the specified restore job.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/restore-jobs/{RestoreJobId}/metadata",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backup#GetRestoreJobMetadataInput": {
+            "type": "structure",
+            "members": {
+                "RestoreJobId": {
+                    "target": "com.amazonaws.backup#RestoreJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a unique identifier of a restore job within Backup.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#GetRestoreJobMetadataOutput": {
+            "type": "structure",
+            "members": {
+                "RestoreJobId": {
+                    "target": "com.amazonaws.backup#RestoreJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a unique identifier of a restore job within Backup.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.backup#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This contains the metadata of the specified backup job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#GetRestoreTestingInferredMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#GetRestoreTestingInferredMetadataInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#GetRestoreTestingInferredMetadataOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This request returns the minimal required set of metadata needed to \n         start a restore job with secure default settings. <code>BackupVaultName</code> \n         and <code>RecoveryPointArn</code> are required parameters. \n         <code>BackupVaultAccountId</code> is an optional parameter.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/restore-testing/inferred-metadata",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backup#GetRestoreTestingInferredMetadataInput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the account ID of the specified backup vault.</p>",
+                        "smithy.api#httpQuery": "BackupVaultAccountId"
+                    }
+                },
+                "BackupVaultName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup \n         vaults are identified by names that are unique to the account used to \n         create them and the Amazon Web ServicesRegion where they are created. \n         They consist of letters, numbers, and hyphens.</p>",
+                        "smithy.api#httpQuery": "BackupVaultName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecoveryPointArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a recovery \n         point; for example,\n         <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.\n      </p>",
+                        "smithy.api#httpQuery": "RecoveryPointArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#GetRestoreTestingInferredMetadataOutput": {
+            "type": "structure",
+            "members": {
+                "InferredMetadata": {
+                    "target": "com.amazonaws.backup#stringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a string map of the metadata inferred from the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#GetRestoreTestingPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#GetRestoreTestingPlanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#GetRestoreTestingPlanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns <code>RestoreTestingPlan</code> details for the specified\n            <code>RestoreTestingPlanName</code>. The details are the body of a restore testing plan\n         in JSON format, in addition to plan metadata.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/restore-testing/plans/{RestoreTestingPlanName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backup#GetRestoreTestingPlanInput": {
+            "type": "structure",
+            "members": {
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required unique name of the restore testing plan.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#GetRestoreTestingPlanOutput": {
+            "type": "structure",
+            "members": {
+                "RestoreTestingPlan": {
+                    "target": "com.amazonaws.backup#RestoreTestingPlanForGet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the body of a restore testing plan. Includes \n         <code>RestoreTestingPlanName</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#GetRestoreTestingSelection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#GetRestoreTestingSelectionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#GetRestoreTestingSelectionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns RestoreTestingSelection, which displays resources \n         and elements of the restore testing plan.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backup#GetRestoreTestingSelectionInput": {
+            "type": "structure",
+            "members": {
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required unique name of the restore testing plan.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingSelectionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required unique name of the restore testing selection.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#GetRestoreTestingSelectionOutput": {
+            "type": "structure",
+            "members": {
+                "RestoreTestingSelection": {
+                    "target": "com.amazonaws.backup#RestoreTestingSelectionForGet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique name of the restore testing selection.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
@@ -6528,6 +7196,34 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.backup#KeyValue": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key (String). The key can't start with \n         <code>aws:</code>.</p>\n         <p>Length Constraints: Minimum length of 1. Maximum \n         length of 128.</p>\n         <p>Pattern: <code>^(?![aA]{1}[wW]{1}[sS]{1}:)([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+)$</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the key.</p>\n         <p>Length Constraints: Maximum length of 256.</p>\n         <p>Pattern: <code>^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Pair of two related strings. Allowed characters \n         are letters, white space, and numbers that can be \n         represented in UTF-8 and the following characters: \n         <code> + - = . _ : /</code>\n         </p>"
+            }
+        },
+        "com.amazonaws.backup#KeyValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#KeyValue"
+            }
+        },
         "com.amazonaws.backup#LegalHold": {
             "type": "structure",
             "members": {
@@ -6626,6 +7322,12 @@
                     "target": "com.amazonaws.backup#Long",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the number of days after creation that a recovery point is deleted. Must be\n         greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.</p>"
+                    }
+                },
+                "OptInToArchiveForSupportedResources": {
+                    "target": "com.amazonaws.backup#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional Boolean. If this is true, this setting will \n         instruct your backup plan to transition supported resources to \n         archive (cold) storage tier in accordance with your lifecycle settings.</p>"
                     }
                 }
             },
@@ -6738,7 +7440,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>maxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>MaxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
@@ -6765,7 +7467,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>maxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>MaxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
                     }
                 }
             },
@@ -6811,7 +7513,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is \n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -6895,7 +7597,7 @@
                 "ByMessageCategory": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>This returns a list of backup jobs for the specified \n         message category.</p>\n         <p>Example strings may include <code>AccessDenied</code>, \n         <code>Success</code>, and <code>InvalidParameters</code>. See \n         <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a> \n         for a list of MessageCategory strings.</p>",
+                        "smithy.api#documentation": "<p>This is an optional parameter that can be used to \n         filter out jobs with a MessageCategory which matches the \n         value you input.</p>\n         <p>Example strings may include <code>AccessDenied</code>, \n         <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and \n         <code>InvalidParameters</code>.</p>\n         <p>View <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a>\n         </p>\n         <p>The wildcard () returns count of all message categories.</p>\n         <p>\n            <code>AGGREGATE_ALL</code> aggregates job counts \n            for all message categories and returns the sum.</p>",
                         "smithy.api#httpQuery": "messageCategory"
                     }
                 }
@@ -6916,7 +7618,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is  \n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 }
             },
@@ -6967,7 +7669,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -6989,7 +7691,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 },
                 "BackupPlanTemplatesList": {
@@ -7055,7 +7757,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -7077,7 +7779,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 },
                 "BackupPlanVersionsList": {
@@ -7135,7 +7837,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -7164,7 +7866,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 },
                 "BackupPlansList": {
@@ -7230,7 +7932,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -7252,7 +7954,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 },
                 "BackupSelectionsList": {
@@ -7325,7 +8027,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -7353,7 +8055,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 }
             },
@@ -7439,7 +8141,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>maxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>MaxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
@@ -7466,7 +8168,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>maxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>MaxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
                     }
                 }
             },
@@ -7511,7 +8213,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return maxResults number of items, NextToken allows you to return more items in\n         your list starting at the location pointed to by the next token. </p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return MaxResults number of items, NextToken allows you to return more items in\n         your list starting at the location pointed to by the next token. </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -7595,7 +8297,7 @@
                 "ByMessageCategory": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter returns the job count for the specified \n         message category.</p>\n         <p>Example accepted strings include <code>AccessDenied</code>, \n         <code>Success</code>, and <code>InvalidParameters</code>. See \n         <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a> \n         for a list of accepted MessageCategory strings.</p>\n         <p>The the value ANY returns count of all message categories.</p>\n         <p>\n            <code>AGGREGATE_ALL</code> aggregates job counts \n         for all message categories and returns the sum.</p>",
+                        "smithy.api#documentation": "<p>This is an optional parameter that can be used to \n         filter out jobs with a MessageCategory which matches the \n         value you input.</p>\n         <p>Example strings may include <code>AccessDenied</code>, \n         <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and \n         <code>INVALIDPARAMETERS</code>.</p>\n         <p>View \n         <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a>\n         for a list of accepted strings.</p>\n         <p>The the value ANY returns count of all message categories.</p>\n         <p>\n            <code>AGGREGATE_ALL</code> aggregates job counts \n            for all message categories and returns the sum.</p>",
                         "smithy.api#httpQuery": "messageCategory"
                     }
                 }
@@ -7616,7 +8318,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return maxResults number of items, NextToken allows you to return more items in\n         your list starting at the location pointed to by the next token. </p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return MaxResults number of items, NextToken allows you to return more items in\n         your list starting at the location pointed to by the next token. </p>"
                     }
                 }
             },
@@ -7734,7 +8436,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>maxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>MaxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -7756,7 +8458,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>maxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>MaxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
                     }
                 },
                 "LegalHolds": {
@@ -7863,7 +8565,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -7891,7 +8593,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 }
             },
@@ -7905,7 +8607,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -7933,7 +8635,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 }
             },
@@ -8000,7 +8702,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -8064,7 +8766,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 },
                 "RecoveryPoints": {
@@ -8127,7 +8829,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the next item following a partial list of returned resources. For example, if a request\n         is made to return <code>maxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>This is the next item following a partial list of returned resources. For example, if a request\n         is made to return <code>MaxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -8215,7 +8917,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -8237,7 +8939,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 },
                 "RecoveryPoints": {
@@ -8497,7 +9199,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>maxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>MaxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
@@ -8524,7 +9226,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>maxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request\n         is made to return <code>MaxResults</code> number of resources, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
                     }
                 }
             },
@@ -8570,13 +9272,121 @@
                 }
             }
         },
+        "com.amazonaws.backup#ListRestoreJobsByProtectedResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListRestoreJobsByProtectedResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListRestoreJobsByProtectedResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This returns restore jobs that contain the specified protected resource.</p>\n         <p>You must include <code>ResourceArn</code>. You can optionally include\n            <code>NextToken</code>, <code>ByStatus</code>, <code>MaxResults</code>,\n            <code>ByRecoveryPointCreationDateAfter</code> , and\n            <code>ByRecoveryPointCreationDateBefore</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/resources/{ResourceArn}/restore-jobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RestoreJobs",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backup#ListRestoreJobsByProtectedResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only restore jobs that match the specified resource \n         Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ByStatus": {
+                    "target": "com.amazonaws.backup#RestoreJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only restore jobs associated with the specified job status.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "ByRecoveryPointCreationDateAfter": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only restore jobs of recovery points that were created after the specified date.</p>",
+                        "smithy.api#httpQuery": "recoveryPointCreationDateAfter"
+                    }
+                },
+                "ByRecoveryPointCreationDateBefore": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only restore jobs of recovery points that were created before the specified date.</p>",
+                        "smithy.api#httpQuery": "recoveryPointCreationDateBefore"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, \n         if a request ismade to return <code>MaxResults</code> number of items, \n         <code>NextToken</code> allows you to return more items in your list \n         starting at the location pointed to by the next token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#ListRestoreJobsByProtectedResourceOutput": {
+            "type": "structure",
+            "members": {
+                "RestoreJobs": {
+                    "target": "com.amazonaws.backup#RestoreJobsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that contain detailed information about \n         jobs to restore saved resources.></p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, \n         if a request is made to return <code>MaxResults</code> number of items, \n         <code>NextToken</code> allows youto return more items in your list starting \n         at the location pointed to by the next token</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.backup#ListRestoreJobsInput": {
             "type": "structure",
             "members": {
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -8628,6 +9438,13 @@
                         "smithy.api#documentation": "<p>Returns only copy jobs completed after a date expressed in Unix format and Coordinated\n         Universal Time (UTC).</p>",
                         "smithy.api#httpQuery": "completeAfter"
                     }
+                },
+                "ByRestoreTestingPlanArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This returns only restore testing jobs that match the \n         specified resource Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpQuery": "restoreTestingPlanArn"
+                    }
                 }
             },
             "traits": {
@@ -8646,7 +9463,184 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#ListRestoreTestingPlans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListRestoreTestingPlansInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListRestoreTestingPlansOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of restore testing plans.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/restore-testing/plans",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RestoreTestingPlans",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backup#ListRestoreTestingPlansInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#ListRestoreTestingPlansInputMaxResultsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. \n         For example, if a request is made to return <code>MaxResults</code> \n         number of items, <code>NextToken</code> allows you to return more items \n         in your list starting at the location pointed to by the nexttoken.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#ListRestoreTestingPlansInputMaxResultsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.backup#ListRestoreTestingPlansOutput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. \n         For example, if a request is made to return <code>MaxResults</code> \n         number of items, <code>NextToken</code> allows you to return more items \n         in your list starting at the location pointed to by the nexttoken.</p>"
+                    }
+                },
+                "RestoreTestingPlans": {
+                    "target": "com.amazonaws.backup#RestoreTestingPlans",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a returned list of restore testing plans.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#ListRestoreTestingSelections": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListRestoreTestingSelectionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListRestoreTestingSelectionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of restore testing selections. Can be filtered \n         by <code>MaxResults</code> and <code>RestoreTestingPlanName</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/restore-testing/plans/{RestoreTestingPlanName}/selections",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RestoreTestingSelections",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backup#ListRestoreTestingSelectionsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#ListRestoreTestingSelectionsInputMaxResultsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. \n         For example, if a request is made to return <code>MaxResults</code> \n         number of items, <code>NextToken</code> allows you to return more items \n         in your list starting at the location pointed to by the nexttoken.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns restore testing selections by the specified restore testing \n         plan name.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#ListRestoreTestingSelectionsInputMaxResultsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.backup#ListRestoreTestingSelectionsOutput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, \n         if a request is made to return <code>MaxResults</code> number of items, \n         <code>NextToken</code> allows you to return more items in your list \n         starting at the location pointed to by the nexttoken.</p>"
+                    }
+                },
+                "RestoreTestingSelections": {
+                    "target": "com.amazonaws.backup#RestoreTestingSelections",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned restore testing selections associated with the \n         restore testing plan.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -8705,7 +9699,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -8727,7 +9721,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
                     }
                 },
                 "Tags": {
@@ -8848,10 +9842,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This is the non-unique name of the resource that \n         belongs to the specified backup.</p>"
                     }
+                },
+                "LastBackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the ARN (Amazon Resource Name) of the backup vault \n         that contains the most recent backup recovery point.</p>"
+                    }
+                },
+                "LastRecoveryPointArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the ARN (Amazon Resource Name) of the most \n         recent recovery point.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that contains information about a backed-up resource.</p>"
+            }
+        },
+        "com.amazonaws.backup#ProtectedResourceConditions": {
+            "type": "structure",
+            "members": {
+                "StringEquals": {
+                    "target": "com.amazonaws.backup#KeyValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the values of your tagged resources for only \n         those resources that you tagged  with the same value. \n         Also called \"exact matching.\"</p>"
+                    }
+                },
+                "StringNotEquals": {
+                    "target": "com.amazonaws.backup#KeyValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the values of your tagged resources for only \n         those resources that you tagged  that do not have the same value. \n         Also called \"negated matching.\"</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of conditions that you define for resources in \n         your restore testing plan using  tags.</p>\n         <p>For example, \n         <code>\"StringEquals\": {  \"Key\": \"aws:ResourceTag/CreatedByCryo\",  \"Value\": \"true\"  },</code>. \n         Condition operators are case sensitive.</p>"
             }
         },
         "com.amazonaws.backup#ProtectedResourcesList": {
@@ -9038,6 +10064,70 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of events that indicate the status of jobs to back up resources to the backup\n         vault.</p>\n         <p>For common use cases and code samples, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html\">Using Amazon SNS to\n            track Backup events</a>.</p>\n         <p>The following events are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BACKUP_JOB_STARTED</code> | <code>BACKUP_JOB_COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>COPY_JOB_STARTED</code> | <code>COPY_JOB_SUCCESSFUL</code> |\n                  <code>COPY_JOB_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTORE_JOB_STARTED</code> | <code>RESTORE_JOB_COMPLETED</code> |\n                  <code>RECOVERY_POINT_MODIFIED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>S3_BACKUP_OBJECT_FAILED</code> | <code>S3_RESTORE_OBJECT_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The list below shows items that are deprecated events (for reference) and are no longer \n            in use. They are no longer supported and will not return statuses or notifications. \n            Refer to the list above for current supported events.</p>\n         </note>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#PutRestoreValidationResult": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#PutRestoreValidationResultInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This request allows you to send your independent self-run \n         restore test validation results. \n         <code>RestoreJobId</code> and <code>ValidationStatus</code> \n         are required. Optionally, you can input a \n         <code>ValidationStatusMessage</code>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/restore-jobs/{RestoreJobId}/validations",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#PutRestoreValidationResultInput": {
+            "type": "structure",
+            "members": {
+                "RestoreJobId": {
+                    "target": "com.amazonaws.backup#RestoreJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a unique identifier of a restore job within Backup.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValidationStatus": {
+                    "target": "com.amazonaws.backup#RestoreValidationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the status of your restore validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValidationStatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an optional message string you can input to \n         describe the validation status for the restore test validation.</p>"
                     }
                 }
             },
@@ -9714,6 +10804,43 @@
                 "target": "com.amazonaws.backup#ResourceType"
             }
         },
+        "com.amazonaws.backup#RestoreDeletionStatus": {
+            "type": "enum",
+            "members": {
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESSFUL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#RestoreJobCreator": {
+            "type": "structure",
+            "members": {
+                "RestoreTestingPlanArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies \n         a restore testing plan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the restore testing plan that \n         Backup used to initiate the restore job.</p>"
+            }
+        },
         "com.amazonaws.backup#RestoreJobId": {
             "type": "string"
         },
@@ -9948,10 +11075,605 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store\n            (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.\n         For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is\n            Amazon EC2.</p>"
                     }
+                },
+                "RecoveryPointCreationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date on which a recovery point was created.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.backup#RestoreJobCreator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains identifying information about the creation \n         of a restore job.</p>"
+                    }
+                },
+                "ValidationStatus": {
+                    "target": "com.amazonaws.backup#RestoreValidationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the status of validation run on the indicated \n         restore job.</p>"
+                    }
+                },
+                "ValidationStatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This describes the status of validation run on the \n         indicated restore job.</p>"
+                    }
+                },
+                "DeletionStatus": {
+                    "target": "com.amazonaws.backup#RestoreDeletionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This notes the status of the data generated by the restore \n         test. The status may be <code>Deleting</code>, <code>Failed</code>, \n         or <code>Successful</code>.</p>"
+                    }
+                },
+                "DeletionStatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This describes the restore job deletion status.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains metadata about a restore job.</p>"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingPlanForCreate": {
+            "type": "structure",
+            "members": {
+                "RecoveryPointSelection": {
+                    "target": "com.amazonaws.backup#RestoreTestingRecoveryPointSelection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required: Algorithm; Required: Recovery point types; IncludeVaults \n         (one or more). Optional: SelectionWindowDays ('30' if not specified); \n         ExcludeVaults (list of selectors), defaults to empty list if not listed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RestoreTestingPlanName is a unique string that is the name \n         of the restore testing plan. This cannot be changed after creation, \n         and it must consist of only alphanumeric characters and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleExpression": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore \n         testing plan is executed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleExpressionTimezone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. This is the timezone in which the schedule \n         expression is set. By default, ScheduleExpressions are in UTC. \n         You can modify this to a specified timezone.</p>"
+                    }
+                },
+                "StartWindowHours": {
+                    "target": "com.amazonaws.backup#integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Defaults to 24 hours.</p>\n         <p>A value in hours after a \n         restore test is scheduled before a job will be canceled if it \n         doesn't start successfully. This value is optional. If this value \n         is included, this parameter has a maximum value of 168 hours \n         (one week).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a restore testing plan.</p>"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingPlanForGet": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a restore testing plan was created, \n         in Unix format and Coordinated Universal Time (UTC). The value of \n         <code>CreationTime</code> is accurate to milliseconds. For example, \n         the value 1516925490.087 represents Friday, January 26, 2018 \n         12:11:30.087  AM.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatorRequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This identifies the request and allows failed requests to \n         be retried without the risk of running the operation twice. \n         If the request includes a <code>CreatorRequestId</code> that \n         matches an existing backup plan, that plan is returned. This \n         parameter is optional.</p>\n         <p>If used, this parameter must \n            contain 1 to 50 alphanumeric or '-_.' characters.</p>"
+                    }
+                },
+                "LastExecutionTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time a restore test was run with the specified \n         restore testing plan. A date and time, in Unix format and \n         Coordinated Universal Time (UTC). The value of \n         <code>LastExecutionDate</code> is accurate to milliseconds. \n         For example, the value  1516925490.087 represents Friday, \n         January 26, 2018 12:11:30.087 AM.</p>"
+                    }
+                },
+                "LastUpdateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the restore testing plan was updated. \n         This update is in Unix format and Coordinated Universal Time (UTC). \n         The value of <code>LastUpdateTime</code> is accurate to milliseconds. \n         For example, the value  1516925490.087 represents Friday, \n         January 26, 2018 12:11:30.087 AM.</p>"
+                    }
+                },
+                "RecoveryPointSelection": {
+                    "target": "com.amazonaws.backup#RestoreTestingRecoveryPointSelection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified criteria to assign a set of resources, such as \n         recovery point types or backup vaults.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies \n         a restore testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the restore testing plan name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleExpression": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore \n         testing plan is executed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleExpressionTimezone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. This is the timezone in which the schedule \n         expression is set. By default, ScheduleExpressions are in UTC. \n         You can modify this to a specified timezone.</p>"
+                    }
+                },
+                "StartWindowHours": {
+                    "target": "com.amazonaws.backup#integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Defaults to 24 hours.</p>\n         <p>A value in hours after a \n         restore test is scheduled before a job will be canceled if it \n         doesn't start successfully. This value is optional. If this value \n         is included, this parameter has a maximum value of 168 hours \n         (one week).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a restore testing plan.</p>"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingPlanForList": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a restore testing plan was created, \n         in Unix format and Coordinated Universal Time (UTC). The value \n         of <code>CreationTime</code> is accurate to milliseconds. For \n         example, the value 1516925490.087 represents Friday, January 26, \n         2018 12:11:30.087 AM.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastExecutionTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time a restore test was run with the specified \n         restore testing plan. A date and time, in Unix format and \n         Coordinated Universal Time (UTC). The value of \n         <code>LastExecutionDate</code> is accurate to milliseconds. \n         For example, the value 1516925490.087 represents Friday, \n         January 26, 2018 12:11:30.087 AM.</p>"
+                    }
+                },
+                "LastUpdateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the restore testing plan was updated. \n         This update is in Unix format and Coordinated Universal Time (UTC). \n         The value of <code>LastUpdateTime</code> is accurate to \n         milliseconds. For example, the value 1516925490.087 represents \n         Friday, January 26, 2018 12:11:30.087 AM.</p>"
+                    }
+                },
+                "RestoreTestingPlanArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifiesa \n         restore testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the restore testing plan name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleExpression": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore \n         testing plan is executed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleExpressionTimezone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. This is the timezone in which the schedule \n         expression is set. By default, ScheduleExpressions are in UTC. \n         You can modify this to a specified timezone.</p>"
+                    }
+                },
+                "StartWindowHours": {
+                    "target": "com.amazonaws.backup#integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Defaults to 24 hours.</p>\n         <p>A value in hours after a restore test is scheduled before \n            a job will be canceled if it doesn't start successfully. This \n            value is optional. If this value is included, this parameter \n            has a maximum value of 168 hours (one week).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a restore testing plan.</p>"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingPlanForUpdate": {
+            "type": "structure",
+            "members": {
+                "RecoveryPointSelection": {
+                    "target": "com.amazonaws.backup#RestoreTestingRecoveryPointSelection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required: <code>Algorithm</code>; <code>RecoveryPointTypes</code>; \n         <code>IncludeVaults</code> (<i>one or more</i>).</p>\n         <p>Optional: <i>SelectionWindowDays</i> (<i>'30' if \n         not specified</i>); <code>ExcludeVaults</code> (defaults to empty \n         list if not listed).</p>"
+                    }
+                },
+                "ScheduleExpression": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A CRON expression in specified timezone when a restore \n         testing plan is executed.</p>"
+                    }
+                },
+                "ScheduleExpressionTimezone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. This is the timezone in which the schedule \n         expression is set. By default, ScheduleExpressions are in UTC. \n         You can modify this to a specified timezone.</p>"
+                    }
+                },
+                "StartWindowHours": {
+                    "target": "com.amazonaws.backup#integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Defaults to 24 hours.</p>\n         <p>A value in hours after a restore test is scheduled before a \n         job will be canceled if it doesn't start successfully. This value \n         is optional. If this value is included, this parameter has a \n         maximum value of 168 hours (one week).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a restore testing plan.</p>"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingPlans": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#RestoreTestingPlanForList"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingRecoveryPointSelection": {
+            "type": "structure",
+            "members": {
+                "Algorithm": {
+                    "target": "com.amazonaws.backup#RestoreTestingRecoveryPointSelectionAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Acceptable values include \"LATEST_WITHIN_WINDOW\" or \n         \"RANDOM_WITHIN_WINDOW\"</p>"
+                    }
+                },
+                "ExcludeVaults": {
+                    "target": "com.amazonaws.backup#stringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Accepted values include specific ARNs or list of selectors. \n         Defaults to empty list if not listed.</p>"
+                    }
+                },
+                "IncludeVaults": {
+                    "target": "com.amazonaws.backup#stringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Accepted values include wildcard [\"*\"] or by specific ARNs or \n         ARN wilcard replacement \n         [\"arn:aws:backup:us-west-2:123456789012:backup-vault:asdf\", ...] \n         [\"arn:aws:backup:*:*:backup-vault:asdf-*\", ...]</p>"
+                    }
+                },
+                "RecoveryPointTypes": {
+                    "target": "com.amazonaws.backup#RestoreTestingRecoveryPointTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>These are the types of recovery points.</p>"
+                    }
+                },
+                "SelectionWindowDays": {
+                    "target": "com.amazonaws.backup#integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Accepted values are integers from 1 to 365.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Required: Algorithm; Required: Recovery point types; \n         IncludeVaults(one or more). Optional: SelectionWindowDays \n         ('30' if not specified);ExcludeVaults (list of selectors), \n         defaults to empty list if not listed.</p>"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingRecoveryPointSelectionAlgorithm": {
+            "type": "enum",
+            "members": {
+                "LATEST_WITHIN_WINDOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATEST_WITHIN_WINDOW"
+                    }
+                },
+                "RANDOM_WITHIN_WINDOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RANDOM_WITHIN_WINDOW"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingRecoveryPointType": {
+            "type": "enum",
+            "members": {
+                "CONTINUOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUOUS"
+                    }
+                },
+                "SNAPSHOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNAPSHOT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingRecoveryPointTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#RestoreTestingRecoveryPointType"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingSelectionForCreate": {
+            "type": "structure",
+            "members": {
+                "IamRoleArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that \n         Backup uses to create the target resource; \n         for example: <code>arn:aws:iam::123456789012:role/S3Access</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectedResourceArns": {
+                    "target": "com.amazonaws.backup#stringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Each protected resource can be filtered by its specific ARNs, such as \n         <code>ProtectedResourceArns: [\"arn:aws:...\", \"arn:aws:...\"]</code> \n         or by a wildcard: <code>ProtectedResourceArns: [\"*\"]</code>, \n         but not both.</p>"
+                    }
+                },
+                "ProtectedResourceConditions": {
+                    "target": "com.amazonaws.backup#ProtectedResourceConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you have included the wildcard in ProtectedResourceArns, \n         you can include resource conditions, such as \n         <code>ProtectedResourceConditions: {    StringEquals: [{ key: \"XXXX\", \n            value: \"YYYY\" }]</code>.</p>"
+                    }
+                },
+                "ProtectedResourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource included in a restore \n         testing selection; for \n         example, an Amazon EBS volume or \n         an Amazon RDS database.</p>\n         <p>Supported resource types accepted include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>DocumentDB</code> for Amazon DocumentDB (with MongoDB compatibility)</p>\n            </li>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>FSx</code> for Amazon FSx</p>\n            </li>\n            <li>\n               <p>\n                  <code>Neptune</code> for Amazon Neptune</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> for Amazon S3</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreMetadataOverrides": {
+                    "target": "com.amazonaws.backup#SensitiveStringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can override certain restore metadata keys by including the parameter\n            <code>RestoreMetadataOverrides</code> in the body of\n            <code>RestoreTestingSelection</code>. Key values are not case sensitive.</p>\n         <p>See the complete list of <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html\">restore testing\n            inferred metadata</a>.</p>"
+                    }
+                },
+                "RestoreTestingSelectionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the unique name of the restore testing selection \n         that belongs to the related restore testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValidationWindowHours": {
+                    "target": "com.amazonaws.backup#integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>This is amount of hours (1 to 168) available to run a validation script on the data. The\n         data will be deleted upon the completion of the validation script or the end of the\n         specified retention period, whichever comes first.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a specific restore testing selection.</p>\n         <p>ProtectedResourceType is required, such as Amazon EBS or \n         Amazon EC2.</p>\n         <p>This consists of <code>RestoreTestingSelectionName</code>,\n         <code>ProtectedResourceType</code>, and one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ProtectedResourceArns</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ProtectedResourceConditions</code>\n               </p>\n            </li>\n         </ul>\n         <p>Each protected resource type can have one single value.</p>\n         <p>A restore testing selection can include a wildcard value (\"*\") for\n         <code>ProtectedResourceArns</code> along with <code>ProtectedResourceConditions</code>.\n         Alternatively, you can include up to 30 specific protected resource ARNs in\n         <code>ProtectedResourceArns</code>.</p>\n         <p>\n            <code>ProtectedResourceConditions</code> examples include as <code>StringEquals</code> \n         and <code>StringNotEquals</code>.</p>"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingSelectionForGet": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a restore testing selection was created, \n         in Unix format and Coordinated Universal Time (UTC). The value of \n         <code>CreationTime</code> is accurate to milliseconds. For example, \n         the value 1516925490.087 represents Friday, January 26, \n         201812:11:30.087  AM.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatorRequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This identifies the request and allows failed requests to \n         be retried without the risk of running the operation twice. \n         If the request includes a <code>CreatorRequestId</code> that \n         matches an existing backup plan, that plan is returned. This \n         parameter is optional.</p>\n         <p>If used, this parameter must contain 1 to 50 alphanumeric \n         or '-_.' characters.</p>"
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that \n         Backup uses to create the target resource; for \n         example:<code>arn:aws:iam::123456789012:role/S3Access</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectedResourceArns": {
+                    "target": "com.amazonaws.backup#stringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can include specific ARNs, such as \n         <code>ProtectedResourceArns: [\"arn:aws:...\", \"arn:aws:...\"]</code> \n         or you can include a wildcard: <code>ProtectedResourceArns: [\"*\"]</code>, \n         but not both.</p>"
+                    }
+                },
+                "ProtectedResourceConditions": {
+                    "target": "com.amazonaws.backup#ProtectedResourceConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>In a resource testing selection, this parameter filters by \n         specific conditions such as <code>StringEquals</code> or \n         <code>StringNotEquals</code>.</p>"
+                    }
+                },
+                "ProtectedResourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource included in a resource \n         testing selection; \n         for example, an Amazon EBS volume \n         or an Amazon RDS database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreMetadataOverrides": {
+                    "target": "com.amazonaws.backup#SensitiveStringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can override certain restore metadata keys by including the parameter\n         <code>RestoreMetadataOverrides</code> in the body of\n         <code>RestoreTestingSelection</code>. Key values are not case sensitive.</p>\n         <p>See the complete list of <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html\">restore testing\n         inferred metadata</a>.</p>"
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RestoreTestingPlanName is a unique string that is the name \n         of the restore testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingSelectionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the unique name of the restore testing selection that \n         belongs to the related restore testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValidationWindowHours": {
+                    "target": "com.amazonaws.backup#integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>This is amount of hours (1 to 168) available to run a validation script on the data. The\n         data will be deleted upon the completion of the validation script or the end of the\n         specified retention period, whichever comes first.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a restore testing selection.</p>"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingSelectionForList": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the date and time that a restore testing selection \n         was created, in Unix format and Coordinated Universal Time (UTC). \n         The value of <code>CreationTime</code> is accurate to milliseconds. \n         For example, the value 1516925490.087 represents Friday, \n         January 26,2018 12:11:30.087 AM.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that \n         Backup uses to create the target resource; for example: \n         <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectedResourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource included in a restore \n         testing selection; for example, an \n         Amazon EBS volume or an\n         Amazon RDS database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique string that is the name of the restore testing plan.</p>\n         <p>The name cannot be changed after creation. The name must \n         consist of only alphanumeric characters and underscores. \n         Maximum length is 50.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingSelectionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique name of a restore testing selection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValidationWindowHours": {
+                    "target": "com.amazonaws.backup#integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>This value represents the time, in hours, data is retained after \n         a restore test so that optional validation can be completed.</p>\n         <p>Accepted value is an integer between \n         0 and 168 (the hourly equivalent of seven days).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a restore testing selection.</p>"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingSelectionForUpdate": {
+            "type": "structure",
+            "members": {
+                "IamRoleArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that \n         Backup uses to create the target resource; for example: \n         <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>"
+                    }
+                },
+                "ProtectedResourceArns": {
+                    "target": "com.amazonaws.backup#stringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can include a list of specific ARNs, such as \n         <code>ProtectedResourceArns: [\"arn:aws:...\", \"arn:aws:...\"]</code> \n         or you can include a wildcard: <code>ProtectedResourceArns: [\"*\"]</code>, \n         but not both.</p>"
+                    }
+                },
+                "ProtectedResourceConditions": {
+                    "target": "com.amazonaws.backup#ProtectedResourceConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that you define for resources in \n         your restore testing plan using  tags.</p>\n         <p>For example, \n         <code>\"StringEquals\": {  \"Key\": \"aws:ResourceTag/CreatedByCryo\",  \"Value\": \"true\"  },</code>. \n         Condition operators are case sensitive.</p>"
+                    }
+                },
+                "RestoreMetadataOverrides": {
+                    "target": "com.amazonaws.backup#SensitiveStringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can override certain restore metadata keys by including the parameter\n         <code>RestoreMetadataOverrides</code> in the body of\n         <code>RestoreTestingSelection</code>. Key values are not case sensitive.</p>\n         <p>See the complete list of <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html\">restore testing\n         inferred metadata</a>.</p>"
+                    }
+                },
+                "ValidationWindowHours": {
+                    "target": "com.amazonaws.backup#integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>This value represents the time, in hours, data is retained after \n         a restore test so that optional validation can be completed.</p>\n         <p>Accepted value is an integer between \n         0 and 168 (the hourly equivalent of seven days).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a restore testing selection.</p>"
+            }
+        },
+        "com.amazonaws.backup#RestoreTestingSelections": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#RestoreTestingSelectionForList"
+            }
+        },
+        "com.amazonaws.backup#RestoreValidationStatus": {
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESSFUL"
+                    }
+                },
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMED_OUT"
+                    }
+                },
+                "VALIDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#SensitiveStringMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.backup#ServiceUnavailableException": {
@@ -11088,6 +12810,209 @@
                     "target": "com.amazonaws.backup#timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that a report plan is created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateRestoreTestingPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#UpdateRestoreTestingPlanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#UpdateRestoreTestingPlanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This request will send changes to your specified restore testing \n         plan. <code>RestoreTestingPlanName</code> \n         cannot be updated after it is created.</p>\n         <p>\n            <code>RecoveryPointSelection</code> can contain:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Algorithm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ExcludeVaults</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>IncludeVaults</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RecoveryPointTypes</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SelectionWindowDays</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/restore-testing/plans/{RestoreTestingPlanName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateRestoreTestingPlanInput": {
+            "type": "structure",
+            "members": {
+                "RestoreTestingPlan": {
+                    "target": "com.amazonaws.backup#RestoreTestingPlanForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the body of a restore testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the restore testing plan name you wish to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateRestoreTestingPlanOutput": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the time the resource testing plan was \n         created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique ARN (Amazon Resource Name) of the restore testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name cannot be changed after creation. The name consists of \n         only alphanumeric characters and underscores. Maximum length is 50.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the time the update completed for the restore \n         testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateRestoreTestingSelection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#UpdateRestoreTestingSelectionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#UpdateRestoreTestingSelectionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Most elements except the <code>RestoreTestingSelectionName</code> \n         can be updated with this request.</p>\n         <p>\n            <code>RestoreTestingSelection</code> can use either protected \n         resource ARNs or conditions, but not both. That is, if your selection \n         has <code>ProtectedResourceArns</code>, requesting an update with the \n         parameter <code>ProtectedResourceConditions</code> will be \n         unsuccessful.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateRestoreTestingSelectionInput": {
+            "type": "structure",
+            "members": {
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The restore testing plan name is required to update the \n         indicated testing plan.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingSelection": {
+                    "target": "com.amazonaws.backup#RestoreTestingSelectionForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To update your restore testing selection, you can use either \n         protected resource ARNs or conditions, but not both. That is, if your \n         selection has <code>ProtectedResourceArns</code>, requesting an update \n         with the parameter <code>ProtectedResourceConditions</code> will be \n         unsuccessful.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingSelectionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the required restore testing selection name of the restore \n         testing selection you wish to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateRestoreTestingSelectionOutput": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the time the resource testing selection was \n         updated successfully.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique string that is the name of the restore testing plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingPlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the restore testing plan with which the updated restore \n         testing selection is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestoreTestingSelectionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the returned restore testing selection name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the time the update completed for the restore \n         testing selection.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },

@@ -1666,7 +1666,13 @@ type ConnectorDataSource struct {
 
 	// The connectionType , as provided to the underlying Glue library. This node type
 	// supports the following connection types:
+	//   - opensearch
+	//   - azuresql
+	//   - azurecosmos
 	//   - bigquery
+	//   - saphana
+	//   - teradata
+	//   - vertica
 	//
 	// This member is required.
 	ConnectionType *string
@@ -1695,7 +1701,13 @@ type ConnectorDataTarget struct {
 
 	// The connectionType , as provided to the underlying Glue library. This node type
 	// supports the following connection types:
+	//   - opensearch
+	//   - azuresql
+	//   - azurecosmos
 	//   - bigquery
+	//   - saphana
+	//   - teradata
+	//   - vertica
 	//
 	// This member is required.
 	ConnectionType *string

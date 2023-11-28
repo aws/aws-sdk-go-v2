@@ -80,6 +80,10 @@ type DescribeBotLocaleOutput struct {
 	// bot.
 	FailureReasons []string
 
+	// Contains settings for Amazon Bedrock's generative AI features for your bot
+	// locale.
+	GenerativeAISettings *types.GenerativeAISettings
+
 	// The number of intents defined for the locale.
 	IntentsCount *int32
 

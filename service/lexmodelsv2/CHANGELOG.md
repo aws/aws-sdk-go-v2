@@ -1,3 +1,15 @@
+# v1.37.2 (2023-11-28.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
+# v1.37.0 (2023-11-27)
+
+* **Feature**: This release introduces new generative AI features in AWS Lex: Assisted Slot Resolution, Descriptive Bot Building, and Sample Utterance Generation. These features leverage large language models available through Amazon Bedrock to improve the bot builder and customer experiences.
+
 # v1.36.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

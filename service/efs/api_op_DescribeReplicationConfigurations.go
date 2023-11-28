@@ -138,6 +138,100 @@ func (c *Client) addOperationDescribeReplicationConfigurationsMiddlewares(stack 
 	return nil
 }
 
+// DescribeReplicationConfigurationsAPIClient is a client that implements the
+// DescribeReplicationConfigurations operation.
+type DescribeReplicationConfigurationsAPIClient interface {
+	DescribeReplicationConfigurations(context.Context, *DescribeReplicationConfigurationsInput, ...func(*Options)) (*DescribeReplicationConfigurationsOutput, error)
+}
+
+var _ DescribeReplicationConfigurationsAPIClient = (*Client)(nil)
+
+// DescribeReplicationConfigurationsPaginatorOptions is the paginator options for
+// DescribeReplicationConfigurations
+type DescribeReplicationConfigurationsPaginatorOptions struct {
+	// (Optional) To limit the number of objects returned in a response, you can
+	// specify the MaxItems parameter. The default value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeReplicationConfigurationsPaginator is a paginator for
+// DescribeReplicationConfigurations
+type DescribeReplicationConfigurationsPaginator struct {
+	options   DescribeReplicationConfigurationsPaginatorOptions
+	client    DescribeReplicationConfigurationsAPIClient
+	params    *DescribeReplicationConfigurationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeReplicationConfigurationsPaginator returns a new
+// DescribeReplicationConfigurationsPaginator
+func NewDescribeReplicationConfigurationsPaginator(client DescribeReplicationConfigurationsAPIClient, params *DescribeReplicationConfigurationsInput, optFns ...func(*DescribeReplicationConfigurationsPaginatorOptions)) *DescribeReplicationConfigurationsPaginator {
+	if params == nil {
+		params = &DescribeReplicationConfigurationsInput{}
+	}
+
+	options := DescribeReplicationConfigurationsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeReplicationConfigurationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeReplicationConfigurationsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeReplicationConfigurations page.
+func (p *DescribeReplicationConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReplicationConfigurationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeReplicationConfigurations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opDescribeReplicationConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

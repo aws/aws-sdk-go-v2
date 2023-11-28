@@ -61,8 +61,7 @@ type CreateEksAnywhereSubscriptionInput struct {
 	ClientRequestToken *string
 
 	// The number of licenses to purchase with the subscription. Valid values are
-	// between 1 and 1000. This value cannot be changed after creating the
-	// subscription.
+	// between 1 and 100. This value can't be changed after creating the subscription.
 	LicenseQuantity int32
 
 	// The license type for all licenses in the subscription. Valid value is CLUSTER.
@@ -71,7 +70,7 @@ type CreateEksAnywhereSubscriptionInput struct {
 	LicenseType types.EksAnywhereSubscriptionLicenseType
 
 	// The metadata for a subscription to assist with categorization and organization.
-	// Each tag consists of a key and an optional value. Subscription tags do not
+	// Each tag consists of a key and an optional value. Subscription tags don't
 	// propagate to any other resources associated with the subscription.
 	Tags map[string]string
 

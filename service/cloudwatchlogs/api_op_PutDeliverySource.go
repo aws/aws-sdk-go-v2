@@ -37,7 +37,7 @@ import (
 // deliveries to configure multiple delivery sources to send logs to the same
 // delivery destination. Only some Amazon Web Services services support being
 // configured as a delivery source. These services are listed as Supported [V2
-// Permissions] in the table at Enabling logging from Amazon Web Services services. (https://docs.aws.amazon.com/     AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions)
+// Permissions] in the table at Enabling logging from Amazon Web Services services. (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html)
 // If you use this operation to update an existing delivery source, all the current
 // delivery source parameters are overwritten with the new parameter values that
 // you specify.

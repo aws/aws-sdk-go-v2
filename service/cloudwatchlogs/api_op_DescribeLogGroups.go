@@ -56,6 +56,13 @@ type DescribeLogGroupsInput struct {
 	// is up to 50 items.
 	Limit *int32
 
+	// Specifies the log group class for this log group. There are two classes:
+	//   - The Standard log class supports all CloudWatch Logs features.
+	//   - The Infrequent Access log class supports a subset of CloudWatch Logs
+	//   features and incurs lower costs.
+	// For details about the features supported by each class, see Log classes (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)
+	LogGroupClass types.LogGroupClass
+
 	// If you specify a string for this parameter, the operation returns only log
 	// groups that have names that match the string based on a case-sensitive substring
 	// search. For example, if you specify Foo , log groups named FooBar , aws/Foo ,

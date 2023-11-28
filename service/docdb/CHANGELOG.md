@@ -1,3 +1,15 @@
+# v1.28.3 (2023-11-28.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.2 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
+# v1.28.1 (2023-11-27)
+
+* No change notes available for this release.
+
 # v1.28.0 (2023-11-20)
 
 * **Feature**: Amazon DocumentDB updates for new cluster storage configuration: Amazon DocumentDB I/O-Optimized.

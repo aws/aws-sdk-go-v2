@@ -163,6 +163,15 @@ type Administrator struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the installed GuardDuty security agent.
+type AgentDetails struct {
+
+	// Version of the installed GuardDuty security agent.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the anomalies.
 type Anomaly struct {
 
@@ -403,6 +412,20 @@ type Container struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the Amazon EC2 instance that is running the Amazon
+// ECS container.
+type ContainerInstanceDetails struct {
+
+	// Represents total number of nodes in the Amazon ECS cluster.
+	CompatibleContainerInstances *int64
+
+	// Represents the nodes in the Amazon ECS cluster that has a HEALTHY coverage
+	// status.
+	CoveredContainerInstances *int64
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the country where the remote IP address is located.
 type Country struct {
 
@@ -411,6 +434,50 @@ type Country struct {
 
 	// The country name of the remote IP address.
 	CountryName *string
+
+	noSmithyDocumentSerde
+}
+
+// This API is also used when you use GuardDuty Runtime Monitoring for your Amazon
+// EC2 instances (currently in preview release) and is subject to change. Contains
+// information about the Amazon EC2 instance runtime coverage details.
+type CoverageEc2InstanceDetails struct {
+
+	// Information about the installed security agent.
+	AgentDetails *AgentDetails
+
+	// The cluster ARN of the Amazon ECS cluster running on the Amazon EC2 instance.
+	ClusterArn *string
+
+	// The Amazon EC2 instance ID.
+	InstanceId *string
+
+	// The instance type of the Amazon EC2 instance.
+	InstanceType *string
+
+	// Indicates how the GuardDuty security agent is managed for this resource.
+	//   - AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this
+	//   resource.
+	//   - MANUAL indicates that you are responsible to deploy, update, and manage the
+	//   GuardDuty security agent updates for this resource.
+	// The DISABLED status doesn't apply to Amazon EC2 instances and Amazon EKS
+	// clusters that run on Amazon EC2 instances.
+	ManagementType ManagementType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about Amazon ECS cluster runtime coverage details.
+type CoverageEcsClusterDetails struct {
+
+	// The name of the Amazon ECS cluster.
+	ClusterName *string
+
+	// Information about the Amazon ECS container running on Amazon EC2 instance.
+	ContainerInstanceDetails *ContainerInstanceDetails
+
+	// Information about the Fargate details associated with the Amazon ECS cluster.
+	FargateDetails *FargateDetails
 
 	noSmithyDocumentSerde
 }
@@ -508,6 +575,14 @@ type CoverageResource struct {
 
 // Information about the resource for each individual EKS cluster.
 type CoverageResourceDetails struct {
+
+	// This API is also used when you use GuardDuty Runtime Monitoring for your Amazon
+	// EC2 instances (currently in preview release) and is subject to change.
+	// Information about the Amazon EC2 instance assessed for runtime coverage.
+	Ec2InstanceDetails *CoverageEc2InstanceDetails
+
+	// Information about the Amazon ECS cluster that is assessed for runtime coverage.
+	EcsClusterDetails *CoverageEcsClusterDetails
 
 	// EKS cluster details involved in the coverage statistics.
 	EksClusterDetails *CoverageEksClusterDetails
@@ -941,6 +1016,25 @@ type Evidence struct {
 
 	// A list of threat intelligence details related to the evidence.
 	ThreatIntelligenceDetails []ThreatIntelligenceDetail
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about AWS Fargate details associated with an Amazon ECS
+// cluster.
+type FargateDetails struct {
+
+	// Runtime coverage issues identified for the resource running on AWS Fargate.
+	Issues []string
+
+	// Indicates how the GuardDuty security agent is managed for this resource.
+	//   - AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this
+	//   resource.
+	//   - MANUAL indicates that you are responsible to deploy, update, and manage the
+	//   GuardDuty security agent updates for this resource.
+	//   - DISABLED indicates that the deployment of the GuardDuty security agent is
+	//   disabled for this resource.
+	ManagementType ManagementType
 
 	noSmithyDocumentSerde
 }

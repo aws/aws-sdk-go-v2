@@ -1,3 +1,16 @@
+# v1.40.0 (2023-11-28.2)
+
+* **Feature**: Adds support for S3 Express One Zone, and InvocationSchemaVersion 2.0 for S3 Batch Operations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.39.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
+# v1.39.0 (2023-11-27)
+
+* **Feature**: Introduce Amazon S3 Access Grants, a new S3 access control feature that maps identities in directories such as Active Directory, or AWS Identity and Access Management (IAM) Principals, to datasets in S3.
+
 # v1.38.0 (2023-11-22)
 
 * **Feature**: **BREAK FIX**: Convert S3Control PublicAccessBlock field types to nilable. See #2384, #2162.

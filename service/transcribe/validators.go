@@ -170,6 +170,26 @@ func (m *validateOpDeleteLanguageModel) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteMedicalScribeJob struct {
+}
+
+func (*validateOpDeleteMedicalScribeJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMedicalScribeJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMedicalScribeJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMedicalScribeJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMedicalTranscriptionJob struct {
 }
 
@@ -330,6 +350,26 @@ func (m *validateOpGetCallAnalyticsJob) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMedicalScribeJob struct {
+}
+
+func (*validateOpGetMedicalScribeJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMedicalScribeJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMedicalScribeJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMedicalScribeJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMedicalTranscriptionJob struct {
 }
 
@@ -465,6 +505,26 @@ func (m *validateOpStartCallAnalyticsJob) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartCallAnalyticsJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartMedicalScribeJob struct {
+}
+
+func (*validateOpStartMedicalScribeJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMedicalScribeJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMedicalScribeJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMedicalScribeJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -662,6 +722,10 @@ func addOpDeleteLanguageModelValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDeleteLanguageModel{}, middleware.After)
 }
 
+func addOpDeleteMedicalScribeJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMedicalScribeJob{}, middleware.After)
+}
+
 func addOpDeleteMedicalTranscriptionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMedicalTranscriptionJob{}, middleware.After)
 }
@@ -694,6 +758,10 @@ func addOpGetCallAnalyticsJobValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetCallAnalyticsJob{}, middleware.After)
 }
 
+func addOpGetMedicalScribeJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMedicalScribeJob{}, middleware.After)
+}
+
 func addOpGetMedicalTranscriptionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMedicalTranscriptionJob{}, middleware.After)
 }
@@ -720,6 +788,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpStartCallAnalyticsJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCallAnalyticsJob{}, middleware.After)
+}
+
+func addOpStartMedicalScribeJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMedicalScribeJob{}, middleware.After)
 }
 
 func addOpStartMedicalTranscriptionJobValidationMiddleware(stack *middleware.Stack) error {
@@ -764,6 +836,11 @@ func validateCallAnalyticsJobSettings(v *types.CallAnalyticsJobSettings) error {
 			invalidParams.AddNested("ContentRedaction", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Summarization != nil {
+		if err := validateSummarization(v.Summarization); err != nil {
+			invalidParams.AddNested("Summarization", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -799,6 +876,38 @@ func validateInputDataConfig(v *types.InputDataConfig) error {
 	}
 	if v.DataAccessRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalScribeChannelDefinition(v *types.MedicalScribeChannelDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribeChannelDefinition"}
+	if len(v.ParticipantRole) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalScribeChannelDefinitions(v []types.MedicalScribeChannelDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribeChannelDefinitions"}
+	for i := range v {
+		if err := validateMedicalScribeChannelDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -855,6 +964,21 @@ func validateSentimentFilter(v *types.SentimentFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SentimentFilter"}
 	if v.Sentiments == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sentiments"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSummarization(v *types.Summarization) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Summarization"}
+	if v.GenerateAbstractiveSummary == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GenerateAbstractiveSummary"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1120,6 +1244,21 @@ func validateOpDeleteLanguageModelInput(v *DeleteLanguageModelInput) error {
 	}
 }
 
+func validateOpDeleteMedicalScribeJobInput(v *DeleteMedicalScribeJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMedicalScribeJobInput"}
+	if v.MedicalScribeJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MedicalScribeJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMedicalTranscriptionJobInput(v *DeleteMedicalTranscriptionJobInput) error {
 	if v == nil {
 		return nil
@@ -1240,6 +1379,21 @@ func validateOpGetCallAnalyticsJobInput(v *GetCallAnalyticsJobInput) error {
 	}
 }
 
+func validateOpGetMedicalScribeJobInput(v *GetMedicalScribeJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMedicalScribeJobInput"}
+	if v.MedicalScribeJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MedicalScribeJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMedicalTranscriptionJobInput(v *GetMedicalTranscriptionJobInput) error {
 	if v == nil {
 		return nil
@@ -1344,6 +1498,43 @@ func validateOpStartCallAnalyticsJobInput(v *StartCallAnalyticsJobInput) error {
 	if v.Settings != nil {
 		if err := validateCallAnalyticsJobSettings(v.Settings); err != nil {
 			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMedicalScribeJobInput(v *StartMedicalScribeJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMedicalScribeJobInput"}
+	if v.MedicalScribeJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MedicalScribeJobName"))
+	}
+	if v.Media == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Media"))
+	}
+	if v.OutputBucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputBucketName"))
+	}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	}
+	if v.ChannelDefinitions != nil {
+		if err := validateMedicalScribeChannelDefinitions(v.ChannelDefinitions); err != nil {
+			invalidParams.AddNested("ChannelDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

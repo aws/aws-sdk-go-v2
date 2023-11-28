@@ -84,10 +84,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A comment in addition to the description.</p>"
                     }
+                },
+                "structFullyQualifiedName": {
+                    "target": "com.amazonaws.iotfleetwise#NodePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified name of the struct node for the actuator if the data type of the actuator is <code>Struct</code> or <code>StructArray</code>. For example, the struct fully qualified name of an actuator might be <code>Vehicle.Door.LockStruct</code>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A signal that represents a vehicle device such as the engine, heater, and door locks.\n            Data from an actuator reports the state of a certain vehicle device.</p>\n        <note>\n            <p> Updating actuator data can change the state of a device. For example, you can\n                turn on or off the heater by updating its actuator data.</p>\n        </note>"
+                "smithy.api#documentation": "<p>A signal that represents a vehicle device such as the engine, heater, and door locks.\n            Data from an actuator reports the state of a certain vehicle device.</p>\n         <note>\n            <p> Updating actuator data can change the state of a device. For example, you can\n                turn on or off the heater by updating its actuator data.</p>\n         </note>"
             }
         },
         "com.amazonaws.iotfleetwise#AmazonResourceName": {
@@ -113,6 +119,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotfleetwise#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleetwise#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.iotfleetwise#ResourceNotFoundException"
@@ -262,7 +271,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a group, or batch, of vehicles. </p>\n        <note>\n            <p> You must specify a decoder manifest and a vehicle model (model manifest) for each\n                vehicle. </p>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicles-cli.html\">Create multiple\n                vehicles (AWS CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p> Creates a group, or batch, of vehicles. </p>\n         <note>\n            <p> You must specify a decoder manifest and a vehicle model (model manifest) for each\n                vehicle. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicles-cli.html\">Create multiple\n                vehicles (AWS CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/vehicles",
@@ -322,7 +331,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Updates a group, or batch, of vehicles.</p>\n        <note>\n            <p> You must specify a decoder manifest and a vehicle model (model manifest) for each\n                vehicle. </p>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/update-vehicles-cli.html\">Update multiple\n                vehicles (AWS CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>. </p>",
+                "smithy.api#documentation": "<p> Updates a group, or batch, of vehicles.</p>\n         <note>\n            <p> You must specify a decoder manifest and a vehicle model (model manifest) for each\n                vehicle. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/update-vehicles-cli.html\">Update multiple\n                vehicles (AWS CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/vehicles",
@@ -348,7 +357,7 @@
                 "vehicles": {
                     "target": "com.amazonaws.iotfleetwise#updateVehicleResponseItems",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of information about the batch of updated vehicles. </p>\n        <note>\n            <p>This list contains only unique IDs for the vehicles that were updated.</p>\n        </note>"
+                        "smithy.api#documentation": "<p> A list of information about the batch of updated vehicles. </p>\n         <note>\n            <p>This list contains only unique IDs for the vehicles that were updated.</p>\n         </note>"
                     }
                 },
                 "errors": {
@@ -480,7 +489,7 @@
                 "status": {
                     "target": "com.amazonaws.iotfleetwise#CampaignStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of a campaign. The status can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>CREATING</code> - Amazon Web Services IoT FleetWise is processing your request to create the\n                    campaign.</p>\n            </li>\n            <li>\n                <p>\n                    <code>WAITING_FOR_APPROVAL</code> - After a campaign is created, it enters the\n                        <code>WAITING_FOR_APPROVAL</code> state. To allow Amazon Web Services IoT FleetWise to deploy the\n                    campaign to the target vehicle or fleet, use the  API operation to approve the campaign.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>RUNNING</code> - The campaign is active. </p>\n            </li>\n            <li>\n                <p>\n                    <code>SUSPENDED</code> - The campaign is suspended. To resume the campaign, use\n                    the  API operation. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of a campaign. The status can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon Web Services IoT FleetWise is processing your request to create the\n                    campaign.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WAITING_FOR_APPROVAL</code> - After a campaign is created, it enters the\n                        <code>WAITING_FOR_APPROVAL</code> state. To allow Amazon Web Services IoT FleetWise to deploy the\n                    campaign to the target vehicle or fleet, use the  API operation to approve the campaign.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> - The campaign is active. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code> - The campaign is suspended. To resume the campaign, use\n                    the  API operation. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "creationTime": {
@@ -499,7 +508,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a campaign. </p>\n        <p>You can use the  API operation to return this\n            information about multiple created campaigns.</p>"
+                "smithy.api#documentation": "<p>Information about a campaign. </p>\n         <p>You can use the  API operation to return this\n            information about multiple created campaigns.</p>"
             }
         },
         "com.amazonaws.iotfleetwise#CanDbcDefinition": {
@@ -515,7 +524,7 @@
                 "canDbcFiles": {
                     "target": "com.amazonaws.iotfleetwise#NetworkFilesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of DBC files. You can upload only one DBC file for each network interface and\n            specify up to five (inclusive) files in the list.</p>",
+                        "smithy.api#documentation": "<p>A list of DBC files. You can upload only one DBC file for each network interface and\n            specify up to five (inclusive) files in the list. The DBC file can be a maximum size of 200 MB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -578,7 +587,7 @@
                     }
                 },
                 "isBigEndian": {
-                    "target": "com.amazonaws.iotfleetwise#boolean",
+                    "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the byte ordering of a CAN message is big-endian.</p>",
@@ -586,7 +595,7 @@
                     }
                 },
                 "isSigned": {
-                    "target": "com.amazonaws.iotfleetwise#boolean",
+                    "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the message data is specified as a signed value.</p>",
@@ -597,7 +606,7 @@
                     "target": "com.amazonaws.iotfleetwise#nonNegativeInteger",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Indicates the beginning of the CAN signal. This should always be the least significant bit (LSB).</p>\n        <p>This value might be different from the value in a DBC file. For little endian signals,\n                <code>startBit</code> is the same value as in the DBC file. For big endian signals\n            in a DBC file, the start bit is the most significant bit (MSB). You will have to\n            calculate the LSB instead and pass it as the <code>startBit</code>.</p>",
+                        "smithy.api#documentation": "<p>Indicates the beginning of the CAN signal. This should always be the least significant bit (LSB).</p>\n         <p>This value might be different from the value in a DBC file. For little endian signals,\n                <code>startBit</code> is the same value as in the DBC file. For big endian signals\n            in a DBC file, the start bit is the most significant bit (MSB). You will have to\n            calculate the LSB instead and pass it as the <code>startBit</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -722,7 +731,7 @@
                 "minimumTriggerIntervalMs": {
                     "target": "com.amazonaws.iotfleetwise#uint32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum duration of time between two triggering events to collect data, in\n            milliseconds.</p>\n        <note>\n            <p>If a signal changes often, you might want to collect data at a slower rate.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The minimum duration of time between two triggering events to collect data, in\n            milliseconds.</p>\n         <note>\n            <p>If a signal changes often, you might want to collect data at a slower rate.</p>\n         </note>"
                     }
                 },
                 "triggerMode": {
@@ -801,7 +810,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an orchestration of data collection rules. The Amazon Web Services IoT FleetWise Edge Agent software\n            running in vehicles uses campaigns to decide how to collect and transfer data to the\n            cloud. You create campaigns in the cloud. After you or your team approve campaigns,\n            Amazon Web Services IoT FleetWise automatically deploys them to vehicles. </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/campaigns.html\">Collect and transfer data\n                with campaigns</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an orchestration of data collection rules. The Amazon Web Services IoT FleetWise Edge Agent software\n            running in vehicles uses campaigns to decide how to collect and transfer data to the\n            cloud. You create campaigns in the cloud. After you or your team approve campaigns,\n            Amazon Web Services IoT FleetWise automatically deploys them to vehicles. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/campaigns.html\">Collect and transfer data\n                with campaigns</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/campaigns/{name}",
@@ -844,43 +853,43 @@
                 "startTime": {
                     "target": "com.amazonaws.iotfleetwise#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) The time, in milliseconds, to deliver a campaign after it was approved. If\n            it's not specified, <code>0</code> is used.</p>\n        <p>Default: <code>0</code>\n         </p>"
+                        "smithy.api#documentation": "<p>(Optional) The time, in milliseconds, to deliver a campaign after it was approved. If\n            it's not specified, <code>0</code> is used.</p>\n         <p>Default: <code>0</code>\n         </p>"
                     }
                 },
                 "expiryTime": {
                     "target": "com.amazonaws.iotfleetwise#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Optional) The time the campaign expires, in seconds since epoch (January 1, 1970 at\n            midnight UTC time). Vehicle data isn't collected after the campaign expires. </p>\n        <p>Default: 253402214400 (December 31, 9999, 00:00:00 UTC)</p>"
+                        "smithy.api#documentation": "<p> (Optional) The time the campaign expires, in seconds since epoch (January 1, 1970 at\n            midnight UTC time). Vehicle data isn't collected after the campaign expires. </p>\n         <p>Default: 253402214400 (December 31, 9999, 00:00:00 UTC)</p>"
                     }
                 },
                 "postTriggerCollectionDuration": {
                     "target": "com.amazonaws.iotfleetwise#uint32",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Optional) How long (in milliseconds) to collect raw data after a triggering event\n            initiates the collection. If it's not specified, <code>0</code> is used.</p>\n        <p>Default: <code>0</code>\n         </p>"
+                        "smithy.api#documentation": "<p> (Optional) How long (in milliseconds) to collect raw data after a triggering event\n            initiates the collection. If it's not specified, <code>0</code> is used.</p>\n         <p>Default: <code>0</code>\n         </p>"
                     }
                 },
                 "diagnosticsMode": {
                     "target": "com.amazonaws.iotfleetwise#DiagnosticsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Optional) Option for a vehicle to send diagnostic trouble codes to Amazon Web Services IoT FleetWise. If you\n            want to send diagnostic trouble codes, use <code>SEND_ACTIVE_DTCS</code>. If it's not\n            specified, <code>OFF</code> is used.</p>\n        <p>Default: <code>OFF</code>\n         </p>"
+                        "smithy.api#documentation": "<p> (Optional) Option for a vehicle to send diagnostic trouble codes to Amazon Web Services IoT FleetWise. If you\n            want to send diagnostic trouble codes, use <code>SEND_ACTIVE_DTCS</code>. If it's not\n            specified, <code>OFF</code> is used.</p>\n         <p>Default: <code>OFF</code>\n         </p>"
                     }
                 },
                 "spoolingMode": {
                     "target": "com.amazonaws.iotfleetwise#SpoolingMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) Whether to store collected data after a vehicle lost a connection with the\n            cloud. After a connection is re-established, the data is automatically forwarded to\n            Amazon Web Services IoT FleetWise. If you want to store collected data when a vehicle loses connection with the\n            cloud, use <code>TO_DISK</code>. If it's not specified, <code>OFF</code> is used.</p>\n        <p>Default: <code>OFF</code>\n         </p>"
+                        "smithy.api#documentation": "<p>(Optional) Whether to store collected data after a vehicle lost a connection with the\n            cloud. After a connection is re-established, the data is automatically forwarded to\n            Amazon Web Services IoT FleetWise. If you want to store collected data when a vehicle loses connection with the\n            cloud, use <code>TO_DISK</code>. If it's not specified, <code>OFF</code> is used.</p>\n         <p>Default: <code>OFF</code>\n         </p>"
                     }
                 },
                 "compression": {
                     "target": "com.amazonaws.iotfleetwise#Compression",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Optional) Whether to compress signals before transmitting data to Amazon Web Services IoT FleetWise. If you\n            don't want to compress the signals, use <code>OFF</code>. If it's not specified,\n                <code>SNAPPY</code> is used. </p>\n        <p>Default: <code>SNAPPY</code>\n         </p>"
+                        "smithy.api#documentation": "<p> (Optional) Whether to compress signals before transmitting data to Amazon Web Services IoT FleetWise. If you\n            don't want to compress the signals, use <code>OFF</code>. If it's not specified,\n                <code>SNAPPY</code> is used. </p>\n         <p>Default: <code>SNAPPY</code>\n         </p>"
                     }
                 },
                 "priority": {
                     "target": "com.amazonaws.iotfleetwise#priority",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) A number indicating the priority of one campaign over another campaign for\n            a certain vehicle or fleet. A campaign with the lowest value is deployed to vehicles\n            before any other campaigns. If it's not specified, <code>0</code> is used. </p>\n        <p>Default: <code>0</code>\n         </p>"
+                        "smithy.api#documentation": "<p>(Optional) A number indicating the priority of one campaign over another campaign for\n            a certain vehicle or fleet. A campaign with the lowest value is deployed to vehicles\n            before any other campaigns. If it's not specified, <code>0</code> is used. </p>\n         <p>Default: <code>0</code>\n         </p>"
                     }
                 },
                 "signalsToCollect": {
@@ -899,7 +908,7 @@
                 "dataExtraDimensions": {
                     "target": "com.amazonaws.iotfleetwise#DataExtraDimensionNodePathList",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Optional) A list of vehicle attributes to associate with a campaign. </p>\n        <p>Enrich the data with specified vehicle attributes. For example, add <code>make</code> and <code>model</code> to the campaign, and Amazon Web Services IoT FleetWise will associate the data with those attributes as dimensions in Amazon Timestream. You can then query the data against <code>make</code> and <code>model</code>.</p>\n        <p>Default: An empty array</p>"
+                        "smithy.api#documentation": "<p> (Optional) A list of vehicle attributes to associate with a campaign. </p>\n         <p>Enrich the data with specified vehicle attributes. For example, add <code>make</code> and <code>model</code> to the campaign, and Amazon Web Services IoT FleetWise will associate the data with those attributes as dimensions in Amazon Timestream. You can then query the data against <code>make</code> and <code>model</code>.</p>\n         <p>Default: An empty array</p>"
                     }
                 },
                 "tags": {
@@ -911,7 +920,7 @@
                 "dataDestinationConfigs": {
                     "target": "com.amazonaws.iotfleetwise#DataDestinationConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream.</p>\n        <p>Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. Amazon Web Services IoT FleetWise supports at-least-once file delivery to S3. Your vehicle data is stored on multiple Amazon Web Services IoT FleetWise servers for redundancy and high availability.</p>\n        <p>You can use Amazon Timestream to access and analyze time series data, and Timestream to query\n            vehicle data so that you can identify trends and patterns.</p>"
+                        "smithy.api#documentation": "<p>The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream.</p>\n         <p>Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. Amazon Web Services IoT FleetWise supports at-least-once file delivery to S3. Your vehicle data is stored on multiple Amazon Web Services IoT FleetWise servers for redundancy and high availability.</p>\n         <p>You can use Amazon Timestream to access and analyze time series data, and Timestream to query\n            vehicle data so that you can identify trends and patterns.</p>"
                     }
                 }
             }
@@ -965,7 +974,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the decoder manifest associated with a model manifest. To create a decoder\n            manifest, the following must be true:</p>\n        <ul>\n            <li>\n                <p>Every signal decoder has a unique name.</p>\n            </li>\n            <li>\n                <p>Each signal decoder is associated with a network interface.</p>\n            </li>\n            <li>\n                <p>Each network interface has a unique ID.</p>\n            </li>\n            <li>\n                <p>The signal decoders are specified in the model manifest.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates the decoder manifest associated with a model manifest. To create a decoder\n            manifest, the following must be true:</p>\n         <ul>\n            <li>\n               <p>Every signal decoder has a unique name.</p>\n            </li>\n            <li>\n               <p>Each signal decoder is associated with a network interface.</p>\n            </li>\n            <li>\n               <p>Each network interface has a unique ID.</p>\n            </li>\n            <li>\n               <p>The signal decoders are specified in the model manifest.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/decoder-manifests/{name}",
@@ -1069,7 +1078,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a fleet that represents a group of vehicles.\n            </p>\n        <note>\n            <p>You must create both a signal catalog and vehicles before you can create a fleet.\n            </p>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleets.html\">Fleets</a> in the\n                <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p> Creates a fleet that represents a group of vehicles.\n            </p>\n         <note>\n            <p>You must create both a signal catalog and vehicles before you can create a fleet.\n            </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleets.html\">Fleets</a> in the\n                <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/fleets/{fleetId}",
@@ -1161,7 +1170,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a vehicle model (model manifest) that specifies signals (attributes,\n            branches, sensors, and actuators). </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/vehicle-models.html\">Vehicle models</a>\n            in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p> Creates a vehicle model (model manifest) that specifies signals (attributes,\n            branches, sensors, and actuators). </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/vehicle-models.html\">Vehicle models</a>\n            in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/model-manifests/{name}",
@@ -1351,7 +1360,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a vehicle, which is an instance of a vehicle model (model manifest). Vehicles\n            created from the same vehicle model consist of the same signals inherited from the\n            vehicle model.</p>\n        <note>\n            <p> If you have an existing Amazon Web Services IoT thing, you can use Amazon Web Services IoT FleetWise to create a\n                vehicle and collect data from your thing. </p>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicle-cli.html\">Create a vehicle\n                (AWS CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p> Creates a vehicle, which is an instance of a vehicle model (model manifest). Vehicles\n            created from the same vehicle model consist of the same signals inherited from the\n            vehicle model.</p>\n         <note>\n            <p> If you have an existing Amazon Web Services IoT thing, you can use Amazon Web Services IoT FleetWise to create a\n                vehicle and collect data from your thing. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicle-cli.html\">Create a vehicle\n                (AWS CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/vehicles/{vehicleName}",
@@ -1414,13 +1423,13 @@
                 "attributes": {
                     "target": "com.amazonaws.iotfleetwise#attributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:\n                <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>\n        <p>A campaign must include the keys (attribute names) in <code>dataExtraDimensions</code> for them to display in Amazon Timestream.</p>"
+                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:\n                <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>\n         <p>A campaign must include the keys (attribute names) in <code>dataExtraDimensions</code> for them to display in Amazon Timestream.</p>"
                     }
                 },
                 "associationBehavior": {
                     "target": "com.amazonaws.iotfleetwise#VehicleAssociationBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p> An option to create a new Amazon Web Services IoT thing when creating a vehicle, or to validate an\n            existing Amazon Web Services IoT thing as a vehicle. </p>\n        <p>Default: <code/>\n         </p>"
+                        "smithy.api#documentation": "<p> An option to create a new Amazon Web Services IoT thing when creating a vehicle, or to validate an\n            existing Amazon Web Services IoT thing as a vehicle. </p>\n         <p>Default: <code/>\n         </p>"
                     }
                 },
                 "tags": {
@@ -1525,6 +1534,91 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a created vehicle.</p>"
+            }
+        },
+        "com.amazonaws.iotfleetwise#CustomProperty": {
+            "type": "structure",
+            "members": {
+                "fullyQualifiedName": {
+                    "target": "com.amazonaws.iotfleetwise#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified name of the custom property. For example, the fully qualified name of a custom property might be <code>ComplexDataTypes.VehicleDataTypes.SVMCamera.FPS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.iotfleetwise#NodeDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type for the custom property. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataEncoding": {
+                    "target": "com.amazonaws.iotfleetwise#NodeDataEncoding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the property is binary data.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iotfleetwise#description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description of the custom property.</p>"
+                    }
+                },
+                "deprecationMessage": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deprecation message for the node or the branch that was moved or deleted.</p>"
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment in addition to the description.</p>"
+                    }
+                },
+                "structFullyQualifiedName": {
+                    "target": "com.amazonaws.iotfleetwise#NodePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified name of the struct node for the custom property if the data type of the custom property is <code>Struct</code> or <code>StructArray</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a member of the complex data structure. The data type of the property can be either primitive or another <code>struct</code>.</p>"
+            }
+        },
+        "com.amazonaws.iotfleetwise#CustomStruct": {
+            "type": "structure",
+            "members": {
+                "fullyQualifiedName": {
+                    "target": "com.amazonaws.iotfleetwise#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified name of the custom structure. For example, the fully qualified name of a custom structure might be <code>ComplexDataTypes.VehicleDataTypes.SVMCamera</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iotfleetwise#description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description of the custom structure.</p>"
+                    }
+                },
+                "deprecationMessage": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deprecation message for the node or the branch that was moved or deleted.</p>"
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment in addition to the description.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The custom structure represents a complex or higher-order data structure.</p>"
             }
         },
         "com.amazonaws.iotfleetwise#DataDestinationConfig": {
@@ -1672,6 +1766,12 @@
                         "smithy.api#documentation": "<p>The time the decoder manifest was last updated in seconds since epoch (January 1,\n            1970 at midnight UTC time).</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "message": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed message for the decoder manifest. When a decoder manifest is in an <code>INVALID</code> status, the message contains detailed reason and help information.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1760,7 +1860,7 @@
                 "arn": {
                     "target": "com.amazonaws.iotfleetwise#arn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the deleted campaign.</p>\n        <note>\n            <p>The ARN isn’t returned if a campaign doesn’t exist.</p>\n        </note>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the deleted campaign.</p>\n         <note>\n            <p>The ARN isn’t returned if a campaign doesn’t exist.</p>\n         </note>"
                     }
                 }
             }
@@ -1791,7 +1891,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deletes a decoder manifest. You can't delete a decoder manifest if it has vehicles\n            associated with it. </p>\n        <note>\n            <p>If the decoder manifest is successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200\n                response with an empty body.</p>\n        </note>",
+                "smithy.api#documentation": "<p> Deletes a decoder manifest. You can't delete a decoder manifest if it has vehicles\n            associated with it. </p>\n         <note>\n            <p>If the decoder manifest is successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200\n                response with an empty body.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/decoder-manifests/{name}",
@@ -1855,7 +1955,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deletes a fleet. Before you delete a fleet, all vehicles must be\n            dissociated from the fleet. For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/delete-fleet-cli.html\">Delete a fleet (AWS\n                CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>\n        <note>\n            <p>If the fleet is successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200 response\n                with an empty body.</p>\n        </note>",
+                "smithy.api#documentation": "<p> Deletes a fleet. Before you delete a fleet, all vehicles must be\n            dissociated from the fleet. For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/delete-fleet-cli.html\">Delete a fleet (AWS\n                CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>\n         <note>\n            <p>If the fleet is successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200 response\n                with an empty body.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/fleets/{fleetId}",
@@ -1920,7 +2020,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deletes a vehicle model (model manifest).</p>\n        <note>\n            <p>If the vehicle model is successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200\n                response with an empty body.</p>\n        </note>",
+                "smithy.api#documentation": "<p> Deletes a vehicle model (model manifest).</p>\n         <note>\n            <p>If the vehicle model is successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200\n                response with an empty body.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/model-manifests/{name}",
@@ -1987,7 +2087,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deletes a signal catalog. </p>\n        <note>\n            <p>If the signal catalog is successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200\n                response with an empty body.</p>\n        </note>",
+                "smithy.api#documentation": "<p> Deletes a signal catalog. </p>\n         <note>\n            <p>If the signal catalog is successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200\n                response with an empty body.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/signal-catalogs/{name}",
@@ -2051,7 +2151,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deletes a vehicle and removes it from any campaigns.</p>\n        <note>\n            <p>If the vehicle is successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200 response\n                with an empty body.</p>\n        </note>",
+                "smithy.api#documentation": "<p> Deletes a vehicle and removes it from any campaigns.</p>\n         <note>\n            <p>If the vehicle is successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200 response\n                with an empty body.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/vehicles/{vehicleName}",
@@ -2133,7 +2233,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes, or disassociates, a vehicle from a fleet. Disassociating a vehicle from a\n            fleet doesn't delete the vehicle.</p>\n        <note>\n            <p>If the vehicle is successfully dissociated from a fleet, Amazon Web Services IoT FleetWise sends back an\n                HTTP 200 response with an empty body.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Removes, or disassociates, a vehicle from a fleet. Disassociating a vehicle from a\n            fleet doesn't delete the vehicle.</p>\n         <note>\n            <p>If the vehicle is successfully dissociated from a fleet, Amazon Web Services IoT FleetWise sends back an\n                HTTP 200 response with an empty body.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/vehicles/{vehicleName}/disassociate",
@@ -2292,7 +2392,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a fleet.</p>\n        <p>You can use the  API operation to return this\n            information about multiple fleets.</p>"
+                "smithy.api#documentation": "<p>Information about a fleet.</p>\n         <p>You can use the  API operation to return this\n            information about multiple fleets.</p>"
             }
         },
         "com.amazonaws.iotfleetwise#FormattedVss": {
@@ -2489,7 +2589,7 @@
                 "dataDestinationConfigs": {
                     "target": "com.amazonaws.iotfleetwise#DataDestinationConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream.</p>\n        <p>Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. </p>\n        <p>You can use Amazon Timestream to access and analyze time series data, and Timestream to query\n            vehicle data so that you can identify trends and patterns.</p>"
+                        "smithy.api#documentation": "<p>The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream.</p>\n         <p>Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. </p>\n         <p>You can use Amazon Timestream to access and analyze time series data, and Timestream to query\n            vehicle data so that you can identify trends and patterns.</p>"
                     }
                 }
             }
@@ -2587,6 +2687,12 @@
                         "smithy.api#documentation": "<p> The time the decoder manifest was last updated in seconds since epoch (January 1, 1970 at midnight UTC time).  </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "message": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed message for the decoder manifest. When a decoder manifest is in an <code>INVALID</code> status, the message contains detailed reason and help information.</p>"
+                    }
                 }
             }
         },
@@ -2651,7 +2757,7 @@
                 "encryptionType": {
                     "target": "com.amazonaws.iotfleetwise#EncryptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of encryption. Set to <code>KMS_BASED_ENCRYPTION</code> to use an KMS key that you own and manage. Set to <code>FLEETWISE_DEFAULT_ENCRYPTION</code> to use an Amazon Web Services managed key that is owned by the Amazon Web Services IoT FleetWise service account.</p>",
+                        "smithy.api#documentation": "<p>The type of encryption. Set to <code>KMS_BASED_ENCRYPTION</code> to use a KMS key that you own and manage. Set to <code>FLEETWISE_DEFAULT_ENCRYPTION</code> to use an Amazon Web Services managed key that is owned by the Amazon Web Services IoT FleetWise service account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2936,7 +3042,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Retrieves information about the status of registering your Amazon Web Services account, IAM, and\n            Amazon Timestream resources so that Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services\n            Cloud. </p>\n        <p>For more information, including step-by-step procedures, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html\">Setting up Amazon Web Services IoT FleetWise</a>. </p>\n        <note>\n            <p>This API operation doesn't require input parameters.</p>\n        </note>",
+                "smithy.api#documentation": "<p> Retrieves information about the status of registering your Amazon Web Services account, IAM, and\n            Amazon Timestream resources so that Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services\n            Cloud. </p>\n         <p>For more information, including step-by-step procedures, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html\">Setting up Amazon Web Services IoT FleetWise</a>. </p>\n         <note>\n            <p>This API operation doesn't require input parameters.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/account/registration_status",
@@ -2962,7 +3068,7 @@
                 "accountStatus": {
                     "target": "com.amazonaws.iotfleetwise#RegistrationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> The status of registering your account and resources. The status can be one\n            of:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>REGISTRATION_SUCCESS</code> - The Amazon Web Services resource is successfully\n                    registered.</p>\n            </li>\n            <li>\n                <p>\n                  <code>REGISTRATION_PENDING</code> - Amazon Web Services IoT FleetWise is processing the registration\n                    request. This process takes approximately five minutes to complete.</p>\n            </li>\n            <li>\n                <p>\n                  <code>REGISTRATION_FAILURE</code> - Amazon Web Services IoT FleetWise can't register the AWS resource.\n                    Try again later.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p> The status of registering your account and resources. The status can be one\n            of:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REGISTRATION_SUCCESS</code> - The Amazon Web Services resource is successfully\n                    registered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGISTRATION_PENDING</code> - Amazon Web Services IoT FleetWise is processing the registration\n                    request. This process takes approximately five minutes to complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGISTRATION_FAILURE</code> - Amazon Web Services IoT FleetWise can't register the AWS resource.\n                    Try again later.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3163,7 +3269,7 @@
                 "attributes": {
                     "target": "com.amazonaws.iotfleetwise#attributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:</p>\n        <p>\n            <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:</p>\n         <p>\n            <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>"
                     }
                 },
                 "creationTime": {
@@ -3315,7 +3421,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The IAM resource that enables Amazon Web Services IoT FleetWise edge agent software to send data to\n            Amazon Timestream. </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the\n                <i>Identity and Access Management User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The IAM resource that enables Amazon Web Services IoT FleetWise edge agent software to send data to\n            Amazon Timestream. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the\n                <i>Identity and Access Management User Guide</i>.</p>"
             }
         },
         "com.amazonaws.iotfleetwise#ImportDecoderManifest": {
@@ -3621,6 +3727,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A message about why the signal decoder isn't valid.</p>"
                     }
+                },
+                "hint": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The possible cause for the invalid signal decoder.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3734,7 +3846,7 @@
                 },
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>Amazon Web Services IoT FleetWise is a fully managed service that you can use to collect, model, and transfer\n            vehicle data to the Amazon Web Services cloud at scale. With Amazon Web Services IoT FleetWise, you can standardize all of\n            your vehicle data models, independent of the in-vehicle communication architecture, and\n            define data collection rules to transfer only high-value data to the cloud.\n            </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/\">What is Amazon Web Services IoT FleetWise?</a> in the\n                <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services IoT FleetWise is a fully managed service that you can use to collect, model, and transfer\n            vehicle data to the Amazon Web Services cloud at scale. With Amazon Web Services IoT FleetWise, you can standardize all of\n            your vehicle data models, independent of the in-vehicle communication architecture, and\n            define data collection rules to transfer only high-value data to the cloud.\n            </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/\">What is Amazon Web Services IoT FleetWise?</a> in the\n                <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
                 "smithy.api#title": "AWS IoT FleetWise",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3778,7 +3890,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3821,7 +3932,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -3834,7 +3946,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3848,7 +3959,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3871,7 +3981,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3906,7 +4015,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3917,14 +4025,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3938,14 +4048,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -3954,11 +4062,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3969,14 +4077,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -3990,7 +4100,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4010,7 +4119,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4021,14 +4129,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -4039,9 +4149,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -4429,7 +4541,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists information about created campaigns. </p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Lists information about created campaigns. </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/campaigns",
@@ -4513,7 +4625,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists the network interfaces specified in a decoder manifest. </p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Lists the network interfaces specified in a decoder manifest. </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/decoder-manifests/{name}/network-interfaces",
@@ -4598,7 +4710,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> A list of information about signal decoders specified in a decoder manifest. </p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> A list of information about signal decoders specified in a decoder manifest. </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/decoder-manifests/{name}/signals",
@@ -4680,7 +4792,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists decoder manifests. </p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Lists decoder manifests. </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/decoder-manifests",
@@ -4764,7 +4876,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Retrieves information for each created fleet in an Amazon Web Services account. </p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Retrieves information for each created fleet in an Amazon Web Services account. </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/fleets",
@@ -4805,7 +4917,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of IDs for all fleets that the vehicle is associated with.</p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves a list of IDs for all fleets that the vehicle is associated with.</p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/vehicles/{vehicleName}/fleets",
@@ -4929,7 +5041,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists information about nodes specified in a vehicle model (model manifest). </p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Lists information about nodes specified in a vehicle model (model manifest). </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/model-manifests/{name}/nodes",
@@ -5011,7 +5123,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Retrieves a list of vehicle models (model manifests). </p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Retrieves a list of vehicle models (model manifests). </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/model-manifests",
@@ -5098,7 +5210,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists of information about the signals (nodes) specified in a signal catalog. </p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Lists of information about the signals (nodes) specified in a signal catalog. </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/signal-catalogs/{name}/nodes",
@@ -5180,7 +5292,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists all the created signal catalogs in an Amazon Web Services account. </p>\n        <p>You can use  to list information about\n            each signal (node) specified in a signal catalog.</p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Lists all the created signal catalogs in an Amazon Web Services account. </p>\n         <p>You can use  to list information about\n            each signal (node) specified in a signal catalog.</p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/signal-catalogs",
@@ -5313,7 +5425,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Retrieves a list of summaries of created vehicles. </p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Retrieves a list of summaries of created vehicles. </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/vehicles",
@@ -5354,7 +5466,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Retrieves a list of summaries of all vehicles associated with a fleet. </p>\n        <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Retrieves a list of summaries of all vehicles associated with a fleet. </p>\n         <note>\n            <p>This API operation uses pagination. Specify the <code>nextToken</code> parameter in the request to return more results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/fleets/{fleetId}/vehicles",
@@ -5482,8 +5594,38 @@
                     {
                         "value": "DRAFT",
                         "name": "DRAFT"
+                    },
+                    {
+                        "value": "INVALID",
+                        "name": "INVALID"
+                    },
+                    {
+                        "value": "VALIDATING",
+                        "name": "VALIDATING"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.iotfleetwise#MessageSignal": {
+            "type": "structure",
+            "members": {
+                "topicName": {
+                    "target": "com.amazonaws.iotfleetwise#TopicName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The topic name for the message signal. It corresponds to topics in ROS 2. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "structuredMessage": {
+                    "target": "com.amazonaws.iotfleetwise#StructuredMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structured message for the message signal. It can be defined with either a <code>primitiveMessageDefinition</code>, <code>structuredMessageListDefinition</code>, or <code>structuredMessageDefinition</code> recursively.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The decoding information for a specific message which support higher order data types. </p>"
             }
         },
         "com.amazonaws.iotfleetwise#ModelManifestResource": {
@@ -5582,7 +5724,12 @@
             }
         },
         "com.amazonaws.iotfleetwise#NetworkFileBlob": {
-            "type": "blob"
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 200000000
+                }
+            }
         },
         "com.amazonaws.iotfleetwise#NetworkFileDefinition": {
             "type": "union",
@@ -5644,10 +5791,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about a network interface specified by the On-board diagnostic (OBD) II\n            protocol.</p>"
                     }
+                },
+                "vehicleMiddleware": {
+                    "target": "com.amazonaws.iotfleetwise#VehicleMiddleware",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vehicle middleware defined as a type of network interface. Examples of vehicle middleware include <code>ROS2</code> and <code>SOME/IP</code>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a node and its specifications in an in-vehicle communication network. All\n            signal decoders must be associated with a network node. </p>\n        <p> To return this information about all the network interfaces specified in a decoder\n            manifest, use the  API\n            operation.</p>"
+                "smithy.api#documentation": "<p>Represents a node and its specifications in an in-vehicle communication network. All\n            signal decoders must be associated with a network node. </p>\n         <p> To return this information about all the network interfaces specified in a decoder\n            manifest, use the  API\n            operation.</p>"
             }
         },
         "com.amazonaws.iotfleetwise#NetworkInterfaceFailureReason": {
@@ -5677,6 +5830,14 @@
                     {
                         "value": "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS",
                         "name": "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS"
+                    },
+                    {
+                        "value": "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL",
+                        "name": "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL"
+                    },
+                    {
+                        "value": "CUSTOMER_DECODED_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL",
+                        "name": "CUSTOMER_DECODED_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL"
                     }
                 ]
             }
@@ -5692,6 +5853,14 @@
                     {
                         "value": "OBD_INTERFACE",
                         "name": "OBD_INTERFACE"
+                    },
+                    {
+                        "value": "VEHICLE_MIDDLEWARE",
+                        "name": "VEHICLE_MIDDLEWARE"
+                    },
+                    {
+                        "value": "CUSTOMER_DECODED_INTERFACE",
+                        "name": "CUSTOMER_DECODED_INTERFACE"
                     }
                 ]
             }
@@ -5714,7 +5883,7 @@
                 "branch": {
                     "target": "com.amazonaws.iotfleetwise#Branch",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about a node specified as a branch.</p>\n        <note>\n            <p>A group of signals that are defined in a hierarchical structure.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Information about a node specified as a branch.</p>\n         <note>\n            <p>A group of signals that are defined in a hierarchical structure.</p>\n         </note>"
                     }
                 },
                 "sensor": {
@@ -5723,13 +5892,25 @@
                 "actuator": {
                     "target": "com.amazonaws.iotfleetwise#Actuator",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about a node specified as an actuator.</p>\n        <note>\n            <p>An actuator is a digital representation of a vehicle device.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Information about a node specified as an actuator.</p>\n         <note>\n            <p>An actuator is a digital representation of a vehicle device.</p>\n         </note>"
                     }
                 },
                 "attribute": {
                     "target": "com.amazonaws.iotfleetwise#Attribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about a node specified as an attribute.</p>\n        <note>\n            <p>An attribute represents static information about a vehicle.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Information about a node specified as an attribute.</p>\n         <note>\n            <p>An attribute represents static information about a vehicle.</p>\n         </note>"
+                    }
+                },
+                "struct": {
+                    "target": "com.amazonaws.iotfleetwise#CustomStruct",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a complex or higher-order data structure.</p>"
+                    }
+                },
+                "property": {
+                    "target": "com.amazonaws.iotfleetwise#CustomProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a member of the complex data structure. The <code>datatype</code> of the property can be either primitive or another <code>struct</code>.</p>"
                     }
                 }
             },
@@ -5774,10 +5955,39 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of nodes in a vehicle network that represent actuators.</p>"
                     }
+                },
+                "totalStructs": {
+                    "target": "com.amazonaws.iotfleetwise#number",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total structure for the node.</p>"
+                    }
+                },
+                "totalProperties": {
+                    "target": "com.amazonaws.iotfleetwise#number",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total properties for the node.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the number of nodes and node types in a vehicle network.</p>"
+            }
+        },
+        "com.amazonaws.iotfleetwise#NodeDataEncoding": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BINARY",
+                        "name": "BINARY"
+                    },
+                    {
+                        "value": "TYPED",
+                        "name": "TYPED"
+                    }
+                ]
             }
         },
         "com.amazonaws.iotfleetwise#NodeDataType": {
@@ -5891,6 +6101,14 @@
                     {
                         "value": "UNKNOWN",
                         "name": "UNKNOWN"
+                    },
+                    {
+                        "value": "STRUCT",
+                        "name": "STRUCT"
+                    },
+                    {
+                        "value": "STRUCT_ARRAY",
+                        "name": "STRUCT_ARRAY"
                     }
                 ]
             }
@@ -5986,14 +6204,14 @@
                     }
                 },
                 "useExtendedIds": {
-                    "target": "com.amazonaws.iotfleetwise#boolean",
+                    "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether to use extended IDs in the message.</p>"
                     }
                 },
                 "hasTransmissionEcu": {
-                    "target": "com.amazonaws.iotfleetwise#boolean",
+                    "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the vehicle has a transmission control module (TCM).</p>"
@@ -6019,7 +6237,6 @@
                 "pidResponseLength": {
                     "target": "com.amazonaws.iotfleetwise#positiveInteger",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The length of the requested data.</p>",
                         "smithy.api#required": {}
                     }
@@ -6106,6 +6323,20 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-_:./!*'()]+$"
             }
         },
+        "com.amazonaws.iotfleetwise#PrimitiveMessageDefinition": {
+            "type": "union",
+            "members": {
+                "ros2PrimitiveMessageDefinition": {
+                    "target": "com.amazonaws.iotfleetwise#ROS2PrimitiveMessageDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a <code>PrimitiveMessage</code> using a ROS 2 compliant primitive type message of the complex data structure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a primitive type node of the complex data structure.</p>"
+            }
+        },
         "com.amazonaws.iotfleetwise#ProtocolName": {
             "type": "string",
             "traits": {
@@ -6167,7 +6398,11 @@
                 "kmsKeyId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the KMS key that is used for encryption.</p>"
+                        "smithy.api#documentation": "<p>The ID of the KMS key that is used for encryption.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 2048
+                        }
                     }
                 },
                 "encryptionType": {
@@ -6261,6 +6496,110 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.iotfleetwise#ROS2PrimitiveMessageDefinition": {
+            "type": "structure",
+            "members": {
+                "primitiveType": {
+                    "target": "com.amazonaws.iotfleetwise#ROS2PrimitiveType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primitive type (integer, floating point, boolean, etc.) for the ROS 2 primitive message definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "offset": {
+                    "target": "com.amazonaws.iotfleetwise#double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The offset used to calculate the signal value. Combined with scaling, the calculation is <code>value = raw_value * scaling + offset</code>.</p>"
+                    }
+                },
+                "scaling": {
+                    "target": "com.amazonaws.iotfleetwise#double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A multiplier used to decode the message.</p>"
+                    }
+                },
+                "upperBound": {
+                    "target": "com.amazonaws.iotfleetwise#maxStringSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional attribute specifying the upper bound for <code>STRING</code> and <code>WSTRING</code>.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a ROS 2 compliant primitive type message of the complex data structure.</p>"
+            }
+        },
+        "com.amazonaws.iotfleetwise#ROS2PrimitiveType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BOOL",
+                        "name": "BOOL"
+                    },
+                    {
+                        "value": "BYTE",
+                        "name": "BYTE"
+                    },
+                    {
+                        "value": "CHAR",
+                        "name": "CHAR"
+                    },
+                    {
+                        "value": "FLOAT32",
+                        "name": "FLOAT32"
+                    },
+                    {
+                        "value": "FLOAT64",
+                        "name": "FLOAT64"
+                    },
+                    {
+                        "value": "INT8",
+                        "name": "INT8"
+                    },
+                    {
+                        "value": "UINT8",
+                        "name": "UINT8"
+                    },
+                    {
+                        "value": "INT16",
+                        "name": "INT16"
+                    },
+                    {
+                        "value": "UINT16",
+                        "name": "UINT16"
+                    },
+                    {
+                        "value": "INT32",
+                        "name": "INT32"
+                    },
+                    {
+                        "value": "UINT32",
+                        "name": "UINT32"
+                    },
+                    {
+                        "value": "INT64",
+                        "name": "INT64"
+                    },
+                    {
+                        "value": "UINT64",
+                        "name": "UINT64"
+                    },
+                    {
+                        "value": "STRING",
+                        "name": "STRING"
+                    },
+                    {
+                        "value": "WSTRING",
+                        "name": "WSTRING"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotfleetwise#RegisterAccount": {
             "type": "operation",
             "input": {
@@ -6290,7 +6629,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>This API operation contains deprecated parameters. Register your account again without the Timestream resources parameter so that Amazon Web Services IoT FleetWise can remove the Timestream metadata stored. You should then pass the data destination into the <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateCampaign.html\">CreateCampaign</a> API operation.</p>\n            <p>You must delete any existing campaigns that include an empty data destination before you register your account again. For more information, see the <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteCampaign.html\">DeleteCampaign</a> API operation.</p>\n            <p>If you want to delete the Timestream inline policy from the service-linked role, such as to mitigate an overly permissive policy, you must first delete any existing campaigns. Then delete the service-linked role and register your account again to enable CloudWatch metrics. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html\">DeleteServiceLinkedRole</a> in the <i>Identity and Access Management API Reference</i>.</p>\n        </important>\n        \n        <p>Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can\n            transfer your vehicle data to the Amazon Web Services Cloud. For more information, including\n            step-by-step procedures, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html\">Setting up\n                Amazon Web Services IoT FleetWise</a>. </p>\n        <note>\n            <p>An Amazon Web Services account is <b>not</b> the same thing as a \"user.\" An <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users\">Amazon Web Services user</a> is an identity that you create using Identity and Access Management (IAM) and\n                takes the form of either an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html\">IAM user</a> or an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM role, both\n                    with credentials</a>. A single Amazon Web Services account can, and typically does,\n                contain many users and roles.</p>\n        </note>",
+                "smithy.api#documentation": "<important>\n            <p>This API operation contains deprecated parameters. Register your account again without the Timestream resources parameter so that Amazon Web Services IoT FleetWise can remove the Timestream metadata stored. You should then pass the data destination into the <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateCampaign.html\">CreateCampaign</a> API operation.</p>\n            <p>You must delete any existing campaigns that include an empty data destination before you register your account again. For more information, see the <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteCampaign.html\">DeleteCampaign</a> API operation.</p>\n            <p>If you want to delete the Timestream inline policy from the service-linked role, such as to mitigate an overly permissive policy, you must first delete any existing campaigns. Then delete the service-linked role and register your account again to enable CloudWatch metrics. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html\">DeleteServiceLinkedRole</a> in the <i>Identity and Access Management API Reference</i>.</p>\n         </important>\n         <p>Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can\n            transfer your vehicle data to the Amazon Web Services Cloud. For more information, including\n            step-by-step procedures, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html\">Setting up\n                Amazon Web Services IoT FleetWise</a>. </p>\n         <note>\n            <p>An Amazon Web Services account is <b>not</b> the same thing as a \"user.\" An <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users\">Amazon Web Services user</a> is an identity that you create using Identity and Access Management (IAM) and\n                takes the form of either an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html\">IAM user</a> or an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM role, both\n                    with credentials</a>. A single Amazon Web Services account can, and typically does,\n                contain many users and roles.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/account/registration",
@@ -6437,7 +6776,7 @@
                 "dataFormat": {
                     "target": "com.amazonaws.iotfleetwise#DataFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the format that files are saved in the Amazon S3 bucket. You can save files in an Apache Parquet or JSON format.</p>\n        <ul>\n            <li>\n                <p>Parquet - Store data in a columnar storage file format. Parquet is optimal for\n                    fast data retrieval and can reduce costs. This option is selected by\n                    default.</p>\n            </li>\n            <li>\n                <p>JSON - Store data in a standard text-based JSON file format.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify the format that files are saved in the Amazon S3 bucket. You can save files in an Apache Parquet or JSON format.</p>\n         <ul>\n            <li>\n               <p>Parquet - Store data in a columnar storage file format. Parquet is optimal for\n                    fast data retrieval and can reduce costs. This option is selected by\n                    default.</p>\n            </li>\n            <li>\n               <p>JSON - Store data in a standard text-based JSON file format.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "storageCompressionFormat": {
@@ -6449,7 +6788,7 @@
                 "prefix": {
                     "target": "com.amazonaws.iotfleetwise#Prefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) Enter an S3 bucket prefix. The prefix is the string of characters after the bucket name and before the object name. You can use the prefix to organize data stored in Amazon S3 buckets. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n        <p>By default, Amazon Web Services IoT FleetWise sets the prefix <code>processed-data/year=YY/month=MM/date=DD/hour=HH/</code> (in UTC) to data it delivers to Amazon S3. You can enter a prefix to append it to this default prefix. For example, if you enter the prefix <code>vehicles</code>, the prefix will be <code>vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/</code>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) Enter an S3 bucket prefix. The prefix is the string of characters after the bucket name and before the object name. You can use the prefix to organize data stored in Amazon S3 buckets. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <p>By default, Amazon Web Services IoT FleetWise sets the prefix <code>processed-data/year=YY/month=MM/date=DD/hour=HH/</code> (in UTC) to data it delivers to Amazon S3. You can enter a prefix to append it to this default prefix. For example, if you enter the prefix <code>vehicles</code>, the prefix will be <code>vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/</code>.</p>"
                     }
                 }
             },
@@ -6515,10 +6854,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A comment in addition to the description.</p>"
                     }
+                },
+                "structFullyQualifiedName": {
+                    "target": "com.amazonaws.iotfleetwise#NodePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified name of the struct node for a sensor if the data type of the actuator is <code>Struct</code> or <code>StructArray</code>. For example, the struct fully qualified name of a sensor might be <code>Vehicle.ADAS.CameraStruct</code>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An input component that reports the environmental condition of a vehicle.</p>\n        <note>\n            <p>You can collect data about fluid levels, temperatures, vibrations, or battery\n                voltage from sensors.</p>\n        </note>"
+                "smithy.api#documentation": "<p>An input component that reports the environmental condition of a vehicle.</p>\n         <note>\n            <p>You can collect data about fluid levels, temperatures, vibrations, or battery\n                voltage from sensors.</p>\n         </note>"
             }
         },
         "com.amazonaws.iotfleetwise#SignalCatalogResource": {
@@ -6625,6 +6970,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about signal decoder using the On-board diagnostic (OBD) II protocol.</p>"
                     }
+                },
+                "messageSignal": {
+                    "target": "com.amazonaws.iotfleetwise#MessageSignal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The decoding information for a specific message which supports higher order data types. </p>"
+                    }
                 }
             },
             "traits": {
@@ -6670,6 +7021,34 @@
                     {
                         "value": "NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL",
                         "name": "NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL"
+                    },
+                    {
+                        "value": "MESSAGE_SIGNAL_INFO_IS_NULL",
+                        "name": "MESSAGE_SIGNAL_INFO_IS_NULL"
+                    },
+                    {
+                        "value": "SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE",
+                        "name": "SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE"
+                    },
+                    {
+                        "value": "STRUCT_SIZE_MISMATCH",
+                        "name": "STRUCT_SIZE_MISMATCH"
+                    },
+                    {
+                        "value": "NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL",
+                        "name": "NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL"
+                    },
+                    {
+                        "value": "SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG",
+                        "name": "SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG"
+                    },
+                    {
+                        "value": "EMPTY_MESSAGE_SIGNAL",
+                        "name": "EMPTY_MESSAGE_SIGNAL"
+                    },
+                    {
+                        "value": "CUSTOMER_DECODED_SIGNAL_INFO_IS_NULL",
+                        "name": "CUSTOMER_DECODED_SIGNAL_INFO_IS_NULL"
                     }
                 ]
             }
@@ -6685,6 +7064,14 @@
                     {
                         "value": "OBD_SIGNAL",
                         "name": "OBD_SIGNAL"
+                    },
+                    {
+                        "value": "MESSAGE_SIGNAL",
+                        "name": "MESSAGE_SIGNAL"
+                    },
+                    {
+                        "value": "CUSTOMER_DECODED_SIGNAL",
+                        "name": "CUSTOMER_DECODED_SIGNAL"
                     }
                 ]
             }
@@ -6720,7 +7107,7 @@
                 "minimumSamplingIntervalMs": {
                     "target": "com.amazonaws.iotfleetwise#uint32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum duration of time (in milliseconds) between two triggering events to\n            collect data.</p>\n        <note>\n            <p>If a signal changes often, you might want to collect data at a slower rate.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The minimum duration of time (in milliseconds) between two triggering events to\n            collect data.</p>\n         <note>\n            <p>If a signal changes often, you might want to collect data at a slower rate.</p>\n         </note>"
                     }
                 }
             },
@@ -6766,6 +7153,130 @@
                     {
                         "value": "GZIP",
                         "name": "GZIP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotfleetwise#StructureMessageName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.iotfleetwise#StructuredMessage": {
+            "type": "union",
+            "members": {
+                "primitiveMessageDefinition": {
+                    "target": "com.amazonaws.iotfleetwise#PrimitiveMessageDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a primitive type node of the complex data structure.</p>"
+                    }
+                },
+                "structuredMessageListDefinition": {
+                    "target": "com.amazonaws.iotfleetwise#StructuredMessageListDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list type node of the complex data structure.</p>"
+                    }
+                },
+                "structuredMessageDefinition": {
+                    "target": "com.amazonaws.iotfleetwise#StructuredMessageDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a struct type node of the complex data structure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structured message for the message signal. It can be defined with either a <code>primitiveMessageDefinition</code>, <code>structuredMessageListDefinition</code>, or <code>structuredMessageDefinition</code> recursively.</p>"
+            }
+        },
+        "com.amazonaws.iotfleetwise#StructuredMessageDefinition": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotfleetwise#StructuredMessageFieldNameAndDataTypePair"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.iotfleetwise#StructuredMessageFieldNameAndDataTypePair": {
+            "type": "structure",
+            "members": {
+                "fieldName": {
+                    "target": "com.amazonaws.iotfleetwise#StructureMessageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field name of the structured message. It determines how a data value is referenced in the target language. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.iotfleetwise#StructuredMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a <code>StructureMessageName</code> to <code>DataType</code> map element.</p>"
+            }
+        },
+        "com.amazonaws.iotfleetwise#StructuredMessageListDefinition": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.iotfleetwise#StructureMessageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the structured message list definition. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "memberType": {
+                    "target": "com.amazonaws.iotfleetwise#StructuredMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The member type of the structured message list definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "listType": {
+                    "target": "com.amazonaws.iotfleetwise#StructuredMessageListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of list of the structured message list definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacity": {
+                    "target": "com.amazonaws.iotfleetwise#nonNegativeInteger",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The capacity of the structured message list definition when the list type is <code>FIXED_CAPACITY</code> or <code>DYNAMIC_BOUNDED_CAPACITY</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a list type node of the complex data structure.</p>"
+            }
+        },
+        "com.amazonaws.iotfleetwise#StructuredMessageListType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FIXED_CAPACITY",
+                        "name": "FIXED_CAPACITY"
+                    },
+                    {
+                        "value": "DYNAMIC_UNBOUNDED_CAPACITY",
+                        "name": "DYNAMIC_UNBOUNDED_CAPACITY"
+                    },
+                    {
+                        "value": "DYNAMIC_BOUNDED_CAPACITY",
+                        "name": "DYNAMIC_BOUNDED_CAPACITY"
                     }
                 ]
             }
@@ -7068,6 +7579,16 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
+        "com.amazonaws.iotfleetwise#TopicName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 150
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-#:./]+$"
+            }
+        },
         "com.amazonaws.iotfleetwise#TriggerMode": {
             "type": "string",
             "traits": {
@@ -7220,13 +7741,13 @@
                 "dataExtraDimensions": {
                     "target": "com.amazonaws.iotfleetwise#DataExtraDimensionNodePathList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of vehicle attributes to associate with a signal. </p>\n        <p>Default: An empty array</p>"
+                        "smithy.api#documentation": "<p> A list of vehicle attributes to associate with a signal. </p>\n         <p>Default: An empty array</p>"
                     }
                 },
                 "action": {
                     "target": "com.amazonaws.iotfleetwise#UpdateCampaignAction",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies how to update a campaign. The action can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>APPROVE</code> - To approve delivering a data collection scheme to\n                    vehicles. </p>\n            </li>\n            <li>\n                <p>\n                    <code>SUSPEND</code> - To suspend collecting signal data. The campaign is deleted from vehicles and all vehicles in the suspended campaign will stop sending data.</p>\n            </li>\n            <li>\n                <p>\n                    <code>RESUME</code> - To reactivate the <code>SUSPEND</code> campaign. The campaign is redeployed to all vehicles and the vehicles will resume sending data.</p>\n            </li>\n            <li>\n                <p>\n                    <code>UPDATE</code> - To update a campaign. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p> Specifies how to update a campaign. The action can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>APPROVE</code> - To approve delivering a data collection scheme to\n                    vehicles. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPEND</code> - To suspend collecting signal data. The campaign is deleted from vehicles and all vehicles in the suspended campaign will stop sending data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESUME</code> - To reactivate the <code>SUSPEND</code> campaign. The campaign is redeployed to all vehicles and the vehicles will resume sending data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE</code> - To update a campaign. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7250,7 +7771,7 @@
                 "status": {
                     "target": "com.amazonaws.iotfleetwise#CampaignStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of a campaign. The status can be one of:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>CREATING</code> - Amazon Web Services IoT FleetWise is processing your request to create the\n                    campaign. </p>\n            </li>\n            <li>\n                <p>\n                    <code>WAITING_FOR_APPROVAL</code> - After a campaign is created, it enters the\n                        <code>WAITING_FOR_APPROVAL</code> state. To allow Amazon Web Services IoT FleetWise to deploy the\n                    campaign to the target vehicle or fleet, use the  API operation to approve the campaign.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>RUNNING</code> - The campaign is active. </p>\n            </li>\n            <li>\n                <p>\n                    <code>SUSPENDED</code> - The campaign is suspended. To resume the campaign, use\n                    the  API operation. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of a campaign. The status can be one of:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon Web Services IoT FleetWise is processing your request to create the\n                    campaign. </p>\n            </li>\n            <li>\n               <p>\n                  <code>WAITING_FOR_APPROVAL</code> - After a campaign is created, it enters the\n                        <code>WAITING_FOR_APPROVAL</code> state. To allow Amazon Web Services IoT FleetWise to deploy the\n                    campaign to the target vehicle or fleet, use the  API operation to approve the campaign.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> - The campaign is active. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code> - The campaign is suspended. To resume the campaign, use\n                    the  API operation. </p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -7287,7 +7808,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Updates a decoder manifest.</p>\n        <p>A decoder manifest can only be updated when the status is <code>DRAFT</code>. Only\n                <code>ACTIVE</code> decoder manifests can be associated with vehicles.</p>",
+                "smithy.api#documentation": "<p> Updates a decoder manifest.</p>\n         <p>A decoder manifest can only be updated when the status is <code>DRAFT</code>. Only\n                <code>ACTIVE</code> decoder manifests can be associated with vehicles.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/decoder-manifests/{name}",
@@ -7405,7 +7926,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Updates the description of an existing fleet. </p>\n        <note>\n            <p>If the fleet is successfully updated, Amazon Web Services IoT FleetWise sends back an HTTP 200 response\n                with an empty HTTP body.</p>\n        </note>",
+                "smithy.api#documentation": "<p> Updates the description of an existing fleet. </p>\n         <note>\n            <p>If the fleet is successfully updated, Amazon Web Services IoT FleetWise sends back an HTTP 200 response\n                with an empty HTTP body.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/fleets/{fleetId}",
@@ -7754,13 +8275,13 @@
                 "attributes": {
                     "target": "com.amazonaws.iotfleetwise#attributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:</p>\n        <p>\n            <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:</p>\n         <p>\n            <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>"
                     }
                 },
                 "attributeUpdateMode": {
                     "target": "com.amazonaws.iotfleetwise#UpdateMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method the specified attributes will update the existing attributes on the\n            vehicle. Use<code>Overwite</code> to replace the vehicle attributes with the specified\n            attributes. Or use <code>Merge</code> to combine all attributes.</p>\n        <p>This is required if attributes are present in the input.</p>"
+                        "smithy.api#documentation": "<p>The method the specified attributes will update the existing attributes on the\n            vehicle. Use<code>Overwite</code> to replace the vehicle attributes with the specified\n            attributes. Or use <code>Merge</code> to combine all attributes.</p>\n         <p>This is required if attributes are present in the input.</p>"
                     }
                 }
             }
@@ -7790,13 +8311,13 @@
                 "attributes": {
                     "target": "com.amazonaws.iotfleetwise#attributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:</p>\n        <p>\n            <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:</p>\n         <p>\n            <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>"
                     }
                 },
                 "attributeUpdateMode": {
                     "target": "com.amazonaws.iotfleetwise#UpdateMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method the specified attributes will update the existing attributes on the\n            vehicle. Use<code>Overwite</code> to replace the vehicle attributes with the specified\n            attributes. Or use <code>Merge</code> to combine all attributes.</p>\n        <p>This is required if attributes are present in the input.</p>"
+                        "smithy.api#documentation": "<p>The method the specified attributes will update the existing attributes on the\n            vehicle. Use<code>Overwite</code> to replace the vehicle attributes with the specified\n            attributes. Or use <code>Merge</code> to combine all attributes.</p>\n         <p>This is required if attributes are present in the input.</p>"
                     }
                 }
             },
@@ -7949,6 +8470,48 @@
                 "target": "com.amazonaws.iotfleetwise#ListVehiclesInFleet"
             }
         },
+        "com.amazonaws.iotfleetwise#VehicleMiddleware": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.iotfleetwise#VehicleMiddlewareName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vehicle middleware. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "protocolName": {
+                    "target": "com.amazonaws.iotfleetwise#VehicleMiddlewareProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol name of the vehicle middleware. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The vehicle middleware defined as a type of network interface. Examples of vehicle middleware include <code>ROS2</code> and <code>SOME/IP</code>.</p>"
+            }
+        },
+        "com.amazonaws.iotfleetwise#VehicleMiddlewareName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.iotfleetwise#VehicleMiddlewareProtocol": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ROS_2",
+                        "name": "ROS_2"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotfleetwise#VehicleResource": {
             "type": "resource",
             "identifiers": {
@@ -8036,7 +8599,7 @@
                 "status": {
                     "target": "com.amazonaws.iotfleetwise#VehicleState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of a vehicle, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>CREATED</code> - Amazon Web Services IoT FleetWise sucessfully created the vehicle. </p>\n            </li>\n            <li>\n                <p>\n                    <code>READY</code> - The vehicle is ready to receive a campaign deployment.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>HEALTHY</code> - A campaign deployment was delivered to the vehicle.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>SUSPENDED</code> - A campaign associated with the vehicle was suspended\n                    and data collection was paused. </p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETING</code> - Amazon Web Services IoT FleetWise is removing a campaign from the vehicle.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of a vehicle, which can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATED</code> - Amazon Web Services IoT FleetWise sucessfully created the vehicle. </p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - The vehicle is ready to receive a campaign deployment.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>HEALTHY</code> - A campaign deployment was delivered to the vehicle.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code> - A campaign associated with the vehicle was suspended\n                    and data collection was paused. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Amazon Web Services IoT FleetWise is removing a campaign from the vehicle.\n                </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -8097,7 +8660,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a vehicle.</p>\n        <p>To return this information about vehicles in your account, you can use the  API operation.</p>"
+                "smithy.api#documentation": "<p>Information about a vehicle.</p>\n         <p>To return this information about vehicles in your account, you can use the  API operation.</p>"
             }
         },
         "com.amazonaws.iotfleetwise#arn": {
@@ -8123,12 +8686,6 @@
             },
             "value": {
                 "target": "com.amazonaws.iotfleetwise#attributeValue"
-            }
-        },
-        "com.amazonaws.iotfleetwise#boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
             }
         },
         "com.amazonaws.iotfleetwise#campaignName": {
@@ -8276,6 +8833,15 @@
                 }
             }
         },
+        "com.amazonaws.iotfleetwise#maxStringSize": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.iotfleetwise#message": {
             "type": "string",
             "traits": {
@@ -8319,7 +8885,6 @@
         "com.amazonaws.iotfleetwise#positiveInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }

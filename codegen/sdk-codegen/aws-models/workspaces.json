@@ -2127,6 +2127,43 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspaces#DataReplication": {
+            "type": "enum",
+            "members": {
+                "NO_REPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_REPLICATION"
+                    }
+                },
+                "PRIMARY_AS_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIMARY_AS_SOURCE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#DataReplicationSettings": {
+            "type": "structure",
+            "members": {
+                "DataReplication": {
+                    "target": "com.amazonaws.workspaces#DataReplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether data replication is enabled, and if enabled, the type of data replication.</p>"
+                    }
+                },
+                "RecoverySnapshotTime": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the last successful snapshot was taken of the \n         primary WorkSpace used for replicating data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the data replication settings.</p>"
+            }
+        },
         "com.amazonaws.workspaces#DedicatedTenancyCidrRangeList": {
             "type": "list",
             "member": {
@@ -5857,8 +5894,13 @@
                 "WorkspaceProperties": {
                     "target": "com.amazonaws.workspaces#WorkspaceProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The properties of the WorkSpace.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The properties of the WorkSpace.</p>"
+                    }
+                },
+                "DataReplication": {
+                    "target": "com.amazonaws.workspaces#DataReplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the data replication status.</p>"
                     }
                 }
             },
@@ -6890,6 +6932,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the standby WorkSpace.</p>"
                     }
+                },
+                "DataReplication": {
+                    "target": "com.amazonaws.workspaces#DataReplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether data replication is enabled, and if enabled, the type of data replication.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6917,6 +6965,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.workspaces#StandbyWorkspace"
+            }
+        },
+        "com.amazonaws.workspaces#StandbyWorkspacesProperties": {
+            "type": "structure",
+            "members": {
+                "StandbyWorkspaceId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the standby WorkSpace</p>"
+                    }
+                },
+                "DataReplication": {
+                    "target": "com.amazonaws.workspaces#DataReplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether data replication is enabled, and if enabled, the type of data replication.</p>"
+                    }
+                },
+                "RecoverySnapshotTime": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the last successful snapshot was taken of the \n         primary WorkSpace used for replicating data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the properties of the related standby WorkSpaces. </p>"
+            }
+        },
+        "com.amazonaws.workspaces#StandbyWorkspacesPropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#StandbyWorkspacesProperties"
             }
         },
         "com.amazonaws.workspaces#StartRequest": {
@@ -7896,6 +7976,18 @@
                     "target": "com.amazonaws.workspaces#RelatedWorkspaces",
                     "traits": {
                         "smithy.api#documentation": "<p>The standby WorkSpace or primary WorkSpace related to the specified WorkSpace.</p>"
+                    }
+                },
+                "DataReplicationSettings": {
+                    "target": "com.amazonaws.workspaces#DataReplicationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the settings of the data replication.</p>"
+                    }
+                },
+                "StandbyWorkspacesProperties": {
+                    "target": "com.amazonaws.workspaces#StandbyWorkspacesPropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the standby WorkSpace</p>"
                     }
                 }
             },

@@ -20,6 +20,24 @@ func (CommitmentDuration) Values() []CommitmentDuration {
 	}
 }
 
+type CustomizationType string
+
+// Enum values for CustomizationType
+const (
+	CustomizationTypeFineTuning           CustomizationType = "FINE_TUNING"
+	CustomizationTypeContinuedPreTraining CustomizationType = "CONTINUED_PRE_TRAINING"
+)
+
+// Values returns all known values for CustomizationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomizationType) Values() []CustomizationType {
+	return []CustomizationType{
+		"FINE_TUNING",
+		"CONTINUED_PRE_TRAINING",
+	}
+}
+
 type FineTuningJobStatus string
 
 // Enum values for FineTuningJobStatus
@@ -41,6 +59,25 @@ func (FineTuningJobStatus) Values() []FineTuningJobStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+	}
+}
+
+type FoundationModelLifecycleStatus string
+
+// Enum values for FoundationModelLifecycleStatus
+const (
+	FoundationModelLifecycleStatusActive FoundationModelLifecycleStatus = "ACTIVE"
+	FoundationModelLifecycleStatusLegacy FoundationModelLifecycleStatus = "LEGACY"
+)
+
+// Values returns all known values for FoundationModelLifecycleStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FoundationModelLifecycleStatus) Values() []FoundationModelLifecycleStatus {
+	return []FoundationModelLifecycleStatus{
+		"ACTIVE",
+		"LEGACY",
 	}
 }
 
@@ -66,7 +103,8 @@ type ModelCustomization string
 
 // Enum values for ModelCustomization
 const (
-	ModelCustomizationFineTuning ModelCustomization = "FINE_TUNING"
+	ModelCustomizationFineTuning           ModelCustomization = "FINE_TUNING"
+	ModelCustomizationContinuedPreTraining ModelCustomization = "CONTINUED_PRE_TRAINING"
 )
 
 // Values returns all known values for ModelCustomization. Note that this can be
@@ -75,6 +113,7 @@ const (
 func (ModelCustomization) Values() []ModelCustomization {
 	return []ModelCustomization{
 		"FINE_TUNING",
+		"CONTINUED_PRE_TRAINING",
 	}
 }
 

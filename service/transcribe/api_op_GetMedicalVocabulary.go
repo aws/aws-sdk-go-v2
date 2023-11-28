@@ -46,8 +46,8 @@ type GetMedicalVocabularyInput struct {
 
 type GetMedicalVocabularyOutput struct {
 
-	// The S3 location where the specified custom medical vocabulary is stored; use
-	// this URI to view or download the custom vocabulary.
+	// The Amazon S3 location where the specified custom medical vocabulary is stored;
+	// use this URI to view or download the custom vocabulary.
 	DownloadUri *string
 
 	// If VocabularyState is FAILED , FailureReason contains information about why the

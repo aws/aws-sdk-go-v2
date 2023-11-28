@@ -35,7 +35,7 @@ type ListVocabularyFiltersInput struct {
 
 	// The maximum number of custom vocabulary filters to return in each page of
 	// results. If there are fewer results than the value that you specify, only the
-	// actual results are returned. If you don't specify a value, a default of 5 is
+	// actual results are returned. If you do not specify a value, a default of 5 is
 	// used.
 	MaxResults *int32
 
@@ -161,7 +161,7 @@ var _ ListVocabularyFiltersAPIClient = (*Client)(nil)
 type ListVocabularyFiltersPaginatorOptions struct {
 	// The maximum number of custom vocabulary filters to return in each page of
 	// results. If there are fewer results than the value that you specify, only the
-	// actual results are returned. If you don't specify a value, a default of 5 is
+	// actual results are returned. If you do not specify a value, a default of 5 is
 	// used.
 	Limit int32
 

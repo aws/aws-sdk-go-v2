@@ -150,6 +150,26 @@ func (m *validateOpCreateDataCellsFilter) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLakeFormationIdentityCenterConfiguration struct {
+}
+
+func (*validateOpCreateLakeFormationIdentityCenterConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLakeFormationIdentityCenterConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLakeFormationIdentityCenterConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLakeFormationIdentityCenterConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLakeFormationOptIn struct {
 }
 
@@ -790,6 +810,26 @@ func (m *validateOpUpdateDataCellsFilter) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLakeFormationIdentityCenterConfiguration struct {
+}
+
+func (*validateOpUpdateLakeFormationIdentityCenterConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLakeFormationIdentityCenterConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLakeFormationIdentityCenterConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLakeFormationIdentityCenterConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLFTag struct {
 }
 
@@ -896,6 +936,10 @@ func addOpCommitTransactionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateDataCellsFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataCellsFilter{}, middleware.After)
+}
+
+func addOpCreateLakeFormationIdentityCenterConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLakeFormationIdentityCenterConfiguration{}, middleware.After)
 }
 
 func addOpCreateLakeFormationOptInValidationMiddleware(stack *middleware.Stack) error {
@@ -1024,6 +1068,10 @@ func addOpStartQueryPlanningValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateDataCellsFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataCellsFilter{}, middleware.After)
+}
+
+func addOpUpdateLakeFormationIdentityCenterConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLakeFormationIdentityCenterConfiguration{}, middleware.After)
 }
 
 func addOpUpdateLFTagValidationMiddleware(stack *middleware.Stack) error {
@@ -1175,6 +1223,24 @@ func validateExpression(v []types.LFTag) error {
 		if err := validateLFTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExternalFilteringConfiguration(v *types.ExternalFilteringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExternalFilteringConfiguration"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.AuthorizedTargets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizedTargets"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1577,6 +1643,23 @@ func validateOpCreateDataCellsFilterInput(v *CreateDataCellsFilterInput) error {
 	} else if v.TableData != nil {
 		if err := validateDataCellsFilter(v.TableData); err != nil {
 			invalidParams.AddNested("TableData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLakeFormationIdentityCenterConfigurationInput(v *CreateLakeFormationIdentityCenterConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLakeFormationIdentityCenterConfigurationInput"}
+	if v.ExternalFiltering != nil {
+		if err := validateExternalFilteringConfiguration(v.ExternalFiltering); err != nil {
+			invalidParams.AddNested("ExternalFiltering", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2172,6 +2255,23 @@ func validateOpUpdateDataCellsFilterInput(v *UpdateDataCellsFilterInput) error {
 	} else if v.TableData != nil {
 		if err := validateDataCellsFilter(v.TableData); err != nil {
 			invalidParams.AddNested("TableData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLakeFormationIdentityCenterConfigurationInput(v *UpdateLakeFormationIdentityCenterConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLakeFormationIdentityCenterConfigurationInput"}
+	if v.ExternalFiltering != nil {
+		if err := validateExternalFilteringConfiguration(v.ExternalFiltering); err != nil {
+			invalidParams.AddNested("ExternalFiltering", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

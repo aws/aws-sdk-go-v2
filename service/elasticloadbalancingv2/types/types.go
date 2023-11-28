@@ -52,6 +52,18 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+// Information about anomaly detection and mitigation.
+type AnomalyDetection struct {
+
+	// Indicates whether anomaly mitigation is in progress.
+	MitigationInEffect MitigationInEffectEnum
+
+	// The latest anomaly detection result.
+	Result AnomalyResultEnum
+
+	noSmithyDocumentSerde
+}
+
 // Request parameters to use when integrating with Amazon Cognito to authenticate
 // users.
 type AuthenticateCognitoActionConfig struct {
@@ -218,6 +230,24 @@ type Cipher struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the revocations used by a trust store.
+type DescribeTrustStoreRevocation struct {
+
+	// The number of revoked certificates.
+	NumberOfRevokedEntries *int64
+
+	// The revocation ID of a revocation file in use.
+	RevocationId *int64
+
+	// The type of revocation file.
+	RevocationType RevocationType
+
+	// The Amazon Resource Name (ARN) of the trust store.
+	TrustStoreArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an action that returns a custom HTTP response.
 type FixedResponseActionConfig struct {
 
@@ -357,6 +387,9 @@ type Listener struct {
 	// The Amazon Resource Name (ARN) of the load balancer.
 	LoadBalancerArn *string
 
+	// The mutual authentication configuration information.
+	MutualAuthentication *MutualAuthenticationAttributes
+
 	// The port on which the load balancer is listening.
 	Port *int32
 
@@ -476,6 +509,14 @@ type LoadBalancerAttribute struct {
 	// The following attributes are supported by only Application Load Balancers:
 	//   - idle_timeout.timeout_seconds - The idle timeout value, in seconds. The valid
 	//   range is 1-4000 seconds. The default is 60 seconds.
+	//   - connection_logs.s3.enabled - Indicates whether connection logs are enabled.
+	//   The value is true or false . The default is false .
+	//   - connection_logs.s3.bucket - The name of the S3 bucket for the connection
+	//   logs. This attribute is required if connection logs are enabled. The bucket must
+	//   exist in the same region as the load balancer and have a bucket policy that
+	//   grants Elastic Load Balancing permissions to write to the bucket.
+	//   - connection_logs.s3.prefix - The prefix for the location in the S3 bucket for
+	//   the connection logs.
 	//   - routing.http.desync_mitigation_mode - Determines how the load balancer
 	//   handles requests that might pose a security risk to your application. The
 	//   possible values are monitor , defensive , and strictest . The default is
@@ -570,6 +611,22 @@ type Matcher struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the mutual authentication attributes of a listener.
+type MutualAuthenticationAttributes struct {
+
+	// Indicates whether expired client certificates are ignored.
+	IgnoreClientCertificateExpiry *bool
+
+	// The client certificate handling method. Options are off , passthrough or verify
+	// . The default value is off .
+	Mode *string
+
+	// The Amazon Resource Name (ARN) of the trust store.
+	TrustStoreArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a path pattern condition.
 type PathPatternConditionConfig struct {
 
@@ -657,6 +714,24 @@ type RedirectActionConfig struct {
 	// not include the leading "?", as it is automatically added. You can specify any
 	// of the reserved keywords.
 	Query *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a revocation file.
+type RevocationContent struct {
+
+	// The type of revocation file.
+	RevocationType RevocationType
+
+	// The Amazon S3 bucket for the revocation file.
+	S3Bucket *string
+
+	// The Amazon S3 path for the revocation file.
+	S3Key *string
+
+	// The Amazon S3 object version of the revocation file.
+	S3ObjectVersion *string
 
 	noSmithyDocumentSerde
 }
@@ -1001,7 +1076,11 @@ type TargetGroupAttribute struct {
 	// Application Load Balancer and the target is an instance or an IP address:
 	//   - load_balancing.algorithm.type - The load balancing algorithm determines how
 	//   the load balancer selects targets when routing requests. The value is
-	//   round_robin or least_outstanding_requests . The default is round_robin .
+	//   round_robin , least_outstanding_requests , or weighted_random . The default is
+	//   round_robin .
+	//   - load_balancing.algorithm.anomaly_mitigation - Only available when
+	//   load_balancing.algorithm.type is weighted_random . Indicates whether anomaly
+	//   mitigation is enabled. The value is on or off . The default is off .
 	//   - slow_start.duration_seconds - The time period, in seconds, during which a
 	//   newly registered target receives an increasing share of the traffic to the
 	//   target group. After this time period ends, the target receives its full share of
@@ -1141,6 +1220,10 @@ type TargetHealth struct {
 // Information about the health of a target.
 type TargetHealthDescription struct {
 
+	// The anomaly detection result for the target. If no anomalies were detected, the
+	// result is normal . If anomalies were detected, the result is anomalous .
+	AnomalyDetection *AnomalyDetection
+
 	// The port to use to connect with the target.
 	HealthCheckPort *string
 
@@ -1149,6 +1232,54 @@ type TargetHealthDescription struct {
 
 	// The health information for the target.
 	TargetHealth *TargetHealth
+
+	noSmithyDocumentSerde
+}
+
+// Information about a trust store.
+type TrustStore struct {
+
+	// The name of the trust store.
+	Name *string
+
+	// The number of ca certificates in the trust store.
+	NumberOfCaCertificates *int32
+
+	// The current status of the trust store.
+	Status TrustStoreStatus
+
+	// The number of revoked certificates in the trust store.
+	TotalRevokedEntries *int64
+
+	// The Amazon Resource Name (ARN) of the trust store.
+	TrustStoreArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the resources a trust store is associated with.
+type TrustStoreAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the resource.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a revocation file in use by a trust store.
+type TrustStoreRevocation struct {
+
+	// The number of revoked certificates.
+	NumberOfRevokedEntries *int64
+
+	// The revocation ID of the revocation file.
+	RevocationId *int64
+
+	// The type of revocation file.
+	RevocationType RevocationType
+
+	// The Amazon Resource Name (ARN) of the trust store.
+	TrustStoreArn *string
 
 	noSmithyDocumentSerde
 }

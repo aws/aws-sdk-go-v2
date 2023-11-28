@@ -1669,6 +1669,23 @@ func validateConfigRule(v *types.ConfigRule) error {
 	}
 }
 
+func validateConfigurationRecorder(v *types.ConfigurationRecorder) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationRecorder"}
+	if v.RecordingMode != nil {
+		if err := validateRecordingMode(v.RecordingMode); err != nil {
+			invalidParams.AddNested("RecordingMode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConformancePackComplianceScoresFilters(v *types.ConformancePackComplianceScoresFilters) error {
 	if v == nil {
 		return nil
@@ -1860,6 +1877,61 @@ func validateOrganizationManagedRuleMetadata(v *types.OrganizationManagedRuleMet
 	invalidParams := smithy.InvalidParamsError{Context: "OrganizationManagedRuleMetadata"}
 	if v.RuleIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecordingMode(v *types.RecordingMode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecordingMode"}
+	if len(v.RecordingFrequency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordingFrequency"))
+	}
+	if v.RecordingModeOverrides != nil {
+		if err := validateRecordingModeOverrides(v.RecordingModeOverrides); err != nil {
+			invalidParams.AddNested("RecordingModeOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecordingModeOverride(v *types.RecordingModeOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecordingModeOverride"}
+	if v.ResourceTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceTypes"))
+	}
+	if len(v.RecordingFrequency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordingFrequency"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecordingModeOverrides(v []types.RecordingModeOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecordingModeOverrides"}
+	for i := range v {
+		if err := validateRecordingModeOverride(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2870,6 +2942,10 @@ func validateOpPutConfigurationRecorderInput(v *PutConfigurationRecorderInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "PutConfigurationRecorderInput"}
 	if v.ConfigurationRecorder == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationRecorder"))
+	} else if v.ConfigurationRecorder != nil {
+		if err := validateConfigurationRecorder(v.ConfigurationRecorder); err != nil {
+			invalidParams.AddNested("ConfigurationRecorder", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
