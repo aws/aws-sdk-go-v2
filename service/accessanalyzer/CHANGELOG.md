@@ -1,3 +1,8 @@
+# v1.25.0 (2023-11-28.2)
+
+* **Feature**: This release adds support for external access findings for S3 directory buckets to help you easily identify cross-account access. Updated service API, documentation, and paginators.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.1 (2023-11-28)
 
 * **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.

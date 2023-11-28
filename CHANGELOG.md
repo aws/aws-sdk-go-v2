@@ -1,3 +1,39 @@
+# Release (2023-11-28.2)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.15.0](feature/s3/manager/CHANGELOG.md#v1150-2023-11-282)
+  * **Feature**: Add S3Express support.
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.25.0](service/accessanalyzer/CHANGELOG.md#v1250-2023-11-282)
+  * **Feature**: This release adds support for external access findings for S3 directory buckets to help you easily identify cross-account access. Updated service API, documentation, and paginators.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.4.0](service/bedrock/CHANGELOG.md#v140-2023-11-282)
+  * **Feature**: This release adds support for customization types, model life cycle status and minor versions/aliases for model identifiers.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.0.0](service/bedrockagent/CHANGELOG.md#v100-2023-11-282)
+  * **Release**: New AWS service client module
+  * **Feature**: This release introduces Agents for Amazon Bedrock
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.0.0](service/bedrockagentruntime/CHANGELOG.md#v100-2023-11-282)
+  * **Release**: New AWS service client module
+  * **Feature**: This release introduces Agents for Amazon Bedrock Runtime
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.4.0](service/bedrockruntime/CHANGELOG.md#v140-2023-11-282)
+  * **Feature**: This release adds support for minor versions/aliases for invoke model identifier.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.82.0](service/connect/CHANGELOG.md#v1820-2023-11-282)
+  * **Feature**: Added support for following capabilities: Amazon Connect's in-app, web, and video calling. Two-way SMS integrations. Contact Lens real-time chat analytics feature. Amazon Connect Analytics Datalake capability. Capability to configure real time chat rules.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.33.0](service/customerprofiles/CHANGELOG.md#v1330-2023-11-282)
+  * **Feature**: This release introduces DetectProfileObjectType API to auto generate object type mapping.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.0.0](service/qbusiness/CHANGELOG.md#v100-2023-11-282)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Q - a generative AI powered application that your employees can use to ask questions and get answers from knowledge spread across disparate content repositories, summarize reports, write articles, take actions, and much more - all within their company's connected content repositories.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.0.0](service/qconnect/CHANGELOG.md#v100-2023-11-282)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Q in Connect, an LLM-enhanced evolution of Amazon Connect Wisdom. This release adds generative AI support to Amazon Q Connect QueryAssistant and GetRecommendations APIs.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.46.0](service/s3/CHANGELOG.md#v1460-2023-11-282)
+  * **Feature**: Add S3Express support.
+  * **Feature**: Adds support for S3 Express One Zone.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.40.0](service/s3control/CHANGELOG.md#v1400-2023-11-282)
+  * **Feature**: Adds support for S3 Express One Zone, and InvocationSchemaVersion 2.0 for S3 Batch Operations.
+
 # Release (2023-11-28)
 
 ## General Highlights

@@ -1,3 +1,8 @@
+# v1.15.0 (2023-11-28.2)
+
+* **Feature**: Add S3Express support.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.4 (2023-11-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

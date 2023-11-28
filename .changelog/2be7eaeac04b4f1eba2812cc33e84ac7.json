@@ -1,8 +1,0 @@
-{
-    "id": "2be7eaea-c04b-4f1e-ba28-12cc33e84ac7",
-    "type": "feature",
-    "description": "Adds support for S3 Express One Zone.",
-    "modules": [
-        "service/s3"
-    ]
-}

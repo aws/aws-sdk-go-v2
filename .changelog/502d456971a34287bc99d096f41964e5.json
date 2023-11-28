@@ -1,8 +1,0 @@
-{
-    "id": "502d4569-71a3-4287-bc99-d096f41964e5",
-    "type": "feature",
-    "description": "This release introduces Agents for Amazon Bedrock Runtime",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

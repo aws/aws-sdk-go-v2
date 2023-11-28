@@ -1,8 +1,0 @@
-{
-    "id": "a4562116-0fdd-4c03-9193-70d7934b0dce",
-    "type": "feature",
-    "description": "This release introduces Agents for Amazon Bedrock",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

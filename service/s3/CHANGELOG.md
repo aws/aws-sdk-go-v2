@@ -1,3 +1,9 @@
+# v1.46.0 (2023-11-28.2)
+
+* **Feature**: Add S3Express support.
+* **Feature**: Adds support for S3 Express One Zone.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.1 (2023-11-28)
 
 * **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.

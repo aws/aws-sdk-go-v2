@@ -1,8 +1,0 @@
-{
-    "id": "bee00d73-0be1-4dbf-a2d0-b531f33efe66",
-    "type": "feature",
-    "description": "This release adds support for customization types, model life cycle status and minor versions/aliases for model identifiers.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

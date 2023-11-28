@@ -1,3 +1,8 @@
+# v1.82.0 (2023-11-28.2)
+
+* **Feature**: Added support for following capabilities: Amazon Connect's in-app, web, and video calling. Two-way SMS integrations. Contact Lens real-time chat analytics feature. Amazon Connect Analytics Datalake capability. Capability to configure real time chat rules.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.81.2 (2023-11-28)
 
 * **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.

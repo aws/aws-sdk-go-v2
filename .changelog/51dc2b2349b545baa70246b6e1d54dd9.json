@@ -1,9 +1,0 @@
-{
-    "id": "51dc2b23-49b5-45ba-a702-46b6e1d54dd9",
-    "type": "feature",
-    "description": "Add S3Express support.",
-    "modules": [
-        "feature/s3/manager",
-        "service/s3"
-    ]
-}

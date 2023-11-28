@@ -1,3 +1,8 @@
+# v1.40.0 (2023-11-28.2)
+
+* **Feature**: Adds support for S3 Express One Zone, and InvocationSchemaVersion 2.0 for S3 Batch Operations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.1 (2023-11-28)
 
 * **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.

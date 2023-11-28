@@ -1,3 +1,8 @@
+# v1.33.0 (2023-11-28.2)
+
+* **Feature**: This release introduces DetectProfileObjectType API to auto generate object type mapping.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.4 (2023-11-28)
 
 * **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
