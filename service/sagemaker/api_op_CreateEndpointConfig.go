@@ -76,6 +76,17 @@ type CreateEndpointConfigInput struct {
 	// Configuration to control how SageMaker captures inference data.
 	DataCaptureConfig *types.DataCaptureConfig
 
+	// Sets whether all model containers deployed to the endpoint are isolated. If
+	// they are, no inbound or outbound network calls can be made to or from the model
+	// containers.
+	EnableNetworkIsolation *bool
+
+	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume
+	// to perform actions on your behalf. For more information, see SageMaker Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
+	// . To be able to pass this role to Amazon SageMaker, the caller of this action
+	// must have the iam:PassRole permission.
+	ExecutionRoleArn *string
+
 	// A member of CreateEndpointConfig that enables explainers.
 	ExplainerConfig *types.ExplainerConfig
 
@@ -118,6 +129,13 @@ type CreateEndpointConfigInput struct {
 	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 	// .
 	Tags []types.Tag
+
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see Give
+	// SageMaker Access to Resources in your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
+	// .
+	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
 }

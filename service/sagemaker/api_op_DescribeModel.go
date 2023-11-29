@@ -46,11 +46,6 @@ type DescribeModelOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
-	//
-	// This member is required.
-	ExecutionRoleArn *string
-
 	// The Amazon Resource Name (ARN) of the model.
 	//
 	// This member is required.
@@ -70,6 +65,9 @@ type DescribeModelOutput struct {
 	// If True , no inbound or outbound network calls can be made to or from the model
 	// container.
 	EnableNetworkIsolation *bool
+
+	// The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
+	ExecutionRoleArn *string
 
 	// Specifies details of how containers in a multi-container endpoint are called.
 	InferenceExecutionConfig *types.InferenceExecutionConfig

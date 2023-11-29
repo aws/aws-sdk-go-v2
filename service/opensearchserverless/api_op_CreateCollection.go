@@ -43,6 +43,9 @@ type CreateCollectionInput struct {
 	// Description of the collection.
 	Description *string
 
+	// Indicates whether standby replicas should be used for a collection.
+	StandbyReplicas types.StandbyReplicas
+
 	// An arbitrary set of tags (key–value pairs) to associate with the OpenSearch
 	// Serverless collection.
 	Tags []types.Tag

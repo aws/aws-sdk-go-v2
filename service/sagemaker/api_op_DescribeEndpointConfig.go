@@ -71,6 +71,15 @@ type DescribeEndpointConfigOutput struct {
 	// Configuration to control how SageMaker captures inference data.
 	DataCaptureConfig *types.DataCaptureConfig
 
+	// Indicates whether all model containers deployed to the endpoint are isolated.
+	// If they are, no inbound or outbound network calls can be made to or from the
+	// model containers.
+	EnableNetworkIsolation *bool
+
+	// The Amazon Resource Name (ARN) of the IAM role that you assigned to the
+	// endpoint configuration.
+	ExecutionRoleArn *string
+
 	// The configuration parameters for an explainer.
 	ExplainerConfig *types.ExplainerConfig
 
@@ -82,6 +91,13 @@ type DescribeEndpointConfigOutput struct {
 	// at this endpoint in shadow mode with production traffic replicated from the
 	// model specified on ProductionVariants .
 	ShadowProductionVariants []types.ProductionVariant
+
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see Give
+	// SageMaker Access to Resources in your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
+	// .
+	VpcConfig *types.VpcConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

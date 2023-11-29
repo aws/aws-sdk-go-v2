@@ -128,6 +128,9 @@ type CollectionDetail struct {
 	// The name of the collection.
 	Name *string
 
+	// Details about an OpenSearch Serverless collection.
+	StandbyReplicas StandbyReplicas
+
 	// The current status of the collection.
 	Status CollectionStatus
 
@@ -212,6 +215,9 @@ type CreateCollectionDetail struct {
 
 	// The name of the collection.
 	Name *string
+
+	// Creates details about an OpenSearch Serverless collection.
+	StandbyReplicas StandbyReplicas
 
 	// The current status of the collection.
 	Status CollectionStatus

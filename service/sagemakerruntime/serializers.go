@@ -106,6 +106,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointInput(v *InvokeEndpointIn
 		}
 	}
 
+	if v.InferenceComponentName != nil && len(*v.InferenceComponentName) > 0 {
+		locationName := "X-Amzn-Sagemaker-Inference-Component"
+		encoder.SetHeader(locationName).String(*v.InferenceComponentName)
+	}
+
 	if v.InferenceId != nil && len(*v.InferenceId) > 0 {
 		locationName := "X-Amzn-Sagemaker-Inference-Id"
 		encoder.SetHeader(locationName).String(*v.InferenceId)
@@ -316,6 +321,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointWithResponseStreamInput(v
 		if err := encoder.SetURI("EndpointName").String(*v.EndpointName); err != nil {
 			return err
 		}
+	}
+
+	if v.InferenceComponentName != nil && len(*v.InferenceComponentName) > 0 {
+		locationName := "X-Amzn-Sagemaker-Inference-Component"
+		encoder.SetHeader(locationName).String(*v.InferenceComponentName)
 	}
 
 	if v.InferenceId != nil && len(*v.InferenceId) > 0 {

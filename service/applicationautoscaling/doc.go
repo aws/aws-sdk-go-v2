@@ -18,6 +18,7 @@
 //   - Amazon Neptune clusters
 //   - Amazon SageMaker endpoint variants
 //   - Amazon SageMaker Serverless endpoint provisioned concurrency
+//   - Amazon SageMaker inference components
 //   - Spot Fleets (Amazon EC2)
 //   - Custom resources provided by your own applications or services
 //

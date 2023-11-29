@@ -1,0 +1,8 @@
+{
+    "id": "a7d510a2-eec5-4e5b-bbf2-3bb0063c8ed3",
+    "type": "feature",
+    "description": "Amazon SageMaker customers can now use Application Auto Scaling to automatically scale the number of Inference Component copies across an endpoint to meet the varying demand of their workloads.",
+    "modules": [
+        "service/applicationautoscaling"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "0c845853-4b7c-4224-8519-8938850bddd4",
+    "type": "feature",
+    "description": "Amazon OpenSearch Serverless collections support an additional attribute called standby-replicas. This allows to specify whether a collection should have redundancy enabled.",
+    "modules": [
+        "service/opensearchserverless"
+    ]
+}

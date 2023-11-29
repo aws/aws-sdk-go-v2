@@ -1,0 +1,8 @@
+{
+    "id": "7d03cc76-ee82-41e7-a9bd-8b6d659ad551",
+    "type": "feature",
+    "description": "This release adds following support 1/ Improved SDK tooling for model deployment. 2/ New Inference Component based features to lower inference costs and latency 3/ SageMaker HyperPod management. 4/ Additional parameters for FM Fine Tuning in Autopilot",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

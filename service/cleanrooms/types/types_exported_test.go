@@ -131,6 +131,114 @@ func ExampleMembershipProtectedQueryOutputConfiguration_outputUsage() {
 
 var _ *types.ProtectedQueryS3OutputConfiguration
 
+func ExamplePreviewPrivacyImpactParametersInput_outputUsage() {
+	var union types.PreviewPrivacyImpactParametersInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PreviewPrivacyImpactParametersInputMemberDifferentialPrivacy:
+		_ = v.Value // Value is types.DifferentialPrivacyPreviewParametersInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DifferentialPrivacyPreviewParametersInput
+
+func ExamplePrivacyBudget_outputUsage() {
+	var union types.PrivacyBudget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PrivacyBudgetMemberDifferentialPrivacy:
+		_ = v.Value // Value is types.DifferentialPrivacyPrivacyBudget
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DifferentialPrivacyPrivacyBudget
+
+func ExamplePrivacyBudgetTemplateParametersInput_outputUsage() {
+	var union types.PrivacyBudgetTemplateParametersInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy:
+		_ = v.Value // Value is types.DifferentialPrivacyTemplateParametersInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DifferentialPrivacyTemplateParametersInput
+
+func ExamplePrivacyBudgetTemplateParametersOutput_outputUsage() {
+	var union types.PrivacyBudgetTemplateParametersOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PrivacyBudgetTemplateParametersOutputMemberDifferentialPrivacy:
+		_ = v.Value // Value is types.DifferentialPrivacyTemplateParametersOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DifferentialPrivacyTemplateParametersOutput
+
+func ExamplePrivacyBudgetTemplateUpdateParameters_outputUsage() {
+	var union types.PrivacyBudgetTemplateUpdateParameters
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PrivacyBudgetTemplateUpdateParametersMemberDifferentialPrivacy:
+		_ = v.Value // Value is types.DifferentialPrivacyTemplateUpdateParameters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DifferentialPrivacyTemplateUpdateParameters
+
+func ExamplePrivacyImpact_outputUsage() {
+	var union types.PrivacyImpact
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PrivacyImpactMemberDifferentialPrivacy:
+		_ = v.Value // Value is types.DifferentialPrivacyPrivacyImpact
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DifferentialPrivacyPrivacyImpact
+
 func ExampleProtectedQueryOutput_outputUsage() {
 	var union types.ProtectedQueryOutput
 	// type switches can be used to check the union value

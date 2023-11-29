@@ -139,6 +139,26 @@ func (SecurityPolicyType) Values() []SecurityPolicyType {
 	}
 }
 
+type StandbyReplicas string
+
+// Enum values for StandbyReplicas
+const (
+	// Standby replicas enabled
+	StandbyReplicasEnabled StandbyReplicas = "ENABLED"
+	// Standby replicas disabled
+	StandbyReplicasDisabled StandbyReplicas = "DISABLED"
+)
+
+// Values returns all known values for StandbyReplicas. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StandbyReplicas) Values() []StandbyReplicas {
+	return []StandbyReplicas{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type VpcEndpointStatus string
 
 // Enum values for VpcEndpointStatus

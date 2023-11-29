@@ -15,9 +15,9 @@ import (
 // tags, use the ListTags API. When you call this API to delete tags from a
 // hyperparameter tuning job, the deleted tags are not removed from training jobs
 // that the hyperparameter tuning job launched before you called this API. When you
-// call this API to delete tags from a SageMaker Studio Domain or User Profile, the
-// deleted tags are not removed from Apps that the SageMaker Studio Domain or User
-// Profile launched before you called this API.
+// call this API to delete tags from a SageMaker Domain or User Profile, the
+// deleted tags are not removed from Apps that the SageMaker Domain or User Profile
+// launched before you called this API.
 func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns ...func(*Options)) (*DeleteTagsOutput, error) {
 	if params == nil {
 		params = &DeleteTagsInput{}

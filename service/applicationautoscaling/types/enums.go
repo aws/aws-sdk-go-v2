@@ -93,6 +93,7 @@ const (
 	MetricTypeNeptuneReaderAverageCPUUtilization                        MetricType = "NeptuneReaderAverageCPUUtilization"
 	MetricTypeSageMakerVariantProvisionedConcurrencyUtilization         MetricType = "SageMakerVariantProvisionedConcurrencyUtilization"
 	MetricTypeElastiCacheDatabaseCapacityUsageCountedForEvictPercentage MetricType = "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage"
+	MetricTypeSageMakerInferenceComponentInvocationsPerCopy             MetricType = "SageMakerInferenceComponentInvocationsPerCopy"
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
@@ -123,6 +124,7 @@ func (MetricType) Values() []MetricType {
 		"NeptuneReaderAverageCPUUtilization",
 		"SageMakerVariantProvisionedConcurrencyUtilization",
 		"ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage",
+		"SageMakerInferenceComponentInvocationsPerCopy",
 	}
 }
 
@@ -169,6 +171,7 @@ const (
 	ScalableDimensionElastiCacheReplicationGroupReplicas              ScalableDimension = "elasticache:replication-group:Replicas"
 	ScalableDimensionNeptuneClusterReadReplicaCount                   ScalableDimension = "neptune:cluster:ReadReplicaCount"
 	ScalableDimensionSageMakerVariantDesiredProvisionedConcurrency    ScalableDimension = "sagemaker:variant:DesiredProvisionedConcurrency"
+	ScalableDimensionSageMakerInferenceComponentDesiredCopyCount      ScalableDimension = "sagemaker:inference-component:DesiredCopyCount"
 )
 
 // Values returns all known values for ScalableDimension. Note that this can be
@@ -197,6 +200,7 @@ func (ScalableDimension) Values() []ScalableDimension {
 		"elasticache:replication-group:Replicas",
 		"neptune:cluster:ReadReplicaCount",
 		"sagemaker:variant:DesiredProvisionedConcurrency",
+		"sagemaker:inference-component:DesiredCopyCount",
 	}
 }
 

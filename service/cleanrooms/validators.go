@@ -90,6 +90,26 @@ func (m *validateOpCreateCollaboration) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConfiguredAudienceModelAssociation struct {
+}
+
+func (*validateOpCreateConfiguredAudienceModelAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConfiguredAudienceModelAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConfiguredAudienceModelAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConfiguredAudienceModelAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConfiguredTableAnalysisRule struct {
 }
 
@@ -170,6 +190,26 @@ func (m *validateOpCreateMembership) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePrivacyBudgetTemplate struct {
+}
+
+func (*validateOpCreatePrivacyBudgetTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePrivacyBudgetTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePrivacyBudgetTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePrivacyBudgetTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAnalysisTemplate struct {
 }
 
@@ -205,6 +245,26 @@ func (m *validateOpDeleteCollaboration) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCollaborationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConfiguredAudienceModelAssociation struct {
+}
+
+func (*validateOpDeleteConfiguredAudienceModelAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConfiguredAudienceModelAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConfiguredAudienceModelAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConfiguredAudienceModelAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +370,26 @@ func (m *validateOpDeleteMembership) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePrivacyBudgetTemplate struct {
+}
+
+func (*validateOpDeletePrivacyBudgetTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePrivacyBudgetTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePrivacyBudgetTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePrivacyBudgetTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAnalysisTemplate struct {
 }
 
@@ -350,6 +430,26 @@ func (m *validateOpGetCollaborationAnalysisTemplate) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCollaborationConfiguredAudienceModelAssociation struct {
+}
+
+func (*validateOpGetCollaborationConfiguredAudienceModelAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCollaborationConfiguredAudienceModelAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCollaborationConfiguredAudienceModelAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCollaborationConfiguredAudienceModelAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCollaboration struct {
 }
 
@@ -365,6 +465,46 @@ func (m *validateOpGetCollaboration) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetCollaborationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCollaborationPrivacyBudgetTemplate struct {
+}
+
+func (*validateOpGetCollaborationPrivacyBudgetTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCollaborationPrivacyBudgetTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCollaborationPrivacyBudgetTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCollaborationPrivacyBudgetTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConfiguredAudienceModelAssociation struct {
+}
+
+func (*validateOpGetConfiguredAudienceModelAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfiguredAudienceModelAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfiguredAudienceModelAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfiguredAudienceModelAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -445,6 +585,26 @@ func (m *validateOpGetMembership) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPrivacyBudgetTemplate struct {
+}
+
+func (*validateOpGetPrivacyBudgetTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPrivacyBudgetTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPrivacyBudgetTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPrivacyBudgetTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,6 +710,86 @@ func (m *validateOpListCollaborationAnalysisTemplates) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCollaborationConfiguredAudienceModelAssociations struct {
+}
+
+func (*validateOpListCollaborationConfiguredAudienceModelAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCollaborationConfiguredAudienceModelAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCollaborationConfiguredAudienceModelAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCollaborationConfiguredAudienceModelAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCollaborationPrivacyBudgets struct {
+}
+
+func (*validateOpListCollaborationPrivacyBudgets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCollaborationPrivacyBudgets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCollaborationPrivacyBudgetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCollaborationPrivacyBudgetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCollaborationPrivacyBudgetTemplates struct {
+}
+
+func (*validateOpListCollaborationPrivacyBudgetTemplates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCollaborationPrivacyBudgetTemplates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCollaborationPrivacyBudgetTemplatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCollaborationPrivacyBudgetTemplatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListConfiguredAudienceModelAssociations struct {
+}
+
+func (*validateOpListConfiguredAudienceModelAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListConfiguredAudienceModelAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListConfiguredAudienceModelAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListConfiguredAudienceModelAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListConfiguredTableAssociations struct {
 }
 
@@ -585,6 +825,46 @@ func (m *validateOpListMembers) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPrivacyBudgets struct {
+}
+
+func (*validateOpListPrivacyBudgets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPrivacyBudgets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPrivacyBudgetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPrivacyBudgetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPrivacyBudgetTemplates struct {
+}
+
+func (*validateOpListPrivacyBudgetTemplates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPrivacyBudgetTemplates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPrivacyBudgetTemplatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPrivacyBudgetTemplatesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -645,6 +925,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPreviewPrivacyImpact struct {
+}
+
+func (*validateOpPreviewPrivacyImpact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPreviewPrivacyImpact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PreviewPrivacyImpactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPreviewPrivacyImpactInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +1050,26 @@ func (m *validateOpUpdateCollaboration) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConfiguredAudienceModelAssociation struct {
+}
+
+func (*validateOpUpdateConfiguredAudienceModelAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConfiguredAudienceModelAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConfiguredAudienceModelAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConfiguredAudienceModelAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateConfiguredTableAnalysisRule struct {
 }
 
@@ -830,6 +1150,26 @@ func (m *validateOpUpdateMembership) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePrivacyBudgetTemplate struct {
+}
+
+func (*validateOpUpdatePrivacyBudgetTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePrivacyBudgetTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePrivacyBudgetTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePrivacyBudgetTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateProtectedQuery struct {
 }
 
@@ -866,6 +1206,10 @@ func addOpCreateCollaborationValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateCollaboration{}, middleware.After)
 }
 
+func addOpCreateConfiguredAudienceModelAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConfiguredAudienceModelAssociation{}, middleware.After)
+}
+
 func addOpCreateConfiguredTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConfiguredTableAnalysisRule{}, middleware.After)
 }
@@ -882,12 +1226,20 @@ func addOpCreateMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMembership{}, middleware.After)
 }
 
+func addOpCreatePrivacyBudgetTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePrivacyBudgetTemplate{}, middleware.After)
+}
+
 func addOpDeleteAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAnalysisTemplate{}, middleware.After)
 }
 
 func addOpDeleteCollaborationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCollaboration{}, middleware.After)
+}
+
+func addOpDeleteConfiguredAudienceModelAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConfiguredAudienceModelAssociation{}, middleware.After)
 }
 
 func addOpDeleteConfiguredTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -910,6 +1262,10 @@ func addOpDeleteMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMembership{}, middleware.After)
 }
 
+func addOpDeletePrivacyBudgetTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePrivacyBudgetTemplate{}, middleware.After)
+}
+
 func addOpGetAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAnalysisTemplate{}, middleware.After)
 }
@@ -918,8 +1274,20 @@ func addOpGetCollaborationAnalysisTemplateValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpGetCollaborationAnalysisTemplate{}, middleware.After)
 }
 
+func addOpGetCollaborationConfiguredAudienceModelAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCollaborationConfiguredAudienceModelAssociation{}, middleware.After)
+}
+
 func addOpGetCollaborationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCollaboration{}, middleware.After)
+}
+
+func addOpGetCollaborationPrivacyBudgetTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCollaborationPrivacyBudgetTemplate{}, middleware.After)
+}
+
+func addOpGetConfiguredAudienceModelAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfiguredAudienceModelAssociation{}, middleware.After)
 }
 
 func addOpGetConfiguredTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -936,6 +1304,10 @@ func addOpGetConfiguredTableValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMembership{}, middleware.After)
+}
+
+func addOpGetPrivacyBudgetTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPrivacyBudgetTemplate{}, middleware.After)
 }
 
 func addOpGetProtectedQueryValidationMiddleware(stack *middleware.Stack) error {
@@ -958,12 +1330,36 @@ func addOpListCollaborationAnalysisTemplatesValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpListCollaborationAnalysisTemplates{}, middleware.After)
 }
 
+func addOpListCollaborationConfiguredAudienceModelAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCollaborationConfiguredAudienceModelAssociations{}, middleware.After)
+}
+
+func addOpListCollaborationPrivacyBudgetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCollaborationPrivacyBudgets{}, middleware.After)
+}
+
+func addOpListCollaborationPrivacyBudgetTemplatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCollaborationPrivacyBudgetTemplates{}, middleware.After)
+}
+
+func addOpListConfiguredAudienceModelAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListConfiguredAudienceModelAssociations{}, middleware.After)
+}
+
 func addOpListConfiguredTableAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListConfiguredTableAssociations{}, middleware.After)
 }
 
 func addOpListMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMembers{}, middleware.After)
+}
+
+func addOpListPrivacyBudgetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPrivacyBudgets{}, middleware.After)
+}
+
+func addOpListPrivacyBudgetTemplatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPrivacyBudgetTemplates{}, middleware.After)
 }
 
 func addOpListProtectedQueriesValidationMiddleware(stack *middleware.Stack) error {
@@ -976,6 +1372,10 @@ func addOpListSchemasValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPreviewPrivacyImpactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPreviewPrivacyImpact{}, middleware.After)
 }
 
 func addOpStartProtectedQueryValidationMiddleware(stack *middleware.Stack) error {
@@ -998,6 +1398,10 @@ func addOpUpdateCollaborationValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateCollaboration{}, middleware.After)
 }
 
+func addOpUpdateConfiguredAudienceModelAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConfiguredAudienceModelAssociation{}, middleware.After)
+}
+
 func addOpUpdateConfiguredTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfiguredTableAnalysisRule{}, middleware.After)
 }
@@ -1012,6 +1416,10 @@ func addOpUpdateConfiguredTableValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMembership{}, middleware.After)
+}
+
+func addOpUpdatePrivacyBudgetTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePrivacyBudgetTemplate{}, middleware.After)
 }
 
 func addOpUpdateProtectedQueryValidationMiddleware(stack *middleware.Stack) error {
@@ -1169,6 +1577,11 @@ func validateAnalysisRuleCustom(v *types.AnalysisRuleCustom) error {
 	if v.AllowedAnalyses == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowedAnalyses"))
 	}
+	if v.DifferentialPrivacy != nil {
+		if err := validateDifferentialPrivacyConfiguration(v.DifferentialPrivacy); err != nil {
+			invalidParams.AddNested("DifferentialPrivacy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1258,6 +1671,93 @@ func validateDataEncryptionMetadata(v *types.DataEncryptionMetadata) error {
 	}
 	if v.PreserveNulls == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PreserveNulls"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDifferentialPrivacyColumn(v *types.DifferentialPrivacyColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DifferentialPrivacyColumn"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDifferentialPrivacyColumnList(v []types.DifferentialPrivacyColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DifferentialPrivacyColumnList"}
+	for i := range v {
+		if err := validateDifferentialPrivacyColumn(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDifferentialPrivacyConfiguration(v *types.DifferentialPrivacyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DifferentialPrivacyConfiguration"}
+	if v.Columns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Columns"))
+	} else if v.Columns != nil {
+		if err := validateDifferentialPrivacyColumnList(v.Columns); err != nil {
+			invalidParams.AddNested("Columns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDifferentialPrivacyPreviewParametersInput(v *types.DifferentialPrivacyPreviewParametersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DifferentialPrivacyPreviewParametersInput"}
+	if v.Epsilon == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Epsilon"))
+	}
+	if v.UsersNoisePerQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UsersNoisePerQuery"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDifferentialPrivacyTemplateParametersInput(v *types.DifferentialPrivacyTemplateParametersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DifferentialPrivacyTemplateParametersInput"}
+	if v.Epsilon == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Epsilon"))
+	}
+	if v.UsersNoisePerQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UsersNoisePerQuery"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1410,6 +1910,44 @@ func validatePaymentConfiguration(v *types.PaymentConfiguration) error {
 		if err := validateQueryComputePaymentConfig(v.QueryCompute); err != nil {
 			invalidParams.AddNested("QueryCompute", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePreviewPrivacyImpactParametersInput(v types.PreviewPrivacyImpactParametersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreviewPrivacyImpactParametersInput"}
+	switch uv := v.(type) {
+	case *types.PreviewPrivacyImpactParametersInputMemberDifferentialPrivacy:
+		if err := validateDifferentialPrivacyPreviewParametersInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[differentialPrivacy]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivacyBudgetTemplateParametersInput(v types.PrivacyBudgetTemplateParametersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivacyBudgetTemplateParametersInput"}
+	switch uv := v.(type) {
+	case *types.PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy:
+		if err := validateDifferentialPrivacyTemplateParametersInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[differentialPrivacy]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1617,6 +2155,30 @@ func validateOpCreateCollaborationInput(v *CreateCollaborationInput) error {
 	}
 }
 
+func validateOpCreateConfiguredAudienceModelAssociationInput(v *CreateConfiguredAudienceModelAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConfiguredAudienceModelAssociationInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.ConfiguredAudienceModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredAudienceModelArn"))
+	}
+	if v.ConfiguredAudienceModelAssociationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredAudienceModelAssociationName"))
+	}
+	if v.ManageResourcePolicies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManageResourcePolicies"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateConfiguredTableAnalysisRuleInput(v *CreateConfiguredTableAnalysisRuleInput) error {
 	if v == nil {
 		return nil
@@ -1722,6 +2284,34 @@ func validateOpCreateMembershipInput(v *CreateMembershipInput) error {
 	}
 }
 
+func validateOpCreatePrivacyBudgetTemplateInput(v *CreatePrivacyBudgetTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePrivacyBudgetTemplateInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if len(v.AutoRefresh) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoRefresh"))
+	}
+	if len(v.PrivacyBudgetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetType"))
+	}
+	if v.Parameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
+	} else if v.Parameters != nil {
+		if err := validatePrivacyBudgetTemplateParametersInput(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAnalysisTemplateInput(v *DeleteAnalysisTemplateInput) error {
 	if v == nil {
 		return nil
@@ -1747,6 +2337,24 @@ func validateOpDeleteCollaborationInput(v *DeleteCollaborationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCollaborationInput"}
 	if v.CollaborationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConfiguredAudienceModelAssociationInput(v *DeleteConfiguredAudienceModelAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfiguredAudienceModelAssociationInput"}
+	if v.ConfiguredAudienceModelAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredAudienceModelAssociationIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1839,6 +2447,24 @@ func validateOpDeleteMembershipInput(v *DeleteMembershipInput) error {
 	}
 }
 
+func validateOpDeletePrivacyBudgetTemplateInput(v *DeletePrivacyBudgetTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePrivacyBudgetTemplateInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.PrivacyBudgetTemplateIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetTemplateIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAnalysisTemplateInput(v *GetAnalysisTemplateInput) error {
 	if v == nil {
 		return nil
@@ -1875,6 +2501,24 @@ func validateOpGetCollaborationAnalysisTemplateInput(v *GetCollaborationAnalysis
 	}
 }
 
+func validateOpGetCollaborationConfiguredAudienceModelAssociationInput(v *GetCollaborationConfiguredAudienceModelAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCollaborationConfiguredAudienceModelAssociationInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if v.ConfiguredAudienceModelAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredAudienceModelAssociationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCollaborationInput(v *GetCollaborationInput) error {
 	if v == nil {
 		return nil
@@ -1882,6 +2526,42 @@ func validateOpGetCollaborationInput(v *GetCollaborationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetCollaborationInput"}
 	if v.CollaborationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCollaborationPrivacyBudgetTemplateInput(v *GetCollaborationPrivacyBudgetTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCollaborationPrivacyBudgetTemplateInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if v.PrivacyBudgetTemplateIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetTemplateIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConfiguredAudienceModelAssociationInput(v *GetConfiguredAudienceModelAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfiguredAudienceModelAssociationInput"}
+	if v.ConfiguredAudienceModelAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredAudienceModelAssociationIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1948,6 +2628,24 @@ func validateOpGetMembershipInput(v *GetMembershipInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetMembershipInput"}
 	if v.MembershipIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPrivacyBudgetTemplateInput(v *GetPrivacyBudgetTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPrivacyBudgetTemplateInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.PrivacyBudgetTemplateIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetTemplateIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2043,6 +2741,69 @@ func validateOpListCollaborationAnalysisTemplatesInput(v *ListCollaborationAnaly
 	}
 }
 
+func validateOpListCollaborationConfiguredAudienceModelAssociationsInput(v *ListCollaborationConfiguredAudienceModelAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCollaborationConfiguredAudienceModelAssociationsInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCollaborationPrivacyBudgetsInput(v *ListCollaborationPrivacyBudgetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCollaborationPrivacyBudgetsInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if len(v.PrivacyBudgetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCollaborationPrivacyBudgetTemplatesInput(v *ListCollaborationPrivacyBudgetTemplatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCollaborationPrivacyBudgetTemplatesInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListConfiguredAudienceModelAssociationsInput(v *ListConfiguredAudienceModelAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListConfiguredAudienceModelAssociationsInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListConfiguredTableAssociationsInput(v *ListConfiguredTableAssociationsInput) error {
 	if v == nil {
 		return nil
@@ -2065,6 +2826,39 @@ func validateOpListMembersInput(v *ListMembersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListMembersInput"}
 	if v.CollaborationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPrivacyBudgetsInput(v *ListPrivacyBudgetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPrivacyBudgetsInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if len(v.PrivacyBudgetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPrivacyBudgetTemplatesInput(v *ListPrivacyBudgetTemplatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPrivacyBudgetTemplatesInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2110,6 +2904,28 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPreviewPrivacyImpactInput(v *PreviewPrivacyImpactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreviewPrivacyImpactInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.Parameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
+	} else if v.Parameters != nil {
+		if err := validatePreviewPrivacyImpactParametersInput(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2213,6 +3029,24 @@ func validateOpUpdateCollaborationInput(v *UpdateCollaborationInput) error {
 	}
 }
 
+func validateOpUpdateConfiguredAudienceModelAssociationInput(v *UpdateConfiguredAudienceModelAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfiguredAudienceModelAssociationInput"}
+	if v.ConfiguredAudienceModelAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredAudienceModelAssociationIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateConfiguredTableAnalysisRuleInput(v *UpdateConfiguredTableAnalysisRuleInput) error {
 	if v == nil {
 		return nil
@@ -2283,6 +3117,27 @@ func validateOpUpdateMembershipInput(v *UpdateMembershipInput) error {
 		if err := validateMembershipProtectedQueryResultConfiguration(v.DefaultResultConfiguration); err != nil {
 			invalidParams.AddNested("DefaultResultConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePrivacyBudgetTemplateInput(v *UpdatePrivacyBudgetTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePrivacyBudgetTemplateInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.PrivacyBudgetTemplateIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetTemplateIdentifier"))
+	}
+	if len(v.PrivacyBudgetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

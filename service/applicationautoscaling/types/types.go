@@ -120,7 +120,7 @@ type NotScaledReason struct {
 // Application Auto Scaling. Only the Amazon Web Services that you're using send
 // metrics to Amazon CloudWatch. To determine whether a desired metric already
 // exists by looking up its namespace and dimension using the CloudWatch metrics
-// dashboard in the console, follow the procedure in Building dashboards with
+// dashboard in the console, follow the procedure in Monitor your resources using
 // CloudWatch (https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html)
 // in the Application Auto Scaling User Guide.
 type PredefinedMetricSpecification struct {
@@ -219,6 +219,9 @@ type ScalableTarget struct {
 	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//   - SageMaker inference component - The resource type is inference-component and
+	//   the unique identifier is the resource ID. Example:
+	//   inference-component/my-inference-component .
 	//
 	// This member is required.
 	ResourceId *string
@@ -272,6 +275,8 @@ type ScalableTarget struct {
 	//   Neptune DB cluster.
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
 	//   concurrency for a SageMaker Serverless endpoint.
+	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
+	//   an endpoint for a SageMaker inference component.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -381,6 +386,9 @@ type ScalingActivity struct {
 	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//   - SageMaker inference component - The resource type is inference-component and
+	//   the unique identifier is the resource ID. Example:
+	//   inference-component/my-inference-component .
 	//
 	// This member is required.
 	ResourceId *string
@@ -428,6 +436,8 @@ type ScalingActivity struct {
 	//   Neptune DB cluster.
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
 	//   concurrency for a SageMaker Serverless endpoint.
+	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
+	//   an endpoint for a SageMaker inference component.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -545,6 +555,9 @@ type ScalingPolicy struct {
 	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//   - SageMaker inference component - The resource type is inference-component and
+	//   the unique identifier is the resource ID. Example:
+	//   inference-component/my-inference-component .
 	//
 	// This member is required.
 	ResourceId *string
@@ -592,6 +605,8 @@ type ScalingPolicy struct {
 	//   Neptune DB cluster.
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
 	//   concurrency for a SageMaker Serverless endpoint.
+	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
+	//   an endpoint for a SageMaker inference component.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -673,6 +688,9 @@ type ScheduledAction struct {
 	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//   - SageMaker inference component - The resource type is inference-component and
+	//   the unique identifier is the resource ID. Example:
+	//   inference-component/my-inference-component .
 	//
 	// This member is required.
 	ResourceId *string
@@ -757,6 +775,8 @@ type ScheduledAction struct {
 	//   Neptune DB cluster.
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
 	//   concurrency for a SageMaker Serverless endpoint.
+	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
+	//   an endpoint for a SageMaker inference component.
 	ScalableDimension ScalableDimension
 
 	// The new minimum and maximum capacity. You can set both values or just one. At
@@ -837,7 +857,7 @@ type StepScalingPolicyConfiguration struct {
 
 	// The amount of time, in seconds, to wait for a previous scaling activity to take
 	// effect. If not specified, the default value is 300. For more information, see
-	// Cooldown period (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html#step-scaling-cooldown)
+	// Cooldown period (https://docs.aws.amazon.com/autoscaling/application/userguide/step-scaling-policy-overview.html#step-scaling-cooldown)
 	// in the Application Auto Scaling User Guide.
 	Cooldown *int32
 
@@ -1037,13 +1057,13 @@ type TargetTrackingScalingPolicyConfiguration struct {
 
 	// The amount of time, in seconds, after a scale-in activity completes before
 	// another scale-in activity can start. For more information and for default
-	// values, see Define cooldown periods (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#target-tracking-cooldown)
+	// values, see Define cooldown periods (https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown)
 	// in the Application Auto Scaling User Guide.
 	ScaleInCooldown *int32
 
 	// The amount of time, in seconds, to wait for a previous scale-out activity to
 	// take effect. For more information and for default values, see Define cooldown
-	// periods (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#target-tracking-cooldown)
+	// periods (https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown)
 	// in the Application Auto Scaling User Guide.
 	ScaleOutCooldown *int32
 

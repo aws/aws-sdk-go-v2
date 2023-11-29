@@ -12,17 +12,17 @@ import (
 )
 
 // Creates a URL for a specified UserProfile in a Domain. When accessed in a web
-// browser, the user will be automatically signed in to Amazon SageMaker Studio,
-// and granted access to all of the Apps and files associated with the Domain's
-// Amazon Elastic File System (EFS) volume. This operation can only be called when
-// the authentication mode equals IAM. The IAM role or user passed to this API
-// defines the permissions to access the app. Once the presigned URL is created, no
+// browser, the user will be automatically signed in to the domain, and granted
+// access to all of the Apps and files associated with the Domain's Amazon Elastic
+// File System (EFS) volume. This operation can only be called when the
+// authentication mode equals IAM. The IAM role or user passed to this API defines
+// the permissions to access the app. Once the presigned URL is created, no
 // additional permission is required to access this URL. IAM authorization policies
 // for this API are also enforced for every HTTP request and WebSocket frame that
 // attempts to connect to the app. You can restrict access to this API and to the
 // URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC
-// Endpoints that you specify. For more information, see Connect to SageMaker
-// Studio Through an Interface VPC Endpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html)
+// Endpoints that you specify. For more information, see Connect to Amazon
+// SageMaker Studio Through an Interface VPC Endpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html)
 // . The URL that you get from a call to CreatePresignedDomainUrl has a default
 // timeout of 5 minutes. You can configure this value using ExpiresInSeconds . If
 // you try to use the URL after the timeout limit expires, you are directed to the
@@ -57,6 +57,20 @@ type CreatePresignedDomainUrlInput struct {
 	// The number of seconds until the pre-signed URL expires. This value defaults to
 	// 300.
 	ExpiresInSeconds *int32
+
+	// The landing page that the user is directed to when accessing the presigned URL.
+	// Using this value, users can access Studio or Studio Classic, even if it is not
+	// the default experience for the domain. The supported values are:
+	//   - studio::relative/path : Directs users to the relative path in Studio.
+	//   - app:JupyterServer:relative/path : Directs users to the relative path in the
+	//   Studio Classic application.
+	//   - app:JupyterLab:relative/path : Directs users to the relative path in the
+	//   JupyterLab application.
+	//   - app:RStudioServerPro:relative/path : Directs users to the relative path in
+	//   the RStudio application.
+	//   - app:Canvas:relative/path : Directs users to the relative path in the Canvas
+	//   application.
+	LandingUri *string
 
 	// The session expiration duration in seconds. This value defaults to 43200.
 	SessionExpirationDurationInSeconds *int32

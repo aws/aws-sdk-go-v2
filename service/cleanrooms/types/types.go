@@ -151,7 +151,7 @@ type AnalysisRuleAggregation struct {
 }
 
 // A type of analysis rule that enables the table owner to approve custom SQL
-// queries on their configured tables.
+// queries on their configured tables. It supports differential privacy.
 type AnalysisRuleCustom struct {
 
 	// The analysis templates that are allowed by the custom analysis rule.
@@ -162,6 +162,9 @@ type AnalysisRuleCustom struct {
 	// The Amazon Web Services accounts that are allowed to query by the custom
 	// analysis rule. Required when allowedAnalyses is ANY_QUERY .
 	AllowedAnalysisProviders []string
+
+	// The differential privacy configuration.
+	DifferentialPrivacy *DifferentialPrivacyConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -629,6 +632,291 @@ type CollaborationAnalysisTemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configured audience model association within a collaboration.
+type CollaborationConfiguredAudienceModelAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the configured audience model association.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique ARN for the configured audience model's associated collaboration.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// A unique identifier for the collaboration that the configured audience model
+	// associations belong to. Accepts collaboration ID.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The Amazon Resource Name (ARN) of the configure audience model.
+	//
+	// This member is required.
+	ConfiguredAudienceModelArn *string
+
+	// The time at which the configured audience model association was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The identifier used to reference members of the collaboration. Only supports
+	// AWS account ID.
+	//
+	// This member is required.
+	CreatorAccountId *string
+
+	// The identifier of the configured audience model association.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the configured audience model association.
+	//
+	// This member is required.
+	Name *string
+
+	// The most recent time at which the configured audience model association was
+	// updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the configured audience model association.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the configured audience model association in the collaboration.
+type CollaborationConfiguredAudienceModelAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the configured audience model association.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique ARN for the configured audience model's associated collaboration.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// A unique identifier for the collaboration that the configured audience model
+	// associations belong to. Accepts collaboration ID.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the configured audience model association was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The identifier used to reference members of the collaboration. Only supports
+	// AWS account ID.
+	//
+	// This member is required.
+	CreatorAccountId *string
+
+	// The identifier of the configured audience model association.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the configured audience model association.
+	//
+	// This member is required.
+	Name *string
+
+	// The most recent time at which the configured audience model association was
+	// updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the configured audience model association.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the collaboration privacy budgets. This summary includes the
+// collaboration information, creation information, epsilon provided, and utility
+// in terms of aggregations.
+type CollaborationPrivacyBudgetSummary struct {
+
+	// The includes epsilon provided and utility in terms of aggregations.
+	//
+	// This member is required.
+	Budget PrivacyBudget
+
+	// The ARN of the collaboration that includes this privacy budget.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that includes this privacy budget.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the privacy budget was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the account that created this privacy budget.
+	//
+	// This member is required.
+	CreatorAccountId *string
+
+	// The unique identifier of the collaboration privacy budget.
+	//
+	// This member is required.
+	Id *string
+
+	// The ARN of the collaboration privacy budget template.
+	//
+	// This member is required.
+	PrivacyBudgetTemplateArn *string
+
+	// The unique identifier of the collaboration privacy budget template.
+	//
+	// This member is required.
+	PrivacyBudgetTemplateId *string
+
+	// The type of privacy budget template.
+	//
+	// This member is required.
+	Type PrivacyBudgetType
+
+	// The most recent time at which the privacy budget was updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// An array that specifies the information for a collaboration's privacy budget
+// template.
+type CollaborationPrivacyBudgetTemplate struct {
+
+	// The ARN of the collaboration privacy budget template.
+	//
+	// This member is required.
+	Arn *string
+
+	// How often the privacy budget refreshes. If you plan to regularly bring new data
+	// into the collaboration, use CALENDAR_MONTH to automatically get a new privacy
+	// budget for the collaboration every calendar month. Choosing this option allows
+	// arbitrary amounts of information to be revealed about rows of the data when
+	// repeatedly queried across refreshes. Avoid choosing this if the same rows will
+	// be repeatedly queried between privacy budget refreshes.
+	//
+	// This member is required.
+	AutoRefresh PrivacyBudgetTemplateAutoRefresh
+
+	// The ARN of the collaboration that includes this collaboration privacy budget
+	// template.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that includes this collaboration
+	// privacy budget template.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the collaboration privacy budget template was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the account that created this collaboration privacy
+	// budget template.
+	//
+	// This member is required.
+	CreatorAccountId *string
+
+	// The unique identifier of the collaboration privacy budget template.
+	//
+	// This member is required.
+	Id *string
+
+	// Specifies the epsilon and noise parameters for the privacy budget template.
+	//
+	// This member is required.
+	Parameters PrivacyBudgetTemplateParametersOutput
+
+	// The type of privacy budget template.
+	//
+	// This member is required.
+	PrivacyBudgetType PrivacyBudgetType
+
+	// The most recent time at which the collaboration privacy budget template was
+	// updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the collaboration's privacy budget template. This summary includes
+// information about who created the privacy budget template and what
+// collaborations it belongs to.
+type CollaborationPrivacyBudgetTemplateSummary struct {
+
+	// The ARN of the collaboration privacy budget template.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ARN of the collaboration that contains this collaboration privacy budget
+	// template.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that contains this collaboration
+	// privacy budget template.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the collaboration privacy budget template was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the account that created this collaboration privacy
+	// budget template.
+	//
+	// This member is required.
+	CreatorAccountId *string
+
+	// The unique identifier of the collaboration privacy budget template.
+	//
+	// This member is required.
+	Id *string
+
+	// The type of the privacy budget template.
+	//
+	// This member is required.
+	PrivacyBudgetType PrivacyBudgetType
+
+	// The most recent time at which the collaboration privacy budget template was
+	// updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The metadata of the collaboration.
 type CollaborationSummary struct {
 
@@ -695,6 +983,145 @@ type Column struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the configured audience model association.
+type ConfiguredAudienceModelAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the configured audience model association.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Resource Name (ARN) of the collaboration that contains this
+	// configured audience model association.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// A unique identifier of the collaboration that contains this configured audience
+	// model association.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The Amazon Resource Name (ARN) of the configured audience model that was used
+	// for this configured audience model association.
+	//
+	// This member is required.
+	ConfiguredAudienceModelArn *string
+
+	// The time at which the configured audience model association was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// A unique identifier of the configured audience model association.
+	//
+	// This member is required.
+	Id *string
+
+	// When TRUE , indicates that the resource policy for the configured audience model
+	// resource being associated is configured for Clean Rooms to manage permissions
+	// related to the given collaboration. When FALSE , indicates that the configured
+	// audience model resource owner will manage permissions related to the given
+	// collaboration.
+	//
+	// This member is required.
+	ManageResourcePolicies *bool
+
+	// The Amazon Resource Name (ARN) of the membership that contains this configured
+	// audience model association.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// A unique identifier for the membership that contains this configured audience
+	// model association.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The name of the configured audience model association.
+	//
+	// This member is required.
+	Name *string
+
+	// The most recent time at which the configured audience model association was
+	// updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the configured audience model association.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the configured audience model association.
+type ConfiguredAudienceModelAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the configured audience model association.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Resource Name (ARN) of the collaboration that contains the
+	// configured audience model association.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// A unique identifier of the collaboration that configured audience model is
+	// associated with.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The Amazon Resource Name (ARN) of the configured audience model that was used
+	// for this configured audience model association.
+	//
+	// This member is required.
+	ConfiguredAudienceModelArn *string
+
+	// The time at which the configured audience model association was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// A unique identifier of the configured audience model association.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the membership that contains the configured
+	// audience model association.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// A unique identifier of the membership that contains the configured audience
+	// model association.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The name of the configured audience model association.
+	//
+	// This member is required.
+	Name *string
+
+	// The most recent time at which the configured audience model association was
+	// updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the configured audience model association.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -833,7 +1260,7 @@ func (*ConfiguredTableAnalysisRulePolicyV1MemberAggregation) isConfiguredTableAn
 }
 
 // A type of analysis rule that enables the table owner to approve custom SQL
-// queries on their configured tables.
+// queries on their configured tables. It supports differential privacy.
 type ConfiguredTableAnalysisRulePolicyV1MemberCustom struct {
 	Value AnalysisRuleCustom
 
@@ -1031,6 +1458,217 @@ type DataEncryptionMetadata struct {
 	//
 	// This member is required.
 	PreserveNulls *bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the name of the column that contains the unique identifier of your
+// users, whose privacy you want to protect.
+type DifferentialPrivacyColumn struct {
+
+	// The name of the column, such as user_id, that contains the unique identifier of
+	// your users, whose privacy you want to protect. If you want to turn on
+	// differential privacy for two or more tables in a collaboration, you must
+	// configure the same column as the user identifier column in both analysis rules.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the unique identifier for your users.
+type DifferentialPrivacyConfiguration struct {
+
+	// The name of the column (such as user_id) that contains the unique identifier of
+	// your users whose privacy you want to protect. If you want to turn on diﬀerential
+	// privacy for two or more tables in a collaboration, you must conﬁgure the same
+	// column as the user identiﬁer column in both analysis rules.
+	//
+	// This member is required.
+	Columns []DifferentialPrivacyColumn
+
+	noSmithyDocumentSerde
+}
+
+// An array that contains the sensitivity parameters.
+type DifferentialPrivacyParameters struct {
+
+	// Provides the sensitivity parameters that you can use to better understand the
+	// total amount of noise in query results.
+	//
+	// This member is required.
+	SensitivityParameters []DifferentialPrivacySensitivityParameters
+
+	noSmithyDocumentSerde
+}
+
+// Provides an estimate of the number of aggregation functions that the member who
+// can query can run given the epsilon and noise parameters.
+type DifferentialPrivacyPreviewAggregation struct {
+
+	// The maximum number of aggregations that the member who can query can run given
+	// the epsilon and noise parameters.
+	//
+	// This member is required.
+	MaxCount *int32
+
+	// The type of aggregation function.
+	//
+	// This member is required.
+	Type DifferentialPrivacyAggregationType
+
+	noSmithyDocumentSerde
+}
+
+// The epsilon and noise parameters that you want to preview.
+type DifferentialPrivacyPreviewParametersInput struct {
+
+	// The epsilon value that you want to preview.
+	//
+	// This member is required.
+	Epsilon *int32
+
+	// Noise added per query is measured in terms of the number of users whose
+	// contributions you want to obscure. This value governs the rate at which the
+	// privacy budget is depleted.
+	//
+	// This member is required.
+	UsersNoisePerQuery *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configured epsilon value and the utility in terms of total
+// aggregations, as well as the remaining aggregations available.
+type DifferentialPrivacyPrivacyBudget struct {
+
+	// This information includes the configured epsilon value and the utility in terms
+	// of total aggregations, as well as the remaining aggregations.
+	//
+	// This member is required.
+	Aggregations []DifferentialPrivacyPrivacyBudgetAggregation
+
+	// The epsilon value that you configured.
+	//
+	// This member is required.
+	Epsilon *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about the total number of aggregations, as well as the remaining
+// aggregations.
+type DifferentialPrivacyPrivacyBudgetAggregation struct {
+
+	// The maximum number of aggregation functions that you can perform with the given
+	// privacy budget.
+	//
+	// This member is required.
+	MaxCount *int32
+
+	// The remaining number of aggregation functions that can be run with the
+	// available privacy budget.
+	//
+	// This member is required.
+	RemainingCount *int32
+
+	// The different types of aggregation functions that you can perform.
+	//
+	// This member is required.
+	Type DifferentialPrivacyAggregationType
+
+	noSmithyDocumentSerde
+}
+
+// Information about the number of aggregation functions that the member who can
+// query can run given the epsilon and noise parameters.
+type DifferentialPrivacyPrivacyImpact struct {
+
+	// The number of aggregation functions that you can perform.
+	//
+	// This member is required.
+	Aggregations []DifferentialPrivacyPreviewAggregation
+
+	noSmithyDocumentSerde
+}
+
+// Provides the sensitivity parameters.
+type DifferentialPrivacySensitivityParameters struct {
+
+	// The aggregation expression that was run.
+	//
+	// This member is required.
+	AggregationExpression *string
+
+	// The type of aggregation function that was run.
+	//
+	// This member is required.
+	AggregationType DifferentialPrivacyAggregationType
+
+	// The maximum number of rows contributed by a user in a SQL query.
+	//
+	// This member is required.
+	UserContributionLimit *int32
+
+	// The upper bound of the aggregation expression.
+	MaxColumnValue *float32
+
+	// The lower bound of the aggregation expression.
+	MinColumnValue *float32
+
+	noSmithyDocumentSerde
+}
+
+// The epsilon and noise parameter values that you want to use for the
+// differential privacy template.
+type DifferentialPrivacyTemplateParametersInput struct {
+
+	// The epsilon value that you want to use.
+	//
+	// This member is required.
+	Epsilon *int32
+
+	// Noise added per query is measured in terms of the number of users whose
+	// contributions you want to obscure. This value governs the rate at which the
+	// privacy budget is depleted.
+	//
+	// This member is required.
+	UsersNoisePerQuery *int32
+
+	noSmithyDocumentSerde
+}
+
+// The epsilon and noise parameter values that were used for the differential
+// privacy template.
+type DifferentialPrivacyTemplateParametersOutput struct {
+
+	// The epsilon value that you specified.
+	//
+	// This member is required.
+	Epsilon *int32
+
+	// Noise added per query is measured in terms of the number of users whose
+	// contributions you want to obscure. This value governs the rate at which the
+	// privacy budget is depleted.
+	//
+	// This member is required.
+	UsersNoisePerQuery *int32
+
+	noSmithyDocumentSerde
+}
+
+// The epsilon and noise parameter values that you want to update in the
+// differential privacy template.
+type DifferentialPrivacyTemplateUpdateParameters struct {
+
+	// The updated epsilon value that you want to use.
+	Epsilon *int32
+
+	// The updated value of noise added per query. It is measured in terms of the
+	// number of users whose contributions you want to obscure. This value governs the
+	// rate at which the privacy budget is depleted.
+	UsersNoisePerQuery *int32
 
 	noSmithyDocumentSerde
 }
@@ -1353,6 +1991,310 @@ type PaymentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the updated epsilon and noise parameters to preview. The preview
+// allows you to see how the maximum number of each type of aggregation function
+// would change with the new parameters.
+//
+// The following types satisfy this interface:
+//
+//	PreviewPrivacyImpactParametersInputMemberDifferentialPrivacy
+type PreviewPrivacyImpactParametersInput interface {
+	isPreviewPrivacyImpactParametersInput()
+}
+
+// An array that specifies the epsilon and noise parameters.
+type PreviewPrivacyImpactParametersInputMemberDifferentialPrivacy struct {
+	Value DifferentialPrivacyPreviewParametersInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PreviewPrivacyImpactParametersInputMemberDifferentialPrivacy) isPreviewPrivacyImpactParametersInput() {
+}
+
+// The epsilon parameter value and number of each aggregation function that you
+// can perform.
+//
+// The following types satisfy this interface:
+//
+//	PrivacyBudgetMemberDifferentialPrivacy
+type PrivacyBudget interface {
+	isPrivacyBudget()
+}
+
+// An object that specifies the epsilon parameter and the utility in terms of
+// total aggregations, as well as the remaining aggregations available.
+type PrivacyBudgetMemberDifferentialPrivacy struct {
+	Value DifferentialPrivacyPrivacyBudget
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivacyBudgetMemberDifferentialPrivacy) isPrivacyBudget() {}
+
+// An array that summaries the specified privacy budget. This summary includes
+// collaboration information, creation information, membership information, and
+// privacy budget information.
+type PrivacyBudgetSummary struct {
+
+	// The provided privacy budget.
+	//
+	// This member is required.
+	Budget PrivacyBudget
+
+	// The ARN of the collaboration that contains this privacy budget.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that contains this privacy budget.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the privacy budget was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the privacy budget.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the member who created the privacy budget
+	// summary.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The identifier for a membership resource.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The ARN of the privacy budget template.
+	//
+	// This member is required.
+	PrivacyBudgetTemplateArn *string
+
+	// The unique identifier of the privacy budget template.
+	//
+	// This member is required.
+	PrivacyBudgetTemplateId *string
+
+	// Specifies the type of the privacy budget.
+	//
+	// This member is required.
+	Type PrivacyBudgetType
+
+	// The most recent time at which the privacy budget was updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// An object that defines the privacy budget template.
+type PrivacyBudgetTemplate struct {
+
+	// The ARN of the privacy budget template.
+	//
+	// This member is required.
+	Arn *string
+
+	// How often the privacy budget refreshes. If you plan to regularly bring new data
+	// into the collaboration, use CALENDAR_MONTH to automatically get a new privacy
+	// budget for the collaboration every calendar month. Choosing this option allows
+	// arbitrary amounts of information to be revealed about rows of the data when
+	// repeatedly queried across refreshes. Avoid choosing this if the same rows will
+	// be repeatedly queried between privacy budget refreshes.
+	//
+	// This member is required.
+	AutoRefresh PrivacyBudgetTemplateAutoRefresh
+
+	// The ARN of the collaboration that contains this privacy budget template.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique ID of the collaboration that contains this privacy budget template.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the privacy budget template was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the privacy budget template.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the member who created the privacy budget
+	// template.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The identifier for a membership resource.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// Specifies the epislon and noise parameters for the privacy budget template.
+	//
+	// This member is required.
+	Parameters PrivacyBudgetTemplateParametersOutput
+
+	// Specifies the type of the privacy budget template.
+	//
+	// This member is required.
+	PrivacyBudgetType PrivacyBudgetType
+
+	// The most recent time at which the privacy budget template was updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The epsilon and noise parameters that you want to use for the privacy budget
+// template.
+//
+// The following types satisfy this interface:
+//
+//	PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy
+type PrivacyBudgetTemplateParametersInput interface {
+	isPrivacyBudgetTemplateParametersInput()
+}
+
+// An object that specifies the epsilon and noise parameters.
+type PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy struct {
+	Value DifferentialPrivacyTemplateParametersInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy) isPrivacyBudgetTemplateParametersInput() {
+}
+
+// The epsilon and noise parameters that were used in the privacy budget template.
+//
+// The following types satisfy this interface:
+//
+//	PrivacyBudgetTemplateParametersOutputMemberDifferentialPrivacy
+type PrivacyBudgetTemplateParametersOutput interface {
+	isPrivacyBudgetTemplateParametersOutput()
+}
+
+// The epsilon and noise parameters.
+type PrivacyBudgetTemplateParametersOutputMemberDifferentialPrivacy struct {
+	Value DifferentialPrivacyTemplateParametersOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivacyBudgetTemplateParametersOutputMemberDifferentialPrivacy) isPrivacyBudgetTemplateParametersOutput() {
+}
+
+// A summary of the privacy budget template. The summary includes membership
+// information, collaboration information, and creation information.
+type PrivacyBudgetTemplateSummary struct {
+
+	// The ARN of the privacy budget template.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ARN of the collaboration that contains this privacy budget template.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique ID of the collaboration that contains this privacy budget template.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the privacy budget template was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the privacy budget template.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the member who created the privacy budget
+	// template.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The identifier for a membership resource.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The type of the privacy budget template.
+	//
+	// This member is required.
+	PrivacyBudgetType PrivacyBudgetType
+
+	// The most recent time at which the privacy budget template was updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The epsilon and noise parameters that you want to update in the privacy budget
+// template.
+//
+// The following types satisfy this interface:
+//
+//	PrivacyBudgetTemplateUpdateParametersMemberDifferentialPrivacy
+type PrivacyBudgetTemplateUpdateParameters interface {
+	isPrivacyBudgetTemplateUpdateParameters()
+}
+
+// An object that specifies the new values for the epsilon and noise parameters.
+type PrivacyBudgetTemplateUpdateParametersMemberDifferentialPrivacy struct {
+	Value DifferentialPrivacyTemplateUpdateParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivacyBudgetTemplateUpdateParametersMemberDifferentialPrivacy) isPrivacyBudgetTemplateUpdateParameters() {
+}
+
+// Provides an estimate of the number of aggregation functions that the member who
+// can query can run given the epsilon and noise parameters.
+//
+// The following types satisfy this interface:
+//
+//	PrivacyImpactMemberDifferentialPrivacy
+type PrivacyImpact interface {
+	isPrivacyImpact()
+}
+
+// An object that lists the number and type of aggregation functions you can
+// perform.
+type PrivacyImpactMemberDifferentialPrivacy struct {
+	Value DifferentialPrivacyPrivacyImpact
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivacyImpactMemberDifferentialPrivacy) isPrivacyImpact() {}
+
 // The parameters for an Clean Rooms protected query.
 type ProtectedQuery struct {
 
@@ -1380,6 +2322,10 @@ type ProtectedQuery struct {
 	//
 	// This member is required.
 	Status ProtectedQueryStatus
+
+	// The sensitivity parameters of the differential privacy results of the protected
+	// query.
+	DifferentialPrivacy *DifferentialPrivacyParameters
 
 	// An error thrown by the protected query.
 	Error *ProtectedQueryError
@@ -1772,6 +2718,12 @@ func (*UnknownUnionMember) isAnalysisSource()                              {}
 func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()           {}
 func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicyV1()         {}
 func (*UnknownUnionMember) isMembershipProtectedQueryOutputConfiguration() {}
+func (*UnknownUnionMember) isPreviewPrivacyImpactParametersInput()         {}
+func (*UnknownUnionMember) isPrivacyBudget()                               {}
+func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersInput()        {}
+func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersOutput()       {}
+func (*UnknownUnionMember) isPrivacyBudgetTemplateUpdateParameters()       {}
+func (*UnknownUnionMember) isPrivacyImpact()                               {}
 func (*UnknownUnionMember) isProtectedQueryOutput()                        {}
 func (*UnknownUnionMember) isProtectedQueryOutputConfiguration()           {}
 func (*UnknownUnionMember) isTableReference()                              {}

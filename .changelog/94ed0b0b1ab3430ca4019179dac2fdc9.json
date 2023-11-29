@@ -1,0 +1,8 @@
+{
+    "id": "94ed0b0b-1ab3-430c-a401-9179dac2fdc9",
+    "type": "feature",
+    "description": "Launching Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3. Customers can now manage their direct query data sources to Amazon S3 programatically",
+    "modules": [
+        "service/opensearch"
+    ]
+}

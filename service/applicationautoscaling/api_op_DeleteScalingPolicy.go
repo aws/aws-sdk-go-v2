@@ -16,8 +16,8 @@ import (
 // target. Deleting a step scaling policy deletes the underlying alarm action, but
 // does not delete the CloudWatch alarm associated with the scaling policy, even if
 // it no longer has an associated action. For more information, see Delete a step
-// scaling policy (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html#delete-step-scaling-policy)
-// and Delete a target tracking scaling policy (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#delete-target-tracking-policy)
+// scaling policy (https://docs.aws.amazon.com/autoscaling/application/userguide/create-step-scaling-policy-cli.html#delete-step-scaling-policy)
+// and Delete a target tracking scaling policy (https://docs.aws.amazon.com/autoscaling/application/userguide/create-target-tracking-policy-cli.html#delete-target-tracking-policy)
 // in the Application Auto Scaling User Guide.
 func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingPolicyInput, optFns ...func(*Options)) (*DeleteScalingPolicyOutput, error) {
 	if params == nil {
@@ -92,6 +92,9 @@ type DeleteScalingPolicyInput struct {
 	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//   - SageMaker inference component - The resource type is inference-component and
+	//   the unique identifier is the resource ID. Example:
+	//   inference-component/my-inference-component .
 	//
 	// This member is required.
 	ResourceId *string
@@ -139,6 +142,8 @@ type DeleteScalingPolicyInput struct {
 	//   Neptune DB cluster.
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
 	//   concurrency for a SageMaker Serverless endpoint.
+	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
+	//   an endpoint for a SageMaker inference component.
 	//
 	// This member is required.
 	ScalableDimension types.ScalableDimension
