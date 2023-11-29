@@ -1,8 +1,0 @@
-{
-    "id": "224289a7-5f02-42de-b9c5-5fbb2ea9ee60",
-    "type": "feature",
-    "description": "AWS Clean Rooms now provides differential privacy to protect against user-identification attempts and machine learning modeling to allow two parties to identify similar users in their data.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

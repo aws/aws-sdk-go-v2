@@ -1,3 +1,8 @@
+# v1.5.0 (2023-11-29)
+
+* **Feature**: Expose Options() accessor on service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2023-11-28.2)
 
 * **Feature**: This release adds support for minor versions/aliases for invoke model identifier.

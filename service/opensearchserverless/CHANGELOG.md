@@ -1,3 +1,9 @@
+# v1.9.0 (2023-11-29)
+
+* **Feature**: Amazon OpenSearch Serverless collections support an additional attribute called standby-replicas. This allows to specify whether a collection should have redundancy enabled.
+* **Feature**: Expose Options() accessor on service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.5 (2023-11-28.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

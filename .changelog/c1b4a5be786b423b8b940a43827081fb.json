@@ -1,8 +1,0 @@
-{
-    "id": "c1b4a5be-786b-423b-8b94-0a43827081fb",
-    "type": "feature",
-    "description": "This release adds InferenceComponentName to InvokeEndpoint and InvokeEndpointWithResponseStream APIs to get inferences from the deployed InferenceComponents.",
-    "modules": [
-        "service/sagemakerruntime"
-    ]
-}

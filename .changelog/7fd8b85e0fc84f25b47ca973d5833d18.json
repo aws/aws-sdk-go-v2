@@ -1,8 +1,0 @@
-{
-    "id": "7fd8b85e-0fc8-4f25-b47c-a973d5833d18",
-    "type": "feature",
-    "description": "Public Preview SDK release of AWS Clean Rooms ML APIs",
-    "modules": [
-        "service/cleanroomsml"
-    ]
-}

@@ -1,3 +1,9 @@
+# v1.25.0 (2023-11-29)
+
+* **Feature**: Expose Options() accessor on service clients.
+* **Feature**: This release adds InferenceComponentName to InvokeEndpoint and InvokeEndpointWithResponseStream APIs to get inferences from the deployed InferenceComponents.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.6 (2023-11-28.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

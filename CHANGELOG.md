@@ -1,3 +1,28 @@
+# Release (2023-11-29)
+
+## General Highlights
+* **Feature**: Expose Options() accessor on service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.25.0](service/applicationautoscaling/CHANGELOG.md#v1250-2023-11-29)
+  * **Feature**: Amazon SageMaker customers can now use Application Auto Scaling to automatically scale the number of Inference Component copies across an endpoint to meet the varying demand of their workloads.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.8.0](service/cleanrooms/CHANGELOG.md#v180-2023-11-29)
+  * **Feature**: AWS Clean Rooms now provides differential privacy to protect against user-identification attempts and machine learning modeling to allow two parties to identify similar users in their data.
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.0.0](service/cleanroomsml/CHANGELOG.md#v100-2023-11-29)
+  * **Release**: New AWS service client module
+  * **Feature**: Public Preview SDK release of AWS Clean Rooms ML APIs
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.26.0](service/opensearch/CHANGELOG.md#v1260-2023-11-29)
+  * **Feature**: Launching Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3. Customers can now manage their direct query data sources to Amazon S3 programatically
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.9.0](service/opensearchserverless/CHANGELOG.md#v190-2023-11-29)
+  * **Feature**: Amazon OpenSearch Serverless collections support an additional attribute called standby-replicas. This allows to specify whether a collection should have redundancy enabled.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.119.0](service/sagemaker/CHANGELOG.md#v11190-2023-11-29)
+  * **Feature**: This release adds following support 1/ Improved SDK tooling for model deployment. 2/ New Inference Component based features to lower inference costs and latency 3/ SageMaker HyperPod management. 4/ Additional parameters for FM Fine Tuning in Autopilot
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.25.0](service/sagemakerruntime/CHANGELOG.md#v1250-2023-11-29)
+  * **Feature**: This release adds InferenceComponentName to InvokeEndpoint and InvokeEndpointWithResponseStream APIs to get inferences from the deployed InferenceComponents.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.26.0](service/sts/CHANGELOG.md#v1260-2023-11-29)
+  * **Documentation**: Documentation updates for AWS Security Token Service.
+
 # Release (2023-11-28.3)
 
 ## General Highlights
