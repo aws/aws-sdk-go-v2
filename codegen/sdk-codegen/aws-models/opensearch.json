@@ -258,6 +258,98 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#AddDataSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#AddDataSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#AddDataSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DependencyFailureException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds the data source on the domain.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-01-01/opensearch/domain/{DomainName}/dataSource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#AddDataSourceRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.opensearch#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.opensearch#DataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.opensearch#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.opensearch#DataSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>AddDataSource</code>\n   operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#AddDataSourceResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message associated with the data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of an <code>AddDataSource</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearch#AddTags": {
             "type": "operation",
             "input": {
@@ -478,6 +570,9 @@
                     "target": "com.amazonaws.opensearch#AcceptInboundConnection"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#AddDataSource"
+                },
+                {
                     "target": "com.amazonaws.opensearch#AddTags"
                 },
                 {
@@ -500,6 +595,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearch#CreateVpcEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DeleteDataSource"
                 },
                 {
                     "target": "com.amazonaws.opensearch#DeleteDomain"
@@ -568,6 +666,9 @@
                     "target": "com.amazonaws.opensearch#GetCompatibleVersions"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#GetDataSource"
+                },
+                {
                     "target": "com.amazonaws.opensearch#GetDomainMaintenanceStatus"
                 },
                 {
@@ -578,6 +679,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearch#GetUpgradeStatus"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ListDataSources"
                 },
                 {
                     "target": "com.amazonaws.opensearch#ListDomainMaintenances"
@@ -629,6 +733,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearch#StartServiceSoftwareUpdate"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#UpdateDataSource"
                 },
                 {
                     "target": "com.amazonaws.opensearch#UpdateDomainConfig"
@@ -3321,6 +3428,149 @@
                 "smithy.api#documentation": "<p>Cross-cluster search specific connection properties.</p>"
             }
         },
+        "com.amazonaws.opensearch#DataSourceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9_])*[\\\\a-zA-Z0-9_@#%*+=:?./!\\s-]*$"
+            }
+        },
+        "com.amazonaws.opensearch#DataSourceDetails": {
+            "type": "structure",
+            "members": {
+                "DataSourceType": {
+                    "target": "com.amazonaws.opensearch#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.opensearch#DataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data source.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.opensearch#DataSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the data sources.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#DataSourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#DataSourceDetails"
+            }
+        },
+        "com.amazonaws.opensearch#DataSourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 80
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.opensearch#DataSourceType": {
+            "type": "union",
+            "members": {
+                "S3GlueDataCatalog": {
+                    "target": "com.amazonaws.opensearch#S3GlueDataCatalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source for the AWS S3 Glue Data Catalog.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the data source.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#DeleteDataSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#DeleteDataSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#DeleteDataSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DependencyFailureException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the data source.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#DeleteDataSourceRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.opensearch#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.opensearch#DataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data source.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DeleteDataSource</code>\n   operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#DeleteDataSourceResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message associated with the initiated request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>GetDataSource</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearch#DeleteDomain": {
             "type": "operation",
             "input": {
@@ -5226,7 +5476,7 @@
                 "TLSSecurityPolicy": {
                     "target": "com.amazonaws.opensearch#TLSSecurityPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the TLS security policy to apply to the HTTPS endpoint of the domain.</p>\n         <p> Can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-0-2019-07:</b> TLS security policy which supports\n     TLS version 1.0 and higher.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-2019-07:</b> TLS security policy which supports\n     only TLS version 1.2 </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can\n   be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-0-2019-07:</b> TLS security policy which\n     supports TLS version 1.0 to TLS version 1.2</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-2019-07:</b> TLS security policy which\n     supports only TLS version 1.2</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-0-2023-10:</b> TLS security policy which\n     supports TLS version 1.0 to TLS version 1.3</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-2023-10:</b> TLS security policy which\n     supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CustomEndpointEnabled": {
@@ -6233,6 +6483,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.opensearch#GetDataSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#GetDataSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#GetDataSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DependencyFailureException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the data source details.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#GetDataSourceRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.opensearch#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.opensearch#DataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data source.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>GetDataSource</code>\n   operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#GetDataSourceResponse": {
+            "type": "structure",
+            "members": {
+                "DataSourceType": {
+                    "target": "com.amazonaws.opensearch#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.opensearch#DataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data source.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.opensearch#DataSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>GetDataSource</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearch#GetDomainMaintenanceStatus": {
             "type": "operation",
             "input": {
@@ -7039,6 +7378,75 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> The role of a given instance and all applicable limits. The role performed by a given OpenSearch instance can\n   be one of the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>data</b> - A data node.</p>\n            </li>\n            <li>\n               <p>\n                  <b>master</b> - A dedicated master node.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ultra_warm</b> - An UltraWarm node.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.opensearch#ListDataSources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#ListDataSourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#ListDataSourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DependencyFailureException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the data source details of the domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2021-01-01/opensearch/domain/{DomainName}/dataSource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#ListDataSourcesRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.opensearch#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>ListDataSources</code>\n   operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#ListDataSourcesResponse": {
+            "type": "structure",
+            "members": {
+                "DataSources": {
+                    "target": "com.amazonaws.opensearch#DataSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the data sources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>ListDataSources</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opensearch#ListDomainMaintenances": {
@@ -10132,6 +10540,20 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#S3GlueDataCatalog": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.opensearch#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role ARN for the AWS S3 Glue Data Catalog.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the AWS S3 Glue Data Catalog.</p>"
+            }
+        },
         "com.amazonaws.opensearch#S3Key": {
             "type": "string",
             "traits": {
@@ -11004,6 +11426,96 @@
         },
         "com.amazonaws.opensearch#UncompressedPluginSizeInBytes": {
             "type": "long"
+        },
+        "com.amazonaws.opensearch#UpdateDataSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#UpdateDataSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#UpdateDataSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DependencyFailureException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the data source on the domain.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#UpdateDataSourceRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.opensearch#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.opensearch#DataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data source.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.opensearch#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.opensearch#DataSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>UpdateDataSource</code>\n   operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#UpdateDataSourceResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message associated with the data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of an <code>UpdateDataSource</code> operation.</p>",
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.opensearch#UpdateDomainConfig": {
             "type": "operation",

@@ -2389,7 +2389,7 @@
                 "ProvidedContexts": {
                     "target": "com.amazonaws.sts#ProvidedContextsListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of previously acquired trusted context assertions in the format of a JSON array.\n         The trusted context assertion is signed and encrypted by Amazon Web Services STS.</p>\n         <p>The following is an example of a <code>ProvidedContext</code> value that includes a\n         single trusted context assertion and the ARN of the context provider from which the trusted\n         context assertion was generated.</p>\n         <p>\n            <code>[{\"ProviderArn\":\"arn:aws:iam::aws:contextProvider/identitycenter\",\"ContextAssertion\":\"trusted-context-assertion\"}]</code>\n         </p>"
+                        "smithy.api#documentation": "<p>A list of previously acquired trusted context assertions in the format of a JSON array.\n         The trusted context assertion is signed and encrypted by Amazon Web Services STS.</p>\n         <p>The following is an example of a <code>ProvidedContext</code> value that includes a\n         single trusted context assertion and the ARN of the context provider from which the trusted\n         context assertion was generated.</p>\n         <p>\n            <code>[{\"ProviderArn\":\"arn:aws:iam::aws:contextProvider/IdentityCenter\",\"ContextAssertion\":\"trusted-context-assertion\"}]</code>\n         </p>"
                     }
                 }
             },
