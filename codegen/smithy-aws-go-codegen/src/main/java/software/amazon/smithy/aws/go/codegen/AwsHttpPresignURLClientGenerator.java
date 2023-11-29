@@ -433,9 +433,8 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     if (isS3ServiceShape(model, serviceShape)) {
 
                         writer.write("");
-                        writer.write("// add multi-region access point presigner");
+                        writer.write("// extended s3 presigning");
 
-                        // ==== multi-region access point support
                         Symbol PresignConstructor = SymbolUtils.createValueSymbolBuilder(
                                 "NewPresignHTTPRequestMiddleware", AwsCustomGoDependency.S3_CUSTOMIZATION
                         ).build();
@@ -451,6 +450,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                         writer.openBlock("signermv := $T($T{", "})",
                                 PresignConstructor, PresignOptions, () -> {
                                     writer.write("CredentialsProvider : options.Credentials,");
+                                    writer.write("ExpressCredentials : options.ExpressCredentials,");
                                     writer.write("V4Presigner : c.Presigner,");
                                     writer.write("V4aPresigner : c.presignerV4a,");
                                     writer.write("LogSigning : options.ClientLogMode.IsSigning(),");
@@ -459,8 +459,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                         writer.write("err = $T(stack, signermv)", RegisterPresigningMiddleware);
                         writer.write("if err != nil { return err }");
                         writer.write("");
-
-                        // =======
 
                         writer.openBlock("if c.Expires < 0 {", "}", () -> {
                             writer.addUseImports(SmithyGoDependency.FMT);
@@ -753,7 +751,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
                 schemeID := rscheme.Scheme.SchemeID()
                 $setSignerVersion:W
-                if schemeID == "aws.auth#sigv4" {
+                if schemeID == "aws.auth#sigv4" || schemeID == "com.amazonaws.s3#sigv4express" {
                     if sn, ok := smithyhttp.GetSigV4SigningName(&rscheme.SignerProperties); ok {
                         ctx = $ctxSetName:T(ctx, sn)
                     }

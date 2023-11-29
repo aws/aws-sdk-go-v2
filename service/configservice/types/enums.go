@@ -518,6 +518,24 @@ func (RecorderStatus) Values() []RecorderStatus {
 	}
 }
 
+type RecordingFrequency string
+
+// Enum values for RecordingFrequency
+const (
+	RecordingFrequencyContinuous RecordingFrequency = "CONTINUOUS"
+	RecordingFrequencyDaily      RecordingFrequency = "DAILY"
+)
+
+// Values returns all known values for RecordingFrequency. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecordingFrequency) Values() []RecordingFrequency {
+	return []RecordingFrequency{
+		"CONTINUOUS",
+		"DAILY",
+	}
+}
+
 type RecordingStrategyType string
 
 // Enum values for RecordingStrategyType

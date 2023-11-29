@@ -3578,6 +3578,80 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAutoScalingGroupEstimatedMonthlySavings(v **types.AutoScalingGroupEstimatedMonthlySavings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoScalingGroupEstimatedMonthlySavings
+	if *v == nil {
+		sv = &types.AutoScalingGroupEstimatedMonthlySavings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "currency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Currency to be of type string, got %T instead", value)
+				}
+				sv.Currency = types.Currency(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Value = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Value = f64
+
+				default:
+					return fmt.Errorf("expected Value to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.AutoScalingGroupRecommendation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3832,6 +3906,11 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(v **ty
 				return err
 			}
 
+		case "savingsOpportunityAfterDiscounts":
+			if err := awsAwsjson10_deserializeDocumentAutoScalingGroupSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3906,6 +3985,76 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendations(v *[]types.
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAutoScalingGroupSavingsOpportunityAfterDiscounts(v **types.AutoScalingGroupSavingsOpportunityAfterDiscounts, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoScalingGroupSavingsOpportunityAfterDiscounts
+	if *v == nil {
+		sv = &types.AutoScalingGroupSavingsOpportunityAfterDiscounts{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "estimatedMonthlySavings":
+			if err := awsAwsjson10_deserializeDocumentAutoScalingGroupEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityPercentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				default:
+					return fmt.Errorf("expected SavingsOpportunityPercentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -4212,6 +4361,275 @@ func awsAwsjson10_deserializeDocumentCurrentPerformanceRiskRatings(v **types.Cur
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCustomizableMetricParameters(v **types.CustomizableMetricParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomizableMetricParameters
+	if *v == nil {
+		sv = &types.CustomizableMetricParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "headroom":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomizableMetricHeadroom to be of type string, got %T instead", value)
+				}
+				sv.Headroom = types.CustomizableMetricHeadroom(jtv)
+			}
+
+		case "threshold":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomizableMetricThreshold to be of type string, got %T instead", value)
+				}
+				sv.Threshold = types.CustomizableMetricThreshold(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentEBSEffectiveRecommendationPreferences(v **types.EBSEffectiveRecommendationPreferences, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EBSEffectiveRecommendationPreferences
+	if *v == nil {
+		sv = &types.EBSEffectiveRecommendationPreferences{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "savingsEstimationMode":
+			if err := awsAwsjson10_deserializeDocumentEBSSavingsEstimationMode(&sv.SavingsEstimationMode, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentEBSEstimatedMonthlySavings(v **types.EBSEstimatedMonthlySavings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EBSEstimatedMonthlySavings
+	if *v == nil {
+		sv = &types.EBSEstimatedMonthlySavings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "currency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Currency to be of type string, got %T instead", value)
+				}
+				sv.Currency = types.Currency(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Value = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Value = f64
+
+				default:
+					return fmt.Errorf("expected Value to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentEBSSavingsEstimationMode(v **types.EBSSavingsEstimationMode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EBSSavingsEstimationMode
+	if *v == nil {
+		sv = &types.EBSSavingsEstimationMode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EBSSavingsEstimationModeSource to be of type string, got %T instead", value)
+				}
+				sv.Source = types.EBSSavingsEstimationModeSource(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentEBSSavingsOpportunityAfterDiscounts(v **types.EBSSavingsOpportunityAfterDiscounts, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EBSSavingsOpportunityAfterDiscounts
+	if *v == nil {
+		sv = &types.EBSSavingsOpportunityAfterDiscounts{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "estimatedMonthlySavings":
+			if err := awsAwsjson10_deserializeDocumentEBSEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityPercentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				default:
+					return fmt.Errorf("expected SavingsOpportunityPercentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentEBSUtilizationMetric(v **types.EBSUtilizationMetric, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4326,6 +4744,226 @@ func awsAwsjson10_deserializeDocumentEBSUtilizationMetrics(v *[]types.EBSUtiliza
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentECSEffectiveRecommendationPreferences(v **types.ECSEffectiveRecommendationPreferences, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ECSEffectiveRecommendationPreferences
+	if *v == nil {
+		sv = &types.ECSEffectiveRecommendationPreferences{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "savingsEstimationMode":
+			if err := awsAwsjson10_deserializeDocumentECSSavingsEstimationMode(&sv.SavingsEstimationMode, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentECSEstimatedMonthlySavings(v **types.ECSEstimatedMonthlySavings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ECSEstimatedMonthlySavings
+	if *v == nil {
+		sv = &types.ECSEstimatedMonthlySavings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "currency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Currency to be of type string, got %T instead", value)
+				}
+				sv.Currency = types.Currency(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Value = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Value = f64
+
+				default:
+					return fmt.Errorf("expected Value to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentECSSavingsEstimationMode(v **types.ECSSavingsEstimationMode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ECSSavingsEstimationMode
+	if *v == nil {
+		sv = &types.ECSSavingsEstimationMode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ECSSavingsEstimationModeSource to be of type string, got %T instead", value)
+				}
+				sv.Source = types.ECSSavingsEstimationModeSource(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentECSSavingsOpportunityAfterDiscounts(v **types.ECSSavingsOpportunityAfterDiscounts, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ECSSavingsOpportunityAfterDiscounts
+	if *v == nil {
+		sv = &types.ECSSavingsOpportunityAfterDiscounts{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "estimatedMonthlySavings":
+			if err := awsAwsjson10_deserializeDocumentECSEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityPercentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				default:
+					return fmt.Errorf("expected SavingsOpportunityPercentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -4614,6 +5252,11 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendation(v **types.ECSServi
 				return err
 			}
 
+		case "effectiveRecommendationPreferences":
+			if err := awsAwsjson10_deserializeDocumentECSEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
+				return err
+			}
+
 		case "finding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4816,6 +5459,11 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendationOption(v **types.EC
 
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityAfterDiscounts":
+			if err := awsAwsjson10_deserializeDocumentECSSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
 				return err
 			}
 
@@ -5109,6 +5757,95 @@ func awsAwsjson10_deserializeDocumentECSServiceUtilizationMetrics(v *[]types.ECS
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentEffectivePreferredResource(v **types.EffectivePreferredResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EffectivePreferredResource
+	if *v == nil {
+		sv = &types.EffectivePreferredResource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "effectiveIncludeList":
+			if err := awsAwsjson10_deserializeDocumentPreferredResourceValues(&sv.EffectiveIncludeList, value); err != nil {
+				return err
+			}
+
+		case "excludeList":
+			if err := awsAwsjson10_deserializeDocumentPreferredResourceValues(&sv.ExcludeList, value); err != nil {
+				return err
+			}
+
+		case "includeList":
+			if err := awsAwsjson10_deserializeDocumentPreferredResourceValues(&sv.IncludeList, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PreferredResourceName to be of type string, got %T instead", value)
+				}
+				sv.Name = types.PreferredResourceName(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentEffectivePreferredResources(v *[]types.EffectivePreferredResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EffectivePreferredResource
+	if *v == nil {
+		cv = []types.EffectivePreferredResource{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EffectivePreferredResource
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentEffectivePreferredResource(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(v **types.EffectiveRecommendationPreferences, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5157,6 +5894,30 @@ func awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(v **type
 					return fmt.Errorf("expected InferredWorkloadTypesPreference to be of type string, got %T instead", value)
 				}
 				sv.InferredWorkloadTypes = types.InferredWorkloadTypesPreference(jtv)
+			}
+
+		case "lookBackPeriod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LookBackPeriodPreference to be of type string, got %T instead", value)
+				}
+				sv.LookBackPeriod = types.LookBackPeriodPreference(jtv)
+			}
+
+		case "preferredResources":
+			if err := awsAwsjson10_deserializeDocumentEffectivePreferredResources(&sv.PreferredResources, value); err != nil {
+				return err
+			}
+
+		case "savingsEstimationMode":
+			if err := awsAwsjson10_deserializeDocumentInstanceSavingsEstimationMode(&sv.SavingsEstimationMode, value); err != nil {
+				return err
+			}
+
+		case "utilizationPreferences":
+			if err := awsAwsjson10_deserializeDocumentUtilizationPreferences(&sv.UtilizationPreferences, value); err != nil {
+				return err
 			}
 
 		default:
@@ -5697,6 +6458,80 @@ func awsAwsjson10_deserializeDocumentInferredWorkloadTypes(v *[]types.InferredWo
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentInstanceEstimatedMonthlySavings(v **types.InstanceEstimatedMonthlySavings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceEstimatedMonthlySavings
+	if *v == nil {
+		sv = &types.InstanceEstimatedMonthlySavings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "currency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Currency to be of type string, got %T instead", value)
+				}
+				sv.Currency = types.Currency(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Value = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Value = f64
+
+				default:
+					return fmt.Errorf("expected Value to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRecommendation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6038,6 +6873,11 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 				return err
 			}
 
+		case "savingsOpportunityAfterDiscounts":
+			if err := awsAwsjson10_deserializeDocumentInstanceSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6078,6 +6918,116 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendations(v *[]types.Instance
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInstanceSavingsEstimationMode(v **types.InstanceSavingsEstimationMode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceSavingsEstimationMode
+	if *v == nil {
+		sv = &types.InstanceSavingsEstimationMode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceSavingsEstimationModeSource to be of type string, got %T instead", value)
+				}
+				sv.Source = types.InstanceSavingsEstimationModeSource(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInstanceSavingsOpportunityAfterDiscounts(v **types.InstanceSavingsOpportunityAfterDiscounts, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceSavingsOpportunityAfterDiscounts
+	if *v == nil {
+		sv = &types.InstanceSavingsOpportunityAfterDiscounts{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "estimatedMonthlySavings":
+			if err := awsAwsjson10_deserializeDocumentInstanceEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityPercentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				default:
+					return fmt.Errorf("expected SavingsOpportunityPercentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -6150,6 +7100,116 @@ func awsAwsjson10_deserializeDocumentInvalidParameterValueException(v **types.In
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentLambdaEffectiveRecommendationPreferences(v **types.LambdaEffectiveRecommendationPreferences, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaEffectiveRecommendationPreferences
+	if *v == nil {
+		sv = &types.LambdaEffectiveRecommendationPreferences{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "savingsEstimationMode":
+			if err := awsAwsjson10_deserializeDocumentLambdaSavingsEstimationMode(&sv.SavingsEstimationMode, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentLambdaEstimatedMonthlySavings(v **types.LambdaEstimatedMonthlySavings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaEstimatedMonthlySavings
+	if *v == nil {
+		sv = &types.LambdaEstimatedMonthlySavings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "currency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Currency to be of type string, got %T instead", value)
+				}
+				sv.Currency = types.Currency(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Value = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Value = f64
+
+				default:
+					return fmt.Errorf("expected Value to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -6336,6 +7396,11 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionMemoryRecommendationOption(v 
 				return err
 			}
 
+		case "savingsOpportunityAfterDiscounts":
+			if err := awsAwsjson10_deserializeDocumentLambdaSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6430,6 +7495,11 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 					return fmt.Errorf("expected CurrentPerformanceRisk to be of type string, got %T instead", value)
 				}
 				sv.CurrentPerformanceRisk = types.CurrentPerformanceRisk(jtv)
+			}
+
+		case "effectiveRecommendationPreferences":
+			if err := awsAwsjson10_deserializeDocumentLambdaEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
+				return err
 			}
 
 		case "finding":
@@ -6735,6 +7805,116 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionUtilizationMetrics(v *[]types
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentLambdaSavingsEstimationMode(v **types.LambdaSavingsEstimationMode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaSavingsEstimationMode
+	if *v == nil {
+		sv = &types.LambdaSavingsEstimationMode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaSavingsEstimationModeSource to be of type string, got %T instead", value)
+				}
+				sv.Source = types.LambdaSavingsEstimationModeSource(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentLambdaSavingsOpportunityAfterDiscounts(v **types.LambdaSavingsOpportunityAfterDiscounts, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaSavingsOpportunityAfterDiscounts
+	if *v == nil {
+		sv = &types.LambdaSavingsOpportunityAfterDiscounts{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "estimatedMonthlySavings":
+			if err := awsAwsjson10_deserializeDocumentLambdaEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityPercentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				default:
+					return fmt.Errorf("expected SavingsOpportunityPercentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -7506,6 +8686,42 @@ func awsAwsjson10_deserializeDocumentPlatformDifferences(v *[]types.PlatformDiff
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentPreferredResourceValues(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PreferredResourceValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentProjectedMetric(v **types.ProjectedMetric, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7949,6 +9165,20 @@ func awsAwsjson10_deserializeDocumentRecommendationPreferencesDetail(v **types.R
 				sv.InferredWorkloadTypes = types.InferredWorkloadTypesPreference(jtv)
 			}
 
+		case "lookBackPeriod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LookBackPeriodPreference to be of type string, got %T instead", value)
+				}
+				sv.LookBackPeriod = types.LookBackPeriodPreference(jtv)
+			}
+
+		case "preferredResources":
+			if err := awsAwsjson10_deserializeDocumentEffectivePreferredResources(&sv.PreferredResources, value); err != nil {
+				return err
+			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7958,8 +9188,22 @@ func awsAwsjson10_deserializeDocumentRecommendationPreferencesDetail(v **types.R
 				sv.ResourceType = types.ResourceType(jtv)
 			}
 
+		case "savingsEstimationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SavingsEstimationMode to be of type string, got %T instead", value)
+				}
+				sv.SavingsEstimationMode = types.SavingsEstimationMode(jtv)
+			}
+
 		case "scope":
 			if err := awsAwsjson10_deserializeDocumentScope(&sv.Scope, value); err != nil {
+				return err
+			}
+
+		case "utilizationPreferences":
+			if err := awsAwsjson10_deserializeDocumentUtilizationPreferences(&sv.UtilizationPreferences, value); err != nil {
 				return err
 			}
 
@@ -9017,6 +10261,85 @@ func awsAwsjson10_deserializeDocumentUtilizationMetrics(v *[]types.UtilizationMe
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentUtilizationPreference(v **types.UtilizationPreference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UtilizationPreference
+	if *v == nil {
+		sv = &types.UtilizationPreference{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metricName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomizableMetricName to be of type string, got %T instead", value)
+				}
+				sv.MetricName = types.CustomizableMetricName(jtv)
+			}
+
+		case "metricParameters":
+			if err := awsAwsjson10_deserializeDocumentCustomizableMetricParameters(&sv.MetricParameters, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentUtilizationPreferences(v *[]types.UtilizationPreference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.UtilizationPreference
+	if *v == nil {
+		cv = []types.UtilizationPreference{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.UtilizationPreference
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentUtilizationPreference(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentVolumeConfiguration(v **types.VolumeConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9174,6 +10497,11 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendation(v **types.VolumeRecomm
 					return fmt.Errorf("expected CurrentPerformanceRisk to be of type string, got %T instead", value)
 				}
 				sv.CurrentPerformanceRisk = types.CurrentPerformanceRisk(jtv)
+			}
+
+		case "effectiveRecommendationPreferences":
+			if err := awsAwsjson10_deserializeDocumentEBSEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
+				return err
 			}
 
 		case "finding":
@@ -9344,6 +10672,11 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendationOption(v **types.Volume
 
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityAfterDiscounts":
+			if err := awsAwsjson10_deserializeDocumentEBSSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
 				return err
 			}
 
@@ -10075,6 +11408,25 @@ func awsAwsjson10_deserializeOpDocumentGetEffectiveRecommendationPreferencesOutp
 
 		case "externalMetricsPreference":
 			if err := awsAwsjson10_deserializeDocumentExternalMetricsPreference(&sv.ExternalMetricsPreference, value); err != nil {
+				return err
+			}
+
+		case "lookBackPeriod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LookBackPeriodPreference to be of type string, got %T instead", value)
+				}
+				sv.LookBackPeriod = types.LookBackPeriodPreference(jtv)
+			}
+
+		case "preferredResources":
+			if err := awsAwsjson10_deserializeDocumentEffectivePreferredResources(&sv.PreferredResources, value); err != nil {
+				return err
+			}
+
+		case "utilizationPreferences":
+			if err := awsAwsjson10_deserializeDocumentUtilizationPreferences(&sv.UtilizationPreferences, value); err != nil {
 				return err
 			}
 

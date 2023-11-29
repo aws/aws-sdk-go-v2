@@ -6,11 +6,28 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// An object that identifies an action. The API returns a list of PredictedAction s.
+type PredictedAction struct {
+
+	// The ID of the recommended action.
+	ActionId *string
+
+	// The score of the recommended action. For information about action scores, see
+	// How action recommendation scoring works (https://docs.aws.amazon.com/personalize/latest/dg/how-action-recommendation-scoring-works.html)
+	// .
+	Score *float64
+
+	noSmithyDocumentSerde
+}
+
 // An object that identifies an item. The and APIs return a list of PredictedItem s.
 type PredictedItem struct {
 
 	// The recommended item ID.
 	ItemId *string
+
+	// Metadata about the item from your Items dataset.
+	Metadata map[string]string
 
 	// The name of the promotion that included the predicted item.
 	PromotionName *string

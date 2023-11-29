@@ -258,6 +258,26 @@ func (RecoveryPointStatus) Values() []RecoveryPointStatus {
 	}
 }
 
+type RestoreDeletionStatus string
+
+// Enum values for RestoreDeletionStatus
+const (
+	RestoreDeletionStatusDeleting   RestoreDeletionStatus = "DELETING"
+	RestoreDeletionStatusFailed     RestoreDeletionStatus = "FAILED"
+	RestoreDeletionStatusSuccessful RestoreDeletionStatus = "SUCCESSFUL"
+)
+
+// Values returns all known values for RestoreDeletionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RestoreDeletionStatus) Values() []RestoreDeletionStatus {
+	return []RestoreDeletionStatus{
+		"DELETING",
+		"FAILED",
+		"SUCCESSFUL",
+	}
+}
+
 type RestoreJobState string
 
 // Enum values for RestoreJobState
@@ -309,6 +329,66 @@ func (RestoreJobStatus) Values() []RestoreJobStatus {
 		"COMPLETED",
 		"ABORTED",
 		"FAILED",
+	}
+}
+
+type RestoreTestingRecoveryPointSelectionAlgorithm string
+
+// Enum values for RestoreTestingRecoveryPointSelectionAlgorithm
+const (
+	RestoreTestingRecoveryPointSelectionAlgorithmLatestWithinWindow RestoreTestingRecoveryPointSelectionAlgorithm = "LATEST_WITHIN_WINDOW"
+	RestoreTestingRecoveryPointSelectionAlgorithmRandomWithinWindow RestoreTestingRecoveryPointSelectionAlgorithm = "RANDOM_WITHIN_WINDOW"
+)
+
+// Values returns all known values for
+// RestoreTestingRecoveryPointSelectionAlgorithm. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (RestoreTestingRecoveryPointSelectionAlgorithm) Values() []RestoreTestingRecoveryPointSelectionAlgorithm {
+	return []RestoreTestingRecoveryPointSelectionAlgorithm{
+		"LATEST_WITHIN_WINDOW",
+		"RANDOM_WITHIN_WINDOW",
+	}
+}
+
+type RestoreTestingRecoveryPointType string
+
+// Enum values for RestoreTestingRecoveryPointType
+const (
+	RestoreTestingRecoveryPointTypeContinuous RestoreTestingRecoveryPointType = "CONTINUOUS"
+	RestoreTestingRecoveryPointTypeSnapshot   RestoreTestingRecoveryPointType = "SNAPSHOT"
+)
+
+// Values returns all known values for RestoreTestingRecoveryPointType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RestoreTestingRecoveryPointType) Values() []RestoreTestingRecoveryPointType {
+	return []RestoreTestingRecoveryPointType{
+		"CONTINUOUS",
+		"SNAPSHOT",
+	}
+}
+
+type RestoreValidationStatus string
+
+// Enum values for RestoreValidationStatus
+const (
+	RestoreValidationStatusFailed     RestoreValidationStatus = "FAILED"
+	RestoreValidationStatusSuccessful RestoreValidationStatus = "SUCCESSFUL"
+	RestoreValidationStatusTimedOut   RestoreValidationStatus = "TIMED_OUT"
+	RestoreValidationStatusValidating RestoreValidationStatus = "VALIDATING"
+)
+
+// Values returns all known values for RestoreValidationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RestoreValidationStatus) Values() []RestoreValidationStatus {
+	return []RestoreValidationStatus{
+		"FAILED",
+		"SUCCESSFUL",
+		"TIMED_OUT",
+		"VALIDATING",
 	}
 }
 

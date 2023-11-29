@@ -47,6 +47,20 @@ type AutoScalingGroupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// An object that describes the estimated monthly savings possible by adopting
+// Compute Optimizer’s Auto Scaling group recommendations. This is based on the
+// Savings Plans and Reserved Instances discounts.
+type AutoScalingGroupEstimatedMonthlySavings struct {
+
+	// The currency of the estimated monthly savings.
+	Currency Currency
+
+	// The value of the estimated monthly savings.
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
 // Describes an Auto Scaling group recommendation.
 type AutoScalingGroupRecommendation struct {
 
@@ -172,6 +186,31 @@ type AutoScalingGroupRecommendationOption struct {
 	// savings amount and percentage.
 	SavingsOpportunity *SavingsOpportunity
 
+	// An object that describes the savings opportunity for the Auto Scaling group
+	// recommendation option that includes Savings Plans and Reserved Instances
+	// discounts. Savings opportunity includes the estimated monthly savings and
+	// percentage.
+	SavingsOpportunityAfterDiscounts *AutoScalingGroupSavingsOpportunityAfterDiscounts
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings opportunity for Auto Scaling group recommendations after
+// applying the Savings Plans and Reserved Instances discounts. Savings opportunity
+// represents the estimated monthly savings you can achieve by implementing Compute
+// Optimizer recommendations.
+type AutoScalingGroupSavingsOpportunityAfterDiscounts struct {
+
+	// An object that describes the estimated monthly savings possible by adopting
+	// Compute Optimizer’s Auto Scaling group recommendations. This is based on the
+	// Savings Plans and Reserved Instances pricing discounts.
+	EstimatedMonthlySavings *AutoScalingGroupEstimatedMonthlySavings
+
+	// The estimated monthly savings possible as a percentage of monthly cost after
+	// applying the Savings Plans and Reserved Instances discounts. This saving can be
+	// achieved by adopting Compute Optimizer’s Auto Scaling group recommendations.
+	SavingsOpportunityPercentage float64
+
 	noSmithyDocumentSerde
 }
 
@@ -229,6 +268,44 @@ type CurrentPerformanceRiskRatings struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the various metric parameters that can be customized, such as threshold
+// and headroom.
+type CustomizableMetricParameters struct {
+
+	// The headroom threshold value in percentage used for the specified metric
+	// parameter.
+	Headroom CustomizableMetricHeadroom
+
+	// The threshold value used for the specified metric parameter.
+	Threshold CustomizableMetricThreshold
+
+	noSmithyDocumentSerde
+}
+
+// Describes the effective recommendation preferences for Amazon EBS volumes.
+type EBSEffectiveRecommendationPreferences struct {
+
+	// Describes the savings estimation mode preference applied for calculating
+	// savings opportunity for Amazon EBS volumes.
+	SavingsEstimationMode *EBSSavingsEstimationMode
+
+	noSmithyDocumentSerde
+}
+
+// An object that describes the estimated monthly savings possible by adopting
+// Compute Optimizer’s Amazon EBS volume recommendations. This includes any
+// applicable discounts.
+type EBSEstimatedMonthlySavings struct {
+
+	// The currency of the estimated monthly savings.
+	Currency Currency
+
+	// The value of the estimated monthly savings.
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
 // Describes a filter that returns a more specific list of Amazon Elastic Block
 // Store (Amazon EBS) volume recommendations. Use this filter with the
 // GetEBSVolumeRecommendations action. You can use
@@ -255,6 +332,34 @@ type EBSFilter struct {
 
 	// The value of the filter. The valid values are Optimized , or NotOptimized .
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings estimation mode used for calculating savings opportunity
+// for Amazon EBS volumes.
+type EBSSavingsEstimationMode struct {
+
+	// Describes the source for calculating the savings opportunity for Amazon EBS
+	// volumes.
+	Source EBSSavingsEstimationModeSource
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings opportunity for Amazon EBS volume recommendations after
+// applying specific discounts.
+type EBSSavingsOpportunityAfterDiscounts struct {
+
+	// The estimated monthly savings possible as a percentage of monthly cost by
+	// adopting Compute Optimizer’s Amazon EBS volume recommendations. This saving
+	// includes any applicable discounts.
+	EstimatedMonthlySavings *EBSEstimatedMonthlySavings
+
+	// The estimated monthly savings possible as a percentage of monthly cost after
+	// applying the specific discounts. This saving can be achieved by adopting Compute
+	// Optimizer’s Amazon EBS volume recommendations.
+	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
 }
@@ -291,6 +396,60 @@ type EBSUtilizationMetric struct {
 
 	// The value of the utilization metric.
 	Value float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the effective recommendation preferences for Amazon ECS services.
+type ECSEffectiveRecommendationPreferences struct {
+
+	// Describes the savings estimation mode preference applied for calculating
+	// savings opportunity for Amazon ECS services.
+	SavingsEstimationMode *ECSSavingsEstimationMode
+
+	noSmithyDocumentSerde
+}
+
+// Describes the estimated monthly savings possible for Amazon ECS services by
+// adopting Compute Optimizer recommendations. This is based on Amazon ECS service
+// pricing after applying Savings Plans discounts.
+type ECSEstimatedMonthlySavings struct {
+
+	// The currency of the estimated monthly savings.
+	Currency Currency
+
+	// The value of the estimated monthly savings for Amazon ECS services.
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings estimation mode used for calculating savings opportunity
+// for Amazon ECS services.
+type ECSSavingsEstimationMode struct {
+
+	// Describes the source for calculating the savings opportunity for Amazon ECS
+	// services.
+	Source ECSSavingsEstimationModeSource
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings opportunity for Amazon ECS service recommendations after
+// applying Savings Plans discounts. Savings opportunity represents the estimated
+// monthly savings after applying Savings Plans discounts. You can achieve this by
+// implementing a given Compute Optimizer recommendation.
+type ECSSavingsOpportunityAfterDiscounts struct {
+
+	// The estimated monthly savings possible by adopting Compute Optimizer’s Amazon
+	// ECS service recommendations. This includes any applicable Savings Plans
+	// discounts.
+	EstimatedMonthlySavings *ECSEstimatedMonthlySavings
+
+	// The estimated monthly savings possible as a percentage of monthly cost by
+	// adopting Compute Optimizer’s Amazon ECS service recommendations. This includes
+	// any applicable Savings Plans discounts.
+	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
 }
@@ -369,6 +528,9 @@ type ECSServiceRecommendation struct {
 
 	// The configuration of the current Amazon ECS service.
 	CurrentServiceConfiguration *ServiceConfiguration
+
+	// Describes the effective recommendation preferences for Amazon ECS services.
+	EffectiveRecommendationPreferences *ECSEffectiveRecommendationPreferences
 
 	// The finding classification of an Amazon ECS service. Findings for Amazon ECS
 	// services include:
@@ -491,6 +653,12 @@ type ECSServiceRecommendationOption struct {
 	// in the Cost Management User Guide.
 	SavingsOpportunity *SavingsOpportunity
 
+	// Describes the savings opportunity for Amazon ECS service recommendations or for
+	// the recommendation option. Savings opportunity represents the estimated monthly
+	// savings after applying Savings Plans discounts. You can achieve this by
+	// implementing a given Compute Optimizer recommendation.
+	SavingsOpportunityAfterDiscounts *ECSSavingsOpportunityAfterDiscounts
+
 	noSmithyDocumentSerde
 }
 
@@ -542,6 +710,28 @@ type ECSServiceUtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the effective preferred resources that Compute Optimizer considers as
+// rightsizing recommendation candidates. Compute Optimizer only supports Amazon
+// EC2 instance types.
+type EffectivePreferredResource struct {
+
+	// The expanded version of your preferred resource's include list.
+	EffectiveIncludeList []string
+
+	// The list of preferred resources values that you want excluded from rightsizing
+	// recommendation candidates.
+	ExcludeList []string
+
+	// The list of preferred resource values that you want considered as rightsizing
+	// recommendation candidates.
+	IncludeList []string
+
+	// The name of the preferred resource list.
+	Name PreferredResourceName
+
+	noSmithyDocumentSerde
+}
+
 // Describes the effective recommendation preferences for a resource.
 type EffectiveRecommendationPreferences struct {
 
@@ -576,6 +766,23 @@ type EffectiveRecommendationPreferences struct {
 	// recommendation refresh. A status of Inactive confirms that it's not yet applied
 	// to recommendations.
 	InferredWorkloadTypes InferredWorkloadTypesPreference
+
+	// The number of days the utilization metrics of the Amazon Web Services resource
+	// are analyzed.
+	LookBackPeriod LookBackPeriodPreference
+
+	// The resource type values that are considered as candidates when generating
+	// rightsizing recommendations.
+	PreferredResources []EffectivePreferredResource
+
+	// Describes the savings estimation mode applied for calculating savings
+	// opportunity for a resource.
+	SavingsEstimationMode *InstanceSavingsEstimationMode
+
+	// The resource’s CPU utilization threshold preferences, such as threshold and
+	// headroom, that are used to generate rightsizing recommendations. This preference
+	// is only available for the Amazon EC2 instance resource type.
+	UtilizationPreferences []UtilizationPreference
 
 	noSmithyDocumentSerde
 }
@@ -802,6 +1009,20 @@ type InferredWorkloadSaving struct {
 	//   - Kafka - Infers that Kafka might be running on the instance.
 	//   - SQLServer - Infers that SQLServer might be running on the instance.
 	InferredWorkloadTypes []InferredWorkloadType
+
+	noSmithyDocumentSerde
+}
+
+// An object that describes the estimated monthly savings possible by adopting
+// Compute Optimizer’s Amazon EC2 instance recommendations. This is based on the
+// Savings Plans and Reserved Instances pricing discounts.
+type InstanceEstimatedMonthlySavings struct {
+
+	// The currency of the estimated monthly savings.
+	Currency Currency
+
+	// The value of the estimated monthly savings.
+	Value float64
 
 	noSmithyDocumentSerde
 }
@@ -1098,6 +1319,42 @@ type InstanceRecommendationOption struct {
 	// savings amount and percentage.
 	SavingsOpportunity *SavingsOpportunity
 
+	// An object that describes the savings opportunity for the instance
+	// recommendation option that includes Savings Plans and Reserved Instances
+	// discounts. Savings opportunity includes the estimated monthly savings and
+	// percentage.
+	SavingsOpportunityAfterDiscounts *InstanceSavingsOpportunityAfterDiscounts
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings estimation mode used for calculating savings opportunity
+// for Amazon EC2 instances.
+type InstanceSavingsEstimationMode struct {
+
+	// Describes the source for calculating the savings opportunity for Amazon EC2
+	// instances.
+	Source InstanceSavingsEstimationModeSource
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings opportunity for instance recommendations after applying
+// the Savings Plans and Reserved Instances discounts. Savings opportunity after
+// discounts represents the estimated monthly savings you can achieve by
+// implementing Compute Optimizer recommendations.
+type InstanceSavingsOpportunityAfterDiscounts struct {
+
+	// An object that describes the estimated monthly savings possible by adopting
+	// Compute Optimizer’s Amazon EC2 instance recommendations. This is based on
+	// pricing after applying the Savings Plans and Reserved Instances discounts.
+	EstimatedMonthlySavings *InstanceEstimatedMonthlySavings
+
+	// The estimated monthly savings possible as a percentage of monthly cost after
+	// applying the Savings Plans and Reserved Instances discounts. This saving can be
+	// achieved by adopting Compute Optimizer’s EC2 instance recommendations.
+	SavingsOpportunityPercentage float64
+
 	noSmithyDocumentSerde
 }
 
@@ -1122,6 +1379,30 @@ type JobFilter struct {
 	//   - Specify Queued , InProgress , Complete , or Failed if you specify the name
 	//   parameter as JobStatus .
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the effective recommendation preferences for Lambda functions.
+type LambdaEffectiveRecommendationPreferences struct {
+
+	// Describes the savings estimation mode applied for calculating savings
+	// opportunity for Lambda functions.
+	SavingsEstimationMode *LambdaSavingsEstimationMode
+
+	noSmithyDocumentSerde
+}
+
+// Describes the estimated monthly savings possible for Lambda functions by
+// adopting Compute Optimizer recommendations. This is based on Lambda functions
+// pricing after applying Savings Plans discounts.
+type LambdaEstimatedMonthlySavings struct {
+
+	// The currency of the estimated monthly savings.
+	Currency Currency
+
+	// The value of the estimated monthly savings.
+	Value float64
 
 	noSmithyDocumentSerde
 }
@@ -1161,6 +1442,11 @@ type LambdaFunctionMemoryRecommendationOption struct {
 	// savings amount and percentage.
 	SavingsOpportunity *SavingsOpportunity
 
+	// An object that describes the savings opportunity for the Lambda recommendation
+	// option which includes Saving Plans discounts. Savings opportunity includes the
+	// estimated monthly savings and percentage.
+	SavingsOpportunityAfterDiscounts *LambdaSavingsOpportunityAfterDiscounts
+
 	noSmithyDocumentSerde
 }
 
@@ -1177,6 +1463,9 @@ type LambdaFunctionRecommendation struct {
 	// its workloads. The higher the risk, the more likely the current Lambda function
 	// requires more memory.
 	CurrentPerformanceRisk CurrentPerformanceRisk
+
+	// Describes the effective recommendation preferences for Lambda functions.
+	EffectiveRecommendationPreferences *LambdaEffectiveRecommendationPreferences
 
 	// The finding classification of the function. Findings for functions include:
 	//   - Optimized — The function is correctly provisioned to run your workload based
@@ -1307,6 +1596,35 @@ type LambdaFunctionUtilizationMetric struct {
 
 	// The value of the utilization metric.
 	Value float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings estimation used for calculating savings opportunity for
+// Lambda functions.
+type LambdaSavingsEstimationMode struct {
+
+	// Describes the source for calculation of savings opportunity for Lambda
+	// functions.
+	Source LambdaSavingsEstimationModeSource
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings opportunity for Lambda functions recommendations after
+// applying Savings Plans discounts. Savings opportunity represents the estimated
+// monthly savings after applying Savings Plans discounts. You can achieve this by
+// implementing a given Compute Optimizer recommendation.
+type LambdaSavingsOpportunityAfterDiscounts struct {
+
+	// The estimated monthly savings possible by adopting Compute Optimizer’s Lambda
+	// function recommendations. This includes any applicable Savings Plans discounts.
+	EstimatedMonthlySavings *LambdaEstimatedMonthlySavings
+
+	// The estimated monthly savings possible as a percentage of monthly cost by
+	// adopting Compute Optimizer’s Lambda function recommendations. This includes any
+	// applicable Savings Plans discounts.
+	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
 }
@@ -1486,6 +1804,35 @@ type MetricSource struct {
 	noSmithyDocumentSerde
 }
 
+// The preference to control which resource type values are considered when
+// generating rightsizing recommendations. You can specify this preference as a
+// combination of include and exclude lists. You must specify either an includeList
+// or excludeList . If the preference is an empty set of resource type values, an
+// error occurs. For more information, see Rightsizing recommendation preferences (https://docs.aws.amazon.com/compute-optimizer/latest/ug/rightsizing-preferences.html)
+// in the Compute Optimizer User Guide.
+//   - This preference is only available for the Amazon EC2 instance and Auto
+//     Scaling group resource types.
+//   - Compute Optimizer only supports the customization of Ec2InstanceTypes .
+type PreferredResource struct {
+
+	// The preferred resource type values to exclude from the recommendation
+	// candidates. If this isn’t specified, all supported resources are included by
+	// default. You can specify up to 1000 values in this list.
+	ExcludeList []string
+
+	// The preferred resource type values to include in the recommendation candidates.
+	// You can specify the exact resource type value, such as m5.large, or use wild
+	// card expressions, such as m5. If this isn’t specified, all supported resources
+	// are included by default. You can specify up to 1000 values in this list.
+	IncludeList []string
+
+	// The type of preferred resource to customize. Compute Optimizer only supports
+	// the customization of Ec2InstanceTypes .
+	Name PreferredResourceName
+
+	noSmithyDocumentSerde
+}
+
 // Describes a projected utilization metric of a recommendation option, such as an
 // Amazon EC2 instance. This represents the projected utilization of a
 // recommendation option had you used that resource during the analyzed period.
@@ -1620,11 +1967,27 @@ type RecommendationPreferencesDetail struct {
 	// that the preference isn't yet applied to recommendations.
 	InferredWorkloadTypes InferredWorkloadTypesPreference
 
+	// The preference to control the number of days the utilization metrics of the
+	// Amazon Web Services resource are analyzed. If the preference isn’t set, this
+	// object is null.
+	LookBackPeriod LookBackPeriodPreference
+
+	// The preference to control which resource type values are considered when
+	// generating rightsizing recommendations. This object resolves any wildcard
+	// expressions and returns the effective list of candidate resource type values. If
+	// the preference isn’t set, this object is null.
+	PreferredResources []EffectivePreferredResource
+
 	// The target resource type of the recommendation preference to create. The
 	// Ec2Instance option encompasses standalone instances and instances that are part
 	// of Auto Scaling groups. The AutoScalingGroup option encompasses only instances
 	// that are part of an Auto Scaling group.
 	ResourceType ResourceType
+
+	// Describes the savings estimation mode used for calculating savings opportunity.
+	// Only the account manager or delegated administrator of your organization can
+	// activate this preference.
+	SavingsEstimationMode SavingsEstimationMode
 
 	// An object that describes the scope of the recommendation preference.
 	// Recommendation preferences can be created at the organization level (for
@@ -1632,6 +1995,11 @@ type RecommendationPreferencesDetail struct {
 	// For more information, see Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.
 	Scope *Scope
+
+	// The preference to control the resource’s CPU utilization thresholds - threshold
+	// and headroom. If the preference isn’t set, this object is null. This preference
+	// is only available for the Amazon EC2 instance resource type.
+	UtilizationPreferences []UtilizationPreference
 
 	noSmithyDocumentSerde
 }
@@ -1950,6 +2318,21 @@ type UtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
+// The preference to control the resource’s CPU utilization thresholds - threshold
+// and headroom. This preference is only available for the Amazon EC2 instance
+// resource type.
+type UtilizationPreference struct {
+
+	// The name of the resource utilization metric name to customize. Compute
+	// Optimizer only supports CpuUtilization .
+	MetricName CustomizableMetricName
+
+	// The parameters to set when customizing the resource utilization thresholds.
+	MetricParameters *CustomizableMetricParameters
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration of an Amazon Elastic Block Store (Amazon EBS)
 // volume.
 type VolumeConfiguration struct {
@@ -1993,6 +2376,9 @@ type VolumeRecommendation struct {
 	// workloads. The higher the risk, the more likely the current EBS volume doesn't
 	// have sufficient capacity.
 	CurrentPerformanceRisk CurrentPerformanceRisk
+
+	// Describes the effective recommendation preferences for Amazon EBS volume.
+	EffectiveRecommendationPreferences *EBSEffectiveRecommendationPreferences
 
 	// The finding classification of the volume. Findings for volumes include:
 	//   - NotOptimized —A volume is considered not optimized when Compute Optimizer
@@ -2049,6 +2435,11 @@ type VolumeRecommendationOption struct {
 	// recommendation option. Savings opportunity includes the estimated monthly
 	// savings amount and percentage.
 	SavingsOpportunity *SavingsOpportunity
+
+	// An object that describes the savings opportunity for the Amazon EBS volume
+	// recommendation option with specific discounts. Savings opportunity includes the
+	// estimated monthly savings and percentage.
+	SavingsOpportunityAfterDiscounts *EBSSavingsOpportunityAfterDiscounts
 
 	noSmithyDocumentSerde
 }

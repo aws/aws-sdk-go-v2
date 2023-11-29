@@ -36,9 +36,10 @@ type CreateAnalyzerInput struct {
 	// This member is required.
 	AnalyzerName *string
 
-	// The type of analyzer to create. Only ACCOUNT and ORGANIZATION analyzers are
-	// supported. You can create only one analyzer per account per Region. You can
-	// create up to 5 analyzers per organization per Region.
+	// The type of analyzer to create. Only ACCOUNT , ORGANIZATION ,
+	// ACCOUNT_UNUSED_ACCESS , and ORGANIZTAION_UNUSED_ACCESS analyzers are supported.
+	// You can create only one analyzer per account per Region. You can create up to 5
+	// analyzers per organization per Region.
 	//
 	// This member is required.
 	Type types.Type
@@ -50,7 +51,13 @@ type CreateAnalyzerInput struct {
 	// A client token.
 	ClientToken *string
 
-	// The tags to apply to the analyzer.
+	// Specifies the configuration of the analyzer. If the analyzer is an unused
+	// access analyzer, the specified scope of unused access is used for the
+	// configuration. If the analyzer is an external access analyzer, this field is not
+	// used.
+	Configuration types.AnalyzerConfiguration
+
+	// An array of key-value pairs to apply to the analyzer.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

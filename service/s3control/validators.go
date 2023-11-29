@@ -10,6 +10,86 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateAccessGrantsIdentityCenter struct {
+}
+
+func (*validateOpAssociateAccessGrantsIdentityCenter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateAccessGrantsIdentityCenter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateAccessGrantsIdentityCenterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateAccessGrantsIdentityCenterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAccessGrant struct {
+}
+
+func (*validateOpCreateAccessGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAccessGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAccessGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAccessGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAccessGrantsInstance struct {
+}
+
+func (*validateOpCreateAccessGrantsInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAccessGrantsInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAccessGrantsInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAccessGrantsInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAccessGrantsLocation struct {
+}
+
+func (*validateOpCreateAccessGrantsLocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAccessGrantsLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAccessGrantsLocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAccessGrantsLocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAccessPointForObjectLambda struct {
 }
 
@@ -125,6 +205,86 @@ func (m *validateOpCreateStorageLensGroup) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateStorageLensGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAccessGrant struct {
+}
+
+func (*validateOpDeleteAccessGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccessGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccessGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccessGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAccessGrantsInstance struct {
+}
+
+func (*validateOpDeleteAccessGrantsInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccessGrantsInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccessGrantsInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccessGrantsInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAccessGrantsInstanceResourcePolicy struct {
+}
+
+func (*validateOpDeleteAccessGrantsInstanceResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccessGrantsInstanceResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccessGrantsInstanceResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccessGrantsInstanceResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAccessGrantsLocation struct {
+}
+
+func (*validateOpDeleteAccessGrantsLocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccessGrantsLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccessGrantsLocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccessGrantsLocationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +630,126 @@ func (m *validateOpDescribeMultiRegionAccessPointOperation) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDissociateAccessGrantsIdentityCenter struct {
+}
+
+func (*validateOpDissociateAccessGrantsIdentityCenter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDissociateAccessGrantsIdentityCenter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DissociateAccessGrantsIdentityCenterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDissociateAccessGrantsIdentityCenterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAccessGrant struct {
+}
+
+func (*validateOpGetAccessGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAccessGrantsInstanceForPrefix struct {
+}
+
+func (*validateOpGetAccessGrantsInstanceForPrefix) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessGrantsInstanceForPrefix) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessGrantsInstanceForPrefixInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessGrantsInstanceForPrefixInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAccessGrantsInstance struct {
+}
+
+func (*validateOpGetAccessGrantsInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessGrantsInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessGrantsInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessGrantsInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAccessGrantsInstanceResourcePolicy struct {
+}
+
+func (*validateOpGetAccessGrantsInstanceResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessGrantsInstanceResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessGrantsInstanceResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessGrantsInstanceResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAccessGrantsLocation struct {
+}
+
+func (*validateOpGetAccessGrantsLocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessGrantsLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessGrantsLocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessGrantsLocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAccessPointConfigurationForObjectLambda struct {
 }
 
@@ -730,6 +1010,26 @@ func (m *validateOpGetBucketVersioning) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataAccess struct {
+}
+
+func (*validateOpGetDataAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetJobTagging struct {
 }
 
@@ -910,6 +1210,66 @@ func (m *validateOpGetStorageLensGroup) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAccessGrants struct {
+}
+
+func (*validateOpListAccessGrants) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccessGrants) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccessGrantsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccessGrantsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAccessGrantsInstances struct {
+}
+
+func (*validateOpListAccessGrantsInstances) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccessGrantsInstances) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccessGrantsInstancesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccessGrantsInstancesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAccessGrantsLocations struct {
+}
+
+func (*validateOpListAccessGrantsLocations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccessGrantsLocations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccessGrantsLocationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccessGrantsLocationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAccessPointsForObjectLambda struct {
 }
 
@@ -1065,6 +1425,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAccessGrantsInstanceResourcePolicy struct {
+}
+
+func (*validateOpPutAccessGrantsInstanceResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccessGrantsInstanceResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccessGrantsInstanceResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccessGrantsInstanceResourcePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1390,6 +1770,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAccessGrantsLocation struct {
+}
+
+func (*validateOpUpdateAccessGrantsLocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAccessGrantsLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAccessGrantsLocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAccessGrantsLocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateJobPriority struct {
 }
 
@@ -1450,6 +1850,22 @@ func (m *validateOpUpdateStorageLensGroup) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateAccessGrantsIdentityCenterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateAccessGrantsIdentityCenter{}, middleware.After)
+}
+
+func addOpCreateAccessGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAccessGrant{}, middleware.After)
+}
+
+func addOpCreateAccessGrantsInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAccessGrantsInstance{}, middleware.After)
+}
+
+func addOpCreateAccessGrantsLocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAccessGrantsLocation{}, middleware.After)
+}
+
 func addOpCreateAccessPointForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccessPointForObjectLambda{}, middleware.After)
 }
@@ -1472,6 +1888,22 @@ func addOpCreateMultiRegionAccessPointValidationMiddleware(stack *middleware.Sta
 
 func addOpCreateStorageLensGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStorageLensGroup{}, middleware.After)
+}
+
+func addOpDeleteAccessGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccessGrant{}, middleware.After)
+}
+
+func addOpDeleteAccessGrantsInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccessGrantsInstance{}, middleware.After)
+}
+
+func addOpDeleteAccessGrantsInstanceResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccessGrantsInstanceResourcePolicy{}, middleware.After)
+}
+
+func addOpDeleteAccessGrantsLocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccessGrantsLocation{}, middleware.After)
 }
 
 func addOpDeleteAccessPointForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
@@ -1542,6 +1974,30 @@ func addOpDescribeMultiRegionAccessPointOperationValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpDescribeMultiRegionAccessPointOperation{}, middleware.After)
 }
 
+func addOpDissociateAccessGrantsIdentityCenterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDissociateAccessGrantsIdentityCenter{}, middleware.After)
+}
+
+func addOpGetAccessGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessGrant{}, middleware.After)
+}
+
+func addOpGetAccessGrantsInstanceForPrefixValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessGrantsInstanceForPrefix{}, middleware.After)
+}
+
+func addOpGetAccessGrantsInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessGrantsInstance{}, middleware.After)
+}
+
+func addOpGetAccessGrantsInstanceResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessGrantsInstanceResourcePolicy{}, middleware.After)
+}
+
+func addOpGetAccessGrantsLocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessGrantsLocation{}, middleware.After)
+}
+
 func addOpGetAccessPointConfigurationForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAccessPointConfigurationForObjectLambda{}, middleware.After)
 }
@@ -1594,6 +2050,10 @@ func addOpGetBucketVersioningValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetBucketVersioning{}, middleware.After)
 }
 
+func addOpGetDataAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataAccess{}, middleware.After)
+}
+
 func addOpGetJobTaggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetJobTagging{}, middleware.After)
 }
@@ -1630,6 +2090,18 @@ func addOpGetStorageLensGroupValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetStorageLensGroup{}, middleware.After)
 }
 
+func addOpListAccessGrantsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccessGrants{}, middleware.After)
+}
+
+func addOpListAccessGrantsInstancesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccessGrantsInstances{}, middleware.After)
+}
+
+func addOpListAccessGrantsLocationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccessGrantsLocations{}, middleware.After)
+}
+
 func addOpListAccessPointsForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccessPointsForObjectLambda{}, middleware.After)
 }
@@ -1660,6 +2132,10 @@ func addOpListStorageLensGroupsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutAccessGrantsInstanceResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccessGrantsInstanceResourcePolicy{}, middleware.After)
 }
 
 func addOpPutAccessPointConfigurationForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
@@ -1724,6 +2200,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAccessGrantsLocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAccessGrantsLocation{}, middleware.After)
 }
 
 func addOpUpdateJobPriorityValidationMiddleware(stack *middleware.Stack) error {
@@ -3094,6 +3574,99 @@ func validateVpcConfiguration(v *types.VpcConfiguration) error {
 	}
 }
 
+func validateOpAssociateAccessGrantsIdentityCenterInput(v *AssociateAccessGrantsIdentityCenterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateAccessGrantsIdentityCenterInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.IdentityCenterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityCenterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAccessGrantInput(v *CreateAccessGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessGrantInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.AccessGrantsLocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessGrantsLocationId"))
+	}
+	if v.Grantee == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Grantee"))
+	}
+	if len(v.Permission) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Permission"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAccessGrantsInstanceInput(v *CreateAccessGrantsInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessGrantsInstanceInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAccessGrantsLocationInput(v *CreateAccessGrantsLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessGrantsLocationInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.LocationScope == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationScope"))
+	}
+	if v.IAMRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IAMRoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAccessPointForObjectLambdaInput(v *CreateAccessPointForObjectLambdaInput) error {
 	if v == nil {
 		return nil
@@ -3257,6 +3830,72 @@ func validateOpCreateStorageLensGroupInput(v *CreateStorageLensGroupInput) error
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAccessGrantInput(v *DeleteAccessGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessGrantInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.AccessGrantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessGrantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAccessGrantsInstanceInput(v *DeleteAccessGrantsInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessGrantsInstanceInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAccessGrantsInstanceResourcePolicyInput(v *DeleteAccessGrantsInstanceResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessGrantsInstanceResourcePolicyInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAccessGrantsLocationInput(v *DeleteAccessGrantsLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessGrantsLocationInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.AccessGrantsLocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessGrantsLocationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3575,6 +4214,105 @@ func validateOpDescribeMultiRegionAccessPointOperationInput(v *DescribeMultiRegi
 	}
 }
 
+func validateOpDissociateAccessGrantsIdentityCenterInput(v *DissociateAccessGrantsIdentityCenterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DissociateAccessGrantsIdentityCenterInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAccessGrantInput(v *GetAccessGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessGrantInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.AccessGrantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessGrantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAccessGrantsInstanceForPrefixInput(v *GetAccessGrantsInstanceForPrefixInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessGrantsInstanceForPrefixInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.S3Prefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Prefix"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAccessGrantsInstanceInput(v *GetAccessGrantsInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessGrantsInstanceInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAccessGrantsInstanceResourcePolicyInput(v *GetAccessGrantsInstanceResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessGrantsInstanceResourcePolicyInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAccessGrantsLocationInput(v *GetAccessGrantsLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessGrantsLocationInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.AccessGrantsLocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessGrantsLocationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAccessPointConfigurationForObjectLambdaInput(v *GetAccessPointConfigurationForObjectLambdaInput) error {
 	if v == nil {
 		return nil
@@ -3809,6 +4547,27 @@ func validateOpGetBucketVersioningInput(v *GetBucketVersioningInput) error {
 	}
 }
 
+func validateOpGetDataAccessInput(v *GetDataAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataAccessInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	}
+	if len(v.Permission) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Permission"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetJobTaggingInput(v *GetJobTaggingInput) error {
 	if v == nil {
 		return nil
@@ -3968,6 +4727,51 @@ func validateOpGetStorageLensGroupInput(v *GetStorageLensGroupInput) error {
 	}
 }
 
+func validateOpListAccessGrantsInput(v *ListAccessGrantsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccessGrantsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAccessGrantsInstancesInput(v *ListAccessGrantsInstancesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccessGrantsInstancesInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAccessGrantsLocationsInput(v *ListAccessGrantsLocationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccessGrantsLocationsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAccessPointsForObjectLambdaInput(v *ListAccessPointsForObjectLambdaInput) error {
 	if v == nil {
 		return nil
@@ -4083,6 +4887,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccessGrantsInstanceResourcePolicyInput(v *PutAccessGrantsInstanceResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccessGrantsInstanceResourcePolicyInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4459,6 +5281,27 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAccessGrantsLocationInput(v *UpdateAccessGrantsLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAccessGrantsLocationInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.AccessGrantsLocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessGrantsLocationId"))
+	}
+	if v.IAMRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IAMRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

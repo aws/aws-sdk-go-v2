@@ -9086,6 +9086,11 @@ func awsAwsquery_serializeOpDocumentAssociateDataShareConsumerInput(v *Associate
 	object := value.Object()
 	_ = object
 
+	if v.AllowWrites != nil {
+		objectKey := object.Key("AllowWrites")
+		objectKey.Boolean(*v.AllowWrites)
+	}
+
 	if v.AssociateEntireAccount != nil {
 		objectKey := object.Key("AssociateEntireAccount")
 		objectKey.Boolean(*v.AssociateEntireAccount)
@@ -9139,6 +9144,11 @@ func awsAwsquery_serializeOpDocumentAuthorizeClusterSecurityGroupIngressInput(v 
 func awsAwsquery_serializeOpDocumentAuthorizeDataShareInput(v *AuthorizeDataShareInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.AllowWrites != nil {
+		objectKey := object.Key("AllowWrites")
+		objectKey.Boolean(*v.AllowWrites)
+	}
 
 	if v.ConsumerIdentifier != nil {
 		objectKey := object.Key("ConsumerIdentifier")

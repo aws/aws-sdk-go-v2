@@ -1,3 +1,19 @@
+# v1.63.5 (2023-11-28.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.63.4 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
+# v1.63.3 (2023-11-27.2)
+
+* **Documentation**: Updates Amazon RDS documentation for support for RDS for Db2.
+
+# v1.63.2 (2023-11-27)
+
+* No change notes available for this release.
+
 # v1.63.1 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

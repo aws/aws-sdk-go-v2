@@ -17,12 +17,12 @@ import (
 // point in time before LatestRestorableTime for up to BackupRetentionPeriod days.
 // The target DB cluster is created from the source DB cluster with the same
 // configuration as the original DB cluster, except that the new DB cluster is
-// created with the default DB security group. For Aurora, this action only
+// created with the default DB security group. For Aurora, this operation only
 // restores the DB cluster, not the DB instances for that DB cluster. You must
-// invoke the CreateDBInstance action to create DB instances for the restored DB
-// cluster, specifying the identifier of the restored DB cluster in
+// invoke the CreateDBInstance operation to create DB instances for the restored
+// DB cluster, specifying the identifier of the restored DB cluster in
 // DBClusterIdentifier . You can create DB instances only after the
-// RestoreDBClusterToPointInTime action has completed and the DB cluster is
+// RestoreDBClusterToPointInTime operation has completed and the DB cluster is
 // available. For more information on Amazon Aurora DB clusters, see What is
 // Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,

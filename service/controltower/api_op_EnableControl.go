@@ -7,14 +7,16 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API call activates a control. It starts an asynchronous operation that
-// creates AWS resources on the specified organizational unit and the accounts it
-// contains. The resources created will vary according to the control that you
-// specify. For usage examples, see the AWS Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
+// creates Amazon Web Services resources on the specified organizational unit and
+// the accounts it contains. The resources created will vary according to the
+// control that you specify. For usage examples, see the Amazon Web Services
+// Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
 // .
 func (c *Client) EnableControl(ctx context.Context, params *EnableControlInput, optFns ...func(*Options)) (*EnableControlOutput, error) {
 	if params == nil {
@@ -34,8 +36,8 @@ func (c *Client) EnableControl(ctx context.Context, params *EnableControlInput, 
 type EnableControlInput struct {
 
 	// The ARN of the control. Only Strongly recommended and Elective controls are
-	// permitted, with the exception of the Region deny control. For information on how
-	// to find the controlIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
+	// permitted, with the exception of the landing zone Region deny control. For
+	// information on how to find the controlIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
 	// .
 	//
 	// This member is required.
@@ -47,6 +49,9 @@ type EnableControlInput struct {
 	//
 	// This member is required.
 	TargetIdentifier *string
+
+	// An array of EnabledControlParameter objects
+	Parameters []types.EnabledControlParameter
 
 	// Tags to be applied to the EnabledControl resource.
 	Tags map[string]string

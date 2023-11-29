@@ -1,3 +1,19 @@
+# v1.25.2 (2023-11-28.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
+# v1.25.0 (2023-11-27.2)
+
+* **Feature**: Adding support for EFS Replication to existing file system.
+
+# v1.24.0 (2023-11-27)
+
+* **Feature**: Adding support for EFS Archive lifecycle configuration.
+
 # v1.23.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

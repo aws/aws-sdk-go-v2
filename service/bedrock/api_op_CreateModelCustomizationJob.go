@@ -17,7 +17,7 @@ import (
 // model-customization job completes successfully, your custom model resource will
 // be ready to use. Training data contains input and output text for each record in
 // a JSONL format. Optionally, you can specify validation data in the same format
-// as the training data. Bedrock returns validation loss metrics and output
+// as the training data. Amazon Bedrock returns validation loss metrics and output
 // generations after the job completes. Model-customization jobs are asynchronous
 // and the completion time depends on the base model and the training/validation
 // data size. To monitor a job, use the GetModelCustomizationJob operation to
@@ -65,11 +65,11 @@ type CreateModelCustomizationJobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// The Amazon Resource Name (ARN) of an IAM role that Bedrock can assume to
-	// perform tasks on your behalf. For example, during model training, Bedrock needs
-	// your permission to read input data from an S3 bucket, write model artifacts to
-	// an S3 bucket. To pass this role to Bedrock, the caller of this API must have the
-	// iam:PassRole permission.
+	// The Amazon Resource Name (ARN) of an IAM role that Amazon Bedrock can assume to
+	// perform tasks on your behalf. For example, during model training, Amazon Bedrock
+	// needs your permission to read input data from an S3 bucket, write model
+	// artifacts to an S3 bucket. To pass this role to Amazon Bedrock, the caller of
+	// this API must have the iam:PassRole permission.
 	//
 	// This member is required.
 	RoleArn *string
@@ -88,6 +88,9 @@ type CreateModelCustomizationJobInput struct {
 
 	// Assign tags to the custom model.
 	CustomModelTags []types.Tag
+
+	// The customization type.
+	CustomizationType types.CustomizationType
 
 	// Assign tags to the job.
 	JobTags []types.Tag

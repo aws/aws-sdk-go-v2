@@ -67,6 +67,14 @@ public class ResolveClientConfigFromSources implements GoIntegration {
                             .build())
                     .build(),
             AddAwsConfigFields.AwsConfigField.builder()
+                    .name("DisableExpressAuth")
+                    .type(getUniversalSymbol("*bool"))
+                    .generatedOnClient(false)
+                    .servicePredicate(ResolveClientConfigFromSources::isS3Service)
+                    .awsResolveFunction(SymbolUtils.createValueSymbolBuilder("resolveDisableExpressAuth")
+                            .build())
+                    .build(),
+            AddAwsConfigFields.AwsConfigField.builder()
                     .name(ENDPOINT_DISCOVERY_OPTION)
                     .type(ENDPOINT_DISCOVERY_OPTION_TYPE)
                     .generatedOnClient(false)

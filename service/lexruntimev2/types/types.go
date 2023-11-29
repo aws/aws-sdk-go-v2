@@ -193,15 +193,15 @@ type ConfigurationEvent struct {
 type DialogAction struct {
 
 	// The next action that the bot should take in its interaction with the user. The
-	// possible values are:
-	//   - Close - Indicates that there will not be a response from the user. For
+	// following values are possible:
+	//   - Close – Indicates that there will not be a response from the user. For
 	//   example, the statement "Your order has been placed" does not require a response.
 	//
-	//   - ConfirmIntent - The next action is asking the user if the intent is complete
+	//   - ConfirmIntent – The next action is asking the user if the intent is complete
 	//   and ready to be fulfilled. This is a yes/no question such as "Place the order?"
-	//   - Delegate - The next action is determined by Amazon Lex V2.
-	//   - ElicitIntent - The next action is to elicit an intent from the user.
-	//   - ElicitSlot - The next action is to elicit a slot value from the user.
+	//   - Delegate – The next action is determined by Amazon Lex V2.
+	//   - ElicitIntent – The next action is to elicit an intent from the user.
+	//   - ElicitSlot – The next action is to elicit a slot value from the user.
 	//
 	// This member is required.
 	Type DialogActionType
@@ -211,7 +211,7 @@ type DialogAction struct {
 	//
 	//   - Spell by letter - "b" "o" "b"
 	//   - Spell by word - "b as in boy" "o as in oscar" "b as in boy"
-	// For more information, see  Using spelling to enter slot values  (https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html)
+	// For more information, see  Using spelling to enter slot values  (https://docs.aws.amazon.com/lexv2/latest/dg/spelling-styles.html)
 	// .
 	SlotElicitationStyle StyleType
 
@@ -327,14 +327,25 @@ type Intent struct {
 	// This member is required.
 	Name *string
 
-	// Contains information about whether fulfillment of the intent has been confirmed.
+	// Indicates whether the intent has been Confirmed , Denied , or None if the
+	// confirmation stage has not yet been reached.
 	ConfirmationState ConfirmationState
 
 	// A map of all of the slots for the intent. The name of the slot maps to the
 	// value of the slot. If a slot has not been filled, the value is null.
 	Slots map[string]Slot
 
-	// Contains fulfillment information for the intent.
+	// Indicates the fulfillment state for the intent. The meanings of each value are
+	// as follows:
+	//   - Failed – The bot failed to fulfill the intent.
+	//   - Fulfilled – The bot has completed fulfillment of the intent.
+	//   - FulfillmentInProgress – The bot is in the middle of fulfilling the intent.
+	//   - InProgress – The bot is in the middle of eliciting the slot values that are
+	//   necessary to fulfill the intent.
+	//   - ReadyForFulfillment – The bot has elicited all the slot values for the
+	//   intent and is ready to fulfill the intent.
+	//   - Waiting – The bot is waiting for a response from the user (limited to
+	//   streaming conversations).
 	State IntentState
 
 	noSmithyDocumentSerde
@@ -349,7 +360,8 @@ type IntentResultEvent struct {
 	// each event sent by Amazon Lex V2 in the current session.
 	EventId *string
 
-	// Indicates whether the input to the operation was text or speech.
+	// Indicates whether the input to the operation was text, speech, or from a
+	// touch-tone keypad.
 	InputMode InputMode
 
 	// A list of intents that Amazon Lex V2 determined might satisfy the user's
@@ -374,13 +386,17 @@ type IntentResultEvent struct {
 	noSmithyDocumentSerde
 }
 
-// An intent that Amazon Lex V2 determined might satisfy the user's utterance. The
-// intents are ordered by the confidence score.
+// An object containing information about an intent that Amazon Lex V2 determined
+// might satisfy the user's utterance. The intents are ordered by the confidence
+// score.
 type Interpretation struct {
 
 	// A list of intents that might satisfy the user's utterance. The intents are
 	// ordered by the confidence score.
 	Intent *Intent
+
+	// Specifies the service that interpreted the input.
+	InterpretationSource InterpretationSource
 
 	// Determines the threshold where Amazon Lex V2 will insert the
 	// AMAZON.FallbackIntent , AMAZON.KendraSearchIntent , or both when returning
@@ -830,21 +846,24 @@ type TranscriptEvent struct {
 	noSmithyDocumentSerde
 }
 
-// The value of a slot.
+// Information about the value provided for a slot and Amazon Lex V2's
+// interpretation.
 type Value struct {
 
-	// The value that Amazon Lex V2 determines for the slot. The actual value depends
-	// on the setting of the value selection strategy for the bot. You can choose to
-	// use the value entered by the user, or you can have Amazon Lex V2 choose the
-	// first value in the resolvedValues list.
+	// The value that Amazon Lex V2 determines for the slot, given the user input. The
+	// actual value depends on the setting of the value selection strategy for the bot.
+	// You can choose to use the value entered by the user, or you can have Amazon Lex
+	// V2 choose the first value in the resolvedValues list.
 	//
 	// This member is required.
 	InterpretedValue *string
 
-	// The text of the utterance from the user that was entered for the slot.
+	// The part of the user's response to the slot elicitation that Amazon Lex V2
+	// determines is relevant to the slot value.
 	OriginalValue *string
 
-	// A list of additional values that have been recognized for the slot.
+	// A list of values that Amazon Lex V2 determines are possible resolutions for the
+	// user input. The first value matches the interpretedValue .
 	ResolvedValues []string
 
 	noSmithyDocumentSerde

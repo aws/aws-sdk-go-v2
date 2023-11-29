@@ -45,8 +45,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	setResolvedDefaultsMode(&options)
 
-	resolveRetryer(&options)
-
 	resolveHTTPClient(&options)
 
 	resolveHTTPSignerV4(&options)
@@ -58,6 +56,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	for _, fn := range optFns {
 		fn(&options)
 	}
+
+	resolveRetryer(&options)
 
 	ignoreAnonymousAuth(&options)
 
@@ -505,7 +505,7 @@ func (m *presignContextPolyfillMiddleware) HandleFinalize(ctx context.Context, i
 
 	schemeID := rscheme.Scheme.SchemeID()
 
-	if schemeID == "aws.auth#sigv4" {
+	if schemeID == "aws.auth#sigv4" || schemeID == "com.amazonaws.s3#sigv4express" {
 		if sn, ok := smithyhttp.GetSigV4SigningName(&rscheme.SignerProperties); ok {
 			ctx = awsmiddleware.SetSigningName(ctx, sn)
 		}

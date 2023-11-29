@@ -24,8 +24,8 @@ import (
 // with the default TimeoutAction , connections that prevent Aurora Serverless v1
 // from finding a scaling point might be dropped. For more information about
 // scaling points, see Autoscaling for Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling)
-// in the Amazon Aurora User Guide. This action only applies to Aurora Serverless
-// v1 DB clusters.
+// in the Amazon Aurora User Guide. This operation only applies to Aurora
+// Serverless v1 DB clusters.
 func (c *Client) ModifyCurrentDBClusterCapacity(ctx context.Context, params *ModifyCurrentDBClusterCapacityInput, optFns ...func(*Options)) (*ModifyCurrentDBClusterCapacityOutput, error) {
 	if params == nil {
 		params = &ModifyCurrentDBClusterCapacityInput{}

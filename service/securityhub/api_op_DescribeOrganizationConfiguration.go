@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the Organizations configuration for Security Hub. Can
-// only be called from a Security Hub administrator account.
+// Returns information about the way your organization is configured in Security
+// Hub. Only the Security Hub administrator account can invoke this operation.
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}
@@ -35,21 +35,36 @@ type DescribeOrganizationConfigurationInput struct {
 
 type DescribeOrganizationConfigurationOutput struct {
 
-	// Whether to automatically enable Security Hub for new accounts in the
-	// organization. If set to true , then Security Hub is enabled for new accounts. If
-	// set to false, then new accounts are not added automatically.
+	// Whether to automatically enable Security Hub in new member accounts when they
+	// join the organization. If set to true , then Security Hub is automatically
+	// enabled in new accounts. If set to false , then Security Hub isn't enabled in
+	// new accounts automatically. The default value is false . If the
+	// ConfigurationType of your organization is set to CENTRAL , then this field is
+	// set to false and can't be changed in the home Region and linked Regions.
+	// However, in that case, the delegated administrator can create a configuration
+	// policy in which Security Hub is enabled and associate the policy with new
+	// organization accounts.
 	AutoEnable *bool
 
 	// Whether to automatically enable Security Hub default standards (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html)
-	// for new member accounts in the organization. The default value of this parameter
-	// is equal to DEFAULT . If equal to DEFAULT , then Security Hub default standards
-	// are automatically enabled for new member accounts. If equal to NONE , then
-	// default standards are not automatically enabled for new member accounts.
+	// in new member accounts when they join the organization. If equal to DEFAULT ,
+	// then Security Hub default standards are automatically enabled for new member
+	// accounts. If equal to NONE , then default standards are not automatically
+	// enabled for new member accounts. The default value of this parameter is equal to
+	// DEFAULT . If the ConfigurationType of your organization is set to CENTRAL , then
+	// this field is set to NONE and can't be changed in the home Region and linked
+	// Regions. However, in that case, the delegated administrator can create a
+	// configuration policy in which specific security standards are enabled and
+	// associate the policy with new organization accounts.
 	AutoEnableStandards types.AutoEnableStandards
 
 	// Whether the maximum number of allowed member accounts are already associated
 	// with the Security Hub administrator account.
 	MemberAccountLimitReached *bool
+
+	// Provides information about the way an organization is configured in Security
+	// Hub.
+	OrganizationConfiguration *types.OrganizationConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

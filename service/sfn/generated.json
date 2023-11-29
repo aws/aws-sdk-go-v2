@@ -40,6 +40,7 @@
         "api_op_StartSyncExecution.go",
         "api_op_StopExecution.go",
         "api_op_TagResource.go",
+        "api_op_TestState.go",
         "api_op_UntagResource.go",
         "api_op_UpdateMapRun.go",
         "api_op_UpdateStateMachine.go",

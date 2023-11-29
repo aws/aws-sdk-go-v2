@@ -88,7 +88,8 @@ type CallAnalyticsJob struct {
 	// why the Call Analytics job request failed. The FailureReason field contains one
 	// of the following values:
 	//   - Unsupported media format . The media format specified in MediaFormat isn't
-	//   valid. Refer to MediaFormat for a list of supported formats.
+	//   valid. Refer to refer to the MediaFormat parameter for a list of supported
+	//   formats.
 	//   - The media format provided does not match the detected media format . The
 	//   media format specified in MediaFormat doesn't match the format of the input
 	//   file. Check the media format of your media file and correct the specified value.
@@ -102,11 +103,11 @@ type CallAnalyticsJob struct {
 	//   correct the specified value.
 	//   - Invalid file size: file size too large . The size of your media file is
 	//   larger than what Amazon Transcribe can process. For more information, refer to
-	//   Guidelines and quotas (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
+	//   Service quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe)
 	//   .
 	//   - Invalid number of channels: number of channels too large . Your audio
 	//   contains more channels than Amazon Transcribe is able to process. For more
-	//   information, refer to Guidelines and quotas (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
+	//   information, refer to Service quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe)
 	//   .
 	FailureReason *string
 
@@ -119,7 +120,7 @@ type CallAnalyticsJob struct {
 	// The language code used to create your Call Analytics job. For a list of
 	// supported languages and their associated language codes, refer to the Supported
 	// languages (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-	// table. If you don't know the language spoken in your media file, you can omit
+	// table. If you do not know the language spoken in your media file, you can omit
 	// this field and let Amazon Transcribe automatically identify the language of your
 	// media. To improve the accuracy of language identification, you can include
 	// several language codes and Amazon Transcribe chooses the closest match for your
@@ -160,8 +161,9 @@ type CallAnalyticsJobSettings struct {
 
 	// Makes it possible to redact or flag specified personally identifiable
 	// information (PII) in your transcript. If you use ContentRedaction , you must
-	// also include the sub-parameters: PiiEntityTypes , RedactionOutput , and
-	// RedactionType .
+	// also include the sub-parameters: RedactionOutput and RedactionType . You can
+	// optionally include PiiEntityTypes to choose which types of PII you want to
+	// redact.
 	ContentRedaction *ContentRedaction
 
 	// If using automatic language identification in your request and you want to
@@ -190,7 +192,7 @@ type CallAnalyticsJobSettings struct {
 	// The name of the custom language model you want to use when processing your Call
 	// Analytics job. Note that custom language model names are case sensitive. The
 	// language of the specified custom language model must match the language code
-	// that you specify in your transcription request. If the languages don't match,
+	// that you specify in your transcription request. If the languages do not match,
 	// the custom language model isn't applied. There are no errors or warnings
 	// associated with a language mismatch.
 	LanguageModelName *string
@@ -204,6 +206,10 @@ type CallAnalyticsJobSettings struct {
 	// table. To transcribe speech in Modern Standard Arabic ( ar-SA ), your media file
 	// must be encoded at a sample rate of 16,000 Hz or higher.
 	LanguageOptions []LanguageCode
+
+	// Contains GenerateAbstractiveSummary , which is a required parameter if you want
+	// to enable Generative call summarization in your Call Analytics request.
+	Summarization *Summarization
 
 	// Specify how you want your custom vocabulary filter applied to your transcript.
 	// To replace words with *** , choose mask . To delete words, choose remove . To
@@ -315,8 +321,9 @@ type ChannelDefinition struct {
 
 // Makes it possible to redact or flag specified personally identifiable
 // information (PII) in your transcript. If you use ContentRedaction , you must
-// also include the sub-parameters: PiiEntityTypes , RedactionOutput , and
-// RedactionType .
+// also include the sub-parameters: RedactionOutput and RedactionType . You can
+// optionally include PiiEntityTypes to choose which types of PII you want to
+// redact.
 type ContentRedaction struct {
 
 	// Specify if you want only a redacted transcript, or if you want a redacted and
@@ -330,14 +337,16 @@ type ContentRedaction struct {
 
 	// Specify the category of information you want to redact; PII (personally
 	// identifiable information) is the only valid value. You can use PiiEntityTypes
-	// to choose which types of PII you want to redact.
+	// to choose which types of PII you want to redact. If you do not include
+	// PiiEntityTypes in your request, all PII is redacted.
 	//
 	// This member is required.
 	RedactionType RedactionType
 
 	// Specify which types of personally identifiable information (PII) you want to
 	// redact in your transcript. You can include as many types as you'd like, or you
-	// can select ALL .
+	// can select ALL . If you do not include PiiEntityTypes in your request, all PII
+	// is redacted.
 	PiiEntityTypes []PiiEntityType
 
 	noSmithyDocumentSerde
@@ -481,7 +490,7 @@ type LanguageIdSettings struct {
 	// The name of the custom language model you want to use when processing your
 	// transcription job. Note that custom language model names are case sensitive. The
 	// language of the specified custom language model must match the language code
-	// that you specify in your transcription request. If the languages don't match,
+	// that you specify in your transcription request. If the languages do not match,
 	// the custom language model isn't applied. There are no errors or warnings
 	// associated with a language mismatch.
 	LanguageModelName *string
@@ -489,7 +498,7 @@ type LanguageIdSettings struct {
 	// The name of the custom vocabulary filter you want to use when processing your
 	// transcription job. Custom vocabulary filter names are case sensitive. The
 	// language of the specified custom vocabulary filter must match the language code
-	// that you specify in your transcription request. If the languages don't match,
+	// that you specify in your transcription request. If the languages do not match,
 	// the custom vocabulary filter isn't applied. There are no errors or warnings
 	// associated with a language mismatch. Note that if you include
 	// VocabularyFilterName in your request, you must also include
@@ -499,7 +508,7 @@ type LanguageIdSettings struct {
 	// The name of the custom vocabulary you want to use when processing your
 	// transcription job. Custom vocabulary names are case sensitive. The language of
 	// the specified custom vocabulary must match the language code that you specify in
-	// your transcription request. If the languages don't match, the custom vocabulary
+	// your transcription request. If the languages do not match, the custom vocabulary
 	// isn't applied. There are no errors or warnings associated with a language
 	// mismatch.
 	VocabularyName *string
@@ -542,8 +551,8 @@ type LanguageModel struct {
 	// select for your custom language model must match the language of your training
 	// and tuning data. For a list of supported languages and their associated language
 	// codes, refer to the Supported languages (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-	// table. Note that U.S. English ( en-US ) is the only language supported with
-	// Amazon Transcribe Medical.
+	// table. Note that US English ( en-US ) is the only language supported with Amazon
+	// Transcribe Medical.
 	LanguageCode CLMLanguageCode
 
 	// The date and time the specified custom language model was last modified.
@@ -572,7 +581,7 @@ type LanguageModel struct {
 }
 
 // Describes the Amazon S3 location of the media file you want to use in your
-// request. For information on supported media formats, refer to the MediaFormat (https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat)
+// request. For information on supported media formats, refer to the MediaFormat
 // parameter or the Media formats (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
 // section in the Amazon S3 Developer Guide.
 type Media struct {
@@ -594,6 +603,225 @@ type Media struct {
 	// redacted transcript. It is only supported for Call Analytics (
 	// StartCallAnalyticsJob ) transcription requests.
 	RedactedMediaFileUri *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates which speaker is on which channel. The options are CLINICIAN and
+// PATIENT
+type MedicalScribeChannelDefinition struct {
+
+	// Specify the audio channel you want to define.
+	//
+	// This member is required.
+	ChannelId int32
+
+	// Specify the participant that you want to flag. The options are CLINICIAN and
+	// PATIENT
+	//
+	// This member is required.
+	ParticipantRole MedicalScribeParticipantRole
+
+	noSmithyDocumentSerde
+}
+
+// Provides detailed information about a Medical Scribe job. To view the status of
+// the specified Medical Scribe job, check the MedicalScribeJobStatus field. If
+// the status is COMPLETED , the job is finished and you can find the results at
+// the locations specified in MedicalScribeOutput . If the status is FAILED ,
+// FailureReason provides details on why your Medical Scribe job failed.
+type MedicalScribeJob struct {
+
+	// Makes it possible to specify which speaker is on which channel. For example, if
+	// the clinician is the first participant to speak, you would set ChannelId of the
+	// first ChannelDefinition in the list to 0 (to indicate the first channel) and
+	// ParticipantRole to CLINICIAN (to indicate that it's the clinician speaking).
+	// Then you would set the ChannelId of the second ChannelDefinition in the list to
+	// 1 (to indicate the second channel) and ParticipantRole to PATIENT (to indicate
+	// that it's the patient speaking).
+	ChannelDefinitions []MedicalScribeChannelDefinition
+
+	// The date and time the specified Medical Scribe job finished processing.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents a Medical Scribe job that finished
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	CompletionTime *time.Time
+
+	// The date and time the specified Medical Scribe job request was made. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents a Medical Scribe job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
+	// the Amazon S3 bucket that contains your input files, write to the output bucket,
+	// and use your KMS key if supplied. If the role that you specify doesn’t have the
+	// appropriate permissions your request fails. IAM role ARNs have the format
+	// arn:partition:iam::account:role/role-name-with-path . For example:
+	// arn:aws:iam::111122223333:role/Admin . For more information, see IAM ARNs (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns)
+	// .
+	DataAccessRoleArn *string
+
+	// If MedicalScribeJobStatus is FAILED , FailureReason contains information about
+	// why the transcription job failed. See also: Common Errors (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html)
+	// .
+	FailureReason *string
+
+	// The language code used to create your Medical Scribe job. US English ( en-US )
+	// is the only supported language for Medical Scribe jobs.
+	LanguageCode MedicalScribeLanguageCode
+
+	// Describes the Amazon S3 location of the media file you want to use in your
+	// request. For information on supported media formats, refer to the MediaFormat
+	// parameter or the Media formats (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
+	// section in the Amazon S3 Developer Guide.
+	Media *Media
+
+	// The name of the Medical Scribe job. Job names are case sensitive and must be
+	// unique within an Amazon Web Services account.
+	MedicalScribeJobName *string
+
+	// Provides the status of the specified Medical Scribe job. If the status is
+	// COMPLETED , the job is finished and you can find the results at the location
+	// specified in MedicalScribeOutput If the status is FAILED , FailureReason
+	// provides details on why your Medical Scribe job failed.
+	MedicalScribeJobStatus MedicalScribeJobStatus
+
+	// The location of the output of your Medical Scribe job. ClinicalDocumentUri
+	// holds the Amazon S3 URI for the Clinical Document and TranscriptFileUri holds
+	// the Amazon S3 URI for the Transcript.
+	MedicalScribeOutput *MedicalScribeOutput
+
+	// Makes it possible to control how your Medical Scribe job is processed using a
+	// MedicalScribeSettings object. Specify ChannelIdentification if
+	// ChannelDefinitions are set. Enabled ShowSpeakerLabels if ChannelIdentification
+	// and ChannelDefinitions are not set. One and only one of ChannelIdentification
+	// and ShowSpeakerLabels must be set. If ShowSpeakerLabels is set, MaxSpeakerLabels
+	// must also be set. Use Settings to specify a vocabulary or vocabulary filter or
+	// both using VocabularyName , VocabularyFilterName . VocabularyFilterMethod must
+	// be specified if VocabularyFilterName is set.
+	Settings *MedicalScribeSettings
+
+	// The date and time your Medical Scribe job began processing. Timestamps are in
+	// the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
+	// 2022-05-04T12:32:58.789000-07:00 represents a Medical Scribe job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	StartTime *time.Time
+
+	// Adds one or more custom tags, each in the form of a key:value pair, to the
+	// Medica Scribe job. To learn more about using tags with Amazon Transcribe, refer
+	// to Tagging resources (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html)
+	// .
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Provides detailed information about a specific Medical Scribe job.
+type MedicalScribeJobSummary struct {
+
+	// The date and time the specified Medical Scribe job finished processing.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents a Medical Scribe job that finished
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	CompletionTime *time.Time
+
+	// The date and time the specified Medical Scribe job request was made. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents a Medical Scribe job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	CreationTime *time.Time
+
+	// If MedicalScribeJobStatus is FAILED , FailureReason contains information about
+	// why the transcription job failed. See also: Common Errors (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html)
+	// .
+	FailureReason *string
+
+	// The language code used to create your Medical Scribe job. US English ( en-US )
+	// is the only supported language for Medical Scribe jobs.
+	LanguageCode MedicalScribeLanguageCode
+
+	// The name of the Medical Scribe job. Job names are case sensitive and must be
+	// unique within an Amazon Web Services account.
+	MedicalScribeJobName *string
+
+	// Provides the status of the specified Medical Scribe job. If the status is
+	// COMPLETED , the job is finished and you can find the results at the location
+	// specified in MedicalScribeOutput If the status is FAILED , FailureReason
+	// provides details on why your Medical Scribe job failed.
+	MedicalScribeJobStatus MedicalScribeJobStatus
+
+	// The date and time your Medical Scribe job began processing. Timestamps are in
+	// the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
+	// 2022-05-04T12:32:58.789000-07:00 represents a Medical Scribe job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The location of the output of your Medical Scribe job. ClinicalDocumentUri
+// holds the Amazon S3 URI for the Clinical Document and TranscriptFileUri holds
+// the Amazon S3 URI for the Transcript.
+type MedicalScribeOutput struct {
+
+	// Holds the Amazon S3 URI for the Clinical Document.
+	//
+	// This member is required.
+	ClinicalDocumentUri *string
+
+	// Holds the Amazon S3 URI for the Transcript.
+	//
+	// This member is required.
+	TranscriptFileUri *string
+
+	noSmithyDocumentSerde
+}
+
+// Makes it possible to control how your Medical Scribe job is processed using a
+// MedicalScribeSettings object. Specify ChannelIdentification if
+// ChannelDefinitions are set. Enabled ShowSpeakerLabels if ChannelIdentification
+// and ChannelDefinitions are not set. One and only one of ChannelIdentification
+// and ShowSpeakerLabels must be set. If ShowSpeakerLabels is set, MaxSpeakerLabels
+// must also be set. Use Settings to specify a vocabulary or vocabulary filter or
+// both using VocabularyName , VocabularyFilterName . VocabularyFilterMethod must
+// be specified if VocabularyFilterName is set.
+type MedicalScribeSettings struct {
+
+	// Enables channel identification in multi-channel audio. Channel identification
+	// transcribes the audio on each channel independently, then appends the output for
+	// each channel into one transcript. For more information, see Transcribing
+	// multi-channel audio (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html)
+	// .
+	ChannelIdentification *bool
+
+	// Specify the maximum number of speakers you want to partition in your media.
+	// Note that if your media contains more speakers than the specified number,
+	// multiple speakers are treated as a single speaker. If you specify the
+	// MaxSpeakerLabels field, you must set the ShowSpeakerLabels field to true.
+	MaxSpeakerLabels *int32
+
+	// Enables speaker partitioning (diarization) in your Medical Scribe output.
+	// Speaker partitioning labels the speech from individual speakers in your media
+	// file. If you enable ShowSpeakerLabels in your request, you must also include
+	// MaxSpeakerLabels . For more information, see Partitioning speakers (diarization) (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html)
+	// .
+	ShowSpeakerLabels *bool
+
+	// Specify how you want your custom vocabulary filter applied to your transcript.
+	// To replace words with *** , choose mask . To delete words, choose remove . To
+	// flag words without changing them, choose tag .
+	VocabularyFilterMethod VocabularyFilterMethod
+
+	// The name of the custom vocabulary filter you want to include in your Medical
+	// Scribe request. Custom vocabulary filter names are case sensitive. Note that if
+	// you include VocabularyFilterName in your request, you must also include
+	// VocabularyFilterMethod .
+	VocabularyFilterName *string
+
+	// The name of the custom vocabulary you want to include in your Medical Scribe
+	// request. Custom vocabulary names are case sensitive.
+	VocabularyName *string
 
 	noSmithyDocumentSerde
 }
@@ -637,7 +865,8 @@ type MedicalTranscriptionJob struct {
 	// why the transcription job request failed. The FailureReason field contains one
 	// of the following values:
 	//   - Unsupported media format . The media format specified in MediaFormat isn't
-	//   valid. Refer to MediaFormat for a list of supported formats.
+	//   valid. Refer to refer to the MediaFormat parameter for a list of supported
+	//   formats.
 	//   - The media format provided does not match the detected media format . The
 	//   media format specified in MediaFormat doesn't match the format of the input
 	//   file. Check the media format of your media file and correct the specified value.
@@ -651,11 +880,11 @@ type MedicalTranscriptionJob struct {
 	//   correct the specified value.
 	//   - Invalid file size: file size too large . The size of your media file is
 	//   larger than what Amazon Transcribe can process. For more information, refer to
-	//   Guidelines and quotas (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
+	//   Service quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe)
 	//   .
 	//   - Invalid number of channels: number of channels too large . Your audio
 	//   contains more channels than Amazon Transcribe is able to process. For more
-	//   information, refer to Guidelines and quotas (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
+	//   information, refer to Service quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe)
 	//   .
 	FailureReason *string
 
@@ -664,7 +893,7 @@ type MedicalTranscriptionJob struct {
 	LanguageCode LanguageCode
 
 	// Describes the Amazon S3 location of the media file you want to use in your
-	// request. For information on supported media formats, refer to the MediaFormat (https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat)
+	// request. For information on supported media formats, refer to the MediaFormat
 	// parameter or the Media formats (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
 	// section in the Amazon S3 Developer Guide.
 	Media *Media
@@ -787,10 +1016,8 @@ type MedicalTranscriptionSetting struct {
 	// transcribes the audio on each channel independently, then appends the output for
 	// each channel into one transcript. If you have multi-channel audio and do not
 	// enable channel identification, your audio is transcribed in a continuous manner
-	// and your transcript does not separate the speech by channel. You can't include
-	// both ShowSpeakerLabels and ChannelIdentification in the same request. Including
-	// both parameters returns a BadRequestException . For more information, see
-	// Transcribing multi-channel audio (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html)
+	// and your transcript does not separate the speech by channel. For more
+	// information, see Transcribing multi-channel audio (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html)
 	// .
 	ChannelIdentification *bool
 
@@ -821,16 +1048,14 @@ type MedicalTranscriptionSetting struct {
 	// Enables speaker partitioning (diarization) in your transcription output.
 	// Speaker partitioning labels the speech from individual speakers in your media
 	// file. If you enable ShowSpeakerLabels in your request, you must also include
-	// MaxSpeakerLabels . You can't include ShowSpeakerLabels and ChannelIdentification
-	// in the same request. Including both parameters returns a BadRequestException .
-	// For more information, see Partitioning speakers (diarization) (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html)
+	// MaxSpeakerLabels . For more information, see Partitioning speakers (diarization) (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html)
 	// .
 	ShowSpeakerLabels *bool
 
 	// The name of the custom vocabulary you want to use when processing your medical
 	// transcription job. Custom vocabulary names are case sensitive. The language of
 	// the specified custom vocabulary must match the language code that you specify in
-	// your transcription request. If the languages don't match, the custom vocabulary
+	// your transcription request. If the languages do not match, the custom vocabulary
 	// isn't applied. There are no errors or warnings associated with a language
 	// mismatch. US English ( en-US ) is the only valid language for Amazon Transcribe
 	// Medical.
@@ -849,7 +1074,7 @@ type ModelSettings struct {
 	// The name of the custom language model you want to use when processing your
 	// transcription job. Note that custom language model names are case sensitive. The
 	// language of the specified custom language model must match the language code
-	// that you specify in your transcription request. If the languages don't match,
+	// that you specify in your transcription request. If the languages do not match,
 	// the custom language model isn't applied. There are no errors or warnings
 	// associated with a language mismatch.
 	LanguageModelName *string
@@ -1028,9 +1253,8 @@ type Settings struct {
 
 	// Enables channel identification in multi-channel audio. Channel identification
 	// transcribes the audio on each channel independently, then appends the output for
-	// each channel into one transcript. You can't include both ShowSpeakerLabels and
-	// ChannelIdentification in the same request. Including both parameters returns a
-	// BadRequestException . For more information, see Transcribing multi-channel audio (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html)
+	// each channel into one transcript. For more information, see Transcribing
+	// multi-channel audio (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html)
 	// .
 	ChannelIdentification *bool
 
@@ -1062,10 +1286,7 @@ type Settings struct {
 	// Enables speaker partitioning (diarization) in your transcription output.
 	// Speaker partitioning labels the speech from individual speakers in your media
 	// file. If you enable ShowSpeakerLabels in your request, you must also include
-	// MaxSpeakerLabels . You can't include both ShowSpeakerLabels and
-	// ChannelIdentification in the same request. Including both parameters returns a
-	// BadRequestException . For more information, see Partitioning speakers
-	// (diarization) (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html)
+	// MaxSpeakerLabels . For more information, see Partitioning speakers (diarization) (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html)
 	// .
 	ShowSpeakerLabels *bool
 
@@ -1133,6 +1354,22 @@ type SubtitlesOutput struct {
 	// minutes. If you get an AccesDenied error, you can get a new temporary URI by
 	// running a GetTranscriptionJob or ListTranscriptionJob request.
 	SubtitleFileUris []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains GenerateAbstractiveSummary , which is a required parameter if you want
+// to enable Generative call summarization in your Call Analytics request.
+type Summarization struct {
+
+	// Enables Generative call summarization in your Call Analytics request Generative
+	// call summarization provides a summary of the transcript including important
+	// components discussed in the conversation. For more information, see Enabling
+	// generative call summarization (https://docs.aws.amazon.com/transcribe/latest/dg/tca-enable-summarization.html)
+	// .
+	//
+	// This member is required.
+	GenerateAbstractiveSummary *bool
 
 	noSmithyDocumentSerde
 }
@@ -1283,7 +1520,8 @@ type TranscriptionJob struct {
 	// why the transcription job request failed. The FailureReason field contains one
 	// of the following values:
 	//   - Unsupported media format . The media format specified in MediaFormat isn't
-	//   valid. Refer to MediaFormat for a list of supported formats.
+	//   valid. Refer to refer to the MediaFormat parameter for a list of supported
+	//   formats.
 	//   - The media format provided does not match the detected media format . The
 	//   media format specified in MediaFormat doesn't match the format of the input
 	//   file. Check the media format of your media file and correct the specified value.
@@ -1297,11 +1535,11 @@ type TranscriptionJob struct {
 	//   correct the specified value.
 	//   - Invalid file size: file size too large . The size of your media file is
 	//   larger than what Amazon Transcribe can process. For more information, refer to
-	//   Guidelines and quotas (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
+	//   Service quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe)
 	//   .
 	//   - Invalid number of channels: number of channels too large . Your audio
 	//   contains more channels than Amazon Transcribe is able to process. For more
-	//   information, refer to Guidelines and quotas (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
+	//   information, refer to Service quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe)
 	//   .
 	FailureReason *string
 

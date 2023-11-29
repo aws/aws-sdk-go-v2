@@ -9935,6 +9935,46 @@ func awsRestjson1_deserializeDocumentAffectedResources(v *map[string]string, val
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAgentDetails(v **types.AgentDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AgentDetails
+	if *v == nil {
+		sv = &types.AgentDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAnomaly(v **types.Anomaly, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10914,6 +10954,63 @@ func awsRestjson1_deserializeDocumentContainer(v **types.Container, value interf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentContainerInstanceDetails(v **types.ContainerInstanceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContainerInstanceDetails
+	if *v == nil {
+		sv = &types.ContainerInstanceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "compatibleContainerInstances":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CompatibleContainerInstances = ptr.Int64(i64)
+			}
+
+		case "coveredContainerInstances":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CoveredContainerInstances = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentContainers(v *[]types.Container, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11106,6 +11203,128 @@ func awsRestjson1_deserializeDocumentCountry(v **types.Country, value interface{
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.CountryName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCoverageEc2InstanceDetails(v **types.CoverageEc2InstanceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CoverageEc2InstanceDetails
+	if *v == nil {
+		sv = &types.CoverageEc2InstanceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "agentDetails":
+			if err := awsRestjson1_deserializeDocumentAgentDetails(&sv.AgentDetails, value); err != nil {
+				return err
+			}
+
+		case "clusterArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClusterArn = ptr.String(jtv)
+			}
+
+		case "instanceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.InstanceId = ptr.String(jtv)
+			}
+
+		case "instanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = ptr.String(jtv)
+			}
+
+		case "managementType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagementType to be of type string, got %T instead", value)
+				}
+				sv.ManagementType = types.ManagementType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCoverageEcsClusterDetails(v **types.CoverageEcsClusterDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CoverageEcsClusterDetails
+	if *v == nil {
+		sv = &types.CoverageEcsClusterDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clusterName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClusterName = ptr.String(jtv)
+			}
+
+		case "containerInstanceDetails":
+			if err := awsRestjson1_deserializeDocumentContainerInstanceDetails(&sv.ContainerInstanceDetails, value); err != nil {
+				return err
+			}
+
+		case "fargateDetails":
+			if err := awsRestjson1_deserializeDocumentFargateDetails(&sv.FargateDetails, value); err != nil {
+				return err
 			}
 
 		default:
@@ -11316,6 +11535,16 @@ func awsRestjson1_deserializeDocumentCoverageResourceDetails(v **types.CoverageR
 
 	for key, value := range shape {
 		switch key {
+		case "ec2InstanceDetails":
+			if err := awsRestjson1_deserializeDocumentCoverageEc2InstanceDetails(&sv.Ec2InstanceDetails, value); err != nil {
+				return err
+			}
+
+		case "ecsClusterDetails":
+			if err := awsRestjson1_deserializeDocumentCoverageEcsClusterDetails(&sv.EcsClusterDetails, value); err != nil {
+				return err
+			}
+
 		case "eksClusterDetails":
 			if err := awsRestjson1_deserializeDocumentCoverageEksClusterDetails(&sv.EksClusterDetails, value); err != nil {
 				return err
@@ -12843,6 +13072,51 @@ func awsRestjson1_deserializeDocumentEvidence(v **types.Evidence, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFargateDetails(v **types.FargateDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FargateDetails
+	if *v == nil {
+		sv = &types.FargateDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "issues":
+			if err := awsRestjson1_deserializeDocumentIssues(&sv.Issues, value); err != nil {
+				return err
+			}
+
+		case "managementType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagementType to be of type string, got %T instead", value)
+				}
+				sv.ManagementType = types.ManagementType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFilePaths(v *[]types.ScanFilePath, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14076,6 +14350,42 @@ func awsRestjson1_deserializeDocumentIpSetIds(v *[]string, value interface{}) er
 }
 
 func awsRestjson1_deserializeDocumentIpv6Addresses(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIssues(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

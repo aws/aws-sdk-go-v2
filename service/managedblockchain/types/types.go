@@ -15,10 +15,9 @@ type Accessor struct {
 	// in the Amazon Web Services General Reference.
 	Arn *string
 
-	// The billing token is a property of the accessor. Use this token to make
-	// Ethereum API calls to your Ethereum node. The billing token is used to track
-	// your accessor object for billing Ethereum API requests made to your Ethereum
-	// nodes.
+	// The billing token is a property of the Accessor. Use this token to when making
+	// calls to the blockchain network. The billing token is used to track your
+	// accessor token for billing requests.
 	BillingToken *string
 
 	// The creation date and time of the accessor.
@@ -26,6 +25,9 @@ type Accessor struct {
 
 	// The unique identifier of the accessor.
 	Id *string
+
+	// The blockchain network that the Accessor token is created for.
+	NetworkType AccessorNetworkType
 
 	// The current status of the accessor.
 	Status AccessorStatus
@@ -57,6 +59,9 @@ type AccessorSummary struct {
 	// The unique identifier of the accessor.
 	Id *string
 
+	// The blockchain network that the Accessor token is created for.
+	NetworkType AccessorNetworkType
+
 	// The current status of the accessor.
 	Status AccessorStatus
 
@@ -81,7 +86,7 @@ type ApprovalThresholdPolicy struct {
 	ProposalDurationInHours *int32
 
 	// Determines whether the vote percentage must be greater than the
-	// ThresholdPercentage or must be greater than or equal to the ThreholdPercentage
+	// ThresholdPercentage or must be greater than or equal to the ThresholdPercentage
 	// to be approved.
 	ThresholdComparator ThresholdComparator
 

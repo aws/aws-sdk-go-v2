@@ -14,8 +14,8 @@ import (
 
 // Updates a manual DB snapshot with a new engine version. The snapshot can be
 // encrypted or unencrypted, but not shared or public. Amazon RDS supports
-// upgrading DB snapshots for MySQL, PostgreSQL, and Oracle. This command doesn't
-// apply to RDS Custom.
+// upgrading DB snapshots for MySQL, PostgreSQL, and Oracle. This operation doesn't
+// apply to RDS Custom or RDS for Db2.
 func (c *Client) ModifyDBSnapshot(ctx context.Context, params *ModifyDBSnapshotInput, optFns ...func(*Options)) (*ModifyDBSnapshotOutput, error) {
 	if params == nil {
 		params = &ModifyDBSnapshotInput{}

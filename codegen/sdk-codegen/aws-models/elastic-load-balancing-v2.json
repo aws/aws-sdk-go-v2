@@ -241,10 +241,13 @@
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your\n      Application Load Balancers, Network Load Balancers, Gateway Load Balancers, target groups,\n      listeners, and rules.</p>\n         <p>Each tag consists of a key and an optional value. If a resource already has a tag with the\n      same key, <code>AddTags</code> updates its value.</p>",
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your\n      Application Load Balancers, Network Load Balancers, Gateway Load Balancers, target groups,\n      trust stores, listeners, and rules.</p>\n         <p>Each tag consists of a key and an optional value. If a resource already has a tag with the\n      same key, <code>AddTags</code> updates its value.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To add tags to a load balancer",
@@ -299,6 +302,68 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#AddTrustStoreRevocations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#AddTrustStoreRevocationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#AddTrustStoreRevocationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#InvalidRevocationContentException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationContentNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TooManyTrustStoreRevocationEntriesException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds the specified revocation file to the specified trust store.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#AddTrustStoreRevocationsInput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevocationContents": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revocation file to add.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#AddTrustStoreRevocationsOutput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreRevocations": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreRevocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the revocation file added to the trust store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#AllocationId": {
             "type": "string"
         },
@@ -327,6 +392,43 @@
         },
         "com.amazonaws.elasticloadbalancingv2#AlpnPolicyValue": {
             "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#AnomalyDetection": {
+            "type": "structure",
+            "members": {
+                "Result": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#AnomalyResultEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest anomaly detection result.</p>"
+                    }
+                },
+                "MitigationInEffect": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#MitigationInEffectEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether anomaly mitigation is in progress.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about anomaly detection and mitigation.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#AnomalyResultEnum": {
+            "type": "enum",
+            "members": {
+                "ANOMALOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "anomalous"
+                    }
+                },
+                "NORMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "normal"
+                    }
+                }
+            }
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateCognitoActionAuthenticationRequestExtraParams": {
             "type": "map",
@@ -659,6 +761,23 @@
                 "target": "com.amazonaws.elasticloadbalancingv2#AvailabilityZone"
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#CaCertificatesBundleNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CaCertificatesBundleNotFound",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified ca certificate bundle does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#CanonicalHostedZoneId": {
             "type": "string"
         },
@@ -810,6 +929,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#TooManyUniqueTargetGroupsPerLoadBalancerException"
                 },
                 {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotReadyException"
+                },
+                {
                     "target": "com.amazonaws.elasticloadbalancingv2#UnsupportedProtocolException"
                 }
             ],
@@ -903,6 +1028,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to assign to the listener.</p>"
+                    }
+                },
+                "MutualAuthentication": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#MutualAuthenticationAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mutual authentication configuration information.</p>"
                     }
                 }
             },
@@ -1449,6 +1580,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#CreateTrustStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#CreateTrustStoreInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#CreateTrustStoreOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CaCertificatesBundleNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DuplicateTagKeysException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DuplicateTrustStoreNameException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#InvalidCaCertificatesBundleException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TooManyTrustStoresException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a trust store.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#CreateTrustStoreInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the trust store.</p>\n         <p>This name must be unique per region and cannot be changed after creation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaCertificatesBundleS3Bucket": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#S3Bucket",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket for the ca certificates bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaCertificatesBundleS3Key": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#S3Key",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 path for the ca certificates bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaCertificatesBundleS3ObjectVersion": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 object version for the ca certificates bundle. If undefined the current version is used.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the trust store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#CreateTrustStoreOutput": {
+            "type": "structure",
+            "members": {
+                "TrustStores": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStores",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the trust store created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#CreatedTime": {
             "type": "timestamp"
         },
@@ -1670,6 +1891,49 @@
             }
         },
         "com.amazonaws.elasticloadbalancingv2#DeleteTargetGroupOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DeleteTrustStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DeleteTrustStoreInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DeleteTrustStoreOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreInUseException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a trust store.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DeleteTrustStoreInput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DeleteTrustStoreOutput": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -2533,6 +2797,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
                 }
             ],
             "traits": {
@@ -2911,10 +3178,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The targets.</p>"
                     }
+                },
+                "Include": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListOfDescribeTargetHealthIncludeOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to inclue anomaly detection information.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTargetHealthInputIncludeEnum": {
+            "type": "enum",
+            "members": {
+                "ANOMALY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AnomalyDetection"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#DescribeTargetHealthOutput": {
@@ -2924,6 +3214,267 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetHealthDescriptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the health of the targets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreAssociationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreAssociationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes all resources associated with the specified trust store.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreAssociationsInput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The marker for the next set of results. (You received this marker from a previous call.)</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with this call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreAssociationsOutput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreAssociations": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreAssociations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resources the trust store is associated to.</p>"
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the marker for the next set of results.\n      Otherwise, this is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreRevocation": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>"
+                    }
+                },
+                "RevocationId": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revocation ID of a revocation file in use.</p>"
+                    }
+                },
+                "RevocationType": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of revocation file.</p>"
+                    }
+                },
+                "NumberOfRevokedEntries": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#NumberOfRevokedEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of revoked certificates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the revocations used by a trust store.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreRevocationResponse": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreRevocation"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreRevocations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreRevocationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreRevocationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationIdNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the revocation files in use by the specified \n      trust store arn, or revocation ID.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreRevocationsInput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevocationIds": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revocation IDs of the revocation files you want to describe.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The marker for the next set of results. (You received this marker from a previous call.)</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with this call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreRevocationsOutput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreRevocations": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreRevocationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the revocation file in the trust store.</p>"
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the marker for the next set of results.\n      Otherwise, this is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStores": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoresInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoresOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes all trust stores for a given account \n      by trust store arn’s or name.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoresInput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArns": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>"
+                    }
+                },
+                "Names": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the trust stores.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The marker for the next set of results. (You received this marker from a previous call.)</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with this call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoresOutput": {
+            "type": "structure",
+            "members": {
+                "TrustStores": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStores",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the trust stores.</p>"
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the marker for the next set of results.\n      Otherwise, this is null.</p>"
                     }
                 }
             },
@@ -3002,6 +3553,23 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#DuplicateTrustStoreNameException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DuplicateTrustStoreName",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>A trust store with the specified name already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#ElasticLoadBalancing_v10": {
             "type": "service",
             "version": "2015-12-01",
@@ -3011,6 +3579,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#AddTags"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#AddTrustStoreRevocations"
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#CreateListener"
@@ -3025,6 +3596,9 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#CreateTargetGroup"
                 },
                 {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CreateTrustStore"
+                },
+                {
                     "target": "com.amazonaws.elasticloadbalancingv2#DeleteListener"
                 },
                 {
@@ -3035,6 +3609,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#DeleteTargetGroup"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DeleteTrustStore"
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#DeregisterTargets"
@@ -3073,6 +3650,21 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#DescribeTargetHealth"
                 },
                 {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreAssociations"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStoreRevocations"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DescribeTrustStores"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#GetTrustStoreCaCertificatesBundle"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#GetTrustStoreRevocationContent"
+                },
+                {
                     "target": "com.amazonaws.elasticloadbalancingv2#ModifyListener"
                 },
                 {
@@ -3088,6 +3680,9 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#ModifyTargetGroupAttributes"
                 },
                 {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ModifyTrustStore"
+                },
+                {
                     "target": "com.amazonaws.elasticloadbalancingv2#RegisterTargets"
                 },
                 {
@@ -3095,6 +3690,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#RemoveTags"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RemoveTrustStoreRevocations"
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#SetIpAddressType"
@@ -4241,6 +4839,111 @@
                 "smithy.api#documentation": "<p>Information about a forward action.</p>"
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#GetTrustStoreCaCertificatesBundle": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#GetTrustStoreCaCertificatesBundleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#GetTrustStoreCaCertificatesBundleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the ca certificate bundle.</p>\n         <p>This action returns a pre-signed S3 URI which is \n      active for ten minutes.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#GetTrustStoreCaCertificatesBundleInput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#GetTrustStoreCaCertificatesBundleOutput": {
+            "type": "structure",
+            "members": {
+                "Location": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ca certificate bundles Amazon S3 URI.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#GetTrustStoreRevocationContent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#GetTrustStoreRevocationContentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#GetTrustStoreRevocationContentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationIdNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the specified revocation file.</p>\n         <p>This action returns a pre-signed S3 URI which is \n      active for ten minutes.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#GetTrustStoreRevocationContentInput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevocationId": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The revocation ID of the revocation file.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#GetTrustStoreRevocationContentOutput": {
+            "type": "structure",
+            "members": {
+                "Location": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revocation files Amazon S3 URI.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#GrpcCode": {
             "type": "string"
         },
@@ -4351,6 +5054,9 @@
         "com.amazonaws.elasticloadbalancingv2#IPv6Address": {
             "type": "string"
         },
+        "com.amazonaws.elasticloadbalancingv2#IgnoreClientCertificateExpiry": {
+            "type": "boolean"
+        },
         "com.amazonaws.elasticloadbalancingv2#IncompatibleProtocolsException": {
             "type": "structure",
             "members": {
@@ -4364,6 +5070,23 @@
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>The specified configuration is not valid with this protocol.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#InvalidCaCertificatesBundleException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidCaCertificatesBundle",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified ca certificate bundle is in an invalid format, or corrupt.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4398,6 +5121,23 @@
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>The requested action is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#InvalidRevocationContentException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidRevocationContent",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The provided revocation file is an invalid format, or uses an incorrect algorithm.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4519,6 +5259,12 @@
                 "target": "com.amazonaws.elasticloadbalancingv2#Limit"
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#ListOfDescribeTargetHealthIncludeOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeTargetHealthInputIncludeEnum"
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#ListOfString": {
             "type": "list",
             "member": {
@@ -4574,6 +5320,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#AlpnPolicyName",
                     "traits": {
                         "smithy.api#documentation": "<p>[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN)\n      policy.</p>"
+                    }
+                },
+                "MutualAuthentication": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#MutualAuthenticationAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mutual authentication configuration information.</p>"
                     }
                 }
             },
@@ -4758,7 +5510,7 @@
                 "Key": {
                     "target": "com.amazonaws.elasticloadbalancingv2#LoadBalancerAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n         <p>The following attributes are supported by all load balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deletion_protection.enabled</code> - Indicates whether deletion protection is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is\n            <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross-zone load\n          balancing is enabled. The possible values are <code>true</code> and <code>false</code>.\n          The default for Network Load Balancers and Gateway Load Balancers is <code>false</code>. \n          The default for Application Load Balancers is <code>true</code>, and cannot be changed.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by both Application Load Balancers and Network Load\n      Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>access_logs.s3.enabled</code> - Indicates whether access logs are enabled. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>access_logs.s3.bucket</code> - The name of the S3 bucket for the access logs.\n          This attribute is required if access logs are enabled. The bucket must exist in the same\n          region as the load balancer and have a bucket policy that grants Elastic Load Balancing\n          permissions to write to the bucket.</p>\n            </li>\n            <li>\n               <p>\n                  <code>access_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the\n          access logs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ipv6.deny_all_igw_traffic</code> - Blocks internet gateway (IGW) access to the\n          load balancer. It is set to <code>false</code> for internet-facing load balancers and\n            <code>true</code> for internal load balancers, preventing unintended access to your\n          internal load balancer through an internet gateway.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by only Application Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>idle_timeout.timeout_seconds</code> - The idle timeout value, in seconds. The\n          valid range is 1-4000 seconds. The default is 60 seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.desync_mitigation_mode</code> - Determines how the load balancer\n          handles requests that might pose a security risk to your application. The possible values\n          are <code>monitor</code>, <code>defensive</code>, and <code>strictest</code>. The default\n          is <code>defensive</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.drop_invalid_header_fields.enabled</code> - Indicates whether HTTP\n          headers with invalid header fields are removed by the load balancer (<code>true</code>) or\n          routed to targets (<code>false</code>). The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.preserve_host_header.enabled</code> - Indicates whether the\n          Application Load Balancer should preserve the <code>Host</code> header in the HTTP request\n          and send it to the target without any change. The possible values are <code>true</code>\n          and <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.x_amzn_tls_version_and_cipher_suite.enabled</code> - Indicates\n          whether the two headers (<code>x-amzn-tls-version</code> and\n            <code>x-amzn-tls-cipher-suite</code>), which contain information about the negotiated\n          TLS version and cipher suite, are added to the client request before sending it to the\n          target. The <code>x-amzn-tls-version</code> header has information about the TLS protocol\n          version negotiated with the client, and the <code>x-amzn-tls-cipher-suite</code> header\n          has information about the cipher suite negotiated with the client. Both headers are in\n          OpenSSL format. The possible values for the attribute are <code>true</code> and\n            <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.xff_client_port.enabled</code> - Indicates whether the\n            <code>X-Forwarded-For</code> header should preserve the source port that the client used\n          to connect to the load balancer. The possible values are <code>true</code> and\n            <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.xff_header_processing.mode</code> - Enables you to modify,\n          preserve, or remove the <code>X-Forwarded-For</code> header in the HTTP request before the\n          Application Load Balancer sends the request to the target. The possible values are\n            <code>append</code>, <code>preserve</code>, and <code>remove</code>. The default is\n            <code>append</code>.</p>\n               <ul>\n                  <li>\n                     <p>If the value is <code>append</code>, the Application Load Balancer adds the client\n              IP address (of the last hop) to the <code>X-Forwarded-For</code> header in the HTTP\n              request before it sends it to targets.</p>\n                  </li>\n                  <li>\n                     <p>If the value is <code>preserve</code> the Application Load Balancer preserves the\n                <code>X-Forwarded-For</code> header in the HTTP request, and sends it to targets\n              without any change.</p>\n                  </li>\n                  <li>\n                     <p>If the value is <code>remove</code>, the Application Load Balancer removes the\n                <code>X-Forwarded-For</code> header in the HTTP request before it sends it to\n              targets.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http2.enabled</code> - Indicates whether HTTP/2 is enabled. The possible\n          values are <code>true</code> and <code>false</code>. The default is <code>true</code>.\n          Elastic Load Balancing requires that message header names contain only alphanumeric\n          characters and hyphens.</p>\n            </li>\n            <li>\n               <p>\n                  <code>waf.fail_open.enabled</code> - Indicates whether to allow a WAF-enabled load\n          balancer to route requests to targets if it is unable to forward the request to Amazon Web Services WAF. The possible values are <code>true</code> and <code>false</code>. The\n          default is <code>false</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by only Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>dns_record.client_routing_policy</code> - Indicates how traffic is \n          distributed among the load balancer Availability Zones. The possible values are \n          <code>availability_zone_affinity</code> with 100 percent zonal affinity, \n          <code>partial_availability_zone_affinity</code> with 85 percent zonal affinity, \n          and <code>any_availability_zone</code> with 0 percent zonal affinity.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n         <p>The following attributes are supported by all load balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deletion_protection.enabled</code> - Indicates whether deletion protection is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is\n            <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross-zone load\n          balancing is enabled. The possible values are <code>true</code> and <code>false</code>.\n          The default for Network Load Balancers and Gateway Load Balancers is <code>false</code>. \n          The default for Application Load Balancers is <code>true</code>, and cannot be changed.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by both Application Load Balancers and Network Load\n      Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>access_logs.s3.enabled</code> - Indicates whether access logs are enabled. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>access_logs.s3.bucket</code> - The name of the S3 bucket for the access logs.\n          This attribute is required if access logs are enabled. The bucket must exist in the same\n          region as the load balancer and have a bucket policy that grants Elastic Load Balancing\n          permissions to write to the bucket.</p>\n            </li>\n            <li>\n               <p>\n                  <code>access_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the\n          access logs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ipv6.deny_all_igw_traffic</code> - Blocks internet gateway (IGW) access to the\n          load balancer. It is set to <code>false</code> for internet-facing load balancers and\n            <code>true</code> for internal load balancers, preventing unintended access to your\n          internal load balancer through an internet gateway.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by only Application Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>idle_timeout.timeout_seconds</code> - The idle timeout value, in seconds. The\n          valid range is 1-4000 seconds. The default is 60 seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>connection_logs.s3.enabled</code> - Indicates whether connection logs are enabled. The\n          value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>connection_logs.s3.bucket</code> - The name of the S3 bucket for the connection logs.\n          This attribute is required if connection logs are enabled. The bucket must exist in the same\n          region as the load balancer and have a bucket policy that grants Elastic Load Balancing\n          permissions to write to the bucket.</p>\n            </li>\n            <li>\n               <p>\n                  <code>connection_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the\n          connection logs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.desync_mitigation_mode</code> - Determines how the load balancer\n          handles requests that might pose a security risk to your application. The possible values\n          are <code>monitor</code>, <code>defensive</code>, and <code>strictest</code>. The default\n          is <code>defensive</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.drop_invalid_header_fields.enabled</code> - Indicates whether HTTP\n          headers with invalid header fields are removed by the load balancer (<code>true</code>) or\n          routed to targets (<code>false</code>). The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.preserve_host_header.enabled</code> - Indicates whether the\n          Application Load Balancer should preserve the <code>Host</code> header in the HTTP request\n          and send it to the target without any change. The possible values are <code>true</code>\n          and <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.x_amzn_tls_version_and_cipher_suite.enabled</code> - Indicates\n          whether the two headers (<code>x-amzn-tls-version</code> and\n            <code>x-amzn-tls-cipher-suite</code>), which contain information about the negotiated\n          TLS version and cipher suite, are added to the client request before sending it to the\n          target. The <code>x-amzn-tls-version</code> header has information about the TLS protocol\n          version negotiated with the client, and the <code>x-amzn-tls-cipher-suite</code> header\n          has information about the cipher suite negotiated with the client. Both headers are in\n          OpenSSL format. The possible values for the attribute are <code>true</code> and\n            <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.xff_client_port.enabled</code> - Indicates whether the\n            <code>X-Forwarded-For</code> header should preserve the source port that the client used\n          to connect to the load balancer. The possible values are <code>true</code> and\n            <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.xff_header_processing.mode</code> - Enables you to modify,\n          preserve, or remove the <code>X-Forwarded-For</code> header in the HTTP request before the\n          Application Load Balancer sends the request to the target. The possible values are\n            <code>append</code>, <code>preserve</code>, and <code>remove</code>. The default is\n            <code>append</code>.</p>\n               <ul>\n                  <li>\n                     <p>If the value is <code>append</code>, the Application Load Balancer adds the client\n              IP address (of the last hop) to the <code>X-Forwarded-For</code> header in the HTTP\n              request before it sends it to targets.</p>\n                  </li>\n                  <li>\n                     <p>If the value is <code>preserve</code> the Application Load Balancer preserves the\n                <code>X-Forwarded-For</code> header in the HTTP request, and sends it to targets\n              without any change.</p>\n                  </li>\n                  <li>\n                     <p>If the value is <code>remove</code>, the Application Load Balancer removes the\n                <code>X-Forwarded-For</code> header in the HTTP request before it sends it to\n              targets.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http2.enabled</code> - Indicates whether HTTP/2 is enabled. The possible\n          values are <code>true</code> and <code>false</code>. The default is <code>true</code>.\n          Elastic Load Balancing requires that message header names contain only alphanumeric\n          characters and hyphens.</p>\n            </li>\n            <li>\n               <p>\n                  <code>waf.fail_open.enabled</code> - Indicates whether to allow a WAF-enabled load\n          balancer to route requests to targets if it is unable to forward the request to Amazon Web Services WAF. The possible values are <code>true</code> and <code>false</code>. The\n          default is <code>false</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by only Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>dns_record.client_routing_policy</code> - Indicates how traffic is \n          distributed among the load balancer Availability Zones. The possible values are \n          <code>availability_zone_affinity</code> with 100 percent zonal affinity, \n          <code>partial_availability_zone_affinity</code> with 85 percent zonal affinity, \n          and <code>any_availability_zone</code> with 0 percent zonal affinity.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Value": {
@@ -4924,6 +5676,9 @@
                 "target": "com.amazonaws.elasticloadbalancingv2#LoadBalancer"
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#Location": {
+            "type": "string"
+        },
         "com.amazonaws.elasticloadbalancingv2#Marker": {
             "type": "string"
         },
@@ -4948,6 +5703,26 @@
             }
         },
         "com.amazonaws.elasticloadbalancingv2#Max": {
+            "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#MitigationInEffectEnum": {
+            "type": "enum",
+            "members": {
+                "YES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "yes"
+                    }
+                },
+                "NO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "no"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#Mode": {
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#ModifyListener": {
@@ -5006,6 +5781,12 @@
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#TooManyUniqueTargetGroupsPerLoadBalancerException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotReadyException"
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#UnsupportedProtocolException"
@@ -5091,6 +5872,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#AlpnPolicyName",
                     "traits": {
                         "smithy.api#documentation": "<p>[TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN) policy. You\n      can specify one policy name. The following are the possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HTTP1Only</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HTTP2Only</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HTTP2Optional</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HTTP2Preferred</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>None</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies\">ALPN\n        policies</a> in the <i>Network Load Balancers Guide</i>.</p>"
+                    }
+                },
+                "MutualAuthentication": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#MutualAuthenticationAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mutual authentication configuration information.</p>"
                     }
                 }
             },
@@ -5569,8 +6356,115 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#ModifyTrustStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#ModifyTrustStoreInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#ModifyTrustStoreOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CaCertificatesBundleNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#InvalidCaCertificatesBundleException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the ca certificate bundle for a given trust store.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ModifyTrustStoreInput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaCertificatesBundleS3Bucket": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#S3Bucket",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket for the ca certificates bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaCertificatesBundleS3Key": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#S3Key",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 path for the ca certificates bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaCertificatesBundleS3ObjectVersion": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 object version for the ca certificates bundle. If undefined the current version is used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ModifyTrustStoreOutput": {
+            "type": "structure",
+            "members": {
+                "TrustStores": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStores",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the modified trust store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#MutualAuthenticationAttributes": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#Mode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client certificate handling method. Options are <code>off</code>, \n      <code>passthrough</code> or <code>verify</code>. The default value is \n      <code>off</code>.</p>"
+                    }
+                },
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>"
+                    }
+                },
+                "IgnoreClientCertificateExpiry": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#IgnoreClientCertificateExpiry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether expired client certificates are ignored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the mutual authentication attributes of a listener.</p>"
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#Name": {
             "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#NumberOfCaCertificates": {
+            "type": "integer"
+        },
+        "com.amazonaws.elasticloadbalancingv2#NumberOfRevokedEntries": {
+            "type": "long"
         },
         "com.amazonaws.elasticloadbalancingv2#OperationNotPermittedException": {
             "type": "structure",
@@ -5990,6 +6884,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
                 }
             ],
             "traits": {
@@ -6042,6 +6939,57 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#RemoveTrustStoreRevocations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#RemoveTrustStoreRevocationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#RemoveTrustStoreRevocationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationIdNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified revocation file from the specified trust store.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RemoveTrustStoreRevocationsInput": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevocationIds": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationIds",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The revocation IDs of the revocation files you want to remove.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RemoveTrustStoreRevocationsOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#ResourceArn": {
             "type": "string"
         },
@@ -6066,6 +7014,98 @@
                 "smithy.api#documentation": "<p>A specified resource is in use.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RevocationContent": {
+            "type": "structure",
+            "members": {
+                "S3Bucket": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket for the revocation file.</p>"
+                    }
+                },
+                "S3Key": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 path for the revocation file.</p>"
+                    }
+                },
+                "S3ObjectVersion": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 object version of the revocation file.</p>"
+                    }
+                },
+                "RevocationType": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of revocation file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a revocation file.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RevocationContentNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RevocationContentNotFound",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified revocation file does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RevocationContents": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#RevocationContent"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RevocationId": {
+            "type": "long"
+        },
+        "com.amazonaws.elasticloadbalancingv2#RevocationIdNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RevocationIdNotFound",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified revocation ID does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RevocationIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#RevocationId"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RevocationType": {
+            "type": "enum",
+            "members": {
+                "CRL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRL"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#Rule": {
@@ -6234,6 +7274,15 @@
             "member": {
                 "target": "com.amazonaws.elasticloadbalancingv2#Rule"
             }
+        },
+        "com.amazonaws.elasticloadbalancingv2#S3Bucket": {
+            "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#S3Key": {
+            "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#S3ObjectVersion": {
+            "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#SSLPolicyNotFoundException": {
             "type": "structure",
@@ -7023,7 +8072,7 @@
                 "Key": {
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n         <p>The following attributes are supported by all load balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.timeout_seconds</code> - The amount of time, in seconds,\n          for Elastic Load Balancing to wait before changing the state of a deregistering target\n          from <code>draining</code> to <code>unused</code>. The range is 0-3600 seconds. The\n          default value is 300 seconds. If the target is a Lambda function, this attribute is not\n          supported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.enabled</code> - Indicates whether target stickiness is enabled. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.type</code> - Indicates the type of stickiness. The possible values are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>lb_cookie</code> and <code>app_cookie</code> for Application Load Balancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip</code> for Network Load Balancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip_dest_ip</code> and <code>source_ip_dest_ip_proto</code> for Gateway Load Balancers.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>The following attributes are supported by Application Load Balancers and \n      Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross zone load \n          balancing is enabled. The value is <code>true</code>, <code>false</code> or \n          <code>use_load_balancer_configuration</code>. The default is \n          <code>use_load_balancer_configuration</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.dns_failover.minimum_healthy_targets.count</code> - \n          The minimum number of targets that must be healthy.\n          If the number of healthy targets is below this value, mark the zone as unhealthy\n          in DNS, so that traffic is routed only to healthy zones. The possible values are\n          <code>off</code> or an integer from 1 to the maximum number of targets.\n          The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.dns_failover.minimum_healthy_targets.percentage</code> - \n          The minimum percentage of targets that must be healthy.\n          If the percentage of healthy targets is below this value, mark the zone as unhealthy\n          in DNS, so that traffic is routed only to healthy zones. The possible values are\n          <code>off</code> or an integer from 1 to 100. The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.count</code> - \n          The minimum number of targets that must be healthy.  \n          If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets.\n          The possible values are 1 to the maximum number of targets. The default is 1.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.percentage</code> - \n          The minimum percentage of targets that must be healthy. \n          If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets.\n          The possible values are <code>off</code> or an integer from 1 to 100.\n          The default is <code>off</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only if the load balancer is an Application Load\n      Balancer and the target is an instance or an IP address:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>load_balancing.algorithm.type</code> - The load balancing algorithm determines\n          how the load balancer selects targets when routing requests. The value is\n            <code>round_robin</code> or <code>least_outstanding_requests</code>. The default is\n            <code>round_robin</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>slow_start.duration_seconds</code> - The time period, in seconds, during which a\n          newly registered target receives an increasing share of the traffic to the target group.\n          After this time period ends, the target receives its full share of traffic. The range is\n          30-900 seconds (15 minutes). The default is 0 seconds (disabled).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.cookie_name</code> - Indicates the name of the\n          application-based cookie. Names that start with the following prefixes are not allowed:\n            <code>AWSALB</code>, <code>AWSALBAPP</code>, and <code>AWSALBTG</code>; they're reserved\n          for use by the load balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the application-based cookie is considered stale. The range is 1 second to\n          1 week (604800 seconds). The default value is 1 day (86400 seconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the load balancer-generated cookie is considered stale. The range is 1\n          second to 1 week (604800 seconds). The default value is 1 day (86400 seconds). </p>\n            </li>\n         </ul>\n         <p>The following attribute is supported only if the load balancer is an Application Load\n      Balancer and the target is a Lambda function:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>lambda.multi_value_headers.enabled</code> - Indicates whether the request and\n          response headers that are exchanged between the load balancer and the Lambda function\n          include arrays of values or strings. The value is <code>true</code> or <code>false</code>.\n          The default is <code>false</code>. If the value is <code>false</code> and the request\n          contains a duplicate header field name or query parameter key, the load balancer uses the\n          last value sent by the client.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only by Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.connection_termination.enabled</code> - Indicates whether\n          the load balancer terminates connections at the end of the deregistration timeout. The\n          value is <code>true</code> or <code>false</code>. For new UDP/TCP_UDP target groups the \n          default is <code>true</code>. Otherwise, the default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>preserve_client_ip.enabled</code> - Indicates whether client IP preservation is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is disabled if\n          the target group type is IP address and the target group protocol is TCP or TLS.\n          Otherwise, the default is enabled. Client IP preservation cannot be disabled for UDP and\n          TCP_UDP target groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is\n            <code>false</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>target_health_state.unhealthy.connection_termination.enabled</code> - Indicates whether \n          the load balancer terminates connections to unhealthy targets. The value is <code>true</code> \n          or <code>false</code>. The default is <code>true</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only by Gateway Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>target_failover.on_deregistration</code> - Indicates how the Gateway Load\n          Balancer handles existing flows when a target is deregistered. The possible values are\n            <code>rebalance</code> and <code>no_rebalance</code>. The default is\n            <code>no_rebalance</code>. The two attributes\n            (<code>target_failover.on_deregistration</code> and\n            <code>target_failover.on_unhealthy</code>) can't be set independently. The value you set\n          for both attributes must be the same.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>target_failover.on_unhealthy</code> - Indicates how the Gateway Load Balancer\n          handles existing flows when a target is unhealthy. The possible values are\n            <code>rebalance</code> and <code>no_rebalance</code>. The default is\n            <code>no_rebalance</code>. The two attributes\n            (<code>target_failover.on_deregistration</code> and\n            <code>target_failover.on_unhealthy</code>) cannot be set independently. The value you\n          set for both attributes must be the same.  </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n         <p>The following attributes are supported by all load balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.timeout_seconds</code> - The amount of time, in seconds,\n          for Elastic Load Balancing to wait before changing the state of a deregistering target\n          from <code>draining</code> to <code>unused</code>. The range is 0-3600 seconds. The\n          default value is 300 seconds. If the target is a Lambda function, this attribute is not\n          supported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.enabled</code> - Indicates whether target stickiness is enabled. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.type</code> - Indicates the type of stickiness. The possible values are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>lb_cookie</code> and <code>app_cookie</code> for Application Load Balancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip</code> for Network Load Balancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip_dest_ip</code> and <code>source_ip_dest_ip_proto</code> for Gateway Load Balancers.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>The following attributes are supported by Application Load Balancers and \n      Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross zone load \n          balancing is enabled. The value is <code>true</code>, <code>false</code> or \n          <code>use_load_balancer_configuration</code>. The default is \n          <code>use_load_balancer_configuration</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.dns_failover.minimum_healthy_targets.count</code> - \n          The minimum number of targets that must be healthy.\n          If the number of healthy targets is below this value, mark the zone as unhealthy\n          in DNS, so that traffic is routed only to healthy zones. The possible values are\n          <code>off</code> or an integer from 1 to the maximum number of targets.\n          The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.dns_failover.minimum_healthy_targets.percentage</code> - \n          The minimum percentage of targets that must be healthy.\n          If the percentage of healthy targets is below this value, mark the zone as unhealthy\n          in DNS, so that traffic is routed only to healthy zones. The possible values are\n          <code>off</code> or an integer from 1 to 100. The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.count</code> - \n          The minimum number of targets that must be healthy.  \n          If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets.\n          The possible values are 1 to the maximum number of targets. The default is 1.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.percentage</code> - \n          The minimum percentage of targets that must be healthy. \n          If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets.\n          The possible values are <code>off</code> or an integer from 1 to 100.\n          The default is <code>off</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only if the load balancer is an Application Load\n      Balancer and the target is an instance or an IP address:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>load_balancing.algorithm.type</code> - The load balancing algorithm determines\n          how the load balancer selects targets when routing requests. The value is\n            <code>round_robin</code>, <code>least_outstanding_requests</code>, or <code>weighted_random</code>. The default is\n            <code>round_robin</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>load_balancing.algorithm.anomaly_mitigation</code> - Only available when <code>load_balancing.algorithm.type</code> \n          is <code>weighted_random</code>. Indicates whether anomaly mitigation is enabled. The value is <code>on</code> \n          or <code>off</code>. The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>slow_start.duration_seconds</code> - The time period, in seconds, during which a\n          newly registered target receives an increasing share of the traffic to the target group.\n          After this time period ends, the target receives its full share of traffic. The range is\n          30-900 seconds (15 minutes). The default is 0 seconds (disabled).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.cookie_name</code> - Indicates the name of the\n          application-based cookie. Names that start with the following prefixes are not allowed:\n            <code>AWSALB</code>, <code>AWSALBAPP</code>, and <code>AWSALBTG</code>; they're reserved\n          for use by the load balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the application-based cookie is considered stale. The range is 1 second to\n          1 week (604800 seconds). The default value is 1 day (86400 seconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the load balancer-generated cookie is considered stale. The range is 1\n          second to 1 week (604800 seconds). The default value is 1 day (86400 seconds). </p>\n            </li>\n         </ul>\n         <p>The following attribute is supported only if the load balancer is an Application Load\n      Balancer and the target is a Lambda function:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>lambda.multi_value_headers.enabled</code> - Indicates whether the request and\n          response headers that are exchanged between the load balancer and the Lambda function\n          include arrays of values or strings. The value is <code>true</code> or <code>false</code>.\n          The default is <code>false</code>. If the value is <code>false</code> and the request\n          contains a duplicate header field name or query parameter key, the load balancer uses the\n          last value sent by the client.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only by Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.connection_termination.enabled</code> - Indicates whether\n          the load balancer terminates connections at the end of the deregistration timeout. The\n          value is <code>true</code> or <code>false</code>. For new UDP/TCP_UDP target groups the \n          default is <code>true</code>. Otherwise, the default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>preserve_client_ip.enabled</code> - Indicates whether client IP preservation is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is disabled if\n          the target group type is IP address and the target group protocol is TCP or TLS.\n          Otherwise, the default is enabled. Client IP preservation cannot be disabled for UDP and\n          TCP_UDP target groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is\n            <code>false</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>target_health_state.unhealthy.connection_termination.enabled</code> - Indicates whether \n          the load balancer terminates connections to unhealthy targets. The value is <code>true</code> \n          or <code>false</code>. The default is <code>true</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only by Gateway Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>target_failover.on_deregistration</code> - Indicates how the Gateway Load\n          Balancer handles existing flows when a target is deregistered. The possible values are\n            <code>rebalance</code> and <code>no_rebalance</code>. The default is\n            <code>no_rebalance</code>. The two attributes\n            (<code>target_failover.on_deregistration</code> and\n            <code>target_failover.on_unhealthy</code>) can't be set independently. The value you set\n          for both attributes must be the same.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>target_failover.on_unhealthy</code> - Indicates how the Gateway Load Balancer\n          handles existing flows when a target is unhealthy. The possible values are\n            <code>rebalance</code> and <code>no_rebalance</code>. The default is\n            <code>no_rebalance</code>. The two attributes\n            (<code>target_failover.on_deregistration</code> and\n            <code>target_failover.on_unhealthy</code>) cannot be set independently. The value you\n          set for both attributes must be the same.  </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Value": {
@@ -7205,6 +8254,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetHealth",
                     "traits": {
                         "smithy.api#documentation": "<p>The health information for the target.</p>"
+                    }
+                },
+                "AnomalyDetection": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#AnomalyDetection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The anomaly detection result for the target.</p>\n         <p>If no anomalies were detected, the result is <code>normal</code>.</p>\n         <p>If anomalies were detected, the result is <code>anomalous</code>.</p>"
                     }
                 }
             },
@@ -7482,7 +8537,7 @@
                     "code": "TooManyTags",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>You've reached the limit on the number of tags per load balancer.</p>",
+                "smithy.api#documentation": "<p>You've reached the limit on the number of tags for this resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -7521,6 +8576,40 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#TooManyTrustStoreRevocationEntriesException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TooManyTrustStoreRevocationEntries",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified trust store has too many revocation entries.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TooManyTrustStoresException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TooManyTrustStores",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>You've reached the limit on the number of trust stores for your Amazon Web Services account.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#TooManyUniqueTargetGroupsPerLoadBalancerException": {
             "type": "structure",
             "members": {
@@ -7536,6 +8625,207 @@
                 "smithy.api#documentation": "<p>You've reached the limit on the number of unique target groups per load balancer across\n      all listeners. If a target group is used by multiple actions for a load balancer, it is\n      counted as only one use.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TotalRevokedEntries": {
+            "type": "long"
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStore": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the trust store.</p>"
+                    }
+                },
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the trust store.</p>"
+                    }
+                },
+                "NumberOfCaCertificates": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#NumberOfCaCertificates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of ca certificates in the trust store.</p>"
+                    }
+                },
+                "TotalRevokedEntries": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TotalRevokedEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of revoked certificates in the trust store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a trust store.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreArn": {
+            "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreAssociation": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreAssociationResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the resources a trust store is associated with.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreAssociationResourceArn": {
+            "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreAssociations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreAssociation"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreInUseException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TrustStoreInUse",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified trust store is currently in use.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9]+-)*[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreName"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TrustStoreNotFound",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified trust store does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreNotReadyException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TrustStoreNotReady",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified trust store is not active.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreRevocation": {
+            "type": "structure",
+            "members": {
+                "TrustStoreArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trust store.</p>"
+                    }
+                },
+                "RevocationId": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revocation ID of the revocation file.</p>"
+                    }
+                },
+                "RevocationType": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RevocationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of revocation file.</p>"
+                    }
+                },
+                "NumberOfRevokedEntries": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#NumberOfRevokedEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of revoked certificates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a revocation file in use by a trust store.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreRevocations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreRevocation"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStoreStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#TrustStores": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#TrustStore"
             }
         },
         "com.amazonaws.elasticloadbalancingv2#UnsupportedProtocolException": {

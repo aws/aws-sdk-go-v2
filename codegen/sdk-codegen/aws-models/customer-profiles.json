@@ -1501,6 +1501,9 @@
                     "target": "com.amazonaws.customerprofiles#DeleteWorkflow"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#DetectProfileObjectType"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#GetAutoMergingPreview"
                 },
                 {
@@ -3083,6 +3086,109 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Summary information about the Kinesis data stream</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#DetectProfileObjectType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DetectProfileObjectTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DetectProfileObjectTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The process of detecting profile object type mapping by using given objects.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/detect/object-types",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DetectProfileObjectTypeRequest": {
+            "type": "structure",
+            "members": {
+                "Objects": {
+                    "target": "com.amazonaws.customerprofiles#Objects",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that is serialized from a JSON object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DetectProfileObjectTypeResponse": {
+            "type": "structure",
+            "members": {
+                "DetectedProfileObjectTypes": {
+                    "target": "com.amazonaws.customerprofiles#DetectedProfileObjectTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detected <code>ProfileObjectType</code> mappings from given objects. A maximum of one mapping is supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DetectedProfileObjectType": {
+            "type": "structure",
+            "members": {
+                "SourceLastUpdatedTimestampFormat": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of <code>sourceLastUpdatedTimestamp</code> that was detected in fields.</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#FieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the name and the <code>ObjectType</code> field.</p>"
+                    }
+                },
+                "Keys": {
+                    "target": "com.amazonaws.customerprofiles#KeyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique keys that can be used to map data to a profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains <code>ProfileObjectType</code> mapping information from the model.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#DetectedProfileObjectTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#DetectedProfileObjectType"
             }
         },
         "com.amazonaws.customerprofiles#DomainList": {
@@ -7333,6 +7439,19 @@
             },
             "value": {
                 "target": "com.amazonaws.customerprofiles#typeName"
+            }
+        },
+        "com.amazonaws.customerprofiles#Objects": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#stringifiedJson"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#Operator": {

@@ -90,7 +90,7 @@ type UpdateFileSystemOutput struct {
 	// This member is required.
 	OwnerId *string
 
-	// The performance mode of the file system.
+	// The Performance mode of the file system.
 	//
 	// This member is required.
 	PerformanceMode types.PerformanceMode
@@ -114,14 +114,14 @@ type UpdateFileSystemOutput struct {
 	Tags []types.Tag
 
 	// The unique and consistent identifier of the Availability Zone in which the file
-	// system's One Zone storage classes exist. For example, use1-az1 is an
-	// Availability Zone ID for the us-east-1 Amazon Web Services Region, and it has
-	// the same location in every Amazon Web Services account.
+	// system is located, and is valid only for One Zone file systems. For example,
+	// use1-az1 is an Availability Zone ID for the us-east-1 Amazon Web Services
+	// Region, and it has the same location in every Amazon Web Services account.
 	AvailabilityZoneId *string
 
 	// Describes the Amazon Web Services Availability Zone in which the file system is
-	// located, and is valid only for file systems using One Zone storage classes. For
-	// more information, see Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
+	// located, and is valid only for One Zone file systems. For more information, see
+	// Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
 	// in the Amazon EFS User Guide.
 	AvailabilityZoneName *string
 
@@ -133,6 +133,9 @@ type UpdateFileSystemOutput struct {
 	// Example with sample data:
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
+
+	// Describes the protection on the file system.
+	FileSystemProtection *types.FileSystemProtectionDescription
 
 	// The ID of an KMS key used to protect the encrypted file system.
 	KmsKeyId *string

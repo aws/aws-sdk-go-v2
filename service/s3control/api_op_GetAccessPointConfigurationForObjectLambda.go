@@ -16,8 +16,9 @@ import (
 	"strings"
 )
 
-// Returns configuration for an Object Lambda Access Point. The following actions
-// are related to GetAccessPointConfigurationForObjectLambda :
+// This operation is not supported by directory buckets. Returns configuration for
+// an Object Lambda Access Point. The following actions are related to
+// GetAccessPointConfigurationForObjectLambda :
 //   - PutAccessPointConfigurationForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointConfigurationForObjectLambda.html)
 func (c *Client) GetAccessPointConfigurationForObjectLambda(ctx context.Context, params *GetAccessPointConfigurationForObjectLambdaInput, optFns ...func(*Options)) (*GetAccessPointConfigurationForObjectLambdaOutput, error) {
 	if params == nil {

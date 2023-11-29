@@ -21,6 +21,8 @@
         "api_op_DeregisterOrganizationDelegatedAdmin.go",
         "api_op_DescribeQuery.go",
         "api_op_DescribeTrails.go",
+        "api_op_DisableFederation.go",
+        "api_op_EnableFederation.go",
         "api_op_GetChannel.go",
         "api_op_GetEventDataStore.go",
         "api_op_GetEventSelectors.go",

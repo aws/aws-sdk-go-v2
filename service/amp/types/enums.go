@@ -113,6 +113,35 @@ func (RuleGroupsNamespaceStatusCode) Values() []RuleGroupsNamespaceStatusCode {
 	}
 }
 
+type ScraperStatusCode string
+
+// Enum values for ScraperStatusCode
+const (
+	// Scraper is being created. Deletion is disallowed until status is ACTIVE.
+	ScraperStatusCodeCreating ScraperStatusCode = "CREATING"
+	// Scraper has been created and is usable.
+	ScraperStatusCodeActive ScraperStatusCode = "ACTIVE"
+	// Scraper is being deleted. Deletions are allowed only when status is ACTIVE.
+	ScraperStatusCodeDeleting ScraperStatusCode = "DELETING"
+	// Scraper creation failed.
+	ScraperStatusCodeCreationFailed ScraperStatusCode = "CREATION_FAILED"
+	// Scraper deletion failed.
+	ScraperStatusCodeDeletionFailed ScraperStatusCode = "DELETION_FAILED"
+)
+
+// Values returns all known values for ScraperStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScraperStatusCode) Values() []ScraperStatusCode {
+	return []ScraperStatusCode{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"CREATION_FAILED",
+		"DELETION_FAILED",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

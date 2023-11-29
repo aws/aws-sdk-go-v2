@@ -59,7 +59,8 @@ type CreateDBParameterGroupInput struct {
 	// duplicates. The following are the valid DB engine values:
 	//   - aurora-mysql
 	//   - aurora-postgresql
-	//   - mariadb
+	//   - db2-ae
+	//   - db2-se
 	//   - mysql
 	//   - oracle-ee
 	//   - oracle-ee-cdb

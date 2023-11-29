@@ -51,6 +51,10 @@ const (
 	CoverageFilterCriterionKeyAddonVersion   CoverageFilterCriterionKey = "ADDON_VERSION"
 	CoverageFilterCriterionKeyManagementType CoverageFilterCriterionKey = "MANAGEMENT_TYPE"
 	CoverageFilterCriterionKeyEksClusterName CoverageFilterCriterionKey = "EKS_CLUSTER_NAME"
+	CoverageFilterCriterionKeyEcsClusterName CoverageFilterCriterionKey = "ECS_CLUSTER_NAME"
+	CoverageFilterCriterionKeyAgentVersion   CoverageFilterCriterionKey = "AGENT_VERSION"
+	CoverageFilterCriterionKeyInstanceId     CoverageFilterCriterionKey = "INSTANCE_ID"
+	CoverageFilterCriterionKeyClusterArn     CoverageFilterCriterionKey = "CLUSTER_ARN"
 )
 
 // Values returns all known values for CoverageFilterCriterionKey. Note that this
@@ -65,6 +69,10 @@ func (CoverageFilterCriterionKey) Values() []CoverageFilterCriterionKey {
 		"ADDON_VERSION",
 		"MANAGEMENT_TYPE",
 		"EKS_CLUSTER_NAME",
+		"ECS_CLUSTER_NAME",
+		"AGENT_VERSION",
+		"INSTANCE_ID",
+		"CLUSTER_ARN",
 	}
 }
 
@@ -79,6 +87,8 @@ const (
 	CoverageSortKeyAddonVersion   CoverageSortKey = "ADDON_VERSION"
 	CoverageSortKeyUpdatedAt      CoverageSortKey = "UPDATED_AT"
 	CoverageSortKeyEksClusterName CoverageSortKey = "EKS_CLUSTER_NAME"
+	CoverageSortKeyEcsClusterName CoverageSortKey = "ECS_CLUSTER_NAME"
+	CoverageSortKeyInstanceId     CoverageSortKey = "INSTANCE_ID"
 )
 
 // Values returns all known values for CoverageSortKey. Note that this can be
@@ -93,6 +103,8 @@ func (CoverageSortKey) Values() []CoverageSortKey {
 		"ADDON_VERSION",
 		"UPDATED_AT",
 		"EKS_CLUSTER_NAME",
+		"ECS_CLUSTER_NAME",
+		"INSTANCE_ID",
 	}
 }
 
@@ -230,6 +242,7 @@ const (
 	DetectorFeatureRdsLoginEvents       DetectorFeature = "RDS_LOGIN_EVENTS"
 	DetectorFeatureEksRuntimeMonitoring DetectorFeature = "EKS_RUNTIME_MONITORING"
 	DetectorFeatureLambdaNetworkLogs    DetectorFeature = "LAMBDA_NETWORK_LOGS"
+	DetectorFeatureRuntimeMonitoring    DetectorFeature = "RUNTIME_MONITORING"
 )
 
 // Values returns all known values for DetectorFeature. Note that this can be
@@ -243,6 +256,7 @@ func (DetectorFeature) Values() []DetectorFeature {
 		"RDS_LOGIN_EVENTS",
 		"EKS_RUNTIME_MONITORING",
 		"LAMBDA_NETWORK_LOGS",
+		"RUNTIME_MONITORING",
 	}
 }
 
@@ -259,6 +273,7 @@ const (
 	DetectorFeatureResultRdsLoginEvents       DetectorFeatureResult = "RDS_LOGIN_EVENTS"
 	DetectorFeatureResultEksRuntimeMonitoring DetectorFeatureResult = "EKS_RUNTIME_MONITORING"
 	DetectorFeatureResultLambdaNetworkLogs    DetectorFeatureResult = "LAMBDA_NETWORK_LOGS"
+	DetectorFeatureResultRuntimeMonitoring    DetectorFeatureResult = "RUNTIME_MONITORING"
 )
 
 // Values returns all known values for DetectorFeatureResult. Note that this can
@@ -275,6 +290,7 @@ func (DetectorFeatureResult) Values() []DetectorFeatureResult {
 		"RDS_LOGIN_EVENTS",
 		"EKS_RUNTIME_MONITORING",
 		"LAMBDA_NETWORK_LOGS",
+		"RUNTIME_MONITORING",
 	}
 }
 
@@ -318,7 +334,8 @@ type FeatureAdditionalConfiguration string
 
 // Enum values for FeatureAdditionalConfiguration
 const (
-	FeatureAdditionalConfigurationEksAddonManagement FeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
+	FeatureAdditionalConfigurationEksAddonManagement        FeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
+	FeatureAdditionalConfigurationEcsFargateAgentManagement FeatureAdditionalConfiguration = "ECS_FARGATE_AGENT_MANAGEMENT"
 )
 
 // Values returns all known values for FeatureAdditionalConfiguration. Note that
@@ -328,6 +345,7 @@ const (
 func (FeatureAdditionalConfiguration) Values() []FeatureAdditionalConfiguration {
 	return []FeatureAdditionalConfiguration{
 		"EKS_ADDON_MANAGEMENT",
+		"ECS_FARGATE_AGENT_MANAGEMENT",
 	}
 }
 
@@ -425,15 +443,17 @@ type FreeTrialFeatureResult string
 
 // Enum values for FreeTrialFeatureResult
 const (
-	FreeTrialFeatureResultFlowLogs             FreeTrialFeatureResult = "FLOW_LOGS"
-	FreeTrialFeatureResultCloudTrail           FreeTrialFeatureResult = "CLOUD_TRAIL"
-	FreeTrialFeatureResultDnsLogs              FreeTrialFeatureResult = "DNS_LOGS"
-	FreeTrialFeatureResultS3DataEvents         FreeTrialFeatureResult = "S3_DATA_EVENTS"
-	FreeTrialFeatureResultEksAuditLogs         FreeTrialFeatureResult = "EKS_AUDIT_LOGS"
-	FreeTrialFeatureResultEbsMalwareProtection FreeTrialFeatureResult = "EBS_MALWARE_PROTECTION"
-	FreeTrialFeatureResultRdsLoginEvents       FreeTrialFeatureResult = "RDS_LOGIN_EVENTS"
-	FreeTrialFeatureResultEksRuntimeMonitoring FreeTrialFeatureResult = "EKS_RUNTIME_MONITORING"
-	FreeTrialFeatureResultLambdaNetworkLogs    FreeTrialFeatureResult = "LAMBDA_NETWORK_LOGS"
+	FreeTrialFeatureResultFlowLogs                 FreeTrialFeatureResult = "FLOW_LOGS"
+	FreeTrialFeatureResultCloudTrail               FreeTrialFeatureResult = "CLOUD_TRAIL"
+	FreeTrialFeatureResultDnsLogs                  FreeTrialFeatureResult = "DNS_LOGS"
+	FreeTrialFeatureResultS3DataEvents             FreeTrialFeatureResult = "S3_DATA_EVENTS"
+	FreeTrialFeatureResultEksAuditLogs             FreeTrialFeatureResult = "EKS_AUDIT_LOGS"
+	FreeTrialFeatureResultEbsMalwareProtection     FreeTrialFeatureResult = "EBS_MALWARE_PROTECTION"
+	FreeTrialFeatureResultRdsLoginEvents           FreeTrialFeatureResult = "RDS_LOGIN_EVENTS"
+	FreeTrialFeatureResultEksRuntimeMonitoring     FreeTrialFeatureResult = "EKS_RUNTIME_MONITORING"
+	FreeTrialFeatureResultLambdaNetworkLogs        FreeTrialFeatureResult = "LAMBDA_NETWORK_LOGS"
+	FreeTrialFeatureResultFargateRuntimeMonitoring FreeTrialFeatureResult = "FARGATE_RUNTIME_MONITORING"
+	FreeTrialFeatureResultEc2RuntimeMonitoring     FreeTrialFeatureResult = "EC2_RUNTIME_MONITORING"
 )
 
 // Values returns all known values for FreeTrialFeatureResult. Note that this can
@@ -450,6 +470,8 @@ func (FreeTrialFeatureResult) Values() []FreeTrialFeatureResult {
 		"RDS_LOGIN_EVENTS",
 		"EKS_RUNTIME_MONITORING",
 		"LAMBDA_NETWORK_LOGS",
+		"FARGATE_RUNTIME_MONITORING",
+		"EC2_RUNTIME_MONITORING",
 	}
 }
 
@@ -513,6 +535,7 @@ type ManagementType string
 const (
 	ManagementTypeAutoManaged ManagementType = "AUTO_MANAGED"
 	ManagementTypeManual      ManagementType = "MANUAL"
+	ManagementTypeDisabled    ManagementType = "DISABLED"
 )
 
 // Values returns all known values for ManagementType. Note that this can be
@@ -522,6 +545,7 @@ func (ManagementType) Values() []ManagementType {
 	return []ManagementType{
 		"AUTO_MANAGED",
 		"MANUAL",
+		"DISABLED",
 	}
 }
 
@@ -553,6 +577,7 @@ const (
 	OrgFeatureRdsLoginEvents       OrgFeature = "RDS_LOGIN_EVENTS"
 	OrgFeatureEksRuntimeMonitoring OrgFeature = "EKS_RUNTIME_MONITORING"
 	OrgFeatureLambdaNetworkLogs    OrgFeature = "LAMBDA_NETWORK_LOGS"
+	OrgFeatureRuntimeMonitoring    OrgFeature = "RUNTIME_MONITORING"
 )
 
 // Values returns all known values for OrgFeature. Note that this can be expanded
@@ -566,6 +591,7 @@ func (OrgFeature) Values() []OrgFeature {
 		"RDS_LOGIN_EVENTS",
 		"EKS_RUNTIME_MONITORING",
 		"LAMBDA_NETWORK_LOGS",
+		"RUNTIME_MONITORING",
 	}
 }
 
@@ -573,7 +599,8 @@ type OrgFeatureAdditionalConfiguration string
 
 // Enum values for OrgFeatureAdditionalConfiguration
 const (
-	OrgFeatureAdditionalConfigurationEksAddonManagement OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
+	OrgFeatureAdditionalConfigurationEksAddonManagement        OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
+	OrgFeatureAdditionalConfigurationEcsFargateAgentManagement OrgFeatureAdditionalConfiguration = "ECS_FARGATE_AGENT_MANAGEMENT"
 )
 
 // Values returns all known values for OrgFeatureAdditionalConfiguration. Note
@@ -583,6 +610,7 @@ const (
 func (OrgFeatureAdditionalConfiguration) Values() []OrgFeatureAdditionalConfiguration {
 	return []OrgFeatureAdditionalConfiguration{
 		"EKS_ADDON_MANAGEMENT",
+		"ECS_FARGATE_AGENT_MANAGEMENT",
 	}
 }
 
@@ -671,6 +699,8 @@ type ResourceType string
 // Enum values for ResourceType
 const (
 	ResourceTypeEks ResourceType = "EKS"
+	ResourceTypeEcs ResourceType = "ECS"
+	ResourceTypeEc2 ResourceType = "EC2"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -679,6 +709,8 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"EKS",
+		"ECS",
+		"EC2",
 	}
 }
 
@@ -814,15 +846,17 @@ type UsageFeature string
 
 // Enum values for UsageFeature
 const (
-	UsageFeatureFlowLogs             UsageFeature = "FLOW_LOGS"
-	UsageFeatureCloudTrail           UsageFeature = "CLOUD_TRAIL"
-	UsageFeatureDnsLogs              UsageFeature = "DNS_LOGS"
-	UsageFeatureS3DataEvents         UsageFeature = "S3_DATA_EVENTS"
-	UsageFeatureEksAuditLogs         UsageFeature = "EKS_AUDIT_LOGS"
-	UsageFeatureEbsMalwareProtection UsageFeature = "EBS_MALWARE_PROTECTION"
-	UsageFeatureRdsLoginEvents       UsageFeature = "RDS_LOGIN_EVENTS"
-	UsageFeatureLambdaNetworkLogs    UsageFeature = "LAMBDA_NETWORK_LOGS"
-	UsageFeatureEksRuntimeMonitoring UsageFeature = "EKS_RUNTIME_MONITORING"
+	UsageFeatureFlowLogs                 UsageFeature = "FLOW_LOGS"
+	UsageFeatureCloudTrail               UsageFeature = "CLOUD_TRAIL"
+	UsageFeatureDnsLogs                  UsageFeature = "DNS_LOGS"
+	UsageFeatureS3DataEvents             UsageFeature = "S3_DATA_EVENTS"
+	UsageFeatureEksAuditLogs             UsageFeature = "EKS_AUDIT_LOGS"
+	UsageFeatureEbsMalwareProtection     UsageFeature = "EBS_MALWARE_PROTECTION"
+	UsageFeatureRdsLoginEvents           UsageFeature = "RDS_LOGIN_EVENTS"
+	UsageFeatureLambdaNetworkLogs        UsageFeature = "LAMBDA_NETWORK_LOGS"
+	UsageFeatureEksRuntimeMonitoring     UsageFeature = "EKS_RUNTIME_MONITORING"
+	UsageFeatureFargateRuntimeMonitoring UsageFeature = "FARGATE_RUNTIME_MONITORING"
+	UsageFeatureEc2RuntimeMonitoring     UsageFeature = "EC2_RUNTIME_MONITORING"
 )
 
 // Values returns all known values for UsageFeature. Note that this can be
@@ -839,6 +873,8 @@ func (UsageFeature) Values() []UsageFeature {
 		"RDS_LOGIN_EVENTS",
 		"LAMBDA_NETWORK_LOGS",
 		"EKS_RUNTIME_MONITORING",
+		"FARGATE_RUNTIME_MONITORING",
+		"EC2_RUNTIME_MONITORING",
 	}
 }
 

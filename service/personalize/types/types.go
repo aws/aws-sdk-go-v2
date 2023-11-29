@@ -94,6 +94,9 @@ type BatchInferenceJob struct {
 	// A string to string map of the configuration details of a batch inference job.
 	BatchInferenceJobConfig *BatchInferenceJobConfig
 
+	// The job's mode.
+	BatchInferenceJobMode BatchInferenceJobMode
+
 	// The time at which the batch inference job was created.
 	CreationDateTime *time.Time
 
@@ -136,6 +139,9 @@ type BatchInferenceJob struct {
 	//   - ACTIVE
 	//   - CREATE FAILED
 	Status *string
+
+	// The job's theme generation settings.
+	ThemeGenerationConfig *ThemeGenerationConfig
 
 	noSmithyDocumentSerde
 }
@@ -184,6 +190,9 @@ type BatchInferenceJobSummary struct {
 
 	// The Amazon Resource Name (ARN) of the batch inference job.
 	BatchInferenceJobArn *string
+
+	// The job's mode.
+	BatchInferenceJobMode BatchInferenceJobMode
 
 	// The time at which the batch inference job was created.
 	CreationDateTime *time.Time
@@ -366,6 +375,14 @@ type Campaign struct {
 // The configuration details of a campaign.
 type CampaignConfig struct {
 
+	// Whether metadata with recommendations is enabled for the campaign. If enabled,
+	// you can specify the columns from your Items dataset in your request for
+	// recommendations. Amazon Personalize returns this data for each item in the
+	// recommendation response. If you enable metadata in recommendations, you will
+	// incur additional costs. For more information, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
+	// .
+	EnableMetadataWithRecommendations *bool
+
 	// Specifies the exploration configuration hyperparameters, including
 	// explorationWeight and explorationItemAgeCutOff , you want to use to configure
 	// the amount of item exploration Amazon Personalize uses when recommending items.
@@ -481,6 +498,8 @@ type Dataset struct {
 	//   - Interactions
 	//   - Items
 	//   - Users
+	//   - Actions
+	//   - Action_Interactions
 	DatasetType *string
 
 	// A time stamp that shows when the dataset was updated.
@@ -499,6 +518,12 @@ type Dataset struct {
 	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//   - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
+
+	// The ID of the event tracker for an Action interactions dataset. You specify the
+	// tracker's ID in the PutActionInteractions API operation. Amazon Personalize
+	// uses it to direct new data to the Action interactions dataset in your dataset
+	// group.
+	TrackingId *string
 
 	noSmithyDocumentSerde
 }
@@ -590,8 +615,9 @@ type DatasetExportJobSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A dataset group is a collection of related datasets (Interactions, User, and
-// Item). You create a dataset group by calling CreateDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html)
+// A dataset group is a collection of related datasets (Item interactions, Users,
+// Items, Actions, Action interactions). You create a dataset group by calling
+// CreateDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html)
 // . You then create a dataset and add it to a dataset group by calling
 // CreateDataset (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html)
 // . The dataset group is used to create and train a solution by calling
@@ -622,7 +648,9 @@ type DatasetGroup struct {
 	// The name of the dataset group.
 	Name *string
 
-	// The ARN of the IAM role that has permissions to create the dataset group.
+	// The ARN of the Identity and Access Management (IAM) role that has permissions
+	// to access the Key Management Service (KMS) key. Supplying an IAM role is only
+	// valid when also specifying a KMS key.
 	RoleArn *string
 
 	// The current status of the dataset group. A dataset group can be in one of the
@@ -1021,6 +1049,18 @@ type FeatureTransformation struct {
 	noSmithyDocumentSerde
 }
 
+// A string to string map of the configuration details for theme generation.
+type FieldsForThemeGeneration struct {
+
+	// The name of the Items dataset column that stores the name of each item in the
+	// dataset.
+	//
+	// This member is required.
+	ItemName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on a recommendation filter, including its ARN, status, and
 // filter expression.
 type Filter struct {
@@ -1399,6 +1439,14 @@ type Recommender struct {
 // The configuration details of the recommender.
 type RecommenderConfig struct {
 
+	// Whether metadata with recommendations is enabled for the recommender. If
+	// enabled, you can specify the columns from your Items dataset in your request for
+	// recommendations. Amazon Personalize returns this data for each item in the
+	// recommendation response. If you enable metadata in recommendations, you will
+	// incur additional costs. For more information, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
+	// .
+	EnableMetadataWithRecommendations *bool
+
 	// Specifies the exploration configuration hyperparameters, including
 	// explorationWeight and explorationItemAgeCutOff , you want to use to configure
 	// the amount of item exploration Amazon Personalize uses when recommending items.
@@ -1563,7 +1611,7 @@ type Solution struct {
 // Describes the configuration properties for the solution.
 type SolutionConfig struct {
 
-	// Lists the hyperparameter names and ranges.
+	// Lists the algorithm hyperparameters and their values.
 	AlgorithmHyperParameters map[string]string
 
 	// The AutoMLConfig (https://docs.aws.amazon.com/personalize/latest/dg/API_AutoMLConfig.html)
@@ -1741,6 +1789,17 @@ type Tag struct {
 	//
 	// This member is required.
 	TagValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for generating themes with a batch inference job.
+type ThemeGenerationConfig struct {
+
+	// Fields used to generate descriptive themes for a batch inference job.
+	//
+	// This member is required.
+	FieldsForThemeGeneration *FieldsForThemeGeneration
 
 	noSmithyDocumentSerde
 }

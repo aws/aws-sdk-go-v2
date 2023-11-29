@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the controls enabled by AWS Control Tower on the specified organizational
-// unit and the accounts it contains. For usage examples, see the AWS Control
-// Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
+// Lists the controls enabled by Amazon Web Services Control Tower on the
+// specified organizational unit and the accounts it contains. For usage examples,
+// see the Amazon Web Services Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
 // .
 func (c *Client) ListEnabledControls(ctx context.Context, params *ListEnabledControlsInput, optFns ...func(*Options)) (*ListEnabledControlsOutput, error) {
 	if params == nil {
@@ -52,14 +52,14 @@ type ListEnabledControlsInput struct {
 
 type ListEnabledControlsOutput struct {
 
-	// Lists the controls enabled by AWS Control Tower on the specified organizational
-	// unit and the accounts it contains.
+	// Lists the controls enabled by Amazon Web Services Control Tower on the
+	// specified organizational unit and the accounts it contains.
 	//
 	// This member is required.
 	EnabledControls []types.EnabledControlSummary
 
-	// Retrieves the next page of results. If the string is empty, the current
-	// response is the end of the results.
+	// Retrieves the next page of results. If the string is empty, the response is the
+	// end of the results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

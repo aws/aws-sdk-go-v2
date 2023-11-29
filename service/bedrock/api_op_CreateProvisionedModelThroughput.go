@@ -48,7 +48,7 @@ type CreateProvisionedModelThroughputInput struct {
 	ProvisionedModelName *string
 
 	// Unique token value that you can provide. If this token matches a previous
-	// request, Bedrock ignores the request, but does not return an error.
+	// request, Amazon Bedrock ignores the request, but does not return an error.
 	ClientRequestToken *string
 
 	// Commitment duration requested for the provisioned throughput.

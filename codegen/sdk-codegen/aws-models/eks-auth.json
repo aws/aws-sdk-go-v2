@@ -1,0 +1,746 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.eksauth#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have permissions to perform the requested operation. The IAM principal\n            making the request must have at least one IAM permissions policy attached\n            that grants the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html\">Access\n                management</a> in the <i>IAM User Guide</i>. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.eksauth#AssumeRoleForPodIdentity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eksauth#AssumeRoleForPodIdentityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eksauth#AssumeRoleForPodIdentityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eksauth#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.eksauth#ExpiredTokenException"
+                },
+                {
+                    "target": "com.amazonaws.eksauth#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.eksauth#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eksauth#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eksauth#InvalidTokenException"
+                },
+                {
+                    "target": "com.amazonaws.eksauth#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eksauth#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.eksauth#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only used\n            by the EKS Pod Identity Agent.</p>\n         <p>We recommend that applications use the Amazon Web Services SDKs to connect to Amazon Web Services services; if\n            credentials from an EKS Pod Identity association are available in the pod, the latest versions of the\n            SDKs use them automatically.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/clusters/{clusterName}/assume-role-for-pod-identity"
+                }
+            }
+        },
+        "com.amazonaws.eksauth#AssumeRoleForPodIdentityRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eksauth#ClusterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster for the request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "token": {
+                    "target": "com.amazonaws.eksauth#JwtToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token of the Kubernetes service account for the pod.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eksauth#AssumeRoleForPodIdentityResponse": {
+            "type": "structure",
+            "members": {
+                "subject": {
+                    "target": "com.amazonaws.eksauth#Subject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM\n            credentials with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "audience": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity that is allowed to use the credentials. This value is always\n                <code>pods.eks.amazonaws.com</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "podIdentityAssociation": {
+                    "target": "com.amazonaws.eksauth#PodIdentityAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) and ID of the EKS Pod Identity association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assumedRoleUser": {
+                    "target": "com.amazonaws.eksauth#AssumedRoleUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object with the permanent IAM role identity and the temporary session\n            name.</p>\n         <p>The ARN of the IAM role that the temporary credentials authenticate to.</p>\n         <p>The session name of the temporary session requested to STS. The value\n            is a unique identifier that contains the role ID, a colon (<code>:</code>), and the role\n            session name of the role that is being assumed. The role ID is generated by IAM when\n            the role is created. The role session name part of the value follows this format:\n                    <code>eks-<i>clustername</i>-<i>podname</i>-<i>random\n                    UUID</i>\n            </code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "credentials": {
+                    "target": "com.amazonaws.eksauth#Credentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <i>Amazon Web Services Signature Version 4</i> type of temporary\n            credentials.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eksauth#AssumedRoleUser": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that the temporary credentials authenticate to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assumeRoleId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session name of the temporary session requested to STS. The value\n            is a unique identifier that contains the role ID, a colon (<code>:</code>), and the role\n            session name of the role that is being assumed. The role ID is generated by IAM when\n            the role is created. The role session name part of the value follows this format:\n                    <code>eks-<i>clustername</i>-<i>podname</i>-<i>random\n                    UUID</i>\n            </code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object with the permanent IAM role identity and the temporary session\n            name.</p>"
+            }
+        },
+        "com.amazonaws.eksauth#ClusterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*$"
+            }
+        },
+        "com.amazonaws.eksauth#Credentials": {
+            "type": "structure",
+            "members": {
+                "sessionToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that applications inside the pods must pass to any service API to use the\n            temporary credentials.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secretAccessKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secret access key that applications inside the pods use to sign requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accessKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access key ID that identifies the temporary security credentials.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiration": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds when the current credentials expire.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <i>Amazon Web Services Signature Version 4</i> type of temporary\n            credentials.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.eksauth#EKSAuthFrontend": {
+            "type": "service",
+            "version": "2023-11-26",
+            "operations": [
+                {
+                    "target": "com.amazonaws.eksauth#AssumeRoleForPodIdentity"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "EKS Auth",
+                    "arnNamespace": "eks-auth",
+                    "endpointPrefix": "eks-auth"
+                },
+                "aws.auth#sigv4": {
+                    "name": "eks-auth"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only\n            used by the EKS Pod Identity Agent.</p>",
+                "smithy.api#title": "Amazon EKS Auth",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://eks-auth-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://eks-auth.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://eks-auth-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://eks-auth.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-auth-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-auth.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-auth-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-auth.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-auth-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-auth.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.eksauth#ExpiredTokenException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified Kubernetes service account token is expired.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.eksauth#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>These errors are usually caused by a server-side issue.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.eksauth#InvalidParameterException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified parameter is invalid. Review the available parameters for the API\n            request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.eksauth#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This exception is thrown if the request contains a semantic error. The precise meaning\n            will depend on the API, and will be documented in the error message.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.eksauth#InvalidTokenException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified Kubernetes service account token is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.eksauth#JwtToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.eksauth#PodIdentityAssociation": {
+            "type": "structure",
+            "members": {
+                "associationArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the EKS Pod Identity association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the association.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that Amazon EC2 instance profiles provide credentials to Amazon EC2 instances.</p>"
+            }
+        },
+        "com.amazonaws.eksauth#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource could not be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.eksauth#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service is unavailable. Back off and retry the operation.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.eksauth#Subject": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes namespace inside the cluster to create the association in. The\n            service account and the pods that use the service account must be in this\n            namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceAccount": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM\n            credentials with.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the name of the Kubernetes service account inside the cluster to\n            associate the IAM credentials with.</p>"
+            }
+        },
+        "com.amazonaws.eksauth#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied because your request rate is too high. Reduce the frequency of requests.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        }
+    }
+}

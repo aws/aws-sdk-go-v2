@@ -60,7 +60,7 @@
                 "BillingToken": {
                     "target": "com.amazonaws.managedblockchain#AccessorBillingTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The billing token is a property of the accessor. Use this token to make Ethereum API calls to your \n         Ethereum node. The billing token is used to track your accessor object for billing Ethereum API \n         requests made to your Ethereum nodes.</p>"
+                        "smithy.api#documentation": "<p>The billing token is a property of the Accessor. Use this token to \n         when making calls to the blockchain network. The billing token is used \n         to track your accessor token for billing requests.</p>"
                     }
                 },
                 "Status": {
@@ -86,6 +86,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags assigned to the Accessor.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.managedblockchain#AccessorNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network that the Accessor token is created for.</p>"
+                    }
                 }
             },
             "traits": {
@@ -107,6 +113,41 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.managedblockchain#AccessorNetworkType": {
+            "type": "enum",
+            "members": {
+                "ETHEREUM_GOERLI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ETHEREUM_GOERLI"
+                    }
+                },
+                "ETHEREUM_MAINNET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ETHEREUM_MAINNET"
+                    }
+                },
+                "ETHEREUM_MAINNET_AND_GOERLI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ETHEREUM_MAINNET_AND_GOERLI"
+                    }
+                },
+                "POLYGON_MAINNET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLYGON_MAINNET"
+                    }
+                },
+                "POLYGON_MUMBAI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLYGON_MUMBAI"
+                    }
                 }
             }
         },
@@ -165,6 +206,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the accessor. For more information about \n         ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource \n            Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.managedblockchain#AccessorNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network that the Accessor token is created for.</p>"
+                    }
                 }
             },
             "traits": {
@@ -206,7 +253,7 @@
                 "ThresholdComparator": {
                     "target": "com.amazonaws.managedblockchain#ThresholdComparator",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether the vote percentage must be greater than the <code>ThresholdPercentage</code> or must be greater than or equal to the <code>ThreholdPercentage</code> to be approved.</p>"
+                        "smithy.api#documentation": "<p>Determines whether the vote percentage must be greater than the\n            <code>ThresholdPercentage</code> or must be greater than or equal to the\n            <code>ThresholdPercentage</code> to be approved.</p>"
                     }
                 }
             },
@@ -268,7 +315,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new accessor for use with Managed Blockchain Ethereum nodes. An accessor contains information \n         required for token based access to your Ethereum nodes.</p>",
+                "smithy.api#documentation": "<p>Creates a new accessor for use with Amazon Managed Blockchain service that supports token based access. \n         The accessor contains information required for token based access.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accessors",
@@ -299,6 +346,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Tags to assign to the Accessor.</p>\n         <p> Each tag consists of a key and an optional value. You can specify \n          multiple key-value pairs in a single request with an overall maximum of 50 tags \n          allowed per resource.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.managedblockchain#AccessorNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network that the <code>Accessor</code> token is created for.</p>\n         <note>\n            <p>We recommend using the appropriate <code>networkType</code> \n            value for the blockchain network that you are creating the <code>Accessor</code> \n            token for. You cannnot use the value <code>ETHEREUM_MAINNET_AND_GOERLI</code> to \n            specify a <code>networkType</code> for your Accessor token.</p>\n            <p>The default value of <code>ETHEREUM_MAINNET_AND_GOERLI</code> is only applied:</p>\n            <ul>\n               <li>\n                  <p>when the <code>CreateAccessor</code> action does not set a <code>networkType</code>.</p>\n               </li>\n               <li>\n                  <p>to all existing <code>Accessor</code> tokens that were created before the <code>networkType</code> property was introduced.\n               </p>\n               </li>\n            </ul>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -317,7 +370,13 @@
                 "BillingToken": {
                     "target": "com.amazonaws.managedblockchain#AccessorBillingTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The billing token is a property of the Accessor. Use this token to make Ethereum API calls to\n         your Ethereum node. The billing token is used to track your accessor object for billing Ethereum \n         API requests made to your Ethereum nodes.</p>"
+                        "smithy.api#documentation": "<p>The billing token is a property of the Accessor. Use this token to \n         when making calls to the blockchain network. The billing token is used \n         to track your accessor token for billing requests.</p>"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.managedblockchain#AccessorNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network that the accessor token is created for.</p>"
                     }
                 }
             },
@@ -1579,6 +1638,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The pagination token that indicates the next set of results to retrieve. </p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.managedblockchain#AccessorNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network that the <code>Accessor</code> token is created for.</p>\n         <note>\n            <p>Use the value <code>ETHEREUM_MAINNET_AND_GOERLI</code> for all \n         existing <code>Accessors</code> tokens that were created before the <code>networkType</code> \n         property was introduced.</p>\n         </note>",
+                        "smithy.api#httpQuery": "networkType"
                     }
                 }
             },
@@ -3893,7 +3959,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3936,7 +4001,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -3949,7 +4015,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3963,7 +4028,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3986,7 +4050,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4021,7 +4084,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4032,14 +4094,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -4053,14 +4117,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -4069,11 +4131,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4084,14 +4146,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -4105,7 +4169,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4125,7 +4188,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4136,14 +4198,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -4154,9 +4218,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],

@@ -54,6 +54,11 @@ type CustomModelSummary struct {
 	// This member is required.
 	ModelName *string
 
+	// Specifies whether to carry out continued pre-training of a model or whether to
+	// fine-tune it. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
+	// .
+	CustomizationType CustomizationType
+
 	noSmithyDocumentSerde
 }
 
@@ -79,6 +84,9 @@ type FoundationModelDetails struct {
 	// The input modalities that the model supports.
 	InputModalities []ModelModality
 
+	// Contains details about whether a model version is available or deprecated
+	ModelLifecycle *FoundationModelLifecycle
+
 	// The model name.
 	ModelName *string
 
@@ -90,6 +98,18 @@ type FoundationModelDetails struct {
 
 	// Indicates whether the model supports streaming.
 	ResponseStreamingSupported *bool
+
+	noSmithyDocumentSerde
+}
+
+// Details about whether a model version is available or deprecated.
+type FoundationModelLifecycle struct {
+
+	// Specifies whether a model version is available ( ACTIVE ) or deprecated ( LEGACY
+	// .
+	//
+	// This member is required.
+	Status FoundationModelLifecycleStatus
 
 	noSmithyDocumentSerde
 }
@@ -115,6 +135,9 @@ type FoundationModelSummary struct {
 
 	// The input modalities that the model supports.
 	InputModalities []ModelModality
+
+	// Contains details about whether a model version is available or deprecated.
+	ModelLifecycle *FoundationModelLifecycle
 
 	// The name of the model.
 	ModelName *string
@@ -185,6 +208,11 @@ type ModelCustomizationJobSummary struct {
 
 	// Name of the custom model.
 	CustomModelName *string
+
+	// Specifies whether to carry out continued pre-training of a model or whether to
+	// fine-tune it. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
+	// .
+	CustomizationType CustomizationType
 
 	// Time that the customization job ended.
 	EndTime *time.Time

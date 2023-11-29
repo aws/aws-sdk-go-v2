@@ -6,7 +6,8 @@ type AdditionalOptionKeys string
 
 // Enum values for AdditionalOptionKeys
 const (
-	AdditionalOptionKeysCacheOption AdditionalOptionKeys = "performanceTuning.caching"
+	AdditionalOptionKeysCacheOption        AdditionalOptionKeys = "performanceTuning.caching"
+	AdditionalOptionKeysObservationsOption AdditionalOptionKeys = "observations.scope"
 )
 
 // Values returns all known values for AdditionalOptionKeys. Note that this can be
@@ -15,6 +16,7 @@ const (
 func (AdditionalOptionKeys) Values() []AdditionalOptionKeys {
 	return []AdditionalOptionKeys{
 		"performanceTuning.caching",
+		"observations.scope",
 	}
 }
 

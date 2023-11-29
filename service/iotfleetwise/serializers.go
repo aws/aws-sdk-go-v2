@@ -2953,6 +2953,11 @@ func awsAwsjson10_serializeDocumentActuator(v *types.Actuator, value smithyjson.
 		}
 	}
 
+	if v.StructFullyQualifiedName != nil {
+		ok := object.Key("structFullyQualifiedName")
+		ok.String(*v.StructFullyQualifiedName)
+	}
+
 	if v.Unit != nil {
 		ok := object.Key("unit")
 		ok.String(*v.Unit)
@@ -3332,6 +3337,75 @@ func awsAwsjson10_serializeDocumentCreateVehicleRequestItems(v []types.CreateVeh
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCustomProperty(v *types.CustomProperty, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Comment != nil {
+		ok := object.Key("comment")
+		ok.String(*v.Comment)
+	}
+
+	if len(v.DataEncoding) > 0 {
+		ok := object.Key("dataEncoding")
+		ok.String(string(v.DataEncoding))
+	}
+
+	if len(v.DataType) > 0 {
+		ok := object.Key("dataType")
+		ok.String(string(v.DataType))
+	}
+
+	if v.DeprecationMessage != nil {
+		ok := object.Key("deprecationMessage")
+		ok.String(*v.DeprecationMessage)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.FullyQualifiedName != nil {
+		ok := object.Key("fullyQualifiedName")
+		ok.String(*v.FullyQualifiedName)
+	}
+
+	if v.StructFullyQualifiedName != nil {
+		ok := object.Key("structFullyQualifiedName")
+		ok.String(*v.StructFullyQualifiedName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentCustomStruct(v *types.CustomStruct, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Comment != nil {
+		ok := object.Key("comment")
+		ok.String(*v.Comment)
+	}
+
+	if v.DeprecationMessage != nil {
+		ok := object.Key("deprecationMessage")
+		ok.String(*v.DeprecationMessage)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.FullyQualifiedName != nil {
+		ok := object.Key("fullyQualifiedName")
+		ok.String(*v.FullyQualifiedName)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDataDestinationConfig(v types.DataDestinationConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3444,6 +3518,25 @@ func awsAwsjson10_serializeDocumentListOfStrings(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentMessageSignal(v *types.MessageSignal, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StructuredMessage != nil {
+		ok := object.Key("structuredMessage")
+		if err := awsAwsjson10_serializeDocumentStructuredMessage(v.StructuredMessage, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TopicName != nil {
+		ok := object.Key("topicName")
+		ok.String(*v.TopicName)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentModelSignalsMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3531,6 +3624,13 @@ func awsAwsjson10_serializeDocumentNetworkInterface(v *types.NetworkInterface, v
 		ok.String(string(v.Type))
 	}
 
+	if v.VehicleMiddleware != nil {
+		ok := object.Key("vehicleMiddleware")
+		if err := awsAwsjson10_serializeDocumentVehicleMiddleware(v.VehicleMiddleware, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3570,9 +3670,21 @@ func awsAwsjson10_serializeDocumentNode(v types.Node, value smithyjson.Value) er
 			return err
 		}
 
+	case *types.NodeMemberProperty:
+		av := object.Key("property")
+		if err := awsAwsjson10_serializeDocumentCustomProperty(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.NodeMemberSensor:
 		av := object.Key("sensor")
 		if err := awsAwsjson10_serializeDocumentSensor(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.NodeMemberStruct:
+		av := object.Key("struct")
+		if err := awsAwsjson10_serializeDocumentCustomStruct(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -3694,9 +3806,9 @@ func awsAwsjson10_serializeDocumentObdSignal(v *types.ObdSignal, value smithyjso
 		ok.Integer(v.Pid)
 	}
 
-	{
+	if v.PidResponseLength != nil {
 		ok := object.Key("pidResponseLength")
-		ok.Integer(v.PidResponseLength)
+		ok.Integer(*v.PidResponseLength)
 	}
 
 	if v.Scaling != nil {
@@ -3725,6 +3837,77 @@ func awsAwsjson10_serializeDocumentObdSignal(v *types.ObdSignal, value smithyjso
 	{
 		ok := object.Key("startByte")
 		ok.Integer(v.StartByte)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPrimitiveMessageDefinition(v types.PrimitiveMessageDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition:
+		av := object.Key("ros2PrimitiveMessageDefinition")
+		if err := awsAwsjson10_serializeDocumentROS2PrimitiveMessageDefinition(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentROS2PrimitiveMessageDefinition(v *types.ROS2PrimitiveMessageDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Offset != nil {
+		ok := object.Key("offset")
+		switch {
+		case math.IsNaN(*v.Offset):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Offset, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Offset, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Offset)
+
+		}
+	}
+
+	if len(v.PrimitiveType) > 0 {
+		ok := object.Key("primitiveType")
+		ok.String(string(v.PrimitiveType))
+	}
+
+	if v.Scaling != nil {
+		ok := object.Key("scaling")
+		switch {
+		case math.IsNaN(*v.Scaling):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Scaling, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Scaling, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Scaling)
+
+		}
+	}
+
+	if v.UpperBound != nil {
+		ok := object.Key("upperBound")
+		ok.Long(*v.UpperBound)
 	}
 
 	return nil
@@ -3829,6 +4012,11 @@ func awsAwsjson10_serializeDocumentSensor(v *types.Sensor, value smithyjson.Valu
 		}
 	}
 
+	if v.StructFullyQualifiedName != nil {
+		ok := object.Key("structFullyQualifiedName")
+		ok.String(*v.StructFullyQualifiedName)
+	}
+
 	if v.Unit != nil {
 		ok := object.Key("unit")
 		ok.String(*v.Unit)
@@ -3856,6 +4044,13 @@ func awsAwsjson10_serializeDocumentSignalDecoder(v *types.SignalDecoder, value s
 	if v.InterfaceId != nil {
 		ok := object.Key("interfaceId")
 		ok.String(*v.InterfaceId)
+	}
+
+	if v.MessageSignal != nil {
+		ok := object.Key("messageSignal")
+		if err := awsAwsjson10_serializeDocumentMessageSignal(v.MessageSignal, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ObdSignal != nil {
@@ -3918,6 +4113,97 @@ func awsAwsjson10_serializeDocumentSignalInformationList(v []types.SignalInforma
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentStructuredMessage(v types.StructuredMessage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.StructuredMessageMemberPrimitiveMessageDefinition:
+		av := object.Key("primitiveMessageDefinition")
+		if err := awsAwsjson10_serializeDocumentPrimitiveMessageDefinition(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.StructuredMessageMemberStructuredMessageDefinition:
+		av := object.Key("structuredMessageDefinition")
+		if err := awsAwsjson10_serializeDocumentStructuredMessageDefinition(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.StructuredMessageMemberStructuredMessageListDefinition:
+		av := object.Key("structuredMessageListDefinition")
+		if err := awsAwsjson10_serializeDocumentStructuredMessageListDefinition(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentStructuredMessageDefinition(v []types.StructuredMessageFieldNameAndDataTypePair, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentStructuredMessageFieldNameAndDataTypePair(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentStructuredMessageFieldNameAndDataTypePair(v *types.StructuredMessageFieldNameAndDataTypePair, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataType != nil {
+		ok := object.Key("dataType")
+		if err := awsAwsjson10_serializeDocumentStructuredMessage(v.DataType, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FieldName != nil {
+		ok := object.Key("fieldName")
+		ok.String(*v.FieldName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentStructuredMessageListDefinition(v *types.StructuredMessageListDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Capacity != 0 {
+		ok := object.Key("capacity")
+		ok.Integer(v.Capacity)
+	}
+
+	if len(v.ListType) > 0 {
+		ok := object.Key("listType")
+		ok.String(string(v.ListType))
+	}
+
+	if v.MemberType != nil {
+		ok := object.Key("memberType")
+		if err := awsAwsjson10_serializeDocumentStructuredMessage(v.MemberType, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
 	return nil
 }
 
@@ -4052,6 +4338,23 @@ func awsAwsjson10_serializeDocumentUpdateVehicleRequestItems(v []types.UpdateVeh
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentVehicleMiddleware(v *types.VehicleMiddleware, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.ProtocolName) > 0 {
+		ok := object.Key("protocolName")
+		ok.String(string(v.ProtocolName))
+	}
+
 	return nil
 }
 

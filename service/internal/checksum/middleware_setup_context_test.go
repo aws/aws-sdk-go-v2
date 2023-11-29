@@ -7,6 +7,7 @@ import (
 	"context"
 	"testing"
 
+	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,7 +61,7 @@ func TestSetupInput(t *testing.T) {
 					func(ctx context.Context, input middleware.InitializeInput) (
 						out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 					) {
-						v := getContextInputAlgorithm(ctx)
+						v := internalcontext.GetChecksumInputAlgorithm(ctx)
 						if e, a := c.expectValue, v; e != a {
 							t.Errorf("expect value %v, got %v", e, a)
 						}

@@ -9,8 +9,8 @@
 // capacity for an industry-standard relational database and manages common
 // database administration tasks, freeing up developers to focus on what makes
 // their applications and businesses unique. Amazon RDS gives you access to the
-// capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, Oracle, or
-// Amazon Aurora database server. These capabilities mean that the code,
+// capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, Oracle, Db2,
+// or Amazon Aurora database server. These capabilities mean that the code,
 // applications, and tools you already use today with your existing databases work
 // with Amazon RDS without modification. Amazon RDS automatically backs up your
 // database and maintains the database software that powers your DB instance.

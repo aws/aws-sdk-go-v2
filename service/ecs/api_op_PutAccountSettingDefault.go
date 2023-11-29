@@ -56,7 +56,12 @@ type PutAccountSettingDefaultInput struct {
 	// launched to replace them. Use fargateTaskRetirementWaitPeriod to set the wait
 	// time to retire a Fargate task to the default. For information about the Fargate
 	// tasks maintenance, see Amazon Web Services Fargate task maintenance (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html)
-	// in the Amazon ECS Developer Guide.
+	// in the Amazon ECS Developer Guide. The guardDutyActivate parameter is read-only
+	// in Amazon ECS and indicates whether Amazon ECS Runtime Monitoring is enabled or
+	// disabled by your security administrator in your Amazon ECS account. Amazon
+	// GuardDuty controls this account setting on your behalf. For more information,
+	// see Protecting Amazon ECS workloads with Amazon ECS Runtime Monitoring (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html)
+	// .
 	//
 	// This member is required.
 	Name types.SettingName

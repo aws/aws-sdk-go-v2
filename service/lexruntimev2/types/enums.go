@@ -112,6 +112,24 @@ func (IntentState) Values() []IntentState {
 	}
 }
 
+type InterpretationSource string
+
+// Enum values for InterpretationSource
+const (
+	InterpretationSourceBedrock InterpretationSource = "Bedrock"
+	InterpretationSourceLex     InterpretationSource = "Lex"
+)
+
+// Values returns all known values for InterpretationSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InterpretationSource) Values() []InterpretationSource {
+	return []InterpretationSource{
+		"Bedrock",
+		"Lex",
+	}
+}
+
 type MessageContentType string
 
 // Enum values for MessageContentType

@@ -17,8 +17,7 @@ import (
 // parameters are required in some situations. For example, Email is required if
 // you are using SAML for identity management. FirstName and LastName are required
 // if you are using Amazon Connect or SAML for identity management. For information
-// about how to create user accounts using the Amazon Connect console, see Add
-// Users (https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html)
+// about how to create users using the Amazon Connect admin website, see Add Users (https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {

@@ -16,13 +16,17 @@ import (
 )
 
 // This operation removes the specified Amazon Web Services resource tags from an
-// S3 resource. To use this operation, you must have the permission to perform the
-// s3:UntagResource action. For more information about the required Storage Lens
-// Groups permissions, see Setting account permissions to use S3 Storage Lens
-// groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions)
+// S3 resource. Each tag is a label consisting of a user-defined key and value.
+// Tags can help you manage, identify, organize, search for, and filter resources.
+// This operation is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
+// and for S3 Access Grants (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html)
+// . The tagged resource can be an S3 Storage Lens group or S3 Access Grants
+// instance, registered location, or grant. Permissions You must have the
+// s3:UntagResource permission to use this operation. For more information about
+// the required Storage Lens Groups permissions, see Setting account permissions
+// to use S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions)
 // . For information about S3 Tagging errors, see List of Amazon S3 Tagging error
 // codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList)
-// . This operation is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
 // .
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
@@ -47,13 +51,14 @@ type UntagResourceInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The Amazon Resource Name (ARN) of the S3 resource that you want to remove the
-	// resource tags from.
+	// The Amazon Resource Name (ARN) of the S3 resource that you're trying to remove
+	// the tags from.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The tag key pair of the S3 resource tag that you're trying to remove.
+	// The array of tag key-value pairs that you're trying to remove from of the S3
+	// resource.
 	//
 	// This member is required.
 	TagKeys []string

@@ -110,6 +110,26 @@ func (m *validateOpCompleteMigration) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCopyServerlessCacheSnapshot struct {
+}
+
+func (*validateOpCopyServerlessCacheSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCopyServerlessCacheSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CopyServerlessCacheSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCopyServerlessCacheSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCopySnapshot struct {
 }
 
@@ -245,6 +265,46 @@ func (m *validateOpCreateReplicationGroup) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateReplicationGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateServerlessCache struct {
+}
+
+func (*validateOpCreateServerlessCache) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateServerlessCache) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateServerlessCacheInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateServerlessCacheInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateServerlessCacheSnapshot struct {
+}
+
+func (*validateOpCreateServerlessCacheSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateServerlessCacheSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateServerlessCacheSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateServerlessCacheSnapshotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +530,46 @@ func (m *validateOpDeleteReplicationGroup) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteServerlessCache struct {
+}
+
+func (*validateOpDeleteServerlessCache) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteServerlessCache) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteServerlessCacheInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteServerlessCacheInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteServerlessCacheSnapshot struct {
+}
+
+func (*validateOpDeleteServerlessCacheSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteServerlessCacheSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteServerlessCacheSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteServerlessCacheSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteSnapshot struct {
 }
 
@@ -605,6 +705,26 @@ func (m *validateOpDisassociateGlobalReplicationGroup) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateGlobalReplicationGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExportServerlessCacheSnapshot struct {
+}
+
+func (*validateOpExportServerlessCacheSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportServerlessCacheSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportServerlessCacheSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportServerlessCacheSnapshotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -805,6 +925,26 @@ func (m *validateOpModifyReplicationGroupShardConfiguration) HandleInitialize(ct
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyReplicationGroupShardConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyServerlessCache struct {
+}
+
+func (*validateOpModifyServerlessCache) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyServerlessCache) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyServerlessCacheInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyServerlessCacheInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1050,6 +1190,10 @@ func addOpCompleteMigrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCompleteMigration{}, middleware.After)
 }
 
+func addOpCopyServerlessCacheSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCopyServerlessCacheSnapshot{}, middleware.After)
+}
+
 func addOpCopySnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopySnapshot{}, middleware.After)
 }
@@ -1076,6 +1220,14 @@ func addOpCreateGlobalReplicationGroupValidationMiddleware(stack *middleware.Sta
 
 func addOpCreateReplicationGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReplicationGroup{}, middleware.After)
+}
+
+func addOpCreateServerlessCacheValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateServerlessCache{}, middleware.After)
+}
+
+func addOpCreateServerlessCacheSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateServerlessCacheSnapshot{}, middleware.After)
 }
 
 func addOpCreateSnapshotValidationMiddleware(stack *middleware.Stack) error {
@@ -1122,6 +1274,14 @@ func addOpDeleteReplicationGroupValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteReplicationGroup{}, middleware.After)
 }
 
+func addOpDeleteServerlessCacheValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteServerlessCache{}, middleware.After)
+}
+
+func addOpDeleteServerlessCacheSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteServerlessCacheSnapshot{}, middleware.After)
+}
+
 func addOpDeleteSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSnapshot{}, middleware.After)
 }
@@ -1148,6 +1308,10 @@ func addOpDescribeUsersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDisassociateGlobalReplicationGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateGlobalReplicationGroup{}, middleware.After)
+}
+
+func addOpExportServerlessCacheSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportServerlessCacheSnapshot{}, middleware.After)
 }
 
 func addOpFailoverGlobalReplicationGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1188,6 +1352,10 @@ func addOpModifyReplicationGroupValidationMiddleware(stack *middleware.Stack) er
 
 func addOpModifyReplicationGroupShardConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyReplicationGroupShardConfiguration{}, middleware.After)
+}
+
+func addOpModifyServerlessCacheValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyServerlessCache{}, middleware.After)
 }
 
 func addOpModifyUserGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1234,6 +1402,28 @@ func addOpTestMigrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTestMigration{}, middleware.After)
 }
 
+func validateCacheUsageLimits(v *types.CacheUsageLimits) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CacheUsageLimits"}
+	if v.DataStorage != nil {
+		if err := validateDataStorage(v.DataStorage); err != nil {
+			invalidParams.AddNested("DataStorage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ECPUPerSecond != nil {
+		if err := validateECPUPerSecond(v.ECPUPerSecond); err != nil {
+			invalidParams.AddNested("ECPUPerSecond", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConfigureShard(v *types.ConfigureShard) error {
 	if v == nil {
 		return nil
@@ -1244,6 +1434,39 @@ func validateConfigureShard(v *types.ConfigureShard) error {
 	}
 	if v.NewReplicaCount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NewReplicaCount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataStorage(v *types.DataStorage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataStorage"}
+	if v.Maximum == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Maximum"))
+	}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateECPUPerSecond(v *types.ECPUPerSecond) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ECPUPerSecond"}
+	if v.Maximum == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Maximum"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1426,6 +1649,24 @@ func validateOpCompleteMigrationInput(v *CompleteMigrationInput) error {
 	}
 }
 
+func validateOpCopyServerlessCacheSnapshotInput(v *CopyServerlessCacheSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CopyServerlessCacheSnapshotInput"}
+	if v.SourceServerlessCacheSnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerlessCacheSnapshotName"))
+	}
+	if v.TargetServerlessCacheSnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetServerlessCacheSnapshotName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCopySnapshotInput(v *CopySnapshotInput) error {
 	if v == nil {
 		return nil
@@ -1547,6 +1788,47 @@ func validateOpCreateReplicationGroupInput(v *CreateReplicationGroupInput) error
 	}
 	if v.ReplicationGroupDescription == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupDescription"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateServerlessCacheInput(v *CreateServerlessCacheInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateServerlessCacheInput"}
+	if v.ServerlessCacheName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerlessCacheName"))
+	}
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	}
+	if v.CacheUsageLimits != nil {
+		if err := validateCacheUsageLimits(v.CacheUsageLimits); err != nil {
+			invalidParams.AddNested("CacheUsageLimits", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateServerlessCacheSnapshotInput(v *CreateServerlessCacheSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateServerlessCacheSnapshotInput"}
+	if v.ServerlessCacheSnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerlessCacheSnapshotName"))
+	}
+	if v.ServerlessCacheName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerlessCacheName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1749,6 +2031,36 @@ func validateOpDeleteReplicationGroupInput(v *DeleteReplicationGroupInput) error
 	}
 }
 
+func validateOpDeleteServerlessCacheInput(v *DeleteServerlessCacheInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteServerlessCacheInput"}
+	if v.ServerlessCacheName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerlessCacheName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteServerlessCacheSnapshotInput(v *DeleteServerlessCacheSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteServerlessCacheSnapshotInput"}
+	if v.ServerlessCacheSnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerlessCacheSnapshotName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteSnapshotInput(v *DeleteSnapshotInput) error {
 	if v == nil {
 		return nil
@@ -1854,6 +2166,24 @@ func validateOpDisassociateGlobalReplicationGroupInput(v *DisassociateGlobalRepl
 	}
 	if v.ReplicationGroupRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExportServerlessCacheSnapshotInput(v *ExportServerlessCacheSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportServerlessCacheSnapshotInput"}
+	if v.ServerlessCacheSnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerlessCacheSnapshotName"))
+	}
+	if v.S3BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2041,6 +2371,26 @@ func validateOpModifyReplicationGroupShardConfigurationInput(v *ModifyReplicatio
 	}
 	if v.ApplyImmediately == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplyImmediately"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyServerlessCacheInput(v *ModifyServerlessCacheInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyServerlessCacheInput"}
+	if v.ServerlessCacheName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerlessCacheName"))
+	}
+	if v.CacheUsageLimits != nil {
+		if err := validateCacheUsageLimits(v.CacheUsageLimits); err != nil {
+			invalidParams.AddNested("CacheUsageLimits", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

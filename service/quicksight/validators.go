@@ -710,6 +710,26 @@ func (m *validateOpDeleteIAMPolicyAssignment) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteIdentityPropagationConfig struct {
+}
+
+func (*validateOpDeleteIdentityPropagationConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIdentityPropagationConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIdentityPropagationConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIdentityPropagationConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteNamespace struct {
 }
 
@@ -2150,6 +2170,26 @@ func (m *validateOpListIAMPolicyAssignments) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListIdentityPropagationConfigs struct {
+}
+
+func (*validateOpListIdentityPropagationConfigs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIdentityPropagationConfigs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIdentityPropagationConfigsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIdentityPropagationConfigsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListIngestions struct {
 }
 
@@ -3050,6 +3090,26 @@ func (m *validateOpUpdateIAMPolicyAssignment) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIdentityPropagationConfig struct {
+}
+
+func (*validateOpUpdateIdentityPropagationConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIdentityPropagationConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIdentityPropagationConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIdentityPropagationConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateIpRestriction struct {
 }
 
@@ -3490,6 +3550,10 @@ func addOpDeleteIAMPolicyAssignmentValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpDeleteIAMPolicyAssignment{}, middleware.After)
 }
 
+func addOpDeleteIdentityPropagationConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIdentityPropagationConfig{}, middleware.After)
+}
+
 func addOpDeleteNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNamespace{}, middleware.After)
 }
@@ -3778,6 +3842,10 @@ func addOpListIAMPolicyAssignmentsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpListIAMPolicyAssignments{}, middleware.After)
 }
 
+func addOpListIdentityPropagationConfigsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIdentityPropagationConfigs{}, middleware.After)
+}
+
 func addOpListIngestionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIngestions{}, middleware.After)
 }
@@ -3956,6 +4024,10 @@ func addOpUpdateGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateIAMPolicyAssignmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIAMPolicyAssignment{}, middleware.After)
+}
+
+func addOpUpdateIdentityPropagationConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIdentityPropagationConfig{}, middleware.After)
 }
 
 func addOpUpdateIpRestrictionValidationMiddleware(stack *middleware.Stack) error {
@@ -18393,6 +18465,24 @@ func validateOpDeleteIAMPolicyAssignmentInput(v *DeleteIAMPolicyAssignmentInput)
 	}
 }
 
+func validateOpDeleteIdentityPropagationConfigInput(v *DeleteIdentityPropagationConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIdentityPropagationConfigInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if len(v.Service) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteNamespaceInput(v *DeleteNamespaceInput) error {
 	if v == nil {
 		return nil
@@ -19753,6 +19843,21 @@ func validateOpListIAMPolicyAssignmentsInput(v *ListIAMPolicyAssignmentsInput) e
 	}
 }
 
+func validateOpListIdentityPropagationConfigsInput(v *ListIdentityPropagationConfigsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIdentityPropagationConfigsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListIngestionsInput(v *ListIngestionsInput) error {
 	if v == nil {
 		return nil
@@ -20807,6 +20912,24 @@ func validateOpUpdateIAMPolicyAssignmentInput(v *UpdateIAMPolicyAssignmentInput)
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIdentityPropagationConfigInput(v *UpdateIdentityPropagationConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIdentityPropagationConfigInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if len(v.Service) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

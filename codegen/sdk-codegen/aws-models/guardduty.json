@@ -568,6 +568,21 @@
                 "target": "com.amazonaws.guardduty#String"
             }
         },
+        "com.amazonaws.guardduty#AgentDetails": {
+            "type": "structure",
+            "members": {
+                "Version": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Version of the installed GuardDuty security agent.</p>",
+                        "smithy.api#jsonName": "version"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the installed GuardDuty security agent.</p>"
+            }
+        },
         "com.amazonaws.guardduty#Anomaly": {
             "type": "structure",
             "members": {
@@ -1162,6 +1177,28 @@
                 "smithy.api#documentation": "<p>Details of a container.</p>"
             }
         },
+        "com.amazonaws.guardduty#ContainerInstanceDetails": {
+            "type": "structure",
+            "members": {
+                "CoveredContainerInstances": {
+                    "target": "com.amazonaws.guardduty#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the nodes in the Amazon ECS cluster that has a <code>HEALTHY</code>\n      coverage status.</p>",
+                        "smithy.api#jsonName": "coveredContainerInstances"
+                    }
+                },
+                "CompatibleContainerInstances": {
+                    "target": "com.amazonaws.guardduty#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents total number of nodes in the Amazon ECS cluster.</p>",
+                        "smithy.api#jsonName": "compatibleContainerInstances"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon EC2 instance that is running \n    the Amazon ECS container.</p>"
+            }
+        },
         "com.amazonaws.guardduty#Containers": {
             "type": "list",
             "member": {
@@ -1215,6 +1252,78 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the country where the remote IP address is located.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#CoverageEc2InstanceDetails": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance ID.</p>",
+                        "smithy.api#jsonName": "instanceId"
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type of the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "instanceType"
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster ARN of the Amazon ECS cluster running on \n    the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "clusterArn"
+                    }
+                },
+                "AgentDetails": {
+                    "target": "com.amazonaws.guardduty#AgentDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the installed security agent.</p>",
+                        "smithy.api#jsonName": "agentDetails"
+                    }
+                },
+                "ManagementType": {
+                    "target": "com.amazonaws.guardduty#ManagementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how the GuardDuty security agent is managed for this resource.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTO_MANAGED</code> indicates that GuardDuty deploys and manages updates for this resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANUAL</code> indicates that you are responsible to deploy, update, and manage the GuardDuty \n          security agent updates for this resource.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>DISABLED</code> status doesn't apply to Amazon \n    EC2 instances and Amazon EKS clusters that run on Amazon EC2 instances.</p>\n         </note>",
+                        "smithy.api#jsonName": "managementType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note>\n            <p>This API is also used when you use GuardDuty Runtime Monitoring \n      for your Amazon EC2 instances (currently in preview\n      release) and is subject to change.</p>\n         </note>\n         <p>Contains information about the Amazon EC2 instance runtime \n    coverage details.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#CoverageEcsClusterDetails": {
+            "type": "structure",
+            "members": {
+                "ClusterName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon ECS cluster.</p>",
+                        "smithy.api#jsonName": "clusterName"
+                    }
+                },
+                "FargateDetails": {
+                    "target": "com.amazonaws.guardduty#FargateDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Fargate details associated with the Amazon \n      ECS cluster.</p>",
+                        "smithy.api#jsonName": "fargateDetails"
+                    }
+                },
+                "ContainerInstanceDetails": {
+                    "target": "com.amazonaws.guardduty#ContainerInstanceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Amazon ECS container running on Amazon EC2 \n      instance.</p>",
+                        "smithy.api#jsonName": "containerInstanceDetails"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about Amazon ECS cluster runtime coverage details.</p>"
             }
         },
         "com.amazonaws.guardduty#CoverageEksClusterDetails": {
@@ -1363,6 +1472,30 @@
                     "traits": {
                         "smithy.api#enumValue": "EKS_CLUSTER_NAME"
                     }
+                },
+                "ECS_CLUSTER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS_CLUSTER_NAME"
+                    }
+                },
+                "AGENT_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_VERSION"
+                    }
+                },
+                "INSTANCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_ID"
+                    }
+                },
+                "CLUSTER_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLUSTER_ARN"
+                    }
                 }
             }
         },
@@ -1451,6 +1584,20 @@
                         "smithy.api#documentation": "<p>The type of Amazon Web Services resource.</p>",
                         "smithy.api#jsonName": "resourceType"
                     }
+                },
+                "EcsClusterDetails": {
+                    "target": "com.amazonaws.guardduty#CoverageEcsClusterDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Amazon ECS cluster that is assessed for \n    runtime coverage.</p>",
+                        "smithy.api#jsonName": "ecsClusterDetails"
+                    }
+                },
+                "Ec2InstanceDetails": {
+                    "target": "com.amazonaws.guardduty#CoverageEc2InstanceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<note>\n            <p>This API is also used when you use GuardDuty Runtime Monitoring \n      for your Amazon EC2 instances (currently in preview\n      release) and is subject to change.</p>\n         </note>\n         <p>Information about the Amazon EC2 instance assessed \n      for runtime coverage.</p>",
+                        "smithy.api#jsonName": "ec2InstanceDetails"
+                    }
                 }
             },
             "traits": {
@@ -1528,6 +1675,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EKS_CLUSTER_NAME"
+                    }
+                },
+                "ECS_CLUSTER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS_CLUSTER_NAME"
+                    }
+                },
+                "INSTANCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_ID"
                     }
                 }
             }
@@ -3544,6 +3703,12 @@
                     "traits": {
                         "smithy.api#enumValue": "LAMBDA_NETWORK_LOGS"
                     }
+                },
+                "RUNTIME_MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNTIME_MONITORING"
+                    }
                 }
             }
         },
@@ -3679,6 +3844,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "LAMBDA_NETWORK_LOGS"
+                    }
+                },
+                "RUNTIME_MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNTIME_MONITORING"
                     }
                 }
             }
@@ -4400,6 +4571,28 @@
                 "smithy.api#documentation": "<p>Contains information about the reason that the finding was generated.</p>"
             }
         },
+        "com.amazonaws.guardduty#FargateDetails": {
+            "type": "structure",
+            "members": {
+                "Issues": {
+                    "target": "com.amazonaws.guardduty#Issues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime coverage issues identified for the resource running on AWS Fargate.</p>",
+                        "smithy.api#jsonName": "issues"
+                    }
+                },
+                "ManagementType": {
+                    "target": "com.amazonaws.guardduty#ManagementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how the GuardDuty security agent is managed for this resource.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTO_MANAGED</code> indicates that GuardDuty deploys and manages updates for this resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANUAL</code> indicates that you are responsible to deploy, update, and manage the GuardDuty \n        security agent updates for this resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> indicates that the deployment of the GuardDuty security agent is disabled for this resource.</p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "managementType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about AWS Fargate details associated with \n      an Amazon ECS cluster.</p>"
+            }
+        },
         "com.amazonaws.guardduty#FeatureAdditionalConfiguration": {
             "type": "enum",
             "members": {
@@ -4407,6 +4600,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EKS_ADDON_MANAGEMENT"
+                    }
+                },
+                "ECS_FARGATE_AGENT_MANAGEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS_FARGATE_AGENT_MANAGEMENT"
                     }
                 }
             }
@@ -4958,6 +5157,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "LAMBDA_NETWORK_LOGS"
+                    }
+                },
+                "FARGATE_RUNTIME_MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FARGATE_RUNTIME_MONITORING"
+                    }
+                },
+                "EC2_RUNTIME_MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_RUNTIME_MONITORING"
                     }
                 }
             }
@@ -6429,7 +6640,7 @@
                     "name": "guardduty"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes\n      the following data sources: VPC flow logs, Amazon Web Services CloudTrail management event logs, CloudTrail S3 data event\n      logs, EKS audit logs, DNS logs, and Amazon EBS volume data.\n      It uses threat intelligence\n      feeds, such as lists of malicious IPs and domains, and machine learning to identify\n      unexpected, potentially unauthorized, and malicious activity within your Amazon Web Services environment.\n      This can include issues like escalations of privileges, uses of exposed credentials, or\n      communication with malicious IPs, domains, or presence of malware on your Amazon EC2 instances\n      and container workloads. For example, GuardDuty can detect compromised EC2 instances and\n      container workloads serving malware, or mining bitcoin. </p>\n         <p>GuardDuty also monitors Amazon Web Services account access behavior for signs of compromise, such as\n      unauthorized infrastructure deployments like EC2 instances deployed in a Region that has never\n      been used, or unusual API calls like a password policy change to reduce password strength. </p>\n         <p>GuardDuty informs you about the status of your Amazon Web Services environment by producing security\n      findings that you can view in the GuardDuty console or through Amazon EventBridge. For more\n      information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html\">Amazon\n          GuardDuty User Guide</a>\n            </i>. </p>",
+                "smithy.api#documentation": "<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes\n      the following foundational data sources - VPC flow logs, Amazon Web Services CloudTrail management event logs, CloudTrail S3 data event\n      logs, EKS audit logs, DNS logs, Amazon EBS volume data, runtime activity belonging to container workloads, such \n      as Amazon EKS, Amazon ECS (including Amazon Web Services Fargate), and Amazon EC2 instances.\n      It uses threat intelligence\n      feeds, such as lists of malicious IPs and domains, and machine learning to identify\n      unexpected, potentially unauthorized, and malicious activity within your Amazon Web Services environment.\n      This can include issues like escalations of privileges, uses of exposed credentials, or\n      communication with malicious IPs, domains, or presence of malware on your Amazon EC2 instances\n      and container workloads. For example, GuardDuty can detect compromised EC2 instances and\n      container workloads serving malware, or mining bitcoin. </p>\n         <p>GuardDuty also monitors Amazon Web Services account access behavior for signs of compromise, such as\n      unauthorized infrastructure deployments like EC2 instances deployed in a Region that has never\n      been used, or unusual API calls like a password policy change to reduce password strength. </p>\n         <p>GuardDuty informs you about the status of your Amazon Web Services environment by producing security\n      findings that you can view in the GuardDuty console or through Amazon EventBridge. For more\n      information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html\">Amazon\n          GuardDuty User Guide</a>\n            </i>. </p>",
                 "smithy.api#title": "Amazon GuardDuty",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -7918,6 +8129,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#String"
+            }
+        },
+        "com.amazonaws.guardduty#Issues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.guardduty#KubernetesApiCallAction": {
@@ -9584,6 +9807,12 @@
                     "traits": {
                         "smithy.api#enumValue": "MANUAL"
                     }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
                 }
             }
         },
@@ -10163,6 +10392,12 @@
                     "traits": {
                         "smithy.api#enumValue": "LAMBDA_NETWORK_LOGS"
                     }
+                },
+                "RUNTIME_MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNTIME_MONITORING"
+                    }
                 }
             }
         },
@@ -10173,6 +10408,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EKS_ADDON_MANAGEMENT"
+                    }
+                },
+                "ECS_FARGATE_AGENT_MANAGEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS_FARGATE_AGENT_MANAGEMENT"
                     }
                 }
             }
@@ -11293,6 +11534,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EKS"
+                    }
+                },
+                "ECS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS"
+                    }
+                },
+                "EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2"
                     }
                 }
             }
@@ -13865,6 +14118,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EKS_RUNTIME_MONITORING"
+                    }
+                },
+                "FARGATE_RUNTIME_MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FARGATE_RUNTIME_MONITORING"
+                    }
+                },
+                "EC2_RUNTIME_MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_RUNTIME_MONITORING"
                     }
                 }
             }

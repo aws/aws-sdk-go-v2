@@ -26278,6 +26278,22 @@ func awsAwsquery_deserializeDocumentDataShareAssociation(v **types.DataShareAsso
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("ConsumerAcceptedWrites", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.ConsumerAcceptedWrites = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("ConsumerIdentifier", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -26319,6 +26335,22 @@ func awsAwsquery_deserializeDocumentDataShareAssociation(v **types.DataShareAsso
 					return err
 				}
 				sv.CreatedDate = ptr.Time(t)
+			}
+
+		case strings.EqualFold("ProducerAllowedWrites", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.ProducerAllowedWrites = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):

@@ -17,14 +17,18 @@ import (
 )
 
 // Creates a new Amazon Web Services resource tag or updates an existing resource
-// tag. You can add up to 50 Amazon Web Services resource tags for each S3
-// resource. To use this operation, you must have the permission to perform the
-// s3:TagResource action. For more information about the required Storage Lens
-// Groups permissions, see Setting account permissions to use S3 Storage Lens
-// groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions)
+// tag. Each tag is a label consisting of a user-defined key and value. Tags can
+// help you manage, identify, organize, search for, and filter resources. You can
+// add up to 50 Amazon Web Services resource tags for each S3 resource. This
+// operation is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
+// and for S3 Access Grants (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html)
+// . The tagged resource can be an S3 Storage Lens group or S3 Access Grants
+// instance, registered location, or grant. Permissions You must have the
+// s3:TagResource permission to use this operation. For more information about the
+// required Storage Lens Groups permissions, see Setting account permissions to
+// use S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions)
 // . For information about S3 Tagging errors, see List of Amazon S3 Tagging error
 // codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList)
-// . This operation is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
 // .
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
@@ -44,13 +48,14 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 type TagResourceInput struct {
 
 	// The Amazon Web Services account ID that created the S3 resource that you're
-	// trying to add tags to.
+	// trying to add tags to or the requester's account ID.
 	//
 	// This member is required.
 	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the S3 resource that you're trying to add
-	// tags to.
+	// tags to. The tagged resource can be an S3 Storage Lens group or S3 Access Grants
+	// instance, registered location, or grant.
 	//
 	// This member is required.
 	ResourceArn *string

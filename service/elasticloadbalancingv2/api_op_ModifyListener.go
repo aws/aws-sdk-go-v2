@@ -61,6 +61,9 @@ type ModifyListenerInput struct {
 	// The actions for the default rule.
 	DefaultActions []types.Action
 
+	// The mutual authentication configuration information.
+	MutualAuthentication *types.MutualAuthenticationAttributes
+
 	// The port for connections from clients to the load balancer. You cannot specify
 	// a port for a Gateway Load Balancer.
 	Port *int32

@@ -8103,6 +8103,9 @@ func awsAwsjson11_deserializeOpErrorPutConfigurationRecorder(response *smithyhtt
 	case strings.EqualFold("MaxNumberOfConfigurationRecordersExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorMaxNumberOfConfigurationRecordersExceededException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -13428,6 +13431,22 @@ func awsAwsjson11_deserializeDocumentBaseConfigurationItem(v **types.BaseConfigu
 				}
 			}
 
+		case "configurationItemDeliveryTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ConfigurationItemDeliveryTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected ConfigurationItemDeliveryTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "configurationItemStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13444,6 +13463,15 @@ func awsAwsjson11_deserializeDocumentBaseConfigurationItem(v **types.BaseConfigu
 					return fmt.Errorf("expected ConfigurationStateId to be of type string, got %T instead", value)
 				}
 				sv.ConfigurationStateId = ptr.String(jtv)
+			}
+
+		case "recordingFrequency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecordingFrequency to be of type string, got %T instead", value)
+				}
+				sv.RecordingFrequency = types.RecordingFrequency(jtv)
 			}
 
 		case "resourceCreationTime":
@@ -14821,6 +14849,22 @@ func awsAwsjson11_deserializeDocumentConfigurationItem(v **types.ConfigurationIt
 				}
 			}
 
+		case "configurationItemDeliveryTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ConfigurationItemDeliveryTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected ConfigurationItemDeliveryTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "configurationItemMD5Hash":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14846,6 +14890,15 @@ func awsAwsjson11_deserializeDocumentConfigurationItem(v **types.ConfigurationIt
 					return fmt.Errorf("expected ConfigurationStateId to be of type string, got %T instead", value)
 				}
 				sv.ConfigurationStateId = ptr.String(jtv)
+			}
+
+		case "recordingFrequency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecordingFrequency to be of type string, got %T instead", value)
+				}
+				sv.RecordingFrequency = types.RecordingFrequency(jtv)
 			}
 
 		case "relatedEvents":
@@ -14996,6 +15049,11 @@ func awsAwsjson11_deserializeDocumentConfigurationRecorder(v **types.Configurati
 
 		case "recordingGroup":
 			if err := awsAwsjson11_deserializeDocumentRecordingGroup(&sv.RecordingGroup, value); err != nil {
+				return err
+			}
+
+		case "recordingMode":
+			if err := awsAwsjson11_deserializeDocumentRecordingMode(&sv.RecordingMode, value); err != nil {
 				return err
 			}
 
@@ -20619,6 +20677,175 @@ func awsAwsjson11_deserializeDocumentRecordingGroup(v **types.RecordingGroup, va
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecordingMode(v **types.RecordingMode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecordingMode
+	if *v == nil {
+		sv = &types.RecordingMode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "recordingFrequency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecordingFrequency to be of type string, got %T instead", value)
+				}
+				sv.RecordingFrequency = types.RecordingFrequency(jtv)
+			}
+
+		case "recordingModeOverrides":
+			if err := awsAwsjson11_deserializeDocumentRecordingModeOverrides(&sv.RecordingModeOverrides, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecordingModeOverride(v **types.RecordingModeOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecordingModeOverride
+	if *v == nil {
+		sv = &types.RecordingModeOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "recordingFrequency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecordingFrequency to be of type string, got %T instead", value)
+				}
+				sv.RecordingFrequency = types.RecordingFrequency(jtv)
+			}
+
+		case "resourceTypes":
+			if err := awsAwsjson11_deserializeDocumentRecordingModeResourceTypesList(&sv.ResourceTypes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecordingModeOverrides(v *[]types.RecordingModeOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RecordingModeOverride
+	if *v == nil {
+		cv = []types.RecordingModeOverride{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RecordingModeOverride
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRecordingModeOverride(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecordingModeResourceTypesList(v *[]types.ResourceType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResourceType
+	if *v == nil {
+		cv = []types.ResourceType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResourceType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
+			}
+			col = types.ResourceType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

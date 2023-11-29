@@ -30,7 +30,7 @@ func (c *Client) DescribeBackupPolicy(ctx context.Context, params *DescribeBacku
 
 type DescribeBackupPolicyInput struct {
 
-	// Specifies which EFS file system to retrieve the BackupPolicy for.
+	// Specifies which EFS file system for which to retrieve the BackupPolicy .
 	//
 	// This member is required.
 	FileSystemId *string

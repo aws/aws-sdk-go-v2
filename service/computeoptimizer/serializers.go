@@ -1313,6 +1313,23 @@ func awsAwsjson10_serializeDocumentCpuVendorArchitectures(v []types.CpuVendorArc
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCustomizableMetricParameters(v *types.CustomizableMetricParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Headroom) > 0 {
+		ok := object.Key("headroom")
+		ok.String(string(v.Headroom))
+	}
+
+	if len(v.Threshold) > 0 {
+		ok := object.Key("threshold")
+		ok.String(string(v.Threshold))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentEBSFilter(v *types.EBSFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1659,6 +1676,56 @@ func awsAwsjson10_serializeDocumentLicenseRecommendationFilters(v []types.Licens
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentPreferredResource(v *types.PreferredResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExcludeList != nil {
+		ok := object.Key("excludeList")
+		if err := awsAwsjson10_serializeDocumentPreferredResourceValues(v.ExcludeList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludeList != nil {
+		ok := object.Key("includeList")
+		if err := awsAwsjson10_serializeDocumentPreferredResourceValues(v.IncludeList, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPreferredResources(v []types.PreferredResource, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentPreferredResource(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPreferredResourceValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentRecommendationPreferenceNames(v []types.RecommendationPreferenceName, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1736,6 +1803,38 @@ func awsAwsjson10_serializeDocumentServiceArns(v []string, value smithyjson.Valu
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentUtilizationPreference(v *types.UtilizationPreference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MetricName) > 0 {
+		ok := object.Key("metricName")
+		ok.String(string(v.MetricName))
+	}
+
+	if v.MetricParameters != nil {
+		ok := object.Key("metricParameters")
+		if err := awsAwsjson10_serializeDocumentCustomizableMetricParameters(v.MetricParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentUtilizationPreferences(v []types.UtilizationPreference, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentUtilizationPreference(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -2522,14 +2621,38 @@ func awsAwsjson10_serializeOpDocumentPutRecommendationPreferencesInput(v *PutRec
 		ok.String(string(v.InferredWorkloadTypes))
 	}
 
+	if len(v.LookBackPeriod) > 0 {
+		ok := object.Key("lookBackPeriod")
+		ok.String(string(v.LookBackPeriod))
+	}
+
+	if v.PreferredResources != nil {
+		ok := object.Key("preferredResources")
+		if err := awsAwsjson10_serializeDocumentPreferredResources(v.PreferredResources, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ResourceType) > 0 {
 		ok := object.Key("resourceType")
 		ok.String(string(v.ResourceType))
 	}
 
+	if len(v.SavingsEstimationMode) > 0 {
+		ok := object.Key("savingsEstimationMode")
+		ok.String(string(v.SavingsEstimationMode))
+	}
+
 	if v.Scope != nil {
 		ok := object.Key("scope")
 		if err := awsAwsjson10_serializeDocumentScope(v.Scope, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UtilizationPreferences != nil {
+		ok := object.Key("utilizationPreferences")
+		if err := awsAwsjson10_serializeDocumentUtilizationPreferences(v.UtilizationPreferences, ok); err != nil {
 			return err
 		}
 	}

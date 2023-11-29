@@ -364,11 +364,11 @@ type EksAnywhereSubscription struct {
 	// UUID identifying a subscription.
 	Id *string
 
-	// License Manager License ARNs associated with the subscription.
+	// Amazon Web Services License Manager ARN associated with the subscription.
 	LicenseArns []string
 
 	// The number of licenses included in a subscription. Valid values are between 1
-	// and 1000.
+	// and 100.
 	LicenseQuantity int32
 
 	// The type of licenses included in the subscription. Valid value is CLUSTER. With
@@ -400,7 +400,7 @@ type EksAnywhereSubscriptionTerm struct {
 	// 12 month or 36 month subscription.
 	Duration int32
 
-	// The term unit of the subscription. Valid value is MONTHS.
+	// The term unit of the subscription. Valid value is MONTHS .
 	Unit EksAnywhereSubscriptionTermUnit
 
 	noSmithyDocumentSerde
@@ -1080,6 +1080,91 @@ type OutpostConfigResponse struct {
 	// For more information, see Capacity considerations (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
 	// in the Amazon EKS User Guide.
 	ControlPlanePlacement *ControlPlanePlacementResponse
+
+	noSmithyDocumentSerde
+}
+
+// Amazon EKS Pod Identity associations provide the ability to manage credentials
+// for your applications, similar to the way that 7EC2l instance profiles provide
+// credentials to Amazon EC2 instances.
+type PodIdentityAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the association.
+	AssociationArn *string
+
+	// The ID of the association.
+	AssociationId *string
+
+	// The name of the cluster that the association is in.
+	ClusterName *string
+
+	// The timestamp that the association was created at.
+	CreatedAt *time.Time
+
+	// The most recent timestamp that the association was modified at
+	ModifiedAt *time.Time
+
+	// The name of the Kubernetes namespace inside the cluster to create the
+	// association in. The service account and the pods that use the service account
+	// must be in this namespace.
+	Namespace *string
+
+	// The Amazon Resource Name (ARN) of the IAM role to associate with the service
+	// account. The EKS Pod Identity agent manages credentials to assume this role for
+	// applications in the containers in the pods that use this service account.
+	RoleArn *string
+
+	// The name of the Kubernetes service account inside the cluster to associate the
+	// IAM credentials with.
+	ServiceAccount *string
+
+	// The metadata that you apply to a resource to assist with categorization and
+	// organization. Each tag consists of a key and an optional value. You define both.
+	// The following basic restrictions apply to tags:
+	//   - Maximum number of tags per resource – 50
+	//   - For each resource, each tag key must be unique, and each tag key can have
+	//   only one value.
+	//   - Maximum key length – 128 Unicode characters in UTF-8
+	//   - Maximum value length – 256 Unicode characters in UTF-8
+	//   - If your tagging schema is used across multiple services and resources,
+	//   remember that other services may have restrictions on allowed characters.
+	//   Generally allowed characters are: letters, numbers, and spaces representable in
+	//   UTF-8, and the following characters: + - = . _ : / @.
+	//   - Tag keys and values are case-sensitive.
+	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
+	//   prefix for either keys or values as it is reserved for Amazon Web Services use.
+	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
+	//   prefix do not count against your tags per resource limit.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The summarized description of the association. Each summary is simplified by
+// removing these fields compared to the full PodIdentityAssociation :
+//   - The IAM role: roleArn
+//   - The timestamp that the association was created at: createdAt
+//   - The most recent timestamp that the association was modified at:. modifiedAt
+//   - The tags on the association: tags
+type PodIdentityAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the association.
+	AssociationArn *string
+
+	// The ID of the association.
+	AssociationId *string
+
+	// The name of the cluster that the association is in.
+	ClusterName *string
+
+	// The name of the Kubernetes namespace inside the cluster to create the
+	// association in. The service account and the pods that use the service account
+	// must be in this namespace.
+	Namespace *string
+
+	// The name of the Kubernetes service account inside the cluster to associate the
+	// IAM credentials with.
+	ServiceAccount *string
 
 	noSmithyDocumentSerde
 }

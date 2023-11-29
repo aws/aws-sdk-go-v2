@@ -1073,6 +1073,18 @@ type AudioSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the Amazon Bedrock model used to interpret the
+// prompt used in descriptive bot building.
+type BedrockModelSpecification struct {
+
+	// The ARN of the foundation model used in descriptive bot building.
+	//
+	// This member is required.
+	ModelArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides a record of an event that affects a bot alias. For example, when the
 // version of a bot that the alias points to changes.
 type BotAliasHistoryEvent struct {
@@ -1563,6 +1575,19 @@ type BotVersionSummary struct {
 
 	// The description of the version.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains specifications about the Amazon Lex build time generative AI
+// capabilities from Amazon Bedrock that you can turn on for your bot.
+type BuildtimeSettings struct {
+
+	// An object containing specifications for the descriptive bot building feature.
+	DescriptiveBotBuilder *DescriptiveBotBuilderSpecification
+
+	// Contains specifications for the sample utterance generation feature.
+	SampleUtteranceGeneration *SampleUtteranceGenerationSpecification
 
 	noSmithyDocumentSerde
 }
@@ -2075,6 +2100,21 @@ type DefaultConditionalBranch struct {
 	noSmithyDocumentSerde
 }
 
+// Contains specifications for the descriptive bot building feature.
+type DescriptiveBotBuilderSpecification struct {
+
+	// Specifies whether the descriptive bot building feature is activated or not.
+	//
+	// This member is required.
+	Enabled bool
+
+	// An object containing information about the Amazon Bedrock model used to
+	// interpret the prompt used in descriptive bot building.
+	BedrockModelSpecification *BedrockModelSpecification
+
+	noSmithyDocumentSerde
+}
+
 // Defines the action that the bot executes at runtime when the conversation
 // reaches this step.
 type DialogAction struct {
@@ -2438,6 +2478,59 @@ type FulfillmentUpdatesSpecification struct {
 	// Provides configuration information for messages sent periodically to the user
 	// while the fulfillment Lambda function is running.
 	UpdateResponse *FulfillmentUpdateResponseSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the attribute and method by which to sort the generation request
+// information.
+type GenerationSortBy struct {
+
+	// The attribute by which to sort the generation request information. You can sort
+	// by the following attributes.
+	//   - creationStartTime – The time at which the generation request was created.
+	//   - lastUpdatedTime – The time at which the generation request was last updated.
+	//
+	// This member is required.
+	Attribute GenerationSortByAttribute
+
+	// The order by which to sort the generation request information.
+	//
+	// This member is required.
+	Order SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a generation request made for the bot locale.
+type GenerationSummary struct {
+
+	// The date and time at which the generation request was made.
+	CreationDateTime *time.Time
+
+	// The unique identifier of the generation request.
+	GenerationId *string
+
+	// The status of the generation request.
+	GenerationStatus GenerationStatus
+
+	// The date and time at which the generation request was last updated.
+	LastUpdatedDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains specifications about the generative AI capabilities from Amazon
+// Bedrock that you can turn on for your bot.
+type GenerativeAISettings struct {
+
+	// Contains specifications about the Amazon Lex build time generative AI
+	// capabilities from Amazon Bedrock that you can turn on for your bot.
+	BuildtimeSettings *BuildtimeSettings
+
+	// Contains specifications about the Amazon Lex runtime generative AI capabilities
+	// from Amazon Bedrock that you can turn on for your bot.
+	RuntimeSettings *RuntimeSettings
 
 	noSmithyDocumentSerde
 }
@@ -3423,6 +3516,16 @@ type RuntimeHintValue struct {
 	noSmithyDocumentSerde
 }
 
+// Contains specifications about the Amazon Lex runtime generative AI capabilities
+// from Amazon Bedrock that you can turn on for your bot.
+type RuntimeSettings struct {
+
+	// An object containing specifications for the assisted slot resolution feature.
+	SlotResolutionImprovement *SlotResolutionImprovementSpecification
+
+	noSmithyDocumentSerde
+}
+
 // Specifies an Amazon S3 bucket for logging audio conversations
 type S3BucketLogDestination struct {
 
@@ -3486,6 +3589,21 @@ type SampleUtterance struct {
 	//
 	// This member is required.
 	Utterance *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains specifications for the sample utterance generation feature.
+type SampleUtteranceGenerationSpecification struct {
+
+	// Specifies whether to enable sample utterance generation or not.
+	//
+	// This member is required.
+	Enabled bool
+
+	// Contains information about the Amazon Bedrock model used to interpret the
+	// prompt used in descriptive bot building.
+	BedrockModelSpecification *BedrockModelSpecification
 
 	noSmithyDocumentSerde
 }
@@ -3684,6 +3802,36 @@ type SlotPriority struct {
 	//
 	// This member is required.
 	SlotId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains specifications for the assisted slot resolution feature.
+type SlotResolutionImprovementSpecification struct {
+
+	// Specifies whether assisted slot resolution is turned on or off.
+	//
+	// This member is required.
+	Enabled bool
+
+	// An object containing information about the Amazon Bedrock model used to assist
+	// slot resolution.
+	BedrockModelSpecification *BedrockModelSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about whether assisted slot resolution is turned on for
+// the slot or not.
+type SlotResolutionSetting struct {
+
+	// Specifies whether assisted slot resolution is turned on for the slot or not. If
+	// the value is EnhancedFallback , assisted slot resolution is activated when
+	// Amazon Lex defaults to the AMAZON.FallbackIntent . If the value is Default ,
+	// assisted slot resolution is turned off.
+	//
+	// This member is required.
+	SlotResolutionStrategy SlotResolutionStrategy
 
 	noSmithyDocumentSerde
 }
@@ -3903,6 +4051,10 @@ type SlotValueElicitationSetting struct {
 	// Specifies the settings that Amazon Lex uses when a slot value is successfully
 	// entered by a user.
 	SlotCaptureSetting *SlotCaptureSetting
+
+	// An object containing information about whether assisted slot resolution is
+	// turned on for the slot or not.
+	SlotResolutionSetting *SlotResolutionSetting
 
 	// Specifies the prompts that Amazon Lex uses while a bot is waiting for customer
 	// input.

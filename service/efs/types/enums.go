@@ -46,6 +46,27 @@ func (PerformanceMode) Values() []PerformanceMode {
 	}
 }
 
+type ReplicationOverwriteProtection string
+
+// Enum values for ReplicationOverwriteProtection
+const (
+	ReplicationOverwriteProtectionEnabled     ReplicationOverwriteProtection = "ENABLED"
+	ReplicationOverwriteProtectionDisabled    ReplicationOverwriteProtection = "DISABLED"
+	ReplicationOverwriteProtectionReplicating ReplicationOverwriteProtection = "REPLICATING"
+)
+
+// Values returns all known values for ReplicationOverwriteProtection. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReplicationOverwriteProtection) Values() []ReplicationOverwriteProtection {
+	return []ReplicationOverwriteProtection{
+		"ENABLED",
+		"DISABLED",
+		"REPLICATING",
+	}
+}
+
 type ReplicationStatus string
 
 // Enum values for ReplicationStatus
@@ -150,16 +171,51 @@ func (ThroughputMode) Values() []ThroughputMode {
 	}
 }
 
+type TransitionToArchiveRules string
+
+// Enum values for TransitionToArchiveRules
+const (
+	TransitionToArchiveRulesAfter1Day    TransitionToArchiveRules = "AFTER_1_DAY"
+	TransitionToArchiveRulesAfter7Days   TransitionToArchiveRules = "AFTER_7_DAYS"
+	TransitionToArchiveRulesAfter14Days  TransitionToArchiveRules = "AFTER_14_DAYS"
+	TransitionToArchiveRulesAfter30Days  TransitionToArchiveRules = "AFTER_30_DAYS"
+	TransitionToArchiveRulesAfter60Days  TransitionToArchiveRules = "AFTER_60_DAYS"
+	TransitionToArchiveRulesAfter90Days  TransitionToArchiveRules = "AFTER_90_DAYS"
+	TransitionToArchiveRulesAfter180Days TransitionToArchiveRules = "AFTER_180_DAYS"
+	TransitionToArchiveRulesAfter270Days TransitionToArchiveRules = "AFTER_270_DAYS"
+	TransitionToArchiveRulesAfter365Days TransitionToArchiveRules = "AFTER_365_DAYS"
+)
+
+// Values returns all known values for TransitionToArchiveRules. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransitionToArchiveRules) Values() []TransitionToArchiveRules {
+	return []TransitionToArchiveRules{
+		"AFTER_1_DAY",
+		"AFTER_7_DAYS",
+		"AFTER_14_DAYS",
+		"AFTER_30_DAYS",
+		"AFTER_60_DAYS",
+		"AFTER_90_DAYS",
+		"AFTER_180_DAYS",
+		"AFTER_270_DAYS",
+		"AFTER_365_DAYS",
+	}
+}
+
 type TransitionToIARules string
 
 // Enum values for TransitionToIARules
 const (
-	TransitionToIARulesAfter7Days  TransitionToIARules = "AFTER_7_DAYS"
-	TransitionToIARulesAfter14Days TransitionToIARules = "AFTER_14_DAYS"
-	TransitionToIARulesAfter30Days TransitionToIARules = "AFTER_30_DAYS"
-	TransitionToIARulesAfter60Days TransitionToIARules = "AFTER_60_DAYS"
-	TransitionToIARulesAfter90Days TransitionToIARules = "AFTER_90_DAYS"
-	TransitionToIARulesAfter1Day   TransitionToIARules = "AFTER_1_DAY"
+	TransitionToIARulesAfter7Days   TransitionToIARules = "AFTER_7_DAYS"
+	TransitionToIARulesAfter14Days  TransitionToIARules = "AFTER_14_DAYS"
+	TransitionToIARulesAfter30Days  TransitionToIARules = "AFTER_30_DAYS"
+	TransitionToIARulesAfter60Days  TransitionToIARules = "AFTER_60_DAYS"
+	TransitionToIARulesAfter90Days  TransitionToIARules = "AFTER_90_DAYS"
+	TransitionToIARulesAfter1Day    TransitionToIARules = "AFTER_1_DAY"
+	TransitionToIARulesAfter180Days TransitionToIARules = "AFTER_180_DAYS"
+	TransitionToIARulesAfter270Days TransitionToIARules = "AFTER_270_DAYS"
+	TransitionToIARulesAfter365Days TransitionToIARules = "AFTER_365_DAYS"
 )
 
 // Values returns all known values for TransitionToIARules. Note that this can be
@@ -173,6 +229,9 @@ func (TransitionToIARules) Values() []TransitionToIARules {
 		"AFTER_60_DAYS",
 		"AFTER_90_DAYS",
 		"AFTER_1_DAY",
+		"AFTER_180_DAYS",
+		"AFTER_270_DAYS",
+		"AFTER_365_DAYS",
 	}
 }
 

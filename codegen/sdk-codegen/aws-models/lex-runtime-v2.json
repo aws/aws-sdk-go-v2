@@ -117,7 +117,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -160,7 +159,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -173,7 +173,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -187,7 +186,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -210,7 +208,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -245,7 +242,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -256,14 +252,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -277,14 +275,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -293,11 +289,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -308,14 +304,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -329,7 +327,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -349,7 +346,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -360,14 +356,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -378,9 +376,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -887,7 +887,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^([A-Za-z]_?)+$"
+                "smithy.api#pattern": "^([A-Za-z0-9]_?)+$"
             }
         },
         "com.amazonaws.lexruntimev2#ActiveContextParametersMap": {
@@ -1422,7 +1422,7 @@
                 "type": {
                     "target": "com.amazonaws.lexruntimev2#DialogActionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next action that the bot should take in its interaction with the\n         user. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Close</code> - Indicates that there will not be a\n               response from the user. For example, the statement \"Your order\n               has been placed\" does not require a response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - The next action is asking the\n               user if the intent is complete and ready to be fulfilled. This is\n               a yes/no question such as \"Place the order?\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>Delegate</code> - The next action is determined by\n               Amazon Lex V2.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - The next action is to elicit an\n               intent from the user.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - The next action is to elicit a slot\n               value from the user.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The next action that the bot should take in its interaction with the\n         user. The following values are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Close</code> – Indicates that there will not be a\n               response from the user. For example, the statement \"Your order\n               has been placed\" does not require a response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> – The next action is asking the\n               user if the intent is complete and ready to be fulfilled. This is\n               a yes/no question such as \"Place the order?\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>Delegate</code> – The next action is determined by\n               Amazon Lex V2.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> – The next action is to elicit an\n               intent from the user.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> – The next action is to elicit a slot\n               value from the user.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1435,7 +1435,7 @@
                 "slotElicitationStyle": {
                     "target": "com.amazonaws.lexruntimev2#StyleType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the slot to use spell-by-letter or spell-by-word style.\n         When you use a style on a slot, users can spell out their input to make\n         it clear to your bot.</p>\n         <ul>\n            <li>\n               <p>Spell by letter - \"b\" \"o\" \"b\"</p>\n            </li>\n            <li>\n               <p>Spell by word - \"b as in boy\" \"o as in oscar\" \"b as in\n               boy\"</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html\">\n            Using spelling to enter slot values </a>.</p>"
+                        "smithy.api#documentation": "<p>Configures the slot to use spell-by-letter or spell-by-word style.\n         When you use a style on a slot, users can spell out their input to make\n         it clear to your bot.</p>\n         <ul>\n            <li>\n               <p>Spell by letter - \"b\" \"o\" \"b\"</p>\n            </li>\n            <li>\n               <p>Spell by word - \"b as in boy\" \"o as in oscar\" \"b as in\n               boy\"</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/spelling-styles.html\">\n            Using spelling to enter slot values </a>.</p>"
                     }
                 },
                 "subSlotToElicit": {
@@ -1680,31 +1680,31 @@
                 "title": {
                     "target": "com.amazonaws.lexruntimev2#AttachmentTitle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The title to display on the response card. The format of the title\n         is determined by the platform displaying the response card.</p>",
+                        "smithy.api#documentation": "<p>The title to display on the response card. The format of the title\n            is determined by the platform displaying the response card.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "subtitle": {
                     "target": "com.amazonaws.lexruntimev2#AttachmentTitle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subtitle to display on the response card. The format of the\n         subtitle is determined by the platform displaying the response\n         card.</p>"
+                        "smithy.api#documentation": "<p>The subtitle to display on the response card. The format of the\n            subtitle is determined by the platform displaying the response\n            card.</p>"
                     }
                 },
                 "imageUrl": {
                     "target": "com.amazonaws.lexruntimev2#AttachmentUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of an image to display on the response card. The image URL\n         must be publicly available so that the platform displaying the response\n         card has access to the image.</p>"
+                        "smithy.api#documentation": "<p>The URL of an image to display on the response card. The image URL\n            must be publicly available so that the platform displaying the response\n            card has access to the image.</p>"
                     }
                 },
                 "buttons": {
                     "target": "com.amazonaws.lexruntimev2#ButtonsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of buttons that should be displayed on the response card. The\n         arrangement of the buttons is determined by the platform that displays\n         the button.</p>"
+                        "smithy.api#documentation": "<p>A list of buttons that should be displayed on the response card. The\n            arrangement of the buttons is determined by the platform that displays\n            the button.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A card that is shown to the user by a messaging platform. You define\n         the contents of the card, the card is displayed by the platform. </p>\n         <p>When you use a response card, the response from the user is\n         constrained to the text associated with a button on the card.</p>"
+                "smithy.api#documentation": "<p>A card that is shown to the user by a messaging platform. You define\n            the contents of the card, the card is displayed by the platform. </p>\n         <p>When you use a response card, the response from the user is\n            constrained to the text associated with a button on the card.</p>"
             }
         },
         "com.amazonaws.lexruntimev2#InputMode": {
@@ -1749,13 +1749,13 @@
                 "state": {
                     "target": "com.amazonaws.lexruntimev2#IntentState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains fulfillment information for the intent. </p>"
+                        "smithy.api#documentation": "<p>Indicates the fulfillment state for the intent. The meanings of each value are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Failed</code> – The bot failed to fulfill the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Fulfilled</code> – The bot has completed fulfillment of the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FulfillmentInProgress</code> – The bot is in the middle of fulfilling the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InProgress</code> – The bot is in the middle of eliciting the slot values that are necessary to fulfill the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadyForFulfillment</code> – The bot has elicited all the slot values for the intent and is ready to fulfill the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Waiting</code> – The bot is waiting for a response from the user (limited to streaming conversations).</p>\n            </li>\n         </ul>"
                     }
                 },
                 "confirmationState": {
                     "target": "com.amazonaws.lexruntimev2#ConfirmationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about whether fulfillment of the intent has\n         been confirmed.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the intent has been <code>Confirmed</code>, <code>Denied</code>, or <code>None</code> if the confirmation stage has not yet been reached.</p>"
                     }
                 }
             },
@@ -1769,7 +1769,7 @@
                 "inputMode": {
                     "target": "com.amazonaws.lexruntimev2#InputMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the input to the operation was text or\n         speech.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the input to the operation was text, speech, or from a touch-tone keypad.</p>"
                     }
                 },
                 "interpretations": {
@@ -1887,10 +1887,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of intents that might satisfy the user's utterance. The\n         intents are ordered by the confidence score.</p>"
                     }
+                },
+                "interpretationSource": {
+                    "target": "com.amazonaws.lexruntimev2#InterpretationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the service that interpreted the input.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An intent that Amazon Lex V2 determined might satisfy the user's utterance.\n         The intents are ordered by the confidence score. </p>"
+                "smithy.api#documentation": "<p>An object containing information about an intent that Amazon Lex V2 determined might satisfy the user's utterance.\n         The intents are ordered by the confidence score. </p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#InterpretationSource": {
+            "type": "enum",
+            "members": {
+                "BEDROCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bedrock"
+                    }
+                },
+                "LEX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Lex"
+                    }
+                }
             }
         },
         "com.amazonaws.lexruntimev2#Interpretations": {
@@ -2204,14 +2227,14 @@
                 "sessionState": {
                     "target": "com.amazonaws.lexruntimev2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the current state of the dialog between the user and the\n         bot.</p>\n         <p>Use this to determine the progress of the conversation and what the\n         next action may be.</p>",
+                        "smithy.api#documentation": "<p>A base-64-encoded gzipped field that represents the current state of \n         the dialog between the user and the bot. Use this to determine the progress \n         of the conversation and what the next action may be.</p>",
                         "smithy.api#httpHeader": "x-amz-lex-session-state"
                     }
                 },
                 "requestAttributes": {
                     "target": "com.amazonaws.lexruntimev2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request-specific information passed between the client application\n         and Amazon Lex V2. These are the same as the <code>requestAttribute</code>\n         parameter in the call to the <code>PutSession</code> operation.</p>",
+                        "smithy.api#documentation": "<p>A base-64-encoded gzipped field that provides request-specific information \n         passed between the client application and Amazon Lex V2. These are the same as the \n         <code>requestAttribute</code> parameter in the call to the \n         <code>PutSession</code> operation.</p>",
                         "smithy.api#httpHeader": "x-amz-lex-request-attributes"
                     }
                 },
@@ -2511,7 +2534,7 @@
                 "inputMode": {
                     "target": "com.amazonaws.lexruntimev2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the input mode to the operation was text or\n         speech. \n      </p>",
+                        "smithy.api#documentation": "<p>Indicates whether the input mode to the operation was text, speech, or from a touch-tone keypad.\n      </p>",
                         "smithy.api#httpHeader": "x-amz-lex-input-mode"
                     }
                 },
@@ -3290,25 +3313,25 @@
                 "originalValue": {
                     "target": "com.amazonaws.lexruntimev2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The text of the utterance from the user that was entered for the\n         slot.</p>"
+                        "smithy.api#documentation": "<p>The part of the user's response to the slot elicitation that Amazon Lex V2 determines is relevant to the slot value.</p>"
                     }
                 },
                 "interpretedValue": {
                     "target": "com.amazonaws.lexruntimev2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that Amazon Lex V2 determines for the slot. The actual value\n         depends on the setting of the value selection strategy for the bot. You\n         can choose to use the value entered by the user, or you can have Amazon Lex V2\n         choose the first value in the <code>resolvedValues</code> list.</p>",
+                        "smithy.api#documentation": "<p>The value that Amazon Lex V2 determines for the slot, given the user input. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the <code>resolvedValues</code> list.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resolvedValues": {
                     "target": "com.amazonaws.lexruntimev2#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of additional values that have been recognized for the\n         slot.</p>"
+                        "smithy.api#documentation": "<p>A list of values that Amazon Lex V2 determines are possible resolutions for the user input. The first value matches the <code>interpretedValue</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The value of a slot.</p>"
+                "smithy.api#documentation": "<p>Information about the value provided for a slot and Amazon Lex V2's interpretation.</p>"
             }
         },
         "com.amazonaws.lexruntimev2#Values": {

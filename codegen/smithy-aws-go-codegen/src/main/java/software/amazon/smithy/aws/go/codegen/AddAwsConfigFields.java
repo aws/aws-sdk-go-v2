@@ -43,6 +43,8 @@ import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.traits.HttpBearerAuthTrait;
 import software.amazon.smithy.utils.ListUtils;
 
+import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
+
 /**
  * Registers additional AWS specific client configuration fields
  */
@@ -111,9 +113,12 @@ public class AddAwsConfigFields implements GoIntegration {
                             When nil the API client will use a default retryer. The kind of default retry created
                             by the API client can be changed with the RetryMode option.
                             """)
-                    .addConfigFieldResolvers(getClientInitializationResolver(
-                            SymbolUtils.createValueSymbolBuilder(RESOLVE_RETRYER).build())
-                            .build()
+                    .addConfigFieldResolvers(
+                            ConfigFieldResolver.builder()
+                                    .location(ConfigFieldResolver.Location.CLIENT)
+                                    .target(ConfigFieldResolver.Target.FINALIZATION)
+                                    .resolver(buildPackageSymbol(RESOLVE_RETRYER))
+                                    .build()
                     )
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRYER_PROVIDER)
                             .build())

@@ -389,7 +389,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -432,7 +431,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -445,7 +445,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -459,7 +458,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -482,7 +480,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -517,7 +514,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -528,14 +524,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -549,14 +547,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -565,11 +561,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -580,14 +576,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -601,7 +599,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -621,7 +618,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -632,14 +628,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -650,9 +648,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1168,7 +1168,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 10000
+                    "max": 20000
                 }
             }
         },
@@ -1235,6 +1235,18 @@
                         "smithy.api#documentation": "<p>The ARN of the Amazon Identity and Access Management (IAM) role that requested the batch inference job.</p>"
                     }
                 },
+                "batchInferenceJobMode": {
+                    "target": "com.amazonaws.personalize#BatchInferenceJobMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job's mode.</p>"
+                    }
+                },
+                "themeGenerationConfig": {
+                    "target": "com.amazonaws.personalize#ThemeGenerationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job's theme generation settings.</p>"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
@@ -1285,6 +1297,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The input configuration of a batch inference job.</p>"
+            }
+        },
+        "com.amazonaws.personalize#BatchInferenceJobMode": {
+            "type": "enum",
+            "members": {
+                "BATCH_INFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BATCH_INFERENCE"
+                    }
+                },
+                "THEME_GENERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THEME_GENERATION"
+                    }
+                }
             }
         },
         "com.amazonaws.personalize#BatchInferenceJobOutput": {
@@ -1345,6 +1374,12 @@
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the solution version used by the batch inference job.</p>"
+                    }
+                },
+                "batchInferenceJobMode": {
+                    "target": "com.amazonaws.personalize#BatchInferenceJobMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job's mode.</p>"
                     }
                 }
             },
@@ -1609,6 +1644,12 @@
                     "target": "com.amazonaws.personalize#HyperParameters",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the exploration configuration hyperparameters, including <code>explorationWeight</code> and \n      <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when\n      recommending items. Provide <code>itemExplorationConfig</code> data only if your solution uses the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a> recipe.</p>"
+                    }
+                },
+                "enableMetadataWithRecommendations": {
+                    "target": "com.amazonaws.personalize#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether metadata with recommendations is enabled for the campaign. \n      If enabled, you can specify the columns from your Items dataset in your request for recommendations. Amazon Personalize returns this data for each item in the recommendation response. </p>\n         <p>\n      If you enable metadata in recommendations, you will incur additional costs. For more information, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.\n    </p>"
                     }
                 }
             },
@@ -1880,7 +1921,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a batch inference job. The operation can handle up to 50 million records and the\n      input file must be in JSON format. For more information, see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/creating-batch-inference-job.html\">Creating a batch inference job</a>.\n    </p>"
+                "smithy.api#documentation": "<p>Generates batch recommendations based on a list of items or users stored in Amazon S3\n      and exports the recommendations to an Amazon S3 bucket.</p>\n         <p>To generate batch recommendations, specify the ARN of a solution version and an Amazon S3 URI for the input and output data.\n      For user personalization, popular items, and personalized ranking solutions, the batch inference job generates a list of\n      recommended items for each user ID in the input file. For related items solutions, the job generates a list of recommended\n      items for each item ID in the input file.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/getting-batch-recommendations.html\">Creating a batch inference job\n    </a>.</p>\n         <p>\n      If you use the Similar-Items recipe, Amazon Personalize can add descriptive themes to batch recommendations. \n      To generate themes, set the job's mode to\n      <code>THEME_GENERATION</code> and specify the name of the field that contains item names in the\n      input data.</p>\n         <p>\n      For more information about generating themes, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/themed-batch-recommendations.html\">Batch recommendations with themes from Content Generator\n      </a>.\n    </p>\n         <p>You can't get batch recommendations with the Trending-Now or Next-Best-Action recipes.</p>"
             }
         },
         "com.amazonaws.personalize#CreateBatchInferenceJobRequest": {
@@ -1943,6 +1984,18 @@
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the batch inference job.</p>"
+                    }
+                },
+                "batchInferenceJobMode": {
+                    "target": "com.amazonaws.personalize#BatchInferenceJobMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the batch inference job. To generate descriptive themes for groups of similar items, set the\n      job mode to <code>THEME_GENERATION</code>. If you don't want to generate themes, use the default <code>BATCH_INFERENCE</code>.</p>\n         <p>\n      When you get batch recommendations with themes, you will incur additional costs. For more information, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.\n    </p>"
+                    }
+                },
+                "themeGenerationConfig": {
+                    "target": "com.amazonaws.personalize#ThemeGenerationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For theme generation jobs, specify the name of the column in your Items\n      dataset that contains each item's name.</p>"
                     }
                 }
             },
@@ -2100,7 +2153,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a campaign that deploys a solution version. When a client calls the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      and\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html\">GetPersonalizedRanking</a>\n      APIs, a campaign is specified in the request.</p>\n         <p>\n            <b>Minimum Provisioned TPS and Auto-Scaling</b>\n         </p>\n         <important>\n            <p> A high <code>minProvisionedTPS</code> will increase your bill. We recommend starting with 1 for <code>minProvisionedTPS</code> (the default). Track\n        your usage using Amazon CloudWatch metrics, and increase the <code>minProvisionedTPS</code>\n        as necessary.</p>\n         </important>\n         <p>A transaction is a single <code>GetRecommendations</code> or\n       <code>GetPersonalizedRanking</code> call. Transactions per second (TPS) is the throughput\n       and unit of billing for Amazon Personalize. The minimum provisioned TPS\n       (<code>minProvisionedTPS</code>) specifies the baseline throughput provisioned by\n       Amazon Personalize, and thus, the minimum billing charge. \n    </p>\n         <p>\n       If your TPS increases beyond\n       <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n       but never below <code>minProvisionedTPS</code>.\n       There's a short time delay while the capacity is increased that might cause loss of\n       transactions.</p>\n         <p>The actual TPS used is calculated as the average requests/second within a 5-minute window.\n      You pay for maximum of either the minimum provisioned TPS or the actual TPS.\n      We recommend starting with a low <code>minProvisionedTPS</code>, track\n       your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code>\n       as necessary.</p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A campaign can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the campaign status, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the campaign\n        is <code>ACTIVE</code> before asking the campaign for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html\">ListCampaigns</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html\">UpdateCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html\">DeleteCampaign</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a campaign that deploys a solution version. When a client calls the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      and\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html\">GetPersonalizedRanking</a>\n      APIs, a campaign is specified in the request.</p>\n         <p>\n            <b>Minimum Provisioned TPS and Auto-Scaling</b>\n         </p>\n         <important>\n            <p> A high <code>minProvisionedTPS</code> will increase your bill. We recommend starting with 1 for <code>minProvisionedTPS</code> (the default). Track\n        your usage using Amazon CloudWatch metrics, and increase the <code>minProvisionedTPS</code>\n        as necessary.</p>\n         </important>\n         <p>A transaction is a single <code>GetRecommendations</code> or\n      <code>GetPersonalizedRanking</code> call. Transactions per second (TPS) is the throughput\n      and unit of billing for Amazon Personalize. The minimum provisioned TPS\n      (<code>minProvisionedTPS</code>) specifies the baseline throughput provisioned by\n      Amazon Personalize, and thus, the minimum billing charge. \n    </p>\n         <p>\n      If your TPS increases beyond\n      <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n      but never below <code>minProvisionedTPS</code>.\n      There's a short time delay while the capacity is increased that might cause loss of\n      transactions.</p>\n         <p>The actual TPS used is calculated as the average requests/second within a 5-minute window.\n      You pay for maximum of either the minimum provisioned TPS or the actual TPS.\n      We recommend starting with a low <code>minProvisionedTPS</code>, track\n      your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code>\n      as necessary.</p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A campaign can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the campaign status, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the campaign\n        is <code>ACTIVE</code> before asking the campaign for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html\">ListCampaigns</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html\">UpdateCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html\">DeleteCampaign</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2187,7 +2240,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an empty dataset and adds it to the specified dataset group.\n      Use <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a> to import your training data to a\n      dataset.</p>\n         <p>There are three types of datasets:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>\n         <p>Each dataset type has an associated schema with required field types.\n      Only the <code>Interactions</code> dataset is required in order to train a\n      model (also referred to as creating a solution).</p>\n         <p>A dataset can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasets.html\">ListDatasets</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDataset.html\">DeleteDataset</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an empty dataset and adds it to the specified dataset group.\n      Use <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a> to import your training data to a\n      dataset.</p>\n         <p>There are 5 types of datasets:</p>\n         <ul>\n            <li>\n               <p>Item interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n            <li>\n               <p>Action interactions</p>\n            </li>\n            <li>\n               <p>Actions</p>\n            </li>\n         </ul>\n         <p>Each dataset type has an associated schema with required field types.\n      Only the <code>Item interactions</code> dataset is required in order to train a\n      model (also referred to as creating a solution).</p>\n         <p>A dataset can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasets.html\">ListDatasets</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDataset.html\">DeleteDataset</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2309,7 +2362,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an empty dataset group. A dataset group is a container for\n      Amazon Personalize resources. A dataset group can contain at most three datasets, one\n      for each type of dataset:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>\n         <p> A dataset group can be a Domain dataset group, where you specify a\n      domain and use pre-configured resources like recommenders, or a\n      Custom dataset group, where you use custom resources, such as a solution\n      with a solution version, that you deploy with a campaign. If you start\n      with a Domain dataset group, you can still add custom resources such as\n      solutions and solution versions trained with recipes for custom use cases\n      and deployed with campaigns. </p>\n         <p>A dataset group can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset group, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html\">DescribeDatasetGroup</a>. If the status shows as CREATE FAILED, the\n      response includes a <code>failureReason</code> key, which describes why\n      the creation failed.</p>\n         <note>\n            <p>You must wait until the <code>status</code> of the dataset group is\n          <code>ACTIVE</code> before adding a dataset to the group.</p>\n         </note>\n         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in\n      the group. If you specify a KMS key, you must also include an Identity and Access Management\n      (IAM) role that has permission to access the key.</p>\n         <p class=\"title\">\n            <b>APIs that require a dataset group ARN in the request</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html\">CreateEventTracker</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetGroups.html\">ListDatasetGroups</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html\">DescribeDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDatasetGroup.html\">DeleteDatasetGroup</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates an empty dataset group. A dataset group is a container for\n      Amazon Personalize resources. A dataset group can contain at most three datasets, one\n      for each type of dataset:</p>\n         <ul>\n            <li>\n               <p>Item interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n            <li>\n               <p>Actions</p>\n            </li>\n            <li>\n               <p>Action interactions</p>\n            </li>\n         </ul>\n         <p> A dataset group can be a Domain dataset group, where you specify a\n      domain and use pre-configured resources like recommenders, or a\n      Custom dataset group, where you use custom resources, such as a solution\n      with a solution version, that you deploy with a campaign. If you start\n      with a Domain dataset group, you can still add custom resources such as\n      solutions and solution versions trained with recipes for custom use cases\n      and deployed with campaigns. </p>\n         <p>A dataset group can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset group, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html\">DescribeDatasetGroup</a>. If the status shows as CREATE FAILED, the\n      response includes a <code>failureReason</code> key, which describes why\n      the creation failed.</p>\n         <note>\n            <p>You must wait until the <code>status</code> of the dataset group is\n          <code>ACTIVE</code> before adding a dataset to the group.</p>\n         </note>\n         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in\n      the group. If you specify a KMS key, you must also include an Identity and Access Management\n      (IAM) role that has permission to access the key.</p>\n         <p class=\"title\">\n            <b>APIs that require a dataset group ARN in the request</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html\">CreateEventTracker</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetGroups.html\">ListDatasetGroups</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html\">DescribeDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDatasetGroup.html\">DeleteDatasetGroup</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateDatasetGroupRequest": {
@@ -2400,7 +2453,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job that imports training data from your data source (an\n      Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the\n      training data, you must specify an IAM service role that has permission to\n      read from the data source, as Amazon Personalize makes a copy of your data and\n      processes it internally. For information on granting access to your Amazon S3\n      bucket, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html\">Giving\n        Amazon Personalize Access to Amazon S3 Resources</a>. </p>\n         <important>\n            <p>By default, a dataset import job replaces any existing data in the\n        dataset that you imported in bulk. To add new records without replacing\n        existing data, specify INCREMENTAL for the import mode in the\n        CreateDatasetImportJob operation.</p>\n         </important>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A dataset import job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n         </ul>\n         <p>To get the status of the import job, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>, providing the Amazon Resource Name\n      (ARN) of the dataset import job. The dataset import is complete when the\n      status shows as ACTIVE. If the status shows as CREATE FAILED, the response\n      includes a <code>failureReason</code> key, which describes why the job\n      failed.</p>\n         <note>\n            <p>Importing takes time. You must wait until the status shows as ACTIVE\n        before training a model using the dataset.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetImportJobs.html\">ListDatasetImportJobs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates a job that imports training data from your data source (an\n      Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the\n      training data, you must specify an IAM service role that has permission to\n      read from the data source, as Amazon Personalize makes a copy of your data and\n      processes it internally. For information on granting access to your Amazon S3\n      bucket, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html\">Giving\n        Amazon Personalize Access to Amazon S3 Resources</a>. </p>\n         <p>If you already created a recommender or deployed a custom solution version with a campaign, how new bulk records\n      influence recommendations depends on the domain use case or recipe that you use. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/how-new-data-influences-recommendations.html\">How new data influences\n        real-time recommendations</a>.</p>\n         <important>\n            <p>By default, a dataset import job replaces any existing data in the\n        dataset that you imported in bulk. To add new records without replacing\n        existing data, specify INCREMENTAL for the import mode in the\n        CreateDatasetImportJob operation.</p>\n         </important>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A dataset import job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n         </ul>\n         <p>To get the status of the import job, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>, providing the Amazon Resource Name\n      (ARN) of the dataset import job. The dataset import is complete when the\n      status shows as ACTIVE. If the status shows as CREATE FAILED, the response\n      includes a <code>failureReason</code> key, which describes why the job\n      failed.</p>\n         <note>\n            <p>Importing takes time. You must wait until the status shows as ACTIVE\n        before training a model using the dataset.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetImportJobs.html\">ListDatasetImportJobs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateDatasetImportJobRequest": {
@@ -2498,7 +2551,7 @@
                 "datasetType": {
                     "target": "com.amazonaws.personalize#DatasetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of dataset.</p>\n         <p>One of the following (case insensitive) values:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of dataset.</p>\n         <p>One of the following (case insensitive) values:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n            <li>\n               <p>Actions</p>\n            </li>\n            <li>\n               <p>Action_Interactions</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2556,7 +2609,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an event tracker that you use when adding event data to a specified dataset\n      group using the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html\">PutEvents</a> API.</p>\n         <note>\n            <p>Only one event tracker can be associated with a dataset group. You will get\n        an error if you call <code>CreateEventTracker</code> using the same dataset group as an\n        existing event tracker.</p>\n         </note>\n         <p>When you create an event tracker, the response includes a tracking ID, which you pass as a parameter when you use the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html\">PutEvents</a> operation.\n      Amazon Personalize then appends the event data to the Interactions dataset of the dataset group you specify \n      in your event tracker.\n    </p>\n         <p>The event tracker can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the event tracker, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html\">DescribeEventTracker</a>.</p>\n         <note>\n            <p>The event tracker must be in the ACTIVE state before using the tracking ID.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListEventTrackers.html\">ListEventTrackers</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html\">DescribeEventTracker</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteEventTracker.html\">DeleteEventTracker</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an event tracker that you use when adding event data to a specified dataset\n      group using the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html\">PutEvents</a> API.</p>\n         <note>\n            <p>Only one event tracker can be associated with a dataset group. You will get\n        an error if you call <code>CreateEventTracker</code> using the same dataset group as an\n        existing event tracker.</p>\n         </note>\n         <p>When you create an event tracker, the response includes a tracking ID, which you pass as a parameter when you use the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html\">PutEvents</a> operation.\n      Amazon Personalize then appends the event data to the Item interactions dataset of the dataset group you specify \n      in your event tracker.\n    </p>\n         <p>The event tracker can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the event tracker, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html\">DescribeEventTracker</a>.</p>\n         <note>\n            <p>The event tracker must be in the ACTIVE state before using the tracking ID.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListEventTrackers.html\">ListEventTrackers</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html\">DescribeEventTracker</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteEventTracker.html\">DeleteEventTracker</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3075,7 +3128,7 @@
                 "trainingMode": {
                     "target": "com.amazonaws.personalize#TrainingMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope of training to be performed when creating the solution version. The\n        <code>FULL</code> option trains the solution version based on the entirety of the input\n      solution's training data, while the <code>UPDATE</code> option processes only the data that\n      has changed in comparison to the input solution. Choose <code>UPDATE</code> when you want to\n      incrementally update your solution version instead of creating an entirely new one.</p>\n         <important>\n            <p>The <code>UPDATE</code> option can only be used when you already have an active solution\n        version created from the input solution using the <code>FULL</code> option and the input\n        solution was trained with the \n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a>\n        recipe or the \n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html\">HRNN-Coldstart</a> recipe.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The scope of training to be performed when creating the solution version. \n      The default is <code>FULL</code>. This creates a completely new model based on the entirety \n      of the training data from the datasets in your dataset group.\n    </p>\n         <p>If you use\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a>,\n      you can specify a training mode of <code>UPDATE</code>. This updates the model to consider new items for recommendations. It is not a full\n        retraining. You should still complete a full retraining weekly.\n        If you specify <code>UPDATE</code>, Amazon Personalize will stop automatic updates for the solution version. To resume updates, create a new solution with training mode set to <code>FULL</code>\n        and deploy it in a campaign. \n        For more information about automatic updates, see \n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/use-case-recipe-features.html#maintaining-with-automatic-updates\">Automatic updates</a>.\n      </p>\n         <p>The <code>UPDATE</code> option can only be used when you already have an active solution\n        version created from the input solution using the <code>FULL</code> option and the input\n        solution was trained with the \n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a>\n        recipe or the legacy\n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html\">HRNN-Coldstart</a> recipe.</p>"
                     }
                 },
                 "tags": {
@@ -3141,7 +3194,7 @@
                 "datasetType": {
                     "target": "com.amazonaws.personalize#DatasetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>One of the following values:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>One of the following values:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n            <li>\n               <p>Actions</p>\n            </li>\n            <li>\n               <p>Action_Interactions</p>\n            </li>\n         </ul>"
                     }
                 },
                 "schemaArn": {
@@ -3172,6 +3225,12 @@
                     "target": "com.amazonaws.personalize#DatasetUpdateSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the latest update to the dataset.</p>"
+                    }
+                },
+                "trackingId": {
+                    "target": "com.amazonaws.personalize#TrackingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the event tracker for an Action interactions dataset. \n      You specify the tracker's ID in the <code>PutActionInteractions</code> API operation. Amazon Personalize uses it to direct new data to the Action interactions dataset in your dataset group.</p>"
                     }
                 }
             },
@@ -3341,7 +3400,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.personalize#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that has permissions to create the dataset\n      group.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Identity and Access Management (IAM) role that has permissions to access\n      the Key Management Service (KMS) key. Supplying an IAM role is only valid when also\n      specifying a KMS key.</p>"
                     }
                 },
                 "kmsKeyArn": {
@@ -3376,7 +3435,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A dataset group is a collection of related datasets (Interactions,\n      User, and Item). You create a dataset group by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>. You then create a dataset and add it to a\n      dataset group by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>. The dataset group is used to create and train a\n      solution by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>. A dataset group can contain only one of each\n      type of dataset.</p>\n         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in\n      the group.</p>"
+                "smithy.api#documentation": "<p>A dataset group is a collection of related datasets (Item interactions,\n      Users, Items, Actions, Action interactions). You create a dataset group by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>. You then create a dataset and add it to a\n      dataset group by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>. The dataset group is used to create and train a\n      solution by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>. A dataset group can contain only one of each\n      type of dataset.</p>\n         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in\n      the group.</p>"
             }
         },
         "com.amazonaws.personalize#DatasetGroupSummary": {
@@ -4061,7 +4120,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the event tracker. Does not delete the event-interactions dataset from\n        the associated dataset group. For more\n        information on event trackers, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html\">CreateEventTracker</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes the event tracker. Does not delete the dataset from\n        the dataset group. For more\n        information on event trackers, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html\">CreateEventTracker</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5371,6 +5430,21 @@
                 }
             }
         },
+        "com.amazonaws.personalize#FieldsForThemeGeneration": {
+            "type": "structure",
+            "members": {
+                "itemName": {
+                    "target": "com.amazonaws.personalize#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Items dataset column that stores the name of each item in the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A string to string map of the configuration details for theme generation.</p>"
+            }
+        },
         "com.amazonaws.personalize#Filter": {
             "type": "structure",
             "members": {
@@ -6023,7 +6097,7 @@
                 "solutionArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the solution to list the campaigns for. When\n        a solution is not specified, all the campaigns associated with the account are listed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the solution to list the campaigns for. When\n      a solution is not specified, all the campaigns associated with the account are listed.</p>"
                     }
                 },
                 "nextToken": {
@@ -6312,7 +6386,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token returned from the previous call to\n        <code>ListDatasetImportJobs</code> for getting the next set of dataset\n      import jobs (if they exist).</p>"
+                        "smithy.api#documentation": "<p>A token returned from the previous call to\n        <code>ListDatasets</code> for getting the next set of dataset\n      import jobs (if they exist).</p>"
                     }
                 },
                 "maxResults": {
@@ -7628,6 +7702,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      Specifies the training data configuration to use when creating a domain recommender.\n    </p>"
                     }
+                },
+                "enableMetadataWithRecommendations": {
+                    "target": "com.amazonaws.personalize#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether metadata with recommendations is enabled for the recommender. \n      If enabled, you can specify the columns from your Items dataset in your request for recommendations. Amazon Personalize returns this data for each item in the recommendation response. </p>\n         <p>\n      If you enable metadata in recommendations, you will incur additional costs. For more information, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -7953,7 +8033,7 @@
                 "algorithmHyperParameters": {
                     "target": "com.amazonaws.personalize#HyperParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the hyperparameter names and ranges.</p>"
+                        "smithy.api#documentation": "<p>Lists the algorithm hyperparameters and their values.</p>"
                     }
                 },
                 "featureTransformationParameters": {
@@ -8475,6 +8555,21 @@
                 }
             }
         },
+        "com.amazonaws.personalize#ThemeGenerationConfig": {
+            "type": "structure",
+            "members": {
+                "fieldsForThemeGeneration": {
+                    "target": "com.amazonaws.personalize#FieldsForThemeGeneration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fields used to generate descriptive themes for a batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for generating themes with a batch inference job.</p>"
+            }
+        },
         "com.amazonaws.personalize#TooManyTagKeysException": {
             "type": "structure",
             "members": {
@@ -8661,7 +8756,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a campaign by either deploying a new solution or changing the value of the\n      campaign's <code>minProvisionedTPS</code> parameter.</p>\n         <p>To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.\n      Check the campaign status using the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a> operation.</p>\n         <note>\n            <p>You can still get recommendations from a campaign while an update is in progress.\n      The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is <code>Active</code>.\n    </p>\n         </note>\n         <p>For more information on campaigns, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>.</p>",
+                "smithy.api#documentation": "<p>\n      Updates a campaign to deploy a retrained solution version with an existing campaign, change your campaign's <code>minProvisionedTPS</code>,\n      or modify your campaign's configuration, such as the exploration configuration.\n    </p>\n         <p>To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.\n      Check the campaign status using the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a> operation.</p>\n         <note>\n            <p>You can still get recommendations from a campaign while an update is in progress.\n        The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is <code>Active</code>.\n      </p>\n         </note>\n         <p>For more information about updating a campaign, including code samples, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/update-campaigns.html\">Updating a campaign</a>.\n      For more information about campaigns, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html\">Creating a campaign</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },

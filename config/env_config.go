@@ -77,6 +77,8 @@ const (
 
 	awsDisableRequestCompression      = "AWS_DISABLE_REQUEST_COMPRESSION"
 	awsRequestMinCompressionSizeBytes = "AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES"
+
+	awsS3DisableExpressSessionAuthEnv = "AWS_S3_DISABLE_EXPRESS_SESSION_AUTH"
 )
 
 var (
@@ -280,6 +282,13 @@ type EnvConfig struct {
 	// default to 10240 and must be within 0 and 10485760 bytes inclusive
 	// retrieved from env var AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES
 	RequestMinCompressSizeBytes *int64
+
+	// Whether S3Express auth is disabled.
+	//
+	// This will NOT prevent requests from being made to S3Express buckets, it
+	// will only bypass the modified endpoint routing and signing behaviors
+	// associated with the feature.
+	S3DisableExpressAuth *bool
 }
 
 // loadEnvConfig reads configuration values from the OS's environment variables.
@@ -372,6 +381,10 @@ func NewEnvConfig() (EnvConfig, error) {
 	setStringFromEnvVal(&cfg.BaseEndpoint, []string{awsEndpointURL})
 
 	if err := setBoolPtrFromEnvVal(&cfg.IgnoreConfiguredEndpoints, []string{awsIgnoreConfiguredEndpoints}); err != nil {
+		return cfg, err
+	}
+
+	if err := setBoolPtrFromEnvVal(&cfg.S3DisableExpressAuth, []string{awsS3DisableExpressSessionAuthEnv}); err != nil {
 		return cfg, err
 	}
 
@@ -789,4 +802,14 @@ func (c EnvConfig) GetEC2IMDSV1FallbackDisabled() (bool, bool) {
 	}
 
 	return *c.EC2IMDSv1Disabled, true
+}
+
+// GetS3DisableExpressAuth returns the configured value for
+// [EnvConfig.S3DisableExpressAuth].
+func (c EnvConfig) GetS3DisableExpressAuth() (value, ok bool) {
+	if c.S3DisableExpressAuth == nil {
+		return false, false
+	}
+
+	return *c.S3DisableExpressAuth, true
 }

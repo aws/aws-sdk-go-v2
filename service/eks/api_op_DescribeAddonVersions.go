@@ -72,12 +72,12 @@ type DescribeAddonVersionsOutput struct {
 	// properties.
 	Addons []types.AddonInfo
 
-	// The nextToken value returned from a previous paginated
-	// DescribeAddonVersionsResponse where maxResults was used and the results
-	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value. This token should be
-	// treated as an opaque identifier that is used only to retrieve the next items in
-	// a list and not for other programmatic purposes.
+	// The nextToken value to include in a future DescribeAddonVersions request. When
+	// the results of a DescribeAddonVersions request exceed maxResults , you can use
+	// this value to retrieve the next page of results. This value is null when there
+	// are no more results to return. This token should be treated as an opaque
+	// identifier that is used only to retrieve the next items in a list and not for
+	// other programmatic purposes.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

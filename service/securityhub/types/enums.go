@@ -38,6 +38,24 @@ func (AssociationStatus) Values() []AssociationStatus {
 	}
 }
 
+type AssociationType string
+
+// Enum values for AssociationType
+const (
+	AssociationTypeInherited AssociationType = "INHERITED"
+	AssociationTypeApplied   AssociationType = "APPLIED"
+)
+
+// Values returns all known values for AssociationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationType) Values() []AssociationType {
+	return []AssociationType{
+		"INHERITED",
+		"APPLIED",
+	}
+}
+
 type AutoEnableStandards string
 
 // Enum values for AutoEnableStandards
@@ -128,6 +146,27 @@ func (ComplianceStatus) Values() []ComplianceStatus {
 		"WARNING",
 		"FAILED",
 		"NOT_AVAILABLE",
+	}
+}
+
+type ConfigurationPolicyAssociationStatus string
+
+// Enum values for ConfigurationPolicyAssociationStatus
+const (
+	ConfigurationPolicyAssociationStatusPending ConfigurationPolicyAssociationStatus = "PENDING"
+	ConfigurationPolicyAssociationStatusSuccess ConfigurationPolicyAssociationStatus = "SUCCESS"
+	ConfigurationPolicyAssociationStatusFailed  ConfigurationPolicyAssociationStatus = "FAILED"
+)
+
+// Values returns all known values for ConfigurationPolicyAssociationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ConfigurationPolicyAssociationStatus) Values() []ConfigurationPolicyAssociationStatus {
+	return []ConfigurationPolicyAssociationStatus{
+		"PENDING",
+		"SUCCESS",
+		"FAILED",
 	}
 }
 
@@ -326,6 +365,64 @@ func (NetworkDirection) Values() []NetworkDirection {
 	}
 }
 
+type OrganizationConfigurationConfigurationType string
+
+// Enum values for OrganizationConfigurationConfigurationType
+const (
+	OrganizationConfigurationConfigurationTypeCentral OrganizationConfigurationConfigurationType = "CENTRAL"
+	OrganizationConfigurationConfigurationTypeLocal   OrganizationConfigurationConfigurationType = "LOCAL"
+)
+
+// Values returns all known values for OrganizationConfigurationConfigurationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OrganizationConfigurationConfigurationType) Values() []OrganizationConfigurationConfigurationType {
+	return []OrganizationConfigurationConfigurationType{
+		"CENTRAL",
+		"LOCAL",
+	}
+}
+
+type OrganizationConfigurationStatus string
+
+// Enum values for OrganizationConfigurationStatus
+const (
+	OrganizationConfigurationStatusPending OrganizationConfigurationStatus = "PENDING"
+	OrganizationConfigurationStatusEnabled OrganizationConfigurationStatus = "ENABLED"
+	OrganizationConfigurationStatusFailed  OrganizationConfigurationStatus = "FAILED"
+)
+
+// Values returns all known values for OrganizationConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OrganizationConfigurationStatus) Values() []OrganizationConfigurationStatus {
+	return []OrganizationConfigurationStatus{
+		"PENDING",
+		"ENABLED",
+		"FAILED",
+	}
+}
+
+type ParameterValueType string
+
+// Enum values for ParameterValueType
+const (
+	ParameterValueTypeDefault ParameterValueType = "DEFAULT"
+	ParameterValueTypeCustom  ParameterValueType = "CUSTOM"
+)
+
+// Values returns all known values for ParameterValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterValueType) Values() []ParameterValueType {
+	return []ParameterValueType{
+		"DEFAULT",
+		"CUSTOM",
+	}
+}
+
 type Partition string
 
 // Enum values for Partition
@@ -397,6 +494,22 @@ func (RuleStatus) Values() []RuleStatus {
 	return []RuleStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type SecurityControlProperty string
+
+// Enum values for SecurityControlProperty
+const (
+	SecurityControlPropertyParameters SecurityControlProperty = "Parameters"
+)
+
+// Values returns all known values for SecurityControlProperty. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityControlProperty) Values() []SecurityControlProperty {
+	return []SecurityControlProperty{
+		"Parameters",
 	}
 }
 
@@ -532,6 +645,24 @@ func (StringFilterComparison) Values() []StringFilterComparison {
 	}
 }
 
+type TargetType string
+
+// Enum values for TargetType
+const (
+	TargetTypeAccount            TargetType = "ACCOUNT"
+	TargetTypeOrganizationalUnit TargetType = "ORGANIZATIONAL_UNIT"
+)
+
+// Values returns all known values for TargetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetType) Values() []TargetType {
+	return []TargetType{
+		"ACCOUNT",
+		"ORGANIZATIONAL_UNIT",
+	}
+}
+
 type ThreatIntelIndicatorCategory string
 
 // Enum values for ThreatIntelIndicatorCategory
@@ -614,6 +745,24 @@ func (UnprocessedErrorCode) Values() []UnprocessedErrorCode {
 		"ACCESS_DENIED",
 		"NOT_FOUND",
 		"LIMIT_EXCEEDED",
+	}
+}
+
+type UpdateStatus string
+
+// Enum values for UpdateStatus
+const (
+	UpdateStatusReady    UpdateStatus = "READY"
+	UpdateStatusUpdating UpdateStatus = "UPDATING"
+)
+
+// Values returns all known values for UpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateStatus) Values() []UpdateStatus {
+	return []UpdateStatus{
+		"READY",
+		"UPDATING",
 	}
 }
 

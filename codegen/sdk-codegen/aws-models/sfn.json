@@ -127,6 +127,9 @@
                     "target": "com.amazonaws.sfn#TagResource"
                 },
                 {
+                    "target": "com.amazonaws.sfn#TestState"
+                },
+                {
                     "target": "com.amazonaws.sfn#UntagResource"
                 },
                 {
@@ -2187,7 +2190,7 @@
                 "redriveCount": {
                     "target": "com.amazonaws.sfn#RedriveCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of times you've redriven an execution. If you have not yet redriven an execution, the <code>redriveCount</code> is 0. This count is not updated for redrives that failed to start or are pending to be redriven.</p>"
+                        "smithy.api#documentation": "<p>The number of times you've redriven an execution. If you have not yet redriven an execution, the <code>redriveCount</code> is 0. This count is only updated if you successfully redrive an execution.</p>"
                     }
                 },
                 "redriveDate": {
@@ -2326,7 +2329,7 @@
                 "redriveCount": {
                     "target": "com.amazonaws.sfn#RedriveCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of times you've redriven a Map Run. If you have not yet redriven a Map Run, the <code>redriveCount</code> is 0. This count is not updated for redrives that failed to start or are pending to be redriven.</p>"
+                        "smithy.api#documentation": "<p>The number of times you've redriven a Map Run. If you have not yet redriven a Map Run, the <code>redriveCount</code> is 0. This count is only updated if you successfully redrive a Map Run.</p>"
                     }
                 },
                 "redriveDate": {
@@ -2814,7 +2817,7 @@
                 "redriveCount": {
                     "target": "com.amazonaws.sfn#RedriveCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of times you've redriven an execution. If you have not yet redriven an execution, the <code>redriveCount</code> is 0. This count is not updated for redrives that failed to start or are pending to be redriven.</p>"
+                        "smithy.api#documentation": "<p>The number of times you've redriven an execution. If you have not yet redriven an execution, the <code>redriveCount</code> is 0. This count is only updated when you successfully redrive an execution.</p>"
                     }
                 },
                 "redriveDate": {
@@ -3167,6 +3170,24 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.sfn#HTTPBody": {
+            "type": "string"
+        },
+        "com.amazonaws.sfn#HTTPHeaders": {
+            "type": "string"
+        },
+        "com.amazonaws.sfn#HTTPMethod": {
+            "type": "string"
+        },
+        "com.amazonaws.sfn#HTTPProtocol": {
+            "type": "string"
+        },
+        "com.amazonaws.sfn#HTTPStatusCode": {
+            "type": "string"
+        },
+        "com.amazonaws.sfn#HTTPStatusMessage": {
+            "type": "string"
         },
         "com.amazonaws.sfn#HistoryEvent": {
             "type": "structure",
@@ -3785,6 +3806,162 @@
         },
         "com.amazonaws.sfn#IncludeExecutionDataGetExecutionHistory": {
             "type": "boolean"
+        },
+        "com.amazonaws.sfn#InspectionData": {
+            "type": "structure",
+            "members": {
+                "input": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw state input.</p>"
+                    }
+                },
+                "afterInputPath": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input after Step Functions applies the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-inputpath\">InputPath</a> filter.</p>"
+                    }
+                },
+                "afterParameters": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective input after Step Functions applies the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-parameters\">Parameters</a> filter.</p>"
+                    }
+                },
+                "result": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state's raw result.</p>"
+                    }
+                },
+                "afterResultSelector": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective result after Step Functions applies the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-resultselector\">ResultSelector</a> filter.</p>"
+                    }
+                },
+                "afterResultPath": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective result combined with the raw state input after Step Functions applies the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultpath.html\">ResultPath</a> filter.</p>"
+                    }
+                },
+                "request": {
+                    "target": "com.amazonaws.sfn#InspectionDataRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw HTTP request that is sent when you test an HTTP Task.</p>"
+                    }
+                },
+                "response": {
+                    "target": "com.amazonaws.sfn#InspectionDataResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw HTTP response that is returned when you test an HTTP Task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains additional details about the state's execution, including its input and output data processing flow, and HTTP request and response information.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sfn#InspectionDataRequest": {
+            "type": "structure",
+            "members": {
+                "protocol": {
+                    "target": "com.amazonaws.sfn#HTTPProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol used to make the HTTP request.</p>"
+                    }
+                },
+                "method": {
+                    "target": "com.amazonaws.sfn#HTTPMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP method used for the HTTP request.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.sfn#URL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API endpoint used for the HTTP request.</p>"
+                    }
+                },
+                "headers": {
+                    "target": "com.amazonaws.sfn#HTTPHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request headers associated with the HTTP request.</p>"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.sfn#HTTPBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request body for the HTTP request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains additional details about the state's execution, including its input and output data processing flow, and HTTP request information.</p>"
+            }
+        },
+        "com.amazonaws.sfn#InspectionDataResponse": {
+            "type": "structure",
+            "members": {
+                "protocol": {
+                    "target": "com.amazonaws.sfn#HTTPProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol used to return the HTTP response.</p>"
+                    }
+                },
+                "statusCode": {
+                    "target": "com.amazonaws.sfn#HTTPStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP response status code for the HTTP response.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.sfn#HTTPStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the HTTP status code.</p>"
+                    }
+                },
+                "headers": {
+                    "target": "com.amazonaws.sfn#HTTPHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response headers associated with the HTTP response.</p>"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.sfn#HTTPBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP response returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains additional details about the state's execution, including its input and output data processing flow, and HTTP response information. The <code>inspectionLevel</code> request parameter specifies which details are returned.</p>"
+            }
+        },
+        "com.amazonaws.sfn#InspectionLevel": {
+            "type": "enum",
+            "members": {
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                },
+                "DEBUG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEBUG"
+                    }
+                },
+                "TRACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRACE"
+                    }
+                }
+            }
         },
         "com.amazonaws.sfn#InvalidArn": {
             "type": "structure",
@@ -4720,7 +4897,7 @@
                 "failuresNotRedrivable": {
                     "target": "com.amazonaws.sfn#LongObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of <code>FAILED</code>, <code>ABORTED</code>, or <code>TIMED_OUT</code> child workflow executions that cannot be redriven because their execution status is terminal. For example, if your execution event history contains 25,000 entries, or the <code>toleratedFailureCount</code> or <code>toleratedFailurePercentage</code> for the Distributed Map has exceeded.</p>"
+                        "smithy.api#documentation": "<p>The number of <code>FAILED</code>, <code>ABORTED</code>, or <code>TIMED_OUT</code> child workflow executions that cannot be redriven because their execution status is terminal. For example, child workflows with an execution status of <code>FAILED</code>, <code>ABORTED</code>, or <code>TIMED_OUT</code> and a <code>redriveStatus</code> of <code>NOT_REDRIVABLE</code>.</p>"
                     }
                 },
                 "pendingRedrive": {
@@ -4824,7 +5001,7 @@
                 "failuresNotRedrivable": {
                     "target": "com.amazonaws.sfn#LongObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of <code>FAILED</code>, <code>ABORTED</code>, or <code>TIMED_OUT</code> items in child workflow executions that cannot be redriven because the execution status of those child workflows is terminal. For example, if your execution event history contains 25,000 entries, or the <code>toleratedFailureCount</code> or <code>toleratedFailurePercentage</code> for the Distributed Map has exceeded.</p>"
+                        "smithy.api#documentation": "<p>The number of <code>FAILED</code>, <code>ABORTED</code>, or <code>TIMED_OUT</code> items in child workflow executions that cannot be redriven because the execution status of those child workflows is terminal. For example, child workflows with an execution status of <code>FAILED</code>, <code>ABORTED</code>, or <code>TIMED_OUT</code> and a <code>redriveStatus</code> of <code>NOT_REDRIVABLE</code>.</p>"
                     }
                 },
                 "pendingRedrive": {
@@ -5130,7 +5307,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restarts unsuccessful executions of Standard workflows that didn't complete successfully in the last 14 days. These include failed, aborted, or timed out executions. When you <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html\">redrive</a> an execution, it continues the failed execution from the unsuccessful step and uses the same input. Step Functions preserves the results and execution history of the successful steps, and doesn't rerun these steps when you redrive an execution. Redriven executions use the same state machine definition and execution ARN as the original execution attempt.</p>\n         <p>For workflows that include an <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html\">Inline Map</a> or <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html\">Parallel</a> state, <code>RedriveExecution</code> API action reschedules and redrives only the iterations and branches that failed or aborted.</p>\n         <p>To redrive a workflow that includes a Distributed Map state with failed child workflow executions, you must redrive the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/use-dist-map-orchestrate-large-scale-parallel-workloads.html#dist-map-orchestrate-parallel-workloads-key-terms\">parent workflow</a>. The parent workflow redrives all the unsuccessful states, including Distributed Map.</p>\n         <note>\n            <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>\n            <p>However, you can restart the unsuccessful executions of Express child workflows in a Distributed Map by redriving its Map Run. When you redrive a Map Run, the Express child workflows are rerun using the <a>StartExecution</a> API action. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html\">Redriving Map Runs</a>.</p>\n         </note>\n         <p>You can redrive executions if your original execution meets the following conditions:</p>\n         <ul>\n            <li>\n               <p>The execution status isn't <code>SUCCEEDED</code>.</p>\n            </li>\n            <li>\n               <p>Your workflow execution has not exceeded the redrivable period of 14 days. Redrivable period refers to the time during which you can redrive a given execution. This period starts from the day a state machine completes its execution.</p>\n            </li>\n            <li>\n               <p>The workflow execution has not exceeded the maximum open time of one year. For more information about state machine quotas, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits-overview.html#service-limits-state-machine-executions\">Quotas related to state machine executions</a>.</p>\n            </li>\n            <li>\n               <p>The execution event history count is less than 24,999. Redriven executions append their event history to the existing event history. Make sure your workflow execution contains less than 24,999 events to accommodate the <code>ExecutionRedriven</code> history event and at least one other history event.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Restarts unsuccessful executions of Standard workflows that didn't complete successfully in the last 14 days. These include failed, aborted, or timed out executions. When you <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html\">redrive</a> an execution, it continues the failed execution from the unsuccessful step and uses the same input. Step Functions preserves the results and execution history of the successful steps, and doesn't rerun these steps when you redrive an execution. Redriven executions use the same state machine definition and execution ARN as the original execution attempt.</p>\n         <p>For workflows that include an <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html\">Inline Map</a> or <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html\">Parallel</a> state, <code>RedriveExecution</code> API action reschedules and redrives only the iterations and branches that failed or aborted.</p>\n         <p>To redrive a workflow that includes a Distributed Map state whose Map Run failed, you must redrive the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/use-dist-map-orchestrate-large-scale-parallel-workloads.html#dist-map-orchestrate-parallel-workloads-key-terms\">parent workflow</a>. The parent workflow redrives all the unsuccessful states, including a failed Map Run. If a Map Run was not started in the original execution attempt, the redriven parent workflow starts the Map Run.</p>\n         <note>\n            <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>\n            <p>However, you can restart the unsuccessful executions of Express child workflows in a Distributed Map by redriving its Map Run. When you redrive a Map Run, the Express child workflows are rerun using the <a>StartExecution</a> API action. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html\">Redriving Map Runs</a>.</p>\n         </note>\n         <p>You can redrive executions if your original execution meets the following conditions:</p>\n         <ul>\n            <li>\n               <p>The execution status isn't <code>SUCCEEDED</code>.</p>\n            </li>\n            <li>\n               <p>Your workflow execution has not exceeded the redrivable period of 14 days. Redrivable period refers to the time during which you can redrive a given execution. This period starts from the day a state machine completes its execution.</p>\n            </li>\n            <li>\n               <p>The workflow execution has not exceeded the maximum open time of one year. For more information about state machine quotas, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits-overview.html#service-limits-state-machine-executions\">Quotas related to state machine executions</a>.</p>\n            </li>\n            <li>\n               <p>The execution event history count is less than 24,999. Redriven executions append their event history to the existing event history. Make sure your workflow execution contains less than 24,999 events to accommodate the <code>ExecutionRedriven</code> history event and at least one other history event.</p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5147,7 +5324,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.sfn#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency. The API uses one of the last 10 client tokens provided.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency. The API will return idempotent responses for the last 10 client tokens used to successfully redrive the execution. These client tokens are valid for up to 15 minutes after they are first used.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -5185,6 +5362,12 @@
                 "smithy.api#documentation": "<p>Could not find the referenced resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.sfn#RevealSecrets": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.sfn#ReverseOrder": {
@@ -5939,6 +6122,15 @@
                 "smithy.api#documentation": "<p>Contains details about a specific state machine version.</p>"
             }
         },
+        "com.amazonaws.sfn#StateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 80
+                }
+            }
+        },
         "com.amazonaws.sfn#StopExecution": {
             "type": "operation",
             "input": {
@@ -6458,6 +6650,149 @@
                 }
             }
         },
+        "com.amazonaws.sfn#TestExecutionStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "RETRIABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETRIABLE"
+                    }
+                },
+                "CAUGHT_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAUGHT_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sfn#TestState": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#TestStateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#TestStateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidDefinition"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidExecutionInput"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine. Using this API, you can test the following:</p>\n         <ul>\n            <li>\n               <p>A state's <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-input-output-dataflow\">input and output processing</a> data flow</p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html\">Amazon Web Services service integration</a> request and response</p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-third-party-apis.html\">HTTP Task</a> request and response</p>\n            </li>\n         </ul>\n         <p>You can call this API on only one state at a time. The states that you can test include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#task-types\">All Task types</a> except <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html\">Activity</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-pass-state.html\">Pass</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html\">Wait</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html\">Choice</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-succeed-state.html\">Succeed</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-fail-state.html\">Fail</a>\n               </p>\n            </li>\n         </ul>\n         <p>The <code>TestState</code> API assumes an IAM role which must contain the required IAM permissions for the resources your state is accessing. For information about the permissions a state might need, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions\">IAM permissions to test a state</a>.</p>\n         <p>The <code>TestState</code> API can run for up to five minutes. If the execution of a state exceeds this duration, it fails with the <code>States.Timeout</code> error.</p>\n         <p>\n            <code>TestState</code> doesn't support <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html\">Activity tasks</a>, <code>.sync</code> or <code>.waitForTaskToken</code>\n            <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html\">service integration patterns</a>, <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html\">Parallel</a>, or <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html\">Map</a> states.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "sync-"
+                }
+            }
+        },
+        "com.amazonaws.sfn#TestStateInput": {
+            "type": "structure",
+            "members": {
+                "definition": {
+                    "target": "com.amazonaws.sfn#Definition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a> (ASL) definition of the state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution role with the required IAM permissions for the state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "input": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that contains the JSON input data for the state.</p>"
+                    }
+                },
+                "inspectionLevel": {
+                    "target": "com.amazonaws.sfn#InspectionLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the values to return when a state is tested. You can specify one of the following types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INFO</code>: Shows the final state output. By default, Step Functions sets <code>inspectionLevel</code> to <code>INFO</code> if you don't specify a level.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEBUG</code>: Shows the final state output along with the input and output data processing result.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRACE</code>: Shows the HTTP request and response for an HTTP Task. This level also shows the final state output along with the input and output data processing result.</p>\n            </li>\n         </ul>\n         <p>Each of these levels also provide information about the status of the state execution and the next state to transition to.</p>"
+                    }
+                },
+                "revealSecrets": {
+                    "target": "com.amazonaws.sfn#RevealSecrets",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether or not to include secret information in the test result. For HTTP Tasks, a secret includes the data that an EventBridge connection adds to modify the HTTP request headers, query parameters, and body. Step Functions doesn't omit any information included in the state definition or the HTTP response.</p>\n         <p>If you set <code>revealSecrets</code> to <code>true</code>, you must make sure that the IAM user that calls the <code>TestState</code> API has permission for the <code>states:RevealSecrets</code> action. For an example of IAM policy that sets the <code>states:RevealSecrets</code> permission, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions\">IAM permissions to test a state</a>. Without this permission, Step Functions throws an access denied error.</p>\n         <p>By default, <code>revealSecrets</code> is set to <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sfn#TestStateOutput": {
+            "type": "structure",
+            "members": {
+                "output": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON output data of the state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.sfn#SensitiveError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error returned when the execution of a state fails.</p>"
+                    }
+                },
+                "cause": {
+                    "target": "com.amazonaws.sfn#SensitiveCause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed explanation of the cause for the error when the execution of a state fails.</p>"
+                    }
+                },
+                "inspectionData": {
+                    "target": "com.amazonaws.sfn#InspectionData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns additional details about the state's execution, including its input and output data processing flow, and HTTP request and response information. The <code>inspectionLevel</code> request parameter specifies which details are returned.</p>"
+                    }
+                },
+                "nextState": {
+                    "target": "com.amazonaws.sfn#StateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the next state to transition to. If you haven't defined a next state in your definition or if the execution of the state fails, this ﬁeld doesn't contain a value.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.sfn#TestExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution status of the state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sfn#TimeoutInSeconds": {
             "type": "long",
             "traits": {
@@ -6526,6 +6861,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Selects whether or not the state machine's X-Ray tracing is enabled. Default is\n        <code>false</code>\n         </p>"
             }
+        },
+        "com.amazonaws.sfn#URL": {
+            "type": "string"
         },
         "com.amazonaws.sfn#UnsignedInteger": {
             "type": "integer",
@@ -6722,6 +7060,9 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#ResourceNotFound"
+                },
+                {
+                    "target": "com.amazonaws.sfn#StateMachineDeleting"
                 },
                 {
                     "target": "com.amazonaws.sfn#ValidationException"

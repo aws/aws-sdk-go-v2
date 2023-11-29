@@ -92,6 +92,11 @@ func awsRestjson1_serializeOpDocumentCreateModelCustomizationJobInput(v *CreateM
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if len(v.CustomizationType) > 0 {
+		ok := object.Key("customizationType")
+		ok.String(string(v.CustomizationType))
+	}
+
 	if v.CustomModelKmsKeyId != nil {
 		ok := object.Key("customModelKmsKeyId")
 		ok.String(*v.CustomModelKmsKeyId)

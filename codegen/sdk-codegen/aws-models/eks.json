@@ -132,6 +132,9 @@
                     "target": "com.amazonaws.eks#CreateNodegroup"
                 },
                 {
+                    "target": "com.amazonaws.eks#CreatePodIdentityAssociation"
+                },
+                {
                     "target": "com.amazonaws.eks#DeleteAddon"
                 },
                 {
@@ -145,6 +148,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#DeleteNodegroup"
+                },
+                {
+                    "target": "com.amazonaws.eks#DeletePodIdentityAssociation"
                 },
                 {
                     "target": "com.amazonaws.eks#DeregisterCluster"
@@ -174,6 +180,9 @@
                     "target": "com.amazonaws.eks#DescribeNodegroup"
                 },
                 {
+                    "target": "com.amazonaws.eks#DescribePodIdentityAssociation"
+                },
+                {
                     "target": "com.amazonaws.eks#DescribeUpdate"
                 },
                 {
@@ -196,6 +205,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#ListNodegroups"
+                },
+                {
+                    "target": "com.amazonaws.eks#ListPodIdentityAssociations"
                 },
                 {
                     "target": "com.amazonaws.eks#ListTagsForResource"
@@ -229,6 +241,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#UpdateNodegroupVersion"
+                },
+                {
+                    "target": "com.amazonaws.eks#UpdatePodIdentityAssociation"
                 }
             ],
             "traits": {
@@ -1280,7 +1295,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1814,7 +1832,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This exception is thrown if the request contains a semantic error. The precise meaning\n            will depend on the API, and will be documented in the error message.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1890,7 +1911,10 @@
                     }
                 },
                 "addonName": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS add-on name associated with the exception.</p>"
+                    }
                 },
                 "subscriptionId": {
                     "target": "com.amazonaws.eks#String",
@@ -1899,7 +1923,10 @@
                     }
                 },
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>These errors are usually caused by a client action. Actions can include using an\n            action or resource on behalf of an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html\">IAM principal</a> that doesn't have permissions to use\n            the action or resource or specifying an identifier that is not valid.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2572,7 +2599,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon EKS control plane. </p>\n         <p>The Amazon EKS control plane consists of control plane instances that run the\n            Kubernetes software, such as <code>etcd</code> and the API server. The control plane runs in\n            an account managed by Amazon Web Services, and the Kubernetes API is exposed by the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is\n            single tenant and unique. It runs on its own set of Amazon EC2 instances.</p>\n         <p>The cluster control plane is provisioned across multiple Availability Zones and\n            fronted by an Elastic Load Balancing\n            Network Load Balancer. Amazon EKS also provisions elastic network interfaces in\n            your VPC subnets to provide connectivity from the control plane instances to the nodes\n            (for example, to support <code>kubectl exec</code>, <code>logs</code>, and\n                <code>proxy</code> data flows).</p>\n         <p>Amazon EKS nodes run in your Amazon Web Services account and connect to your\n            cluster's control plane over the Kubernetes API server endpoint and a certificate file that\n            is created for your cluster.</p>\n         <p>In most cases, it takes several minutes to create a cluster. After you create an\n                Amazon EKS cluster, you must configure your Kubernetes tooling to communicate\n            with the API server and launch nodes into your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html\">Managing Cluster\n                Authentication</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching Amazon EKS nodes</a> in the\n            <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon EKS control plane. </p>\n         <p>The Amazon EKS control plane consists of control plane instances that run the\n            Kubernetes software, such as <code>etcd</code> and the API server. The control plane runs in\n            an account managed by Amazon Web Services, and the Kubernetes API is exposed by the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is\n            single tenant and unique. It runs on its own set of Amazon EC2 instances.</p>\n         <p>The cluster control plane is provisioned across multiple Availability Zones and\n            fronted by an Elastic Load Balancing\n            Network Load Balancer. Amazon EKS also provisions elastic network interfaces in\n            your VPC subnets to provide connectivity from the control plane instances to the nodes\n            (for example, to support <code>kubectl exec</code>, <code>logs</code>, and\n                <code>proxy</code> data flows).</p>\n         <p>Amazon EKS nodes run in your Amazon Web Services account and connect to your\n            cluster's control plane over the Kubernetes API server endpoint and a certificate file that\n            is created for your cluster.</p>\n         <p>You can use the <code>endpointPublicAccess</code> and\n                <code>endpointPrivateAccess</code> parameters to enable or disable public and\n            private access to your cluster's Kubernetes API server endpoint. By default, public access is\n            enabled, and private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. </p>\n         <p>You can use the <code>logging</code> parameter to enable or disable exporting the\n            Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster\n            control plane logs aren't exported to CloudWatch Logs. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>\n         <p>In most cases, it takes several minutes to create a cluster. After you create an\n                Amazon EKS cluster, you must configure your Kubernetes tooling to communicate\n            with the API server and launch nodes into your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html\">Managing Cluster\n                Authentication</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching Amazon EKS nodes</a> in the\n            <i>Amazon EKS User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a new cluster",
@@ -2743,7 +2770,7 @@
                     "target": "com.amazonaws.eks#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of licenses to purchase with the subscription. Valid values are between 1\n            and 1000. This value cannot be changed after creating the subscription.</p>"
+                        "smithy.api#documentation": "<p>The number of licenses to purchase with the subscription. Valid values are between 1\n            and 100. This value can't be changed after creating the subscription.</p>"
                     }
                 },
                 "licenseType": {
@@ -2769,7 +2796,7 @@
                 "tags": {
                     "target": "com.amazonaws.eks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata for a subscription to assist with categorization and organization. Each\n            tag consists of a key and an optional value. Subscription tags do not propagate to any\n            other resources associated with the subscription.</p>"
+                        "smithy.api#documentation": "<p>The metadata for a subscription to assist with categorization and organization. Each\n            tag consists of a key and an optional value. Subscription tags don't propagate to any\n            other resources associated with the subscription.</p>"
                     }
                 }
             },
@@ -3073,6 +3100,107 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#CreatePodIdentityAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#CreatePodIdentityAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#CreatePodIdentityAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an EKS Pod Identity association between a service account in an Amazon EKS cluster and an IAM role\n            with <i>EKS Pod Identity</i>. Use EKS Pod Identity to give temporary IAM credentials to\n            pods and the credentials are rotated automatically.</p>\n         <p>Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that 7EC2l instance profiles provide credentials to Amazon EC2 instances.</p>\n         <p>If a pod uses a service account that has an association, Amazon EKS sets environment variables\n            in the containers of the pod. The environment variables configure the Amazon Web Services SDKs,\n            including the Command Line Interface, to use the EKS Pod Identity credentials.</p>\n         <p>Pod Identity is a simpler method than <i>IAM roles for service\n                accounts</i>, as this method doesn't use OIDC identity providers.\n            Additionally, you can configure a role for Pod Identity once, and reuse it across\n            clusters.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/clusters/{clusterName}/pod-identity-associations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#CreatePodIdentityAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster to create the association in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes namespace inside the cluster to create the association in. The\n            service account and the pods that use the service account must be in this\n            namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceAccount": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity\n            agent manages credentials to assume this role for applications in the containers in the\n            pods that use this service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.eks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you apply to a resource to assist with categorization and organization. Each tag consists of a key and an optional value. You define both.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource – 50</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only\n                    one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length – 128 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>Maximum value length – 256 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources,\n                    remember that other services may have restrictions on allowed characters.\n                    Generally allowed characters are: letters, numbers, and spaces representable in\n                    UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case-sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase\n                    combination of such as a prefix for either keys or values as it is reserved for\n                    Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with\n                    this prefix do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#CreatePodIdentityAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "association": {
+                    "target": "com.amazonaws.eks#PodIdentityAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of your new association.</p>\n         <p>The description includes an ID for the association. Use the ID of the association in further\n            actions to manage the association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#DeleteAddon": {
             "type": "operation",
             "input": {
@@ -3247,7 +3375,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an expired / inactive subscription. Deleting inactive subscriptions removes\n            them from the Amazon Web Services Management Console view and from list/describe API responses.\n            Subscriptions can only be cancelled within 7 days of creation, and are cancelled by\n            creating a ticket in the Amazon Web Services Support Center. </p>",
+                "smithy.api#documentation": "<p>Deletes an expired or inactive subscription. Deleting inactive subscriptions removes\n            them from the Amazon Web Services Management Console view and from list/describe API responses.\n            Subscriptions can only be cancelled within 7 days of creation and are cancelled by\n            creating a ticket in the Amazon Web Services Support Center. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/eks-anywhere-subscriptions/{id}",
@@ -3422,6 +3550,75 @@
                     "target": "com.amazonaws.eks#Nodegroup",
                     "traits": {
                         "smithy.api#documentation": "<p>The full description of your deleted node group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#DeletePodIdentityAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DeletePodIdentityAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DeletePodIdentityAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a EKS Pod Identity association.</p>\n         <p>The temporary Amazon Web Services credentials from the previous IAM role session might still be valid until the session expiry. If you need to immediately revoke the temporary session credentials, then go to the role in the IAM console.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/clusters/{clusterName}/pod-identity-associations/{associationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#DeletePodIdentityAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster name that</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the association to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DeletePodIdentityAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "association": {
+                    "target": "com.amazonaws.eks#PodIdentityAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the EKS Pod Identity association that was deleted.</p>"
                     }
                 }
             },
@@ -3810,7 +4007,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>DescribeAddonVersionsResponse</code> where <code>maxResults</code> was used\n            and the results exceeded the value of that parameter. Pagination continues from the end\n            of the previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>DescribeAddonVersions</code> request. When the results of a\n                <code>DescribeAddonVersions</code> request exceed <code>maxResults</code>, you can\n            use this value to retrieve the next page of results. This value is <code>null</code>\n            when there are no more results to return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 }
             },
@@ -4359,6 +4556,75 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#DescribePodIdentityAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DescribePodIdentityAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DescribePodIdentityAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns descriptive information about an EKS Pod Identity association.</p>\n         <p>This action requires the ID of the association. You can get the ID from the response to\n            the <code>CreatePodIdentityAssocation</code> for newly created associations. Or, you can\n            list the IDs for associations with <code>ListPodIdentityAssociations</code> and filter the\n            list by namespace or service account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/clusters/{clusterName}/pod-identity-associations/{associationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#DescribePodIdentityAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster that the association is in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the association that you want the description of.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DescribePodIdentityAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "association": {
+                    "target": "com.amazonaws.eks#PodIdentityAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the EKS Pod Identity association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#DescribeUpdate": {
             "type": "operation",
             "input": {
@@ -4557,7 +4823,7 @@
                     "target": "com.amazonaws.eks#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of licenses included in a subscription. Valid values are between 1 and\n            1000.</p>"
+                        "smithy.api#documentation": "<p>The number of licenses included in a subscription. Valid values are between 1 and\n            100.</p>"
                     }
                 },
                 "licenseType": {
@@ -4588,7 +4854,7 @@
                 "licenseArns": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>License Manager License ARNs associated with the subscription.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services License Manager ARN associated with the subscription.</p>"
                     }
                 },
                 "tags": {
@@ -4689,7 +4955,7 @@
                 "unit": {
                     "target": "com.amazonaws.eks#EksAnywhereSubscriptionTermUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The term unit of the subscription. Valid value is MONTHS.</p>"
+                        "smithy.api#documentation": "<p>The term unit of the subscription. Valid value is <code>MONTHS</code>.</p>"
                     }
                 }
             },
@@ -5110,7 +5376,10 @@
                     }
                 },
                 "addonName": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified parameter for the add-on name is invalid. Review the available\n            parameters for the API request</p>"
+                    }
                 },
                 "subscriptionId": {
                     "target": "com.amazonaws.eks#String",
@@ -5119,7 +5388,10 @@
                     }
                 },
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified parameter is invalid. Review the available parameters for the API\n            request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5144,7 +5416,10 @@
                     }
                 },
                 "addonName": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request is invalid given the state of the add-on name. Check the state of the\n            cluster and the associated operations.</p>"
+                    }
                 },
                 "subscriptionId": {
                     "target": "com.amazonaws.eks#String",
@@ -5153,7 +5428,10 @@
                     }
                 },
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS add-on name associated with the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5374,7 +5652,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListAddonsResponse</code> where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListAddons</code>\n            request. When the results of a <code>ListAddons</code> request exceed\n                <code>maxResults</code>, you can use this value to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 }
             },
@@ -5517,6 +5795,12 @@
                     "method": "GET",
                     "uri": "/eks-anywhere-subscriptions",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "subscriptions",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -5533,7 +5817,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The nextToken value to include in a future ListEksAnywhereSubscriptions request. When\n            the results of a ListEksAnywhereSubscriptions request exceed maxResults, you can use\n            this value to retrieve the next page of results. This value is null when there are no\n            more results to return.</p>",
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListEksAnywhereSubscriptions</code> request where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -5756,7 +6040,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListIdentityProviderConfigsResponse</code> where <code>maxResults</code> was\n            used and the results exceeded the value of that parameter. Pagination continues from the\n            end of the previous results that returned the <code>nextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>ListIdentityProviderConfigsResponse</code> request. When the results of a\n                <code>ListIdentityProviderConfigsResponse</code> request exceed\n                <code>maxResults</code>, you can use this value to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
                     }
                 }
             },
@@ -5856,6 +6140,116 @@
                     "target": "com.amazonaws.eks#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListNodegroups</code>\n            request. When the results of a <code>ListNodegroups</code> request exceed\n                <code>maxResults</code>, you can use this value to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#ListPodIdentityAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#ListPodIdentityAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#ListPodIdentityAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the EKS Pod Identity associations in a cluster. You can filter the list by the namespace that the\n            association is in or the service account that the association uses.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/clusters/{clusterName}/pod-identity-associations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "associations",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.eks#ListPodIdentityAssociationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.eks#ListPodIdentityAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster that the associations are in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes namespace inside the cluster that the associations are in.</p>",
+                        "smithy.api#httpQuery": "namespace"
+                    }
+                },
+                "serviceAccount": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes service account that the associations use.</p>",
+                        "smithy.api#httpQuery": "serviceAccount"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.eks#ListPodIdentityAssociationsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of EKS Pod Identity association results returned by\n                <code>ListPodIdentityAssociations</code> in paginated output. When you use this\n            parameter, <code>ListPodIdentityAssociations</code> returns only <code>maxResults</code>\n            results in a single page along with a <code>nextToken</code> response element. You can\n            see the remaining results of the initial request by sending another\n                <code>ListPodIdentityAssociations</code> request with the returned\n                <code>nextToken</code> value. This value can be between 1 and\n            100. If you don't use this parameter,\n                <code>ListPodIdentityAssociations</code> returns up to 100 results\n            and a <code>nextToken</code> value if applicable.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListUpdates</code> request where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#ListPodIdentityAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "associations": {
+                    "target": "com.amazonaws.eks#PodIdentityAssociationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of summarized descriptions of the associations that are in the cluster and match any\n            filters that you provided.</p>\n         <p>Each summary is simplified by removing these fields compared to the full <code>\n               <a>PodIdentityAssociation</a>\n            </code>:</p>\n         <ul>\n            <li>\n               <p>The IAM role: <code>roleArn</code>\n               </p>\n            </li>\n            <li>\n               <p>The timestamp that the association was created at: <code>createdAt</code>\n               </p>\n            </li>\n            <li>\n               <p>The most recent timestamp that the association was modified at:. <code>modifiedAt</code>\n               </p>\n            </li>\n            <li>\n               <p>The tags on the association: <code>tags</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>ListPodIdentityAssociations</code> request. When the results of a\n                <code>ListPodIdentityAssociations</code> request exceed <code>maxResults</code>, you\n            can use this value to retrieve the next page of results. This value is <code>null</code>\n            when there are no more results to return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 }
             },
@@ -6631,7 +7025,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A service resource associated with the request could not be found. Clients should not\n            retry such requests.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6858,6 +7255,112 @@
                 }
             }
         },
+        "com.amazonaws.eks#PodIdentityAssociation": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster that the association is in.</p>"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes namespace inside the cluster to create the association in. The\n            service account and the pods that use the service account must be in this\n            namespace.</p>"
+                    }
+                },
+                "serviceAccount": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity\n            agent manages credentials to assume this role for applications in the containers in the\n            pods that use this service account.</p>"
+                    }
+                },
+                "associationArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the association.</p>"
+                    }
+                },
+                "associationId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the association.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.eks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you apply to a resource to assist with categorization and organization. Each tag consists of a key and an optional value. You define both.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource – 50</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only\n                    one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length – 128 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>Maximum value length – 256 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources,\n                    remember that other services may have restrictions on allowed characters.\n                    Generally allowed characters are: letters, numbers, and spaces representable in\n                    UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case-sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase\n                    combination of such as a prefix for either keys or values as it is reserved for\n                    Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with\n                    this prefix do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that the association was created at.</p>"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most recent timestamp that the association was modified at</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that 7EC2l instance profiles provide credentials to Amazon EC2 instances.</p>"
+            }
+        },
+        "com.amazonaws.eks#PodIdentityAssociationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#PodIdentityAssociationSummary"
+            }
+        },
+        "com.amazonaws.eks#PodIdentityAssociationSummary": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster that the association is in.</p>"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes namespace inside the cluster to create the association in. The\n            service account and the pods that use the service account must be in this\n            namespace.</p>"
+                    }
+                },
+                "serviceAccount": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.</p>"
+                    }
+                },
+                "associationArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the association.</p>"
+                    }
+                },
+                "associationId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summarized description of the association.</p>\n         <p>Each summary is simplified by removing these fields compared to the full <code>\n               <a>PodIdentityAssociation</a>\n            </code>:</p>\n         <ul>\n            <li>\n               <p>The IAM role: <code>roleArn</code>\n               </p>\n            </li>\n            <li>\n               <p>The timestamp that the association was created at: <code>createdAt</code>\n               </p>\n            </li>\n            <li>\n               <p>The most recent timestamp that the association was modified at:. <code>modifiedAt</code>\n               </p>\n            </li>\n            <li>\n               <p>The tags on the association: <code>tags</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.eks#Provider": {
             "type": "structure",
             "members": {
@@ -7020,10 +7523,16 @@
                     }
                 },
                 "addonName": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified add-on name is in use.</p>"
+                    }
                 },
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS message associated with the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7054,7 +7563,10 @@
                     }
                 },
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS message associated with the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7085,7 +7597,10 @@
                     }
                 },
                 "addonName": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS add-on name associated with the exception.</p>"
+                    }
                 },
                 "subscriptionId": {
                     "target": "com.amazonaws.eks#String",
@@ -7094,7 +7609,10 @@
                     }
                 },
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS message associated with the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7107,7 +7625,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required resources (such as service-linked roles) were created and are still\n            propagating. Retry later.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7141,7 +7662,10 @@
                     }
                 },
                 "addonName": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EKS add-on name associated with the exception.</p>"
+                    }
                 },
                 "subscriptionId": {
                     "target": "com.amazonaws.eks#String",
@@ -7150,7 +7674,10 @@
                     }
                 },
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>These errors are usually caused by a server-side issue.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7163,7 +7690,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request has failed due to a temporary failure of the server.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7184,6 +7714,7 @@
         "com.amazonaws.eks#TagKey": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A <code>key</code> is a general label\n            that acts like a category for more specific tag values.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
@@ -7211,6 +7742,7 @@
                 "target": "com.amazonaws.eks#TagValue"
             },
             "traits": {
+                "smithy.api#documentation": "<p>The metadata that you apply to a resource to help you categorize and organize them.\n            Each tag consists of a key and an optional value. You define them.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource – 50</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only\n                    one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length – 128 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>Maximum value length – 256 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources,\n                    remember that other services may have restrictions on allowed characters.\n                    Generally allowed characters are: letters, numbers, and spaces representable in\n                    UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case-sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase\n                    combination of such as a prefix for either keys or values as it is reserved for\n                    Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with\n                    this prefix do not count against your tags per resource limit.</p>\n            </li>\n         </ul>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
@@ -7275,6 +7807,7 @@
         "com.amazonaws.eks#TagValue": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>The optional part of a key-value pair that make up a tag. A <code>value</code> acts as\n            a descriptor within a tag category (key).</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
@@ -7337,7 +7870,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.eks#String"
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>At least one of your specified cluster subnets is in an Availability Zone that does\n            not support Amazon EKS. The exception output specifies the supported\n            Availability Zones for your account, from which you can choose subnets for your\n            cluster.</p>"
+                    }
                 },
                 "clusterName": {
                     "target": "com.amazonaws.eks#String",
@@ -7596,7 +8132,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to\n            function during the update. The response output includes an update ID that you can use\n            to track the status of your cluster update with the <a>DescribeUpdate</a> API\n            operation.</p>\n         <p>You can use this API operation to enable or disable exporting the Kubernetes control plane\n            logs for your cluster to CloudWatch Logs. By default, cluster control plane logs\n            aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>\n         <p>You can also use this API operation to enable or disable public and private access to\n            your cluster's Kubernetes API server endpoint. By default, public access is enabled, and\n            private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. </p>\n         <important>\n            <p>You can't update the subnets or security group IDs for an existing cluster.</p>\n         </important>\n         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>",
+                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to\n            function during the update. The response output includes an update ID that you can use\n            to track the status of your cluster update with the <a>DescribeUpdate</a> API\n            operation.</p>\n         <p>You can use this API operation to enable or disable exporting the Kubernetes control plane\n            logs for your cluster to CloudWatch Logs. By default, cluster control plane logs\n            aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>\n         <p>You can also use this API operation to enable or disable public and private access to\n            your cluster's Kubernetes API server endpoint. By default, public access is enabled, and\n            private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <p>You can also use this API operation to choose different subnets and security groups\n            for the cluster. You must specify at least two subnets that are in different\n            Availability Zones. You can't change which VPC the subnets are from, the subnets must be\n            in the same VPC as the subnets that the cluster was created with. For more information\n            about the VPC requirements, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{name}/update-config",
@@ -7768,7 +8304,7 @@
                 "id": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The ID of the subscription.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8219,6 +8755,88 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.eks#UpdateParam"
+            }
+        },
+        "com.amazonaws.eks#UpdatePodIdentityAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#UpdatePodIdentityAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#UpdatePodIdentityAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a EKS Pod Identity association. Only the IAM role can be changed; an association can't be moved\n            between clusters, namespaces, or service accounts. If you need to edit the namespace\n            or service account, you need to remove the association and then create a new\n            association with your desired settings.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/clusters/{clusterName}/pod-identity-associations/{associationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#UpdatePodIdentityAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster that you want to update the association in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the association to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new IAM role to change the </p>"
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#UpdatePodIdentityAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "association": {
+                    "target": "com.amazonaws.eks#PodIdentityAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the EKS Pod Identity association that was updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#UpdateStatus": {

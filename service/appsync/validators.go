@@ -570,6 +570,26 @@ func (m *validateOpGetDataSource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataSourceIntrospection struct {
+}
+
+func (*validateOpGetDataSourceIntrospection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataSourceIntrospection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataSourceIntrospectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataSourceIntrospectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDomainName struct {
 }
 
@@ -905,6 +925,26 @@ func (m *validateOpListTypes) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTypesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartDataSourceIntrospection struct {
+}
+
+func (*validateOpStartDataSourceIntrospection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDataSourceIntrospection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDataSourceIntrospectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDataSourceIntrospectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1282,6 +1322,10 @@ func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataSource{}, middleware.After)
 }
 
+func addOpGetDataSourceIntrospectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataSourceIntrospection{}, middleware.After)
+}
+
 func addOpGetDomainNameValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDomainName{}, middleware.After)
 }
@@ -1348,6 +1392,10 @@ func addOpListTypesByAssociationValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListTypesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTypes{}, middleware.After)
+}
+
+func addOpStartDataSourceIntrospectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDataSourceIntrospection{}, middleware.After)
 }
 
 func addOpStartSchemaCreationValidationMiddleware(stack *middleware.Stack) error {
@@ -1650,6 +1698,27 @@ func validateOpenSearchServiceDataSourceConfig(v *types.OpenSearchServiceDataSou
 	}
 	if v.AwsRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRdsDataApiConfig(v *types.RdsDataApiConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RdsDataApiConfig"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2254,6 +2323,21 @@ func validateOpGetDataSourceInput(v *GetDataSourceInput) error {
 	}
 }
 
+func validateOpGetDataSourceIntrospectionInput(v *GetDataSourceIntrospectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataSourceIntrospectionInput"}
+	if v.IntrospectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntrospectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDomainNameInput(v *GetDomainNameInput) error {
 	if v == nil {
 		return nil
@@ -2537,6 +2621,23 @@ func validateOpListTypesInput(v *ListTypesInput) error {
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDataSourceIntrospectionInput(v *StartDataSourceIntrospectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDataSourceIntrospectionInput"}
+	if v.RdsDataApiConfig != nil {
+		if err := validateRdsDataApiConfig(v.RdsDataApiConfig); err != nil {
+			invalidParams.AddNested("RdsDataApiConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

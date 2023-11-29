@@ -13,8 +13,9 @@ import (
 )
 
 // Retrieves the contents of the encrypted fields SecretString or SecretBinary
-// from the specified version of a secret, whichever contains content. We recommend
-// that you cache your secret values by using client-side caching. Caching secrets
+// from the specified version of a secret, whichever contains content. To retrieve
+// the values for a group of secrets, call BatchGetSecretValue . We recommend that
+// you cache your secret values by using client-side caching. Caching secrets
 // improves speed and reduces your costs. For more information, see Cache secrets
 // for your applications (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html)
 // . To retrieve the previous version of a secret, use VersionStage and specify

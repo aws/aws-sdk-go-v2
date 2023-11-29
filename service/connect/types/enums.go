@@ -80,6 +80,26 @@ func (AgentStatusType) Values() []AgentStatusType {
 	}
 }
 
+type ArtifactStatus string
+
+// Enum values for ArtifactStatus
+const (
+	ArtifactStatusApproved   ArtifactStatus = "APPROVED"
+	ArtifactStatusRejected   ArtifactStatus = "REJECTED"
+	ArtifactStatusInProgress ArtifactStatus = "IN_PROGRESS"
+)
+
+// Values returns all known values for ArtifactStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactStatus) Values() []ArtifactStatus {
+	return []ArtifactStatus{
+		"APPROVED",
+		"REJECTED",
+		"IN_PROGRESS",
+	}
+}
+
 type BehaviorType string
 
 // Enum values for BehaviorType
@@ -115,6 +135,26 @@ func (Channel) Values() []Channel {
 		"VOICE",
 		"CHAT",
 		"TASK",
+	}
+}
+
+type ChatEventType string
+
+// Enum values for ChatEventType
+const (
+	ChatEventTypeDisconnect ChatEventType = "DISCONNECT"
+	ChatEventTypeMessage    ChatEventType = "MESSAGE"
+	ChatEventTypeEvent      ChatEventType = "EVENT"
+)
+
+// Values returns all known values for ChatEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChatEventType) Values() []ChatEventType {
+	return []ChatEventType{
+		"DISCONNECT",
+		"MESSAGE",
+		"EVENT",
 	}
 }
 
@@ -497,6 +537,7 @@ type EventSourceName string
 const (
 	EventSourceNameOnPostCallAnalysisAvailable     EventSourceName = "OnPostCallAnalysisAvailable"
 	EventSourceNameOnRealTimeCallAnalysisAvailable EventSourceName = "OnRealTimeCallAnalysisAvailable"
+	EventSourceNameOnRealTimeChatAnalysisAvailable EventSourceName = "OnRealTimeChatAnalysisAvailable"
 	EventSourceNameOnPostChatAnalysisAvailable     EventSourceName = "OnPostChatAnalysisAvailable"
 	EventSourceNameOnZendeskTicketCreate           EventSourceName = "OnZendeskTicketCreate"
 	EventSourceNameOnZendeskTicketStatusUpdate     EventSourceName = "OnZendeskTicketStatusUpdate"
@@ -512,6 +553,7 @@ func (EventSourceName) Values() []EventSourceName {
 	return []EventSourceName{
 		"OnPostCallAnalysisAvailable",
 		"OnRealTimeCallAnalysisAvailable",
+		"OnRealTimeChatAnalysisAvailable",
 		"OnPostChatAnalysisAvailable",
 		"OnZendeskTicketCreate",
 		"OnZendeskTicketStatusUpdate",
@@ -552,6 +594,22 @@ func (FailureReasonCode) Values() []FailureReasonCode {
 		"REQUEST_THROTTLED",
 		"IDEMPOTENCY_EXCEPTION",
 		"INTERNAL_ERROR",
+	}
+}
+
+type FlowAssociationResourceType string
+
+// Enum values for FlowAssociationResourceType
+const (
+	FlowAssociationResourceTypeSmsPhoneNumber FlowAssociationResourceType = "SMS_PHONE_NUMBER"
+)
+
+// Values returns all known values for FlowAssociationResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowAssociationResourceType) Values() []FlowAssociationResourceType {
+	return []FlowAssociationResourceType{
+		"SMS_PHONE_NUMBER",
 	}
 }
 
@@ -863,6 +921,24 @@ const (
 func (ListFlowAssociationResourceType) Values() []ListFlowAssociationResourceType {
 	return []ListFlowAssociationResourceType{
 		"VOICE_PHONE_NUMBER",
+	}
+}
+
+type MeetingFeatureStatus string
+
+// Enum values for MeetingFeatureStatus
+const (
+	MeetingFeatureStatusAvailable   MeetingFeatureStatus = "AVAILABLE"
+	MeetingFeatureStatusUnavailable MeetingFeatureStatus = "UNAVAILABLE"
+)
+
+// Values returns all known values for MeetingFeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MeetingFeatureStatus) Values() []MeetingFeatureStatus {
+	return []MeetingFeatureStatus{
+		"AVAILABLE",
+		"UNAVAILABLE",
 	}
 }
 
@@ -1501,6 +1577,7 @@ const (
 	PhoneNumberTypeShared        PhoneNumberType = "SHARED"
 	PhoneNumberTypeThirdPartyTf  PhoneNumberType = "THIRD_PARTY_TF"
 	PhoneNumberTypeThirdPartyDid PhoneNumberType = "THIRD_PARTY_DID"
+	PhoneNumberTypeShortCode     PhoneNumberType = "SHORT_CODE"
 )
 
 // Values returns all known values for PhoneNumberType. Note that this can be
@@ -1514,6 +1591,7 @@ func (PhoneNumberType) Values() []PhoneNumberType {
 		"SHARED",
 		"THIRD_PARTY_TF",
 		"THIRD_PARTY_DID",
+		"SHORT_CODE",
 	}
 }
 
@@ -1638,6 +1716,111 @@ func (QuickConnectType) Values() []QuickConnectType {
 	}
 }
 
+type RealTimeContactAnalysisOutputType string
+
+// Enum values for RealTimeContactAnalysisOutputType
+const (
+	RealTimeContactAnalysisOutputTypeRaw      RealTimeContactAnalysisOutputType = "Raw"
+	RealTimeContactAnalysisOutputTypeRedacted RealTimeContactAnalysisOutputType = "Redacted"
+)
+
+// Values returns all known values for RealTimeContactAnalysisOutputType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RealTimeContactAnalysisOutputType) Values() []RealTimeContactAnalysisOutputType {
+	return []RealTimeContactAnalysisOutputType{
+		"Raw",
+		"Redacted",
+	}
+}
+
+type RealTimeContactAnalysisSegmentType string
+
+// Enum values for RealTimeContactAnalysisSegmentType
+const (
+	RealTimeContactAnalysisSegmentTypeTranscript  RealTimeContactAnalysisSegmentType = "Transcript"
+	RealTimeContactAnalysisSegmentTypeCategories  RealTimeContactAnalysisSegmentType = "Categories"
+	RealTimeContactAnalysisSegmentTypeIssues      RealTimeContactAnalysisSegmentType = "Issues"
+	RealTimeContactAnalysisSegmentTypeEvent       RealTimeContactAnalysisSegmentType = "Event"
+	RealTimeContactAnalysisSegmentTypeAttachments RealTimeContactAnalysisSegmentType = "Attachments"
+)
+
+// Values returns all known values for RealTimeContactAnalysisSegmentType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RealTimeContactAnalysisSegmentType) Values() []RealTimeContactAnalysisSegmentType {
+	return []RealTimeContactAnalysisSegmentType{
+		"Transcript",
+		"Categories",
+		"Issues",
+		"Event",
+		"Attachments",
+	}
+}
+
+type RealTimeContactAnalysisSentimentLabel string
+
+// Enum values for RealTimeContactAnalysisSentimentLabel
+const (
+	RealTimeContactAnalysisSentimentLabelPositive RealTimeContactAnalysisSentimentLabel = "POSITIVE"
+	RealTimeContactAnalysisSentimentLabelNegative RealTimeContactAnalysisSentimentLabel = "NEGATIVE"
+	RealTimeContactAnalysisSentimentLabelNeutral  RealTimeContactAnalysisSentimentLabel = "NEUTRAL"
+)
+
+// Values returns all known values for RealTimeContactAnalysisSentimentLabel. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RealTimeContactAnalysisSentimentLabel) Values() []RealTimeContactAnalysisSentimentLabel {
+	return []RealTimeContactAnalysisSentimentLabel{
+		"POSITIVE",
+		"NEGATIVE",
+		"NEUTRAL",
+	}
+}
+
+type RealTimeContactAnalysisStatus string
+
+// Enum values for RealTimeContactAnalysisStatus
+const (
+	RealTimeContactAnalysisStatusInProgress RealTimeContactAnalysisStatus = "IN_PROGRESS"
+	RealTimeContactAnalysisStatusFailed     RealTimeContactAnalysisStatus = "FAILED"
+	RealTimeContactAnalysisStatusCompleted  RealTimeContactAnalysisStatus = "COMPLETED"
+)
+
+// Values returns all known values for RealTimeContactAnalysisStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RealTimeContactAnalysisStatus) Values() []RealTimeContactAnalysisStatus {
+	return []RealTimeContactAnalysisStatus{
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+	}
+}
+
+type RealTimeContactAnalysisSupportedChannel string
+
+// Enum values for RealTimeContactAnalysisSupportedChannel
+const (
+	RealTimeContactAnalysisSupportedChannelVoice RealTimeContactAnalysisSupportedChannel = "VOICE"
+	RealTimeContactAnalysisSupportedChannelChat  RealTimeContactAnalysisSupportedChannel = "CHAT"
+)
+
+// Values returns all known values for RealTimeContactAnalysisSupportedChannel.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RealTimeContactAnalysisSupportedChannel) Values() []RealTimeContactAnalysisSupportedChannel {
+	return []RealTimeContactAnalysisSupportedChannel{
+		"VOICE",
+		"CHAT",
+	}
+}
+
 type ReferenceStatus string
 
 // Enum values for ReferenceStatus
@@ -1711,6 +1894,7 @@ const (
 	ResourceTypeHierarchyLevel ResourceType = "HIERARCHY_LEVEL"
 	ResourceTypeHierarchyGroup ResourceType = "HIERARCHY_GROUP"
 	ResourceTypeUser           ResourceType = "USER"
+	ResourceTypePhoneNumber    ResourceType = "PHONE_NUMBER"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1725,6 +1909,7 @@ func (ResourceType) Values() []ResourceType {
 		"HIERARCHY_LEVEL",
 		"HIERARCHY_GROUP",
 		"USER",
+		"PHONE_NUMBER",
 	}
 }
 
@@ -2034,6 +2219,22 @@ func (UseCaseType) Values() []UseCaseType {
 	return []UseCaseType{
 		"RULES_EVALUATION",
 		"CONNECT_CAMPAIGNS",
+	}
+}
+
+type VideoCapability string
+
+// Enum values for VideoCapability
+const (
+	VideoCapabilitySend VideoCapability = "SEND"
+)
+
+// Values returns all known values for VideoCapability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VideoCapability) Values() []VideoCapability {
+	return []VideoCapability{
+		"SEND",
 	}
 }
 

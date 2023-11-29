@@ -1241,6 +1241,39 @@ func validateCreateVehicleRequestItems(v []types.CreateVehicleRequestItem) error
 	}
 }
 
+func validateCustomProperty(v *types.CustomProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomProperty"}
+	if v.FullyQualifiedName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FullyQualifiedName"))
+	}
+	if len(v.DataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomStruct(v *types.CustomStruct) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomStruct"}
+	if v.FullyQualifiedName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FullyQualifiedName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataDestinationConfig(v types.DataDestinationConfig) error {
 	if v == nil {
 		return nil
@@ -1289,6 +1322,28 @@ func validateIamResources(v *types.IamResources) error {
 	invalidParams := smithy.InvalidParamsError{Context: "IamResources"}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessageSignal(v *types.MessageSignal) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageSignal"}
+	if v.TopicName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicName"))
+	}
+	if v.StructuredMessage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StructuredMessage"))
+	} else if v.StructuredMessage != nil {
+		if err := validateStructuredMessage(v.StructuredMessage); err != nil {
+			invalidParams.AddNested("StructuredMessage", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1354,6 +1409,11 @@ func validateNetworkInterface(v *types.NetworkInterface) error {
 			invalidParams.AddNested("ObdInterface", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.VehicleMiddleware != nil {
+		if err := validateVehicleMiddleware(v.VehicleMiddleware); err != nil {
+			invalidParams.AddNested("VehicleMiddleware", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1399,9 +1459,19 @@ func validateNode(v types.Node) error {
 			invalidParams.AddNested("[branch]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.NodeMemberProperty:
+		if err := validateCustomProperty(&uv.Value); err != nil {
+			invalidParams.AddNested("[property]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.NodeMemberSensor:
 		if err := validateSensor(&uv.Value); err != nil {
 			invalidParams.AddNested("[sensor]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.NodeMemberStruct:
+		if err := validateCustomStruct(&uv.Value); err != nil {
+			invalidParams.AddNested("[struct]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1449,6 +1519,9 @@ func validateObdSignal(v *types.ObdSignal) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ObdSignal"}
+	if v.PidResponseLength == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PidResponseLength"))
+	}
 	if v.Scaling == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Scaling"))
 	}
@@ -1457,6 +1530,40 @@ func validateObdSignal(v *types.ObdSignal) error {
 	}
 	if v.ByteLength == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ByteLength"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrimitiveMessageDefinition(v types.PrimitiveMessageDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrimitiveMessageDefinition"}
+	switch uv := v.(type) {
+	case *types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition:
+		if err := validateROS2PrimitiveMessageDefinition(&uv.Value); err != nil {
+			invalidParams.AddNested("[ros2PrimitiveMessageDefinition]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateROS2PrimitiveMessageDefinition(v *types.ROS2PrimitiveMessageDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ROS2PrimitiveMessageDefinition"}
+	if len(v.PrimitiveType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimitiveType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1522,6 +1629,11 @@ func validateSignalDecoder(v *types.SignalDecoder) error {
 			invalidParams.AddNested("ObdSignal", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MessageSignal != nil {
+		if err := validateMessageSignal(v.MessageSignal); err != nil {
+			invalidParams.AddNested("MessageSignal", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1570,6 +1682,99 @@ func validateSignalInformationList(v []types.SignalInformation) error {
 		if err := validateSignalInformation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStructuredMessage(v types.StructuredMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StructuredMessage"}
+	switch uv := v.(type) {
+	case *types.StructuredMessageMemberPrimitiveMessageDefinition:
+		if err := validatePrimitiveMessageDefinition(uv.Value); err != nil {
+			invalidParams.AddNested("[primitiveMessageDefinition]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.StructuredMessageMemberStructuredMessageDefinition:
+		if err := validateStructuredMessageDefinition(uv.Value); err != nil {
+			invalidParams.AddNested("[structuredMessageDefinition]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.StructuredMessageMemberStructuredMessageListDefinition:
+		if err := validateStructuredMessageListDefinition(&uv.Value); err != nil {
+			invalidParams.AddNested("[structuredMessageListDefinition]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStructuredMessageDefinition(v []types.StructuredMessageFieldNameAndDataTypePair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StructuredMessageDefinition"}
+	for i := range v {
+		if err := validateStructuredMessageFieldNameAndDataTypePair(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStructuredMessageFieldNameAndDataTypePair(v *types.StructuredMessageFieldNameAndDataTypePair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StructuredMessageFieldNameAndDataTypePair"}
+	if v.FieldName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
+	}
+	if v.DataType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataType"))
+	} else if v.DataType != nil {
+		if err := validateStructuredMessage(v.DataType); err != nil {
+			invalidParams.AddNested("DataType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStructuredMessageListDefinition(v *types.StructuredMessageListDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StructuredMessageListDefinition"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.MemberType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberType"))
+	} else if v.MemberType != nil {
+		if err := validateStructuredMessage(v.MemberType); err != nil {
+			invalidParams.AddNested("MemberType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ListType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ListType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1688,6 +1893,24 @@ func validateUpdateVehicleRequestItems(v []types.UpdateVehicleRequestItem) error
 		if err := validateUpdateVehicleRequestItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVehicleMiddleware(v *types.VehicleMiddleware) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VehicleMiddleware"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.ProtocolName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtocolName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

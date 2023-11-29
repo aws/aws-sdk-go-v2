@@ -108,8 +108,8 @@ type DescribeExecutionOutput struct {
 	OutputDetails *types.CloudWatchEventsExecutionDataDetails
 
 	// The number of times you've redriven an execution. If you have not yet redriven
-	// an execution, the redriveCount is 0. This count is not updated for redrives
-	// that failed to start or are pending to be redriven.
+	// an execution, the redriveCount is 0. This count is only updated if you
+	// successfully redrive an execution.
 	RedriveCount *int32
 
 	// The date the execution was last redriven. If you have not yet redriven an

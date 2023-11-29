@@ -1737,6 +1737,12 @@
                     "traits": {
                         "smithy.api#enumValue": "performanceTuning.caching"
                     }
+                },
+                "ObservationsOption": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "observations.scope"
+                    }
                 }
             }
         },
@@ -6901,7 +6907,7 @@
                 "ConnectionType": {
                     "target": "com.amazonaws.glue#EnclosedInStringProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>connectionType</code>, as provided to the underlying Glue library. This node type supports\nthe following connection types: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>bigquery</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The <code>connectionType</code>, as provided to the underlying Glue library. This node type supports\nthe following connection types: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>opensearch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>azuresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>azurecosmos</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>bigquery</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>saphana</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>teradata</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>vertica</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6936,7 +6942,7 @@
                 "ConnectionType": {
                     "target": "com.amazonaws.glue#EnclosedInStringProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>connectionType</code>, as provided to the underlying Glue library. This node type supports\nthe following connection types: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>bigquery</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The <code>connectionType</code>, as provided to the underlying Glue library. This node type supports\nthe following connection types: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>opensearch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>azuresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>azurecosmos</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>bigquery</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>saphana</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>teradata</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>vertica</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },

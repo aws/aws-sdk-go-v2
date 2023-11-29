@@ -16,9 +16,9 @@ import (
 	"strings"
 )
 
-// Gets the tags of Amazon S3 Storage Lens configuration. For more information
-// about S3 Storage Lens, see Assessing your storage activity and usage with
-// Amazon S3 Storage Lens  (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html)
+// This operation is not supported by directory buckets. Gets the tags of Amazon
+// S3 Storage Lens configuration. For more information about S3 Storage Lens, see
+// Assessing your storage activity and usage with Amazon S3 Storage Lens  (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html)
 // in the Amazon S3 User Guide. To use this action, you must have permission to
 // perform the s3:GetStorageLensConfigurationTagging action. For more information,
 // see Setting permissions to use Amazon S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html)

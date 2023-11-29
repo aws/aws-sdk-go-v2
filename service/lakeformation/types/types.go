@@ -256,8 +256,8 @@ type DataLakeSettings struct {
 	ExternalDataFilteringAllowList []DataLakePrincipal
 
 	// A key-value map that provides an additional configuration on your data lake.
-	// CrossAccountVersion is the key you can configure in the Parameters field.
-	// Accepted values for the CrossAccountVersion key are 1, 2, and 3.
+	// CROSS_ACCOUNT_VERSION is the key you can configure in the Parameters field.
+	// Accepted values for the CrossAccountVersion key are 1, 2, 3, and 4.
 	Parameters map[string]string
 
 	// A list of Lake Formation principals with only view access to the resources,
@@ -344,6 +344,24 @@ type ExecutionStatistics struct {
 
 	// The number of work units executed.
 	WorkUnitsExecutedCount int64
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for enabling external data filtering for third-party applications
+// to access data managed by Lake Formation .
+type ExternalFilteringConfiguration struct {
+
+	// List of third-party application ARNs integrated with Lake Formation.
+	//
+	// This member is required.
+	AuthorizedTargets []string
+
+	// Allows to enable or disable the third-party applications that are allowed to
+	// access data managed by Lake Formation.
+	//
+	// This member is required.
+	Status EnableStatus
 
 	noSmithyDocumentSerde
 }

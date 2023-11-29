@@ -15411,6 +15411,15 @@ func awsAwsjson11_deserializeDocumentSetting(v **types.Setting, value interface{
 				sv.PrincipalArn = ptr.String(jtv)
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SettingType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SettingType(jtv)
+			}
+
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)

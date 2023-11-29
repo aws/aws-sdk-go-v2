@@ -15,8 +15,9 @@ import (
 	"strings"
 )
 
-// Creates or replaces resource policy for an Object Lambda Access Point. For an
-// example policy, see Creating Object Lambda Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-create.html#olap-create-cli)
+// This operation is not supported by directory buckets. Creates or replaces
+// resource policy for an Object Lambda Access Point. For an example policy, see
+// Creating Object Lambda Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-create.html#olap-create-cli)
 // in the Amazon S3 User Guide. The following actions are related to
 // PutAccessPointPolicyForObjectLambda :
 //   - DeleteAccessPointPolicyForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html)

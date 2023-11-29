@@ -50,6 +50,10 @@ type ListRestoreJobsInput struct {
 	// Returns only restore jobs that were created before the specified date.
 	ByCreatedBefore *time.Time
 
+	// This returns only restore testing jobs that match the specified resource Amazon
+	// Resource Name (ARN).
+	ByRestoreTestingPlanArn *string
+
 	// Returns only restore jobs associated with the specified job status.
 	ByStatus types.RestoreJobStatus
 
@@ -57,7 +61,7 @@ type ListRestoreJobsInput struct {
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return MaxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
@@ -68,7 +72,7 @@ type ListRestoreJobsInput struct {
 type ListRestoreJobsOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
+	// request is made to return MaxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string

@@ -1,3 +1,16 @@
+# v1.25.0 (2023-11-28.2)
+
+* **Feature**: This release adds support for external access findings for S3 directory buckets to help you easily identify cross-account access. Updated service API, documentation, and paginators.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.24.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
+# v1.24.0 (2023-11-27)
+
+* **Feature**: IAM Access Analyzer now continuously monitors IAM roles and users in your AWS account or organization to generate findings for unused access. Additionally, IAM Access Analyzer now provides custom policy checks to validate that IAM policies adhere to your security standards ahead of deployments.
+
 # v1.23.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

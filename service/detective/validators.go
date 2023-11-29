@@ -190,6 +190,26 @@ func (m *validateOpEnableOrganizationAdminAccount) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetInvestigation struct {
+}
+
+func (*validateOpGetInvestigation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInvestigation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInvestigationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInvestigationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMembers struct {
 }
 
@@ -225,6 +245,46 @@ func (m *validateOpListDatasourcePackages) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDatasourcePackagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIndicators struct {
+}
+
+func (*validateOpListIndicators) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIndicators) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIndicatorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIndicatorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListInvestigations struct {
+}
+
+func (*validateOpListInvestigations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInvestigations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInvestigationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInvestigationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +345,26 @@ func (m *validateOpRejectInvitation) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRejectInvitationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartInvestigation struct {
+}
+
+func (*validateOpStartInvestigation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartInvestigation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartInvestigationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartInvestigationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +450,26 @@ func (m *validateOpUpdateDatasourcePackages) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateInvestigationState struct {
+}
+
+func (*validateOpUpdateInvestigationState) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateInvestigationState) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateInvestigationStateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateInvestigationStateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateOrganizationConfiguration struct {
 }
 
@@ -426,12 +526,24 @@ func addOpEnableOrganizationAdminAccountValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpEnableOrganizationAdminAccount{}, middleware.After)
 }
 
+func addOpGetInvestigationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInvestigation{}, middleware.After)
+}
+
 func addOpGetMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMembers{}, middleware.After)
 }
 
 func addOpListDatasourcePackagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDatasourcePackages{}, middleware.After)
+}
+
+func addOpListIndicatorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIndicators{}, middleware.After)
+}
+
+func addOpListInvestigationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInvestigations{}, middleware.After)
 }
 
 func addOpListMembersValidationMiddleware(stack *middleware.Stack) error {
@@ -444,6 +556,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpRejectInvitationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRejectInvitation{}, middleware.After)
+}
+
+func addOpStartInvestigationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartInvestigation{}, middleware.After)
 }
 
 func addOpStartMonitoringMemberValidationMiddleware(stack *middleware.Stack) error {
@@ -460,6 +576,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDatasourcePackagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDatasourcePackages{}, middleware.After)
+}
+
+func addOpUpdateInvestigationStateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateInvestigationState{}, middleware.After)
 }
 
 func addOpUpdateOrganizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -493,6 +613,76 @@ func validateAccountList(v []types.Account) error {
 		if err := validateAccount(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDateFilter(v *types.DateFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DateFilter"}
+	if v.StartInclusive == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartInclusive"))
+	}
+	if v.EndInclusive == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndInclusive"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterCriteria(v *types.FilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterCriteria"}
+	if v.Severity != nil {
+		if err := validateStringFilter(v.Severity); err != nil {
+			invalidParams.AddNested("Severity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Status != nil {
+		if err := validateStringFilter(v.Status); err != nil {
+			invalidParams.AddNested("Status", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.State != nil {
+		if err := validateStringFilter(v.State); err != nil {
+			invalidParams.AddNested("State", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EntityArn != nil {
+		if err := validateStringFilter(v.EntityArn); err != nil {
+			invalidParams.AddNested("EntityArn", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CreatedTime != nil {
+		if err := validateDateFilter(v.CreatedTime); err != nil {
+			invalidParams.AddNested("CreatedTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStringFilter(v *types.StringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StringFilter"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -649,6 +839,24 @@ func validateOpEnableOrganizationAdminAccountInput(v *EnableOrganizationAdminAcc
 	}
 }
 
+func validateOpGetInvestigationInput(v *GetInvestigationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInvestigationInput"}
+	if v.GraphArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if v.InvestigationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvestigationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMembersInput(v *GetMembersInput) error {
 	if v == nil {
 		return nil
@@ -674,6 +882,44 @@ func validateOpListDatasourcePackagesInput(v *ListDatasourcePackagesInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "ListDatasourcePackagesInput"}
 	if v.GraphArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIndicatorsInput(v *ListIndicatorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIndicatorsInput"}
+	if v.GraphArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if v.InvestigationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvestigationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInvestigationsInput(v *ListInvestigationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInvestigationsInput"}
+	if v.GraphArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if v.FilterCriteria != nil {
+		if err := validateFilterCriteria(v.FilterCriteria); err != nil {
+			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -719,6 +965,30 @@ func validateOpRejectInvitationInput(v *RejectInvitationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RejectInvitationInput"}
 	if v.GraphArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartInvestigationInput(v *StartInvestigationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartInvestigationInput"}
+	if v.GraphArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if v.EntityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityArn"))
+	}
+	if v.ScopeStartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeStartTime"))
+	}
+	if v.ScopeEndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeEndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -791,6 +1061,27 @@ func validateOpUpdateDatasourcePackagesInput(v *UpdateDatasourcePackagesInput) e
 	}
 	if v.DatasourcePackages == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasourcePackages"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateInvestigationStateInput(v *UpdateInvestigationStateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateInvestigationStateInput"}
+	if v.GraphArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if v.InvestigationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvestigationId"))
+	}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

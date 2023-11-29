@@ -41,6 +41,9 @@ type UpdateExperimentTemplateInput struct {
 	// A description for the template.
 	Description *string
 
+	// The experiment options for the experiment template.
+	ExperimentOptions *types.UpdateExperimentTemplateExperimentOptionsInput
+
 	// The configuration for experiment logging.
 	LogConfiguration *types.UpdateExperimentTemplateLogConfigurationInput
 

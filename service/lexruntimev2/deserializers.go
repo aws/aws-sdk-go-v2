@@ -2618,6 +2618,15 @@ func awsRestjson1_deserializeDocumentInterpretation(v **types.Interpretation, va
 				return err
 			}
 
+		case "interpretationSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InterpretationSource to be of type string, got %T instead", value)
+				}
+				sv.InterpretationSource = types.InterpretationSource(jtv)
+			}
+
 		case "nluConfidence":
 			if err := awsRestjson1_deserializeDocumentConfidenceScore(&sv.NluConfidence, value); err != nil {
 				return err

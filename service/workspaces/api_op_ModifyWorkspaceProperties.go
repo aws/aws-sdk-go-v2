@@ -40,9 +40,10 @@ type ModifyWorkspacePropertiesInput struct {
 	// This member is required.
 	WorkspaceId *string
 
+	// Indicates the data replication status.
+	DataReplication types.DataReplication
+
 	// The properties of the WorkSpace.
-	//
-	// This member is required.
 	WorkspaceProperties *types.WorkspaceProperties
 
 	noSmithyDocumentSerde

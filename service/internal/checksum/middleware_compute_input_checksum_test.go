@@ -16,6 +16,7 @@ import (
 	"testing/iotest"
 
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,7 +50,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 		"no op": {
 			"checksum header set known length": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -72,7 +73,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"checksum header set unknown length": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -126,7 +127,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 		"build handled": {
 			"http nil stream": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -146,7 +147,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"http empty stream": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -169,7 +170,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"https empty stream unseekable": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -192,7 +193,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"http empty stream unseekable": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -215,7 +216,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"https nil stream": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -234,7 +235,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"https empty stream": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -323,7 +324,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"http seekable": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -346,7 +347,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"http payload hash already set": {
 				initContext: func(ctx context.Context) context.Context {
-					ctx = setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					ctx = internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 					ctx = v4.SetPayloadHash(ctx, "somehash")
 					return ctx
 				},
@@ -371,7 +372,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"http seekable checksum matches payload hash": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmSHA256))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmSHA256))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -394,7 +395,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"http payload hash disabled": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				optionsFn: func(o *computeInputPayloadChecksum) {
 					o.EnableComputePayloadHash = false
@@ -422,7 +423,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					o.EnableTrailingChecksum = false
 				},
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -447,7 +448,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					o.EnableTrailingChecksum = false
 				},
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -474,7 +475,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 		"build error": {
 			"unknown algorithm": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string("unknown"))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string("unknown"))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -504,7 +505,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"http unseekable stream": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -519,7 +520,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"http stream read error": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -537,7 +538,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"http stream rewind error": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -558,7 +559,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					o.EnableTrailingChecksum = false
 				},
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -576,7 +577,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 		"finalize handled": {
 			"https unseekable": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -602,7 +603,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"https unseekable unknown length": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -627,7 +628,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"https seekable": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -653,7 +654,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"https seekable unknown length": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -679,7 +680,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"https no compute payload hash": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				optionsFn: func(o *computeInputPayloadChecksum) {
 					o.EnableComputePayloadHash = false
@@ -707,7 +708,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"https no decode content length": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				optionsFn: func(o *computeInputPayloadChecksum) {
 					o.EnableDecodedContentLengthHeader = false
@@ -735,7 +736,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			},
 			"with content encoding set": {
 				initContext: func(ctx context.Context) context.Context {
-					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {

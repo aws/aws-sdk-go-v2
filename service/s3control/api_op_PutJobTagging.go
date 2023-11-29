@@ -22,9 +22,9 @@ import (
 // modify the existing tag set, you can either replace the existing tag set
 // entirely, or make changes within the existing tag set by retrieving the existing
 // tag set using GetJobTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html)
-// , modify that tag set, and use this action to replace the tag set with the one
-// you modified. For more information, see Controlling access and labeling jobs
-// using tags (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
+// , modify that tag set, and use this operation to replace the tag set with the
+// one you modified. For more information, see Controlling access and labeling
+// jobs using tags (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
 // in the Amazon S3 User Guide.
 //   - If you send this request with an empty tag set, Amazon S3 deletes the
 //     existing tag set on the Batch Operations job. If you use this method, you are
@@ -44,8 +44,8 @@ import (
 //     User-Defined Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
 //     in the Billing and Cost Management User Guide.
 //
-// To use the PutJobTagging operation, you must have permission to perform the
-// s3:PutJobTagging action. Related actions include:
+// Permissions To use the PutJobTagging operation, you must have permission to
+// perform the s3:PutJobTagging action. Related actions include:
 //   - CreateJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //   - GetJobTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html)
 //   - DeleteJobTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html)

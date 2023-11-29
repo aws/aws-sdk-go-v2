@@ -12,10 +12,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a batch inference job. The operation can handle up to 50 million
-// records and the input file must be in JSON format. For more information, see
-// Creating a batch inference job (https://docs.aws.amazon.com/personalize/latest/dg/creating-batch-inference-job.html)
-// .
+// Generates batch recommendations based on a list of items or users stored in
+// Amazon S3 and exports the recommendations to an Amazon S3 bucket. To generate
+// batch recommendations, specify the ARN of a solution version and an Amazon S3
+// URI for the input and output data. For user personalization, popular items, and
+// personalized ranking solutions, the batch inference job generates a list of
+// recommended items for each user ID in the input file. For related items
+// solutions, the job generates a list of recommended items for each item ID in the
+// input file. For more information, see Creating a batch inference job  (https://docs.aws.amazon.com/personalize/latest/dg/getting-batch-recommendations.html)
+// . If you use the Similar-Items recipe, Amazon Personalize can add descriptive
+// themes to batch recommendations. To generate themes, set the job's mode to
+// THEME_GENERATION and specify the name of the field that contains item names in
+// the input data. For more information about generating themes, see Batch
+// recommendations with themes from Content Generator  (https://docs.aws.amazon.com/personalize/latest/dg/themed-batch-recommendations.html)
+// . You can't get batch recommendations with the Trending-Now or Next-Best-Action
+// recipes.
 func (c *Client) CreateBatchInferenceJob(ctx context.Context, params *CreateBatchInferenceJobInput, optFns ...func(*Options)) (*CreateBatchInferenceJobOutput, error) {
 	if params == nil {
 		params = &CreateBatchInferenceJobInput{}
@@ -64,6 +75,14 @@ type CreateBatchInferenceJobInput struct {
 	// The configuration details of a batch inference job.
 	BatchInferenceJobConfig *types.BatchInferenceJobConfig
 
+	// The mode of the batch inference job. To generate descriptive themes for groups
+	// of similar items, set the job mode to THEME_GENERATION . If you don't want to
+	// generate themes, use the default BATCH_INFERENCE . When you get batch
+	// recommendations with themes, you will incur additional costs. For more
+	// information, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
+	// .
+	BatchInferenceJobMode types.BatchInferenceJobMode
+
 	// The ARN of the filter to apply to the batch inference job. For more information
 	// on using filters, see Filtering batch recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html)
 	// .
@@ -75,6 +94,10 @@ type CreateBatchInferenceJobInput struct {
 	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 	// to apply to the batch inference job.
 	Tags []types.Tag
+
+	// For theme generation jobs, specify the name of the column in your Items dataset
+	// that contains each item's name.
+	ThemeGenerationConfig *types.ThemeGenerationConfig
 
 	noSmithyDocumentSerde
 }

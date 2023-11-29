@@ -5,9 +5,50 @@ package controltower
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
+
+type validateOpCreateLandingZone struct {
+}
+
+func (*validateOpCreateLandingZone) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLandingZone) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLandingZoneInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLandingZoneInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLandingZone struct {
+}
+
+func (*validateOpDeleteLandingZone) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLandingZone) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLandingZoneInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLandingZoneInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
 
 type validateOpDisableControl struct {
 }
@@ -89,6 +130,46 @@ func (m *validateOpGetEnabledControl) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetLandingZone struct {
+}
+
+func (*validateOpGetLandingZone) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLandingZone) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLandingZoneInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLandingZoneInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLandingZoneOperation struct {
+}
+
+func (*validateOpGetLandingZoneOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLandingZoneOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLandingZoneOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLandingZoneOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEnabledControls struct {
 }
 
@@ -124,6 +205,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResetLandingZone struct {
+}
+
+func (*validateOpResetLandingZone) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetLandingZone) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetLandingZoneInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetLandingZoneInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -169,6 +270,54 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEnabledControl struct {
+}
+
+func (*validateOpUpdateEnabledControl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEnabledControl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEnabledControlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEnabledControlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLandingZone struct {
+}
+
+func (*validateOpUpdateLandingZone) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLandingZone) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLandingZoneInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLandingZoneInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpCreateLandingZoneValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLandingZone{}, middleware.After)
+}
+
+func addOpDeleteLandingZoneValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLandingZone{}, middleware.After)
+}
+
 func addOpDisableControlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableControl{}, middleware.After)
 }
@@ -185,6 +334,14 @@ func addOpGetEnabledControlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEnabledControl{}, middleware.After)
 }
 
+func addOpGetLandingZoneValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLandingZone{}, middleware.After)
+}
+
+func addOpGetLandingZoneOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLandingZoneOperation{}, middleware.After)
+}
+
 func addOpListEnabledControlsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEnabledControls{}, middleware.After)
 }
@@ -193,12 +350,92 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpResetLandingZoneValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetLandingZone{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateEnabledControlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEnabledControl{}, middleware.After)
+}
+
+func addOpUpdateLandingZoneValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLandingZone{}, middleware.After)
+}
+
+func validateEnabledControlParameter(v *types.EnabledControlParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnabledControlParameter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEnabledControlParameters(v []types.EnabledControlParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnabledControlParameters"}
+	for i := range v {
+		if err := validateEnabledControlParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLandingZoneInput(v *CreateLandingZoneInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLandingZoneInput"}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.Manifest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLandingZoneInput(v *DeleteLandingZoneInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLandingZoneInput"}
+	if v.LandingZoneIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LandingZoneIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpDisableControlInput(v *DisableControlInput) error {
@@ -229,6 +466,11 @@ func validateOpEnableControlInput(v *EnableControlInput) error {
 	}
 	if v.TargetIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetIdentifier"))
+	}
+	if v.Parameters != nil {
+		if err := validateEnabledControlParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -267,6 +509,36 @@ func validateOpGetEnabledControlInput(v *GetEnabledControlInput) error {
 	}
 }
 
+func validateOpGetLandingZoneInput(v *GetLandingZoneInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLandingZoneInput"}
+	if v.LandingZoneIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LandingZoneIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLandingZoneOperationInput(v *GetLandingZoneOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLandingZoneOperationInput"}
+	if v.OperationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListEnabledControlsInput(v *ListEnabledControlsInput) error {
 	if v == nil {
 		return nil
@@ -289,6 +561,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResetLandingZoneInput(v *ResetLandingZoneInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResetLandingZoneInput"}
+	if v.LandingZoneIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LandingZoneIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -325,6 +612,49 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEnabledControlInput(v *UpdateEnabledControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnabledControlInput"}
+	if v.Parameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
+	} else if v.Parameters != nil {
+		if err := validateEnabledControlParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnabledControlIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledControlIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLandingZoneInput(v *UpdateLandingZoneInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLandingZoneInput"}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.Manifest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
+	}
+	if v.LandingZoneIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LandingZoneIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

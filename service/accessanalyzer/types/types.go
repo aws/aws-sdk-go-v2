@@ -7,6 +7,18 @@ import (
 	"time"
 )
 
+// Contains information about actions that define permissions to check against a
+// policy.
+type Access struct {
+
+	// A list of actions for the access permissions.
+	//
+	// This member is required.
+	Actions []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an access preview.
 type AccessPreview struct {
 
@@ -289,6 +301,27 @@ type AnalyzedResourceSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the configuration of an unused access analyzer for
+// an Amazon Web Services organization or account.
+//
+// The following types satisfy this interface:
+//
+//	AnalyzerConfigurationMemberUnusedAccess
+type AnalyzerConfiguration interface {
+	isAnalyzerConfiguration()
+}
+
+// Specifies the configuration of an unused access analyzer for an Amazon Web
+// Services organization or account. External access analyzers do not support any
+// configuration.
+type AnalyzerConfigurationMemberUnusedAccess struct {
+	Value UnusedAccessConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalyzerConfigurationMemberUnusedAccess) isAnalyzerConfiguration() {}
+
 // Contains information about the analyzer.
 type AnalyzerSummary struct {
 
@@ -322,6 +355,9 @@ type AnalyzerSummary struct {
 	//
 	// This member is required.
 	Type Type
+
+	// Specifies whether the analyzer is an external access or unused access analyzer.
+	Configuration AnalyzerConfiguration
 
 	// The resource that was most recently analyzed by the analyzer.
 	LastResourceAnalyzed *string
@@ -438,6 +474,7 @@ type CloudTrailProperties struct {
 //	ConfigurationMemberRdsDbClusterSnapshot
 //	ConfigurationMemberRdsDbSnapshot
 //	ConfigurationMemberS3Bucket
+//	ConfigurationMemberS3ExpressDirectoryBucket
 //	ConfigurationMemberSecretsManagerSecret
 //	ConfigurationMemberSnsTopic
 //	ConfigurationMemberSqsQueue
@@ -508,7 +545,7 @@ type ConfigurationMemberRdsDbSnapshot struct {
 
 func (*ConfigurationMemberRdsDbSnapshot) isConfiguration() {}
 
-// The access control configuration is for an Amazon S3 Bucket.
+// The access control configuration is for an Amazon S3 bucket.
 type ConfigurationMemberS3Bucket struct {
 	Value S3BucketConfiguration
 
@@ -516,6 +553,15 @@ type ConfigurationMemberS3Bucket struct {
 }
 
 func (*ConfigurationMemberS3Bucket) isConfiguration() {}
+
+// The access control configuration is for an Amazon S3 directory bucket.
+type ConfigurationMemberS3ExpressDirectoryBucket struct {
+	Value S3ExpressDirectoryBucketConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberS3ExpressDirectoryBucket) isConfiguration() {}
 
 // The access control configuration is for a Secrets Manager secret.
 type ConfigurationMemberSecretsManagerSecret struct {
@@ -652,6 +698,32 @@ type EfsFileSystemConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an external access finding.
+type ExternalAccessDetails struct {
+
+	// The condition in the analyzed policy statement that resulted in an external
+	// access finding.
+	//
+	// This member is required.
+	Condition map[string]string
+
+	// The action in the analyzed policy statement that an external principal has
+	// permission to use.
+	Action []string
+
+	// Specifies whether the external access finding is public.
+	IsPublic *bool
+
+	// The external principal that has access to a resource within the zone of trust.
+	Principal map[string]string
+
+	// The sources of the external access finding. This indicates how the access that
+	// generated the finding is granted. It is populated for Amazon S3 bucket findings.
+	Sources []FindingSource
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a finding.
 type Finding struct {
 
@@ -706,7 +778,7 @@ type Finding struct {
 	// the resource.
 	IsPublic *bool
 
-	// The external principal that access to a resource within the zone of trust.
+	// The external principal that has access to a resource within the zone of trust.
 	Principal map[string]string
 
 	// The resource that an external principal has access to.
@@ -718,6 +790,69 @@ type Finding struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains information about an external access or unused access finding. Only
+// one parameter can be used in a FindingDetails object.
+//
+// The following types satisfy this interface:
+//
+//	FindingDetailsMemberExternalAccessDetails
+//	FindingDetailsMemberUnusedIamRoleDetails
+//	FindingDetailsMemberUnusedIamUserAccessKeyDetails
+//	FindingDetailsMemberUnusedIamUserPasswordDetails
+//	FindingDetailsMemberUnusedPermissionDetails
+type FindingDetails interface {
+	isFindingDetails()
+}
+
+// The details for an external access analyzer finding.
+type FindingDetailsMemberExternalAccessDetails struct {
+	Value ExternalAccessDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingDetailsMemberExternalAccessDetails) isFindingDetails() {}
+
+// The details for an unused access analyzer finding with an unused IAM role
+// finding type.
+type FindingDetailsMemberUnusedIamRoleDetails struct {
+	Value UnusedIamRoleDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingDetailsMemberUnusedIamRoleDetails) isFindingDetails() {}
+
+// The details for an unused access analyzer finding with an unused IAM user
+// access key finding type.
+type FindingDetailsMemberUnusedIamUserAccessKeyDetails struct {
+	Value UnusedIamUserAccessKeyDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingDetailsMemberUnusedIamUserAccessKeyDetails) isFindingDetails() {}
+
+// The details for an unused access analyzer finding with an unused IAM user
+// password finding type.
+type FindingDetailsMemberUnusedIamUserPasswordDetails struct {
+	Value UnusedIamUserPasswordDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingDetailsMemberUnusedIamUserPasswordDetails) isFindingDetails() {}
+
+// The details for an unused access analyzer finding with an unused permission
+// finding type.
+type FindingDetailsMemberUnusedPermissionDetails struct {
+	Value UnusedPermissionDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingDetailsMemberUnusedPermissionDetails) isFindingDetails() {}
 
 // The source of the finding. This indicates how the access that generated the
 // finding is granted. It is populated for Amazon S3 bucket findings.
@@ -813,6 +948,57 @@ type FindingSummary struct {
 	// The sources of the finding. This indicates how the access that generated the
 	// finding is granted. It is populated for Amazon S3 bucket findings.
 	Sources []FindingSource
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a finding.
+type FindingSummaryV2 struct {
+
+	// The time at which the resource-based policy or IAM entity that generated the
+	// finding was analyzed.
+	//
+	// This member is required.
+	AnalyzedAt *time.Time
+
+	// The time at which the finding was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the finding.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Web Services account ID that owns the resource.
+	//
+	// This member is required.
+	ResourceOwnerAccount *string
+
+	// The type of the resource that the external principal has access to.
+	//
+	// This member is required.
+	ResourceType ResourceType
+
+	// The status of the finding.
+	//
+	// This member is required.
+	Status FindingStatus
+
+	// The time at which the finding was most recently updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The error that resulted in an Error finding.
+	Error *string
+
+	// The type of the external access or unused access finding.
+	FindingType FindingType
+
+	// The resource that the external principal has access to.
+	Resource *string
 
 	noSmithyDocumentSerde
 }
@@ -1317,6 +1503,22 @@ type RdsDbSnapshotConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the reasoning why a check for access passed or
+// failed.
+type ReasonSummary struct {
+
+	// A description of the reasoning of a result of checking for access.
+	Description *string
+
+	// The identifier for the reason statement.
+	StatementId *string
+
+	// The index number of the reason statement.
+	StatementIndex *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for an Amazon S3 access point or multi-region access point
 // for the bucket. You can propose up to 10 access points or multi-region access
 // points per bucket. If the proposed Amazon S3 access point configuration is for
@@ -1395,6 +1597,25 @@ type S3BucketConfiguration struct {
 
 	// The proposed block public access configuration for the Amazon S3 bucket.
 	BucketPublicAccessBlock *S3PublicAccessBlockConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Proposed access control configuration for an Amazon S3 directory bucket. You
+// can propose a configuration for a new Amazon S3 directory bucket or an existing
+// Amazon S3 directory bucket that you own by specifying the Amazon S3 bucket
+// policy. If the configuration is for an existing Amazon S3 directory bucket and
+// you do not specify the Amazon S3 bucket policy, the access preview uses the
+// existing policy attached to the directory bucket. If the access preview is for a
+// new resource and you do not specify the Amazon S3 bucket policy, the access
+// preview assumes an directory bucket without a policy. To propose deletion of an
+// existing bucket policy, you can specify an empty string. For more information
+// about bucket policy limits, see Example bucket policies (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
+// .
+type S3ExpressDirectoryBucketConfiguration struct {
+
+	// The proposed bucket policy for the Amazon S3 directory bucket.
+	BucketPolicy *string
 
 	noSmithyDocumentSerde
 }
@@ -1588,6 +1809,98 @@ type TrailProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an unused access analyzer.
+type UnusedAccessConfiguration struct {
+
+	// The specified access age in days for which to generate findings for unused
+	// access. For example, if you specify 90 days, the analyzer will generate findings
+	// for IAM entities within the accounts of the selected organization for any access
+	// that hasn't been used in 90 or more days since the analyzer's last scan. You can
+	// choose a value between 1 and 180 days.
+	UnusedAccessAge *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an unused access finding for an action. IAM Access
+// Analyzer charges for unused access analysis based on the number of IAM roles and
+// users analyzed per month. For more details on pricing, see IAM Access Analyzer
+// pricing (https://aws.amazon.com/iam/access-analyzer/pricing) .
+type UnusedAction struct {
+
+	// The action for which the unused access finding was generated.
+	//
+	// This member is required.
+	Action *string
+
+	// The time at which the action was last accessed.
+	LastAccessed *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an unused access finding for an IAM role. IAM Access
+// Analyzer charges for unused access analysis based on the number of IAM roles and
+// users analyzed per month. For more details on pricing, see IAM Access Analyzer
+// pricing (https://aws.amazon.com/iam/access-analyzer/pricing) .
+type UnusedIamRoleDetails struct {
+
+	// The time at which the role was last accessed.
+	LastAccessed *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an unused access finding for an IAM user access key.
+// IAM Access Analyzer charges for unused access analysis based on the number of
+// IAM roles and users analyzed per month. For more details on pricing, see IAM
+// Access Analyzer pricing (https://aws.amazon.com/iam/access-analyzer/pricing) .
+type UnusedIamUserAccessKeyDetails struct {
+
+	// The ID of the access key for which the unused access finding was generated.
+	//
+	// This member is required.
+	AccessKeyId *string
+
+	// The time at which the access key was last accessed.
+	LastAccessed *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an unused access finding for an IAM user password.
+// IAM Access Analyzer charges for unused access analysis based on the number of
+// IAM roles and users analyzed per month. For more details on pricing, see IAM
+// Access Analyzer pricing (https://aws.amazon.com/iam/access-analyzer/pricing) .
+type UnusedIamUserPasswordDetails struct {
+
+	// The time at which the password was last accessed.
+	LastAccessed *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an unused access finding for a permission. IAM
+// Access Analyzer charges for unused access analysis based on the number of IAM
+// roles and users analyzed per month. For more details on pricing, see IAM Access
+// Analyzer pricing (https://aws.amazon.com/iam/access-analyzer/pricing) .
+type UnusedPermissionDetails struct {
+
+	// The namespace of the Amazon Web Services service that contains the unused
+	// actions.
+	//
+	// This member is required.
+	ServiceNamespace *string
+
+	// A list of unused actions for which the unused access finding was generated.
+	Actions []UnusedAction
+
+	// The time at which the permission last accessed.
+	LastAccessed *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A finding in a policy. Each finding is an actionable recommendation that can be
 // used to improve the policy.
 type ValidatePolicyFinding struct {
@@ -1669,7 +1982,9 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAclGrantee()                         {}
+func (*UnknownUnionMember) isAnalyzerConfiguration()              {}
 func (*UnknownUnionMember) isConfiguration()                      {}
+func (*UnknownUnionMember) isFindingDetails()                     {}
 func (*UnknownUnionMember) isNetworkOriginConfiguration()         {}
 func (*UnknownUnionMember) isPathElement()                        {}
 func (*UnknownUnionMember) isRdsDbClusterSnapshotAttributeValue() {}

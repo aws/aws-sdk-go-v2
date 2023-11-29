@@ -188,6 +188,15 @@ func awsRestjson1_deserializeOpDocumentCreateAccessorOutput(v **CreateAccessorOu
 				sv.BillingToken = ptr.String(jtv)
 			}
 
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessorNetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.AccessorNetworkType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4273,6 +4282,15 @@ func awsRestjson1_deserializeDocumentAccessor(v **types.Accessor, value interfac
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessorNetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.AccessorNetworkType(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4356,6 +4374,15 @@ func awsRestjson1_deserializeDocumentAccessorSummary(v **types.AccessorSummary, 
 					return fmt.Errorf("expected ResourceIdString to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessorNetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.AccessorNetworkType(jtv)
 			}
 
 		case "Status":

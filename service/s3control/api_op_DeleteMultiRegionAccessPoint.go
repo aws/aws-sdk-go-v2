@@ -16,11 +16,12 @@ import (
 	"strings"
 )
 
-// Deletes a Multi-Region Access Point. This action does not delete the buckets
-// associated with the Multi-Region Access Point, only the Multi-Region Access
-// Point itself. This action will always be routed to the US West (Oregon) Region.
-// For more information about the restrictions around managing Multi-Region Access
-// Points, see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
+// This operation is not supported by directory buckets. Deletes a Multi-Region
+// Access Point. This action does not delete the buckets associated with the
+// Multi-Region Access Point, only the Multi-Region Access Point itself. This
+// action will always be routed to the US West (Oregon) Region. For more
+// information about the restrictions around managing Multi-Region Access Points,
+// see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
 // in the Amazon S3 User Guide. This request is asynchronous, meaning that you
 // might receive a response before the command has completed. When this request
 // provides a response, it provides a token that you can use to monitor the status

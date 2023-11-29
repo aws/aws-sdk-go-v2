@@ -18,9 +18,9 @@ import (
 // an error if you call CreateEventTracker using the same dataset group as an
 // existing event tracker. When you create an event tracker, the response includes
 // a tracking ID, which you pass as a parameter when you use the PutEvents (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html)
-// operation. Amazon Personalize then appends the event data to the Interactions
-// dataset of the dataset group you specify in your event tracker. The event
-// tracker can be in one of the following states:
+// operation. Amazon Personalize then appends the event data to the Item
+// interactions dataset of the dataset group you specify in your event tracker. The
+// event tracker can be in one of the following states:
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //   - DELETE PENDING > DELETE IN_PROGRESS
 //

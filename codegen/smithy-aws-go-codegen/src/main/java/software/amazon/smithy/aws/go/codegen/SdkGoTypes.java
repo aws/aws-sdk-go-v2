@@ -57,6 +57,10 @@ public final class SdkGoTypes {
             }
         }
 
+        public static final class Context {
+            public static final Symbol SetS3Backend = AwsGoDependency.INTERNAL_CONTEXT.valueSymbol("SetS3Backend");
+        }
+
         public static final class Endpoints {
             public static final Symbol MapFIPSRegion = AwsGoDependency.INTERNAL_ENDPOINTS.valueSymbol("MapFIPSRegion");
         }
@@ -73,6 +77,10 @@ public final class SdkGoTypes {
     public static final class ServiceCustomizations {
         public static final class S3 {
             public static final Symbol SetSignerVersion = AwsCustomGoDependency.S3_CUSTOMIZATION.valueSymbol("SetSignerVersion");
+            public static final Symbol ExpressIdentityResolver = AwsCustomGoDependency.S3_CUSTOMIZATION.valueSymbol("ExpressIdentityResolver");
+            public static final Symbol ExpressSigner = AwsCustomGoDependency.S3_CUSTOMIZATION.valueSymbol("ExpressSigner");
+            public static final Symbol GetPropertiesBackend = AwsCustomGoDependency.S3_CUSTOMIZATION.valueSymbol("GetPropertiesBackend");
+            public static final Symbol AddExpressDefaultChecksumMiddleware = AwsCustomGoDependency.S3_CUSTOMIZATION.valueSymbol("AddExpressDefaultChecksumMiddleware");
         }
 
         public static final class S3Control {

@@ -5,6 +5,6 @@
 //
 // Amazon Personalize can consume real-time user event data, such as stream or
 // click data, and use it for model training either alone or combined with
-// historical data. For more information see Recording Events (https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html)
+// historical data. For more information see Recording item interaction events (https://docs.aws.amazon.com/personalize/latest/dg/recording-item-interaction-events.html)
 // .
 package personalizeevents

@@ -1004,7 +1004,7 @@ func TestVPC_CustomEndpoint(t *testing.T) {
 			operation: func(ctx context.Context, svc *s3.Client, fm *requestRetriever) (interface{}, error) {
 				return svc.ListBuckets(ctx, &s3.ListBucketsInput{}, addRequestRetriever(fm))
 			},
-			expectedReqURL:        "https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com/",
+			expectedReqURL:        "https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com/?x-id=ListBuckets",
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "us-west-2",
 		},

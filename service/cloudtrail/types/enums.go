@@ -112,6 +112,28 @@ func (EventDataStoreStatus) Values() []EventDataStoreStatus {
 	}
 }
 
+type FederationStatus string
+
+// Enum values for FederationStatus
+const (
+	FederationStatusEnabling  FederationStatus = "ENABLING"
+	FederationStatusEnabled   FederationStatus = "ENABLED"
+	FederationStatusDisabling FederationStatus = "DISABLING"
+	FederationStatusDisabled  FederationStatus = "DISABLED"
+)
+
+// Values returns all known values for FederationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FederationStatus) Values() []FederationStatus {
+	return []FederationStatus{
+		"ENABLING",
+		"ENABLED",
+		"DISABLING",
+		"DISABLED",
+	}
+}
+
 type ImportFailureStatus string
 
 // Enum values for ImportFailureStatus

@@ -1,3 +1,15 @@
+# v1.29.2 (2023-11-28.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.29.1 (2023-11-28)
+
+* **Bug Fix**: Respect setting RetryMaxAttempts in functional options at client construction.
+
+# v1.29.0 (2023-11-27)
+
+* **Feature**: Enables metadata in recommendations, recommendations with themes, and next best action recommendations
+
 # v1.28.3 (2023-11-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

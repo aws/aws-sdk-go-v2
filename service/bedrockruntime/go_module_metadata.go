@@ -3,4 +3,4 @@
 package bedrockruntime
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.3.3"
+const goModuleVersion = "1.4.0"
