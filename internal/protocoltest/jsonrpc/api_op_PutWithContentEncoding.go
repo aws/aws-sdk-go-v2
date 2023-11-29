@@ -123,7 +123,9 @@ func (c *Client) addOperationPutWithContentEncodingMiddlewares(stack *middleware
 
 func addOperationPutWithContentEncodingRequestCompressionMiddleware(stack *middleware.Stack, options Options) error {
 	return smithyrequestcompression.AddRequestCompression(stack, options.DisableRequestCompression, options.RequestMinCompressSizeBytes,
-		[]string{"gzip"})
+		[]string{
+			"gzip",
+		})
 }
 
 func newServiceMetadataMiddleware_opPutWithContentEncoding(region string) *awsmiddleware.RegisterServiceMetadata {
