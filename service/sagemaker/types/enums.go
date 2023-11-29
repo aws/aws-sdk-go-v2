@@ -1255,6 +1255,166 @@ func (ClarifyTextLanguage) Values() []ClarifyTextLanguage {
 	}
 }
 
+type ClusterInstanceStatus string
+
+// Enum values for ClusterInstanceStatus
+const (
+	ClusterInstanceStatusRunning        ClusterInstanceStatus = "Running"
+	ClusterInstanceStatusFailure        ClusterInstanceStatus = "Failure"
+	ClusterInstanceStatusPending        ClusterInstanceStatus = "Pending"
+	ClusterInstanceStatusShuttingDown   ClusterInstanceStatus = "ShuttingDown"
+	ClusterInstanceStatusSystemUpdating ClusterInstanceStatus = "SystemUpdating"
+)
+
+// Values returns all known values for ClusterInstanceStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterInstanceStatus) Values() []ClusterInstanceStatus {
+	return []ClusterInstanceStatus{
+		"Running",
+		"Failure",
+		"Pending",
+		"ShuttingDown",
+		"SystemUpdating",
+	}
+}
+
+type ClusterInstanceType string
+
+// Enum values for ClusterInstanceType
+const (
+	ClusterInstanceTypeMlP4d24xlarge   ClusterInstanceType = "ml.p4d.24xlarge"
+	ClusterInstanceTypeMlP4de24xlarge  ClusterInstanceType = "ml.p4de.24xlarge"
+	ClusterInstanceTypeMlP548xlarge    ClusterInstanceType = "ml.p5.48xlarge"
+	ClusterInstanceTypeMlTrn132xlarge  ClusterInstanceType = "ml.trn1.32xlarge"
+	ClusterInstanceTypeMlTrn1n32xlarge ClusterInstanceType = "ml.trn1n.32xlarge"
+	ClusterInstanceTypeMlG5Xlarge      ClusterInstanceType = "ml.g5.xlarge"
+	ClusterInstanceTypeMlG52xlarge     ClusterInstanceType = "ml.g5.2xlarge"
+	ClusterInstanceTypeMlG54xlarge     ClusterInstanceType = "ml.g5.4xlarge"
+	ClusterInstanceTypeMlG58xlarge     ClusterInstanceType = "ml.g5.8xlarge"
+	ClusterInstanceTypeMlG512xlarge    ClusterInstanceType = "ml.g5.12xlarge"
+	ClusterInstanceTypeMlG516xlarge    ClusterInstanceType = "ml.g5.16xlarge"
+	ClusterInstanceTypeMlG524xlarge    ClusterInstanceType = "ml.g5.24xlarge"
+	ClusterInstanceTypeMlG548xlarge    ClusterInstanceType = "ml.g5.48xlarge"
+	ClusterInstanceTypeMlC5Large       ClusterInstanceType = "ml.c5.large"
+	ClusterInstanceTypeMlC5Xlarge      ClusterInstanceType = "ml.c5.xlarge"
+	ClusterInstanceTypeMlC52xlarge     ClusterInstanceType = "ml.c5.2xlarge"
+	ClusterInstanceTypeMlC54xlarge     ClusterInstanceType = "ml.c5.4xlarge"
+	ClusterInstanceTypeMlC59xlarge     ClusterInstanceType = "ml.c5.9xlarge"
+	ClusterInstanceTypeMlC512xlarge    ClusterInstanceType = "ml.c5.12xlarge"
+	ClusterInstanceTypeMlC518xlarge    ClusterInstanceType = "ml.c5.18xlarge"
+	ClusterInstanceTypeMlC524xlarge    ClusterInstanceType = "ml.c5.24xlarge"
+	ClusterInstanceTypeMlC5nLarge      ClusterInstanceType = "ml.c5n.large"
+	ClusterInstanceTypeMlC5n2xlarge    ClusterInstanceType = "ml.c5n.2xlarge"
+	ClusterInstanceTypeMlC5n4xlarge    ClusterInstanceType = "ml.c5n.4xlarge"
+	ClusterInstanceTypeMlC5n9xlarge    ClusterInstanceType = "ml.c5n.9xlarge"
+	ClusterInstanceTypeMlC5n18xlarge   ClusterInstanceType = "ml.c5n.18xlarge"
+	ClusterInstanceTypeMlM5Large       ClusterInstanceType = "ml.m5.large"
+	ClusterInstanceTypeMlM5Xlarge      ClusterInstanceType = "ml.m5.xlarge"
+	ClusterInstanceTypeMlM52xlarge     ClusterInstanceType = "ml.m5.2xlarge"
+	ClusterInstanceTypeMlM54xlarge     ClusterInstanceType = "ml.m5.4xlarge"
+	ClusterInstanceTypeMlM58xlarge     ClusterInstanceType = "ml.m5.8xlarge"
+	ClusterInstanceTypeMlM512xlarge    ClusterInstanceType = "ml.m5.12xlarge"
+	ClusterInstanceTypeMlM516xlarge    ClusterInstanceType = "ml.m5.16xlarge"
+	ClusterInstanceTypeMlM524xlarge    ClusterInstanceType = "ml.m5.24xlarge"
+	ClusterInstanceTypeMlT3Medium      ClusterInstanceType = "ml.t3.medium"
+	ClusterInstanceTypeMlT3Large       ClusterInstanceType = "ml.t3.large"
+	ClusterInstanceTypeMlT3Xlarge      ClusterInstanceType = "ml.t3.xlarge"
+	ClusterInstanceTypeMlT32xlarge     ClusterInstanceType = "ml.t3.2xlarge"
+)
+
+// Values returns all known values for ClusterInstanceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterInstanceType) Values() []ClusterInstanceType {
+	return []ClusterInstanceType{
+		"ml.p4d.24xlarge",
+		"ml.p4de.24xlarge",
+		"ml.p5.48xlarge",
+		"ml.trn1.32xlarge",
+		"ml.trn1n.32xlarge",
+		"ml.g5.xlarge",
+		"ml.g5.2xlarge",
+		"ml.g5.4xlarge",
+		"ml.g5.8xlarge",
+		"ml.g5.12xlarge",
+		"ml.g5.16xlarge",
+		"ml.g5.24xlarge",
+		"ml.g5.48xlarge",
+		"ml.c5.large",
+		"ml.c5.xlarge",
+		"ml.c5.2xlarge",
+		"ml.c5.4xlarge",
+		"ml.c5.9xlarge",
+		"ml.c5.12xlarge",
+		"ml.c5.18xlarge",
+		"ml.c5.24xlarge",
+		"ml.c5n.large",
+		"ml.c5n.2xlarge",
+		"ml.c5n.4xlarge",
+		"ml.c5n.9xlarge",
+		"ml.c5n.18xlarge",
+		"ml.m5.large",
+		"ml.m5.xlarge",
+		"ml.m5.2xlarge",
+		"ml.m5.4xlarge",
+		"ml.m5.8xlarge",
+		"ml.m5.12xlarge",
+		"ml.m5.16xlarge",
+		"ml.m5.24xlarge",
+		"ml.t3.medium",
+		"ml.t3.large",
+		"ml.t3.xlarge",
+		"ml.t3.2xlarge",
+	}
+}
+
+type ClusterSortBy string
+
+// Enum values for ClusterSortBy
+const (
+	ClusterSortByCreationTime ClusterSortBy = "CREATION_TIME"
+	ClusterSortByName         ClusterSortBy = "NAME"
+)
+
+// Values returns all known values for ClusterSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterSortBy) Values() []ClusterSortBy {
+	return []ClusterSortBy{
+		"CREATION_TIME",
+		"NAME",
+	}
+}
+
+type ClusterStatus string
+
+// Enum values for ClusterStatus
+const (
+	ClusterStatusCreating       ClusterStatus = "Creating"
+	ClusterStatusDeleting       ClusterStatus = "Deleting"
+	ClusterStatusFailed         ClusterStatus = "Failed"
+	ClusterStatusInservice      ClusterStatus = "InService"
+	ClusterStatusRollingback    ClusterStatus = "RollingBack"
+	ClusterStatusSystemupdating ClusterStatus = "SystemUpdating"
+	ClusterStatusUpdating       ClusterStatus = "Updating"
+)
+
+// Values returns all known values for ClusterStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterStatus) Values() []ClusterStatus {
+	return []ClusterStatus{
+		"Creating",
+		"Deleting",
+		"Failed",
+		"InService",
+		"RollingBack",
+		"SystemUpdating",
+		"Updating",
+	}
+}
+
 type CodeRepositorySortBy string
 
 // Enum values for CodeRepositorySortBy
@@ -2477,6 +2637,50 @@ func (ImageVersionStatus) Values() []ImageVersionStatus {
 	}
 }
 
+type InferenceComponentSortKey string
+
+// Enum values for InferenceComponentSortKey
+const (
+	InferenceComponentSortKeyName         InferenceComponentSortKey = "Name"
+	InferenceComponentSortKeyCreationTime InferenceComponentSortKey = "CreationTime"
+	InferenceComponentSortKeyStatus       InferenceComponentSortKey = "Status"
+)
+
+// Values returns all known values for InferenceComponentSortKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceComponentSortKey) Values() []InferenceComponentSortKey {
+	return []InferenceComponentSortKey{
+		"Name",
+		"CreationTime",
+		"Status",
+	}
+}
+
+type InferenceComponentStatus string
+
+// Enum values for InferenceComponentStatus
+const (
+	InferenceComponentStatusInService InferenceComponentStatus = "InService"
+	InferenceComponentStatusCreating  InferenceComponentStatus = "Creating"
+	InferenceComponentStatusUpdating  InferenceComponentStatus = "Updating"
+	InferenceComponentStatusFailed    InferenceComponentStatus = "Failed"
+	InferenceComponentStatusDeleting  InferenceComponentStatus = "Deleting"
+)
+
+// Values returns all known values for InferenceComponentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceComponentStatus) Values() []InferenceComponentStatus {
+	return []InferenceComponentStatus{
+		"InService",
+		"Creating",
+		"Updating",
+		"Failed",
+		"Deleting",
+	}
+}
+
 type InferenceExecutionMode string
 
 // Enum values for InferenceExecutionMode
@@ -3006,6 +3210,25 @@ func (ListWorkteamsSortByOptions) Values() []ListWorkteamsSortByOptions {
 	return []ListWorkteamsSortByOptions{
 		"Name",
 		"CreateDate",
+	}
+}
+
+type ManagedInstanceScalingStatus string
+
+// Enum values for ManagedInstanceScalingStatus
+const (
+	ManagedInstanceScalingStatusEnabled  ManagedInstanceScalingStatus = "ENABLED"
+	ManagedInstanceScalingStatusDisabled ManagedInstanceScalingStatus = "DISABLED"
+)
+
+// Values returns all known values for ManagedInstanceScalingStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ManagedInstanceScalingStatus) Values() []ManagedInstanceScalingStatus {
+	return []ManagedInstanceScalingStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -4885,6 +5108,24 @@ func (RootAccess) Values() []RootAccess {
 	}
 }
 
+type RoutingStrategy string
+
+// Enum values for RoutingStrategy
+const (
+	RoutingStrategyLeastOutstandingRequests RoutingStrategy = "LEAST_OUTSTANDING_REQUESTS"
+	RoutingStrategyRandom                   RoutingStrategy = "RANDOM"
+)
+
+// Values returns all known values for RoutingStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RoutingStrategy) Values() []RoutingStrategy {
+	return []RoutingStrategy{
+		"LEAST_OUTSTANDING_REQUESTS",
+		"RANDOM",
+	}
+}
+
 type RStudioServerProAccessStatus string
 
 // Enum values for RStudioServerProAccessStatus
@@ -5572,6 +5813,24 @@ func (StudioLifecycleConfigSortKey) Values() []StudioLifecycleConfigSortKey {
 		"CreationTime",
 		"LastModifiedTime",
 		"Name",
+	}
+}
+
+type StudioWebPortal string
+
+// Enum values for StudioWebPortal
+const (
+	StudioWebPortalEnabled  StudioWebPortal = "ENABLED"
+	StudioWebPortalDisabled StudioWebPortal = "DISABLED"
+)
+
+// Values returns all known values for StudioWebPortal. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StudioWebPortal) Values() []StudioWebPortal {
+	return []StudioWebPortal{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

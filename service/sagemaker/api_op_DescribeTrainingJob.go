@@ -211,6 +211,10 @@ type DescribeTrainingJobOutput struct {
 	// Algorithm-specific parameters.
 	HyperParameters map[string]string
 
+	// Contains information about the infrastructure health check configuration for
+	// the training job.
+	InfraCheckConfig *types.InfraCheckConfig
+
 	// An array of Channel objects that describes each data input channel.
 	InputDataConfig []types.Channel
 

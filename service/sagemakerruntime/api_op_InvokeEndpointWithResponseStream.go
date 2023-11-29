@@ -28,12 +28,16 @@ import (
 //     real-time endpoints (https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-test-endpoints.html)
 //     .
 //
-// Amazon SageMaker strips all POST headers except those supported by the API.
-// Amazon SageMaker might add additional headers. You should not rely on the
-// behavior of headers outside those enumerated in the request syntax. Calls to
-// InvokeEndpointWithResponseStream are authenticated by using Amazon Web Services
-// Signature Version 4. For information, see Authenticating Requests (Amazon Web
-// Services Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
+// Before you can use this operation, your IAM permissions must allow the
+// sagemaker:InvokeEndpoint action. For more information about Amazon SageMaker
+// actions for IAM policies, see Actions, resources, and condition keys for Amazon
+// SageMaker (https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonsagemaker.html)
+// in the IAM Service Authorization Reference. Amazon SageMaker strips all POST
+// headers except those supported by the API. Amazon SageMaker might add additional
+// headers. You should not rely on the behavior of headers outside those enumerated
+// in the request syntax. Calls to InvokeEndpointWithResponseStream are
+// authenticated by using Amazon Web Services Signature Version 4. For information,
+// see Authenticating Requests (Amazon Web Services Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 // in the Amazon S3 API Reference.
 func (c *Client) InvokeEndpointWithResponseStream(ctx context.Context, params *InvokeEndpointWithResponseStreamInput, optFns ...func(*Options)) (*InvokeEndpointWithResponseStreamOutput, error) {
 	if params == nil {
@@ -89,6 +93,10 @@ type InvokeEndpointWithResponseStreamInput struct {
 	// This feature is currently supported in the Amazon Web Services SDKs but not in
 	// the Amazon SageMaker Python SDK.
 	CustomAttributes *string
+
+	// If the endpoint hosts one or more inference components, this parameter
+	// specifies the name of inference component to invoke for a streaming response.
+	InferenceComponentName *string
 
 	// An identifier that you assign to your request.
 	InferenceId *string

@@ -587,6 +587,39 @@ type CrossClusterSearchConnectionProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the data sources.
+type DataSourceDetails struct {
+
+	// The type of data source.
+	DataSourceType DataSourceType
+
+	// A description of the data source.
+	Description *string
+
+	// The name of the data source.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the data source.
+//
+// The following types satisfy this interface:
+//
+//	DataSourceTypeMemberS3GlueDataCatalog
+type DataSourceType interface {
+	isDataSourceType()
+}
+
+// The data source for the AWS S3 Glue Data Catalog.
+type DataSourceTypeMemberS3GlueDataCatalog struct {
+	Value S3GlueDataCatalog
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceTypeMemberS3GlueDataCatalog) isDataSourceType() {}
+
 // A filter to apply to the DescribePackage response.
 type DescribePackagesFilter struct {
 
@@ -682,11 +715,15 @@ type DomainEndpointOptions struct {
 	EnforceHTTPS *bool
 
 	// Specify the TLS security policy to apply to the HTTPS endpoint of the domain.
-	// Can be one of the following values:
+	// The policy can be one of the following values:
 	//   - Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLS version
-	//   1.0 and higher.
+	//   1.0 to TLS version 1.2
 	//   - Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLS
 	//   version 1.2
+	//   - Policy-Min-TLS-1-0-2023-10: TLS security policy which supports TLS version
+	//   1.0 to TLS version 1.3
+	//   - Policy-Min-TLS-1-2-2023-10: TLS security policy which supports TLS version
+	//   1.2 to TLS version 1.3 with perfect forward secrecy cipher suites
 	TLSSecurityPolicy TLSSecurityPolicy
 
 	noSmithyDocumentSerde
@@ -1643,6 +1680,15 @@ type ReservedInstanceOffering struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the AWS S3 Glue Data Catalog.
+type S3GlueDataCatalog struct {
+
+	// The role ARN for the AWS S3 Glue Data Catalog.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The SAML identity povider information.
 type SAMLIdp struct {
 
@@ -2150,3 +2196,14 @@ type ZoneAwarenessConfig struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isDataSourceType() {}

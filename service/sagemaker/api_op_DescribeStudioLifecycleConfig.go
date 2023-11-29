@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Describes the Studio Lifecycle Configuration.
+// Describes the Amazon SageMaker Studio Lifecycle Configuration.
 func (c *Client) DescribeStudioLifecycleConfig(ctx context.Context, params *DescribeStudioLifecycleConfigInput, optFns ...func(*Options)) (*DescribeStudioLifecycleConfigOutput, error) {
 	if params == nil {
 		params = &DescribeStudioLifecycleConfigInput{}
@@ -31,7 +31,7 @@ func (c *Client) DescribeStudioLifecycleConfig(ctx context.Context, params *Desc
 
 type DescribeStudioLifecycleConfigInput struct {
 
-	// The name of the Studio Lifecycle Configuration to describe.
+	// The name of the Amazon SageMaker Studio Lifecycle Configuration to describe.
 	//
 	// This member is required.
 	StudioLifecycleConfigName *string
@@ -41,11 +41,11 @@ type DescribeStudioLifecycleConfigInput struct {
 
 type DescribeStudioLifecycleConfigOutput struct {
 
-	// The creation time of the Studio Lifecycle Configuration.
+	// The creation time of the Amazon SageMaker Studio Lifecycle Configuration.
 	CreationTime *time.Time
 
-	// This value is equivalent to CreationTime because Studio Lifecycle
-	// Configurations are immutable.
+	// This value is equivalent to CreationTime because Amazon SageMaker Studio
+	// Lifecycle Configurations are immutable.
 	LastModifiedTime *time.Time
 
 	// The App type that the Lifecycle Configuration is attached to.
@@ -54,10 +54,11 @@ type DescribeStudioLifecycleConfigOutput struct {
 	// The ARN of the Lifecycle Configuration to describe.
 	StudioLifecycleConfigArn *string
 
-	// The content of your Studio Lifecycle Configuration script.
+	// The content of your Amazon SageMaker Studio Lifecycle Configuration script.
 	StudioLifecycleConfigContent *string
 
-	// The name of the Studio Lifecycle Configuration that is described.
+	// The name of the Amazon SageMaker Studio Lifecycle Configuration that is
+	// described.
 	StudioLifecycleConfigName *string
 
 	// Metadata pertaining to the operation's result.

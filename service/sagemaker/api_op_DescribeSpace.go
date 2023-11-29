@@ -73,6 +73,15 @@ type DescribeSpaceOutput struct {
 	// The status.
 	Status types.SpaceStatus
 
+	// Returns the URL of the space. If the space is created with Amazon Web Services
+	// IAM Identity Center (Successor to Amazon Web Services Single Sign-On)
+	// authentication, users can navigate to the URL after appending the respective
+	// redirect parameter for the application type to be federated through Amazon Web
+	// Services IAM Identity Center. The following application types are supported:
+	//   - Studio Classic: &redirect=JupyterServer
+	//   - JupyterLab: &redirect=JupyterLab
+	Url *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

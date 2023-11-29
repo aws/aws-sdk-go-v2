@@ -1,3 +1,9 @@
+# v1.26.0 (2023-11-29)
+
+* **Feature**: Expose Options() accessor on service clients.
+* **Feature**: Launching Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3. Customers can now manage their direct query data sources to Amazon S3 programatically
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.5 (2023-11-28.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

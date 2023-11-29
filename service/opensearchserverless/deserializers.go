@@ -5056,6 +5056,15 @@ func awsAwsjson10_deserializeDocumentCollectionDetail(v **types.CollectionDetail
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "standbyReplicas":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StandbyReplicas to be of type string, got %T instead", value)
+				}
+				sv.StandbyReplicas = types.StandbyReplicas(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5450,6 +5459,15 @@ func awsAwsjson10_deserializeDocumentCreateCollectionDetail(v **types.CreateColl
 					return fmt.Errorf("expected CollectionName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "standbyReplicas":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StandbyReplicas to be of type string, got %T instead", value)
+				}
+				sv.StandbyReplicas = types.StandbyReplicas(jtv)
 			}
 
 		case "status":

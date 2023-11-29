@@ -1,3 +1,9 @@
+# v1.119.0 (2023-11-29)
+
+* **Feature**: Expose Options() accessor on service clients.
+* **Feature**: This release adds following support 1/ Improved SDK tooling for model deployment. 2/ New Inference Component based features to lower inference costs and latency 3/ SageMaker HyperPod management. 4/ Additional parameters for FM Fine Tuning in Autopilot
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.118.2 (2023-11-28.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

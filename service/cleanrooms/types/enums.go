@@ -169,6 +169,31 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	}
 }
 
+type DifferentialPrivacyAggregationType string
+
+// Enum values for DifferentialPrivacyAggregationType
+const (
+	DifferentialPrivacyAggregationTypeAvg           DifferentialPrivacyAggregationType = "AVG"
+	DifferentialPrivacyAggregationTypeCount         DifferentialPrivacyAggregationType = "COUNT"
+	DifferentialPrivacyAggregationTypeCountDistinct DifferentialPrivacyAggregationType = "COUNT_DISTINCT"
+	DifferentialPrivacyAggregationTypeSum           DifferentialPrivacyAggregationType = "SUM"
+	DifferentialPrivacyAggregationTypeStddev        DifferentialPrivacyAggregationType = "STDDEV"
+)
+
+// Values returns all known values for DifferentialPrivacyAggregationType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DifferentialPrivacyAggregationType) Values() []DifferentialPrivacyAggregationType {
+	return []DifferentialPrivacyAggregationType{
+		"AVG",
+		"COUNT",
+		"COUNT_DISTINCT",
+		"SUM",
+		"STDDEV",
+	}
+}
+
 type FilterableMemberStatus string
 
 // Enum values for FilterableMemberStatus
@@ -340,6 +365,41 @@ func (ParameterType) Values() []ParameterType {
 		"TIME",
 		"TIMETZ",
 		"VARBYTE",
+	}
+}
+
+type PrivacyBudgetTemplateAutoRefresh string
+
+// Enum values for PrivacyBudgetTemplateAutoRefresh
+const (
+	PrivacyBudgetTemplateAutoRefreshCalendarMonth PrivacyBudgetTemplateAutoRefresh = "CALENDAR_MONTH"
+	PrivacyBudgetTemplateAutoRefreshNone          PrivacyBudgetTemplateAutoRefresh = "NONE"
+)
+
+// Values returns all known values for PrivacyBudgetTemplateAutoRefresh. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PrivacyBudgetTemplateAutoRefresh) Values() []PrivacyBudgetTemplateAutoRefresh {
+	return []PrivacyBudgetTemplateAutoRefresh{
+		"CALENDAR_MONTH",
+		"NONE",
+	}
+}
+
+type PrivacyBudgetType string
+
+// Enum values for PrivacyBudgetType
+const (
+	PrivacyBudgetTypeDifferentialPrivacy PrivacyBudgetType = "DIFFERENTIAL_PRIVACY"
+)
+
+// Values returns all known values for PrivacyBudgetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PrivacyBudgetType) Values() []PrivacyBudgetType {
+	return []PrivacyBudgetType{
+		"DIFFERENTIAL_PRIVACY",
 	}
 }
 

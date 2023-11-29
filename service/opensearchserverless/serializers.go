@@ -2414,6 +2414,11 @@ func awsAwsjson10_serializeOpDocumentCreateCollectionInput(v *CreateCollectionIn
 		ok.String(*v.Name)
 	}
 
+	if len(v.StandbyReplicas) > 0 {
+		ok := object.Key("standbyReplicas")
+		ok.String(string(v.StandbyReplicas))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson10_serializeDocumentTags(v.Tags, ok); err != nil {

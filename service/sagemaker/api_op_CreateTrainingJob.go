@@ -187,6 +187,10 @@ type CreateTrainingJobInput struct {
 	// job request and return an exception error.
 	HyperParameters map[string]string
 
+	// Contains information about the infrastructure health check configuration for
+	// the training job.
+	InfraCheckConfig *types.InfraCheckConfig
+
 	// An array of Channel objects. Each channel is a named input source.
 	// InputDataConfig describes the input data and its location. Algorithms can accept
 	// input data from one or more channels. For example, an algorithm might have two

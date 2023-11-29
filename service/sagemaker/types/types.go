@@ -1424,7 +1424,8 @@ type AutoMLJobCompletionCriteria struct {
 	// For more information, see the StoppingCondition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StoppingCondition.html)
 	// used by the CreateHyperParameterTuningJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html)
 	// action. For job V2s (jobs created by calling CreateAutoMLJobV2 ), this field
-	// controls the runtime of the job candidate.
+	// controls the runtime of the job candidate. For TextGenerationJobConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TextClassificationJobConfig.html)
+	// problem types, the maximum time defaults to 72 hours (259200 seconds).
 	MaxRuntimePerTrainingJobInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -2563,6 +2564,197 @@ type ClarifyTextConfig struct {
 	//
 	// This member is required.
 	Language ClarifyTextLanguage
+
+	noSmithyDocumentSerde
+}
+
+// Details of an instance group in a SageMaker HyperPod cluster.
+type ClusterInstanceGroupDetails struct {
+
+	// The number of instances that are currently in the instance group of a SageMaker
+	// HyperPod cluster.
+	CurrentCount *int32
+
+	// The execution role for the instance group to assume.
+	ExecutionRole *string
+
+	// The name of the instance group of a SageMaker HyperPod cluster.
+	InstanceGroupName *string
+
+	// The instance type of the instance group of a SageMaker HyperPod cluster.
+	InstanceType ClusterInstanceType
+
+	// Details of LifeCycle configuration for the instance group.
+	LifeCycleConfig *ClusterLifeCycleConfig
+
+	// The number of instances you specified to add to the instance group of a
+	// SageMaker HyperPod cluster.
+	TargetCount *int32
+
+	// The number you specified to TreadsPerCore in CreateCluster for enabling or
+	// disabling multithreading. For instance types that support multithreading, you
+	// can specify 1 for disabling multithreading and 2 for enabling multithreading.
+	// For more information, see the reference table of CPU cores and threads per CPU
+	// core per instance type (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	ThreadsPerCore *int32
+
+	noSmithyDocumentSerde
+}
+
+// The specifications of an instance group that you need to define.
+type ClusterInstanceGroupSpecification struct {
+
+	// Specifies an IAM execution role to be assumed by the instance group.
+	//
+	// This member is required.
+	ExecutionRole *string
+
+	// Specifies the number of instances to add to the instance group of a SageMaker
+	// HyperPod cluster.
+	//
+	// This member is required.
+	InstanceCount *int32
+
+	// Specifies the name of the instance group.
+	//
+	// This member is required.
+	InstanceGroupName *string
+
+	// Specifies the instance type of the instance group.
+	//
+	// This member is required.
+	InstanceType ClusterInstanceType
+
+	// Specifies the LifeCycle configuration for the instance group.
+	//
+	// This member is required.
+	LifeCycleConfig *ClusterLifeCycleConfig
+
+	// Specifies the value for Threads per core. For instance types that support
+	// multithreading, you can specify 1 for disabling multithreading and 2 for
+	// enabling multithreading. For instance types that doesn't support multithreading,
+	// specify 1 . For more information, see the reference table of CPU cores and
+	// threads per CPU core per instance type (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	ThreadsPerCore *int32
+
+	noSmithyDocumentSerde
+}
+
+// Details of an instance in a SageMaker HyperPod cluster.
+type ClusterInstanceStatusDetails struct {
+
+	// The status of an instance in a SageMaker HyperPod cluster.
+	//
+	// This member is required.
+	Status ClusterInstanceStatus
+
+	// The message from an instance in a SageMaker HyperPod cluster.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The LifeCycle configuration for a SageMaker HyperPod cluster.
+type ClusterLifeCycleConfig struct {
+
+	// The directory of the LifeCycle script under SourceS3Uri . This LifeCycle script
+	// runs during cluster creation.
+	//
+	// This member is required.
+	OnCreate *string
+
+	// An Amazon S3 bucket path where your LifeCycle scripts are stored.
+	//
+	// This member is required.
+	SourceS3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of an instance (also called a node interchangeably) in a SageMaker
+// HyperPod cluster.
+type ClusterNodeDetails struct {
+
+	// The instance group name in which the instance is.
+	InstanceGroupName *string
+
+	// The ID of the instance.
+	InstanceId *string
+
+	// The status of the instance.
+	InstanceStatus *ClusterInstanceStatusDetails
+
+	// The type of the instance.
+	InstanceType ClusterInstanceType
+
+	// The time when the instance is launched.
+	LaunchTime *time.Time
+
+	// The LifeCycle configuration applied to the instance.
+	LifeCycleConfig *ClusterLifeCycleConfig
+
+	// The number of threads per CPU core you specified under CreateCluster .
+	ThreadsPerCore *int32
+
+	noSmithyDocumentSerde
+}
+
+// Lists a summary of the properties of an instance (also called a node
+// interchangeably) of a SageMaker HyperPod cluster.
+type ClusterNodeSummary struct {
+
+	// The name of the instance group in which the instance is.
+	//
+	// This member is required.
+	InstanceGroupName *string
+
+	// The ID of the instance.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The status of the instance.
+	//
+	// This member is required.
+	InstanceStatus *ClusterInstanceStatusDetails
+
+	// The type of the instance.
+	//
+	// This member is required.
+	InstanceType ClusterInstanceType
+
+	// The time when the instance is launched.
+	//
+	// This member is required.
+	LaunchTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Lists a summary of the properties of a SageMaker HyperPod cluster.
+type ClusterSummary struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// The name of the SageMaker HyperPod cluster.
+	//
+	// This member is required.
+	ClusterName *string
+
+	// The status of the SageMaker HyperPod cluster.
+	//
+	// This member is required.
+	ClusterStatus ClusterStatus
+
+	// The time when the SageMaker HyperPod cluster is created.
+	//
+	// This member is required.
+	CreationTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -6814,6 +7006,210 @@ type ImageVersion struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the compute resources to allocate to run a model that you assign to an
+// inference component. These resources include CPU cores, accelerators, and
+// memory.
+type InferenceComponentComputeResourceRequirements struct {
+
+	// The minimum MB of memory to allocate to run a model that you assign to an
+	// inference component.
+	//
+	// This member is required.
+	MinMemoryRequiredInMb *int32
+
+	// The maximum MB of memory to allocate to run a model that you assign to an
+	// inference component.
+	MaxMemoryRequiredInMb *int32
+
+	// The number of accelerators to allocate to run a model that you assign to an
+	// inference component. Accelerators include GPUs and Amazon Web Services
+	// Inferentia.
+	NumberOfAcceleratorDevicesRequired *float32
+
+	// The number of CPU cores to allocate to run a model that you assign to an
+	// inference component.
+	NumberOfCpuCoresRequired *float32
+
+	noSmithyDocumentSerde
+}
+
+// Defines a container that provides the runtime environment for a model that you
+// deploy with an inference component.
+type InferenceComponentContainerSpecification struct {
+
+	// The Amazon S3 path where the model artifacts, which result from model training,
+	// are stored. This path must point to a single gzip compressed tar archive
+	// (.tar.gz suffix).
+	ArtifactUrl *string
+
+	// The environment variables to set in the Docker container. Each key and value in
+	// the Environment string-to-string map can have length of up to 1024. We support
+	// up to 16 entries in the map.
+	Environment map[string]string
+
+	// The Amazon Elastic Container Registry (Amazon ECR) path where the Docker image
+	// for the model is stored.
+	Image *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the resources that are deployed with this inference component.
+type InferenceComponentContainerSpecificationSummary struct {
+
+	// The Amazon S3 path where the model artifacts are stored.
+	ArtifactUrl *string
+
+	// Gets the Amazon EC2 Container Registry path of the docker image of the model
+	// that is hosted in this ProductionVariant (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariant.html)
+	// . If you used the registry/repository[:tag] form to specify the image path of
+	// the primary container when you created the model hosted in this
+	// ProductionVariant , the path resolves to a path of the form
+	// registry/repository[@digest] . A digest is a hash value that identifies a
+	// specific version of an image. For information about Amazon ECR paths, see
+	// Pulling an Image (https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html)
+	// in the Amazon ECR User Guide.
+	DeployedImage *DeployedImage
+
+	// The environment variables to set in the Docker container.
+	Environment map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Runtime settings for a model that is deployed with an inference component.
+type InferenceComponentRuntimeConfig struct {
+
+	// The number of runtime copies of the model container to deploy with the
+	// inference component. Each copy can serve inference requests.
+	//
+	// This member is required.
+	CopyCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Details about the runtime settings for the model that is deployed with the
+// inference component.
+type InferenceComponentRuntimeConfigSummary struct {
+
+	// The number of runtime copies of the model container that are currently deployed.
+	CurrentCopyCount *int32
+
+	// The number of runtime copies of the model container that you requested to
+	// deploy with the inference component.
+	DesiredCopyCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Details about the resources to deploy with this inference component, including
+// the model, container, and compute resources.
+type InferenceComponentSpecification struct {
+
+	// The compute resources allocated to run the model assigned to the inference
+	// component.
+	//
+	// This member is required.
+	ComputeResourceRequirements *InferenceComponentComputeResourceRequirements
+
+	// Defines a container that provides the runtime environment for a model that you
+	// deploy with an inference component.
+	Container *InferenceComponentContainerSpecification
+
+	// The name of an existing SageMaker model object in your account that you want to
+	// deploy with the inference component.
+	ModelName *string
+
+	// Settings that take effect while the model container starts up.
+	StartupParameters *InferenceComponentStartupParameters
+
+	noSmithyDocumentSerde
+}
+
+// Details about the resources that are deployed with this inference component.
+type InferenceComponentSpecificationSummary struct {
+
+	// The compute resources allocated to run the model assigned to the inference
+	// component.
+	ComputeResourceRequirements *InferenceComponentComputeResourceRequirements
+
+	// Details about the container that provides the runtime environment for the model
+	// that is deployed with the inference component.
+	Container *InferenceComponentContainerSpecificationSummary
+
+	// The name of the SageMaker model object that is deployed with the inference
+	// component.
+	ModelName *string
+
+	// Settings that take effect while the model container starts up.
+	StartupParameters *InferenceComponentStartupParameters
+
+	noSmithyDocumentSerde
+}
+
+// Settings that take effect while the model container starts up.
+type InferenceComponentStartupParameters struct {
+
+	// The timeout value, in seconds, for your inference container to pass health
+	// check by Amazon S3 Hosting. For more information about health check, see How
+	// Your Container Should Respond to Health Check (Ping) Requests (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests)
+	// .
+	ContainerStartupHealthCheckTimeoutInSeconds *int32
+
+	// The timeout value, in seconds, to download and extract the model that you want
+	// to host from Amazon S3 to the individual inference instance associated with this
+	// inference component.
+	ModelDataDownloadTimeoutInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the properties of an inference component.
+type InferenceComponentSummary struct {
+
+	// The time when the inference component was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the endpoint that hosts the inference
+	// component.
+	//
+	// This member is required.
+	EndpointArn *string
+
+	// The name of the endpoint that hosts the inference component.
+	//
+	// This member is required.
+	EndpointName *string
+
+	// The Amazon Resource Name (ARN) of the inference component.
+	//
+	// This member is required.
+	InferenceComponentArn *string
+
+	// The name of the inference component.
+	//
+	// This member is required.
+	InferenceComponentName *string
+
+	// The time when the inference component was last updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the production variant that hosts the inference component.
+	//
+	// This member is required.
+	VariantName *string
+
+	// The status of the inference component.
+	InferenceComponentStatus InferenceComponentStatus
+
+	noSmithyDocumentSerde
+}
+
 // Specifies details about how containers in a multi-container endpoint are run.
 type InferenceExecutionConfig struct {
 
@@ -7071,6 +7467,17 @@ type InferenceSpecification struct {
 	// which an endpoint can be deployed. This parameter is required for unversioned
 	// models, and optional for versioned models.
 	SupportedTransformInstanceTypes []TransformInstanceType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information for the infrastructure health check of a training
+// job. A SageMaker-provided health check tests the health of instance hardware and
+// cluster network connectivity.
+type InfraCheckConfig struct {
+
+	// Enables an infrastructure health check.
+	EnableInfraCheck *bool
 
 	noSmithyDocumentSerde
 }
@@ -7590,11 +7997,10 @@ type LabelingJobResourceConfig struct {
 	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
-	// Specifies a VPC that your training jobs and hosted models have access to.
-	// Control access to and from your training and model containers by configuring the
-	// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
-	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
-	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see Give
+	// SageMaker Access to Resources in your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
 	// .
 	VpcConfig *VpcConfig
 
@@ -7942,11 +8348,10 @@ type Model struct {
 	// in the Amazon Web Services General Reference Guide.
 	Tags []Tag
 
-	// Specifies a VPC that your training jobs and hosted models have access to.
-	// Control access to and from your training and model containers by configuring the
-	// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
-	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
-	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see Give
+	// SageMaker Access to Resources in your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
 	// .
 	VpcConfig *VpcConfig
 
@@ -9526,11 +9931,10 @@ type MonitoringNetworkConfig struct {
 	// used for the monitoring job.
 	EnableNetworkIsolation *bool
 
-	// Specifies a VPC that your training jobs and hosted models have access to.
-	// Control access to and from your training and model containers by configuring the
-	// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
-	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
-	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see Give
+	// SageMaker Access to Resources in your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
 	// .
 	VpcConfig *VpcConfig
 
@@ -9811,11 +10215,10 @@ type NetworkConfig struct {
 	// used for the processing job.
 	EnableNetworkIsolation *bool
 
-	// Specifies a VPC that your training jobs and hosted models have access to.
-	// Control access to and from your training and model containers by configuring the
-	// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
-	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
-	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see Give
+	// SageMaker Access to Resources in your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
 	// .
 	VpcConfig *VpcConfig
 
@@ -10504,6 +10907,14 @@ type PendingProductionVariantSummary struct {
 
 	// The type of instances associated with the variant.
 	InstanceType ProductionVariantInstanceType
+
+	// Settings that control the range in the number of instances that the endpoint
+	// provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling *ProductionVariantManagedInstanceScaling
+
+	// Settings that control how the endpoint routes incoming traffic to the instances
+	// that the endpoint hosts.
+	RoutingConfig *ProductionVariantRoutingConfig
 
 	// The endpoint variant status which describes the current deployment stage status
 	// or operational status.
@@ -11214,12 +11625,6 @@ type ProcessingStoppingCondition struct {
 // .
 type ProductionVariant struct {
 
-	// The name of the model that you want to host. This is the name that you
-	// specified when creating the model.
-	//
-	// This member is required.
-	ModelName *string
-
 	// The name of the production variant.
 	//
 	// This member is required.
@@ -11260,10 +11665,22 @@ type ProductionVariant struct {
 	// The ML compute instance type.
 	InstanceType ProductionVariantInstanceType
 
+	// Settings that control the range in the number of instances that the endpoint
+	// provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling *ProductionVariantManagedInstanceScaling
+
 	// The timeout value, in seconds, to download and extract the model that you want
 	// to host from Amazon S3 to the individual inference instance associated with this
 	// production variant.
 	ModelDataDownloadTimeoutInSeconds *int32
+
+	// The name of the model that you want to host. This is the name that you
+	// specified when creating the model.
+	ModelName *string
+
+	// Settings that control how the endpoint routes incoming traffic to the instances
+	// that the endpoint hosts.
+	RoutingConfig *ProductionVariantRoutingConfig
 
 	// The serverless configuration for an endpoint. Specifies a serverless endpoint
 	// configuration instead of an instance-based endpoint configuration.
@@ -11309,6 +11726,39 @@ type ProductionVariantCoreDumpConfig struct {
 	// Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Settings that control the range in the number of instances that the endpoint
+// provisions as it scales up or down to accommodate traffic.
+type ProductionVariantManagedInstanceScaling struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales
+	// up to accommodate an increase in traffic.
+	MaxInstanceCount *int32
+
+	// The minimum number of instances that the endpoint must retain when it scales
+	// down to accommodate a decrease in traffic.
+	MinInstanceCount *int32
+
+	// Indicates whether managed instance scaling is enabled.
+	Status ManagedInstanceScalingStatus
+
+	noSmithyDocumentSerde
+}
+
+// Settings that control how the endpoint routes incoming traffic to the instances
+// that the endpoint hosts.
+type ProductionVariantRoutingConfig struct {
+
+	// Sets how the endpoint routes incoming traffic:
+	//   - LEAST_OUTSTANDING_REQUESTS : The endpoint routes requests to the specific
+	//   instances that have more capacity to process them.
+	//   - RANDOM : The endpoint routes each request to a randomly chosen instance.
+	//
+	// This member is required.
+	RoutingStrategy RoutingStrategy
 
 	noSmithyDocumentSerde
 }
@@ -11413,6 +11863,14 @@ type ProductionVariantSummary struct {
 	// The requested weight, as specified in the UpdateEndpointWeightsAndCapacities
 	// request.
 	DesiredWeight *float32
+
+	// Settings that control the range in the number of instances that the endpoint
+	// provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling *ProductionVariantManagedInstanceScaling
+
+	// Settings that control how the endpoint routes incoming traffic to the instances
+	// that the endpoint hosts.
+	RoutingConfig *ProductionVariantRoutingConfig
 
 	// The endpoint variant status which describes the current deployment stage status
 	// or operational status.
@@ -12446,6 +12904,9 @@ type ResourceSpec struct {
 	// The ARN of the SageMaker image that the image version belongs to.
 	SageMakerImageArn *string
 
+	// The SageMakerImageVersionAlias.
+	SageMakerImageVersionAlias *string
+
 	// The ARN of the image version created on the instance.
 	SageMakerImageVersionArn *string
 
@@ -13149,10 +13610,10 @@ type ShadowModelVariantConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies options for sharing SageMaker Studio notebooks. These settings are
-// specified as part of DefaultUserSettings when the CreateDomain API is called,
-// and as part of UserSettings when the CreateUserProfile API is called. When
-// SharingSettings is not specified, notebook sharing isn't allowed.
+// Specifies options for sharing Amazon SageMaker Studio notebooks. These settings
+// are specified as part of DefaultUserSettings when the CreateDomain API is
+// called, and as part of UserSettings when the CreateUserProfile API is called.
+// When SharingSettings is not specified, notebook sharing isn't allowed.
 type SharingSettings struct {
 
 	// Whether to include the notebook cell output when sharing the notebook. The
@@ -13336,14 +13797,14 @@ type StoppingCondition struct {
 	noSmithyDocumentSerde
 }
 
-// Details of the Studio Lifecycle Configuration.
+// Details of the Amazon SageMaker Studio Lifecycle Configuration.
 type StudioLifecycleConfigDetails struct {
 
-	// The creation time of the Studio Lifecycle Configuration.
+	// The creation time of the Amazon SageMaker Studio Lifecycle Configuration.
 	CreationTime *time.Time
 
-	// This value is equivalent to CreationTime because Studio Lifecycle
-	// Configurations are immutable.
+	// This value is equivalent to CreationTime because Amazon SageMaker Studio
+	// Lifecycle Configurations are immutable.
 	LastModifiedTime *time.Time
 
 	// The App type to which the Lifecycle Configuration is attached.
@@ -13352,7 +13813,7 @@ type StudioLifecycleConfigDetails struct {
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration.
 	StudioLifecycleConfigArn *string
 
-	// The name of the Studio Lifecycle Configuration.
+	// The name of the Amazon SageMaker Studio Lifecycle Configuration.
 	StudioLifecycleConfigName *string
 
 	noSmithyDocumentSerde
@@ -13620,12 +14081,37 @@ type TextGenerationJobConfig struct {
 	// The name of the base model to fine-tune. Autopilot supports fine-tuning a
 	// variety of large language models. For information on the list of supported
 	// models, see Text generation models supporting fine-tuning in Autopilot (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-models.html#autopilot-llms-finetuning-supported-llms)
-	// . If no BaseModelName is provided, the default model used is Falcon-7B-Instruct.
+	// . If no BaseModelName is provided, the default model used is Falcon7BInstruct.
 	BaseModelName *string
 
-	// How long a job is allowed to run, or how many candidates a job is allowed to
-	// generate.
+	// How long a fine-tuning job is allowed to run. For TextGenerationJobConfig
+	// problem types, the MaxRuntimePerTrainingJobInSeconds attribute of
+	// AutoMLJobCompletionCriteria defaults to 72h (259200s).
 	CompletionCriteria *AutoMLJobCompletionCriteria
+
+	// The hyperparameters used to configure and optimize the learning process of the
+	// base model. You can set any combination of the following hyperparameters for all
+	// base models. For more information on each supported hyperparameter, see
+	// Optimize the learning process of your text generation models with
+	// hyperparameters (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-set-hyperparameters.html)
+	// .
+	//   - "epochCount" : The number of times the model goes through the entire
+	//   training dataset. Its value should be a string containing an integer value
+	//   within the range of "1" to "10".
+	//   - "batchSize" : The number of data samples used in each iteration of training.
+	//   Its value should be a string containing an integer value within the range of "1"
+	//   to "64".
+	//   - "learningRate" : The step size at which a model's parameters are updated
+	//   during training. Its value should be a string containing a floating-point value
+	//   within the range of "0" to "1".
+	//   - "learningRateWarmupSteps" : The number of training steps during which the
+	//   learning rate gradually increases before reaching its target or maximum value.
+	//   Its value should be a string containing an integer value within the range of "0"
+	//   to "250".
+	// Here is an example where all four hyperparameters are configured. {
+	// "epochCount":"5", "learningRate":"0.5", "batchSize": "32",
+	// "learningRateWarmupSteps": "10" }
+	TextGenerationHyperParameters map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -15168,16 +15654,24 @@ type UserProfileDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of settings that apply to users of Amazon SageMaker Studio. These
-// settings are specified when the CreateUserProfile API is called, and as
-// DefaultUserSettings when the CreateDomain API is called. SecurityGroups is
-// aggregated when specified in both calls. For all other settings in UserSettings
-// , the values specified in CreateUserProfile take precedence over those
-// specified in CreateDomain .
+// A collection of settings that apply to users in a domain. These settings are
+// specified when the CreateUserProfile API is called, and as DefaultUserSettings
+// when the CreateDomain API is called. SecurityGroups is aggregated when
+// specified in both calls. For all other settings in UserSettings , the values
+// specified in CreateUserProfile take precedence over those specified in
+// CreateDomain .
 type UserSettings struct {
 
 	// The Canvas app settings.
 	CanvasAppSettings *CanvasAppSettings
+
+	// The default experience that the user is directed to when accessing the domain.
+	// The supported values are:
+	//   - studio:: : Indicates that Studio is the default experience. This value can
+	//   only be passed if StudioWebPortal is set to ENABLED .
+	//   - app:JupyterServer: : Indicates that Studio Classic is the default
+	//   experience.
+	DefaultLandingUri *string
 
 	// The execution role for the user.
 	ExecutionRole *string
@@ -15195,18 +15689,22 @@ type UserSettings struct {
 	// RStudioServerPro app.
 	RStudioServerProAppSettings *RStudioServerProAppSettings
 
-	// The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses
-	// for communication. Optional when the CreateDomain.AppNetworkAccessType
+	// The security groups for the Amazon Virtual Private Cloud (VPC) that the domain
+	// uses for communication. Optional when the CreateDomain.AppNetworkAccessType
 	// parameter is set to PublicInternetOnly . Required when the
 	// CreateDomain.AppNetworkAccessType parameter is set to VpcOnly , unless specified
 	// as part of the DefaultUserSettings for the domain. Amazon SageMaker adds a
-	// security group to allow NFS traffic from SageMaker Studio. Therefore, the number
-	// of security groups that you can specify is one less than the maximum number
-	// shown.
+	// security group to allow NFS traffic from Amazon SageMaker Studio. Therefore, the
+	// number of security groups that you can specify is one less than the maximum
+	// number shown.
 	SecurityGroups []string
 
-	// Specifies options for sharing SageMaker Studio notebooks.
+	// Specifies options for sharing Amazon SageMaker Studio notebooks.
 	SharingSettings *SharingSettings
+
+	// Whether the user can access Studio. If this value is set to DISABLED , the user
+	// cannot access Studio, even if that is the default experience for the domain.
+	StudioWebPortal StudioWebPortal
 
 	// The TensorBoard app settings.
 	TensorBoardAppSettings *TensorBoardAppSettings
@@ -15265,15 +15763,14 @@ type Vertex struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a VPC that your training jobs and hosted models have access to.
-// Control access to and from your training and model containers by configuring the
-// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
-// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
-// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html)
+// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+// hosted models, and compute resources have access to. You can control access to
+// and from your resources by configuring a VPC. For more information, see Give
+// SageMaker Access to Resources in your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
 // .
 type VpcConfig struct {
 
-	// The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security
+	// The VPC security group IDs, in the form sg-xxxxxxxx . Specify the security
 	// groups for the VPC that is specified in the Subnets field.
 	//
 	// This member is required.

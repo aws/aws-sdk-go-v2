@@ -48,16 +48,6 @@ func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optF
 
 type CreateModelInput struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role that SageMaker can assume to
-	// access model artifacts and docker image for deployment on ML compute instances
-	// or for batch transform jobs. Deploying on ML compute instances is part of model
-	// hosting. For more information, see SageMaker Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
-	// . To be able to pass this role to SageMaker, the caller of this API must have
-	// the iam:PassRole permission.
-	//
-	// This member is required.
-	ExecutionRoleArn *string
-
 	// The name of the new model.
 	//
 	// This member is required.
@@ -69,6 +59,14 @@ type CreateModelInput struct {
 	// Isolates the model container. No inbound or outbound network calls can be made
 	// to or from the model container.
 	EnableNetworkIsolation *bool
+
+	// The Amazon Resource Name (ARN) of the IAM role that SageMaker can assume to
+	// access model artifacts and docker image for deployment on ML compute instances
+	// or for batch transform jobs. Deploying on ML compute instances is part of model
+	// hosting. For more information, see SageMaker Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
+	// . To be able to pass this role to SageMaker, the caller of this API must have
+	// the iam:PassRole permission.
+	ExecutionRoleArn *string
 
 	// Specifies details of how containers in a multi-container endpoint are called.
 	InferenceExecutionConfig *types.InferenceExecutionConfig

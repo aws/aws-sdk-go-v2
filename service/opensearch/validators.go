@@ -30,6 +30,26 @@ func (m *validateOpAcceptInboundConnection) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAddDataSource struct {
+}
+
+func (*validateOpAddDataSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAddTags struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpCreateVpcEndpoint) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateVpcEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDataSource struct {
+}
+
+func (*validateOpDeleteDataSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataSourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +550,26 @@ func (m *validateOpDissociatePackage) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataSource struct {
+}
+
+func (*validateOpGetDataSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDomainMaintenanceStatus struct {
 }
 
@@ -585,6 +645,26 @@ func (m *validateOpGetUpgradeStatus) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetUpgradeStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataSources struct {
+}
+
+func (*validateOpListDataSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataSourcesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,6 +950,26 @@ func (m *validateOpStartServiceSoftwareUpdate) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataSource struct {
+}
+
+func (*validateOpUpdateDataSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDomainConfig struct {
 }
 
@@ -974,6 +1074,10 @@ func addOpAcceptInboundConnectionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpAcceptInboundConnection{}, middleware.After)
 }
 
+func addOpAddDataSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddDataSource{}, middleware.After)
+}
+
 func addOpAddTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTags{}, middleware.After)
 }
@@ -1004,6 +1108,10 @@ func addOpCreatePackageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVpcEndpoint{}, middleware.After)
+}
+
+func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataSource{}, middleware.After)
 }
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -1070,6 +1178,10 @@ func addOpDissociatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDissociatePackage{}, middleware.After)
 }
 
+func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataSource{}, middleware.After)
+}
+
 func addOpGetDomainMaintenanceStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDomainMaintenanceStatus{}, middleware.After)
 }
@@ -1084,6 +1196,10 @@ func addOpGetUpgradeHistoryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetUpgradeStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUpgradeStatus{}, middleware.After)
+}
+
+func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataSources{}, middleware.After)
 }
 
 func addOpListDomainMaintenancesValidationMiddleware(stack *middleware.Stack) error {
@@ -1140,6 +1256,10 @@ func addOpStartDomainMaintenanceValidationMiddleware(stack *middleware.Stack) er
 
 func addOpStartServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartServiceSoftwareUpdate{}, middleware.After)
+}
+
+func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataSource{}, middleware.After)
 }
 
 func addOpUpdateDomainConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1374,6 +1494,27 @@ func validateOpAcceptInboundConnectionInput(v *AcceptInboundConnectionInput) err
 	}
 }
 
+func validateOpAddDataSourceInput(v *AddDataSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddDataSourceInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DataSourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddTagsInput(v *AddTagsInput) error {
 	if v == nil {
 		return nil
@@ -1542,6 +1683,24 @@ func validateOpCreateVpcEndpointInput(v *CreateVpcEndpointInput) error {
 	}
 	if v.VpcOptions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcOptions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataSourceInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1796,6 +1955,24 @@ func validateOpDissociatePackageInput(v *DissociatePackageInput) error {
 	}
 }
 
+func validateOpGetDataSourceInput(v *GetDataSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataSourceInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDomainMaintenanceStatusInput(v *GetDomainMaintenanceStatusInput) error {
 	if v == nil {
 		return nil
@@ -1849,6 +2026,21 @@ func validateOpGetUpgradeStatusInput(v *GetUpgradeStatusInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetUpgradeStatusInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataSourcesInput(v *ListDataSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataSourcesInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
@@ -2073,6 +2265,27 @@ func validateOpStartServiceSoftwareUpdateInput(v *StartServiceSoftwareUpdateInpu
 	invalidParams := smithy.InvalidParamsError{Context: "StartServiceSoftwareUpdateInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataSourceInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DataSourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

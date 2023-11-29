@@ -45,7 +45,7 @@ type DescribeDomainOutput struct {
 	// PublicInternetOnly .
 	//   - PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon
 	//   SageMaker, which allows direct internet access
-	//   - VpcOnly - All Studio traffic is through the specified VPC and subnets
+	//   - VpcOnly - All traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
 	// The entity that creates and manages the required security groups for inter-app
@@ -111,13 +111,13 @@ type DescribeDomainOutput struct {
 	// The status.
 	Status types.DomainStatus
 
-	// The VPC subnets that Studio uses for communication.
+	// The VPC subnets that the domain uses for communication.
 	SubnetIds []string
 
 	// The domain's URL.
 	Url *string
 
-	// The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for
+	// The ID of the Amazon Virtual Private Cloud (VPC) that the domain uses for
 	// communication.
 	VpcId *string
 

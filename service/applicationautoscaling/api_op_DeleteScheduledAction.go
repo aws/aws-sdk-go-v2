@@ -83,6 +83,9 @@ type DeleteScheduledActionInput struct {
 	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//   - SageMaker inference component - The resource type is inference-component and
+	//   the unique identifier is the resource ID. Example:
+	//   inference-component/my-inference-component .
 	//
 	// This member is required.
 	ResourceId *string
@@ -130,6 +133,8 @@ type DeleteScheduledActionInput struct {
 	//   Neptune DB cluster.
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
 	//   concurrency for a SageMaker Serverless endpoint.
+	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
+	//   an endpoint for a SageMaker inference component.
 	//
 	// This member is required.
 	ScalableDimension types.ScalableDimension

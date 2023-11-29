@@ -88,6 +88,10 @@ type InvokeEndpointInput struct {
 	// section in the developer guide for more information.
 	EnableExplanations *string
 
+	// If the endpoint hosts one or more inference components, this parameter
+	// specifies the name of inference component to invoke.
+	InferenceComponentName *string
+
 	// If you provide a value, it is added to the captured data when you enable data
 	// capture on the endpoint. For information about data capture, see Capture Data (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html)
 	// .

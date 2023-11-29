@@ -1,3 +1,8 @@
+# v1.47.0 (2023-11-29)
+
+* **Feature**: Expose Options() accessor on service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.0 (2023-11-28.2)
 
 * **Feature**: Add S3Express support.

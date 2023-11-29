@@ -1,3 +1,9 @@
+# v1.25.0 (2023-11-29)
+
+* **Feature**: Amazon SageMaker customers can now use Application Auto Scaling to automatically scale the number of Inference Component copies across an endpoint to meet the varying demand of their workloads.
+* **Feature**: Expose Options() accessor on service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.5 (2023-11-28.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

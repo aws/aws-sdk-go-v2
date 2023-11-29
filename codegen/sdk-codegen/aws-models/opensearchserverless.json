@@ -497,6 +497,12 @@
                         "smithy.api#documentation": "<p>The ARN of the Amazon Web Services KMS key used to encrypt the collection.</p>"
                     }
                 },
+                "standbyReplicas": {
+                    "target": "com.amazonaws.opensearchserverless#StandbyReplicas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an OpenSearch Serverless collection.</p>"
+                    }
+                },
                 "createdDate": {
                     "target": "smithy.api#Long",
                     "traits": {
@@ -906,6 +912,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key with which to encrypt the collection.</p>"
                     }
                 },
+                "standbyReplicas": {
+                    "target": "com.amazonaws.opensearchserverless#StandbyReplicas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creates details about an OpenSearch Serverless collection.</p>"
+                    }
+                },
                 "createdDate": {
                     "target": "smithy.api#Long",
                     "traits": {
@@ -952,6 +964,12 @@
                     "target": "com.amazonaws.opensearchserverless#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection.</p>"
+                    }
+                },
+                "standbyReplicas": {
+                    "target": "com.amazonaws.opensearchserverless#StandbyReplicas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether standby replicas should be used for a collection.</p>"
                     }
                 },
                 "clientToken": {
@@ -3604,6 +3622,17 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
+                        },
+                        {
+                            "documentation": "Partition doesn't support DualStack",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -4124,6 +4153,23 @@
                 "smithy.api#documentation": "<p>Thrown when you attempt to create more resources than the service allows based on service quotas.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.opensearchserverless#StandbyReplicas": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLED",
+                        "value": "ENABLED",
+                        "documentation": "Standby replicas enabled"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "DISABLED",
+                        "documentation": "Standby replicas disabled"
+                    }
+                ]
             }
         },
         "com.amazonaws.opensearchserverless#SubnetId": {
