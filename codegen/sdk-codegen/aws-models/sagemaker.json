@@ -911,6 +911,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the space.</p>"
                     }
+                },
+                "ResourceSpec": {
+                    "target": "com.amazonaws.sagemaker#ResourceSpec"
                 }
             },
             "traits": {
@@ -958,6 +961,12 @@
                     "target": "com.amazonaws.sagemaker#KernelGatewayImageConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for the file system and kernels in the SageMaker image.</p>"
+                    }
+                },
+                "JupyterLabAppImageConfig": {
+                    "target": "com.amazonaws.sagemaker#JupyterLabAppImageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the file system and the runtime, such as the environment variables and entry point.</p>"
                     }
                 }
             },
@@ -1545,6 +1554,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RSessionGateway"
+                    }
+                },
+                "JupyterLab": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JupyterLab"
+                    }
+                },
+                "CodeEditor": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CodeEditor"
                     }
                 }
             }
@@ -6484,6 +6505,23 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#CodeEditorAppSettings": {
+            "type": "structure",
+            "members": {
+                "DefaultResourceSpec": {
+                    "target": "com.amazonaws.sagemaker#ResourceSpec"
+                },
+                "LifecycleConfigArns": {
+                    "target": "com.amazonaws.sagemaker#LifecycleConfigArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Code Editor application \n      lifecycle configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Code Editor application settings.</p>\n         <p>For more information about Code Editor, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/code-editor.html\">Get started with Code \n      Editor in Amazon SageMaker</a>.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#CodeRepositories": {
             "type": "list",
             "member": {
@@ -7086,6 +7124,32 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#ContainerConfig": {
+            "type": "structure",
+            "members": {
+                "ContainerArguments": {
+                    "target": "com.amazonaws.sagemaker#CustomImageContainerArguments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arguments for the container when you're running the application.</p>"
+                    }
+                },
+                "ContainerEntrypoint": {
+                    "target": "com.amazonaws.sagemaker#CustomImageContainerEntrypoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entrypoint used to run the application in the container.</p>"
+                    }
+                },
+                "ContainerEnvironmentVariables": {
+                    "target": "com.amazonaws.sagemaker#CustomImageContainerEnvironmentVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment variables to set in the container</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration used to run the application image container.</p>"
             }
         },
         "com.amazonaws.sagemaker#ContainerDefinition": {
@@ -7708,6 +7772,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The KernelGatewayImageConfig. You can only specify one image kernel in the \n\tAppImageConfig API. This kernel will be shown to users before the \n\timage starts. Once the image runs, all kernels are visible in JupyterLab.</p>"
                     }
+                },
+                "JupyterLabAppImageConfig": {
+                    "target": "com.amazonaws.sagemaker#JupyterLabAppImageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>JupyterLabAppImageConfig</code>. You can only specify one image kernel in the <code>AppImageConfig</code> API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7776,7 +7846,7 @@
                 "SpaceName": {
                     "target": "com.amazonaws.sagemaker#SpaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the space. If this value is not set, then <code>UserProfileName</code> must be set.</p>"
+                        "smithy.api#documentation": "<p>The name of the space. If this value is not set, then <code>UserProfileName</code>\n            must be set.</p>"
                     }
                 }
             },
@@ -11748,13 +11818,31 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags to associated with the space. Each tag consists of a key and an optional value.\n            Tag keys must be unique for each resource. Tags are searchable using the\n            <code>Search</code> API.</p>"
+                        "smithy.api#documentation": "<p>Tags to associated with the space. Each tag consists of a key and an optional value.\n            Tag keys must be unique for each resource. Tags are searchable using the\n                <code>Search</code> API.</p>"
                     }
                 },
                 "SpaceSettings": {
                     "target": "com.amazonaws.sagemaker#SpaceSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of space settings.</p>"
+                    }
+                },
+                "SpaceDisplayName": {
+                    "target": "com.amazonaws.sagemaker#NonEmptyString64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space that appears in the SageMaker Studio UI.</p>"
+                    }
+                },
+                "OwnershipSettings": {
+                    "target": "com.amazonaws.sagemaker#OwnershipSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of ownership settings.</p>"
+                    }
+                },
+                "SpaceSharingSettings": {
+                    "target": "com.amazonaws.sagemaker#SpaceSharingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of space sharing settings.</p>"
                     }
                 }
             },
@@ -12618,6 +12706,58 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#CustomFileSystem": {
+            "type": "union",
+            "members": {
+                "EFSFileSystem": {
+                    "target": "com.amazonaws.sagemaker#EFSFileSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom file system in Amazon EFS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A file system, created by you, that you assign to a user profile or space for an\n                Amazon SageMaker Domain. Permitted users can access this file system in Amazon SageMaker Studio.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CustomFileSystemConfig": {
+            "type": "union",
+            "members": {
+                "EFSFileSystemConfig": {
+                    "target": "com.amazonaws.sagemaker#EFSFileSystemConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for a custom Amazon EFS file system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for assigning a custom file system to a user profile or space for an\n                Amazon SageMaker Domain. Permitted users can access this file system in Amazon SageMaker Studio.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CustomFileSystemConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CustomFileSystemConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CustomFileSystems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CustomFileSystem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.sagemaker#CustomImage": {
             "type": "structure",
             "members": {
@@ -12648,6 +12788,45 @@
                 "smithy.api#documentation": "<p>A custom SageMaker image. For more information, see\n       <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html\">Bring your own SageMaker image</a>.</p>"
             }
         },
+        "com.amazonaws.sagemaker#CustomImageContainerArguments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#NonEmptyString64"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CustomImageContainerEntrypoint": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#NonEmptyString256"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CustomImageContainerEnvironmentVariables": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sagemaker#NonEmptyString256"
+            },
+            "value": {
+                "target": "com.amazonaws.sagemaker#String256"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.sagemaker#CustomImages": {
             "type": "list",
             "member": {
@@ -12658,6 +12837,30 @@
                     "min": 0,
                     "max": 200
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#CustomPosixUserConfig": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.sagemaker#Uid",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The POSIX user ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Gid": {
+                    "target": "com.amazonaws.sagemaker#Gid",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The POSIX group ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the POSIX identity that is used for file system operations.</p>"
             }
         },
         "com.amazonaws.sagemaker#CustomerMetadataKey": {
@@ -13230,6 +13433,30 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#DefaultEbsStorageSettings": {
+            "type": "structure",
+            "members": {
+                "DefaultEbsVolumeSizeInGb": {
+                    "target": "com.amazonaws.sagemaker#SpaceEbsVolumeSizeInGb",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The default size of the EBS storage volume for a private space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaximumEbsVolumeSizeInGb": {
+                    "target": "com.amazonaws.sagemaker#SpaceEbsVolumeSizeInGb",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The maximum size of the EBS storage volume for a private space.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of default EBS storage settings that applies to private spaces created within a domain or user profile.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#DefaultGid": {
             "type": "integer",
             "traits": {
@@ -13263,6 +13490,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A collection of settings that apply to spaces created in the Domain.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DefaultSpaceStorageSettings": {
+            "type": "structure",
+            "members": {
+                "DefaultEbsStorageSettings": {
+                    "target": "com.amazonaws.sagemaker#DefaultEbsStorageSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default EBS storage settings for a private space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default storage settings for a private space.</p>"
             }
         },
         "com.amazonaws.sagemaker#DefaultUid": {
@@ -13438,7 +13679,7 @@
                 "SpaceName": {
                     "target": "com.amazonaws.sagemaker#SpaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the space. If this value is not set, then <code>UserProfileName</code> must be set.</p>"
+                        "smithy.api#documentation": "<p>The name of the space. If this value is not set, then <code>UserProfileName</code>\n            must be set.</p>"
                     }
                 }
             },
@@ -15686,6 +15927,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of a KernelGateway app.</p>"
                     }
+                },
+                "JupyterLabAppImageConfig": {
+                    "target": "com.amazonaws.sagemaker#JupyterLabAppImageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the JupyterLab app.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15808,7 +16055,7 @@
                 "SpaceName": {
                     "target": "com.amazonaws.sagemaker#SpaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the space. If this value is not set, then <code>UserProfileName</code> must be set.</p>"
+                        "smithy.api#documentation": "<p>The name of the space. If this value is not set, then <code>UserProfileName</code>\n            must be set.</p>"
                     }
                 }
             },
@@ -22038,6 +22285,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the URL of the space. If the space is created with Amazon Web Services IAM Identity Center (Successor to Amazon Web Services Single Sign-On) authentication, users can navigate to the URL after appending the respective redirect parameter for the application type to be federated through Amazon Web Services IAM Identity Center.</p>\n         <p>The following application types are supported:</p>\n         <ul>\n            <li>\n               <p>Studio Classic: <code>&redirect=JupyterServer</code>\n               </p>\n            </li>\n            <li>\n               <p>JupyterLab: <code>&redirect=JupyterLab</code>\n               </p>\n            </li>\n         </ul>"
                     }
+                },
+                "SpaceDisplayName": {
+                    "target": "com.amazonaws.sagemaker#NonEmptyString64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space that appears in the Amazon SageMaker Studio UI.</p>"
+                    }
+                },
+                "OwnershipSettings": {
+                    "target": "com.amazonaws.sagemaker#OwnershipSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of ownership settings for a space.</p>"
+                    }
+                },
+                "SpaceSharingSettings": {
+                    "target": "com.amazonaws.sagemaker#SpaceSharingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of space sharing settings for a space.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24261,6 +24526,44 @@
                 "smithy.api#documentation": "<p>An object with the recommended values for you to specify when creating an autoscaling policy.</p>"
             }
         },
+        "com.amazonaws.sagemaker#EFSFileSystem": {
+            "type": "structure",
+            "members": {
+                "FileSystemId": {
+                    "target": "com.amazonaws.sagemaker#FileSystemId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of your Amazon EFS file system.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A file system, created by you in Amazon EFS, that you assign to a user profile\n            or space for an Amazon SageMaker Domain. Permitted users can access this file\n            system in Amazon SageMaker Studio.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EFSFileSystemConfig": {
+            "type": "structure",
+            "members": {
+                "FileSystemId": {
+                    "target": "com.amazonaws.sagemaker#FileSystemId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of your Amazon EFS file system.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileSystemPath": {
+                    "target": "com.amazonaws.sagemaker#FileSystemPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the file system directory that is accessible in Amazon SageMaker\n            Studio. Permitted users can access only this directory and below.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for assigning a custom Amazon EFS file system to a user profile\n            or space for an Amazon SageMaker Domain.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#EMRStepMetadata": {
             "type": "structure",
             "members": {
@@ -24291,6 +24594,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configurations and outcomes of an Amazon EMR step execution.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EbsStorageSettings": {
+            "type": "structure",
+            "members": {
+                "EbsVolumeSizeInGb": {
+                    "target": "com.amazonaws.sagemaker#SpaceEbsVolumeSizeInGb",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The size of an EBS storage volume for a private space.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of EBS storage settings that applies to private spaces.</p>"
             }
         },
         "com.amazonaws.sagemaker#Edge": {
@@ -26648,7 +26967,17 @@
                 "smithy.api#length": {
                     "min": 11
                 },
-                "smithy.api#pattern": ".*"
+                "smithy.api#pattern": "^(fs-[0-9a-f]{8,})$"
+            }
+        },
+        "com.amazonaws.sagemaker#FileSystemPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^\\/\\S*$"
             }
         },
         "com.amazonaws.sagemaker#FileSystemType": {
@@ -27584,6 +27913,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#Gid": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1001,
+                    "max": 4000000
+                }
             }
         },
         "com.amazonaws.sagemaker#GitConfig": {
@@ -32083,6 +32421,46 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#JupyterLabAppImageConfig": {
+            "type": "structure",
+            "members": {
+                "ContainerConfig": {
+                    "target": "com.amazonaws.sagemaker#ContainerConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the file system and kernels in a SageMaker image running as a JupyterLab app.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#JupyterLabAppSettings": {
+            "type": "structure",
+            "members": {
+                "DefaultResourceSpec": {
+                    "target": "com.amazonaws.sagemaker#ResourceSpec"
+                },
+                "CustomImages": {
+                    "target": "com.amazonaws.sagemaker#CustomImages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of custom SageMaker images that are configured to run as a JupyterLab app.</p>"
+                    }
+                },
+                "LifecycleConfigArns": {
+                    "target": "com.amazonaws.sagemaker#LifecycleConfigArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lifecycle configurations attached to the user profile or domain. To remove a lifecycle config, you must set <code>LifecycleConfigArns</code> to an empty list.</p>"
+                    }
+                },
+                "CodeRepositories": {
+                    "target": "com.amazonaws.sagemaker#CodeRepositories",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterLab application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for the JupyterLab application.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#JupyterServerAppSettings": {
             "type": "structure",
             "members": {
@@ -33399,7 +33777,7 @@
                 "SpaceNameEquals": {
                     "target": "com.amazonaws.sagemaker#SpaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A parameter to search by space name. If <code>UserProfileNameEquals</code> is set, then this value cannot be set.</p>"
+                        "smithy.api#documentation": "<p>A parameter to search by space name. If <code>UserProfileNameEquals</code> is set,\n            then this value cannot be set.</p>"
                     }
                 }
             },
@@ -39210,13 +39588,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token.\n            Use it in your next request to receive the next set of results.</p>"
+                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token. Use it in your\n            next request to receive the next set of results.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of items to return in the response. If the total\n            number of items available is more than the value specified, a <code>NextToken</code>\n            is provided in the response. To resume pagination, provide the <code>NextToken</code>\n            value in the as part of a subsequent call. The default value is 10.</p>"
+                        "smithy.api#documentation": "<p>The total number of items to return in the response. If the total number of items\n            available is more than the value specified, a <code>NextToken</code> is provided in the\n            response. To resume pagination, provide the <code>NextToken</code> value in the as part\n            of a subsequent call. The default value is 10.</p>"
                     }
                 },
                 "SortOrder": {
@@ -39228,7 +39606,7 @@
                 "SortBy": {
                     "target": "com.amazonaws.sagemaker#SpaceSortKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter by which to sort the results. The default is <code>CreationTime</code>.</p>"
+                        "smithy.api#documentation": "<p>The parameter by which to sort the results. The default is\n            <code>CreationTime</code>.</p>"
                     }
                 },
                 "DomainIdEquals": {
@@ -39260,7 +39638,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token.\n            Use it in your next request to receive the next set of results.</p>"
+                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token. Use it in your\n            next request to receive the next set of results.</p>"
                     }
                 }
             },
@@ -44875,6 +45253,26 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.sagemaker#NonEmptyString256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(?!\\s*$).+$"
+            }
+        },
+        "com.amazonaws.sagemaker#NonEmptyString64": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(?!\\s*$).+$"
+            }
+        },
         "com.amazonaws.sagemaker#NotebookInstanceAcceleratorType": {
             "type": "enum",
             "members": {
@@ -45907,6 +46305,36 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#OwnershipSettings": {
+            "type": "structure",
+            "members": {
+                "OwnerUserProfileName": {
+                    "target": "com.amazonaws.sagemaker#UserProfileName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The user profile who is the owner of the private space.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The collection of ownership settings for a space.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#OwnershipSettingsSummary": {
+            "type": "structure",
+            "members": {
+                "OwnerUserProfileName": {
+                    "target": "com.amazonaws.sagemaker#UserProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user profile who is the owner of the private space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies summary information about the ownership settings.</p>"
             }
         },
         "com.amazonaws.sagemaker#PaginationToken": {
@@ -55420,6 +55848,23 @@
                 "smithy.api#documentation": "<p>Specifies options for sharing Amazon SageMaker Studio notebooks. These settings are\n    specified as part of <code>DefaultUserSettings</code> when the <code>CreateDomain</code>\n    API is called, and as part of <code>UserSettings</code> when the <code>CreateUserProfile</code>\n    API is called. When <code>SharingSettings</code> is not specified, notebook sharing\n    isn't allowed.</p>"
             }
         },
+        "com.amazonaws.sagemaker#SharingType": {
+            "type": "enum",
+            "members": {
+                "Private": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Private"
+                    }
+                },
+                "Shared": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Shared"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ShuffleConfig": {
             "type": "structure",
             "members": {
@@ -55815,6 +56260,17 @@
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:space/"
             }
         },
+        "com.amazonaws.sagemaker#SpaceCodeEditorAppSettings": {
+            "type": "structure",
+            "members": {
+                "DefaultResourceSpec": {
+                    "target": "com.amazonaws.sagemaker#ResourceSpec"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The application settings for a Code Editor space.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#SpaceDetails": {
             "type": "structure",
             "members": {
@@ -55847,10 +56303,60 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The last modified time.</p>"
                     }
+                },
+                "SpaceDisplayName": {
+                    "target": "com.amazonaws.sagemaker#NonEmptyString64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space that appears in the Studio UI.</p>"
+                    }
+                },
+                "SpaceSettingsSummary": {
+                    "target": "com.amazonaws.sagemaker#SpaceSettingsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies summary information about the space settings.</p>"
+                    }
+                },
+                "SpaceSharingSettingsSummary": {
+                    "target": "com.amazonaws.sagemaker#SpaceSharingSettingsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies summary information about the space sharing settings.</p>"
+                    }
+                },
+                "OwnershipSettingsSummary": {
+                    "target": "com.amazonaws.sagemaker#OwnershipSettingsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies summary information about the ownership settings.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The space's details.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SpaceEbsVolumeSizeInGb": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 16384
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#SpaceJupyterLabAppSettings": {
+            "type": "structure",
+            "members": {
+                "DefaultResourceSpec": {
+                    "target": "com.amazonaws.sagemaker#ResourceSpec"
+                },
+                "CodeRepositories": {
+                    "target": "com.amazonaws.sagemaker#CodeRepositories",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterLab application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for the JupyterLab application within a space.</p>"
             }
         },
         "com.amazonaws.sagemaker#SpaceList": {
@@ -55877,10 +56383,90 @@
                 },
                 "KernelGatewayAppSettings": {
                     "target": "com.amazonaws.sagemaker#KernelGatewayAppSettings"
+                },
+                "JupyterLabAppSettings": {
+                    "target": "com.amazonaws.sagemaker#SpaceJupyterLabAppSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the JupyterLab application.</p>"
+                    }
+                },
+                "CodeEditorAppSettings": {
+                    "target": "com.amazonaws.sagemaker#SpaceCodeEditorAppSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Code Editor application settings.</p>"
+                    }
+                },
+                "SpaceStorageSettings": {
+                    "target": "com.amazonaws.sagemaker#SpaceStorageSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                    }
+                },
+                "AppType": {
+                    "target": "com.amazonaws.sagemaker#AppType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of app created within the space.</p>"
+                    }
+                },
+                "CustomFileSystems": {
+                    "target": "com.amazonaws.sagemaker#CustomFileSystems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A file system, created by you, that you assign to a space for an Amazon SageMaker\n            Domain. Permitted users can access this file system in Amazon SageMaker\n            Studio.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A collection of space settings.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SpaceSettingsSummary": {
+            "type": "structure",
+            "members": {
+                "AppType": {
+                    "target": "com.amazonaws.sagemaker#AppType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of app created within the space.</p>"
+                    }
+                },
+                "SpaceStorageSettings": {
+                    "target": "com.amazonaws.sagemaker#SpaceStorageSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies summary information about the space settings.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SpaceSharingSettings": {
+            "type": "structure",
+            "members": {
+                "SharingType": {
+                    "target": "com.amazonaws.sagemaker#SharingType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the sharing type of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of space sharing settings.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SpaceSharingSettingsSummary": {
+            "type": "structure",
+            "members": {
+                "SharingType": {
+                    "target": "com.amazonaws.sagemaker#SharingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the sharing type of the space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies summary information about the space sharing settings.</p>"
             }
         },
         "com.amazonaws.sagemaker#SpaceSortKey": {
@@ -55945,6 +56531,20 @@
                         "smithy.api#enumValue": "Delete_Failed"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#SpaceStorageSettings": {
+            "type": "structure",
+            "members": {
+                "EbsStorageSettings": {
+                    "target": "com.amazonaws.sagemaker#EbsStorageSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of EBS storage settings for a private space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
             }
         },
         "com.amazonaws.sagemaker#SpawnRate": {
@@ -57099,6 +57699,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "KernelGateway"
+                    }
+                },
+                "JupyterLab": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JupyterLab"
+                    }
+                },
+                "CodeEditor": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CodeEditor"
                     }
                 }
             }
@@ -61044,6 +61656,15 @@
                 "smithy.api#documentation": "<p>Container for user interface template information.</p>"
             }
         },
+        "com.amazonaws.sagemaker#Uid": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 10000,
+                    "max": 4000000
+                }
+            }
+        },
         "com.amazonaws.sagemaker#UpdateAction": {
             "type": "operation",
             "input": {
@@ -61150,6 +61771,12 @@
                     "target": "com.amazonaws.sagemaker#KernelGatewayImageConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The new KernelGateway app to run on the image.</p>"
+                    }
+                },
+                "JupyterLabAppImageConfig": {
+                    "target": "com.amazonaws.sagemaker#JupyterLabAppImageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JupyterLab app running on the image.</p>"
                     }
                 }
             },
@@ -63091,6 +63718,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of space settings.</p>"
                     }
+                },
+                "SpaceDisplayName": {
+                    "target": "com.amazonaws.sagemaker#NonEmptyString64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the space that appears in the Amazon SageMaker Studio UI.</p>"
+                    }
                 }
             },
             "traits": {
@@ -63772,6 +64405,24 @@
                         "smithy.api#documentation": "<p>The Canvas app settings.</p>"
                     }
                 },
+                "JupyterLabAppSettings": {
+                    "target": "com.amazonaws.sagemaker#JupyterLabAppSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the JupyterLab application.</p>"
+                    }
+                },
+                "CodeEditorAppSettings": {
+                    "target": "com.amazonaws.sagemaker#CodeEditorAppSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Code Editor application settings.</p>"
+                    }
+                },
+                "SpaceStorageSettings": {
+                    "target": "com.amazonaws.sagemaker#DefaultSpaceStorageSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                    }
+                },
                 "DefaultLandingUri": {
                     "target": "com.amazonaws.sagemaker#LandingUri",
                     "traits": {
@@ -63782,6 +64433,18 @@
                     "target": "com.amazonaws.sagemaker#StudioWebPortal",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether the user can access Studio. If this value is set to <code>DISABLED</code>, the user cannot access Studio, even if that is the default experience for the domain.</p>"
+                    }
+                },
+                "CustomPosixUserConfig": {
+                    "target": "com.amazonaws.sagemaker#CustomPosixUserConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the POSIX identity that is used for file system operations.</p>"
+                    }
+                },
+                "CustomFileSystemConfigs": {
+                    "target": "com.amazonaws.sagemaker#CustomFileSystemConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for assigning a custom file system to a user profile. Permitted users can\n            access this file system in Amazon SageMaker Studio.</p>"
                     }
                 }
             },

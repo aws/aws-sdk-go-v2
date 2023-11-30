@@ -10559,6 +10559,50 @@
                 }
             }
         },
+        "com.amazonaws.glue#DataQualityAnalyzerResult": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data quality analyzer.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#DataQualityRuleResultDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the data quality analyzer.</p>"
+                    }
+                },
+                "EvaluationMessage": {
+                    "target": "com.amazonaws.glue#DataQualityRuleResultDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An evaluation message.</p>"
+                    }
+                },
+                "EvaluatedMetrics": {
+                    "target": "com.amazonaws.glue#EvaluatedMetricsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of metrics associated with the evaluation of the analyzer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the result of the evaluation of a data quality analyzer.</p>"
+            }
+        },
+        "com.amazonaws.glue#DataQualityAnalyzerResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#DataQualityAnalyzerResult"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.glue#DataQualityEvaluationRunAdditionalRunOptions": {
             "type": "structure",
             "members": {
@@ -10577,6 +10621,80 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Additional run options you can specify for an evaluation run.</p>"
+            }
+        },
+        "com.amazonaws.glue#DataQualityMetricValues": {
+            "type": "structure",
+            "members": {
+                "ActualValue": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actual value of the data quality metric.</p>"
+                    }
+                },
+                "ExpectedValue": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected value of the data quality metric according to the analysis of historical data.</p>"
+                    }
+                },
+                "LowerLimit": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lower limit of the data quality metric value according to the analysis of historical data.</p>"
+                    }
+                },
+                "UpperLimit": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upper limit of the data quality metric value according to the analysis of historical data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the data quality metric value according to the analysis of historical data.</p>"
+            }
+        },
+        "com.amazonaws.glue#DataQualityObservation": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.glue#DataQualityObservationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the data quality observation.</p>"
+                    }
+                },
+                "MetricBasedObservation": {
+                    "target": "com.amazonaws.glue#MetricBasedObservation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object of type <code>MetricBasedObservation</code> representing the observation that is based on evaluated data quality metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the observation generated after evaluating the rules and analyzers.</p>"
+            }
+        },
+        "com.amazonaws.glue#DataQualityObservationDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.glue#DataQualityObservations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#DataQualityObservation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.glue#DataQualityResult": {
@@ -10646,6 +10764,18 @@
                     "target": "com.amazonaws.glue#DataQualityRuleResults",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>DataQualityRuleResult</code> objects representing the results for each rule. </p>"
+                    }
+                },
+                "AnalyzerResults": {
+                    "target": "com.amazonaws.glue#DataQualityAnalyzerResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataQualityAnalyzerResult</code> objects representing the results for each analyzer. </p>"
+                    }
+                },
+                "Observations": {
+                    "target": "com.amazonaws.glue#DataQualityObservations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataQualityObservation</code> objects representing the observations generated after evaluating the rules and analyzers. </p>"
                     }
                 }
             },
@@ -10840,13 +10970,13 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.glue#DescriptionString",
+                    "target": "com.amazonaws.glue#DataQualityRuleResultDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the data quality rule.</p>"
                     }
                 },
                 "EvaluationMessage": {
-                    "target": "com.amazonaws.glue#DescriptionString",
+                    "target": "com.amazonaws.glue#DataQualityRuleResultDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>An evaluation message.</p>"
                     }
@@ -10866,6 +10996,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the result of the evaluation of a data quality rule.</p>"
+            }
+        },
+        "com.amazonaws.glue#DataQualityRuleResultDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.glue#DataQualityRuleResultStatus": {
@@ -10898,7 +11038,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 2000
                 }
             }
@@ -15983,6 +16123,18 @@
                     "target": "com.amazonaws.glue#DataQualityRuleResults",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>DataQualityRuleResult</code> objects representing the results for each rule. </p>"
+                    }
+                },
+                "AnalyzerResults": {
+                    "target": "com.amazonaws.glue#DataQualityAnalyzerResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataQualityAnalyzerResult</code> objects representing the results for each analyzer. </p>"
+                    }
+                },
+                "Observations": {
+                    "target": "com.amazonaws.glue#DataQualityObservations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataQualityObservation</code> objects representing the observations generated after evaluating the rules and analyzers. </p>"
                     }
                 }
             },
@@ -25112,6 +25264,32 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9+-=._./@]+$"
             }
         },
+        "com.amazonaws.glue#MetricBasedObservation": {
+            "type": "structure",
+            "members": {
+                "MetricName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data quality metric used for generating the observation.</p>"
+                    }
+                },
+                "MetricValues": {
+                    "target": "com.amazonaws.glue#DataQualityMetricValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object of type <code>DataQualityMetricValues</code> representing the analysis of the data quality metric value.</p>"
+                    }
+                },
+                "NewRules": {
+                    "target": "com.amazonaws.glue#NewRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of new data quality rules generated as part of the observation based on the data quality metric value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the metric based observation generated based on evaluated data quality metrics.</p>"
+            }
+        },
         "com.amazonaws.glue#MicrosoftSQLServerCatalogSource": {
             "type": "structure",
             "members": {
@@ -25291,6 +25469,12 @@
             }
         },
         "com.amazonaws.glue#NameStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#NameString"
+            }
+        },
+        "com.amazonaws.glue#NewRules": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#NameString"
