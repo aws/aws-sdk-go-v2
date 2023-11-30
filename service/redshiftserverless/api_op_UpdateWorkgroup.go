@@ -42,7 +42,7 @@ type UpdateWorkgroupInput struct {
 	BaseCapacity *int32
 
 	// An array of parameters to set for advanced control over a database. The options
-	// are auto_mv , datestyle , enable_case_sensitivity_identifier ,
+	// are auto_mv , datestyle , enable_case_sensitive_identifier ,
 	// enable_user_activity_logging , query_group , search_path , and query monitoring
 	// metrics that let you define performance boundaries. For more information about
 	// query monitoring rules and available metrics, see Query monitoring metrics for

@@ -1,0 +1,8 @@
+{
+    "id": "7772cb60-5e9d-4af7-9ec2-5716caccbd18",
+    "type": "feature",
+    "description": "AWS Marketplace Deployment is a new service that provides essential features that facilitate the deployment of software, data, and services procured through AWS Marketplace.",
+    "modules": [
+        "service/marketplacedeployment"
+    ]
+}

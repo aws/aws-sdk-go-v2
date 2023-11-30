@@ -1,0 +1,8 @@
+{
+    "id": "ca5fc62a-b59b-43fa-9b2f-b2b690da1697",
+    "type": "feature",
+    "description": "This release enhances the ListEntities API to support new entity type-specific strongly typed filters in the request and entity type-specific strongly typed summaries in the response.",
+    "modules": [
+        "service/marketplacecatalog"
+    ]
+}

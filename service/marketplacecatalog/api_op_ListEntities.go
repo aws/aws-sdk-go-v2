@@ -35,10 +35,22 @@ type ListEntitiesInput struct {
 	// This member is required.
 	Catalog *string
 
-	// The type of entities to retrieve.
+	// The type of entities to retrieve. Valid values are: ServerProduct , AmiProduct ,
+	// ContainerProduct , DataProduct , SaaSProduct , ProcurementPolicy , Experience ,
+	// Audience , BrandingSettings , Offer , Seller , ResaleAuthorization .
 	//
 	// This member is required.
 	EntityType *string
+
+	// A Union object containing filter shapes for all EntityType s. Each
+	// EntityTypeFilter shape will have filters applicable for that EntityType that
+	// can be used to search or filter entities.
+	EntityTypeFilters types.EntityTypeFilters
+
+	// A Union object containing Sort shapes for all EntityType s. Each EntityTypeSort
+	// shape will have SortBy and SortOrder applicable for fields on that EntityType .
+	// This can be used to sort the results of the filter query.
+	EntityTypeSort types.EntityTypeSort
 
 	// An array of filter objects. Each filter object contains two attributes,
 	// filterName and filterValues .
@@ -65,7 +77,7 @@ type ListEntitiesInput struct {
 
 type ListEntitiesOutput struct {
 
-	// Array of EntitySummary object.
+	// Array of EntitySummary objects.
 	EntitySummaryList []types.EntitySummary
 
 	// The value of the next token if it exists. Null if there is no more result.

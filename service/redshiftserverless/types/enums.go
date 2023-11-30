@@ -68,6 +68,24 @@ func (SnapshotStatus) Values() []SnapshotStatus {
 	}
 }
 
+type State string
+
+// Enum values for State
+const (
+	StateActive   State = "ACTIVE"
+	StateDisabled State = "DISABLED"
+)
+
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (State) Values() []State {
+	return []State{
+		"ACTIVE",
+		"DISABLED",
+	}
+}
+
 type UsageLimitBreachAction string
 
 // Enum values for UsageLimitBreachAction
