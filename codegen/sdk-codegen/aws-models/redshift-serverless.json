@@ -77,7 +77,7 @@
                 "parameterKey": {
                     "target": "com.amazonaws.redshiftserverless#ParameterKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key of the parameter. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitivity_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, and query monitoring metrics that let \n         you define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>The key of the parameter. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, and query monitoring metrics that let \n         you define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "parameterValue": {
@@ -349,6 +349,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifiers of the security group that defines the ports, \n         protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>"
                     }
+                },
+                "ownerAccount": {
+                    "target": "com.amazonaws.redshiftserverless#OwnerAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.</p>"
+                    }
                 }
             },
             "traits": {
@@ -491,6 +497,113 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#CreateScheduledAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#CreateScheduledActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#CreateScheduledActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. \n         For example, you can create a schedule of when to run the <code>CreateSnapshot</code> API operation.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateScheduledActionRequest": {
+            "type": "structure",
+            "members": {
+                "scheduledActionName": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scheduled action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetAction": {
+                    "target": "com.amazonaws.redshiftserverless#TargetAction",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "schedule": {
+                    "target": "com.amazonaws.redshiftserverless#Schedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour.</p>\n         <p>Format of at expressions is \"<code>at(yyyy-mm-ddThh:mm:ss)</code>\". For example, \"<code>at(2016-03-04T17:27:00)</code>\".</p>\n         <p>Format of cron expressions is \"<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>\". For example, \"<code>cron(0 10 ? * MON *)</code>\". For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.redshiftserverless#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Cluster Management Guide</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace for which to create a scheduled action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> \n         of the scheduled action, see <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_ScheduledAction.html\">ScheduledAction</a>.</p>"
+                    }
+                },
+                "scheduledActionDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the scheduled action.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time in UTC when the schedule is active. Before this time, the scheduled action does not trigger.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateScheduledActionResponse": {
+            "type": "structure",
+            "members": {
+                "scheduledAction": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned <code>ScheduledAction</code> object that describes the properties of a scheduled action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshiftserverless#CreateSnapshot": {
             "type": "operation",
             "input": {
@@ -522,6 +635,88 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a snapshot of all databases in a namespace.\n         For more information about snapshots, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html\">\n         Working with snapshots and recovery points</a>.</p>",
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateSnapshotCopyConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#CreateSnapshotCopyConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#CreateSnapshotCopyConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a snapshot copy configuration that lets you copy snapshots to another Amazon Web Services Region.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateSnapshotCopyConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace to copy snapshots from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationRegion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination Amazon Web Services Region that you want to copy snapshots to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotRetentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention period of the snapshots that you copy to the destination Amazon Web Services Region.</p>"
+                    }
+                },
+                "destinationKmsKeyId": {
+                    "target": "com.amazonaws.redshiftserverless#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key to use to encrypt your snapshots in the destination Amazon Web Services Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateSnapshotCopyConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "snapshotCopyConfiguration": {
+                    "target": "com.amazonaws.redshiftserverless#SnapshotCopyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The snapshot copy configuration object that is returned.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshiftserverless#CreateSnapshotRequest": {
@@ -570,6 +765,40 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateSnapshotScheduleActionParameters": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace for which you want to configure a scheduled action to create a snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotNamePrefix": {
+                    "target": "com.amazonaws.redshiftserverless#SnapshotNamePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string prefix that is attached to the name of the snapshot created by the scheduled action. The final \n      name of the snapshot is the string prefix appended by the date and time of when the snapshot was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention period of the snapshot created by the scheduled action.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.redshiftserverless#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html\">Tag objects</a> to associate with the snapshot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters that you can use to configure a <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html\">scheduled action</a> to create a snapshot. For more information about creating a scheduled action, see \n         <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html\">CreateScheduledAction</a>.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#CreateUsageLimit": {
@@ -722,7 +951,7 @@
                 "configParameters": {
                     "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitivity_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">\n            Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">\n            Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "securityGroupIds": {
@@ -1066,6 +1295,59 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#DeleteScheduledAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#DeleteScheduledActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#DeleteScheduledActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a scheduled action.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteScheduledActionRequest": {
+            "type": "structure",
+            "members": {
+                "scheduledActionName": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scheduled action to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteScheduledActionResponse": {
+            "type": "structure",
+            "members": {
+                "scheduledAction": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deleted scheduled action object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshiftserverless#DeleteSnapshot": {
             "type": "operation",
             "input": {
@@ -1091,6 +1373,66 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a snapshot from Amazon Redshift Serverless.</p>",
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteSnapshotCopyConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#DeleteSnapshotCopyConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#DeleteSnapshotCopyConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a snapshot copy configuration</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteSnapshotCopyConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "snapshotCopyConfigurationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the snapshot copy configuration to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteSnapshotCopyConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "snapshotCopyConfiguration": {
+                    "target": "com.amazonaws.redshiftserverless#SnapshotCopyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deleted snapshot copy configuration object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshiftserverless#DeleteSnapshotRequest": {
@@ -1729,6 +2071,59 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#GetScheduledAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetScheduledActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetScheduledActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a scheduled action.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetScheduledActionRequest": {
+            "type": "structure",
+            "members": {
+                "scheduledActionName": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scheduled action.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetScheduledActionResponse": {
+            "type": "structure",
+            "members": {
+                "scheduledAction": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned scheduled action object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshiftserverless#GetSnapshot": {
             "type": "operation",
             "input": {
@@ -2176,6 +2571,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the virtual private cloud with access to Amazon Redshift Serverless.</p>"
                     }
+                },
+                "ownerAccount": {
+                    "target": "com.amazonaws.redshiftserverless#OwnerAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2369,6 +2770,182 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListScheduledActions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListScheduledActionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListScheduledActionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InvalidPaginationException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of scheduled actions. You can use the flags to filter the list of returned scheduled actions.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "scheduledActions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListScheduledActionsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.redshiftserverless#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. Use <code>nextToken</code> to display the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of namespace associated with the scheduled action to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListScheduledActionsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.redshiftserverless#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
+                    }
+                },
+                "scheduledActions": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All of the returned scheduled action objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListSnapshotCopyConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListSnapshotCopyConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListSnapshotCopyConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InvalidPaginationException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of snapshot copy configurations.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "snapshotCopyConfigurations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListSnapshotCopyConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace from which to list all snapshot copy configurations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.redshiftserverless#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using \n         the returned token to retrieve the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListSnapshotCopyConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.redshiftserverless#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using \n         the returned token to retrieve the next page.</p>"
+                    }
+                },
+                "snapshotCopyConfigurations": {
+                    "target": "com.amazonaws.redshiftserverless#SnapshotCopyConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All of the returned snapshot copy configurations.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -2771,6 +3348,12 @@
                             "max": 100
                         }
                     }
+                },
+                "ownerAccount": {
+                    "target": "com.amazonaws.redshiftserverless#OwnerAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3018,6 +3601,22 @@
                 "target": "com.amazonaws.redshiftserverless#NetworkInterface"
             }
         },
+        "com.amazonaws.redshiftserverless#NextInvocationsList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Timestamp"
+            }
+        },
+        "com.amazonaws.redshiftserverless#OwnerAccount": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 12
+                },
+                "smithy.api#pattern": "(\\d{12})"
+            }
+        },
         "com.amazonaws.redshiftserverless#PaginationToken": {
             "type": "string",
             "traits": {
@@ -3163,6 +3762,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#RestoreFromRecoveryPoint"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#RestoreTableFromRecoveryPoint"
                 }
             ]
         },
@@ -3225,6 +3827,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#RecoveryPointResource"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionResource"
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#SnapshotResource"
@@ -4236,6 +4841,117 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#RestoreTableFromRecoveryPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#RestoreTableFromRecoveryPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#RestoreTableFromRecoveryPointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Restores a table from a recovery point to your Amazon Redshift Serverless instance. You can't use this operation to restore tables with interleaved sort keys.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#RestoreTableFromRecoveryPointRequest": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Namespace of the recovery point to restore from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workgroupName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workgroup to restore the table to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recoveryPointId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the recovery point to restore the table from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceDatabaseName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source database that contains the table being restored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceSchemaName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source schema that contains the table being restored.</p>"
+                    }
+                },
+                "sourceTableName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source table being restored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetDatabaseName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database to restore the table to.</p>"
+                    }
+                },
+                "targetSchemaName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schema to restore the table to.</p>"
+                    }
+                },
+                "newTableName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table to create from the restore operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "activateCaseSensitiveIdentifier": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false, the names are not case sensitive. The default is false.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#RestoreTableFromRecoveryPointResponse": {
+            "type": "structure",
+            "members": {
+                "tableRestoreStatus": {
+                    "target": "com.amazonaws.redshiftserverless#TableRestoreStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshiftserverless#RestoreTableFromSnapshot": {
             "type": "operation",
             "input": {
@@ -4348,6 +5064,133 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#Schedule": {
+            "type": "union",
+            "members": {
+                "at": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when Amazon Redshift Serverless should run the scheduled action. Format of at expressions is \"<code>at(yyyy-mm-ddThh:mm:ss)</code>\". For example, \"<code>at(2016-03-04T17:27:00)</code>\".</p>"
+                    }
+                },
+                "cron": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cron expression to use to schedule a recurring scheduled action. Schedule invocations must be separated by at least one hour.</p>\n         <p>Format of cron expressions is \"<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>\". For example, \"<code>cron(0 10 ? * MON *)</code>\". For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The schedule of when Amazon Redshift Serverless should run the scheduled action.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#ScheduledActionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 60
+                },
+                "smithy.api#pattern": "^[a-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.redshiftserverless#ScheduledActionResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#CreateScheduledAction"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#DeleteScheduledAction"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#GetScheduledAction"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ListScheduledActions"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#UpdateScheduledAction"
+                }
+            ]
+        },
+        "com.amazonaws.redshiftserverless#ScheduledActionResponse": {
+            "type": "structure",
+            "members": {
+                "scheduledActionName": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scheduled action.</p>"
+                    }
+                },
+                "schedule": {
+                    "target": "com.amazonaws.redshiftserverless#Schedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour.</p>\n         <p>Format of at expressions is \"<code>at(yyyy-mm-ddThh:mm:ss)</code>\". For example, \"<code>at(2016-03-04T17:27:00)</code>\".</p>\n         <p>Format of cron expressions is \"<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>\". For example, \"<code>cron(0 10 ? * MON *)</code>\". For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>"
+                    }
+                },
+                "scheduledActionDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the scheduled action.</p>"
+                    }
+                },
+                "nextInvocations": {
+                    "target": "com.amazonaws.redshiftserverless#NextInvocationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of timestamps of when the next scheduled actions will trigger.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.redshiftserverless#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Cluster Management Guide</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.redshiftserverless#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the scheduled action.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time in UTC when the schedule is active. Before this time, the scheduled action does not trigger.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of </p>"
+                    }
+                },
+                "targetAction": {
+                    "target": "com.amazonaws.redshiftserverless#TargetAction"
+                },
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger.</p>"
+                    }
+                },
+                "scheduledActionUuid": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The uuid of the scheduled action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The returned scheduled action object.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#ScheduledActionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#ScheduledActionName"
             }
         },
         "com.amazonaws.redshiftserverless#SecurityGroupId": {
@@ -4517,10 +5360,75 @@
                 "smithy.api#documentation": "<p>A snapshot object that contains databases.</p>"
             }
         },
+        "com.amazonaws.redshiftserverless#SnapshotCopyConfiguration": {
+            "type": "structure",
+            "members": {
+                "snapshotCopyConfigurationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the snapshot copy configuration object.</p>"
+                    }
+                },
+                "snapshotCopyConfigurationArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the snapshot copy configuration object.</p>"
+                    }
+                },
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace to copy snapshots from in the source Amazon Web Services Region.</p>"
+                    }
+                },
+                "destinationRegion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination Amazon Web Services Region to copy snapshots to.</p>"
+                    }
+                },
+                "snapshotRetentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention period of snapshots that are copied to the destination Amazon Web Services Region.</p>"
+                    }
+                },
+                "destinationKmsKeyId": {
+                    "target": "com.amazonaws.redshiftserverless#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the KMS key to use to encrypt your snapshots in the destination Amazon Web Services Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that you configure to copy snapshots from one namespace to a namespace in another Amazon Web Services Region.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#SnapshotCopyConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#SnapshotCopyConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.redshiftserverless#SnapshotList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.redshiftserverless#Snapshot"
+            }
+        },
+        "com.amazonaws.redshiftserverless#SnapshotNamePrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 235
+                }
             }
         },
         "com.amazonaws.redshiftserverless#SnapshotResource": {
@@ -4530,13 +5438,22 @@
                     "target": "com.amazonaws.redshiftserverless#CreateSnapshot"
                 },
                 {
+                    "target": "com.amazonaws.redshiftserverless#CreateSnapshotCopyConfiguration"
+                },
+                {
                     "target": "com.amazonaws.redshiftserverless#DeleteSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#DeleteSnapshotCopyConfiguration"
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#GetSnapshot"
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#GetTableRestoreStatus"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ListSnapshotCopyConfigurations"
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#ListSnapshots"
@@ -4552,6 +5469,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshiftserverless#UpdateSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#UpdateSnapshotCopyConfiguration"
                 }
             ]
         },
@@ -4586,6 +5506,21 @@
                 ]
             }
         },
+        "com.amazonaws.redshiftserverless#State": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "DISABLED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.redshiftserverless#SubnetId": {
             "type": "string"
         },
@@ -4607,13 +5542,13 @@
                 "status": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that describes the current state of the table restore request. \n         Possible values include <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELED</code>, <code>PENDING</code>, <code>IN_PROGRESS</code>.</p>"
+                        "smithy.api#documentation": "<p>A value that describes the current state of the table restore request. \n         Possible values are <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>"
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the status of the table restore request. \n         Status values include <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELED</code>, <code>PENDING</code>, <code>IN_PROGRESS</code>.</p>"
+                        "smithy.api#documentation": "<p>A message that explains the returned status. For example, if the status of the operation is <code>FAILED</code>, the message explains why the operation failed.</p>"
                     }
                 },
                 "requestTime": {
@@ -4686,6 +5621,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the table to create from the restore operation.</p>"
+                    }
+                },
+                "recoveryPointId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the recovery point being restored from.</p>"
                     }
                 }
             },
@@ -4819,6 +5760,17 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.redshiftserverless#TargetAction": {
+            "type": "union",
+            "members": {
+                "createSnapshot": {
+                    "target": "com.amazonaws.redshiftserverless#CreateSnapshotScheduleActionParameters"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p>\n         <p>\n            <code>\"{\"CreateSnapshot\": {\"NamespaceName\": \"sampleNamespace\",\"SnapshotName\": \"sampleSnapshot\", \"retentionPeriod\": \"1\"}}\"</code>\n         </p>"
             }
         },
         "com.amazonaws.redshiftserverless#ThrottlingException": {
@@ -5174,6 +6126,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#UpdateScheduledAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#UpdateScheduledActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#UpdateScheduledActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a scheduled action.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateScheduledActionRequest": {
+            "type": "structure",
+            "members": {
+                "scheduledActionName": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scheduled action to update to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetAction": {
+                    "target": "com.amazonaws.redshiftserverless#TargetAction"
+                },
+                "schedule": {
+                    "target": "com.amazonaws.redshiftserverless#Schedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour.</p>\n         <p>Format of at expressions is \"<code>at(yyyy-mm-ddThh:mm:ss)</code>\". For example, \"<code>at(2016-03-04T17:27:00)</code>\".</p>\n         <p>Format of cron expressions is \"<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>\". For example, \"<code>cron(0 10 ? * MON *)</code>\". For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.redshiftserverless#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Cluster Management Guide</p>"
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable the scheduled action.</p>"
+                    }
+                },
+                "scheduledActionDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descripion of the scheduled action to update to.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time in UTC of the scheduled action to update to.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time in UTC of the scheduled action to update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateScheduledActionResponse": {
+            "type": "structure",
+            "members": {
+                "scheduledAction": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ScheduledAction object that was updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshiftserverless#UpdateSnapshot": {
             "type": "operation",
             "input": {
@@ -5198,6 +6245,71 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Updates a snapshot.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateSnapshotCopyConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#UpdateSnapshotCopyConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#UpdateSnapshotCopyConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a snapshot copy configuration.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateSnapshotCopyConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "snapshotCopyConfigurationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the snapshot copy configuration to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotRetentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new retention period of how long to keep a snapshot in the destination Amazon Web Services Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateSnapshotCopyConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "snapshotCopyConfiguration": {
+                    "target": "com.amazonaws.redshiftserverless#SnapshotCopyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated snapshot copy configuration object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshiftserverless#UpdateSnapshotRequest": {
@@ -5356,7 +6468,7 @@
                 "configParameters": {
                     "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitivity_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, and query monitoring metrics that let you \n         define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> \n            Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, and query monitoring metrics that let you \n         define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> \n            Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "publiclyAccessible": {
@@ -5592,6 +6704,12 @@
                 "target": "com.amazonaws.redshiftserverless#VpcEndpoint"
             }
         },
+        "com.amazonaws.redshiftserverless#VpcIds": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.redshiftserverless#VpcSecurityGroupId": {
             "type": "string"
         },
@@ -5669,7 +6787,7 @@
                 "configParameters": {
                     "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n        options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitivity_identifier</code>, <code>enable_user_activity_logging</code>,\n        <code>query_group</code>, , <code>search_path</code>, and query monitoring metrics that let you define performance boundaries. \n        For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n        options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n        <code>query_group</code>, <code>search_path</code>, and query monitoring metrics that let you define performance boundaries. \n        For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "securityGroupIds": {
@@ -5750,6 +6868,12 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.</p>"
+                    }
+                },
+                "crossAccountVpcs": {
+                    "target": "com.amazonaws.redshiftserverless#VpcIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPCs. Each entry is the unique identifier of a virtual private cloud with access to Amazon Redshift Serverless. If all of the VPCs for the grantee are allowed, it shows an asterisk.</p>"
                     }
                 }
             },

@@ -136,7 +136,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -179,7 +178,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -192,7 +192,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -206,7 +205,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -229,7 +227,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -264,7 +261,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -275,14 +271,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -296,14 +294,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -312,11 +308,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -327,14 +323,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -348,7 +346,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -368,7 +365,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -379,14 +375,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -397,9 +395,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -737,6 +737,274 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.marketplacecatalog#AmiProductEntityIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductEntityIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique entity id values to be filtered on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on entity id of an AMI product.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductEntityIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#AmiProductEntityIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductEntityIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductFilters": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductEntityIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the AMI product.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductLastModifiedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last date on which the AMI product was modified.</p>"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductTitleFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the AMI product.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductVisibilityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility of the AMI product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object containing all the filter fields for AMI products. Client can add a maximum of 8\n            filters in a single <code>ListEntities</code> request.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductLastModifiedDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductLastModifiedDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dates between which the AMI product was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering based on the last modified date of AMI products.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductLastModifiedDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date after which the AMI product was last modified.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date before which the AMI product was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that contains date range of the last modified date to be filtered on. You can optionally provide a <code>BeforeValue</code> and/or <code>AfterValue</code>. Both are inclusive.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductSort": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field to sort the AMI products by.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.marketplacecatalog#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Objects that allows sorting on AMI products based on certain fields and sorting order.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductSortBy": {
+            "type": "enum",
+            "members": {
+                "EntityId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EntityId"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastModifiedDate"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProductTitle"
+                    }
+                },
+                "Visibility": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Visibility"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductSummary": {
+            "type": "structure",
+            "members": {
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductTitleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the AMI product.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductVisibilityString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle of the AMI product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that contains summarized information about an AMI product.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductTitleFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductTitleFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique product title values to be filtered on.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductTitleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that will be the <code>wildCard</code> input for product tile filter. It matches the provided value as a substring in the actual value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on product title.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductTitleFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#AmiProductTitleString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductTitleString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductVisibilityFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductVisibilityFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique visibility values to be filtered on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on the visibility of the product in the AWS Marketplace.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductVisibilityFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#AmiProductVisibilityString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AmiProductVisibilityString": {
+            "type": "enum",
+            "members": {
+                "Limited": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Limited"
+                    }
+                },
+                "Public": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Public"
+                    }
+                },
+                "Restricted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Restricted"
+                    }
+                },
+                "Draft": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Draft"
+                    }
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#CancelChangeSet": {
             "type": "operation",
             "input": {
@@ -1059,6 +1327,548 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[!-~]+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductEntityIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductEntityIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique entity id values to be filtered on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on entity id of a container product.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductEntityIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ContainerProductEntityIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductEntityIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductFilters": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductEntityIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the container product.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductLastModifiedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last date on which the container product was modified.</p>"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductTitleFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the container product.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductVisibilityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility of the container product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object containing all the filter fields for container products. Client can add a maximum of 8 filters in a single <code>ListEntities</code> request.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductLastModifiedDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductLastModifiedDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dates between which the container product was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering based on the last modified date of container products.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductLastModifiedDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date after which the container product was last modified.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date before which the container product was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that contains date range of the last modified date to be filtered on. You can optionally provide a <code>BeforeValue</code> and/or <code>AfterValue</code>. Both are inclusive.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductSort": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field to sort the container products by.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.marketplacecatalog#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Objects that allows sorting on container products based on certain fields and sorting order.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductSortBy": {
+            "type": "enum",
+            "members": {
+                "EntityId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EntityId"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastModifiedDate"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProductTitle"
+                    }
+                },
+                "Visibility": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Visibility"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductSummary": {
+            "type": "structure",
+            "members": {
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductTitleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the container product.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductVisibilityString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle of the product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that contains summarized information about a container product.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductTitleFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductTitleFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique product title values to be filtered on.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductTitleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that will be the <code>wildCard</code> input for product tile filter. It matches the provided value as a substring in the actual value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on product title.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductTitleFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ContainerProductTitleString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductTitleString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductVisibilityFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductVisibilityFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique visibility values to be filtered on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on the visibility of the product in the AWS Marketplace.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductVisibilityFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ContainerProductVisibilityString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContainerProductVisibilityString": {
+            "type": "enum",
+            "members": {
+                "Limited": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Limited"
+                    }
+                },
+                "Public": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Public"
+                    }
+                },
+                "Restricted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Restricted"
+                    }
+                },
+                "Draft": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Draft"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductEntityIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductEntityIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique entity id values to be filtered on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on entity id of a data product.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductEntityIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#DataProductEntityIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductEntityIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductFilters": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductEntityIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the data product.</p>"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductTitleFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the data product.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductVisibilityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility of the data product.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductLastModifiedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last date on which the data product was modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object containing all the filter fields for data products. Client can add a maximum of 8 filters in a single <code>ListEntities</code> request.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductLastModifiedDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductLastModifiedDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dates between which the data product was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering based on the last modified date of data products.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductLastModifiedDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date after which the data product was last modified.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date before which the data product was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that contains date range of the last modified date to be filtered on. You can optionally provide a <code>BeforeValue</code> and/or <code>AfterValue</code>. Both are inclusive.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductSort": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field to sort the data products by.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.marketplacecatalog#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Objects that allows sorting on data products based on certain fields and sorting order.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductSortBy": {
+            "type": "enum",
+            "members": {
+                "EntityId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EntityId"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProductTitle"
+                    }
+                },
+                "Visibility": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Visibility"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastModifiedDate"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductSummary": {
+            "type": "structure",
+            "members": {
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductTitleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the data product.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductVisibilityString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle of the data product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that contains summarized information about a data product.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductTitleFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductTitleFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique product title values to be filtered on.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductTitleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that will be the <code>wildCard</code> input for product tile filter. It matches the provided value as a substring in the actual value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on product title.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductTitleFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#DataProductTitleString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductTitleString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductVisibilityFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductVisibilityFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique visibility values to be filtered on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on the visibility of the product in the AWS Marketplace.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductVisibilityFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#DataProductVisibilityString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#DataProductVisibilityString": {
+            "type": "enum",
+            "members": {
+                "Limited": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Limited"
+                    }
+                },
+                "Public": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Public"
+                    }
+                },
+                "Restricted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Restricted"
+                    }
+                },
+                "Unavailable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unavailable"
+                    }
+                },
+                "Draft": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Draft"
+                    }
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#DateTimeISO8601": {
@@ -1422,6 +2232,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The visibility status of the entity to buyers. This value can be <code>Public</code>\n            (everyone can view the entity), <code>Limited</code> (the entity is visible to limited\n            accounts only), or <code>Restricted</code> (the entity was published and then\n            unpublished and only existing buyers can view it). </p>"
                     }
+                },
+                "AmiProductSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains summary information about the AMI product.</p>"
+                    }
+                },
+                "ContainerProductSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains summary information about the container product.</p>"
+                    }
+                },
+                "DataProductSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains summary information about the data product.</p>"
+                    }
+                },
+                "SaaSProductSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains summary information about the SaaS product.</p>"
+                    }
+                },
+                "OfferSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains summary information about the offer.</p>"
+                    }
+                },
+                "ResaleAuthorizationSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains summary information about the Resale Authorization.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1442,6 +2288,94 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#EntityTypeFilters": {
+            "type": "union",
+            "members": {
+                "DataProductFilters": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for data products.</p>"
+                    }
+                },
+                "SaaSProductFilters": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for SaaS products.</p>"
+                    }
+                },
+                "AmiProductFilters": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for AMI products.</p>"
+                    }
+                },
+                "OfferFilters": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for offers.</p>"
+                    }
+                },
+                "ContainerProductFilters": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for container products.</p>"
+                    }
+                },
+                "ResaleAuthorizationFilters": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for Resale Authorizations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object containing all the filter fields per entity type.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#EntityTypeSort": {
+            "type": "union",
+            "members": {
+                "DataProductSort": {
+                    "target": "com.amazonaws.marketplacecatalog#DataProductSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sort for data products.</p>"
+                    }
+                },
+                "SaaSProductSort": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sort for SaaS products.</p>"
+                    }
+                },
+                "AmiProductSort": {
+                    "target": "com.amazonaws.marketplacecatalog#AmiProductSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sort for AMI products.</p>"
+                    }
+                },
+                "OfferSort": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sort for offers.</p>"
+                    }
+                },
+                "ContainerProductSort": {
+                    "target": "com.amazonaws.marketplacecatalog#ContainerProductSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sort for container products.</p>"
+                    }
+                },
+                "ResaleAuthorizationSort": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sort for Resale Authorizations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object containing all the sort fields per entity type.</p>"
             }
         },
         "com.amazonaws.marketplacecatalog#ErrorCodeString": {
@@ -1826,7 +2760,7 @@
                 "EntityType": {
                     "target": "com.amazonaws.marketplacecatalog#EntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of entities to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The type of entities to\n            retrieve. Valid\n            values are: <code>ServerProduct</code>, <code>AmiProduct</code>,\n                <code>ContainerProduct</code>, <code>DataProduct</code>, <code>SaaSProduct</code>,\n                <code>ProcurementPolicy</code>, <code>Experience</code>, <code>Audience</code>,\n                <code>BrandingSettings</code>, <code>Offer</code>, <code>Seller</code>,\n                <code>ResaleAuthorization</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1859,6 +2793,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Filters the returned set of entities based on their owner. The default is\n                <code>SELF</code>. To list entities shared with you\n            through AWS Resource Access Manager (AWS RAM), set to <code>SHARED</code>. Entities shared through the AWS Marketplace\n            Catalog API <code>PutResourcePolicy</code> operation can't be discovered through the\n                <code>SHARED</code> parameter.</p>"
                     }
+                },
+                "EntityTypeFilters": {
+                    "target": "com.amazonaws.marketplacecatalog#EntityTypeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Union object containing filter shapes for all <code>EntityType</code>s. Each\n                <code>EntityTypeFilter</code> shape will have filters applicable for that\n                <code>EntityType</code> that can be used to search or filter entities.</p>"
+                    }
+                },
+                "EntityTypeSort": {
+                    "target": "com.amazonaws.marketplacecatalog#EntityTypeSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Union object containing <code>Sort</code> shapes for all <code>EntityType</code>s.\n            Each <code>EntityTypeSort</code> shape will have <code>SortBy</code> and\n                <code>SortOrder</code> applicable for fields on that <code>EntityType</code>. This\n            can be used to sort the results of the filter query.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1871,7 +2817,7 @@
                 "EntitySummaryList": {
                     "target": "com.amazonaws.marketplacecatalog#EntitySummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p> Array of <code>EntitySummary</code> object.</p>"
+                        "smithy.api#documentation": "<p>Array of <code>EntitySummary</code> objects.</p>"
                     }
                 },
                 "NextToken": {
@@ -1962,6 +2908,569 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[\\w+=.:@\\-\\/]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferAvailabilityEndDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferAvailabilityEndDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>AvailabilityEndDate</code> of an offer with date range as input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>AvailabilityEndDate</code> of an offer.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferAvailabilityEndDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>AvailabilityEndDate</code> of an offer after a date.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>AvailabilityEndDate</code> of an offer before a date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>AvailabilityEndDate</code> of an offer with date range as input.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferBuyerAccountsFilter": {
+            "type": "structure",
+            "members": {
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferBuyerAccountsFilterWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>BuyerAccounts</code> of an offer with wild card input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>BuyerAccounts</code> of an offer.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferBuyerAccountsFilterWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferBuyerAccountsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#OfferBuyerAccountsString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 26
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferBuyerAccountsString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferEntityIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferEntityIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on entity id of an offer with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the entity id of an offer.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferEntityIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#OfferEntityIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferEntityIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferFilters": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferEntityIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on <code>EntityId</code> of an offer.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferNameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>Name</code> of an offer.</p>"
+                    }
+                },
+                "ProductId": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferProductIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ProductId</code> of an offer.</p>"
+                    }
+                },
+                "ReleaseDate": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferReleaseDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ReleaseDate</code> of an offer.</p>"
+                    }
+                },
+                "AvailabilityEndDate": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferAvailabilityEndDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>AvailabilityEndDate</code> of an offer.</p>"
+                    }
+                },
+                "BuyerAccounts": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferBuyerAccountsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>BuyerAccounts</code> of an offer.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferStateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>State</code> of an offer.</p>"
+                    }
+                },
+                "Targeting": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferTargetingFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>Targeting</code> of an offer.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferLastModifiedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of an offer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for offers entity.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferLastModifiedDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferLastModifiedDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of an offer with date range as input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of an offer.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferLastModifiedDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of an offer after a date.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of an offer before a date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of an offer with date range as input.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferNameFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferNameFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>Name</code> of an offer with list input.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>Name</code> of an offer with wild card input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>Name</code> of an offer.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferNameFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#OfferNameString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 150
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferProductIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferProductIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ProductId</code> of an offer with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>ProductId</code> of an offer.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferProductIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#OfferProductIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferProductIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferReleaseDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferReleaseDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ReleaseDate</code> of an offer with date range as input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>ReleaseDate</code> of an offer.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferReleaseDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ReleaseDate</code> of offers after a date.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ReleaseDate</code> of offers before a date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>ReleaseDate</code> of an offer with date range as input.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferSort": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows to sort offers.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.marketplacecatalog#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows to sort offers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows to sort offers.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferSortBy": {
+            "type": "enum",
+            "members": {
+                "EntityId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EntityId"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "ProductId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProductId"
+                    }
+                },
+                "ReleaseDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReleaseDate"
+                    }
+                },
+                "AvailabilityEndDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AvailabilityEndDate"
+                    }
+                },
+                "BuyerAccounts": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BuyerAccounts"
+                    }
+                },
+                "State": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "State"
+                    }
+                },
+                "Targeting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Targeting"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastModifiedDate"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferStateFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferStateFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>State</code> of an offer with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>State</code> of an offer.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferStateFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#OfferStateString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferStateString": {
+            "type": "enum",
+            "members": {
+                "Draft": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Draft"
+                    }
+                },
+                "Released": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Released"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the offer.</p>"
+                    }
+                },
+                "ProductId": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferProductIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product ID of the offer.</p>"
+                    }
+                },
+                "ReleaseDate": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The release date of the offer.</p>"
+                    }
+                },
+                "AvailabilityEndDate": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability end date of the offer.</p>"
+                    }
+                },
+                "BuyerAccounts": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferBuyerAccountsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The buyer accounts in the offer.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferStateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the offer.</p>"
+                    }
+                },
+                "Targeting": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferTargetingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The targeting in the offer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summarized information about an offer.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferTargetingFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferTargetingFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>Targeting</code> of an offer with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>Targeting</code> of an offer.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferTargetingFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#OfferTargetingString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferTargetingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#OfferTargetingString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferTargetingString": {
+            "type": "enum",
+            "members": {
+                "BuyerAccounts": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BuyerAccounts"
+                    }
+                },
+                "ParticipatingPrograms": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ParticipatingPrograms"
+                    }
+                },
+                "CountryCodes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CountryCodes"
+                    }
+                },
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#OwnershipType": {
@@ -2056,6 +3565,892 @@
                 }
             }
         },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationAvailabilityEndDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationAvailabilityEndDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on <code>AvailabilityEndDate</code> of a ResaleAuthorization with date range as input</p>"
+                    }
+                },
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationAvailabilityEndDateFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on <code>AvailabilityEndDate</code> of a ResaleAuthorization with date value as input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on <code>AvailabilityEndDate</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationAvailabilityEndDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on <code>AvailabilityEndDate</code> of a ResaleAuthorization after a date.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on <code>AvailabilityEndDate</code> of a ResaleAuthorization before a date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on <code>AvailabilityEndDate</code> of a ResaleAuthorization with date range as input.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationAvailabilityEndDateFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationCreatedDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationCreatedDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on <code>CreatedDate</code> of a ResaleAuthorization with date range as input.</p>"
+                    }
+                },
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationCreatedDateFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on <code>CreatedDate</code> of a ResaleAuthorization with date value as input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on <code>CreatedDate</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationCreatedDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on <code>CreatedDate</code> of a ResaleAuthorization after a date.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on <code>CreatedDate</code> of a ResaleAuthorization before a date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on <code>CreatedDate</code> of a ResaleAuthorization with date range as input.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationCreatedDateFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationEntityIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationEntityIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on <code>EntityId</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on <code>EntityId</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationEntityIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationEntityIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationEntityIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationFilters": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationEntityIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>EntityId</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationNameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>Name</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "ProductId": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ProductId</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationCreatedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>CreatedDate</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "AvailabilityEndDate": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationAvailabilityEndDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>AvailabilityEndDate</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "ManufacturerAccountId": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerAccountIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ManufacturerAccountId</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "ProductName": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductNameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ProductName</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "ManufacturerLegalName": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerLegalNameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ManufacturerLegalName</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "ResellerAccountID": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerAccountIDFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ResellerAccountID</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "ResellerLegalName": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ResellerLegalName</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>Status</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "OfferExtendedStatus": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationOfferExtendedStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>OfferExtendedStatus</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationLastModifiedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for ResaleAuthorization entity.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationLastModifiedDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationLastModifiedDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization with date range as input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationLastModifiedDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization after a date.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization before a date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization with date range as input.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerAccountIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerAccountIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ManufacturerAccountId</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerAccountIdFilterWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ManufacturerAccountId</code> of a ResaleAuthorization with wild card input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>ManufacturerAccountId</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerAccountIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerAccountIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerAccountIdFilterWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerAccountIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerLegalNameFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerLegalNameFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ManufacturerLegalName</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerLegalNameFilterWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ManufacturerLegalName</code> of a ResaleAuthorization with wild card input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>ManufacturerLegalName</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerLegalNameFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerLegalNameString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerLegalNameFilterWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerLegalNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationNameFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationNameFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>Name</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationNameFilterWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>Name</code> of a ResaleAuthorization with wild card input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>Name</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationNameFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationNameString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationNameFilterWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationOfferExtendedStatusFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationOfferExtendedStatusFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>OfferExtendedStatus</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>OfferExtendedStatus</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationOfferExtendedStatusFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationOfferExtendedStatusString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationOfferExtendedStatusString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ProductId</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductIdFilterWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ProductId</code> of a ResaleAuthorization with wild card input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>ProductId</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductIdFilterWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductNameFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductNameFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ProductName</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductNameFilterWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ProductName</code> of a ResaleAuthorization with wild card input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>ProductName</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductNameFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductNameString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductNameFilterWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerAccountIDFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerAccountIDFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ResellerAccountID</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerAccountIDFilterWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ResellerAccountID</code> of a ResaleAuthorization with wild card input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>ResellerAccountID</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerAccountIDFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerAccountIDString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerAccountIDFilterWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerAccountIDString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the ResellerLegalNameProductName of a ResaleAuthorization with list input.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameFilterWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the ResellerLegalName of a ResaleAuthorization with wild card input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the ResellerLegalName of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameFilterWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationSort": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows to sort ResaleAuthorization.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.marketplacecatalog#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows to sort ResaleAuthorization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows to sort ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationSortBy": {
+            "type": "enum",
+            "members": {
+                "EntityId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EntityId"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "ProductId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProductId"
+                    }
+                },
+                "ProductName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProductName"
+                    }
+                },
+                "ManufacturerAccountId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManufacturerAccountId"
+                    }
+                },
+                "ManufacturerLegalName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManufacturerLegalName"
+                    }
+                },
+                "ResellerAccountID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResellerAccountID"
+                    }
+                },
+                "ResellerLegalName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResellerLegalName"
+                    }
+                },
+                "Status": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
+                    }
+                },
+                "OfferExtendedStatus": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OfferExtendedStatus"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreatedDate"
+                    }
+                },
+                "AvailabilityEndDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AvailabilityEndDate"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastModifiedDate"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>Status</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>Status</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusString": {
+            "type": "enum",
+            "members": {
+                "Draft": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Draft"
+                    }
+                },
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "Restricted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Restricted"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ResaleAuthorization.</p>"
+                    }
+                },
+                "ProductId": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product ID of the ResaleAuthorization.</p>"
+                    }
+                },
+                "ProductName": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationProductNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product name of the ResaleAuthorization.</p>"
+                    }
+                },
+                "ManufacturerAccountId": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerAccountIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The manufacturer account ID of the ResaleAuthorization.</p>"
+                    }
+                },
+                "ManufacturerLegalName": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerLegalNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The manufacturer legal name of the ResaleAuthorization.</p>"
+                    }
+                },
+                "ResellerAccountID": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerAccountIDString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reseller account ID of the ResaleAuthorization.</p>"
+                    }
+                },
+                "ResellerLegalName": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reseller legal name of the ResaleAuthorization</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the ResaleAuthorization.</p>"
+                    }
+                },
+                "OfferExtendedStatus": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationOfferExtendedStatusString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The offer extended status of the ResaleAuthorization</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The created date of the ResaleAuthorization.</p>"
+                    }
+                },
+                "AvailabilityEndDate": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability end date of the ResaleAuthorization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summarized information about a Resale Authorization.</p>"
+            }
+        },
         "com.amazonaws.marketplacecatalog#ResourceARN": {
             "type": "string",
             "traits": {
@@ -2129,6 +4524,274 @@
                     "max": 10240
                 },
                 "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductEntityIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductEntityIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique entity id values to be filtered on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on entity id of a SaaS product.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductEntityIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#SaaSProductEntityIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductEntityIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductFilters": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductEntityIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the SaaS product.</p>"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductTitleFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the SaaS product.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductVisibilityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility of the SaaS product.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductLastModifiedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last date on which the SaaS product was modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object containing all the filter fields for SaaS products. Client can add a maximum of\n            8 filters in a single <code>ListEntities</code> request.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductLastModifiedDateFilter": {
+            "type": "structure",
+            "members": {
+                "DateRange": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductLastModifiedDateFilterDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dates between which the SaaS product was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering based on the last modified date of SaaS products</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductLastModifiedDateFilterDateRange": {
+            "type": "structure",
+            "members": {
+                "AfterValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date after which the SaaS product was last modified.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date before which the SaaS product was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that contains date range of the last modified date to be filtered on. You can optionally provide a <code>BeforeValue</code> and/or <code>AfterValue</code>. Both are inclusive.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductSort": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field to sort the SaaS products by.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.marketplacecatalog#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Objects that allows sorting on SaaS products based on certain fields and sorting order.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductSortBy": {
+            "type": "enum",
+            "members": {
+                "EntityId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EntityId"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProductTitle"
+                    }
+                },
+                "Visibility": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Visibility"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastModifiedDate"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductSummary": {
+            "type": "structure",
+            "members": {
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductTitleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the SaaS product.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductVisibilityString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle of the SaaS product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that contains summarized information about a SaaS product.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductTitleFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductTitleFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique product title values to be filtered on.</p>"
+                    }
+                },
+                "WildCardValue": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductTitleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that will be the <code>wildCard</code> input for product tile filter. It matches the provided value as a substring in the actual value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on product title.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductTitleFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#SaaSProductTitleString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductTitleString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductVisibilityFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#SaaSProductVisibilityFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string array of unique visibility values to be filtered on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that allows filtering on the visibility of the product in the AWS Marketplace.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductVisibilityFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#SaaSProductVisibilityString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#SaaSProductVisibilityString": {
+            "type": "enum",
+            "members": {
+                "Limited": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Limited"
+                    }
+                },
+                "Public": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Public"
+                    }
+                },
+                "Restricted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Restricted"
+                    }
+                },
+                "Draft": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Draft"
+                    }
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#ServiceQuotaExceededException": {

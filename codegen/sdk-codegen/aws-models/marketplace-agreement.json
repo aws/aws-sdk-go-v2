@@ -1,0 +1,2328 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.marketplaceagreement#AWSAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AWSMPCommerceService_v20200301": {
+            "type": "service",
+            "version": "2020-03-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#DescribeAgreement"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#GetAgreementTerms"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#SearchAgreements"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Marketplace Agreement",
+                    "endpointPrefix": "agreement-marketplace"
+                },
+                "aws.auth#sigv4": {
+                    "name": "aws-marketplace"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>AWS Marketplace is a curated digital catalog that customers can use to find, buy, deploy, and manage third-party software, data, and services to build solutions and run their businesses. The AWS Marketplace Agreement Service provides an API interface that helps AWS Marketplace sellers manage their product-related agreements, including listing, searching, and filtering agreements.</p>\n         <p>To manage agreements in AWS Marketplace, you must ensure that your AWS Identity and\n         Access Management (IAM) policies and roles are set up. The user must have the required\n         policies/permissions that allow them to carry out the actions in AWS:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DescribeAgreement</code> – Grants permission to users to obtain detailed\n               meta data about any of their agreements.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetAgreementTerms</code> – Grants permission to users to obtain details\n               about the terms of an agreement.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SearchAgreements</code> – Grants permission to users to search through all\n               their agreements.</p>\n            </li>\n         </ul>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#title": "AWS Marketplace Agreement Service",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://agreement-marketplace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://agreement-marketplace-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://agreement-marketplace.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://agreement-marketplace.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://agreement-marketplace.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AcceptedTerm": {
+            "type": "union",
+            "members": {
+                "legalTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#LegalTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the list of text agreements proposed to the acceptors. An example is the end user license agreement (EULA).</p>"
+                    }
+                },
+                "supportTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#SupportTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the customer support available for the acceptors when they purchase the software.</p>"
+                    }
+                },
+                "renewalTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#RenewalTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines that on graceful expiration of the agreement (when the agreement ends on its pre-defined end date), a new agreement will be created using the accepted terms on the existing agreement. In other words, the agreement will be renewed. Presence of <code>RenewalTerm</code> in the offer document means that auto-renewal is allowed. Buyers will have the option to accept or decline auto-renewal at the offer acceptance/agreement creation. Buyers can also change this flag from <code>True</code> to <code>False</code> or <code>False</code> to <code>True</code> at anytime during the agreement's lifecycle.</p>"
+                    }
+                },
+                "usageBasedPricingTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#UsageBasedPricingTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a usage-based pricing model (typically, pay-as-you-go pricing), where the customers are charged based on product usage.</p>"
+                    }
+                },
+                "configurableUpfrontPricingTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#ConfigurableUpfrontPricingTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a prepaid payment model that allows buyers to configure the entitlements they want to purchase and the duration.</p>"
+                    }
+                },
+                "byolPricingTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#ByolPricingTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables you and your customers to move your existing agreements to AWS Marketplace. The customer won't be charged for product usage in AWS Marketplace because they already paid for the product outside of AWS Marketplace.</p>"
+                    }
+                },
+                "recurringPaymentTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#RecurringPaymentTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a pricing model where customers are charged a fixed recurring price at the end of each billing period.</p>"
+                    }
+                },
+                "validityTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#ValidityTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the conditions that will keep an agreement created from this offer valid.</p>"
+                    }
+                },
+                "paymentScheduleTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentScheduleTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines an installment-based pricing model where customers are charged a fixed price on different dates during the agreement validity period. This is used most commonly for flexible payment schedule pricing.</p>"
+                    }
+                },
+                "freeTrialPricingTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#FreeTrialPricingTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a short-term free pricing model where the buyers aren’t charged anything within a specified limit.</p>"
+                    }
+                },
+                "fixedUpfrontPricingTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#FixedUpfrontPricingTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a pre-paid pricing model where the customers are charged a fixed upfront amount.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A subset of terms proposed by the proposer, which have been accepted by the acceptor as part of agreement creation.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AcceptedTermList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#AcceptedTerm"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Acceptor": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.marketplaceagreement#AWSAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the acceptor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the party accepting the agreement terms. This is commonly the buyer for\n            <code>PurchaseAgreement</code>.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.marketplaceagreement#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the error.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.marketplaceagreement#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>User does not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "RENEWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RENEWED"
+                    }
+                },
+                "REPLACED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLACED"
+                    }
+                },
+                "ROLLED_BACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLED_BACK"
+                    }
+                },
+                "SUPERSEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPERSEDED"
+                    }
+                },
+                "TERMINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementViewSummary": {
+            "type": "structure",
+            "members": {
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement.</p>"
+                    }
+                },
+                "acceptanceTime": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the agreement was accepted.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement starts.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement ends. The field is <code>null</code> for\n         pay-as-you-go agreements, which don’t have end dates.</p>"
+                    }
+                },
+                "agreementType": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of agreement. Values are <code>PurchaseAgreement</code> or\n            <code>VendorInsightsAgreement</code>.</p>"
+                    }
+                },
+                "acceptor": {
+                    "target": "com.amazonaws.marketplaceagreement#Acceptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the party accepting the agreement terms. This is commonly the buyer for\n            <code>PurchaseAgreement.</code>\n         </p>"
+                    }
+                },
+                "proposer": {
+                    "target": "com.amazonaws.marketplaceagreement#Proposer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the party proposing the agreement terms, most commonly the seller for\n            <code>PurchaseAgreement</code>.</p>"
+                    }
+                },
+                "proposalSummary": {
+                    "target": "com.amazonaws.marketplaceagreement#ProposalSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the proposal</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the agreement. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the agreement, including top-level attributes (for example, the agreement\n         ID, version, proposer, and acceptor).</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementViewSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#AgreementViewSummary"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.marketplaceagreement#BoundedString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ByolPricingTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the term being updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables you and your customers to move your existing agreements to AWS Marketplace. The\n         customer won't be charged for product usage in AWS Marketplace because they already paid\n         for the product outside of AWS Marketplace.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Catalog": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ConfigurableUpfrontPricingTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category of selector.</p>"
+                    }
+                },
+                "currencyCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the currency for the prices mentioned in the term.</p>"
+                    }
+                },
+                "rateCards": {
+                    "target": "com.amazonaws.marketplaceagreement#ConfigurableUpfrontRateCardList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A rate card defines the per unit rates for product dimensions.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.marketplaceagreement#ConfigurableUpfrontPricingTermConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional parameters specified by the acceptor while accepting the term.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a prepaid payment model that allows buyers to configure the entitlements they\n         want to purchase and the duration.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ConfigurableUpfrontPricingTermConfiguration": {
+            "type": "structure",
+            "members": {
+                "selectorValue": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the length of time for which the particular pricing/dimension is being purchased\n         by the acceptor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dimensions": {
+                    "target": "com.amazonaws.marketplaceagreement#DimensionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the dimensions that the acceptor has purchased from the overall set of\n         dimensions presented in the rate card.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a prepaid payment model that allows buyers to configure the entitlements they\n         want to purchase and the duration.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ConfigurableUpfrontRateCardItem": {
+            "type": "structure",
+            "members": {
+                "selector": {
+                    "target": "com.amazonaws.marketplaceagreement#Selector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Differentiates between the mutually exclusive rate cards in the same pricing term to be selected by the buyer.</p>"
+                    }
+                },
+                "constraints": {
+                    "target": "com.amazonaws.marketplaceagreement#Constraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines limits on how the term can be configured by acceptors.</p>"
+                    }
+                },
+                "rateCard": {
+                    "target": "com.amazonaws.marketplaceagreement#RateCardList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the per unit rates for product dimensions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Within the prepaid payment model defined under <code>ConfigurableUpfrontPricingTerm</code>, the <code>RateCardItem</code> defines all the various rate cards (including pricing and dimensions) that have been proposed.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ConfigurableUpfrontRateCardList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#ConfigurableUpfrontRateCardItem"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Constraints": {
+            "type": "structure",
+            "members": {
+                "multipleDimensionSelection": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines if buyers are allowed to select multiple dimensions in the rate card. The\n         possible values are <code>Allowed</code> and <code>Disallowed</code>. The default value is\n            <code>Allowed</code>.</p>"
+                    }
+                },
+                "quantityConfiguration": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines if acceptors are allowed to configure quantity for each dimension in rate\n         card. The possible values are <code>Allowed</code> and <code>Disallowed</code>. The default\n         value is <code>Allowed</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines limits on how the term can be configured by acceptors. </p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#CurrencyCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 3
+                },
+                "smithy.api#pattern": "^[A-Z]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#DescribeAgreement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#DescribeAgreementInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#DescribeAgreementOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about an agreement, such as the proposer, acceptor, start date, and end date.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#DescribeAgreementInput": {
+            "type": "structure",
+            "members": {
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#DescribeAgreementOutput": {
+            "type": "structure",
+            "members": {
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement.</p>"
+                    }
+                },
+                "acceptor": {
+                    "target": "com.amazonaws.marketplaceagreement#Acceptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the party accepting the agreement terms. This is commonly the buyer for\n            <code>PurchaseAgreement</code>.</p>"
+                    }
+                },
+                "proposer": {
+                    "target": "com.amazonaws.marketplaceagreement#Proposer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the party proposing the agreement terms. This is commonly the seller for\n            <code>PurchaseAgreement</code>.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement starts.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement ends. The field is <code>null</code> for\n         pay-as-you-go agreements, which don’t have end dates.</p>"
+                    }
+                },
+                "acceptanceTime": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the offer was accepted or the agreement was created.</p>\n         <note>\n            <p>\n               <code>AcceptanceTime</code> and <code>StartTime</code> can differ for future dated\n            agreements (FDAs).</p>\n         </note>"
+                    }
+                },
+                "agreementType": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of agreement. Values are <code>PurchaseAgreement</code> or\n            <code>VendorInsightsAgreement</code>.</p>"
+                    }
+                },
+                "estimatedCharges": {
+                    "target": "com.amazonaws.marketplaceagreement#EstimatedCharges",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated cost of the agreement.</p>"
+                    }
+                },
+                "proposalSummary": {
+                    "target": "com.amazonaws.marketplaceagreement#ProposalSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the proposal received from the proposer.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the agreement.</p>\n         <p>Statuses include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> – The terms of the agreement are active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ARCHIVED</code> – The agreement ended without a specified reason.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – The acceptor ended the agreement before the defined end\n               date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXPIRED</code> – The agreement ended on the defined end date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RENEWED</code> – The agreement was renewed into a new agreement (for\n               example, an auto-renewal).</p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLACED</code> – The agreement was replaced using an agreement replacement\n               offer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROLLED_BACK</code> (Only applicable to inactive agreement revisions) – The\n               agreement revision has been rolled back because of an error. An earlier revision is\n               now active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPERCEDED</code> (Only applicable to inactive agreement revisions) – The\n               agreement revision is no longer active and another agreement revision is now\n               active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERMINATED</code> – The agreement ended before the defined end date because\n               of an AWS termination (for example, a payment failure).</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Dimension": {
+            "type": "structure",
+            "members": {
+                "dimensionKey": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of key value of the dimension.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dimensionValue": {
+                    "target": "com.amazonaws.marketplaceagreement#ZeroValueInteger",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of units of the dimension the acceptor has purchased.</p>\n         <note>\n            <p>For Agreements with <code>ConfigurableUpfrontPricingTerm</code>, the\n               <code>RateCard</code> section will define the prices and dimensions defined by the\n            seller (proposer), whereas the <code>Configuration</code> section will define the actual\n            dimensions, prices, and units the buyer has chosen to accept.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the dimensions that the acceptor has purchased from the overall set of\n         dimensions presented in the rate card.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#DimensionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#Dimension"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#DocumentItem": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category of the document. Document types include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CustomEula</code> – A custom EULA provided by you as seller. A URL for a\n               EULA stored in an accessible Amazon S3 bucket is required for this document\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomDsa</code> – A custom Data Subscription Agreement (DSA) provided by\n               you as seller. A URL for a DSA stored in an accessible Amazon S3 bucket is required\n               for this document type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StandardEula</code> – The Standard Contract for AWS Marketplace (SCMP). For\n               more information about SCMP, see the AWS Marketplace Seller Guide. You don’t provide\n               a URL for this type because it’s managed by AWS Marketplace.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StandardDsa</code> – DSA for AWS Marketplace. For more information about the\n               DSA, see the AWS Data Exchange User Guide. You don’t provide a URL for this type\n               because it’s managed by AWS Marketplace.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL to the legal document for buyers to read. Required when <code>Type</code> is <code>CustomEula</code>.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Version of standard contracts provided by AWS Marketplace. Required when Type is <code>StandardEula</code> or <code>StandardDsa</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Includes the list of references to legal resources proposed by the proposer to the acceptor. Each <code>DocumentItem</code> refers to an individual reference.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#DocumentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#DocumentItem"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#EstimatedCharges": {
+            "type": "structure",
+            "members": {
+                "currencyCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the currency code for the charge.</p>"
+                    }
+                },
+                "agreementValue": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total known amount customer has to pay across the lifecycle of the agreement.</p>\n         <note>\n            <p>This is the total contract value if accepted terms contain\n               <code>ConfigurableUpfrontPricingTerm</code> or <code>FixedUpfrontPricingTerm</code>.\n            In the case of pure contract pricing, this will be the total value of the contract. In\n            the case of contracts with consumption pricing, this will only include the committed\n            value and not include any overages that occur.</p>\n            <p>If the accepted terms contain <code>PaymentScheduleTerm</code>, it will be the total\n            payment schedule amount. This occurs when flexible payment schedule is used, and is the\n            sum of all invoice charges in the payment schedule.</p>\n            <p>In case a customer has amended an agreement, by purchasing more units of any\n            dimension, this will include both the original cost as well as the added cost incurred\n            due to addition of new units. </p>\n            <p>This is <code>0</code> if the accepted terms contain\n               <code>UsageBasedPricingTerm</code> without\n               <code>ConfigurableUpfrontPricingTerm</code> or <code>RecurringPaymentTerm</code>.\n            This occurs for usage-based pricing (such as SaaS metered or AMI/container hourly or\n            monthly), because the exact usage is not known upfront.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Estimated cost of the agreement.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ExceptionMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Filter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#FilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.marketplaceagreement#FilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter name and value pair that is used to return a more specific list of results.\n         Filters can be used to match a set of resources by various criteria, such as\n            <code>offerId</code> or <code>productId</code>.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#FilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#Filter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#FilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[A-Za-z_]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#FilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+:_-]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#FilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#FilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#FixedUpfrontPricingTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category of the term being updated.</p>"
+                    }
+                },
+                "currencyCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the currency for the prices mentioned in this term. </p>"
+                    }
+                },
+                "duration": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contract duration for the terms.</p>"
+                    }
+                },
+                "price": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fixed amount to be charged to the customer when this term is accepted.</p>"
+                    }
+                },
+                "grants": {
+                    "target": "com.amazonaws.marketplaceagreement#GrantList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Entitlements granted to the acceptor of fixed upfront as part of agreement\n         execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a prepaid pricing model where the customers are charged a fixed upfront\n         amount.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#FreeTrialPricingTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category of the term.</p>"
+                    }
+                },
+                "duration": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Duration of the free trial period (5–31 days). </p>"
+                    }
+                },
+                "grants": {
+                    "target": "com.amazonaws.marketplaceagreement#GrantList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Entitlements granted to the acceptor of a free trial as part of an agreement\n         execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a short-term free pricing model where the buyers aren’t charged anything within\n         a specified limit.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementTerms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementTermsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementTermsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Obtains details about the terms in an agreement that you participated in as proposer or\n         acceptor.</p>\n         <p>The details include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TermType</code> – The type of term, such as <code>LegalTerm</code>,\n                  <code>RenewalTerm</code>, or <code>ConfigurableUpfrontPricingTerm</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TermID</code> – The ID of the particular term, which is common between offer\n               and agreement.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TermPayload</code> – The key information contained in the term, such as the\n               EULA for <code>LegalTerm</code> or pricing and dimensions for various pricing terms,\n               such as <code>ConfigurableUpfrontPricingTerm</code> or\n                  <code>UsageBasedPricingTerm</code>.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>Configuration</code> – The buyer/acceptor's selection at the time of\n               agreement creation, such as the number of units purchased for a dimension or setting\n               the <code>EnableAutoRenew</code> flag.</p>\n            </li>\n         </ul>",
+                "smithy.api#paginated": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementTermsInput": {
+            "type": "structure",
+            "members": {
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.marketplaceagreement#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of agreements to return in the response.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start pagination</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementTermsOutput": {
+            "type": "structure",
+            "members": {
+                "acceptedTerms": {
+                    "target": "com.amazonaws.marketplaceagreement#AcceptedTermList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A subset of terms proposed by the proposer that have been accepted by the acceptor as\n         part of the agreement creation.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start pagination</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GrantItem": {
+            "type": "structure",
+            "members": {
+                "dimensionKey": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique dimension key defined in the product document. Dimensions represent categories of capacity in a product and are specified when the product is listed in AWS Marketplace. </p>"
+                    }
+                },
+                "maxQuantity": {
+                    "target": "com.amazonaws.marketplaceagreement#PositiveIntegerWithDefaultValueOne",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>Maximum amount of capacity that the buyer can be entitled to the given dimension of the product. If <code>MaxQuantity</code> is not provided, the buyer will be able to use an unlimited amount of the given dimension. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Entitlements granted to the acceptor of fixed upfront as part of agreement execution.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GrantList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#GrantItem"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.marketplaceagreement#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the error.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.marketplaceagreement#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unexpected error during processing of request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.marketplaceagreement#LegalTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category of the term being updated.</p>"
+                    }
+                },
+                "documents": {
+                    "target": "com.amazonaws.marketplaceagreement#DocumentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of references to legal resources proposed to the buyers. An example is the\n         EULA.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the list of text agreements proposed to the acceptors. An example is the end\n         user license agreement (EULA).</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9+/=]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#OfferId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^\\S{1,64}$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#PaymentScheduleTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the term.</p>"
+                    }
+                },
+                "currencyCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the currency for the prices mentioned in the term. </p>"
+                    }
+                },
+                "schedule": {
+                    "target": "com.amazonaws.marketplaceagreement#ScheduleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the payment schedule where each element defines one installment of payment. It\n         contains the information necessary for calculating the price.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines an installment-based pricing model where customers are charged a fixed price on\n         different dates during the agreement validity period. This is used most commonly for\n         flexible payment schedule pricing.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#PositiveIntegerWithDefaultValueOne": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 1,
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ProposalSummary": {
+            "type": "structure",
+            "members": {
+                "resources": {
+                    "target": "com.amazonaws.marketplaceagreement#Resources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resources involved in the agreement.</p>"
+                    }
+                },
+                "offerId": {
+                    "target": "com.amazonaws.marketplaceagreement#OfferId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the offer in AWS Marketplace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the proposal received from the proposer.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Proposer": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.marketplaceagreement#AWSAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the proposer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the party proposing the agreement terms,. This is commonly the seller for\n            <code>PurchaseAgreement</code>. </p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#RateCardItem": {
+            "type": "structure",
+            "members": {
+                "dimensionKey": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dimension for which the given entitlement applies. Dimensions represent categories of capacity in a product and are specified when the product is listed in AWS Marketplace.</p>"
+                    }
+                },
+                "price": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Per unit price for the product dimension that’s used for calculating the amount to be charged.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the per unit rates for each individual product dimension.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#RateCardList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#RateCardItem"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#RecurringPaymentTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the term being updated.</p>"
+                    }
+                },
+                "currencyCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the currency for the prices mentioned in this term. </p>"
+                    }
+                },
+                "billingPeriod": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the recurrence at which buyers are charged.</p>"
+                    }
+                },
+                "price": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amount charged to the buyer every billing period.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a pricing model where customers are charged a fixed recurring price at the end\n         of each billing period.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#RenewalTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category of the term being updated. </p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.marketplaceagreement#RenewalTermConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional parameters specified by the acceptor while accepting the term.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines that on graceful expiration of the agreement (when the agreement ends on its\n         pre-defined end date), a new agreement will be created using the accepted terms on the\n         existing agreement. In other words, the agreement will be renewed. The presence of\n            <code>RenewalTerm</code> in the offer document means that auto-renewal is allowed.\n         Buyers will have the option to accept or decline auto-renewal at the offer\n         acceptance/agreement creation. Buyers can also change this flag from <code>True</code> to\n            <code>False</code> or <code>False</code> to <code>True</code> at anytime during the\n         agreement's lifecycle.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#RenewalTermConfiguration": {
+            "type": "structure",
+            "members": {
+                "enableAutoRenew": {
+                    "target": "com.amazonaws.marketplaceagreement#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines whether the acceptor has chosen to auto-renew the agreement at the end of its\n         lifecycle. Can be set to <code>True</code> or <code>False</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional parameters specified by the acceptor while accepting the term.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#RequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Resource": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the resource.</p>\n         <note>\n            <p>We mention the term resource, which is most commonly a product, so a\n               <code>resourceId</code> is also a <code>productId</code>.</p>\n         </note>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the resource, which is the product. Values include <code>SaaSProduct</code> or\n            <code>AmiProduct</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of resources involved in the agreement.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_/-]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.marketplaceagreement#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the error.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.marketplaceagreement#ExceptionMessage"
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request references a resource which does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ResourceType": {
+            "type": "enum",
+            "members": {
+                "AGREEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Agreement"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Resources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#Resource"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ScheduleItem": {
+            "type": "structure",
+            "members": {
+                "chargeDate": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date that the customer would pay the price defined in this payment schedule term. Invoices are generated on the date provided.</p>"
+                    }
+                },
+                "chargeAmount": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The price that the customer would pay on the scheduled date (chargeDate).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An individual installment of the payment that includes the date and amount of the charge.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ScheduleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#ScheduleItem"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#SearchAgreements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#SearchAgreementsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#SearchAgreementsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches across all agreements that a proposer or an acceptor has in AWS Marketplace. The search returns a list of agreements with basic agreement information.</p>\n         <p>The following filter combinations are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>ResourceIdentifier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>OfferId</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>AcceptorAccountId</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>ResourceIdentifier</code> + <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>OfferId</code> + <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>AcceptorAccountId</code> + <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>ResourceType</code> + <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>AcceptorAccountId</code> + <code>ResourceType</code> +\n               <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>AcceptorAccountId</code> + <code>OfferId</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>AcceptorAccountId</code> + <code>OfferId</code> + <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>AcceptorAccountId</code> + <code>ResourceIdentifier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>AcceptorAccountId</code> + <code>ResourceIdentifier</code> +\n                  <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> as <code>Proposer</code> + <code>AgreementType</code> +\n                  <code>AcceptorAccountId</code> + <code>ResourceType</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#paginated": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#SearchAgreementsInput": {
+            "type": "structure",
+            "members": {
+                "catalog": {
+                    "target": "com.amazonaws.marketplaceagreement#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog in which the agreement was created.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.marketplaceagreement#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter name and value pair used to return a specific list of results.</p>\n         <p>The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ResourceIdentifier</code> – The unique identifier of the resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType</code> – Type of the resource, which is the product\n                  (<code>AmiProduct</code>, <code>ContainerProduct</code>, or\n                  <code>SaaSProduct</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>PartyType</code> – The party type (either <code>Acceptor</code> or\n                  <code>Proposer</code>) of the caller. For agreements where the caller is the\n               proposer, use the <code>Proposer</code> filter. For agreements where the caller is\n               the acceptor, use the <code>Acceptor</code> filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AcceptorAccountId</code> – The AWS account ID of the party accepting the\n               agreement terms.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OfferId</code> – The unique identifier of the offer in which the terms are\n               registered in the agreement token.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code> – The current status of the agreement. Values include\n                  <code>ACTIVE</code>, <code>ARCHIVED</code>, <code>CANCELLED</code>,\n                  <code>EXPIRED</code>, <code>RENEWED</code>, <code>REPLACED</code>, and\n                  <code>TERMINATED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BeforeEndTime</code> – A date used to filter agreements with a date before\n               the <code>endTime</code> of an agreement.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AfterEndTime</code> – A date used to filter agreements with a date after the\n                  <code>endTime</code> of an agreement.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AgreementType</code> – The type of agreement. Values include\n                  <code>PurchaseAgreement</code> or <code>VendorInsightsAgreement</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "sort": {
+                    "target": "com.amazonaws.marketplaceagreement#Sort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the <code>SortBy</code> and <code>SortOrder</code>\n         attributes.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.marketplaceagreement#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of agreements to return in the response.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start pagination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#SearchAgreementsOutput": {
+            "type": "structure",
+            "members": {
+                "agreementViewSummaries": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementViewSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the agreement, including top-level attributes (for example, the agreement\n         ID, version, proposer, and acceptor).</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used for pagination. The field is <code>null</code> if there are no more\n         results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Selector": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category of selector.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contract duration. This field supports the ISO 8601 format. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Differentiates between the mutually exclusive rate cards in the same pricing term to be\n         selected by the buyer.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Sort": {
+            "type": "structure",
+            "members": {
+                "sortBy": {
+                    "target": "com.amazonaws.marketplaceagreement#SortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute on which the data is grouped, which can be by <code>StartTime</code> and\n            <code>EndTime</code>. The default value is <code>EndTime</code>.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.marketplaceagreement#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sorting order, which can be <code>ASCENDING</code> or <code>DESCENDING</code>. The\n         default value is <code>DESCENDING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains the <code>SortBy</code> and <code>SortOrder</code>\n         attributes.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#SortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z_]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#SortOrder": {
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
+                    }
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#SupportTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category of the term being updated.</p>"
+                    }
+                },
+                "refundPolicy": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Free-text field about the refund policy description that will be shown to customers as\n         is on the website and console.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the customer support available for the acceptors when they purchase the\n         software.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.marketplaceagreement#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the error.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.marketplaceagreement#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.marketplaceagreement#UnversionedTermType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[A-Za-z]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#UsageBasedPricingTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category of the term.</p>"
+                    }
+                },
+                "currencyCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the currency for the prices mentioned in the term. </p>"
+                    }
+                },
+                "rateCards": {
+                    "target": "com.amazonaws.marketplaceagreement#UsageBasedRateCardList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of rate cards.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a usage-based pricing model (typically, pay-as-you-go pricing), where the\n         customers are charged based on product usage.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#UsageBasedRateCardItem": {
+            "type": "structure",
+            "members": {
+                "rateCard": {
+                    "target": "com.amazonaws.marketplaceagreement#RateCardList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the per unit rates for product dimensions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Within the pay-as-you-go model defined under <code>UsageBasedPricingTerm</code>, the <code>UsageBasedRateCardItem</code> defines an individual rate for a product dimension.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#UsageBasedRateCardList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#UsageBasedRateCardItem"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ValidationException": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.marketplaceagreement#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier associated with the error.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.marketplaceagreement#ExceptionMessage"
+                },
+                "reason": {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason associated with the error.</p>"
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fields associated with the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field associated with the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>See applicable actions.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the service.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "INVALID_AGREEMENT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_AGREEMENT_ID"
+                    }
+                },
+                "MISSING_AGREEMENT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_AGREEMENT_ID"
+                    }
+                },
+                "INVALID_CATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_CATALOG"
+                    }
+                },
+                "INVALID_FILTER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_FILTER_NAME"
+                    }
+                },
+                "INVALID_FILTER_VALUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_FILTER_VALUES"
+                    }
+                },
+                "INVALID_SORT_BY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SORT_BY"
+                    }
+                },
+                "INVALID_SORT_ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SORT_ORDER"
+                    }
+                },
+                "INVALID_NEXT_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NEXT_TOKEN"
+                    }
+                },
+                "INVALID_MAX_RESULTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_MAX_RESULTS"
+                    }
+                },
+                "UNSUPPORTED_FILTERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSUPPORTED_FILTERS"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ValidityTerm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category of the term being updated. </p>"
+                    }
+                },
+                "agreementDuration": {
+                    "target": "com.amazonaws.marketplaceagreement#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the duration that the agreement remains active. If\n            <code>AgreementStartDate</code> isn’t provided, the agreement duration is relative to\n         the agreement signature time. The duration is represented in the ISO_8601 format.</p>"
+                    }
+                },
+                "agreementStartDate": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the date when agreement starts. The agreement starts at 00:00:00.000 UTC on the\n         date provided. If <code>AgreementStartDate</code> isn’t provided, the agreement start date\n         is determined based on agreement signature time.</p>"
+                    }
+                },
+                "agreementEndDate": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the date when the agreement ends. The agreement ends at 23:59:59.999 UTC on the\n         date provided. If <code>AgreementEndDate</code> isn’t provided, the agreement end date is\n         determined by the validity of individual terms.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the conditions that will keep an agreement created from this offer valid. </p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ZeroValueInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        }
+    }
+}
