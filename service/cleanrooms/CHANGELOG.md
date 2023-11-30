@@ -1,3 +1,7 @@
+# v1.8.1 (2023-11-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2023-11-29)
 
 * **Feature**: AWS Clean Rooms now provides differential privacy to protect against user-identification attempts and machine learning modeling to allow two parties to identify similar users in their data.

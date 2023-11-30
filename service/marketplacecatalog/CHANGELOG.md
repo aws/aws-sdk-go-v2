@@ -1,3 +1,8 @@
+# v1.22.0 (2023-11-30)
+
+* **Feature**: This release enhances the ListEntities API to support new entity type-specific strongly typed filters in the request and entity type-specific strongly typed summaries in the response.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-11-29)
 
 * **Feature**: Expose Options() accessor on service clients.

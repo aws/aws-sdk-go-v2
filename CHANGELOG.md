@@ -1,3 +1,20 @@
+# Release (2023-11-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.0.0](service/marketplaceagreement/CHANGELOG.md#v100-2023-11-30)
+  * **Release**: New AWS service client module
+  * **Feature**: The AWS Marketplace Agreement Service provides an API interface that helps AWS Marketplace sellers manage their agreements, including listing, filtering, and viewing details about their agreements.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.22.0](service/marketplacecatalog/CHANGELOG.md#v1220-2023-11-30)
+  * **Feature**: This release enhances the ListEntities API to support new entity type-specific strongly typed filters in the request and entity type-specific strongly typed summaries in the response.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.0.0](service/marketplacedeployment/CHANGELOG.md#v100-2023-11-30)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Marketplace Deployment is a new service that provides essential features that facilitate the deployment of software, data, and services procured through AWS Marketplace.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.15.0](service/redshiftserverless/CHANGELOG.md#v1150-2023-11-30)
+  * **Feature**: This release adds the following support for Amazon Redshift Serverless: 1) cross-account cross-VPCs, 2) copying snapshots across Regions, 3) scheduling snapshot creation, and 4) restoring tables from a recovery point.
+
 # Release (2023-11-29)
 
 ## General Highlights

@@ -1,3 +1,8 @@
+# v1.15.0 (2023-11-30)
+
+* **Feature**: This release adds the following support for Amazon Redshift Serverless: 1) cross-account cross-VPCs, 2) copying snapshots across Regions, 3) scheduling snapshot creation, and 4) restoring tables from a recovery point.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2023-11-29)
 
 * **Feature**: Expose Options() accessor on service clients.

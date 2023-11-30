@@ -1,8 +1,0 @@
-{
-    "id": "f561ce34-3032-4785-95e4-2f9692571ad6",
-    "type": "feature",
-    "description": "This release adds the following support for Amazon Redshift Serverless: 1) cross-account cross-VPCs, 2) copying snapshots across Regions, 3) scheduling snapshot creation, and 4) restoring tables from a recovery point.",
-    "modules": [
-        "service/redshiftserverless"
-    ]
-}

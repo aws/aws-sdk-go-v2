@@ -1,3 +1,7 @@
+# v1.48.1 (2023-11-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2023-11-29)
 
 * **Feature**: Expose Options() accessor on service clients.

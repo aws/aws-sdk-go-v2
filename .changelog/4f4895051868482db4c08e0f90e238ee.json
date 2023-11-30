@@ -1,8 +1,0 @@
-{
-    "id": "4f489505-1868-482d-b4c0-8e0f90e238ee",
-    "type": "feature",
-    "description": "The AWS Marketplace Agreement Service provides an API interface that helps AWS Marketplace sellers manage their agreements, including listing, filtering, and viewing details about their agreements.",
-    "modules": [
-        "service/marketplaceagreement"
-    ]
-}
