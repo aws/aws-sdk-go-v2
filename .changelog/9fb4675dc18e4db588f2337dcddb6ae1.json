@@ -1,0 +1,8 @@
+{
+    "id": "9fb4675d-c18e-4db5-88f2-337dcddb6ae1",
+    "type": "feature",
+    "description": "Adds observation and analyzer support to the GetDataQualityResult and BatchGetDataQualityResult APIs.",
+    "modules": [
+        "service/glue"
+    ]
+}

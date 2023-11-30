@@ -19166,6 +19166,27 @@ func awsAwsjson11_serializeDocumentClusterLifeCycleConfig(v *types.ClusterLifeCy
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCodeEditorAppSettings(v *types.CodeEditorAppSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultResourceSpec != nil {
+		ok := object.Key("DefaultResourceSpec")
+		if err := awsAwsjson11_serializeDocumentResourceSpec(v.DefaultResourceSpec, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LifecycleConfigArns != nil {
+		ok := object.Key("LifecycleConfigArns")
+		if err := awsAwsjson11_serializeDocumentLifecycleConfigArns(v.LifecycleConfigArns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCodeRepositories(v []types.CodeRepository, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -19310,6 +19331,34 @@ func awsAwsjson11_serializeDocumentContainerArguments(v []string, value smithyjs
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentContainerConfig(v *types.ContainerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContainerArguments != nil {
+		ok := object.Key("ContainerArguments")
+		if err := awsAwsjson11_serializeDocumentCustomImageContainerArguments(v.ContainerArguments, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContainerEntrypoint != nil {
+		ok := object.Key("ContainerEntrypoint")
+		if err := awsAwsjson11_serializeDocumentCustomImageContainerEntrypoint(v.ContainerEntrypoint, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContainerEnvironmentVariables != nil {
+		ok := object.Key("ContainerEnvironmentVariables")
+		if err := awsAwsjson11_serializeDocumentCustomImageContainerEnvironmentVariables(v.ContainerEnvironmentVariables, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -19548,6 +19597,74 @@ func awsAwsjson11_serializeDocumentCustomerMetadataMap(v map[string]string, valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCustomFileSystem(v types.CustomFileSystem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CustomFileSystemMemberEFSFileSystem:
+		av := object.Key("EFSFileSystem")
+		if err := awsAwsjson11_serializeDocumentEFSFileSystem(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomFileSystemConfig(v types.CustomFileSystemConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CustomFileSystemConfigMemberEFSFileSystemConfig:
+		av := object.Key("EFSFileSystemConfig")
+		if err := awsAwsjson11_serializeDocumentEFSFileSystemConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomFileSystemConfigs(v []types.CustomFileSystemConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentCustomFileSystemConfig(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomFileSystems(v []types.CustomFileSystem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentCustomFileSystem(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCustomImage(v *types.CustomImage, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19570,6 +19687,39 @@ func awsAwsjson11_serializeDocumentCustomImage(v *types.CustomImage, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCustomImageContainerArguments(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomImageContainerEntrypoint(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomImageContainerEnvironmentVariables(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCustomImages(v []types.CustomImage, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -19580,6 +19730,23 @@ func awsAwsjson11_serializeDocumentCustomImages(v []types.CustomImage, value smi
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomPosixUserConfig(v *types.CustomPosixUserConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Gid != nil {
+		ok := object.Key("Gid")
+		ok.Long(*v.Gid)
+	}
+
+	if v.Uid != nil {
+		ok := object.Key("Uid")
+		ok.Long(*v.Uid)
+	}
+
 	return nil
 }
 
@@ -19903,6 +20070,23 @@ func awsAwsjson11_serializeDocumentDebugRuleConfigurations(v []types.DebugRuleCo
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDefaultEbsStorageSettings(v *types.DefaultEbsStorageSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultEbsVolumeSizeInGb != nil {
+		ok := object.Key("DefaultEbsVolumeSizeInGb")
+		ok.Integer(*v.DefaultEbsVolumeSizeInGb)
+	}
+
+	if v.MaximumEbsVolumeSizeInGb != nil {
+		ok := object.Key("MaximumEbsVolumeSizeInGb")
+		ok.Integer(*v.MaximumEbsVolumeSizeInGb)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDefaultSpaceSettings(v *types.DefaultSpaceSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19929,6 +20113,20 @@ func awsAwsjson11_serializeDocumentDefaultSpaceSettings(v *types.DefaultSpaceSet
 	if v.SecurityGroups != nil {
 		ok := object.Key("SecurityGroups")
 		if err := awsAwsjson11_serializeDocumentSecurityGroupIds(v.SecurityGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDefaultSpaceStorageSettings(v *types.DefaultSpaceStorageSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultEbsStorageSettings != nil {
+		ok := object.Key("DefaultEbsStorageSettings")
+		if err := awsAwsjson11_serializeDocumentDefaultEbsStorageSettings(v.DefaultEbsStorageSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -20334,6 +20532,18 @@ func awsAwsjson11_serializeDocumentDriftCheckModelQuality(v *types.DriftCheckMod
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEbsStorageSettings(v *types.EbsStorageSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EbsVolumeSizeInGb != nil {
+		ok := object.Key("EbsVolumeSizeInGb")
+		ok.Integer(*v.EbsVolumeSizeInGb)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEdgeDeploymentConfig(v *types.EdgeDeploymentConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20398,6 +20608,35 @@ func awsAwsjson11_serializeDocumentEdgeOutputConfig(v *types.EdgeOutputConfig, v
 	if v.S3OutputLocation != nil {
 		ok := object.Key("S3OutputLocation")
 		ok.String(*v.S3OutputLocation)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEFSFileSystem(v *types.EFSFileSystem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileSystemId != nil {
+		ok := object.Key("FileSystemId")
+		ok.String(*v.FileSystemId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEFSFileSystemConfig(v *types.EFSFileSystemConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileSystemId != nil {
+		ok := object.Key("FileSystemId")
+		ok.String(*v.FileSystemId)
+	}
+
+	if v.FileSystemPath != nil {
+		ok := object.Key("FileSystemPath")
+		ok.String(*v.FileSystemPath)
 	}
 
 	return nil
@@ -22144,6 +22383,55 @@ func awsAwsjson11_serializeDocumentJsonContentTypes(v []string, value smithyjson
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentJupyterLabAppImageConfig(v *types.JupyterLabAppImageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContainerConfig != nil {
+		ok := object.Key("ContainerConfig")
+		if err := awsAwsjson11_serializeDocumentContainerConfig(v.ContainerConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentJupyterLabAppSettings(v *types.JupyterLabAppSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CodeRepositories != nil {
+		ok := object.Key("CodeRepositories")
+		if err := awsAwsjson11_serializeDocumentCodeRepositories(v.CodeRepositories, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomImages != nil {
+		ok := object.Key("CustomImages")
+		if err := awsAwsjson11_serializeDocumentCustomImages(v.CustomImages, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultResourceSpec != nil {
+		ok := object.Key("DefaultResourceSpec")
+		if err := awsAwsjson11_serializeDocumentResourceSpec(v.DefaultResourceSpec, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LifecycleConfigArns != nil {
+		ok := object.Key("LifecycleConfigArns")
+		if err := awsAwsjson11_serializeDocumentLifecycleConfigArns(v.LifecycleConfigArns, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -24137,6 +24425,18 @@ func awsAwsjson11_serializeDocumentOutputParameterList(v []types.OutputParameter
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOwnershipSettings(v *types.OwnershipSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OwnerUserProfileName != nil {
+		ok := object.Key("OwnerUserProfileName")
+		ok.String(*v.OwnerUserProfileName)
+	}
+
 	return nil
 }
 
@@ -26163,9 +26463,70 @@ func awsAwsjson11_serializeDocumentSourceIpConfig(v *types.SourceIpConfig, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSpaceCodeEditorAppSettings(v *types.SpaceCodeEditorAppSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultResourceSpec != nil {
+		ok := object.Key("DefaultResourceSpec")
+		if err := awsAwsjson11_serializeDocumentResourceSpec(v.DefaultResourceSpec, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSpaceJupyterLabAppSettings(v *types.SpaceJupyterLabAppSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CodeRepositories != nil {
+		ok := object.Key("CodeRepositories")
+		if err := awsAwsjson11_serializeDocumentCodeRepositories(v.CodeRepositories, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultResourceSpec != nil {
+		ok := object.Key("DefaultResourceSpec")
+		if err := awsAwsjson11_serializeDocumentResourceSpec(v.DefaultResourceSpec, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSpaceSettings(v *types.SpaceSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AppType) > 0 {
+		ok := object.Key("AppType")
+		ok.String(string(v.AppType))
+	}
+
+	if v.CodeEditorAppSettings != nil {
+		ok := object.Key("CodeEditorAppSettings")
+		if err := awsAwsjson11_serializeDocumentSpaceCodeEditorAppSettings(v.CodeEditorAppSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomFileSystems != nil {
+		ok := object.Key("CustomFileSystems")
+		if err := awsAwsjson11_serializeDocumentCustomFileSystems(v.CustomFileSystems, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.JupyterLabAppSettings != nil {
+		ok := object.Key("JupyterLabAppSettings")
+		if err := awsAwsjson11_serializeDocumentSpaceJupyterLabAppSettings(v.JupyterLabAppSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.JupyterServerAppSettings != nil {
 		ok := object.Key("JupyterServerAppSettings")
@@ -26177,6 +26538,39 @@ func awsAwsjson11_serializeDocumentSpaceSettings(v *types.SpaceSettings, value s
 	if v.KernelGatewayAppSettings != nil {
 		ok := object.Key("KernelGatewayAppSettings")
 		if err := awsAwsjson11_serializeDocumentKernelGatewayAppSettings(v.KernelGatewayAppSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceStorageSettings != nil {
+		ok := object.Key("SpaceStorageSettings")
+		if err := awsAwsjson11_serializeDocumentSpaceStorageSettings(v.SpaceStorageSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSpaceSharingSettings(v *types.SpaceSharingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SharingType) > 0 {
+		ok := object.Key("SharingType")
+		ok.String(string(v.SharingType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSpaceStorageSettings(v *types.SpaceStorageSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EbsStorageSettings != nil {
+		ok := object.Key("EbsStorageSettings")
+		if err := awsAwsjson11_serializeDocumentEbsStorageSettings(v.EbsStorageSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -27233,6 +27627,27 @@ func awsAwsjson11_serializeDocumentUserSettings(v *types.UserSettings, value smi
 		}
 	}
 
+	if v.CodeEditorAppSettings != nil {
+		ok := object.Key("CodeEditorAppSettings")
+		if err := awsAwsjson11_serializeDocumentCodeEditorAppSettings(v.CodeEditorAppSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomFileSystemConfigs != nil {
+		ok := object.Key("CustomFileSystemConfigs")
+		if err := awsAwsjson11_serializeDocumentCustomFileSystemConfigs(v.CustomFileSystemConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomPosixUserConfig != nil {
+		ok := object.Key("CustomPosixUserConfig")
+		if err := awsAwsjson11_serializeDocumentCustomPosixUserConfig(v.CustomPosixUserConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DefaultLandingUri != nil {
 		ok := object.Key("DefaultLandingUri")
 		ok.String(*v.DefaultLandingUri)
@@ -27241,6 +27656,13 @@ func awsAwsjson11_serializeDocumentUserSettings(v *types.UserSettings, value smi
 	if v.ExecutionRole != nil {
 		ok := object.Key("ExecutionRole")
 		ok.String(*v.ExecutionRole)
+	}
+
+	if v.JupyterLabAppSettings != nil {
+		ok := object.Key("JupyterLabAppSettings")
+		if err := awsAwsjson11_serializeDocumentJupyterLabAppSettings(v.JupyterLabAppSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.JupyterServerAppSettings != nil {
@@ -27281,6 +27703,13 @@ func awsAwsjson11_serializeDocumentUserSettings(v *types.UserSettings, value smi
 	if v.SharingSettings != nil {
 		ok := object.Key("SharingSettings")
 		if err := awsAwsjson11_serializeDocumentSharingSettings(v.SharingSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceStorageSettings != nil {
+		ok := object.Key("SpaceStorageSettings")
+		if err := awsAwsjson11_serializeDocumentDefaultSpaceStorageSettings(v.SpaceStorageSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -27618,6 +28047,13 @@ func awsAwsjson11_serializeOpDocumentCreateAppImageConfigInput(v *CreateAppImage
 	if v.AppImageConfigName != nil {
 		ok := object.Key("AppImageConfigName")
 		ok.String(*v.AppImageConfigName)
+	}
+
+	if v.JupyterLabAppImageConfig != nil {
+		ok := object.Key("JupyterLabAppImageConfig")
+		if err := awsAwsjson11_serializeDocumentJupyterLabAppImageConfig(v.JupyterLabAppImageConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KernelGatewayImageConfig != nil {
@@ -29902,6 +30338,18 @@ func awsAwsjson11_serializeOpDocumentCreateSpaceInput(v *CreateSpaceInput, value
 		ok.String(*v.DomainId)
 	}
 
+	if v.OwnershipSettings != nil {
+		ok := object.Key("OwnershipSettings")
+		if err := awsAwsjson11_serializeDocumentOwnershipSettings(v.OwnershipSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceDisplayName != nil {
+		ok := object.Key("SpaceDisplayName")
+		ok.String(*v.SpaceDisplayName)
+	}
+
 	if v.SpaceName != nil {
 		ok := object.Key("SpaceName")
 		ok.String(*v.SpaceName)
@@ -29910,6 +30358,13 @@ func awsAwsjson11_serializeOpDocumentCreateSpaceInput(v *CreateSpaceInput, value
 	if v.SpaceSettings != nil {
 		ok := object.Key("SpaceSettings")
 		if err := awsAwsjson11_serializeDocumentSpaceSettings(v.SpaceSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceSharingSettings != nil {
+		ok := object.Key("SpaceSharingSettings")
+		if err := awsAwsjson11_serializeDocumentSpaceSharingSettings(v.SpaceSharingSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -36215,6 +36670,13 @@ func awsAwsjson11_serializeOpDocumentUpdateAppImageConfigInput(v *UpdateAppImage
 		ok.String(*v.AppImageConfigName)
 	}
 
+	if v.JupyterLabAppImageConfig != nil {
+		ok := object.Key("JupyterLabAppImageConfig")
+		if err := awsAwsjson11_serializeDocumentJupyterLabAppImageConfig(v.JupyterLabAppImageConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KernelGatewayImageConfig != nil {
 		ok := object.Key("KernelGatewayImageConfig")
 		if err := awsAwsjson11_serializeDocumentKernelGatewayImageConfig(v.KernelGatewayImageConfig, ok); err != nil {
@@ -37129,6 +37591,11 @@ func awsAwsjson11_serializeOpDocumentUpdateSpaceInput(v *UpdateSpaceInput, value
 	if v.DomainId != nil {
 		ok := object.Key("DomainId")
 		ok.String(*v.DomainId)
+	}
+
+	if v.SpaceDisplayName != nil {
+		ok := object.Key("SpaceDisplayName")
+		ok.String(*v.SpaceDisplayName)
 	}
 
 	if v.SpaceName != nil {

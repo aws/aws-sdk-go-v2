@@ -12,29 +12,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all active and completed zonal shifts in Amazon Route 53 Application
-// Recovery Controller in your Amazon Web Services account in this Amazon Web
-// Services Region. ListZonalShifts returns customer-started zonal shifts, as well
-// as practice run zonal shifts that Route 53 ARC started on your behalf for zonal
-// autoshift. The ListZonalShifts operation does not list autoshifts. For more
-// information about listing autoshifts, see ">ListAutoshifts (https://docs.aws.amazon.com/arc-zonal-shift/latest/api/API_ListAutoshifts.html)
-// .
-func (c *Client) ListZonalShifts(ctx context.Context, params *ListZonalShiftsInput, optFns ...func(*Options)) (*ListZonalShiftsOutput, error) {
+// Returns the active autoshifts for a specified resource.
+func (c *Client) ListAutoshifts(ctx context.Context, params *ListAutoshiftsInput, optFns ...func(*Options)) (*ListAutoshiftsOutput, error) {
 	if params == nil {
-		params = &ListZonalShiftsInput{}
+		params = &ListAutoshiftsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListZonalShifts", params, optFns, c.addOperationListZonalShiftsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAutoshifts", params, optFns, c.addOperationListAutoshiftsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListZonalShiftsOutput)
+	out := result.(*ListAutoshiftsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListZonalShiftsInput struct {
+type ListAutoshiftsInput struct {
 
 	// The number of objects that you want to return with this call.
 	MaxResults *int32
@@ -45,24 +39,16 @@ type ListZonalShiftsInput struct {
 	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
-	// The identifier for the resource that you want to list zonal shifts for. The
-	// identifier is the Amazon Resource Name (ARN) for the resource.
-	ResourceIdentifier *string
-
-	// A status for a zonal shift. The Status for a zonal shift can have one of the
-	// following values:
-	//   - ACTIVE: The zonal shift has been started and active.
-	//   - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
-	//   - CANCELED: The zonal shift was canceled.
-	Status types.ZonalShiftStatus
+	// The status of the autoshift.
+	Status types.AutoshiftExecutionStatus
 
 	noSmithyDocumentSerde
 }
 
-type ListZonalShiftsOutput struct {
+type ListAutoshiftsOutput struct {
 
 	// The items in the response list.
-	Items []types.ZonalShiftSummary
+	Items []types.AutoshiftSummary
 
 	// Specifies that you want to receive the next page of results. Valid only if you
 	// received a NextToken response in the previous request. If you did, it indicates
@@ -76,19 +62,19 @@ type ListZonalShiftsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListZonalShiftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAutoshiftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListZonalShifts{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAutoshifts{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListZonalShifts{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAutoshifts{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListZonalShifts"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutoshifts"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -131,7 +117,7 @@ func (c *Client) addOperationListZonalShiftsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListZonalShifts(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAutoshifts(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -152,16 +138,16 @@ func (c *Client) addOperationListZonalShiftsMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-// ListZonalShiftsAPIClient is a client that implements the ListZonalShifts
+// ListAutoshiftsAPIClient is a client that implements the ListAutoshifts
 // operation.
-type ListZonalShiftsAPIClient interface {
-	ListZonalShifts(context.Context, *ListZonalShiftsInput, ...func(*Options)) (*ListZonalShiftsOutput, error)
+type ListAutoshiftsAPIClient interface {
+	ListAutoshifts(context.Context, *ListAutoshiftsInput, ...func(*Options)) (*ListAutoshiftsOutput, error)
 }
 
-var _ ListZonalShiftsAPIClient = (*Client)(nil)
+var _ ListAutoshiftsAPIClient = (*Client)(nil)
 
-// ListZonalShiftsPaginatorOptions is the paginator options for ListZonalShifts
-type ListZonalShiftsPaginatorOptions struct {
+// ListAutoshiftsPaginatorOptions is the paginator options for ListAutoshifts
+type ListAutoshiftsPaginatorOptions struct {
 	// The number of objects that you want to return with this call.
 	Limit int32
 
@@ -170,22 +156,22 @@ type ListZonalShiftsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListZonalShiftsPaginator is a paginator for ListZonalShifts
-type ListZonalShiftsPaginator struct {
-	options   ListZonalShiftsPaginatorOptions
-	client    ListZonalShiftsAPIClient
-	params    *ListZonalShiftsInput
+// ListAutoshiftsPaginator is a paginator for ListAutoshifts
+type ListAutoshiftsPaginator struct {
+	options   ListAutoshiftsPaginatorOptions
+	client    ListAutoshiftsAPIClient
+	params    *ListAutoshiftsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListZonalShiftsPaginator returns a new ListZonalShiftsPaginator
-func NewListZonalShiftsPaginator(client ListZonalShiftsAPIClient, params *ListZonalShiftsInput, optFns ...func(*ListZonalShiftsPaginatorOptions)) *ListZonalShiftsPaginator {
+// NewListAutoshiftsPaginator returns a new ListAutoshiftsPaginator
+func NewListAutoshiftsPaginator(client ListAutoshiftsAPIClient, params *ListAutoshiftsInput, optFns ...func(*ListAutoshiftsPaginatorOptions)) *ListAutoshiftsPaginator {
 	if params == nil {
-		params = &ListZonalShiftsInput{}
+		params = &ListAutoshiftsInput{}
 	}
 
-	options := ListZonalShiftsPaginatorOptions{}
+	options := ListAutoshiftsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -194,7 +180,7 @@ func NewListZonalShiftsPaginator(client ListZonalShiftsAPIClient, params *ListZo
 		fn(&options)
 	}
 
-	return &ListZonalShiftsPaginator{
+	return &ListAutoshiftsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -204,12 +190,12 @@ func NewListZonalShiftsPaginator(client ListZonalShiftsAPIClient, params *ListZo
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListZonalShiftsPaginator) HasMorePages() bool {
+func (p *ListAutoshiftsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListZonalShifts page.
-func (p *ListZonalShiftsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListZonalShiftsOutput, error) {
+// NextPage retrieves the next ListAutoshifts page.
+func (p *ListAutoshiftsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAutoshiftsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -223,7 +209,7 @@ func (p *ListZonalShiftsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListZonalShifts(ctx, &params, optFns...)
+	result, err := p.client.ListAutoshifts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -242,10 +228,10 @@ func (p *ListZonalShiftsPaginator) NextPage(ctx context.Context, optFns ...func(
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListZonalShifts(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListAutoshifts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ListZonalShifts",
+		OperationName: "ListAutoshifts",
 	}
 }

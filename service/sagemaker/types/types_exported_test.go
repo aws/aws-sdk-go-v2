@@ -81,6 +81,42 @@ func ExampleCollectionConfig_outputUsage() {
 
 var _ *types.VectorConfig
 
+func ExampleCustomFileSystem_outputUsage() {
+	var union types.CustomFileSystem
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomFileSystemMemberEFSFileSystem:
+		_ = v.Value // Value is types.EFSFileSystem
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EFSFileSystem
+
+func ExampleCustomFileSystemConfig_outputUsage() {
+	var union types.CustomFileSystemConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomFileSystemConfigMemberEFSFileSystemConfig:
+		_ = v.Value // Value is types.EFSFileSystemConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EFSFileSystemConfig
+
 func ExampleMetricSpecification_outputUsage() {
 	var union types.MetricSpecification
 	// type switches can be used to check the union value

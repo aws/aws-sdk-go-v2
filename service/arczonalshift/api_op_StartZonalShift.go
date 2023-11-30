@@ -14,17 +14,18 @@ import (
 )
 
 // You start a zonal shift to temporarily move load balancer traffic away from an
-// Availability Zone in a AWS Region, to help your application recover immediately,
-// for example, from a developer's bad code deployment or from an AWS
-// infrastructure failure in a single Availability Zone. You can start a zonal
-// shift in Route 53 ARC only for managed resources in your account in an AWS
-// Region. Resources are automatically registered with Route 53 ARC by AWS
-// services. At this time, you can only start a zonal shift for Network Load
-// Balancers and Application Load Balancers with cross-zone load balancing turned
-// off. When you start a zonal shift, traffic for the resource is no longer routed
-// to the Availability Zone. The zonal shift is created immediately in Route 53
-// ARC. However, it can take a short time, typically up to a few minutes, for
-// existing, in-progress connections in the Availability Zone to complete. For more
+// Availability Zone in an Amazon Web Services Region, to help your application
+// recover immediately, for example, from a developer's bad code deployment or from
+// an Amazon Web Services infrastructure failure in a single Availability Zone. You
+// can start a zonal shift in Route 53 ARC only for managed resources in your
+// Amazon Web Services account in an Amazon Web Services Region. Resources are
+// automatically registered with Route 53 ARC by Amazon Web Services services. At
+// this time, you can only start a zonal shift for Network Load Balancers and
+// Application Load Balancers with cross-zone load balancing turned off. When you
+// start a zonal shift, traffic for the resource is no longer routed to the
+// Availability Zone. The zonal shift is created immediately in Route 53 ARC.
+// However, it can take a short time, typically up to a few minutes, for existing,
+// in-progress connections in the Availability Zone to complete. For more
 // information, see Zonal shift (https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.html)
 // in the Amazon Route 53 Application Recovery Controller Developer Guide.
 func (c *Client) StartZonalShift(ctx context.Context, params *StartZonalShiftInput, optFns ...func(*Options)) (*StartZonalShiftOutput, error) {
@@ -46,7 +47,8 @@ type StartZonalShiftInput struct {
 
 	// The Availability Zone that traffic is moved away from for a resource when you
 	// start a zonal shift. Until the zonal shift expires or you cancel it, traffic for
-	// the resource is instead moved to other Availability Zones in the AWS Region.
+	// the resource is instead moved to other Availability Zones in the Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	AwayFrom *string
@@ -74,10 +76,10 @@ type StartZonalShiftInput struct {
 	// This member is required.
 	ExpiresIn *string
 
-	// The identifier for the resource to include in a zonal shift. The identifier is
-	// the Amazon Resource Name (ARN) for the resource. At this time, you can only
-	// start a zonal shift for Network Load Balancers and Application Load Balancers
-	// with cross-zone load balancing turned off.
+	// The identifier for the resource to shift away traffic for. The identifier is
+	// the Amazon Resource Name (ARN) for the resource. At this time, supported
+	// resources are Network Load Balancers and Application Load Balancers with
+	// cross-zone load balancing turned off.
 	//
 	// This member is required.
 	ResourceIdentifier *string
@@ -89,7 +91,8 @@ type StartZonalShiftOutput struct {
 
 	// The Availability Zone that traffic is moved away from for a resource when you
 	// start a zonal shift. Until the zonal shift expires or you cancel it, traffic for
-	// the resource is instead moved to other Availability Zones in the AWS Region.
+	// the resource is instead moved to other Availability Zones in the Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	AwayFrom *string
@@ -101,35 +104,35 @@ type StartZonalShiftOutput struct {
 	// This member is required.
 	Comment *string
 
-	// The expiry time (expiration time) for the zonal shift. A zonal shift is
-	// temporary and must be set to expire when you start the zonal shift. You can
-	// initially set a zonal shift to expire in a maximum of three days (72 hours).
+	// The expiry time (expiration time) for a customer-started zonal shift. A zonal
+	// shift is temporary and must be set to expire when you start the zonal shift. You
+	// can initially set a zonal shift to expire in a maximum of three days (72 hours).
 	// However, you can update a zonal shift to set a new expiration at any time. When
 	// you start a zonal shift, you specify how long you want it to be active, which
 	// Route 53 ARC converts to an expiry time (expiration time). You can cancel a
-	// zonal shift, for example, if you're ready to restore traffic to the Availability
-	// Zone. Or you can update the zonal shift to specify another length of time to
-	// expire in.
+	// zonal shift when you're ready to restore traffic to the Availability Zone, or
+	// just wait for it to expire. Or you can update the zonal shift to specify another
+	// length of time to expire in.
 	//
 	// This member is required.
 	ExpiryTime *time.Time
 
-	// The identifier for the resource to include in a zonal shift. The identifier is
-	// the Amazon Resource Name (ARN) for the resource. At this time, you can only
-	// start a zonal shift for Network Load Balancers and Application Load Balancers
-	// with cross-zone load balancing turned off.
+	// The identifier for the resource to shift away traffic for. The identifier is
+	// the Amazon Resource Name (ARN) for the resource. At this time, supported
+	// resources are Network Load Balancers and Application Load Balancers with
+	// cross-zone load balancing turned off.
 	//
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The time (UTC) when the zonal shift is started.
+	// The time (UTC) when the zonal shift starts.
 	//
 	// This member is required.
 	StartTime *time.Time
 
 	// A status for a zonal shift. The Status for a zonal shift can have one of the
 	// following values:
-	//   - ACTIVE: The zonal shift is started and active.
+	//   - ACTIVE: The zonal shift has been started and active.
 	//   - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
 	//   - CANCELED: The zonal shift was canceled.
 	//

@@ -7364,6 +7364,78 @@ func validateContinuousParameterRangeSpecification(v *types.ContinuousParameterR
 	}
 }
 
+func validateCustomFileSystem(v types.CustomFileSystem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomFileSystem"}
+	switch uv := v.(type) {
+	case *types.CustomFileSystemMemberEFSFileSystem:
+		if err := validateEFSFileSystem(&uv.Value); err != nil {
+			invalidParams.AddNested("[EFSFileSystem]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomFileSystemConfig(v types.CustomFileSystemConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomFileSystemConfig"}
+	switch uv := v.(type) {
+	case *types.CustomFileSystemConfigMemberEFSFileSystemConfig:
+		if err := validateEFSFileSystemConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[EFSFileSystemConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomFileSystemConfigs(v []types.CustomFileSystemConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomFileSystemConfigs"}
+	for i := range v {
+		if err := validateCustomFileSystemConfig(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomFileSystems(v []types.CustomFileSystem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomFileSystems"}
+	for i := range v {
+		if err := validateCustomFileSystem(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomImage(v *types.CustomImage) error {
 	if v == nil {
 		return nil
@@ -7391,6 +7463,24 @@ func validateCustomImages(v []types.CustomImage) error {
 		if err := validateCustomImage(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomPosixUserConfig(v *types.CustomPosixUserConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomPosixUserConfig"}
+	if v.Uid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uid"))
+	}
+	if v.Gid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Gid"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7576,6 +7666,24 @@ func validateDebugRuleConfigurations(v []types.DebugRuleConfiguration) error {
 	}
 }
 
+func validateDefaultEbsStorageSettings(v *types.DefaultEbsStorageSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefaultEbsStorageSettings"}
+	if v.DefaultEbsVolumeSizeInGb == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultEbsVolumeSizeInGb"))
+	}
+	if v.MaximumEbsVolumeSizeInGb == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumEbsVolumeSizeInGb"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDefaultSpaceSettings(v *types.DefaultSpaceSettings) error {
 	if v == nil {
 		return nil
@@ -7589,6 +7697,23 @@ func validateDefaultSpaceSettings(v *types.DefaultSpaceSettings) error {
 	if v.KernelGatewayAppSettings != nil {
 		if err := validateKernelGatewayAppSettings(v.KernelGatewayAppSettings); err != nil {
 			invalidParams.AddNested("KernelGatewayAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDefaultSpaceStorageSettings(v *types.DefaultSpaceStorageSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefaultSpaceStorageSettings"}
+	if v.DefaultEbsStorageSettings != nil {
+		if err := validateDefaultEbsStorageSettings(v.DefaultEbsStorageSettings); err != nil {
+			invalidParams.AddNested("DefaultEbsStorageSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7902,6 +8027,21 @@ func validateDriftCheckModelQuality(v *types.DriftCheckModelQuality) error {
 	}
 }
 
+func validateEbsStorageSettings(v *types.EbsStorageSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EbsStorageSettings"}
+	if v.EbsVolumeSizeInGb == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EbsVolumeSizeInGb"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEdgeDeploymentConfig(v *types.EdgeDeploymentConfig) error {
 	if v == nil {
 		return nil
@@ -7959,6 +8099,36 @@ func validateEdgeOutputConfig(v *types.EdgeOutputConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EdgeOutputConfig"}
 	if v.S3OutputLocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3OutputLocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEFSFileSystem(v *types.EFSFileSystem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EFSFileSystem"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEFSFileSystemConfig(v *types.EFSFileSystemConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EFSFileSystemConfig"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8918,6 +9088,28 @@ func validateIntegerParameterRangeSpecification(v *types.IntegerParameterRangeSp
 	}
 	if v.MaxValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJupyterLabAppSettings(v *types.JupyterLabAppSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JupyterLabAppSettings"}
+	if v.CustomImages != nil {
+		if err := validateCustomImages(v.CustomImages); err != nil {
+			invalidParams.AddNested("CustomImages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeRepositories != nil {
+		if err := validateCodeRepositories(v.CodeRepositories); err != nil {
+			invalidParams.AddNested("CodeRepositories", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10201,6 +10393,21 @@ func validateOutputParameterList(v []types.OutputParameter) error {
 	}
 }
 
+func validateOwnershipSettings(v *types.OwnershipSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OwnershipSettings"}
+	if v.OwnerUserProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwnerUserProfileName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateParallelismConfiguration(v *types.ParallelismConfiguration) error {
 	if v == nil {
 		return nil
@@ -11272,6 +11479,23 @@ func validateSourceIpConfig(v *types.SourceIpConfig) error {
 	}
 }
 
+func validateSpaceJupyterLabAppSettings(v *types.SpaceJupyterLabAppSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpaceJupyterLabAppSettings"}
+	if v.CodeRepositories != nil {
+		if err := validateCodeRepositories(v.CodeRepositories); err != nil {
+			invalidParams.AddNested("CodeRepositories", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSpaceSettings(v *types.SpaceSettings) error {
 	if v == nil {
 		return nil
@@ -11285,6 +11509,53 @@ func validateSpaceSettings(v *types.SpaceSettings) error {
 	if v.KernelGatewayAppSettings != nil {
 		if err := validateKernelGatewayAppSettings(v.KernelGatewayAppSettings); err != nil {
 			invalidParams.AddNested("KernelGatewayAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JupyterLabAppSettings != nil {
+		if err := validateSpaceJupyterLabAppSettings(v.JupyterLabAppSettings); err != nil {
+			invalidParams.AddNested("JupyterLabAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpaceStorageSettings != nil {
+		if err := validateSpaceStorageSettings(v.SpaceStorageSettings); err != nil {
+			invalidParams.AddNested("SpaceStorageSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomFileSystems != nil {
+		if err := validateCustomFileSystems(v.CustomFileSystems); err != nil {
+			invalidParams.AddNested("CustomFileSystems", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSpaceSharingSettings(v *types.SpaceSharingSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpaceSharingSettings"}
+	if len(v.SharingType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SharingType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSpaceStorageSettings(v *types.SpaceStorageSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpaceStorageSettings"}
+	if v.EbsStorageSettings != nil {
+		if err := validateEbsStorageSettings(v.EbsStorageSettings); err != nil {
+			invalidParams.AddNested("EbsStorageSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11798,6 +12069,26 @@ func validateUserSettings(v *types.UserSettings) error {
 	if v.RSessionAppSettings != nil {
 		if err := validateRSessionAppSettings(v.RSessionAppSettings); err != nil {
 			invalidParams.AddNested("RSessionAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JupyterLabAppSettings != nil {
+		if err := validateJupyterLabAppSettings(v.JupyterLabAppSettings); err != nil {
+			invalidParams.AddNested("JupyterLabAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpaceStorageSettings != nil {
+		if err := validateDefaultSpaceStorageSettings(v.SpaceStorageSettings); err != nil {
+			invalidParams.AddNested("SpaceStorageSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomPosixUserConfig != nil {
+		if err := validateCustomPosixUserConfig(v.CustomPosixUserConfig); err != nil {
+			invalidParams.AddNested("CustomPosixUserConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomFileSystemConfigs != nil {
+		if err := validateCustomFileSystemConfigs(v.CustomFileSystemConfigs); err != nil {
+			invalidParams.AddNested("CustomFileSystemConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -13638,6 +13929,16 @@ func validateOpCreateSpaceInput(v *CreateSpaceInput) error {
 	if v.SpaceSettings != nil {
 		if err := validateSpaceSettings(v.SpaceSettings); err != nil {
 			invalidParams.AddNested("SpaceSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OwnershipSettings != nil {
+		if err := validateOwnershipSettings(v.OwnershipSettings); err != nil {
+			invalidParams.AddNested("OwnershipSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpaceSharingSettings != nil {
+		if err := validateSpaceSharingSettings(v.SpaceSharingSettings); err != nil {
+			invalidParams.AddNested("SpaceSharingSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -35,6 +35,9 @@ type UpdateAppImageConfigInput struct {
 	// This member is required.
 	AppImageConfigName *string
 
+	// The JupyterLab app running on the image.
+	JupyterLabAppImageConfig *types.JupyterLabAppImageConfig
+
 	// The new KernelGateway app to run on the image.
 	KernelGatewayImageConfig *types.KernelGatewayImageConfig
 
