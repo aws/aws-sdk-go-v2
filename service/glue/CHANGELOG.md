@@ -1,3 +1,7 @@
+# v1.72.0 (2023-11-30.2)
+
+* **Feature**: Adds observation and analyzer support to the GetDataQualityResult and BatchGetDataQualityResult APIs.
+
 # v1.71.1 (2023-11-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

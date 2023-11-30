@@ -1,3 +1,7 @@
+# v1.7.0 (2023-11-30.2)
+
+* **Feature**: This release adds a new capability, zonal autoshift. You can configure zonal autoshift so that AWS shifts traffic for a resource away from an Availability Zone, on your behalf, when AWS determines that there is an issue that could potentially affect customers in the Availability Zone.
+
 # v1.6.1 (2023-11-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

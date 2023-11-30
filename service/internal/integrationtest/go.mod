@@ -30,7 +30,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.29.1
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.26.1
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.138.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.35.1
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.19.1
-	github.com/aws/aws-sdk-go-v2/service/glue v1.71.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.72.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.19.1
@@ -79,7 +79,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.44.1
 	github.com/aws/aws-sdk-go-v2/service/sts v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/support v1.19.1
-	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.23.1
+	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.15.1
 	github.com/aws/aws-sdk-go-v2/service/waf v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.19.1
@@ -99,7 +99,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.2.7 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.10.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.2.7 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.8.7 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.8.8 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.10.7 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.16.7 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sso v1.18.1 // indirect

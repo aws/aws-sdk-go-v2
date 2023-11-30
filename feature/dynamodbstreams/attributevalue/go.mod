@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.23.4
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.26.1
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.18.1
 	github.com/aws/smithy-go v1.18.1
 	github.com/google/go-cmp v0.5.8

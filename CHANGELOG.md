@@ -1,3 +1,24 @@
+# Release (2023-11-30.2)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.7.0](service/arczonalshift/CHANGELOG.md#v170-2023-11-302)
+  * **Feature**: This release adds a new capability, zonal autoshift. You can configure zonal autoshift so that AWS shifts traffic for a resource away from an Availability Zone, on your behalf, when AWS determines that there is an issue that could potentially affect customers in the Availability Zone.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.26.2](service/dynamodb/CHANGELOG.md#v1262-2023-11-302)
+  * **Bug Fix**: Respect caller region overrides in endpoint discovery.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.72.0](service/glue/CHANGELOG.md#v1720-2023-11-302)
+  * **Feature**: Adds observation and analyzer support to the GetDataQualityResult and BatchGetDataQualityResult APIs.
+* `github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery`: [v1.8.8](service/internal/endpoint-discovery/CHANGELOG.md#v188-2023-11-302)
+  * **Bug Fix**: Respect caller region overrides in endpoint discovery.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.120.0](service/sagemaker/CHANGELOG.md#v11200-2023-11-302)
+  * **Feature**: This release adds support for 1/ Code Editor, based on Code-OSS, Visual Studio Code Open Source, a new fully managed IDE option in SageMaker Studio  2/ JupyterLab, a new fully managed JupyterLab IDE experience in SageMaker Studio
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.20.2](service/timestreamquery/CHANGELOG.md#v1202-2023-11-302)
+  * **Bug Fix**: Respect caller region overrides in endpoint discovery.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.23.2](service/timestreamwrite/CHANGELOG.md#v1232-2023-11-302)
+  * **Bug Fix**: Respect caller region overrides in endpoint discovery.
+
 # Release (2023-11-30)
 
 ## General Highlights

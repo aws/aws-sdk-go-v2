@@ -1,3 +1,7 @@
+# v1.8.8 (2023-11-30.2)
+
+* **Bug Fix**: Respect caller region overrides in endpoint discovery.
+
 # v1.8.7 (2023-11-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.120.0 (2023-11-30.2)
+
+* **Feature**: This release adds support for 1/ Code Editor, based on Code-OSS, Visual Studio Code Open Source, a new fully managed IDE option in SageMaker Studio  2/ JupyterLab, a new fully managed JupyterLab IDE experience in SageMaker Studio
+
 # v1.119.1 (2023-11-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions
