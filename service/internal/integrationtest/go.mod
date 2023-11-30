@@ -3,6 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.23.5
 	github.com/aws/aws-sdk-go-v2/config v1.25.11
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/acm v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.21.2
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.25.2
@@ -114,6 +115,8 @@ replace github.com/aws/aws-sdk-go-v2 => ../../../
 replace github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream => ../../../aws/protocol/eventstream/
 
 replace github.com/aws/aws-sdk-go-v2/config => ../../../config/
+
+replace github.com/aws/aws-sdk-go-v2/feature/s3/manager => ../../../feature/s3/manager/
 
 replace github.com/aws/aws-sdk-go-v2/credentials => ../../../credentials/
 
