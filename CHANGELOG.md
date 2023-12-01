@@ -1,3 +1,18 @@
+# Release (2023-12-01)
+
+## General Highlights
+* **Bug Fix**: Correct wrapping of errors in authentication workflow.
+* **Bug Fix**: Correctly recognize cache-wrapped instances of AnonymousCredentials at client construction.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.2.0](service/qconnect/CHANGELOG.md#v120-2023-12-01)
+  * **Feature**: This release adds the PutFeedback API and allows providing feedback against the specified assistant for the specified target.
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.14.0](service/rbin/CHANGELOG.md#v1140-2023-12-01)
+  * **Feature**: Added resource identifier in the output and updated error handling.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.8.0](service/verifiedpermissions/CHANGELOG.md#v180-2023-12-01)
+  * **Feature**: Adds description field to PolicyStore API's and namespaces field to GetSchema.
+
 # Release (2023-11-30.2)
 
 ## General Highlights

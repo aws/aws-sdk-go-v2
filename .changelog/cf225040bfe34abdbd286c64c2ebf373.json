@@ -1,8 +1,0 @@
-{
-    "id": "cf225040-bfe3-4abd-bd28-6c64c2ebf373",
-    "type": "feature",
-    "description": "This release adds the PutFeedback API and allows providing feedback against the specified assistant for the specified target.",
-    "modules": [
-        "service/qconnect"
-    ]
-}

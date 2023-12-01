@@ -1,8 +1,0 @@
-{
-    "id": "ef417bc8-6700-497b-af44-8a3b1f6e8121",
-    "type": "feature",
-    "description": "Adds description field to PolicyStore API's and namespaces field to GetSchema.",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}
