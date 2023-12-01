@@ -22,7 +22,7 @@ func (r *endpointAuthResolver) ResolveAuthSchemes(
 ) {
 	endpt, err := r.EndpointResolver.ResolveEndpoint(ctx, *params.endpointParams)
 	if err != nil {
-		return nil, fmt.Errorf("resolve endpoint: %v", err)
+		return nil, fmt.Errorf("resolve endpoint: %w", err)
 	}
 
 	if opts, ok := smithyauth.GetAuthOptions(&endpt.Properties); ok {
