@@ -121,7 +121,7 @@
             "traits": {
                 "aws.iam#actionName": "IsAuthorized",
                 "aws.iam#actionPermissionDescription": "Grants permission to make a batch authorization decision about a service request described in the parameters",
-                "smithy.api#documentation": "<p>Makes a series of decisions about multiple authorization requests for one principal or\n            resource. Each request contains the equivalent content of an <code>IsAuthorized</code>\n            request: principal, action, resource, and context. Either the <code>principal</code> or\n            the <code>resource</code> parameter must be identical across all requests. For example,\n            Verified Permissions won't evaluate a pair of requests where <code>bob</code> views\n                <code>photo1</code> and <code>alice</code> views <code>photo2</code>. Authorization\n            of <code>bob</code> to view <code>photo1</code> and <code>photo2</code>, or\n                <code>bob</code> and <code>alice</code> to view <code>photo1</code>, are valid\n            batches. </p>\n         <p>The request is evaluated against all policies in the specified policy store that match the\n            entities that you declare. The result of the decisions is a series of <code>Allow</code>\n            or <code>Deny</code> responses, along with the IDs of the policies that produced each\n            decision.</p>\n         <p>The <code>entities</code> of a <code>BatchIsAuthorized</code> API request can contain up to 100 principals and up\n            to 100 resources. The <code>requests</code> of a <code>BatchIsAuthorized</code> API request can contain up to 30\n            requests.</p>",
+                "smithy.api#documentation": "<p>Makes a series of decisions about multiple authorization requests for one principal or\n            resource. Each request contains the equivalent content of an <code>IsAuthorized</code>\n            request: principal, action, resource, and context. Either the <code>principal</code> or\n            the <code>resource</code> parameter must be identical across all requests. For example,\n            Verified Permissions won't evaluate a pair of requests where <code>bob</code> views\n                <code>photo1</code> and <code>alice</code> views <code>photo2</code>. Authorization\n            of <code>bob</code> to view <code>photo1</code> and <code>photo2</code>, or\n                <code>bob</code> and <code>alice</code> to view <code>photo1</code>, are valid\n            batches. </p>\n         <p>The request is evaluated against all policies in the specified policy store that match the\n            entities that you declare. The result of the decisions is a series of <code>Allow</code>\n            or <code>Deny</code> responses, along with the IDs of the policies that produced each\n            decision.</p>\n         <p>The <code>entities</code> of a <code>BatchIsAuthorized</code> API request can contain\n            up to 100 principals and up to 100 resources. The <code>requests</code> of a\n                <code>BatchIsAuthorized</code> API request can contain up to 30 requests.</p>\n         <note>\n            <p>The <code>BatchIsAuthorized</code> operation doesn't have its own IAM\n                permission. To authorize this operation for Amazon Web Services principals, include the permission\n                    <code>verifiedpermissions:IsAuthorized</code> in their IAM policies.</p>\n         </note>",
                 "smithy.api#readonly": {}
             }
         },
@@ -605,6 +605,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the validation setting for this policy store.</p>\n         <p>Currently, the only valid and required value is <code>Mode</code>.</p>\n         <important>\n            <p>We recommend that you turn on <code>STRICT</code> mode only after you define a\n                schema. If a schema doesn't exist, then <code>STRICT</code> mode causes any policy\n                to fail validation, and Verified Permissions rejects the policy. You can turn off validation by\n                using the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore\">UpdatePolicyStore</a>. Then, when you have a schema defined, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore\">UpdatePolicyStore</a> again to turn validation back on.</p>\n         </important>",
                         "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Descriptive text that you can provide to help with identification \n            of the current policy store.</p>"
                     }
                 }
             },
@@ -1401,6 +1407,12 @@
                         "smithy.api#documentation": "<p>The date and time that the policy store was last updated.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "description": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Descriptive text that you can provide to help with identification \n            of the current policy store.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1562,6 +1574,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the schema was most recently updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "namespaces": {
+                    "target": "com.amazonaws.verifiedpermissions#NamespaceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespaces of the entities referenced by this schema.</p>"
                     }
                 }
             },
@@ -2613,6 +2631,16 @@
                 "smithy.api#documentation": "Represents a policy store that you can place schema, policies, and policy templates in to validate authorization requests"
             }
         },
+        "com.amazonaws.verifiedpermissions#PolicyStoreDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.verifiedpermissions#PolicyStoreId": {
             "type": "string",
             "traits": {
@@ -2645,6 +2673,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the policy was created.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedDate": {
+                    "target": "com.amazonaws.verifiedpermissions#TimestampFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the policy store was most recently updated.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Descriptive text that you can provide to help with identification \n            of the current policy store.</p>"
                     }
                 }
             },
@@ -3541,6 +3581,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that defines the validation settings that want to enable for the\n            policy store.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Descriptive text that you can provide to help with identification \n            of the current policy store.</p>"
                     }
                 }
             },
