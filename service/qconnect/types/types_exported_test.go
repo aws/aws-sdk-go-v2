@@ -61,6 +61,24 @@ func ExampleConfiguration_outputUsage() {
 
 var _ *types.ConnectConfiguration
 
+func ExampleContentFeedbackData_outputUsage() {
+	var union types.ContentFeedbackData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentFeedbackDataMemberGenerativeContentFeedbackData:
+		_ = v.Value // Value is types.GenerativeContentFeedbackData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GenerativeContentFeedbackData
+
 func ExampleDataDetails_outputUsage() {
 	var union types.DataDetails
 	// type switches can be used to check the union value

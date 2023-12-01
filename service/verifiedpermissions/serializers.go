@@ -2048,6 +2048,11 @@ func awsAwsjson10_serializeOpDocumentCreatePolicyStoreInput(v *CreatePolicyStore
 		ok.String(*v.ClientToken)
 	}
 
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
 	if v.ValidationSettings != nil {
 		ok := object.Key("validationSettings")
 		if err := awsAwsjson10_serializeDocumentValidationSettings(v.ValidationSettings, ok); err != nil {
@@ -2492,6 +2497,11 @@ func awsAwsjson10_serializeOpDocumentUpdatePolicyInput(v *UpdatePolicyInput, val
 func awsAwsjson10_serializeOpDocumentUpdatePolicyStoreInput(v *UpdatePolicyStoreInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
 
 	if v.PolicyStoreId != nil {
 		ok := object.Key("policyStoreId")

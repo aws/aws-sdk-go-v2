@@ -550,6 +550,26 @@ func (m *validateOpNotifyRecommendationsReceived) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutFeedback struct {
+}
+
+func (*validateOpPutFeedback) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutFeedback) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutFeedbackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutFeedbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpQueryAssistant struct {
 }
 
@@ -898,6 +918,10 @@ func addOpNotifyRecommendationsReceivedValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpNotifyRecommendationsReceived{}, middleware.After)
 }
 
+func addOpPutFeedbackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutFeedback{}, middleware.After)
+}
+
 func addOpQueryAssistantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpQueryAssistant{}, middleware.After)
 }
@@ -961,6 +985,25 @@ func validateAppIntegrationsConfiguration(v *types.AppIntegrationsConfiguration)
 	}
 }
 
+func validateContentFeedbackData(v types.ContentFeedbackData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentFeedbackData"}
+	switch uv := v.(type) {
+	case *types.ContentFeedbackDataMemberGenerativeContentFeedbackData:
+		if err := validateGenerativeContentFeedbackData(&uv.Value); err != nil {
+			invalidParams.AddNested("[generativeContentFeedbackData]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExternalSourceConfiguration(v *types.ExternalSourceConfiguration) error {
 	if v == nil {
 		return nil
@@ -1009,6 +1052,21 @@ func validateFilterList(v []types.Filter) error {
 		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGenerativeContentFeedbackData(v *types.GenerativeContentFeedbackData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerativeContentFeedbackData"}
+	if len(v.Relevance) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Relevance"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1695,6 +1753,34 @@ func validateOpNotifyRecommendationsReceivedInput(v *NotifyRecommendationsReceiv
 	}
 	if v.RecommendationIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommendationIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutFeedbackInput(v *PutFeedbackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutFeedbackInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.TargetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
+	}
+	if len(v.TargetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	}
+	if v.ContentFeedback == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentFeedback"))
+	} else if v.ContentFeedback != nil {
+		if err := validateContentFeedbackData(v.ContentFeedback); err != nil {
+			invalidParams.AddNested("ContentFeedback", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

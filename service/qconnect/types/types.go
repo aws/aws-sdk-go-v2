@@ -172,7 +172,7 @@ type AssistantAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The capability configuration for a Amazon Q assistant.
+// The capability configuration for an Amazon Q assistant.
 type AssistantCapabilityConfiguration struct {
 
 	// The type of Amazon Q assistant capability.
@@ -417,6 +417,24 @@ type ContentDataDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the feedback.
+//
+// The following types satisfy this interface:
+//
+//	ContentFeedbackDataMemberGenerativeContentFeedbackData
+type ContentFeedbackData interface {
+	isContentFeedbackData()
+}
+
+// Information about the feedback for a generative target type.
+type ContentFeedbackDataMemberGenerativeContentFeedbackData struct {
+	Value GenerativeContentFeedbackData
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentFeedbackDataMemberGenerativeContentFeedbackData) isContentFeedbackData() {}
+
 // Reference information about the content.
 type ContentReference struct {
 
@@ -643,6 +661,17 @@ type Filter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The feedback information for a generative target type.
+type GenerativeContentFeedbackData struct {
+
+	// The relevance of the feedback.
+	//
+	// This member is required.
+	Relevance Relevance
 
 	noSmithyDocumentSerde
 }
@@ -1735,6 +1764,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAssistantAssociationInputData()  {}
 func (*UnknownUnionMember) isAssistantAssociationOutputData() {}
 func (*UnknownUnionMember) isConfiguration()                  {}
+func (*UnknownUnionMember) isContentFeedbackData()            {}
 func (*UnknownUnionMember) isDataDetails()                    {}
 func (*UnknownUnionMember) isDataReference()                  {}
 func (*UnknownUnionMember) isQueryCondition()                 {}

@@ -60,6 +60,9 @@ type GetSchemaOutput struct {
 	// This member is required.
 	Schema *string
 
+	// The namespaces of the entities referenced by this schema.
+	Namespaces []string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

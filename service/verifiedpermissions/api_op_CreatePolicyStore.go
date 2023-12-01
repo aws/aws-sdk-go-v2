@@ -58,6 +58,10 @@ type CreatePolicyStoreInput struct {
 	// different parameters, the retry fails with an IdempotentParameterMismatch error.
 	ClientToken *string
 
+	// Descriptive text that you can provide to help with identification of the
+	// current policy store.
+	Description *string
+
 	noSmithyDocumentSerde
 }
 

@@ -209,6 +209,15 @@ func awsRestjson1_deserializeOpDocumentCreateRuleOutput(v **CreateRuleOutput, va
 				return err
 			}
 
+		case "RuleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleArn to be of type string, got %T instead", value)
+				}
+				sv.RuleArn = ptr.String(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -528,6 +537,15 @@ func awsRestjson1_deserializeOpDocumentGetRuleOutput(v **GetRuleOutput, value in
 		case "RetentionPeriod":
 			if err := awsRestjson1_deserializeDocumentRetentionPeriod(&sv.RetentionPeriod, value); err != nil {
 				return err
+			}
+
+		case "RuleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleArn to be of type string, got %T instead", value)
+				}
+				sv.RuleArn = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -1053,6 +1071,15 @@ func awsRestjson1_deserializeOpDocumentLockRuleOutput(v **LockRuleOutput, value 
 				return err
 			}
 
+		case "RuleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleArn to be of type string, got %T instead", value)
+				}
+				sv.RuleArn = ptr.String(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1372,6 +1399,15 @@ func awsRestjson1_deserializeOpDocumentUnlockRuleOutput(v **UnlockRuleOutput, va
 				return err
 			}
 
+		case "RuleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleArn to be of type string, got %T instead", value)
+				}
+				sv.RuleArn = ptr.String(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1586,6 +1622,9 @@ func awsRestjson1_deserializeOpErrorUpdateRule(response *smithyhttp.Response, me
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -1681,6 +1720,15 @@ func awsRestjson1_deserializeOpDocumentUpdateRuleOutput(v **UpdateRuleOutput, va
 		case "RetentionPeriod":
 			if err := awsRestjson1_deserializeDocumentRetentionPeriod(&sv.RetentionPeriod, value); err != nil {
 				return err
+			}
+
+		case "RuleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleArn to be of type string, got %T instead", value)
+				}
+				sv.RuleArn = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -2243,6 +2291,15 @@ func awsRestjson1_deserializeDocumentRuleSummary(v **types.RuleSummary, value in
 		case "RetentionPeriod":
 			if err := awsRestjson1_deserializeDocumentRetentionPeriod(&sv.RetentionPeriod, value); err != nil {
 				return err
+			}
+
+		case "RuleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleArn to be of type string, got %T instead", value)
+				}
+				sv.RuleArn = ptr.String(jtv)
 			}
 
 		default:

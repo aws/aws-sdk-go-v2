@@ -1,0 +1,8 @@
+{
+    "id": "18a1bf4f-2953-45fc-8a6e-cd57b44cc111",
+    "type": "feature",
+    "description": "Added resource identifier in the output and updated error handling.",
+    "modules": [
+        "service/rbin"
+    ]
+}

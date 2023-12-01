@@ -675,6 +675,13 @@ type PolicyStoreItem struct {
 	// This member is required.
 	PolicyStoreId *string
 
+	// Descriptive text that you can provide to help with identification of the
+	// current policy store.
+	Description *string
+
+	// The date and time the policy store was most recently updated.
+	LastUpdatedDate *time.Time
+
 	noSmithyDocumentSerde
 }
 
