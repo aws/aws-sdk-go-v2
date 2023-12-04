@@ -110,7 +110,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -153,7 +152,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -166,7 +166,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -180,7 +179,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -254,7 +252,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -289,7 +286,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -300,14 +296,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -321,14 +319,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -337,11 +333,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -352,14 +348,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -373,7 +371,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -393,7 +390,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -404,14 +400,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -422,9 +420,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1826,6 +1826,12 @@
                         "smithy.api#documentation": "<p>\n      A <code>CustomLineItemChargeDetails</code> that describes the charge details for a custom line item.\n    </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.billingconductor#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account in which this custom line item will be applied to.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2388,6 +2394,12 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of resources that are associated to the custom line item.</p>"
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.billingconductor#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account in which this custom line item will be applied to.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2572,6 +2584,12 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>\n      The inclusive start time.\n    </p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.billingconductor#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account in which this custom line item will be applied to.</p>"
                     }
                 }
             },
@@ -3675,6 +3693,12 @@
                     "target": "com.amazonaws.billingconductor#CustomLineItemArns",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of custom line item ARNs to retrieve information.</p>"
+                    }
+                },
+                "AccountIds": {
+                    "target": "com.amazonaws.billingconductor#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services accounts in which this custom line item will be applied to.</p>"
                     }
                 }
             },
@@ -6156,6 +6180,10 @@
                     {
                         "value": "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP",
                         "name": "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP"
+                    },
+                    {
+                        "value": "ILLEGAL_ACCOUNT_ID",
+                        "name": "ILLEGAL_ACCOUNT_ID"
                     }
                 ]
             }

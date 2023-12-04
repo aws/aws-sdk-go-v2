@@ -4491,6 +4491,86 @@
                                 }
                             },
                             {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Stacks[].StackStatus",
+                                        "expected": "UPDATE_COMPLETE",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Stacks[].StackStatus",
+                                        "expected": "UPDATE_IN_PROGRESS",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Stacks[].StackStatus",
+                                        "expected": "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Stacks[].StackStatus",
+                                        "expected": "UPDATE_FAILED",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Stacks[].StackStatus",
+                                        "expected": "UPDATE_ROLLBACK_IN_PROGRESS",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Stacks[].StackStatus",
+                                        "expected": "UPDATE_ROLLBACK_FAILED",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Stacks[].StackStatus",
+                                        "expected": "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Stacks[].StackStatus",
+                                        "expected": "UPDATE_ROLLBACK_COMPLETE",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
                                 "state": "failure",
                                 "matcher": {
                                     "output": {
