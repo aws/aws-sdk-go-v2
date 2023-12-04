@@ -1,3 +1,7 @@
+# v1.24.3 (2023-12-04)
+
+* **Documentation**: Documentation-only updates for Dawn
+
 # v1.24.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

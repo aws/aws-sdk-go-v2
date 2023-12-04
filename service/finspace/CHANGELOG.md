@@ -1,3 +1,7 @@
+# v1.19.0 (2023-12-04)
+
+* **Feature**: Release General Purpose type clusters
+
 # v1.18.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

@@ -1,3 +1,7 @@
+# v1.19.3 (2023-12-04)
+
+* No change notes available for this release.
+
 # v1.19.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

@@ -1,3 +1,7 @@
+# v1.13.0 (2023-12-04)
+
+* **Feature**: This release adds the ability to specify a linked account of the billing group for the custom line item resource.
+
 # v1.12.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

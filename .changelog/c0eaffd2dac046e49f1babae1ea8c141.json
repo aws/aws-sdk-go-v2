@@ -1,8 +1,0 @@
-{
-    "id": "c0eaffd2-dac0-46e4-9f1b-abae1ea8c141",
-    "type": "feature",
-    "description": "This release adds the ability to specify a linked account of the billing group for the custom line item resource.",
-    "modules": [
-        "service/billingconductor"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.42.0 (2023-12-04)
+
+* **Feature**: Including UPDATE_* states as a success status for CreateStack waiter.
+
 # v1.41.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

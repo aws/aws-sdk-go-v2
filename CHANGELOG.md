@@ -1,3 +1,21 @@
+# Release (2023-12-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.13.0](service/billingconductor/CHANGELOG.md#v1130-2023-12-04)
+  * **Feature**: This release adds the ability to specify a linked account of the billing group for the custom line item resource.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.24.0](service/braket/CHANGELOG.md#v1240-2023-12-04)
+  * **Feature**: This release enhances service support to create quantum tasks and hybrid jobs associated with Braket Direct Reservations.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.22.0](service/cloud9/CHANGELOG.md#v1220-2023-12-04)
+  * **Feature**: This release adds the requirement to include the imageId parameter in the CreateEnvironmentEC2 API call.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.42.0](service/cloudformation/CHANGELOG.md#v1420-2023-12-04)
+  * **Feature**: Including UPDATE_* states as a success status for CreateStack waiter.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.19.0](service/finspace/CHANGELOG.md#v1190-2023-12-04)
+  * **Feature**: Release General Purpose type clusters
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.43.0](service/medialive/CHANGELOG.md#v1430-2023-12-04)
+  * **Feature**: Adds support for custom color correction on channels using 3D LUT files.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.24.3](service/servicecatalogappregistry/CHANGELOG.md#v1243-2023-12-04)
+  * **Documentation**: Documentation-only updates for Dawn
+
 # Release (2023-12-01)
 
 ## General Highlights

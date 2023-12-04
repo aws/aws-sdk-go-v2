@@ -1,3 +1,7 @@
+# v1.43.0 (2023-12-04)
+
+* **Feature**: Adds support for custom color correction on channels using 3D LUT files.
+
 # v1.42.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

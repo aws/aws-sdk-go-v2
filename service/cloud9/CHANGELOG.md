@@ -1,3 +1,7 @@
+# v1.22.0 (2023-12-04)
+
+* **Feature**: This release adds the requirement to include the imageId parameter in the CreateEnvironmentEC2 API call.
+
 # v1.21.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

@@ -1,3 +1,7 @@
+# v1.24.0 (2023-12-04)
+
+* **Feature**: This release enhances service support to create quantum tasks and hybrid jobs associated with Braket Direct Reservations.
+
 # v1.23.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

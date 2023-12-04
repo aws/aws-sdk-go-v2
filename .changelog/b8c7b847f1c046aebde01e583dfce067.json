@@ -1,8 +1,0 @@
-{
-    "id": "b8c7b847-f1c0-46ae-bde0-1e583dfce067",
-    "type": "documentation",
-    "description": "Documentation-only updates for Dawn",
-    "modules": [
-        "service/servicecatalogappregistry"
-    ]
-}

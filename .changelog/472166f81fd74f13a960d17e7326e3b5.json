@@ -1,8 +1,0 @@
-{
-    "id": "472166f8-1fd7-4f13-a960-d17e7326e3b5",
-    "type": "feature",
-    "description": "Including UPDATE_* states as a success status for CreateStack waiter.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}
