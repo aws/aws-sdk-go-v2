@@ -3,12 +3,71 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
 type ComplexNestedErrorData struct {
 	Foo *string
+
+	noSmithyDocumentSerde
+}
+
+type Defaults struct {
+	DefaultBlob []byte
+
+	DefaultBoolean *bool
+
+	DefaultByte *int8
+
+	DefaultDocumentBoolean document.Interface
+
+	DefaultDocumentList document.Interface
+
+	DefaultDocumentMap document.Interface
+
+	DefaultDocumentString document.Interface
+
+	DefaultDouble *float64
+
+	DefaultEnum TestEnum
+
+	DefaultFloat *float32
+
+	DefaultIntEnum TestIntEnum
+
+	DefaultInteger *int32
+
+	DefaultList []string
+
+	DefaultLong *int64
+
+	DefaultMap map[string]string
+
+	DefaultNullDocument document.Interface
+
+	DefaultShort *int16
+
+	DefaultString *string
+
+	DefaultTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+type Dialog struct {
+	Farewell *Farewell
+
+	Greeting *string
+
+	Language *string
+
+	noSmithyDocumentSerde
+}
+
+type Farewell struct {
+	Phrase *string
 
 	noSmithyDocumentSerde
 }
@@ -110,6 +169,18 @@ type MyUnionMemberTimestampValue struct {
 }
 
 func (*MyUnionMemberTimestampValue) isMyUnion() {}
+
+type TopLevel struct {
+
+	// This member is required.
+	Dialog *Dialog
+
+	DialogList []Dialog
+
+	DialogMap map[string]Dialog
+
+	noSmithyDocumentSerde
+}
 
 type GreetingStruct struct {
 	Hi *string

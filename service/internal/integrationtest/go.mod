@@ -116,11 +116,11 @@ replace github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream => ../../../aws/pr
 
 replace github.com/aws/aws-sdk-go-v2/config => ../../../config/
 
-replace github.com/aws/aws-sdk-go-v2/feature/s3/manager => ../../../feature/s3/manager/
-
 replace github.com/aws/aws-sdk-go-v2/credentials => ../../../credentials/
 
 replace github.com/aws/aws-sdk-go-v2/feature/ec2/imds => ../../../feature/ec2/imds/
+
+replace github.com/aws/aws-sdk-go-v2/feature/s3/manager => ../../../feature/s3/manager/
 
 replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../../internal/configsources/
 

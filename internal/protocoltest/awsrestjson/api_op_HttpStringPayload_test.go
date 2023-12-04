@@ -39,7 +39,7 @@ func TestClient_HttpStringPayload_awsRestjson1Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		"StringPayloadRequest": {
+		"RestJsonStringPayloadRequest": {
 			Params: &HttpStringPayloadInput{
 				Payload: ptr.String("rawstring"),
 			},
@@ -123,7 +123,7 @@ func TestClient_HttpStringPayload_awsRestjson1Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *HttpStringPayloadOutput
 	}{
-		"StringPayloadResponse": {
+		"RestJsonStringPayloadResponse": {
 			StatusCode: 200,
 			Body:       []byte(`rawstring`),
 			ExpectResult: &HttpStringPayloadOutput{
