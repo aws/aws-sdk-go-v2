@@ -1109,6 +1109,47 @@ type ChannelSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Property of ColorCorrectionSettings. Used for custom color space conversion.
+// The object identifies one 3D LUT file and specifies the input/output color space
+// combination that the file will be used for.
+type ColorCorrection struct {
+
+	// The color space of the input.
+	//
+	// This member is required.
+	InputColorSpace ColorSpace
+
+	// The color space of the output.
+	//
+	// This member is required.
+	OutputColorSpace ColorSpace
+
+	// The URI of the 3D LUT file. The protocol must be 's3:' or 's3ssl:':.
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Property of encoderSettings. Controls color conversion when you are using 3D
+// LUT files to perform color conversion on video.
+type ColorCorrectionSettings struct {
+
+	// An array of colorCorrections that applies when you are using 3D LUT files to
+	// perform color conversion on video. Each colorCorrection contains one 3D LUT file
+	// (that defines the color mapping for converting an input color space to an output
+	// color space), and the input/output combination that this 3D LUT file applies to.
+	// MediaLive reads the color space in the input metadata, determines the color
+	// space that you have specified for the output, and finds and uses the LUT file
+	// that applies to this combination.
+	//
+	// This member is required.
+	GlobalColorCorrections []ColorCorrection
+
+	noSmithyDocumentSerde
+}
+
 // Passthrough applies no color space conversion to the output
 type ColorSpacePassthroughSettings struct {
 	noSmithyDocumentSerde
@@ -1518,6 +1559,9 @@ type EncoderSettings struct {
 
 	// Settings for caption decriptions
 	CaptionDescriptions []CaptionDescription
+
+	// Color correction settings
+	ColorCorrectionSettings *ColorCorrectionSettings
 
 	// Feature Activations
 	FeatureActivations *FeatureActivations

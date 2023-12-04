@@ -344,6 +344,41 @@ func validateAlgorithmSpecification(v *types.AlgorithmSpecification) error {
 	}
 }
 
+func validateAssociation(v *types.Association) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Association"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssociations(v []types.Association) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Associations"}
+	for i := range v {
+		if err := validateAssociation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContainerImage(v *types.ContainerImage) error {
 	if v == nil {
 		return nil
@@ -709,6 +744,11 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 			invalidParams.AddNested("DeviceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Associations != nil {
+		if err := validateAssociations(v.Associations); err != nil {
+			invalidParams.AddNested("Associations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -738,6 +778,11 @@ func validateOpCreateQuantumTaskInput(v *CreateQuantumTaskInput) error {
 	}
 	if v.Action == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.Associations != nil {
+		if err := validateAssociations(v.Associations); err != nil {
+			invalidParams.AddNested("Associations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

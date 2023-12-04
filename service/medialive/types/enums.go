@@ -751,6 +751,28 @@ func (ChannelState) Values() []ChannelState {
 	}
 }
 
+type ColorSpace string
+
+// Enum values for ColorSpace
+const (
+	ColorSpaceHdr10   ColorSpace = "HDR10"
+	ColorSpaceHlg2020 ColorSpace = "HLG_2020"
+	ColorSpaceRec601  ColorSpace = "REC_601"
+	ColorSpaceRec709  ColorSpace = "REC_709"
+)
+
+// Values returns all known values for ColorSpace. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ColorSpace) Values() []ColorSpace {
+	return []ColorSpace{
+		"HDR10",
+		"HLG_2020",
+		"REC_601",
+		"REC_709",
+	}
+}
+
 type ContentType string
 
 // Enum values for ContentType

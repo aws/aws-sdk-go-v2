@@ -1,0 +1,8 @@
+{
+    "id": "e61a9d34-218c-4023-ae2b-3498d7e4ecfb",
+    "type": "feature",
+    "description": "This release adds the requirement to include the imageId parameter in the CreateEnvironmentEC2 API call.",
+    "modules": [
+        "service/cloud9"
+    ]
+}

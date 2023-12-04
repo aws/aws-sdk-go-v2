@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/braket/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,6 +61,9 @@ type CreateQuantumTaskInput struct {
 	//
 	// This member is required.
 	Shots *int64
+
+	// The list of Amazon Braket resources associated with the quantum task.
+	Associations []types.Association
 
 	// The parameters for the device to run the task on.
 	//

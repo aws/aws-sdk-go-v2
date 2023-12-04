@@ -73,6 +73,9 @@ type CreateJobInput struct {
 	// This member is required.
 	RoleArn *string
 
+	// The list of Amazon Braket resources associated with the hybrid job.
+	Associations []types.Association
+
 	// Information about the output locations for job checkpoint data.
 	CheckpointConfig *types.JobCheckpointConfig
 

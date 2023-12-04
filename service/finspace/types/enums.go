@@ -208,8 +208,9 @@ type KxClusterCodeDeploymentStrategy string
 
 // Enum values for KxClusterCodeDeploymentStrategy
 const (
-	KxClusterCodeDeploymentStrategyRolling KxClusterCodeDeploymentStrategy = "ROLLING"
-	KxClusterCodeDeploymentStrategyForce   KxClusterCodeDeploymentStrategy = "FORCE"
+	KxClusterCodeDeploymentStrategyNoRestart KxClusterCodeDeploymentStrategy = "NO_RESTART"
+	KxClusterCodeDeploymentStrategyRolling   KxClusterCodeDeploymentStrategy = "ROLLING"
+	KxClusterCodeDeploymentStrategyForce     KxClusterCodeDeploymentStrategy = "FORCE"
 )
 
 // Values returns all known values for KxClusterCodeDeploymentStrategy. Note that
@@ -218,6 +219,7 @@ const (
 // updates.
 func (KxClusterCodeDeploymentStrategy) Values() []KxClusterCodeDeploymentStrategy {
 	return []KxClusterCodeDeploymentStrategy{
+		"NO_RESTART",
 		"ROLLING",
 		"FORCE",
 	}
@@ -260,6 +262,7 @@ const (
 	KxClusterTypeHdb     KxClusterType = "HDB"
 	KxClusterTypeRdb     KxClusterType = "RDB"
 	KxClusterTypeGateway KxClusterType = "GATEWAY"
+	KxClusterTypeGp      KxClusterType = "GP"
 )
 
 // Values returns all known values for KxClusterType. Note that this can be
@@ -270,6 +273,7 @@ func (KxClusterType) Values() []KxClusterType {
 		"HDB",
 		"RDB",
 		"GATEWAY",
+		"GP",
 	}
 }
 

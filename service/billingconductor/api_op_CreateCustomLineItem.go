@@ -55,6 +55,10 @@ type CreateCustomLineItemInput struct {
 	// This member is required.
 	Name *string
 
+	// The Amazon Web Services account in which this custom line item will be applied
+	// to.
+	AccountId *string
+
 	// A time range for which the custom line item is effective.
 	BillingPeriodRange *types.CustomLineItemBillingPeriodRange
 

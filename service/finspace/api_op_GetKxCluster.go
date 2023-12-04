@@ -88,6 +88,11 @@ type GetKxClusterOutput struct {
 	//   kdb systems. It allows you to create your own routing logic using the
 	//   initialization scripts and custom code. This type of cluster does not require a
 	//   writable local storage.
+	//   - GP – A general purpose cluster allows you to quickly iterate on code during
+	//   development by granting greater access to system commands and enabling a fast
+	//   reload of custom code. This cluster type can optionally mount databases
+	//   including cache and savedown storage. For this cluster type, the node count is
+	//   fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.
 	ClusterType types.KxClusterType
 
 	// The details of the custom code that you want to use inside a cluster when

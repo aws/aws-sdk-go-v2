@@ -1,0 +1,8 @@
+{
+    "id": "6d673098-1388-4833-b105-0e3404c1d3b1",
+    "type": "feature",
+    "description": "Release General Purpose type clusters",
+    "modules": [
+        "service/finspace"
+    ]
+}

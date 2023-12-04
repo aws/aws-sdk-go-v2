@@ -33,22 +33,30 @@ func (c *Client) CreateKxChangeset(ctx context.Context, params *CreateKxChangese
 type CreateKxChangesetInput struct {
 
 	// A list of change request objects that are run in order. A change request object
-	// consists of changeType , s3Path, and a dbPath. A changeType can has the
+	// consists of changeType , s3Path , and dbPath . A changeType can has the
 	// following values:
 	//   - PUT – Adds or updates files in a database.
 	//   - DELETE – Deletes files in a database.
 	// All the change requests require a mandatory dbPath attribute that defines the
-	// path within the database directory. The s3Path attribute defines the s3 source
-	// file path and is required for a PUT change type. Here is an example of how you
-	// can use the change request object: [ { "changeType": "PUT",
-	// "s3Path":"s3://bucket/db/2020.01.02/", "dbPath":"/2020.01.02/"}, { "changeType":
-	// "PUT", "s3Path":"s3://bucket/db/sym", "dbPath":"/"}, { "changeType": "DELETE",
-	// "dbPath": "/2020.01.01/"} ] In this example, the first request with PUT change
-	// type allows you to add files in the given s3Path under the 2020.01.02 partition
-	// of the database. The second request with PUT change type allows you to add a
-	// single sym file at database root location. The last request with DELETE change
-	// type allows you to delete the files under the 2020.01.01 partition of the
-	// database.
+	// path within the database directory. All database paths must start with a leading
+	// / and end with a trailing /. The s3Path attribute defines the s3 source file
+	// path and is required for a PUT change type. The s3path must end with a trailing
+	// / if it is a directory and must end without a trailing / if it is a file. Here
+	// are few examples of how you can use the change request object:
+	//   - This request adds a single sym file at database root location. {
+	//   "changeType": "PUT", "s3Path":"s3://bucket/db/sym", "dbPath":"/"}
+	//   - This request adds files in the given s3Path under the 2020.01.02 partition
+	//   of the database. { "changeType": "PUT",
+	//   "s3Path":"s3://bucket/db/2020.01.02/", "dbPath":"/2020.01.02/"}
+	//   - This request adds files in the given s3Path under the taq table partition of
+	//   the database. [ { "changeType": "PUT",
+	//   "s3Path":"s3://bucket/db/2020.01.02/taq/", "dbPath":"/2020.01.02/taq/"}]
+	//   - This request deletes the 2020.01.02 partition of the database. [{
+	//   "changeType": "DELETE", "dbPath": "/2020.01.02/"} ]
+	//   - The DELETE request allows you to delete the existing files under the
+	//   2020.01.02 partition of the database, and the PUT request adds a new taq table
+	//   under it. [ {"changeType": "DELETE", "dbPath":"/2020.01.02/"}, {"changeType":
+	//   "PUT", "s3Path":"s3://bucket/db/2020.01.02/taq/", "dbPath":"/2020.01.02/taq/"}]
 	//
 	// This member is required.
 	ChangeRequests []types.ChangeRequest

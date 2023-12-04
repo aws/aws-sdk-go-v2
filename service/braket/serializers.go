@@ -241,6 +241,13 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		}
 	}
 
+	if v.Associations != nil {
+		ok := object.Key("associations")
+		if err := awsRestjson1_serializeDocumentAssociations(v.Associations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CheckpointConfig != nil {
 		ok := object.Key("checkpointConfig")
 		if err := awsRestjson1_serializeDocumentJobCheckpointConfig(v.CheckpointConfig, ok); err != nil {
@@ -385,6 +392,13 @@ func awsRestjson1_serializeOpDocumentCreateQuantumTaskInput(v *CreateQuantumTask
 	if v.Action != nil {
 		ok := object.Key("action")
 		ok.String(*v.Action)
+	}
+
+	if v.Associations != nil {
+		ok := object.Key("associations")
+		if err := awsRestjson1_serializeDocumentAssociations(v.Associations, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ClientToken != nil {
@@ -1144,6 +1158,36 @@ func awsRestjson1_serializeDocumentAlgorithmSpecification(v *types.AlgorithmSpec
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssociation(v *types.Association, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssociations(v []types.Association, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssociation(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -411,6 +411,262 @@ func stackCreateCompleteStateRetryable(ctx context.Context, input *DescribeStack
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}
 
+		expectedValue := "UPDATE_COMPLETE"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_IN_PROGRESS"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_FAILED"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_IN_PROGRESS"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_FAILED"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_COMPLETE"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
 		expectedValue := "CREATE_FAILED"
 		listOfValues, ok := pathValue.([]interface{})
 		if !ok {

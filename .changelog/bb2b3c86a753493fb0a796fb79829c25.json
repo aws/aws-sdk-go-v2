@@ -1,0 +1,8 @@
+{
+    "id": "bb2b3c86-a753-493f-b0a7-96fb79829c25",
+    "type": "feature",
+    "description": "Adds support for custom color correction on channels using 3D LUT files.",
+    "modules": [
+        "service/medialive"
+    ]
+}

@@ -276,6 +276,7 @@ const (
 	ValidationExceptionReasonInvalidFilter                         ValidationExceptionReason = "INVALID_FILTER"
 	ValidationExceptionReasonTooManyAutoAssociateBillingGroups     ValidationExceptionReason = "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS"
 	ValidationExceptionReasonCannotDeleteAutoAssociateBillingGroup ValidationExceptionReason = "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP"
+	ValidationExceptionReasonIllegalAccountId                      ValidationExceptionReason = "ILLEGAL_ACCOUNT_ID"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -342,5 +343,6 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"INVALID_FILTER",
 		"TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS",
 		"CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP",
+		"ILLEGAL_ACCOUNT_ID",
 	}
 }

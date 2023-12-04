@@ -5264,6 +5264,19 @@ func awsRestjson1_serializeDocument__listOfCaptionSelector(v []types.CaptionSele
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfColorCorrection(v []types.ColorCorrection, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentColorCorrection(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfFailoverCondition(v []types.FailoverCondition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -6756,6 +6769,42 @@ func awsRestjson1_serializeDocumentCdiInputSpecification(v *types.CdiInputSpecif
 	return nil
 }
 
+func awsRestjson1_serializeDocumentColorCorrection(v *types.ColorCorrection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.InputColorSpace) > 0 {
+		ok := object.Key("inputColorSpace")
+		ok.String(string(v.InputColorSpace))
+	}
+
+	if len(v.OutputColorSpace) > 0 {
+		ok := object.Key("outputColorSpace")
+		ok.String(string(v.OutputColorSpace))
+	}
+
+	if v.Uri != nil {
+		ok := object.Key("uri")
+		ok.String(*v.Uri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentColorCorrectionSettings(v *types.ColorCorrectionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GlobalColorCorrections != nil {
+		ok := object.Key("globalColorCorrections")
+		if err := awsRestjson1_serializeDocument__listOfColorCorrection(v.GlobalColorCorrections, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentColorSpacePassthroughSettings(v *types.ColorSpacePassthroughSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7298,6 +7347,13 @@ func awsRestjson1_serializeDocumentEncoderSettings(v *types.EncoderSettings, val
 	if v.CaptionDescriptions != nil {
 		ok := object.Key("captionDescriptions")
 		if err := awsRestjson1_serializeDocument__listOfCaptionDescription(v.CaptionDescriptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ColorCorrectionSettings != nil {
+		ok := object.Key("colorCorrectionSettings")
+		if err := awsRestjson1_serializeDocumentColorCorrectionSettings(v.ColorCorrectionSettings, ok); err != nil {
 			return err
 		}
 	}

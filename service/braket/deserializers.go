@@ -1070,6 +1070,11 @@ func awsRestjson1_deserializeOpDocumentGetJobOutput(v **GetJobOutput, value inte
 				return err
 			}
 
+		case "associations":
+			if err := awsRestjson1_deserializeDocumentAssociations(&sv.Associations, value); err != nil {
+				return err
+			}
+
 		case "billableDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1371,6 +1376,11 @@ func awsRestjson1_deserializeOpDocumentGetQuantumTaskOutput(v **GetQuantumTaskOu
 
 	for key, value := range shape {
 		switch key {
+		case "associations":
+			if err := awsRestjson1_deserializeDocumentAssociations(&sv.Associations, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2729,6 +2739,89 @@ func awsRestjson1_deserializeDocumentAlgorithmSpecification(v **types.AlgorithmS
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssociation(v **types.Association, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Association
+	if *v == nil {
+		sv = &types.Association{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BraketResourceArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssociationType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.AssociationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssociations(v *[]types.Association, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Association
+	if *v == nil {
+		cv = []types.Association{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Association
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssociation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
