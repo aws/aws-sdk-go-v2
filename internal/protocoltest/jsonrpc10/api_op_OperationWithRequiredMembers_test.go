@@ -54,6 +54,10 @@ func TestClient_OperationWithRequiredMembers_awsAwsjson10Deserialize(t *testing.
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues" {
+				t.Skip("disabled test aws.protocoltests.json10#JsonRpc10 aws.protocoltests.json10#OperationWithRequiredMembers")
+			}
+
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {

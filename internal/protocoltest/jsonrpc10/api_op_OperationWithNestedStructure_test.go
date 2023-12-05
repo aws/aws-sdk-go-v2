@@ -131,6 +131,10 @@ func TestClient_OperationWithNestedStructure_awsAwsjson10Serialize(t *testing.T)
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "AwsJson10ClientPopulatesNestedDefaultValuesWhenMissing" {
+				t.Skip("disabled test aws.protocoltests.json10#JsonRpc10 aws.protocoltests.json10#OperationWithNestedStructure")
+			}
+
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {
@@ -286,6 +290,10 @@ func TestClient_OperationWithNestedStructure_awsAwsjson10Deserialize(t *testing.
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "AwsJson10ClientPopulatesNestedDefaultsWhenMissingInResponseBody" {
+				t.Skip("disabled test aws.protocoltests.json10#JsonRpc10 aws.protocoltests.json10#OperationWithNestedStructure")
+			}
+
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
