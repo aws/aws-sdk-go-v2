@@ -148,6 +148,20 @@ final class AwsProtocolUtils {
                         .operation(ShapeId.from("aws.protocoltests.restxml#HttpPayloadWithUnion"))
                         .addTestName("RestXmlHttpPayloadWithUnion")
                         .addTestName("RestXmlHttpPayloadWithUnsetUnion")
+                        .build(),
+
+
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#OperationWithDefaults"))
+                        .addTestName("AwsJson10ClientPopulatesDefaultValuesInInput")
+                        .addTestName("AwsJson10ClientSkipsTopLevelDefaultValuesInInput")
+                        .addTestName("AwsJson10ClientUsesExplicitlyProvidedMemberValuesOverDefaults")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#OperationWithNestedStructure"))
+                        .addTestName("AwsJson10ClientPopulatesNestedDefaultValuesWhenMissing")
                         .build()
                 ));
 
@@ -180,6 +194,23 @@ final class AwsProtocolUtils {
                         .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
                         .operation(ShapeId.from("aws.protocoltests.json#JsonUnions"))
                         .addTestName("AwsJson11DeserializeIgnoreType")
+                        .build(),
+
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#OperationWithDefaults"))
+                        .addTestName("AwsJson10ClientPopulatesDefaultsValuesWhenMissingInResponse")
+                        .addTestName("AwsJson10ClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#OperationWithNestedStructure"))
+                        .addTestName("AwsJson10ClientPopulatesNestedDefaultsWhenMissingInResponseBody")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#OperationWithRequiredMembers"))
+                        .addTestName("AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues")
                         .build()
         ));
 

@@ -2,6 +2,34 @@
 
 package types
 
+type TestEnum string
+
+// Enum values for TestEnum
+const (
+	TestEnumFoo TestEnum = "FOO"
+	TestEnumBar TestEnum = "BAR"
+	TestEnumBaz TestEnum = "BAZ"
+)
+
+// Values returns all known values for TestEnum. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TestEnum) Values() []TestEnum {
+	return []TestEnum{
+		"FOO",
+		"BAR",
+		"BAZ",
+	}
+}
+
+type TestIntEnum = int32
+
+// Enum values for TestIntEnum
+const (
+	TestIntEnumOne TestIntEnum = 1
+	TestIntEnumTwo TestIntEnum = 2
+)
+
 type FooEnum string
 
 // Enum values for FooEnum
