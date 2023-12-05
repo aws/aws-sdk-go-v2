@@ -1329,6 +1329,17 @@
                 }
             }
         },
+        "com.amazonaws.athena#AuthenticationType": {
+            "type": "enum",
+            "members": {
+                "DIRECTORY_IDENTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTORY_IDENTITY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.athena#AwsAccountId": {
             "type": "string",
             "traits": {
@@ -2101,7 +2112,7 @@
                 "Nullable": {
                     "target": "com.amazonaws.athena#ColumnNullable",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the column's nullable status.</p>"
+                        "smithy.api#documentation": "<p>Unsupported constraint. This value always shows as <code>UNKNOWN</code>.</p>"
                     }
                 },
                 "CaseSensitive": {
@@ -3779,6 +3790,12 @@
                         "smithy.api#documentation": "<p>The name of the data catalog to return.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup. Required if making an IAM Identity Center request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3837,6 +3854,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the database to return.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup for which the metadata is being fetched. Required if\n            requesting an IAM Identity Center enabled Glue Data Catalog.</p>"
                     }
                 }
             },
@@ -4401,6 +4424,12 @@
                         "smithy.api#documentation": "<p>The name of the table for which metadata is returned.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup for which the metadata is being fetched. Required if\n            requesting an IAM Identity Center enabled Glue Data Catalog.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4477,6 +4506,46 @@
                     "min": 32,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.athena#IdentityCenterApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
+            }
+        },
+        "com.amazonaws.athena#IdentityCenterConfiguration": {
+            "type": "structure",
+            "members": {
+                "EnableIdentityCenter": {
+                    "target": "com.amazonaws.athena#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the workgroup is IAM Identity Center supported.</p>"
+                    }
+                },
+                "IdentityCenterInstanceArn": {
+                    "target": "com.amazonaws.athena#IdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity Center instance ARN that the workgroup associates to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether the workgroup is IAM Identity Center supported.</p>"
+            }
+        },
+        "com.amazonaws.athena#IdentityCenterInstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
             }
         },
         "com.amazonaws.athena#ImportNotebook": {
@@ -4866,6 +4935,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the maximum number of data catalogs to return.</p>"
                     }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup. Required if\n            making an IAM Identity Center request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4941,6 +5016,12 @@
                     "target": "com.amazonaws.athena#MaxDatabasesCount",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the maximum number of results to return.</p>"
+                    }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup for which the metadata is being fetched. Required if\n            requesting an IAM Identity Center enabled Glue Data Catalog.</p>"
                     }
                 }
             },
@@ -5428,7 +5509,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a list of available query execution IDs for the queries in the specified\n            workgroup. Athena keeps a query history for 45 days. If a workgroup is not specified, returns a list of query execution IDs for\n            the primary workgroup. Requires you to have access to the workgroup in which the queries\n            ran.</p>",
+                "smithy.api#documentation": "<p>Provides a list of available query execution IDs for the queries in the specified\n            workgroup. Athena keeps a query history for 45 days. If a workgroup is not\n            specified, returns a list of query execution IDs for the primary workgroup. Requires you\n            to have access to the workgroup in which the queries ran.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5625,6 +5706,12 @@
                     "target": "com.amazonaws.athena#MaxTableMetadataCount",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the maximum number of results to return.</p>"
+                    }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup for which the metadata is being fetched. Required if\n            requesting an IAM Identity Center enabled Glue Data Catalog.</p>"
                     }
                 }
             },
@@ -6400,6 +6487,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The kind of query statement that was run.</p>"
                     }
+                },
+                "QueryResultsS3AccessGrantsConfiguration": {
+                    "target": "com.amazonaws.athena#QueryResultsS3AccessGrantsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 access grants are enabled for query\n            results.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6587,6 +6680,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The completion date, current state, submission time, and state change reason (if\n            applicable) for the query execution.</p>"
+            }
+        },
+        "com.amazonaws.athena#QueryResultsS3AccessGrantsConfiguration": {
+            "type": "structure",
+            "members": {
+                "EnableS3AccessGrants": {
+                    "target": "com.amazonaws.athena#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 access grants are enabled for query\n            results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateUserLevelPrefix": {
+                    "target": "com.amazonaws.athena#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When enabled, appends the user ID as an Amazon S3 path prefix to the query\n            result output location.</p>"
+                    }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.athena#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type used for Amazon S3 access grants. Currently, only\n                <code>DIRECTORY_IDENTITY</code> is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether Amazon S3 access grants are enabled for query\n            results.</p>"
             }
         },
         "com.amazonaws.athena#QueryRuntimeStatistics": {
@@ -7064,7 +7185,7 @@
                 "ExecutionRole": {
                     "target": "com.amazonaws.athena#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the execution role used in a Spark session to access user resources. This\n            property applies only to Spark-enabled workgroups.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the execution role used to access user resources for Spark sessions and Identity Center\n            enabled workgroups. This property applies only to Spark enabled workgroups and Identity\n            Center enabled workgroups.</p>"
                     }
                 },
                 "WorkingDirectory": {
@@ -7295,7 +7416,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Submits calculations for execution within a session. You can supply the code to run as\n            an inline code block within the request.</p>\n         <note>\n            <p>The request syntax requires the\n                <a>StartCalculationExecutionRequest$CodeBlock</a> parameter or the <a>CalculationConfiguration$CodeBlock</a>\n                    parameter, but not both. Because \n                <a>CalculationConfiguration$CodeBlock</a> is deprecated, use the\n                <a>StartCalculationExecutionRequest$CodeBlock</a> parameter instead.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Submits calculations for execution within a session. You can supply the code to run as\n            an inline code block within the request.</p>\n         <note>\n            <p>The request syntax requires the <a>StartCalculationExecutionRequest$CodeBlock</a> parameter or the <a>CalculationConfiguration$CodeBlock</a> parameter, but not both. Because\n                    <a>CalculationConfiguration$CodeBlock</a> is deprecated, use the\n                    <a>StartCalculationExecutionRequest$CodeBlock</a> parameter\n                instead.</p>\n         </note>"
             }
         },
         "com.amazonaws.athena#StartCalculationExecutionRequest": {
@@ -7326,7 +7447,7 @@
                 "CodeBlock": {
                     "target": "com.amazonaws.athena#CodeBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that contains the code of the calculation. Use this parameter instead of <a>CalculationConfiguration$CodeBlock</a>, which is deprecated.</p>"
+                        "smithy.api#documentation": "<p>A string that contains the code of the calculation. Use this parameter instead of\n                <a>CalculationConfiguration$CodeBlock</a>, which is deprecated.</p>"
                     }
                 },
                 "ClientRequestToken": {
@@ -7397,7 +7518,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.athena#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure the request to create the query is\n            idempotent (executes only once). If another <code>StartQueryExecution</code> request is\n            received, the same response is returned and another query is not created. If a parameter\n            has changed, for example, the <code>QueryString</code>, an error is returned.</p>\n         <important>\n            <p>This token is listed as not required because Amazon Web Services SDKs (for example\n                the Amazon Web Services SDK for Java) auto-generate the token for users. If you are\n                not using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide\n                this token or the action will fail.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure the request to create the query is\n            idempotent (executes only once). If another <code>StartQueryExecution</code> request is\n            received, the same response is returned and another query is not created. An error is\n            returned if a parameter, such as <code>QueryString</code>, has changed. A call to\n                <code>StartQueryExecution</code> that uses a previous client request token returns\n            the same <code>QueryExecutionId</code> even if the requester doesn't have permission on\n            the tables specified in <code>QueryString</code>.</p>\n         <important>\n            <p>This token is listed as not required because Amazon Web Services SDKs (for example\n                the Amazon Web Services SDK for Java) auto-generate the token for users. If you are\n                not using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide\n                this token or the action will fail.</p>\n         </important>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -8576,6 +8697,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the workgroup was created.</p>"
                     }
+                },
+                "IdentityCenterApplicationArn": {
+                    "target": "com.amazonaws.athena#IdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center enabled application associated with the\n            workgroup.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8630,7 +8757,7 @@
                 "ExecutionRole": {
                     "target": "com.amazonaws.athena#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Role used in a Spark session for accessing the user's resources. This property applies\n            only to Spark-enabled workgroups.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the execution role used to access user resources for Spark sessions and Identity Center\n            enabled workgroups. This property applies only to Spark enabled workgroups and Identity\n            Center enabled workgroups.</p>"
                     }
                 },
                 "CustomerContentEncryptionConfiguration": {
@@ -8643,6 +8770,18 @@
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Enforces a minimal level of encryption for the workgroup for query and calculation\n            results that are written to Amazon S3. When enabled, workgroup users can set\n            encryption only to the minimum level set by the administrator or higher when they submit\n            queries.</p>\n         <p>The <code>EnforceWorkGroupConfiguration</code> setting takes precedence over the\n                <code>EnableMinimumEncryptionConfiguration</code> flag. This means that if\n                <code>EnforceWorkGroupConfiguration</code> is true, the\n                <code>EnableMinimumEncryptionConfiguration</code> flag is ignored, and the workgroup\n            configuration for encryption is used.</p>"
+                    }
+                },
+                "IdentityCenterConfiguration": {
+                    "target": "com.amazonaws.athena#IdentityCenterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the workgroup is IAM Identity Center supported.</p>"
+                    }
+                },
+                "QueryResultsS3AccessGrantsConfiguration": {
+                    "target": "com.amazonaws.athena#QueryResultsS3AccessGrantsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 access grants are enabled for query\n            results.</p>"
                     }
                 }
             },
@@ -8710,7 +8849,7 @@
                 "ExecutionRole": {
                     "target": "com.amazonaws.athena#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the execution role used to access user resources. This property applies\n            only to Spark-enabled workgroups.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the execution role used to access user resources for Spark sessions and Identity Center\n            enabled workgroups. This property applies only to Spark enabled workgroups and Identity\n            Center enabled workgroups.</p>"
                     }
                 },
                 "CustomerContentEncryptionConfiguration": {
@@ -8720,6 +8859,12 @@
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Enforces a minimal level of encryption for the workgroup for query and calculation\n            results that are written to Amazon S3. When enabled, workgroup users can set\n            encryption only to the minimum level set by the administrator or higher when they submit\n            queries. This setting does not apply to Spark-enabled workgroups.</p>\n         <p>The <code>EnforceWorkGroupConfiguration</code> setting takes precedence over the\n                <code>EnableMinimumEncryptionConfiguration</code> flag. This means that if\n                <code>EnforceWorkGroupConfiguration</code> is true, the\n                <code>EnableMinimumEncryptionConfiguration</code> flag is ignored, and the workgroup\n            configuration for encryption is used.</p>"
+                    }
+                },
+                "QueryResultsS3AccessGrantsConfiguration": {
+                    "target": "com.amazonaws.athena#QueryResultsS3AccessGrantsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 access grants are enabled for query\n            results.</p>"
                     }
                 }
             },
@@ -8796,6 +8941,12 @@
                     "target": "com.amazonaws.athena#EngineVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The engine version setting for all queries on the workgroup. Queries on the\n                <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine\n            regardless of this setting.</p>"
+                    }
+                },
+                "IdentityCenterApplicationArn": {
+                    "target": "com.amazonaws.athena#IdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center enabled application associated with the\n            workgroup.</p>"
                     }
                 }
             },
