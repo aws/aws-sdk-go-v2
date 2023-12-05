@@ -1,3 +1,17 @@
+# v1.24.0 (2023-12-04)
+
+* **Feature**: This release enhances service support to create quantum tasks and hybrid jobs associated with Braket Direct Reservations.
+
+# v1.23.2 (2023-12-01)
+
+* **Bug Fix**: Correct wrapping of errors in authentication workflow.
+* **Bug Fix**: Correctly recognize cache-wrapped instances of AnonymousCredentials at client construction.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.1 (2023-11-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-11-29)
 
 * **Feature**: Expose Options() accessor on service clients.

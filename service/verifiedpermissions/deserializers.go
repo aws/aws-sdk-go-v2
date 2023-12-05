@@ -4661,6 +4661,28 @@ func awsAwsjson10_deserializeDocumentPolicyStoreItem(v **types.PolicyStoreItem, 
 				sv.CreatedDate = ptr.Time(t)
 			}
 
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyStoreDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "lastUpdatedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampFormat to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastUpdatedDate = ptr.Time(t)
+			}
+
 		case "policyStoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6240,6 +6262,15 @@ func awsAwsjson10_deserializeOpDocumentGetPolicyStoreOutput(v **GetPolicyStoreOu
 				sv.CreatedDate = ptr.Time(t)
 			}
 
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyStoreDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
 		case "lastUpdatedDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6415,6 +6446,11 @@ func awsAwsjson10_deserializeOpDocumentGetSchemaOutput(v **GetSchemaOutput, valu
 					return err
 				}
 				sv.LastUpdatedDate = ptr.Time(t)
+			}
+
+		case "namespaces":
+			if err := awsAwsjson10_deserializeDocumentNamespaceList(&sv.Namespaces, value); err != nil {
+				return err
 			}
 
 		case "policyStoreId":

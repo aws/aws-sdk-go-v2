@@ -23,7 +23,7 @@ import (
 // AWSServiceCatalogAppRegistryFullAccess policy. For more information, see
 // AWSServiceCatalogAppRegistryFullAccess (https://docs.aws.amazon.com/servicecatalog/latest/arguide/full.html)
 // in the AppRegistry Administrator Guide.
-//   - resource-groups:DisassociateResource
+//   - resource-groups:AssociateResource
 //   - cloudformation:UpdateStack
 //   - cloudformation:DescribeStacks
 //

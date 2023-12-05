@@ -851,6 +851,10 @@ type AppDetails struct {
 	// The domain ID.
 	DomainId *string
 
+	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
+	// instance type that the version runs on.
+	ResourceSpec *ResourceSpec
+
 	// The name of the space.
 	SpaceName *string
 
@@ -874,6 +878,10 @@ type AppImageConfigDetails struct {
 
 	// When the AppImageConfig was created.
 	CreationTime *time.Time
+
+	// The configuration for the file system and the runtime, such as the environment
+	// variables and entry point.
+	JupyterLabAppImageConfig *JupyterLabAppImageConfig
 
 	// The configuration for the file system and kernels in the SageMaker image.
 	KernelGatewayImageConfig *KernelGatewayImageConfig
@@ -2759,6 +2767,22 @@ type ClusterSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The Code Editor application settings. For more information about Code Editor,
+// see Get started with Code Editor in Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/code-editor.html)
+// .
+type CodeEditorAppSettings struct {
+
+	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
+	// instance type that the version runs on.
+	DefaultResourceSpec *ResourceSpec
+
+	// The Amazon Resource Name (ARN) of the Code Editor application lifecycle
+	// configuration.
+	LifecycleConfigArns []string
+
+	noSmithyDocumentSerde
+}
+
 // A Git repository that SageMaker automatically displays to users for cloning in
 // the JupyterServer application.
 type CodeRepository struct {
@@ -2939,6 +2963,21 @@ type ConditionStepMetadata struct {
 
 	// The outcome of the Condition step evaluation.
 	Outcome ConditionOutcome
+
+	noSmithyDocumentSerde
+}
+
+// The configuration used to run the application image container.
+type ContainerConfig struct {
+
+	// The arguments for the container when you're running the application.
+	ContainerArguments []string
+
+	// The entrypoint used to run the application in the container.
+	ContainerEntrypoint []string
+
+	// The environment variables to set in the container
+	ContainerEnvironmentVariables map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -3131,6 +3170,46 @@ type ConvergenceDetected struct {
 	noSmithyDocumentSerde
 }
 
+// A file system, created by you, that you assign to a user profile or space for
+// an Amazon SageMaker Domain. Permitted users can access this file system in
+// Amazon SageMaker Studio.
+//
+// The following types satisfy this interface:
+//
+//	CustomFileSystemMemberEFSFileSystem
+type CustomFileSystem interface {
+	isCustomFileSystem()
+}
+
+// A custom file system in Amazon EFS.
+type CustomFileSystemMemberEFSFileSystem struct {
+	Value EFSFileSystem
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomFileSystemMemberEFSFileSystem) isCustomFileSystem() {}
+
+// The settings for assigning a custom file system to a user profile or space for
+// an Amazon SageMaker Domain. Permitted users can access this file system in
+// Amazon SageMaker Studio.
+//
+// The following types satisfy this interface:
+//
+//	CustomFileSystemConfigMemberEFSFileSystemConfig
+type CustomFileSystemConfig interface {
+	isCustomFileSystemConfig()
+}
+
+// The settings for a custom Amazon EFS file system.
+type CustomFileSystemConfigMemberEFSFileSystemConfig struct {
+	Value EFSFileSystemConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomFileSystemConfigMemberEFSFileSystemConfig) isCustomFileSystemConfig() {}
+
 // A custom SageMaker image. For more information, see Bring your own SageMaker
 // image (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html) .
 type CustomImage struct {
@@ -3162,6 +3241,22 @@ type CustomizedMetricSpecification struct {
 
 	// The statistic of the customized metric.
 	Statistic Statistic
+
+	noSmithyDocumentSerde
+}
+
+// Details about the POSIX identity that is used for file system operations.
+type CustomPosixUserConfig struct {
+
+	// The POSIX group ID.
+	//
+	// This member is required.
+	Gid *int64
+
+	// The POSIX user ID.
+	//
+	// This member is required.
+	Uid *int64
 
 	noSmithyDocumentSerde
 }
@@ -3496,6 +3591,23 @@ type DebugRuleEvaluationStatus struct {
 	noSmithyDocumentSerde
 }
 
+// A collection of default EBS storage settings that applies to private spaces
+// created within a domain or user profile.
+type DefaultEbsStorageSettings struct {
+
+	// The default size of the EBS storage volume for a private space.
+	//
+	// This member is required.
+	DefaultEbsVolumeSizeInGb *int32
+
+	// The maximum size of the EBS storage volume for a private space.
+	//
+	// This member is required.
+	MaximumEbsVolumeSizeInGb *int32
+
+	noSmithyDocumentSerde
+}
+
 // A collection of settings that apply to spaces created in the Domain.
 type DefaultSpaceSettings struct {
 
@@ -3511,6 +3623,15 @@ type DefaultSpaceSettings struct {
 	// The security group IDs for the Amazon Virtual Private Cloud that the space uses
 	// for communication.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
+}
+
+// The default storage settings for a private space.
+type DefaultSpaceStorageSettings struct {
+
+	// The default EBS storage settings for a private space.
+	DefaultEbsStorageSettings *DefaultEbsStorageSettings
 
 	noSmithyDocumentSerde
 }
@@ -4001,6 +4122,17 @@ type DynamicScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A collection of EBS storage settings that applies to private spaces.
+type EbsStorageSettings struct {
+
+	// The size of an EBS storage volume for a private space.
+	//
+	// This member is required.
+	EbsVolumeSizeInGb *int32
+
+	noSmithyDocumentSerde
+}
+
 // A directed edge connecting two lineage entities.
 type Edge struct {
 
@@ -4291,6 +4423,35 @@ type EdgePresetDeploymentOutput struct {
 
 	// Returns a message describing the status of the deployed resource.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A file system, created by you in Amazon EFS, that you assign to a user profile
+// or space for an Amazon SageMaker Domain. Permitted users can access this file
+// system in Amazon SageMaker Studio.
+type EFSFileSystem struct {
+
+	// The ID of your Amazon EFS file system.
+	//
+	// This member is required.
+	FileSystemId *string
+
+	noSmithyDocumentSerde
+}
+
+// The settings for assigning a custom Amazon EFS file system to a user profile or
+// space for an Amazon SageMaker Domain.
+type EFSFileSystemConfig struct {
+
+	// The ID of your Amazon EFS file system.
+	//
+	// This member is required.
+	FileSystemId *string
+
+	// The path to the file system directory that is accessible in Amazon SageMaker
+	// Studio. Permitted users can access only this directory and below.
+	FileSystemPath *string
 
 	noSmithyDocumentSerde
 }
@@ -7699,6 +7860,39 @@ type IntegerParameterRangeSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the file system and kernels in a SageMaker image running
+// as a JupyterLab app.
+type JupyterLabAppImageConfig struct {
+
+	// The configuration used to run the application image container.
+	ContainerConfig *ContainerConfig
+
+	noSmithyDocumentSerde
+}
+
+// The settings for the JupyterLab application.
+type JupyterLabAppSettings struct {
+
+	// A list of Git repositories that SageMaker automatically displays to users for
+	// cloning in the JupyterLab application.
+	CodeRepositories []CodeRepository
+
+	// A list of custom SageMaker images that are configured to run as a JupyterLab
+	// app.
+	CustomImages []CustomImage
+
+	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
+	// instance type that the version runs on.
+	DefaultResourceSpec *ResourceSpec
+
+	// The Amazon Resource Name (ARN) of the lifecycle configurations attached to the
+	// user profile or domain. To remove a lifecycle config, you must set
+	// LifecycleConfigArns to an empty list.
+	LifecycleConfigArns []string
+
+	noSmithyDocumentSerde
+}
+
 // The JupyterServer app settings.
 type JupyterServerAppSettings struct {
 
@@ -10724,6 +10918,26 @@ type OutputParameter struct {
 	noSmithyDocumentSerde
 }
 
+// The collection of ownership settings for a space.
+type OwnershipSettings struct {
+
+	// The user profile who is the owner of the private space.
+	//
+	// This member is required.
+	OwnerUserProfileName *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies summary information about the ownership settings.
+type OwnershipSettingsSummary struct {
+
+	// The user profile who is the owner of the private space.
+	OwnerUserProfileName *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration that controls the parallelism of the pipeline. By default, the
 // parallelism configuration specified applies to all executions of the pipeline
 // unless overridden.
@@ -13702,6 +13916,16 @@ type SourceIpConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The application settings for a Code Editor space.
+type SpaceCodeEditorAppSettings struct {
+
+	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
+	// instance type that the version runs on.
+	DefaultResourceSpec *ResourceSpec
+
+	noSmithyDocumentSerde
+}
+
 // The space's details.
 type SpaceDetails struct {
 
@@ -13714,8 +13938,20 @@ type SpaceDetails struct {
 	// The last modified time.
 	LastModifiedTime *time.Time
 
+	// Specifies summary information about the ownership settings.
+	OwnershipSettingsSummary *OwnershipSettingsSummary
+
+	// The name of the space that appears in the Studio UI.
+	SpaceDisplayName *string
+
 	// The name of the space.
 	SpaceName *string
+
+	// Specifies summary information about the space settings.
+	SpaceSettingsSummary *SpaceSettingsSummary
+
+	// Specifies summary information about the space sharing settings.
+	SpaceSharingSettingsSummary *SpaceSharingSettingsSummary
 
 	// The status.
 	Status SpaceStatus
@@ -13723,14 +13959,86 @@ type SpaceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The settings for the JupyterLab application within a space.
+type SpaceJupyterLabAppSettings struct {
+
+	// A list of Git repositories that SageMaker automatically displays to users for
+	// cloning in the JupyterLab application.
+	CodeRepositories []CodeRepository
+
+	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
+	// instance type that the version runs on.
+	DefaultResourceSpec *ResourceSpec
+
+	noSmithyDocumentSerde
+}
+
 // A collection of space settings.
 type SpaceSettings struct {
+
+	// The type of app created within the space.
+	AppType AppType
+
+	// The Code Editor application settings.
+	CodeEditorAppSettings *SpaceCodeEditorAppSettings
+
+	// A file system, created by you, that you assign to a space for an Amazon
+	// SageMaker Domain. Permitted users can access this file system in Amazon
+	// SageMaker Studio.
+	CustomFileSystems []CustomFileSystem
+
+	// The settings for the JupyterLab application.
+	JupyterLabAppSettings *SpaceJupyterLabAppSettings
 
 	// The JupyterServer app settings.
 	JupyterServerAppSettings *JupyterServerAppSettings
 
 	// The KernelGateway app settings.
 	KernelGatewayAppSettings *KernelGatewayAppSettings
+
+	// The storage settings for a private space.
+	SpaceStorageSettings *SpaceStorageSettings
+
+	noSmithyDocumentSerde
+}
+
+// Specifies summary information about the space settings.
+type SpaceSettingsSummary struct {
+
+	// The type of app created within the space.
+	AppType AppType
+
+	// The storage settings for a private space.
+	SpaceStorageSettings *SpaceStorageSettings
+
+	noSmithyDocumentSerde
+}
+
+// A collection of space sharing settings.
+type SpaceSharingSettings struct {
+
+	// Specifies the sharing type of the space.
+	//
+	// This member is required.
+	SharingType SharingType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies summary information about the space sharing settings.
+type SpaceSharingSettingsSummary struct {
+
+	// Specifies the sharing type of the space.
+	SharingType SharingType
+
+	noSmithyDocumentSerde
+}
+
+// The storage settings for a private space.
+type SpaceStorageSettings struct {
+
+	// A collection of EBS storage settings for a private space.
+	EbsStorageSettings *EbsStorageSettings
 
 	noSmithyDocumentSerde
 }
@@ -15665,6 +15973,16 @@ type UserSettings struct {
 	// The Canvas app settings.
 	CanvasAppSettings *CanvasAppSettings
 
+	// The Code Editor application settings.
+	CodeEditorAppSettings *CodeEditorAppSettings
+
+	// The settings for assigning a custom file system to a user profile. Permitted
+	// users can access this file system in Amazon SageMaker Studio.
+	CustomFileSystemConfigs []CustomFileSystemConfig
+
+	// Details about the POSIX identity that is used for file system operations.
+	CustomPosixUserConfig *CustomPosixUserConfig
+
 	// The default experience that the user is directed to when accessing the domain.
 	// The supported values are:
 	//   - studio:: : Indicates that Studio is the default experience. This value can
@@ -15675,6 +15993,9 @@ type UserSettings struct {
 
 	// The execution role for the user.
 	ExecutionRole *string
+
+	// The settings for the JupyterLab application.
+	JupyterLabAppSettings *JupyterLabAppSettings
 
 	// The Jupyter server's app settings.
 	JupyterServerAppSettings *JupyterServerAppSettings
@@ -15701,6 +16022,9 @@ type UserSettings struct {
 
 	// Specifies options for sharing Amazon SageMaker Studio notebooks.
 	SharingSettings *SharingSettings
+
+	// The storage settings for a private space.
+	SpaceStorageSettings *DefaultSpaceStorageSettings
 
 	// Whether the user can access Studio. If this value is set to DISABLED , the user
 	// cannot access Studio, even if that is the default experience for the domain.
@@ -15990,6 +16314,8 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAutoMLProblemTypeConfig()             {}
 func (*UnknownUnionMember) isAutoMLProblemTypeResolvedAttributes() {}
 func (*UnknownUnionMember) isCollectionConfig()                    {}
+func (*UnknownUnionMember) isCustomFileSystem()                    {}
+func (*UnknownUnionMember) isCustomFileSystemConfig()              {}
 func (*UnknownUnionMember) isMetricSpecification()                 {}
 func (*UnknownUnionMember) isScalingPolicy()                       {}
 func (*UnknownUnionMember) isTrialComponentParameterValue()        {}

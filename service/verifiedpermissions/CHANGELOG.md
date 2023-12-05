@@ -1,3 +1,14 @@
+# v1.8.0 (2023-12-01)
+
+* **Feature**: Adds description field to PolicyStore API's and namespaces field to GetSchema.
+* **Bug Fix**: Correct wrapping of errors in authentication workflow.
+* **Bug Fix**: Correctly recognize cache-wrapped instances of AnonymousCredentials at client construction.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.1 (2023-11-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2023-11-29)
 
 * **Feature**: Expose Options() accessor on service clients.

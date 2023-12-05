@@ -41,6 +41,10 @@ type GetDataQualityResultInput struct {
 
 type GetDataQualityResultOutput struct {
 
+	// A list of DataQualityAnalyzerResult objects representing the results for each
+	// analyzer.
+	AnalyzerResults []types.DataQualityAnalyzerResult
+
 	// The date and time when the run for this data quality result was completed.
 	CompletedOn *time.Time
 
@@ -57,6 +61,10 @@ type GetDataQualityResultOutput struct {
 
 	// The job run ID associated with the data quality result, if any.
 	JobRunId *string
+
+	// A list of DataQualityObservation objects representing the observations
+	// generated after evaluating the rules and analyzers.
+	Observations []types.DataQualityObservation
 
 	// A unique result ID for the data quality result.
 	ResultId *string

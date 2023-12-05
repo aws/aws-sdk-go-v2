@@ -7,6 +7,105 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Object that allows filtering on entity id of an AMI product.
+type AmiProductEntityIdFilter struct {
+
+	// A string array of unique entity id values to be filtered on.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// Object containing all the filter fields for AMI products. Client can add a
+// maximum of 8 filters in a single ListEntities request.
+type AmiProductFilters struct {
+
+	// Unique identifier for the AMI product.
+	EntityId *AmiProductEntityIdFilter
+
+	// The last date on which the AMI product was modified.
+	LastModifiedDate *AmiProductLastModifiedDateFilter
+
+	// The title of the AMI product.
+	ProductTitle *AmiProductTitleFilter
+
+	// The visibility of the AMI product.
+	Visibility *AmiProductVisibilityFilter
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering based on the last modified date of AMI products.
+type AmiProductLastModifiedDateFilter struct {
+
+	// Dates between which the AMI product was last modified.
+	DateRange *AmiProductLastModifiedDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+// Object that contains date range of the last modified date to be filtered on.
+// You can optionally provide a BeforeValue and/or AfterValue . Both are inclusive.
+type AmiProductLastModifiedDateFilterDateRange struct {
+
+	// Date after which the AMI product was last modified.
+	AfterValue *string
+
+	// Date before which the AMI product was last modified.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Objects that allows sorting on AMI products based on certain fields and sorting
+// order.
+type AmiProductSort struct {
+
+	// Field to sort the AMI products by.
+	SortBy AmiProductSortBy
+
+	// The sorting order. Can be ASCENDING or DESCENDING . The default value is
+	// DESCENDING .
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Object that contains summarized information about an AMI product.
+type AmiProductSummary struct {
+
+	// The title of the AMI product.
+	ProductTitle *string
+
+	// The lifecycle of the AMI product.
+	Visibility AmiProductVisibilityString
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering on product title.
+type AmiProductTitleFilter struct {
+
+	// A string array of unique product title values to be filtered on.
+	ValueList []string
+
+	// A string that will be the wildCard input for product tile filter. It matches
+	// the provided value as a substring in the actual value.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering on the visibility of the product in the AWS
+// Marketplace.
+type AmiProductVisibilityFilter struct {
+
+	// A string array of unique visibility values to be filtered on.
+	ValueList []AmiProductVisibilityString
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains the ChangeType , Details , and Entity .
 type Change struct {
 
@@ -113,6 +212,205 @@ type ChangeSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Object that allows filtering on entity id of a container product.
+type ContainerProductEntityIdFilter struct {
+
+	// A string array of unique entity id values to be filtered on.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// Object containing all the filter fields for container products. Client can add
+// a maximum of 8 filters in a single ListEntities request.
+type ContainerProductFilters struct {
+
+	// Unique identifier for the container product.
+	EntityId *ContainerProductEntityIdFilter
+
+	// The last date on which the container product was modified.
+	LastModifiedDate *ContainerProductLastModifiedDateFilter
+
+	// The title of the container product.
+	ProductTitle *ContainerProductTitleFilter
+
+	// The visibility of the container product.
+	Visibility *ContainerProductVisibilityFilter
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering based on the last modified date of container
+// products.
+type ContainerProductLastModifiedDateFilter struct {
+
+	// Dates between which the container product was last modified.
+	DateRange *ContainerProductLastModifiedDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+// Object that contains date range of the last modified date to be filtered on.
+// You can optionally provide a BeforeValue and/or AfterValue . Both are inclusive.
+type ContainerProductLastModifiedDateFilterDateRange struct {
+
+	// Date after which the container product was last modified.
+	AfterValue *string
+
+	// Date before which the container product was last modified.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Objects that allows sorting on container products based on certain fields and
+// sorting order.
+type ContainerProductSort struct {
+
+	// Field to sort the container products by.
+	SortBy ContainerProductSortBy
+
+	// The sorting order. Can be ASCENDING or DESCENDING . The default value is
+	// DESCENDING .
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Object that contains summarized information about a container product.
+type ContainerProductSummary struct {
+
+	// The title of the container product.
+	ProductTitle *string
+
+	// The lifecycle of the product.
+	Visibility ContainerProductVisibilityString
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering on product title.
+type ContainerProductTitleFilter struct {
+
+	// A string array of unique product title values to be filtered on.
+	ValueList []string
+
+	// A string that will be the wildCard input for product tile filter. It matches
+	// the provided value as a substring in the actual value.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering on the visibility of the product in the AWS
+// Marketplace.
+type ContainerProductVisibilityFilter struct {
+
+	// A string array of unique visibility values to be filtered on.
+	ValueList []ContainerProductVisibilityString
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering on entity id of a data product.
+type DataProductEntityIdFilter struct {
+
+	// A string array of unique entity id values to be filtered on.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// Object containing all the filter fields for data products. Client can add a
+// maximum of 8 filters in a single ListEntities request.
+type DataProductFilters struct {
+
+	// Unique identifier for the data product.
+	EntityId *DataProductEntityIdFilter
+
+	// The last date on which the data product was modified.
+	LastModifiedDate *DataProductLastModifiedDateFilter
+
+	// The title of the data product.
+	ProductTitle *DataProductTitleFilter
+
+	// The visibility of the data product.
+	Visibility *DataProductVisibilityFilter
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering based on the last modified date of data products.
+type DataProductLastModifiedDateFilter struct {
+
+	// Dates between which the data product was last modified.
+	DateRange *DataProductLastModifiedDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+// Object that contains date range of the last modified date to be filtered on.
+// You can optionally provide a BeforeValue and/or AfterValue . Both are inclusive.
+type DataProductLastModifiedDateFilterDateRange struct {
+
+	// Date after which the data product was last modified.
+	AfterValue *string
+
+	// Date before which the data product was last modified.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Objects that allows sorting on data products based on certain fields and
+// sorting order.
+type DataProductSort struct {
+
+	// Field to sort the data products by.
+	SortBy DataProductSortBy
+
+	// The sorting order. Can be ASCENDING or DESCENDING . The default value is
+	// DESCENDING .
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Object that contains summarized information about a data product.
+type DataProductSummary struct {
+
+	// The title of the data product.
+	ProductTitle *string
+
+	// The lifecycle of the data product.
+	Visibility DataProductVisibilityString
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering on product title.
+type DataProductTitleFilter struct {
+
+	// A string array of unique product title values to be filtered on.
+	ValueList []string
+
+	// A string that will be the wildCard input for product tile filter. It matches
+	// the provided value as a substring in the actual value.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering on the visibility of the product in the AWS
+// Marketplace.
+type DataProductVisibilityFilter struct {
+
+	// A string array of unique visibility values to be filtered on.
+	ValueList []DataProductVisibilityString
+
+	noSmithyDocumentSerde
+}
+
 // An entity contains data that describes your product, its supported features,
 // and how it can be used or launched by your customer.
 type Entity struct {
@@ -133,6 +431,15 @@ type Entity struct {
 // information common across all entities.
 type EntitySummary struct {
 
+	// An object that contains summary information about the AMI product.
+	AmiProductSummary *AmiProductSummary
+
+	// An object that contains summary information about the container product.
+	ContainerProductSummary *ContainerProductSummary
+
+	// An object that contains summary information about the data product.
+	DataProductSummary *DataProductSummary
+
 	// The ARN associated with the unique identifier for the entity.
 	EntityArn *string
 
@@ -149,6 +456,15 @@ type EntitySummary struct {
 	// The name for the entity. This value is not unique. It is defined by the seller.
 	Name *string
 
+	// An object that contains summary information about the offer.
+	OfferSummary *OfferSummary
+
+	// An object that contains summary information about the Resale Authorization.
+	ResaleAuthorizationSummary *ResaleAuthorizationSummary
+
+	// An object that contains summary information about the SaaS product.
+	SaaSProductSummary *SaaSProductSummary
+
 	// The visibility status of the entity to buyers. This value can be Public
 	// (everyone can view the entity), Limited (the entity is visible to limited
 	// accounts only), or Restricted (the entity was published and then unpublished
@@ -157,6 +473,142 @@ type EntitySummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// Object containing all the filter fields per entity type.
+//
+// The following types satisfy this interface:
+//
+//	EntityTypeFiltersMemberAmiProductFilters
+//	EntityTypeFiltersMemberContainerProductFilters
+//	EntityTypeFiltersMemberDataProductFilters
+//	EntityTypeFiltersMemberOfferFilters
+//	EntityTypeFiltersMemberResaleAuthorizationFilters
+//	EntityTypeFiltersMemberSaaSProductFilters
+type EntityTypeFilters interface {
+	isEntityTypeFilters()
+}
+
+// A filter for AMI products.
+type EntityTypeFiltersMemberAmiProductFilters struct {
+	Value AmiProductFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeFiltersMemberAmiProductFilters) isEntityTypeFilters() {}
+
+// A filter for container products.
+type EntityTypeFiltersMemberContainerProductFilters struct {
+	Value ContainerProductFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeFiltersMemberContainerProductFilters) isEntityTypeFilters() {}
+
+// A filter for data products.
+type EntityTypeFiltersMemberDataProductFilters struct {
+	Value DataProductFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeFiltersMemberDataProductFilters) isEntityTypeFilters() {}
+
+// A filter for offers.
+type EntityTypeFiltersMemberOfferFilters struct {
+	Value OfferFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeFiltersMemberOfferFilters) isEntityTypeFilters() {}
+
+// A filter for Resale Authorizations.
+type EntityTypeFiltersMemberResaleAuthorizationFilters struct {
+	Value ResaleAuthorizationFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeFiltersMemberResaleAuthorizationFilters) isEntityTypeFilters() {}
+
+// A filter for SaaS products.
+type EntityTypeFiltersMemberSaaSProductFilters struct {
+	Value SaaSProductFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeFiltersMemberSaaSProductFilters) isEntityTypeFilters() {}
+
+// Object containing all the sort fields per entity type.
+//
+// The following types satisfy this interface:
+//
+//	EntityTypeSortMemberAmiProductSort
+//	EntityTypeSortMemberContainerProductSort
+//	EntityTypeSortMemberDataProductSort
+//	EntityTypeSortMemberOfferSort
+//	EntityTypeSortMemberResaleAuthorizationSort
+//	EntityTypeSortMemberSaaSProductSort
+type EntityTypeSort interface {
+	isEntityTypeSort()
+}
+
+// A sort for AMI products.
+type EntityTypeSortMemberAmiProductSort struct {
+	Value AmiProductSort
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeSortMemberAmiProductSort) isEntityTypeSort() {}
+
+// A sort for container products.
+type EntityTypeSortMemberContainerProductSort struct {
+	Value ContainerProductSort
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeSortMemberContainerProductSort) isEntityTypeSort() {}
+
+// A sort for data products.
+type EntityTypeSortMemberDataProductSort struct {
+	Value DataProductSort
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeSortMemberDataProductSort) isEntityTypeSort() {}
+
+// A sort for offers.
+type EntityTypeSortMemberOfferSort struct {
+	Value OfferSort
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeSortMemberOfferSort) isEntityTypeSort() {}
+
+// A sort for Resale Authorizations.
+type EntityTypeSortMemberResaleAuthorizationSort struct {
+	Value ResaleAuthorizationSort
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeSortMemberResaleAuthorizationSort) isEntityTypeSort() {}
+
+// A sort for SaaS products.
+type EntityTypeSortMemberSaaSProductSort struct {
+	Value SaaSProductSort
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeSortMemberSaaSProductSort) isEntityTypeSort() {}
 
 // Details about the error.
 type ErrorDetail struct {
@@ -198,6 +650,593 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+// Allows filtering on the AvailabilityEndDate of an offer.
+type OfferAvailabilityEndDateFilter struct {
+
+	// Allows filtering on the AvailabilityEndDate of an offer with date range as
+	// input.
+	DateRange *OfferAvailabilityEndDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the AvailabilityEndDate of an offer with date range as
+// input.
+type OfferAvailabilityEndDateFilterDateRange struct {
+
+	// Allows filtering on the AvailabilityEndDate of an offer after a date.
+	AfterValue *string
+
+	// Allows filtering on the AvailabilityEndDate of an offer before a date.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the BuyerAccounts of an offer.
+type OfferBuyerAccountsFilter struct {
+
+	// Allows filtering on the BuyerAccounts of an offer with wild card input.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the entity id of an offer.
+type OfferEntityIdFilter struct {
+
+	// Allows filtering on entity id of an offer with list input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// A filter for offers entity.
+type OfferFilters struct {
+
+	// Allows filtering on the AvailabilityEndDate of an offer.
+	AvailabilityEndDate *OfferAvailabilityEndDateFilter
+
+	// Allows filtering on the BuyerAccounts of an offer.
+	BuyerAccounts *OfferBuyerAccountsFilter
+
+	// Allows filtering on EntityId of an offer.
+	EntityId *OfferEntityIdFilter
+
+	// Allows filtering on the LastModifiedDate of an offer.
+	LastModifiedDate *OfferLastModifiedDateFilter
+
+	// Allows filtering on the Name of an offer.
+	Name *OfferNameFilter
+
+	// Allows filtering on the ProductId of an offer.
+	ProductId *OfferProductIdFilter
+
+	// Allows filtering on the ReleaseDate of an offer.
+	ReleaseDate *OfferReleaseDateFilter
+
+	// Allows filtering on the State of an offer.
+	State *OfferStateFilter
+
+	// Allows filtering on the Targeting of an offer.
+	Targeting *OfferTargetingFilter
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the LastModifiedDate of an offer.
+type OfferLastModifiedDateFilter struct {
+
+	// Allows filtering on the LastModifiedDate of an offer with date range as input.
+	DateRange *OfferLastModifiedDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the LastModifiedDate of an offer with date range as input.
+type OfferLastModifiedDateFilterDateRange struct {
+
+	// Allows filtering on the LastModifiedDate of an offer after a date.
+	AfterValue *string
+
+	// Allows filtering on the LastModifiedDate of an offer before a date.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the Name of an offer.
+type OfferNameFilter struct {
+
+	// Allows filtering on the Name of an offer with list input.
+	ValueList []string
+
+	// Allows filtering on the Name of an offer with wild card input.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the ProductId of an offer.
+type OfferProductIdFilter struct {
+
+	// Allows filtering on the ProductId of an offer with list input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the ReleaseDate of an offer.
+type OfferReleaseDateFilter struct {
+
+	// Allows filtering on the ReleaseDate of an offer with date range as input.
+	DateRange *OfferReleaseDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the ReleaseDate of an offer with date range as input.
+type OfferReleaseDateFilterDateRange struct {
+
+	// Allows filtering on the ReleaseDate of offers after a date.
+	AfterValue *string
+
+	// Allows filtering on the ReleaseDate of offers before a date.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows to sort offers.
+type OfferSort struct {
+
+	// Allows to sort offers.
+	SortBy OfferSortBy
+
+	// Allows to sort offers.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the State of an offer.
+type OfferStateFilter struct {
+
+	// Allows filtering on the State of an offer with list input.
+	ValueList []OfferStateString
+
+	noSmithyDocumentSerde
+}
+
+// Summarized information about an offer.
+type OfferSummary struct {
+
+	// The availability end date of the offer.
+	AvailabilityEndDate *string
+
+	// The buyer accounts in the offer.
+	BuyerAccounts []string
+
+	// The name of the offer.
+	Name *string
+
+	// The product ID of the offer.
+	ProductId *string
+
+	// The release date of the offer.
+	ReleaseDate *string
+
+	// The status of the offer.
+	State OfferStateString
+
+	// The targeting in the offer.
+	Targeting []OfferTargetingString
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the Targeting of an offer.
+type OfferTargetingFilter struct {
+
+	// Allows filtering on the Targeting of an offer with list input.
+	ValueList []OfferTargetingString
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on AvailabilityEndDate of a ResaleAuthorization.
+type ResaleAuthorizationAvailabilityEndDateFilter struct {
+
+	// Allows filtering on AvailabilityEndDate of a ResaleAuthorization with date
+	// range as input
+	DateRange *ResaleAuthorizationAvailabilityEndDateFilterDateRange
+
+	// Allows filtering on AvailabilityEndDate of a ResaleAuthorization with date
+	// value as input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on AvailabilityEndDate of a ResaleAuthorization with date
+// range as input.
+type ResaleAuthorizationAvailabilityEndDateFilterDateRange struct {
+
+	// Allows filtering on AvailabilityEndDate of a ResaleAuthorization after a date.
+	AfterValue *string
+
+	// Allows filtering on AvailabilityEndDate of a ResaleAuthorization before a date.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on CreatedDate of a ResaleAuthorization.
+type ResaleAuthorizationCreatedDateFilter struct {
+
+	// Allows filtering on CreatedDate of a ResaleAuthorization with date range as
+	// input.
+	DateRange *ResaleAuthorizationCreatedDateFilterDateRange
+
+	// Allows filtering on CreatedDate of a ResaleAuthorization with date value as
+	// input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on CreatedDate of a ResaleAuthorization with date range as
+// input.
+type ResaleAuthorizationCreatedDateFilterDateRange struct {
+
+	// Allows filtering on CreatedDate of a ResaleAuthorization after a date.
+	AfterValue *string
+
+	// Allows filtering on CreatedDate of a ResaleAuthorization before a date.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on EntityId of a ResaleAuthorization.
+type ResaleAuthorizationEntityIdFilter struct {
+
+	// Allows filtering on EntityId of a ResaleAuthorization with list input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// A filter for ResaleAuthorization entity.
+type ResaleAuthorizationFilters struct {
+
+	// Allows filtering on the AvailabilityEndDate of a ResaleAuthorization.
+	AvailabilityEndDate *ResaleAuthorizationAvailabilityEndDateFilter
+
+	// Allows filtering on the CreatedDate of a ResaleAuthorization.
+	CreatedDate *ResaleAuthorizationCreatedDateFilter
+
+	// Allows filtering on the EntityId of a ResaleAuthorization.
+	EntityId *ResaleAuthorizationEntityIdFilter
+
+	// Allows filtering on the LastModifiedDate of a ResaleAuthorization.
+	LastModifiedDate *ResaleAuthorizationLastModifiedDateFilter
+
+	// Allows filtering on the ManufacturerAccountId of a ResaleAuthorization.
+	ManufacturerAccountId *ResaleAuthorizationManufacturerAccountIdFilter
+
+	// Allows filtering on the ManufacturerLegalName of a ResaleAuthorization.
+	ManufacturerLegalName *ResaleAuthorizationManufacturerLegalNameFilter
+
+	// Allows filtering on the Name of a ResaleAuthorization.
+	Name *ResaleAuthorizationNameFilter
+
+	// Allows filtering on the OfferExtendedStatus of a ResaleAuthorization.
+	OfferExtendedStatus *ResaleAuthorizationOfferExtendedStatusFilter
+
+	// Allows filtering on the ProductId of a ResaleAuthorization.
+	ProductId *ResaleAuthorizationProductIdFilter
+
+	// Allows filtering on the ProductName of a ResaleAuthorization.
+	ProductName *ResaleAuthorizationProductNameFilter
+
+	// Allows filtering on the ResellerAccountID of a ResaleAuthorization.
+	ResellerAccountID *ResaleAuthorizationResellerAccountIDFilter
+
+	// Allows filtering on the ResellerLegalName of a ResaleAuthorization.
+	ResellerLegalName *ResaleAuthorizationResellerLegalNameFilter
+
+	// Allows filtering on the Status of a ResaleAuthorization.
+	Status *ResaleAuthorizationStatusFilter
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the LastModifiedDate of a ResaleAuthorization.
+type ResaleAuthorizationLastModifiedDateFilter struct {
+
+	// Allows filtering on the LastModifiedDate of a ResaleAuthorization with date
+	// range as input.
+	DateRange *ResaleAuthorizationLastModifiedDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the LastModifiedDate of a ResaleAuthorization with date
+// range as input.
+type ResaleAuthorizationLastModifiedDateFilterDateRange struct {
+
+	// Allows filtering on the LastModifiedDate of a ResaleAuthorization after a date.
+	AfterValue *string
+
+	// Allows filtering on the LastModifiedDate of a ResaleAuthorization before a date.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the ManufacturerAccountId of a ResaleAuthorization.
+type ResaleAuthorizationManufacturerAccountIdFilter struct {
+
+	// Allows filtering on the ManufacturerAccountId of a ResaleAuthorization with
+	// list input.
+	ValueList []string
+
+	// Allows filtering on the ManufacturerAccountId of a ResaleAuthorization with
+	// wild card input.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the ManufacturerLegalName of a ResaleAuthorization.
+type ResaleAuthorizationManufacturerLegalNameFilter struct {
+
+	// Allows filtering on the ManufacturerLegalName of a ResaleAuthorization with
+	// list input.
+	ValueList []string
+
+	// Allows filtering on the ManufacturerLegalName of a ResaleAuthorization with
+	// wild card input.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the Name of a ResaleAuthorization.
+type ResaleAuthorizationNameFilter struct {
+
+	// Allows filtering on the Name of a ResaleAuthorization with list input.
+	ValueList []string
+
+	// Allows filtering on the Name of a ResaleAuthorization with wild card input.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the OfferExtendedStatus of a ResaleAuthorization.
+type ResaleAuthorizationOfferExtendedStatusFilter struct {
+
+	// Allows filtering on the OfferExtendedStatus of a ResaleAuthorization with list
+	// input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the ProductId of a ResaleAuthorization.
+type ResaleAuthorizationProductIdFilter struct {
+
+	// Allows filtering on the ProductId of a ResaleAuthorization with list input.
+	ValueList []string
+
+	// Allows filtering on the ProductId of a ResaleAuthorization with wild card input.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the ProductName of a ResaleAuthorization.
+type ResaleAuthorizationProductNameFilter struct {
+
+	// Allows filtering on the ProductName of a ResaleAuthorization with list input.
+	ValueList []string
+
+	// Allows filtering on the ProductName of a ResaleAuthorization with wild card
+	// input.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the ResellerAccountID of a ResaleAuthorization.
+type ResaleAuthorizationResellerAccountIDFilter struct {
+
+	// Allows filtering on the ResellerAccountID of a ResaleAuthorization with list
+	// input.
+	ValueList []string
+
+	// Allows filtering on the ResellerAccountID of a ResaleAuthorization with wild
+	// card input.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the ResellerLegalName of a ResaleAuthorization.
+type ResaleAuthorizationResellerLegalNameFilter struct {
+
+	// Allows filtering on the ResellerLegalNameProductName of a ResaleAuthorization
+	// with list input.
+	ValueList []string
+
+	// Allows filtering on the ResellerLegalName of a ResaleAuthorization with wild
+	// card input.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Allows to sort ResaleAuthorization.
+type ResaleAuthorizationSort struct {
+
+	// Allows to sort ResaleAuthorization.
+	SortBy ResaleAuthorizationSortBy
+
+	// Allows to sort ResaleAuthorization.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the Status of a ResaleAuthorization.
+type ResaleAuthorizationStatusFilter struct {
+
+	// Allows filtering on the Status of a ResaleAuthorization with list input.
+	ValueList []ResaleAuthorizationStatusString
+
+	noSmithyDocumentSerde
+}
+
+// Summarized information about a Resale Authorization.
+type ResaleAuthorizationSummary struct {
+
+	// The availability end date of the ResaleAuthorization.
+	AvailabilityEndDate *string
+
+	// The created date of the ResaleAuthorization.
+	CreatedDate *string
+
+	// The manufacturer account ID of the ResaleAuthorization.
+	ManufacturerAccountId *string
+
+	// The manufacturer legal name of the ResaleAuthorization.
+	ManufacturerLegalName *string
+
+	// The name of the ResaleAuthorization.
+	Name *string
+
+	// The offer extended status of the ResaleAuthorization
+	OfferExtendedStatus *string
+
+	// The product ID of the ResaleAuthorization.
+	ProductId *string
+
+	// The product name of the ResaleAuthorization.
+	ProductName *string
+
+	// The reseller account ID of the ResaleAuthorization.
+	ResellerAccountID *string
+
+	// The reseller legal name of the ResaleAuthorization
+	ResellerLegalName *string
+
+	// The status of the ResaleAuthorization.
+	Status ResaleAuthorizationStatusString
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering on entity id of a SaaS product.
+type SaaSProductEntityIdFilter struct {
+
+	// A string array of unique entity id values to be filtered on.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// Object containing all the filter fields for SaaS products. Client can add a
+// maximum of 8 filters in a single ListEntities request.
+type SaaSProductFilters struct {
+
+	// Unique identifier for the SaaS product.
+	EntityId *SaaSProductEntityIdFilter
+
+	// The last date on which the SaaS product was modified.
+	LastModifiedDate *SaaSProductLastModifiedDateFilter
+
+	// The title of the SaaS product.
+	ProductTitle *SaaSProductTitleFilter
+
+	// The visibility of the SaaS product.
+	Visibility *SaaSProductVisibilityFilter
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering based on the last modified date of SaaS products
+type SaaSProductLastModifiedDateFilter struct {
+
+	// Dates between which the SaaS product was last modified.
+	DateRange *SaaSProductLastModifiedDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+// Object that contains date range of the last modified date to be filtered on.
+// You can optionally provide a BeforeValue and/or AfterValue . Both are inclusive.
+type SaaSProductLastModifiedDateFilterDateRange struct {
+
+	// Date after which the SaaS product was last modified.
+	AfterValue *string
+
+	// Date before which the SaaS product was last modified.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Objects that allows sorting on SaaS products based on certain fields and
+// sorting order.
+type SaaSProductSort struct {
+
+	// Field to sort the SaaS products by.
+	SortBy SaaSProductSortBy
+
+	// The sorting order. Can be ASCENDING or DESCENDING . The default value is
+	// DESCENDING .
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Object that contains summarized information about a SaaS product.
+type SaaSProductSummary struct {
+
+	// The title of the SaaS product.
+	ProductTitle *string
+
+	// The lifecycle of the SaaS product.
+	Visibility SaaSProductVisibilityString
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering on product title.
+type SaaSProductTitleFilter struct {
+
+	// A string array of unique product title values to be filtered on.
+	ValueList []string
+
+	// A string that will be the wildCard input for product tile filter. It matches
+	// the provided value as a substring in the actual value.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Object that allows filtering on the visibility of the product in the AWS
+// Marketplace.
+type SaaSProductVisibilityFilter struct {
+
+	// A string array of unique visibility values to be filtered on.
+	ValueList []SaaSProductVisibilityString
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains two attributes, SortBy and SortOrder .
 type Sort struct {
 
@@ -231,3 +1270,15 @@ type Tag struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isEntityTypeFilters() {}
+func (*UnknownUnionMember) isEntityTypeSort()    {}

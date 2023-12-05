@@ -3347,6 +3347,90 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.medialive#ColorCorrection": {
+            "type": "structure",
+            "members": {
+                "InputColorSpace": {
+                    "target": "com.amazonaws.medialive#ColorSpace",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The color space of the input.",
+                        "smithy.api#jsonName": "inputColorSpace",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputColorSpace": {
+                    "target": "com.amazonaws.medialive#ColorSpace",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The color space of the output.",
+                        "smithy.api#jsonName": "outputColorSpace",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Uri": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The URI of the 3D LUT file. The protocol must be 's3:' or 's3ssl:':.",
+                        "smithy.api#jsonName": "uri",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Property of ColorCorrectionSettings. Used for custom color space conversion. The object identifies one 3D LUT file and specifies the input/output color space combination that the file will be used for."
+            }
+        },
+        "com.amazonaws.medialive#ColorCorrectionSettings": {
+            "type": "structure",
+            "members": {
+                "GlobalColorCorrections": {
+                    "target": "com.amazonaws.medialive#__listOfColorCorrection",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "An array of colorCorrections that applies when you are using 3D LUT files to perform color conversion on video. Each colorCorrection contains one 3D LUT file (that defines the color mapping for converting an input color space to an output color space), and the input/output combination that this 3D LUT file applies to. MediaLive reads the color space in the input metadata, determines the color space that you have specified for the output, and finds and uses the LUT file that applies to this combination.",
+                        "smithy.api#jsonName": "globalColorCorrections",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Property of encoderSettings. Controls color conversion when you are using 3D LUT files to perform color conversion on video."
+            }
+        },
+        "com.amazonaws.medialive#ColorSpace": {
+            "type": "enum",
+            "members": {
+                "HDR10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HDR10"
+                    }
+                },
+                "HLG_2020": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HLG_2020"
+                    }
+                },
+                "REC_601": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REC_601"
+                    }
+                },
+                "REC_709": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REC_709"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Property of colorCorrections. When you are using 3D LUT files to perform color conversion on video, these are the supported color spaces."
+            }
+        },
         "com.amazonaws.medialive#ColorSpacePassthroughSettings": {
             "type": "structure",
             "members": {},
@@ -8512,6 +8596,13 @@
                     "traits": {
                         "smithy.api#documentation": "Settings for caption decriptions",
                         "smithy.api#jsonName": "captionDescriptions"
+                    }
+                },
+                "ColorCorrectionSettings": {
+                    "target": "com.amazonaws.medialive#ColorCorrectionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Color correction settings",
+                        "smithy.api#jsonName": "colorCorrectionSettings"
                     }
                 },
                 "FeatureActivations": {
@@ -25734,6 +25825,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfChannelSummary"
+            }
+        },
+        "com.amazonaws.medialive#__listOfColorCorrection": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#ColorCorrection"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfColorCorrection"
             }
         },
         "com.amazonaws.medialive#__listOfFailoverCondition": {

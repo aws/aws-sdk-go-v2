@@ -218,6 +218,38 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "fips-verification-us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "fips-verification-us-east-2",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "fips-verification-us-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "fips-verification-us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "me-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -258,6 +290,166 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "signer-fips.us-west-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "verification-af-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.af-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "af-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-ap-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.ap-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-ap-northeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.ap-northeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-ap-northeast-2",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.ap-northeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-ap-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.ap-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-ap-southeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.ap-southeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-ap-southeast-2",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.ap-southeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-ca-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-eu-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.eu-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-eu-north-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.eu-north-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-north-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-eu-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.eu-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-eu-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.eu-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-eu-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.eu-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-eu-west-3",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.eu-west-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-3",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-me-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.me-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-sa-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.sa-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "sa-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-us-east-2",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-us-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
 			},
 		},
 	},
@@ -302,6 +494,22 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "cn-northwest-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "verification-cn-north-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.cn-north-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-north-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "verification-cn-northwest-1",
+			}: endpoints.Endpoint{
+				Hostname: "verification.signer.cn-northwest-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-northwest-1",
+				},
+			},
 		},
 	},
 	{

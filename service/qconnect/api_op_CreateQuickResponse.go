@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Amazon Q quick response.
+// Creates an Amazon Q quick response.
 func (c *Client) CreateQuickResponse(ctx context.Context, params *CreateQuickResponseInput, optFns ...func(*Options)) (*CreateQuickResponseOutput, error) {
 	if params == nil {
 		params = &CreateQuickResponseInput{}

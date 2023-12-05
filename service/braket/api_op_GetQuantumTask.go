@@ -31,7 +31,7 @@ func (c *Client) GetQuantumTask(ctx context.Context, params *GetQuantumTaskInput
 
 type GetQuantumTaskInput struct {
 
-	// the ARN of the task to retrieve.
+	// The ARN of the task to retrieve.
 	//
 	// This member is required.
 	QuantumTaskArn *string
@@ -85,6 +85,9 @@ type GetQuantumTaskOutput struct {
 	//
 	// This member is required.
 	Status types.QuantumTaskStatus
+
+	// The list of Amazon Braket resources associated with the quantum task.
+	Associations []types.Association
 
 	// The time at which the task ended.
 	EndedAt *time.Time

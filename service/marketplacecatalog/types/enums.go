@@ -2,6 +2,50 @@
 
 package types
 
+type AmiProductSortBy string
+
+// Enum values for AmiProductSortBy
+const (
+	AmiProductSortByEntityId         AmiProductSortBy = "EntityId"
+	AmiProductSortByLastModifiedDate AmiProductSortBy = "LastModifiedDate"
+	AmiProductSortByProductTitle     AmiProductSortBy = "ProductTitle"
+	AmiProductSortByVisibility       AmiProductSortBy = "Visibility"
+)
+
+// Values returns all known values for AmiProductSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AmiProductSortBy) Values() []AmiProductSortBy {
+	return []AmiProductSortBy{
+		"EntityId",
+		"LastModifiedDate",
+		"ProductTitle",
+		"Visibility",
+	}
+}
+
+type AmiProductVisibilityString string
+
+// Enum values for AmiProductVisibilityString
+const (
+	AmiProductVisibilityStringLimited    AmiProductVisibilityString = "Limited"
+	AmiProductVisibilityStringPublic     AmiProductVisibilityString = "Public"
+	AmiProductVisibilityStringRestricted AmiProductVisibilityString = "Restricted"
+	AmiProductVisibilityStringDraft      AmiProductVisibilityString = "Draft"
+)
+
+// Values returns all known values for AmiProductVisibilityString. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AmiProductVisibilityString) Values() []AmiProductVisibilityString {
+	return []AmiProductVisibilityString{
+		"Limited",
+		"Public",
+		"Restricted",
+		"Draft",
+	}
+}
+
 type ChangeStatus string
 
 // Enum values for ChangeStatus
@@ -26,6 +70,97 @@ func (ChangeStatus) Values() []ChangeStatus {
 	}
 }
 
+type ContainerProductSortBy string
+
+// Enum values for ContainerProductSortBy
+const (
+	ContainerProductSortByEntityId         ContainerProductSortBy = "EntityId"
+	ContainerProductSortByLastModifiedDate ContainerProductSortBy = "LastModifiedDate"
+	ContainerProductSortByProductTitle     ContainerProductSortBy = "ProductTitle"
+	ContainerProductSortByVisibility       ContainerProductSortBy = "Visibility"
+)
+
+// Values returns all known values for ContainerProductSortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerProductSortBy) Values() []ContainerProductSortBy {
+	return []ContainerProductSortBy{
+		"EntityId",
+		"LastModifiedDate",
+		"ProductTitle",
+		"Visibility",
+	}
+}
+
+type ContainerProductVisibilityString string
+
+// Enum values for ContainerProductVisibilityString
+const (
+	ContainerProductVisibilityStringLimited    ContainerProductVisibilityString = "Limited"
+	ContainerProductVisibilityStringPublic     ContainerProductVisibilityString = "Public"
+	ContainerProductVisibilityStringRestricted ContainerProductVisibilityString = "Restricted"
+	ContainerProductVisibilityStringDraft      ContainerProductVisibilityString = "Draft"
+)
+
+// Values returns all known values for ContainerProductVisibilityString. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ContainerProductVisibilityString) Values() []ContainerProductVisibilityString {
+	return []ContainerProductVisibilityString{
+		"Limited",
+		"Public",
+		"Restricted",
+		"Draft",
+	}
+}
+
+type DataProductSortBy string
+
+// Enum values for DataProductSortBy
+const (
+	DataProductSortByEntityId         DataProductSortBy = "EntityId"
+	DataProductSortByProductTitle     DataProductSortBy = "ProductTitle"
+	DataProductSortByVisibility       DataProductSortBy = "Visibility"
+	DataProductSortByLastModifiedDate DataProductSortBy = "LastModifiedDate"
+)
+
+// Values returns all known values for DataProductSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataProductSortBy) Values() []DataProductSortBy {
+	return []DataProductSortBy{
+		"EntityId",
+		"ProductTitle",
+		"Visibility",
+		"LastModifiedDate",
+	}
+}
+
+type DataProductVisibilityString string
+
+// Enum values for DataProductVisibilityString
+const (
+	DataProductVisibilityStringLimited     DataProductVisibilityString = "Limited"
+	DataProductVisibilityStringPublic      DataProductVisibilityString = "Public"
+	DataProductVisibilityStringRestricted  DataProductVisibilityString = "Restricted"
+	DataProductVisibilityStringUnavailable DataProductVisibilityString = "Unavailable"
+	DataProductVisibilityStringDraft       DataProductVisibilityString = "Draft"
+)
+
+// Values returns all known values for DataProductVisibilityString. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataProductVisibilityString) Values() []DataProductVisibilityString {
+	return []DataProductVisibilityString{
+		"Limited",
+		"Public",
+		"Restricted",
+		"Unavailable",
+		"Draft",
+	}
+}
+
 type FailureCode string
 
 // Enum values for FailureCode
@@ -44,6 +179,78 @@ func (FailureCode) Values() []FailureCode {
 	}
 }
 
+type OfferSortBy string
+
+// Enum values for OfferSortBy
+const (
+	OfferSortByEntityId            OfferSortBy = "EntityId"
+	OfferSortByName                OfferSortBy = "Name"
+	OfferSortByProductId           OfferSortBy = "ProductId"
+	OfferSortByReleaseDate         OfferSortBy = "ReleaseDate"
+	OfferSortByAvailabilityEndDate OfferSortBy = "AvailabilityEndDate"
+	OfferSortByBuyerAccounts       OfferSortBy = "BuyerAccounts"
+	OfferSortByState               OfferSortBy = "State"
+	OfferSortByTargeting           OfferSortBy = "Targeting"
+	OfferSortByLastModifiedDate    OfferSortBy = "LastModifiedDate"
+)
+
+// Values returns all known values for OfferSortBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OfferSortBy) Values() []OfferSortBy {
+	return []OfferSortBy{
+		"EntityId",
+		"Name",
+		"ProductId",
+		"ReleaseDate",
+		"AvailabilityEndDate",
+		"BuyerAccounts",
+		"State",
+		"Targeting",
+		"LastModifiedDate",
+	}
+}
+
+type OfferStateString string
+
+// Enum values for OfferStateString
+const (
+	OfferStateStringDraft    OfferStateString = "Draft"
+	OfferStateStringReleased OfferStateString = "Released"
+)
+
+// Values returns all known values for OfferStateString. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OfferStateString) Values() []OfferStateString {
+	return []OfferStateString{
+		"Draft",
+		"Released",
+	}
+}
+
+type OfferTargetingString string
+
+// Enum values for OfferTargetingString
+const (
+	OfferTargetingStringBuyerAccounts         OfferTargetingString = "BuyerAccounts"
+	OfferTargetingStringParticipatingPrograms OfferTargetingString = "ParticipatingPrograms"
+	OfferTargetingStringCountryCodes          OfferTargetingString = "CountryCodes"
+	OfferTargetingStringNone                  OfferTargetingString = "None"
+)
+
+// Values returns all known values for OfferTargetingString. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OfferTargetingString) Values() []OfferTargetingString {
+	return []OfferTargetingString{
+		"BuyerAccounts",
+		"ParticipatingPrograms",
+		"CountryCodes",
+		"None",
+	}
+}
+
 type OwnershipType string
 
 // Enum values for OwnershipType
@@ -59,6 +266,111 @@ func (OwnershipType) Values() []OwnershipType {
 	return []OwnershipType{
 		"SELF",
 		"SHARED",
+	}
+}
+
+type ResaleAuthorizationSortBy string
+
+// Enum values for ResaleAuthorizationSortBy
+const (
+	ResaleAuthorizationSortByEntityId              ResaleAuthorizationSortBy = "EntityId"
+	ResaleAuthorizationSortByName                  ResaleAuthorizationSortBy = "Name"
+	ResaleAuthorizationSortByProductId             ResaleAuthorizationSortBy = "ProductId"
+	ResaleAuthorizationSortByProductName           ResaleAuthorizationSortBy = "ProductName"
+	ResaleAuthorizationSortByManufacturerAccountId ResaleAuthorizationSortBy = "ManufacturerAccountId"
+	ResaleAuthorizationSortByManufacturerLegalName ResaleAuthorizationSortBy = "ManufacturerLegalName"
+	ResaleAuthorizationSortByResellerAccountID     ResaleAuthorizationSortBy = "ResellerAccountID"
+	ResaleAuthorizationSortByResellerLegalName     ResaleAuthorizationSortBy = "ResellerLegalName"
+	ResaleAuthorizationSortByStatus                ResaleAuthorizationSortBy = "Status"
+	ResaleAuthorizationSortByOfferExtendedStatus   ResaleAuthorizationSortBy = "OfferExtendedStatus"
+	ResaleAuthorizationSortByCreatedDate           ResaleAuthorizationSortBy = "CreatedDate"
+	ResaleAuthorizationSortByAvailabilityEndDate   ResaleAuthorizationSortBy = "AvailabilityEndDate"
+	ResaleAuthorizationSortByLastModifiedDate      ResaleAuthorizationSortBy = "LastModifiedDate"
+)
+
+// Values returns all known values for ResaleAuthorizationSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResaleAuthorizationSortBy) Values() []ResaleAuthorizationSortBy {
+	return []ResaleAuthorizationSortBy{
+		"EntityId",
+		"Name",
+		"ProductId",
+		"ProductName",
+		"ManufacturerAccountId",
+		"ManufacturerLegalName",
+		"ResellerAccountID",
+		"ResellerLegalName",
+		"Status",
+		"OfferExtendedStatus",
+		"CreatedDate",
+		"AvailabilityEndDate",
+		"LastModifiedDate",
+	}
+}
+
+type ResaleAuthorizationStatusString string
+
+// Enum values for ResaleAuthorizationStatusString
+const (
+	ResaleAuthorizationStatusStringDraft      ResaleAuthorizationStatusString = "Draft"
+	ResaleAuthorizationStatusStringActive     ResaleAuthorizationStatusString = "Active"
+	ResaleAuthorizationStatusStringRestricted ResaleAuthorizationStatusString = "Restricted"
+)
+
+// Values returns all known values for ResaleAuthorizationStatusString. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ResaleAuthorizationStatusString) Values() []ResaleAuthorizationStatusString {
+	return []ResaleAuthorizationStatusString{
+		"Draft",
+		"Active",
+		"Restricted",
+	}
+}
+
+type SaaSProductSortBy string
+
+// Enum values for SaaSProductSortBy
+const (
+	SaaSProductSortByEntityId         SaaSProductSortBy = "EntityId"
+	SaaSProductSortByProductTitle     SaaSProductSortBy = "ProductTitle"
+	SaaSProductSortByVisibility       SaaSProductSortBy = "Visibility"
+	SaaSProductSortByLastModifiedDate SaaSProductSortBy = "LastModifiedDate"
+)
+
+// Values returns all known values for SaaSProductSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SaaSProductSortBy) Values() []SaaSProductSortBy {
+	return []SaaSProductSortBy{
+		"EntityId",
+		"ProductTitle",
+		"Visibility",
+		"LastModifiedDate",
+	}
+}
+
+type SaaSProductVisibilityString string
+
+// Enum values for SaaSProductVisibilityString
+const (
+	SaaSProductVisibilityStringLimited    SaaSProductVisibilityString = "Limited"
+	SaaSProductVisibilityStringPublic     SaaSProductVisibilityString = "Public"
+	SaaSProductVisibilityStringRestricted SaaSProductVisibilityString = "Restricted"
+	SaaSProductVisibilityStringDraft      SaaSProductVisibilityString = "Draft"
+)
+
+// Values returns all known values for SaaSProductVisibilityString. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SaaSProductVisibilityString) Values() []SaaSProductVisibilityString {
+	return []SaaSProductVisibilityString{
+		"Limited",
+		"Public",
+		"Restricted",
+		"Draft",
 	}
 }
 

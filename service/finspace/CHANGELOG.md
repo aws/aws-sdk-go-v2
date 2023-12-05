@@ -1,3 +1,17 @@
+# v1.19.0 (2023-12-04)
+
+* **Feature**: Release General Purpose type clusters
+
+# v1.18.2 (2023-12-01)
+
+* **Bug Fix**: Correct wrapping of errors in authentication workflow.
+* **Bug Fix**: Correctly recognize cache-wrapped instances of AnonymousCredentials at client construction.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.18.1 (2023-11-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-11-29)
 
 * **Feature**: Expose Options() accessor on service clients.

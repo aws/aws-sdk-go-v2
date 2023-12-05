@@ -223,6 +223,10 @@ type CustomLineItemFlatChargeDetails struct {
 // A representation of a custom line item.
 type CustomLineItemListElement struct {
 
+	// The Amazon Web Services account in which this custom line item will be applied
+	// to.
+	AccountId *string
+
 	// The Amazon Resource Names (ARNs) for custom line items.
 	Arn *string
 
@@ -278,6 +282,10 @@ type CustomLineItemPercentageChargeDetails struct {
 
 // A representation of a custom line item version.
 type CustomLineItemVersionListElement struct {
+
+	// The Amazon Web Services account in which this custom line item will be applied
+	// to.
+	AccountId *string
 
 	// A list of custom line item Amazon Resource Names (ARNs) to retrieve information.
 	Arn *string
@@ -486,6 +494,10 @@ type ListCustomLineItemPercentageChargeDetails struct {
 // A filter that specifies the custom line items and billing groups to retrieve
 // FFLI information.
 type ListCustomLineItemsFilter struct {
+
+	// The Amazon Web Services accounts in which this custom line item will be applied
+	// to.
+	AccountIds []string
 
 	// A list of custom line item ARNs to retrieve information.
 	Arns []string

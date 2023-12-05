@@ -20,6 +20,22 @@ type AlgorithmSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Braket resource and the association type.
+type Association struct {
+
+	// The Amazon Braket resource arn.
+	//
+	// This member is required.
+	Arn *string
+
+	// The association type for the specified Amazon Braket resource arn.
+	//
+	// This member is required.
+	Type AssociationType
+
+	noSmithyDocumentSerde
+}
+
 // The container image used to create an Amazon Braket job.
 type ContainerImage struct {
 
@@ -195,7 +211,7 @@ type JobEventDetails struct {
 	// A message describing the event that occurred related to the Amazon Braket job.
 	Message *string
 
-	// TThe type of event that occurred related to the Amazon Braket job.
+	// The type of event that occurred related to the Amazon Braket job.
 	TimeOfEvent *time.Time
 
 	noSmithyDocumentSerde

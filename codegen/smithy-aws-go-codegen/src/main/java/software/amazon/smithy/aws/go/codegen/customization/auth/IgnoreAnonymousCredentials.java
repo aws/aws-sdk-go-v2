@@ -70,10 +70,10 @@ public class IgnoreAnonymousCredentials implements GoIntegration {
     private GoWriter.Writable generateResolver() {
         return goTemplate("""
                 func ignoreAnonymousAuth(options *Options) {
-                    if _, ok := options.Credentials.($T); ok {
+                    if $T(options.Credentials, ($P)(nil)) {
                         options.Credentials = nil
                     }
                 }
-                """, SdkGoTypes.Aws.AnonymousCredentials);
+                """, SdkGoTypes.Aws.IsCredentialsProvider, SdkGoTypes.Aws.AnonymousCredentials);
     }
 }

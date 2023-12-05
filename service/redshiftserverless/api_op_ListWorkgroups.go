@@ -39,6 +39,10 @@ type ListWorkgroupsInput struct {
 	// results in the next page.
 	NextToken *string
 
+	// The owner Amazon Web Services account for the Amazon Redshift Serverless
+	// workgroup.
+	OwnerAccount *string
+
 	noSmithyDocumentSerde
 }
 

@@ -76,6 +76,9 @@ type RuleSummary struct {
 	// retain resources.
 	RetentionPeriod *RetentionPeriod
 
+	// The Amazon Resource Name (ARN) of the retention rule.
+	RuleArn *string
+
 	noSmithyDocumentSerde
 }
 

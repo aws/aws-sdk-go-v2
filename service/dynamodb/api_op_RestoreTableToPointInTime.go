@@ -204,10 +204,11 @@ func addOpRestoreTableToPointInTimeDiscoverEndpointMiddleware(stack *middleware.
 		DiscoverOperation:            c.fetchOpRestoreTableToPointInTimeDiscoverEndpoint,
 		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
+		Region:                       o.Region,
 	}, "ResolveEndpointV2", middleware.After)
 }
 
-func (c *Client) fetchOpRestoreTableToPointInTimeDiscoverEndpoint(ctx context.Context, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+func (c *Client) fetchOpRestoreTableToPointInTimeDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
 	input := getOperationInput(ctx)
 	in, ok := input.(*RestoreTableToPointInTimeInput)
 	if !ok {
@@ -216,6 +217,7 @@ func (c *Client) fetchOpRestoreTableToPointInTimeDiscoverEndpoint(ctx context.Co
 	_ = in
 
 	identifierMap := make(map[string]string, 0)
+	identifierMap["sdk#Region"] = region
 
 	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
 
@@ -230,7 +232,7 @@ func (c *Client) fetchOpRestoreTableToPointInTimeDiscoverEndpoint(ctx context.Co
 		fn(&opt)
 	}
 
-	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	return internalEndpointDiscovery.WeightedAddress{}, nil
 }
 

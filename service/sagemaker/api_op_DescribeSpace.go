@@ -61,14 +61,23 @@ type DescribeSpaceOutput struct {
 	// The last modified time.
 	LastModifiedTime *time.Time
 
+	// The collection of ownership settings for a space.
+	OwnershipSettings *types.OwnershipSettings
+
 	// The space's Amazon Resource Name (ARN).
 	SpaceArn *string
+
+	// The name of the space that appears in the Amazon SageMaker Studio UI.
+	SpaceDisplayName *string
 
 	// The name of the space.
 	SpaceName *string
 
 	// A collection of space settings.
 	SpaceSettings *types.SpaceSettings
+
+	// The collection of space sharing settings for a space.
+	SpaceSharingSettings *types.SpaceSharingSettings
 
 	// The status.
 	Status types.SpaceStatus

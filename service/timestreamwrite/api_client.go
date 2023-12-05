@@ -154,7 +154,7 @@ func (m *setOperationInputMiddleware) HandleSerialize(ctx context.Context, in mi
 
 func addProtocolFinalizerMiddlewares(stack *middleware.Stack, options Options, operation string) error {
 	if err := stack.Finalize.Add(&resolveAuthSchemeMiddleware{operation: operation, options: options}, middleware.Before); err != nil {
-		return fmt.Errorf("add ResolveAuthScheme: %v", err)
+		return fmt.Errorf("add ResolveAuthScheme: %w", err)
 	}
 	if err := stack.Finalize.Insert(&getIdentityMiddleware{options: options}, "ResolveAuthScheme", middleware.After); err != nil {
 		return fmt.Errorf("add GetIdentity: %v", err)
@@ -163,7 +163,7 @@ func addProtocolFinalizerMiddlewares(stack *middleware.Stack, options Options, o
 		return fmt.Errorf("add ResolveEndpointV2: %v", err)
 	}
 	if err := stack.Finalize.Insert(&signRequestMiddleware{}, "ResolveEndpointV2", middleware.After); err != nil {
-		return fmt.Errorf("add Signing: %v", err)
+		return fmt.Errorf("add Signing: %w", err)
 	}
 	return nil
 }
@@ -476,7 +476,7 @@ func resolveEnableEndpointDiscovery(o *Options) {
 	o.EndpointDiscovery.EnableEndpointDiscovery = aws.EndpointDiscoveryAuto
 }
 
-func (c *Client) handleEndpointDiscoveryFromService(ctx context.Context, input *DescribeEndpointsInput, key string, opt internalEndpointDiscovery.DiscoverEndpointOptions) (internalEndpointDiscovery.Endpoint, error) {
+func (c *Client) handleEndpointDiscoveryFromService(ctx context.Context, input *DescribeEndpointsInput, region, key string, opt internalEndpointDiscovery.DiscoverEndpointOptions) (internalEndpointDiscovery.Endpoint, error) {
 	// assert endpoint resolver interface is of expected type.
 	endpointResolver, ok := opt.EndpointResolverUsedForDiscovery.(EndpointResolver)
 	if opt.EndpointResolverUsedForDiscovery != nil && !ok {
@@ -485,6 +485,8 @@ func (c *Client) handleEndpointDiscoveryFromService(ctx context.Context, input *
 	}
 
 	output, err := c.DescribeEndpoints(ctx, input, func(o *Options) {
+		o.Region = region
+
 		o.EndpointOptions.DisableHTTPS = opt.DisableHTTPS
 		o.Logger = opt.Logger
 		if endpointResolver != nil {

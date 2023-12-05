@@ -40,8 +40,17 @@ type CreateSpaceInput struct {
 	// This member is required.
 	SpaceName *string
 
+	// A collection of ownership settings.
+	OwnershipSettings *types.OwnershipSettings
+
+	// The name of the space that appears in the SageMaker Studio UI.
+	SpaceDisplayName *string
+
 	// A collection of space settings.
 	SpaceSettings *types.SpaceSettings
+
+	// A collection of space sharing settings.
+	SpaceSharingSettings *types.SpaceSharingSettings
 
 	// Tags to associated with the space. Each tag consists of a key and an optional
 	// value. Tag keys must be unique for each resource. Tags are searchable using the

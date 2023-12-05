@@ -40,6 +40,9 @@ type UpdateSpaceInput struct {
 	// This member is required.
 	SpaceName *string
 
+	// The name of the space that appears in the Amazon SageMaker Studio UI.
+	SpaceDisplayName *string
+
 	// A collection of space settings.
 	SpaceSettings *types.SpaceSettings
 

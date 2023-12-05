@@ -50,6 +50,9 @@ type DescribeAppImageConfigOutput struct {
 	// When the AppImageConfig was created.
 	CreationTime *time.Time
 
+	// The configuration of the JupyterLab app.
+	JupyterLabAppImageConfig *types.JupyterLabAppImageConfig
+
 	// The configuration of a KernelGateway app.
 	KernelGatewayImageConfig *types.KernelGatewayImageConfig
 

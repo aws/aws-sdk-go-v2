@@ -12,11 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the resources in your AWS account in this AWS Region that are managed
-// for zonal shifts in Amazon Route 53 Application Recovery Controller, and
-// information about them. The information includes their Amazon Resource Names
-// (ARNs), the Availability Zones the resources are deployed in, and the resource
-// name.
+// Lists all the resources in your Amazon Web Services account in this Amazon Web
+// Services Region that are managed for zonal shifts in Amazon Route 53 Application
+// Recovery Controller, and information about them. The information includes the
+// zonal autoshift status for the resource, as well as the Amazon Resource Name
+// (ARN), the Availability Zones that each resource is deployed in, and the
+// resource name.
 func (c *Client) ListManagedResources(ctx context.Context, params *ListManagedResourcesInput, optFns ...func(*Options)) (*ListManagedResourcesOutput, error) {
 	if params == nil {
 		params = &ListManagedResourcesInput{}

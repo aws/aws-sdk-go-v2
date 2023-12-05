@@ -1,3 +1,14 @@
+# v1.14.0 (2023-12-01)
+
+* **Feature**: Added resource identifier in the output and updated error handling.
+* **Bug Fix**: Correct wrapping of errors in authentication workflow.
+* **Bug Fix**: Correctly recognize cache-wrapped instances of AnonymousCredentials at client construction.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.1 (2023-11-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2023-11-29)
 
 * **Feature**: Expose Options() accessor on service clients.

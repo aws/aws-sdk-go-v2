@@ -13,10 +13,12 @@ import (
 )
 
 // Get information about a resource that's been registered for zonal shifts with
-// Amazon Route 53 Application Recovery Controller in this AWS Region. Resources
-// that are registered for zonal shifts are managed resources in Route 53 ARC. At
-// this time, you can only start a zonal shift for Network Load Balancers and
-// Application Load Balancers with cross-zone load balancing turned off.
+// Amazon Route 53 Application Recovery Controller in this Amazon Web Services
+// Region. Resources that are registered for zonal shifts are managed resources in
+// Route 53 ARC. You can start zonal shifts and configure zonal autoshift for
+// managed resources. At this time, you can only start a zonal shift or configure
+// zonal autoshift for Network Load Balancers and Application Load Balancers with
+// cross-zone load balancing turned off.
 func (c *Client) GetManagedResource(ctx context.Context, params *GetManagedResourceInput, optFns ...func(*Options)) (*GetManagedResourceOutput, error) {
 	if params == nil {
 		params = &GetManagedResourceInput{}
@@ -34,10 +36,10 @@ func (c *Client) GetManagedResource(ctx context.Context, params *GetManagedResou
 
 type GetManagedResourceInput struct {
 
-	// The identifier for the resource to include in a zonal shift. The identifier is
-	// the Amazon Resource Name (ARN) for the resource. At this time, you can only
-	// start a zonal shift for Network Load Balancers and Application Load Balancers
-	// with cross-zone load balancing turned off.
+	// The identifier for the resource to shift away traffic for. The identifier is
+	// the Amazon Resource Name (ARN) for the resource. At this time, supported
+	// resources are Network Load Balancers and Application Load Balancers with
+	// cross-zone load balancing turned off.
 	//
 	// This member is required.
 	ResourceIdentifier *string
@@ -62,8 +64,22 @@ type GetManagedResourceOutput struct {
 	// The Amazon Resource Name (ARN) for the resource.
 	Arn *string
 
+	// An array of the autoshifts that are active for the resource.
+	Autoshifts []types.AutoshiftInResource
+
 	// The name of the resource.
 	Name *string
+
+	// The practice run configuration for zonal autoshift that's associated with the
+	// resource.
+	PracticeRunConfiguration *types.PracticeRunConfiguration
+
+	// The status for zonal autoshift for a resource. When the autoshift status is
+	// ENABLED , Amazon Web Services shifts traffic for a resource away from an
+	// Availability Zone, on your behalf, when Amazon Web Services determines that
+	// there's an issue in the Availability Zone that could potentially affect
+	// customers.
+	ZonalAutoshiftStatus types.ZonalAutoshiftStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

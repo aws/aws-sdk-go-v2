@@ -48,6 +48,10 @@ type CreateEndpointAccessInput struct {
 	// This member is required.
 	WorkgroupName *string
 
+	// The owner Amazon Web Services account for the Amazon Redshift Serverless
+	// workgroup.
+	OwnerAccount *string
+
 	// The unique identifiers of the security group that defines the ports, protocols,
 	// and sources for inbound traffic that you are authorizing into your endpoint.
 	VpcSecurityGroupIds []string

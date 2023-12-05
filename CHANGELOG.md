@@ -1,3 +1,74 @@
+# Release (2023-12-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.13.0](service/billingconductor/CHANGELOG.md#v1130-2023-12-04)
+  * **Feature**: This release adds the ability to specify a linked account of the billing group for the custom line item resource.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.24.0](service/braket/CHANGELOG.md#v1240-2023-12-04)
+  * **Feature**: This release enhances service support to create quantum tasks and hybrid jobs associated with Braket Direct Reservations.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.22.0](service/cloud9/CHANGELOG.md#v1220-2023-12-04)
+  * **Feature**: This release adds the requirement to include the imageId parameter in the CreateEnvironmentEC2 API call.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.42.0](service/cloudformation/CHANGELOG.md#v1420-2023-12-04)
+  * **Feature**: Including UPDATE_* states as a success status for CreateStack waiter.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.19.0](service/finspace/CHANGELOG.md#v1190-2023-12-04)
+  * **Feature**: Release General Purpose type clusters
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.43.0](service/medialive/CHANGELOG.md#v1430-2023-12-04)
+  * **Feature**: Adds support for custom color correction on channels using 3D LUT files.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.24.3](service/servicecatalogappregistry/CHANGELOG.md#v1243-2023-12-04)
+  * **Documentation**: Documentation-only updates for Dawn
+
+# Release (2023-12-01)
+
+## General Highlights
+* **Bug Fix**: Correct wrapping of errors in authentication workflow.
+* **Bug Fix**: Correctly recognize cache-wrapped instances of AnonymousCredentials at client construction.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.2.0](service/qconnect/CHANGELOG.md#v120-2023-12-01)
+  * **Feature**: This release adds the PutFeedback API and allows providing feedback against the specified assistant for the specified target.
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.14.0](service/rbin/CHANGELOG.md#v1140-2023-12-01)
+  * **Feature**: Added resource identifier in the output and updated error handling.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.8.0](service/verifiedpermissions/CHANGELOG.md#v180-2023-12-01)
+  * **Feature**: Adds description field to PolicyStore API's and namespaces field to GetSchema.
+
+# Release (2023-11-30.2)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.7.0](service/arczonalshift/CHANGELOG.md#v170-2023-11-302)
+  * **Feature**: This release adds a new capability, zonal autoshift. You can configure zonal autoshift so that AWS shifts traffic for a resource away from an Availability Zone, on your behalf, when AWS determines that there is an issue that could potentially affect customers in the Availability Zone.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.26.2](service/dynamodb/CHANGELOG.md#v1262-2023-11-302)
+  * **Bug Fix**: Respect caller region overrides in endpoint discovery.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.72.0](service/glue/CHANGELOG.md#v1720-2023-11-302)
+  * **Feature**: Adds observation and analyzer support to the GetDataQualityResult and BatchGetDataQualityResult APIs.
+* `github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery`: [v1.8.8](service/internal/endpoint-discovery/CHANGELOG.md#v188-2023-11-302)
+  * **Bug Fix**: Respect caller region overrides in endpoint discovery.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.120.0](service/sagemaker/CHANGELOG.md#v11200-2023-11-302)
+  * **Feature**: This release adds support for 1/ Code Editor, based on Code-OSS, Visual Studio Code Open Source, a new fully managed IDE option in SageMaker Studio  2/ JupyterLab, a new fully managed JupyterLab IDE experience in SageMaker Studio
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.20.2](service/timestreamquery/CHANGELOG.md#v1202-2023-11-302)
+  * **Bug Fix**: Respect caller region overrides in endpoint discovery.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.23.2](service/timestreamwrite/CHANGELOG.md#v1232-2023-11-302)
+  * **Bug Fix**: Respect caller region overrides in endpoint discovery.
+
+# Release (2023-11-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.0.0](service/marketplaceagreement/CHANGELOG.md#v100-2023-11-30)
+  * **Release**: New AWS service client module
+  * **Feature**: The AWS Marketplace Agreement Service provides an API interface that helps AWS Marketplace sellers manage their agreements, including listing, filtering, and viewing details about their agreements.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.22.0](service/marketplacecatalog/CHANGELOG.md#v1220-2023-11-30)
+  * **Feature**: This release enhances the ListEntities API to support new entity type-specific strongly typed filters in the request and entity type-specific strongly typed summaries in the response.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.0.0](service/marketplacedeployment/CHANGELOG.md#v100-2023-11-30)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Marketplace Deployment is a new service that provides essential features that facilitate the deployment of software, data, and services procured through AWS Marketplace.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.15.0](service/redshiftserverless/CHANGELOG.md#v1150-2023-11-30)
+  * **Feature**: This release adds the following support for Amazon Redshift Serverless: 1) cross-account cross-VPCs, 2) copying snapshots across Regions, 3) scheduling snapshot creation, and 4) restoring tables from a recovery point.
+
 # Release (2023-11-29)
 
 ## General Highlights

@@ -6422,6 +6422,15 @@ func awsRestjson1_deserializeDocumentCustomLineItemListElement(v **types.CustomL
 
 	for key, value := range shape {
 		switch key {
+		case "AccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6585,6 +6594,15 @@ func awsRestjson1_deserializeDocumentCustomLineItemVersionListElement(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "AccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)

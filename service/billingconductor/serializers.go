@@ -548,6 +548,11 @@ func awsRestjson1_serializeOpDocumentCreateCustomLineItemInput(v *CreateCustomLi
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountId != nil {
+		ok := object.Key("AccountId")
+		ok.String(*v.AccountId)
+	}
+
 	if v.BillingGroupArn != nil {
 		ok := object.Key("BillingGroupArn")
 		ok.String(*v.BillingGroupArn)
@@ -3240,6 +3245,13 @@ func awsRestjson1_serializeDocumentListBillingGroupsFilter(v *types.ListBillingG
 func awsRestjson1_serializeDocumentListCustomLineItemsFilter(v *types.ListCustomLineItemsFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountIds != nil {
+		ok := object.Key("AccountIds")
+		if err := awsRestjson1_serializeDocumentAccountIdList(v.AccountIds, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Arns != nil {
 		ok := object.Key("Arns")

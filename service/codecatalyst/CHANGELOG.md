@@ -1,3 +1,12 @@
+# v1.10.2 (2023-12-01)
+
+* **Bug Fix**: Correct wrapping of errors in authentication workflow.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.1 (2023-11-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2023-11-29)
 
 * **Feature**: Expose Options() accessor on service clients.

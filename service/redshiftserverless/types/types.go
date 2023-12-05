@@ -30,8 +30,8 @@ type Association struct {
 type ConfigParameter struct {
 
 	// The key of the parameter. The options are auto_mv , datestyle ,
-	// enable_case_sensitivity_identifier , enable_user_activity_logging , query_group
-	// , search_path , and query monitoring metrics that let you define performance
+	// enable_case_sensitive_identifier , enable_user_activity_logging , query_group ,
+	// search_path , and query monitoring metrics that let you define performance
 	// boundaries. For more information about query monitoring rules and available
 	// metrics, see Query monitoring metrics for Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
 	// .
@@ -39,6 +39,35 @@ type ConfigParameter struct {
 
 	// The value of the parameter to set.
 	ParameterValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The parameters that you can use to configure a scheduled action (https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html)
+// to create a snapshot. For more information about creating a scheduled action,
+// see CreateScheduledAction (https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html)
+// .
+type CreateSnapshotScheduleActionParameters struct {
+
+	// The name of the namespace for which you want to configure a scheduled action to
+	// create a snapshot.
+	//
+	// This member is required.
+	NamespaceName *string
+
+	// A string prefix that is attached to the name of the snapshot created by the
+	// scheduled action. The final name of the snapshot is the string prefix appended
+	// by the date and time of when the snapshot was created.
+	//
+	// This member is required.
+	SnapshotNamePrefix *string
+
+	// The retention period of the snapshot created by the scheduled action.
+	RetentionPeriod *int32
+
+	// An array of Tag objects (https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html)
+	// to associate with the snapshot.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -208,6 +237,97 @@ type ResourcePolicy struct {
 	noSmithyDocumentSerde
 }
 
+// The schedule of when Amazon Redshift Serverless should run the scheduled action.
+//
+// The following types satisfy this interface:
+//
+//	ScheduleMemberAt
+//	ScheduleMemberCron
+type Schedule interface {
+	isSchedule()
+}
+
+// The timestamp of when Amazon Redshift Serverless should run the scheduled
+// action. Format of at expressions is " at(yyyy-mm-ddThh:mm:ss) ". For example, "
+// at(2016-03-04T17:27:00) ".
+type ScheduleMemberAt struct {
+	Value time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleMemberAt) isSchedule() {}
+
+// The cron expression to use to schedule a recurring scheduled action. Schedule
+// invocations must be separated by at least one hour. Format of cron expressions
+// is " cron(Minutes Hours Day-of-month Month Day-of-week Year) ". For example, "
+// cron(0 10 ? * MON *) ". For more information, see Cron Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
+// in the Amazon CloudWatch Events User Guide.
+type ScheduleMemberCron struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleMemberCron) isSchedule() {}
+
+// The returned scheduled action object.
+type ScheduledActionResponse struct {
+
+	// The end time of
+	EndTime *time.Time
+
+	// The end time in UTC when the schedule is no longer active. After this time, the
+	// scheduled action does not trigger.
+	NamespaceName *string
+
+	// An array of timestamps of when the next scheduled actions will trigger.
+	NextInvocations []time.Time
+
+	// The ARN of the IAM role to assume to run the scheduled action. This IAM role
+	// must have permission to run the Amazon Redshift Serverless API operation in the
+	// scheduled action. This IAM role must allow the Amazon Redshift scheduler to
+	// schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to
+	// assume permissions on your behalf. For more information about the IAM role to
+	// use with the Amazon Redshift scheduler, see Using Identity-Based Policies for
+	// Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html)
+	// in the Amazon Redshift Cluster Management Guide
+	RoleArn *string
+
+	// The schedule for a one-time (at format) or recurring (cron format) scheduled
+	// action. Schedule invocations must be separated by at least one hour. Format of
+	// at expressions is " at(yyyy-mm-ddThh:mm:ss) ". For example, "
+	// at(2016-03-04T17:27:00) ". Format of cron expressions is " cron(Minutes Hours
+	// Day-of-month Month Day-of-week Year) ". For example, " cron(0 10 ? * MON *) ".
+	// For more information, see Cron Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
+	// in the Amazon CloudWatch Events User Guide.
+	Schedule Schedule
+
+	// The description of the scheduled action.
+	ScheduledActionDescription *string
+
+	// The name of the scheduled action.
+	ScheduledActionName *string
+
+	// The uuid of the scheduled action.
+	ScheduledActionUuid *string
+
+	// The start time in UTC when the schedule is active. Before this time, the
+	// scheduled action does not trigger.
+	StartTime *time.Time
+
+	// The state of the scheduled action.
+	State State
+
+	// A JSON format string of the Amazon Redshift Serverless API operation with input
+	// parameters. The following is an example of a target action. "{"CreateSnapshot":
+	// {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot",
+	// "retentionPeriod": "1"}}"
+	TargetAction TargetAction
+
+	noSmithyDocumentSerde
+}
+
 // A snapshot object that contains databases.
 type Snapshot struct {
 
@@ -284,11 +404,39 @@ type Snapshot struct {
 	noSmithyDocumentSerde
 }
 
+// The object that you configure to copy snapshots from one namespace to a
+// namespace in another Amazon Web Services Region.
+type SnapshotCopyConfiguration struct {
+
+	// The ID of the KMS key to use to encrypt your snapshots in the destination
+	// Amazon Web Services Region.
+	DestinationKmsKeyId *string
+
+	// The destination Amazon Web Services Region to copy snapshots to.
+	DestinationRegion *string
+
+	// The name of the namespace to copy snapshots from in the source Amazon Web
+	// Services Region.
+	NamespaceName *string
+
+	// The ARN of the snapshot copy configuration object.
+	SnapshotCopyConfigurationArn *string
+
+	// The ID of the snapshot copy configuration object.
+	SnapshotCopyConfigurationId *string
+
+	// The retention period of snapshots that are copied to the destination Amazon Web
+	// Services Region.
+	SnapshotRetentionPeriod *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a table restore request.
 type TableRestoreStatus struct {
 
-	// A description of the status of the table restore request. Status values include
-	// SUCCEEDED , FAILED , CANCELED , PENDING , IN_PROGRESS .
+	// A message that explains the returned status. For example, if the status of the
+	// operation is FAILED , the message explains why the operation failed.
 	Message *string
 
 	// The namespace of the table being restored from.
@@ -299,6 +447,9 @@ type TableRestoreStatus struct {
 
 	// The amount of data restored to the new table so far, in megabytes (MB).
 	ProgressInMegaBytes *int64
+
+	// The ID of the recovery point being restored from.
+	RecoveryPointId *string
 
 	// The time that the table restore request was made, in Universal Coordinated Time
 	// (UTC).
@@ -317,7 +468,7 @@ type TableRestoreStatus struct {
 	SourceTableName *string
 
 	// A value that describes the current state of the table restore request. Possible
-	// values include SUCCEEDED , FAILED , CANCELED , PENDING , IN_PROGRESS .
+	// values are SUCCEEDED , FAILED , CANCELED , PENDING , and IN_PROGRESS .
 	Status *string
 
 	// The ID of the RestoreTableFromSnapshot request.
@@ -353,6 +504,30 @@ type Tag struct {
 
 	noSmithyDocumentSerde
 }
+
+// A JSON format string of the Amazon Redshift Serverless API operation with input
+// parameters. The following is an example of a target action. "{"CreateSnapshot":
+// {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot",
+// "retentionPeriod": "1"}}"
+//
+// The following types satisfy this interface:
+//
+//	TargetActionMemberCreateSnapshot
+type TargetAction interface {
+	isTargetAction()
+}
+
+// The parameters that you can use to configure a scheduled action (https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html)
+// to create a snapshot. For more information about creating a scheduled action,
+// see CreateScheduledAction (https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html)
+// .
+type TargetActionMemberCreateSnapshot struct {
+	Value CreateSnapshotScheduleActionParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*TargetActionMemberCreateSnapshot) isTargetAction() {}
 
 // The usage limit object.
 type UsageLimit struct {
@@ -422,16 +597,21 @@ type Workgroup struct {
 	BaseCapacity *int32
 
 	// An array of parameters to set for advanced control over a database. The options
-	// are auto_mv , datestyle , enable_case_sensitivity_identifier ,
-	// enable_user_activity_logging , query_group , , search_path , and query
-	// monitoring metrics that let you define performance boundaries. For more
-	// information about query monitoring rules and available metrics, see Query
-	// monitoring metrics for Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
+	// are auto_mv , datestyle , enable_case_sensitive_identifier ,
+	// enable_user_activity_logging , query_group , search_path , and query monitoring
+	// metrics that let you define performance boundaries. For more information about
+	// query monitoring rules and available metrics, see Query monitoring metrics for
+	// Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
 	// .
 	ConfigParameters []ConfigParameter
 
 	// The creation date of the workgroup.
 	CreationDate *time.Time
+
+	// A list of VPCs. Each entry is the unique identifier of a virtual private cloud
+	// with access to Amazon Redshift Serverless. If all of the VPCs for the grantee
+	// are allowed, it shows an asterisk.
+	CrossAccountVpcs []string
 
 	// The custom domain name’s certificate Amazon resource name (ARN).
 	CustomDomainCertificateArn *string
@@ -498,3 +678,15 @@ type Workgroup struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isSchedule()     {}
+func (*UnknownUnionMember) isTargetAction() {}

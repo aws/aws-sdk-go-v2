@@ -357,6 +357,8 @@ const (
 	AppTypeTensorBoard      AppType = "TensorBoard"
 	AppTypeRStudioServerPro AppType = "RStudioServerPro"
 	AppTypeRSessionGateway  AppType = "RSessionGateway"
+	AppTypeJupyterLab       AppType = "JupyterLab"
+	AppTypeCodeEditor       AppType = "CodeEditor"
 )
 
 // Values returns all known values for AppType. Note that this can be expanded in
@@ -369,6 +371,8 @@ func (AppType) Values() []AppType {
 		"TensorBoard",
 		"RStudioServerPro",
 		"RSessionGateway",
+		"JupyterLab",
+		"CodeEditor",
 	}
 }
 
@@ -5350,6 +5354,24 @@ func (SecondaryStatus) Values() []SecondaryStatus {
 	}
 }
 
+type SharingType string
+
+// Enum values for SharingType
+const (
+	SharingTypePrivate SharingType = "Private"
+	SharingTypeShared  SharingType = "Shared"
+)
+
+// Values returns all known values for SharingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SharingType) Values() []SharingType {
+	return []SharingType{
+		"Private",
+		"Shared",
+	}
+}
+
 type SkipModelValidation string
 
 // Enum values for SkipModelValidation
@@ -5782,6 +5804,8 @@ type StudioLifecycleConfigAppType string
 const (
 	StudioLifecycleConfigAppTypeJupyterServer StudioLifecycleConfigAppType = "JupyterServer"
 	StudioLifecycleConfigAppTypeKernelGateway StudioLifecycleConfigAppType = "KernelGateway"
+	StudioLifecycleConfigAppTypeJupyterLab    StudioLifecycleConfigAppType = "JupyterLab"
+	StudioLifecycleConfigAppTypeCodeEditor    StudioLifecycleConfigAppType = "CodeEditor"
 )
 
 // Values returns all known values for StudioLifecycleConfigAppType. Note that
@@ -5792,6 +5816,8 @@ func (StudioLifecycleConfigAppType) Values() []StudioLifecycleConfigAppType {
 	return []StudioLifecycleConfigAppType{
 		"JupyterServer",
 		"KernelGateway",
+		"JupyterLab",
+		"CodeEditor",
 	}
 }
 

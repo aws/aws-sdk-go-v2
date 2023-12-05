@@ -24,7 +24,9 @@ import (
 // responses, along with the IDs of the policies that produced each decision. The
 // entities of a BatchIsAuthorized API request can contain up to 100 principals
 // and up to 100 resources. The requests of a BatchIsAuthorized API request can
-// contain up to 30 requests.
+// contain up to 30 requests. The BatchIsAuthorized operation doesn't have its own
+// IAM permission. To authorize this operation for Amazon Web Services principals,
+// include the permission verifiedpermissions:IsAuthorized in their IAM policies.
 func (c *Client) BatchIsAuthorized(ctx context.Context, params *BatchIsAuthorizedInput, optFns ...func(*Options)) (*BatchIsAuthorizedOutput, error) {
 	if params == nil {
 		params = &BatchIsAuthorizedInput{}

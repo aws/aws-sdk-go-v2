@@ -35294,6 +35294,11 @@ func awsAwsjson11_deserializeDocumentAppDetails(v **types.AppDetails, value inte
 				sv.DomainId = ptr.String(jtv)
 			}
 
+		case "ResourceSpec":
+			if err := awsAwsjson11_deserializeDocumentResourceSpec(&sv.ResourceSpec, value); err != nil {
+				return err
+			}
+
 		case "SpaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -35384,6 +35389,11 @@ func awsAwsjson11_deserializeDocumentAppImageConfigDetails(v **types.AppImageCon
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "JupyterLabAppImageConfig":
+			if err := awsAwsjson11_deserializeDocumentJupyterLabAppImageConfig(&sv.JupyterLabAppImageConfig, value); err != nil {
+				return err
 			}
 
 		case "KernelGatewayImageConfig":
@@ -40812,6 +40822,47 @@ func awsAwsjson11_deserializeDocumentClusterSummary(v **types.ClusterSummary, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCodeEditorAppSettings(v **types.CodeEditorAppSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CodeEditorAppSettings
+	if *v == nil {
+		sv = &types.CodeEditorAppSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultResourceSpec":
+			if err := awsAwsjson11_deserializeDocumentResourceSpec(&sv.DefaultResourceSpec, value); err != nil {
+				return err
+			}
+
+		case "LifecycleConfigArns":
+			if err := awsAwsjson11_deserializeDocumentLifecycleConfigArns(&sv.LifecycleConfigArns, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCodeRepositories(v *[]types.CodeRepository, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41612,6 +41663,52 @@ func awsAwsjson11_deserializeDocumentContainerArguments(v *[]string, value inter
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentContainerConfig(v **types.ContainerConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContainerConfig
+	if *v == nil {
+		sv = &types.ContainerConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContainerArguments":
+			if err := awsAwsjson11_deserializeDocumentCustomImageContainerArguments(&sv.ContainerArguments, value); err != nil {
+				return err
+			}
+
+		case "ContainerEntrypoint":
+			if err := awsAwsjson11_deserializeDocumentCustomImageContainerEntrypoint(&sv.ContainerEntrypoint, value); err != nil {
+				return err
+			}
+
+		case "ContainerEnvironmentVariables":
+			if err := awsAwsjson11_deserializeDocumentCustomImageContainerEnvironmentVariables(&sv.ContainerEnvironmentVariables, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentContainerDefinition(v **types.ContainerDefinition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -42308,6 +42405,150 @@ func awsAwsjson11_deserializeDocumentCustomerMetadataMap(v *map[string]string, v
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCustomFileSystem(v *types.CustomFileSystem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.CustomFileSystem
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "EFSFileSystem":
+			var mv types.EFSFileSystem
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentEFSFileSystem(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CustomFileSystemMemberEFSFileSystem{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomFileSystemConfig(v *types.CustomFileSystemConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.CustomFileSystemConfig
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "EFSFileSystemConfig":
+			var mv types.EFSFileSystemConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentEFSFileSystemConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CustomFileSystemConfigMemberEFSFileSystemConfig{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomFileSystemConfigs(v *[]types.CustomFileSystemConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CustomFileSystemConfig
+	if *v == nil {
+		cv = []types.CustomFileSystemConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CustomFileSystemConfig
+		if err := awsAwsjson11_deserializeDocumentCustomFileSystemConfig(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomFileSystems(v *[]types.CustomFileSystem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CustomFileSystem
+	if *v == nil {
+		cv = []types.CustomFileSystem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CustomFileSystem
+		if err := awsAwsjson11_deserializeDocumentCustomFileSystem(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCustomImage(v **types.CustomImage, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -42367,6 +42608,114 @@ func awsAwsjson11_deserializeDocumentCustomImage(v **types.CustomImage, value in
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomImageContainerArguments(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NonEmptyString64 to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomImageContainerEntrypoint(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NonEmptyString256 to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomImageContainerEnvironmentVariables(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -42451,6 +42800,63 @@ func awsAwsjson11_deserializeDocumentCustomizedMetricSpecification(v **types.Cus
 					return fmt.Errorf("expected Statistic to be of type string, got %T instead", value)
 				}
 				sv.Statistic = types.Statistic(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomPosixUserConfig(v **types.CustomPosixUserConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomPosixUserConfig
+	if *v == nil {
+		sv = &types.CustomPosixUserConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Gid":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Gid to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Gid = ptr.Int64(i64)
+			}
+
+		case "Uid":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Uid to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Uid = ptr.Int64(i64)
 			}
 
 		default:
@@ -43316,6 +43722,63 @@ func awsAwsjson11_deserializeDocumentDebugRuleEvaluationStatuses(v *[]types.Debu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDefaultEbsStorageSettings(v **types.DefaultEbsStorageSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultEbsStorageSettings
+	if *v == nil {
+		sv = &types.DefaultEbsStorageSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultEbsVolumeSizeInGb":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SpaceEbsVolumeSizeInGb to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DefaultEbsVolumeSizeInGb = ptr.Int32(int32(i64))
+			}
+
+		case "MaximumEbsVolumeSizeInGb":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SpaceEbsVolumeSizeInGb to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumEbsVolumeSizeInGb = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDefaultSpaceSettings(v **types.DefaultSpaceSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -43359,6 +43822,42 @@ func awsAwsjson11_deserializeDocumentDefaultSpaceSettings(v **types.DefaultSpace
 
 		case "SecurityGroups":
 			if err := awsAwsjson11_deserializeDocumentSecurityGroupIds(&sv.SecurityGroups, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDefaultSpaceStorageSettings(v **types.DefaultSpaceStorageSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultSpaceStorageSettings
+	if *v == nil {
+		sv = &types.DefaultSpaceStorageSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultEbsStorageSettings":
+			if err := awsAwsjson11_deserializeDocumentDefaultEbsStorageSettings(&sv.DefaultEbsStorageSettings, value); err != nil {
 				return err
 			}
 
@@ -44868,6 +45367,50 @@ func awsAwsjson11_deserializeDocumentDynamicScalingConfiguration(v **types.Dynam
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEbsStorageSettings(v **types.EbsStorageSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EbsStorageSettings
+	if *v == nil {
+		sv = &types.EbsStorageSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EbsVolumeSizeInGb":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SpaceEbsVolumeSizeInGb to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EbsVolumeSizeInGb = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEdge(v **types.Edge, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45965,6 +46508,95 @@ func awsAwsjson11_deserializeDocumentEdges(v *[]types.Edge, value interface{}) e
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEFSFileSystem(v **types.EFSFileSystem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EFSFileSystem
+	if *v == nil {
+		sv = &types.EFSFileSystem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FileSystemId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileSystemId to be of type string, got %T instead", value)
+				}
+				sv.FileSystemId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEFSFileSystemConfig(v **types.EFSFileSystemConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EFSFileSystemConfig
+	if *v == nil {
+		sv = &types.EFSFileSystemConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FileSystemId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileSystemId to be of type string, got %T instead", value)
+				}
+				sv.FileSystemId = ptr.String(jtv)
+			}
+
+		case "FileSystemPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileSystemPath to be of type string, got %T instead", value)
+				}
+				sv.FileSystemPath = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -54033,6 +54665,93 @@ func awsAwsjson11_deserializeDocumentJsonContentTypes(v *[]string, value interfa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentJupyterLabAppImageConfig(v **types.JupyterLabAppImageConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JupyterLabAppImageConfig
+	if *v == nil {
+		sv = &types.JupyterLabAppImageConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContainerConfig":
+			if err := awsAwsjson11_deserializeDocumentContainerConfig(&sv.ContainerConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentJupyterLabAppSettings(v **types.JupyterLabAppSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JupyterLabAppSettings
+	if *v == nil {
+		sv = &types.JupyterLabAppSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CodeRepositories":
+			if err := awsAwsjson11_deserializeDocumentCodeRepositories(&sv.CodeRepositories, value); err != nil {
+				return err
+			}
+
+		case "CustomImages":
+			if err := awsAwsjson11_deserializeDocumentCustomImages(&sv.CustomImages, value); err != nil {
+				return err
+			}
+
+		case "DefaultResourceSpec":
+			if err := awsAwsjson11_deserializeDocumentResourceSpec(&sv.DefaultResourceSpec, value); err != nil {
+				return err
+			}
+
+		case "LifecycleConfigArns":
+			if err := awsAwsjson11_deserializeDocumentLifecycleConfigArns(&sv.LifecycleConfigArns, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -63161,6 +63880,86 @@ func awsAwsjson11_deserializeDocumentOutputParameterList(v *[]types.OutputParame
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOwnershipSettings(v **types.OwnershipSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OwnershipSettings
+	if *v == nil {
+		sv = &types.OwnershipSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OwnerUserProfileName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserProfileName to be of type string, got %T instead", value)
+				}
+				sv.OwnerUserProfileName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOwnershipSettingsSummary(v **types.OwnershipSettingsSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OwnershipSettingsSummary
+	if *v == nil {
+		sv = &types.OwnershipSettingsSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OwnerUserProfileName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserProfileName to be of type string, got %T instead", value)
+				}
+				sv.OwnerUserProfileName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentParallelismConfiguration(v **types.ParallelismConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -71241,6 +72040,42 @@ func awsAwsjson11_deserializeDocumentSourceIpConfig(v **types.SourceIpConfig, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSpaceCodeEditorAppSettings(v **types.SpaceCodeEditorAppSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpaceCodeEditorAppSettings
+	if *v == nil {
+		sv = &types.SpaceCodeEditorAppSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultResourceSpec":
+			if err := awsAwsjson11_deserializeDocumentResourceSpec(&sv.DefaultResourceSpec, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSpaceDetails(v **types.SpaceDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -71304,6 +72139,20 @@ func awsAwsjson11_deserializeDocumentSpaceDetails(v **types.SpaceDetails, value 
 				}
 			}
 
+		case "OwnershipSettingsSummary":
+			if err := awsAwsjson11_deserializeDocumentOwnershipSettingsSummary(&sv.OwnershipSettingsSummary, value); err != nil {
+				return err
+			}
+
+		case "SpaceDisplayName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString64 to be of type string, got %T instead", value)
+				}
+				sv.SpaceDisplayName = ptr.String(jtv)
+			}
+
 		case "SpaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -71313,6 +72162,16 @@ func awsAwsjson11_deserializeDocumentSpaceDetails(v **types.SpaceDetails, value 
 				sv.SpaceName = ptr.String(jtv)
 			}
 
+		case "SpaceSettingsSummary":
+			if err := awsAwsjson11_deserializeDocumentSpaceSettingsSummary(&sv.SpaceSettingsSummary, value); err != nil {
+				return err
+			}
+
+		case "SpaceSharingSettingsSummary":
+			if err := awsAwsjson11_deserializeDocumentSpaceSharingSettingsSummary(&sv.SpaceSharingSettingsSummary, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -71320,6 +72179,47 @@ func awsAwsjson11_deserializeDocumentSpaceDetails(v **types.SpaceDetails, value 
 					return fmt.Errorf("expected SpaceStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.SpaceStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSpaceJupyterLabAppSettings(v **types.SpaceJupyterLabAppSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpaceJupyterLabAppSettings
+	if *v == nil {
+		sv = &types.SpaceJupyterLabAppSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CodeRepositories":
+			if err := awsAwsjson11_deserializeDocumentCodeRepositories(&sv.CodeRepositories, value); err != nil {
+				return err
+			}
+
+		case "DefaultResourceSpec":
+			if err := awsAwsjson11_deserializeDocumentResourceSpec(&sv.DefaultResourceSpec, value); err != nil {
+				return err
 			}
 
 		default:
@@ -71387,6 +72287,30 @@ func awsAwsjson11_deserializeDocumentSpaceSettings(v **types.SpaceSettings, valu
 
 	for key, value := range shape {
 		switch key {
+		case "AppType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppType to be of type string, got %T instead", value)
+				}
+				sv.AppType = types.AppType(jtv)
+			}
+
+		case "CodeEditorAppSettings":
+			if err := awsAwsjson11_deserializeDocumentSpaceCodeEditorAppSettings(&sv.CodeEditorAppSettings, value); err != nil {
+				return err
+			}
+
+		case "CustomFileSystems":
+			if err := awsAwsjson11_deserializeDocumentCustomFileSystems(&sv.CustomFileSystems, value); err != nil {
+				return err
+			}
+
+		case "JupyterLabAppSettings":
+			if err := awsAwsjson11_deserializeDocumentSpaceJupyterLabAppSettings(&sv.JupyterLabAppSettings, value); err != nil {
+				return err
+			}
+
 		case "JupyterServerAppSettings":
 			if err := awsAwsjson11_deserializeDocumentJupyterServerAppSettings(&sv.JupyterServerAppSettings, value); err != nil {
 				return err
@@ -71394,6 +72318,172 @@ func awsAwsjson11_deserializeDocumentSpaceSettings(v **types.SpaceSettings, valu
 
 		case "KernelGatewayAppSettings":
 			if err := awsAwsjson11_deserializeDocumentKernelGatewayAppSettings(&sv.KernelGatewayAppSettings, value); err != nil {
+				return err
+			}
+
+		case "SpaceStorageSettings":
+			if err := awsAwsjson11_deserializeDocumentSpaceStorageSettings(&sv.SpaceStorageSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSpaceSettingsSummary(v **types.SpaceSettingsSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpaceSettingsSummary
+	if *v == nil {
+		sv = &types.SpaceSettingsSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AppType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppType to be of type string, got %T instead", value)
+				}
+				sv.AppType = types.AppType(jtv)
+			}
+
+		case "SpaceStorageSettings":
+			if err := awsAwsjson11_deserializeDocumentSpaceStorageSettings(&sv.SpaceStorageSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSpaceSharingSettings(v **types.SpaceSharingSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpaceSharingSettings
+	if *v == nil {
+		sv = &types.SpaceSharingSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SharingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SharingType to be of type string, got %T instead", value)
+				}
+				sv.SharingType = types.SharingType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSpaceSharingSettingsSummary(v **types.SpaceSharingSettingsSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpaceSharingSettingsSummary
+	if *v == nil {
+		sv = &types.SpaceSharingSettingsSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SharingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SharingType to be of type string, got %T instead", value)
+				}
+				sv.SharingType = types.SharingType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSpaceStorageSettings(v **types.SpaceStorageSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpaceStorageSettings
+	if *v == nil {
+		sv = &types.SpaceStorageSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EbsStorageSettings":
+			if err := awsAwsjson11_deserializeDocumentEbsStorageSettings(&sv.EbsStorageSettings, value); err != nil {
 				return err
 			}
 
@@ -76662,6 +77752,21 @@ func awsAwsjson11_deserializeDocumentUserSettings(v **types.UserSettings, value 
 				return err
 			}
 
+		case "CodeEditorAppSettings":
+			if err := awsAwsjson11_deserializeDocumentCodeEditorAppSettings(&sv.CodeEditorAppSettings, value); err != nil {
+				return err
+			}
+
+		case "CustomFileSystemConfigs":
+			if err := awsAwsjson11_deserializeDocumentCustomFileSystemConfigs(&sv.CustomFileSystemConfigs, value); err != nil {
+				return err
+			}
+
+		case "CustomPosixUserConfig":
+			if err := awsAwsjson11_deserializeDocumentCustomPosixUserConfig(&sv.CustomPosixUserConfig, value); err != nil {
+				return err
+			}
+
 		case "DefaultLandingUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -76678,6 +77783,11 @@ func awsAwsjson11_deserializeDocumentUserSettings(v **types.UserSettings, value 
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRole = ptr.String(jtv)
+			}
+
+		case "JupyterLabAppSettings":
+			if err := awsAwsjson11_deserializeDocumentJupyterLabAppSettings(&sv.JupyterLabAppSettings, value); err != nil {
+				return err
 			}
 
 		case "JupyterServerAppSettings":
@@ -76707,6 +77817,11 @@ func awsAwsjson11_deserializeDocumentUserSettings(v **types.UserSettings, value 
 
 		case "SharingSettings":
 			if err := awsAwsjson11_deserializeDocumentSharingSettings(&sv.SharingSettings, value); err != nil {
+				return err
+			}
+
+		case "SpaceStorageSettings":
+			if err := awsAwsjson11_deserializeDocumentDefaultSpaceStorageSettings(&sv.SpaceStorageSettings, value); err != nil {
 				return err
 			}
 
@@ -80772,6 +81887,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeAppImageConfigOutput(v **Describe
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "JupyterLabAppImageConfig":
+			if err := awsAwsjson11_deserializeDocumentJupyterLabAppImageConfig(&sv.JupyterLabAppImageConfig, value); err != nil {
+				return err
 			}
 
 		case "KernelGatewayImageConfig":
@@ -87607,6 +88727,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeSpaceOutput(v **DescribeSpaceOutp
 				}
 			}
 
+		case "OwnershipSettings":
+			if err := awsAwsjson11_deserializeDocumentOwnershipSettings(&sv.OwnershipSettings, value); err != nil {
+				return err
+			}
+
 		case "SpaceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -87614,6 +88739,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeSpaceOutput(v **DescribeSpaceOutp
 					return fmt.Errorf("expected SpaceArn to be of type string, got %T instead", value)
 				}
 				sv.SpaceArn = ptr.String(jtv)
+			}
+
+		case "SpaceDisplayName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString64 to be of type string, got %T instead", value)
+				}
+				sv.SpaceDisplayName = ptr.String(jtv)
 			}
 
 		case "SpaceName":
@@ -87627,6 +88761,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeSpaceOutput(v **DescribeSpaceOutp
 
 		case "SpaceSettings":
 			if err := awsAwsjson11_deserializeDocumentSpaceSettings(&sv.SpaceSettings, value); err != nil {
+				return err
+			}
+
+		case "SpaceSharingSettings":
+			if err := awsAwsjson11_deserializeDocumentSpaceSharingSettings(&sv.SpaceSharingSettings, value); err != nil {
 				return err
 			}
 

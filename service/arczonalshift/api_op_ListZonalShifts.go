@@ -12,8 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the active zonal shifts in Amazon Route 53 Application Recovery
-// Controller in your AWS account in this AWS Region.
+// Lists all active and completed zonal shifts in Amazon Route 53 Application
+// Recovery Controller in your Amazon Web Services account in this Amazon Web
+// Services Region. ListZonalShifts returns customer-started zonal shifts, as well
+// as practice run zonal shifts that Route 53 ARC started on your behalf for zonal
+// autoshift. The ListZonalShifts operation does not list autoshifts. For more
+// information about listing autoshifts, see ">ListAutoshifts (https://docs.aws.amazon.com/arc-zonal-shift/latest/api/API_ListAutoshifts.html)
+// .
 func (c *Client) ListZonalShifts(ctx context.Context, params *ListZonalShiftsInput, optFns ...func(*Options)) (*ListZonalShiftsOutput, error) {
 	if params == nil {
 		params = &ListZonalShiftsInput{}
@@ -40,9 +45,13 @@ type ListZonalShiftsInput struct {
 	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
+	// The identifier for the resource that you want to list zonal shifts for. The
+	// identifier is the Amazon Resource Name (ARN) for the resource.
+	ResourceIdentifier *string
+
 	// A status for a zonal shift. The Status for a zonal shift can have one of the
 	// following values:
-	//   - ACTIVE: The zonal shift is started and active.
+	//   - ACTIVE: The zonal shift has been started and active.
 	//   - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
 	//   - CANCELED: The zonal shift was canceled.
 	Status types.ZonalShiftStatus

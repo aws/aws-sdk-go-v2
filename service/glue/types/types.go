@@ -2294,6 +2294,24 @@ type DataLakePrincipal struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the result of the evaluation of a data quality analyzer.
+type DataQualityAnalyzerResult struct {
+
+	// A description of the data quality analyzer.
+	Description *string
+
+	// A map of metrics associated with the evaluation of the analyzer.
+	EvaluatedMetrics map[string]float64
+
+	// An evaluation message.
+	EvaluationMessage *string
+
+	// The name of the data quality analyzer.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Additional run options you can specify for an evaluation run.
 type DataQualityEvaluationRunAdditionalRunOptions struct {
 
@@ -2306,8 +2324,47 @@ type DataQualityEvaluationRunAdditionalRunOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the data quality metric value according to the analysis of historical
+// data.
+type DataQualityMetricValues struct {
+
+	// The actual value of the data quality metric.
+	ActualValue *float64
+
+	// The expected value of the data quality metric according to the analysis of
+	// historical data.
+	ExpectedValue *float64
+
+	// The lower limit of the data quality metric value according to the analysis of
+	// historical data.
+	LowerLimit *float64
+
+	// The upper limit of the data quality metric value according to the analysis of
+	// historical data.
+	UpperLimit *float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the observation generated after evaluating the rules and analyzers.
+type DataQualityObservation struct {
+
+	// A description of the data quality observation.
+	Description *string
+
+	// An object of type MetricBasedObservation representing the observation that is
+	// based on evaluated data quality metrics.
+	MetricBasedObservation *MetricBasedObservation
+
+	noSmithyDocumentSerde
+}
+
 // Describes a data quality result.
 type DataQualityResult struct {
+
+	// A list of DataQualityAnalyzerResult objects representing the results for each
+	// analyzer.
+	AnalyzerResults []DataQualityAnalyzerResult
 
 	// The date and time when this data quality run completed.
 	CompletedOn *time.Time
@@ -2325,6 +2382,10 @@ type DataQualityResult struct {
 
 	// The job run ID associated with the data quality result, if any.
 	JobRunId *string
+
+	// A list of DataQualityObservation objects representing the observations
+	// generated after evaluating the rules and analyzers.
+	Observations []DataQualityObservation
 
 	// A unique result ID for the data quality result.
 	ResultId *string
@@ -5015,6 +5076,24 @@ type MetadataKeyValuePair struct {
 
 	// A metadata key’s corresponding value.
 	MetadataValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the metric based observation generated based on evaluated data
+// quality metrics.
+type MetricBasedObservation struct {
+
+	// The name of the data quality metric used for generating the observation.
+	MetricName *string
+
+	// An object of type DataQualityMetricValues representing the analysis of the data
+	// quality metric value.
+	MetricValues *DataQualityMetricValues
+
+	// A list of new data quality rules generated as part of the observation based on
+	// the data quality metric value.
+	NewRules []string
 
 	noSmithyDocumentSerde
 }

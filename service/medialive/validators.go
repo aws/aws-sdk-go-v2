@@ -1329,6 +1329,23 @@ func validate__listOfCaptionSelector(v []types.CaptionSelector) error {
 	}
 }
 
+func validate__listOfColorCorrection(v []types.ColorCorrection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfColorCorrection"}
+	for i := range v {
+		if err := validateColorCorrection(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfFailoverCondition(v []types.FailoverCondition) error {
 	if v == nil {
 		return nil
@@ -2057,6 +2074,46 @@ func validateCaptionSelectorSettings(v *types.CaptionSelectorSettings) error {
 	}
 }
 
+func validateColorCorrection(v *types.ColorCorrection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ColorCorrection"}
+	if len(v.InputColorSpace) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InputColorSpace"))
+	}
+	if len(v.OutputColorSpace) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputColorSpace"))
+	}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateColorCorrectionSettings(v *types.ColorCorrectionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ColorCorrectionSettings"}
+	if v.GlobalColorCorrections == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalColorCorrections"))
+	} else if v.GlobalColorCorrections != nil {
+		if err := validate__listOfColorCorrection(v.GlobalColorCorrections); err != nil {
+			invalidParams.AddNested("GlobalColorCorrections", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDvbNitSettings(v *types.DvbNitSettings) error {
 	if v == nil {
 		return nil
@@ -2122,6 +2179,11 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 	if v.CaptionDescriptions != nil {
 		if err := validate__listOfCaptionDescription(v.CaptionDescriptions); err != nil {
 			invalidParams.AddNested("CaptionDescriptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ColorCorrectionSettings != nil {
+		if err := validateColorCorrectionSettings(v.ColorCorrectionSettings); err != nil {
+			invalidParams.AddNested("ColorCorrectionSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.GlobalConfiguration != nil {

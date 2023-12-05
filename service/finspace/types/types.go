@@ -315,6 +315,11 @@ type KxCluster struct {
 	//   kdb systems. It allows you to create your own routing logic using the
 	//   initialization scripts and custom code. This type of cluster does not require a
 	//   writable local storage.
+	//   - GP – A general purpose cluster allows you to quickly iterate on code during
+	//   development by granting greater access to system commands and enabling a fast
+	//   reload of custom code. This cluster type can optionally mount databases
+	//   including cache and savedown storage. For this cluster type, the node count is
+	//   fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.
 	ClusterType KxClusterType
 
 	// The timestamp at which the cluster was created in FinSpace. The value is
@@ -364,6 +369,11 @@ type KxClusterCodeDeploymentConfiguration struct {
 	// The type of deployment that you want on a cluster.
 	//   - ROLLING – This options updates the cluster by stopping the exiting q
 	//   process and starting a new q process with updated configuration.
+	//   - NO_RESTART – This option updates the cluster without stopping the running q
+	//   process. It is only available for GP type cluster. This option is quicker as
+	//   it reduces the turn around time to update configuration on a cluster. With this
+	//   deployment mode, you cannot update the initializationScript and
+	//   commandLineArguments parameters.
 	//   - FORCE – This option updates the cluster by immediately stopping all the
 	//   running processes before starting up new ones with the updated configuration.
 	//

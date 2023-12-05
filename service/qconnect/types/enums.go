@@ -455,6 +455,24 @@ func (RecommendationType) Values() []RecommendationType {
 	}
 }
 
+type Relevance string
+
+// Enum values for Relevance
+const (
+	RelevanceHelpful    Relevance = "HELPFUL"
+	RelevanceNotHelpful Relevance = "NOT_HELPFUL"
+)
+
+// Values returns all known values for Relevance. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Relevance) Values() []Relevance {
+	return []Relevance{
+		"HELPFUL",
+		"NOT_HELPFUL",
+	}
+}
+
 type RelevanceLevel string
 
 // Enum values for RelevanceLevel
@@ -488,5 +506,23 @@ const (
 func (SourceContentType) Values() []SourceContentType {
 	return []SourceContentType{
 		"KNOWLEDGE_CONTENT",
+	}
+}
+
+type TargetType string
+
+// Enum values for TargetType
+const (
+	TargetTypeRecommendation TargetType = "RECOMMENDATION"
+	TargetTypeResult         TargetType = "RESULT"
+)
+
+// Values returns all known values for TargetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetType) Values() []TargetType {
+	return []TargetType{
+		"RECOMMENDATION",
+		"RESULT",
 	}
 }

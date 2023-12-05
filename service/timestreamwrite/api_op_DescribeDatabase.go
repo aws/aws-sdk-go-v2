@@ -148,10 +148,11 @@ func addOpDescribeDatabaseDiscoverEndpointMiddleware(stack *middleware.Stack, o 
 		DiscoverOperation:            c.fetchOpDescribeDatabaseDiscoverEndpoint,
 		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    true,
+		Region:                       o.Region,
 	}, "ResolveEndpointV2", middleware.After)
 }
 
-func (c *Client) fetchOpDescribeDatabaseDiscoverEndpoint(ctx context.Context, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+func (c *Client) fetchOpDescribeDatabaseDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
 	input := getOperationInput(ctx)
 	in, ok := input.(*DescribeDatabaseInput)
 	if !ok {
@@ -160,6 +161,7 @@ func (c *Client) fetchOpDescribeDatabaseDiscoverEndpoint(ctx context.Context, op
 	_ = in
 
 	identifierMap := make(map[string]string, 0)
+	identifierMap["sdk#Region"] = region
 
 	key := fmt.Sprintf("Timestream Write.%v", identifierMap)
 
@@ -174,7 +176,7 @@ func (c *Client) fetchOpDescribeDatabaseDiscoverEndpoint(ctx context.Context, op
 		fn(&opt)
 	}
 
-	endpoint, err := c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	endpoint, err := c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	if err != nil {
 		return internalEndpointDiscovery.WeightedAddress{}, err
 	}

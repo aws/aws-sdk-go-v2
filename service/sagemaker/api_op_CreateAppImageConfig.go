@@ -37,6 +37,11 @@ type CreateAppImageConfigInput struct {
 	// This member is required.
 	AppImageConfigName *string
 
+	// The JupyterLabAppImageConfig . You can only specify one image kernel in the
+	// AppImageConfig API. This kernel is shown to users before the image starts. After
+	// the image runs, all kernels are visible in JupyterLab.
+	JupyterLabAppImageConfig *types.JupyterLabAppImageConfig
+
 	// The KernelGatewayImageConfig. You can only specify one image kernel in the
 	// AppImageConfig API. This kernel will be shown to users before the image starts.
 	// Once the image runs, all kernels are visible in JupyterLab.

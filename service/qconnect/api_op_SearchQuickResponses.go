@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches existing Amazon Q quick responses in a Amazon Q knowledge base.
+// Searches existing Amazon Q quick responses in an Amazon Q knowledge base.
 func (c *Client) SearchQuickResponses(ctx context.Context, params *SearchQuickResponsesInput, optFns ...func(*Options)) (*SearchQuickResponsesOutput, error) {
 	if params == nil {
 		params = &SearchQuickResponsesInput{}

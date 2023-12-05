@@ -1108,17 +1108,6 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
-                        },
-                        {
-                            "documentation": "Partition doesn't support DualStack",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
                         }
                     ],
                     "version": "1.0"
@@ -1452,7 +1441,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n       Associates a resource with an application. \n       The resource can be specified by its ARN or name. \n       The application can be specified by ARN, ID, or name.\n     </p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>\n       You must have the following permissions to associate a resource using the <code>OPTIONS</code> parameter set to <code>APPLY_APPLICATION_TAG</code>.\n     </p>\n         <ul>\n            <li>\n               <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:TagResources</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n       You must also have these additional permissions if you don't use the <code>AWSServiceCatalogAppRegistryFullAccess</code> policy. \n       For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/arguide/full.html\">AWSServiceCatalogAppRegistryFullAccess</a> in the AppRegistry Administrator Guide.\n     </p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:DisassociateResource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:UpdateStack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:DescribeStacks</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>\n         In addition, you must have the tagging permission defined by the Amazon Web Services service that creates the resource. \n         For more information, see <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html\">TagResources</a> in the <i>Resource Groups Tagging API Reference</i>.\n       </p>\n         </note>",
+                "smithy.api#documentation": "<p>\n       Associates a resource with an application. \n       The resource can be specified by its ARN or name. \n       The application can be specified by ARN, ID, or name.\n     </p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>\n       You must have the following permissions to associate a resource using the <code>OPTIONS</code> parameter set to <code>APPLY_APPLICATION_TAG</code>.\n     </p>\n         <ul>\n            <li>\n               <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:TagResources</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n       You must also have these additional permissions if you don't use the <code>AWSServiceCatalogAppRegistryFullAccess</code> policy. \n       For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/arguide/full.html\">AWSServiceCatalogAppRegistryFullAccess</a> in the AppRegistry Administrator Guide.\n     </p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:AssociateResource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:UpdateStack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:DescribeStacks</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>\n         In addition, you must have the tagging permission defined by the Amazon Web Services service that creates the resource. \n         For more information, see <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html\">TagResources</a> in the <i>Resource Groups Tagging API Reference</i>.\n       </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/applications/{application}/resources/{resourceType}/{resource}",

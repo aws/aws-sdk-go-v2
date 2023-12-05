@@ -90,6 +90,9 @@ type GetJobOutput struct {
 	// This member is required.
 	Status types.JobPrimaryStatus
 
+	// The list of Amazon Braket resources associated with the hybrid job.
+	Associations []types.Association
+
 	// The billable time the Amazon Braket job used to complete.
 	BillableDuration *int32
 

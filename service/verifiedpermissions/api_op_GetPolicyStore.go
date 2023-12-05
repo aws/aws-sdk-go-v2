@@ -66,6 +66,10 @@ type GetPolicyStoreOutput struct {
 	// This member is required.
 	ValidationSettings *types.ValidationSettings
 
+	// Descriptive text that you can provide to help with identification of the
+	// current policy store.
+	Description *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -2183,6 +2183,55 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAmiProductSummary(v **types.AmiProductSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmiProductSummary
+	if *v == nil {
+		sv = &types.AmiProductSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProductTitle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmiProductTitleString to be of type string, got %T instead", value)
+				}
+				sv.ProductTitle = ptr.String(jtv)
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmiProductVisibilityString to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.AmiProductVisibilityString(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentChangeSetDescription(v *[]types.ChangeSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2423,6 +2472,104 @@ func awsRestjson1_deserializeDocumentChangeSummary(v **types.ChangeSummary, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentContainerProductSummary(v **types.ContainerProductSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContainerProductSummary
+	if *v == nil {
+		sv = &types.ContainerProductSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProductTitle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContainerProductTitleString to be of type string, got %T instead", value)
+				}
+				sv.ProductTitle = ptr.String(jtv)
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContainerProductVisibilityString to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.ContainerProductVisibilityString(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataProductSummary(v **types.DataProductSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataProductSummary
+	if *v == nil {
+		sv = &types.DataProductSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProductTitle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataProductTitleString to be of type string, got %T instead", value)
+				}
+				sv.ProductTitle = ptr.String(jtv)
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataProductVisibilityString to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.DataProductVisibilityString(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEntity(v **types.Entity, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2494,6 +2641,21 @@ func awsRestjson1_deserializeDocumentEntitySummary(v **types.EntitySummary, valu
 
 	for key, value := range shape {
 		switch key {
+		case "AmiProductSummary":
+			if err := awsRestjson1_deserializeDocumentAmiProductSummary(&sv.AmiProductSummary, value); err != nil {
+				return err
+			}
+
+		case "ContainerProductSummary":
+			if err := awsRestjson1_deserializeDocumentContainerProductSummary(&sv.ContainerProductSummary, value); err != nil {
+				return err
+			}
+
+		case "DataProductSummary":
+			if err := awsRestjson1_deserializeDocumentDataProductSummary(&sv.DataProductSummary, value); err != nil {
+				return err
+			}
+
 		case "EntityArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2537,6 +2699,21 @@ func awsRestjson1_deserializeDocumentEntitySummary(v **types.EntitySummary, valu
 					return fmt.Errorf("expected EntityNameString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "OfferSummary":
+			if err := awsRestjson1_deserializeDocumentOfferSummary(&sv.OfferSummary, value); err != nil {
+				return err
+			}
+
+		case "ResaleAuthorizationSummary":
+			if err := awsRestjson1_deserializeDocumentResaleAuthorizationSummary(&sv.ResaleAuthorizationSummary, value); err != nil {
+				return err
+			}
+
+		case "SaaSProductSummary":
+			if err := awsRestjson1_deserializeDocumentSaaSProductSummary(&sv.SaaSProductSummary, value); err != nil {
+				return err
 			}
 
 		case "Visibility":
@@ -2722,6 +2899,294 @@ func awsRestjson1_deserializeDocumentJsonDocumentType(v *document.Interface, val
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOfferBuyerAccountsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected OfferBuyerAccountsString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOfferSummary(v **types.OfferSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OfferSummary
+	if *v == nil {
+		sv = &types.OfferSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityEndDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimeISO8601 to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityEndDate = ptr.String(jtv)
+			}
+
+		case "BuyerAccounts":
+			if err := awsRestjson1_deserializeDocumentOfferBuyerAccountsList(&sv.BuyerAccounts, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OfferNameString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "ProductId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OfferProductIdString to be of type string, got %T instead", value)
+				}
+				sv.ProductId = ptr.String(jtv)
+			}
+
+		case "ReleaseDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimeISO8601 to be of type string, got %T instead", value)
+				}
+				sv.ReleaseDate = ptr.String(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OfferStateString to be of type string, got %T instead", value)
+				}
+				sv.State = types.OfferStateString(jtv)
+			}
+
+		case "Targeting":
+			if err := awsRestjson1_deserializeDocumentOfferTargetingList(&sv.Targeting, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOfferTargetingList(v *[]types.OfferTargetingString, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OfferTargetingString
+	if *v == nil {
+		cv = []types.OfferTargetingString{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OfferTargetingString
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected OfferTargetingString to be of type string, got %T instead", value)
+			}
+			col = types.OfferTargetingString(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResaleAuthorizationSummary(v **types.ResaleAuthorizationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResaleAuthorizationSummary
+	if *v == nil {
+		sv = &types.ResaleAuthorizationSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityEndDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimeISO8601 to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityEndDate = ptr.String(jtv)
+			}
+
+		case "CreatedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimeISO8601 to be of type string, got %T instead", value)
+				}
+				sv.CreatedDate = ptr.String(jtv)
+			}
+
+		case "ManufacturerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResaleAuthorizationManufacturerAccountIdString to be of type string, got %T instead", value)
+				}
+				sv.ManufacturerAccountId = ptr.String(jtv)
+			}
+
+		case "ManufacturerLegalName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResaleAuthorizationManufacturerLegalNameString to be of type string, got %T instead", value)
+				}
+				sv.ManufacturerLegalName = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResaleAuthorizationNameString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OfferExtendedStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResaleAuthorizationOfferExtendedStatusString to be of type string, got %T instead", value)
+				}
+				sv.OfferExtendedStatus = ptr.String(jtv)
+			}
+
+		case "ProductId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResaleAuthorizationProductIdString to be of type string, got %T instead", value)
+				}
+				sv.ProductId = ptr.String(jtv)
+			}
+
+		case "ProductName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResaleAuthorizationProductNameString to be of type string, got %T instead", value)
+				}
+				sv.ProductName = ptr.String(jtv)
+			}
+
+		case "ResellerAccountID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResaleAuthorizationResellerAccountIDString to be of type string, got %T instead", value)
+				}
+				sv.ResellerAccountID = ptr.String(jtv)
+			}
+
+		case "ResellerLegalName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResaleAuthorizationResellerLegalNameString to be of type string, got %T instead", value)
+				}
+				sv.ResellerLegalName = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResaleAuthorizationStatusString to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ResaleAuthorizationStatusString(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResourceIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2867,6 +3332,55 @@ func awsRestjson1_deserializeDocumentResourceNotSupportedException(v **types.Res
 					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSaaSProductSummary(v **types.SaaSProductSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SaaSProductSummary
+	if *v == nil {
+		sv = &types.SaaSProductSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProductTitle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SaaSProductTitleString to be of type string, got %T instead", value)
+				}
+				sv.ProductTitle = ptr.String(jtv)
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SaaSProductVisibilityString to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.SaaSProductVisibilityString(jtv)
 			}
 
 		default:

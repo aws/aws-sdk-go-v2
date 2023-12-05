@@ -51,7 +51,8 @@ type UpdateKxClusterCodeConfigurationInput struct {
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
 
-	// Specifies the key-value pairs to make them available inside the cluster.
+	// Specifies the key-value pairs to make them available inside the cluster. You
+	// cannot update this parameter for a NO_RESTART deployment.
 	CommandLineArguments []types.KxCommandLineArgument
 
 	// The configuration that allows you to choose how you want to update the code on
@@ -60,7 +61,8 @@ type UpdateKxClusterCodeConfigurationInput struct {
 
 	// Specifies a Q program that will be run at launch of a cluster. It is a relative
 	// path within .zip file that contains the custom code, which will be loaded on the
-	// cluster. It must include the file name itself. For example, somedir/init.q .
+	// cluster. It must include the file name itself. For example, somedir/init.q . You
+	// cannot update this parameter for a NO_RESTART deployment.
 	InitializationScript *string
 
 	noSmithyDocumentSerde

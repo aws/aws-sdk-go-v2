@@ -68,6 +68,9 @@
                     "target": "com.amazonaws.qconnect#NotifyRecommendationsReceived"
                 },
                 {
+                    "target": "com.amazonaws.qconnect#PutFeedback"
+                },
+                {
                     "target": "com.amazonaws.qconnect#QueryAssistant"
                 },
                 {
@@ -287,7 +290,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The capability configuration for a Amazon Q assistant. </p>"
+                "smithy.api#documentation": "<p>The capability configuration for an Amazon Q assistant. </p>"
             }
         },
         "com.amazonaws.qconnect#AssistantCapabilityType": {
@@ -791,6 +794,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about the content data.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ContentFeedbackData": {
+            "type": "union",
+            "members": {
+                "generativeContentFeedbackData": {
+                    "target": "com.amazonaws.qconnect#GenerativeContentFeedbackData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the feedback for a generative target type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the feedback.</p>"
             }
         },
         "com.amazonaws.qconnect#ContentMetadata": {
@@ -1386,7 +1403,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Amazon Q quick response.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Q quick response.</p>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/quickResponses",
                     "method": "POST"
@@ -2113,6 +2130,21 @@
                         "name": "EQUALS"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.qconnect#GenerativeContentFeedbackData": {
+            "type": "structure",
+            "members": {
+                "relevance": {
+                    "target": "com.amazonaws.qconnect#Relevance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relevance of the feedback.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The feedback information for a generative target type.</p>"
             }
         },
         "com.amazonaws.qconnect#GenerativeDataDetails": {
@@ -4072,6 +4104,114 @@
                 ]
             }
         },
+        "com.amazonaws.qconnect#PutFeedback": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#PutFeedbackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#PutFeedbackResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides feedback against the specified assistant for the specified target. This API only supports generative targets.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/feedback",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#PutFeedbackRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the feedback target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.qconnect#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the feedback target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentFeedback": {
+                    "target": "com.amazonaws.qconnect#ContentFeedbackData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the feedback provided.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#PutFeedbackResponse": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantArn": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the feedback target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.qconnect#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the feedback target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentFeedback": {
+                    "target": "com.amazonaws.qconnect#ContentFeedbackData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the feedback provided.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#QueryAssistant": {
             "type": "operation",
             "input": {
@@ -5279,6 +5419,21 @@
                 ]
             }
         },
+        "com.amazonaws.qconnect#Relevance": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HELPFUL",
+                        "name": "HELPFUL"
+                    },
+                    {
+                        "value": "NOT_HELPFUL",
+                        "name": "NOT_HELPFUL"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.qconnect#RelevanceLevel": {
             "type": "string",
             "traits": {
@@ -5563,7 +5718,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches existing Amazon Q quick responses in a Amazon Q knowledge base.</p>",
+                "smithy.api#documentation": "<p>Searches existing Amazon Q quick responses in an Amazon Q knowledge base.</p>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/search/quickResponses",
                     "method": "POST"
@@ -6228,6 +6383,21 @@
                 "target": "com.amazonaws.qconnect#TagValue"
             }
         },
+        "com.amazonaws.qconnect#TargetType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RECOMMENDATION",
+                        "name": "RECOMMENDATION"
+                    },
+                    {
+                        "value": "RESULT",
+                        "name": "RESULT"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.qconnect#TextData": {
             "type": "structure",
             "members": {
@@ -6713,7 +6883,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>Amazon Q in Connect is a generative AI customer service assistant. It is an LLM-enhanced evolution\n      of Amazon Connect Wisdom that delivers real-time recommendations to help contact center\n      agents resolve customer issues quickly and accurately.</p>\n         <p>Amazon Q automatically detects customer intent during calls and chats using\n      conversational analytics and natural language understanding (NLU). It then provides agents\n      with immediate, real-time generative responses and suggested actions, and links to relevant\n      documents and articles. Agents can also query Amazon Q directly using natural language or\n      keywords to answer customer requests.</p>\n         <p>Use the Amazon Q in Connect APIs to create an assistant and a knowledge base, for example, or\n      manage content by uploading custom files.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html\">Use Amazon Q in Connect for generative AI\n        powered agent assistance in real-time</a> in the <i>Amazon Connect\n        Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<note>\n            <p>\n               <b>Powered by Amazon Bedrock</b>: Amazon Web Services implements <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html\">automated abuse\n      detection</a>. Because Amazon Q in Connect is built on Amazon Bedrock, users can take full\n      advantage of the controls implemented in Amazon Bedrock to enforce safety, security, and the\n      responsible use of artificial intelligence (AI).</p>\n         </note>\n         <p>Amazon Q in Connect is a generative AI customer service assistant. It is an LLM-enhanced evolution\n      of Amazon Connect Wisdom that delivers real-time recommendations to help contact center\n      agents resolve customer issues quickly and accurately.</p>\n         <p>Amazon Q automatically detects customer intent during calls and chats using\n      conversational analytics and natural language understanding (NLU). It then provides agents\n      with immediate, real-time generative responses and suggested actions, and links to relevant\n      documents and articles. Agents can also query Amazon Q directly using natural language or\n      keywords to answer customer requests.</p>\n         <p>Use the Amazon Q in Connect APIs to create an assistant and a knowledge base, for example, or\n      manage content by uploading custom files.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html\">Use Amazon Q in Connect for generative AI\n        powered agent assistance in real-time</a> in the <i>Amazon Connect\n        Administrator Guide</i>.</p>",
                 "smithy.api#title": "Amazon Q Connect",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",

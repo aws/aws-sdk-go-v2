@@ -77,6 +77,9 @@ type LockRuleOutput struct {
 	// retain resources.
 	RetentionPeriod *types.RetentionPeriod
 
+	// The Amazon Resource Name (ARN) of the retention rule.
+	RuleArn *string
+
 	// The state of the retention rule. Only retention rules that are in the available
 	// state retain resources.
 	Status types.RuleStatus

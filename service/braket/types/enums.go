@@ -2,6 +2,22 @@
 
 package types
 
+type AssociationType string
+
+// Enum values for AssociationType
+const (
+	AssociationTypeReservationTimeWindowArn AssociationType = "RESERVATION_TIME_WINDOW_ARN"
+)
+
+// Values returns all known values for AssociationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationType) Values() []AssociationType {
+	return []AssociationType{
+		"RESERVATION_TIME_WINDOW_ARN",
+	}
+}
+
 type CancellationStatus string
 
 // Enum values for CancellationStatus

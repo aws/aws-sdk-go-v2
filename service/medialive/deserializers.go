@@ -12421,6 +12421,40 @@ func awsRestjson1_deserializeDocument__listOfChannelSummary(v *[]types.ChannelSu
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfColorCorrection(v *[]types.ColorCorrection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ColorCorrection
+	if *v == nil {
+		cv = []types.ColorCorrection{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ColorCorrection
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentColorCorrection(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfFailoverCondition(v *[]types.FailoverCondition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16704,6 +16738,100 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentColorCorrection(v **types.ColorCorrection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ColorCorrection
+	if *v == nil {
+		sv = &types.ColorCorrection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inputColorSpace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColorSpace to be of type string, got %T instead", value)
+				}
+				sv.InputColorSpace = types.ColorSpace(jtv)
+			}
+
+		case "outputColorSpace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColorSpace to be of type string, got %T instead", value)
+				}
+				sv.OutputColorSpace = types.ColorSpace(jtv)
+			}
+
+		case "uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentColorCorrectionSettings(v **types.ColorCorrectionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ColorCorrectionSettings
+	if *v == nil {
+		sv = &types.ColorCorrectionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "globalColorCorrections":
+			if err := awsRestjson1_deserializeDocument__listOfColorCorrection(&sv.GlobalColorCorrections, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentColorSpacePassthroughSettings(v **types.ColorSpacePassthroughSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18017,6 +18145,11 @@ func awsRestjson1_deserializeDocumentEncoderSettings(v **types.EncoderSettings, 
 
 		case "captionDescriptions":
 			if err := awsRestjson1_deserializeDocument__listOfCaptionDescription(&sv.CaptionDescriptions, value); err != nil {
+				return err
+			}
+
+		case "colorCorrectionSettings":
+			if err := awsRestjson1_deserializeDocumentColorCorrectionSettings(&sv.ColorCorrectionSettings, value); err != nil {
 				return err
 			}
 
