@@ -62,6 +62,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	ignoreAnonymousAuth(&options)
 
+	wrapWithAnonymousAuth(&options)
+
 	resolveAuthSchemes(&options)
 
 	client := &Client{
