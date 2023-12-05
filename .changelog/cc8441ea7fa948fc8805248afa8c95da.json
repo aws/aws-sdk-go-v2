@@ -1,0 +1,8 @@
+{
+    "id": "cc8441ea-7fa9-48fc-8805-248afa8c95da",
+    "type": "feature",
+    "description": "Updated service title from cleanroomsml to CleanRoomsML.",
+    "modules": [
+        "service/cleanroomsml"
+    ]
+}

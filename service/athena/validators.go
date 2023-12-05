@@ -1534,6 +1534,24 @@ func validateEngineConfiguration(v *types.EngineConfiguration) error {
 	}
 }
 
+func validateQueryResultsS3AccessGrantsConfiguration(v *types.QueryResultsS3AccessGrantsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryResultsS3AccessGrantsConfiguration"}
+	if v.EnableS3AccessGrants == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnableS3AccessGrants"))
+	}
+	if len(v.AuthenticationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResultConfiguration(v *types.ResultConfiguration) error {
 	if v == nil {
 		return nil
@@ -1622,6 +1640,11 @@ func validateWorkGroupConfiguration(v *types.WorkGroupConfiguration) error {
 			invalidParams.AddNested("CustomerContentEncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.QueryResultsS3AccessGrantsConfiguration != nil {
+		if err := validateQueryResultsS3AccessGrantsConfiguration(v.QueryResultsS3AccessGrantsConfiguration); err != nil {
+			invalidParams.AddNested("QueryResultsS3AccessGrantsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1642,6 +1665,11 @@ func validateWorkGroupConfigurationUpdates(v *types.WorkGroupConfigurationUpdate
 	if v.CustomerContentEncryptionConfiguration != nil {
 		if err := validateCustomerContentEncryptionConfiguration(v.CustomerContentEncryptionConfiguration); err != nil {
 			invalidParams.AddNested("CustomerContentEncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueryResultsS3AccessGrantsConfiguration != nil {
+		if err := validateQueryResultsS3AccessGrantsConfiguration(v.QueryResultsS3AccessGrantsConfiguration); err != nil {
+			invalidParams.AddNested("QueryResultsS3AccessGrantsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

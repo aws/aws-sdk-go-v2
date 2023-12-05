@@ -209,7 +209,7 @@ type ChangeSetSummary struct {
 	// creating it or in an OBSOLETE state because the stack was already updated.
 	ExecutionStatus ExecutionStatus
 
-	// Indicates if the stack set imports resources that already exist.
+	// Indicates if the change set imports resources that already exist.
 	ImportExistingResources *bool
 
 	// Specifies the current setting of IncludeNestedStacks for the change set.

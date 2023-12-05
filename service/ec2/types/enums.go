@@ -10,6 +10,7 @@ const (
 	AcceleratorManufacturerAmd               AcceleratorManufacturer = "amd"
 	AcceleratorManufacturerNvidia            AcceleratorManufacturer = "nvidia"
 	AcceleratorManufacturerXilinx            AcceleratorManufacturer = "xilinx"
+	AcceleratorManufacturerHabana            AcceleratorManufacturer = "habana"
 )
 
 // Values returns all known values for AcceleratorManufacturer. Note that this can
@@ -21,6 +22,7 @@ func (AcceleratorManufacturer) Values() []AcceleratorManufacturer {
 		"amd",
 		"nvidia",
 		"xilinx",
+		"habana",
 	}
 }
 
@@ -37,6 +39,9 @@ const (
 	AcceleratorNameT4            AcceleratorName = "t4"
 	AcceleratorNameVu9p          AcceleratorName = "vu9p"
 	AcceleratorNameV100          AcceleratorName = "v100"
+	AcceleratorNameA10g          AcceleratorName = "a10g"
+	AcceleratorNameH100          AcceleratorName = "h100"
+	AcceleratorNameT4g           AcceleratorName = "t4g"
 )
 
 // Values returns all known values for AcceleratorName. Note that this can be
@@ -53,6 +58,9 @@ func (AcceleratorName) Values() []AcceleratorName {
 		"t4",
 		"vu9p",
 		"v100",
+		"a10g",
+		"h100",
+		"t4g",
 	}
 }
 

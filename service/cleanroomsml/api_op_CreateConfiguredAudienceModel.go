@@ -68,7 +68,9 @@ type CreateConfiguredAudienceModelInput struct {
 	// StartAudienceGenerationJob request determine the tags of the audience generation
 	// job. If you specify FROM_PARENT_RESOURCE , the audience generation job inherits
 	// the tags from the configured audience model, by default. Tags in the
-	// StartAudienceGenerationJob will override the default.
+	// StartAudienceGenerationJob will override the default. When the client is in a
+	// different account than the configured audience model, the tags from the client
+	// are never applied to a resource in the caller's account.
 	ChildResourceTagOnCreatePolicy types.TagOnCreatePolicy
 
 	// The description of the configured audience model.

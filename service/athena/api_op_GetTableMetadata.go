@@ -46,6 +46,10 @@ type GetTableMetadataInput struct {
 	// This member is required.
 	TableName *string
 
+	// The name of the workgroup for which the metadata is being fetched. Required if
+	// requesting an IAM Identity Center enabled Glue Data Catalog.
+	WorkGroup *string
+
 	noSmithyDocumentSerde
 }
 

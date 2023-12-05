@@ -43,6 +43,10 @@ type ListDatabasesInput struct {
 	// pass in the NextToken from the response object of the previous page call.
 	NextToken *string
 
+	// The name of the workgroup for which the metadata is being fetched. Required if
+	// requesting an IAM Identity Center enabled Glue Data Catalog.
+	WorkGroup *string
+
 	noSmithyDocumentSerde
 }
 

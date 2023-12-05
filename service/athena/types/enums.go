@@ -2,6 +2,22 @@
 
 package types
 
+type AuthenticationType string
+
+// Enum values for AuthenticationType
+const (
+	AuthenticationTypeDirectoryIdentity AuthenticationType = "DIRECTORY_IDENTITY"
+)
+
+// Values returns all known values for AuthenticationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationType) Values() []AuthenticationType {
+	return []AuthenticationType{
+		"DIRECTORY_IDENTITY",
+	}
+}
+
 type CalculationExecutionState string
 
 // Enum values for CalculationExecutionState

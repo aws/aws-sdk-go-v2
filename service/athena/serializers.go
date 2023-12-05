@@ -3910,6 +3910,23 @@ func awsAwsjson11_serializeDocumentFilterDefinition(v *types.FilterDefinition, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIdentityCenterConfiguration(v *types.IdentityCenterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableIdentityCenter != nil {
+		ok := object.Key("EnableIdentityCenter")
+		ok.Boolean(*v.EnableIdentityCenter)
+	}
+
+	if v.IdentityCenterInstanceArn != nil {
+		ok := object.Key("IdentityCenterInstanceArn")
+		ok.String(*v.IdentityCenterInstanceArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNamedQueryIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3968,6 +3985,28 @@ func awsAwsjson11_serializeDocumentQueryExecutionIdList(v []string, value smithy
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentQueryResultsS3AccessGrantsConfiguration(v *types.QueryResultsS3AccessGrantsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
+	if v.CreateUserLevelPrefix != nil {
+		ok := object.Key("CreateUserLevelPrefix")
+		ok.Boolean(*v.CreateUserLevelPrefix)
+	}
+
+	if v.EnableS3AccessGrants != nil {
+		ok := object.Key("EnableS3AccessGrants")
+		ok.Boolean(*v.EnableS3AccessGrants)
+	}
+
 	return nil
 }
 
@@ -4168,9 +4207,23 @@ func awsAwsjson11_serializeDocumentWorkGroupConfiguration(v *types.WorkGroupConf
 		ok.String(*v.ExecutionRole)
 	}
 
+	if v.IdentityCenterConfiguration != nil {
+		ok := object.Key("IdentityCenterConfiguration")
+		if err := awsAwsjson11_serializeDocumentIdentityCenterConfiguration(v.IdentityCenterConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PublishCloudWatchMetricsEnabled != nil {
 		ok := object.Key("PublishCloudWatchMetricsEnabled")
 		ok.Boolean(*v.PublishCloudWatchMetricsEnabled)
+	}
+
+	if v.QueryResultsS3AccessGrantsConfiguration != nil {
+		ok := object.Key("QueryResultsS3AccessGrantsConfiguration")
+		if err := awsAwsjson11_serializeDocumentQueryResultsS3AccessGrantsConfiguration(v.QueryResultsS3AccessGrantsConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RequesterPaysEnabled != nil {
@@ -4234,6 +4287,13 @@ func awsAwsjson11_serializeDocumentWorkGroupConfigurationUpdates(v *types.WorkGr
 	if v.PublishCloudWatchMetricsEnabled != nil {
 		ok := object.Key("PublishCloudWatchMetricsEnabled")
 		ok.Boolean(*v.PublishCloudWatchMetricsEnabled)
+	}
+
+	if v.QueryResultsS3AccessGrantsConfiguration != nil {
+		ok := object.Key("QueryResultsS3AccessGrantsConfiguration")
+		if err := awsAwsjson11_serializeDocumentQueryResultsS3AccessGrantsConfiguration(v.QueryResultsS3AccessGrantsConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RemoveBytesScannedCutoffPerQuery != nil {
@@ -4688,6 +4748,11 @@ func awsAwsjson11_serializeOpDocumentGetDatabaseInput(v *GetDatabaseInput, value
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.WorkGroup != nil {
+		ok := object.Key("WorkGroup")
+		ok.String(*v.WorkGroup)
+	}
+
 	return nil
 }
 
@@ -4698,6 +4763,11 @@ func awsAwsjson11_serializeOpDocumentGetDataCatalogInput(v *GetDataCatalogInput,
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.WorkGroup != nil {
+		ok := object.Key("WorkGroup")
+		ok.String(*v.WorkGroup)
 	}
 
 	return nil
@@ -4833,6 +4903,11 @@ func awsAwsjson11_serializeOpDocumentGetTableMetadataInput(v *GetTableMetadataIn
 		ok.String(*v.TableName)
 	}
 
+	if v.WorkGroup != nil {
+		ok := object.Key("WorkGroup")
+		ok.String(*v.WorkGroup)
+	}
+
 	return nil
 }
 
@@ -4960,6 +5035,11 @@ func awsAwsjson11_serializeOpDocumentListDatabasesInput(v *ListDatabasesInput, v
 		ok.String(*v.NextToken)
 	}
 
+	if v.WorkGroup != nil {
+		ok := object.Key("WorkGroup")
+		ok.String(*v.WorkGroup)
+	}
+
 	return nil
 }
 
@@ -4975,6 +5055,11 @@ func awsAwsjson11_serializeOpDocumentListDataCatalogsInput(v *ListDataCatalogsIn
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.WorkGroup != nil {
+		ok := object.Key("WorkGroup")
+		ok.String(*v.WorkGroup)
 	}
 
 	return nil
@@ -5195,6 +5280,11 @@ func awsAwsjson11_serializeOpDocumentListTableMetadataInput(v *ListTableMetadata
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.WorkGroup != nil {
+		ok := object.Key("WorkGroup")
+		ok.String(*v.WorkGroup)
 	}
 
 	return nil

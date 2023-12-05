@@ -35,6 +35,9 @@ type GetDataCatalogInput struct {
 	// This member is required.
 	Name *string
 
+	// The name of the workgroup. Required if making an IAM Identity Center request.
+	WorkGroup *string
+
 	noSmithyDocumentSerde
 }
 

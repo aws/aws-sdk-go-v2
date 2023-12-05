@@ -27,7 +27,7 @@ import (
 const ServiceID = "CleanRoomsML"
 const ServiceAPIVersion = "2023-09-06"
 
-// Client provides the API client to make operations call for cleanrooms-ml.
+// Client provides the API client to make operations call for AWS Clean Rooms ML.
 type Client struct {
 	options Options
 }

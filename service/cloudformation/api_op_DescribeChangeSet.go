@@ -86,8 +86,8 @@ type DescribeChangeSetOutput struct {
 	// creating it or in an OBSOLETE state because the stack was already updated.
 	ExecutionStatus types.ExecutionStatus
 
-	// Indicates if the stack set imports resources that already exist. This parameter
-	// can only import resources that have custom names (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html)
+	// Indicates if the change set imports resources that already exist. This
+	// parameter can only import resources that have custom names (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html)
 	// in templates. To import resources that do not accept custom names, such as EC2
 	// instances, use the resource import (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html)
 	// feature instead.

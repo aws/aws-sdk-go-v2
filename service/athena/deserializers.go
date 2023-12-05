@@ -9899,6 +9899,55 @@ func awsAwsjson11_deserializeDocumentExecutorsSummaryList(v *[]types.ExecutorsSu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIdentityCenterConfiguration(v **types.IdentityCenterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdentityCenterConfiguration
+	if *v == nil {
+		sv = &types.IdentityCenterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnableIdentityCenter":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableIdentityCenter = ptr.Bool(jtv)
+			}
+
+		case "IdentityCenterInstanceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityCenterInstanceArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityCenterInstanceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10704,6 +10753,11 @@ func awsAwsjson11_deserializeDocumentQueryExecution(v **types.QueryExecution, va
 				sv.QueryExecutionId = ptr.String(jtv)
 			}
 
+		case "QueryResultsS3AccessGrantsConfiguration":
+			if err := awsAwsjson11_deserializeDocumentQueryResultsS3AccessGrantsConfiguration(&sv.QueryResultsS3AccessGrantsConfiguration, value); err != nil {
+				return err
+			}
+
 		case "ResultConfiguration":
 			if err := awsAwsjson11_deserializeDocumentResultConfiguration(&sv.ResultConfiguration, value); err != nil {
 				return err
@@ -11090,6 +11144,64 @@ func awsAwsjson11_deserializeDocumentQueryExecutionStatus(v **types.QueryExecuti
 					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentQueryResultsS3AccessGrantsConfiguration(v **types.QueryResultsS3AccessGrantsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryResultsS3AccessGrantsConfiguration
+	if *v == nil {
+		sv = &types.QueryResultsS3AccessGrantsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AuthenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.AuthenticationType(jtv)
+			}
+
+		case "CreateUserLevelPrefix":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.CreateUserLevelPrefix = ptr.Bool(jtv)
+			}
+
+		case "EnableS3AccessGrants":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableS3AccessGrants = ptr.Bool(jtv)
 			}
 
 		default:
@@ -13010,6 +13122,15 @@ func awsAwsjson11_deserializeDocumentWorkGroup(v **types.WorkGroup, value interf
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "IdentityCenterApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityCenterApplicationArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityCenterApplicationArn = ptr.String(jtv)
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13118,6 +13239,11 @@ func awsAwsjson11_deserializeDocumentWorkGroupConfiguration(v **types.WorkGroupC
 				sv.ExecutionRole = ptr.String(jtv)
 			}
 
+		case "IdentityCenterConfiguration":
+			if err := awsAwsjson11_deserializeDocumentIdentityCenterConfiguration(&sv.IdentityCenterConfiguration, value); err != nil {
+				return err
+			}
+
 		case "PublishCloudWatchMetricsEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13125,6 +13251,11 @@ func awsAwsjson11_deserializeDocumentWorkGroupConfiguration(v **types.WorkGroupC
 					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.PublishCloudWatchMetricsEnabled = ptr.Bool(jtv)
+			}
+
+		case "QueryResultsS3AccessGrantsConfiguration":
+			if err := awsAwsjson11_deserializeDocumentQueryResultsS3AccessGrantsConfiguration(&sv.QueryResultsS3AccessGrantsConfiguration, value); err != nil {
+				return err
 			}
 
 		case "RequesterPaysEnabled":
@@ -13270,6 +13401,15 @@ func awsAwsjson11_deserializeDocumentWorkGroupSummary(v **types.WorkGroupSummary
 		case "EngineVersion":
 			if err := awsAwsjson11_deserializeDocumentEngineVersion(&sv.EngineVersion, value); err != nil {
 				return err
+			}
+
+		case "IdentityCenterApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityCenterApplicationArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityCenterApplicationArn = ptr.String(jtv)
 			}
 
 		case "Name":

@@ -1,0 +1,8 @@
+{
+    "id": "d34cdc47-70a1-4a4c-a136-fcf56b95850a",
+    "type": "feature",
+    "description": "Adds A10G, T4G, and H100 as accelerator name options and Habana as an accelerator manufacturer option for attribute based selection",
+    "modules": [
+        "service/ec2"
+    ]
+}

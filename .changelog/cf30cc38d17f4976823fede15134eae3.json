@@ -1,0 +1,8 @@
+{
+    "id": "cf30cc38-d17f-4976-823f-ede15134eae3",
+    "type": "documentation",
+    "description": "Documentation update, December 2023",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

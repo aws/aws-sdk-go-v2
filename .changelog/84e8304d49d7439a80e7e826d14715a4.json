@@ -1,0 +1,8 @@
+{
+    "id": "84e8304d-49d7-439a-80e7-e826d14715a4",
+    "type": "feature",
+    "description": "Adding IdentityCenter enabled request for interactive query",
+    "modules": [
+        "service/athena"
+    ]
+}

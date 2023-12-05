@@ -40,6 +40,9 @@ type ListDataCatalogsInput struct {
 	// pass in the NextToken from the response object of the previous page call.
 	NextToken *string
 
+	// The name of the workgroup. Required if making an IAM Identity Center request.
+	WorkGroup *string
+
 	noSmithyDocumentSerde
 }
 
