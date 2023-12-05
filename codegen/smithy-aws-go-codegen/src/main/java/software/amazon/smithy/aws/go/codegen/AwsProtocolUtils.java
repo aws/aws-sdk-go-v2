@@ -206,6 +206,11 @@ final class AwsProtocolUtils {
                         .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
                         .operation(ShapeId.from("aws.protocoltests.json10#OperationWithNestedStructure"))
                         .addTestName("AwsJson10ClientPopulatesNestedDefaultsWhenMissingInResponseBody")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#OperationWithRequiredMembers"))
+                        .addTestName("AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues")
                         .build()
         ));
 
