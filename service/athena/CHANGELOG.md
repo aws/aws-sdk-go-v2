@@ -1,3 +1,7 @@
+# v1.37.0 (2023-12-05)
+
+* **Feature**: Adding IdentityCenter enabled request for interactive query
+
 # v1.36.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

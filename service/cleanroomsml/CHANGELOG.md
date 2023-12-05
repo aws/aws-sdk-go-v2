@@ -1,3 +1,7 @@
+# v1.1.0 (2023-12-05)
+
+* **Feature**: Updated service title from cleanroomsml to CleanRoomsML.
+
 # v1.0.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

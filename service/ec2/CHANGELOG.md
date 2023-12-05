@@ -1,3 +1,7 @@
+# v1.139.0 (2023-12-05)
+
+* **Feature**: Adds A10G, T4G, and H100 as accelerator name options and Habana as an accelerator manufacturer option for attribute based selection
+
 # v1.138.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

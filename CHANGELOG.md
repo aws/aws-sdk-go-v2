@@ -1,3 +1,15 @@
+# Release (2023-12-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.37.0](service/athena/CHANGELOG.md#v1370-2023-12-05)
+  * **Feature**: Adding IdentityCenter enabled request for interactive query
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.1.0](service/cleanroomsml/CHANGELOG.md#v110-2023-12-05)
+  * **Feature**: Updated service title from cleanroomsml to CleanRoomsML.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.42.1](service/cloudformation/CHANGELOG.md#v1421-2023-12-05)
+  * **Documentation**: Documentation update, December 2023
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.139.0](service/ec2/CHANGELOG.md#v11390-2023-12-05)
+  * **Feature**: Adds A10G, T4G, and H100 as accelerator name options and Habana as an accelerator manufacturer option for attribute based selection
+
 # Release (2023-12-04)
 
 ## Module Highlights

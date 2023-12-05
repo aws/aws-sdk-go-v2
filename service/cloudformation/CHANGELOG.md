@@ -1,3 +1,7 @@
+# v1.42.1 (2023-12-05)
+
+* **Documentation**: Documentation update, December 2023
+
 # v1.42.0 (2023-12-04)
 
 * **Feature**: Including UPDATE_* states as a success status for CreateStack waiter.
