@@ -1,0 +1,11 @@
+{
+    "id": "225527fb-0025-4820-9347-a0fdb79f6dca",
+    "type": "feature",
+    "description": "Upgrade smithy core",
+    "modules": [
+        "internal/protocoltest/awsrestjson",
+        "internal/protocoltest/jsonrpc10",
+        "internal/protocoltest/restxml",
+        "service/internal/integrationtest"
+    ]
+}
