@@ -12,6 +12,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
+	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
 )
 
 // CredentialsSourceName provides a name of the provider when config is
@@ -334,7 +335,7 @@ func NewEnvConfig() (EnvConfig, error) {
 	if err := setBoolPtrFromEnvVal(&cfg.DisableRequestCompression, []string{awsDisableRequestCompression}); err != nil {
 		return cfg, err
 	}
-	if err := setRequestMinCompressSizeBytes(&cfg.RequestMinCompressSizeBytes); err != nil {
+	if err := setInt64PtrFromEnvVal(&cfg.RequestMinCompressSizeBytes, []string{awsRequestMinCompressionSizeBytes}, smithyrequestcompression.MaxRequestMinCompressSizeBytes); err != nil {
 		return cfg, err
 	}
 
@@ -400,27 +401,6 @@ func (c EnvConfig) getDefaultsMode(ctx context.Context) (aws.DefaultsMode, bool,
 
 func (c EnvConfig) getAppID(context.Context) (string, bool, error) {
 	return c.AppID, len(c.AppID) > 0, nil
-}
-
-func setRequestMinCompressSizeBytes(bytes **int64) error {
-	b := os.Getenv(awsRequestMinCompressionSizeBytes)
-	if b == "" {
-		return nil
-	}
-
-	byte, err := strconv.ParseInt(b, 10, 64)
-	if err != nil {
-		return fmt.Errorf("invalid value for env var, %s=%s, need int64",
-			awsRequestMinCompressionSizeBytes, b)
-	} else if byte < 0 || byte > 10485760 {
-		return fmt.Errorf("invalid range for env var min request compression size bytes %q, must be within 0 and 10485760 inclusively", byte)
-	}
-	if *bytes == nil {
-		*bytes = new(int64)
-	}
-	**bytes = byte
-
-	return nil
 }
 
 func (c EnvConfig) getDisableRequestCompression(context.Context) (bool, bool, error) {
@@ -687,6 +667,30 @@ func setBoolPtrFromEnvVal(dst **bool, keys []string) error {
 				"invalid value for environment variable, %s=%s, need true or false",
 				k, value)
 		}
+		break
+	}
+
+	return nil
+}
+
+func setInt64PtrFromEnvVal(dst **int64, keys []string, max int64) error {
+	for _, k := range keys {
+		value := os.Getenv(k)
+		if len(value) == 0 {
+			continue
+		}
+
+		v, err := strconv.ParseInt(value, 10, 64)
+		if err != nil {
+			return fmt.Errorf("invalid value for env var, %s=%s, need int64", k, value)
+		} else if v < 0 || v > max {
+			return fmt.Errorf("invalid range for env var min request compression size bytes %q, must be within 0 and 10485760 inclusively", v)
+		}
+		if *dst == nil {
+			*dst = new(int64)
+		}
+
+		**dst = v
 		break
 	}
 

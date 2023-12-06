@@ -17,6 +17,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
 	"github.com/aws/aws-sdk-go-v2/internal/shareddefaults"
 	"github.com/aws/smithy-go/logging"
+	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
 )
 
 const (
@@ -1147,7 +1148,7 @@ func updateRequestMinCompressSizeBytes(bytes **int64, sec ini.Section, key strin
 	if !ok {
 		return fmt.Errorf("invalid value for min request compression size bytes %s, need int64", sec.String(key))
 	}
-	if v < 0 || v > 10485760 {
+	if v < 0 || v > smithyrequestcompression.MaxRequestMinCompressSizeBytes {
 		return fmt.Errorf("invalid range for min request compression size bytes %d, must be within 0 and 10485760 inclusively", v)
 	}
 	*bytes = new(int64)
