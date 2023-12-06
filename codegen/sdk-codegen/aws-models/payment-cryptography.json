@@ -45,6 +45,41 @@
                 "smithy.api#pattern": "^alias/[a-zA-Z0-9/_-]+$"
             }
         },
+        "com.amazonaws.paymentcryptography#AliasResource": {
+            "type": "resource",
+            "identifiers": {
+                "AliasName": {
+                    "target": "com.amazonaws.paymentcryptography#AliasName"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.paymentcryptography#CreateAlias"
+            },
+            "read": {
+                "target": "com.amazonaws.paymentcryptography#GetAlias"
+            },
+            "update": {
+                "target": "com.amazonaws.paymentcryptography#UpdateAlias"
+            },
+            "delete": {
+                "target": "com.amazonaws.paymentcryptography#DeleteAlias"
+            },
+            "list": {
+                "target": "com.amazonaws.paymentcryptography#ListAliases"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "Alias",
+                    "additionalSchemas": [
+                        "com.amazonaws.paymentcryptography#Alias"
+                    ]
+                },
+                "smithy.api#noReplace": {},
+                "smithy.api#suppress": [
+                    "UnstableTrait"
+                ]
+            }
+        },
         "com.amazonaws.paymentcryptography#Aliases": {
             "type": "list",
             "member": {
@@ -111,7 +146,8 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Creates an <i>alias</i>, or a friendly name, for an Amazon Web Services Payment Cryptography key. You can use an alias to identify a key in the console and when you call cryptographic operations such as <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_EncryptData.html\">EncryptData</a> or <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_DecryptData.html\">DecryptData</a>.</p>\n         <p>You can associate the alias with any key in the same Amazon Web Services Region. Each alias is associated with only one key at a time, but a key can have multiple aliases. You can't create an alias without a key. The alias must be unique in the account and Amazon Web Services Region, but you can create another alias with the same name in a different Amazon Web Services Region.</p>\n         <p>To change the key that's associated with the alias, call <a>UpdateAlias</a>. To delete the alias, call <a>DeleteAlias</a>. These operations don't affect the underlying key. To get the alias that you created, call <a>ListAliases</a>.</p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateAlias</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates an <i>alias</i>, or a friendly name, for an Amazon Web Services Payment Cryptography key. You can use an alias to identify a key in the console and when you call cryptographic operations such as <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_EncryptData.html\">EncryptData</a> or <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_DecryptData.html\">DecryptData</a>.</p>\n         <p>You can associate the alias with any key in the same Amazon Web Services Region. Each alias is associated with only one key at a time, but a key can have multiple aliases. You can't create an alias without a key. The alias must be unique in the account and Amazon Web Services Region, but you can create another alias with the same name in a different Amazon Web Services Region.</p>\n         <p>To change the key that's associated with the alias, call <a>UpdateAlias</a>. To delete the alias, call <a>DeleteAlias</a>. These operations don't affect the underlying key. To get the alias that you created, call <a>ListAliases</a>.</p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateAlias</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.paymentcryptography#CreateAliasInput": {
@@ -120,14 +156,22 @@
                 "AliasName": {
                     "target": "com.amazonaws.paymentcryptography#AliasName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A friendly name that you can use to refer a key. An alias must begin with <code>alias/</code> followed by a name, for example <code>alias/ExampleAlias</code>. It can contain only alphanumeric characters, forward slashes (/), underscores (_), and dashes (-).</p>\n         <important>\n            <p>Don't include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
-                        "smithy.api#required": {}
+                        "aws.cloudformation#cfnMutability": "create",
+                        "smithy.api#documentation": "<p>A friendly name that you can use to refer to a key. An alias must begin with <code>alias/</code> followed by a name, for example <code>alias/ExampleAlias</code>. It can contain only alphanumeric characters, forward slashes (/), underscores (_), and dashes (-).</p>\n         <important>\n            <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "KeyArn": {
                     "target": "com.amazonaws.paymentcryptography#KeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key to associate with the alias.</p>"
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key to associate with the alias.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
@@ -141,8 +185,12 @@
                 "Alias": {
                     "target": "com.amazonaws.paymentcryptography#Alias",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The alias for the key.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
@@ -186,7 +234,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Creates an Amazon Web Services Payment Cryptography key, a logical representation of a cryptographic key, that is unique in your account and Amazon Web Services Region. You use keys for cryptographic functions such as encryption and decryption. </p>\n         <p>In addition to the key material used in cryptographic operations, an Amazon Web Services Payment Cryptography key includes metadata such as the key ARN, key usage, key origin, creation date, description, and key state.</p>\n         <p>When you create a key, you specify both immutable and mutable data about the key. The immutable data contains key attributes that defines the scope and cryptographic operations that you can perform using the key, for example key class (example: <code>SYMMETRIC_KEY</code>), key algorithm (example: <code>TDES_2KEY</code>), key usage (example: <code>TR31_P0_PIN_ENCRYPTION_KEY</code>) and key modes of use (example: <code>Encrypt</code>). For information about valid combinations of key attributes, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. The mutable data contained within a key includes usage timestamp and key deletion timestamp and can be modified after creation.</p>\n         <p>Amazon Web Services Payment Cryptography binds key attributes to keys using key blocks when you store or export them. Amazon Web Services Payment Cryptography stores the key contents wrapped and never stores or transmits them in the clear. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListKeys</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services Payment Cryptography key, a logical representation of a cryptographic key, that is unique in your account and Amazon Web Services Region. You use keys for cryptographic functions such as encryption and decryption. </p>\n         <p>In addition to the key material used in cryptographic operations, an Amazon Web Services Payment Cryptography key includes metadata such as the key ARN, key usage, key origin, creation date, description, and key state.</p>\n         <p>When you create a key, you specify both immutable and mutable data about the key. The immutable data contains key attributes that define the scope and cryptographic operations that you can perform using the key, for example key class (example: <code>SYMMETRIC_KEY</code>), key algorithm (example: <code>TDES_2KEY</code>), key usage (example: <code>TR31_P0_PIN_ENCRYPTION_KEY</code>) and key modes of use (example: <code>Encrypt</code>). For information about valid combinations of key attributes, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. The mutable data contained within a key includes usage timestamp and key deletion timestamp and can be modified after creation.</p>\n         <p>Amazon Web Services Payment Cryptography binds key attributes to keys using key blocks when you store or export them. Amazon Web Services Payment Cryptography stores the key contents wrapped and never stores or transmits them in the clear. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListKeys</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.paymentcryptography#CreateKeyInput": {
@@ -195,33 +243,53 @@
                 "KeyAttributes": {
                     "target": "com.amazonaws.paymentcryptography#KeyAttributes",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>The role of the key, the algorithm it supports, and the cryptographic operations allowed with the key. This data is immutable after the key is created.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "KeyCheckValueAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV) for DES and AES keys.</p>\n         <p>For DES key, the KCV is computed by encrypting 8 bytes, each with value '00', with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES key, the KCV is computed by encrypting 8 bytes, each with value '01', with the key to be checked and retaining the 3 highest order bytes of the encrypted result.</p>"
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p>\n         <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "Exportable": {
                     "target": "smithy.api#Boolean",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>Specifies whether the key is exportable from the service.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "Enabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable the key. If the key is enabled, it is activated for use within the service. If the key not enabled, then it is created but not activated. The default value is enabled.</p>"
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>Specifies whether to enable the key. If the key is enabled, it is activated for use within the service. If the key is not enabled, then it is created but not activated. The default value is enabled.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.paymentcryptography#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to attach to the key. Each tag consists of a tag key and a tag value. Both the tag key and the tag value are required, but the tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. </p>\n         <p>To use this parameter, you must have <code>TagResource</code> permission.</p>\n         <important>\n            <p>Don't include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <note>\n            <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p>\n         </note>"
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>Assigns one or more tags to the Amazon Web Services Payment Cryptography key. Use this parameter to tag a key when it is created. To tag an existing Amazon Web Services Payment Cryptography key, use the <a>TagResource</a> operation.</p>\n         <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value are required, but the tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. </p>\n         <important>\n            <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <note>\n            <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p>\n         </note>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
@@ -235,8 +303,12 @@
                 "Key": {
                     "target": "com.amazonaws.paymentcryptography#Key",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The key material that contains all the key attributes.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
@@ -277,7 +349,8 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Deletes the alias, but doesn't affect the underlying key.</p>\n         <p>Each key can have multiple aliases. To get the aliases of all keys, use the <a>ListAliases</a> operation. To change the alias of a key, first use <a>DeleteAlias</a> to delete the current alias and then use <a>CreateAlias</a> to create a new alias. To associate an existing alias with a different key, call <a>UpdateAlias</a>.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateAlias</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Deletes the alias, but doesn't affect the underlying key.</p>\n         <p>Each key can have multiple aliases. To get the aliases of all keys, use the <a>ListAliases</a> operation. To change the alias of a key, first use <a>DeleteAlias</a> to delete the current alias and then use <a>CreateAlias</a> to create a new alias. To associate an existing alias with a different key, call <a>UpdateAlias</a>.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateAlias</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.paymentcryptography#DeleteAliasInput": {
@@ -335,7 +408,8 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Deletes the key material and all metadata associated with Amazon Web Services Payment Cryptography key.</p>\n         <p>Key deletion is irreversible. After a key is deleted, you can't perform cryptographic operations using the key. For example, you can't decrypt data that was encrypted by a deleted Amazon Web Services Payment Cryptography key, and the data may become unrecoverable. Because key deletion is destructive, Amazon Web Services Payment Cryptography has a safety mechanism to prevent accidental deletion of a key. When you call this operation, Amazon Web Services Payment Cryptography disables the specified key but doesn't delete it until after a waiting period. The default waiting period is 7 days. To set a different waiting period, set <code>DeleteKeyInDays</code>. During the waiting period, the <code>KeyState</code> is <code>DELETE_PENDING</code>. After the key is deleted, the <code>KeyState</code> is <code>DELETE_COMPLETE</code>.</p>\n         <p>If you delete key material, you can use <a>ImportKey</a> to reimport the same key material into the Amazon Web Services Payment Cryptography key.</p>\n         <p>You should delete a key only when you are sure that you don't need to use it anymore and no other parties are utilizing this key. If you aren't sure, consider deactivating it instead by calling <a>StopKeyUsage</a>.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>RestoreKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>StartKeyUsage</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>StopKeyUsage</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Deletes the key material and metadata associated with Amazon Web Services Payment Cryptography key.</p>\n         <p>Key deletion is irreversible. After a key is deleted, you can't perform cryptographic operations using the key. For example, you can't decrypt data that was encrypted by a deleted Amazon Web Services Payment Cryptography key, and the data may become unrecoverable. Because key deletion is destructive, Amazon Web Services Payment Cryptography has a safety mechanism to prevent accidental deletion of a key. When you call this operation, Amazon Web Services Payment Cryptography disables the specified key but doesn't delete it until after a waiting period set using <code>DeleteKeyInDays</code>. The default waiting period is 7 days. During the waiting period, the <code>KeyState</code> is <code>DELETE_PENDING</code>. After the key is deleted, the <code>KeyState</code> is <code>DELETE_COMPLETE</code>.</p>\n         <p>You should delete a key only when you are sure that you don't need to use it anymore and no other parties are utilizing this key. If you aren't sure, consider deactivating it instead by calling <a>StopKeyUsage</a>.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>RestoreKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>StartKeyUsage</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>StopKeyUsage</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.paymentcryptography#DeleteKeyInput": {
@@ -369,13 +443,52 @@
                 "Key": {
                     "target": "com.amazonaws.paymentcryptography#Key",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key that is scheduled for deletion.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ExportAttributes": {
+            "type": "structure",
+            "members": {
+                "ExportDukptInitialKey": {
+                    "target": "com.amazonaws.paymentcryptography#ExportDukptInitialKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for IPEK export.</p>"
+                    }
+                },
+                "KeyCheckValueAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity. Specify KCV for IPEK export only.</p>\n         <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The attributes for IPEK generation during export.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ExportDukptInitialKey": {
+            "type": "structure",
+            "members": {
+                "KeySerialNumber": {
+                    "target": "com.amazonaws.paymentcryptography#HexLength20Or24",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KSN for IPEK generation using DUKPT. </p>\n         <p>KSN must be padded before sending to Amazon Web Services Payment Cryptography. KSN hex length should be 20 for a TDES_2KEY key or 24 for an AES key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for IPEK generation during export.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#ExportKey": {
@@ -411,7 +524,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Exports a key from Amazon Web Services Payment Cryptography using either ANSI X9 TR-34 or TR-31 key export standard.</p>\n         <p>Amazon Web Services Payment Cryptography simplifies main or root key exchange process by eliminating the need of a paper-based key exchange process. It takes a modern and secure approach based of the ANSI X9 TR-34 key exchange standard.</p>\n         <p>You can use <code>ExportKey</code> to export main or root keys such as KEK (Key Encryption Key), using asymmetric key exchange technique following ANSI X9 TR-34 standard. The ANSI X9 TR-34 standard uses asymmetric keys to establishes bi-directional trust between the two parties exchanging keys. After which you can export working keys using the ANSI X9 TR-31 symmetric key exchange standard as mandated by PCI PIN. Using this operation, you can share your Amazon Web Services Payment Cryptography generated keys with other service partners to perform cryptographic operations outside of Amazon Web Services Payment Cryptography </p>\n         <p>\n            <b>TR-34 key export</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-34 asymmetric key exchange standard to export main keys such as KEK. In TR-34 terminology, the sending party of the key is called Key Distribution Host (KDH) and the receiving party of the key is called Key Receiving Host (KRH). In key export process, KDH is Amazon Web Services Payment Cryptography which initiates key export. KRH is the user receiving the key. Before you initiate TR-34 key export, you must obtain an export token by calling <a>GetParametersForExport</a>. This operation also returns the signing key certificate that KDH uses to sign the wrapped key to generate a TR-34 wrapped key block. The export token expires after 7 days.</p>\n         <p>Set the following parameters:</p>\n         <dl>\n            <dt>CertificateAuthorityPublicKeyIdentifier</dt>\n            <dd>\n               <p>The <code>KeyARN</code> of the certificate chain that will sign the wrapping key certificate. This must exist within Amazon Web Services Payment Cryptography before you initiate TR-34 key export. If it does not exist, you can import it by calling <a>ImportKey</a> for <code>RootCertificatePublicKey</code>.</p>\n            </dd>\n            <dt>ExportToken</dt>\n            <dd>\n               <p>Obtained from KDH by calling <a>GetParametersForExport</a>.</p>\n            </dd>\n            <dt>WrappingKeyCertificate</dt>\n            <dd>\n               <p>Amazon Web Services Payment Cryptography uses this to wrap the key under export.</p>\n            </dd>\n         </dl>\n         <p>When this operation is successful, Amazon Web Services Payment Cryptography returns the TR-34 wrapped key block. </p>\n         <p>\n            <b>TR-31 key export</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-31 symmetric key exchange standard to export working keys. In TR-31, you must use a main key such as KEK to encrypt or wrap the key under export. To establish a KEK, you can use <a>CreateKey</a> or <a>ImportKey</a>. When this operation is successful, Amazon Web Services Payment Cryptography returns a TR-31 wrapped key block. </p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetParametersForExport</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ImportKey</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Exports a key from Amazon Web Services Payment Cryptography.</p>\n         <p>Amazon Web Services Payment Cryptography simplifies key exchange by replacing the existing paper-based approach with a modern electronic approach. With <code>ExportKey</code> you can export symmetric keys using either symmetric and asymmetric key exchange mechanisms. Using this operation, you can share your Amazon Web Services Payment Cryptography generated keys with other service partners to perform cryptographic operations outside of Amazon Web Services Payment Cryptography </p>\n         <p>For symmetric key exchange, Amazon Web Services Payment Cryptography uses the ANSI X9 TR-31 norm in accordance with PCI PIN guidelines. And for asymmetric key exchange, Amazon Web Services Payment Cryptography supports ANSI X9 TR-34 norm . Asymmetric key exchange methods are typically used to establish bi-directional trust between the two parties exhanging keys and are used for initial key exchange such as Key Encryption Key (KEK). After which you can export working keys using symmetric method to perform various cryptographic operations within Amazon Web Services Payment Cryptography.</p>\n         <p>The TR-34 norm is intended for exchanging 3DES keys only and keys are imported in a WrappedKeyBlock format. Key attributes (such as KeyUsage, KeyAlgorithm, KeyModesOfUse, Exportability) are contained within the key block.</p>\n         <p>You can also use <code>ExportKey</code> functionality to generate and export an IPEK (Initial Pin Encryption Key) from Amazon Web Services Payment Cryptography using either TR-31 or TR-34 export key exchange. IPEK is generated from BDK (Base Derivation Key) and <code>ExportDukptInitialKey</code> attribute KSN (<code>KeySerialNumber</code>). The generated IPEK does not persist within Amazon Web Services Payment Cryptography and has to be re-generated each time during export.</p>\n         <p>\n            <b>To export KEK or IPEK using TR-34</b>\n         </p>\n         <p>Using this operation, you can export initial key using TR-34 asymmetric key exchange. You can only export KEK generated within Amazon Web Services Payment Cryptography. In TR-34 terminology, the sending party of the key is called Key Distribution Host (KDH) and the receiving party of the key is called Key Receiving Device (KRD). During key export process, KDH is Amazon Web Services Payment Cryptography which initiates key export and KRD is the user receiving the key.</p>\n         <p>To initiate TR-34 key export, the KRD must obtain an export token by calling <a>GetParametersForExport</a>. This operation also generates a key pair for the purpose of key export, signs the key and returns back the signing public key certificate (also known as KDH signing certificate) and root certificate chain. The KDH uses the private key to sign the the export payload and the signing public key certificate is provided to KRD to verify the signature. The KRD can import the root certificate into its Hardware Security Module (HSM), as required. The export token and the associated KDH signing certificate expires after 7 days. </p>\n         <p>Next the KRD generates a key pair for the the purpose of encrypting the KDH key and provides the public key cerificate (also known as KRD wrapping certificate) back to KDH. The KRD will also import the root cerificate chain into Amazon Web Services Payment Cryptography by calling <a>ImportKey</a> for <code>RootCertificatePublicKey</code>. The KDH, Amazon Web Services Payment Cryptography, will use the KRD wrapping cerificate to encrypt (wrap) the key under export and signs it with signing private key to generate a TR-34 WrappedKeyBlock. For more information on TR-34 key export, see section <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-export.html\">Exporting symmetric keys</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ExportAttributes</code>: Specify export attributes in case of IPEK export. This parameter is optional for KEK export.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ExportKeyIdentifier</code>: The <code>KeyARN</code> of the KEK or BDK (in case of IPEK) under export.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: Use <code>Tr34KeyBlock</code> parameters.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: The <code>KeyARN</code> of the certificate chain that signed the KRD wrapping key certificate.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ExportToken</code>: Obtained from KDH by calling <a>GetParametersForImport</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappingKeyCertificate</code>: The public key certificate in PEM format (base64 encoded) of the KRD wrapping key Amazon Web Services Payment Cryptography uses for encryption of the TR-34 export payload. This certificate must be signed by the root certificate (CertificateAuthorityPublicKeyIdentifier) imported into Amazon Web Services Payment Cryptography.</p>\n            </li>\n         </ul>\n         <p>When this operation is successful, Amazon Web Services Payment Cryptography returns the KEK or IPEK as a TR-34 WrappedKeyBlock. </p>\n         <p>\n            <b>To export WK (Working Key) or IPEK using TR-31</b>\n         </p>\n         <p>Using this operation, you can export working keys or IPEK using TR-31 symmetric key exchange. In TR-31, you must use an initial key such as KEK to encrypt or wrap the key under export. To establish a KEK, you can use <a>CreateKey</a> or <a>ImportKey</a>. </p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ExportAttributes</code>: Specify export attributes in case of IPEK export. This parameter is optional for KEK export.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ExportKeyIdentifier</code>: The <code>KeyARN</code> of the KEK or BDK (in case of IPEK) under export.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: Use <code>Tr31KeyBlock</code> parameters.</p>\n            </li>\n         </ul>\n         <p>When this operation is successful, Amazon Web Services Payment Cryptography returns the WK or IPEK as a TR-31 WrappedKeyBlock.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetParametersForExport</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ImportKey</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.paymentcryptography#ExportKeyInput": {
@@ -430,6 +543,12 @@
                         "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key under export from Amazon Web Services Payment Cryptography.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ExportAttributes": {
+                    "target": "com.amazonaws.paymentcryptography#ExportAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes for IPEK generation during export.</p>"
+                    }
                 }
             },
             "traits": {
@@ -442,18 +561,18 @@
                 "Tr31KeyBlock": {
                     "target": "com.amazonaws.paymentcryptography#ExportTr31KeyBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameter information for key material export using TR-31 standard.</p>"
+                        "smithy.api#documentation": "<p>Parameter information for key material export using symmetric TR-31 key exchange method.</p>"
                     }
                 },
                 "Tr34KeyBlock": {
                     "target": "com.amazonaws.paymentcryptography#ExportTr34KeyBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameter information for key material export using TR-34 standard.</p>"
+                        "smithy.api#documentation": "<p>Parameter information for key material export using the asymmetric TR-34 key exchange method.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameter information for key material export from Amazon Web Services Payment Cryptography.</p>"
+                "smithy.api#documentation": "<p>Parameter information for key material export from Amazon Web Services Payment Cryptography using TR-31 or TR-34 key exchange method.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#ExportKeyOutput": {
@@ -462,7 +581,7 @@
                 "WrappedKey": {
                     "target": "com.amazonaws.paymentcryptography#WrappedKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key material under export as a TR-34 or TR-31 wrapped key block.</p>"
+                        "smithy.api#documentation": "<p>The key material under export as a TR-34 WrappedKeyBlock or a TR-31 WrappedKeyBlock. </p>"
                     }
                 }
             },
@@ -488,7 +607,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameter information for key material export using TR-31 standard.</p>"
+                "smithy.api#documentation": "<p>Parameter information for key material export using symmetric TR-31 key exchange method.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#ExportTr34KeyBlock": {
@@ -530,7 +649,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameter information for key material export using TR-34 standard.</p>"
+                "smithy.api#documentation": "<p>Parameter information for key material export using the asymmetric TR-34 key exchange method.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#GetAlias": {
@@ -588,8 +707,12 @@
                 "Alias": {
                     "target": "com.amazonaws.paymentcryptography#Alias",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The alias of the Amazon Web Services Payment Cryptography key.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
@@ -652,8 +775,12 @@
                 "Key": {
                     "target": "com.amazonaws.paymentcryptography#Key",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The key material, including the immutable and mutable data for the key.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
@@ -713,7 +840,7 @@
                 "SigningKeyAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#KeyAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The signing key algorithm to generate a signing key certificate. This certificate signs the wrapped key under export within the TR-34 key block cryptogram. <code>RSA_2048</code> is the only signing key algorithm allowed.</p>",
+                        "smithy.api#documentation": "<p>The signing key algorithm to generate a signing key certificate. This certificate signs the wrapped key under export within the TR-34 key block. <code>RSA_2048</code> is the only signing key algorithm allowed.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -728,14 +855,14 @@
                 "SigningKeyCertificate": {
                     "target": "com.amazonaws.paymentcryptography#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The signing key certificate of the public key for signature within the TR-34 key block cryptogram. The certificate expires after 7 days.</p>",
+                        "smithy.api#documentation": "<p>The signing key certificate in PEM format (base64 encoded) of the public key for signature within the TR-34 key block. The certificate expires after 7 days.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SigningKeyCertificateChain": {
                     "target": "com.amazonaws.paymentcryptography#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The certificate chain that signed the signing key certificate. This is the root certificate authority (CA) within your service account.</p>",
+                        "smithy.api#documentation": "<p>The root certificate authority (CA) that signed the signing key certificate in PEM format (base64 encoded).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -801,7 +928,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Gets the import token and the wrapping key certificate to initiate a TR-34 key import into Amazon Web Services Payment Cryptography.</p>\n         <p>The wrapping key certificate wraps the key under import within the TR-34 key payload. The import token and wrapping key certificate must be in place and operational before calling <a>ImportKey</a>. The import token expires in 7 days. The same import token can be used to import multiple keys into your service account.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetParametersForExport</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ImportKey</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Gets the import token and the wrapping key certificate in PEM format (base64 encoded) to initiate a TR-34 WrappedKeyBlock.</p>\n         <p>The wrapping key certificate wraps the key under import. The import token and wrapping key certificate must be in place and operational before calling <a>ImportKey</a>. The import token expires in 7 days. You can use the same import token to import multiple keys into your service account.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetParametersForExport</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ImportKey</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.paymentcryptography#GetParametersForImportInput": {
@@ -810,14 +937,14 @@
                 "KeyMaterialType": {
                     "target": "com.amazonaws.paymentcryptography#KeyMaterialType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key block format type such as TR-34 or TR-31 to use during key material import. Import token is only required for TR-34 key import <code>TR34_KEY_BLOCK</code>. Import token is not required for TR-31 key import.</p>",
+                        "smithy.api#documentation": "<p>The method to use for key material import. Import token is only required for TR-34 WrappedKeyBlock (<code>TR34_KEY_BLOCK</code>).</p>\n         <p>Import token is not required for TR-31, root public key cerificate or trusted public key certificate.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "WrappingKeyAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#KeyAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The wrapping key algorithm to generate a wrapping key certificate. This certificate wraps the key under import within the TR-34 key block cryptogram. <code>RSA_2048</code> is the only wrapping key algorithm allowed.</p>",
+                        "smithy.api#documentation": "<p>The wrapping key algorithm to generate a wrapping key certificate. This certificate wraps the key under import.</p>\n         <p>At this time, <code>RSA_2048</code>, <code>RSA_3072</code>, <code>RSA_4096</code> are the only allowed algorithms for TR-34 WrappedKeyBlock import.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -832,21 +959,21 @@
                 "WrappingKeyCertificate": {
                     "target": "com.amazonaws.paymentcryptography#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The wrapping key certificate of the wrapping key for use within the TR-34 key block. The certificate expires in 7 days.</p>",
+                        "smithy.api#documentation": "<p>The wrapping key certificate in PEM format (base64 encoded) of the wrapping key for use within the TR-34 key block. The certificate expires in 7 days.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "WrappingKeyCertificateChain": {
                     "target": "com.amazonaws.paymentcryptography#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Payment Cryptography certificate chain that signed the wrapping key certificate. This is the root certificate authority (CA) within your service account.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Payment Cryptography root certificate authority (CA) that signed the wrapping key certificate in PEM format (base64 encoded).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "WrappingKeyAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#KeyAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm of the wrapping key for use within TR-34 key block. <code>RSA_2048</code> is the only wrapping key algorithm allowed.</p>",
+                        "smithy.api#documentation": "<p>The algorithm of the wrapping key for use within TR-34 WrappedKeyBlock.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -924,14 +1051,14 @@
                 "KeyCertificate": {
                     "target": "com.amazonaws.paymentcryptography#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public key component of the asymmetric key pair in a certificate (PEM) format. It is signed by the root certificate authority (CA) within your service account. The certificate expires in 90 days.</p>",
+                        "smithy.api#documentation": "<p>The public key component of the asymmetric key pair in a certificate PEM format (base64 encoded). It is signed by the root certificate authority (CA). The certificate expires in 90 days.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KeyCertificateChain": {
                     "target": "com.amazonaws.paymentcryptography#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The certificate chain that signed the public key certificate of the asymmetric key pair. This is the root certificate authority (CA) within your service account.</p>",
+                        "smithy.api#documentation": "<p>The root certificate authority (CA) that signed the public key certificate in PEM format (base64 encoded) of the asymmetric key pair.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -948,6 +1075,16 @@
                     "max": 16
                 },
                 "smithy.api#pattern": "^[0-9A-F]+$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#HexLength20Or24": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 24
+                },
+                "smithy.api#pattern": "^[0-9A-F]{20}$|^[0-9A-F]{24}$"
             }
         },
         "com.amazonaws.paymentcryptography#ImportKey": {
@@ -986,7 +1123,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Imports keys and public key certificates into Amazon Web Services Payment Cryptography.</p>\n         <p>Amazon Web Services Payment Cryptography simplifies main or root key exchange process by eliminating the need of a paper-based key exchange process. It takes a modern and secure approach based of the ANSI X9 TR-34 key exchange standard. </p>\n         <p>You can use <code>ImportKey</code> to import main or root keys such as KEK (Key Encryption Key) using asymmetric key exchange technique following the ANSI X9 TR-34 standard. The ANSI X9 TR-34 standard uses asymmetric keys to establishes bi-directional trust between the two parties exchanging keys. </p>\n         <p>After you have imported a main or root key, you can import working keys to perform various cryptographic operations within Amazon Web Services Payment Cryptography using the ANSI X9 TR-31 symmetric key exchange standard as mandated by PCI PIN.</p>\n         <p>You can also import a <i>root public key certificate</i>, a self-signed certificate used to sign other public key certificates, or a <i>trusted public key certificate</i> under an already established root public key certificate. </p>\n         <p>\n            <b>To import a public root key certificate</b>\n         </p>\n         <p>Using this operation, you can import the public component (in PEM cerificate format) of your private root key. You can use the imported public root key certificate for digital signatures, for example signing wrapping key or signing key in TR-34, within your Amazon Web Services Payment Cryptography account.  </p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: <code>RootCertificatePublicKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyClass</code>: <code>PUBLIC_KEY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyModesOfUse</code>: <code>Verify</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyUsage</code>: <code>TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PublicKeyCertificate</code>: The certificate authority used to sign the root public key certificate.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import a trusted public key certificate</b>\n         </p>\n         <p>The root public key certificate must be in place and operational before you import a trusted public key certificate. Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: <code>TrustedCertificatePublicKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: <code>KeyArn</code> of the <code>RootCertificatePublicKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyModesOfUse</code> and <code>KeyUsage</code>: Corresponding to the cryptographic operations such as wrap, sign, or encrypt that you will allow the trusted public key certificate to perform.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PublicKeyCertificate</code>: The certificate authority used to sign the trusted public key certificate.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Import main keys</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-34 asymmetric key exchange standard to import main keys such as KEK. In TR-34 terminology, the sending party of the key is called Key Distribution Host (KDH) and the receiving party of the key is called Key Receiving Host (KRH). During the key import process, KDH is the user who initiates the key import and KRH is Amazon Web Services Payment Cryptography who receives the key. Before initiating TR-34 key import, you must obtain an import token by calling <a>GetParametersForImport</a>. This operation also returns the wrapping key certificate that KDH uses wrap key under import to generate a TR-34 wrapped key block. The import token expires after 7 days.</p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: The <code>KeyArn</code> of the certificate chain that will sign the signing key certificate and should exist within Amazon Web Services Payment Cryptography before initiating TR-34 key import. If it does not exist, you can import it by calling by calling <code>ImportKey</code> for <code>RootCertificatePublicKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ImportToken</code>: Obtained from KRH by calling <a>GetParametersForImport</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappedKeyBlock</code>: The TR-34 wrapped key block from KDH. It contains the KDH key under import, wrapped with KRH provided wrapping key certificate and signed by the KDH private signing key. This TR-34 key block is generated by the KDH Hardware Security Module (HSM) outside of Amazon Web Services Payment Cryptography.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SigningKeyCertificate</code>: The public component of the private key that signed the KDH TR-34 wrapped key block. In PEM certificate format.</p>\n            </li>\n         </ul>\n         <note>\n            <p>TR-34 is intended primarily to exchange 3DES keys. Your ability to export AES-128 and larger AES keys may be dependent on your source system.</p>\n         </note>\n         <p>\n            <b>Import working keys</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-31 symmetric key exchange standard to import working keys. A KEK must be established within Amazon Web Services Payment Cryptography by using TR-34 key import. To initiate a TR-31 key import, set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WrappedKeyBlock</code>: The key under import and encrypted using KEK. The TR-31 key block generated by your HSM outside of Amazon Web Services Payment Cryptography. </p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappingKeyIdentifier</code>: The <code>KeyArn</code> of the KEK that Amazon Web Services Payment Cryptography uses to decrypt or unwrap the key under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ExportKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetParametersForImport</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Imports symmetric keys and public key certificates in PEM format (base64 encoded) into Amazon Web Services Payment Cryptography.</p>\n         <p>Amazon Web Services Payment Cryptography simplifies key exchange by replacing the existing paper-based approach with a modern electronic approach. With <code>ImportKey</code> you can import symmetric keys using either symmetric and asymmetric key exchange mechanisms.</p>\n         <p>For symmetric key exchange, Amazon Web Services Payment Cryptography uses the ANSI X9 TR-31 norm in accordance with PCI PIN guidelines. And for asymmetric key exchange, Amazon Web Services Payment Cryptography supports ANSI X9 TR-34 norm . Asymmetric key exchange methods are typically used to establish bi-directional trust between the two parties exhanging keys and are used for initial key exchange such as Key Encryption Key (KEK) or Zone Master Key (ZMK). After which you can import working keys using symmetric method to perform various cryptographic operations within Amazon Web Services Payment Cryptography.</p>\n         <p>The TR-34 norm is intended for exchanging 3DES keys only and keys are imported in a WrappedKeyBlock format. Key attributes (such as KeyUsage, KeyAlgorithm, KeyModesOfUse, Exportability) are contained within the key block.  </p>\n         <p>You can also import a <i>root public key certificate</i>, used to sign other public key certificates, or a <i>trusted public key certificate</i> under an already established root public key certificate.</p>\n         <p>\n            <b>To import a public root key certificate</b>\n         </p>\n         <p>You can also import a <i>root public key certificate</i>, used to sign other public key certificates, or a <i>trusted public key certificate</i> under an already established root public key certificate.</p>\n         <p>\n            <b>To import a public root key certificate</b>\n         </p>\n         <p>Using this operation, you can import the public component (in PEM cerificate format) of your private root key. You can use the imported public root key certificate for digital signatures, for example signing wrapping key or signing key in TR-34, within your Amazon Web Services Payment Cryptography account.</p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: <code>RootCertificatePublicKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyClass</code>: <code>PUBLIC_KEY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyModesOfUse</code>: <code>Verify</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyUsage</code>: <code>TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PublicKeyCertificate</code>: The public key certificate in PEM format (base64 encoded) of the private root key under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import a trusted public key certificate</b>\n         </p>\n         <p>The root public key certificate must be in place and operational before you import a trusted public key certificate. Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: <code>TrustedCertificatePublicKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: <code>KeyArn</code> of the <code>RootCertificatePublicKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyModesOfUse</code> and <code>KeyUsage</code>: Corresponding to the cryptographic operations such as wrap, sign, or encrypt that you will allow the trusted public key certificate to perform.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PublicKeyCertificate</code>: The trusted public key certificate in PEM format (base64 encoded) under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import KEK or ZMK using TR-34</b>\n         </p>\n         <p>Using this operation, you can import initial key using TR-34 asymmetric key exchange. In TR-34 terminology, the sending party of the key is called Key Distribution Host (KDH) and the receiving party of the key is called Key Receiving Device (KRD). During the key import process, KDH is the user who initiates the key import and KRD is Amazon Web Services Payment Cryptography who receives the key.</p>\n         <p>To initiate TR-34 key import, the KDH must obtain an import token by calling <a>GetParametersForImport</a>. This operation generates an encryption keypair for the purpose of key import, signs the key and returns back the wrapping key certificate (also known as KRD wrapping certificate) and the root certificate chain. The KDH must trust and install the KRD wrapping certificate on its HSM and use it to encrypt (wrap) the KDH key during TR-34 WrappedKeyBlock generation. The import token and associated KRD wrapping certificate expires after 7 days.</p>\n         <p>Next the KDH generates a key pair for the purpose of signing the encrypted KDH key and provides the public certificate of the signing key to Amazon Web Services Payment Cryptography. The KDH will also need to import the root certificate chain of the KDH signing certificate by calling <code>ImportKey</code> for <code>RootCertificatePublicKey</code>. For more information on TR-34 key import, see section <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-import.html\">Importing symmetric keys</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: Use <code>Tr34KeyBlock</code> parameters.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: The <code>KeyARN</code> of the certificate chain that signed the KDH signing key certificate.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ImportToken</code>: Obtained from KRD by calling <a>GetParametersForImport</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappedKeyBlock</code>: The TR-34 wrapped key material from KDH. It contains the KDH key under import, wrapped with KRD wrapping certificate and signed by KDH signing private key. This TR-34 key block is typically generated by the KDH Hardware Security Module (HSM) outside of Amazon Web Services Payment Cryptography.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SigningKeyCertificate</code>: The public key certificate in PEM format (base64 encoded) of the KDH signing key generated under the root certificate (CertificateAuthorityPublicKeyIdentifier) imported in Amazon Web Services Payment Cryptography.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import WK (Working Key) using TR-31</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-31 symmetric key exchange norm to import working keys. A KEK must be established within Amazon Web Services Payment Cryptography by using TR-34 key import or by using <a>CreateKey</a>. To initiate a TR-31 key import, set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: Use <code>Tr31KeyBlock</code> parameters.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappedKeyBlock</code>: The TR-31 wrapped key material. It contains the key under import, encrypted using KEK. The TR-31 key block is typically generated by a HSM outside of Amazon Web Services Payment Cryptography. </p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappingKeyIdentifier</code>: The <code>KeyArn</code> of the KEK that Amazon Web Services Payment Cryptography uses to decrypt or unwrap the key under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ExportKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetParametersForImport</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.paymentcryptography#ImportKeyInput": {
@@ -1002,7 +1139,7 @@
                 "KeyCheckValueAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV) for DES and AES keys.</p>\n         <p>For DES key, the KCV is computed by encrypting 8 bytes, each with value '00', with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES key, the KCV is computed by encrypting 8 bytes, each with value '01', with the key to be checked and retaining the 3 highest order bytes of the encrypted result.</p>"
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p>\n         <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>"
                     }
                 },
                 "Enabled": {
@@ -1014,7 +1151,7 @@
                 "Tags": {
                     "target": "com.amazonaws.paymentcryptography#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to attach to the key. Each tag consists of a tag key and a tag value. Both the tag key and the tag value are required, but the tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. </p>\n         <p>You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. If you specify an existing tag key with a different tag value, Amazon Web Services Payment Cryptography replaces the current tag value with the specified one.</p>\n         <p>To use this parameter, you must have <code>TagResource</code> permission.</p>\n         <important>\n            <p>Don't include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <note>\n            <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags to the Amazon Web Services Payment Cryptography key. Use this parameter to tag a key when it is imported. To tag an existing Amazon Web Services Payment Cryptography key, use the <a>TagResource</a> operation.</p>\n         <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value are required, but the tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. If you specify an existing tag key with a different tag value, Amazon Web Services Payment Cryptography replaces the current tag value with the specified one.</p>\n         <important>\n            <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <note>\n            <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p>\n         </note>"
                     }
                 }
             },
@@ -1040,18 +1177,18 @@
                 "Tr31KeyBlock": {
                     "target": "com.amazonaws.paymentcryptography#ImportTr31KeyBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameter information for key material import using TR-31 standard.</p>"
+                        "smithy.api#documentation": "<p>Parameter information for key material import using symmetric TR-31 key exchange method.</p>"
                     }
                 },
                 "Tr34KeyBlock": {
                     "target": "com.amazonaws.paymentcryptography#ImportTr34KeyBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameter information for key material import using TR-34 standard.</p>"
+                        "smithy.api#documentation": "<p>Parameter information for key material import using the asymmetric TR-34 key exchange method.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameter information for key material import.</p>"
+                "smithy.api#documentation": "<p>Parameter information for key material import into Amazon Web Services Payment Cryptography using TR-31 or TR-34 key exchange method.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#ImportKeyOutput": {
@@ -1088,13 +1225,13 @@
                 "WrappedKeyBlock": {
                     "target": "com.amazonaws.paymentcryptography#Tr31WrappedKeyBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>The TR-34 wrapped key block to import.</p>",
+                        "smithy.api#documentation": "<p>The TR-31 wrapped key block to import.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameter information for key material import using TR-31 standard.</p>"
+                "smithy.api#documentation": "<p>Parameter information for key material import using symmetric TR-31 key exchange method.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#ImportTr34KeyBlock": {
@@ -1110,14 +1247,14 @@
                 "SigningKeyCertificate": {
                     "target": "com.amazonaws.paymentcryptography#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public key component in PEM certificate format of the private key that signs the KDH TR-34 wrapped key block.</p>",
+                        "smithy.api#documentation": "<p>The public key component in PEM certificate format of the private key that signs the KDH TR-34 WrappedKeyBlock.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ImportToken": {
                     "target": "com.amazonaws.paymentcryptography#ImportTokenId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The import token that initiates key import into Amazon Web Services Payment Cryptography. It expires after 7 days. You can use the same import token to import multiple keys to the same service account.</p>",
+                        "smithy.api#documentation": "<p>The import token that initiates key import using the asymmetric TR-34 key exchange method into Amazon Web Services Payment Cryptography. It expires after 7 days. You can use the same import token to import multiple keys to the same service account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1143,7 +1280,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameter information for key material import using TR-34 standard.</p>"
+                "smithy.api#documentation": "<p>Parameter information for key material import using the asymmetric TR-34 key exchange method.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#InternalServerException": {
@@ -1165,8 +1302,12 @@
                 "KeyArn": {
                     "target": "com.amazonaws.paymentcryptography#KeyArn",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the key.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "KeyAttributes": {
@@ -1179,14 +1320,18 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptography#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
-                        "smithy.api#required": {}
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The key check value (KCV) is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "KeyCheckValueAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm used for calculating key check value (KCV) for DES and AES keys. For a DES key, Amazon Web Services Payment Cryptography computes the KCV by encrypting 8 bytes, each with value '00', with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For an AES key, Amazon Web Services Payment Cryptography computes the KCV by encrypting 8 bytes, each with value '01', with the key to be checked and retaining the 3 highest order bytes of the encrypted result.</p>",
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p>\n         <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1207,51 +1352,88 @@
                 "KeyState": {
                     "target": "com.amazonaws.paymentcryptography#KeyState",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
                         "smithy.api#documentation": "<p>The state of key that is being created or deleted.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "KeyOrigin": {
                     "target": "com.amazonaws.paymentcryptography#KeyOrigin",
                     "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
                         "smithy.api#documentation": "<p>The source of the key material. For keys created within Amazon Web Services Payment Cryptography, the value is <code>AWS_PAYMENT_CRYPTOGRAPHY</code>. For keys imported into Amazon Web Services Payment Cryptography, the value is <code>EXTERNAL</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "CreateTimestamp": {
                     "target": "com.amazonaws.paymentcryptography#Timestamp",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The date and time when the key was created.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "UsageStartTimestamp": {
                     "target": "com.amazonaws.paymentcryptography#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will start using the key material for cryptographic operations.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will start using the key material for cryptographic operations.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "UsageStopTimestamp": {
                     "target": "com.amazonaws.paymentcryptography#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will stop using the key material for cryptographic operations.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will stop using the key material for cryptographic operations.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "DeletePendingTimestamp": {
                     "target": "com.amazonaws.paymentcryptography#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will delete the key. This value is present only when <code>KeyState</code> is <code>DELETE_PENDING</code> and the key is scheduled for deletion.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will delete the key. This value is present only when <code>KeyState</code> is <code>DELETE_PENDING</code> and the key is scheduled for deletion.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "DeleteTimestamp": {
                     "target": "com.amazonaws.paymentcryptography#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will delete the key. This value is present only when when the <code>KeyState</code> is <code>DELETE_COMPLETE</code> and the Amazon Web Services Payment Cryptography key is deleted.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will delete the key. This value is present only when when the <code>KeyState</code> is <code>DELETE_COMPLETE</code> and the Amazon Web Services Payment Cryptography key is deleted.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata about an Amazon Web Services Payment Cryptography key.</p>"
+                "smithy.api#documentation": "<p>Metadata about an Amazon Web Services Payment Cryptography key.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.paymentcryptography#KeyResource",
+                        "service": "com.amazonaws.paymentcryptography#PaymentCryptographyControlPlane",
+                        "ids": {
+                            "KeyIdentifier": "KeyArn"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.paymentcryptography#KeyAlgorithm": {
@@ -1517,6 +1699,48 @@
                 ]
             }
         },
+        "com.amazonaws.paymentcryptography#KeyResource": {
+            "type": "resource",
+            "identifiers": {
+                "KeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.paymentcryptography#CreateKey"
+            },
+            "read": {
+                "target": "com.amazonaws.paymentcryptography#GetKey"
+            },
+            "delete": {
+                "target": "com.amazonaws.paymentcryptography#DeleteKey"
+            },
+            "list": {
+                "target": "com.amazonaws.paymentcryptography#ListKeys"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#RestoreKey"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#StartKeyUsage"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#StopKeyUsage"
+                }
+            ],
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "Key",
+                    "additionalSchemas": [
+                        "com.amazonaws.paymentcryptography#Key"
+                    ]
+                },
+                "smithy.api#suppress": [
+                    "UnstableTrait"
+                ]
+            }
+        },
         "com.amazonaws.paymentcryptography#KeyState": {
             "type": "string",
             "traits": {
@@ -1568,7 +1792,7 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptography#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1758,8 +1982,12 @@
                 "Aliases": {
                     "target": "com.amazonaws.paymentcryptography#Aliases",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The list of aliases. Each alias describes the <code>KeyArn</code> contained within.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "NextToken": {
@@ -1831,7 +2059,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.paymentcryptography#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
                     }
                 }
             },
@@ -1845,8 +2073,12 @@
                 "Keys": {
                     "target": "com.amazonaws.paymentcryptography#KeySummaryList",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The list of keys created within the caller's Amazon Web Services account and Amazon Web Services Region.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "NextToken": {
@@ -1919,7 +2151,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.paymentcryptography#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
                     }
                 }
             },
@@ -1971,25 +2203,7 @@
             "version": "2021-09-14",
             "operations": [
                 {
-                    "target": "com.amazonaws.paymentcryptography#CreateAlias"
-                },
-                {
-                    "target": "com.amazonaws.paymentcryptography#CreateKey"
-                },
-                {
-                    "target": "com.amazonaws.paymentcryptography#DeleteAlias"
-                },
-                {
-                    "target": "com.amazonaws.paymentcryptography#DeleteKey"
-                },
-                {
                     "target": "com.amazonaws.paymentcryptography#ExportKey"
-                },
-                {
-                    "target": "com.amazonaws.paymentcryptography#GetAlias"
-                },
-                {
-                    "target": "com.amazonaws.paymentcryptography#GetKey"
                 },
                 {
                     "target": "com.amazonaws.paymentcryptography#GetParametersForExport"
@@ -2004,45 +2218,36 @@
                     "target": "com.amazonaws.paymentcryptography#ImportKey"
                 },
                 {
-                    "target": "com.amazonaws.paymentcryptography#ListAliases"
-                },
-                {
-                    "target": "com.amazonaws.paymentcryptography#ListKeys"
-                },
-                {
                     "target": "com.amazonaws.paymentcryptography#ListTagsForResource"
-                },
-                {
-                    "target": "com.amazonaws.paymentcryptography#RestoreKey"
-                },
-                {
-                    "target": "com.amazonaws.paymentcryptography#StartKeyUsage"
-                },
-                {
-                    "target": "com.amazonaws.paymentcryptography#StopKeyUsage"
                 },
                 {
                     "target": "com.amazonaws.paymentcryptography#TagResource"
                 },
                 {
                     "target": "com.amazonaws.paymentcryptography#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AliasResource"
                 },
                 {
-                    "target": "com.amazonaws.paymentcryptography#UpdateAlias"
+                    "target": "com.amazonaws.paymentcryptography#KeyResource"
                 }
             ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "Payment Cryptography",
                     "arnNamespace": "payment-cryptography",
-                    "endpointPrefix": "controlplane.payment-cryptography"
+                    "endpointPrefix": "controlplane.payment-cryptography",
+                    "cloudFormationName": "PaymentCryptography"
                 },
                 "aws.auth#sigv4": {
                     "name": "payment-cryptography"
                 },
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>You use the Amazon Web Services Payment Cryptography Control Plane to manage the encryption keys you use for payment-related cryptographic operations. You can create, import, export, share, manage, and delete keys. You can also manage Identity and Access Management (IAM) policies for keys. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security-iam.html\">Identity and access management</a> in the <i>Amazon Web Services Payment Cryptography User Guide.</i>\n         </p>\n         <p>To use encryption keys for payment-related transaction processing and associated cryptographic operations, you use the <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/Welcome.html\">Amazon Web Services Payment Cryptography Data Plane</a>. You can encrypt, decrypt, generate, verify, and translate payment-related cryptographic operations. </p>\n         <p>All Amazon Web Services Payment Cryptography API calls must be signed and transmitted using Transport Layer Security (TLS). We recommend you always use the latest supported TLS version for logging API requests. </p>\n         <p>Amazon Web Services Payment Cryptography supports CloudTrail, a service that logs Amazon Web Services API calls and related events for your Amazon Web Services account and delivers them to an Amazon S3 bucket that you specify. By using the information collected by CloudTrail, you can determine what requests were made to Amazon Web Services Payment Cryptography, who made the request, when it was made, and so on. If you don't conﬁgure a trail, you can still view the most recent events in the CloudTrail console. For more information, see the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/\">CloudTrail User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services Payment Cryptography Control Plane APIs manage encryption keys for use during payment-related cryptographic operations. You can create, import, export, share, manage, and delete keys. You can also manage Identity and Access Management (IAM) policies for keys. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security-iam.html\">Identity and access management</a> in the <i>Amazon Web Services Payment Cryptography User Guide.</i>\n         </p>\n         <p>To use encryption keys for payment-related transaction processing and associated cryptographic operations, you use the <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/Welcome.html\">Amazon Web Services Payment Cryptography Data Plane</a>. You can perform actions like encrypt, decrypt, generate, and verify payment-related data.</p>\n         <p>All Amazon Web Services Payment Cryptography API calls must be signed and transmitted using Transport Layer Security (TLS). We recommend you always use the latest supported TLS version for logging API requests. </p>\n         <p>Amazon Web Services Payment Cryptography supports CloudTrail for control plane operations, a service that logs Amazon Web Services API calls and related events for your Amazon Web Services account and delivers them to an Amazon S3 bucket you specify. By using the information collected by CloudTrail, you can determine what requests were made to Amazon Web Services Payment Cryptography, who made the request, when it was made, and so on. If you don't conﬁgure a trail, you can still view the most recent events in the CloudTrail console. For more information, see the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/\">CloudTrail User Guide</a>.</p>",
                 "smithy.api#title": "Payment Cryptography Control Plane",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2086,7 +2291,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2105,7 +2309,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2133,13 +2336,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2152,7 +2356,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2166,7 +2369,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2189,7 +2391,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -2224,11 +2425,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -2239,16 +2438,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -2262,14 +2464,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -2278,15 +2478,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -2297,16 +2496,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -2320,7 +2522,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -2340,11 +2541,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -2355,20 +2554,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2379,18 +2580,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -2796,8 +3001,12 @@
                 "Key": {
                     "target": "com.amazonaws.paymentcryptography#Key",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The key material of the restored key. The <code>KeyState</code> will change to <code>CREATE_COMPLETE</code> and value for <code>DeletePendingTimestamp</code> gets removed. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
@@ -2913,8 +3122,12 @@
                 "Key": {
                     "target": "com.amazonaws.paymentcryptography#Key",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The <code>KeyARN</code> of the Amazon Web Services Payment Cryptography key activated for use.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
@@ -2982,8 +3195,12 @@
                 "Key": {
                     "target": "com.amazonaws.paymentcryptography#Key",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
@@ -3085,7 +3302,7 @@
                 "Tags": {
                     "target": "com.amazonaws.paymentcryptography#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more tags. Each tag consists of a tag key and a tag value. The tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. If you specify an existing tag key with a different tag value, Amazon Web Services Payment Cryptography replaces the current tag value with the new one.</p>\n         <important>\n            <p>Don't include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>To use this parameter, you must have <a>TagResource</a> permission in an IAM policy.</p>\n         <important>\n            <p>Don't include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>One or more tags. Each tag consists of a tag key and a tag value. The tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. If you specify an existing tag key with a different tag value, Amazon Web Services Payment Cryptography replaces the current tag value with the new one.</p>\n         <important>\n            <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>To use this parameter, you must have <a>TagResource</a> permission in an IAM policy.</p>\n         <important>\n            <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3326,8 +3543,12 @@
                 "Alias": {
                     "target": "com.amazonaws.paymentcryptography#Alias",
                     "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The alias name.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             },
@@ -3368,13 +3589,25 @@
                 "KeyMaterial": {
                     "target": "com.amazonaws.paymentcryptography#KeyMaterial",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameter information for generating a wrapped key using TR-31 or TR-34 standard.</p>",
+                        "smithy.api#documentation": "<p>Parameter information for generating a wrapped key using TR-31 or TR-34 skey exchange method.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "KeyCheckValue": {
+                    "target": "com.amazonaws.paymentcryptography#KeyCheckValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key check value (KCV) is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>"
+                    }
+                },
+                "KeyCheckValueAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p>\n         <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameter information for generating a wrapped key using TR-31 or TR-34 standard.</p>"
+                "smithy.api#documentation": "<p>Parameter information for generating a WrappedKeyBlock for key exchange.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#WrappedKeyMaterialFormat": {
