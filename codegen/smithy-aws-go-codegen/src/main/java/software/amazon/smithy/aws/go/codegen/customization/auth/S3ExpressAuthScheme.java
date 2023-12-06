@@ -43,6 +43,7 @@ import java.util.function.Consumer;
 
 import static software.amazon.smithy.go.codegen.GoWriter.emptyGoTemplate;
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
+import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
 
 public class S3ExpressAuthScheme implements GoIntegration {
     private static final ConfigField s3ExpressCredentials =
@@ -67,6 +68,14 @@ public class S3ExpressAuthScheme implements GoIntegration {
                     .withClientInput(true)
                     .build();
 
+    private static final ConfigFieldResolver s3ExpressCredentialsOperationFinalizer =
+            ConfigFieldResolver.builder()
+                    .location(ConfigFieldResolver.Location.OPERATION)
+                    .target(ConfigFieldResolver.Target.FINALIZATION)
+                    .resolver(buildPackageSymbol("finalizeOperationExpressCredentials"))
+                    .withClientInput(true)
+                    .build();
+
     @Override
     public void writeAdditionalFiles(
             GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator
@@ -84,6 +93,7 @@ public class S3ExpressAuthScheme implements GoIntegration {
                         .addConfigField(s3ExpressCredentials)
                         .addConfigFieldResolver(s3ExpressCredentialsResolver)
                         .addConfigFieldResolver(s3ExpressCredentialsClientFinalizer)
+                        .addConfigFieldResolver(s3ExpressCredentialsOperationFinalizer)
                         .addAuthSchemeDefinition(SigV4S3ExpressTrait.ID, new SigV4S3Express())
                         .build()
         );

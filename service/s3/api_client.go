@@ -111,6 +111,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 
 	resolveCredentialProvider(&options)
 
+	finalizeOperationExpressCredentials(&options, *c)
+
 	finalizeOperationEndpointAuthResolver(&options)
 
 	for _, fn := range stackFns {

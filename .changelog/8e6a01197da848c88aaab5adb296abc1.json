@@ -1,0 +1,8 @@
+{
+    "id": "8e6a0119-7da8-48c8-8aaa-b5adb296abc1",
+    "type": "bugfix",
+    "description": "Improve uniqueness of default S3Express sesssion credentials cache keying to prevent collision in multi-credential scenarios.",
+    "modules": [
+        "service/s3"
+    ]
+}
