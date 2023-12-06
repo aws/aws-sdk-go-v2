@@ -1,3 +1,7 @@
+# v1.43.1 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.43.0 (2023-12-04)
 
 * **Feature**: Adds support for custom color correction on channels using 3D LUT files.

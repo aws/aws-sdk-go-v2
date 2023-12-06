@@ -1,3 +1,8 @@
+# v1.6.0 (2023-12-06)
+
+* **Feature**: AWS Payment Cryptography IPEK feature release
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.5.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

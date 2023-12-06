@@ -1,8 +1,0 @@
-{
-    "id": "1e67e315-4d61-4506-929c-3dec3f349711",
-    "type": "documentation",
-    "description": "Documentation updates for Trust and Safety features.",
-    "modules": [
-        "service/comprehend"
-    ]
-}

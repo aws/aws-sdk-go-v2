@@ -1,8 +1,0 @@
-{
-    "id": "2efef09a-601c-4db4-a163-1723cfe07183",
-    "type": "bugfix",
-    "description": "STS `AssumeRoleWithSAML` and `AssumeRoleWithWebIdentity` would incorrectly attempt to use SigV4 authentication.",
-    "modules": [
-        "service/sts"
-    ]
-}

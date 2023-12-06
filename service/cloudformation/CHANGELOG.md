@@ -1,3 +1,7 @@
+# v1.42.2 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.42.1 (2023-12-05)
 
 * **Documentation**: Documentation update, December 2023

@@ -1,3 +1,8 @@
+# v1.31.0 (2023-12-06)
+
+* **Feature**: AWS Backup - Features: Add VaultType to the output of DescribeRecoveryPoint, ListRecoveryPointByBackupVault API and add ResourceType to the input of ListRestoreJobs API
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.30.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

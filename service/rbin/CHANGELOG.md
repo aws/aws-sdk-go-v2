@@ -1,3 +1,7 @@
+# v1.14.1 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.14.0 (2023-12-01)
 
 * **Feature**: Added resource identifier in the output and updated error handling.

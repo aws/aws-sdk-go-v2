@@ -1,8 +1,0 @@
-{
-    "id": "e5989f85-eb41-4e4c-83e7-2d13fe2730cb",
-    "type": "feature",
-    "description": "Releasing the new cpuManufacturer attribute within the DescribeInstanceTypes API response which notifies our customers with information on who the Manufacturer is for the processor attached to the instance, for example: Intel.",
-    "modules": [
-        "service/ec2"
-    ]
-}

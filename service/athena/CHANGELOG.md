@@ -1,3 +1,7 @@
+# v1.37.1 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.37.0 (2023-12-05)
 
 * **Feature**: Adding IdentityCenter enabled request for interactive query

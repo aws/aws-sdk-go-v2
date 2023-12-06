@@ -1,3 +1,8 @@
+# v1.29.3 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+* **Documentation**: Documentation updates for Trust and Safety features.
+
 # v1.29.2 (2023-12-01)
 
 * **Bug Fix**: Correct wrapping of errors in authentication workflow.

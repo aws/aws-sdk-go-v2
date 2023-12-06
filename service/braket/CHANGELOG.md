@@ -1,3 +1,7 @@
+# v1.24.1 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.24.0 (2023-12-04)
 
 * **Feature**: This release enhances service support to create quantum tasks and hybrid jobs associated with Braket Direct Reservations.

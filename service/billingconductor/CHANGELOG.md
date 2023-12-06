@@ -1,3 +1,7 @@
+# v1.13.1 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.13.0 (2023-12-04)
 
 * **Feature**: This release adds the ability to specify a linked account of the billing group for the custom line item resource.

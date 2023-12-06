@@ -1,3 +1,7 @@
+# v1.1.1 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.1.0 (2023-12-05)
 
 * **Feature**: Updated service title from cleanroomsml to CleanRoomsML.

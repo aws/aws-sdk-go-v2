@@ -1,3 +1,7 @@
+# v1.8.1 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.8.0 (2023-12-01)
 
 * **Feature**: Adds description field to PolicyStore API's and namespaces field to GetSchema.

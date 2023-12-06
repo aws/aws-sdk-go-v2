@@ -1,8 +1,0 @@
-{
-    "id": "0a689c9e-a891-4d8b-945d-dd89a233ea1b",
-    "type": "feature",
-    "description": "AWS Backup - Features: Add VaultType to the output of DescribeRecoveryPoint, ListRecoveryPointByBackupVault API and add ResourceType to the input of ListRestoreJobs API",
-    "modules": [
-        "service/backup"
-    ]
-}

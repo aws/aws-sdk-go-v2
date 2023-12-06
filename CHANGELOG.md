@@ -1,3 +1,23 @@
+# Release (2023-12-06)
+
+## General Highlights
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.31.0](service/backup/CHANGELOG.md#v1310-2023-12-06)
+  * **Feature**: AWS Backup - Features: Add VaultType to the output of DescribeRecoveryPoint, ListRecoveryPointByBackupVault API and add ResourceType to the input of ListRestoreJobs API
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.29.3](service/comprehend/CHANGELOG.md#v1293-2023-12-06)
+  * **Documentation**: Documentation updates for Trust and Safety features.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.84.0](service/connect/CHANGELOG.md#v1840-2023-12-06)
+  * **Feature**: Releasing Tagging Support for Instance Management APIS
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.140.0](service/ec2/CHANGELOG.md#v11400-2023-12-06)
+  * **Feature**: Releasing the new cpuManufacturer attribute within the DescribeInstanceTypes API response which notifies our customers with information on who the Manufacturer is for the processor attached to the instance, for example: Intel.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.6.0](service/paymentcryptography/CHANGELOG.md#v160-2023-12-06)
+  * **Feature**: AWS Payment Cryptography IPEK feature release
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.26.3](service/sts/CHANGELOG.md#v1263-2023-12-06)
+  * **Bug Fix**: STS `AssumeRoleWithSAML` and `AssumeRoleWithWebIdentity` would incorrectly attempt to use SigV4 authentication.
+
 # Release (2023-12-05)
 
 ## Module Highlights

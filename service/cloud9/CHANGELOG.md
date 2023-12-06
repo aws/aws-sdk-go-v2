@@ -1,3 +1,7 @@
+# v1.22.1 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.22.0 (2023-12-04)
 
 * **Feature**: This release adds the requirement to include the imageId parameter in the CreateEnvironmentEC2 API call.

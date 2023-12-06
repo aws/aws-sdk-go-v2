@@ -1,3 +1,7 @@
+# v1.24.4 (2023-12-06)
+
+* **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.
+
 # v1.24.3 (2023-12-04)
 
 * **Documentation**: Documentation-only updates for Dawn
