@@ -4919,6 +4919,15 @@ func awsRestjson1_deserializeOpDocumentDescribeRecoveryPointOutput(v **DescribeR
 				sv.StorageClass = types.StorageClass(jtv)
 			}
 
+		case "VaultType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VaultType to be of type string, got %T instead", value)
+				}
+				sv.VaultType = types.VaultType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -19663,6 +19672,15 @@ func awsRestjson1_deserializeDocumentRecoveryPointByBackupVault(v **types.Recove
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "VaultType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VaultType to be of type string, got %T instead", value)
+				}
+				sv.VaultType = types.VaultType(jtv)
 			}
 
 		default:

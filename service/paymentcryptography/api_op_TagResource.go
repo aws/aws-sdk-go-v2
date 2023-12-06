@@ -50,11 +50,11 @@ type TagResourceInput struct {
 	// Services Payment Cryptography key with the same tag key. If you specify an
 	// existing tag key with a different tag value, Amazon Web Services Payment
 	// Cryptography replaces the current tag value with the new one. Don't include
-	// confidential or sensitive information in this field. This field may be displayed
-	// in plaintext in CloudTrail logs and other output. To use this parameter, you
-	// must have TagResource permission in an IAM policy. Don't include confidential
-	// or sensitive information in this field. This field may be displayed in plaintext
-	// in CloudTrail logs and other output.
+	// personal, confidential or sensitive information in this field. This field may be
+	// displayed in plaintext in CloudTrail logs and other output. To use this
+	// parameter, you must have TagResource permission in an IAM policy. Don't include
+	// personal, confidential or sensitive information in this field. This field may be
+	// displayed in plaintext in CloudTrail logs and other output.
 	//
 	// This member is required.
 	Tags []types.Tag

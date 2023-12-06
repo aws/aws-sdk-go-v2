@@ -1114,6 +1114,37 @@ func (m *awsAwsjson10_serializeOpUpdateAlias) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentExportAttributes(v *types.ExportAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExportDukptInitialKey != nil {
+		ok := object.Key("ExportDukptInitialKey")
+		if err := awsAwsjson10_serializeDocumentExportDukptInitialKey(v.ExportDukptInitialKey, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.KeyCheckValueAlgorithm) > 0 {
+		ok := object.Key("KeyCheckValueAlgorithm")
+		ok.String(string(v.KeyCheckValueAlgorithm))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentExportDukptInitialKey(v *types.ExportDukptInitialKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeySerialNumber != nil {
+		ok := object.Key("KeySerialNumber")
+		ok.String(*v.KeySerialNumber)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentExportKeyMaterial(v types.ExportKeyMaterial, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1522,6 +1553,13 @@ func awsAwsjson10_serializeOpDocumentDeleteKeyInput(v *DeleteKeyInput, value smi
 func awsAwsjson10_serializeOpDocumentExportKeyInput(v *ExportKeyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ExportAttributes != nil {
+		ok := object.Key("ExportAttributes")
+		if err := awsAwsjson10_serializeDocumentExportAttributes(v.ExportAttributes, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ExportKeyIdentifier != nil {
 		ok := object.Key("ExportKeyIdentifier")

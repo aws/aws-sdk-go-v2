@@ -191,6 +191,9 @@ type DescribeRecoveryPointOutput struct {
 	// .
 	StorageClass types.StorageClass
 
+	// This is the type of vault in which the described recovery point is stored.
+	VaultType types.VaultType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

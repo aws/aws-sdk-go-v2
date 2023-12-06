@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an asynchronous document classification job. Use the
-// DescribeDocumentClassificationJob operation to track the progress of the job.
+// Starts an asynchronous document classification job using a custom
+// classification model. Use the DescribeDocumentClassificationJob operation to
+// track the progress of the job.
 func (c *Client) StartDocumentClassificationJob(ctx context.Context, params *StartDocumentClassificationJobInput, optFns ...func(*Options)) (*StartDocumentClassificationJobOutput, error) {
 	if params == nil {
 		params = &StartDocumentClassificationJobInput{}

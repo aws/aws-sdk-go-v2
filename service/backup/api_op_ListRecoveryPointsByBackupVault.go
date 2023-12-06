@@ -60,7 +60,23 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	// Name (ARN).
 	ByResourceArn *string
 
-	// Returns only recovery points that match the specified resource type.
+	// Returns only recovery points that match the specified resource type(s):
+	//   - Aurora for Amazon Aurora
+	//   - CloudFormation for CloudFormation
+	//   - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//   - DynamoDB for Amazon DynamoDB
+	//   - EBS for Amazon Elastic Block Store
+	//   - EC2 for Amazon Elastic Compute Cloud
+	//   - EFS for Amazon Elastic File System
+	//   - FSx for Amazon FSx
+	//   - Neptune for Amazon Neptune
+	//   - Redshift for Amazon Redshift
+	//   - RDS for Amazon Relational Database Service
+	//   - SAP HANA on Amazon EC2 for SAP HANA databases
+	//   - Storage Gateway for Storage Gateway
+	//   - S3 for Amazon S3
+	//   - Timestream for Amazon Timestream
+	//   - VirtualMachine for virtual machines
 	ByResourceType *string
 
 	// The maximum number of items to be returned.

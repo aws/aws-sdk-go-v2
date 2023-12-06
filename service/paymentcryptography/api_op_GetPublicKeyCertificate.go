@@ -46,16 +46,15 @@ type GetPublicKeyCertificateInput struct {
 
 type GetPublicKeyCertificateOutput struct {
 
-	// The public key component of the asymmetric key pair in a certificate (PEM)
-	// format. It is signed by the root certificate authority (CA) within your service
-	// account. The certificate expires in 90 days.
+	// The public key component of the asymmetric key pair in a certificate PEM format
+	// (base64 encoded). It is signed by the root certificate authority (CA). The
+	// certificate expires in 90 days.
 	//
 	// This member is required.
 	KeyCertificate *string
 
-	// The certificate chain that signed the public key certificate of the asymmetric
-	// key pair. This is the root certificate authority (CA) within your service
-	// account.
+	// The root certificate authority (CA) that signed the public key certificate in
+	// PEM format (base64 encoded) of the asymmetric key pair.
 	//
 	// This member is required.
 	KeyCertificateChain *string

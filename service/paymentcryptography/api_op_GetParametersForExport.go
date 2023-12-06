@@ -48,8 +48,8 @@ type GetParametersForExportInput struct {
 	KeyMaterialType types.KeyMaterialType
 
 	// The signing key algorithm to generate a signing key certificate. This
-	// certificate signs the wrapped key under export within the TR-34 key block
-	// cryptogram. RSA_2048 is the only signing key algorithm allowed.
+	// certificate signs the wrapped key under export within the TR-34 key block.
+	// RSA_2048 is the only signing key algorithm allowed.
 	//
 	// This member is required.
 	SigningKeyAlgorithm types.KeyAlgorithm
@@ -77,14 +77,14 @@ type GetParametersForExportOutput struct {
 	// This member is required.
 	SigningKeyAlgorithm types.KeyAlgorithm
 
-	// The signing key certificate of the public key for signature within the TR-34
-	// key block cryptogram. The certificate expires after 7 days.
+	// The signing key certificate in PEM format (base64 encoded) of the public key
+	// for signature within the TR-34 key block. The certificate expires after 7 days.
 	//
 	// This member is required.
 	SigningKeyCertificate *string
 
-	// The certificate chain that signed the signing key certificate. This is the root
-	// certificate authority (CA) within your service account.
+	// The root certificate authority (CA) that signed the signing key certificate in
+	// PEM format (base64 encoded).
 	//
 	// This member is required.
 	SigningKeyCertificateChain *string

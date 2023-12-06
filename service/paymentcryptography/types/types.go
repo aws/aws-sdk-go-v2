@@ -23,8 +23,39 @@ type Alias struct {
 	noSmithyDocumentSerde
 }
 
+// The attributes for IPEK generation during export.
+type ExportAttributes struct {
+
+	// Parameter information for IPEK export.
+	ExportDukptInitialKey *ExportDukptInitialKey
+
+	// The algorithm that Amazon Web Services Payment Cryptography uses to calculate
+	// the key check value (KCV). It is used to validate the key integrity. Specify KCV
+	// for IPEK export only. For TDES keys, the KCV is computed by encrypting 8 bytes,
+	// each with value of zero, with the key to be checked and retaining the 3 highest
+	// order bytes of the encrypted result. For AES keys, the KCV is computed using a
+	// CMAC algorithm where the input data is 16 bytes of zero and retaining the 3
+	// highest order bytes of the encrypted result.
+	KeyCheckValueAlgorithm KeyCheckValueAlgorithm
+
+	noSmithyDocumentSerde
+}
+
+// Parameter information for IPEK generation during export.
+type ExportDukptInitialKey struct {
+
+	// The KSN for IPEK generation using DUKPT. KSN must be padded before sending to
+	// Amazon Web Services Payment Cryptography. KSN hex length should be 20 for a
+	// TDES_2KEY key or 24 for an AES key.
+	//
+	// This member is required.
+	KeySerialNumber *string
+
+	noSmithyDocumentSerde
+}
+
 // Parameter information for key material export from Amazon Web Services Payment
-// Cryptography.
+// Cryptography using TR-31 or TR-34 key exchange method.
 //
 // The following types satisfy this interface:
 //
@@ -34,7 +65,8 @@ type ExportKeyMaterial interface {
 	isExportKeyMaterial()
 }
 
-// Parameter information for key material export using TR-31 standard.
+// Parameter information for key material export using symmetric TR-31 key
+// exchange method.
 type ExportKeyMaterialMemberTr31KeyBlock struct {
 	Value ExportTr31KeyBlock
 
@@ -43,7 +75,8 @@ type ExportKeyMaterialMemberTr31KeyBlock struct {
 
 func (*ExportKeyMaterialMemberTr31KeyBlock) isExportKeyMaterial() {}
 
-// Parameter information for key material export using TR-34 standard.
+// Parameter information for key material export using the asymmetric TR-34 key
+// exchange method.
 type ExportKeyMaterialMemberTr34KeyBlock struct {
 	Value ExportTr34KeyBlock
 
@@ -52,7 +85,8 @@ type ExportKeyMaterialMemberTr34KeyBlock struct {
 
 func (*ExportKeyMaterialMemberTr34KeyBlock) isExportKeyMaterial() {}
 
-// Parameter information for key material export using TR-31 standard.
+// Parameter information for key material export using symmetric TR-31 key
+// exchange method.
 type ExportTr31KeyBlock struct {
 
 	// The KeyARN of the the wrapping key. This key encrypts or wraps the key under
@@ -64,7 +98,8 @@ type ExportTr31KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
-// Parameter information for key material export using TR-34 standard.
+// Parameter information for key material export using the asymmetric TR-34 key
+// exchange method.
 type ExportTr34KeyBlock struct {
 
 	// The KeyARN of the certificate chain that signs the wrapping key certificate
@@ -102,7 +137,8 @@ type ExportTr34KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
-// Parameter information for key material import.
+// Parameter information for key material import into Amazon Web Services Payment
+// Cryptography using TR-31 or TR-34 key exchange method.
 //
 // The following types satisfy this interface:
 //
@@ -123,7 +159,8 @@ type ImportKeyMaterialMemberRootCertificatePublicKey struct {
 
 func (*ImportKeyMaterialMemberRootCertificatePublicKey) isImportKeyMaterial() {}
 
-// Parameter information for key material import using TR-31 standard.
+// Parameter information for key material import using symmetric TR-31 key
+// exchange method.
 type ImportKeyMaterialMemberTr31KeyBlock struct {
 	Value ImportTr31KeyBlock
 
@@ -132,7 +169,8 @@ type ImportKeyMaterialMemberTr31KeyBlock struct {
 
 func (*ImportKeyMaterialMemberTr31KeyBlock) isImportKeyMaterial() {}
 
-// Parameter information for key material import using TR-34 standard.
+// Parameter information for key material import using the asymmetric TR-34 key
+// exchange method.
 type ImportKeyMaterialMemberTr34KeyBlock struct {
 	Value ImportTr34KeyBlock
 
@@ -150,10 +188,11 @@ type ImportKeyMaterialMemberTrustedCertificatePublicKey struct {
 
 func (*ImportKeyMaterialMemberTrustedCertificatePublicKey) isImportKeyMaterial() {}
 
-// Parameter information for key material import using TR-31 standard.
+// Parameter information for key material import using symmetric TR-31 key
+// exchange method.
 type ImportTr31KeyBlock struct {
 
-	// The TR-34 wrapped key block to import.
+	// The TR-31 wrapped key block to import.
 	//
 	// This member is required.
 	WrappedKeyBlock *string
@@ -167,7 +206,8 @@ type ImportTr31KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
-// Parameter information for key material import using TR-34 standard.
+// Parameter information for key material import using the asymmetric TR-34 key
+// exchange method.
 type ImportTr34KeyBlock struct {
 
 	// The KeyARN of the certificate chain that signs the signing key certificate
@@ -176,9 +216,10 @@ type ImportTr34KeyBlock struct {
 	// This member is required.
 	CertificateAuthorityPublicKeyIdentifier *string
 
-	// The import token that initiates key import into Amazon Web Services Payment
-	// Cryptography. It expires after 7 days. You can use the same import token to
-	// import multiple keys to the same service account.
+	// The import token that initiates key import using the asymmetric TR-34 key
+	// exchange method into Amazon Web Services Payment Cryptography. It expires after
+	// 7 days. You can use the same import token to import multiple keys to the same
+	// service account.
 	//
 	// This member is required.
 	ImportToken *string
@@ -190,7 +231,7 @@ type ImportTr34KeyBlock struct {
 	KeyBlockFormat Tr34KeyBlockFormat
 
 	// The public key component in PEM certificate format of the private key that
-	// signs the KDH TR-34 wrapped key block.
+	// signs the KDH TR-34 WrappedKeyBlock.
 	//
 	// This member is required.
 	SigningKeyCertificate *string
@@ -240,21 +281,18 @@ type Key struct {
 	KeyAttributes *KeyAttributes
 
 	// The key check value (KCV) is used to check if all parties holding a given key
-	// have the same key or to detect that a key has changed. Amazon Web Services
-	// Payment Cryptography calculates the KCV by using standard algorithms, typically
-	// by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to
-	// the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+	// have the same key or to detect that a key has changed.
 	//
 	// This member is required.
 	KeyCheckValue *string
 
-	// The algorithm used for calculating key check value (KCV) for DES and AES keys.
-	// For a DES key, Amazon Web Services Payment Cryptography computes the KCV by
-	// encrypting 8 bytes, each with value '00', with the key to be checked and
-	// retaining the 3 highest order bytes of the encrypted result. For an AES key,
-	// Amazon Web Services Payment Cryptography computes the KCV by encrypting 8 bytes,
-	// each with value '01', with the key to be checked and retaining the 3 highest
-	// order bytes of the encrypted result.
+	// The algorithm that Amazon Web Services Payment Cryptography uses to calculate
+	// the key check value (KCV). It is used to validate the key integrity. For TDES
+	// keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with
+	// the key to be checked and retaining the 3 highest order bytes of the encrypted
+	// result. For AES keys, the KCV is computed using a CMAC algorithm where the input
+	// data is 16 bytes of zero and retaining the 3 highest order bytes of the
+	// encrypted result.
 	//
 	// This member is required.
 	KeyCheckValueAlgorithm KeyCheckValueAlgorithm
@@ -397,10 +435,7 @@ type KeySummary struct {
 	KeyAttributes *KeyAttributes
 
 	// The key check value (KCV) is used to check if all parties holding a given key
-	// have the same key or to detect that a key has changed. Amazon Web Services
-	// Payment Cryptography calculates the KCV by using standard algorithms, typically
-	// by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to
-	// the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+	// have the same key or to detect that a key has changed.
 	//
 	// This member is required.
 	KeyCheckValue *string
@@ -470,12 +505,11 @@ type TrustedCertificatePublicKey struct {
 	noSmithyDocumentSerde
 }
 
-// Parameter information for generating a wrapped key using TR-31 or TR-34
-// standard.
+// Parameter information for generating a WrappedKeyBlock for key exchange.
 type WrappedKey struct {
 
-	// Parameter information for generating a wrapped key using TR-31 or TR-34
-	// standard.
+	// Parameter information for generating a wrapped key using TR-31 or TR-34 skey
+	// exchange method.
 	//
 	// This member is required.
 	KeyMaterial *string
@@ -489,6 +523,19 @@ type WrappedKey struct {
 	//
 	// This member is required.
 	WrappingKeyArn *string
+
+	// The key check value (KCV) is used to check if all parties holding a given key
+	// have the same key or to detect that a key has changed.
+	KeyCheckValue *string
+
+	// The algorithm that Amazon Web Services Payment Cryptography uses to calculate
+	// the key check value (KCV). It is used to validate the key integrity. For TDES
+	// keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with
+	// the key to be checked and retaining the 3 highest order bytes of the encrypted
+	// result. For AES keys, the KCV is computed using a CMAC algorithm where the input
+	// data is 16 bytes of zero and retaining the 3 highest order bytes of the
+	// encrypted result.
+	KeyCheckValueAlgorithm KeyCheckValueAlgorithm
 
 	noSmithyDocumentSerde
 }

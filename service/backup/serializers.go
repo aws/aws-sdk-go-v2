@@ -4973,6 +4973,10 @@ func awsRestjson1_serializeOpHttpBindingsListRestoreJobsInput(v *ListRestoreJobs
 		encoder.SetQuery("createdBefore").String(smithytime.FormatDateTime(*v.ByCreatedBefore))
 	}
 
+	if v.ByResourceType != nil {
+		encoder.SetQuery("resourceType").String(*v.ByResourceType)
+	}
+
 	if v.ByRestoreTestingPlanArn != nil {
 		encoder.SetQuery("restoreTestingPlanArn").String(*v.ByRestoreTestingPlanArn)
 	}

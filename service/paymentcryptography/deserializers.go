@@ -3865,6 +3865,24 @@ func awsAwsjson10_deserializeDocumentWrappedKey(v **types.WrappedKey, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "KeyCheckValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeyCheckValue to be of type string, got %T instead", value)
+				}
+				sv.KeyCheckValue = ptr.String(jtv)
+			}
+
+		case "KeyCheckValueAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeyCheckValueAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.KeyCheckValueAlgorithm = types.KeyCheckValueAlgorithm(jtv)
+			}
+
 		case "KeyMaterial":
 			if value != nil {
 				jtv, ok := value.(string)

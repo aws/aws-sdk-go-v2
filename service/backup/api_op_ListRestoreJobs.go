@@ -50,6 +50,25 @@ type ListRestoreJobsInput struct {
 	// Returns only restore jobs that were created before the specified date.
 	ByCreatedBefore *time.Time
 
+	// Include this parameter to return only restore jobs for the specified resources:
+	//   - Aurora for Amazon Aurora
+	//   - CloudFormation for CloudFormation
+	//   - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//   - DynamoDB for Amazon DynamoDB
+	//   - EBS for Amazon Elastic Block Store
+	//   - EC2 for Amazon Elastic Compute Cloud
+	//   - EFS for Amazon Elastic File System
+	//   - FSx for Amazon FSx
+	//   - Neptune for Amazon Neptune
+	//   - Redshift for Amazon Redshift
+	//   - RDS for Amazon Relational Database Service
+	//   - SAP HANA on Amazon EC2 for SAP HANA databases
+	//   - Storage Gateway for Storage Gateway
+	//   - S3 for Amazon S3
+	//   - Timestream for Amazon Timestream
+	//   - VirtualMachine for virtual machines
+	ByResourceType *string
+
 	// This returns only restore testing jobs that match the specified resource Amazon
 	// Resource Name (ARN).
 	ByRestoreTestingPlanArn *string

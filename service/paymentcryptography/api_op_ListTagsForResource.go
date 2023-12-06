@@ -46,7 +46,9 @@ type ListTagsForResourceInput struct {
 
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more
-	// than the specified number of items, but it might return fewer.
+	// than the specified number of items, but it might return fewer. This value is
+	// optional. If you include a value, it must be between 1 and 100, inclusive. If
+	// you do not include a value, it defaults to 50.
 	MaxResults *int32
 
 	// Use this parameter in a subsequent request after you receive a response with
@@ -167,7 +169,9 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 type ListTagsForResourcePaginatorOptions struct {
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more
-	// than the specified number of items, but it might return fewer.
+	// than the specified number of items, but it might return fewer. This value is
+	// optional. If you include a value, it must be between 1 and 100, inclusive. If
+	// you do not include a value, it defaults to 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

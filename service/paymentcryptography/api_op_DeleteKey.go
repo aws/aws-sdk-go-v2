@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the key material and all metadata associated with Amazon Web Services
+// Deletes the key material and metadata associated with Amazon Web Services
 // Payment Cryptography key. Key deletion is irreversible. After a key is deleted,
 // you can't perform cryptographic operations using the key. For example, you can't
 // decrypt data that was encrypted by a deleted Amazon Web Services Payment
@@ -20,16 +20,13 @@ import (
 // destructive, Amazon Web Services Payment Cryptography has a safety mechanism to
 // prevent accidental deletion of a key. When you call this operation, Amazon Web
 // Services Payment Cryptography disables the specified key but doesn't delete it
-// until after a waiting period. The default waiting period is 7 days. To set a
-// different waiting period, set DeleteKeyInDays . During the waiting period, the
-// KeyState is DELETE_PENDING . After the key is deleted, the KeyState is
-// DELETE_COMPLETE . If you delete key material, you can use ImportKey to reimport
-// the same key material into the Amazon Web Services Payment Cryptography key. You
-// should delete a key only when you are sure that you don't need to use it anymore
-// and no other parties are utilizing this key. If you aren't sure, consider
-// deactivating it instead by calling StopKeyUsage . Cross-account use: This
-// operation can't be used across different Amazon Web Services accounts. Related
-// operations:
+// until after a waiting period set using DeleteKeyInDays . The default waiting
+// period is 7 days. During the waiting period, the KeyState is DELETE_PENDING .
+// After the key is deleted, the KeyState is DELETE_COMPLETE . You should delete a
+// key only when you are sure that you don't need to use it anymore and no other
+// parties are utilizing this key. If you aren't sure, consider deactivating it
+// instead by calling StopKeyUsage . Cross-account use: This operation can't be
+// used across different Amazon Web Services accounts. Related operations:
 //   - RestoreKey
 //   - StartKeyUsage
 //   - StopKeyUsage

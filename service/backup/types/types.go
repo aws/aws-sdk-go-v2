@@ -1238,6 +1238,9 @@ type RecoveryPointByBackupVault struct {
 	// A message explaining the reason of the recovery point deletion failure.
 	StatusMessage *string
 
+	// This is the type of vault in which the described recovery point is stored.
+	VaultType VaultType
+
 	noSmithyDocumentSerde
 }
 

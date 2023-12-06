@@ -40543,6 +40543,11 @@ func awsRestjson1_deserializeDocumentInstance(v **types.Instance, value interfac
 				return err
 			}
 
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

@@ -2464,6 +2464,13 @@ func awsRestjson1_serializeOpDocumentCreateInstanceInput(v *CreateInstanceInput,
 		ok.Boolean(*v.OutboundCallsEnabled)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

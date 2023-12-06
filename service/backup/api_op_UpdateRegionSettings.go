@@ -11,12 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the current service opt-in settings for the Region. If service-opt-in
-// is enabled for a service, Backup tries to protect that service's resources in
-// this Region, when the resource is included in an on-demand backup or scheduled
-// backup plan. Otherwise, Backup does not try to protect that service's resources
-// in this Region. Use the DescribeRegionSettings API to determine the resource
-// types that are supported.
+// Updates the current service opt-in settings for the Region. Use the
+// DescribeRegionSettings API to determine the resource types that are supported.
 func (c *Client) UpdateRegionSettings(ctx context.Context, params *UpdateRegionSettingsInput, optFns ...func(*Options)) (*UpdateRegionSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateRegionSettingsInput{}
@@ -42,6 +38,13 @@ type UpdateRegionSettingsInput struct {
 	ResourceTypeManagementPreference map[string]bool
 
 	// Updates the list of services along with the opt-in preferences for the Region.
+	// If resource assignments are only based on tags, then service opt-in settings are
+	// applied. If a resource type is explicitly assigned to a backup plan, such as
+	// Amazon S3, Amazon EC2, or Amazon RDS, it will be included in the backup even if
+	// the opt-in is not enabled for that particular service. If both a resource type
+	// and tags are specified in a resource assignment, the resource type specified in
+	// the backup plan takes priority over the tag condition. Service opt-in settings
+	// are disregarded in this situation.
 	ResourceTypeOptInPreference map[string]bool
 
 	noSmithyDocumentSerde

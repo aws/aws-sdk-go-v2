@@ -13,11 +13,10 @@ import (
 )
 
 // Performs toxicity analysis on the list of text strings that you provide as
-// input. The analysis uses the order of strings in the list to determine context
-// when predicting toxicity. The API response contains a results list that matches
-// the size of the input list. For more information about toxicity detection, see
-// Toxicity detection (https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html)
-// in the Amazon Comprehend Developer Guide
+// input. The API response contains a results list that matches the size of the
+// input list. For more information about toxicity detection, see Toxicity
+// detection (https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html)
+// in the Amazon Comprehend Developer Guide.
 func (c *Client) DetectToxicContent(ctx context.Context, params *DetectToxicContentInput, optFns ...func(*Options)) (*DetectToxicContentOutput, error) {
 	if params == nil {
 		params = &DetectToxicContentInput{}
@@ -41,7 +40,8 @@ type DetectToxicContentInput struct {
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// A list of up to 10 text strings. The maximum size for the list is 10 KB.
+	// A list of up to 10 text strings. Each string has a maximum size of 1 KB, and
+	// the maximum size of the list is 10 KB.
 	//
 	// This member is required.
 	TextSegments []types.TextSegment

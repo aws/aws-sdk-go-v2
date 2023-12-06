@@ -2075,6 +2075,9 @@ type Instance struct {
 	// Relevant details why the instance was not successfully created.
 	StatusReason *InstanceStatusReason
 
+	// The tags of an instance.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

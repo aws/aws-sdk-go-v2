@@ -19,7 +19,7 @@ import (
 // operations, an Amazon Web Services Payment Cryptography key includes metadata
 // such as the key ARN, key usage, key origin, creation date, description, and key
 // state. When you create a key, you specify both immutable and mutable data about
-// the key. The immutable data contains key attributes that defines the scope and
+// the key. The immutable data contains key attributes that define the scope and
 // cryptographic operations that you can perform using the key, for example key
 // class (example: SYMMETRIC_KEY ), key algorithm (example: TDES_2KEY ), key usage
 // (example: TR31_P0_PIN_ENCRYPTION_KEY ) and key modes of use (example: Encrypt ).
@@ -65,26 +65,29 @@ type CreateKeyInput struct {
 	KeyAttributes *types.KeyAttributes
 
 	// Specifies whether to enable the key. If the key is enabled, it is activated for
-	// use within the service. If the key not enabled, then it is created but not
+	// use within the service. If the key is not enabled, then it is created but not
 	// activated. The default value is enabled.
 	Enabled *bool
 
 	// The algorithm that Amazon Web Services Payment Cryptography uses to calculate
-	// the key check value (KCV) for DES and AES keys. For DES key, the KCV is computed
-	// by encrypting 8 bytes, each with value '00', with the key to be checked and
-	// retaining the 3 highest order bytes of the encrypted result. For AES key, the
-	// KCV is computed by encrypting 8 bytes, each with value '01', with the key to be
-	// checked and retaining the 3 highest order bytes of the encrypted result.
+	// the key check value (KCV). It is used to validate the key integrity. For TDES
+	// keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with
+	// the key to be checked and retaining the 3 highest order bytes of the encrypted
+	// result. For AES keys, the KCV is computed using a CMAC algorithm where the input
+	// data is 16 bytes of zero and retaining the 3 highest order bytes of the
+	// encrypted result.
 	KeyCheckValueAlgorithm types.KeyCheckValueAlgorithm
 
-	// The tags to attach to the key. Each tag consists of a tag key and a tag value.
-	// Both the tag key and the tag value are required, but the tag value can be an
-	// empty (null) string. You can't have more than one tag on an Amazon Web Services
-	// Payment Cryptography key with the same tag key. To use this parameter, you must
-	// have TagResource permission. Don't include confidential or sensitive
-	// information in this field. This field may be displayed in plaintext in
-	// CloudTrail logs and other output. Tagging or untagging an Amazon Web Services
-	// Payment Cryptography key can allow or deny permission to the key.
+	// Assigns one or more tags to the Amazon Web Services Payment Cryptography key.
+	// Use this parameter to tag a key when it is created. To tag an existing Amazon
+	// Web Services Payment Cryptography key, use the TagResource operation. Each tag
+	// consists of a tag key and a tag value. Both the tag key and the tag value are
+	// required, but the tag value can be an empty (null) string. You can't have more
+	// than one tag on an Amazon Web Services Payment Cryptography key with the same
+	// tag key. Don't include personal, confidential or sensitive information in this
+	// field. This field may be displayed in plaintext in CloudTrail logs and other
+	// output. Tagging or untagging an Amazon Web Services Payment Cryptography key can
+	// allow or deny permission to the key.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

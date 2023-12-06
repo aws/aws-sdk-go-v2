@@ -47,11 +47,11 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 
 type CreateAliasInput struct {
 
-	// A friendly name that you can use to refer a key. An alias must begin with alias/
-	// followed by a name, for example alias/ExampleAlias . It can contain only
+	// A friendly name that you can use to refer to a key. An alias must begin with
+	// alias/ followed by a name, for example alias/ExampleAlias . It can contain only
 	// alphanumeric characters, forward slashes (/), underscores (_), and dashes (-).
-	// Don't include confidential or sensitive information in this field. This field
-	// may be displayed in plaintext in CloudTrail logs and other output.
+	// Don't include personal, confidential or sensitive information in this field.
+	// This field may be displayed in plaintext in CloudTrail logs and other output.
 	//
 	// This member is required.
 	AliasName *string

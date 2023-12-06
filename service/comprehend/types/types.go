@@ -1003,9 +1003,9 @@ type DocumentReaderConfig struct {
 	// Specifies the type of Amazon Textract features to apply. If you chose
 	// TEXTRACT_ANALYZE_DOCUMENT as the read action, you must specify one or both of
 	// the following values:
-	//   - TABLES - Returns information about any tables that are detected in the input
-	//   document.
-	//   - FORMS - Returns information and the data from any forms that are detected in
+	//   - TABLES - Returns additional information about any tables that are detected
+	//   in the input document.
+	//   - FORMS - Returns additional information about any forms that are detected in
 	//   the input document.
 	FeatureTypes []DocumentReadFeatureTypes
 
@@ -1674,8 +1674,8 @@ type EntityTypesListItem struct {
 	// An entity type within a labeled training dataset that Amazon Comprehend uses to
 	// train a custom entity recognizer. Entity types must not contain the following
 	// invalid characters: \n (line break), \\n (escaped line break, \r (carriage
-	// return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), space, and
-	// , (comma).
+	// return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), and ,
+	// (comma).
 	//
 	// This member is required.
 	Type *string
@@ -2004,18 +2004,25 @@ type InputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Provides additional detail about why the request failed:
-//   - Document size is too large - Check the size of your file and resubmit the
-//     request.
-//   - Document type is not supported - Check the file type and resubmit the
-//     request.
-//   - Too many pages in the document - Check the number of pages in your file and
-//     resubmit the request.
-//   - Access denied to Amazon Textract - Verify that your account has permission
-//     to use Amazon Textract API operations and resubmit the request.
+// Provides additional detail about why the request failed.
 type InvalidRequestDetail struct {
 
-	// Reason code is INVALID_DOCUMENT .
+	// Reason codes include the following values:
+	//   - DOCUMENT_SIZE_EXCEEDED - Document size is too large. Check the size of your
+	//   file and resubmit the request.
+	//   - UNSUPPORTED_DOC_TYPE - Document type is not supported. Check the file type
+	//   and resubmit the request.
+	//   - PAGE_LIMIT_EXCEEDED - Too many pages in the document. Check the number of
+	//   pages in your file and resubmit the request.
+	//   - TEXTRACT_ACCESS_DENIED - Access denied to Amazon Textract. Verify that your
+	//   account has permission to use Amazon Textract API operations and resubmit the
+	//   request.
+	//   - NOT_TEXTRACT_JSON - Document is not Amazon Textract JSON format. Verify the
+	//   format and resubmit the request.
+	//   - MISMATCHED_TOTAL_PAGE_COUNT - Check the number of pages in your file and
+	//   resubmit the request.
+	//   - INVALID_DOCUMENT - Invalid document. Check the file and resubmit the
+	//   request.
 	Reason InvalidRequestDetailReason
 
 	noSmithyDocumentSerde
@@ -2781,13 +2788,14 @@ type ToxicContent struct {
 
 // Toxicity analysis result for one string. For more information about toxicity
 // detection, see Toxicity detection (https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html)
-// in the Amazon Comprehend Developer Guide
+// in the Amazon Comprehend Developer Guide.
 type ToxicLabels struct {
 
 	// Array of toxic content types identified in the string.
 	Labels []ToxicContent
 
-	// Overall toxicity score for the string.
+	// Overall toxicity score for the string. Value range is zero to one, where one is
+	// the highest confidence.
 	Toxicity *float32
 
 	noSmithyDocumentSerde

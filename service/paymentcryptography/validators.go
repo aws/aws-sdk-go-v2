@@ -442,6 +442,38 @@ func addOpUpdateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAlias{}, middleware.After)
 }
 
+func validateExportAttributes(v *types.ExportAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportAttributes"}
+	if v.ExportDukptInitialKey != nil {
+		if err := validateExportDukptInitialKey(v.ExportDukptInitialKey); err != nil {
+			invalidParams.AddNested("ExportDukptInitialKey", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExportDukptInitialKey(v *types.ExportDukptInitialKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportDukptInitialKey"}
+	if v.KeySerialNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeySerialNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExportKeyMaterial(v types.ExportKeyMaterial) error {
 	if v == nil {
 		return nil
@@ -773,6 +805,11 @@ func validateOpExportKeyInput(v *ExportKeyInput) error {
 	}
 	if v.ExportKeyIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExportKeyIdentifier"))
+	}
+	if v.ExportAttributes != nil {
+		if err := validateExportAttributes(v.ExportAttributes); err != nil {
+			invalidParams.AddNested("ExportAttributes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

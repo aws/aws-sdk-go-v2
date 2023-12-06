@@ -1,0 +1,8 @@
+{
+    "id": "3ba7a6e6-523f-4c99-b252-e8344f001f81",
+    "type": "feature",
+    "description": "AWS Payment Cryptography IPEK feature release",
+    "modules": [
+        "service/paymentcryptography"
+    ]
+}

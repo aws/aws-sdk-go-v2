@@ -61,10 +61,11 @@ type CreateDocumentClassifierInput struct {
 	ClientRequestToken *string
 
 	// Indicates the mode in which the classifier will be trained. The classifier can
-	// be trained in multi-class mode, which identifies one and only one class for each
-	// document, or multi-label mode, which identifies one or more labels for each
-	// document. In multi-label mode, multiple labels for an individual document are
-	// separated by a delimiter. The default delimiter between labels is a pipe (|).
+	// be trained in multi-class (single-label) mode or multi-label mode. Multi-class
+	// mode identifies a single class label for each document and multi-label mode
+	// identifies one or more class labels for each document. Multiple labels for an
+	// individual document are separated by a delimiter. The default delimiter between
+	// labels is a pipe (|).
 	Mode types.DocumentClassifierMode
 
 	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom

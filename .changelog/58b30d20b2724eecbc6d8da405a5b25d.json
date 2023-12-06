@@ -1,0 +1,8 @@
+{
+    "id": "58b30d20-b272-4eec-bc6d-8da405a5b25d",
+    "type": "feature",
+    "description": "Releasing Tagging Support for Instance Management APIS",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -11936,6 +11936,9 @@ type PrivateIpAddressSpecification struct {
 // Describes the processor used by the instance type.
 type ProcessorInfo struct {
 
+	// The manufacturer of the processor.
+	Manufacturer *string
+
 	// The architectures supported by the instance type.
 	SupportedArchitectures []ArchitectureType
 
