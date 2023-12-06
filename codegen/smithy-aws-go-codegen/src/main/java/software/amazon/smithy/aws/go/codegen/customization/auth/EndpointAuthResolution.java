@@ -42,7 +42,7 @@ public class EndpointAuthResolution implements GoIntegration {
             .target(ConfigFieldResolver.Target.FINALIZATION)
             .build();
 
-    private static boolean isEndpointAuthService(Model model, ServiceShape service) {
+    public static boolean isEndpointAuthService(Model model, ServiceShape service) {
         final String sdkId = service.expectTrait(ServiceTrait.class).getSdkId();
         return sdkId.equalsIgnoreCase("s3") || sdkId.equalsIgnoreCase("eventbridge");
     };

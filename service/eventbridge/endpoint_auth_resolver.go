@@ -20,6 +20,22 @@ func (r *endpointAuthResolver) ResolveAuthSchemes(
 ) (
 	[]*smithyauth.Option, error,
 ) {
+	opts, err := r.resolveAuthSchemes(ctx, params)
+	if err != nil {
+		return nil, err
+	}
+
+	// preserve pre-SRA behavior where everything technically had anonymous
+	return append(opts, &smithyauth.Option{
+		SchemeID: smithyauth.SchemeIDAnonymous,
+	}), nil
+}
+
+func (r *endpointAuthResolver) resolveAuthSchemes(
+	ctx context.Context, params *AuthResolverParameters,
+) (
+	[]*smithyauth.Option, error,
+) {
 	endpt, err := r.EndpointResolver.ResolveEndpoint(ctx, *params.endpointParams)
 	if err != nil {
 		return nil, fmt.Errorf("resolve endpoint: %w", err)

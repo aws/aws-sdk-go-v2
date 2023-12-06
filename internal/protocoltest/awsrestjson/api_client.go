@@ -54,6 +54,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveRetryer(&options)
 
+	wrapWithAnonymousAuth(&options)
+
 	resolveAuthSchemes(&options)
 
 	client := &Client{

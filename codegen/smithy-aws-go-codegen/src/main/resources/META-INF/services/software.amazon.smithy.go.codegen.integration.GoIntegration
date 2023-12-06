@@ -72,3 +72,4 @@ software.amazon.smithy.aws.go.codegen.customization.RemoveDefaults
 software.amazon.smithy.aws.go.codegen.customization.auth.S3ExpressAuthScheme
 software.amazon.smithy.aws.go.codegen.customization.S3BucketContext
 software.amazon.smithy.aws.go.codegen.customization.s3.ExpressDefaultChecksum
+software.amazon.smithy.aws.go.codegen.customization.auth.GlobalAnonymousOption
