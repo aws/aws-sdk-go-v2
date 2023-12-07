@@ -30,6 +30,8 @@ func (c *Client) ListDeploymentTargets(ctx context.Context, params *ListDeployme
 type ListDeploymentTargetsInput struct {
 
 	// The unique ID of a deployment.
+	//
+	// This member is required.
 	DeploymentId *string
 
 	// A token identifier returned from the previous ListDeploymentTargets call. It
@@ -115,6 +117,9 @@ func (c *Client) addOperationListDeploymentTargetsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpListDeploymentTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDeploymentTargets(options.Region), middleware.Before); err != nil {

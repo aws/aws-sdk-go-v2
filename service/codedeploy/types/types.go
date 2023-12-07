@@ -105,11 +105,20 @@ type AutoRollbackConfiguration struct {
 // Information about an Auto Scaling group.
 type AutoScalingGroup struct {
 
-	// An Auto Scaling lifecycle event hook name.
+	// The name of the launch hook that CodeDeploy installed into the Auto Scaling
+	// group. For more information about the launch hook, see How Amazon EC2 Auto
+	// Scaling works with CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors)
+	// in the CodeDeploy User Guide.
 	Hook *string
 
 	// The Auto Scaling group name.
 	Name *string
+
+	// The name of the termination hook that CodeDeploy installed into the Auto
+	// Scaling group. For more information about the termination hook, see Enabling
+	// termination deployments during Auto Scaling scale-in events (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable)
+	// in the CodeDeploy User Guide.
+	TerminationHook *string
 
 	noSmithyDocumentSerde
 }
@@ -202,12 +211,15 @@ type DeploymentConfigInfo struct {
 	// The deployment configuration name.
 	DeploymentConfigName *string
 
-	// Information about the number or percentage of minimum healthy instance.
+	// Information about the number or percentage of minimum healthy instances.
 	MinimumHealthyHosts *MinimumHealthyHosts
 
 	// The configuration that specifies how the deployment traffic is routed. Used for
 	// deployments with a Lambda or Amazon ECS compute platform only.
 	TrafficRoutingConfig *TrafficRoutingConfig
+
+	// Information about a zonal configuration.
+	ZonalConfig *ZonalConfig
 
 	noSmithyDocumentSerde
 }
@@ -298,6 +310,13 @@ type DeploymentGroupInfo struct {
 	// Information about the deployment group's target revision, including type and
 	// location.
 	TargetRevision *RevisionLocation
+
+	// Indicates whether the deployment group was configured to have CodeDeploy
+	// install a termination hook into an Auto Scaling group. For more information
+	// about the termination hook, see How Amazon EC2 Auto Scaling works with
+	// CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors)
+	// in the CodeDeploy User Guide.
+	TerminationHookEnabled bool
 
 	// Information about triggers associated with the deployment group.
 	TriggerConfigurations []TriggerConfig
@@ -1007,7 +1026,7 @@ type LoadBalancerInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Information about minimum healthy instance.
+// Information about the minimum number of healthy instances.
 type MinimumHealthyHosts struct {
 
 	// The minimum healthy instance type:
@@ -1033,6 +1052,18 @@ type MinimumHealthyHosts struct {
 	Type MinimumHealthyHostsType
 
 	// The minimum healthy instance value.
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about the minimum number of healthy instances per Availability Zone.
+type MinimumHealthyHostsPerZone struct {
+
+	// The type associated with the MinimumHealthyHostsPerZone option.
+	Type MinimumHealthyHostsPerZoneType
+
+	// The value associated with the MinimumHealthyHostsPerZone option.
 	Value int32
 
 	noSmithyDocumentSerde
@@ -1356,6 +1387,53 @@ type TriggerConfig struct {
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic
 	// through which notifications about deployment or instance events are sent.
 	TriggerTargetArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configure the ZonalConfig object if you want CodeDeploy to deploy your
+// application to one Availability Zone (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones)
+// at a time, within an Amazon Web Services Region. By deploying to one
+// Availability Zone at a time, you can expose your deployment to a progressively
+// larger audience as confidence in the deployment's performance and viability
+// grows. If you don't configure the ZonalConfig object, CodeDeploy deploys your
+// application to a random selection of hosts across a Region. For more information
+// about the zonal configuration feature, see zonal configuration (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
+// in the CodeDeploy User Guide.
+type ZonalConfig struct {
+
+	// The period of time, in seconds, that CodeDeploy must wait after completing a
+	// deployment to the first Availability Zone. CodeDeploy will wait this amount of
+	// time before starting a deployment to the second Availability Zone. You might set
+	// this option if you want to allow extra bake time for the first Availability
+	// Zone. If you don't specify a value for firstZoneMonitorDurationInSeconds , then
+	// CodeDeploy uses the monitorDurationInSeconds value for the first Availability
+	// Zone. For more information about the zonal configuration feature, see zonal
+	// configuration (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
+	// in the CodeDeploy User Guide.
+	FirstZoneMonitorDurationInSeconds *int64
+
+	// The number or percentage of instances that must remain available per
+	// Availability Zone during a deployment. This option works in conjunction with the
+	// MinimumHealthyHosts option. For more information, see About the minimum number
+	// of healthy hosts per Availability Zone (https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html#minimum-healthy-hosts-az)
+	// in the CodeDeploy User Guide. If you don't specify the
+	// minimumHealthyHostsPerZone option, then CodeDeploy uses a default value of 0
+	// percent. For more information about the zonal configuration feature, see zonal
+	// configuration (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
+	// in the CodeDeploy User Guide.
+	MinimumHealthyHostsPerZone *MinimumHealthyHostsPerZone
+
+	// The period of time, in seconds, that CodeDeploy must wait after completing a
+	// deployment to an Availability Zone. CodeDeploy will wait this amount of time
+	// before starting a deployment to the next Availability Zone. Consider adding a
+	// monitor duration to give the deployment some time to prove itself (or 'bake') in
+	// one Availability Zone before it is released in the next zone. If you don't
+	// specify a monitorDurationInSeconds , CodeDeploy starts deploying to the next
+	// Availability Zone immediately. For more information about the zonal
+	// configuration feature, see zonal configuration (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
+	// in the CodeDeploy User Guide.
+	MonitorDurationInSeconds *int64
 
 	noSmithyDocumentSerde
 }

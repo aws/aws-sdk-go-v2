@@ -56,6 +56,13 @@ type CreateDeploymentConfigInput struct {
 	// The configuration that specifies how the deployment traffic is routed.
 	TrafficRoutingConfig *types.TrafficRoutingConfig
 
+	// Configure the ZonalConfig object if you want CodeDeploy to deploy your
+	// application to one Availability Zone (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones)
+	// at a time, within an Amazon Web Services Region. For more information about the
+	// zonal configuration feature, see zonal configuration (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
+	// in the CodeDeploy User Guide.
+	ZonalConfig *types.ZonalConfig
+
 	noSmithyDocumentSerde
 }
 

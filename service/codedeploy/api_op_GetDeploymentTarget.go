@@ -31,9 +31,13 @@ func (c *Client) GetDeploymentTarget(ctx context.Context, params *GetDeploymentT
 type GetDeploymentTargetInput struct {
 
 	// The unique ID of a deployment.
+	//
+	// This member is required.
 	DeploymentId *string
 
 	// The unique ID of a deployment target.
+	//
+	// This member is required.
 	TargetId *string
 
 	noSmithyDocumentSerde
@@ -106,6 +110,9 @@ func (c *Client) addOperationGetDeploymentTargetMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpGetDeploymentTargetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeploymentTarget(options.Region), middleware.Before); err != nil {

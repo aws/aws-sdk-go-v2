@@ -129,6 +129,26 @@ func (m *validateOpBatchGetDeployments) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetDeploymentTargets struct {
+}
+
+func (*validateOpBatchGetDeploymentTargets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetDeploymentTargets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetDeploymentTargetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetDeploymentTargetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetOnPremisesInstances struct {
 }
 
@@ -429,6 +449,26 @@ func (m *validateOpGetDeploymentInstance) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDeploymentTarget struct {
+}
+
+func (*validateOpGetDeploymentTarget) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeploymentTarget) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeploymentTargetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeploymentTargetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetOnPremisesInstance struct {
 }
 
@@ -504,6 +544,26 @@ func (m *validateOpListDeploymentInstances) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDeploymentInstancesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDeploymentTargets struct {
+}
+
+func (*validateOpListDeploymentTargets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDeploymentTargets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDeploymentTargetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDeploymentTargetsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -693,6 +753,10 @@ func addOpBatchGetDeploymentsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpBatchGetDeployments{}, middleware.After)
 }
 
+func addOpBatchGetDeploymentTargetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetDeploymentTargets{}, middleware.After)
+}
+
 func addOpBatchGetOnPremisesInstancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetOnPremisesInstances{}, middleware.After)
 }
@@ -753,6 +817,10 @@ func addOpGetDeploymentInstanceValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpGetDeploymentInstance{}, middleware.After)
 }
 
+func addOpGetDeploymentTargetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeploymentTarget{}, middleware.After)
+}
+
 func addOpGetOnPremisesInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOnPremisesInstance{}, middleware.After)
 }
@@ -767,6 +835,10 @@ func addOpListDeploymentGroupsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpListDeploymentInstancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDeploymentInstances{}, middleware.After)
+}
+
+func addOpListDeploymentTargetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDeploymentTargets{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -895,6 +967,24 @@ func validateOpBatchGetDeploymentsInput(v *BatchGetDeploymentsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDeploymentsInput"}
 	if v.DeploymentIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetDeploymentTargetsInput(v *BatchGetDeploymentTargetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDeploymentTargetsInput"}
+	if v.DeploymentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
+	}
+	if v.TargetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1146,6 +1236,24 @@ func validateOpGetDeploymentInstanceInput(v *GetDeploymentInstanceInput) error {
 	}
 }
 
+func validateOpGetDeploymentTargetInput(v *GetDeploymentTargetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentTargetInput"}
+	if v.DeploymentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
+	}
+	if v.TargetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetOnPremisesInstanceInput(v *GetOnPremisesInstanceInput) error {
 	if v == nil {
 		return nil
@@ -1196,6 +1304,21 @@ func validateOpListDeploymentInstancesInput(v *ListDeploymentInstancesInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListDeploymentInstancesInput"}
+	if v.DeploymentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDeploymentTargetsInput(v *ListDeploymentTargetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDeploymentTargetsInput"}
 	if v.DeploymentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
 	}

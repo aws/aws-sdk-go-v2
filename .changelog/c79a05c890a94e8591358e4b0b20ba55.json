@@ -1,0 +1,8 @@
+{
+    "id": "c79a05c8-90a9-4e85-9135-8e4b0b20ba55",
+    "type": "feature",
+    "description": "This release adds support for two new CodeDeploy features: 1) zonal deployments for Amazon EC2 in-place deployments, 2) deployments triggered by Auto Scaling group termination lifecycle hook events.",
+    "modules": [
+        "service/codedeploy"
+    ]
+}

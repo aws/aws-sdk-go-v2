@@ -3090,6 +3090,23 @@ func awsAwsjson11_serializeDocumentMinimumHealthyHosts(v *types.MinimumHealthyHo
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMinimumHealthyHostsPerZone(v *types.MinimumHealthyHostsPerZone, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Value != 0 {
+		ok := object.Key("value")
+		ok.Integer(v.Value)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOnPremisesTagSet(v *types.OnPremisesTagSet, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3558,6 +3575,30 @@ func awsAwsjson11_serializeDocumentTriggerEventTypeList(v []types.TriggerEventTy
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentZonalConfig(v *types.ZonalConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FirstZoneMonitorDurationInSeconds != nil {
+		ok := object.Key("firstZoneMonitorDurationInSeconds")
+		ok.Long(*v.FirstZoneMonitorDurationInSeconds)
+	}
+
+	if v.MinimumHealthyHostsPerZone != nil {
+		ok := object.Key("minimumHealthyHostsPerZone")
+		if err := awsAwsjson11_serializeDocumentMinimumHealthyHostsPerZone(v.MinimumHealthyHostsPerZone, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MonitorDurationInSeconds != nil {
+		ok := object.Key("monitorDurationInSeconds")
+		ok.Long(*v.MonitorDurationInSeconds)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentAddTagsToOnPremisesInstancesInput(v *AddTagsToOnPremisesInstancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3766,6 +3807,13 @@ func awsAwsjson11_serializeOpDocumentCreateDeploymentConfigInput(v *CreateDeploy
 		}
 	}
 
+	if v.ZonalConfig != nil {
+		ok := object.Key("zonalConfig")
+		if err := awsAwsjson11_serializeDocumentZonalConfig(v.ZonalConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3880,6 +3928,11 @@ func awsAwsjson11_serializeOpDocumentCreateDeploymentGroupInput(v *CreateDeploym
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TerminationHookEnabled != nil {
+		ok := object.Key("terminationHookEnabled")
+		ok.Boolean(*v.TerminationHookEnabled)
 	}
 
 	if v.TriggerConfigurations != nil {
@@ -4671,6 +4724,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDeploymentGroupInput(v *UpdateDeploym
 	if v.ServiceRoleArn != nil {
 		ok := object.Key("serviceRoleArn")
 		ok.String(*v.ServiceRoleArn)
+	}
+
+	if v.TerminationHookEnabled != nil {
+		ok := object.Key("terminationHookEnabled")
+		ok.Boolean(*v.TerminationHookEnabled)
 	}
 
 	if v.TriggerConfigurations != nil {

@@ -22,7 +22,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sso v1.18.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.21.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.26.3 // indirect
-	github.com/aws/smithy-go v1.18.1 // indirect
+	github.com/aws/smithy-go v1.19.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 

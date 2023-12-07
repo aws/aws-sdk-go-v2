@@ -97,6 +97,7 @@ const (
 	DeploymentCreatorCodeDeployAutoUpdate   DeploymentCreator = "CodeDeployAutoUpdate"
 	DeploymentCreatorCloudFormation         DeploymentCreator = "CloudFormation"
 	DeploymentCreatorCloudFormationRollback DeploymentCreator = "CloudFormationRollback"
+	DeploymentCreatorAutoscalingTermination DeploymentCreator = "autoscalingTermination"
 )
 
 // Values returns all known values for DeploymentCreator. Note that this can be
@@ -111,6 +112,7 @@ func (DeploymentCreator) Values() []DeploymentCreator {
 		"CodeDeployAutoUpdate",
 		"CloudFormation",
 		"CloudFormationRollback",
+		"autoscalingTermination",
 	}
 }
 
@@ -512,6 +514,25 @@ func (ListStateFilterAction) Values() []ListStateFilterAction {
 		"include",
 		"exclude",
 		"ignore",
+	}
+}
+
+type MinimumHealthyHostsPerZoneType string
+
+// Enum values for MinimumHealthyHostsPerZoneType
+const (
+	MinimumHealthyHostsPerZoneTypeHostCount    MinimumHealthyHostsPerZoneType = "HOST_COUNT"
+	MinimumHealthyHostsPerZoneTypeFleetPercent MinimumHealthyHostsPerZoneType = "FLEET_PERCENT"
+)
+
+// Values returns all known values for MinimumHealthyHostsPerZoneType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MinimumHealthyHostsPerZoneType) Values() []MinimumHealthyHostsPerZoneType {
+	return []MinimumHealthyHostsPerZoneType{
+		"HOST_COUNT",
+		"FLEET_PERCENT",
 	}
 }
 

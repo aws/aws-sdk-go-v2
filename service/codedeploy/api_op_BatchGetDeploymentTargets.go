@@ -40,6 +40,8 @@ func (c *Client) BatchGetDeploymentTargets(ctx context.Context, params *BatchGet
 type BatchGetDeploymentTargetsInput struct {
 
 	// The unique ID of a deployment.
+	//
+	// This member is required.
 	DeploymentId *string
 
 	// The unique IDs of the deployment targets. The compute platform of the
@@ -55,6 +57,8 @@ type BatchGetDeploymentTargetsInput struct {
 	//   Their target type is ecsTarget .
 	//   - For deployments that are deployed with CloudFormation, the target IDs are
 	//   CloudFormation stack IDs. Their target type is cloudFormationTarget .
+	//
+	// This member is required.
 	TargetIds []string
 
 	noSmithyDocumentSerde
@@ -132,6 +136,9 @@ func (c *Client) addOperationBatchGetDeploymentTargetsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpBatchGetDeploymentTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetDeploymentTargets(options.Region), middleware.Before); err != nil {

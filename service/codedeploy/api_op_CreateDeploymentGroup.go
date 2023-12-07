@@ -120,6 +120,19 @@ type CreateDeploymentGroupInput struct {
 	// both of which you define.
 	Tags []types.Tag
 
+	// This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto
+	// Scaling. For more information, see Integrating CodeDeploy with Amazon EC2 Auto
+	// Scaling (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html)
+	// in the CodeDeploy User Guide. Set terminationHookEnabled to true to have
+	// CodeDeploy install a termination hook into your Auto Scaling group when you
+	// create a deployment group. When this hook is installed, CodeDeploy will perform
+	// termination deployments. For information about termination deployments, see
+	// Enabling termination deployments during Auto Scaling scale-in events (https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable)
+	// in the CodeDeploy User Guide. For more information about Auto Scaling scale-in
+	// events, see the Scale in (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html#as-lifecycle-scale-in)
+	// topic in the Amazon EC2 Auto Scaling User Guide.
+	TerminationHookEnabled *bool
+
 	// Information about triggers to create when the deployment group is created. For
 	// examples, see Create a Trigger for an CodeDeploy Event (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
 	// in the CodeDeploy User Guide.

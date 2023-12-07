@@ -353,6 +353,14 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "aws-us-gov-global",
+			}: endpoints.Endpoint{
+				Hostname: "global.health.us-gov.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "fips-us-gov-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "health-fips.us-gov-west-1.amazonaws.com",

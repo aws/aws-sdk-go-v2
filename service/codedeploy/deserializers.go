@@ -1542,6 +1542,9 @@ func awsAwsjson11_deserializeOpErrorCreateDeploymentConfig(response *smithyhttp.
 	case strings.EqualFold("InvalidTrafficRoutingConfigurationException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrafficRoutingConfigurationException(response, errorBody)
 
+	case strings.EqualFold("InvalidZonalDeploymentConfigurationException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidZonalDeploymentConfigurationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4265,6 +4268,9 @@ func awsAwsjson11_deserializeOpErrorListDeploymentTargets(response *smithyhttp.R
 
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidTargetFilterNameException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidTargetFilterNameException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -9166,6 +9172,41 @@ func awsAwsjson11_deserializeErrorInvalidUpdateOutdatedInstancesOnlyValueExcepti
 	return output
 }
 
+func awsAwsjson11_deserializeErrorInvalidZonalDeploymentConfigurationException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.InvalidZonalDeploymentConfigurationException{}
+	err := awsAwsjson11_deserializeDocumentInvalidZonalDeploymentConfigurationException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorLifecycleEventAlreadyCompletedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -10391,6 +10432,15 @@ func awsAwsjson11_deserializeDocumentAutoScalingGroup(v **types.AutoScalingGroup
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "terminationHook":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoScalingGroupHook to be of type string, got %T instead", value)
+				}
+				sv.TerminationHook = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -10966,6 +11016,11 @@ func awsAwsjson11_deserializeDocumentDeploymentConfigInfo(v **types.DeploymentCo
 				return err
 			}
 
+		case "zonalConfig":
+			if err := awsAwsjson11_deserializeDocumentZonalConfig(&sv.ZonalConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11404,6 +11459,15 @@ func awsAwsjson11_deserializeDocumentDeploymentGroupInfo(v **types.DeploymentGro
 		case "targetRevision":
 			if err := awsAwsjson11_deserializeDocumentRevisionLocation(&sv.TargetRevision, value); err != nil {
 				return err
+			}
+
+		case "terminationHookEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.TerminationHookEnabled = jtv
 			}
 
 		case "triggerConfigurations":
@@ -16594,6 +16658,46 @@ func awsAwsjson11_deserializeDocumentInvalidUpdateOutdatedInstancesOnlyValueExce
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInvalidZonalDeploymentConfigurationException(v **types.InvalidZonalDeploymentConfigurationException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidZonalDeploymentConfigurationException
+	if *v == nil {
+		sv = &types.InvalidZonalDeploymentConfigurationException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentLambdaFunctionInfo(v **types.LambdaFunctionInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17187,6 +17291,59 @@ func awsAwsjson11_deserializeDocumentMinimumHealthyHosts(v **types.MinimumHealth
 				jtv, ok := value.(json.Number)
 				if !ok {
 					return fmt.Errorf("expected MinimumHealthyHostsValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Value = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMinimumHealthyHostsPerZone(v **types.MinimumHealthyHostsPerZone, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MinimumHealthyHostsPerZone
+	if *v == nil {
+		sv = &types.MinimumHealthyHostsPerZone{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MinimumHealthyHostsPerZoneType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.MinimumHealthyHostsPerZoneType(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinimumHealthyHostsPerZoneValue to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -18913,6 +19070,68 @@ func awsAwsjson11_deserializeDocumentUnsupportedActionForDeploymentTypeException
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentZonalConfig(v **types.ZonalConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ZonalConfig
+	if *v == nil {
+		sv = &types.ZonalConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "firstZoneMonitorDurationInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WaitTimeInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FirstZoneMonitorDurationInSeconds = ptr.Int64(i64)
+			}
+
+		case "minimumHealthyHostsPerZone":
+			if err := awsAwsjson11_deserializeDocumentMinimumHealthyHostsPerZone(&sv.MinimumHealthyHostsPerZone, value); err != nil {
+				return err
+			}
+
+		case "monitorDurationInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WaitTimeInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MonitorDurationInSeconds = ptr.Int64(i64)
 			}
 
 		default:
