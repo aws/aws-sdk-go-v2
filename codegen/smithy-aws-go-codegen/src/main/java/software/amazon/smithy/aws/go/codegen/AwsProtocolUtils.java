@@ -108,42 +108,6 @@ final class AwsProtocolUtils {
         // skip request compression tests, not yet implemented in the SDK
         Set<HttpProtocolUnitTestGenerator.SkipTest> inputSkipTests = new TreeSet<>(SetUtils.of(
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
-                        .operation(ShapeId.from("aws.protocoltests.json10#PutWithContentEncoding"))
-                        .addTestName("SDKAppliedContentEncoding_awsJson1_0")
-                        .addTestName("SDKAppendsGzipAndIgnoresHttpProvidedEncoding_awsJson1_0")
-                        .build(),
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
-                        .operation(ShapeId.from("aws.protocoltests.json#PutWithContentEncoding"))
-                        .addTestName("SDKAppliedContentEncoding_awsJson1_1")
-                        .addTestName("SDKAppendsGzipAndIgnoresHttpProvidedEncoding_awsJson1_1")
-                        .build(),
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.query#AwsQuery"))
-                        .operation(ShapeId.from("aws.protocoltests.query#PutWithContentEncoding"))
-                        .addTestName("SDKAppliedContentEncoding_awsQuery")
-                        .addTestName("SDKAppendsGzipAndIgnoresHttpProvidedEncoding_awsQuery")
-                        .build(),
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.ec2#AwsEc2"))
-                        .operation(ShapeId.from("aws.protocoltests.ec2#PutWithContentEncoding"))
-                        .addTestName("SDKAppliedContentEncoding_ec2Query")
-                        .addTestName("SDKAppendsGzipAndIgnoresHttpProvidedEncoding_ec2Query")
-                        .build(),
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
-                        .operation(ShapeId.from("aws.protocoltests.restjson#PutWithContentEncoding"))
-                        .addTestName("SDKAppliedContentEncoding_restJson1")
-                        .addTestName("SDKAppendedGzipAfterProvidedEncoding_restJson1")
-                        .build(),
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
-                        .operation(ShapeId.from("aws.protocoltests.restxml#PutWithContentEncoding"))
-                        .addTestName("SDKAppliedContentEncoding_restXml")
-                        .addTestName("SDKAppendedGzipAfterProvidedEncoding_restXml")
-                        .build(),
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
                         .operation(ShapeId.from("aws.protocoltests.restxml#HttpPayloadWithUnion"))
                         .addTestName("RestXmlHttpPayloadWithUnion")

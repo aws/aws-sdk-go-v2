@@ -3,11 +3,13 @@
 package ec2query
 
 import (
+	"bytes"
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
 	"github.com/aws/smithy-go/middleware"
 	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
+	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -62,15 +64,8 @@ func TestClient_PutWithContentEncoding_awsEc2querySerialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "SDKAppliedContentEncoding_ec2Query" {
-				t.Skip("disabled test aws.protocoltests.ec2#AwsEc2 aws.protocoltests.ec2#PutWithContentEncoding")
-			}
-
-			if name == "SDKAppendsGzipAndIgnoresHttpProvidedEncoding_ec2Query" {
-				t.Skip("disabled test aws.protocoltests.ec2#AwsEc2 aws.protocoltests.ec2#PutWithContentEncoding")
-			}
-
 			actualReq := &http.Request{}
+			rawBodyBuf := &bytes.Buffer{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {
 				u, err := url.Parse(serverURL)
@@ -103,7 +98,12 @@ func TestClient_PutWithContentEncoding_awsEc2querySerialize(t *testing.T) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
 					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
 				})
+				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
+					return smithyrequestcompression.AddCaptureUncompressedRequestMiddleware(stack, rawBodyBuf)
+				})
 			})
+			disable := client.Options().DisableRequestCompression
+			min := client.Options().RequestMinCompressSizeBytes
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}
@@ -127,6 +127,10 @@ func TestClient_PutWithContentEncoding_awsEc2querySerialize(t *testing.T) {
 				if err := c.BodyAssert(actualReq.Body); err != nil {
 					t.Errorf("expect body equal, got %v", err)
 				}
+			}
+			if err := smithytesting.CompareCompressedBytes(rawBodyBuf, actualReq.Body,
+				disable, min, "gzip"); err != nil {
+				t.Errorf("unzipped request body not match: %q", err)
 			}
 		})
 	}

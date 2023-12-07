@@ -686,6 +686,31 @@ func TestNewSharedConfig(t *testing.T) {
 				EC2IMDSv1Disabled: aws.Bool(false),
 			},
 		},
+		"profile configuring request compression": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "request_compression",
+			Expected: SharedConfig{
+				Profile:                     "request_compression",
+				DisableRequestCompression:   aws.Bool(true),
+				RequestMinCompressSizeBytes: aws.Int64(12345),
+			},
+		},
+		"profile with invalid disableRequestCompression": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "request_compression_invalid_disable",
+			Err: fmt.Errorf("invalid value for shared config profile field, %s=%s, need true or false",
+				disableRequestCompression, "blabla"),
+		},
+		"profile with non-int requestMinCompressSizeBytes": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "request_compression_non_int_min_request",
+			Err:             fmt.Errorf("invalid value for min request compression size bytes hahaha, need int64"),
+		},
+		"profile with requestMinCompressSizeBytes out of bounds": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "request_compression_min_request_out_of_bounds",
+			Err:             fmt.Errorf("invalid range for min request compression size bytes 10485761, must be within 0 and 10485760 inclusively"),
+		},
 	}
 
 	for name, c := range cases {
