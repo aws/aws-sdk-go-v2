@@ -72,8 +72,8 @@ public class AddAwsConfigFields implements GoIntegration {
     private static final String RESOLVE_AWS_CONFIG_RETRY_MAX_ATTEMPTS = "resolveAWSRetryMaxAttempts";
     private static final String RESOLVE_AWS_CONFIG_RETRY_MODE = "resolveAWSRetryMode";
     private static final String RESOLVE_AWS_CONFIG_RETRYER_PROVIDER = "resolveAWSRetryerProvider";
-
-    private static final String FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS = "finalizeRetryMaxAttemptOptions";
+    private static final String FINALIZE_RETRY_MAX_ATTEMPTS = "finalizeRetryMaxAttempts";
+    private static final String FINALIZE_OPERATION_RETRY_MAX_ATTEMPTS = "finalizeOperationRetryMaxAttempts";
 
     private static final String SDK_APP_ID = "AppID";
 
@@ -116,7 +116,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     .addConfigFieldResolvers(
                             ConfigFieldResolver.builder()
                                     .location(ConfigFieldResolver.Location.CLIENT)
-                                    .target(ConfigFieldResolver.Target.FINALIZATION)
+                                    .target(ConfigFieldResolver.Target.INITIALIZATION)
                                     .resolver(buildPackageSymbol(RESOLVE_RETRYER))
                                     .build()
                     )
@@ -132,22 +132,24 @@ public class AddAwsConfigFields implements GoIntegration {
                             and will not be used to configure the API client created default retryer, or modify
                             per operation call's retry max attempts.
 
-                            When creating a new API Clients this member will only be used if the
-                            Retryer Options member is nil. This value will be ignored if
-                            Retryer is not nil.
-
                             If specified in an operation call's functional options with a value that
                             is different than the constructed client's Options, the Client's Retryer
                             will be wrapped to use the operation's specific RetryMaxAttempts value.
                             """)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRY_MAX_ATTEMPTS)
                             .build())
+                    .addConfigFieldResolvers(
+                            ConfigFieldResolver.builder()
+                                .location(ConfigFieldResolver.Location.CLIENT)
+                                .target(ConfigFieldResolver.Target.FINALIZATION)
+                                .resolver(buildPackageSymbol(FINALIZE_RETRY_MAX_ATTEMPTS))
+                                .build()
+                    )
                     .addConfigFieldResolvers(ConfigFieldResolver.builder()
                             .location(ConfigFieldResolver.Location.OPERATION)
                             .target(ConfigFieldResolver.Target.FINALIZATION)
                             .withClientInput(true)
-                            .resolver(SymbolUtils.createValueSymbolBuilder(
-                                    FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS).build())
+                            .resolver(buildPackageSymbol(FINALIZE_OPERATION_RETRY_MAX_ATTEMPTS))
                             .build())
                     .build(),
 
@@ -295,7 +297,7 @@ public class AddAwsConfigFields implements GoIntegration {
     private void writeAwsDefaultResolvers(GoWriter writer) {
         writeHttpClientResolver(writer);
         writeRetryerResolvers(writer);
-        writeRetryMaxAttemptsFinalizeResolver(writer);
+        writeRetryMaxAttemptsFinalizers(writer);
         writeAwsConfigEndpointResolver(writer);
     }
 
@@ -394,15 +396,24 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.popState();
     }
 
-    private void writeRetryMaxAttemptsFinalizeResolver(GoWriter writer) {
+    private void writeRetryMaxAttemptsFinalizers(GoWriter writer) {
         writer.pushState();
 
-        writer.putContext("finalizeResolveName", FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS);
+        writer.putContext("clientFinalizeResolver", FINALIZE_RETRY_MAX_ATTEMPTS);
+        writer.putContext("operationFinalizeResolver", FINALIZE_OPERATION_RETRY_MAX_ATTEMPTS);
         writer.putContext("withMaxAttempts", SymbolUtils.createValueSymbolBuilder("AddWithMaxAttempts",
                 AwsGoDependency.AWS_RETRY).build());
 
         writer.write("""
-                func $finalizeResolveName:L(o *Options, client Client) {
+                func $clientFinalizeResolver:L(o *Options) {
+                    if o.RetryMaxAttempts == 0 {
+                        return
+                    }
+
+                    o.Retryer = $withMaxAttempts:T(o.Retryer, o.RetryMaxAttempts)
+                }
+
+                func $operationFinalizeResolver:L(o *Options, client Client) {
                     if v := o.RetryMaxAttempts; v == 0 || v == client.options.RetryMaxAttempts {
                         return
                     }
@@ -517,6 +528,10 @@ public class AddAwsConfigFields implements GoIntegration {
                                 HTTPClient: nopClient,
                                 RetryMaxAttempts: c.retryMaxAttempts,
                                 RetryMode:        c.retryMode,
+                            }, func (o *Options) {
+                                if o.Retryer == nil {
+                                    t.Errorf("retryer must not be nil in functional options")
+                                }
                             })
 
                             if e, a := c.expectClientRetryMode, client.options.RetryMode; e != a {

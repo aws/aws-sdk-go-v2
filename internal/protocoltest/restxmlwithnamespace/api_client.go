@@ -38,6 +38,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	setResolvedDefaultsMode(&options)
 
+	resolveRetryer(&options)
+
 	resolveHTTPClient(&options)
 
 	resolveEndpointResolverV2(&options)
@@ -48,7 +50,7 @@ func New(options Options, optFns ...func(*Options)) *Client {
 		fn(&options)
 	}
 
-	resolveRetryer(&options)
+	finalizeRetryMaxAttempts(&options)
 
 	wrapWithAnonymousAuth(&options)
 
@@ -79,7 +81,7 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 		fn(&options)
 	}
 
-	finalizeRetryMaxAttemptOptions(&options, *c)
+	finalizeOperationRetryMaxAttempts(&options, *c)
 
 	finalizeClientEndpointResolverOptions(&options)
 
@@ -320,7 +322,15 @@ func resolveAWSRetryMaxAttempts(cfg aws.Config, o *Options) {
 	o.RetryMaxAttempts = cfg.RetryMaxAttempts
 }
 
-func finalizeRetryMaxAttemptOptions(o *Options, client Client) {
+func finalizeRetryMaxAttempts(o *Options) {
+	if o.RetryMaxAttempts == 0 {
+		return
+	}
+
+	o.Retryer = retry.AddWithMaxAttempts(o.Retryer, o.RetryMaxAttempts)
+}
+
+func finalizeOperationRetryMaxAttempts(o *Options, client Client) {
 	if v := o.RetryMaxAttempts; v == 0 || v == client.options.RetryMaxAttempts {
 		return
 	}

@@ -85,6 +85,10 @@ func TestClient_resolveRetryOptions(t *testing.T) {
 				HTTPClient:       nopClient,
 				RetryMaxAttempts: c.retryMaxAttempts,
 				RetryMode:        c.retryMode,
+			}, func(o *Options) {
+				if o.Retryer == nil {
+					t.Errorf("retryer must not be nil in functional options")
+				}
 			})
 
 			if e, a := c.expectClientRetryMode, client.options.RetryMode; e != a {

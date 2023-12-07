@@ -719,11 +719,11 @@ func TestNewSharedConfig(t *testing.T) {
 				ServicesSectionName: "service_endpoint_url_services",
 				Services: Services{
 					ServiceValues: map[string]map[string]string{
-						"s3": map[string]string{
+						"s3": {
 							"endpoint_url": "http://127.0.0.1",
 							"other":        "foo",
 						},
-						"ec2": map[string]string{
+						"ec2": {
 							"endpoint_url": "http://127.0.0.1:81",
 						},
 					},
