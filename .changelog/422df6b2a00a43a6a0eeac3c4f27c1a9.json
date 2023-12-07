@@ -1,0 +1,8 @@
+{
+    "id": "422df6b2-a00a-43a6-a0ee-ac3c4f27c1a9",
+    "type": "bugfix",
+    "description": "Add non-vhostable buckets to request path when using legacy V1 endpoint resolver.",
+    "modules": [
+        "service/s3"
+    ]
+}
