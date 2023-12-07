@@ -419,7 +419,13 @@
                 "hook": {
                     "target": "com.amazonaws.codedeploy#AutoScalingGroupHook",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Auto Scaling lifecycle event hook name.</p>"
+                        "smithy.api#documentation": "<p>The name of the launch hook that CodeDeploy installed into the Auto Scaling group.</p>\n         <p>For more information about the launch hook, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors\">How Amazon EC2 Auto Scaling works with CodeDeploy</a> in the\n                    <i>CodeDeploy User Guide</i>.</p>"
+                    }
+                },
+                "terminationHook": {
+                    "target": "com.amazonaws.codedeploy#AutoScalingGroupHook",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the termination hook that CodeDeploy installed into the Auto Scaling group.</p>\n         <p>For more information about the termination hook, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable\">Enabling termination deployments during Auto Scaling scale-in events</a> in the\n            <i>CodeDeploy User Guide</i>.</p>"
                     }
                 }
             },
@@ -792,13 +798,15 @@
                 "deploymentId": {
                     "target": "com.amazonaws.codedeploy#DeploymentId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
+                        "smithy.api#documentation": "<p> The unique ID of a deployment. </p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "targetIds": {
                     "target": "com.amazonaws.codedeploy#TargetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique IDs of the deployment targets. The compute platform of the deployment\n            determines the type of the targets and their formats. The maximum number of deployment\n            target IDs you can specify is 25.</p>\n         <ul>\n            <li>\n               <p> For deployments that use the EC2/On-premises compute platform, the target IDs\n                    are Amazon EC2 or on-premises instances IDs, and their target type is\n                        <code>instanceTarget</code>. </p>\n            </li>\n            <li>\n               <p> For deployments that use the Lambda compute platform, the\n                    target IDs are the names of Lambda functions, and their target type\n                    is <code>instanceTarget</code>. </p>\n            </li>\n            <li>\n               <p> For deployments that use the Amazon ECS compute platform, the target\n                    IDs are pairs of Amazon ECS clusters and services specified using the\n                    format <code><clustername>:<servicename></code>. Their target type\n                    is <code>ecsTarget</code>. </p>\n            </li>\n            <li>\n               <p> For deployments that are deployed with CloudFormation, the target IDs are\n                        CloudFormation stack IDs. Their target type is\n                        <code>cloudFormationTarget</code>. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> The unique IDs of the deployment targets. The compute platform of the deployment\n            determines the type of the targets and their formats. The maximum number of deployment\n            target IDs you can specify is 25.</p>\n         <ul>\n            <li>\n               <p> For deployments that use the EC2/On-premises compute platform, the target IDs\n                    are Amazon EC2 or on-premises instances IDs, and their target type is\n                        <code>instanceTarget</code>. </p>\n            </li>\n            <li>\n               <p> For deployments that use the Lambda compute platform, the\n                    target IDs are the names of Lambda functions, and their target type\n                    is <code>instanceTarget</code>. </p>\n            </li>\n            <li>\n               <p> For deployments that use the Amazon ECS compute platform, the target\n                    IDs are pairs of Amazon ECS clusters and services specified using the\n                    format <code><clustername>:<servicename></code>. Their target type\n                    is <code>ecsTarget</code>. </p>\n            </li>\n            <li>\n               <p> For deployments that are deployed with CloudFormation, the target IDs are\n                        CloudFormation stack IDs. Their target type is\n                        <code>cloudFormationTarget</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1305,7 +1313,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1348,7 +1355,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -1361,7 +1369,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1375,7 +1382,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -1398,7 +1404,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1433,7 +1438,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1444,14 +1448,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1465,14 +1471,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -1481,11 +1485,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1496,14 +1500,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1517,7 +1523,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1537,7 +1542,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1548,14 +1552,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -1566,9 +1572,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2537,6 +2545,9 @@
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidTrafficRoutingConfigurationException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#InvalidZonalDeploymentConfigurationException"
                 }
             ],
             "traits": {
@@ -2569,6 +2580,12 @@
                     "target": "com.amazonaws.codedeploy#ComputePlatform",
                     "traits": {
                         "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>,\n                <code>Server</code>, or <code>ECS</code>).</p>"
+                    }
+                },
+                "zonalConfig": {
+                    "target": "com.amazonaws.codedeploy#ZonalConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configure the <code>ZonalConfig</code> object if you want CodeDeploy to\n            deploy your application to one <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones\">Availability Zone</a> at a time, within an Amazon Web Services Region.</p>\n         <p>For more information about the zonal configuration feature, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config\">zonal configuration</a> in the <i>CodeDeploy User\n                Guide</i>.</p>"
                     }
                 }
             },
@@ -2817,6 +2834,12 @@
                     "target": "com.amazonaws.codedeploy#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p> The metadata that you apply to CodeDeploy deployment groups to help you organize and\n            categorize them. Each tag consists of a key and an optional value, both of which you\n            define. </p>"
+                    }
+                },
+                "terminationHookEnabled": {
+                    "target": "com.amazonaws.codedeploy#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto Scaling. For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html\">Integrating\n                    CodeDeploy with Amazon EC2 Auto Scaling</a> in the <i>CodeDeploy User Guide</i>.</p>\n         <p>Set <code>terminationHookEnabled</code> to <code>true</code> to have CodeDeploy install a termination hook into your Auto Scaling group when you create a\n            deployment group. When this hook is installed, CodeDeploy will perform\n            termination deployments.</p>\n         <p>For information about termination deployments, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable\">Enabling termination deployments during Auto Scaling scale-in events</a> in the\n                    <i>CodeDeploy User Guide</i>.</p>\n         <p>For more information about Auto Scaling scale-in events, see the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html#as-lifecycle-scale-in\">Scale in</a> topic in the <i>Amazon EC2 Auto Scaling User\n            Guide</i>.</p>"
                     }
                 }
             },
@@ -3254,7 +3277,7 @@
                 "minimumHealthyHosts": {
                     "target": "com.amazonaws.codedeploy#MinimumHealthyHosts",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the number or percentage of minimum healthy instance.</p>"
+                        "smithy.api#documentation": "<p>Information about the number or percentage of minimum healthy instances.</p>"
                     }
                 },
                 "createTime": {
@@ -3273,6 +3296,12 @@
                     "target": "com.amazonaws.codedeploy#TrafficRoutingConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that specifies how the deployment traffic is routed. Used for\n            deployments with a Lambda or Amazon ECS compute platform\n            only.</p>"
+                    }
+                },
+                "zonalConfig": {
+                    "target": "com.amazonaws.codedeploy#ZonalConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a zonal configuration.</p>"
                     }
                 }
             },
@@ -3368,6 +3397,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CloudFormationRollback"
+                    }
+                },
+                "AutoscalingTermination": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "autoscalingTermination"
                     }
                 }
             }
@@ -3553,6 +3588,13 @@
                     "target": "com.amazonaws.codedeploy#ECSServiceList",
                     "traits": {
                         "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service is specified as an Amazon ECS cluster and service name\n            pair using the format <code><clustername>:<servicename></code>. </p>"
+                    }
+                },
+                "terminationHookEnabled": {
+                    "target": "com.amazonaws.codedeploy#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the deployment group was configured to have CodeDeploy\n            install a termination hook into an Auto Scaling group.</p>\n         <p>For more information about the termination hook, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors\">How Amazon EC2 Auto Scaling works with CodeDeploy</a> in the\n                    <i>CodeDeploy User Guide</i>.</p>"
                     }
                 }
             },
@@ -4558,12 +4600,12 @@
                 "name": {
                     "target": "com.amazonaws.codedeploy#ELBName",
                     "traits": {
-                        "smithy.api#documentation": "<p>For blue/green deployments, the name of the Classic Load Balancer that is used to route\n            traffic from original instances to replacement instances in a blue/green deployment. For\n            in-place deployments, the name of the Classic Load Balancer that instances are deregistered from\n            so they are not serving traffic during a deployment, and then re-registered with after\n            the deployment is complete.</p>"
+                        "smithy.api#documentation": "<p>For blue/green deployments, the name of the Classic Load Balancer that is used to\n            route traffic from original instances to replacement instances in a blue/green\n            deployment. For in-place deployments, the name of the Classic Load Balancer that\n            instances are deregistered from so they are not serving traffic during a deployment, and\n            then re-registered with after the deployment is complete.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a Classic Load Balancer in Elastic Load Balancing to use in a deployment.\n            Instances are registered directly with a load balancer, and traffic is routed to the\n            load balancer.</p>"
+                "smithy.api#documentation": "<p>Information about a Classic Load Balancer in Elastic Load Balancing to use in a\n            deployment. Instances are registered directly with a load balancer, and traffic is\n            routed to the load balancer.</p>"
             }
         },
         "com.amazonaws.codedeploy#ELBInfoList": {
@@ -5360,13 +5402,15 @@
                 "deploymentId": {
                     "target": "com.amazonaws.codedeploy#DeploymentId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
+                        "smithy.api#documentation": "<p> The unique ID of a deployment. </p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "targetId": {
                     "target": "com.amazonaws.codedeploy#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID of a deployment target. </p>"
+                        "smithy.api#documentation": "<p> The unique ID of a deployment target. </p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -6788,6 +6832,21 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.codedeploy#InvalidZonalDeploymentConfigurationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.codedeploy#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message that corresponds to the exception thrown by CodeDeploy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>ZonalConfig</code> object is not valid.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.codedeploy#Key": {
             "type": "string"
         },
@@ -7540,6 +7599,9 @@
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#InvalidTargetFilterNameException"
                 }
             ],
             "traits": {
@@ -7552,7 +7614,8 @@
                 "deploymentId": {
                     "target": "com.amazonaws.codedeploy#DeploymentId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique ID of a deployment. </p>"
+                        "smithy.api#documentation": "<p> The unique ID of a deployment. </p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
@@ -7942,7 +8005,7 @@
                 "elbInfoList": {
                     "target": "com.amazonaws.codedeploy#ELBInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that contains information about the load balancers to use for load balancing\n            in a deployment. If you're using Classic Load Balancers, specify those load balancers\n            in this array. </p>\n         <note>\n            <p>You can add up to 10 load balancers to the array.</p>\n         </note>\n         <note>\n            <p>If you're using Application Load Balancers or Network Load Balancers, use the\n                    <code>targetGroupInfoList</code> array instead of this one.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An array that contains information about the load balancers to use for load balancing\n            in a deployment. If you're using Classic Load Balancers, specify those load balancers in\n            this array. </p>\n         <note>\n            <p>You can add up to 10 load balancers to the array.</p>\n         </note>\n         <note>\n            <p>If you're using Application Load Balancers or Network Load Balancers, use the\n                    <code>targetGroupInfoList</code> array instead of this one.</p>\n         </note>"
                     }
                 },
                 "targetGroupInfoList": {
@@ -7986,7 +8049,51 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about minimum healthy instance.</p>"
+                "smithy.api#documentation": "<p>Information about the minimum number of healthy instances.</p>"
+            }
+        },
+        "com.amazonaws.codedeploy#MinimumHealthyHostsPerZone": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.codedeploy#MinimumHealthyHostsPerZoneType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>type</code> associated with the <code>MinimumHealthyHostsPerZone</code>\n            option.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.codedeploy#MinimumHealthyHostsPerZoneValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The <code>value</code> associated with the <code>MinimumHealthyHostsPerZone</code>\n            option.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the minimum number of healthy instances per Availability\n            Zone.</p>"
+            }
+        },
+        "com.amazonaws.codedeploy#MinimumHealthyHostsPerZoneType": {
+            "type": "enum",
+            "members": {
+                "HOST_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOST_COUNT"
+                    }
+                },
+                "FLEET_PERCENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLEET_PERCENT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codedeploy#MinimumHealthyHostsPerZoneValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
             }
         },
         "com.amazonaws.codedeploy#MinimumHealthyHostsType": {
@@ -9842,6 +9949,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about an on-premises instance tag set. The deployment group includes only\n            on-premises instances identified by all the tag groups.</p>"
                     }
+                },
+                "terminationHookEnabled": {
+                    "target": "com.amazonaws.codedeploy#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto Scaling. For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html\">Integrating\n                CodeDeploy with Amazon EC2 Auto Scaling</a> in the <i>CodeDeploy User Guide</i>.</p>\n         <p>Set <code>terminationHookEnabled</code> to <code>true</code> to have CodeDeploy install a termination hook into your Auto Scaling group when you update a\n            deployment group. When this hook is installed, CodeDeploy will perform\n            termination deployments.</p>\n         <p>For information about termination deployments, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable\">Enabling termination deployments during Auto Scaling scale-in events</a> in the\n            <i>CodeDeploy User Guide</i>.</p>\n         <p>For more information about Auto Scaling scale-in events, see the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html#as-lifecycle-scale-in\">Scale in</a> topic in the <i>Amazon EC2 Auto Scaling User\n                Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9877,6 +9990,35 @@
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.codedeploy#WaitTimeInSeconds": {
+            "type": "long"
+        },
+        "com.amazonaws.codedeploy#ZonalConfig": {
+            "type": "structure",
+            "members": {
+                "firstZoneMonitorDurationInSeconds": {
+                    "target": "com.amazonaws.codedeploy#WaitTimeInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period of time, in seconds, that CodeDeploy must wait after completing a\n            deployment to the <i>first</i> Availability Zone. CodeDeploy will\n            wait this amount of time before starting a deployment to the second Availability Zone.\n            You might set this option if you want to allow extra bake time for the first\n            Availability Zone. If you don't specify a value for\n                <code>firstZoneMonitorDurationInSeconds</code>, then CodeDeploy uses the\n                <code>monitorDurationInSeconds</code> value for the first Availability Zone.</p>\n         <p>For more information about the zonal configuration feature, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config\">zonal configuration</a> in the <i>CodeDeploy User\n                Guide</i>.</p>"
+                    }
+                },
+                "monitorDurationInSeconds": {
+                    "target": "com.amazonaws.codedeploy#WaitTimeInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period of time, in seconds, that CodeDeploy must wait after completing a\n            deployment to an Availability Zone. CodeDeploy will wait this amount of time\n            before starting a deployment to the next Availability Zone. Consider adding a monitor\n            duration to give the deployment some time to prove itself (or 'bake') in one\n            Availability Zone before it is released in the next zone. If you don't specify a\n                <code>monitorDurationInSeconds</code>, CodeDeploy starts deploying to the\n            next Availability Zone immediately.</p>\n         <p>For more information about the zonal configuration feature, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config\">zonal configuration</a> in the <i>CodeDeploy User\n                Guide</i>.</p>"
+                    }
+                },
+                "minimumHealthyHostsPerZone": {
+                    "target": "com.amazonaws.codedeploy#MinimumHealthyHostsPerZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number or percentage of instances that must remain available per Availability Zone\n            during a deployment. This option works in conjunction with the\n                <code>MinimumHealthyHosts</code> option. For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html#minimum-healthy-hosts-az\">About the minimum number of healthy hosts per Availability Zone</a> in the\n                    <i>CodeDeploy User Guide</i>.</p>\n         <p>If you don't specify the <code>minimumHealthyHostsPerZone</code> option, then CodeDeploy uses a default value of <code>0</code> percent.</p>\n         <p>For more information about the zonal configuration feature, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config\">zonal configuration</a> in the <i>CodeDeploy User\n                Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configure the <code>ZonalConfig</code> object if you want CodeDeploy to\n            deploy your application to one <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones\">Availability Zone</a> at a time, within an Amazon Web Services Region. By\n            deploying to one Availability Zone at a time, you can expose your deployment to a\n            progressively larger audience as confidence in the deployment's performance and\n            viability grows. If you don't configure the <code>ZonalConfig</code> object, CodeDeploy deploys your application to a random selection of hosts across a\n            Region.</p>\n         <p>For more information about the zonal configuration feature, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config\">zonal configuration</a> in the <i>CodeDeploy User\n                Guide</i>.</p>"
             }
         }
     }
