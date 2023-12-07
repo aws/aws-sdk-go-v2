@@ -1,3 +1,8 @@
+# v1.22.0 (2023-12-07)
+
+* **Feature**: This release adds support for two new CodeDeploy features: 1) zonal deployments for Amazon EC2 in-place deployments, 2) deployments triggered by Auto Scaling group termination lifecycle hook events.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.3 (2023-12-06)
 
 * **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.

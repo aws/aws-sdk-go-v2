@@ -3,4 +3,4 @@
 package inspectorscan
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.1.3"
+const goModuleVersion = "1.1.4"

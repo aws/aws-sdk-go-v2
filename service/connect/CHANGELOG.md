@@ -1,3 +1,7 @@
+# v1.84.1 (2023-12-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.84.0 (2023-12-06)
 
 * **Feature**: Releasing Tagging Support for Instance Management APIS

@@ -1,3 +1,7 @@
+# v1.140.1 (2023-12-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.140.0 (2023-12-06)
 
 * **Feature**: Releasing the new cpuManufacturer attribute within the DescribeInstanceTypes API response which notifies our customers with information on who the Manufacturer is for the processor attached to the instance, for example: Intel.

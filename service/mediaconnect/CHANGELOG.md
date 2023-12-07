@@ -1,3 +1,7 @@
+# v1.24.4 (2023-12-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.3 (2023-12-06)
 
 * **Bug Fix**: Restore pre-refactor auth behavior where all operations could technically be performed anonymously.

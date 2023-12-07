@@ -1,3 +1,13 @@
+# Release (2023-12-07)
+
+## General Highlights
+* **Feature**: Support modeled request compression. The only algorithm supported at this time is `gzip`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.22.0](service/codedeploy/CHANGELOG.md#v1220-2023-12-07)
+  * **Feature**: This release adds support for two new CodeDeploy features: 1) zonal deployments for Amazon EC2 in-place deployments, 2) deployments triggered by Auto Scaling group termination lifecycle hook events.
+
 # Release (2023-12-06)
 
 ## General Highlights
