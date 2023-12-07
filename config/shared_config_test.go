@@ -711,6 +711,25 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:         "request_compression_min_request_out_of_bounds",
 			Err:             fmt.Errorf("invalid range for min request compression size bytes 10485761, must be within 0 and 10485760 inclusively"),
 		},
+		"services section": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "service_endpoint_url",
+			Expected: SharedConfig{
+				Profile:             "service_endpoint_url",
+				ServicesSectionName: "service_endpoint_url_services",
+				Services: Services{
+					ServiceValues: map[string]map[string]string{
+						"s3": map[string]string{
+							"endpoint_url": "http://127.0.0.1",
+							"other":        "foo",
+						},
+						"ec2": map[string]string{
+							"endpoint_url": "http://127.0.0.1:81",
+						},
+					},
+				},
+			},
+		},
 	}
 
 	for name, c := range cases {

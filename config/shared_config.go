@@ -31,7 +31,7 @@ const (
 
 	// Prefix for services section. It is referenced in profile via the services
 	// parameter to configure clients for service-specific parameters.
-	servicesPrefix = `services`
+	servicesPrefix = `services `
 
 	// string equivalent for boolean
 	endpointDiscoveryDisabled = `false`
@@ -108,6 +108,8 @@ const (
 	ignoreConfiguredEndpoints = "ignore_configured_endpoint_urls"
 
 	endpointURL = "endpoint_url"
+
+	servicesSectionKey = "services"
 
 	disableRequestCompression      = "disable_request_compression"
 	requestMinCompressionSizeBytes = "request_min_compression_size_bytes"
@@ -320,8 +322,9 @@ type SharedConfig struct {
 	// corresponding endpoint resolution field.
 	BaseEndpoint string
 
-	// Value to contain services section content.
-	Services Services
+	// Services section config.
+	ServicesSectionName string
+	Services            Services
 
 	// determine if request compression is allowed, default to false
 	// retrieved from config file's profile field disable_request_compression
@@ -1007,14 +1010,11 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 		c.SSOSession = &ssoSession
 	}
 
-	for _, sectionName := range sections.List() {
-		if strings.HasPrefix(sectionName, servicesPrefix) {
-			section, ok := sections.GetSection(sectionName)
-			if ok {
-				var svcs Services
-				svcs.setFromIniSection(section)
-				c.Services = svcs
-			}
+	if len(c.ServicesSectionName) > 0 {
+		if section, ok := sections.GetSection(servicesPrefix + c.ServicesSectionName); ok {
+			var svcs Services
+			svcs.setFromIniSection(section)
+			c.Services = svcs
 		}
 	}
 
@@ -1135,6 +1135,8 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	if creds.HasKeys() {
 		c.Credentials = creds
 	}
+
+	updateString(&c.ServicesSectionName, section, servicesSectionKey)
 
 	return nil
 }
