@@ -55,6 +55,24 @@ func Test_UpdateEndpointBuild(t *testing.T) {
 					{"abc", "k:e,y", "https://abc.s3.mock-region.amazonaws.com/k%3Ae%2Cy?x-id=GetObject", ""},
 				},
 			},
+			"VirtualHostStyleBucketV1EndpointHTTPS": {
+				customEndpoint: &aws.Endpoint{
+					URL: "https://foo.bar",
+				},
+				tests: []s3BucketTest{
+					{"abc", "key", "https://abc.foo.bar/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://foo.bar/a.b.c/key?x-id=GetObject", ""},
+				},
+			},
+			"VirtualHostStyleBucketV1EndpointHTTP": {
+				customEndpoint: &aws.Endpoint{
+					URL: "http://foo.bar",
+				},
+				tests: []s3BucketTest{
+					{"abc", "key", "http://abc.foo.bar/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "http://a.b.c.foo.bar/key?x-id=GetObject", ""},
+				},
+			},
 			"Accelerate": {
 				useAccelerate: true,
 				tests: []s3BucketTest{
