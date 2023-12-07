@@ -50,7 +50,9 @@ while [ -n "$branch" ] && [[ "$branch" == *-* ]]; do
 done
 
 if [ -z "$matched_branch" ]; then
-    echo found no matching smithy-go branch, stop
+    # default to main but don't modreplace so we can use release but codegen ci
+    # still works
+    git clone "$repository" "$RUNNER_TMPDIR"/smithy-go
     exit 0
 fi
 
