@@ -46,10 +46,19 @@
                     "target": "com.amazonaws.finspace#CreateKxDatabase"
                 },
                 {
+                    "target": "com.amazonaws.finspace#CreateKxDataview"
+                },
+                {
                     "target": "com.amazonaws.finspace#CreateKxEnvironment"
                 },
                 {
+                    "target": "com.amazonaws.finspace#CreateKxScalingGroup"
+                },
+                {
                     "target": "com.amazonaws.finspace#CreateKxUser"
+                },
+                {
+                    "target": "com.amazonaws.finspace#CreateKxVolume"
                 },
                 {
                     "target": "com.amazonaws.finspace#DeleteEnvironment"
@@ -61,10 +70,19 @@
                     "target": "com.amazonaws.finspace#DeleteKxDatabase"
                 },
                 {
+                    "target": "com.amazonaws.finspace#DeleteKxDataview"
+                },
+                {
                     "target": "com.amazonaws.finspace#DeleteKxEnvironment"
                 },
                 {
+                    "target": "com.amazonaws.finspace#DeleteKxScalingGroup"
+                },
+                {
                     "target": "com.amazonaws.finspace#DeleteKxUser"
+                },
+                {
+                    "target": "com.amazonaws.finspace#DeleteKxVolume"
                 },
                 {
                     "target": "com.amazonaws.finspace#GetEnvironment"
@@ -82,10 +100,19 @@
                     "target": "com.amazonaws.finspace#GetKxDatabase"
                 },
                 {
+                    "target": "com.amazonaws.finspace#GetKxDataview"
+                },
+                {
                     "target": "com.amazonaws.finspace#GetKxEnvironment"
                 },
                 {
+                    "target": "com.amazonaws.finspace#GetKxScalingGroup"
+                },
+                {
                     "target": "com.amazonaws.finspace#GetKxUser"
+                },
+                {
+                    "target": "com.amazonaws.finspace#GetKxVolume"
                 },
                 {
                     "target": "com.amazonaws.finspace#ListEnvironments"
@@ -103,10 +130,19 @@
                     "target": "com.amazonaws.finspace#ListKxDatabases"
                 },
                 {
+                    "target": "com.amazonaws.finspace#ListKxDataviews"
+                },
+                {
                     "target": "com.amazonaws.finspace#ListKxEnvironments"
                 },
                 {
+                    "target": "com.amazonaws.finspace#ListKxScalingGroups"
+                },
+                {
                     "target": "com.amazonaws.finspace#ListKxUsers"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ListKxVolumes"
                 },
                 {
                     "target": "com.amazonaws.finspace#ListTagsForResource"
@@ -130,6 +166,9 @@
                     "target": "com.amazonaws.finspace#UpdateKxDatabase"
                 },
                 {
+                    "target": "com.amazonaws.finspace#UpdateKxDataview"
+                },
+                {
                     "target": "com.amazonaws.finspace#UpdateKxEnvironment"
                 },
                 {
@@ -137,6 +176,9 @@
                 },
                 {
                     "target": "com.amazonaws.finspace#UpdateKxUser"
+                },
+                {
+                    "target": "com.amazonaws.finspace#UpdateKxVolume"
                 }
             ],
             "traits": {
@@ -848,6 +890,12 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.finspace#AttachedClusterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#KxClusterName"
+            }
+        },
         "com.amazonaws.finspace#AttributeMap": {
             "type": "map",
             "key": {
@@ -1068,6 +1116,14 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
+        "com.amazonaws.finspace#ClusterNodeCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.finspace#CodeConfiguration": {
             "type": "structure",
             "members": {
@@ -1119,6 +1175,14 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100000
+                }
+            }
+        },
+        "com.amazonaws.finspace#CpuCount": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.1
                 }
             }
         },
@@ -1448,8 +1512,14 @@
                 "clusterType": {
                     "target": "com.amazonaws.finspace#KxClusterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of KDB database that is being created. The following types are available: </p>\n         <ul>\n            <li>\n               <p>HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.</p>\n            </li>\n            <li>\n               <p>RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the <code>savedownStorageConfiguration</code> parameter.</p>\n            </li>\n            <li>\n               <p>GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a  writable local storage.</p>\n            </li>\n            <li>\n               <p>GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only <code>SINGLE</code> AZ mode.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the type of KDB database that is being created. The following types are available: </p>\n         <ul>\n            <li>\n               <p>HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.</p>\n            </li>\n            <li>\n               <p>RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the <code>savedownStorageConfiguration</code> parameter.</p>\n            </li>\n            <li>\n               <p>GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a  writable local storage.</p>\n            </li>\n            <li>\n               <p>GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only <code>SINGLE</code> AZ mode.</p>\n            </li>\n            <li>\n               <p>Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tickerplantLogConfiguration": {
+                    "target": "com.amazonaws.finspace#TickerplantLogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA configuration to store Tickerplant logs. It consists of\na list of volumes that will be mounted to your cluster. For the cluster type <code>Tickerplant</code>, the location of the TP volume on the cluster will be available by using the global variable <code>.aws.tp_log_path</code>. \n</p>"
                     }
                 },
                 "databases": {
@@ -1479,8 +1549,7 @@
                 "capacityConfiguration": {
                     "target": "com.amazonaws.finspace#CapacityConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.</p>"
                     }
                 },
                 "releaseLabel": {
@@ -1493,7 +1562,8 @@
                 "vpcConfiguration": {
                     "target": "com.amazonaws.finspace#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration details about the network where the Privatelink endpoint of the cluster resides.</p>"
+                        "smithy.api#documentation": "<p>Configuration details about the network where the Privatelink endpoint of the cluster resides.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "initializationScript": {
@@ -1544,6 +1614,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pairs to label the cluster. You can add up to 50 tags to a cluster.</p>"
                     }
+                },
+                "scalingGroupConfiguration": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that stores the configuration details of a scaling group.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1580,7 +1656,16 @@
                 "clusterType": {
                     "target": "com.amazonaws.finspace#KxClusterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of KDB database that is being created. The following types are available: </p>\n         <ul>\n            <li>\n               <p>HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.</p>\n            </li>\n            <li>\n               <p>RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the <code>savedownStorageConfiguration</code> parameter.</p>\n            </li>\n            <li>\n               <p>GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a  writable local storage.</p>\n            </li>\n            <li>\n               <p>GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only <code>SINGLE</code> AZ mode.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the type of KDB database that is being created. The following types are available: </p>\n         <ul>\n            <li>\n               <p>HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.</p>\n            </li>\n            <li>\n               <p>RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the <code>savedownStorageConfiguration</code> parameter.</p>\n            </li>\n            <li>\n               <p>GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a  writable local storage.</p>\n            </li>\n            <li>\n               <p>GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only <code>SINGLE</code> AZ mode.</p>\n            </li>\n            <li>\n               <p>Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "tickerplantLogConfiguration": {
+                    "target": "com.amazonaws.finspace#TickerplantLogConfiguration"
+                },
+                "volumes": {
+                    "target": "com.amazonaws.finspace#Volumes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of volumes mounted on the cluster.\n</p>"
                     }
                 },
                 "databases": {
@@ -1677,6 +1762,12 @@
                     "target": "com.amazonaws.finspace#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp at which the cluster was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "scalingGroupConfiguration": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that stores the configuration details of a scaling group.</p>"
                     }
                 }
             },
@@ -1814,6 +1905,213 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.finspace#CreateKxDataview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#CreateKxDataviewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#CreateKxDataviewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nCreates a snapshot of kdb database with tiered storage capabilities and a pre-warmed cache, ready for mounting on kdb clusters.  Dataviews are only available for clusters running on a scaling group. They are not supported on dedicated clusters. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/kx/environments/{environmentId}/databases/{databaseName}/dataviews",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#CreateKxDataviewRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, where you want to create the dataview. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.finspace#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the database where you want to create a dataview.\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the dataview.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "azMode": {
+                    "target": "com.amazonaws.finspace#KxAzMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier of the availability zones.\n      </p>"
+                    }
+                },
+                "changesetId": {
+                    "target": "com.amazonaws.finspace#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA unique identifier of the changeset that you want to use to ingest data. </p>"
+                    }
+                },
+                "segmentConfigurations": {
+                    "target": "com.amazonaws.finspace#KxDataviewSegmentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. </p>"
+                    }
+                },
+                "autoUpdate": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets. The default value is false.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the dataview.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.finspace#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of key-value pairs to label the dataview. You can add up to 50 tags to a dataview.\n</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#CreateKxDataviewResponse": {
+            "type": "structure",
+            "members": {
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the dataview.</p>"
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.finspace#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database where you want to create a dataview.</p>"
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, where you want to create the dataview. </p>"
+                    }
+                },
+                "azMode": {
+                    "target": "com.amazonaws.finspace#KxAzMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier of the availability zones.\n      </p>"
+                    }
+                },
+                "changesetId": {
+                    "target": "com.amazonaws.finspace#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the changeset.</p>"
+                    }
+                },
+                "segmentConfigurations": {
+                    "target": "com.amazonaws.finspace#KxDataviewSegmentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the dataview.</p>"
+                    }
+                },
+                "autoUpdate": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The option to select whether you want to apply all the future additions and corrections automatically to the dataview when you ingest new changesets. The default value is false.</p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe timestamp at which the dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe last time that the dataview was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxDataviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The dataview creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> – The dataview is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> – The dataview is active.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.finspace#CreateKxEnvironment": {
             "type": "operation",
             "input": {
@@ -1886,7 +2184,8 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspace#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>"
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -1937,6 +2236,147 @@
                     "target": "com.amazonaws.finspace#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp at which the kdb environment was created in FinSpace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.finspace#CreateKxScalingGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#CreateKxScalingGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#CreateKxScalingGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new scaling group. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/kx/environments/{environmentId}/scalingGroups",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#CreateKxScalingGroupRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, where you want to create the scaling group. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "scalingGroupName": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb scaling group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "hostType": {
+                    "target": "com.amazonaws.finspace#KxHostType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.\n   \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the availability zones.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.finspace#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of key-value pairs to label the scaling group. You can add up to 50 tags to a scaling group.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#CreateKxScalingGroupResponse": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, where you create the scaling group. </p>"
+                    }
+                },
+                "scalingGroupName": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb scaling group. </p>"
+                    }
+                },
+                "hostType": {
+                    "target": "com.amazonaws.finspace#KxHostType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.\n   \n</p>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the availability zones.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of scaling group.</p>\n         <ul>\n            <li>\n               <p>CREATING – The scaling group creation is in progress.</p>\n            </li>\n            <li>\n               <p>CREATE_FAILED – The scaling group creation has failed.</p>\n            </li>\n            <li>\n               <p>ACTIVE – The scaling group is active.</p>\n            </li>\n            <li>\n               <p>UPDATING – The scaling group is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>UPDATE_FAILED – The update action failed.</p>\n            </li>\n            <li>\n               <p>DELETING – The scaling group is in the process of being deleted.</p>\n            </li>\n            <li>\n               <p>DELETE_FAILED – The system failed to delete the scaling group.</p>\n            </li>\n            <li>\n               <p>DELETED – The scaling group is successfully deleted.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe last time that the scaling group was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. </p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The timestamp at which the scaling group was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 }
             },
@@ -2021,7 +2461,8 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspace#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>"
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -2054,6 +2495,192 @@
                     "target": "com.amazonaws.finspace#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM role ARN that will be associated with the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.finspace#CreateKxVolume": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#CreateKxVolumeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#CreateKxVolumeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nCreates a new volume with a specific amount of throughput and storage capacity. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/kx/environments/{environmentId}/kxvolumes",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#CreateKxVolumeRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, whose clusters can attach to the volume. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "volumeType": {
+                    "target": "com.amazonaws.finspace#KxVolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The type of file system volume. Currently, FinSpace only supports <code>NAS_1</code> volume type. When you select <code>NAS_1</code> volume type, you must also provide <code>nas1Configuration</code>.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#KxVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the volume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA description of the volume.\n</p>"
+                    }
+                },
+                "nas1Configuration": {
+                    "target": "com.amazonaws.finspace#KxNAS1Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the configuration for the Network attached storage (NAS_1) file system volume. This\n         parameter is required when you choose <code>volumeType</code> as\n         <i>NAS_1</i>.</p>"
+                    }
+                },
+                "azMode": {
+                    "target": "com.amazonaws.finspace#KxAzMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. Currently, FinSpace only support <code>SINGLE</code> for volumes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "availabilityZoneIds": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the availability zones.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.finspace#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of key-value pairs to label the volume. You can add up to 50 tags to a volume.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#CreateKxVolumeResponse": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, whose clusters can attach to the volume. </p>"
+                    }
+                },
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#KxVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the volume.</p>"
+                    }
+                },
+                "volumeType": {
+                    "target": "com.amazonaws.finspace#KxVolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of file system volume. Currently, FinSpace only supports <code>NAS_1</code> volume type.\n   </p>"
+                    }
+                },
+                "volumeArn": {
+                    "target": "com.amazonaws.finspace#KxVolumeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN identifier of the volume.\n</p>"
+                    }
+                },
+                "nas1Configuration": {
+                    "target": "com.amazonaws.finspace#KxNAS1Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the configuration for the Network attached storage (NAS_1) file system volume.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxVolumeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of volume creation.</p>\n         <ul>\n            <li>\n               <p>CREATING – The volume creation is in progress.</p>\n            </li>\n            <li>\n               <p>CREATE_FAILED – The volume creation has failed.</p>\n            </li>\n            <li>\n               <p>ACTIVE – The volume is active.</p>\n            </li>\n            <li>\n               <p>UPDATING – The volume is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>UPDATE_FAILED – The update action failed.</p>\n            </li>\n            <li>\n               <p>UPDATED – The volume is successfully updated.</p>\n            </li>\n            <li>\n               <p>DELETING – The volume is in the process of being deleted.</p>\n            </li>\n            <li>\n               <p>DELETE_FAILED – The system failed to delete the volume.</p>\n            </li>\n            <li>\n               <p>DELETED – The volume is successfully deleted.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.finspace#KxVolumeStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message when a failed state occurs. </p>"
+                    }
+                },
+                "azMode": {
+                    "target": "com.amazonaws.finspace#KxAzMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. Currently, FinSpace only support <code>SINGLE</code> for volumes.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA description of the volume.\n</p>"
+                    }
+                },
+                "availabilityZoneIds": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the availability zones.</p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the volume was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 }
             },
@@ -2126,7 +2753,7 @@
                     "min": 1,
                     "max": 1025
                 },
-                "smithy.api#pattern": "^\\/([^\\/]+\\/){0,2}[^\\/]*$"
+                "smithy.api#pattern": "^(\\*)*[\\/\\?\\*]([^\\/]+\\/){0,2}[^\\/]*$"
             }
         },
         "com.amazonaws.finspace#DbPaths": {
@@ -2351,6 +2978,91 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.finspace#DeleteKxDataview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#DeleteKxDataviewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#DeleteKxDataviewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nDeletes the specified dataview. Before deleting a dataview, make sure that it is not in use by any cluster. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/kx/environments/{environmentId}/databases/{databaseName}/dataviews/{dataviewName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxDataviewRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, from where you want to delete the dataview. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.finspace#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database whose dataview you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataview that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxDataviewResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.finspace#DeleteKxEnvironment": {
             "type": "operation",
             "input": {
@@ -2362,6 +3074,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.finspace#InternalServerException"
@@ -2395,6 +3110,14 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -2402,6 +3125,85 @@
             }
         },
         "com.amazonaws.finspace#DeleteKxEnvironmentResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxScalingGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#DeleteKxScalingGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#DeleteKxScalingGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nDeletes the specified scaling group. This action is irreversible. You cannot delete a scaling group until all the clusters running on it have been deleted.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/kx/environments/{environmentId}/scalingGroups/{scalingGroupName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxScalingGroupRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, from where you want to delete the dataview. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "scalingGroupName": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb scaling group. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxScalingGroupResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -2419,6 +3221,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.finspace#InternalServerException"
@@ -2460,6 +3265,14 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -2467,6 +3280,85 @@
             }
         },
         "com.amazonaws.finspace#DeleteKxUserResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxVolume": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#DeleteKxVolumeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#DeleteKxVolumeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Deletes a volume. You can only delete a volume if it's not attached to a cluster or a dataview. When a volume is deleted, any data on the volume is lost. This action is irreversible.\n\n</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/kx/environments/{environmentId}/kxvolumes/{volumeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxVolumeRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, whose clusters can attach to the volume. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#KxVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the volume that you want to delete.\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxVolumeResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -2896,7 +3788,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:(environment|kxEnvironment)/[0-9A-Za-z_-]{1,128}(/(kxDatabase|kxCluster|kxUser)/[a-zA-Z0-9_-]{1,255})?$"
+                "smithy.api#pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:(environment|kxEnvironment)/[0-9A-Za-z_-]{1,128}(/(kxCluster|kxUser|kxVolume|kxScalingGroup)/[a-zA-Z0-9_-]{1,255}|/(kxDatabase/[a-zA-Z0-9_-]{1,255}(/kxDataview/[a-zA-Z0-9_-]{1,255})?))?$"
             }
         },
         "com.amazonaws.finspace#GetEnvironment": {
@@ -3179,7 +4071,16 @@
                 "clusterType": {
                     "target": "com.amazonaws.finspace#KxClusterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of KDB database that is being created. The following types are available: </p>\n         <ul>\n            <li>\n               <p>HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.</p>\n            </li>\n            <li>\n               <p>RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the <code>savedownStorageConfiguration</code> parameter.</p>\n            </li>\n            <li>\n               <p>GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a  writable local storage.</p>\n            </li>\n            <li>\n               <p>GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only <code>SINGLE</code> AZ mode.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the type of KDB database that is being created. The following types are available: </p>\n         <ul>\n            <li>\n               <p>HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.</p>\n            </li>\n            <li>\n               <p>RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the <code>savedownStorageConfiguration</code> parameter.</p>\n            </li>\n            <li>\n               <p>GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a  writable local storage.</p>\n            </li>\n            <li>\n               <p>GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only <code>SINGLE</code> AZ mode.</p>\n            </li>\n            <li>\n               <p>Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "tickerplantLogConfiguration": {
+                    "target": "com.amazonaws.finspace#TickerplantLogConfiguration"
+                },
+                "volumes": {
+                    "target": "com.amazonaws.finspace#Volumes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of volumes attached to the cluster.\n</p>"
                     }
                 },
                 "databases": {
@@ -3277,6 +4178,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp at which the cluster was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
+                },
+                "scalingGroupConfiguration": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupConfiguration"
                 }
             },
             "traits": {
@@ -3492,6 +4396,165 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.finspace#GetKxDataview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#GetKxDataviewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#GetKxDataviewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nRetrieves details of the dataview.\n</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/kx/environments/{environmentId}/databases/{databaseName}/dataviews/{dataviewName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#GetKxDataviewRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, from where you want to retrieve the dataview details.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.finspace#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the database where you created the dataview.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the dataview.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#GetKxDataviewResponse": {
+            "type": "structure",
+            "members": {
+                "databaseName": {
+                    "target": "com.amazonaws.finspace#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the database where you created the dataview.</p>"
+                    }
+                },
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the dataview.</p>"
+                    }
+                },
+                "azMode": {
+                    "target": "com.amazonaws.finspace#KxAzMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier of the availability zones.\n      </p>"
+                    }
+                },
+                "changesetId": {
+                    "target": "com.amazonaws.finspace#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA unique identifier of the changeset that you want to use to ingest data. </p>"
+                    }
+                },
+                "segmentConfigurations": {
+                    "target": "com.amazonaws.finspace#KxDataviewSegmentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. </p>"
+                    }
+                },
+                "activeVersions": {
+                    "target": "com.amazonaws.finspace#KxDataviewActiveVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The current active changeset versions of the database on the given dataview. \n   \n</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the dataview.</p>"
+                    }
+                },
+                "autoUpdate": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when new changesets are ingested. The default value is false.</p>"
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, from where you want to retrieve the dataview details.</p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The last time that the dataview was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.\n</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxDataviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status of dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The dataview creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> – The dataview is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> – The dataview is active.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.finspace#KxDataviewStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe error message when a failed state occurs. \n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.finspace#GetKxEnvironment": {
             "type": "operation",
             "input": {
@@ -3503,6 +4566,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.finspace#InternalServerException"
@@ -3646,6 +4712,132 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.finspace#GetKxScalingGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#GetKxScalingGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#GetKxScalingGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nRetrieves details of a scaling group.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/kx/environments/{environmentId}/scalingGroups/{scalingGroupName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#GetKxScalingGroupRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "scalingGroupName": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb scaling group. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#GetKxScalingGroupResponse": {
+            "type": "structure",
+            "members": {
+                "scalingGroupName": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb scaling group. </p>"
+                    }
+                },
+                "scalingGroupArn": {
+                    "target": "com.amazonaws.finspace#arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The ARN identifier for the scaling group.\n      </p>"
+                    }
+                },
+                "hostType": {
+                    "target": "com.amazonaws.finspace#KxHostType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.\n   \n</p>"
+                    }
+                },
+                "clusters": {
+                    "target": "com.amazonaws.finspace#KxClusterNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The list of Managed kdb clusters that are currently active in the given scaling group.\n   \n</p>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the availability zones.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of scaling group.</p>\n         <ul>\n            <li>\n               <p>CREATING – The scaling group creation is in progress.</p>\n            </li>\n            <li>\n               <p>CREATE_FAILED – The scaling group creation has failed.</p>\n            </li>\n            <li>\n               <p>ACTIVE – The scaling group is active.</p>\n            </li>\n            <li>\n               <p>UPDATING – The scaling group is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>UPDATE_FAILED – The update action failed.</p>\n            </li>\n            <li>\n               <p>DELETING – The scaling group is in the process of being deleted.</p>\n            </li>\n            <li>\n               <p>DELETE_FAILED – The system failed to delete the scaling group.</p>\n            </li>\n            <li>\n               <p>DELETED – The scaling group is successfully deleted.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.finspace#KxClusterStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe error message when a failed state occurs. \n</p>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The last time that the scaling group was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.\n</p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The timestamp at which the scaling group was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.finspace#GetKxUser": {
             "type": "operation",
             "input": {
@@ -3729,6 +4921,156 @@
                     "target": "com.amazonaws.finspace#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM role ARN that is associated with the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.finspace#GetKxVolume": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#GetKxVolumeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#GetKxVolumeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nRetrieves the information about the volume. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/kx/environments/{environmentId}/kxvolumes/{volumeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#GetKxVolumeRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, whose clusters can attach to the volume. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#KxVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the volume.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#GetKxVolumeResponse": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, whose clusters can attach to the volume. </p>"
+                    }
+                },
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#KxVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA unique identifier for the volume.</p>"
+                    }
+                },
+                "volumeType": {
+                    "target": "com.amazonaws.finspace#KxVolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of file system volume. Currently, FinSpace only supports <code>NAS_1</code> volume type.\n   </p>"
+                    }
+                },
+                "volumeArn": {
+                    "target": "com.amazonaws.finspace#KxVolumeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN identifier of the volume.\n</p>"
+                    }
+                },
+                "nas1Configuration": {
+                    "target": "com.amazonaws.finspace#KxNAS1Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the configuration for the Network attached storage (NAS_1) file system volume.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxVolumeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of volume creation.</p>\n         <ul>\n            <li>\n               <p>CREATING – The volume creation is in progress.</p>\n            </li>\n            <li>\n               <p>CREATE_FAILED – The volume creation has failed.</p>\n            </li>\n            <li>\n               <p>ACTIVE – The volume is active.</p>\n            </li>\n            <li>\n               <p>UPDATING – The volume is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>UPDATE_FAILED – The update action failed.</p>\n            </li>\n            <li>\n               <p>UPDATED – The volume is successfully updated.</p>\n            </li>\n            <li>\n               <p>DELETING – The volume is in the process of being deleted.</p>\n            </li>\n            <li>\n               <p>DELETE_FAILED – The system failed to delete the volume.</p>\n            </li>\n            <li>\n               <p>DELETED – The volume is successfully deleted.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.finspace#KxVolumeStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message when a failed state occurs. </p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe timestamp at which the volume was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.\n</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA description of the volume.\n</p>"
+                    }
+                },
+                "azMode": {
+                    "target": "com.amazonaws.finspace#KxAzMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. Currently, FinSpace only support <code>SINGLE</code> for volumes.</p>"
+                    }
+                },
+                "availabilityZoneIds": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the availability zones.</p>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the volume was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "attachedClusters": {
+                    "target": "com.amazonaws.finspace#KxAttachedClusters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of cluster identifiers that a volume is attached to. \n</p>"
                     }
                 }
             },
@@ -3843,6 +5185,38 @@
                 "smithy.api#pattern": "^[a-zA-Z-0-9-:\\/]*$"
             }
         },
+        "com.amazonaws.finspace#KxAttachedCluster": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.finspace#KxClusterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the attached cluster.</p>"
+                    }
+                },
+                "clusterType": {
+                    "target": "com.amazonaws.finspace#KxClusterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of cluster. The volume for TP and RDB cluster types will be used for TP logs.</p>"
+                    }
+                },
+                "clusterStatus": {
+                    "target": "com.amazonaws.finspace#KxClusterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the attached cluster.</p>\n         <ul>\n            <li>\n               <p>PENDING – The cluster is pending creation.</p>\n            </li>\n            <li>\n               <p>CREATING – The cluster creation process is in progress.</p>\n            </li>\n            <li>\n               <p>CREATE_FAILED – The cluster creation process has failed.</p>\n            </li>\n            <li>\n               <p>RUNNING – The cluster creation process is running.</p>\n            </li>\n            <li>\n               <p>UPDATING – The cluster is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>DELETING – The cluster is in the process of being deleted.</p>\n            </li>\n            <li>\n               <p>DELETED – The cluster has been deleted.</p>\n            </li>\n            <li>\n               <p>DELETE_FAILED – The cluster failed to delete.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure containing the metadata of the attached clusters.</p>"
+            }
+        },
+        "com.amazonaws.finspace#KxAttachedClusters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#KxAttachedCluster"
+            }
+        },
         "com.amazonaws.finspace#KxAzMode": {
             "type": "enum",
             "members": {
@@ -3889,13 +5263,7 @@
             }
         },
         "com.amazonaws.finspace#KxCacheStorageSize": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 1200,
-                    "max": 33600
-                }
-            }
+            "type": "integer"
         },
         "com.amazonaws.finspace#KxCacheStorageType": {
             "type": "string",
@@ -3974,7 +5342,7 @@
                 "clusterType": {
                     "target": "com.amazonaws.finspace#KxClusterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of KDB database that is being created. The following types are available: </p>\n         <ul>\n            <li>\n               <p>HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.</p>\n            </li>\n            <li>\n               <p>RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the <code>savedownStorageConfiguration</code> parameter.</p>\n            </li>\n            <li>\n               <p>GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a  writable local storage.</p>\n            </li>\n            <li>\n               <p>GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only <code>SINGLE</code> AZ mode.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the type of KDB database that is being created. The following types are available: </p>\n         <ul>\n            <li>\n               <p>HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.</p>\n            </li>\n            <li>\n               <p>RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the <code>savedownStorageConfiguration</code> parameter.</p>\n            </li>\n            <li>\n               <p>GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a  writable local storage.</p>\n            </li>\n            <li>\n               <p>GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only <code>SINGLE</code> AZ mode.</p>\n            </li>\n            <li>\n               <p>Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "clusterDescription": {
@@ -3987,6 +5355,12 @@
                     "target": "com.amazonaws.finspace#ReleaseLabel",
                     "traits": {
                         "smithy.api#documentation": "<p>A version of the FinSpace managed kdb to run.</p>"
+                    }
+                },
+                "volumes": {
+                    "target": "com.amazonaws.finspace#Volumes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of volumes attached to the cluster.\n</p>"
                     }
                 },
                 "initializationScript": {
@@ -4088,6 +5462,12 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"
             }
         },
+        "com.amazonaws.finspace#KxClusterNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#KxClusterName"
+            }
+        },
         "com.amazonaws.finspace#KxClusterNodeIdString": {
             "type": "string",
             "traits": {
@@ -4186,6 +5566,12 @@
                     "traits": {
                         "smithy.api#enumValue": "GP"
                     }
+                },
+                "TICKERPLANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TICKERPLANT"
+                    }
                 }
             }
         },
@@ -4257,6 +5643,12 @@
                         "smithy.api#documentation": "<p>Specifies the portions of database that will be loaded into the cache for access.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The name of the dataview to be used for caching historical data on disk.\n   \n</p>"
+                    }
                 }
             },
             "traits": {
@@ -4289,6 +5681,18 @@
                     "target": "com.amazonaws.finspace#ChangesetId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier of the changeset that is associated with the cluster.</p>"
+                    }
+                },
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The name of the dataview to be used for caching historical data on disk.\n   \n</p>"
+                    }
+                },
+                "dataviewConfiguration": {
+                    "target": "com.amazonaws.finspace#KxDataviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The configuration of the dataview to be used with specified cluster.\n   \n</p>"
                     }
                 }
             },
@@ -4332,6 +5736,270 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.finspace#KxDatabaseListEntry"
+            }
+        },
+        "com.amazonaws.finspace#KxDataviewActiveVersion": {
+            "type": "structure",
+            "members": {
+                "changesetId": {
+                    "target": "com.amazonaws.finspace#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the changeset.</p>"
+                    }
+                },
+                "segmentConfigurations": {
+                    "target": "com.amazonaws.finspace#KxDataviewSegmentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. </p>"
+                    }
+                },
+                "attachedClusters": {
+                    "target": "com.amazonaws.finspace#AttachedClusterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The list of clusters that are currently using this dataview.\n   \n</p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe timestamp at which the dataview version was active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "versionId": {
+                    "target": "com.amazonaws.finspace#VersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA unique identifier of the active version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   The active version of the dataview that is currently in use by this cluster.\n      \n</p>"
+            }
+        },
+        "com.amazonaws.finspace#KxDataviewActiveVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#KxDataviewActiveVersion"
+            }
+        },
+        "com.amazonaws.finspace#KxDataviewConfiguration": {
+            "type": "structure",
+            "members": {
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe unique identifier of the dataview.</p>"
+                    }
+                },
+                "dataviewVersionId": {
+                    "target": "com.amazonaws.finspace#VersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The version of the dataview corresponding to a given changeset.\n   \n</p>"
+                    }
+                },
+                "changesetId": {
+                    "target": "com.amazonaws.finspace#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the changeset.</p>"
+                    }
+                },
+                "segmentConfigurations": {
+                    "target": "com.amazonaws.finspace#KxDataviewSegmentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe db path and volume configuration for the segmented database.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe structure that stores the configuration details of a dataview.</p>"
+            }
+        },
+        "com.amazonaws.finspace#KxDataviewListEntry": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment.</p>"
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.finspace#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA unique identifier of the database.</p>"
+                    }
+                },
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA unique identifier of the dataview.</p>"
+                    }
+                },
+                "azMode": {
+                    "target": "com.amazonaws.finspace#KxAzMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier of the availability zones.\n      </p>"
+                    }
+                },
+                "changesetId": {
+                    "target": "com.amazonaws.finspace#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the changeset.</p>"
+                    }
+                },
+                "segmentConfigurations": {
+                    "target": "com.amazonaws.finspace#KxDataviewSegmentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. </p>"
+                    }
+                },
+                "activeVersions": {
+                    "target": "com.amazonaws.finspace#KxDataviewActiveVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The active changeset versions for the given dataview entry.\n      \n</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxDataviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The status of a given dataview entry.\n   \n</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA description for the dataview list entry.</p>"
+                    }
+                },
+                "autoUpdate": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n   The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when you ingest new changesets. The default value is false.\n</p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe timestamp at which the dataview list entry was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the dataview list was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.finspace#KxDataviewStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe error message when a failed state occurs. \n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   A collection of kdb dataview entries.\n   \n</p>"
+            }
+        },
+        "com.amazonaws.finspace#KxDataviewName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.finspace#KxDataviewSegmentConfiguration": {
+            "type": "structure",
+            "members": {
+                "dbPaths": {
+                    "target": "com.amazonaws.finspace#SegmentConfigurationDbPathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe database path of the data that you want to place on each selected volume for the segment. Each segment must have a unique database path for each volume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#KxVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the volume where you want to add data. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. </p>"
+            }
+        },
+        "com.amazonaws.finspace#KxDataviewSegmentConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#KxDataviewSegmentConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.finspace#KxDataviewStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#KxDataviewStatusReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\_\\-\\.\\s]+$"
+            }
+        },
+        "com.amazonaws.finspace#KxDataviews": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#KxDataviewListEntry"
             }
         },
         "com.amazonaws.finspace#KxDeploymentConfiguration": {
@@ -4502,6 +6170,68 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"
             }
         },
+        "com.amazonaws.finspace#KxHostType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._]+$"
+            }
+        },
+        "com.amazonaws.finspace#KxNAS1Configuration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.finspace#KxNAS1Type",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe type of the network attached storage.\n</p>"
+                    }
+                },
+                "size": {
+                    "target": "com.amazonaws.finspace#KxNAS1Size",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe size of the network attached storage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   The structure containing the size and type of the network attached storage (NAS_1) file system volume.\n</p>"
+            }
+        },
+        "com.amazonaws.finspace#KxNAS1Size": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1200,
+                    "max": 33600
+                }
+            }
+        },
+        "com.amazonaws.finspace#KxNAS1Type": {
+            "type": "enum",
+            "members": {
+                "SSD_1000": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSD_1000"
+                    }
+                },
+                "SSD_250": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSD_250"
+                    }
+                },
+                "HDD_12": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HDD_12"
+                    }
+                }
+            }
+        },
         "com.amazonaws.finspace#KxNode": {
             "type": "structure",
             "members": {
@@ -4540,15 +6270,19 @@
                 "type": {
                     "target": "com.amazonaws.finspace#KxSavedownStorageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of writeable storage space for temporarily storing your savedown data. The valid values are:</p>\n         <ul>\n            <li>\n               <p>SDS01 – This type represents 3000 IOPS and io2 ebs volume type.</p>\n            </li>\n         </ul>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The type of writeable storage space for temporarily storing your savedown data. The valid values are:</p>\n         <ul>\n            <li>\n               <p>SDS01 – This type represents 3000 IOPS and io2 ebs volume type.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "size": {
                     "target": "com.amazonaws.finspace#KxSavedownStorageSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of temporary storage in gibibytes.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The size of temporary storage in gibibytes.</p>"
+                    }
+                },
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#KxVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The name of the kdb volume that you want to use as writeable save-down storage for clusters.\n   \n</p>"
                     }
                 }
             },
@@ -4560,7 +6294,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 4,
+                    "min": 10,
                     "max": 16000
                 }
             }
@@ -4572,6 +6306,160 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SDS01"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#KxScalingGroup": {
+            "type": "structure",
+            "members": {
+                "scalingGroupName": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb scaling group. </p>"
+                    }
+                },
+                "hostType": {
+                    "target": "com.amazonaws.finspace#KxHostType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.\n   \n</p>"
+                    }
+                },
+                "clusters": {
+                    "target": "com.amazonaws.finspace#KxClusterNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The list of clusters currently active in a given scaling group.\n   \n</p>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the availability zones.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of scaling groups.\n</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.finspace#KxClusterStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe error message when a failed state occurs. \n</p>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The last time that the scaling group was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.\n</p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The timestamp at which the scaling group was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nA structure for storing metadata of scaling group.</p>"
+            }
+        },
+        "com.amazonaws.finspace#KxScalingGroupConfiguration": {
+            "type": "structure",
+            "members": {
+                "scalingGroupName": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb scaling group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "memoryLimit": {
+                    "target": "com.amazonaws.finspace#MemoryMib",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   An optional hard limit on the amount of memory a kdb cluster can use.\n   \n</p>"
+                    }
+                },
+                "memoryReservation": {
+                    "target": "com.amazonaws.finspace#MemoryMib",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A reservation of the minimum amount of memory that should be available on the scaling group for a kdb cluster to be successfully placed in a scaling group. \n   \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nodeCount": {
+                    "target": "com.amazonaws.finspace#ClusterNodeCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The number of kdb cluster nodes.\n   \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cpu": {
+                    "target": "com.amazonaws.finspace#CpuCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The number of vCPUs that you want to reserve for each node of this kdb cluster on the scaling group host.\n   \n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that stores the capacity configuration details of a scaling group.</p>"
+            }
+        },
+        "com.amazonaws.finspace#KxScalingGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#KxScalingGroup"
+            }
+        },
+        "com.amazonaws.finspace#KxScalingGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.finspace#KxScalingGroupStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
                     }
                 }
             }
@@ -4640,6 +6528,174 @@
                 "smithy.api#pattern": "^[0-9A-Za-z_-]{1,50}$"
             }
         },
+        "com.amazonaws.finspace#KxVolume": {
+            "type": "structure",
+            "members": {
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#KxVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the volume.</p>"
+                    }
+                },
+                "volumeType": {
+                    "target": "com.amazonaws.finspace#KxVolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of file system volume. Currently, FinSpace only supports <code>NAS_1</code> volume type.\n   </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxVolumeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of volume.</p>\n         <ul>\n            <li>\n               <p>CREATING – The volume creation is in progress.</p>\n            </li>\n            <li>\n               <p>CREATE_FAILED – The volume creation has failed.</p>\n            </li>\n            <li>\n               <p>ACTIVE – The volume is active.</p>\n            </li>\n            <li>\n               <p>UPDATING – The volume is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>UPDATE_FAILED – The update action failed.</p>\n            </li>\n            <li>\n               <p>UPDATED – The volume is successfully updated.</p>\n            </li>\n            <li>\n               <p>DELETING – The volume is in the process of being deleted.</p>\n            </li>\n            <li>\n               <p>DELETE_FAILED – The system failed to delete the volume.</p>\n            </li>\n            <li>\n               <p>DELETED – The volume is successfully deleted.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA description of the volume.\n</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.finspace#KxVolumeStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message when a failed state occurs. </p>"
+                    }
+                },
+                "azMode": {
+                    "target": "com.amazonaws.finspace#KxAzMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe number of availability zones assigned to the volume. Currently, only <code>SINGLE</code> is supported.\n</p>"
+                    }
+                },
+                "availabilityZoneIds": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the availability zones.</p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe timestamp at which the volume was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the volume was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe structure that contains the metadata of the volume.\n</p>"
+            }
+        },
+        "com.amazonaws.finspace#KxVolumeArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:kxEnvironment/[0-9A-Za-z_-]{1,128}(/kxSharedVolume/[a-zA-Z0-9_-]{1,255})?$"
+            }
+        },
+        "com.amazonaws.finspace#KxVolumeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.finspace#KxVolumeStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATED"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#KxVolumeStatusReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\_\\-\\.\\s]+$"
+            }
+        },
+        "com.amazonaws.finspace#KxVolumeType": {
+            "type": "enum",
+            "members": {
+                "NAS_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAS_1"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#KxVolumes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#KxVolume"
+            }
+        },
         "com.amazonaws.finspace#LimitExceededException": {
             "type": "structure",
             "members": {
@@ -4662,6 +6718,9 @@
                 "target": "com.amazonaws.finspace#ListEnvironmentsResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.finspace#InternalServerException"
                 },
@@ -4977,7 +7036,7 @@
                 "clusterType": {
                     "target": "com.amazonaws.finspace#KxClusterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of KDB database that is being created. The following types are available: </p>\n         <ul>\n            <li>\n               <p>HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.</p>\n            </li>\n            <li>\n               <p>RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the <code>savedownStorageConfiguration</code> parameter.</p>\n            </li>\n            <li>\n               <p>GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a  writable local storage.</p>\n            </li>\n            <li>\n               <p>GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only <code>SINGLE</code> AZ mode.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the type of KDB database that is being created. The following types are available: </p>\n         <ul>\n            <li>\n               <p>HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.</p>\n            </li>\n            <li>\n               <p>RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the <code>savedownStorageConfiguration</code> parameter.</p>\n            </li>\n            <li>\n               <p>GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a  writable local storage.</p>\n            </li>\n            <li>\n               <p>GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only <code>SINGLE</code> AZ mode.</p>\n            </li>\n            <li>\n               <p>Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "clusterType"
                     }
                 },
@@ -5111,6 +7170,104 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.finspace#ListKxDataviews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#ListKxDataviewsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#ListKxDataviewsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nReturns a list of all the dataviews in the database.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/kx/environments/{environmentId}/databases/{databaseName}/dataviews",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.finspace#ListKxDataviewsRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, for which you want to retrieve a list of dataviews.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.finspace#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the database where the dataviews were created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspace#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA token that indicates where a results page should begin.\n</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspace#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#ListKxDataviewsResponse": {
+            "type": "structure",
+            "members": {
+                "kxDataviews": {
+                    "target": "com.amazonaws.finspace#KxDataviews",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The list of kdb dataviews that are currently active for the given database.\n</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspace#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA token that indicates where a results page should begin. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.finspace#ListKxEnvironments": {
             "type": "operation",
             "input": {
@@ -5120,6 +7277,9 @@
                 "target": "com.amazonaws.finspace#ListKxEnvironmentsResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.finspace#InternalServerException"
                 },
@@ -5177,6 +7337,102 @@
                     "target": "com.amazonaws.finspace#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.finspace#ListKxScalingGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#ListKxScalingGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#ListKxScalingGroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nReturns a list of scaling groups in a kdb environment.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/kx/environments/{environmentId}/scalingGroups",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.finspace#ListKxScalingGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, for which you want to retrieve a list of scaling groups.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspace#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspace#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA token that indicates where a results page should begin. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#ListKxScalingGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "scalingGroups": {
+                    "target": "com.amazonaws.finspace#KxScalingGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of scaling groups available in a kdb environment.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspace#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA token that indicates where a results page should begin. </p>"
                     }
                 }
             },
@@ -5269,6 +7525,104 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.finspace#ListKxVolumes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#ListKxVolumesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#ListKxVolumesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nLists all the volumes in a kdb environment.\n</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/kx/environments/{environmentId}/kxvolumes",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#ListKxVolumesRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, whose clusters can attach to the volume. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspace#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspace#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "volumeType": {
+                    "target": "com.amazonaws.finspace#KxVolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of file system volume. Currently, FinSpace only supports <code>NAS_1</code> volume type.\n   </p>",
+                        "smithy.api#httpQuery": "volumeType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#ListKxVolumesResponse": {
+            "type": "structure",
+            "members": {
+                "kxVolumeSummaries": {
+                    "target": "com.amazonaws.finspace#KxVolumes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA summary of volumes.\n</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspace#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.finspace#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -5334,6 +7688,14 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.finspace#MemoryMib": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 6
                 }
             }
         },
@@ -5626,6 +7988,18 @@
                 "smithy.api#pattern": "^sg-([a-z0-9]{8}$|[a-z0-9]{17}$)$"
             }
         },
+        "com.amazonaws.finspace#SegmentConfigurationDbPathList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#DbPath"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
         "com.amazonaws.finspace#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -5821,6 +8195,26 @@
                 "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.finspace#TickerplantLogConfiguration": {
+            "type": "structure",
+            "members": {
+                "tickerplantLogVolumes": {
+                    "target": "com.amazonaws.finspace#TickerplantLogVolumes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the volumes for tickerplant logs.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nA configuration to store the Tickerplant logs. It consists of\na list of volumes that will be mounted to your cluster. For the cluster type <code>Tickerplant</code>, the location of the TP volume on the cluster will be available by using the global variable <code>.aws.tp_log_path</code>. \n</p>"
+            }
+        },
+        "com.amazonaws.finspace#TickerplantLogVolumes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#VolumeName"
             }
         },
         "com.amazonaws.finspace#Timestamp": {
@@ -6310,6 +8704,191 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.finspace#UpdateKxDataview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#UpdateKxDataviewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#UpdateKxDataviewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nUpdates the specified dataview. The dataviews get automatically updated when any new changesets are ingested. Each update of the dataview creates a new version, including changeset details and cache configurations</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/kx/environments/{environmentId}/databases/{databaseName}/dataviews/{dataviewName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#UpdateKxDataviewRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, where you want to update the dataview.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.finspace#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the database.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataview that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n       The description for a dataview.\n      </p>"
+                    }
+                },
+                "changesetId": {
+                    "target": "com.amazonaws.finspace#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the changeset.</p>"
+                    }
+                },
+                "segmentConfigurations": {
+                    "target": "com.amazonaws.finspace#KxDataviewSegmentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. </p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#UpdateKxDataviewResponse": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment, where you want to update the dataview.</p>"
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.finspace#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the database.\n</p>"
+                    }
+                },
+                "dataviewName": {
+                    "target": "com.amazonaws.finspace#KxDataviewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The name of the database under which the dataview was created.\n   \n</p>"
+                    }
+                },
+                "azMode": {
+                    "target": "com.amazonaws.finspace#KxAzMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier of the availability zones.\n      </p>"
+                    }
+                },
+                "changesetId": {
+                    "target": "com.amazonaws.finspace#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the changeset.</p>"
+                    }
+                },
+                "segmentConfigurations": {
+                    "target": "com.amazonaws.finspace#KxDataviewSegmentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. </p>"
+                    }
+                },
+                "activeVersions": {
+                    "target": "com.amazonaws.finspace#KxDataviewActiveVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The current active changeset versions of the database on the given dataview. \n   \n</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxDataviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status of dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The dataview creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> – The dataview is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> – The dataview is active.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "autoUpdate": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when new changesets are ingested. The default value is false.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the dataview.</p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The timestamp at which the dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.\n</p>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The last time that the dataview was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.finspace#UpdateKxEnvironment": {
             "type": "operation",
             "input": {
@@ -6410,7 +8989,8 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspace#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>"
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -6545,7 +9125,8 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspace#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>"
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -6723,7 +9304,8 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspace#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>"
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -6756,6 +9338,175 @@
                     "target": "com.amazonaws.finspace#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM role ARN that is associated with the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.finspace#UpdateKxVolume": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#UpdateKxVolumeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#UpdateKxVolumeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nUpdates the throughput or capacity of a volume. During the update process, the filesystem \nmight be unavailable for a few minutes. You can retry any operations after the update is complete.\n</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/kx/environments/{environmentId}/kxvolumes/{volumeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#UpdateKxVolumeRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment where you created the storage volume. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#KxVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA unique identifier for the volume.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA description of the volume.\n</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspace#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "nas1Configuration": {
+                    "target": "com.amazonaws.finspace#KxNAS1Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the configuration for the Network attached storage (NAS_1) file system volume.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#UpdateKxVolumeResponse": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment where you want to update the volume. </p>"
+                    }
+                },
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#KxVolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the volume that you want to update.</p>"
+                    }
+                },
+                "volumeType": {
+                    "target": "com.amazonaws.finspace#KxVolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of file system volume. Currently, FinSpace only supports <code>NAS_1</code> volume type.\n   </p>"
+                    }
+                },
+                "volumeArn": {
+                    "target": "com.amazonaws.finspace#KxVolumeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN identifier of the volume.\n</p>"
+                    }
+                },
+                "nas1Configuration": {
+                    "target": "com.amazonaws.finspace#KxNAS1Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the configuration for the Network attached storage (NAS_1) file system volume.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxVolumeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the volume.</p>\n         <ul>\n            <li>\n               <p>CREATING – The volume creation is in progress.</p>\n            </li>\n            <li>\n               <p>CREATE_FAILED – The volume creation has failed.</p>\n            </li>\n            <li>\n               <p>ACTIVE – The volume is active.</p>\n            </li>\n            <li>\n               <p>UPDATING – The volume is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>UPDATE_FAILED – The update action failed.</p>\n            </li>\n            <li>\n               <p>UPDATED – The volume is successfully updated.</p>\n            </li>\n            <li>\n               <p>DELETING – The volume is in the process of being deleted.</p>\n            </li>\n            <li>\n               <p>DELETE_FAILED – The system failed to delete the volume.</p>\n            </li>\n            <li>\n               <p>DELETED – The volume is successfully deleted.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe description for the volume.\n</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.finspace#KxVolumeStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message when a failed state occurs. </p>"
+                    }
+                },
+                "createdTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe timestamp at which the volume was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "azMode": {
+                    "target": "com.amazonaws.finspace#KxAzMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. Currently, FinSpace only support <code>SINGLE</code> for volumes.</p>"
+                    }
+                },
+                "availabilityZoneIds": {
+                    "target": "com.amazonaws.finspace#AvailabilityZoneIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the availability zones.</p>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.finspace#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the volume was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "attachedClusters": {
+                    "target": "com.amazonaws.finspace#KxAttachedClusters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecifies the clusters that a volume is attached to.\n</p>"
                     }
                 }
             },
@@ -6805,6 +9556,68 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.finspace#VersionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 26
+                }
+            }
+        },
+        "com.amazonaws.finspace#Volume": {
+            "type": "structure",
+            "members": {
+                "volumeName": {
+                    "target": "com.amazonaws.finspace#VolumeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the volume.</p>"
+                    }
+                },
+                "volumeType": {
+                    "target": "com.amazonaws.finspace#VolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of file system volume. Currently, FinSpace only supports <code>NAS_1</code> volume type.\n   </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe structure that consists of name and type of volume.</p>"
+            }
+        },
+        "com.amazonaws.finspace#VolumeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.finspace#VolumeType": {
+            "type": "enum",
+            "members": {
+                "NAS_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAS_1"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#Volumes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#Volume"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.finspace#VpcConfiguration": {
             "type": "structure",
             "members": {
@@ -6845,6 +9658,22 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^vpc-([a-z0-9]{8}$|[a-z0-9]{17}$)$"
+            }
+        },
+        "com.amazonaws.finspace#arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:*:*:*:*:*$"
+            }
+        },
+        "com.amazonaws.finspace#booleanValue": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.finspace#dnsStatus": {
