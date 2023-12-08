@@ -131,6 +131,9 @@ func (c *Client) addOperationUpdateKxUserMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opUpdateKxUserMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateKxUserValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,6 +156,39 @@ func (c *Client) addOperationUpdateKxUserMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpUpdateKxUser struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdateKxUser) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdateKxUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*UpdateKxUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateKxUserInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdateKxUserMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateKxUser{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opUpdateKxUser(region string) *awsmiddleware.RegisterServiceMetadata {

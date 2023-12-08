@@ -90,6 +90,26 @@ func (m *validateOpCreateKxDatabase) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateKxDataview struct {
+}
+
+func (*validateOpCreateKxDataview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateKxDataview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateKxDataviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateKxDataviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateKxEnvironment struct {
 }
 
@@ -110,6 +130,26 @@ func (m *validateOpCreateKxEnvironment) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateKxScalingGroup struct {
+}
+
+func (*validateOpCreateKxScalingGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateKxScalingGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateKxScalingGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateKxScalingGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateKxUser struct {
 }
 
@@ -125,6 +165,26 @@ func (m *validateOpCreateKxUser) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateKxUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateKxVolume struct {
+}
+
+func (*validateOpCreateKxVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateKxVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateKxVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateKxVolumeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +250,26 @@ func (m *validateOpDeleteKxDatabase) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteKxDataview struct {
+}
+
+func (*validateOpDeleteKxDataview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteKxDataview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteKxDataviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteKxDataviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteKxEnvironment struct {
 }
 
@@ -210,6 +290,26 @@ func (m *validateOpDeleteKxEnvironment) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteKxScalingGroup struct {
+}
+
+func (*validateOpDeleteKxScalingGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteKxScalingGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteKxScalingGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteKxScalingGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteKxUser struct {
 }
 
@@ -225,6 +325,26 @@ func (m *validateOpDeleteKxUser) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteKxUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteKxVolume struct {
+}
+
+func (*validateOpDeleteKxVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteKxVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteKxVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteKxVolumeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +450,26 @@ func (m *validateOpGetKxDatabase) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetKxDataview struct {
+}
+
+func (*validateOpGetKxDataview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetKxDataview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetKxDataviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetKxDataviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetKxEnvironment struct {
 }
 
@@ -350,6 +490,26 @@ func (m *validateOpGetKxEnvironment) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetKxScalingGroup struct {
+}
+
+func (*validateOpGetKxScalingGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetKxScalingGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetKxScalingGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetKxScalingGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetKxUser struct {
 }
 
@@ -365,6 +525,26 @@ func (m *validateOpGetKxUser) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetKxUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetKxVolume struct {
+}
+
+func (*validateOpGetKxVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetKxVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetKxVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetKxVolumeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,6 +630,46 @@ func (m *validateOpListKxDatabases) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListKxDataviews struct {
+}
+
+func (*validateOpListKxDataviews) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListKxDataviews) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListKxDataviewsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListKxDataviewsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListKxScalingGroups struct {
+}
+
+func (*validateOpListKxScalingGroups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListKxScalingGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListKxScalingGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListKxScalingGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListKxUsers struct {
 }
 
@@ -465,6 +685,26 @@ func (m *validateOpListKxUsers) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListKxUsersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListKxVolumes struct {
+}
+
+func (*validateOpListKxVolumes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListKxVolumes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListKxVolumesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListKxVolumesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +850,26 @@ func (m *validateOpUpdateKxDatabase) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateKxDataview struct {
+}
+
+func (*validateOpUpdateKxDataview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateKxDataview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateKxDataviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateKxDataviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateKxEnvironment struct {
 }
 
@@ -670,6 +930,26 @@ func (m *validateOpUpdateKxUser) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateKxVolume struct {
+}
+
+func (*validateOpUpdateKxVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateKxVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateKxVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateKxVolumeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEnvironment{}, middleware.After)
 }
@@ -686,12 +966,24 @@ func addOpCreateKxDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateKxDatabase{}, middleware.After)
 }
 
+func addOpCreateKxDataviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateKxDataview{}, middleware.After)
+}
+
 func addOpCreateKxEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateKxEnvironment{}, middleware.After)
 }
 
+func addOpCreateKxScalingGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateKxScalingGroup{}, middleware.After)
+}
+
 func addOpCreateKxUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateKxUser{}, middleware.After)
+}
+
+func addOpCreateKxVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateKxVolume{}, middleware.After)
 }
 
 func addOpDeleteEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -706,12 +998,24 @@ func addOpDeleteKxDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKxDatabase{}, middleware.After)
 }
 
+func addOpDeleteKxDataviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteKxDataview{}, middleware.After)
+}
+
 func addOpDeleteKxEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKxEnvironment{}, middleware.After)
 }
 
+func addOpDeleteKxScalingGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteKxScalingGroup{}, middleware.After)
+}
+
 func addOpDeleteKxUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKxUser{}, middleware.After)
+}
+
+func addOpDeleteKxVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteKxVolume{}, middleware.After)
 }
 
 func addOpGetEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -734,12 +1038,24 @@ func addOpGetKxDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetKxDatabase{}, middleware.After)
 }
 
+func addOpGetKxDataviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetKxDataview{}, middleware.After)
+}
+
 func addOpGetKxEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetKxEnvironment{}, middleware.After)
 }
 
+func addOpGetKxScalingGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetKxScalingGroup{}, middleware.After)
+}
+
 func addOpGetKxUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetKxUser{}, middleware.After)
+}
+
+func addOpGetKxVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetKxVolume{}, middleware.After)
 }
 
 func addOpListKxChangesetsValidationMiddleware(stack *middleware.Stack) error {
@@ -758,8 +1074,20 @@ func addOpListKxDatabasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListKxDatabases{}, middleware.After)
 }
 
+func addOpListKxDataviewsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListKxDataviews{}, middleware.After)
+}
+
+func addOpListKxScalingGroupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListKxScalingGroups{}, middleware.After)
+}
+
 func addOpListKxUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListKxUsers{}, middleware.After)
+}
+
+func addOpListKxVolumesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListKxVolumes{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -790,6 +1118,10 @@ func addOpUpdateKxDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKxDatabase{}, middleware.After)
 }
 
+func addOpUpdateKxDataviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateKxDataview{}, middleware.After)
+}
+
 func addOpUpdateKxEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKxEnvironment{}, middleware.After)
 }
@@ -800,6 +1132,10 @@ func addOpUpdateKxEnvironmentNetworkValidationMiddleware(stack *middleware.Stack
 
 func addOpUpdateKxUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKxUser{}, middleware.After)
+}
+
+func addOpUpdateKxVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateKxVolume{}, middleware.After)
 }
 
 func validateChangeRequest(v *types.ChangeRequest) error {
@@ -982,6 +1318,11 @@ func validateKxDatabaseConfiguration(v *types.KxDatabaseConfiguration) error {
 			invalidParams.AddNested("CacheConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DataviewConfiguration != nil {
+		if err := validateKxDataviewConfiguration(v.DataviewConfiguration); err != nil {
+			invalidParams.AddNested("DataviewConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -996,6 +1337,58 @@ func validateKxDatabaseConfigurations(v []types.KxDatabaseConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "KxDatabaseConfigurations"}
 	for i := range v {
 		if err := validateKxDatabaseConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKxDataviewConfiguration(v *types.KxDataviewConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KxDataviewConfiguration"}
+	if v.SegmentConfigurations != nil {
+		if err := validateKxDataviewSegmentConfigurationList(v.SegmentConfigurations); err != nil {
+			invalidParams.AddNested("SegmentConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKxDataviewSegmentConfiguration(v *types.KxDataviewSegmentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KxDataviewSegmentConfiguration"}
+	if v.DbPaths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbPaths"))
+	}
+	if v.VolumeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKxDataviewSegmentConfigurationList(v []types.KxDataviewSegmentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KxDataviewSegmentConfigurationList"}
+	for i := range v {
+		if err := validateKxDataviewSegmentConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1021,16 +1414,19 @@ func validateKxDeploymentConfiguration(v *types.KxDeploymentConfiguration) error
 	}
 }
 
-func validateKxSavedownStorageConfiguration(v *types.KxSavedownStorageConfiguration) error {
+func validateKxScalingGroupConfiguration(v *types.KxScalingGroupConfiguration) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "KxSavedownStorageConfiguration"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	invalidParams := smithy.InvalidParamsError{Context: "KxScalingGroupConfiguration"}
+	if v.ScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalingGroupName"))
 	}
-	if v.Size == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Size"))
+	if v.MemoryReservation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryReservation"))
+	}
+	if v.NodeCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeCount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1218,19 +1614,19 @@ func validateOpCreateKxClusterInput(v *CreateKxClusterInput) error {
 			invalidParams.AddNested("CacheStorageConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CapacityConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CapacityConfiguration"))
-	}
 	if v.ReleaseLabel == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReleaseLabel"))
 	}
-	if v.SavedownStorageConfiguration != nil {
-		if err := validateKxSavedownStorageConfiguration(v.SavedownStorageConfiguration); err != nil {
-			invalidParams.AddNested("SavedownStorageConfiguration", err.(smithy.InvalidParamsError))
-		}
+	if v.VpcConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConfiguration"))
 	}
 	if len(v.AzMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AzMode"))
+	}
+	if v.ScalingGroupConfiguration != nil {
+		if err := validateKxScalingGroupConfiguration(v.ScalingGroupConfiguration); err != nil {
+			invalidParams.AddNested("ScalingGroupConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1260,6 +1656,38 @@ func validateOpCreateKxDatabaseInput(v *CreateKxDatabaseInput) error {
 	}
 }
 
+func validateOpCreateKxDataviewInput(v *CreateKxDataviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateKxDataviewInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.DataviewName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataviewName"))
+	}
+	if len(v.AzMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AzMode"))
+	}
+	if v.SegmentConfigurations != nil {
+		if err := validateKxDataviewSegmentConfigurationList(v.SegmentConfigurations); err != nil {
+			invalidParams.AddNested("SegmentConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateKxEnvironmentInput(v *CreateKxEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -1270,6 +1698,33 @@ func validateOpCreateKxEnvironmentInput(v *CreateKxEnvironmentInput) error {
 	}
 	if v.KmsKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateKxScalingGroupInput(v *CreateKxScalingGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateKxScalingGroupInput"}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalingGroupName"))
+	}
+	if v.HostType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostType"))
+	}
+	if v.AvailabilityZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZoneId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1291,6 +1746,33 @@ func validateOpCreateKxUserInput(v *CreateKxUserInput) error {
 	}
 	if v.IamRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateKxVolumeInput(v *CreateKxVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateKxVolumeInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if len(v.VolumeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeType"))
+	}
+	if v.VolumeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeName"))
+	}
+	if len(v.AzMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AzMode"))
+	}
+	if v.AvailabilityZoneIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZoneIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1353,6 +1835,30 @@ func validateOpDeleteKxDatabaseInput(v *DeleteKxDatabaseInput) error {
 	}
 }
 
+func validateOpDeleteKxDataviewInput(v *DeleteKxDataviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteKxDataviewInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.DataviewName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataviewName"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteKxEnvironmentInput(v *DeleteKxEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -1360,6 +1866,24 @@ func validateOpDeleteKxEnvironmentInput(v *DeleteKxEnvironmentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteKxEnvironmentInput"}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteKxScalingGroupInput(v *DeleteKxScalingGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteKxScalingGroupInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalingGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1378,6 +1902,24 @@ func validateOpDeleteKxUserInput(v *DeleteKxUserInput) error {
 	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteKxVolumeInput(v *DeleteKxVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteKxVolumeInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.VolumeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1479,6 +2021,27 @@ func validateOpGetKxDatabaseInput(v *GetKxDatabaseInput) error {
 	}
 }
 
+func validateOpGetKxDataviewInput(v *GetKxDataviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetKxDataviewInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.DataviewName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataviewName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetKxEnvironmentInput(v *GetKxEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -1486,6 +2049,24 @@ func validateOpGetKxEnvironmentInput(v *GetKxEnvironmentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetKxEnvironmentInput"}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetKxScalingGroupInput(v *GetKxScalingGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetKxScalingGroupInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalingGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1504,6 +2085,24 @@ func validateOpGetKxUserInput(v *GetKxUserInput) error {
 	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetKxVolumeInput(v *GetKxVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetKxVolumeInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.VolumeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1578,11 +2177,59 @@ func validateOpListKxDatabasesInput(v *ListKxDatabasesInput) error {
 	}
 }
 
+func validateOpListKxDataviewsInput(v *ListKxDataviewsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListKxDataviewsInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListKxScalingGroupsInput(v *ListKxScalingGroupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListKxScalingGroupsInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListKxUsersInput(v *ListKxUsersInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListKxUsersInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListKxVolumesInput(v *ListKxVolumesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListKxVolumesInput"}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
 	}
@@ -1736,6 +2383,35 @@ func validateOpUpdateKxDatabaseInput(v *UpdateKxDatabaseInput) error {
 	}
 }
 
+func validateOpUpdateKxDataviewInput(v *UpdateKxDataviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateKxDataviewInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.DataviewName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataviewName"))
+	}
+	if v.SegmentConfigurations != nil {
+		if err := validateKxDataviewSegmentConfigurationList(v.SegmentConfigurations); err != nil {
+			invalidParams.AddNested("SegmentConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateKxEnvironmentInput(v *UpdateKxEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -1789,6 +2465,24 @@ func validateOpUpdateKxUserInput(v *UpdateKxUserInput) error {
 	}
 	if v.IamRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateKxVolumeInput(v *UpdateKxVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateKxVolumeInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.VolumeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

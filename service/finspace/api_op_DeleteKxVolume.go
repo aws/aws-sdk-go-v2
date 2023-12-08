@@ -11,29 +11,36 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the kdb environment. This action is irreversible. Deleting a kdb
-// environment will remove all the associated data and any services running in it.
-func (c *Client) DeleteKxEnvironment(ctx context.Context, params *DeleteKxEnvironmentInput, optFns ...func(*Options)) (*DeleteKxEnvironmentOutput, error) {
+// Deletes a volume. You can only delete a volume if it's not attached to a
+// cluster or a dataview. When a volume is deleted, any data on the volume is lost.
+// This action is irreversible.
+func (c *Client) DeleteKxVolume(ctx context.Context, params *DeleteKxVolumeInput, optFns ...func(*Options)) (*DeleteKxVolumeOutput, error) {
 	if params == nil {
-		params = &DeleteKxEnvironmentInput{}
+		params = &DeleteKxVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteKxEnvironment", params, optFns, c.addOperationDeleteKxEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteKxVolume", params, optFns, c.addOperationDeleteKxVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteKxEnvironmentOutput)
+	out := result.(*DeleteKxVolumeOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteKxEnvironmentInput struct {
+type DeleteKxVolumeInput struct {
 
-	// A unique identifier for the kdb environment.
+	// A unique identifier for the kdb environment, whose clusters can attach to the
+	// volume.
 	//
 	// This member is required.
 	EnvironmentId *string
+
+	// The name of the volume that you want to delete.
+	//
+	// This member is required.
+	VolumeName *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
@@ -41,26 +48,26 @@ type DeleteKxEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeleteKxEnvironmentOutput struct {
+type DeleteKxVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteKxEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteKxVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKxEnvironment{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKxVolume{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKxEnvironment{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKxVolume{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKxEnvironment"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKxVolume"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -106,13 +113,13 @@ func (c *Client) addOperationDeleteKxEnvironmentMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opDeleteKxEnvironmentMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opDeleteKxVolumeMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDeleteKxEnvironmentValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteKxVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKxEnvironment(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKxVolume(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -133,24 +140,24 @@ func (c *Client) addOperationDeleteKxEnvironmentMiddlewares(stack *middleware.St
 	return nil
 }
 
-type idempotencyToken_initializeOpDeleteKxEnvironment struct {
+type idempotencyToken_initializeOpDeleteKxVolume struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpDeleteKxEnvironment) ID() string {
+func (*idempotencyToken_initializeOpDeleteKxVolume) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpDeleteKxEnvironment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpDeleteKxVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*DeleteKxEnvironmentInput)
+	input, ok := in.Parameters.(*DeleteKxVolumeInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteKxEnvironmentInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteKxVolumeInput ")
 	}
 
 	if input.ClientToken == nil {
@@ -162,14 +169,14 @@ func (m *idempotencyToken_initializeOpDeleteKxEnvironment) HandleInitialize(ctx 
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opDeleteKxEnvironmentMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteKxEnvironment{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opDeleteKxVolumeMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteKxVolume{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opDeleteKxEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteKxVolume(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeleteKxEnvironment",
+		OperationName: "DeleteKxVolume",
 	}
 }

@@ -69,9 +69,9 @@ type PutMetricStreamInput struct {
 	// This member is required.
 	Name *string
 
-	// The output format for the stream. Valid values are json and opentelemetry0.7 .
-	// For more information about metric stream output formats, see Metric streams
-	// output formats (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html)
+	// The output format for the stream. Valid values are json , opentelemetry1.0 , and
+	// opentelemetry0.7 . For more information about metric stream output formats, see
+	// Metric streams output formats (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html)
 	// .
 	//
 	// This member is required.
@@ -109,8 +109,8 @@ type PutMetricStreamInput struct {
 	// additional statistics that you can stream depend on the stream's OutputFormat .
 	// If the OutputFormat is json , you can stream any additional statistic that is
 	// supported by CloudWatch, listed in CloudWatch statistics definitions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html)
-	// . If the OutputFormat is opentelemetry0.7 , you can stream percentile statistics
-	// such as p95, p99.9, and so on.
+	// . If the OutputFormat is opentelemetry1.0 or opentelemetry0.7 , you can stream
+	// percentile statistics such as p95, p99.9, and so on.
 	StatisticsConfigurations []types.MetricStreamStatisticsConfiguration
 
 	// A list of key-value pairs to associate with the metric stream. You can

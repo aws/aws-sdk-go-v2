@@ -189,8 +189,9 @@ type PutMetricAlarmInput struct {
 	// The name for the metric associated with the alarm. For each PutMetricAlarm
 	// operation, you must specify either MetricName or a Metrics array. If you are
 	// creating an alarm based on a math expression, you cannot specify this parameter,
-	// or any of the Dimensions , Period , Namespace , Statistic , or ExtendedStatistic
-	// parameters. Instead, you specify all this information in the Metrics array.
+	// or any of the Namespace , Dimensions , Period , Unit , Statistic , or
+	// ExtendedStatistic parameters. Instead, you specify all this information in the
+	// Metrics array.
 	MetricName *string
 
 	// An array of MetricDataQuery structures that enable you to create an alarm based
@@ -200,10 +201,10 @@ type PutMetricAlarmInput struct {
 	// Metrics array is the expression that the alarm watches. You designate this
 	// expression by setting ReturnData to true for this object in the array. For more
 	// information, see MetricDataQuery (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html)
-	// . If you use the Metrics parameter, you cannot include the MetricName ,
-	// Dimensions , Period , Namespace , Statistic , or ExtendedStatistic parameters
-	// of PutMetricAlarm in the same operation. Instead, you retrieve the metrics you
-	// are using in your math expression as part of the Metrics array.
+	// . If you use the Metrics parameter, you cannot include the Namespace ,
+	// MetricName , Dimensions , Period , Unit , Statistic , or ExtendedStatistic
+	// parameters of PutMetricAlarm in the same operation. Instead, you retrieve the
+	// metrics you are using in your math expression as part of the Metrics array.
 	Metrics []types.MetricDataQuery
 
 	// The namespace for the metric associated specified in MetricName .
@@ -295,11 +296,13 @@ type PutMetricAlarmInput struct {
 	// an instance receives on all network interfaces. You can also specify a unit when
 	// you create a custom metric. Units help provide conceptual meaning to your data.
 	// Metric data points that specify a unit of measure, such as Percent, are
-	// aggregated separately. If you don't specify Unit , CloudWatch retrieves all unit
-	// types that have been published for the metric and attempts to evaluate the
-	// alarm. Usually, metrics are published with only one unit, so the alarm works as
-	// intended. However, if the metric is published with multiple types of units and
-	// you don't specify a unit, the alarm's behavior is not defined and it behaves
+	// aggregated separately. If you are creating an alarm based on a metric math
+	// expression, you can specify the unit for each metric (if needed) within the
+	// objects in the Metrics array. If you don't specify Unit , CloudWatch retrieves
+	// all unit types that have been published for the metric and attempts to evaluate
+	// the alarm. Usually, metrics are published with only one unit, so the alarm works
+	// as intended. However, if the metric is published with multiple types of units
+	// and you don't specify a unit, the alarm's behavior is not defined and it behaves
 	// unpredictably. We recommend omitting Unit so that you don't inadvertently
 	// specify an incorrect unit that is not published for this metric. Doing so causes
 	// the alarm to be stuck in the INSUFFICIENT DATA state.

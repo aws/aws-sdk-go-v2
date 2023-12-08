@@ -11,29 +11,35 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the kdb environment. This action is irreversible. Deleting a kdb
-// environment will remove all the associated data and any services running in it.
-func (c *Client) DeleteKxEnvironment(ctx context.Context, params *DeleteKxEnvironmentInput, optFns ...func(*Options)) (*DeleteKxEnvironmentOutput, error) {
+// Deletes the specified scaling group. This action is irreversible. You cannot
+// delete a scaling group until all the clusters running on it have been deleted.
+func (c *Client) DeleteKxScalingGroup(ctx context.Context, params *DeleteKxScalingGroupInput, optFns ...func(*Options)) (*DeleteKxScalingGroupOutput, error) {
 	if params == nil {
-		params = &DeleteKxEnvironmentInput{}
+		params = &DeleteKxScalingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteKxEnvironment", params, optFns, c.addOperationDeleteKxEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteKxScalingGroup", params, optFns, c.addOperationDeleteKxScalingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteKxEnvironmentOutput)
+	out := result.(*DeleteKxScalingGroupOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteKxEnvironmentInput struct {
+type DeleteKxScalingGroupInput struct {
 
-	// A unique identifier for the kdb environment.
+	// A unique identifier for the kdb environment, from where you want to delete the
+	// dataview.
 	//
 	// This member is required.
 	EnvironmentId *string
+
+	// A unique identifier for the kdb scaling group.
+	//
+	// This member is required.
+	ScalingGroupName *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
@@ -41,26 +47,26 @@ type DeleteKxEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeleteKxEnvironmentOutput struct {
+type DeleteKxScalingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteKxEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteKxScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKxEnvironment{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKxScalingGroup{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKxEnvironment{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKxScalingGroup{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKxEnvironment"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKxScalingGroup"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -106,13 +112,13 @@ func (c *Client) addOperationDeleteKxEnvironmentMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opDeleteKxEnvironmentMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opDeleteKxScalingGroupMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDeleteKxEnvironmentValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteKxScalingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKxEnvironment(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKxScalingGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -133,24 +139,24 @@ func (c *Client) addOperationDeleteKxEnvironmentMiddlewares(stack *middleware.St
 	return nil
 }
 
-type idempotencyToken_initializeOpDeleteKxEnvironment struct {
+type idempotencyToken_initializeOpDeleteKxScalingGroup struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpDeleteKxEnvironment) ID() string {
+func (*idempotencyToken_initializeOpDeleteKxScalingGroup) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpDeleteKxEnvironment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpDeleteKxScalingGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*DeleteKxEnvironmentInput)
+	input, ok := in.Parameters.(*DeleteKxScalingGroupInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteKxEnvironmentInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteKxScalingGroupInput ")
 	}
 
 	if input.ClientToken == nil {
@@ -162,14 +168,14 @@ func (m *idempotencyToken_initializeOpDeleteKxEnvironment) HandleInitialize(ctx 
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opDeleteKxEnvironmentMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteKxEnvironment{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opDeleteKxScalingGroupMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteKxScalingGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opDeleteKxEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteKxScalingGroup(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeleteKxEnvironment",
+		OperationName: "DeleteKxScalingGroup",
 	}
 }

@@ -259,10 +259,11 @@ type KxClusterType string
 
 // Enum values for KxClusterType
 const (
-	KxClusterTypeHdb     KxClusterType = "HDB"
-	KxClusterTypeRdb     KxClusterType = "RDB"
-	KxClusterTypeGateway KxClusterType = "GATEWAY"
-	KxClusterTypeGp      KxClusterType = "GP"
+	KxClusterTypeHdb         KxClusterType = "HDB"
+	KxClusterTypeRdb         KxClusterType = "RDB"
+	KxClusterTypeGateway     KxClusterType = "GATEWAY"
+	KxClusterTypeGp          KxClusterType = "GP"
+	KxClusterTypeTickerplant KxClusterType = "TICKERPLANT"
 )
 
 // Values returns all known values for KxClusterType. Note that this can be
@@ -274,6 +275,31 @@ func (KxClusterType) Values() []KxClusterType {
 		"RDB",
 		"GATEWAY",
 		"GP",
+		"TICKERPLANT",
+	}
+}
+
+type KxDataviewStatus string
+
+// Enum values for KxDataviewStatus
+const (
+	KxDataviewStatusCreating KxDataviewStatus = "CREATING"
+	KxDataviewStatusActive   KxDataviewStatus = "ACTIVE"
+	KxDataviewStatusUpdating KxDataviewStatus = "UPDATING"
+	KxDataviewStatusFailed   KxDataviewStatus = "FAILED"
+	KxDataviewStatusDeleting KxDataviewStatus = "DELETING"
+)
+
+// Values returns all known values for KxDataviewStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KxDataviewStatus) Values() []KxDataviewStatus {
+	return []KxDataviewStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"FAILED",
+		"DELETING",
 	}
 }
 
@@ -295,6 +321,26 @@ func (KxDeploymentStrategy) Values() []KxDeploymentStrategy {
 	}
 }
 
+type KxNAS1Type string
+
+// Enum values for KxNAS1Type
+const (
+	KxNAS1TypeSsd1000 KxNAS1Type = "SSD_1000"
+	KxNAS1TypeSsd250  KxNAS1Type = "SSD_250"
+	KxNAS1TypeHdd12   KxNAS1Type = "HDD_12"
+)
+
+// Values returns all known values for KxNAS1Type. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (KxNAS1Type) Values() []KxNAS1Type {
+	return []KxNAS1Type{
+		"SSD_1000",
+		"SSD_250",
+		"HDD_12",
+	}
+}
+
 type KxSavedownStorageType string
 
 // Enum values for KxSavedownStorageType
@@ -308,6 +354,80 @@ const (
 func (KxSavedownStorageType) Values() []KxSavedownStorageType {
 	return []KxSavedownStorageType{
 		"SDS01",
+	}
+}
+
+type KxScalingGroupStatus string
+
+// Enum values for KxScalingGroupStatus
+const (
+	KxScalingGroupStatusCreating     KxScalingGroupStatus = "CREATING"
+	KxScalingGroupStatusCreateFailed KxScalingGroupStatus = "CREATE_FAILED"
+	KxScalingGroupStatusActive       KxScalingGroupStatus = "ACTIVE"
+	KxScalingGroupStatusDeleting     KxScalingGroupStatus = "DELETING"
+	KxScalingGroupStatusDeleted      KxScalingGroupStatus = "DELETED"
+	KxScalingGroupStatusDeleteFailed KxScalingGroupStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for KxScalingGroupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KxScalingGroupStatus) Values() []KxScalingGroupStatus {
+	return []KxScalingGroupStatus{
+		"CREATING",
+		"CREATE_FAILED",
+		"ACTIVE",
+		"DELETING",
+		"DELETED",
+		"DELETE_FAILED",
+	}
+}
+
+type KxVolumeStatus string
+
+// Enum values for KxVolumeStatus
+const (
+	KxVolumeStatusCreating     KxVolumeStatus = "CREATING"
+	KxVolumeStatusCreateFailed KxVolumeStatus = "CREATE_FAILED"
+	KxVolumeStatusActive       KxVolumeStatus = "ACTIVE"
+	KxVolumeStatusUpdating     KxVolumeStatus = "UPDATING"
+	KxVolumeStatusUpdated      KxVolumeStatus = "UPDATED"
+	KxVolumeStatusUpdateFailed KxVolumeStatus = "UPDATE_FAILED"
+	KxVolumeStatusDeleting     KxVolumeStatus = "DELETING"
+	KxVolumeStatusDeleted      KxVolumeStatus = "DELETED"
+	KxVolumeStatusDeleteFailed KxVolumeStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for KxVolumeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KxVolumeStatus) Values() []KxVolumeStatus {
+	return []KxVolumeStatus{
+		"CREATING",
+		"CREATE_FAILED",
+		"ACTIVE",
+		"UPDATING",
+		"UPDATED",
+		"UPDATE_FAILED",
+		"DELETING",
+		"DELETED",
+		"DELETE_FAILED",
+	}
+}
+
+type KxVolumeType string
+
+// Enum values for KxVolumeType
+const (
+	KxVolumeTypeNas1 KxVolumeType = "NAS_1"
+)
+
+// Values returns all known values for KxVolumeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KxVolumeType) Values() []KxVolumeType {
+	return []KxVolumeType{
+		"NAS_1",
 	}
 }
 
@@ -350,5 +470,21 @@ func (TgwStatus) Values() []TgwStatus {
 		"UPDATING",
 		"FAILED_UPDATE",
 		"SUCCESSFULLY_UPDATED",
+	}
+}
+
+type VolumeType string
+
+// Enum values for VolumeType
+const (
+	VolumeTypeNas1 VolumeType = "NAS_1"
+)
+
+// Values returns all known values for VolumeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VolumeType) Values() []VolumeType {
+	return []VolumeType{
+		"NAS_1",
 	}
 }

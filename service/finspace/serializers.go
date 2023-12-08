@@ -411,9 +411,23 @@ func awsRestjson1_serializeOpDocumentCreateKxClusterInput(v *CreateKxClusterInpu
 		}
 	}
 
+	if v.ScalingGroupConfiguration != nil {
+		ok := object.Key("scalingGroupConfiguration")
+		if err := awsRestjson1_serializeDocumentKxScalingGroupConfiguration(v.ScalingGroupConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TickerplantLogConfiguration != nil {
+		ok := object.Key("tickerplantLogConfiguration")
+		if err := awsRestjson1_serializeDocumentTickerplantLogConfiguration(v.TickerplantLogConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -533,6 +547,147 @@ func awsRestjson1_serializeOpDocumentCreateKxDatabaseInput(v *CreateKxDatabaseIn
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateKxDataview struct {
+}
+
+func (*awsRestjson1_serializeOpCreateKxDataview) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateKxDataview) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateKxDataviewInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/databases/{databaseName}/dataviews")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateKxDataviewInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateKxDataviewInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateKxDataviewInput(v *CreateKxDataviewInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DatabaseName == nil || len(*v.DatabaseName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member databaseName must not be empty")}
+	}
+	if v.DatabaseName != nil {
+		if err := encoder.SetURI("databaseName").String(*v.DatabaseName); err != nil {
+			return err
+		}
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateKxDataviewInput(v *CreateKxDataviewInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoUpdate {
+		ok := object.Key("autoUpdate")
+		ok.Boolean(v.AutoUpdate)
+	}
+
+	if v.AvailabilityZoneId != nil {
+		ok := object.Key("availabilityZoneId")
+		ok.String(*v.AvailabilityZoneId)
+	}
+
+	if len(v.AzMode) > 0 {
+		ok := object.Key("azMode")
+		ok.String(string(v.AzMode))
+	}
+
+	if v.ChangesetId != nil {
+		ok := object.Key("changesetId")
+		ok.String(*v.ChangesetId)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.DataviewName != nil {
+		ok := object.Key("dataviewName")
+		ok.String(*v.DataviewName)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.SegmentConfigurations != nil {
+		ok := object.Key("segmentConfigurations")
+		if err := awsRestjson1_serializeDocumentKxDataviewSegmentConfigurationList(v.SegmentConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateKxEnvironment struct {
 }
 
@@ -618,6 +773,116 @@ func awsRestjson1_serializeOpDocumentCreateKxEnvironmentInput(v *CreateKxEnviron
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateKxScalingGroup struct {
+}
+
+func (*awsRestjson1_serializeOpCreateKxScalingGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateKxScalingGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateKxScalingGroupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/scalingGroups")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateKxScalingGroupInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateKxScalingGroupInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateKxScalingGroupInput(v *CreateKxScalingGroupInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateKxScalingGroupInput(v *CreateKxScalingGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailabilityZoneId != nil {
+		ok := object.Key("availabilityZoneId")
+		ok.String(*v.AvailabilityZoneId)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.HostType != nil {
+		ok := object.Key("hostType")
+		ok.String(*v.HostType)
+	}
+
+	if v.ScalingGroupName != nil {
+		ok := object.Key("scalingGroupName")
+		ok.String(*v.ScalingGroupName)
 	}
 
 	if v.Tags != nil {
@@ -730,6 +995,135 @@ func awsRestjson1_serializeOpDocumentCreateKxUserInput(v *CreateKxUserInput, val
 	if v.UserName != nil {
 		ok := object.Key("userName")
 		ok.String(*v.UserName)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateKxVolume struct {
+}
+
+func (*awsRestjson1_serializeOpCreateKxVolume) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateKxVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateKxVolumeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/kxvolumes")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateKxVolumeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateKxVolumeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateKxVolumeInput(v *CreateKxVolumeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateKxVolumeInput(v *CreateKxVolumeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailabilityZoneIds != nil {
+		ok := object.Key("availabilityZoneIds")
+		if err := awsRestjson1_serializeDocumentAvailabilityZoneIds(v.AvailabilityZoneIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AzMode) > 0 {
+		ok := object.Key("azMode")
+		ok.String(string(v.AzMode))
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Nas1Configuration != nil {
+		ok := object.Key("nas1Configuration")
+		if err := awsRestjson1_serializeDocumentKxNAS1Configuration(v.Nas1Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeName != nil {
+		ok := object.Key("volumeName")
+		ok.String(*v.VolumeName)
+	}
+
+	if len(v.VolumeType) > 0 {
+		ok := object.Key("volumeType")
+		ok.String(string(v.VolumeType))
 	}
 
 	return nil
@@ -956,6 +1350,93 @@ func awsRestjson1_serializeOpHttpBindingsDeleteKxDatabaseInput(v *DeleteKxDataba
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteKxDataview struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteKxDataview) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteKxDataview) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteKxDataviewInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/databases/{databaseName}/dataviews/{dataviewName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteKxDataviewInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteKxDataviewInput(v *DeleteKxDataviewInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
+	if v.DatabaseName == nil || len(*v.DatabaseName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member databaseName must not be empty")}
+	}
+	if v.DatabaseName != nil {
+		if err := encoder.SetURI("databaseName").String(*v.DatabaseName); err != nil {
+			return err
+		}
+	}
+
+	if v.DataviewName == nil || len(*v.DataviewName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member dataviewName must not be empty")}
+	}
+	if v.DataviewName != nil {
+		if err := encoder.SetURI("dataviewName").String(*v.DataviewName); err != nil {
+			return err
+		}
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteKxEnvironment struct {
 }
 
@@ -1009,11 +1490,93 @@ func awsRestjson1_serializeOpHttpBindingsDeleteKxEnvironmentInput(v *DeleteKxEnv
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
 	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
 	}
 	if v.EnvironmentId != nil {
 		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteKxScalingGroup struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteKxScalingGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteKxScalingGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteKxScalingGroupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/scalingGroups/{scalingGroupName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteKxScalingGroupInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteKxScalingGroupInput(v *DeleteKxScalingGroupInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	if v.ScalingGroupName == nil || len(*v.ScalingGroupName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member scalingGroupName must not be empty")}
+	}
+	if v.ScalingGroupName != nil {
+		if err := encoder.SetURI("scalingGroupName").String(*v.ScalingGroupName); err != nil {
 			return err
 		}
 	}
@@ -1074,6 +1637,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteKxUserInput(v *DeleteKxUserInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
 	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
 	}
@@ -1088,6 +1655,84 @@ func awsRestjson1_serializeOpHttpBindingsDeleteKxUserInput(v *DeleteKxUserInput,
 	}
 	if v.UserName != nil {
 		if err := encoder.SetURI("userName").String(*v.UserName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteKxVolume struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteKxVolume) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteKxVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteKxVolumeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/kxvolumes/{volumeName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteKxVolumeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteKxVolumeInput(v *DeleteKxVolumeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeName == nil || len(*v.VolumeName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member volumeName must not be empty")}
+	}
+	if v.VolumeName != nil {
+		if err := encoder.SetURI("volumeName").String(*v.VolumeName); err != nil {
 			return err
 		}
 	}
@@ -1464,6 +2109,89 @@ func awsRestjson1_serializeOpHttpBindingsGetKxDatabaseInput(v *GetKxDatabaseInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpGetKxDataview struct {
+}
+
+func (*awsRestjson1_serializeOpGetKxDataview) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetKxDataview) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetKxDataviewInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/databases/{databaseName}/dataviews/{dataviewName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetKxDataviewInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetKxDataviewInput(v *GetKxDataviewInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DatabaseName == nil || len(*v.DatabaseName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member databaseName must not be empty")}
+	}
+	if v.DatabaseName != nil {
+		if err := encoder.SetURI("databaseName").String(*v.DatabaseName); err != nil {
+			return err
+		}
+	}
+
+	if v.DataviewName == nil || len(*v.DataviewName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member dataviewName must not be empty")}
+	}
+	if v.DataviewName != nil {
+		if err := encoder.SetURI("dataviewName").String(*v.DataviewName); err != nil {
+			return err
+		}
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetKxEnvironment struct {
 }
 
@@ -1522,6 +2250,80 @@ func awsRestjson1_serializeOpHttpBindingsGetKxEnvironmentInput(v *GetKxEnvironme
 	}
 	if v.EnvironmentId != nil {
 		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetKxScalingGroup struct {
+}
+
+func (*awsRestjson1_serializeOpGetKxScalingGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetKxScalingGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetKxScalingGroupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/scalingGroups/{scalingGroupName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetKxScalingGroupInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetKxScalingGroupInput(v *GetKxScalingGroupInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	if v.ScalingGroupName == nil || len(*v.ScalingGroupName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member scalingGroupName must not be empty")}
+	}
+	if v.ScalingGroupName != nil {
+		if err := encoder.SetURI("scalingGroupName").String(*v.ScalingGroupName); err != nil {
 			return err
 		}
 	}
@@ -1596,6 +2398,80 @@ func awsRestjson1_serializeOpHttpBindingsGetKxUserInput(v *GetKxUserInput, encod
 	}
 	if v.UserName != nil {
 		if err := encoder.SetURI("userName").String(*v.UserName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetKxVolume struct {
+}
+
+func (*awsRestjson1_serializeOpGetKxVolume) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetKxVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetKxVolumeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/kxvolumes/{volumeName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetKxVolumeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetKxVolumeInput(v *GetKxVolumeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeName == nil || len(*v.VolumeName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member volumeName must not be empty")}
+	}
+	if v.VolumeName != nil {
+		if err := encoder.SetURI("volumeName").String(*v.VolumeName); err != nil {
 			return err
 		}
 	}
@@ -1981,6 +2857,88 @@ func awsRestjson1_serializeOpHttpBindingsListKxDatabasesInput(v *ListKxDatabases
 	return nil
 }
 
+type awsRestjson1_serializeOpListKxDataviews struct {
+}
+
+func (*awsRestjson1_serializeOpListKxDataviews) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListKxDataviews) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListKxDataviewsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/databases/{databaseName}/dataviews")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListKxDataviewsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListKxDataviewsInput(v *ListKxDataviewsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DatabaseName == nil || len(*v.DatabaseName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member databaseName must not be empty")}
+	}
+	if v.DatabaseName != nil {
+		if err := encoder.SetURI("databaseName").String(*v.DatabaseName); err != nil {
+			return err
+		}
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListKxEnvironments struct {
 }
 
@@ -2036,6 +2994,79 @@ func awsRestjson1_serializeOpHttpBindingsListKxEnvironmentsInput(v *ListKxEnviro
 
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListKxScalingGroups struct {
+}
+
+func (*awsRestjson1_serializeOpListKxScalingGroups) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListKxScalingGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListKxScalingGroupsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/scalingGroups")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListKxScalingGroupsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListKxScalingGroupsInput(v *ListKxScalingGroupsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2113,6 +3144,83 @@ func awsRestjson1_serializeOpHttpBindingsListKxUsersInput(v *ListKxUsersInput, e
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListKxVolumes struct {
+}
+
+func (*awsRestjson1_serializeOpListKxVolumes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListKxVolumes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListKxVolumesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/kxvolumes")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListKxVolumesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListKxVolumesInput(v *ListKxVolumesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if len(v.VolumeType) > 0 {
+		encoder.SetQuery("volumeType").String(string(v.VolumeType))
 	}
 
 	return nil
@@ -2785,6 +3893,129 @@ func awsRestjson1_serializeOpDocumentUpdateKxDatabaseInput(v *UpdateKxDatabaseIn
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateKxDataview struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateKxDataview) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateKxDataview) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateKxDataviewInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/databases/{databaseName}/dataviews/{dataviewName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateKxDataviewInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateKxDataviewInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateKxDataviewInput(v *UpdateKxDataviewInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DatabaseName == nil || len(*v.DatabaseName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member databaseName must not be empty")}
+	}
+	if v.DatabaseName != nil {
+		if err := encoder.SetURI("databaseName").String(*v.DatabaseName); err != nil {
+			return err
+		}
+	}
+
+	if v.DataviewName == nil || len(*v.DataviewName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member dataviewName must not be empty")}
+	}
+	if v.DataviewName != nil {
+		if err := encoder.SetURI("dataviewName").String(*v.DataviewName); err != nil {
+			return err
+		}
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateKxDataviewInput(v *UpdateKxDataviewInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChangesetId != nil {
+		ok := object.Key("changesetId")
+		ok.String(*v.ChangesetId)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.SegmentConfigurations != nil {
+		ok := object.Key("segmentConfigurations")
+		if err := awsRestjson1_serializeDocumentKxDataviewSegmentConfigurationList(v.SegmentConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateKxEnvironment struct {
 }
 
@@ -3087,6 +4318,115 @@ func awsRestjson1_serializeOpDocumentUpdateKxUserInput(v *UpdateKxUserInput, val
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateKxVolume struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateKxVolume) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateKxVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateKxVolumeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/kxvolumes/{volumeName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateKxVolumeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateKxVolumeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateKxVolumeInput(v *UpdateKxVolumeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeName == nil || len(*v.VolumeName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member volumeName must not be empty")}
+	}
+	if v.VolumeName != nil {
+		if err := encoder.SetURI("volumeName").String(*v.VolumeName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateKxVolumeInput(v *UpdateKxVolumeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Nas1Configuration != nil {
+		ok := object.Key("nas1Configuration")
+		if err := awsRestjson1_serializeDocumentKxNAS1Configuration(v.Nas1Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAttributeMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3171,6 +4511,17 @@ func awsRestjson1_serializeDocumentAutoScalingConfiguration(v *types.AutoScaling
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAvailabilityZoneIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -3437,6 +4788,11 @@ func awsRestjson1_serializeDocumentKxDatabaseCacheConfiguration(v *types.KxDatab
 		ok.String(*v.CacheType)
 	}
 
+	if v.DataviewName != nil {
+		ok := object.Key("dataviewName")
+		ok.String(*v.DataviewName)
+	}
+
 	if v.DbPaths != nil {
 		ok := object.Key("dbPaths")
 		if err := awsRestjson1_serializeDocumentDbPaths(v.DbPaths, ok); err != nil {
@@ -3481,6 +4837,18 @@ func awsRestjson1_serializeDocumentKxDatabaseConfiguration(v *types.KxDatabaseCo
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.DataviewConfiguration != nil {
+		ok := object.Key("dataviewConfiguration")
+		if err := awsRestjson1_serializeDocumentKxDataviewConfiguration(v.DataviewConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataviewName != nil {
+		ok := object.Key("dataviewName")
+		ok.String(*v.DataviewName)
+	}
+
 	return nil
 }
 
@@ -3491,6 +4859,67 @@ func awsRestjson1_serializeDocumentKxDatabaseConfigurations(v []types.KxDatabase
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentKxDatabaseConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKxDataviewConfiguration(v *types.KxDataviewConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChangesetId != nil {
+		ok := object.Key("changesetId")
+		ok.String(*v.ChangesetId)
+	}
+
+	if v.DataviewName != nil {
+		ok := object.Key("dataviewName")
+		ok.String(*v.DataviewName)
+	}
+
+	if v.DataviewVersionId != nil {
+		ok := object.Key("dataviewVersionId")
+		ok.String(*v.DataviewVersionId)
+	}
+
+	if v.SegmentConfigurations != nil {
+		ok := object.Key("segmentConfigurations")
+		if err := awsRestjson1_serializeDocumentKxDataviewSegmentConfigurationList(v.SegmentConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKxDataviewSegmentConfiguration(v *types.KxDataviewSegmentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DbPaths != nil {
+		ok := object.Key("dbPaths")
+		if err := awsRestjson1_serializeDocumentSegmentConfigurationDbPathList(v.DbPaths, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeName != nil {
+		ok := object.Key("volumeName")
+		ok.String(*v.VolumeName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKxDataviewSegmentConfigurationList(v []types.KxDataviewSegmentConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentKxDataviewSegmentConfiguration(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3509,6 +4938,23 @@ func awsRestjson1_serializeDocumentKxDeploymentConfiguration(v *types.KxDeployme
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKxNAS1Configuration(v *types.KxNAS1Configuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Size != nil {
+		ok := object.Key("size")
+		ok.Integer(*v.Size)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKxSavedownStorageConfiguration(v *types.KxSavedownStorageConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3521,6 +4967,56 @@ func awsRestjson1_serializeDocumentKxSavedownStorageConfiguration(v *types.KxSav
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	if v.VolumeName != nil {
+		ok := object.Key("volumeName")
+		ok.String(*v.VolumeName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKxScalingGroupConfiguration(v *types.KxScalingGroupConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Cpu != nil {
+		ok := object.Key("cpu")
+		switch {
+		case math.IsNaN(*v.Cpu):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Cpu, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Cpu, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Cpu)
+
+		}
+	}
+
+	if v.MemoryLimit != nil {
+		ok := object.Key("memoryLimit")
+		ok.Integer(*v.MemoryLimit)
+	}
+
+	if v.MemoryReservation != nil {
+		ok := object.Key("memoryReservation")
+		ok.Integer(*v.MemoryReservation)
+	}
+
+	if v.NodeCount != nil {
+		ok := object.Key("nodeCount")
+		ok.Integer(*v.NodeCount)
+	}
+
+	if v.ScalingGroupName != nil {
+		ok := object.Key("scalingGroupName")
+		ok.String(*v.ScalingGroupName)
 	}
 
 	return nil
@@ -3608,6 +5104,17 @@ func awsRestjson1_serializeDocumentSecurityGroupIdList(v []string, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSegmentConfigurationDbPathList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSubnetIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3648,6 +5155,31 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTickerplantLogConfiguration(v *types.TickerplantLogConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TickerplantLogVolumes != nil {
+		ok := object.Key("tickerplantLogVolumes")
+		if err := awsRestjson1_serializeDocumentTickerplantLogVolumes(v.TickerplantLogVolumes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTickerplantLogVolumes(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

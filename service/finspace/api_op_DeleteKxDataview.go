@@ -11,56 +11,69 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the kdb environment. This action is irreversible. Deleting a kdb
-// environment will remove all the associated data and any services running in it.
-func (c *Client) DeleteKxEnvironment(ctx context.Context, params *DeleteKxEnvironmentInput, optFns ...func(*Options)) (*DeleteKxEnvironmentOutput, error) {
+// Deletes the specified dataview. Before deleting a dataview, make sure that it
+// is not in use by any cluster.
+func (c *Client) DeleteKxDataview(ctx context.Context, params *DeleteKxDataviewInput, optFns ...func(*Options)) (*DeleteKxDataviewOutput, error) {
 	if params == nil {
-		params = &DeleteKxEnvironmentInput{}
+		params = &DeleteKxDataviewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteKxEnvironment", params, optFns, c.addOperationDeleteKxEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteKxDataview", params, optFns, c.addOperationDeleteKxDataviewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteKxEnvironmentOutput)
+	out := result.(*DeleteKxDataviewOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteKxEnvironmentInput struct {
+type DeleteKxDataviewInput struct {
 
-	// A unique identifier for the kdb environment.
+	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// This member is required.
+	ClientToken *string
+
+	// The name of the database whose dataview you want to delete.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The name of the dataview that you want to delete.
+	//
+	// This member is required.
+	DataviewName *string
+
+	// A unique identifier for the kdb environment, from where you want to delete the
+	// dataview.
 	//
 	// This member is required.
 	EnvironmentId *string
 
-	// A token that ensures idempotency. This token expires in 10 minutes.
-	ClientToken *string
-
 	noSmithyDocumentSerde
 }
 
-type DeleteKxEnvironmentOutput struct {
+type DeleteKxDataviewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteKxEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteKxDataviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKxEnvironment{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKxDataview{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKxEnvironment{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKxDataview{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKxEnvironment"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKxDataview"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -106,13 +119,13 @@ func (c *Client) addOperationDeleteKxEnvironmentMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opDeleteKxEnvironmentMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opDeleteKxDataviewMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDeleteKxEnvironmentValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteKxDataviewValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKxEnvironment(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKxDataview(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -133,24 +146,24 @@ func (c *Client) addOperationDeleteKxEnvironmentMiddlewares(stack *middleware.St
 	return nil
 }
 
-type idempotencyToken_initializeOpDeleteKxEnvironment struct {
+type idempotencyToken_initializeOpDeleteKxDataview struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpDeleteKxEnvironment) ID() string {
+func (*idempotencyToken_initializeOpDeleteKxDataview) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpDeleteKxEnvironment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpDeleteKxDataview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*DeleteKxEnvironmentInput)
+	input, ok := in.Parameters.(*DeleteKxDataviewInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteKxEnvironmentInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteKxDataviewInput ")
 	}
 
 	if input.ClientToken == nil {
@@ -162,14 +175,14 @@ func (m *idempotencyToken_initializeOpDeleteKxEnvironment) HandleInitialize(ctx 
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opDeleteKxEnvironmentMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteKxEnvironment{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opDeleteKxDataviewMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteKxDataview{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opDeleteKxEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteKxDataview(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeleteKxEnvironment",
+		OperationName: "DeleteKxDataview",
 	}
 }

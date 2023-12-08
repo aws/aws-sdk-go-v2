@@ -39,6 +39,9 @@ type DeleteKxUserInput struct {
 	// This member is required.
 	UserName *string
 
+	// A token that ensures idempotency. This token expires in 10 minutes.
+	ClientToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -107,6 +110,9 @@ func (c *Client) addOperationDeleteKxUserMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opDeleteKxUserMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteKxUserValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -129,6 +135,39 @@ func (c *Client) addOperationDeleteKxUserMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpDeleteKxUser struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpDeleteKxUser) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpDeleteKxUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*DeleteKxUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteKxUserInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opDeleteKxUserMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteKxUser{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDeleteKxUser(region string) *awsmiddleware.RegisterServiceMetadata {

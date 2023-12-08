@@ -93,6 +93,11 @@ type GetKxClusterOutput struct {
 	//   reload of custom code. This cluster type can optionally mount databases
 	//   including cache and savedown storage. For this cluster type, the node count is
 	//   fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.
+	//   - Tickerplant – A tickerplant cluster allows you to subscribe to feed
+	//   handlers based on IAM permissions. It can publish to RDBs, other Tickerplants,
+	//   and real-time subscribers (RTS). Tickerplants can persist messages to log, which
+	//   is readable by any RDB environment. It supports only single-node that is only
+	//   one kdb process.
 	ClusterType types.KxClusterType
 
 	// The details of the custom code that you want to use inside a cluster when
@@ -135,6 +140,9 @@ type GetKxClusterOutput struct {
 	// restarted.
 	SavedownStorageConfiguration *types.KxSavedownStorageConfiguration
 
+	// The structure that stores the capacity configuration details of a scaling group.
+	ScalingGroupConfiguration *types.KxScalingGroupConfiguration
+
 	// The status of cluster creation.
 	//   - PENDING – The cluster is pending creation.
 	//   - CREATING – The cluster creation process is in progress.
@@ -148,6 +156,15 @@ type GetKxClusterOutput struct {
 
 	// The error message when a failed state occurs.
 	StatusReason *string
+
+	// A configuration to store the Tickerplant logs. It consists of a list of volumes
+	// that will be mounted to your cluster. For the cluster type Tickerplant , the
+	// location of the TP volume on the cluster will be available by using the global
+	// variable .aws.tp_log_path .
+	TickerplantLogConfiguration *types.TickerplantLogConfiguration
+
+	// A list of volumes attached to the cluster.
+	Volumes []types.Volume
 
 	// Configuration details about the network where the Privatelink endpoint of the
 	// cluster resides.

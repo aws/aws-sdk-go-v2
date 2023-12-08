@@ -39,12 +39,6 @@ type CreateKxClusterInput struct {
 	// This member is required.
 	AzMode types.KxAzMode
 
-	// A structure for the metadata of a cluster. It includes information like the
-	// CPUs needed, memory of instances, and number of instances.
-	//
-	// This member is required.
-	CapacityConfiguration *types.CapacityConfiguration
-
 	// A unique name for the cluster that you want to create.
 	//
 	// This member is required.
@@ -70,6 +64,11 @@ type CreateKxClusterInput struct {
 	//   reload of custom code. This cluster type can optionally mount databases
 	//   including cache and savedown storage. For this cluster type, the node count is
 	//   fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.
+	//   - Tickerplant – A tickerplant cluster allows you to subscribe to feed
+	//   handlers based on IAM permissions. It can publish to RDBs, other Tickerplants,
+	//   and real-time subscribers (RTS). Tickerplants can persist messages to log, which
+	//   is readable by any RDB environment. It supports only single-node that is only
+	//   one kdb process.
 	//
 	// This member is required.
 	ClusterType types.KxClusterType
@@ -84,6 +83,12 @@ type CreateKxClusterInput struct {
 	// This member is required.
 	ReleaseLabel *string
 
+	// Configuration details about the network where the Privatelink endpoint of the
+	// cluster resides.
+	//
+	// This member is required.
+	VpcConfiguration *types.VpcConfiguration
+
 	// The configuration based on which FinSpace will scale in or scale out nodes in
 	// your cluster.
 	AutoScalingConfiguration *types.AutoScalingConfiguration
@@ -94,6 +99,10 @@ type CreateKxClusterInput struct {
 	// The configurations for a read only cache storage associated with a cluster.
 	// This cache will be stored as an FSx Lustre that reads from the S3 store.
 	CacheStorageConfigurations []types.KxCacheStorageConfiguration
+
+	// A structure for the metadata of a cluster. It includes information like the
+	// CPUs needed, memory of instances, and number of instances.
+	CapacityConfiguration *types.CapacityConfiguration
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
@@ -128,13 +137,18 @@ type CreateKxClusterInput struct {
 	// restarted.
 	SavedownStorageConfiguration *types.KxSavedownStorageConfiguration
 
+	// The structure that stores the configuration details of a scaling group.
+	ScalingGroupConfiguration *types.KxScalingGroupConfiguration
+
 	// A list of key-value pairs to label the cluster. You can add up to 50 tags to a
 	// cluster.
 	Tags map[string]string
 
-	// Configuration details about the network where the Privatelink endpoint of the
-	// cluster resides.
-	VpcConfiguration *types.VpcConfiguration
+	// A configuration to store Tickerplant logs. It consists of a list of volumes
+	// that will be mounted to your cluster. For the cluster type Tickerplant , the
+	// location of the TP volume on the cluster will be available by using the global
+	// variable .aws.tp_log_path .
+	TickerplantLogConfiguration *types.TickerplantLogConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -188,6 +202,11 @@ type CreateKxClusterOutput struct {
 	//   reload of custom code. This cluster type can optionally mount databases
 	//   including cache and savedown storage. For this cluster type, the node count is
 	//   fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.
+	//   - Tickerplant – A tickerplant cluster allows you to subscribe to feed
+	//   handlers based on IAM permissions. It can publish to RDBs, other Tickerplants,
+	//   and real-time subscribers (RTS). Tickerplants can persist messages to log, which
+	//   is readable by any RDB environment. It supports only single-node that is only
+	//   one kdb process.
 	ClusterType types.KxClusterType
 
 	// The details of the custom code that you want to use inside a cluster when
@@ -233,6 +252,9 @@ type CreateKxClusterOutput struct {
 	// restarted.
 	SavedownStorageConfiguration *types.KxSavedownStorageConfiguration
 
+	// The structure that stores the configuration details of a scaling group.
+	ScalingGroupConfiguration *types.KxScalingGroupConfiguration
+
 	// The status of cluster creation.
 	//   - PENDING – The cluster is pending creation.
 	//   - CREATING – The cluster creation process is in progress.
@@ -246,6 +268,15 @@ type CreateKxClusterOutput struct {
 
 	// The error message when a failed state occurs.
 	StatusReason *string
+
+	// A configuration to store the Tickerplant logs. It consists of a list of volumes
+	// that will be mounted to your cluster. For the cluster type Tickerplant , the
+	// location of the TP volume on the cluster will be available by using the global
+	// variable .aws.tp_log_path .
+	TickerplantLogConfiguration *types.TickerplantLogConfiguration
+
+	// A list of volumes mounted on the cluster.
+	Volumes []types.Volume
 
 	// Configuration details about the network where the Privatelink endpoint of the
 	// cluster resides.
