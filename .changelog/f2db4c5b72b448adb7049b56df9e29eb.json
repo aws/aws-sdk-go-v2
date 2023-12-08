@@ -1,9 +1,0 @@
-{
-    "id": "f2db4c5b-72b4-48ad-b704-9b56df9e29eb",
-    "type": "bugfix",
-    "description": "Correct loading of [services *] sections into shared config.",
-    "modules": [
-        "config",
-        "internal/ini"
-    ]
-}

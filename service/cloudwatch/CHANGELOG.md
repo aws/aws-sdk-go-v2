@@ -1,3 +1,8 @@
+# v1.32.0 (2023-12-08)
+
+* **Feature**: Adds support for the OpenTelemetry 1.0 output format in CloudWatch Metric Streams.
+* **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.
+
 # v1.31.4 (2023-12-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

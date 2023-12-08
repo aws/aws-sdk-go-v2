@@ -1,3 +1,24 @@
+# Release (2023-12-08)
+
+## General Highlights
+* **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.26.1](config/CHANGELOG.md#v1261-2023-12-08)
+  * **Bug Fix**: Correct loading of [services *] sections into shared config.
+* `github.com/aws/aws-sdk-go-v2/internal/ini`: [v1.7.2](internal/ini/CHANGELOG.md#v172-2023-12-08)
+  * **Bug Fix**: Correct loading of [services *] sections into shared config.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.32.0](service/cloudwatch/CHANGELOG.md#v1320-2023-12-08)
+  * **Feature**: Adds support for the OpenTelemetry 1.0 output format in CloudWatch Metric Streams.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.141.0](service/ec2/CHANGELOG.md#v11410-2023-12-08)
+  * **Feature**: M2 Mac instances are built on Apple M2 Mac mini computers. I4i instances are powered by 3rd generation Intel Xeon Scalable processors. C7i compute optimized, M7i general purpose and R7i memory optimized instances are powered by custom 4th Generation Intel Xeon Scalable processors.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.20.0](service/finspace/CHANGELOG.md#v1200-2023-12-08)
+  * **Feature**: Releasing Scaling Group, Dataview, and Volume APIs
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.47.5](service/s3/CHANGELOG.md#v1475-2023-12-08)
+  * **Bug Fix**: Add non-vhostable buckets to request path when using legacy V1 endpoint resolver.
+  * **Bug Fix**: Improve uniqueness of default S3Express sesssion credentials cache keying to prevent collision in multi-credential scenarios.
+
 # Release (2023-12-07)
 
 ## General Highlights

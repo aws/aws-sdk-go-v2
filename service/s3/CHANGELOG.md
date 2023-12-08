@@ -1,3 +1,9 @@
+# v1.47.5 (2023-12-08)
+
+* **Bug Fix**: Add non-vhostable buckets to request path when using legacy V1 endpoint resolver.
+* **Bug Fix**: Improve uniqueness of default S3Express sesssion credentials cache keying to prevent collision in multi-credential scenarios.
+* **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.
+
 # v1.47.4 (2023-12-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

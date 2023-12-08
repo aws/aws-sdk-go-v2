@@ -1,3 +1,8 @@
+# v1.20.0 (2023-12-08)
+
+* **Feature**: Releasing Scaling Group, Dataview, and Volume APIs
+* **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.
+
 # v1.19.2 (2023-12-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

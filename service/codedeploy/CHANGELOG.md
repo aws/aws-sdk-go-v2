@@ -1,3 +1,7 @@
+# v1.22.1 (2023-12-08)
+
+* **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.
+
 # v1.22.0 (2023-12-07)
 
 * **Feature**: This release adds support for two new CodeDeploy features: 1) zonal deployments for Amazon EC2 in-place deployments, 2) deployments triggered by Auto Scaling group termination lifecycle hook events.

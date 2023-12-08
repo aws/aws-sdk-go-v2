@@ -1,3 +1,8 @@
+# v1.26.1 (2023-12-08)
+
+* **Bug Fix**: Correct loading of [services *] sections into shared config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-12-07)
 
 * **Feature**: Support modeled request compression. The only algorithm supported at this time is `gzip`.

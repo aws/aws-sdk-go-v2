@@ -1,8 +1,0 @@
-{
-    "id": "6b7f7a61-c619-4c9f-aef6-122a004f89c6",
-    "type": "feature",
-    "description": "Adds support for the OpenTelemetry 1.0 output format in CloudWatch Metric Streams.",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}
