@@ -1,3 +1,13 @@
+# Release (2023-12-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.28.0](service/neptune/CHANGELOG.md#v1280-2023-12-11)
+  * **Feature**: This release adds a new parameter configuration setting to the Neptune cluster related APIs that can be leveraged to switch between the underlying supported storage modes.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.26.6](service/pinpoint/CHANGELOG.md#v1266-2023-12-11)
+  * **Documentation**: This release includes Amazon Pinpoint API documentation updates pertaining to campaign message sending rate limits.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.44.0](service/securityhub/CHANGELOG.md#v1440-2023-12-11)
+  * **Feature**: Added new resource detail objects to ASFF, including resources for AwsDynamoDbTable, AwsEc2ClientVpnEndpoint, AwsMskCluster, AwsS3AccessPoint, AwsS3Bucket
+
 # Release (2023-12-08)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.28.0 (2023-12-11)
+
+* **Feature**: This release adds a new parameter configuration setting to the Neptune cluster related APIs that can be leveraged to switch between the underlying supported storage modes.
+
 # v1.27.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

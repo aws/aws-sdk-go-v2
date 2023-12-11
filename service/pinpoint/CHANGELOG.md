@@ -1,3 +1,7 @@
+# v1.26.6 (2023-12-11)
+
+* **Documentation**: This release includes Amazon Pinpoint API documentation updates pertaining to campaign message sending rate limits.
+
 # v1.26.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

@@ -57,7 +57,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.49.5
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.18.5
-	github.com/aws/aws-sdk-go-v2/service/neptune v1.27.5
+	github.com/aws/aws-sdk-go-v2/service/neptune v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/polly v1.36.5
