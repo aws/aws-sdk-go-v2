@@ -486,7 +486,7 @@
         "com.amazonaws.securityhub#AlphaNumericNonEmptyString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[-_ a-zA-Z0-9]+$"
+                "smithy.api#pattern": "^([^\\u0000-\\u007F]|[-_ a-zA-Z0-9])+$"
             }
         },
         "com.amazonaws.securityhub#ArnList": {
@@ -5304,6 +5304,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the table. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ARCHIVED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ARCHIVING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INACCESSIBLE_ENCRYPTION_CREDENTIALS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>\n               </p>\n            </li>\n         </ul>"
                     }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -5672,6 +5678,288 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The current DynamoDB Streams configuration for the table.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID of the Active Directory used for authentication.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about an Active Directory that’s used to authenticate an Client VPN endpoint.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointAuthenticationOptionsDetails": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The authentication type used.\n        </p>"
+                    }
+                },
+                "ActiveDirectory": {
+                    "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information about the Active Directory, if applicable. With Active Directory authentication, clients are authenticated \n            against existing Active Directory groups.\n        </p>"
+                    }
+                },
+                "MutualAuthentication": {
+                    "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information about the authentication certificates, if applicable.</p>"
+                    }
+                },
+                "FederatedAuthentication": {
+                    "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information about the IAM SAML identity provider, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Information about the authentication method used by the Client VPN endpoint.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails": {
+            "type": "structure",
+            "members": {
+                "SamlProviderArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the IAM SAML identity provider.\n        </p>"
+                    }
+                },
+                "SelfServiceSamlProviderArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the IAM SAML identity provider for the self-service portal.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the IAM SAML identity providers used for federated authentication.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointAuthenticationOptionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointAuthenticationOptionsDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails": {
+            "type": "structure",
+            "members": {
+                "ClientRootCertificateChain": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the client certificate.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Information about the client certificate used for authentication.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointClientConnectOptionsDetails": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether client connect options are enabled.\n        </p>"
+                    }
+                },
+                "LambdaFunctionArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the Lambda function used for connection authorization.\n        </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The status of any updates to the client connect options.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The options for managing connection authorization for new client connections.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The status code.\n        </p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The status message.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the status of the Client VPN endpoint attribute.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Current state of text banner feature.\n        </p>"
+                    }
+                },
+                "BannerText": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Customizable text that will be displayed in a banner on Amazon Web Services provided clients when a VPN session is \n            established.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Options for enabling a customizable text banner that will be displayed on Amazon Web Services provided clients when a \n            VPN session is established.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointConnectionLogOptionsDetails": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether client connection logging is enabled for the Client VPN endpoint.\n        </p>"
+                    }
+                },
+                "CloudwatchLogGroup": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the Amazon CloudWatch Logs log group to which connection logging data is published.\n        </p>"
+                    }
+                },
+                "CloudwatchLogStream": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the Amazon CloudWatch Logs log stream to which connection logging data is published.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Information about the client connection logging options for the Client VPN endpoint.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointDetails": {
+            "type": "structure",
+            "members": {
+                "ClientVpnEndpointId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID of the Client VPN endpoint.\n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A brief description of the endpoint.\n        </p>"
+                    }
+                },
+                "ClientCidrBlock": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The IPv4 address range, in CIDR notation, from which client IP addresses are assigned.\n        </p>"
+                    }
+                },
+                "DnsServer": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information about the DNS servers to be used for DNS resolution.\n        </p>"
+                    }
+                },
+                "SplitTunnel": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether split-tunnel is enabled in the Client VPN endpoint.\n        </p>"
+                    }
+                },
+                "TransportProtocol": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The transport protocol used by the Client VPN endpoint.\n        </p>"
+                    }
+                },
+                "VpnPort": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The port number for the Client VPN endpoint.\n        </p>"
+                    }
+                },
+                "ServerCertificateArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the server certificate.\n        </p>"
+                    }
+                },
+                "AuthenticationOptions": {
+                    "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointAuthenticationOptionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information about the authentication method used by the Client VPN endpoint.\n        </p>"
+                    }
+                },
+                "ConnectionLogOptions": {
+                    "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointConnectionLogOptionsDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information about the client connection logging options for the Client VPN endpoint.\n        </p>"
+                    }
+                },
+                "SecurityGroupIdSet": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The IDs of the security groups for the target network.\n        </p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID of the VPC.\n        </p>"
+                    }
+                },
+                "SelfServicePortalUrl": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The URL of the self-service portal.\n        </p>"
+                    }
+                },
+                "ClientConnectOptions": {
+                    "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointClientConnectOptionsDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The options for managing connection authorization for new client connections.\n        </p>"
+                    }
+                },
+                "SessionTimeoutHours": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum VPN session duration time in hours.\n        </p>"
+                    }
+                },
+                "ClientLoginBannerOptions": {
+                    "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Options for enabling a customizable text banner that will be displayed on Amazon Web Services provided clients when a \n            VPN session is established.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes an Client VPN endpoint. A Client VPN endpoint is the resource that you create and \n            configure to enable and manage client VPN sessions. It's the termination point for all client VPN sessions.\n        </p>"
             }
         },
         "com.amazonaws.securityhub#AwsEc2EipDetails": {
@@ -13561,7 +13849,7 @@
                 "CurrentVersion": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The current version of the MSK cluster.</p>"
+                        "smithy.api#documentation": "<p>\n            The current version of the cluster.</p>"
                     }
                 },
                 "NumberOfBrokerNodes": {
@@ -13581,10 +13869,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Provides information for different modes of client authentication.</p>"
                     }
+                },
+                "EnhancedMonitoring": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies the level of monitoring for the cluster.\n        </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Provide details about an Amazon MSK cluster.</p>"
+                "smithy.api#documentation": "<p>\n            Provide details about an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsMskClusterClusterInfoEncryptionInfoDetails": {
@@ -16752,6 +17046,73 @@
                 "smithy.api#documentation": "<p>\n            Provides details about a specified Amazon Route 53 configuration for DNS query logging.</p>"
             }
         },
+        "com.amazonaws.securityhub#AwsS3AccessPointDetails": {
+            "type": "structure",
+            "members": {
+                "AccessPointArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the access point.\n        </p>"
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name or alias of the access point.\n        </p>"
+                    }
+                },
+                "Bucket": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the S3 bucket associated with the specified access point.\n        </p>"
+                    }
+                },
+                "BucketAccountId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account ID associated with the S3 bucket associated with this access point.\n        </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the specified access point.\n        </p>"
+                    }
+                },
+                "NetworkOrigin": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether this access point allows access from the public internet.\n        </p>"
+                    }
+                },
+                "PublicAccessBlockConfiguration": {
+                    "target": "com.amazonaws.securityhub#AwsS3AccountPublicAccessBlockDetails"
+                },
+                "VpcConfiguration": {
+                    "target": "com.amazonaws.securityhub#AwsS3AccessPointVpcConfigurationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains the virtual private cloud (VPC) configuration for the specified access point.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Returns configuration information about the specified Amazon S3 access point. S3 access points are named \n            network endpoints that are attached to buckets that you can use to perform S3 object operations.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3AccessPointVpcConfigurationDetails": {
+            "type": "structure",
+            "members": {
+                "VpcId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            If this field is specified, this access point will only allow connections from the specified VPC ID.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The virtual private cloud (VPC) configuration for an Amazon S3 access point.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#AwsS3AccountPublicAccessBlockDetails": {
             "type": "structure",
             "members": {
@@ -17124,7 +17485,7 @@
                 "BucketLifecycleConfiguration": {
                     "target": "com.amazonaws.securityhub#AwsS3BucketBucketLifecycleConfigurationDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle configuration for objects in the S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle configuration for objects in the specified bucket.</p>"
                     }
                 },
                 "PublicAccessBlockConfiguration": {
@@ -17166,12 +17527,18 @@
                 "ObjectLockConfiguration": {
                     "target": "com.amazonaws.securityhub#AwsS3BucketObjectLockConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Specifies which rule Amazon S3 applies by default to every new object placed in the specified bucket. \n      </p>"
+                        "smithy.api#documentation": "<p>\n         Specifies which rule Amazon S3 applies by default to every new object placed in the bucket. \n      </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the bucket.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details of an Amazon S3 bucket.</p>"
+                "smithy.api#documentation": "<p>The details of an Amazon Simple Storage Service (Amazon S3) bucket.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsS3BucketLoggingConfiguration": {
@@ -22053,7 +22420,7 @@
                 "Name": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The name of the configuration policy.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The name of the configuration policy. Alphanumeric characters and the following ASCII characters are permitted: \n            <code>-, ., !, *, /</code>.\n        </p>"
                     }
                 },
                 "Description": {
@@ -22580,7 +22947,7 @@
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n            The name of the configuration policy.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            The name of the configuration policy. Alphanumeric characters and the following ASCII characters are permitted: \n            <code>-, ., !, *, /</code>.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -29124,7 +29491,7 @@
                     "target": "com.amazonaws.securityhub#ParameterValueType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n            Identifies whether a control parameter uses a custom user-defined value or the Security Hub default value.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Identifies whether a control parameter uses a custom user-defined value or subscribes to the default \n            Security Hub behavior.</p>\n         <p>When <code>ValueType</code> is set equal to <code>DEFAULT</code>, the default \n            behavior can be a specific Security Hub default value, or the default behavior can be to ignore a specific parameter. \n            When <code>ValueType</code> is set equal to <code>DEFAULT</code>, Security Hub ignores user-provided input for \n            the <code>Value</code> field.</p>\n         <p>When <code>ValueType</code> is set equal to <code>CUSTOM</code>, the <code>Value</code> field can't be empty.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -30441,6 +30808,18 @@
                     "target": "com.amazonaws.securityhub#AwsMskClusterDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster.</p>"
+                    }
+                },
+                "AwsS3AccessPoint": {
+                    "target": "com.amazonaws.securityhub#AwsS3AccessPointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about an Amazon Simple Storage Service (Amazon S3) access point. S3 access points are named network \n            endpoints that are attached to S3 buckets that you can use to perform S3 object operations.\n        </p>"
+                    }
+                },
+                "AwsEc2ClientVpnEndpoint": {
+                    "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about an Client VPN endpoint. A Client VPN endpoint is the resource that you \n            create and configure to enable and manage client VPN sessions. It's the termination point for all client VPN sessions.\n        </p>"
                     }
                 }
             },
@@ -34865,7 +35244,7 @@
                 "Name": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The name of the configuration policy.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The name of the configuration policy. Alphanumeric characters and the following ASCII characters are permitted: \n            <code>-, ., !, *, /</code>.\n        </p>"
                     }
                 },
                 "Description": {

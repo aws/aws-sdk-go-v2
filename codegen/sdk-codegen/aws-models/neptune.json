@@ -1442,6 +1442,17 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
+                        },
+                        {
+                            "documentation": "Partition doesn't support DualStack",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -1649,7 +1660,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration setting for the log types to be enabled for export\n      to CloudWatch Logs for a specific DB instance or DB cluster.</p>\n         <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays\n      determine which logs will be exported (or not exported) to CloudWatch Logs.</p>"
+                "smithy.api#documentation": "<p>The configuration setting for the log types to be enabled for export\n      to CloudWatch Logs for a specific DB instance or DB cluster.</p>\n         <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays\n      determine which logs will be exported (or not exported) to CloudWatch Logs.</p>\n         <p>Valid log types are: <code>audit</code> (to publish audit logs) and\n      <code>slowquery</code> (to publish slow-query logs). See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html\">Publishing Neptune logs\n      to Amazon CloudWatch logs</a>.</p>"
             }
         },
         "com.amazonaws.neptune#ClusterPendingModifiedValues": {
@@ -1683,6 +1694,12 @@
                     "target": "com.amazonaws.neptune#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of days for which automatic DB snapshots are retained.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type for the DB cluster.</p>"
                     }
                 },
                 "AllocatedStorage": {
@@ -2301,7 +2318,7 @@
                 "EnableCloudwatchLogsExports": {
                     "target": "com.amazonaws.neptune#LogTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of log types that need to be enabled for exporting to CloudWatch Logs.</p>"
+                        "smithy.api#documentation": "<p>A list of the log types that this DB cluster should export to CloudWatch Logs.\n      Valid log types are: <code>audit</code> (to publish audit logs) and\n      <code>slowquery</code> (to publish slow-query logs). See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html\">Publishing Neptune logs\n      to Amazon CloudWatch logs</a>.</p>"
                     }
                 },
                 "DeletionProtection": {
@@ -2320,6 +2337,12 @@
                     "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Neptune global database to which this new DB cluster\n      should be added.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>standard | iopt1</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>standard</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>When you create a Neptune cluster with the storage type set to <code>iopt1</code>, the storage type is returned\n        in the response. The storage type isn't returned when you set it to <code>standard</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -3383,7 +3406,7 @@
                 "EnabledCloudwatchLogsExports": {
                     "target": "com.amazonaws.neptune#LogTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of log types that this DB cluster is configured to export to CloudWatch Logs.</p>"
+                        "smithy.api#documentation": "<p>A list of the log types that this DB cluster is configured to export to CloudWatch Logs.\n      Valid log types are: <code>audit</code> (to publish audit logs to CloudWatch) and\n      slowquery (to publish slow-query logs to CloudWatch). See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html\">Publishing Neptune logs\n      to Amazon CloudWatch logs</a>.</p>"
                     }
                 },
                 "PendingModifiedValues": {
@@ -3420,6 +3443,18 @@
                     "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains a user-supplied global database cluster identifier.\n      This identifier is the unique key that identifies a global database.</p>"
+                    }
+                },
+                "IOOptimizedNextAllowedModificationTime": {
+                    "target": "com.amazonaws.neptune#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next time you can modify the DB cluster to use the <code>iopt1</code> storage type.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type associated with the DB cluster.</p>"
                     }
                 }
             },
@@ -4068,6 +4103,12 @@
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts\n      is enabled, and otherwise false.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type associated with the DB cluster snapshot.</p>"
                     }
                 }
             },
@@ -8250,6 +8291,9 @@
                 },
                 {
                     "target": "com.amazonaws.neptune#StorageQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#StorageTypeNotSupportedFault"
                 }
             ],
             "traits": {
@@ -8468,7 +8512,7 @@
                 "CloudwatchLogsExportConfiguration": {
                     "target": "com.amazonaws.neptune#CloudwatchLogsExportConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs\n      for a specific DB cluster.</p>"
+                        "smithy.api#documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs\n      for a specific DB cluster. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html#cloudwatch-logs-cli\">Using the\n      CLI to publish Neptune audit logs to CloudWatch Logs</a>.</p>"
                     }
                 },
                 "EngineVersion": {
@@ -8505,6 +8549,12 @@
                     "target": "com.amazonaws.neptune#ServerlessV2ScalingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the scaling configuration of a Neptune Serverless DB cluster.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html\">Using Amazon Neptune Serverless</a> in the\n      <i>Amazon Neptune User Guide</i>.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>standard | iopt1</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>standard</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -9517,7 +9567,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of the log types whose configuration is still pending. In other\n      words, these log types are in the process of being activated or deactivated.</p>"
+                "smithy.api#documentation": "<p>A list of the log types whose configuration is still pending. In other\n      words, these log types are in the process of being activated or deactivated.</p>\n         <p>Valid log types are: <code>audit</code> (to publish audit logs) and\n      <code>slowquery</code> (to publish slow-query logs). See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html\">Publishing Neptune logs\n      to Amazon CloudWatch logs</a>.</p>"
             }
         },
         "com.amazonaws.neptune#PendingMaintenanceAction": {
@@ -9691,7 +9741,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> This data type is used as a response element in the <a>ModifyDBInstance</a>\n      action.</p>"
+                "smithy.api#documentation": "<p>This data type is used as a response element in the <a>ModifyDBInstance</a>\n      action.</p>"
             }
         },
         "com.amazonaws.neptune#PromoteReadReplicaDBCluster": {
@@ -10409,6 +10459,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the scaling configuration of a Neptune Serverless DB cluster.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html\">Using Amazon Neptune Serverless</a> in the\n      <i>Amazon Neptune User Guide</i>.</p>"
                     }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB cluster.</p>\n         <p>Valid values: <code>standard</code>, <code>iopt1</code>\n         </p>\n         <p>Default: <code>standard</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -10592,6 +10648,12 @@
                     "target": "com.amazonaws.neptune#ServerlessV2ScalingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the scaling configuration of a Neptune Serverless DB cluster.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html\">Using Amazon Neptune Serverless</a> in the\n      <i>Amazon Neptune User Guide</i>.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB cluster.</p>\n         <p>Valid values: <code>standard</code>, <code>iopt1</code>\n         </p>\n         <p>Default: <code>standard</code>\n         </p>"
                     }
                 }
             },
