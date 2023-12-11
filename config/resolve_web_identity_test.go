@@ -2,7 +2,9 @@ package config
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"os"
 	"path/filepath"
@@ -54,6 +56,32 @@ func TestResolveWebIdentityWithOptions(t *testing.T) {
 
 		if err == nil || !strings.Contains(err.Error(), "web_identity_token_file requires role_arn") {
 			t.Fatalf("expected profile parsing error, got %v", err)
+		}
+	})
+
+	t.Run("token supplied directly from loadOptions", func(t *testing.T) {
+		restoreEnv := initConfigTestEnv()
+		defer awstesting.PopEnv(restoreEnv)
+
+		var tokenFile = filepath.Join("testdata", "wit.txt")
+		os.Setenv("AWS_REGION", "us-east-1")
+
+		config, err := LoadDefaultConfig(context.Background(),
+			WithEC2IMDSClientEnableState(imds.ClientDisabled),
+			WithWebIdentityRoleCredentialOptions(func(options *stscreds.WebIdentityRoleOptions) {
+				options.TokenRetriever = stscreds.IdentityTokenFile(tokenFile)
+				options.RoleARN = "test-arn"
+				options.RoleSessionName = "test-session"
+			}),
+		)
+
+		if err != nil {
+			t.Fatalf("expect no error, got %v", err)
+		}
+
+		target := stscreds.WebIdentityRoleProvider{}
+		if !aws.IsCredentialsProvider(config.Credentials, &target) {
+			t.Fatalf("expected type %T", target)
 		}
 	})
 }

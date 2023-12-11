@@ -110,7 +110,11 @@ func resolveCredentialChain(ctx context.Context, cfg *aws.Config, configs config
 		return err
 	}
 
+	loadOptions := getLoadOptions(other)
+
 	switch {
+	case loadOptions.WebIdentityRoleCredentialOptions != nil:
+		err = assumeWebIdentity(ctx, cfg, "WebIdTokenFilePathPlaceHolder", "RoleARNFPlaceHolder", "RoleSessionNamePlaceHolder", configs)
 	case sharedProfileSet:
 		err = resolveCredsFromProfile(ctx, cfg, envConfig, sharedConfig, other)
 	case envConfig.Credentials.HasKeys():
@@ -180,6 +184,26 @@ func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *En
 	}
 
 	return nil
+}
+
+func getLoadOptions(cfgs configs) (loadOptions *LoadOptions) {
+	for _, cfg := range cfgs {
+		switch c := cfg.(type) {
+		case LoadOptions:
+			if loadOptions == nil {
+				loadOptions = &c
+			}
+		case *LoadOptions:
+			if loadOptions == nil {
+				loadOptions = c
+			}
+		default:
+		}
+	}
+	if loadOptions == nil {
+		loadOptions = &LoadOptions{}
+	}
+	return
 }
 
 func resolveSSOCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *SharedConfig, configs configs) error {
