@@ -1,0 +1,8 @@
+{
+    "id": "ade6f215-447f-4db3-8352-c773474788a4",
+    "type": "bugfix",
+    "description": "Insert LoadOptions into cred chain switch to enable directly loading web identity role",
+    "modules": [
+        "config"
+    ]
+}
