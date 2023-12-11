@@ -89,7 +89,10 @@ type CreateDBClusterInput struct {
 	// deletion protection is enabled.
 	DeletionProtection *bool
 
-	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
+	// A list of the log types that this DB cluster should export to CloudWatch Logs.
+	// Valid log types are: audit (to publish audit logs) and slowquery (to publish
+	// slow-query logs). See Publishing Neptune logs to Amazon CloudWatch logs (https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html)
+	// .
 	EnableCloudwatchLogsExports []string
 
 	// If set to true , enables Amazon Identity and Access Management (IAM)
@@ -174,6 +177,15 @@ type CreateDBClusterInput struct {
 
 	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted *bool
+
+	// The storage type to associate with the DB cluster. Valid Values:
+	//   - standard | iopt1
+	// Default:
+	//   - standard
+	// When you create a Neptune cluster with the storage type set to iopt1 , the
+	// storage type is returned in the response. The storage type isn't returned when
+	// you set it to standard .
+	StorageType *string
 
 	// The tags to assign to the new DB cluster.
 	Tags []types.Tag

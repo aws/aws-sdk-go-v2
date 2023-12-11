@@ -125,6 +125,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// in the Amazon Neptune User Guide.
 	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
 
+	// Specifies the storage type to be associated with the DB cluster. Valid values:
+	// standard , iopt1 Default: standard
+	StorageType *string
+
 	// The tags to be applied to the restored DB cluster.
 	Tags []types.Tag
 

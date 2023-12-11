@@ -45,7 +45,8 @@ type CreateConfigurationPolicyInput struct {
 	// This member is required.
 	ConfigurationPolicy types.Policy
 
-	// The name of the configuration policy.
+	// The name of the configuration policy. Alphanumeric characters and the following
+	// ASCII characters are permitted: -, ., !, *, / .
 	//
 	// This member is required.
 	Name *string

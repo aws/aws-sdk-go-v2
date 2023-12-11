@@ -62,7 +62,9 @@ type ModifyDBClusterInput struct {
 	BackupRetentionPeriod *int32
 
 	// The configuration setting for the log types to be enabled for export to
-	// CloudWatch Logs for a specific DB cluster.
+	// CloudWatch Logs for a specific DB cluster. See Using the CLI to publish Neptune
+	// audit logs to CloudWatch Logs (https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html#cloudwatch-logs-cli)
+	// .
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
 	// If set to true , tags are copied to any snapshot of the DB cluster that is
@@ -137,6 +139,12 @@ type ModifyDBClusterInput struct {
 	// information, see Using Amazon Neptune Serverless (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
 	// in the Amazon Neptune User Guide.
 	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
+	// The storage type to associate with the DB cluster. Valid Values:
+	//   - standard | iopt1
+	// Default:
+	//   - standard
+	StorageType *string
 
 	// A list of VPC security groups that the DB cluster will belong to.
 	VpcSecurityGroupIds []string

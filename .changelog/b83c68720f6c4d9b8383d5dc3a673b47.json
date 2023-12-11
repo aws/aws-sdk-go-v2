@@ -1,0 +1,8 @@
+{
+    "id": "b83c6872-0f6c-4d9b-8383-d5dc3a673b47",
+    "type": "feature",
+    "description": "This release adds a new parameter configuration setting to the Neptune cluster related APIs that can be leveraged to switch between the underlying supported storage modes.",
+    "modules": [
+        "service/neptune"
+    ]
+}

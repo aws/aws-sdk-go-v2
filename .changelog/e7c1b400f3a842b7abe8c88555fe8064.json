@@ -1,0 +1,8 @@
+{
+    "id": "e7c1b400-f3a8-42b7-abe8-c88555fe8064",
+    "type": "documentation",
+    "description": "This release includes Amazon Pinpoint API documentation updates pertaining to campaign message sending rate limits.",
+    "modules": [
+        "service/pinpoint"
+    ]
+}

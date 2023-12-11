@@ -5433,6 +5433,9 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
 
+	case strings.EqualFold("StorageTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -11276,6 +11279,19 @@ func awsAwsquery_deserializeDocumentClusterPendingModifiedValues(v **types.Clust
 				return err
 			}
 
+		case strings.EqualFold("StorageType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageType = ptr.String(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -11660,6 +11676,23 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.IAMDatabaseAuthenticationEnabled = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("IOOptimizedNextAllowedModificationTime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.IOOptimizedNextAllowedModificationTime = ptr.Time(t)
+			}
+
 		case strings.EqualFold("KmsKeyId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -11846,6 +11879,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.StorageEncrypted = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("StorageType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageType = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("VpcSecurityGroups", t.Name.Local):
@@ -13524,6 +13570,19 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.StorageEncrypted = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("StorageType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageType = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("VpcId", t.Name.Local):

@@ -3316,6 +3316,10 @@ type AwsDynamoDbTableDetails struct {
 	// For example, 2020-03-22T13:22:13.933Z .
 	CreationDateTime *string
 
+	// Indicates whether deletion protection is to be enabled (true) or disabled
+	// (false) on the table.
+	DeletionProtectionEnabled *bool
+
 	// List of global secondary indexes for the table.
 	GlobalSecondaryIndexes []AwsDynamoDbTableGlobalSecondaryIndex
 
@@ -3596,6 +3600,178 @@ type AwsDynamoDbTableStreamSpecification struct {
 
 	// Determines the information that is written to the table.
 	StreamViewType *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an Active Directory that’s used to authenticate an
+// Client VPN endpoint.
+type AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails struct {
+
+	// The ID of the Active Directory used for authentication.
+	DirectoryId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the authentication method used by the Client VPN endpoint.
+type AwsEc2ClientVpnEndpointAuthenticationOptionsDetails struct {
+
+	// Information about the Active Directory, if applicable. With Active Directory
+	// authentication, clients are authenticated against existing Active Directory
+	// groups.
+	ActiveDirectory *AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails
+
+	// Information about the IAM SAML identity provider, if applicable.
+	FederatedAuthentication *AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails
+
+	// Information about the authentication certificates, if applicable.
+	MutualAuthentication *AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails
+
+	// The authentication type used.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the IAM SAML identity providers used for federated authentication.
+type AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails struct {
+
+	// The Amazon Resource Name (ARN) of the IAM SAML identity provider.
+	SamlProviderArn *string
+
+	// The Amazon Resource Name (ARN) of the IAM SAML identity provider for the
+	// self-service portal.
+	SelfServiceSamlProviderArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the client certificate used for authentication.
+type AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails struct {
+
+	// The Amazon Resource Name (ARN) of the client certificate.
+	ClientRootCertificateChain *string
+
+	noSmithyDocumentSerde
+}
+
+// The options for managing connection authorization for new client connections.
+type AwsEc2ClientVpnEndpointClientConnectOptionsDetails struct {
+
+	// Indicates whether client connect options are enabled.
+	Enabled *bool
+
+	// The Amazon Resource Name (ARN) of the Lambda function used for connection
+	// authorization.
+	LambdaFunctionArn *string
+
+	// The status of any updates to the client connect options.
+	Status *AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails
+
+	noSmithyDocumentSerde
+}
+
+// Describes the status of the Client VPN endpoint attribute.
+type AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails struct {
+
+	// The status code.
+	Code *string
+
+	// The status message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Options for enabling a customizable text banner that will be displayed on
+// Amazon Web Services provided clients when a VPN session is established.
+type AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails struct {
+
+	// Customizable text that will be displayed in a banner on Amazon Web Services
+	// provided clients when a VPN session is established.
+	BannerText *string
+
+	// Current state of text banner feature.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Information about the client connection logging options for the Client VPN
+// endpoint.
+type AwsEc2ClientVpnEndpointConnectionLogOptionsDetails struct {
+
+	// The name of the Amazon CloudWatch Logs log group to which connection logging
+	// data is published.
+	CloudwatchLogGroup *string
+
+	// The name of the Amazon CloudWatch Logs log stream to which connection logging
+	// data is published.
+	CloudwatchLogStream *string
+
+	// Indicates whether client connection logging is enabled for the Client VPN
+	// endpoint.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes an Client VPN endpoint. A Client VPN endpoint is the resource that
+// you create and configure to enable and manage client VPN sessions. It's the
+// termination point for all client VPN sessions.
+type AwsEc2ClientVpnEndpointDetails struct {
+
+	// Information about the authentication method used by the Client VPN endpoint.
+	AuthenticationOptions []AwsEc2ClientVpnEndpointAuthenticationOptionsDetails
+
+	// The IPv4 address range, in CIDR notation, from which client IP addresses are
+	// assigned.
+	ClientCidrBlock *string
+
+	// The options for managing connection authorization for new client connections.
+	ClientConnectOptions *AwsEc2ClientVpnEndpointClientConnectOptionsDetails
+
+	// Options for enabling a customizable text banner that will be displayed on
+	// Amazon Web Services provided clients when a VPN session is established.
+	ClientLoginBannerOptions *AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails
+
+	// The ID of the Client VPN endpoint.
+	ClientVpnEndpointId *string
+
+	// Information about the client connection logging options for the Client VPN
+	// endpoint.
+	ConnectionLogOptions *AwsEc2ClientVpnEndpointConnectionLogOptionsDetails
+
+	// A brief description of the endpoint.
+	Description *string
+
+	// Information about the DNS servers to be used for DNS resolution.
+	DnsServer []string
+
+	// The IDs of the security groups for the target network.
+	SecurityGroupIdSet []string
+
+	// The URL of the self-service portal.
+	SelfServicePortalUrl *string
+
+	// The Amazon Resource Name (ARN) of the server certificate.
+	ServerCertificateArn *string
+
+	// The maximum VPN session duration time in hours.
+	SessionTimeoutHours *int32
+
+	// Indicates whether split-tunnel is enabled in the Client VPN endpoint.
+	SplitTunnel *bool
+
+	// The transport protocol used by the Client VPN endpoint.
+	TransportProtocol *string
+
+	// The ID of the VPC.
+	VpcId *string
+
+	// The port number for the Client VPN endpoint.
+	VpnPort *int32
 
 	noSmithyDocumentSerde
 }
@@ -8461,7 +8637,8 @@ type AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Provide details about an Amazon MSK cluster.
+// Provide details about an Amazon Managed Streaming for Apache Kafka (Amazon MSK)
+// cluster.
 type AwsMskClusterClusterInfoDetails struct {
 
 	// Provides information for different modes of client authentication.
@@ -8470,13 +8647,16 @@ type AwsMskClusterClusterInfoDetails struct {
 	// The name of the cluster.
 	ClusterName *string
 
-	// The current version of the MSK cluster.
+	// The current version of the cluster.
 	CurrentVersion *string
 
 	// Includes encryption-related information, such as the KMS key used for
 	// encrypting data at rest and whether you want Amazon MSK to encrypt your data in
 	// transit.
 	EncryptionInfo *AwsMskClusterClusterInfoEncryptionInfoDetails
+
+	// Specifies the level of monitoring for the cluster.
+	EnhancedMonitoring *string
 
 	// The number of broker nodes in the cluster.
 	NumberOfBrokerNodes *int32
@@ -10401,6 +10581,51 @@ type AwsRoute53QueryLoggingConfigDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Returns configuration information about the specified Amazon S3 access point.
+// S3 access points are named network endpoints that are attached to buckets that
+// you can use to perform S3 object operations.
+type AwsS3AccessPointDetails struct {
+
+	// The Amazon Resource Name (ARN) of the access point.
+	AccessPointArn *string
+
+	// The name or alias of the access point.
+	Alias *string
+
+	// The name of the S3 bucket associated with the specified access point.
+	Bucket *string
+
+	// The Amazon Web Services account ID associated with the S3 bucket associated
+	// with this access point.
+	BucketAccountId *string
+
+	// The name of the specified access point.
+	Name *string
+
+	// Indicates whether this access point allows access from the public internet.
+	NetworkOrigin *string
+
+	// provides information about the Amazon S3 Public Access Block configuration for
+	// accounts.
+	PublicAccessBlockConfiguration *AwsS3AccountPublicAccessBlockDetails
+
+	// Contains the virtual private cloud (VPC) configuration for the specified access
+	// point.
+	VpcConfiguration *AwsS3AccessPointVpcConfigurationDetails
+
+	noSmithyDocumentSerde
+}
+
+// The virtual private cloud (VPC) configuration for an Amazon S3 access point.
+type AwsS3AccessPointVpcConfigurationDetails struct {
+
+	// If this field is specified, this access point will only allow connections from
+	// the specified VPC ID.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
 // provides information about the Amazon S3 Public Access Block configuration for
 // accounts.
 type AwsS3AccountPublicAccessBlockDetails struct {
@@ -10615,13 +10840,13 @@ type AwsS3BucketBucketVersioningConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The details of an Amazon S3 bucket.
+// The details of an Amazon Simple Storage Service (Amazon S3) bucket.
 type AwsS3BucketDetails struct {
 
 	// The access control list for the S3 bucket.
 	AccessControlList *string
 
-	// The lifecycle configuration for objects in the S3 bucket.
+	// The lifecycle configuration for objects in the specified bucket.
 	BucketLifecycleConfiguration *AwsS3BucketBucketLifecycleConfigurationDetails
 
 	// The logging configuration for the S3 bucket.
@@ -10642,8 +10867,11 @@ type AwsS3BucketDetails struct {
 	// For example, 2020-03-22T13:22:13.933Z .
 	CreatedAt *string
 
+	// The name of the bucket.
+	Name *string
+
 	// Specifies which rule Amazon S3 applies by default to every new object placed in
-	// the specified bucket.
+	// the bucket.
 	ObjectLockConfiguration *AwsS3BucketObjectLockConfiguration
 
 	// The Amazon Web Services account identifier of the account that owns the S3
@@ -13103,7 +13331,8 @@ type ConfigurationPolicySummary struct {
 	// The universally unique identifier (UUID) of the configuration policy.
 	Id *string
 
-	// The name of the configuration policy.
+	// The name of the configuration policy. Alphanumeric characters and the following
+	// ASCII characters are permitted: -, ., !, *, / .
 	Name *string
 
 	// Indicates whether the service that the configuration policy applies to is
@@ -14174,8 +14403,12 @@ type Page struct {
 // identifies whether it has been customized.
 type ParameterConfiguration struct {
 
-	// Identifies whether a control parameter uses a custom user-defined value or the
-	// Security Hub default value.
+	// Identifies whether a control parameter uses a custom user-defined value or
+	// subscribes to the default Security Hub behavior. When ValueType is set equal to
+	// DEFAULT , the default behavior can be a specific Security Hub default value, or
+	// the default behavior can be to ignore a specific parameter. When ValueType is
+	// set equal to DEFAULT , Security Hub ignores user-provided input for the Value
+	// field. When ValueType is set equal to CUSTOM , the Value field can't be empty.
 	//
 	// This member is required.
 	ValueType ParameterValueType
@@ -14720,6 +14953,11 @@ type ResourceDetails struct {
 	// Details about a DynamoDB table.
 	AwsDynamoDbTable *AwsDynamoDbTableDetails
 
+	// Provides details about an Client VPN endpoint. A Client VPN endpoint is the
+	// resource that you create and configure to enable and manage client VPN sessions.
+	// It's the termination point for all client VPN sessions.
+	AwsEc2ClientVpnEndpoint *AwsEc2ClientVpnEndpointDetails
+
 	// Details about an Elastic IP address.
 	AwsEc2Eip *AwsEc2EipDetails
 
@@ -14898,6 +15136,11 @@ type ResourceDetails struct {
 	// servers assigned to the hosted zone. A hosted zone represents a collection of
 	// records that can be managed together, belonging to a single parent domain name.
 	AwsRoute53HostedZone *AwsRoute53HostedZoneDetails
+
+	// Provides details about an Amazon Simple Storage Service (Amazon S3) access
+	// point. S3 access points are named network endpoints that are attached to S3
+	// buckets that you can use to perform S3 object operations.
+	AwsS3AccessPoint *AwsS3AccessPointDetails
 
 	// Details about the Amazon S3 Public Access Block configuration for an account.
 	AwsS3AccountPublicAccessBlock *AwsS3AccountPublicAccessBlockDetails

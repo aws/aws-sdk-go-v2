@@ -31,7 +31,10 @@ type CharacterSet struct {
 // The configuration setting for the log types to be enabled for export to
 // CloudWatch Logs for a specific DB instance or DB cluster. The EnableLogTypes
 // and DisableLogTypes arrays determine which logs will be exported (or not
-// exported) to CloudWatch Logs.
+// exported) to CloudWatch Logs. Valid log types are: audit (to publish audit
+// logs) and slowquery (to publish slow-query logs). See Publishing Neptune logs
+// to Amazon CloudWatch logs (https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html)
+// .
 type CloudwatchLogsExportConfiguration struct {
 
 	// The list of log types to disable.
@@ -72,6 +75,9 @@ type ClusterPendingModifiedValues struct {
 	// This PendingCloudwatchLogsExports structure specifies pending changes to which
 	// CloudWatch logs are enabled and which are disabled.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
+
+	// The storage type for the DB cluster.
+	StorageType *string
 
 	noSmithyDocumentSerde
 }
@@ -155,8 +161,11 @@ type DBCluster struct {
 	// point-in-time restore.
 	EarliestRestorableTime *time.Time
 
-	// A list of log types that this DB cluster is configured to export to CloudWatch
-	// Logs.
+	// A list of the log types that this DB cluster is configured to export to
+	// CloudWatch Logs. Valid log types are: audit (to publish audit logs to
+	// CloudWatch) and slowquery (to publish slow-query logs to CloudWatch). See
+	// Publishing Neptune logs to Amazon CloudWatch logs (https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html)
+	// .
 	EnabledCloudwatchLogsExports []string
 
 	// Specifies the connection endpoint for the primary instance of the DB cluster.
@@ -178,6 +187,9 @@ type DBCluster struct {
 	// True if mapping of Amazon Identity and Access Management (IAM) accounts to
 	// database accounts is enabled, and otherwise false.
 	IAMDatabaseAuthenticationEnabled *bool
+
+	// The next time you can modify the DB cluster to use the iopt1 storage type.
+	IOOptimizedNextAllowedModificationTime *time.Time
 
 	// If StorageEncrypted is true, the Amazon KMS key identifier for the encrypted DB
 	// cluster.
@@ -239,6 +251,9 @@ type DBCluster struct {
 
 	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted *bool
+
+	// The storage type associated with the DB cluster.
+	StorageType *string
 
 	// Provides a list of VPC security groups that the DB cluster belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
@@ -458,6 +473,9 @@ type DBClusterSnapshot struct {
 
 	// Specifies whether the DB cluster snapshot is encrypted.
 	StorageEncrypted *bool
+
+	// The storage type associated with the DB cluster snapshot.
+	StorageType *string
 
 	// Provides the VPC ID associated with the DB cluster snapshot.
 	VpcId *string
@@ -1188,7 +1206,10 @@ type Parameter struct {
 }
 
 // A list of the log types whose configuration is still pending. In other words,
-// these log types are in the process of being activated or deactivated.
+// these log types are in the process of being activated or deactivated. Valid log
+// types are: audit (to publish audit logs) and slowquery (to publish slow-query
+// logs). See Publishing Neptune logs to Amazon CloudWatch logs (https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html)
+// .
 type PendingCloudwatchLogsExports struct {
 
 	// Log types that are in the process of being enabled. After they are enabled,

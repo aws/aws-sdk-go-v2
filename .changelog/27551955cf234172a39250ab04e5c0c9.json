@@ -1,0 +1,8 @@
+{
+    "id": "27551955-cf23-4172-a392-50ab04e5c0c9",
+    "type": "feature",
+    "description": "Added new resource detail objects to ASFF, including resources for AwsDynamoDbTable, AwsEc2ClientVpnEndpoint, AwsMskCluster, AwsS3AccessPoint, AwsS3Bucket",
+    "modules": [
+        "service/securityhub"
+    ]
+}

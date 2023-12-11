@@ -54,7 +54,8 @@ type UpdateConfigurationPolicyInput struct {
 	// The description of the configuration policy.
 	Description *string
 
-	// The name of the configuration policy.
+	// The name of the configuration policy. Alphanumeric characters and the following
+	// ASCII characters are permitted: -, ., !, *, / .
 	Name *string
 
 	// The reason for updating the configuration policy.
