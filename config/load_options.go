@@ -207,6 +207,13 @@ type LoadOptions struct {
 	// The sdk app ID retrieved from env var or shared config to be added to request user agent header
 	AppID string
 
+	// Flag used to disable configured endpoints.
+	IgnoreConfiguredEndpoints *bool
+
+	// Value to contain configured endpoints to be propagated to
+	// corresponding endpoint resolution field.
+	BaseEndpoint string
+
 	// Specifies whether an operation request could be compressed
 	DisableRequestCompression *bool
 
@@ -1095,7 +1102,7 @@ func WithDefaultsMode(mode aws.DefaultsMode, optFns ...func(options *DefaultsMod
 }
 
 // GetS3DisableExpressAuth returns the configured value for
-// [EnvConfig.S3DisableExpressAuth].
+// [LoadOptions.S3DisableExpressAuth].
 func (o LoadOptions) GetS3DisableExpressAuth() (value, ok bool) {
 	if o.S3DisableExpressAuth == nil {
 		return false, false
@@ -1109,6 +1116,44 @@ func (o LoadOptions) GetS3DisableExpressAuth() (value, ok bool) {
 func WithS3DisableExpressAuth(v bool) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.S3DisableExpressAuth = &v
+		return nil
+	}
+}
+
+// GetIgnoreConfiguredEndpoints is used in knowing when to disable configured
+// endpoints feature.
+func (o LoadOptions) GetIgnoreConfiguredEndpoints(context.Context) (bool, bool, error) {
+	if o.IgnoreConfiguredEndpoints == nil {
+		return false, false, nil
+	}
+
+	return *o.IgnoreConfiguredEndpoints, true, nil
+}
+
+// WithIgnoreConfiguredEndpoints is a helper function to construct functional options
+// that sets IgnoreConfiguredEndpoints on config's LoadOptions.
+// If multiple WithIgnoreConfiguredEndpoints calls are made, the last call overrides
+// the previous call values.
+func WithIgnoreConfiguredEndpoints(v bool) LoadOptionsFunc {
+	return func(o *LoadOptions) error {
+		o.IgnoreConfiguredEndpoints = &v
+		return nil
+	}
+}
+
+func (o LoadOptions) getBaseEndpoint(context.Context) (string, bool, error) {
+	return o.BaseEndpoint, len(o.BaseEndpoint) > 0, nil
+}
+
+// WithBaseEndpoint is a helper function to construct functional options
+// that sets BaseEndpoint on config's LoadOptions. Setting the base
+// endpoint to an empty string will result in the endpoint
+// value being ignored.
+// If multiple WithBaseEndpoint calls are made, the last call overrides
+// the previous call values.
+func WithBaseEndpoint(v string) LoadOptionsFunc {
+	return func(o *LoadOptions) error {
+		o.BaseEndpoint = v
 		return nil
 	}
 }
