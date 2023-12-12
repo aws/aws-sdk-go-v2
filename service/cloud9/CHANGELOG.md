@@ -1,3 +1,7 @@
+# v1.22.4 (2023-12-12)
+
+* No change notes available for this release.
+
 # v1.22.3 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

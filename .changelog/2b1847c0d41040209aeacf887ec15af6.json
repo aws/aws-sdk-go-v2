@@ -1,8 +1,0 @@
-{
-    "id": "2b1847c0-d410-4020-9aea-cf887ec15af6",
-    "type": "feature",
-    "description": "This release 1)  adds sub-municipality field in Places API for searching and getting places information, and 2) allows optimizing route calculation based on expected arrival time.",
-    "modules": [
-        "service/location"
-    ]
-}

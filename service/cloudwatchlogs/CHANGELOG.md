@@ -1,3 +1,7 @@
+# v1.30.0 (2023-12-12)
+
+* **Feature**: This release introduces the StartLiveTail API to tail ingested logs in near real time.
+
 # v1.29.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

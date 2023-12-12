@@ -1,3 +1,13 @@
+# Release (2023-12-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.30.0](service/cloudwatchlogs/CHANGELOG.md#v1300-2023-12-12)
+  * **Feature**: This release introduces the StartLiveTail API to tail ingested logs in near real time.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.30.0](service/imagebuilder/CHANGELOG.md#v1300-2023-12-12)
+  * **Feature**: This release adds the Image Workflows feature to give more flexibility and control over the image building and testing process.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.33.0](service/location/CHANGELOG.md#v1330-2023-12-12)
+  * **Feature**: This release 1)  adds sub-municipality field in Places API for searching and getting places information, and 2) allows optimizing route calculation based on expected arrival time.
+
 # Release (2023-12-11)
 
 ## Module Highlights
