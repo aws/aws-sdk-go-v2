@@ -457,7 +457,7 @@
                 "changeDescription": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The change description of the component.</p>"
+                        "smithy.api#documentation": "<p>Describes what change has been made in this version of the component, \n\t\t\tor what makes this version different from other versions of the component.</p>"
                     }
                 },
                 "type": {
@@ -731,7 +731,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A group of fields that describe the current status of components that are no longer\n\t\t\tactive.</p>"
+                "smithy.api#documentation": "<p>A group of fields that describe the current status of components.</p>"
             }
         },
         "com.amazonaws.imagebuilder#ComponentStatus": {
@@ -1272,7 +1272,7 @@
                 "changeDescription": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The change description of the component. Describes what change has been made in this\n\t\t\tversion, or what makes this version different from other versions of this\n\t\t\tcomponent.</p>"
+                        "smithy.api#documentation": "<p>The change description of the component. Describes what change has been made in this\n\t\t\tversion, or what makes this version different from other versions of the\n\t\t\tcomponent.</p>"
                     }
                 },
                 "platform": {
@@ -1840,6 +1840,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for vulnerability scans.</p>"
                     }
+                },
+                "workflows": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an array of workflow configuration objects.</p>"
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants \n\t\t\tImage Builder access to perform workflow actions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2082,6 +2094,18 @@
                     "target": "com.amazonaws.imagebuilder#ImageScanningConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for vulnerability scans.</p>"
+                    }
+                },
+                "workflows": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an array of workflow configuration objects.</p>"
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants \n\t\t\tImage Builder access to perform workflow actions.</p>"
                     }
                 }
             },
@@ -2360,7 +2384,7 @@
                 "executionRole": {
                     "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role name or Amazon Resource Name (ARN) for the IAM role that grants \n\t\t\tImage Builder access to run lifecycle actions.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants \n\t\t\tImage Builder access to run lifecycle actions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2417,6 +2441,151 @@
                     "target": "com.amazonaws.imagebuilder#LifecyclePolicyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lifecycle policy that the request created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#CreateWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#CreateWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#CreateWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidVersionNumberException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a new workflow or a new version of an existing workflow.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/CreateWorkflow",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#CreateWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "semanticVersion": {
+                    "target": "com.amazonaws.imagebuilder#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic version of this workflow resource. The semantic version syntax \n\t\t\tadheres to the following rules.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n            <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the workflow.</p>"
+                    }
+                },
+                "changeDescription": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes what change has been made in this version of the workflow, or \n\t\t\twhat makes this version different from other versions of the workflow.</p>"
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.imagebuilder#InlineWorkflowData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the UTF-8 encoded YAML document content for the workflow. \n\t\t\tAlternatively, you can specify the <code>uri</code> of a YAML document file stored in\n\t\t\tAmazon S3. However, you cannot specify both properties.</p>"
+                    }
+                },
+                "uri": {
+                    "target": "com.amazonaws.imagebuilder#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>uri</code> of a YAML component document file. This must be an S3 URL\n\t\t\t(<code>s3://bucket/key</code>), and the requester must have permission to access the\n\t\t\tS3 bucket it points to. If you use Amazon S3, you can specify component content up to your\n\t\t\tservice quota.</p>\n         <p>Alternatively, you can specify the YAML document inline, using the component\n\t\t\t<code>data</code> property. You cannot specify both properties.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the KMS key that is used to encrypt this workflow resource.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that apply to the workflow resource.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phase in the image build process for which the workflow resource \n\t\t\tis responsible.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#CreateWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
+                    }
+                },
+                "workflowBuildVersionArn": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the workflow resource that the request created.</p>"
                     }
                 }
             },
@@ -3140,6 +3309,76 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.imagebuilder#DeleteWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#DeleteWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#DeleteWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceDependencyException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a specific workflow resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/DeleteWorkflow",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#DeleteWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "workflowBuildVersionArn": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the workflow resource to delete.</p>",
+                        "smithy.api#httpQuery": "workflowBuildVersionArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#DeleteWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "workflowBuildVersionArn": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the workflow resource that this request deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.imagebuilder#DiskImageFormat": {
             "type": "enum",
             "members": {
@@ -3812,7 +4051,7 @@
                 "component": {
                     "target": "com.amazonaws.imagebuilder#Component",
                     "traits": {
-                        "smithy.api#documentation": "<p>The component object associated with the specified ARN.</p>"
+                        "smithy.api#documentation": "<p>The component object specified in the request.</p>"
                     }
                 }
             },
@@ -4613,6 +4852,43 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.imagebuilder#GetWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#GetWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#GetWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a workflow resource object.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/GetWorkflow",
+                    "code": 200
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#GetWorkflowExecution": {
             "type": "operation",
             "input": {
@@ -4749,6 +5025,42 @@
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the specified runtime instance of the workflow finished.</p>"
+                    }
+                },
+                "parallelGroup": {
+                    "target": "com.amazonaws.imagebuilder#ParallelGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Test workflows are defined within named runtime groups. The parallel group \n\t\t\tis a named group that contains one or more test workflows.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#GetWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "workflowBuildVersionArn": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowVersionArnOrBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the workflow resource that you want to get.</p>",
+                        "smithy.api#httpQuery": "workflowBuildVersionArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#GetWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "workflow": {
+                    "target": "com.amazonaws.imagebuilder#Workflow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workflow resource specified in the request.</p>"
                     }
                 }
             },
@@ -5093,6 +5405,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Identifies the last runtime instance of the lifecycle policy to take action on the image.</p>"
                     }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants \n\t\t\tImage Builder access to perform workflow actions.</p>"
+                    }
+                },
+                "workflows": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the build and test workflows that are associated with the image.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5275,6 +5599,18 @@
                     "target": "com.amazonaws.imagebuilder#ImageScanningConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for vulnerability scans.</p>"
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants \n\t\t\tImage Builder access to perform workflow actions.</p>"
+                    }
+                },
+                "workflows": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the workflows that run for the image pipeline.</p>"
                     }
                 }
             },
@@ -6178,7 +6514,7 @@
                 "changeDescription": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The change description of the component. This description indicates the change that\n\t\t\thas been made in this version, or what makes this version different from other versions\n\t\t\tof this component.</p>"
+                        "smithy.api#documentation": "<p>The change description of the component. This description indicates the change that\n\t\t\thas been made in this version, or what makes this version different from other versions\n\t\t\tof the component.</p>"
                     }
                 },
                 "type": {
@@ -6570,6 +6906,16 @@
             }
         },
         "com.amazonaws.imagebuilder#InlineDockerFileTemplate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16000
+                },
+                "smithy.api#pattern": "^[^\\x00]+$"
+            }
+        },
+        "com.amazonaws.imagebuilder#InlineWorkflowData": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -7200,7 +7546,7 @@
                 "executionRole": {
                     "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM role that Image Builder uses to run the lifecycle policy. \n\t\t\tThis is a custom role that you create.</p>"
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses to run the lifecycle policy. \n\t\t\tThis is a custom role that you create.</p>"
                     }
                 },
                 "resourceType": {
@@ -7367,7 +7713,7 @@
                 "tagMap": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a list of tags that Image Builder uses to skip lifecycle actions for AMIs that have them.</p>"
+                        "smithy.api#documentation": "<p>Contains a list of tags that Image Builder uses to skip lifecycle actions for resources that have them.</p>"
                     }
                 },
                 "amis": {
@@ -7394,19 +7740,19 @@
                 "regions": {
                     "target": "com.amazonaws.imagebuilder#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies Amazon Web Services accounts whose resources are excluded from the lifecycle action.</p>"
+                        "smithy.api#documentation": "<p>Configures Amazon Web Services Regions that are excluded from the lifecycle action.</p>"
                     }
                 },
                 "sharedAccounts": {
                     "target": "com.amazonaws.imagebuilder#AccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration details for Image Builder to exclude the most recent resources \n\t\t\tfrom lifecycle actions.</p>"
+                        "smithy.api#documentation": "<p>Specifies Amazon Web Services accounts whose resources are excluded from the lifecycle action.</p>"
                     }
                 },
                 "lastLaunched": {
                     "target": "com.amazonaws.imagebuilder#LifecyclePolicyDetailExclusionRulesAmisLastLaunched",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures Amazon Web Services Regions that are excluded from the lifecycle action.</p>"
+                        "smithy.api#documentation": "<p>Specifies configuration details for Image Builder to exclude the most recent resources \n\t\t\tfrom lifecycle actions.</p>"
                     }
                 },
                 "tagMap": {
@@ -7650,7 +7996,7 @@
                 "executionRole": {
                     "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM role that Image Builder uses to run the lifecycle policy.</p>"
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses to run the lifecycle policy.</p>"
                     }
                 },
                 "resourceType": {
@@ -9413,6 +9759,185 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.imagebuilder#ListWaitingWorkflowSteps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#ListWaitingWorkflowStepsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#ListWaitingWorkflowStepsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a list of workflow steps that are waiting for action for workflows \n\t\t\tin your Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListWaitingWorkflowSteps",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "steps",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ListWaitingWorkflowStepsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.imagebuilder#RestrictedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ListWaitingWorkflowStepsResponse": {
+            "type": "structure",
+            "members": {
+                "steps": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowStepExecutionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the workflow steps that are waiting for action in your \n\t\t\tAmazon Web Services account.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ListWorkflowBuildVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#ListWorkflowBuildVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#ListWorkflowBuildVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of build versions for a specific workflow resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListWorkflowBuildVersions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "workflowSummaryList",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ListWorkflowBuildVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "workflowVersionArn": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowWildcardVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the workflow resource for which to get a list of build versions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.imagebuilder#RestrictedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ListWorkflowBuildVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "workflowSummaryList": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that contains metadata for the workflow builds that have run for \n\t\t\tthe workflow resource specified in the request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.imagebuilder#ListWorkflowExecutions": {
             "type": "operation",
             "input": {
@@ -9556,7 +10081,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Shows runtime data for each step in a runtime instance of the workflow \n\t\t\tthat you specify in the request.</p>",
+                "smithy.api#documentation": "<p>Returns runtime data for each step in a runtime instance of the workflow \n\t\t\tthat you specify in the request.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListWorkflowStepExecutions",
@@ -9647,6 +10172,111 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.imagebuilder#ListWorkflows": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#ListWorkflowsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#ListWorkflowsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists workflow build versions based on filtering parameters.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListWorkflows",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "workflowVersionList",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ListWorkflowsRequest": {
+            "type": "structure",
+            "members": {
+                "owner": {
+                    "target": "com.amazonaws.imagebuilder#Ownership",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to get a list of workflow build version filtered by the identity of the creator.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.imagebuilder#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to streamline search results.</p>"
+                    }
+                },
+                "byName": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specify all or part of the workflow name to streamline results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.imagebuilder#RestrictedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ListWorkflowsResponse": {
+            "type": "structure",
+            "members": {
+                "workflowVersionList": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of workflow build versions that match the request criteria.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.imagebuilder#Logging": {
             "type": "structure",
             "members": {
@@ -9699,6 +10329,23 @@
         },
         "com.amazonaws.imagebuilder#NullableBoolean": {
             "type": "boolean"
+        },
+        "com.amazonaws.imagebuilder#OnWorkflowFailure": {
+            "type": "enum",
+            "members": {
+                "CONTINUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUE"
+                    }
+                },
+                "ABORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ABORT"
+                    }
+                }
+            }
         },
         "com.amazonaws.imagebuilder#OrganizationArn": {
             "type": "string",
@@ -9887,6 +10534,16 @@
                     "min": 1,
                     "max": 65535
                 }
+            }
+        },
+        "com.amazonaws.imagebuilder#ParallelGroup": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9-_+#]{0,99}$"
             }
         },
         "com.amazonaws.imagebuilder#PipelineExecutionStartCondition": {
@@ -10582,13 +11239,131 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A schedule configures how often and when a pipeline will automatically create a new\n\t\t\timage.</p>"
+                "smithy.api#documentation": "<p>A schedule configures when and how often a pipeline will automatically create a new\n\t\t\timage.</p>"
             }
         },
         "com.amazonaws.imagebuilder#SecurityGroupIds": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.imagebuilder#NonEmptyString"
+            }
+        },
+        "com.amazonaws.imagebuilder#SendWorkflowStepAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#SendWorkflowStepActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#SendWorkflowStepActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Pauses or resumes image creation when the associated workflow runs a \n\t\t\t<code>WaitForAction</code> step.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/SendWorkflowStepAction",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#SendWorkflowStepActionRequest": {
+            "type": "structure",
+            "members": {
+                "stepExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowStepExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uniquely identifies the workflow step that sent the step action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageBuildVersionArn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image build version to send action for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowStepActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action for the image creation process to take while a workflow \n\t\t\t<code>WaitForAction</code> step waits for an asynchronous action to complete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why this action is sent.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#SendWorkflowStepActionResponse": {
+            "type": "structure",
+            "members": {
+                "stepExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowStepExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workflow step that sent the step action.</p>"
+                    }
+                },
+                "imageBuildVersionArn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image build version that received the action \n\t\t\trequest.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.imagebuilder#ServiceException": {
@@ -11256,7 +12031,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an image pipeline. Image pipelines enable you to automate the creation and\n\t\t\tdistribution of images.</p>\n         <note>\n            <p>UpdateImagePipeline does not support selective updates for the pipeline. You must\n\t\t\t\tspecify all of the required properties in the update request, not just the\n\t\t\t\tproperties that have changed.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates an image pipeline. Image pipelines enable you to automate the creation and\n\t\t\tdistribution of images. You must specify exactly one recipe for your image, using either \n\t\t\ta <code>containerRecipeArn</code> or an <code>imageRecipeArn</code>.</p>\n         <note>\n            <p>UpdateImagePipeline does not support selective updates for the pipeline. You must\n\t\t\t\tspecify all of the required properties in the update request, not just the\n\t\t\t\tproperties that have changed.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/UpdateImagePipeline",
@@ -11341,6 +12116,18 @@
                     "target": "com.amazonaws.imagebuilder#ImageScanningConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for vulnerability scans.</p>"
+                    }
+                },
+                "workflows": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the workflows to run for the pipeline.</p>"
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants \n\t\t\tImage Builder access to perform workflow actions.</p>"
                     }
                 }
             },
@@ -11604,7 +12391,7 @@
                 "executionRole": {
                     "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM role that Image Builder should use to update the \n\t\t\tlifecycle policy.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses to update the \n\t\t\tlifecycle policy.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11778,6 +12565,92 @@
                 "target": "com.amazonaws.imagebuilder#VulnerablePackage"
             }
         },
+        "com.amazonaws.imagebuilder#Workflow": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the workflow resource.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow resource.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.imagebuilder#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workflow resource version. Workflow resources are immutable. \n\t\t\tTo make a change, you can clone a workflow or create a new version.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the workflow.</p>"
+                    }
+                },
+                "changeDescription": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes what change has been made in this version of the workflow, or \n\t\t\twhat makes this version different from other versions of the workflow.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the image creation stage that the workflow applies to. Image Builder \n\t\t\tcurrently supports build and test workflows.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the current status of the workflow and the reason for \n\t\t\tthat status.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the workflow resource.</p>"
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the YAML document content for the workflow.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier used to encrypt the workflow resource.</p>"
+                    }
+                },
+                "dateCreated": {
+                    "target": "com.amazonaws.imagebuilder#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when Image Builder created the workflow resource.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that apply to the workflow resource</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowParameterDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of input parameters that that the image workflow uses \n\t\t\tto control actions or configure settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a process that Image Builder uses to build and test images during \n\t\t\tthe image creation process.</p>"
+            }
+        },
         "com.amazonaws.imagebuilder#WorkflowBuildVersionArn": {
             "type": "string",
             "traits": {
@@ -11787,6 +12660,48 @@
                 },
                 "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+$"
             }
+        },
+        "com.amazonaws.imagebuilder#WorkflowConfiguration": {
+            "type": "structure",
+            "members": {
+                "workflowArn": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowVersionArnOrBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the workflow resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains parameter values for each of the parameters that the workflow \n\t\t\tdocument defined for the workflow resource.</p>"
+                    }
+                },
+                "parallelGroup": {
+                    "target": "com.amazonaws.imagebuilder#ParallelGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Test workflows are defined within named runtime groups called parallel groups. \n\t\t\tThe parallel group is the named group that contains this test workflow. Test \n\t\t\tworkflows within a parallel group can run at the same time. Image Builder starts up to five \n\t\t\ttest workflows in the group at the same time, and starts additional workflows as \n\t\t\tothers complete, until all workflows in the group have completed. This field only \n\t\t\tapplies for test workflows.</p>"
+                    }
+                },
+                "onFailure": {
+                    "target": "com.amazonaws.imagebuilder#OnWorkflowFailure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take if the workflow fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains control settings and configurable inputs for a workflow \n\t\t\tresource.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#WorkflowConfiguration"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowData": {
+            "type": "string"
         },
         "com.amazonaws.imagebuilder#WorkflowExecutionId": {
             "type": "string",
@@ -11875,6 +12790,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when this runtime instance of the workflow finished.</p>"
                     }
+                },
+                "parallelGroup": {
+                    "target": "com.amazonaws.imagebuilder#ParallelGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the test group that included the test workflow resource at runtime.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11925,6 +12846,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ROLLBACK_COMPLETED"
                     }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
                 }
             }
         },
@@ -11934,10 +12861,182 @@
                 "target": "com.amazonaws.imagebuilder#WorkflowExecutionMetadata"
             }
         },
+        "com.amazonaws.imagebuilder#WorkflowNameArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/x\\.x\\.x$"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowParameter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow parameter to set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowParameterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the value for the named workflow parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a key/value pair that sets the named workflow parameter.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowParameterDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[^\\x00]+$"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowParameterDetail": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this input parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowParameterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of input this parameter provides. The currently supported value is\n\t\t\t\"string\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultValue": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowParameterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value of this parameter if no input is provided.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowParameterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes this parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a parameter that's used to provide configuration details for the \n\t\t\tworkflow.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowParameterDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#WorkflowParameterDetail"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#WorkflowParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[^\\x00]+$"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowParameterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^string|integer|boolean|stringList$"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                },
+                "smithy.api#pattern": "^[^\\x00]*$"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowParameterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#WorkflowParameterValue"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowState": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the workflow.</p>"
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes how or why the workflow changed state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A group of fields that describe the current status of workflow.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowStatus": {
+            "type": "enum",
+            "members": {
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#WorkflowStepAction": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9-_]{1,99}$"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowStepActionType": {
+            "type": "enum",
+            "members": {
+                "RESUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESUME"
+                    }
+                },
+                "STOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP"
+                    }
+                }
             }
         },
         "com.amazonaws.imagebuilder#WorkflowStepCount": {
@@ -11955,10 +13054,66 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#WorkflowStepExecution": {
+            "type": "structure",
+            "members": {
+                "stepExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowStepExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uniquely identifies the workflow step that ran for the associated \n\t\t\timage build version.</p>"
+                    }
+                },
+                "imageBuildVersionArn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image build version that ran the workflow.</p>"
+                    }
+                },
+                "workflowExecutionId": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uniquely identifies the runtime instance of the workflow that contains \n\t\t\tthe workflow step that ran for the associated image build version.</p>"
+                    }
+                },
+                "workflowBuildVersionArn": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the workflow resource that ran.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowStepName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow step.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowStepAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step action.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.imagebuilder#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the workflow step started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains runtime details for an instance of a workflow that ran for the \n\t\t\tassociated image build version.</p>"
+            }
+        },
         "com.amazonaws.imagebuilder#WorkflowStepExecutionId": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^step-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowStepExecutionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#WorkflowStepExecution"
             }
         },
         "com.amazonaws.imagebuilder#WorkflowStepExecutionRollbackStatus": {
@@ -12021,6 +13176,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
                     }
                 }
             }
@@ -12135,6 +13296,80 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#WorkflowSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowNameArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the workflow resource.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.imagebuilder#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the workflow.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the workflow.</p>"
+                    }
+                },
+                "changeDescription": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The change description for the current version of the workflow resource.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image creation stage that this workflow applies to. Image Builder currently \n\t\t\tsupports build and test stage workflows.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the workflow resource.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the current state of the workflow resource.</p>"
+                    }
+                },
+                "dateCreated": {
+                    "target": "com.amazonaws.imagebuilder#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The original creation date of the workflow resource.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a list of tags that are defined for the workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about the workflow resource.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#WorkflowSummary"
+            }
+        },
         "com.amazonaws.imagebuilder#WorkflowType": {
             "type": "enum",
             "members": {
@@ -12156,6 +13391,80 @@
                         "smithy.api#enumValue": "DISTRIBUTION"
                     }
                 }
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowVersion": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the workflow resource.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.imagebuilder#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic version of the workflow resource. The format includes three nodes: <major>.<minor>.<patch>.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the workflow.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image creation stage that this workflow applies to. Image Builder currently \n\t\t\tsupports build and test stage workflows.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the workflow resource.</p>"
+                    }
+                },
+                "dateCreated": {
+                    "target": "com.amazonaws.imagebuilder#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when Image Builder created the workflow version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about this version of the workflow.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowVersionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+$"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowVersionArnOrBuildVersionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/(?:(?:([0-9]+|x)\\.([0-9]+|x)\\.([0-9]+|x))|(?:[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+))$"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#WorkflowVersion"
+            }
+        },
+        "com.amazonaws.imagebuilder#WorkflowWildcardVersionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/(?:[0-9]+|x)\\.(?:[0-9]+|x)\\.(?:[0-9]+|x)$"
             }
         },
         "com.amazonaws.imagebuilder#imagebuilder": {
@@ -12193,6 +13502,9 @@
                     "target": "com.amazonaws.imagebuilder#CreateLifecyclePolicy"
                 },
                 {
+                    "target": "com.amazonaws.imagebuilder#CreateWorkflow"
+                },
+                {
                     "target": "com.amazonaws.imagebuilder#DeleteComponent"
                 },
                 {
@@ -12215,6 +13527,9 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#DeleteLifecyclePolicy"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#DeleteWorkflow"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#GetComponent"
@@ -12254,6 +13569,9 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#GetLifecyclePolicy"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#GetWorkflow"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#GetWorkflowExecution"
@@ -12319,7 +13637,16 @@
                     "target": "com.amazonaws.imagebuilder#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.imagebuilder#ListWaitingWorkflowSteps"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ListWorkflowBuildVersions"
+                },
+                {
                     "target": "com.amazonaws.imagebuilder#ListWorkflowExecutions"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ListWorkflows"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#ListWorkflowStepExecutions"
@@ -12335,6 +13662,9 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#PutImageRecipePolicy"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#SendWorkflowStepAction"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#StartImagePipelineExecution"

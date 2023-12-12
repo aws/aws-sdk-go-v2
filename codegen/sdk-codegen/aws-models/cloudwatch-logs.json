@@ -580,7 +580,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <i>delivery</i>. A delivery is a connection between a logical <i>delivery source</i> and a logical\n       <i>delivery destination</i>\n       that you have already created.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source using this operation. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>A delivery destination can represent a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Kinesis Data Firehose.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>You can't update an existing delivery. You can only create and delete deliveries.</p>"
+                "smithy.api#documentation": "<p>Creates a <i>delivery</i>. A delivery is a connection between a logical <i>delivery source</i> and a logical\n       <i>delivery destination</i>\n       that you have already created.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source using this operation. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>A delivery destination can represent a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Kinesis Data Firehose.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>You can't update an existing delivery. You can only create and delete deliveries.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateDeliveryRequest": {
@@ -760,7 +760,7 @@
                 "logGroupArnList": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array containing the ARNs of the log groups that this anomaly detector will watch. You must specify\n      at least one ARN.</p>",
+                        "smithy.api#documentation": "<p>An array containing the ARN of the log group that this anomaly detector will watch. You can specify only one\n        log group ARN.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -873,7 +873,7 @@
                 "logGroupClass": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to specify the log group class for this log group. There are two classes:</p>\n         <ul>\n            <li>\n               <p>The <code>Standard</code> log class supports all CloudWatch Logs features.</p>\n            </li>\n            <li>\n               <p>The <code>Infrequent Access</code> log class supports a subset of CloudWatch Logs features\n        and incurs lower costs.</p>\n            </li>\n         </ul>\n         <p>If you omit this parameter, the default of <code>STANDARD</code> is used.</p>\n         <p>For details about the features supported by each class, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html\">Log classes</a>\n         </p>"
+                        "smithy.api#documentation": "<p>Use this parameter to specify the log group class for this log group. There are two classes:</p>\n         <ul>\n            <li>\n               <p>The <code>Standard</code> log class supports all CloudWatch Logs features.</p>\n            </li>\n            <li>\n               <p>The <code>Infrequent Access</code> log class supports a subset of CloudWatch Logs features\n        and incurs lower costs.</p>\n            </li>\n         </ul>\n         <p>If you omit this parameter, the default of <code>STANDARD</code> is used.</p>\n         <important>\n            <p>After a log group is created, its class can't be changed.</p>\n         </important>\n         <p>For details about the features supported by each class, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html\">Log classes</a>\n         </p>"
                     }
                 }
             },
@@ -1745,7 +1745,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure contains information about one <i>delivery destination</i> in your account. \n     A delivery destination is an Amazon Web Services resource that represents an \n     Amazon Web Services service that logs can be sent to. CloudWatch Logs, Amazon S3, are supported as Kinesis Data Firehose delivery destinations.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination. </p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n     can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>"
+                "smithy.api#documentation": "<p>This structure contains information about one <i>delivery destination</i> in your account. \n     A delivery destination is an Amazon Web Services resource that represents an \n     Amazon Web Services service that logs can be sent to. CloudWatch Logs, Amazon S3, are supported as Kinesis Data Firehose delivery destinations.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination. </p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n     can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DeliveryDestinationConfiguration": {
@@ -1862,7 +1862,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure contains information about one <i>delivery source</i> in your account. \n       A delivery source is an Amazon Web Services resource that sends logs to an\n       Amazon Web Services destination. The destination can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>"
+                "smithy.api#documentation": "<p>This structure contains information about one <i>delivery source</i> in your account. \n       A delivery source is an Amazon Web Services resource that sends logs to an\n       Amazon Web Services destination. The destination can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DeliverySourceName": {
@@ -2670,7 +2670,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation returns a paginated list of your saved CloudWatch Logs Insights query definitions.</p>\n         <p>You can use the <code>queryDefinitionNamePrefix</code> parameter to limit the results to only the\n      query definitions that have names that start with a certain string.</p>"
+                "smithy.api#documentation": "<p>This operation returns a paginated list of your saved CloudWatch Logs Insights query definitions. You can\n    retrieve query definitions from the current account or from a source account that is linked to the current account.</p>\n         <p>You can use the <code>queryDefinitionNamePrefix</code> parameter to limit the results to only the\n      query definitions that have names that start with a certain string.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeQueryDefinitionsRequest": {
@@ -4354,6 +4354,12 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.cloudwatchlogs#IsSampled": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.cloudwatchlogs#KmsKeyId": {
             "type": "string",
             "traits": {
@@ -4651,6 +4657,129 @@
                     "message": "Please use the generic tagging API model ListTagsForResourceRequest and ListTagsForResourceResponse"
                 },
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LiveTailSessionLogEvent": {
+            "type": "structure",
+            "members": {
+                "logStreamName": {
+                    "target": "com.amazonaws.cloudwatchlogs#LogStreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the log stream that ingested this log event.</p>"
+                    }
+                },
+                "logGroupIdentifier": {
+                    "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or ARN of the log group that ingested this log event.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.cloudwatchlogs#EventMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log event message text.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp specifying when this log event was created.</p>"
+                    }
+                },
+                "ingestionTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp specifying when this log event was ingested into the log group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object contains the information for one log event returned in a Live Tail stream.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LiveTailSessionMetadata": {
+            "type": "structure",
+            "members": {
+                "sampled": {
+                    "target": "com.amazonaws.cloudwatchlogs#IsSampled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If this is <code>true</code>, then more than 500 log events matched the request for this update, and the \n    <code>sessionResults</code> includes a sample of 500 of those events.</p>\n         <p>If this is <code>false</code>, then 500 or fewer log events matched the request for this update, so no sampling\n      was necessary. In this case, the \n      <code>sessionResults</code> array includes all log events that matched your request during this time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object contains the metadata for one <code>LiveTailSessionUpdate</code> structure. It indicates whether\n    that update includes only a sample of 500 log events out of a larger number of ingested log events, or if it contains\n    all of the matching log events ingested during that second of time.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LiveTailSessionResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#LiveTailSessionLogEvent"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LiveTailSessionStart": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.cloudwatchlogs#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID generated by CloudWatch Logs to identify this Live Tail session request.</p>"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.cloudwatchlogs#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID generated by CloudWatch Logs to identify this Live Tail session.</p>"
+                    }
+                },
+                "logGroupIdentifiers": {
+                    "target": "com.amazonaws.cloudwatchlogs#StartLiveTailLogGroupIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the names and ARNs of the log groups included in this Live Tail session.</p>"
+                    }
+                },
+                "logStreamNames": {
+                    "target": "com.amazonaws.cloudwatchlogs#InputLogStreamNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your StartLiveTail operation request included a <code>logStreamNames</code> parameter that filtered the session\n    to only include certain log streams, these streams are listed here.</p>"
+                    }
+                },
+                "logStreamNamePrefixes": {
+                    "target": "com.amazonaws.cloudwatchlogs#InputLogStreamNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your StartLiveTail operation request included a <code>logStreamNamePrefixes</code> parameter that filtered the session\n      to only include log streams that have names that start with certain prefixes, these prefixes are listed here.</p>"
+                    }
+                },
+                "logEventFilterPattern": {
+                    "target": "com.amazonaws.cloudwatchlogs#FilterPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pattern to filter the results to include only log events that match the pattern.\n    For example, a filter pattern of <code>error 404</code> displays only log events that include both <code>error</code> \n    and <code>404</code>.</p>\n         <p>For more information about filter pattern syntax, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html\">Filter and Pattern Syntax</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object contains information about this Live Tail session, including the log groups included and the \n      log stream filters, if any.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LiveTailSessionUpdate": {
+            "type": "structure",
+            "members": {
+                "sessionMetadata": {
+                    "target": "com.amazonaws.cloudwatchlogs#LiveTailSessionMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This object contains the session metadata for a Live Tail session.</p>"
+                    }
+                },
+                "sessionResults": {
+                    "target": "com.amazonaws.cloudwatchlogs#LiveTailSessionResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array, where each member of the array includes the information for one log event in the Live Tail session.</p>\n         <p>A <code>sessionResults</code> array can include as many as 500 log events. If the number of  \n      log events matching the request exceeds 500 per second, the\n      log events are sampled down to 500 log events to be included in each <code>sessionUpdate</code> structure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object contains the log events and metadata for a Live Tail session.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#LogEvent": {
@@ -5138,6 +5267,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#PutSubscriptionFilter"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#StartLiveTail"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#StartQuery"
@@ -6804,7 +6936,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a logical <i>delivery destination</i>. A delivery destination is an Amazon Web Services resource that represents an \n       Amazon Web Services service that logs can be sent to. CloudWatch Logs, Amazon S3, and\n       Kinesis Data Firehose are supported as logs delivery destinations.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Use <code>PutDeliveryDestination</code> to create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  </p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly \n         one delivery source and one delivery destination. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.\n       </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>If you use this operation to update an existing delivery destination, all the current delivery destination parameters are overwritten\n       with the new parameter values that you specify.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a logical <i>delivery destination</i>. A delivery destination is an Amazon Web Services resource that represents an \n       Amazon Web Services service that logs can be sent to. CloudWatch Logs, Amazon S3, and\n       Kinesis Data Firehose are supported as logs delivery destinations.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Use <code>PutDeliveryDestination</code> to create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  </p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly \n         one delivery source and one delivery destination. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.\n       </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>If you use this operation to update an existing delivery destination, all the current delivery destination parameters are overwritten\n       with the new parameter values that you specify.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationPolicy": {
@@ -6946,7 +7078,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a logical <i>delivery source</i>. A delivery source represents an Amazon Web Services resource that sends logs to an\n       logs delivery destination. The destination can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.</p>\n         <p>To configure logs delivery between a delivery destination and an Amazon Web Services service that is supported as a delivery source, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Use <code>PutDeliverySource</code> to create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. </p>\n            </li>\n            <li>\n               <p>Use <code>PutDeliveryDestination</code> to create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly \n         one delivery source and one delivery destination. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.\n       </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling \n       logging from Amazon Web Services services.</a>\n         </p>\n         <p>If you use this operation to update an existing delivery source, all the current delivery source parameters are overwritten\n     with the new parameter values that you specify.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a logical <i>delivery source</i>. A delivery source represents an Amazon Web Services resource that sends logs to an\n       logs delivery destination. The destination can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.</p>\n         <p>To configure logs delivery between a delivery destination and an Amazon Web Services service that is supported as a delivery source, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Use <code>PutDeliverySource</code> to create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. </p>\n            </li>\n            <li>\n               <p>Use <code>PutDeliveryDestination</code> to create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly \n         one delivery source and one delivery destination. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.\n       </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling \n       logging from Amazon Web Services services.</a>\n         </p>\n         <p>If you use this operation to update an existing delivery source, all the current delivery source parameters are overwritten\n     with the new parameter values that you specify.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutDeliverySourceRequest": {
@@ -7819,6 +7951,15 @@
                 "smithy.api#documentation": "<p>Represents the rejected events.</p>"
             }
         },
+        "com.amazonaws.cloudwatchlogs#RequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#ResourceAlreadyExistsException": {
             "type": "structure",
             "members": {
@@ -8004,6 +8145,39 @@
                 "smithy.api#error": "server"
             }
         },
+        "com.amazonaws.cloudwatchlogs#SessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#SessionStreamingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cloudwatchlogs#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>his exception is returned if an unknown error occurs during a Live Tail session.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#SessionTimeoutException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cloudwatchlogs#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This exception is returned in a Live Tail stream when the Live Tail session times out. Live Tail sessions time\n      out after three hours.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#StandardUnit": {
             "type": "enum",
             "members": {
@@ -8173,6 +8347,130 @@
         },
         "com.amazonaws.cloudwatchlogs#StartFromHead": {
             "type": "boolean"
+        },
+        "com.amazonaws.cloudwatchlogs#StartLiveTail": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#StartLiveTailRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#StartLiveTailResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a Live Tail streaming session for one or more log groups. A Live Tail session returns a stream of \n      log events that have\n      been recently ingested in the log groups. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_LiveTail.html\">Use Live Tail to view logs in near real time</a>.\n    </p>\n         <p>The response to this operation is a response stream, over which \n      the server sends live log events and the client receives them.</p>\n         <p>The following objects are sent over the stream:</p>\n         <ul>\n            <li>\n               <p>A single <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionStart.html\">LiveTailSessionStart</a> \n        object is sent at the start of the session.</p>\n            </li>\n            <li>\n               <p>Every second, a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionUpdate.html\">LiveTailSessionUpdate</a>\n        object is sent. Each of these objects contains an array of the actual log events.</p>\n               <p>If no new log events were ingested in the past second, the \n          <code>LiveTailSessionUpdate</code> object will contain an empty array.</p>\n               <p>The array of log events contained in a <code>LiveTailSessionUpdate</code> can include\n          as many as 500 log events. If the number of log events matching the request exceeds 500 per second, the\n          log events are sampled down to 500 log events to be included in each <code>LiveTailSessionUpdate</code> object.</p>\n               <p>If your client consumes the log events slower than the server produces them, CloudWatch Logs\n          buffers up to 10 <code>LiveTailSessionUpdate</code> events or 5000 log events, after \n          which it starts dropping the oldest events.</p>\n            </li>\n            <li>\n               <p>A <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionStreamingException.html\">SessionStreamingException</a> \n        object is returned if an unknown error occurs on the server side.</p>\n            </li>\n            <li>\n               <p>A <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionTimeoutException.html\">SessionTimeoutException</a> \n        object is returned when the session times out, after it has been kept open for three hours.</p>\n            </li>\n         </ul>\n         <important>\n            <p>You can end a session before it times out by closing the session stream or by closing the client that is receiving the \n  stream. The session also ends if the established connection between the client and the server breaks.</p>\n         </important>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "streaming-"
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#StartLiveTailLogGroupIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#StartLiveTailRequest": {
+            "type": "structure",
+            "members": {
+                "logGroupIdentifiers": {
+                    "target": "com.amazonaws.cloudwatchlogs#StartLiveTailLogGroupIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array where each item in the array is a log group to include in the Live Tail session.</p>\n         <p>Specify each log group by its ARN. </p>\n         <p>If you specify an ARN, the ARN can't end with an asterisk (*).</p>\n         <note>\n            <p> You can include up to 10 log groups.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "logStreamNames": {
+                    "target": "com.amazonaws.cloudwatchlogs#InputLogStreamNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you specify this parameter, then only log events in the log streams that you specify here are \n    included in the Live Tail session.</p>\n         <note>\n            <p>You can specify this parameter only if you specify only one log group in <code>logGroupIdentifiers</code>.</p>\n         </note>"
+                    }
+                },
+                "logStreamNamePrefixes": {
+                    "target": "com.amazonaws.cloudwatchlogs#InputLogStreamNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you specify this parameter, then only log events in the log streams that have names that start with the \n      prefixes that you specify here are \n      included in the Live Tail session.</p>\n         <note>\n            <p>You can specify this parameter only if you specify only one log group in <code>logGroupIdentifiers</code>.</p>\n         </note>"
+                    }
+                },
+                "logEventFilterPattern": {
+                    "target": "com.amazonaws.cloudwatchlogs#FilterPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pattern to use to filter the results to include only log events that match the pattern.\n      For example, a filter pattern of <code>error 404</code> causes only log events that include both <code>error</code> \n      and <code>404</code> to be included in the Live Tail stream.</p>\n         <p>Regular expression filter patterns are supported.</p>\n         <p>For more information about filter pattern syntax, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html\">Filter and Pattern Syntax</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#StartLiveTailResponse": {
+            "type": "structure",
+            "members": {
+                "responseStream": {
+                    "target": "com.amazonaws.cloudwatchlogs#StartLiveTailResponseStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that includes the stream returned by your request. It can include both log events and exceptions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#StartLiveTailResponseStream": {
+            "type": "union",
+            "members": {
+                "sessionStart": {
+                    "target": "com.amazonaws.cloudwatchlogs#LiveTailSessionStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This object contains information about this Live Tail session, including the log groups included and the \n    log stream filters, if any.</p>"
+                    }
+                },
+                "sessionUpdate": {
+                    "target": "com.amazonaws.cloudwatchlogs#LiveTailSessionUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This object contains the log events and session metadata.</p>"
+                    }
+                },
+                "SessionTimeoutException": {
+                    "target": "com.amazonaws.cloudwatchlogs#SessionTimeoutException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This exception is returned in the stream when the Live Tail session times out. Live Tail sessions time\n    out after three hours.</p>"
+                    }
+                },
+                "SessionStreamingException": {
+                    "target": "com.amazonaws.cloudwatchlogs#SessionStreamingException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This exception is returned if an unknown error occurs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object includes the stream returned by your \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTail.html\">StartLiveTail</a>\n      request.</p>",
+                "smithy.api#streaming": {}
+            }
         },
         "com.amazonaws.cloudwatchlogs#StartQuery": {
             "type": "operation",

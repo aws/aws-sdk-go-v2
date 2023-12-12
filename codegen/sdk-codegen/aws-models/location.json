@@ -1282,7 +1282,7 @@
                 "DepartureTime": {
                     "target": "com.amazonaws.location#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the desired time of departure. Uses the given time to calculate the route.\n            Otherwise, the best time of day to travel with the best traffic conditions is used to\n            calculate the route.</p>\n         <note>\n            <p>Setting a departure time in the past returns a <code>400\n                    ValidationException</code> error.</p>\n         </note>\n         <ul>\n            <li>\n               <p>In <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO\n                        8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. For example,\n                        <code>2020–07-2T12:15:20.000Z+01:00</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the desired time of departure. Uses the given time to calculate the route.\n            Otherwise, the best time of day to travel with the best traffic conditions is used to\n            calculate the route.</p>\n         <ul>\n            <li>\n               <p>In <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO\n                        8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. For example,\n                        <code>2020–07-2T12:15:20.000Z+01:00</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "DepartNow": {
@@ -1313,6 +1313,18 @@
                     "target": "com.amazonaws.location#CalculateRouteTruckModeOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies route preferences when traveling by <code>Truck</code>, such as avoiding\n            routes that use ferries or tolls, and truck specifications to consider when choosing an\n            optimal road.</p>\n         <p>Requirements: <code>TravelMode</code> must be specified as <code>Truck</code>.</p>"
+                    }
+                },
+                "ArrivalTime": {
+                    "target": "com.amazonaws.location#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the desired time of arrival. Uses the given time to calculate the route. \n            Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.</p>\n         <note>\n            <p>ArrivalTime is not supported Esri.</p>\n         </note>"
+                    }
+                },
+                "OptimizeFor": {
+                    "target": "com.amazonaws.location#OptimizationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the distance to optimize for when calculating a route.</p>"
                     }
                 },
                 "Key": {
@@ -4650,7 +4662,7 @@
                 "FilterGeometry": {
                     "target": "com.amazonaws.location#TrackingFilterGeometry",
                     "traits": {
-                        "smithy.api#documentation": "<p>The geomerty used to filter device positions.</p>"
+                        "smithy.api#documentation": "<p>The geometry used to filter device positions.</p>"
                     }
                 }
             }
@@ -6617,6 +6629,19 @@
                 "smithy.api#pattern": "^[-._\\w]+$"
             }
         },
+        "com.amazonaws.location#OptimizationMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FastestRoute"
+                    },
+                    {
+                        "value": "ShortestRoute"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.location#Place": {
             "type": "structure",
             "members": {
@@ -6714,6 +6739,12 @@
                     "target": "com.amazonaws.location#PlaceSupplementalCategoryList",
                     "traits": {
                         "smithy.api#documentation": "<p>Categories from the data provider that describe the Place that are not mapped\n            to any Amazon Location categories.</p>"
+                    }
+                },
+                "SubMunicipality": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An area that's part of a larger municipality. For example, <code>Blissville </code> \n            is a submunicipality in the Queen County in New York.</p>\n         <note>\n            <p>This property supported by Esri and OpenData. The Esri property is <code>district</code>, and the OpenData property is <code>borough</code>.</p>\n         </note>"
                     }
                 }
             },
