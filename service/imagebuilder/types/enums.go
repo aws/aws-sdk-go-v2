@@ -426,6 +426,24 @@ func (LifecyclePolicyTimeUnit) Values() []LifecyclePolicyTimeUnit {
 	}
 }
 
+type OnWorkflowFailure string
+
+// Enum values for OnWorkflowFailure
+const (
+	OnWorkflowFailureContinue OnWorkflowFailure = "CONTINUE"
+	OnWorkflowFailureAbort    OnWorkflowFailure = "ABORT"
+)
+
+// Values returns all known values for OnWorkflowFailure. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OnWorkflowFailure) Values() []OnWorkflowFailure {
+	return []OnWorkflowFailure{
+		"CONTINUE",
+		"ABORT",
+	}
+}
+
 type Ownership string
 
 // Enum values for Ownership
@@ -536,6 +554,7 @@ const (
 	WorkflowExecutionStatusFailed             WorkflowExecutionStatus = "FAILED"
 	WorkflowExecutionStatusRollbackInProgress WorkflowExecutionStatus = "ROLLBACK_IN_PROGRESS"
 	WorkflowExecutionStatusRollbackCompleted  WorkflowExecutionStatus = "ROLLBACK_COMPLETED"
+	WorkflowExecutionStatusCancelled          WorkflowExecutionStatus = "CANCELLED"
 )
 
 // Values returns all known values for WorkflowExecutionStatus. Note that this can
@@ -550,6 +569,41 @@ func (WorkflowExecutionStatus) Values() []WorkflowExecutionStatus {
 		"FAILED",
 		"ROLLBACK_IN_PROGRESS",
 		"ROLLBACK_COMPLETED",
+		"CANCELLED",
+	}
+}
+
+type WorkflowStatus string
+
+// Enum values for WorkflowStatus
+const (
+	WorkflowStatusDeprecated WorkflowStatus = "DEPRECATED"
+)
+
+// Values returns all known values for WorkflowStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowStatus) Values() []WorkflowStatus {
+	return []WorkflowStatus{
+		"DEPRECATED",
+	}
+}
+
+type WorkflowStepActionType string
+
+// Enum values for WorkflowStepActionType
+const (
+	WorkflowStepActionTypeResume WorkflowStepActionType = "RESUME"
+	WorkflowStepActionTypeStop   WorkflowStepActionType = "STOP"
+)
+
+// Values returns all known values for WorkflowStepActionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowStepActionType) Values() []WorkflowStepActionType {
+	return []WorkflowStepActionType{
+		"RESUME",
+		"STOP",
 	}
 }
 
@@ -585,6 +639,7 @@ const (
 	WorkflowStepExecutionStatusRunning   WorkflowStepExecutionStatus = "RUNNING"
 	WorkflowStepExecutionStatusCompleted WorkflowStepExecutionStatus = "COMPLETED"
 	WorkflowStepExecutionStatusFailed    WorkflowStepExecutionStatus = "FAILED"
+	WorkflowStepExecutionStatusCancelled WorkflowStepExecutionStatus = "CANCELLED"
 )
 
 // Values returns all known values for WorkflowStepExecutionStatus. Note that this
@@ -597,6 +652,7 @@ func (WorkflowStepExecutionStatus) Values() []WorkflowStepExecutionStatus {
 		"RUNNING",
 		"COMPLETED",
 		"FAILED",
+		"CANCELLED",
 	}
 }
 

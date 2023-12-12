@@ -12,28 +12,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new component that can be used to build, validate, test, and assess
-// your image. The component is based on a YAML document that you specify using
-// exactly one of the following methods:
-//   - Inline, using the data property in the request body.
-//   - A URL that points to a YAML document file stored in Amazon S3, using the uri
-//     property in the request body.
-func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInput, optFns ...func(*Options)) (*CreateComponentOutput, error) {
+// Create a new workflow or a new version of an existing workflow.
+func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput, optFns ...func(*Options)) (*CreateWorkflowOutput, error) {
 	if params == nil {
-		params = &CreateComponentInput{}
+		params = &CreateWorkflowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateComponent", params, optFns, c.addOperationCreateComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWorkflow", params, optFns, c.addOperationCreateWorkflowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateComponentOutput)
+	out := result.(*CreateWorkflowOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateComponentInput struct {
+type CreateWorkflowInput struct {
 
 	// Unique, case-sensitive identifier you provide to ensure idempotency of the
 	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
@@ -42,51 +37,46 @@ type CreateComponentInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The name of the component.
+	// The name of the workflow to create.
 	//
 	// This member is required.
 	Name *string
 
-	// The operating system platform of the component.
-	//
-	// This member is required.
-	Platform types.Platform
-
-	// The semantic version of the component. This version follows the semantic
-	// version syntax. The semantic version has four nodes: ../. You can assign values
-	// for the first three, and can filter on all of them. Assignment: For the first
-	// three nodes you can assign any positive integer value, including zero, with an
-	// upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically
-	// assigns the build number to the fourth node. Patterns: You can use any numeric
-	// pattern that adheres to the assignment requirements for the nodes that you can
-	// assign. For example, you might choose a software version pattern, such as 1.0.0,
-	// or a date, such as 2021.01.01.
+	// The semantic version of this workflow resource. The semantic version syntax
+	// adheres to the following rules. The semantic version has four nodes: ../. You
+	// can assign values for the first three, and can filter on all of them.
+	// Assignment: For the first three nodes you can assign any positive integer value,
+	// including zero, with an upper limit of 2^30-1, or 1073741823 for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
+	// Patterns: You can use any numeric pattern that adheres to the assignment
+	// requirements for the nodes that you can assign. For example, you might choose a
+	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
 	// This member is required.
 	SemanticVersion *string
 
-	// The change description of the component. Describes what change has been made in
-	// this version, or what makes this version different from other versions of the
-	// component.
+	// The phase in the image build process for which the workflow resource is
+	// responsible.
+	//
+	// This member is required.
+	Type types.WorkflowType
+
+	// Describes what change has been made in this version of the workflow, or what
+	// makes this version different from other versions of the workflow.
 	ChangeDescription *string
 
-	// Component data contains inline YAML document content for the component.
+	// Contains the UTF-8 encoded YAML document content for the workflow.
 	// Alternatively, you can specify the uri of a YAML document file stored in Amazon
 	// S3. However, you cannot specify both properties.
 	Data *string
 
-	// Describes the contents of the component.
+	// Describes the workflow.
 	Description *string
 
-	// The ID of the KMS key that is used to encrypt this component.
+	// The ID of the KMS key that is used to encrypt this workflow resource.
 	KmsKeyId *string
 
-	// The operating system (OS) version supported by the component. If the OS
-	// information is available, a prefix match is performed against the base image OS
-	// version during image recipe creation.
-	SupportedOsVersions []string
-
-	// The tags that apply to the component.
+	// Tags that apply to the workflow resource.
 	Tags map[string]string
 
 	// The uri of a YAML component document file. This must be an S3 URL (
@@ -99,16 +89,14 @@ type CreateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
-type CreateComponentOutput struct {
+type CreateWorkflowOutput struct {
 
 	// The client token that uniquely identifies the request.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the component that the request created.
-	ComponentBuildVersionArn *string
-
-	// The request ID that uniquely identifies this request.
-	RequestId *string
+	// The Amazon Resource Name (ARN) of the workflow resource that the request
+	// created.
+	WorkflowBuildVersionArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -116,19 +104,19 @@ type CreateComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComponent{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkflow{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComponent{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkflow{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComponent"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkflow"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -171,13 +159,13 @@ func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateComponentMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opCreateWorkflowMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateComponentValidationMiddleware(stack); err != nil {
+	if err = addOpCreateWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComponent(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkflow(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -198,24 +186,24 @@ func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-type idempotencyToken_initializeOpCreateComponent struct {
+type idempotencyToken_initializeOpCreateWorkflow struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpCreateComponent) ID() string {
+func (*idempotencyToken_initializeOpCreateWorkflow) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpCreateComponent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpCreateWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*CreateComponentInput)
+	input, ok := in.Parameters.(*CreateWorkflowInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateComponentInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateWorkflowInput ")
 	}
 
 	if input.ClientToken == nil {
@@ -227,14 +215,14 @@ func (m *idempotencyToken_initializeOpCreateComponent) HandleInitialize(ctx cont
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opCreateComponentMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateComponent{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opCreateWorkflowMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateWorkflow{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opCreateComponent(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateWorkflow(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateComponent",
+		OperationName: "CreateWorkflow",
 	}
 }

@@ -59,6 +59,10 @@ type CreateImageInput struct {
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
 	EnhancedImageMetadataEnabled *bool
 
+	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
+	// Image Builder access to perform workflow actions.
+	ExecutionRole *string
+
 	// The Amazon Resource Name (ARN) of the image recipe that defines how images are
 	// configured, tested, and assessed.
 	ImageRecipeArn *string
@@ -71,6 +75,9 @@ type CreateImageInput struct {
 
 	// The tags of the image.
 	Tags map[string]string
+
+	// Contains an array of workflow configuration objects.
+	Workflows []types.WorkflowConfiguration
 
 	noSmithyDocumentSerde
 }

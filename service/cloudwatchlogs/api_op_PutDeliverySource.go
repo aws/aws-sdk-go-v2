@@ -25,7 +25,7 @@ import (
 //     information, see PutDeliveryDestination (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html)
 //     .
 //   - If you are delivering logs cross-account, you must use
-//     PutDeliveryDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html)
+//     PutDeliveryDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html)
 //     in the destination account to assign an IAM policy to the destination. This
 //     policy allows delivery to that destination.
 //   - Use CreateDelivery to create a delivery by pairing exactly one delivery

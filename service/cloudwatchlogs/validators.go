@@ -930,6 +930,26 @@ func (m *validateOpPutSubscriptionFilter) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartLiveTail struct {
+}
+
+func (*validateOpStartLiveTail) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartLiveTail) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartLiveTailInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartLiveTailInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartQuery struct {
 }
 
@@ -1292,6 +1312,10 @@ func addOpPutRetentionPolicyValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpPutSubscriptionFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutSubscriptionFilter{}, middleware.After)
+}
+
+func addOpStartLiveTailValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartLiveTail{}, middleware.After)
 }
 
 func addOpStartQueryValidationMiddleware(stack *middleware.Stack) error {
@@ -2199,6 +2223,21 @@ func validateOpPutSubscriptionFilterInput(v *PutSubscriptionFilterInput) error {
 	}
 	if v.DestinationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartLiveTailInput(v *StartLiveTailInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartLiveTailInput"}
+	if v.LogGroupIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupIdentifiers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

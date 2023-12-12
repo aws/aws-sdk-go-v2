@@ -41,7 +41,7 @@ type GetComponentInput struct {
 
 type GetComponentOutput struct {
 
-	// The component object associated with the specified ARN.
+	// The component object specified in the request.
 	Component *types.Component
 
 	// The request ID that uniquely identifies this request.

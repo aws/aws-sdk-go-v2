@@ -35,7 +35,7 @@ type ListDevicePositionsInput struct {
 	// This member is required.
 	TrackerName *string
 
-	// The geomerty used to filter device positions.
+	// The geometry used to filter device positions.
 	FilterGeometry *types.TrackingFilterGeometry
 
 	// An optional limit for the number of entries returned in a single call. Default

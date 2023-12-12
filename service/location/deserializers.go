@@ -12832,6 +12832,15 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				sv.Street = ptr.String(jtv)
 			}
 
+		case "SubMunicipality":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SubMunicipality = ptr.String(jtv)
+			}
+
 		case "SubRegion":
 			if value != nil {
 				jtv, ok := value.(string)

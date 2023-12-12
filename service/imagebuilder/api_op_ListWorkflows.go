@@ -12,30 +12,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns runtime data for each step in a runtime instance of the workflow that
-// you specify in the request.
-func (c *Client) ListWorkflowStepExecutions(ctx context.Context, params *ListWorkflowStepExecutionsInput, optFns ...func(*Options)) (*ListWorkflowStepExecutionsOutput, error) {
+// Lists workflow build versions based on filtering parameters.
+func (c *Client) ListWorkflows(ctx context.Context, params *ListWorkflowsInput, optFns ...func(*Options)) (*ListWorkflowsOutput, error) {
 	if params == nil {
-		params = &ListWorkflowStepExecutionsInput{}
+		params = &ListWorkflowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListWorkflowStepExecutions", params, optFns, c.addOperationListWorkflowStepExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListWorkflows", params, optFns, c.addOperationListWorkflowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListWorkflowStepExecutionsOutput)
+	out := result.(*ListWorkflowsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListWorkflowStepExecutionsInput struct {
+type ListWorkflowsInput struct {
 
-	// The unique identifier that Image Builder assigned to keep track of runtime
-	// details when it ran the workflow.
-	//
-	// This member is required.
-	WorkflowExecutionId *string
+	// Specify all or part of the workflow name to streamline results.
+	ByName bool
+
+	// Used to streamline search results.
+	Filters []types.Filter
 
 	// The maximum items to return in a request.
 	MaxResults *int32
@@ -44,37 +43,22 @@ type ListWorkflowStepExecutionsInput struct {
 	// previously truncated response.
 	NextToken *string
 
+	// Used to get a list of workflow build version filtered by the identity of the
+	// creator.
+	Owner types.Ownership
+
 	noSmithyDocumentSerde
 }
 
-type ListWorkflowStepExecutionsOutput struct {
-
-	// The image build version resource ARN that's associated with the specified
-	// runtime instance of the workflow.
-	ImageBuildVersionArn *string
-
-	// The output message from the list action, if applicable.
-	Message *string
+type ListWorkflowsOutput struct {
 
 	// The next token used for paginated responses. When this field isn't empty, there
 	// are additional elements that the service hasn't included in this request. Use
 	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
-
-	// Contains an array of runtime details that represents each step in this runtime
-	// instance of the workflow.
-	Steps []types.WorkflowStepMetadata
-
-	// The build version ARN for the Image Builder workflow resource that defines the
-	// steps for this runtime instance of the workflow.
-	WorkflowBuildVersionArn *string
-
-	// The unique identifier that Image Builder assigned to keep track of runtime
-	// details when it ran the workflow.
-	WorkflowExecutionId *string
+	// A list of workflow build versions that match the request criteria.
+	WorkflowVersionList []types.WorkflowVersion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -82,19 +66,19 @@ type ListWorkflowStepExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListWorkflowStepExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkflowStepExecutions{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkflows{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkflowStepExecutions{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkflows{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWorkflowStepExecutions"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWorkflows"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -137,10 +121,7 @@ func (c *Client) addOperationListWorkflowStepExecutionsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpListWorkflowStepExecutionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkflowStepExecutions(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkflows(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -161,17 +142,15 @@ func (c *Client) addOperationListWorkflowStepExecutionsMiddlewares(stack *middle
 	return nil
 }
 
-// ListWorkflowStepExecutionsAPIClient is a client that implements the
-// ListWorkflowStepExecutions operation.
-type ListWorkflowStepExecutionsAPIClient interface {
-	ListWorkflowStepExecutions(context.Context, *ListWorkflowStepExecutionsInput, ...func(*Options)) (*ListWorkflowStepExecutionsOutput, error)
+// ListWorkflowsAPIClient is a client that implements the ListWorkflows operation.
+type ListWorkflowsAPIClient interface {
+	ListWorkflows(context.Context, *ListWorkflowsInput, ...func(*Options)) (*ListWorkflowsOutput, error)
 }
 
-var _ ListWorkflowStepExecutionsAPIClient = (*Client)(nil)
+var _ ListWorkflowsAPIClient = (*Client)(nil)
 
-// ListWorkflowStepExecutionsPaginatorOptions is the paginator options for
-// ListWorkflowStepExecutions
-type ListWorkflowStepExecutionsPaginatorOptions struct {
+// ListWorkflowsPaginatorOptions is the paginator options for ListWorkflows
+type ListWorkflowsPaginatorOptions struct {
 	// The maximum items to return in a request.
 	Limit int32
 
@@ -180,24 +159,22 @@ type ListWorkflowStepExecutionsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListWorkflowStepExecutionsPaginator is a paginator for
-// ListWorkflowStepExecutions
-type ListWorkflowStepExecutionsPaginator struct {
-	options   ListWorkflowStepExecutionsPaginatorOptions
-	client    ListWorkflowStepExecutionsAPIClient
-	params    *ListWorkflowStepExecutionsInput
+// ListWorkflowsPaginator is a paginator for ListWorkflows
+type ListWorkflowsPaginator struct {
+	options   ListWorkflowsPaginatorOptions
+	client    ListWorkflowsAPIClient
+	params    *ListWorkflowsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListWorkflowStepExecutionsPaginator returns a new
-// ListWorkflowStepExecutionsPaginator
-func NewListWorkflowStepExecutionsPaginator(client ListWorkflowStepExecutionsAPIClient, params *ListWorkflowStepExecutionsInput, optFns ...func(*ListWorkflowStepExecutionsPaginatorOptions)) *ListWorkflowStepExecutionsPaginator {
+// NewListWorkflowsPaginator returns a new ListWorkflowsPaginator
+func NewListWorkflowsPaginator(client ListWorkflowsAPIClient, params *ListWorkflowsInput, optFns ...func(*ListWorkflowsPaginatorOptions)) *ListWorkflowsPaginator {
 	if params == nil {
-		params = &ListWorkflowStepExecutionsInput{}
+		params = &ListWorkflowsInput{}
 	}
 
-	options := ListWorkflowStepExecutionsPaginatorOptions{}
+	options := ListWorkflowsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -206,7 +183,7 @@ func NewListWorkflowStepExecutionsPaginator(client ListWorkflowStepExecutionsAPI
 		fn(&options)
 	}
 
-	return &ListWorkflowStepExecutionsPaginator{
+	return &ListWorkflowsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -216,12 +193,12 @@ func NewListWorkflowStepExecutionsPaginator(client ListWorkflowStepExecutionsAPI
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListWorkflowStepExecutionsPaginator) HasMorePages() bool {
+func (p *ListWorkflowsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListWorkflowStepExecutions page.
-func (p *ListWorkflowStepExecutionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListWorkflowStepExecutionsOutput, error) {
+// NextPage retrieves the next ListWorkflows page.
+func (p *ListWorkflowsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListWorkflowsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -235,7 +212,7 @@ func (p *ListWorkflowStepExecutionsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListWorkflowStepExecutions(ctx, &params, optFns...)
+	result, err := p.client.ListWorkflows(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -254,10 +231,10 @@ func (p *ListWorkflowStepExecutionsPaginator) NextPage(ctx context.Context, optF
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListWorkflowStepExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListWorkflows(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ListWorkflowStepExecutions",
+		OperationName: "ListWorkflows",
 	}
 }

@@ -13,9 +13,11 @@ import (
 )
 
 // Updates an image pipeline. Image pipelines enable you to automate the creation
-// and distribution of images. UpdateImagePipeline does not support selective
-// updates for the pipeline. You must specify all of the required properties in the
-// update request, not just the properties that have changed.
+// and distribution of images. You must specify exactly one recipe for your image,
+// using either a containerRecipeArn or an imageRecipeArn . UpdateImagePipeline
+// does not support selective updates for the pipeline. You must specify all of the
+// required properties in the update request, not just the properties that have
+// changed.
 func (c *Client) UpdateImagePipeline(ctx context.Context, params *UpdateImagePipelineInput, optFns ...func(*Options)) (*UpdateImagePipelineOutput, error) {
 	if params == nil {
 		params = &UpdateImagePipelineInput{}
@@ -67,6 +69,10 @@ type UpdateImagePipelineInput struct {
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
 	EnhancedImageMetadataEnabled *bool
 
+	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
+	// Image Builder access to perform workflow actions.
+	ExecutionRole *string
+
 	// The Amazon Resource Name (ARN) of the image recipe that will be used to
 	// configure images updated by this image pipeline.
 	ImageRecipeArn *string
@@ -82,6 +88,9 @@ type UpdateImagePipelineInput struct {
 
 	// The status of the image pipeline.
 	Status types.PipelineStatus
+
+	// Contains the workflows to run for the pipeline.
+	Workflows []types.WorkflowConfiguration
 
 	noSmithyDocumentSerde
 }

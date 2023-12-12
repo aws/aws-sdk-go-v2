@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/configsources": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2": "v2.0.0-00010101000000-000000000000",
         "github.com/aws/smithy-go": "v1.4.0",
@@ -73,6 +74,7 @@
         "api_op_PutResourcePolicy.go",
         "api_op_PutRetentionPolicy.go",
         "api_op_PutSubscriptionFilter.go",
+        "api_op_StartLiveTail.go",
         "api_op_StartQuery.go",
         "api_op_StopQuery.go",
         "api_op_TagLogGroup.go",
@@ -88,6 +90,7 @@
         "endpoints.go",
         "endpoints_config_test.go",
         "endpoints_test.go",
+        "eventstream.go",
         "generated.json",
         "internal/endpoints/endpoints.go",
         "internal/endpoints/endpoints_test.go",
@@ -97,6 +100,7 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.15",

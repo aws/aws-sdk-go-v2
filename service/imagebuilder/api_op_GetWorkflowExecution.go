@@ -53,6 +53,10 @@ type GetWorkflowExecutionOutput struct {
 	// applicable.
 	Message *string
 
+	// Test workflows are defined within named runtime groups. The parallel group is a
+	// named group that contains one or more test workflows.
+	ParallelGroup *string
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

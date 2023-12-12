@@ -360,6 +360,59 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// his exception is returned if an unknown error occurs during a Live Tail session.
+type SessionStreamingException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SessionStreamingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SessionStreamingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SessionStreamingException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SessionStreamingException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SessionStreamingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is returned in a Live Tail stream when the Live Tail session
+// times out. Live Tail sessions time out after three hours.
+type SessionTimeoutException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SessionTimeoutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SessionTimeoutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SessionTimeoutException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SessionTimeoutException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SessionTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request was throttled because of quota limits.
 type ThrottlingException struct {
 	Message *string

@@ -66,8 +66,9 @@ type CreateLogGroupInput struct {
 	//   - The Standard log class supports all CloudWatch Logs features.
 	//   - The Infrequent Access log class supports a subset of CloudWatch Logs
 	//   features and incurs lower costs.
-	// If you omit this parameter, the default of STANDARD is used. For details about
-	// the features supported by each class, see Log classes (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)
+	// If you omit this parameter, the default of STANDARD is used. After a log group
+	// is created, its class can't be changed. For details about the features supported
+	// by each class, see Log classes (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)
 	LogGroupClass types.LogGroupClass
 
 	// The key-value pairs to use for the tags. You can grant users access to certain

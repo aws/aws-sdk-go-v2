@@ -71,7 +71,7 @@ type ImportComponentInput struct {
 
 	// The change description of the component. This description indicates the change
 	// that has been made in this version, or what makes this version different from
-	// other versions of this component.
+	// other versions of the component.
 	ChangeDescription *string
 
 	// The data of the component. Used to specify the data inline. Either data or uri

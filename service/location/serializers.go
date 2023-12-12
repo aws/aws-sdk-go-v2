@@ -728,6 +728,11 @@ func awsRestjson1_serializeOpDocumentCalculateRouteInput(v *CalculateRouteInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.ArrivalTime != nil {
+		ok := object.Key("ArrivalTime")
+		ok.String(smithytime.FormatDateTime(*v.ArrivalTime))
+	}
+
 	if v.CarModeOptions != nil {
 		ok := object.Key("CarModeOptions")
 		if err := awsRestjson1_serializeDocumentCalculateRouteCarModeOptions(v.CarModeOptions, ok); err != nil {
@@ -767,6 +772,11 @@ func awsRestjson1_serializeOpDocumentCalculateRouteInput(v *CalculateRouteInput,
 	if v.IncludeLegGeometry != nil {
 		ok := object.Key("IncludeLegGeometry")
 		ok.Boolean(*v.IncludeLegGeometry)
+	}
+
+	if len(v.OptimizeFor) > 0 {
+		ok := object.Key("OptimizeFor")
+		ok.String(string(v.OptimizeFor))
 	}
 
 	if len(v.TravelMode) > 0 {

@@ -54,6 +54,18 @@ func (IntendedUse) Values() []IntendedUse {
 	}
 }
 
+type OptimizationMode string
+
+// Values returns all known values for OptimizationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OptimizationMode) Values() []OptimizationMode {
+	return []OptimizationMode{
+		"FastestRoute",
+		"ShortestRoute",
+	}
+}
+
 type PositionFiltering string
 
 // Values returns all known values for PositionFiltering. Note that this can be

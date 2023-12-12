@@ -37,8 +37,8 @@ type UpdateLifecyclePolicyInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The name of the IAM role that Image Builder should use to update the lifecycle
-	// policy.
+	// The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses
+	// to update the lifecycle policy.
 	//
 	// This member is required.
 	ExecutionRole *string

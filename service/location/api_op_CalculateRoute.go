@@ -75,6 +75,11 @@ type CalculateRouteInput struct {
 	// This member is required.
 	DestinationPosition []float64
 
+	// Specifies the desired time of arrival. Uses the given time to calculate the
+	// route. Otherwise, the best time of day to travel with the best traffic
+	// conditions is used to calculate the route. ArrivalTime is not supported Esri.
+	ArrivalTime *time.Time
+
 	// Specifies route preferences when traveling by Car , such as avoiding routes that
 	// use ferries or tolls. Requirements: TravelMode must be specified as Car .
 	CarModeOptions *types.CalculateRouteCarModeOptions
@@ -87,8 +92,7 @@ type CalculateRouteInput struct {
 
 	// Specifies the desired time of departure. Uses the given time to calculate the
 	// route. Otherwise, the best time of day to travel with the best traffic
-	// conditions is used to calculate the route. Setting a departure time in the past
-	// returns a 400 ValidationException error.
+	// conditions is used to calculate the route.
 	//   - In ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	//   YYYY-MM-DDThh:mm:ss.sssZ . For example, 2020–07-2T12:15:20.000Z+01:00
 	DepartureTime *time.Time
@@ -103,6 +107,9 @@ type CalculateRouteInput struct {
 	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
 	// to authorize the request.
 	Key *string
+
+	// Specifies the distance to optimize for when calculating a route.
+	OptimizeFor types.OptimizationMode
 
 	// Specifies the mode of transport when calculating a route. Used in estimating
 	// the speed of travel and road compatibility. You can choose Car , Truck , Walking

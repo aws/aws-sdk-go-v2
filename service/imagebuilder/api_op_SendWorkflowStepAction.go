@@ -12,23 +12,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a lifecycle policy resource.
-func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecyclePolicyInput, optFns ...func(*Options)) (*CreateLifecyclePolicyOutput, error) {
+// Pauses or resumes image creation when the associated workflow runs a
+// WaitForAction step.
+func (c *Client) SendWorkflowStepAction(ctx context.Context, params *SendWorkflowStepActionInput, optFns ...func(*Options)) (*SendWorkflowStepActionOutput, error) {
 	if params == nil {
-		params = &CreateLifecyclePolicyInput{}
+		params = &SendWorkflowStepActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLifecyclePolicy", params, optFns, c.addOperationCreateLifecyclePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendWorkflowStepAction", params, optFns, c.addOperationSendWorkflowStepActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateLifecyclePolicyOutput)
+	out := result.(*SendWorkflowStepActionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateLifecyclePolicyInput struct {
+type SendWorkflowStepActionInput struct {
+
+	// The action for the image creation process to take while a workflow WaitForAction
+	// step waits for an asynchronous action to complete.
+	//
+	// This member is required.
+	Action types.WorkflowStepActionType
 
 	// Unique, case-sensitive identifier you provide to ensure idempotency of the
 	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
@@ -37,51 +44,33 @@ type CreateLifecyclePolicyInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
-	// Image Builder access to run lifecycle actions.
+	// The Amazon Resource Name (ARN) of the image build version to send action for.
 	//
 	// This member is required.
-	ExecutionRole *string
+	ImageBuildVersionArn *string
 
-	// The name of the lifecycle policy to create.
+	// Uniquely identifies the workflow step that sent the step action.
 	//
 	// This member is required.
-	Name *string
+	StepExecutionId *string
 
-	// Configuration details for the lifecycle policy rules.
-	//
-	// This member is required.
-	PolicyDetails []types.LifecyclePolicyDetail
-
-	// Selection criteria for the resources that the lifecycle policy applies to.
-	//
-	// This member is required.
-	ResourceSelection *types.LifecyclePolicyResourceSelection
-
-	// The type of Image Builder resource that the lifecycle policy applies to.
-	//
-	// This member is required.
-	ResourceType types.LifecyclePolicyResourceType
-
-	// Optional description for the lifecycle policy.
-	Description *string
-
-	// Indicates whether the lifecycle policy resource is enabled.
-	Status types.LifecyclePolicyStatus
-
-	// Tags to apply to the lifecycle policy resource.
-	Tags map[string]string
+	// The reason why this action is sent.
+	Reason *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateLifecyclePolicyOutput struct {
+type SendWorkflowStepActionOutput struct {
 
 	// The client token that uniquely identifies the request.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the lifecycle policy that the request created.
-	LifecyclePolicyArn *string
+	// The Amazon Resource Name (ARN) of the image build version that received the
+	// action request.
+	ImageBuildVersionArn *string
+
+	// The workflow step that sent the step action.
+	StepExecutionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -89,19 +78,19 @@ type CreateLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendWorkflowStepActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLifecyclePolicy{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendWorkflowStepAction{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLifecyclePolicy{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendWorkflowStepAction{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLifecyclePolicy"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "SendWorkflowStepAction"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -144,13 +133,13 @@ func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateLifecyclePolicyMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opSendWorkflowStepActionMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateLifecyclePolicyValidationMiddleware(stack); err != nil {
+	if err = addOpSendWorkflowStepActionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLifecyclePolicy(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendWorkflowStepAction(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -171,24 +160,24 @@ func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.
 	return nil
 }
 
-type idempotencyToken_initializeOpCreateLifecyclePolicy struct {
+type idempotencyToken_initializeOpSendWorkflowStepAction struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpCreateLifecyclePolicy) ID() string {
+func (*idempotencyToken_initializeOpSendWorkflowStepAction) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpCreateLifecyclePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpSendWorkflowStepAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*CreateLifecyclePolicyInput)
+	input, ok := in.Parameters.(*SendWorkflowStepActionInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateLifecyclePolicyInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *SendWorkflowStepActionInput ")
 	}
 
 	if input.ClientToken == nil {
@@ -200,14 +189,14 @@ func (m *idempotencyToken_initializeOpCreateLifecyclePolicy) HandleInitialize(ct
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opCreateLifecyclePolicyMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateLifecyclePolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opSendWorkflowStepActionMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpSendWorkflowStepAction{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opCreateLifecyclePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opSendWorkflowStepAction(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateLifecyclePolicy",
+		OperationName: "SendWorkflowStepAction",
 	}
 }

@@ -1,0 +1,8 @@
+{
+    "id": "3d6a2047-5590-42eb-92bc-c1de3c12fae6",
+    "type": "feature",
+    "description": "This release introduces the StartLiveTail API to tail ingested logs in near real time.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

@@ -1055,6 +1055,12 @@ type Place struct {
 	// .
 	Street *string
 
+	// An area that's part of a larger municipality. For example, Blissville  is a
+	// submunicipality in the Queen County in New York. This property supported by Esri
+	// and OpenData. The Esri property is district , and the OpenData property is
+	// borough .
+	SubMunicipality *string
+
 	// A county, or an area that's part of a larger region. For example, Metro
 	// Vancouver .
 	SubRegion *string

@@ -107,7 +107,8 @@ type Component struct {
 	// The Amazon Resource Name (ARN) of the component.
 	Arn *string
 
-	// The change description of the component.
+	// Describes what change has been made in this version of the component, or what
+	// makes this version different from other versions of the component.
 	ChangeDescription *string
 
 	// Component data contains the YAML document content for the component.
@@ -223,8 +224,7 @@ type ComponentParameterDetail struct {
 	noSmithyDocumentSerde
 }
 
-// A group of fields that describe the current status of components that are no
-// longer active.
+// A group of fields that describe the current status of components.
 type ComponentState struct {
 
 	// Describes how or why the component changed state.
@@ -809,6 +809,10 @@ type Image struct {
 	// image, such as the operating system (OS) version and package list.
 	EnhancedImageMetadataEnabled *bool
 
+	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
+	// Image Builder access to perform workflow actions.
+	ExecutionRole *string
+
 	// For images that distribute an AMI, this is the image recipe that Image Builder
 	// used to create the image. For container images, this is empty.
 	ImageRecipe *ImageRecipe
@@ -874,6 +878,9 @@ type Image struct {
 	// the right of the first wildcard must also be wildcards.
 	Version *string
 
+	// Contains the build and test workflows that are associated with the image.
+	Workflows []WorkflowConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -936,6 +943,10 @@ type ImagePipeline struct {
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
 	EnhancedImageMetadataEnabled *bool
 
+	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
+	// Image Builder access to perform workflow actions.
+	ExecutionRole *string
+
 	// The Amazon Resource Name (ARN) of the image recipe associated with this image
 	// pipeline.
 	ImageRecipeArn *string
@@ -964,6 +975,9 @@ type ImagePipeline struct {
 
 	// The tags of this image pipeline.
 	Tags map[string]string
+
+	// Contains the workflows that run for the image pipeline.
+	Workflows []WorkflowConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1676,8 +1690,8 @@ type LifecyclePolicy struct {
 	// Optional description for the lifecycle policy.
 	Description *string
 
-	// The name of the IAM role that Image Builder uses to run the lifecycle policy.
-	// This is a custom role that you create.
+	// The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses
+	// to run the lifecycle policy. This is a custom role that you create.
 	ExecutionRole *string
 
 	// The name of the lifecycle policy.
@@ -1760,7 +1774,7 @@ type LifecyclePolicyDetailExclusionRules struct {
 	Amis *LifecyclePolicyDetailExclusionRulesAmis
 
 	// Contains a list of tags that Image Builder uses to skip lifecycle actions for
-	// AMIs that have them.
+	// resources that have them.
 	TagMap map[string]string
 
 	noSmithyDocumentSerde
@@ -1772,16 +1786,16 @@ type LifecyclePolicyDetailExclusionRulesAmis struct {
 	// Configures whether public AMIs are excluded from the lifecycle action.
 	IsPublic bool
 
+	// Specifies configuration details for Image Builder to exclude the most recent
+	// resources from lifecycle actions.
+	LastLaunched *LifecyclePolicyDetailExclusionRulesAmisLastLaunched
+
 	// Configures Amazon Web Services Regions that are excluded from the lifecycle
 	// action.
-	LastLaunched *LifecyclePolicyDetailExclusionRulesAmisLastLaunched
+	Regions []string
 
 	// Specifies Amazon Web Services accounts whose resources are excluded from the
 	// lifecycle action.
-	Regions []string
-
-	// Specifies configuration details for Image Builder to exclude the most recent
-	// resources from lifecycle actions.
 	SharedAccounts []string
 
 	// Lists tags that should be excluded from lifecycle actions for the AMIs that
@@ -1889,7 +1903,8 @@ type LifecyclePolicySummary struct {
 	// Optional description for the lifecycle policy.
 	Description *string
 
-	// The name of the IAM role that Image Builder uses to run the lifecycle policy.
+	// The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses
+	// to run the lifecycle policy.
 	ExecutionRole *string
 
 	// The name of the lifecycle policy.
@@ -2076,7 +2091,7 @@ type S3Logs struct {
 	noSmithyDocumentSerde
 }
 
-// A schedule configures how often and when a pipeline will automatically create a
+// A schedule configures when and how often a pipeline will automatically create a
 // new image.
 type Schedule struct {
 
@@ -2205,6 +2220,82 @@ type VulnerablePackage struct {
 	noSmithyDocumentSerde
 }
 
+// Defines a process that Image Builder uses to build and test images during the
+// image creation process.
+type Workflow struct {
+
+	// The Amazon Resource Name (ARN) of the workflow resource.
+	Arn *string
+
+	// Describes what change has been made in this version of the workflow, or what
+	// makes this version different from other versions of the workflow.
+	ChangeDescription *string
+
+	// Contains the YAML document content for the workflow.
+	Data *string
+
+	// The timestamp when Image Builder created the workflow resource.
+	DateCreated *string
+
+	// The description of the workflow.
+	Description *string
+
+	// The KMS key identifier used to encrypt the workflow resource.
+	KmsKeyId *string
+
+	// The name of the workflow resource.
+	Name *string
+
+	// The owner of the workflow resource.
+	Owner *string
+
+	// An array of input parameters that that the image workflow uses to control
+	// actions or configure settings.
+	Parameters []WorkflowParameterDetail
+
+	// Describes the current status of the workflow and the reason for that status.
+	State *WorkflowState
+
+	// The tags that apply to the workflow resource
+	Tags map[string]string
+
+	// Specifies the image creation stage that the workflow applies to. Image Builder
+	// currently supports build and test workflows.
+	Type WorkflowType
+
+	// The workflow resource version. Workflow resources are immutable. To make a
+	// change, you can clone a workflow or create a new version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains control settings and configurable inputs for a workflow resource.
+type WorkflowConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the workflow resource.
+	//
+	// This member is required.
+	WorkflowArn *string
+
+	// The action to take if the workflow fails.
+	OnFailure OnWorkflowFailure
+
+	// Test workflows are defined within named runtime groups called parallel groups.
+	// The parallel group is the named group that contains this test workflow. Test
+	// workflows within a parallel group can run at the same time. Image Builder starts
+	// up to five test workflows in the group at the same time, and starts additional
+	// workflows as others complete, until all workflows in the group have completed.
+	// This field only applies for test workflows.
+	ParallelGroup *string
+
+	// Contains parameter values for each of the parameters that the workflow document
+	// defined for the workflow resource.
+	Parameters []WorkflowParameter
+
+	noSmithyDocumentSerde
+}
+
 // Metadata that includes details and status from this runtime instance of the
 // workflow.
 type WorkflowExecutionMetadata struct {
@@ -2214,6 +2305,9 @@ type WorkflowExecutionMetadata struct {
 
 	// The runtime output message from the workflow, if applicable.
 	Message *string
+
+	// The name of the test group that included the test workflow resource at runtime.
+	ParallelGroup *string
 
 	// The timestamp when the runtime instance of this workflow started.
 	StartTime *string
@@ -2243,6 +2337,88 @@ type WorkflowExecutionMetadata struct {
 
 	// Unique identifier that Image Builder assigns to keep track of runtime resources
 	// each time it runs a workflow.
+	WorkflowExecutionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains a key/value pair that sets the named workflow parameter.
+type WorkflowParameter struct {
+
+	// The name of the workflow parameter to set.
+	//
+	// This member is required.
+	Name *string
+
+	// Sets the value for the named workflow parameter.
+	//
+	// This member is required.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+// Defines a parameter that's used to provide configuration details for the
+// workflow.
+type WorkflowParameterDetail struct {
+
+	// The name of this input parameter.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of input this parameter provides. The currently supported value is
+	// "string".
+	//
+	// This member is required.
+	Type *string
+
+	// The default value of this parameter if no input is provided.
+	DefaultValue []string
+
+	// Describes this parameter.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// A group of fields that describe the current status of workflow.
+type WorkflowState struct {
+
+	// Describes how or why the workflow changed state.
+	Reason *string
+
+	// The current state of the workflow.
+	Status WorkflowStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains runtime details for an instance of a workflow that ran for the
+// associated image build version.
+type WorkflowStepExecution struct {
+
+	// The name of the step action.
+	Action *string
+
+	// The Amazon Resource Name (ARN) of the image build version that ran the workflow.
+	ImageBuildVersionArn *string
+
+	// The name of the workflow step.
+	Name *string
+
+	// The timestamp when the workflow step started.
+	StartTime *string
+
+	// Uniquely identifies the workflow step that ran for the associated image build
+	// version.
+	StepExecutionId *string
+
+	// The ARN of the workflow resource that ran.
+	WorkflowBuildVersionArn *string
+
+	// Uniquely identifies the runtime instance of the workflow that contains the
+	// workflow step that ran for the associated image build version.
 	WorkflowExecutionId *string
 
 	noSmithyDocumentSerde
@@ -2284,6 +2460,72 @@ type WorkflowStepMetadata struct {
 
 	// A unique identifier for the workflow step, assigned at runtime.
 	StepExecutionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about the workflow resource.
+type WorkflowSummary struct {
+
+	// The Amazon Resource Name (ARN) of the workflow resource.
+	Arn *string
+
+	// The change description for the current version of the workflow resource.
+	ChangeDescription *string
+
+	// The original creation date of the workflow resource.
+	DateCreated *string
+
+	// Describes the workflow.
+	Description *string
+
+	// The name of the workflow.
+	Name *string
+
+	// The owner of the workflow resource.
+	Owner *string
+
+	// Describes the current state of the workflow resource.
+	State *WorkflowState
+
+	// Contains a list of tags that are defined for the workflow.
+	Tags map[string]string
+
+	// The image creation stage that this workflow applies to. Image Builder currently
+	// supports build and test stage workflows.
+	Type WorkflowType
+
+	// The version of the workflow.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about this version of the workflow.
+type WorkflowVersion struct {
+
+	// The Amazon Resource Name (ARN) of the workflow resource.
+	Arn *string
+
+	// The timestamp when Image Builder created the workflow version.
+	DateCreated *string
+
+	// Describes the workflow.
+	Description *string
+
+	// The name of the workflow.
+	Name *string
+
+	// The owner of the workflow resource.
+	Owner *string
+
+	// The image creation stage that this workflow applies to. Image Builder currently
+	// supports build and test stage workflows.
+	Type WorkflowType
+
+	// The semantic version of the workflow resource. The format includes three nodes:
+	// ...
+	Version *string
 
 	noSmithyDocumentSerde
 }

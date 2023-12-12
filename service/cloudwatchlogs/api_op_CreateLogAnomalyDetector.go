@@ -48,8 +48,8 @@ func (c *Client) CreateLogAnomalyDetector(ctx context.Context, params *CreateLog
 
 type CreateLogAnomalyDetectorInput struct {
 
-	// An array containing the ARNs of the log groups that this anomaly detector will
-	// watch. You must specify at least one ARN.
+	// An array containing the ARN of the log group that this anomaly detector will
+	// watch. You can specify only one log group ARN.
 	//
 	// This member is required.
 	LogGroupArnList []string
