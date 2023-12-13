@@ -3229,6 +3229,15 @@ func awsRestjson1_deserializeOpDocumentDisconnectSourceServerOutput(v **Disconne
 
 	for key, value := range shape {
 		switch key {
+		case "agentVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentVersion to be of type string, got %T instead", value)
+				}
+				sv.AgentVersion = ptr.String(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5381,6 +5390,15 @@ func awsRestjson1_deserializeOpDocumentRetryDataReplicationOutput(v **RetryDataR
 
 	for key, value := range shape {
 		switch key {
+		case "agentVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentVersion to be of type string, got %T instead", value)
+				}
+				sv.AgentVersion = ptr.String(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11385,6 +11403,15 @@ func awsRestjson1_deserializeDocumentRecoveryInstance(v **types.RecoveryInstance
 
 	for key, value := range shape {
 		switch key {
+		case "agentVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentVersion to be of type string, got %T instead", value)
+				}
+				sv.AgentVersion = ptr.String(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13272,6 +13299,15 @@ func awsRestjson1_deserializeDocumentSourceServer(v **types.SourceServer, value 
 
 	for key, value := range shape {
 		switch key {
+		case "agentVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentVersion to be of type string, got %T instead", value)
+				}
+				sv.AgentVersion = ptr.String(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)

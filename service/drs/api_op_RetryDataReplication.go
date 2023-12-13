@@ -46,6 +46,9 @@ type RetryDataReplicationInput struct {
 
 type RetryDataReplicationOutput struct {
 
+	// The version of the DRS agent installed on the source server
+	AgentVersion *string
+
 	// The ARN of the Source Server.
 	Arn *string
 

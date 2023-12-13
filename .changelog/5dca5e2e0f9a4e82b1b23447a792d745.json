@@ -1,0 +1,8 @@
+{
+    "id": "5dca5e2e-0f9a-4e82-b1b2-3447a792d745",
+    "type": "feature",
+    "description": "Adding AgentVersion to SourceServer and RecoveryInstance structures",
+    "modules": [
+        "service/drs"
+    ]
+}

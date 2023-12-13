@@ -640,6 +640,9 @@ type PITPolicyRule struct {
 // A Recovery Instance is a replica of a Source Server running on EC2.
 type RecoveryInstance struct {
 
+	// The version of the DRS agent installed on the recovery instance
+	AgentVersion *string
+
 	// The ARN of the Recovery Instance.
 	Arn *string
 
@@ -1098,6 +1101,9 @@ type SourceProperties struct {
 }
 
 type SourceServer struct {
+
+	// The version of the DRS agent installed on the source server
+	AgentVersion *string
 
 	// The ARN of the Source Server.
 	Arn *string

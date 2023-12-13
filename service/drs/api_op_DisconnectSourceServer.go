@@ -51,6 +51,9 @@ type DisconnectSourceServerInput struct {
 
 type DisconnectSourceServerOutput struct {
 
+	// The version of the DRS agent installed on the source server
+	AgentVersion *string
+
 	// The ARN of the Source Server.
 	Arn *string
 
