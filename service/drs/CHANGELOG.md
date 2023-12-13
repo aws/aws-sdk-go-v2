@@ -1,3 +1,7 @@
+# v1.21.0 (2023-12-13)
+
+* **Feature**: Adding AgentVersion to SourceServer and RecoveryInstance structures
+
 # v1.20.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

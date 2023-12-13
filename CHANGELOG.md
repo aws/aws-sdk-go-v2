@@ -1,3 +1,9 @@
+# Release (2023-12-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.21.0](service/drs/CHANGELOG.md#v1210-2023-12-13)
+  * **Feature**: Adding AgentVersion to SourceServer and RecoveryInstance structures
+
 # Release (2023-12-12)
 
 ## Module Highlights
