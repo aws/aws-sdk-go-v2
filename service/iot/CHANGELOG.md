@@ -1,3 +1,7 @@
+# v1.47.0 (2023-12-14)
+
+* **Feature**: This release adds the ability to self-manage certificate signing in AWS IoT Core fleet provisioning using the new certificate provider resource.
+
 # v1.46.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

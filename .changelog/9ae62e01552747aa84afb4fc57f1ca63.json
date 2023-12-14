@@ -1,8 +1,0 @@
-{
-    "id": "9ae62e01-5527-47aa-84af-b4fc57f1ca63",
-    "type": "feature",
-    "description": "Amazon GameLift adds the ability to add and update the game properties of active game sessions.",
-    "modules": [
-        "service/gamelift"
-    ]
-}

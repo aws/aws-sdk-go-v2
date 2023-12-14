@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.25.5
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.22.5
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.29.5
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/athena v1.37.3
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.36.5
 	github.com/aws/aws-sdk-go-v2/service/batch v1.30.5
@@ -44,14 +44,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/emr v1.35.5
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.26.5
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.22.5
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.27.5
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.23.0
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/glue v1.72.4
 	github.com/aws/aws-sdk-go-v2/service/health v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/iam v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.19.5
-	github.com/aws/aws-sdk-go-v2/service/iot v1.46.5
+	github.com/aws/aws-sdk-go-v2/service/iot v1.47.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.24.5
 	github.com/aws/aws-sdk-go-v2/service/kms v1.27.5
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.49.5
@@ -85,7 +85,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.43.5
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.35.5
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.35.6
 	github.com/aws/smithy-go v1.19.0
 	github.com/google/go-cmp v0.5.8
 )

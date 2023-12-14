@@ -1,8 +1,0 @@
-{
-    "id": "8f6fcfdb-c738-4071-a5a9-8941903c5e03",
-    "type": "feature",
-    "description": "This is the initial SDK release for Amazon Neptune Analytics",
-    "modules": [
-        "service/neptunegraph"
-    ]
-}

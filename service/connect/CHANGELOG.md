@@ -1,3 +1,7 @@
+# v1.85.0 (2023-12-14)
+
+* **Feature**: This release adds support for more granular billing using tags (key:value pairs)
+
 # v1.84.2 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

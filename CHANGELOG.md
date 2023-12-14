@@ -1,3 +1,32 @@
+# Release (2023-12-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.30.0](service/appstream/CHANGELOG.md#v1300-2023-12-14)
+  * **Feature**: This release includes support for images of Windows Server 2022 platform.
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.9](service/b2bi/CHANGELOG.md#v100-preview9-2023-12-14)
+  * **Documentation**: Documentation updates for AWS B2B Data Interchange
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.14.0](service/billingconductor/CHANGELOG.md#v1140-2023-12-14)
+  * **Feature**: Billing Conductor is releasing a new API, GetBillingGroupCostReport, which provides the ability to retrieve/view the Billing Group Cost Report broken down by attributes for a specific billing group.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.85.0](service/connect/CHANGELOG.md#v1850-2023-12-14)
+  * **Feature**: This release adds support for more granular billing using tags (key:value pairs)
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.10.6](service/controltower/CHANGELOG.md#v1106-2023-12-14)
+  * **Documentation**: Documentation updates for AWS Control Tower.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.23.0](service/firehose/CHANGELOG.md#v1230-2023-12-14)
+  * **Feature**: This release, 1) adds configurable buffering hints for the Splunk destination, and 2) reduces the minimum configurable buffering interval for supported destinations
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.28.0](service/gamelift/CHANGELOG.md#v1280-2023-12-14)
+  * **Feature**: Amazon GameLift adds the ability to add and update the game properties of active game sessions.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.47.0](service/iot/CHANGELOG.md#v1470-2023-12-14)
+  * **Feature**: This release adds the ability to self-manage certificate signing in AWS IoT Core fleet provisioning using the new certificate provider resource.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.0.0](service/neptunegraph/CHANGELOG.md#v100-2023-12-14)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for Amazon Neptune Analytics
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.27.0](service/opensearch/CHANGELOG.md#v1270-2023-12-14)
+  * **Feature**: Updating documentation for Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.54.0](service/quicksight/CHANGELOG.md#v1540-2023-12-14)
+  * **Feature**: Update Dashboard Links support; SingleAxisOptions support; Scatterplot Query limit support.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.35.6](service/workspaces/CHANGELOG.md#v1356-2023-12-14)
+  * **Documentation**: Updated note to ensure customers understand running modes.
+
 # Release (2023-12-13)
 
 ## Module Highlights

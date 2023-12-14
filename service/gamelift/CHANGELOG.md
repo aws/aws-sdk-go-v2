@@ -1,3 +1,7 @@
+# v1.28.0 (2023-12-14)
+
+* **Feature**: Amazon GameLift adds the ability to add and update the game properties of active game sessions.
+
 # v1.27.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

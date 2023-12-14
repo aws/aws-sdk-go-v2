@@ -1,3 +1,7 @@
+# v1.10.6 (2023-12-14)
+
+* **Documentation**: Documentation updates for AWS Control Tower.
+
 # v1.10.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

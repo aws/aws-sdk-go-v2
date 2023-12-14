@@ -1,8 +1,0 @@
-{
-    "id": "c5adeb46-5044-4eff-af51-991e452601e3",
-    "type": "feature",
-    "description": "This release adds the ability to self-manage certificate signing in AWS IoT Core fleet provisioning using the new certificate provider resource.",
-    "modules": [
-        "service/iot"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.54.0 (2023-12-14)
+
+* **Feature**: Update Dashboard Links support; SingleAxisOptions support; Scatterplot Query limit support.
+
 # v1.53.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

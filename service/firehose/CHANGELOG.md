@@ -1,3 +1,7 @@
+# v1.23.0 (2023-12-14)
+
+* **Feature**: This release, 1) adds configurable buffering hints for the Splunk destination, and 2) reduces the minimum configurable buffering interval for supported destinations
+
 # v1.22.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

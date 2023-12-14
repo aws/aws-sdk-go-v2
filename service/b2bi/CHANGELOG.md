@@ -1,3 +1,7 @@
+# v1.0.0-preview.9 (2023-12-14)
+
+* **Documentation**: Documentation updates for AWS B2B Data Interchange
+
 # v1.0.0-preview.8 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.
