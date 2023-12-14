@@ -63,7 +63,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 60,
+                    "min": 0,
                     "max": 900
                 }
             }
@@ -325,7 +325,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 60,
+                    "min": 0,
                     "max": 900
                 }
             }
@@ -1775,7 +1775,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 60,
+                    "min": 0,
                     "max": 900
                 }
             }
@@ -2594,7 +2594,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2637,7 +2636,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2650,7 +2650,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2664,7 +2663,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2687,7 +2685,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2722,7 +2719,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2733,14 +2729,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2754,14 +2752,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2770,11 +2766,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2785,14 +2781,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2806,7 +2804,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2826,7 +2823,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2837,14 +2833,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2855,9 +2853,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -3650,7 +3650,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 60,
+                    "min": 0,
                     "max": 900
                 }
             }
@@ -4007,7 +4007,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 60,
+                    "min": 0,
                     "max": 900
                 }
             }
@@ -4039,6 +4039,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Kinesis Data Firehose throws this exception when an attempt to put records or to start\n         or stop delivery stream encryption fails. This happens when the KMS service throws one of\n         the following exception types: <code>AccessDeniedException</code>,\n            <code>InvalidStateException</code>, <code>DisabledException</code>, or\n            <code>NotFoundException</code>.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.firehose#InvalidSourceException": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.firehose#ErrorCode"
+                },
+                "message": {
+                    "target": "com.amazonaws.firehose#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Only requests from CloudWatch Logs are supported when CloudWatch Logs decompression is enabled.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4938,6 +4953,9 @@
                     "target": "com.amazonaws.firehose#InvalidKMSResourceException"
                 },
                 {
+                    "target": "com.amazonaws.firehose#InvalidSourceException"
+                },
+                {
                     "target": "com.amazonaws.firehose#ResourceNotFoundException"
                 },
                 {
@@ -4962,6 +4980,9 @@
                 },
                 {
                     "target": "com.amazonaws.firehose#InvalidKMSResourceException"
+                },
+                {
+                    "target": "com.amazonaws.firehose#InvalidSourceException"
                 },
                 {
                     "target": "com.amazonaws.firehose#ResourceNotFoundException"
@@ -5783,6 +5804,44 @@
                 "smithy.api#documentation": "<p>Details about a Kinesis data stream used as the source for a Kinesis Data Firehose\n         delivery stream.</p>"
             }
         },
+        "com.amazonaws.firehose#SplunkBufferingHints": {
+            "type": "structure",
+            "members": {
+                "IntervalInSeconds": {
+                    "target": "com.amazonaws.firehose#SplunkBufferingIntervalInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 60 (1 minute).</p>"
+                    }
+                },
+                "SizeInMBs": {
+                    "target": "com.amazonaws.firehose#SplunkBufferingSizeInMBs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.\n         \n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The buffering options. If no value is specified, the default values for Splunk are used.</p>"
+            }
+        },
+        "com.amazonaws.firehose#SplunkBufferingIntervalInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 60
+                }
+            }
+        },
+        "com.amazonaws.firehose#SplunkBufferingSizeInMBs": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.firehose#SplunkDestinationConfiguration": {
             "type": "structure",
             "members": {
@@ -5842,6 +5901,12 @@
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                    }
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#SplunkBufferingHints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The buffering options. If no value is specified, the default values for Splunk are used.</p>"
                     }
                 }
             },
@@ -5905,6 +5970,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
                     }
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#SplunkBufferingHints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The buffering options. If no value is specified, the default values for Splunk are used.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5966,6 +6037,12 @@
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                    }
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#SplunkBufferingHints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The buffering options. If no value is specified, the default values for Splunk are used.</p>"
                     }
                 }
             },

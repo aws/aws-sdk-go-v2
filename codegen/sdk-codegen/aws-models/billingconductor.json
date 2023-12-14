@@ -6,6 +6,9 @@
             "version": "2021-07-30",
             "operations": [
                 {
+                    "target": "com.amazonaws.billingconductor#GetBillingGroupCostReport"
+                },
+                {
                     "target": "com.amazonaws.billingconductor#ListAccountAssociations"
                 },
                 {
@@ -66,7 +69,7 @@
                         "X-Api-Key"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon Web Services Billing Conductor is a fully managed service that you can use\n      to customize a <a href=\"https://docs.aws.amazon.com/billingconductor/latest/userguide/understanding-eb.html#eb-other-definitions\">pro forma</a> version of your billing data each month, to accurately show or chargeback\n      your end customers. Amazon Web Services Billing Conductor doesn't change the way\n      you're billed by Amazon Web Services each month by design. Instead, it provides you with a\n      mechanism to configure, generate, and display rates to certain customers over a given billing\n      period. You can also analyze the difference between the rates you apply to your accounting\n      groupings relative to your actual rates from Amazon Web Services. As a result of your Amazon Web Services Billing Conductor configuration, the payer account can also see the\n      custom rate applied on the billing details page of the <a href=\"https://console.aws.amazon.com/billing\">Amazon Web Services Billing console</a>, or configure a cost and usage report per\n      billing group.</p>\n         <p>This documentation shows how you can configure Amazon Web Services Billing Conductor using its\n      API. For more information about using the <a href=\"https://console.aws.amazon.com/billingconductor/\">Amazon Web Services\n        Billing Conductor</a> user interface, see the <a href=\"https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html\"> Amazon Web Services Billing Conductor User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services Billing Conductor is a fully managed service that you can use to\n      customize a <a href=\"https://docs.aws.amazon.com/billingconductor/latest/userguide/understanding-eb.html#eb-other-definitions\">proforma</a> version of your billing data each month, to accurately show or chargeback\n      your end customers. Amazon Web Services Billing Conductor doesn't change the way you're billed\n      by Amazon Web Services each month by design. Instead, it provides you with a mechanism to\n      configure, generate, and display rates to certain customers over a given billing period. You\n      can also analyze the difference between the rates you apply to your accounting groupings\n      relative to your actual rates from Amazon Web Services. As a result of your Amazon Web Services\n      Billing Conductor configuration, the payer account can also see the custom rate applied on the\n      billing details page of the <a href=\"https://console.aws.amazon.com/billing\">Amazon Web Services Billing\n        console</a>, or configure a cost and usage report per billing group.</p>\n         <p>This documentation shows how you can configure Amazon Web Services Billing Conductor using its\n      API. For more information about using the <a href=\"https://console.aws.amazon.com/billingconductor/\">Amazon Web Services\n        Billing Conductor</a> user interface, see the <a href=\"https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html\"> Amazon Web Services Billing Conductor User Guide</a>.</p>",
                 "smithy.api#title": "AWSBillingConductor",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1131,6 +1134,32 @@
                 "smithy.api#pattern": "^((arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/)?[0-9]{12}|MONITORED|UNMONITORED)$"
             }
         },
+        "com.amazonaws.billingconductor#Attribute": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key in a key-value pair that describes the margin summary.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value in a key-value pair that describes the margin summary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The key-value pair that represents the attribute by which the\n                <code>BillingGroupCostReportResults</code> are grouped. For example, if you want a\n            service-level breakdown for Amazon Simple Storage Service (Amazon S3) of the billing group, the attribute will be a key-value pair\n            of <code>\"PRODUCT_NAME\"</code> and <code>\"S3\"</code>.</p>"
+            }
+        },
+        "com.amazonaws.billingconductor#AttributesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#Attribute"
+            }
+        },
         "com.amazonaws.billingconductor#BatchAssociateResourcesToCustomLineItem": {
             "type": "operation",
             "input": {
@@ -1399,6 +1428,62 @@
                 "target": "com.amazonaws.billingconductor#BillingGroupCostReportElement"
             }
         },
+        "com.amazonaws.billingconductor#BillingGroupCostReportResultElement": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.billingconductor#BillingGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) that uniquely identifies the billing group.</p>"
+                    }
+                },
+                "AWSCost": {
+                    "target": "com.amazonaws.billingconductor#AWSCost",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actual Amazon Web Services charges for the billing group.</p>"
+                    }
+                },
+                "ProformaCost": {
+                    "target": "com.amazonaws.billingconductor#ProformaCost",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hypothetical Amazon Web Services charges based on the associated pricing plan of a billing group.</p>"
+                    }
+                },
+                "Margin": {
+                    "target": "com.amazonaws.billingconductor#Margin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing group margin.</p>"
+                    }
+                },
+                "MarginPercentage": {
+                    "target": "com.amazonaws.billingconductor#MarginPercentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of the billing group margin.</p>"
+                    }
+                },
+                "Currency": {
+                    "target": "com.amazonaws.billingconductor#Currency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The displayed currency.</p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.billingconductor#AttributesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs that represent the attributes by which the\n                <code>BillingGroupCostReportResults</code> are grouped. For example, if you want the\n                Amazon S3 service-level breakdown of a billing group for November 2023, the\n            attributes list will contain a key-value pair of <code>\"PRODUCT_NAME\"</code> and\n                <code>\"S3\"</code> and a key-value pair of <code>\"BILLING_PERIOD\"</code> and\n                <code>\"Nov 2023\"</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A paginated call to retrieve a list of summary reports of actual Amazon Web Services charges and the\n            calculated Amazon Web Services charges, broken down by attributes.</p>"
+            }
+        },
+        "com.amazonaws.billingconductor#BillingGroupCostReportResultsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#BillingGroupCostReportResultElement"
+            }
+        },
         "com.amazonaws.billingconductor#BillingGroupDescription": {
             "type": "string",
             "traits": {
@@ -1540,6 +1625,28 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^\\d{4}-(0?[1-9]|1[012])$"
+            }
+        },
+        "com.amazonaws.billingconductor#BillingPeriodRange": {
+            "type": "structure",
+            "members": {
+                "InclusiveStartBillingPeriod": {
+                    "target": "com.amazonaws.billingconductor#BillingPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusive start billing period that defines a billing period range for the margin summary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExclusiveEndBillingPeriod": {
+                    "target": "com.amazonaws.billingconductor#BillingPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exclusive end billing period that defines a billing period range for the margin summary. For example, if you choose a billing period that starts in October 2023 and ends in December 2023, the margin summary will only include data from October 2023 and November 2023.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A time range for which the margin summary is effective. The time range can be up to 12 months.</p>"
             }
         },
         "com.amazonaws.billingconductor#ClientToken": {
@@ -1768,7 +1875,7 @@
                     "aws:TagKeys",
                     "aws:RequestTag/${TagKey}"
                 ],
-                "smithy.api#documentation": "<p>\n      Creates a custom line item that can be used to create a one-time fixed charge that can be applied to a single billing group for the current or previous billing period. The one-time fixed charge is either a fee or discount. \n    </p>",
+                "smithy.api#documentation": "<p>Creates a custom line item that can be used to create a one-time fixed charge that can be\n      applied to a single billing group for the current or previous billing period. The one-time\n      fixed charge is either a fee or discount. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-custom-line-item",
@@ -2708,7 +2815,7 @@
                 "Arn": {
                     "target": "com.amazonaws.billingconductor#CustomLineItemArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Then ARN of the deleted custom line item.\n    </p>"
+                        "smithy.api#documentation": "<p>The ARN of the deleted custom line item. </p>"
                     }
                 }
             }
@@ -3004,6 +3111,127 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>\n      The possible Amazon Web Services Free Tier configurations.\n    </p>"
+            }
+        },
+        "com.amazonaws.billingconductor#GetBillingGroupCostReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billingconductor#GetBillingGroupCostReportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.billingconductor#GetBillingGroupCostReportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billingconductor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billingconductor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billingconductor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billingconductor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billingconductor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the margin summary report, which includes the Amazon Web Services cost and charged \n      amount (pro forma cost) by Amazon Web Service for a specific billing group.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-billing-group-cost-report",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "BillingGroupCostReportResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.billingconductor#GetBillingGroupCostReportInput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.billingconductor#BillingGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) that uniquely identifies the billing group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BillingPeriodRange": {
+                    "target": "com.amazonaws.billingconductor#BillingPeriodRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A time range for which the margin summary is effective. You can specify up to 12 months.</p>"
+                    }
+                },
+                "GroupBy": {
+                    "target": "com.amazonaws.billingconductor#GroupByAttributesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of strings that specify the attributes that are used to break down costs in the\n      margin summary reports for the billing group. For example, you can view your costs by the\n      Amazon Web Service name or the billing period.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.billingconductor#MaxBillingGroupCostReportResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of margin summary reports to retrieve.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.billingconductor#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used on subsequent calls to get reports.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billingconductor#GetBillingGroupCostReportOutput": {
+            "type": "structure",
+            "members": {
+                "BillingGroupCostReportResults": {
+                    "target": "com.amazonaws.billingconductor#BillingGroupCostReportResultsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of margin summary reports.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.billingconductor#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used on subsequent calls to get reports.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billingconductor#GroupByAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PRODUCT_NAME",
+                        "name": "PRODUCT_NAME"
+                    },
+                    {
+                        "value": "BILLING_PERIOD",
+                        "name": "BILLING_PERIOD"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.billingconductor#GroupByAttributesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#GroupByAttributeName"
             }
         },
         "com.amazonaws.billingconductor#Instant": {
@@ -4411,6 +4639,15 @@
                         "name": "NOT_EQUAL"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.billingconductor#MaxBillingGroupCostReportResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 200,
+                    "max": 300
+                }
             }
         },
         "com.amazonaws.billingconductor#MaxBillingGroupResults": {

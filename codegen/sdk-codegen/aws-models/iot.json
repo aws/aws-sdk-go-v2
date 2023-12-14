@@ -94,6 +94,9 @@
                     "target": "com.amazonaws.iot#CreateCertificateFromCsr"
                 },
                 {
+                    "target": "com.amazonaws.iot#CreateCertificateProvider"
+                },
+                {
                     "target": "com.amazonaws.iot#CreateCustomMetric"
                 },
                 {
@@ -188,6 +191,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#DeleteCertificate"
+                },
+                {
+                    "target": "com.amazonaws.iot#DeleteCertificateProvider"
                 },
                 {
                     "target": "com.amazonaws.iot#DeleteCustomMetric"
@@ -299,6 +305,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#DescribeCertificate"
+                },
+                {
+                    "target": "com.amazonaws.iot#DescribeCertificateProvider"
                 },
                 {
                     "target": "com.amazonaws.iot#DescribeCustomMetric"
@@ -476,6 +485,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#ListCACertificates"
+                },
+                {
+                    "target": "com.amazonaws.iot#ListCertificateProviders"
                 },
                 {
                     "target": "com.amazonaws.iot#ListCertificates"
@@ -716,6 +728,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateCertificate"
+                },
+                {
+                    "target": "com.amazonaws.iot#UpdateCertificateProvider"
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateCustomMetric"
@@ -5483,6 +5498,84 @@
                 "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
+        "com.amazonaws.iot#CertificateProviderAccountDefaultForOperations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#CertificateProviderOperation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.iot#CertificateProviderArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.iot#CertificateProviderFunctionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.iot#CertificateProviderName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\w=,@-]+$"
+            }
+        },
+        "com.amazonaws.iot#CertificateProviderOperation": {
+            "type": "enum",
+            "members": {
+                "CreateCertificateFromCsr": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreateCertificateFromCsr"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#CertificateProviderSummary": {
+            "type": "structure",
+            "members": {
+                "certificateProviderName": {
+                    "target": "com.amazonaws.iot#CertificateProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the certificate provider.</p>"
+                    }
+                },
+                "certificateProviderArn": {
+                    "target": "com.amazonaws.iot#CertificateProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the certificate provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The certificate provider summary.</p>"
+            }
+        },
+        "com.amazonaws.iot#CertificateProviders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#CertificateProviderSummary"
+            }
+        },
         "com.amazonaws.iot#CertificateSigningRequest": {
             "type": "string",
             "traits": {
@@ -6511,6 +6604,109 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The output from the CreateCertificateFromCsr operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#CreateCertificateProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#CreateCertificateProviderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#CreateCertificateProviderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services IoT Core certificate provider. You can use Amazon Web Services IoT Core certificate provider to\n         customize how to sign a certificate signing request (CSR) in IoT fleet provisioning. For\n         more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provisioning-cert-provider.html\">Customizing certificate\n            signing using Amazon Web Services IoT Core certificate provider</a> from <i>Amazon Web Services IoT Core Developer\n            Guide</i>.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCertificateProvider</a> action.</p>\n         <important>\n            <p>After you create a certificate provider, the behavior of <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/fleet-provision-api.html#create-cert-csr\">\n                  <code>CreateCertificateFromCsr</code> API for fleet provisioning</a> will\n            change and all API calls to <code>CreateCertificateFromCsr</code> will invoke the\n            certificate provider to create the certificates. It can take up to a few minutes for\n            this behavior to change after a certificate provider is created.</p>\n         </important>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/certificate-providers/{certificateProviderName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#CreateCertificateProviderRequest": {
+            "type": "structure",
+            "members": {
+                "certificateProviderName": {
+                    "target": "com.amazonaws.iot#CertificateProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the certificate provider.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "lambdaFunctionArn": {
+                    "target": "com.amazonaws.iot#CertificateProviderFunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Lambda function that defines the authentication logic.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountDefaultForOperations": {
+                    "target": "com.amazonaws.iot#CertificateProviderAccountDefaultForOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the operations that the certificate provider will use to generate certificates. \n         Valid value: <code>CreateCertificateFromCsr</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iot#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that you can optionally pass in the <code>CreateCertificateProvider</code> request to make sure \n         the request is idempotent.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iot#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata which can be used to manage the certificate provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#CreateCertificateProviderResponse": {
+            "type": "structure",
+            "members": {
+                "certificateProviderName": {
+                    "target": "com.amazonaws.iot#CertificateProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the certificate provider.</p>"
+                    }
+                },
+                "certificateProviderArn": {
+                    "target": "com.amazonaws.iot#CertificateProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the certificate provider.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -9887,6 +10083,69 @@
                 }
             }
         },
+        "com.amazonaws.iot#DeleteCertificateProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#DeleteCertificateProviderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DeleteCertificateProviderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#DeleteConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a certificate provider.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteCertificateProvider</a> action.\n      </p>\n         <p>If you delete the certificate provider resource, the behavior of\n            <code>CreateCertificateFromCsr</code> will resume, and IoT will create\n         certificates signed by IoT from a certificate signing request (CSR).</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/certificate-providers/{certificateProviderName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#DeleteCertificateProviderRequest": {
+            "type": "structure",
+            "members": {
+                "certificateProviderName": {
+                    "target": "com.amazonaws.iot#CertificateProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the certificate provider.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#DeleteCertificateProviderResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iot#DeleteCertificateRequest": {
             "type": "structure",
             "members": {
@@ -12336,6 +12595,103 @@
                     "uri": "/certificates/{certificateId}",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.iot#DescribeCertificateProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#DescribeCertificateProviderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DescribeCertificateProviderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a certificate provider.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeCertificateProvider</a> action.\n      </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/certificate-providers/{certificateProviderName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#DescribeCertificateProviderRequest": {
+            "type": "structure",
+            "members": {
+                "certificateProviderName": {
+                    "target": "com.amazonaws.iot#CertificateProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the certificate provider.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#DescribeCertificateProviderResponse": {
+            "type": "structure",
+            "members": {
+                "certificateProviderName": {
+                    "target": "com.amazonaws.iot#CertificateProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the certificate provider.</p>"
+                    }
+                },
+                "certificateProviderArn": {
+                    "target": "com.amazonaws.iot#CertificateProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the certificate provider.</p>"
+                    }
+                },
+                "lambdaFunctionArn": {
+                    "target": "com.amazonaws.iot#CertificateProviderFunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Lambda function ARN that's associated with the certificate provider.</p>"
+                    }
+                },
+                "accountDefaultForOperations": {
+                    "target": "com.amazonaws.iot#CertificateProviderAccountDefaultForOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the operations that the certificate provider will use to generate certificates. \n         Valid value: <code>CreateCertificateFromCsr</code>.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date-time string that indicates when the certificate provider was created.</p>"
+                    }
+                },
+                "lastModifiedDate": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date-time string that indicates when the certificate provider was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iot#DescribeCertificateRequest": {
@@ -20651,6 +21007,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iot#ListCertificateProviders": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#ListCertificateProvidersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListCertificateProvidersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all your certificate providers in your Amazon Web Services account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListCertificateProviders</a> action.\n      </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/certificate-providers",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#ListCertificateProvidersRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.iot#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> if there are no more results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "ascendingOrder": {
+                    "target": "com.amazonaws.iot#AscendingOrder",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Returns the list of certificate providers in ascending alphabetical order.</p>",
+                        "smithy.api#httpQuery": "isAscendingOrder"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#ListCertificateProvidersResponse": {
+            "type": "structure",
+            "members": {
+                "certificateProviders": {
+                    "target": "com.amazonaws.iot#CertificateProviders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of certificate providers in your Amazon Web Services account.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iot#ListCertificates": {
             "type": "operation",
             "input": {
@@ -25681,7 +26114,7 @@
                 "exportMetric": {
                     "target": "com.amazonaws.iot#ExportMetric",
                     "traits": {
-                        "smithy.api#documentation": "<p>Value added in both Behavior and AdditionalMetricsToRetainV2 to indicate if Device\n            Defender Detect should export the corresponding metrics.</p>"
+                        "smithy.api#documentation": "<p>The value indicates exporting metrics related to the <code>MetricToRetain </code> when it's true.</p>"
                     }
                 }
             },
@@ -33184,6 +33617,91 @@
                     "uri": "/certificates/{certificateId}",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.iot#UpdateCertificateProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#UpdateCertificateProviderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#UpdateCertificateProviderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a certificate provider.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateCertificateProvider</a> action.\n      </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/certificate-providers/{certificateProviderName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#UpdateCertificateProviderRequest": {
+            "type": "structure",
+            "members": {
+                "certificateProviderName": {
+                    "target": "com.amazonaws.iot#CertificateProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the certificate provider.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "lambdaFunctionArn": {
+                    "target": "com.amazonaws.iot#CertificateProviderFunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Lambda function ARN that's associated with the certificate provider.</p>"
+                    }
+                },
+                "accountDefaultForOperations": {
+                    "target": "com.amazonaws.iot#CertificateProviderAccountDefaultForOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the operations that the certificate provider will use to generate certificates. \n         Valid value: <code>CreateCertificateFromCsr</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#UpdateCertificateProviderResponse": {
+            "type": "structure",
+            "members": {
+                "certificateProviderName": {
+                    "target": "com.amazonaws.iot#CertificateProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the certificate provider.</p>"
+                    }
+                },
+                "certificateProviderArn": {
+                    "target": "com.amazonaws.iot#CertificateProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the certificate provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iot#UpdateCertificateRequest": {

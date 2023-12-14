@@ -5676,6 +5676,9 @@
                         "smithy.api#documentation": "<p>The label options (label text, label visibility, and sort icon visibility) of a combo chart's secondary y-axis(line) field well.</p>"
                     }
                 },
+                "SingleAxisOptions": {
+                    "target": "com.amazonaws.quicksight#SingleAxisOptions"
+                },
                 "ColorLabelOptions": {
                     "target": "com.amazonaws.quicksight#ChartAxisLabelOptions",
                     "traits": {
@@ -6510,7 +6513,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon QuickSight account, or subscribes to Amazon QuickSight Q.</p>\n         <p>The Amazon Web Services Region for the account is derived from what is configured in the\n          CLI or SDK. This operation isn't supported in the US East (Ohio) Region, South America (Sao Paulo) Region, or Asia\n            Pacific (Singapore) Region.  </p>\n         <p>Before you use this operation, make sure that you can connect to an existing Amazon Web Services account. If you don't have an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/setting-up-aws-sign-up.html\">Sign\n                up for Amazon Web Services</a> in the <i>Amazon QuickSight User\n                Guide</i>. The person who signs up for Amazon QuickSight needs to have the\n            correct Identity and Access Management (IAM) permissions. For more information,\n            see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/iam-policy-examples.html\">IAM Policy Examples for Amazon QuickSight</a> in the\n                    <i>Amazon QuickSight User Guide</i>.</p>\n         <p>If your IAM policy includes both the <code>Subscribe</code> and\n                <code>CreateAccountSubscription</code> actions, make sure that both actions are set\n            to <code>Allow</code>. If either action is set to <code>Deny</code>, the\n                <code>Deny</code> action prevails and your API call fails.</p>\n         <p>You can't pass an existing IAM role to access other Amazon Web Services services using this API operation. To pass your existing IAM role to\n                Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html#security-create-iam-role\">Passing IAM roles to Amazon QuickSight</a> in the\n                    <i>Amazon QuickSight User Guide</i>.</p>\n         <p>You can't set default resource access on the new account from the Amazon QuickSight\n            API. Instead, add default resource access from the Amazon QuickSight console. For more\n            information about setting default resource access to Amazon Web Services services, see\n                <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/scoping-policies-defaults.html\">Setting default resource\n                access to Amazon Web Services services</a> in the <i>Amazon QuickSight\n                User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon QuickSight account, or subscribes to Amazon QuickSight Q.</p>\n         <p>The Amazon Web Services Region for the account is derived from what is configured in the\n          CLI or SDK.</p>\n         <p>Before you use this operation, make sure that you can connect to an existing Amazon Web Services account. If you don't have an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/setting-up-aws-sign-up.html\">Sign\n                up for Amazon Web Services</a> in the <i>Amazon QuickSight User\n                Guide</i>. The person who signs up for Amazon QuickSight needs to have the\n            correct Identity and Access Management (IAM) permissions. For more information,\n            see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/iam-policy-examples.html\">IAM Policy Examples for Amazon QuickSight</a> in the\n                    <i>Amazon QuickSight User Guide</i>.</p>\n         <p>If your IAM policy includes both the <code>Subscribe</code> and\n                <code>CreateAccountSubscription</code> actions, make sure that both actions are set\n            to <code>Allow</code>. If either action is set to <code>Deny</code>, the\n                <code>Deny</code> action prevails and your API call fails.</p>\n         <p>You can't pass an existing IAM role to access other Amazon Web Services services using this API operation. To pass your existing IAM role to\n                Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html#security-create-iam-role\">Passing IAM roles to Amazon QuickSight</a> in the\n                    <i>Amazon QuickSight User Guide</i>.</p>\n         <p>You can't set default resource access on the new account from the Amazon QuickSight\n            API. Instead, add default resource access from the Amazon QuickSight console. For more\n            information about setting default resource access to Amazon Web Services services, see\n                <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/scoping-policies-defaults.html\">Setting default resource\n                access to Amazon Web Services services</a> in the <i>Amazon QuickSight\n                User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/account/{AwsAccountId}",
@@ -6960,6 +6963,12 @@
                     "target": "com.amazonaws.quicksight#LinkSharingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that contains the permissions of a shareable link to the dashboard.</p>"
+                    }
+                },
+                "LinkEntities": {
+                    "target": "com.amazonaws.quicksight#LinkEntityArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.</p>"
                     }
                 }
             },
@@ -9963,6 +9972,12 @@
                     "target": "com.amazonaws.quicksight#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The last time that this dashboard was updated.</p>"
+                    }
+                },
+                "LinkEntities": {
+                    "target": "com.amazonaws.quicksight#LinkEntityArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.</p>"
                     }
                 }
             },
@@ -27649,6 +27664,9 @@
                         "smithy.api#documentation": "<p>The options that determine the presentation of the secondary y-axis label.</p>"
                     }
                 },
+                "SingleAxisOptions": {
+                    "target": "com.amazonaws.quicksight#SingleAxisOptions"
+                },
                 "DefaultSeriesSettings": {
                     "target": "com.amazonaws.quicksight#LineChartDefaultSeriesSettings",
                     "traits": {
@@ -28031,6 +28049,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The series axis configuration of a line chart.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#LinkEntityArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:aws:quicksight:[\\w\\-]+:\\d+:analysis/[\\w\\-]{1,512}$"
+            }
+        },
+        "com.amazonaws.quicksight#LinkEntityArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#LinkEntityArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.quicksight#LinkSharingConfiguration": {
@@ -36225,6 +36265,9 @@
                     "target": "com.amazonaws.quicksight#UpdateDashboard"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#UpdateDashboardLinks"
+                },
+                {
                     "target": "com.amazonaws.quicksight#UpdateDashboardPermissions"
                 },
                 {
@@ -39564,6 +39607,12 @@
                         "smithy.api#documentation": "<p>The field wells of the visual.</p>"
                     }
                 },
+                "SortConfiguration": {
+                    "target": "com.amazonaws.quicksight#ScatterPlotSortConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort configuration of a scatter plot.</p>"
+                    }
+                },
                 "XAxisLabelOptions": {
                     "target": "com.amazonaws.quicksight#ChartAxisLabelOptions",
                     "traits": {
@@ -39635,6 +39684,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The field well configuration of a scatter plot.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ScatterPlotSortConfiguration": {
+            "type": "structure",
+            "members": {
+                "ScatterPlotLimitConfiguration": {
+                    "target": "com.amazonaws.quicksight#ItemsLimitConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sort configuration of a scatter plot.</p>"
             }
         },
         "com.amazonaws.quicksight#ScatterPlotUnaggregatedFieldWells": {
@@ -41786,6 +41846,31 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#SingleAxisOptions": {
+            "type": "structure",
+            "members": {
+                "YAxisOptions": {
+                    "target": "com.amazonaws.quicksight#YAxisOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Y axis options of a single axis configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings of a chart's single axis configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SingleYAxisOption": {
+            "type": "enum",
+            "members": {
+                "PRIMARY_Y_AXIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIMARY_Y_AXIS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#SiteBaseUrl": {
             "type": "string",
             "traits": {
@@ -42314,7 +42399,8 @@
                 "BucketConfiguration": {
                     "target": "com.amazonaws.quicksight#S3BucketConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains details about the Amazon S3 bucket that the generated dashboard snapshot is saved in.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains details about the Amazon S3 bucket that the generated dashboard snapshot is saved in.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -48258,6 +48344,108 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#UpdateDashboardLinks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateDashboardLinksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateDashboardLinksResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the linked analyses on a dashboard.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/linked-entities",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateDashboardLinksRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the dashboard whose links you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DashboardId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the dashboard.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LinkEntities": {
+                    "target": "com.amazonaws.quicksight#LinkEntityArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateDashboardLinksResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "DashboardArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dashboard.</p>"
+                    }
+                },
+                "LinkEntities": {
+                    "target": "com.amazonaws.quicksight#LinkEntityArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateDashboardPermissions": {
             "type": "operation",
             "input": {
@@ -53005,6 +53193,21 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.quicksight#YAxisOptions": {
+            "type": "structure",
+            "members": {
+                "YAxis": {
+                    "target": "com.amazonaws.quicksight#SingleYAxisOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Y axis type to be used in the chart.</p>\n         <p>If you choose <code>PRIMARY_Y_AXIS</code>, the primary Y Axis is located on the leftmost vertical axis of the chart.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The options that are available for a single Y axis in a chart.</p>"
             }
         }
     }

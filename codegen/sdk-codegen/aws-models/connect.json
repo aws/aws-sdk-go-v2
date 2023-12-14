@@ -387,7 +387,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -1190,10 +1190,16 @@
                     "target": "com.amazonaws.connect#SuspendContactRecording"
                 },
                 {
+                    "target": "com.amazonaws.connect#TagContact"
+                },
+                {
                     "target": "com.amazonaws.connect#TagResource"
                 },
                 {
                     "target": "com.amazonaws.connect#TransferContact"
+                },
+                {
+                    "target": "com.amazonaws.connect#UntagContact"
                 },
                 {
                     "target": "com.amazonaws.connect#UntagResource"
@@ -3425,7 +3431,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Associates a list of analytics datasets for a given Amazon Connect instance to a target account. You can\n   associate multiple datasets in a single call.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Associates a list of analytics datasets for a given Amazon Connect instance to a target\n   account. You can associate multiple datasets in a single call.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/analytics-data/instance/{InstanceId}/associations",
@@ -3474,7 +3480,7 @@
                 "Errors": {
                     "target": "com.amazonaws.connect#ErrorResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of errors for datasets that aren't successfully associated \n   with the target account.</p>"
+                        "smithy.api#documentation": "<p>A list of errors for datasets that aren't successfully associated with the target\n   account.</p>"
                     }
                 }
             },
@@ -3893,7 +3899,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ChatContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>Content of the message or event. This is required when <code>Type</code> is\n    <code>MESSAGE</code> and for certain <code>ContentTypes</code> when <code>Type</code> is\n    <code>EVENT</code>.</p>\n         <ul>\n            <li>\n               <p>For allowed message content, see the <code>Content</code> parameter in the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendMessage.html\">SendMessage</a> topic\n     in the <i>Amazon Connect Participant Service API Reference</i>.</p>\n            </li>\n            <li>\n               <p>For allowed event content, see the <code>Content</code> parameter in the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html\">SendEvent</a> topic in the <i>Amazon Connect Participant Service API\n      Reference</i>. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Content of the message or event. This is required when <code>Type</code> is\n    <code>MESSAGE</code> and for certain <code>ContentTypes</code> when <code>Type</code> is\n    <code>EVENT</code>.</p>\n         <ul>\n            <li>\n               <p>For allowed message content, see the <code>Content</code> parameter in the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendMessage.html\">SendMessage</a> topic in the <i>Amazon Connect Participant Service API\n      Reference</i>.</p>\n            </li>\n            <li>\n               <p>For allowed event content, see the <code>Content</code> parameter in the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html\">SendEvent</a> topic in the <i>Amazon Connect Participant Service API\n      Reference</i>. </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4053,7 +4059,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "ClientToken": {
@@ -4142,7 +4148,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "PhoneNumberStatus": {
@@ -4318,6 +4324,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about Amazon Connect Wisdom.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#ContactTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags associated with the contact. This contains both Amazon Web Services generated and user-defined tags.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4442,7 +4454,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -4513,7 +4525,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -4952,6 +4964,52 @@
                 }
             }
         },
+        "com.amazonaws.connect#ContactTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.connect#ContactTagKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ContactTagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.connect#ContactTagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#ContactTagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#ContactTagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.connect#ContactTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.connect#Content": {
             "type": "string",
             "traits": {
@@ -5076,7 +5134,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -5230,7 +5288,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "ClientToken": {
@@ -5306,7 +5364,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -5524,7 +5582,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -5631,7 +5689,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, <code>{ \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }</code>.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, <code>{\n    \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }</code>.</p>"
                     }
                 }
             },
@@ -5739,7 +5797,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -6023,7 +6081,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -6144,7 +6202,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -6246,7 +6304,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -6362,7 +6420,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "AgentAvailabilityTimer": {
@@ -6599,7 +6657,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "AllowedAccessControlTags": {
@@ -6847,7 +6905,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -6938,7 +6996,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -7073,7 +7131,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -7167,7 +7225,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -7487,7 +7545,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -12163,7 +12221,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -12373,7 +12431,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -14645,7 +14703,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -14827,7 +14885,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -15475,7 +15533,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -15794,7 +15852,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "ClientToken": {
@@ -16909,7 +16967,7 @@
                 "Results": {
                     "target": "com.amazonaws.connect#AnalyticsDataAssociationResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of successful results: <code>DataSetId</code>, <code>TargetAccountId</code>,\n   <code>ResourceShareId</code>, <code>ResourceShareArn</code>. This is a paginated API, so\n   <code>nextToken</code> is given if there are more results to be returned.</p>"
+                        "smithy.api#documentation": "<p>An array of successful results: <code>DataSetId</code>, <code>TargetAccountId</code>,\n    <code>ResourceShareId</code>, <code>ResourceShareArn</code>. This is a paginated API, so\n    <code>nextToken</code> is given if there are more results to be returned.</p>"
                     }
                 },
                 "NextToken": {
@@ -21470,7 +21528,7 @@
                 "UserTags": {
                     "target": "com.amazonaws.connect#UserTagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }. Amazon Connect users with the specified tags will be notified.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }. Amazon Connect users with the specified tags will be notified.</p>"
                     }
                 },
                 "UserIds": {
@@ -23673,7 +23731,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -24047,7 +24105,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -24358,7 +24416,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -25909,7 +25967,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "NumberOfAssociatedQueues": {
@@ -26303,7 +26361,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -27649,7 +27707,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "AllowedAccessControlTags": {
@@ -27800,7 +27858,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -27963,7 +28021,7 @@
                 "DestinationId": {
                     "target": "com.amazonaws.connect#DestinationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Chat system identifier, used in part to uniquely identify chat. This is associated with the\n  Amazon Connect instance and flow to be used to start chats. For SMS, this is the phone\n   number destination of inbound SMS messages represented by an Amazon Pinpoint phone number ARN.</p>",
+                        "smithy.api#documentation": "<p>Chat system identifier, used in part to uniquely identify chat. This is associated with the\n    Amazon Connect instance and flow to be used to start chats. For SMS, this is the phone\n   number destination of inbound SMS messages represented by an Amazon Pinpoint phone number\n   ARN.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -28331,7 +28389,7 @@
                 "SegmentAttributes": {
                     "target": "com.amazonaws.connect#SegmentAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments using an\n   attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in\n   flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p>\n         <note>\n            <p>The types <code>application/vnd.amazonaws.connect.message.interactive</code> and\n    <code>application/vnd.amazonaws.connect.message.interactive.response</code> must be present in the\n    SupportedMessagingContentTypes field of this API in order to set <code>SegmentAttributes</code> as {<code>\n     \"connect:Subtype\": {\"valueString\" : \"connect:Guide\" }}</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments using an\n   attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in\n   flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p>\n         <note>\n            <p>The types <code>application/vnd.amazonaws.connect.message.interactive</code> and\n     <code>application/vnd.amazonaws.connect.message.interactive.response</code> must be present in\n    the SupportedMessagingContentTypes field of this API in order to set\n     <code>SegmentAttributes</code> as {<code> \"connect:Subtype\": {\"valueString\" : \"connect:Guide\"\n     }}</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -29593,6 +29651,77 @@
                 "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition, for example, <code>HAVE\n    BPO = 123</code>. </p>"
             }
         },
+        "com.amazonaws.connect#TagContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#TagContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#TagContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds the specified tags to the contact resource. For more information about this API is used, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html\">Set up granular billing for a detailed\n    view of your Amazon Connect usage</a>.\n  </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/contact/tags",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connect#TagContactRequest": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#ContactTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be assigned to the contact resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>\n         <note>\n            <p>Authorization is not supported by this tag.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#TagContactResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#TagKey": {
             "type": "string",
             "traits": {
@@ -29693,7 +29822,7 @@
                 "tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -30357,7 +30486,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "IsDefault": {
@@ -30669,6 +30798,80 @@
                         "smithy.api#enumValue": "PERCENT"
                     }
                 }
+            }
+        },
+        "com.amazonaws.connect#UntagContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UntagContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UntagContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified tags from the contact resource. For more information about this API is used, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html\">Set up granular billing for a detailed\n   view of your Amazon Connect usage</a>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/contact/tags/{InstanceId}/{ContactId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connect#UntagContactRequest": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.connect#ContactTagKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag keys. Existing tags on the contact whose keys are members of this list will be removed.</p>",
+                        "smithy.api#httpQuery": "TagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UntagContactResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connect#UntagResource": {
@@ -34690,7 +34893,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "Username": {
@@ -35223,7 +35426,7 @@
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
