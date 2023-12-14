@@ -14,10 +14,9 @@ import (
 )
 
 // Creates a partnership between a customer and a trading partner, based on the
-// supplied parameters. Partnerships link trading partners with your profile and a
-// specific transformer, so that the EDI (electronic data interchange) documents
-// that they upload to Amazon S3 can be processed according to their
-// specifications.
+// supplied parameters. A partnership represents the connection between you and
+// your trading partner. It ties together a profile and one or more trading
+// capabilities.
 func (c *Client) CreatePartnership(ctx context.Context, params *CreatePartnershipInput, optFns ...func(*Options)) (*CreatePartnershipOutput, error) {
 	if params == nil {
 		params = &CreatePartnershipInput{}

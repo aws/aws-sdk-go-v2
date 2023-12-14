@@ -14,8 +14,8 @@ import (
 )
 
 // Updates some of the parameters for a capability, based on the specified
-// parameters. Capabilities contain the information necessary to process incoming
-// EDI (electronic data interchange) documents.
+// parameters. A trading capability contains the information required to transform
+// incoming EDI documents into JSON or XML outputs.
 func (c *Client) UpdateCapability(ctx context.Context, params *UpdateCapabilityInput, optFns ...func(*Options)) (*UpdateCapabilityOutput, error) {
 	if params == nil {
 		params = &UpdateCapabilityInput{}

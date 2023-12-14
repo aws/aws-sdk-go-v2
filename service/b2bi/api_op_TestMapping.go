@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Maps the input file according to the provided template file.
+// Maps the input file according to the provided template file. The API call
+// downloads the file contents from the Amazon S3 location, and passes the contents
+// in as a string, to the inputFileContent parameter.
 func (c *Client) TestMapping(ctx context.Context, params *TestMappingInput, optFns ...func(*Options)) (*TestMappingOutput, error) {
 	if params == nil {
 		params = &TestMappingInput{}
@@ -36,8 +38,8 @@ type TestMappingInput struct {
 	// This member is required.
 	FileFormat types.FileFormat
 
-	// Specify the EDI (electronic data interchange) file that is used as input for
-	// the transform.
+	// Specify the contents of the EDI (electronic data interchange) XML or JSON file
+	// that is used as input for the transform.
 	//
 	// This member is required.
 	InputFileContent *string

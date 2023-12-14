@@ -44,7 +44,7 @@ type DeleteCustomLineItemInput struct {
 
 type DeleteCustomLineItemOutput struct {
 
-	// Then ARN of the deleted custom line item.
+	// The ARN of the deleted custom line item.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.

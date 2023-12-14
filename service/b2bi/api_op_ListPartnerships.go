@@ -13,10 +13,9 @@ import (
 )
 
 // Lists the partnerships associated with your Amazon Web Services account for
-// your current or specified region. Partnerships link trading partners with your
-// profile and a specific transformer, so that the EDI (electronic data
-// interchange) documents that they upload to Amazon S3 can be processed according
-// to their specifications.
+// your current or specified region. A partnership represents the connection
+// between you and your trading partner. It ties together a profile and one or more
+// trading capabilities.
 func (c *Client) ListPartnerships(ctx context.Context, params *ListPartnershipsInput, optFns ...func(*Options)) (*ListPartnershipsOutput, error) {
 	if params == nil {
 		params = &ListPartnershipsInput{}

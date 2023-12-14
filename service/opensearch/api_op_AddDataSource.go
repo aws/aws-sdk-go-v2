@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the data source on the domain.
+// Creates a new direct-query data source to the specified domain. For more
+// information, see Creating Amazon OpenSearch Service data source integrations
+// with Amazon S3 (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html)
+// .
 func (c *Client) AddDataSource(ctx context.Context, params *AddDataSourceInput, optFns ...func(*Options)) (*AddDataSourceOutput, error) {
 	if params == nil {
 		params = &AddDataSourceInput{}
@@ -36,12 +39,12 @@ type AddDataSourceInput struct {
 	// This member is required.
 	DataSourceType types.DataSourceType
 
-	// The name of the domain.
+	// The name of the domain to add the data source to.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The name of the data source.
+	// A name for the data source.
 	//
 	// This member is required.
 	Name *string
@@ -55,7 +58,7 @@ type AddDataSourceInput struct {
 // The result of an AddDataSource operation.
 type AddDataSourceOutput struct {
 
-	// A message associated with the data source.
+	// A message associated with creation of the data source.
 	Message *string
 
 	// Metadata pertaining to the operation's result.

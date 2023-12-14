@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Updates the specified parameters for a profile. Profiles contain basic
-// information about you and your business.
+// Updates the specified parameters for a profile. A profile is the mechanism used
+// to create the concept of a private network.
 func (c *Client) UpdateProfile(ctx context.Context, params *UpdateProfileInput, optFns ...func(*Options)) (*UpdateProfileOutput, error) {
 	if params == nil {
 		params = &UpdateProfileInput{}

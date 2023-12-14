@@ -3605,6 +3605,22 @@ func (SimpleTotalAggregationFunction) Values() []SimpleTotalAggregationFunction 
 	}
 }
 
+type SingleYAxisOption string
+
+// Enum values for SingleYAxisOption
+const (
+	SingleYAxisOptionPrimaryYAxis SingleYAxisOption = "PRIMARY_Y_AXIS"
+)
+
+// Values returns all known values for SingleYAxisOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SingleYAxisOption) Values() []SingleYAxisOption {
+	return []SingleYAxisOption{
+		"PRIMARY_Y_AXIS",
+	}
+}
+
 type SmallMultiplesAxisPlacement string
 
 // Enum values for SmallMultiplesAxisPlacement

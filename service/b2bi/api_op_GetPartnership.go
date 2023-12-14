@@ -13,9 +13,8 @@ import (
 )
 
 // Retrieves the details for a partnership, based on the partner and profile IDs
-// specified. Partnerships link trading partners with your profile and a specific
-// transformer, so that the EDI (electronic data interchange) documents that they
-// upload to Amazon S3 can be processed according to their specifications.
+// specified. A partnership represents the connection between you and your trading
+// partner. It ties together a profile and one or more trading capabilities.
 func (c *Client) GetPartnership(ctx context.Context, params *GetPartnershipInput, optFns ...func(*Options)) (*GetPartnershipOutput, error) {
 	if params == nil {
 		params = &GetPartnershipInput{}

@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the data source on the domain.
+// Updates a direct-query data source. For more information, see Working with
+// Amazon OpenSearch Service data source integrations with Amazon S3 (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html)
+// .
 func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceInput, optFns ...func(*Options)) (*UpdateDataSourceOutput, error) {
 	if params == nil {
 		params = &UpdateDataSourceInput{}
@@ -41,12 +43,12 @@ type UpdateDataSourceInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The name of the data source.
+	// The name of the data source to modify.
 	//
 	// This member is required.
 	Name *string
 
-	// A description of the data source.
+	// A new description of the data source.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -55,7 +57,7 @@ type UpdateDataSourceInput struct {
 // The result of an UpdateDataSource operation.
 type UpdateDataSourceOutput struct {
 
-	// A message associated with the data source.
+	// A message associated with the updated data source.
 	Message *string
 
 	// Metadata pertaining to the operation's result.

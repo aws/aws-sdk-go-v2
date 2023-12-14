@@ -694,6 +694,9 @@ func awsAwsjson11_deserializeOpErrorPutRecord(response *smithyhttp.Response, met
 	case strings.EqualFold("InvalidKMSResourceException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKMSResourceException(response, errorBody)
 
+	case strings.EqualFold("InvalidSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidSourceException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -813,6 +816,9 @@ func awsAwsjson11_deserializeOpErrorPutRecordBatch(response *smithyhttp.Response
 
 	case strings.EqualFold("InvalidKMSResourceException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKMSResourceException(response, errorBody)
+
+	case strings.EqualFold("InvalidSourceException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidSourceException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -1523,6 +1529,41 @@ func awsAwsjson11_deserializeErrorInvalidKMSResourceException(response *smithyht
 
 	output := &types.InvalidKMSResourceException{}
 	err := awsAwsjson11_deserializeDocumentInvalidKMSResourceException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorInvalidSourceException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.InvalidSourceException{}
+	err := awsAwsjson11_deserializeDocumentInvalidSourceException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -3902,6 +3943,55 @@ func awsAwsjson11_deserializeDocumentInvalidKMSResourceException(v **types.Inval
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInvalidSourceException(v **types.InvalidSourceException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidSourceException
+	if *v == nil {
+		sv = &types.InvalidSourceException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentKinesisStreamSourceDescription(v **types.KinesisStreamSourceDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5512,6 +5602,63 @@ func awsAwsjson11_deserializeDocumentSourceDescription(v **types.SourceDescripti
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSplunkBufferingHints(v **types.SplunkBufferingHints, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SplunkBufferingHints
+	if *v == nil {
+		sv = &types.SplunkBufferingHints{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IntervalInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SplunkBufferingIntervalInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IntervalInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "SizeInMBs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SplunkBufferingSizeInMBs to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeInMBs = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSplunkDestinationDescription(v **types.SplunkDestinationDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5534,6 +5681,11 @@ func awsAwsjson11_deserializeDocumentSplunkDestinationDescription(v **types.Splu
 
 	for key, value := range shape {
 		switch key {
+		case "BufferingHints":
+			if err := awsAwsjson11_deserializeDocumentSplunkBufferingHints(&sv.BufferingHints, value); err != nil {
+				return err
+			}
+
 		case "CloudWatchLoggingOptions":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err

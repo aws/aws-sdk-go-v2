@@ -1,0 +1,8 @@
+{
+    "id": "49dd4553-69ea-4c93-88af-4baad1fa1794",
+    "type": "documentation",
+    "description": "Documentation updates for AWS B2B Data Interchange",
+    "modules": [
+        "service/b2bi"
+    ]
+}

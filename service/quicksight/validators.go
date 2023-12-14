@@ -2890,6 +2890,26 @@ func (m *validateOpUpdateDashboard) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDashboardLinks struct {
+}
+
+func (*validateOpUpdateDashboardLinks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDashboardLinks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDashboardLinksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDashboardLinksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDashboardPermissions struct {
 }
 
@@ -3984,6 +4004,10 @@ func addOpUpdateAnalysisPermissionsValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDashboard{}, middleware.After)
+}
+
+func addOpUpdateDashboardLinksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDashboardLinks{}, middleware.After)
 }
 
 func addOpUpdateDashboardPermissionsValidationMiddleware(stack *middleware.Stack) error {
@@ -6625,6 +6649,11 @@ func validateComboChartConfiguration(v *types.ComboChartConfiguration) error {
 	if v.SecondaryYAxisLabelOptions != nil {
 		if err := validateChartAxisLabelOptions(v.SecondaryYAxisLabelOptions); err != nil {
 			invalidParams.AddNested("SecondaryYAxisLabelOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SingleAxisOptions != nil {
+		if err := validateSingleAxisOptions(v.SingleAxisOptions); err != nil {
+			invalidParams.AddNested("SingleAxisOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ColorLabelOptions != nil {
@@ -11489,6 +11518,11 @@ func validateLineChartConfiguration(v *types.LineChartConfiguration) error {
 			invalidParams.AddNested("SecondaryYAxisLabelOptions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SingleAxisOptions != nil {
+		if err := validateSingleAxisOptions(v.SingleAxisOptions); err != nil {
+			invalidParams.AddNested("SingleAxisOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Series != nil {
 		if err := validateSeriesItemList(v.Series); err != nil {
 			invalidParams.AddNested("Series", err.(smithy.InvalidParamsError))
@@ -14886,6 +14920,23 @@ func validateSheetVisualScopingConfigurations(v []types.SheetVisualScopingConfig
 	}
 }
 
+func validateSingleAxisOptions(v *types.SingleAxisOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SingleAxisOptions"}
+	if v.YAxisOptions != nil {
+		if err := validateYAxisOptions(v.YAxisOptions); err != nil {
+			invalidParams.AddNested("YAxisOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSmallMultiplesDimensionFieldList(v []types.DimensionField) error {
 	if v == nil {
 		return nil
@@ -15096,7 +15147,9 @@ func validateSnapshotS3DestinationConfiguration(v *types.SnapshotS3DestinationCo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SnapshotS3DestinationConfiguration"}
-	if v.BucketConfiguration != nil {
+	if v.BucketConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketConfiguration"))
+	} else if v.BucketConfiguration != nil {
 		if err := validateS3BucketConfiguration(v.BucketConfiguration); err != nil {
 			invalidParams.AddNested("BucketConfiguration", err.(smithy.InvalidParamsError))
 		}
@@ -17498,6 +17551,21 @@ func validateWordCloudVisual(v *types.WordCloudVisual) error {
 		if err := validateColumnHierarchyList(v.ColumnHierarchies); err != nil {
 			invalidParams.AddNested("ColumnHierarchies", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateYAxisOptions(v *types.YAxisOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "YAxisOptions"}
+	if len(v.YAxis) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("YAxis"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20614,6 +20682,27 @@ func validateOpUpdateDashboardInput(v *UpdateDashboardInput) error {
 		if err := validateValidationStrategy(v.ValidationStrategy); err != nil {
 			invalidParams.AddNested("ValidationStrategy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDashboardLinksInput(v *UpdateDashboardLinksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDashboardLinksInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if v.LinkEntities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkEntities"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

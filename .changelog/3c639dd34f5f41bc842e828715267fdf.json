@@ -1,0 +1,8 @@
+{
+    "id": "3c639dd3-4f5f-41bc-842e-828715267fdf",
+    "type": "feature",
+    "description": "This release, 1) adds configurable buffering hints for the Splunk destination, and 2) reduces the minimum configurable buffering interval for supported destinations",
+    "modules": [
+        "service/firehose"
+    ]
+}

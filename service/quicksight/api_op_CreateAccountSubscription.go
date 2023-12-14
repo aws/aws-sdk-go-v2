@@ -14,11 +14,9 @@ import (
 
 // Creates an Amazon QuickSight account, or subscribes to Amazon QuickSight Q. The
 // Amazon Web Services Region for the account is derived from what is configured in
-// the CLI or SDK. This operation isn't supported in the US East (Ohio) Region,
-// South America (Sao Paulo) Region, or Asia Pacific (Singapore) Region. Before you
-// use this operation, make sure that you can connect to an existing Amazon Web
-// Services account. If you don't have an Amazon Web Services account, see Sign up
-// for Amazon Web Services (https://docs.aws.amazon.com/quicksight/latest/user/setting-up-aws-sign-up.html)
+// the CLI or SDK. Before you use this operation, make sure that you can connect to
+// an existing Amazon Web Services account. If you don't have an Amazon Web
+// Services account, see Sign up for Amazon Web Services (https://docs.aws.amazon.com/quicksight/latest/user/setting-up-aws-sign-up.html)
 // in the Amazon QuickSight User Guide. The person who signs up for Amazon
 // QuickSight needs to have the correct Identity and Access Management (IAM)
 // permissions. For more information, see IAM Policy Examples for Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/iam-policy-examples.html)

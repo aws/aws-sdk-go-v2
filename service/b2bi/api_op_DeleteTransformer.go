@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified transformer. Transformers describe how to process the
-// incoming EDI (electronic data interchange) documents, and extract the necessary
-// information.
+// Deletes the specified transformer. A transformer describes how to process the
+// incoming EDI documents and extract the necessary information to the output file.
 func (c *Client) DeleteTransformer(ctx context.Context, params *DeleteTransformerInput, optFns ...func(*Options)) (*DeleteTransformerOutput, error) {
 	if params == nil {
 		params = &DeleteTransformerInput{}

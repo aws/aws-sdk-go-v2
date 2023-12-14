@@ -74,6 +74,9 @@ type CreateDashboardInput struct {
 	// folders.
 	FolderArns []string
 
+	// A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.
+	LinkEntities []string
+
 	// A structure that contains the permissions of a shareable link to the dashboard.
 	LinkSharingConfiguration *types.LinkSharingConfiguration
 

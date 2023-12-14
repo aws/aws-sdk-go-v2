@@ -13,8 +13,8 @@ import (
 )
 
 // Lists the capabilities associated with your Amazon Web Services account for
-// your current or specified region. Capabilities contain the information necessary
-// to process incoming EDI (electronic data interchange) documents.
+// your current or specified region. A trading capability contains the information
+// required to transform incoming EDI documents into JSON or XML outputs.
 func (c *Client) ListCapabilities(ctx context.Context, params *ListCapabilitiesInput, optFns ...func(*Options)) (*ListCapabilitiesOutput, error) {
 	if params == nil {
 		params = &ListCapabilitiesInput{}

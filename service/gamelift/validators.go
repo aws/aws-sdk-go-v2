@@ -3811,6 +3811,11 @@ func validateOpUpdateGameSessionInput(v *UpdateGameSessionInput) error {
 	if v.GameSessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GameSessionId"))
 	}
+	if v.GameProperties != nil {
+		if err := validateGamePropertyList(v.GameProperties); err != nil {
+			invalidParams.AddNested("GameProperties", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

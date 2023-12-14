@@ -1064,6 +1064,18 @@ type CertificateDescription struct {
 	noSmithyDocumentSerde
 }
 
+// The certificate provider summary.
+type CertificateProviderSummary struct {
+
+	// The ARN of the certificate provider.
+	CertificateProviderArn *string
+
+	// The name of the certificate provider.
+	CertificateProviderName *string
+
+	noSmithyDocumentSerde
+}
+
 // When the certificate is valid.
 type CertificateValidity struct {
 
@@ -2547,8 +2559,8 @@ type MetricToRetain struct {
 	// This member is required.
 	Metric *string
 
-	// Value added in both Behavior and AdditionalMetricsToRetainV2 to indicate if
-	// Device Defender Detect should export the corresponding metrics.
+	// The value indicates exporting metrics related to the MetricToRetain  when it's
+	// true.
 	ExportMetric *bool
 
 	// The dimension of a metric. This can't be used with custom metrics.

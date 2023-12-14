@@ -41,7 +41,7 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	//
 	// This member is required.
 	Tags map[string]string

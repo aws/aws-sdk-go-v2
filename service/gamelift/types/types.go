@@ -404,28 +404,28 @@ type Event struct {
 	//   not be found based on the Fleet runtime configuration. Check that the launch
 	//   path is correct based on the operating system of the Fleet.
 	//   - SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT -- The server process did not
-	//   call InitSDK() within the time expected. Check your game session log to see why
-	//   InitSDK() was not called in time.
+	//   call InitSDK() within the time expected (5 minutes). Check your game session
+	//   log to see why InitSDK() was not called in time.
 	//   - SERVER_PROCESS_PROCESS_READY_TIMEOUT -- The server process did not call
-	//   ProcessReady() within the time expected after calling InitSDK(). Check your game
-	//   session log to see why ProcessReady() was not called in time.
+	//   ProcessReady() within the time expected (5 minutes) after calling InitSDK() .
+	//   Check your game session log to see why ProcessReady() was not called in time.
 	//   - SERVER_PROCESS_CRASHED -- The server process exited without calling
-	//   ProcessEnding(). Check your game session log to see why ProcessEnding() was not
-	//   called.
+	//   ProcessEnding() . Check your game session log to see why ProcessEnding() was
+	//   not called.
 	//   - SERVER_PROCESS_TERMINATED_UNHEALTHY -- The server process did not report a
 	//   valid health check for too long and was therefore terminated by GameLift. Check
 	//   your game session log to see if the thread became stuck processing a synchronous
 	//   task for too long.
 	//   - SERVER_PROCESS_FORCE_TERMINATED -- The server process did not exit cleanly
-	//   after OnProcessTerminate() was sent within the time expected. Check your game
+	//   within the time expected after OnProcessTerminate() was sent. Check your game
 	//   session log to see why termination took longer than expected.
 	//   - SERVER_PROCESS_PROCESS_EXIT_TIMEOUT -- The server process did not exit
-	//   cleanly within the time expected after calling ProcessEnding(). Check your game
-	//   session log to see why termination took longer than expected.
+	//   cleanly within the time expected (30 seconds) after calling ProcessEnding() .
+	//   Check your game session log to see why termination took longer than expected.
 	// Game session events:
 	//   - GAME_SESSION_ACTIVATION_TIMEOUT -- GameSession failed to activate within
-	//   the expected time. Check your game session log to see why ActivateGameSession()
-	//   took longer to complete than expected.
+	//   the expected time. Check your game session log to see why
+	//   ActivateGameSession() took longer to complete than expected.
 	// Other fleet events:
 	//   - FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings
 	//   (desired instances, minimum/maximum scaling limits). Event messaging includes
@@ -698,12 +698,14 @@ type FleetUtilization struct {
 	noSmithyDocumentSerde
 }
 
-// Set of key-value pairs that contain information about a game session. When
-// included in a game session request, these properties communicate details to be
-// used when setting up the new game session. For example, a game property might
-// specify a game mode, level, or map. Game properties are passed to the game
-// server process when initiating a new game session. For more information, see the
-// Amazon GameLift Developer Guide (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create)
+// This key-value pair can store custom data about a game session. For example,
+// you might use a GameProperty to track a game session's map, level of
+// difficulty, or remaining time. The difficulty level could be specified like
+// this: {"Key": "difficulty", "Value":"Novice"} . You can set game properties when
+// creating a game session. You can also modify game properties of an active game
+// session. When searching for game sessions, you can filter on game property keys
+// and values. You can't delete game properties from a game session. For examples
+// of working with game properties, see Create a game session with properties (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties)
 // .
 type GameProperty struct {
 
@@ -969,10 +971,8 @@ type GameSession struct {
 	// A unique identifier for the fleet that the game session is running on.
 	FleetId *string
 
-	// A set of custom properties for a game session, formatted as key:value pairs.
-	// These properties are passed to a game server process with a request to start a
-	// new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
-	// ).
+	// A set of key-value pairs that can store custom data in a game session. For
+	// example: {"Key": "difficulty", "Value": "novice"} .
 	GameProperties []GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
@@ -1108,10 +1108,8 @@ type GameSessionPlacement struct {
 	// Time stamp indicating when this request was completed, canceled, or timed out.
 	EndTime *time.Time
 
-	// A set of custom properties for a game session, formatted as key:value pairs.
-	// These properties are passed to a game server process with a request to start a
-	// new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
-	// ).
+	// A set of key-value pairs that can store custom data in a game session. For
+	// example: {"Key": "difficulty", "Value": "novice"} .
 	GameProperties []GameProperty
 
 	// Identifier for the game session created by this placement request. This
@@ -1596,12 +1594,10 @@ type MatchmakingConfiguration struct {
 	//   queue to start a game session for the match.
 	FlexMatchMode FlexMatchMode
 
-	// A set of custom properties for a game session, formatted as key:value pairs.
-	// These properties are passed to a game server process with a request to start a
-	// new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
-	// ). This information is added to the new GameSession object that is created for
-	// a successful match. This parameter is not used when FlexMatchMode is set to
-	// STANDALONE .
+	// A set of key-value pairs that can store custom data in a game session. For
+	// example: {"Key": "difficulty", "Value": "novice"} . This information is added to
+	// the new GameSession object that is created for a successful match. This
+	// parameter is not used when FlexMatchMode is set to STANDALONE .
 	GameProperties []GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.

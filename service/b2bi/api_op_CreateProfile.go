@@ -14,8 +14,8 @@ import (
 )
 
 // Creates a customer profile. You can have up to five customer profiles, each
-// representing a distinct private network. Profiles contain basic information
-// about you and your business.
+// representing a distinct private network. A profile is the mechanism used to
+// create the concept of a private network.
 func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, optFns ...func(*Options)) (*CreateProfileOutput, error) {
 	if params == nil {
 		params = &CreateProfileInput{}

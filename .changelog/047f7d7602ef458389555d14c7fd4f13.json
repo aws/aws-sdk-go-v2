@@ -1,0 +1,8 @@
+{
+    "id": "047f7d76-02ef-4583-8955-5d14c7fd4f13",
+    "type": "feature",
+    "description": "This release adds support for more granular billing using tags (key:value pairs)",
+    "modules": [
+        "service/connect"
+    ]
+}

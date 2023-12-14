@@ -13,8 +13,8 @@ import (
 )
 
 // Lists the profiles associated with your Amazon Web Services account for your
-// current or specified region. Profiles contain basic information about you and
-// your business.
+// current or specified region. A profile is the mechanism used to create the
+// concept of a private network.
 func (c *Client) ListProfiles(ctx context.Context, params *ListProfilesInput, optFns ...func(*Options)) (*ListProfilesOutput, error) {
 	if params == nil {
 		params = &ListProfilesInput{}

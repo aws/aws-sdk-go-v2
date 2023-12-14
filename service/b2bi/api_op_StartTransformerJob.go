@@ -14,7 +14,10 @@ import (
 
 // Runs a job, using a transformer, to parse input EDI (electronic data
 // interchange) file into the output structures used by Amazon Web Services B2BI
-// Data Interchange.
+// Data Interchange. If you only want to transform EDI (electronic data
+// interchange) documents, you don't need to create profiles, partnerships or
+// capabilities. Just create and configure a transformer, and then run the
+// StartTransformerJob API to process your files.
 func (c *Client) StartTransformerJob(ctx context.Context, params *StartTransformerJobInput, optFns ...func(*Options)) (*StartTransformerJobOutput, error) {
 	if params == nil {
 		params = &StartTransformerJobInput{}

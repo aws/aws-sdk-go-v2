@@ -155,7 +155,7 @@ type EnablementStatusSummary struct {
 // Information about the landing zone.
 type LandingZoneDetail struct {
 
-	// The landing zone manifest.yaml text file that specifies the landing zone
+	// The landing zone manifest JSON text file that specifies the landing zone
 	// configurations.
 	//
 	// This member is required.

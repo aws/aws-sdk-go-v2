@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified profile. Profiles contain basic information about you and
-// your business.
+// Deletes the specified profile. A profile is the mechanism used to create the
+// concept of a private network.
 func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, optFns ...func(*Options)) (*DeleteProfileOutput, error) {
 	if params == nil {
 		params = &DeleteProfileInput{}

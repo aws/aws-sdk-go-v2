@@ -1,0 +1,8 @@
+{
+    "id": "f747d527-fb8e-43ae-82c6-366d19248d65",
+    "type": "feature",
+    "description": "Update Dashboard Links support; SingleAxisOptions support; Scatterplot Query limit support.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

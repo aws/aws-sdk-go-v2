@@ -621,6 +621,13 @@ func awsRestjson1_serializeOpDocumentCreateDashboardInput(v *CreateDashboardInpu
 		}
 	}
 
+	if v.LinkEntities != nil {
+		ok := object.Key("LinkEntities")
+		if err := awsRestjson1_serializeDocumentLinkEntityArnList(v.LinkEntities, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LinkSharingConfiguration != nil {
 		ok := object.Key("LinkSharingConfiguration")
 		if err := awsRestjson1_serializeDocumentLinkSharingConfiguration(v.LinkSharingConfiguration, ok); err != nil {
@@ -12877,6 +12884,105 @@ func awsRestjson1_serializeOpDocumentUpdateDashboardInput(v *UpdateDashboardInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateDashboardLinks struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateDashboardLinks) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateDashboardLinks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateDashboardLinksInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/dashboards/{DashboardId}/linked-entities")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateDashboardLinksInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateDashboardLinksInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateDashboardLinksInput(v *UpdateDashboardLinksInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.DashboardId == nil || len(*v.DashboardId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DashboardId must not be empty")}
+	}
+	if v.DashboardId != nil {
+		if err := encoder.SetURI("DashboardId").String(*v.DashboardId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateDashboardLinksInput(v *UpdateDashboardLinksInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LinkEntities != nil {
+		ok := object.Key("LinkEntities")
+		if err := awsRestjson1_serializeDocumentLinkEntityArnList(v.LinkEntities, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateDashboardPermissions struct {
 }
 
@@ -19628,6 +19734,13 @@ func awsRestjson1_serializeDocumentComboChartConfiguration(v *types.ComboChartCo
 	if v.SecondaryYAxisLabelOptions != nil {
 		ok := object.Key("SecondaryYAxisLabelOptions")
 		if err := awsRestjson1_serializeDocumentChartAxisLabelOptions(v.SecondaryYAxisLabelOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SingleAxisOptions != nil {
+		ok := object.Key("SingleAxisOptions")
+		if err := awsRestjson1_serializeDocumentSingleAxisOptions(v.SingleAxisOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -27007,6 +27120,13 @@ func awsRestjson1_serializeDocumentLineChartConfiguration(v *types.LineChartConf
 		}
 	}
 
+	if v.SingleAxisOptions != nil {
+		ok := object.Key("SingleAxisOptions")
+		if err := awsRestjson1_serializeDocumentSingleAxisOptions(v.SingleAxisOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SmallMultiplesOptions != nil {
 		ok := object.Key("SmallMultiplesOptions")
 		if err := awsRestjson1_serializeDocumentSmallMultiplesOptions(v.SmallMultiplesOptions, ok); err != nil {
@@ -27279,6 +27399,17 @@ func awsRestjson1_serializeDocumentLineSeriesAxisDisplayOptions(v *types.LineSer
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLinkEntityArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -31672,6 +31803,13 @@ func awsRestjson1_serializeDocumentScatterPlotConfiguration(v *types.ScatterPlot
 		}
 	}
 
+	if v.SortConfiguration != nil {
+		ok := object.Key("SortConfiguration")
+		if err := awsRestjson1_serializeDocumentScatterPlotSortConfiguration(v.SortConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tooltip != nil {
 		ok := object.Key("Tooltip")
 		if err := awsRestjson1_serializeDocumentTooltipOptions(v.Tooltip, ok); err != nil {
@@ -31731,6 +31869,20 @@ func awsRestjson1_serializeDocumentScatterPlotFieldWells(v *types.ScatterPlotFie
 	if v.ScatterPlotUnaggregatedFieldWells != nil {
 		ok := object.Key("ScatterPlotUnaggregatedFieldWells")
 		if err := awsRestjson1_serializeDocumentScatterPlotUnaggregatedFieldWells(v.ScatterPlotUnaggregatedFieldWells, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScatterPlotSortConfiguration(v *types.ScatterPlotSortConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ScatterPlotLimitConfiguration != nil {
+		ok := object.Key("ScatterPlotLimitConfiguration")
+		if err := awsRestjson1_serializeDocumentItemsLimitConfiguration(v.ScatterPlotLimitConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -32619,6 +32771,20 @@ func awsRestjson1_serializeDocumentSimpleClusterMarker(v *types.SimpleClusterMar
 	if v.Color != nil {
 		ok := object.Key("Color")
 		ok.String(*v.Color)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSingleAxisOptions(v *types.SingleAxisOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.YAxisOptions != nil {
+		ok := object.Key("YAxisOptions")
+		if err := awsRestjson1_serializeDocumentYAxisOptions(v.YAxisOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -37014,6 +37180,18 @@ func awsRestjson1_serializeDocumentWordCloudVisual(v *types.WordCloudVisual, val
 	if v.VisualId != nil {
 		ok := object.Key("VisualId")
 		ok.String(*v.VisualId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentYAxisOptions(v *types.YAxisOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.YAxis) > 0 {
+		ok := object.Key("YAxis")
+		ok.String(string(v.YAxis))
 	}
 
 	return nil

@@ -37,6 +37,14 @@ type UpdateGameSessionInput struct {
 	// This member is required.
 	GameSessionId *string
 
+	// A set of key-value pairs that can store custom data in a game session. For
+	// example: {"Key": "difficulty", "Value": "novice"} . You can use this parameter
+	// to modify game properties in an active game session. This action adds new
+	// properties and modifies existing properties. There is no way to delete
+	// properties. For an example, see Update the value of a game property (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-update)
+	// .
+	GameProperties []types.GameProperty
+
 	// The maximum number of players that can be connected simultaneously to the game
 	// session.
 	MaximumPlayerSessionCount *int32

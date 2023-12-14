@@ -13,9 +13,9 @@ import (
 	"time"
 )
 
-// Retrieves the details for the transformer specified by the transformer ID.
-// Transformers describe how to process the incoming EDI (electronic data
-// interchange) documents, and extract the necessary information.
+// Retrieves the details for the transformer specified by the transformer ID. A
+// transformer describes how to process the incoming EDI documents and extract the
+// necessary information to the output file.
 func (c *Client) GetTransformer(ctx context.Context, params *GetTransformerInput, optFns ...func(*Options)) (*GetTransformerOutput, error) {
 	if params == nil {
 		params = &GetTransformerInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "bb3ebd62-02ec-40d7-b0cd-1faca0f513ff",
+    "type": "documentation",
+    "description": "Documentation updates for AWS Control Tower.",
+    "modules": [
+        "service/controltower"
+    ]
+}

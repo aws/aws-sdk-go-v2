@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the data source details.
+// Retrieves information about a direct query data source.
 func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, optFns ...func(*Options)) (*GetDataSourceOutput, error) {
 	if params == nil {
 		params = &GetDataSourceInput{}
@@ -36,7 +36,7 @@ type GetDataSourceInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The name of the data source.
+	// The name of the data source to get information about.
 	//
 	// This member is required.
 	Name *string

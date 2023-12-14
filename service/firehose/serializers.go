@@ -2571,9 +2571,33 @@ func awsAwsjson11_serializeDocumentSerializer(v *types.Serializer, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSplunkBufferingHints(v *types.SplunkBufferingHints, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IntervalInSeconds != nil {
+		ok := object.Key("IntervalInSeconds")
+		ok.Integer(*v.IntervalInSeconds)
+	}
+
+	if v.SizeInMBs != nil {
+		ok := object.Key("SizeInMBs")
+		ok.Integer(*v.SizeInMBs)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSplunkDestinationConfiguration(v *types.SplunkDestinationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BufferingHints != nil {
+		ok := object.Key("BufferingHints")
+		if err := awsAwsjson11_serializeDocumentSplunkBufferingHints(v.BufferingHints, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CloudWatchLoggingOptions != nil {
 		ok := object.Key("CloudWatchLoggingOptions")
@@ -2634,6 +2658,13 @@ func awsAwsjson11_serializeDocumentSplunkDestinationConfiguration(v *types.Splun
 func awsAwsjson11_serializeDocumentSplunkDestinationUpdate(v *types.SplunkDestinationUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BufferingHints != nil {
+		ok := object.Key("BufferingHints")
+		if err := awsAwsjson11_serializeDocumentSplunkBufferingHints(v.BufferingHints, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CloudWatchLoggingOptions != nil {
 		ok := object.Key("CloudWatchLoggingOptions")

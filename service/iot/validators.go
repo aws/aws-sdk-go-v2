@@ -350,6 +350,26 @@ func (m *validateOpCreateCertificateFromCsr) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCertificateProvider struct {
+}
+
+func (*validateOpCreateCertificateProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCertificateProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCertificateProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCertificateProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCustomMetric struct {
 }
 
@@ -945,6 +965,26 @@ func (m *validateOpDeleteCertificate) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCertificateProvider struct {
+}
+
+func (*validateOpDeleteCertificateProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCertificateProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCertificateProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCertificateProviderInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1645,6 +1685,26 @@ func (m *validateOpDescribeCertificate) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCertificateProvider struct {
+}
+
+func (*validateOpDescribeCertificateProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCertificateProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCertificateProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCertificateProviderInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3490,6 +3550,26 @@ func (m *validateOpUpdateCertificate) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCertificateProvider struct {
+}
+
+func (*validateOpUpdateCertificateProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCertificateProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCertificateProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCertificateProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCustomMetric struct {
 }
 
@@ -3938,6 +4018,10 @@ func addOpCreateCertificateFromCsrValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateCertificateFromCsr{}, middleware.After)
 }
 
+func addOpCreateCertificateProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCertificateProvider{}, middleware.After)
+}
+
 func addOpCreateCustomMetricValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCustomMetric{}, middleware.After)
 }
@@ -4056,6 +4140,10 @@ func addOpDeleteCACertificateValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCertificate{}, middleware.After)
+}
+
+func addOpDeleteCertificateProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCertificateProvider{}, middleware.After)
 }
 
 func addOpDeleteCustomMetricValidationMiddleware(stack *middleware.Stack) error {
@@ -4196,6 +4284,10 @@ func addOpDescribeCACertificateValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCertificate{}, middleware.After)
+}
+
+func addOpDescribeCertificateProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCertificateProvider{}, middleware.After)
 }
 
 func addOpDescribeCustomMetricValidationMiddleware(stack *middleware.Stack) error {
@@ -4564,6 +4656,10 @@ func addOpUpdateCACertificateValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCertificate{}, middleware.After)
+}
+
+func addOpUpdateCertificateProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCertificateProvider{}, middleware.After)
 }
 
 func addOpUpdateCustomMetricValidationMiddleware(stack *middleware.Stack) error {
@@ -6769,6 +6865,32 @@ func validateOpCreateCertificateFromCsrInput(v *CreateCertificateFromCsrInput) e
 	}
 }
 
+func validateOpCreateCertificateProviderInput(v *CreateCertificateProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCertificateProviderInput"}
+	if v.CertificateProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateProviderName"))
+	}
+	if v.LambdaFunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaFunctionArn"))
+	}
+	if v.AccountDefaultForOperations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountDefaultForOperations"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCustomMetricInput(v *CreateCustomMetricInput) error {
 	if v == nil {
 		return nil
@@ -7485,6 +7607,21 @@ func validateOpDeleteCertificateInput(v *DeleteCertificateInput) error {
 	}
 }
 
+func validateOpDeleteCertificateProviderInput(v *DeleteCertificateProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCertificateProviderInput"}
+	if v.CertificateProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateProviderName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCustomMetricInput(v *DeleteCustomMetricInput) error {
 	if v == nil {
 		return nil
@@ -8023,6 +8160,21 @@ func validateOpDescribeCertificateInput(v *DescribeCertificateInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCertificateInput"}
 	if v.CertificateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCertificateProviderInput(v *DescribeCertificateProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCertificateProviderInput"}
+	if v.CertificateProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateProviderName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9547,6 +9699,21 @@ func validateOpUpdateCertificateInput(v *UpdateCertificateInput) error {
 	}
 	if len(v.NewStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NewStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCertificateProviderInput(v *UpdateCertificateProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCertificateProviderInput"}
+	if v.CertificateProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateProviderName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

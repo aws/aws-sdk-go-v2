@@ -2550,6 +2550,9 @@ type ComboChartConfiguration struct {
 	// combo chart's secondary y-axis(line) field well.
 	SecondaryYAxisLabelOptions *ChartAxisLabelOptions
 
+	// The settings of a chart's single axis configuration.
+	SingleAxisOptions *SingleAxisOptions
+
 	// The sort configuration of a ComboChartVisual .
 	SortConfiguration *ComboChartSortConfiguration
 
@@ -3173,6 +3176,9 @@ type Dashboard struct {
 
 	// The last time that this dashboard was updated.
 	LastUpdatedTime *time.Time
+
+	// A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.
+	LinkEntities []string
 
 	// A display name for the dashboard.
 	Name *string
@@ -7773,6 +7779,9 @@ type LineChartConfiguration struct {
 	// The series item configuration of a line chart.
 	Series []SeriesItem
 
+	// The settings of a chart's single axis configuration.
+	SingleAxisOptions *SingleAxisOptions
+
 	// The small multiples setup for the visual.
 	SmallMultiplesOptions *SmallMultiplesOptions
 
@@ -10875,6 +10884,9 @@ type ScatterPlotConfiguration struct {
 	// The legend display setup of the visual.
 	Legend *LegendOptions
 
+	// The sort configuration of a scatter plot.
+	SortConfiguration *ScatterPlotSortConfiguration
+
 	// The legend display setup of the visual.
 	Tooltip *TooltipOptions
 
@@ -10911,6 +10923,15 @@ type ScatterPlotFieldWells struct {
 	// The unaggregated field wells of a scatter plot. The x and y-axes of these
 	// scatter plots are unaggregated.
 	ScatterPlotUnaggregatedFieldWells *ScatterPlotUnaggregatedFieldWells
+
+	noSmithyDocumentSerde
+}
+
+// The sort configuration of a scatter plot.
+type ScatterPlotSortConfiguration struct {
+
+	// The limit configuration of the visual display for an axis.
+	ScatterPlotLimitConfiguration *ItemsLimitConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -11466,6 +11487,15 @@ type SimpleClusterMarker struct {
 	noSmithyDocumentSerde
 }
 
+// The settings of a chart's single axis configuration.
+type SingleAxisOptions struct {
+
+	// The Y axis options of a single axis configuration.
+	YAxisOptions *YAxisOptions
+
+	noSmithyDocumentSerde
+}
+
 // The display options of a control.
 type SliderControlDisplayOptions struct {
 
@@ -11716,6 +11746,8 @@ type SnapshotS3DestinationConfiguration struct {
 
 	// A structure that contains details about the Amazon S3 bucket that the generated
 	// dashboard snapshot is saved in.
+	//
+	// This member is required.
 	BucketConfiguration *S3BucketConfiguration
 
 	noSmithyDocumentSerde
@@ -14762,6 +14794,18 @@ type WordCloudVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	noSmithyDocumentSerde
+}
+
+// The options that are available for a single Y axis in a chart.
+type YAxisOptions struct {
+
+	// The Y axis type to be used in the chart. If you choose PRIMARY_Y_AXIS , the
+	// primary Y Axis is located on the leftmost vertical axis of the chart.
+	//
+	// This member is required.
+	YAxis SingleYAxisOption
 
 	noSmithyDocumentSerde
 }

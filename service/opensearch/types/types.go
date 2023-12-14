@@ -587,7 +587,7 @@ type CrossClusterSearchConnectionProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the data sources.
+// Details about a direct-query data source.
 type DataSourceDetails struct {
 
 	// The type of data source.
@@ -602,7 +602,7 @@ type DataSourceDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the data source.
+// The type of data source.
 //
 // The following types satisfy this interface:
 //
@@ -611,7 +611,7 @@ type DataSourceType interface {
 	isDataSourceType()
 }
 
-// The data source for the AWS S3 Glue Data Catalog.
+// An Amazon S3 data source.
 type DataSourceTypeMemberS3GlueDataCatalog struct {
 	Value S3GlueDataCatalog
 
@@ -716,14 +716,10 @@ type DomainEndpointOptions struct {
 
 	// Specify the TLS security policy to apply to the HTTPS endpoint of the domain.
 	// The policy can be one of the following values:
-	//   - Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLS version
+	//   - Policy-Min-TLS-1-0-2019-07: TLS security policy that supports TLS version
 	//   1.0 to TLS version 1.2
-	//   - Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLS
+	//   - Policy-Min-TLS-1-2-2019-07: TLS security policy that supports only TLS
 	//   version 1.2
-	//   - Policy-Min-TLS-1-0-2023-10: TLS security policy which supports TLS version
-	//   1.0 to TLS version 1.3
-	//   - Policy-Min-TLS-1-2-2023-10: TLS security policy which supports TLS version
-	//   1.2 to TLS version 1.3 with perfect forward secrecy cipher suites
 	TLSSecurityPolicy TLSSecurityPolicy
 
 	noSmithyDocumentSerde
@@ -1680,10 +1676,10 @@ type ReservedInstanceOffering struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the AWS S3 Glue Data Catalog.
+// Information about the Amazon S3 Glue Data Catalog.
 type S3GlueDataCatalog struct {
 
-	// The role ARN for the AWS S3 Glue Data Catalog.
+	// >The Amazon Resource Name (ARN) for the S3 Glue Data Catalog.
 	RoleArn *string
 
 	noSmithyDocumentSerde

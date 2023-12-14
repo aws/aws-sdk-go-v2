@@ -1,0 +1,8 @@
+{
+    "id": "20fbc586-cd59-44aa-8481-f6e20dcf09c6",
+    "type": "feature",
+    "description": "Updating documentation for Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

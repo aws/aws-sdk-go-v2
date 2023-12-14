@@ -13,9 +13,9 @@ import (
 	"time"
 )
 
-// Updates the specified parameters for a transformer. Transformers describe how
-// to process the incoming EDI (electronic data interchange) documents, and extract
-// the necessary information.
+// Updates the specified parameters for a transformer. A transformer describes how
+// to process the incoming EDI documents and extract the necessary information to
+// the output file.
 func (c *Client) UpdateTransformer(ctx context.Context, params *UpdateTransformerInput, optFns ...func(*Options)) (*UpdateTransformerOutput, error) {
 	if params == nil {
 		params = &UpdateTransformerInput{}

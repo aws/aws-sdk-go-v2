@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A list of the data source details of the domain.
+// Lists direct-query data sources for a specific domain. For more information,
+// see For more information, see Working with Amazon OpenSearch Service direct
+// queries with Amazon S3 (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3.html)
+// .
 func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInput, optFns ...func(*Options)) (*ListDataSourcesOutput, error) {
 	if params == nil {
 		params = &ListDataSourcesInput{}
@@ -42,7 +45,7 @@ type ListDataSourcesInput struct {
 // The result of a ListDataSources operation.
 type ListDataSourcesOutput struct {
 
-	// A list of the data sources.
+	// A list of data sources associated with specified domain.
 	DataSources []types.DataSourceDetails
 
 	// Metadata pertaining to the operation's result.

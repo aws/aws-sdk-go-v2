@@ -9211,6 +9211,13 @@ func awsAwsjson11_serializeOpDocumentUpdateGameSessionInput(v *UpdateGameSession
 	object := value.Object()
 	defer object.Close()
 
+	if v.GameProperties != nil {
+		ok := object.Key("GameProperties")
+		if err := awsAwsjson11_serializeDocumentGamePropertyList(v.GameProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.GameSessionId != nil {
 		ok := object.Key("GameSessionId")
 		ok.String(*v.GameSessionId)

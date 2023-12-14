@@ -1,0 +1,8 @@
+{
+    "id": "5a487f47-0ce1-474e-96ea-19516ad82189",
+    "type": "feature",
+    "description": "This release includes support for images of Windows Server 2022 platform.",
+    "modules": [
+        "service/appstream"
+    ]
+}

@@ -8,8 +8,8 @@ import (
 )
 
 // A capability object. Currently, only EDI (electronic data interchange)
-// capabilities are supported. Capabilities contain the information necessary to
-// process incoming EDI (electronic data interchange) documents.
+// capabilities are supported. A trading capability contains the information
+// required to transform incoming EDI documents into JSON or XML outputs.
 //
 // The following types satisfy this interface:
 //
@@ -27,8 +27,9 @@ type CapabilityConfigurationMemberEdi struct {
 
 func (*CapabilityConfigurationMemberEdi) isCapabilityConfiguration() {}
 
-// Returns the capability summary details. Capabilities contain the information
-// necessary to process incoming EDI (electronic data interchange) documents.
+// Returns the capability summary details. A trading capability contains the
+// information required to transform incoming EDI documents into JSON or XML
+// outputs.
 type CapabilitySummary struct {
 
 	// Returns a system-assigned unique identifier for the capability.
@@ -108,10 +109,9 @@ type EdiTypeMemberX12Details struct {
 
 func (*EdiTypeMemberX12Details) isEdiType() {}
 
-// A structure that contains the details for a partnership. Partnerships link
-// trading partners with your profile and a specific transformer, so that the EDI
-// (electronic data interchange) documents that they upload to Amazon S3 can be
-// processed according to their specifications.
+// A structure that contains the details for a partnership. A partnership
+// represents the connection between you and your trading partner. It ties together
+// a profile and one or more trading capabilities.
 type PartnershipSummary struct {
 
 	// Returns a timestamp for creation date and time of the partnership.
@@ -146,8 +146,8 @@ type PartnershipSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details for a profile. Profiles contain basic information about
-// you and your business.
+// Contains the details for a profile. A profile is the mechanism used to create
+// the concept of a private network.
 type ProfileSummary struct {
 
 	// Returns the name for the business associated with this profile.
@@ -218,9 +218,9 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details for a transformer object. Transformers describe how to
-// process the incoming EDI (electronic data interchange) documents, and extract
-// the necessary information.
+// Contains the details for a transformer object. A transformer describes how to
+// process the incoming EDI documents and extract the necessary information to the
+// output file.
 type TransformerSummary struct {
 
 	// Returns a timestamp indicating when the transformer was created. For example,
@@ -278,7 +278,9 @@ type TransformerSummary struct {
 
 // A structure that contains the X12 transaction set and version. The X12
 // structure is used when the system transforms an EDI (electronic data
-// interchange) file.
+// interchange) file. If an EDI input file contains more than one transaction, each
+// transaction must have the same transaction set and version, for example
+// 214/4010. If not, the transformer cannot parse the file.
 type X12Details struct {
 
 	// Returns an enumerated type where each value identifies an X12 transaction set.

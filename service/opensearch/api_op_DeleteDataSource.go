@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the data source.
+// Deletes a direct-query data source. For more information, see Deleting an
+// Amazon OpenSearch Service data source with Amazon S3 (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-delete.html)
+// .
 func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceInput, optFns ...func(*Options)) (*DeleteDataSourceOutput, error) {
 	if params == nil {
 		params = &DeleteDataSourceInput{}
@@ -35,7 +37,7 @@ type DeleteDataSourceInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The name of the data source.
+	// The name of the data source to delete.
 	//
 	// This member is required.
 	Name *string
@@ -46,7 +48,7 @@ type DeleteDataSourceInput struct {
 // The result of a GetDataSource operation.
 type DeleteDataSourceOutput struct {
 
-	// A message associated with the initiated request.
+	// A message associated with deletion of the data source.
 	Message *string
 
 	// Metadata pertaining to the operation's result.

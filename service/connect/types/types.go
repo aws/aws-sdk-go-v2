@@ -98,7 +98,7 @@ type AgentStatus struct {
 	State AgentStatusState
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// The type of agent status.
@@ -424,7 +424,7 @@ type ClaimedPhoneNumberSummary struct {
 	SourcePhoneNumberArn *string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
@@ -504,6 +504,10 @@ type Contact struct {
 	// flow.
 	ScheduledTimestamp *time.Time
 
+	// Tags associated with the contact. This contains both Amazon Web Services
+	// generated and user-defined tags.
+	Tags map[string]string
+
 	// Information about Amazon Connect Wisdom.
 	WisdomInfo *WisdomInfo
 
@@ -572,7 +576,7 @@ type ContactFlow struct {
 	State ContactFlowState
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// The type of the flow. For descriptions of the available types, see Choose a
@@ -610,7 +614,7 @@ type ContactFlowModule struct {
 	Status ContactFlowModuleStatus
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -943,7 +947,7 @@ type Evaluation struct {
 	Scores map[string]EvaluationScore
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1075,7 +1079,7 @@ type EvaluationForm struct {
 	ScoringStrategy *EvaluationFormScoringStrategy
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1706,7 +1710,7 @@ type HierarchyGroup struct {
 	Name *string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1942,7 +1946,7 @@ type HoursOfOperation struct {
 	Name *string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// The time zone for the hours of operation.
@@ -2548,7 +2552,7 @@ type NotificationRecipientType struct {
 	UserIds []string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users
 	// with the specified tags will be notified.
 	UserTags map[string]string
 
@@ -2828,7 +2832,7 @@ type Prompt struct {
 	PromptId *string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -2940,7 +2944,7 @@ type Queue struct {
 	Status QueueStatus
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -3071,7 +3075,7 @@ type QuickConnect struct {
 	QuickConnectId *string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -3652,7 +3656,7 @@ type RoutingProfile struct {
 	RoutingProfileId *string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -3861,7 +3865,7 @@ type Rule struct {
 	TriggerEventSource *RuleTriggerEventSource
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -4032,7 +4036,7 @@ type SecurityProfile struct {
 	TagRestrictedResources []string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -4075,7 +4079,7 @@ type SecurityProfileSearchSummary struct {
 	SecurityProfileName *string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -4498,7 +4502,7 @@ type TrafficDistributionGroup struct {
 	Status TrafficDistributionGroupStatus
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -4856,7 +4860,7 @@ type UserSearchSummary struct {
 	SecurityProfileIds []string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// The name of the user.
@@ -5061,7 +5065,7 @@ type Vocabulary struct {
 	FailureReason *string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

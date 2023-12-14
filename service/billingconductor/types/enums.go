@@ -123,6 +123,24 @@ func (CustomLineItemType) Values() []CustomLineItemType {
 	}
 }
 
+type GroupByAttributeName string
+
+// Enum values for GroupByAttributeName
+const (
+	GroupByAttributeNameProductName   GroupByAttributeName = "PRODUCT_NAME"
+	GroupByAttributeNameBillingPeriod GroupByAttributeName = "BILLING_PERIOD"
+)
+
+// Values returns all known values for GroupByAttributeName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GroupByAttributeName) Values() []GroupByAttributeName {
+	return []GroupByAttributeName{
+		"PRODUCT_NAME",
+		"BILLING_PERIOD",
+	}
+}
+
 type LineItemFilterAttributeName string
 
 // Enum values for LineItemFilterAttributeName

@@ -13,9 +13,9 @@ import (
 	"time"
 )
 
-// Retrieves the details for the specified capability. Capabilities contain the
-// information necessary to process incoming EDI (electronic data interchange)
-// documents.
+// Retrieves the details for the specified capability. A trading capability
+// contains the information required to transform incoming EDI documents into JSON
+// or XML outputs.
 func (c *Client) GetCapability(ctx context.Context, params *GetCapabilityInput, optFns ...func(*Options)) (*GetCapabilityOutput, error) {
 	if params == nil {
 		params = &GetCapabilityInput{}

@@ -153,6 +153,7 @@
         "api_op_UpdateAnalysis.go",
         "api_op_UpdateAnalysisPermissions.go",
         "api_op_UpdateDashboard.go",
+        "api_op_UpdateDashboardLinks.go",
         "api_op_UpdateDashboardPermissions.go",
         "api_op_UpdateDashboardPublishedVersion.go",
         "api_op_UpdateDataSet.go",

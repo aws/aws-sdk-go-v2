@@ -2202,6 +2202,21 @@ type SourceDescription struct {
 	noSmithyDocumentSerde
 }
 
+// The buffering options. If no value is specified, the default values for Splunk
+// are used.
+type SplunkBufferingHints struct {
+
+	// Buffer incoming data for the specified period of time, in seconds, before
+	// delivering it to the destination. The default value is 60 (1 minute).
+	IntervalInSeconds *int32
+
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the
+	// destination. The default value is 5.
+	SizeInMBs *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration of a destination in Splunk.
 type SplunkDestinationConfiguration struct {
 
@@ -2226,6 +2241,10 @@ type SplunkDestinationConfiguration struct {
 	//
 	// This member is required.
 	S3Configuration *S3DestinationConfiguration
+
+	// The buffering options. If no value is specified, the default values for Splunk
+	// are used.
+	BufferingHints *SplunkBufferingHints
 
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
@@ -2257,6 +2276,10 @@ type SplunkDestinationConfiguration struct {
 
 // Describes a destination in Splunk.
 type SplunkDestinationDescription struct {
+
+	// The buffering options. If no value is specified, the default values for Splunk
+	// are used.
+	BufferingHints *SplunkBufferingHints
 
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
@@ -2299,6 +2322,10 @@ type SplunkDestinationDescription struct {
 
 // Describes an update for a destination in Splunk.
 type SplunkDestinationUpdate struct {
+
+	// The buffering options. If no value is specified, the default values for Splunk
+	// are used.
+	BufferingHints *SplunkBufferingHints
 
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions

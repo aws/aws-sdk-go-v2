@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified capability. Capabilities contain the information
-// necessary to process incoming EDI (electronic data interchange) documents.
+// Deletes the specified capability. A trading capability contains the information
+// required to transform incoming EDI documents into JSON or XML outputs.
 func (c *Client) DeleteCapability(ctx context.Context, params *DeleteCapabilityInput, optFns ...func(*Options)) (*DeleteCapabilityOutput, error) {
 	if params == nil {
 		params = &DeleteCapabilityInput{}

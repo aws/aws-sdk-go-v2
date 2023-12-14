@@ -91,6 +91,35 @@ func (e *InvalidKMSResourceException) ErrorCode() string {
 }
 func (e *InvalidKMSResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Only requests from CloudWatch Logs are supported when CloudWatch Logs
+// decompression is enabled.
+type InvalidSourceException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidSourceException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidSourceException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidSourceException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidSourceException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidSourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You have already reached the limit for a requested resource.
 type LimitExceededException struct {
 	Message *string

@@ -65,6 +65,22 @@ type AssociateResourceResponseElement struct {
 	noSmithyDocumentSerde
 }
 
+// The key-value pair that represents the attribute by which the
+// BillingGroupCostReportResults are grouped. For example, if you want a
+// service-level breakdown for Amazon Simple Storage Service (Amazon S3) of the
+// billing group, the attribute will be a key-value pair of "PRODUCT_NAME" and "S3"
+// .
+type Attribute struct {
+
+	// The key in a key-value pair that describes the margin summary.
+	Key *string
+
+	// The value in a key-value pair that describes the margin summary.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // A summary report of actual Amazon Web Services charges and calculated Amazon
 // Web Services charges, based on the associated pricing plan of a billing group.
 type BillingGroupCostReportElement struct {
@@ -82,6 +98,40 @@ type BillingGroupCostReportElement struct {
 	Margin *string
 
 	// The percentage of billing group margin.
+	MarginPercentage *string
+
+	// The hypothetical Amazon Web Services charges based on the associated pricing
+	// plan of a billing group.
+	ProformaCost *string
+
+	noSmithyDocumentSerde
+}
+
+// A paginated call to retrieve a list of summary reports of actual Amazon Web
+// Services charges and the calculated Amazon Web Services charges, broken down by
+// attributes.
+type BillingGroupCostReportResultElement struct {
+
+	// The actual Amazon Web Services charges for the billing group.
+	AWSCost *string
+
+	// The Amazon Resource Number (ARN) that uniquely identifies the billing group.
+	Arn *string
+
+	// The list of key-value pairs that represent the attributes by which the
+	// BillingGroupCostReportResults are grouped. For example, if you want the Amazon
+	// S3 service-level breakdown of a billing group for November 2023, the attributes
+	// list will contain a key-value pair of "PRODUCT_NAME" and "S3" and a key-value
+	// pair of "BILLING_PERIOD" and "Nov 2023" .
+	Attributes []Attribute
+
+	// The displayed currency.
+	Currency *string
+
+	// The billing group margin.
+	Margin *string
+
+	// The percentage of the billing group margin.
 	MarginPercentage *string
 
 	// The hypothetical Amazon Web Services charges based on the associated pricing
@@ -129,6 +179,27 @@ type BillingGroupListElement struct {
 
 	// The reason why the billing group is in its current status.
 	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// A time range for which the margin summary is effective. The time range can be
+// up to 12 months.
+type BillingPeriodRange struct {
+
+	// The exclusive end billing period that defines a billing period range for the
+	// margin summary. For example, if you choose a billing period that starts in
+	// October 2023 and ends in December 2023, the margin summary will only include
+	// data from October 2023 and November 2023.
+	//
+	// This member is required.
+	ExclusiveEndBillingPeriod *string
+
+	// The inclusive start billing period that defines a billing period range for the
+	// margin summary.
+	//
+	// This member is required.
+	InclusiveStartBillingPeriod *string
 
 	noSmithyDocumentSerde
 }
