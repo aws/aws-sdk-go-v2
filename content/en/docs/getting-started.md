@@ -5,7 +5,7 @@ date: "2020-11-12"
 weight: 2
 ---
 
-The AWS SDK for Go requires Go 1.15 or later. You can view your current version of Go by running the following command.
+The AWS SDK for Go requires Go {{% alias min-go-version %}} or later. You can view your current version of Go by running the following command:
 
 ```
 go version

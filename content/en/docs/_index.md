@@ -8,11 +8,6 @@ menu:
         weight: 20
 ---
 
-{{% pageinfo color="warning" %}}
-On October 31, 2023, the AWS SDK for Go (v1 and v2) will start following the Go [release policy](https://go.dev/doc/devel/release#policy) cadence. See the [blog post](https://aws.amazon.com/blogs/developer/aws-sdk-for-go-aligns-with-go-release-policy-on-supported-runtimes/) for more information.
-{{% /pageinfo %}}
-
-
 Welcome to the AWS SDK for Go. The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go
 applications that use AWS services, such as Amazon Elastic Compute Cloud (Amazon EC2) and Amazon Simple Storage
 Service (Amazon S3).
