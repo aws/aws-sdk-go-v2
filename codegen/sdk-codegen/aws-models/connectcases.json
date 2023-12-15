@@ -1017,7 +1017,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of field identifiers.</p>",
                         "smithy.api#length": {
-                            "max": 50
+                            "max": 200
                         },
                         "smithy.api#required": {}
                     }
