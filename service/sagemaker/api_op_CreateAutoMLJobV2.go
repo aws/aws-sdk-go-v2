@@ -22,7 +22,7 @@ import (
 // well as time-series forecasting, non-tabular problem types such as image or text
 // classification, and text generation (LLMs fine-tuning). Find guidelines about
 // how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a
-// CreateAutoMLJob to CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2)
+// CreateAutoMLJob to CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html#autopilot-create-experiment-api-migrate-v1-v2)
 // . For the list of available problem types supported by CreateAutoMLJobV2 , see
 // AutoMLProblemTypeConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html)
 // . You can find the best-performing model after you run an AutoML job V2 by

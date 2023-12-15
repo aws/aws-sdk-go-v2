@@ -5234,6 +5234,9 @@ func awsAwsjson11_deserializeOpErrorCreatePipeline(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceLimitExceeded", errorCode):
 		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
 
@@ -6904,6 +6907,9 @@ func awsAwsjson11_deserializeOpErrorDeleteAlgorithm(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -7507,6 +7513,95 @@ func awsAwsjson11_deserializeOpErrorDeleteCodeRepository(response *smithyhttp.Re
 	}
 
 	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDeleteCompilationJob struct {
+}
+
+func (*awsAwsjson11_deserializeOpDeleteCompilationJob) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDeleteCompilationJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteCompilationJob(response, &metadata)
+	}
+	output := &DeleteCompilationJobOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDeleteCompilationJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ResourceNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -10353,6 +10448,9 @@ func awsAwsjson11_deserializeOpErrorDeletePipeline(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
 
@@ -17866,6 +17964,9 @@ func awsAwsjson11_deserializeOpErrorDescribeUserProfile(response *smithyhttp.Res
 	}
 
 	switch {
+	case strings.EqualFold("ResourceLimitExceeded", errorCode):
+		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
 
@@ -27457,6 +27558,9 @@ func awsAwsjson11_deserializeOpErrorPutModelPackageGroupPolicy(response *smithyh
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -28101,6 +28205,9 @@ func awsAwsjson11_deserializeOpErrorSendPipelineExecutionStepFailure(response *s
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceLimitExceeded", errorCode):
 		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
 
@@ -28215,6 +28322,9 @@ func awsAwsjson11_deserializeOpErrorSendPipelineExecutionStepSuccess(response *s
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceLimitExceeded", errorCode):
 		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
 
@@ -28707,6 +28817,9 @@ func awsAwsjson11_deserializeOpErrorStartPipelineExecution(response *smithyhttp.
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceLimitExceeded", errorCode):
 		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
 
@@ -29727,6 +29840,9 @@ func awsAwsjson11_deserializeOpErrorStopPipelineExecution(response *smithyhttp.R
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
 
@@ -30561,6 +30677,9 @@ func awsAwsjson11_deserializeOpErrorUpdateCodeRepository(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -31411,6 +31530,9 @@ func awsAwsjson11_deserializeOpErrorUpdateFeatureGroup(response *smithyhttp.Resp
 	}
 
 	switch {
+	case strings.EqualFold("ResourceLimitExceeded", errorCode):
+		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
 
@@ -32403,6 +32525,9 @@ func awsAwsjson11_deserializeOpErrorUpdateModelPackage(response *smithyhttp.Resp
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -32961,6 +33086,9 @@ func awsAwsjson11_deserializeOpErrorUpdatePipeline(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
 
@@ -33072,6 +33200,9 @@ func awsAwsjson11_deserializeOpErrorUpdatePipelineExecution(response *smithyhttp
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
 
@@ -33183,6 +33314,9 @@ func awsAwsjson11_deserializeOpErrorUpdateProject(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -33408,6 +33542,9 @@ func awsAwsjson11_deserializeOpErrorUpdateTrainingJob(response *smithyhttp.Respo
 	}
 
 	switch {
+	case strings.EqualFold("ResourceLimitExceeded", errorCode):
+		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
 
@@ -34172,7 +34309,7 @@ func awsAwsjson11_deserializeDocumentActionSource(v **types.ActionSource, value 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String2048 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SourceUri to be of type string, got %T instead", value)
 				}
 				sv.SourceUri = ptr.String(jtv)
 			}
@@ -35575,7 +35712,7 @@ func awsAwsjson11_deserializeDocumentArtifactSource(v **types.ArtifactSource, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String2048 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SourceUri to be of type string, got %T instead", value)
 				}
 				sv.SourceUri = ptr.String(jtv)
 			}
@@ -42000,7 +42137,7 @@ func awsAwsjson11_deserializeDocumentContextSource(v **types.ContextSource, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String2048 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SourceUri to be of type string, got %T instead", value)
 				}
 				sv.SourceUri = ptr.String(jtv)
 			}
@@ -42083,7 +42220,7 @@ func awsAwsjson11_deserializeDocumentContextSummary(v **types.ContextSummary, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ExperimentEntityName to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ContextName to be of type string, got %T instead", value)
 				}
 				sv.ContextName = ptr.String(jtv)
 			}
@@ -54695,6 +54832,11 @@ func awsAwsjson11_deserializeDocumentJupyterLabAppImageConfig(v **types.JupyterL
 				return err
 			}
 
+		case "FileSystemConfig":
+			if err := awsAwsjson11_deserializeDocumentFileSystemConfig(&sv.FileSystemConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -65089,7 +65231,7 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionStep(v **types.PipelineExe
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected IntegerValue to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -68656,7 +68798,7 @@ func awsAwsjson11_deserializeDocumentRecommendationJobContainerConfig(v **types.
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected RecommendationJobFrameworkVersion to be of type string, got %T instead", value)
 				}
 				sv.FrameworkVersion = ptr.String(jtv)
 			}
@@ -68931,7 +69073,7 @@ func awsAwsjson11_deserializeDocumentRecommendationJobPayloadConfig(v **types.Re
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.SamplePayloadUrl = ptr.String(jtv)
 			}
@@ -69090,7 +69232,7 @@ func awsAwsjson11_deserializeDocumentRecommendationJobSupportedContentTypes(v *[
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				return fmt.Errorf("expected RecommendationJobSupportedContentType to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -73496,6 +73638,11 @@ func awsAwsjson11_deserializeDocumentTextGenerationJobConfig(v **types.TextGener
 
 		case "CompletionCriteria":
 			if err := awsAwsjson11_deserializeDocumentAutoMLJobCompletionCriteria(&sv.CompletionCriteria, value); err != nil {
+				return err
+			}
+
+		case "ModelAccessConfig":
+			if err := awsAwsjson11_deserializeDocumentModelAccessConfig(&sv.ModelAccessConfig, value); err != nil {
 				return err
 			}
 
@@ -81984,7 +82131,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeAppOutput(v **DescribeAppOutput, 
 					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 
 				default:
-					return fmt.Errorf("expected CreationTime to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -83050,7 +83197,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeContextOutput(v **DescribeContext
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ExperimentEntityName to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ContextName to be of type string, got %T instead", value)
 				}
 				sv.ContextName = ptr.String(jtv)
 			}

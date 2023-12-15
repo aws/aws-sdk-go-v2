@@ -35,12 +35,6 @@ type CreateFlowDefinitionInput struct {
 	// This member is required.
 	FlowDefinitionName *string
 
-	// An object containing information about the tasks the human reviewers will
-	// perform.
-	//
-	// This member is required.
-	HumanLoopConfig *types.HumanLoopConfig
-
 	// An object containing information about where the human review results will be
 	// uploaded.
 	//
@@ -57,6 +51,10 @@ type CreateFlowDefinitionInput struct {
 
 	// An object containing information about the events that trigger a human workflow.
 	HumanLoopActivationConfig *types.HumanLoopActivationConfig
+
+	// An object containing information about the tasks the human reviewers will
+	// perform.
+	HumanLoopConfig *types.HumanLoopConfig
 
 	// Container for configuring the source of human task requests. Use to specify if
 	// Amazon Rekognition or Amazon Textract is used as an integration source.

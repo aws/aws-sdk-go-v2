@@ -61,6 +61,9 @@ type AgentContactReference struct {
 // Information about the agent who accepted the contact.
 type AgentInfo struct {
 
+	// Agent pause duration for a contact in seconds.
+	AgentPauseDurationInSeconds *int32
+
 	// The timestamp when the contact was connected to the agent.
 	ConnectedToAgentTimestamp *time.Time
 
@@ -483,6 +486,12 @@ type Contact struct {
 	// started listening to a contact.
 	InitiationTimestamp *time.Time
 
+	// The timestamp when the contact was last paused.
+	LastPausedTimestamp *time.Time
+
+	// The timestamp when the contact was last resumed.
+	LastResumedTimestamp *time.Time
+
 	// The timestamp when contact was last updated.
 	LastUpdateTimestamp *time.Time
 
@@ -507,6 +516,12 @@ type Contact struct {
 	// Tags associated with the contact. This contains both Amazon Web Services
 	// generated and user-defined tags.
 	Tags map[string]string
+
+	// Total pause count for a contact.
+	TotalPauseCount *int32
+
+	// Total pause duration for a contact in seconds.
+	TotalPauseDurationInSeconds *int32
 
 	// Information about Amazon Connect Wisdom.
 	WisdomInfo *WisdomInfo
@@ -675,6 +690,22 @@ type ControlPlaneTagFilter struct {
 
 	// A leaf node condition which can be used to specify a tag condition.
 	TagCondition *TagCondition
+
+	noSmithyDocumentSerde
+}
+
+// The CreateCase action definition.
+type CreateCaseActionDefinition struct {
+
+	// An array of objects with Field ID and Value data.
+	//
+	// This member is required.
+	Fields []FieldValue
+
+	// A unique identifier of a template.
+	//
+	// This member is required.
+	TemplateId *string
 
 	noSmithyDocumentSerde
 }
@@ -856,6 +887,11 @@ type EmailReference struct {
 	noSmithyDocumentSerde
 }
 
+// An empty value.
+type EmptyFieldValue struct {
+	noSmithyDocumentSerde
+}
+
 // The encryption configuration.
 type EncryptionConfig struct {
 
@@ -872,6 +908,11 @@ type EncryptionConfig struct {
 	// This member is required.
 	KeyId *string
 
+	noSmithyDocumentSerde
+}
+
+// End associated tasks related to a case.
+type EndAssociatedTasksActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
@@ -1632,6 +1673,40 @@ type FailedRequest struct {
 	// Request identifier provided in the API call in the ContactDataRequest to create
 	// a contact.
 	RequestIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Object for case field values.
+type FieldValue struct {
+
+	// Unique identifier of a field.
+	//
+	// This member is required.
+	Id *string
+
+	// Union of potential field value types.
+	//
+	// This member is required.
+	Value *FieldValueUnion
+
+	noSmithyDocumentSerde
+}
+
+// Object to store union of Field values.
+type FieldValueUnion struct {
+
+	// A Boolean number value type.
+	BooleanValue bool
+
+	// a Double number value type.
+	DoubleValue *float64
+
+	// An empty value.
+	EmptyValue *EmptyFieldValue
+
+	// String value type.
+	StringValue *string
 
 	noSmithyDocumentSerde
 }
@@ -3886,6 +3961,14 @@ type RuleAction struct {
 	// OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate
 	AssignContactCategoryAction *AssignContactCategoryActionDefinition
 
+	// Information about the create case action. Supported only for TriggerEventSource
+	// values: OnPostCallAnalysisAvailable | OnPostChatAnalysisAvailable .
+	CreateCaseAction *CreateCaseActionDefinition
+
+	// Information about the end associated tasks action. Supported only for
+	// TriggerEventSource values: OnCaseUpdate .
+	EndAssociatedTasksAction *EndAssociatedTasksActionDefinition
+
 	// Information about the EventBridge action. Supported only for TriggerEventSource
 	// values: OnPostCallAnalysisAvailable | OnRealTimeCallAnalysisAvailable |
 	// OnRealTimeChatAnalysisAvailable | OnPostChatAnalysisAvailable |
@@ -3902,6 +3985,10 @@ type RuleAction struct {
 	// is one of the following values: OnZendeskTicketCreate |
 	// OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate
 	TaskAction *TaskActionDefinition
+
+	// Information about the update case action. Supported only for TriggerEventSource
+	// values: OnCaseCreate | OnCaseUpdate .
+	UpdateCaseAction *UpdateCaseActionDefinition
 
 	noSmithyDocumentSerde
 }
@@ -4554,6 +4641,17 @@ type TrafficDistributionGroupUserSummary struct {
 
 	// The identifier for the user. This can be the ID or the ARN of the user.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// The UpdateCase action definition.
+type UpdateCaseActionDefinition struct {
+
+	// An array of objects with Field ID and Value data.
+	//
+	// This member is required.
+	Fields []FieldValue
 
 	noSmithyDocumentSerde
 }

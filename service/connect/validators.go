@@ -3030,6 +3030,26 @@ func (m *validateOpMonitorContact) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPauseContact struct {
+}
+
+func (*validateOpPauseContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPauseContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PauseContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPauseContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutUserStatus struct {
 }
 
@@ -3085,6 +3105,26 @@ func (m *validateOpReplicateInstance) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpReplicateInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResumeContact struct {
+}
+
+func (*validateOpResumeContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResumeContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResumeContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResumeContactInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5134,6 +5174,10 @@ func addOpMonitorContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpMonitorContact{}, middleware.After)
 }
 
+func addOpPauseContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPauseContact{}, middleware.After)
+}
+
 func addOpPutUserStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutUserStatus{}, middleware.After)
 }
@@ -5144,6 +5188,10 @@ func addOpReleasePhoneNumberValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpReplicateInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpReplicateInstance{}, middleware.After)
+}
+
+func addOpResumeContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResumeContact{}, middleware.After)
 }
 
 func addOpResumeContactRecordingValidationMiddleware(stack *middleware.Stack) error {
@@ -5530,6 +5578,28 @@ func validateContactReferences(v map[string]types.Reference) error {
 		if err := validateReference(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateCaseActionDefinition(v *types.CreateCaseActionDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCaseActionDefinition"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateFieldValues(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5928,6 +5998,41 @@ func validateEventBridgeActionDefinition(v *types.EventBridgeActionDefinition) e
 	invalidParams := smithy.InvalidParamsError{Context: "EventBridgeActionDefinition"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldValue(v *types.FieldValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldValue"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldValues(v []types.FieldValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldValues"}
+	for i := range v {
+		if err := validateFieldValue(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6468,6 +6573,16 @@ func validateRuleAction(v *types.RuleAction) error {
 			invalidParams.AddNested("SendNotificationAction", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CreateCaseAction != nil {
+		if err := validateCreateCaseActionDefinition(v.CreateCaseAction); err != nil {
+			invalidParams.AddNested("CreateCaseAction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UpdateCaseAction != nil {
+		if err := validateUpdateCaseActionDefinition(v.UpdateCaseAction); err != nil {
+			invalidParams.AddNested("UpdateCaseAction", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6691,6 +6806,25 @@ func validateTelephonyConfig(v *types.TelephonyConfig) error {
 	} else if v.Distributions != nil {
 		if err := validateDistributionList(v.Distributions); err != nil {
 			invalidParams.AddNested("Distributions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateCaseActionDefinition(v *types.UpdateCaseActionDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCaseActionDefinition"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateFieldValues(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9604,6 +9738,24 @@ func validateOpMonitorContactInput(v *MonitorContactInput) error {
 	}
 }
 
+func validateOpPauseContactInput(v *PauseContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PauseContactInput"}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutUserStatusInput(v *PutUserStatusInput) error {
 	if v == nil {
 		return nil
@@ -9653,6 +9805,24 @@ func validateOpReplicateInstanceInput(v *ReplicateInstanceInput) error {
 	}
 	if v.ReplicaAlias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicaAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResumeContactInput(v *ResumeContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResumeContactInput"}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9973,6 +10143,11 @@ func validateOpStartOutboundVoiceContactInput(v *StartOutboundVoiceContactInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartOutboundVoiceContactInput"}
+	if v.References != nil {
+		if err := validateContactReferences(v.References); err != nil {
+			invalidParams.AddNested("References", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DestinationPhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
 	}

@@ -10,6 +10,9 @@ const (
 	ActionTypeAssignContactCategory    ActionType = "ASSIGN_CONTACT_CATEGORY"
 	ActionTypeGenerateEventbridgeEvent ActionType = "GENERATE_EVENTBRIDGE_EVENT"
 	ActionTypeSendNotification         ActionType = "SEND_NOTIFICATION"
+	ActionTypeCreateCase               ActionType = "CREATE_CASE"
+	ActionTypeUpdateCase               ActionType = "UPDATE_CASE"
+	ActionTypeEndAssociatedTasks       ActionType = "END_ASSOCIATED_TASKS"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -21,6 +24,9 @@ func (ActionType) Values() []ActionType {
 		"ASSIGN_CONTACT_CATEGORY",
 		"GENERATE_EVENTBRIDGE_EVENT",
 		"SEND_NOTIFICATION",
+		"CREATE_CASE",
+		"UPDATE_CASE",
+		"END_ASSOCIATED_TASKS",
 	}
 }
 
@@ -544,6 +550,8 @@ const (
 	EventSourceNameOnSalesforceCaseCreate          EventSourceName = "OnSalesforceCaseCreate"
 	EventSourceNameOnContactEvaluationSubmit       EventSourceName = "OnContactEvaluationSubmit"
 	EventSourceNameOnMetricDataUpdate              EventSourceName = "OnMetricDataUpdate"
+	EventSourceNameOnCaseCreate                    EventSourceName = "OnCaseCreate"
+	EventSourceNameOnCaseUpdate                    EventSourceName = "OnCaseUpdate"
 )
 
 // Values returns all known values for EventSourceName. Note that this can be
@@ -560,6 +568,8 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnSalesforceCaseCreate",
 		"OnContactEvaluationSubmit",
 		"OnMetricDataUpdate",
+		"OnCaseCreate",
+		"OnCaseUpdate",
 	}
 }
 
@@ -1990,6 +2000,7 @@ type SourceType string
 const (
 	SourceTypeSalesforce SourceType = "SALESFORCE"
 	SourceTypeZendesk    SourceType = "ZENDESK"
+	SourceTypeCases      SourceType = "CASES"
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
@@ -1999,6 +2010,7 @@ func (SourceType) Values() []SourceType {
 	return []SourceType{
 		"SALESFORCE",
 		"ZENDESK",
+		"CASES",
 	}
 }
 

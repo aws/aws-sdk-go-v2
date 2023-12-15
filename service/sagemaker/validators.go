@@ -1370,6 +1370,26 @@ func (m *validateOpDeleteCodeRepository) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCompilationJob struct {
+}
+
+func (*validateOpDeleteCompilationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCompilationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCompilationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCompilationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteContext struct {
 }
 
@@ -5382,6 +5402,10 @@ func addOpDeleteCodeRepositoryValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteCodeRepository{}, middleware.After)
 }
 
+func addOpDeleteCompilationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCompilationJob{}, middleware.After)
+}
+
 func addOpDeleteContextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteContext{}, middleware.After)
 }
@@ -6474,9 +6498,7 @@ func validateAutoMLChannel(v *types.AutoMLChannel) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AutoMLChannel"}
-	if v.DataSource == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
-	} else if v.DataSource != nil {
+	if v.DataSource != nil {
 		if err := validateAutoMLDataSource(v.DataSource); err != nil {
 			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
 		}
@@ -6627,6 +6649,11 @@ func validateAutoMLProblemTypeConfig(v types.AutoMLProblemTypeConfig) error {
 	case *types.AutoMLProblemTypeConfigMemberTextClassificationJobConfig:
 		if err := validateTextClassificationJobConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[TextClassificationJobConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutoMLProblemTypeConfigMemberTextGenerationJobConfig:
+		if err := validateTextGenerationJobConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[TextGenerationJobConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig:
@@ -8137,21 +8164,6 @@ func validateEFSFileSystemConfig(v *types.EFSFileSystemConfig) error {
 	}
 }
 
-func validateEndpointInfo(v *types.EndpointInfo) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "EndpointInfo"}
-	if v.EndpointName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateEndpointInput(v *types.EndpointInput) error {
 	if v == nil {
 		return nil
@@ -8175,14 +8187,14 @@ func validateEndpointInputConfiguration(v *types.EndpointInputConfiguration) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EndpointInputConfiguration"}
-	if v.EnvironmentParameterRanges != nil {
-		if err := validateEnvironmentParameterRanges(v.EnvironmentParameterRanges); err != nil {
-			invalidParams.AddNested("EnvironmentParameterRanges", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ServerlessConfig != nil {
 		if err := validateProductionVariantServerlessConfig(v.ServerlessConfig); err != nil {
 			invalidParams.AddNested("ServerlessConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnvironmentParameterRanges != nil {
+		if err := validateEnvironmentParameterRanges(v.EnvironmentParameterRanges); err != nil {
+			invalidParams.AddNested("EnvironmentParameterRanges", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8199,23 +8211,6 @@ func validateEndpointInputConfigurations(v []types.EndpointInputConfiguration) e
 	invalidParams := smithy.InvalidParamsError{Context: "EndpointInputConfigurations"}
 	for i := range v {
 		if err := validateEndpointInputConfiguration(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateEndpoints(v []types.EndpointInfo) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "Endpoints"}
-	for i := range v {
-		if err := validateEndpointInfo(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -8299,6 +8294,12 @@ func validateFeatureDefinition(v *types.FeatureDefinition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FeatureDefinition"}
+	if v.FeatureName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureName"))
+	}
+	if len(v.FeatureType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureType"))
+	}
 	if v.CollectionConfig != nil {
 		if err := validateCollectionConfig(v.CollectionConfig); err != nil {
 			invalidParams.AddNested("CollectionConfig", err.(smithy.InvalidParamsError))
@@ -8652,6 +8653,11 @@ func validateHyperParameterTrainingJobDefinition(v *types.HyperParameterTraining
 			invalidParams.AddNested("ResourceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.HyperParameterTuningResourceConfig != nil {
+		if err := validateHyperParameterTuningResourceConfig(v.HyperParameterTuningResourceConfig); err != nil {
+			invalidParams.AddNested("HyperParameterTuningResourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.StoppingCondition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StoppingCondition"))
 	}
@@ -8663,11 +8669,6 @@ func validateHyperParameterTrainingJobDefinition(v *types.HyperParameterTraining
 	if v.RetryStrategy != nil {
 		if err := validateRetryStrategy(v.RetryStrategy); err != nil {
 			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.HyperParameterTuningResourceConfig != nil {
-		if err := validateHyperParameterTuningResourceConfig(v.HyperParameterTuningResourceConfig); err != nil {
-			invalidParams.AddNested("HyperParameterTuningResourceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9336,11 +9337,6 @@ func validateMemberDefinition(v *types.MemberDefinition) error {
 			invalidParams.AddNested("CognitoMemberDefinition", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.OidcMemberDefinition != nil {
-		if err := validateOidcMemberDefinition(v.OidcMemberDefinition); err != nil {
-			invalidParams.AddNested("OidcMemberDefinition", err.(smithy.InvalidParamsError))
-		}
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9518,9 +9514,7 @@ func validateModelDataSource(v *types.ModelDataSource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModelDataSource"}
-	if v.S3DataSource == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3DataSource"))
-	} else if v.S3DataSource != nil {
+	if v.S3DataSource != nil {
 		if err := validateS3ModelDataSource(v.S3DataSource); err != nil {
 			invalidParams.AddNested("S3DataSource", err.(smithy.InvalidParamsError))
 		}
@@ -10308,21 +10302,6 @@ func validateOidcConfig(v *types.OidcConfig) error {
 	}
 }
 
-func validateOidcMemberDefinition(v *types.OidcMemberDefinition) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "OidcMemberDefinition"}
-	if v.Groups == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Groups"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOutputConfig(v *types.OutputConfig) error {
 	if v == nil {
 		return nil
@@ -10918,11 +10897,6 @@ func validateRecommendationJobInputConfig(v *types.RecommendationJobInputConfig)
 	if v.EndpointConfigurations != nil {
 		if err := validateEndpointInputConfigurations(v.EndpointConfigurations); err != nil {
 			invalidParams.AddNested("EndpointConfigurations", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Endpoints != nil {
-		if err := validateEndpoints(v.Endpoints); err != nil {
-			invalidParams.AddNested("Endpoints", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.VpcConfig != nil {
@@ -11680,6 +11654,23 @@ func validateTextClassificationJobConfig(v *types.TextClassificationJobConfig) e
 	}
 	if v.TargetLabelColumn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetLabelColumn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextGenerationJobConfig(v *types.TextGenerationJobConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextGenerationJobConfig"}
+	if v.ModelAccessConfig != nil {
+		if err := validateModelAccessConfig(v.ModelAccessConfig); err != nil {
+			invalidParams.AddNested("ModelAccessConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12720,6 +12711,11 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 			invalidParams.AddNested("DefaultUserSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DomainSettings != nil {
+		if err := validateDomainSettings(v.DomainSettings); err != nil {
+			invalidParams.AddNested("DomainSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
@@ -12729,11 +12725,6 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DomainSettings != nil {
-		if err := validateDomainSettings(v.DomainSettings); err != nil {
-			invalidParams.AddNested("DomainSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DefaultSpaceSettings != nil {
@@ -13000,9 +12991,7 @@ func validateOpCreateFlowDefinitionInput(v *CreateFlowDefinitionInput) error {
 			invalidParams.AddNested("HumanLoopActivationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.HumanLoopConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HumanLoopConfig"))
-	} else if v.HumanLoopConfig != nil {
+	if v.HumanLoopConfig != nil {
 		if err := validateHumanLoopConfig(v.HumanLoopConfig); err != nil {
 			invalidParams.AddNested("HumanLoopConfig", err.(smithy.InvalidParamsError))
 		}
@@ -14379,6 +14368,21 @@ func validateOpDeleteCodeRepositoryInput(v *DeleteCodeRepositoryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCodeRepositoryInput"}
 	if v.CodeRepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CodeRepositoryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCompilationJobInput(v *DeleteCompilationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCompilationJobInput"}
+	if v.CompilationJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CompilationJobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

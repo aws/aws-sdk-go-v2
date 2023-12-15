@@ -72,8 +72,6 @@ type ListFeatureGroupsOutput struct {
 	FeatureGroupSummaries []types.FeatureGroupSummary
 
 	// A token to resume pagination of ListFeatureGroups results.
-	//
-	// This member is required.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -156,6 +154,96 @@ func (c *Client) addOperationListFeatureGroupsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+// ListFeatureGroupsAPIClient is a client that implements the ListFeatureGroups
+// operation.
+type ListFeatureGroupsAPIClient interface {
+	ListFeatureGroups(context.Context, *ListFeatureGroupsInput, ...func(*Options)) (*ListFeatureGroupsOutput, error)
+}
+
+var _ ListFeatureGroupsAPIClient = (*Client)(nil)
+
+// ListFeatureGroupsPaginatorOptions is the paginator options for ListFeatureGroups
+type ListFeatureGroupsPaginatorOptions struct {
+	// The maximum number of results returned by ListFeatureGroups .
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListFeatureGroupsPaginator is a paginator for ListFeatureGroups
+type ListFeatureGroupsPaginator struct {
+	options   ListFeatureGroupsPaginatorOptions
+	client    ListFeatureGroupsAPIClient
+	params    *ListFeatureGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListFeatureGroupsPaginator returns a new ListFeatureGroupsPaginator
+func NewListFeatureGroupsPaginator(client ListFeatureGroupsAPIClient, params *ListFeatureGroupsInput, optFns ...func(*ListFeatureGroupsPaginatorOptions)) *ListFeatureGroupsPaginator {
+	if params == nil {
+		params = &ListFeatureGroupsInput{}
+	}
+
+	options := ListFeatureGroupsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListFeatureGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListFeatureGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListFeatureGroups page.
+func (p *ListFeatureGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFeatureGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListFeatureGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListFeatureGroups(region string) *awsmiddleware.RegisterServiceMetadata {

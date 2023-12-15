@@ -61,12 +61,6 @@ type DescribeFlowDefinitionOutput struct {
 	// This member is required.
 	FlowDefinitionStatus types.FlowDefinitionStatus
 
-	// An object containing information about who works on the task, the workforce
-	// task price, and other task details.
-	//
-	// This member is required.
-	HumanLoopConfig *types.HumanLoopConfig
-
 	// An object containing information about the output file.
 	//
 	// This member is required.
@@ -83,6 +77,10 @@ type DescribeFlowDefinitionOutput struct {
 
 	// An object containing information about what triggers a human review workflow.
 	HumanLoopActivationConfig *types.HumanLoopActivationConfig
+
+	// An object containing information about who works on the task, the workforce
+	// task price, and other task details.
+	HumanLoopConfig *types.HumanLoopConfig
 
 	// Container for configuring the source of human task requests. Used to specify if
 	// Amazon Rekognition or Amazon Textract is used as an integration source.

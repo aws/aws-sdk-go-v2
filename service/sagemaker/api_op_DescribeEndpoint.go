@@ -56,11 +56,6 @@ type DescribeEndpointOutput struct {
 	// This member is required.
 	EndpointArn *string
 
-	// The name of the endpoint configuration associated with this endpoint.
-	//
-	// This member is required.
-	EndpointConfigName *string
-
 	// Name of the endpoint.
 	//
 	// This member is required.
@@ -113,6 +108,9 @@ type DescribeEndpointOutput struct {
 
 	// The currently active data capture configuration used by your Endpoint.
 	DataCaptureConfig *types.DataCaptureConfigSummary
+
+	// The name of the endpoint configuration associated with this endpoint.
+	EndpointConfigName *string
 
 	// The configuration parameters for an explainer.
 	ExplainerConfig *types.ExplainerConfig

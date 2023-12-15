@@ -78,6 +78,7 @@
         "api_op_DeleteAssociation.go",
         "api_op_DeleteCluster.go",
         "api_op_DeleteCodeRepository.go",
+        "api_op_DeleteCompilationJob.go",
         "api_op_DeleteContext.go",
         "api_op_DeleteDataQualityJobDefinition.go",
         "api_op_DeleteDeviceFleet.go",

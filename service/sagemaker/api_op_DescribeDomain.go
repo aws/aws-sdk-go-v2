@@ -102,7 +102,7 @@ type DescribeDomainOutput struct {
 	SecurityGroupIdForDomainBoundary *string
 
 	// The ARN of the application managed by SageMaker in IAM Identity Center. This
-	// value is only returned for domains created after September 19, 2023.
+	// value is only returned for domains created after October 1, 2023.
 	SingleSignOnApplicationArn *string
 
 	// The IAM Identity Center managed application instance ID.

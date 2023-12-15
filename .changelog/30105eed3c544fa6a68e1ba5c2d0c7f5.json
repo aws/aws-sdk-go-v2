@@ -1,0 +1,8 @@
+{
+    "id": "30105eed-3c54-4fa6-a68e-1ba5c2d0c7f5",
+    "type": "feature",
+    "description": "This release 1) introduces a new API: DeleteCompilationJob , and 2) adds InfraCheckConfig for Create/Describe training job API",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

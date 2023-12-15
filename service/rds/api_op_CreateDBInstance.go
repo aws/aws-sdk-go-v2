@@ -95,8 +95,7 @@ type CreateDBInstanceInput struct {
 	//   Custom for Oracle, 16384 for RDS Custom for SQL Server.
 	// RDS for Db2 Constraints to the amount of storage for each storage type are the
 	// following:
-	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to
-	//   64000.
+	//   - General Purpose (SSD) storage (gp3): Must be an integer from 20 to 64000.
 	//   - Provisioned IOPS storage (io1): Must be an integer from 100 to 64000.
 	// RDS for MariaDB Constraints to the amount of storage for each storage type are
 	// the following:

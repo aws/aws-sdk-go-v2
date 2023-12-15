@@ -105,15 +105,18 @@ type GetMetricDataV2Input struct {
 	// is available. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing
 	// Profile, Agent, Agent Hierarchy AVG_ABANDON_TIME Unit: Seconds Valid groupings
 	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,
-	// contact/segmentAttributes/connect:Subtype AVG_AFTER_CONTACT_WORK_TIME Unit:
-	// Seconds Valid metric filter key: INITIATION_METHOD Valid groupings and filters:
-	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,
-	// contact/segmentAttributes/connect:Subtype Feature is a valid filter but not a
-	// valid grouping. AVG_AGENT_CONNECTING_TIME Unit: Seconds Valid metric filter key:
-	// INITIATION_METHOD . For now, this metric only supports the following as
-	// INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK | API Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy The Negate key
-	// in Metric Level Filters is not applicable for this metric. AVG_CONTACT_DURATION
+	// contact/segmentAttributes/connect:Subtype AVG_ACTIVE_TIME Unit: Seconds Valid
+	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
+	// AVG_AFTER_CONTACT_WORK_TIME Unit: Seconds Valid metric filter key:
+	// INITIATION_METHOD Valid groupings and filters: Queue, Channel, Routing Profile,
+	// Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+	// Feature is a valid filter but not a valid grouping. AVG_AGENT_CONNECTING_TIME
+	// Unit: Seconds Valid metric filter key: INITIATION_METHOD . For now, this metric
+	// only supports the following as INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK
+	// | API Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+	// Agent Hierarchy The Negate key in Metric Level Filters is not applicable for
+	// this metric. AVG_AGENT_PAUSE_TIME Unit: Seconds Valid groupings and filters:
+	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy AVG_CONTACT_DURATION
 	// Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile,
 	// Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
 	// Feature is a valid filter but not a valid grouping. AVG_CONVERSATION_DURATION

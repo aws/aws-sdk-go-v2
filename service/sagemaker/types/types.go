@@ -1263,11 +1263,6 @@ type AutoMLCandidateStep struct {
 // . A validation dataset must contain the same headers as the training dataset.
 type AutoMLChannel struct {
 
-	// The data source for an AutoML channel.
-	//
-	// This member is required.
-	DataSource *AutoMLDataSource
-
 	// The name of the target variable in supervised learning, usually represented by
 	// 'y'.
 	//
@@ -1288,6 +1283,9 @@ type AutoMLChannel struct {
 	// text/csv;header=present or x-application/vnd.amazon+parquet . The default value
 	// is text/csv;header=present .
 	ContentType *string
+
+	// The data source for an AutoML channel.
+	DataSource *AutoMLDataSource
 
 	// If specified, this column name indicates which column of the dataset should be
 	// treated as sample weights for use by the objective metric during the training,
@@ -4562,8 +4560,6 @@ type EndpointConfigSummary struct {
 type EndpointInfo struct {
 
 	// The name of a customer's endpoint.
-	//
-	// This member is required.
 	EndpointName *string
 
 	noSmithyDocumentSerde
@@ -4936,6 +4932,17 @@ type FailStepMetadata struct {
 // FeatureType s are Integral , Fractional and String .
 type FeatureDefinition struct {
 
+	// The name of a feature. The type must be a string. FeatureName cannot be any of
+	// the following: is_deleted , write_time , api_invocation_time .
+	//
+	// This member is required.
+	FeatureName *string
+
+	// The value type of a feature. Valid values are Integral, Fractional, or String.
+	//
+	// This member is required.
+	FeatureType FeatureType
+
 	// Configuration for your collection.
 	CollectionConfig CollectionConfig
 
@@ -4947,13 +4954,6 @@ type FeatureDefinition struct {
 	//   The vector dimension is determined by you. Must have elements with fractional
 	//   feature types.
 	CollectionType CollectionType
-
-	// The name of a feature. The type must be a string. FeatureName cannot be any of
-	// the following: is_deleted , write_time , api_invocation_time .
-	FeatureName *string
-
-	// The value type of a feature. Valid values are Integral, Fractional, or String.
-	FeatureType FeatureType
 
 	noSmithyDocumentSerde
 }
@@ -7867,6 +7867,10 @@ type JupyterLabAppImageConfig struct {
 	// The configuration used to run the application image container.
 	ContainerConfig *ContainerConfig
 
+	// The Amazon Elastic File System (EFS) storage configuration for a SageMaker
+	// image.
+	FileSystemConfig *FileSystemConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -9045,8 +9049,6 @@ type ModelDataQuality struct {
 type ModelDataSource struct {
 
 	// Specifies the S3 location of ML model data to deploy.
-	//
-	// This member is required.
 	S3DataSource *S3ModelDataSource
 
 	noSmithyDocumentSerde
@@ -10676,8 +10678,6 @@ type OidcMemberDefinition struct {
 
 	// A list of comma seperated strings that identifies user groups in your OIDC IdP.
 	// Each user group is made up of a group of private workers.
-	//
-	// This member is required.
 	Groups []string
 
 	noSmithyDocumentSerde
@@ -10887,15 +10887,14 @@ type OutputDataConfig struct {
 	// If you use a KMS key ID or an alias of your KMS key, the SageMaker execution
 	// role must include permissions to call kms:Encrypt . If you don't provide a KMS
 	// key ID, SageMaker uses the default KMS key for Amazon S3 for your role's
-	// account. SageMaker uses server-side encryption with KMS-managed keys for
-	// OutputDataConfig . If you use a bucket policy with an s3:PutObject permission
-	// that only allows objects with server-side encryption, set the condition key of
-	// s3:x-amz-server-side-encryption to "aws:kms" . For more information, see
-	// KMS-Managed Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
-	// in the Amazon Simple Storage Service Developer Guide. The KMS key policy must
-	// grant permission to the IAM role that you specify in your CreateTrainingJob ,
-	// CreateTransformJob , or CreateHyperParameterTuningJob requests. For more
-	// information, see Using Key Policies in Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+	// account. For more information, see KMS-Managed Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
+	// in the Amazon Simple Storage Service Developer Guide. If the output data is
+	// stored in Amazon S3 Express One Zone, it is encrypted with server-side
+	// encryption with Amazon S3 managed keys (SSE-S3). KMS key is not supported for
+	// Amazon S3 Express One Zone The KMS key policy must grant permission to the IAM
+	// role that you specify in your CreateTrainingJob , CreateTransformJob , or
+	// CreateHyperParameterTuningJob requests. For more information, see Using Key
+	// Policies in Amazon Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
 
@@ -13118,7 +13117,8 @@ type ResourceSpec struct {
 	// The ARN of the SageMaker image that the image version belongs to.
 	SageMakerImageArn *string
 
-	// The SageMakerImageVersionAlias.
+	// The SageMakerImageVersionAlias of the image to launch with. This value is in
+	// SemVer 2.0.0 versioning format.
 	SageMakerImageVersionAlias *string
 
 	// The ARN of the image version created on the instance.
@@ -14396,6 +14396,12 @@ type TextGenerationJobConfig struct {
 	// problem types, the MaxRuntimePerTrainingJobInSeconds attribute of
 	// AutoMLJobCompletionCriteria defaults to 72h (259200s).
 	CompletionCriteria *AutoMLJobCompletionCriteria
+
+	// The access configuration file for the ML model. You can explicitly accept the
+	// model end-user license agreement (EULA) within the ModelAccessConfig . For more
+	// information, see End-user license agreements (https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula)
+	// .
+	ModelAccessConfig *ModelAccessConfig
 
 	// The hyperparameters used to configure and optimize the learning process of the
 	// base model. You can set any combination of the following hyperparameters for all

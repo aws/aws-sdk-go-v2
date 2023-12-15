@@ -68,6 +68,8 @@ type CreatePresignedDomainUrlInput struct {
 	//   JupyterLab application.
 	//   - app:RStudioServerPro:relative/path : Directs users to the relative path in
 	//   the RStudio application.
+	//   - app:CodeEditor:relative/path : Directs users to the relative path in the
+	//   Code Editor, based on Code-OSS, Visual Studio Code - Open Source application.
 	//   - app:Canvas:relative/path : Directs users to the relative path in the Canvas
 	//   application.
 	LandingUri *string

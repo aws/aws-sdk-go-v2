@@ -89,6 +89,8 @@ type DescribeSpaceOutput struct {
 	// Services IAM Identity Center. The following application types are supported:
 	//   - Studio Classic: &redirect=JupyterServer
 	//   - JupyterLab: &redirect=JupyterLab
+	//   - Code Editor, based on Code-OSS, Visual Studio Code - Open Source:
+	//   &redirect=CodeEditor
 	Url *string
 
 	// Metadata pertaining to the operation's result.

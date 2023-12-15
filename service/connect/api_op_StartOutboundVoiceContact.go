@@ -84,11 +84,32 @@ type StartOutboundVoiceContactInput struct {
 	// the contact ID is returned.
 	ClientToken *string
 
+	// A description of the voice contact that is shown to an agent in the Contact
+	// Control Panel (CCP).
+	Description *string
+
+	// The name of a voice contact that is shown to an agent in the Contact Control
+	// Panel (CCP).
+	Name *string
+
 	// The queue for the call. If you specify a queue, the phone displayed for caller
 	// ID is the phone number specified in the queue. If you do not specify a queue,
 	// the queue defined in the flow is used. If you do not specify a queue, you must
 	// specify a source phone number.
 	QueueId *string
+
+	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
+	// Contacts can have the following reference types at the time of creation: URL |
+	// NUMBER | STRING | DATE | EMAIL . ATTACHMENT is not a supported reference type
+	// during voice contact creation.
+	References map[string]types.Reference
+
+	// The contactId that is related to this contact. Linking voice, task, or chat by
+	// using RelatedContactID copies over contact attributes from the related contact
+	// to the new contact. All updates to user-defined attributes in the new contact
+	// are limited to the individual contact ID. There are no limits to the number of
+	// contacts that can be linked by using RelatedContactId .
+	RelatedContactId *string
 
 	// The phone number associated with the Amazon Connect instance, in E.164 format.
 	// If you do not specify a source phone number, you must specify a queue.
