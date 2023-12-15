@@ -1,3 +1,7 @@
+# v1.64.6 (2023-12-15)
+
+* **Documentation**: Updates Amazon RDS documentation by adding code examples
+
 # v1.64.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

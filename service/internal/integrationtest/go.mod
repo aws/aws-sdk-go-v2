@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.19.5
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.31.5
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.31.6
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.43.5
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.35.5
@@ -53,7 +53,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/iot v1.47.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.24.5
-	github.com/aws/aws-sdk-go-v2/service/kms v1.27.5
+	github.com/aws/aws-sdk-go-v2/service/kms v1.27.6
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.49.5
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.18.5
@@ -61,7 +61,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/polly v1.36.5
-	github.com/aws/aws-sdk-go-v2/service/rds v1.64.5
+	github.com/aws/aws-sdk-go-v2/service/rds v1.64.6
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.39.6
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.35.5
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.35.5

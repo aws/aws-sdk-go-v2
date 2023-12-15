@@ -1,8 +1,0 @@
-{
-    "id": "8da14c12-4bd7-4529-bd89-6cd4b9764f44",
-    "type": "feature",
-    "description": "Increase number of fields that can be included in CaseEventIncludedData from 50 to 200",
-    "modules": [
-        "service/connectcases"
-    ]
-}

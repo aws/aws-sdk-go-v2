@@ -1,3 +1,7 @@
+# v1.121.0 (2023-12-15)
+
+* **Feature**: This release 1) introduces a new API: DeleteCompilationJob , and 2) adds InfraCheckConfig for Create/Describe training job API
+
 # v1.120.4 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

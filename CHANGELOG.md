@@ -1,3 +1,17 @@
+# Release (2023-12-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.22.5](service/cloud9/CHANGELOG.md#v1225-2023-12-15)
+  * **Documentation**: Updated Cloud9 API documentation for AL2023 release
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.86.0](service/connect/CHANGELOG.md#v1860-2023-12-15)
+  * **Feature**: Adds relatedContactId field to StartOutboundVoiceContact API input. Introduces PauseContact API and ResumeContact API for Task contacts. Adds pause duration, number of pauses, timestamps for last paused and resumed events to DescribeContact API response. Adds new Rule type and new Rule action.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.27.6](service/kms/CHANGELOG.md#v1276-2023-12-15)
+  * **Documentation**: Documentation updates for AWS Key Management Service
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.64.6](service/rds/CHANGELOG.md#v1646-2023-12-15)
+  * **Documentation**: Updates Amazon RDS documentation by adding code examples
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.121.0](service/sagemaker/CHANGELOG.md#v11210-2023-12-15)
+  * **Feature**: This release 1) introduces a new API: DeleteCompilationJob , and 2) adds InfraCheckConfig for Create/Describe training job API
+
 # Release (2023-12-14)
 
 ## Module Highlights

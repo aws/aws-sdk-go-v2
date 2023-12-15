@@ -1,8 +1,0 @@
-{
-    "id": "28a35f01-d98f-43b4-a809-cb53037445c2",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation by adding code examples",
-    "modules": [
-        "service/rds"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.27.6 (2023-12-15)
+
+* **Documentation**: Documentation updates for AWS Key Management Service
+
 # v1.27.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

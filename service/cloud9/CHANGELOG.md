@@ -1,3 +1,7 @@
+# v1.22.5 (2023-12-15)
+
+* **Documentation**: Updated Cloud9 API documentation for AL2023 release
+
 # v1.22.4 (2023-12-12)
 
 * No change notes available for this release.

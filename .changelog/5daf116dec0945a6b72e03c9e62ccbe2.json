@@ -1,8 +1,0 @@
-{
-    "id": "5daf116d-ec09-45a6-b72e-03c9e62ccbe2",
-    "type": "documentation",
-    "description": "Updated Cloud9 API documentation for AL2023 release",
-    "modules": [
-        "service/cloud9"
-    ]
-}

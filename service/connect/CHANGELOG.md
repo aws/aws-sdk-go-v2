@@ -1,3 +1,7 @@
+# v1.86.0 (2023-12-15)
+
+* **Feature**: Adds relatedContactId field to StartOutboundVoiceContact API input. Introduces PauseContact API and ResumeContact API for Task contacts. Adds pause duration, number of pauses, timestamps for last paused and resumed events to DescribeContact API response. Adds new Rule type and new Rule action.
+
 # v1.85.0 (2023-12-14)
 
 * **Feature**: This release adds support for more granular billing using tags (key:value pairs)
