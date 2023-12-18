@@ -6308,6 +6308,13 @@ func awsAwsjson11_serializeDocumentLambdaConfigType(v *types.LambdaConfigType, v
 		ok.String(*v.PreTokenGeneration)
 	}
 
+	if v.PreTokenGenerationConfig != nil {
+		ok := object.Key("PreTokenGenerationConfig")
+		if err := awsAwsjson11_serializeDocumentPreTokenGenerationVersionConfigType(v.PreTokenGenerationConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UserMigration != nil {
 		ok := object.Key("UserMigration")
 		ok.String(*v.UserMigration)
@@ -6546,6 +6553,23 @@ func awsAwsjson11_serializeDocumentPasswordPolicyType(v *types.PasswordPolicyTyp
 	if v.TemporaryPasswordValidityDays != 0 {
 		ok := object.Key("TemporaryPasswordValidityDays")
 		ok.Integer(v.TemporaryPasswordValidityDays)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPreTokenGenerationVersionConfigType(v *types.PreTokenGenerationVersionConfigType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LambdaArn != nil {
+		ok := object.Key("LambdaArn")
+		ok.String(*v.LambdaArn)
+	}
+
+	if len(v.LambdaVersion) > 0 {
+		ok := object.Key("LambdaVersion")
+		ok.String(string(v.LambdaVersion))
 	}
 
 	return nil

@@ -7,6 +7,102 @@ import (
 	"time"
 )
 
+// The access configuration for the cluster.
+type AccessConfigResponse struct {
+
+	// The current authentication mode of the cluster.
+	AuthenticationMode AuthenticationMode
+
+	// Specifies whether or not the cluster creator IAM principal was set as a cluster
+	// admin access entry during cluster creation time.
+	BootstrapClusterCreatorAdminPermissions *bool
+
+	noSmithyDocumentSerde
+}
+
+// An access entry allows an IAM principal (user or role) to access your cluster.
+// Access entries can replace the need to maintain the aws-auth ConfigMap for
+// authentication. For more information about access entries, see Access entries (https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html)
+// in the Amazon EKS User Guide.
+type AccessEntry struct {
+
+	// The ARN of the access entry.
+	AccessEntryArn *string
+
+	// The name of your cluster.
+	ClusterName *string
+
+	// The Unix epoch timestamp at object creation.
+	CreatedAt *time.Time
+
+	// A name that you've specified in a Kubernetes RoleBinding or ClusterRoleBinding
+	// object so that Kubernetes authorizes the principalARN access to cluster objects.
+	KubernetesGroups []string
+
+	// The Unix epoch timestamp for the last modification to the object.
+	ModifiedAt *time.Time
+
+	// The ARN of the IAM principal for the access entry. If you ever delete the IAM
+	// principal with this ARN, the access entry isn't automatically deleted. We
+	// recommend that you delete the access entry with an ARN for an IAM principal that
+	// you delete. If you don't delete the access entry and ever recreate the IAM
+	// principal, even if it has the same ARN, the access entry won't work. This is
+	// because even though the ARN is the same for the recreated IAM principal, the
+	// roleID or userID (you can see this with the Security Token Service
+	// GetCallerIdentity API) is different for the recreated IAM principal than it was
+	// for the original IAM principal. Even though you don't see the IAM principal's
+	// roleID or userID for an access entry, Amazon EKS stores it with the access
+	// entry.
+	PrincipalArn *string
+
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
+	Tags map[string]string
+
+	// The type of the access entry.
+	Type *string
+
+	// The name of a user that can authenticate to your cluster.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// An access policy includes permissions that allow Amazon EKS to authorize an IAM
+// principal to work with Kubernetes objects on your cluster. The policies are
+// managed by Amazon EKS, but they're not IAM policies. You can't view the
+// permissions in the policies using the API. The permissions for many of the
+// policies are similar to the Kubernetes cluster-admin , admin , edit , and view
+// cluster roles. For more information about these cluster roles, see User-facing
+// roles (https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles)
+// in the Kubernetes documentation. To view the contents of the policies, see
+// Access policy permissions (https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html#access-policy-permissions)
+// in the Amazon EKS User Guide.
+type AccessPolicy struct {
+
+	// The ARN of the access policy.
+	Arn *string
+
+	// The name of the access policy.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The scope of an AccessPolicy that's associated to an AccessEntry .
+type AccessScope struct {
+
+	// A Kubernetes namespace that an access policy is scoped to. A value is required
+	// if you specified namespace for Type .
+	Namespaces []string
+
+	// The scope type of an access policy.
+	Type AccessScopeType
+
+	noSmithyDocumentSerde
+}
+
 // An Amazon EKS add-on. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
 // in the Amazon EKS User Guide.
 type Addon struct {
@@ -20,13 +116,13 @@ type Addon struct {
 	// The version of the add-on.
 	AddonVersion *string
 
-	// The name of the cluster.
+	// The name of your cluster.
 	ClusterName *string
 
 	// The configuration values that you provided.
 	ConfigurationValues *string
 
-	// The date and time that the add-on was created.
+	// The Unix epoch timestamp at object creation.
 	CreatedAt *time.Time
 
 	// An object that represents the health of the add-on.
@@ -35,7 +131,7 @@ type Addon struct {
 	// Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.
 	MarketplaceInformation *MarketplaceInformation
 
-	// The date and time that the add-on was last modified.
+	// The Unix epoch timestamp for the last modification to the object.
 	ModifiedAt *time.Time
 
 	// The owner of the add-on.
@@ -45,15 +141,15 @@ type Addon struct {
 	Publisher *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that's bound to the Kubernetes
-	// service account that the add-on uses.
+	// ServiceAccount object that the add-on uses.
 	ServiceAccountRoleArn *string
 
 	// The status of the add-on.
 	Status AddonStatus
 
-	// The metadata that you apply to the add-on to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
-	// Add-on tags do not propagate to any other resources associated with the cluster.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -126,6 +222,24 @@ type AddonVersionInfo struct {
 	noSmithyDocumentSerde
 }
 
+// An access policy association.
+type AssociatedAccessPolicy struct {
+
+	// The scope of the access policy.
+	AccessScope *AccessScope
+
+	// The date and time the AccessPolicy was associated with an AccessEntry .
+	AssociatedAt *time.Time
+
+	// The Unix epoch timestamp for the last modification to the object.
+	ModifiedAt *time.Time
+
+	// The ARN of the AccessPolicy .
+	PolicyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // An Auto Scaling group that is associated with an Amazon EKS managed node group.
 type AutoScalingGroup struct {
 
@@ -150,20 +264,23 @@ type Certificate struct {
 // An object representing an Amazon EKS cluster.
 type Cluster struct {
 
+	// The access configuration for the cluster.
+	AccessConfig *AccessConfigResponse
+
 	// The Amazon Resource Name (ARN) of the cluster.
 	Arn *string
 
 	// The certificate-authority-data for your cluster.
 	CertificateAuthority *Certificate
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The configuration used to connect to a cluster for registration.
 	ConnectorConfig *ConnectorConfigResponse
 
-	// The Unix epoch timestamp in seconds for when the cluster was created.
+	// The Unix epoch timestamp at object creation.
 	CreatedAt *time.Time
 
 	// The encryption configuration for the cluster.
@@ -191,7 +308,7 @@ type Cluster struct {
 	// The logging configuration for your cluster.
 	Logging *Logging
 
-	// The name of the cluster.
+	// The name of your cluster.
 	Name *string
 
 	// An object representing the configuration of your local Amazon EKS cluster on an
@@ -199,15 +316,17 @@ type Cluster struct {
 	// Amazon Web Services cloud.
 	OutpostConfig *OutpostConfigResponse
 
-	// The platform version of your Amazon EKS cluster. For more information, see
-	// Platform Versions (https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html)
+	// The platform version of your Amazon EKS cluster. For more information about
+	// clusters deployed on the Amazon Web Services Cloud, see Platform versions (https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html)
+	// in the Amazon EKS User Guide . For more information about local clusters
+	// deployed on an Outpost, see Amazon EKS local cluster platform versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-platform-versions.html)
 	// in the Amazon EKS User Guide .
 	PlatformVersion *string
 
 	// The VPC configuration used by the cluster control plane. Amazon EKS VPC
 	// resources have specific requirements to work properly with Kubernetes. For more
-	// information, see Cluster VPC Considerations (https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
-	// and Cluster Security Group Considerations (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
+	// information, see Cluster VPC considerations (https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
+	// and Cluster security group considerations (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
 	// in the Amazon EKS User Guide.
 	ResourcesVpcConfig *VpcConfigResponse
 
@@ -219,10 +338,9 @@ type Cluster struct {
 	// The current status of the cluster.
 	Status ClusterStatus
 
-	// The metadata that you apply to the cluster to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
-	// Cluster tags do not propagate to any other resources associated with the
-	// cluster.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	// The Kubernetes server version for the cluster.
@@ -340,6 +458,22 @@ type ControlPlanePlacementResponse struct {
 	noSmithyDocumentSerde
 }
 
+// The access configuration information for the cluster.
+type CreateAccessConfigRequest struct {
+
+	// The desired authentication mode for the cluster. If you create a cluster by
+	// using the EKS API, Amazon Web Services SDKs, or CloudFormation, the default is
+	// CONFIG_MAP . If you create the cluster by using the Amazon Web Services
+	// Management Console, the default value is API_AND_CONFIG_MAP .
+	AuthenticationMode AuthenticationMode
+
+	// Specifies whether or not the cluster creator IAM principal was set as a cluster
+	// admin access entry during cluster creation time. The default value is true .
+	BootstrapClusterCreatorAdminPermissions *bool
+
+	noSmithyDocumentSerde
+}
+
 // An EKS Anywhere subscription authorizing the customer to support for licensed
 // clusters and access to EKS Anywhere Curated Packages.
 type EksAnywhereSubscription struct {
@@ -412,7 +546,7 @@ type EncryptionConfig struct {
 	// Key Management Service (KMS) key. Either the ARN or the alias can be used.
 	Provider *Provider
 
-	// Specifies the resources to be encrypted. The only supported value is "secrets".
+	// Specifies the resources to be encrypted. The only supported value is secrets .
 	Resources []string
 
 	noSmithyDocumentSerde
@@ -428,8 +562,8 @@ type ErrorDetail struct {
 	//   associated with the cluster.
 	//   - EniLimitReached: You have reached the elastic network interface limit for
 	//   your account.
-	//   - IpNotAvailable: A subnet associated with the cluster doesn't have any free
-	//   IP addresses.
+	//   - IpNotAvailable: A subnet associated with the cluster doesn't have any
+	//   available IP addresses.
 	//   - AccessDenied: You don't have permissions to perform the specified
 	//   operation.
 	//   - OperationNotPermitted: The service role associated with the cluster doesn't
@@ -449,10 +583,10 @@ type ErrorDetail struct {
 // An object representing an Fargate profile.
 type FargateProfile struct {
 
-	// The name of the Amazon EKS cluster that the Fargate profile belongs to.
+	// The name of your cluster.
 	ClusterName *string
 
-	// The Unix epoch timestamp in seconds for when the Fargate profile was created.
+	// The Unix epoch timestamp at object creation.
 	CreatedAt *time.Time
 
 	// The full Amazon Resource Name (ARN) of the Fargate profile.
@@ -461,25 +595,24 @@ type FargateProfile struct {
 	// The name of the Fargate profile.
 	FargateProfileName *string
 
-	// The Amazon Resource Name (ARN) of the pod execution role to use for pods that
-	// match the selectors in the Fargate profile. For more information, see Pod
-	// Execution Role (https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html)
+	// The Amazon Resource Name (ARN) of the Pod execution role to use for any Pod
+	// that matches the selectors in the Fargate profile. For more information, see Pod
+	// execution role (https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html)
 	// in the Amazon EKS User Guide.
 	PodExecutionRoleArn *string
 
-	// The selectors to match for pods to use this Fargate profile.
+	// The selectors to match for a Pod to use this Fargate profile.
 	Selectors []FargateProfileSelector
 
 	// The current status of the Fargate profile.
 	Status FargateProfileStatus
 
-	// The IDs of subnets to launch pods into.
+	// The IDs of subnets to launch a Pod into.
 	Subnets []string
 
-	// The metadata applied to the Fargate profile to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
-	// Fargate profile tags do not propagate to any other resources associated with the
-	// Fargate profile, such as the pods that are scheduled with it.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -622,9 +755,9 @@ type KubernetesNetworkConfigRequest struct {
 	//   172.16.0.0/12 , or 192.168.0.0/16 .
 	//   - Doesn't overlap with any CIDR block assigned to the VPC that you selected
 	//   for VPC.
-	//   - Between /24 and /12.
-	// You can only specify a custom CIDR block when you create a cluster and can't
-	// change this value once the cluster is created.
+	//   - Between /24 and /12 .
+	// You can only specify a custom CIDR block when you create a cluster. You can't
+	// change this value after the cluster is created.
 	ServiceIpv4Cidr *string
 
 	noSmithyDocumentSerde
@@ -634,18 +767,18 @@ type KubernetesNetworkConfigRequest struct {
 // value for serviceIpv6Cidr or serviceIpv4Cidr, but not both.
 type KubernetesNetworkConfigResponse struct {
 
-	// The IP family used to assign Kubernetes pod and service IP addresses. The IP
-	// family is always ipv4 , unless you have a 1.21 or later cluster running version
-	// 1.10.1 or later of the Amazon VPC CNI add-on and specified ipv6 when you
-	// created the cluster.
+	// The IP family used to assign Kubernetes Pod and Service objects IP addresses.
+	// The IP family is always ipv4 , unless you have a 1.21 or later cluster running
+	// version 1.10.1 or later of the Amazon VPC CNI plugin for Kubernetes and
+	// specified ipv6 when you created the cluster.
 	IpFamily IpFamily
 
-	// The CIDR block that Kubernetes pod and service IP addresses are assigned from.
-	// Kubernetes assigns addresses from an IPv4 CIDR block assigned to a subnet that
-	// the node is in. If you didn't specify a CIDR block when you created the cluster,
-	// then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16
-	// CIDR blocks. If this was specified, then it was specified when the cluster was
-	// created and it can't be changed.
+	// The CIDR block that Kubernetes Pod and Service object IP addresses are assigned
+	// from. Kubernetes assigns addresses from an IPv4 CIDR block assigned to a subnet
+	// that the node is in. If you didn't specify a CIDR block when you created the
+	// cluster, then Kubernetes assigns addresses from either the 10.100.0.0/16 or
+	// 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the
+	// cluster was created and it can't be changed.
 	ServiceIpv4Cidr *string
 
 	// The CIDR block that Kubernetes pod and service IP addresses are assigned from
@@ -736,10 +869,10 @@ type Nodegroup struct {
 	// The capacity type of your managed node group.
 	CapacityType CapacityTypes
 
-	// The name of the cluster that the managed node group resides in.
+	// The name of your cluster.
 	ClusterName *string
 
-	// The Unix epoch timestamp in seconds for when the managed node group was created.
+	// The Unix epoch timestamp at object creation.
 	CreatedAt *time.Time
 
 	// If the node group wasn't deployed with a launch template, then this is the disk
@@ -765,8 +898,7 @@ type Nodegroup struct {
 	// template that was used.
 	LaunchTemplate *LaunchTemplateSpecification
 
-	// The Unix epoch timestamp in seconds for when the managed node group was last
-	// modified.
+	// The Unix epoch timestamp for the last modification to the object.
 	ModifiedAt *time.Time
 
 	// The IAM role associated with your node group. The Amazon EKS node kubelet
@@ -807,10 +939,9 @@ type Nodegroup struct {
 	// with your node group.
 	Subnets []string
 
-	// The metadata applied to the node group to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
-	// Node group tags do not propagate to any other resources associated with the node
-	// group, such as the Amazon EC2 instances or subnets.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	// The Kubernetes taints to be applied to the nodes in the node group when they
@@ -860,20 +991,21 @@ type NodegroupResources struct {
 type NodegroupScalingConfig struct {
 
 	// The current number of nodes that the managed node group should maintain. If you
-	// use Cluster Autoscaler, you shouldn't change the desiredSize value directly, as
-	// this can cause the Cluster Autoscaler to suddenly scale up or scale down.
-	// Whenever this parameter changes, the number of worker nodes in the node group is
-	// updated to the specified size. If this parameter is given a value that is
-	// smaller than the current number of running worker nodes, the necessary number of
-	// worker nodes are terminated to match the given value. When using CloudFormation,
-	// no action occurs if you remove this parameter from your CFN template. This
-	// parameter can be different from minSize in some cases, such as when starting
-	// with extra hosts for testing. This parameter can also be different when you want
-	// to start with an estimated number of needed hosts, but let Cluster Autoscaler
-	// reduce the number if there are too many. When Cluster Autoscaler is used, the
-	// desiredSize parameter is altered by Cluster Autoscaler (but can be out-of-date
-	// for short periods of time). Cluster Autoscaler doesn't scale a managed node
-	// group lower than minSize or higher than maxSize.
+	// use the Kubernetes Cluster Autoscaler (https://github.com/kubernetes/autoscaler#kubernetes-autoscaler)
+	// , you shouldn't change the desiredSize value directly, as this can cause the
+	// Cluster Autoscaler to suddenly scale up or scale down. Whenever this parameter
+	// changes, the number of worker nodes in the node group is updated to the
+	// specified size. If this parameter is given a value that is smaller than the
+	// current number of running worker nodes, the necessary number of worker nodes are
+	// terminated to match the given value. When using CloudFormation, no action occurs
+	// if you remove this parameter from your CFN template. This parameter can be
+	// different from minSize in some cases, such as when starting with extra hosts
+	// for testing. This parameter can also be different when you want to start with an
+	// estimated number of needed hosts, but let the Cluster Autoscaler reduce the
+	// number if there are too many. When the Cluster Autoscaler is used, the
+	// desiredSize parameter is altered by the Cluster Autoscaler (but can be
+	// out-of-date for short periods of time). the Cluster Autoscaler doesn't scale a
+	// managed node group lower than minSize or higher than maxSize .
 	DesiredSize *int32
 
 	// The maximum number of nodes that the managed node group can scale out to. For
@@ -892,13 +1024,13 @@ type NodegroupScalingConfig struct {
 type NodegroupUpdateConfig struct {
 
 	// The maximum number of nodes unavailable at once during a version update. Nodes
-	// will be updated in parallel. This value or maxUnavailablePercentage is required
-	// to have a value.The maximum number is 100.
+	// are updated in parallel. This value or maxUnavailablePercentage is required to
+	// have a value.The maximum number is 100.
 	MaxUnavailable *int32
 
 	// The maximum percentage of nodes unavailable during a version update. This
-	// percentage of nodes will be updated in parallel, up to 100 nodes at once. This
-	// value or maxUnavailable is required to have a value.
+	// percentage of nodes are updated in parallel, up to 100 nodes at once. This value
+	// or maxUnavailable is required to have a value.
 	MaxUnavailablePercentage *int32
 
 	noSmithyDocumentSerde
@@ -922,7 +1054,7 @@ type OidcIdentityProviderConfig struct {
 	// authentication requests to the OIDC identity provider.
 	ClientId *string
 
-	// The cluster that the configuration is associated to.
+	// The name of your cluster.
 	ClusterName *string
 
 	// The JSON web token (JWT) claim that the provider uses to return your groups.
@@ -950,9 +1082,9 @@ type OidcIdentityProviderConfig struct {
 	// The status of the OIDC identity provider.
 	Status ConfigStatus
 
-	// The metadata to apply to the provider configuration to assist with
-	// categorization and organization. Each tag consists of a key and an optional
-	// value. You define both.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	// The JSON Web token (JWT) claim that is used as the username.
@@ -967,13 +1099,12 @@ type OidcIdentityProviderConfig struct {
 
 // An object representing an OpenID Connect (OIDC) configuration. Before
 // associating an OIDC identity provider to your cluster, review the considerations
-// in Authenticating users for your cluster from an OpenID Connect identity
-// provider (https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html)
+// in Authenticating users for your cluster from an OIDC identity provider (https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html)
 // in the Amazon EKS User Guide.
 type OidcIdentityProviderConfigRequest struct {
 
 	// This is also known as audience. The ID for the client application that makes
-	// authentication requests to the OpenID identity provider.
+	// authentication requests to the OIDC identity provider.
 	//
 	// This member is required.
 	ClientId *string
@@ -983,10 +1114,10 @@ type OidcIdentityProviderConfigRequest struct {
 	// This member is required.
 	IdentityProviderConfigName *string
 
-	// The URL of the OpenID identity provider that allows the API server to discover
+	// The URL of the OIDC identity provider that allows the API server to discover
 	// public signing keys for verifying tokens. The URL must begin with https:// and
-	// should correspond to the iss claim in the provider's OIDC ID tokens. Per the
-	// OIDC standard, path components are allowed but query parameters are not.
+	// should correspond to the iss claim in the provider's OIDC ID tokens. Based on
+	// the OIDC standard, path components are allowed but query parameters are not.
 	// Typically the URL consists of only a hostname, like https://server.example.org
 	// or https://example.com . This URL should point to the level below
 	// .well-known/openid-configuration and must be publicly accessible over the
@@ -1012,7 +1143,7 @@ type OidcIdentityProviderConfigRequest struct {
 
 	// The JSON Web Token (JWT) claim to use as the username. The default is sub ,
 	// which is expected to be a unique identifier of the end user. You can choose
-	// other claims, such as email or name , depending on the OpenID identity provider.
+	// other claims, such as email or name , depending on the OIDC identity provider.
 	// Claims other than email are prefixed with the issuer URL to prevent naming
 	// clashes with other plug-ins.
 	UsernameClaim *string
@@ -1085,8 +1216,8 @@ type OutpostConfigResponse struct {
 }
 
 // Amazon EKS Pod Identity associations provide the ability to manage credentials
-// for your applications, similar to the way that 7EC2l instance profiles provide
-// credentials to Amazon EC2 instances.
+// for your applications, similar to the way that Amazon EC2 instance profiles
+// provide credentials to Amazon EC2 instances.
 type PodIdentityAssociation struct {
 
 	// The Amazon Resource Name (ARN) of the association.
@@ -1118,9 +1249,10 @@ type PodIdentityAssociation struct {
 	// IAM credentials with.
 	ServiceAccount *string
 
-	// The metadata that you apply to a resource to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
-	// The following basic restrictions apply to tags:
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources. The following basic restrictions
+	// apply to tags:
 	//   - Maximum number of tags per resource – 50
 	//   - For each resource, each tag key must be unique, and each tag key can have
 	//   only one value.
@@ -1207,9 +1339,9 @@ type RemoteAccessConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A property that allows a node to repel a set of pods. For more information, see
-// Node taints on managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html)
-// .
+// A property that allows a node to repel a Pod . For more information, see Node
+// taints on managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html)
+// in the Amazon EKS User Guide.
 type Taint struct {
 
 	// The effect of the taint.
@@ -1227,7 +1359,7 @@ type Taint struct {
 // An object representing an asynchronous update.
 type Update struct {
 
-	// The Unix epoch timestamp in seconds for when the update was created.
+	// The Unix epoch timestamp at object creation.
 	CreatedAt *time.Time
 
 	// Any errors associated with a Failed update.
@@ -1248,13 +1380,22 @@ type Update struct {
 	noSmithyDocumentSerde
 }
 
+// The access configuration information for the cluster.
+type UpdateAccessConfigRequest struct {
+
+	// The desired authentication mode for the cluster.
+	AuthenticationMode AuthenticationMode
+
+	noSmithyDocumentSerde
+}
+
 // An object representing a Kubernetes label change for a managed node group.
 type UpdateLabelsPayload struct {
 
-	// Kubernetes labels to be added or updated.
+	// The Kubernetes labels to add or update.
 	AddOrUpdateLabels map[string]string
 
-	// Kubernetes labels to be removed.
+	// The Kubernetes labels to remove.
 	RemoveLabels []string
 
 	noSmithyDocumentSerde
@@ -1274,7 +1415,7 @@ type UpdateParam struct {
 
 // An object representing the details of an update to a taints payload. For more
 // information, see Node taints on managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html)
-// .
+// in the Amazon EKS User Guide.
 type UpdateTaintsPayload struct {
 
 	// Kubernetes taints to be added or updated.
@@ -1311,8 +1452,8 @@ type VpcConfigRequest struct {
 	// The CIDR blocks that are allowed access to your cluster's public Kubernetes API
 	// server endpoint. Communication to the endpoint from addresses outside of the
 	// CIDR blocks that you specify is denied. The default value is 0.0.0.0/0 . If
-	// you've disabled private endpoint access and you have nodes or Fargate pods in
-	// the cluster, then ensure that you specify the necessary CIDR blocks. For more
+	// you've disabled private endpoint access, make sure that you specify the
+	// necessary CIDR blocks for every node and Fargate Pod in the cluster. For more
 	// information, see Amazon EKS cluster endpoint access control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
 	// in the Amazon EKS User Guide .
 	PublicAccessCidrs []string
@@ -1352,19 +1493,11 @@ type VpcConfigResponse struct {
 	// in the Amazon EKS User Guide .
 	EndpointPrivateAccess bool
 
-	// This parameter indicates whether the Amazon EKS public API server endpoint is
-	// enabled. If the Amazon EKS public API server endpoint is disabled, your
-	// cluster's Kubernetes API server can only receive requests that originate from
-	// within the cluster VPC.
+	// Whether the public API server endpoint is enabled.
 	EndpointPublicAccess bool
 
 	// The CIDR blocks that are allowed access to your cluster's public Kubernetes API
-	// server endpoint. Communication to the endpoint from addresses outside of the
-	// listed CIDR blocks is denied. The default value is 0.0.0.0/0 . If you've
-	// disabled private endpoint access and you have nodes or Fargate pods in the
-	// cluster, then ensure that the necessary CIDR blocks are listed. For more
-	// information, see Amazon EKS cluster endpoint access control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-	// in the Amazon EKS User Guide .
+	// server endpoint.
 	PublicAccessCidrs []string
 
 	// The security groups associated with the cross-account elastic network

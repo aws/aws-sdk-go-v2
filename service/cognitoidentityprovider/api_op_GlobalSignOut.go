@@ -10,18 +10,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Signs out a user from all devices. GlobalSignOut invalidates all identity,
-// access and refresh tokens that Amazon Cognito has issued to a user. A user can
-// still use a hosted UI cookie to retrieve new tokens for the duration of the
-// 1-hour cookie validity period. Your app isn't aware that a user's access token
-// is revoked unless it attempts to authorize a user pools API request with an
-// access token that contains the scope aws.cognito.signin.user.admin . Your app
-// might otherwise accept access tokens until they expire. Amazon Cognito doesn't
-// evaluate Identity and Access Management (IAM) policies in requests for this API
-// operation. For this operation, you can't use IAM credentials to authorize
-// requests, and you can't grant IAM permissions in policies. For more information
-// about authorization models in Amazon Cognito, see Using the Amazon Cognito
-// native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// Invalidates the identity, access, and refresh tokens that Amazon Cognito issued
+// to a user. Call this operation when your user signs out of your app. This
+// results in the following behavior.
+//   - Amazon Cognito no longer accepts token-authorized user operations that you
+//     authorize with a signed-out user's access tokens. For more information, see
+//     Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+//     . Amazon Cognito returns an Access Token has been revoked error when your app
+//     attempts to authorize a user pools API request with a revoked access token that
+//     contains the scope aws.cognito.signin.user.admin .
+//   - Amazon Cognito no longer accepts a signed-out user's ID token in a GetId  (https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetId.html)
+//     request to an identity pool with ServerSideTokenCheck enabled for its user
+//     pool IdP configuration in CognitoIdentityProvider (https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_CognitoIdentityProvider.html)
+//     .
+//   - Amazon Cognito no longer accepts a signed-out user's refresh tokens in
+//     refresh requests.
+//
+// Other requests might be valid until your user's token expires. Amazon Cognito
+// doesn't evaluate Identity and Access Management (IAM) policies in requests for
+// this API operation. For this operation, you can't use IAM credentials to
+// authorize requests, and you can't grant IAM permissions in policies. For more
+// information about authorization models in Amazon Cognito, see Using the Amazon
+// Cognito native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 // .
 func (c *Client) GlobalSignOut(ctx context.Context, params *GlobalSignOutInput, optFns ...func(*Options)) (*GlobalSignOutOutput, error) {
 	if params == nil {

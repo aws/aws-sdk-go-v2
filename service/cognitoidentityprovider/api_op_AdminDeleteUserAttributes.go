@@ -48,7 +48,10 @@ type AdminDeleteUserAttributesInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The user name of the user from which you would like to delete attributes.
+	// The username of the user that you want to query or modify. The value of this
+	// parameter is typically your user's username, but it can be any of their alias
+	// attributes. If username isn't an alias attribute in your user pool, you can
+	// also use their sub in this request.
 	//
 	// This member is required.
 	Username *string

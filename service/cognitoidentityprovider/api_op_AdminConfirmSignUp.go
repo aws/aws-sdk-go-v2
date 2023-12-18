@@ -11,11 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Confirms user registration as an admin without using a confirmation code. Works
-// on any user. Amazon Cognito evaluates Identity and Access Management (IAM)
-// policies in requests for this API operation. For this operation, you must use
-// IAM credentials to authorize requests, and you must grant yourself the
-// corresponding IAM permission in a policy. Learn more
+// This IAM-authenticated API operation provides a code that Amazon Cognito sent
+// to your user when they signed up in your user pool. After your user enters their
+// code, they confirm ownership of the email address or phone number that they
+// provided, and their user account becomes active. Depending on your user pool
+// configuration, your users will receive their confirmation code in an email or
+// SMS message. Local users who signed up in your user pool are the only type of
+// user who can confirm sign-up with a code. Users who federate through an external
+// identity provider (IdP) have already been confirmed by their IdP.
+// Administrator-created users confirm their accounts when they respond to their
+// invitation email message and choose a password. Amazon Cognito evaluates
+// Identity and Access Management (IAM) policies in requests for this API
+// operation. For this operation, you must use IAM credentials to authorize
+// requests, and you must grant yourself the corresponding IAM permission in a
+// policy. Learn more
 //   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
 //   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) AdminConfirmSignUp(ctx context.Context, params *AdminConfirmSignUpInput, optFns ...func(*Options)) (*AdminConfirmSignUpOutput, error) {
@@ -41,7 +50,10 @@ type AdminConfirmSignUpInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The user name for which you want to confirm user registration.
+	// The username of the user that you want to query or modify. The value of this
+	// parameter is typically your user's username, but it can be any of their alias
+	// attributes. If username isn't an alias attribute in your user pool, you can
+	// also use their sub in this request.
 	//
 	// This member is required.
 	Username *string

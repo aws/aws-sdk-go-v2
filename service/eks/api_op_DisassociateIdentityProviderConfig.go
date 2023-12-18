@@ -15,8 +15,7 @@ import (
 // Disassociates an identity provider configuration from a cluster. If you
 // disassociate an identity provider from your cluster, users included in the
 // provider can no longer access the cluster. However, you can still access the
-// cluster with IAM principals (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html)
-// .
+// cluster with IAM principals.
 func (c *Client) DisassociateIdentityProviderConfig(ctx context.Context, params *DisassociateIdentityProviderConfigInput, optFns ...func(*Options)) (*DisassociateIdentityProviderConfigOutput, error) {
 	if params == nil {
 		params = &DisassociateIdentityProviderConfigInput{}
@@ -34,7 +33,7 @@ func (c *Client) DisassociateIdentityProviderConfig(ctx context.Context, params 
 
 type DisassociateIdentityProviderConfigInput struct {
 
-	// The name of the cluster to disassociate an identity provider from.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string

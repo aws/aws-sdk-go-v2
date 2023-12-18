@@ -40,15 +40,20 @@ type DescribeAddonVersionsInput struct {
 	// The Kubernetes versions that you can use the add-on with.
 	KubernetesVersion *string
 
-	// The maximum number of results to return.
+	// The maximum number of results, returned in paginated output. You receive
+	// maxResults in a single page, along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another request with
+	// the returned nextToken value. This value can be between 1 and 100. If you don't
+	// use this parameter, 100 results and a nextToken value, if applicable, are
+	// returned.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated
-	// DescribeAddonVersionsRequest where maxResults was used and the results exceeded
-	// the value of that parameter. Pagination continues from the end of the previous
-	// results that returned the nextToken value. This token should be treated as an
-	// opaque identifier that is used only to retrieve the next items in a list and not
-	// for other programmatic purposes.
+	// The nextToken value returned from a previous paginated request, where maxResults
+	// was used and the results exceeded the value of that parameter. Pagination
+	// continues from the end of the previous results that returned the nextToken
+	// value. This value is null when there are no more results to return. This token
+	// should be treated as an opaque identifier that is used only to retrieve the next
+	// items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The owner of the add-on. For valid owners , don't specify a value for this
@@ -173,7 +178,12 @@ var _ DescribeAddonVersionsAPIClient = (*Client)(nil)
 // DescribeAddonVersionsPaginatorOptions is the paginator options for
 // DescribeAddonVersions
 type DescribeAddonVersionsPaginatorOptions struct {
-	// The maximum number of results to return.
+	// The maximum number of results, returned in paginated output. You receive
+	// maxResults in a single page, along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another request with
+	// the returned nextToken value. This value can be between 1 and 100. If you don't
+	// use this parameter, 100 results and a nextToken value, if applicable, are
+	// returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

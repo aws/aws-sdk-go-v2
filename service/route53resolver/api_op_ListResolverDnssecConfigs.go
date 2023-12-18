@@ -62,7 +62,8 @@ type ListResolverDnssecConfigsOutput struct {
 
 	// An array that contains one ResolverDnssecConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html)
 	// element for each configuration for DNSSEC validation that is associated with the
-	// current Amazon Web Services account.
+	// current Amazon Web Services account. It doesn't contain disabled DNSSEC
+	// configurations for the resource.
 	ResolverDnssecConfigs []types.ResolverDnssecConfig
 
 	// Metadata pertaining to the operation's result.

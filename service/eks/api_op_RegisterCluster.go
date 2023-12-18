@@ -19,9 +19,9 @@ import (
 // plane. Second, a Manifest (https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml)
 // containing the activationID and activationCode must be applied to the
 // Kubernetes cluster through it's native provider to provide visibility. After the
-// Manifest is updated and applied, then the connected cluster is visible to the
-// Amazon EKS control plane. If the Manifest is not applied within three days, then
-// the connected cluster will no longer be visible and must be deregistered. See
+// manifest is updated and applied, the connected cluster is visible to the Amazon
+// EKS control plane. If the manifest isn't applied within three days, the
+// connected cluster will no longer be visible and must be deregistered using
 // DeregisterCluster .
 func (c *Client) RegisterCluster(ctx context.Context, params *RegisterClusterInput, optFns ...func(*Options)) (*RegisterClusterOutput, error) {
 	if params == nil {
@@ -46,19 +46,18 @@ type RegisterClusterInput struct {
 	// This member is required.
 	ConnectorConfig *types.ConnectorConfigRequest
 
-	// Define a unique name for this cluster for your Region.
+	// A unique name for this cluster in your Amazon Web Services Region.
 	//
 	// This member is required.
 	Name *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
-	// The metadata that you apply to the cluster to assist with categorization and
-	// organization. Each tag consists of a key and an optional value, both of which
-	// you define. Cluster tags do not propagate to any other resources associated with
-	// the cluster.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

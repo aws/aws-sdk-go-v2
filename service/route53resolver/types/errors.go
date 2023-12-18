@@ -438,8 +438,8 @@ func (e *UnknownResourceException) ErrorCode() string {
 }
 func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have provided an invalid command. Supported values are ADD , REMOVE , or
-// REPLACE a domain.
+// You have provided an invalid command. If you ran the UpdateFirewallDomains
+// request. supported values are ADD , REMOVE , or REPLACE a domain.
 type ValidationException struct {
 	Message *string
 

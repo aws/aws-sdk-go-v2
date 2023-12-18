@@ -83,8 +83,11 @@ type CreateClusterInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// The access configuration for the cluster.
+	AccessConfig *types.CreateAccessConfigRequest
+
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The encryption configuration for the cluster.
@@ -108,8 +111,9 @@ type CreateClusterInput struct {
 	// EKS clusters on the Amazon Web Services cloud.
 	OutpostConfig *types.OutpostConfigRequest
 
-	// The metadata to apply to the cluster to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	// The desired Kubernetes version for your cluster. If you don't specify a value

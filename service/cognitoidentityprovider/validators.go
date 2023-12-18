@@ -2687,6 +2687,11 @@ func validateLambdaConfigType(v *types.LambdaConfigType) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LambdaConfigType"}
+	if v.PreTokenGenerationConfig != nil {
+		if err := validatePreTokenGenerationVersionConfigType(v.PreTokenGenerationConfig); err != nil {
+			invalidParams.AddNested("PreTokenGenerationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.CustomSMSSender != nil {
 		if err := validateCustomSMSLambdaVersionConfigType(v.CustomSMSSender); err != nil {
 			invalidParams.AddNested("CustomSMSSender", err.(smithy.InvalidParamsError))
@@ -2776,6 +2781,24 @@ func validateNotifyEmailType(v *types.NotifyEmailType) error {
 	invalidParams := smithy.InvalidParamsError{Context: "NotifyEmailType"}
 	if v.Subject == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subject"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePreTokenGenerationVersionConfigType(v *types.PreTokenGenerationVersionConfigType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreTokenGenerationVersionConfigType"}
+	if len(v.LambdaVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaVersion"))
+	}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

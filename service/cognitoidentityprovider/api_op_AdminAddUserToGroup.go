@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified user to the specified group. Amazon Cognito evaluates
-// Identity and Access Management (IAM) policies in requests for this API
-// operation. For this operation, you must use IAM credentials to authorize
-// requests, and you must grant yourself the corresponding IAM permission in a
-// policy. Learn more
+// Adds a user to a group. A user who is in a group can present a preferred-role
+// claim to an identity pool, and populates a cognito:groups claim to their access
+// and identity tokens. Amazon Cognito evaluates Identity and Access Management
+// (IAM) policies in requests for this API operation. For this operation, you must
+// use IAM credentials to authorize requests, and you must grant yourself the
+// corresponding IAM permission in a policy. Learn more
 //   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
 //   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) AdminAddUserToGroup(ctx context.Context, params *AdminAddUserToGroupInput, optFns ...func(*Options)) (*AdminAddUserToGroupOutput, error) {
@@ -35,7 +36,7 @@ func (c *Client) AdminAddUserToGroup(ctx context.Context, params *AdminAddUserTo
 
 type AdminAddUserToGroupInput struct {
 
-	// The group name.
+	// The name of the group that you want to add your user to.
 	//
 	// This member is required.
 	GroupName *string
@@ -45,7 +46,10 @@ type AdminAddUserToGroupInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The username for the user.
+	// The username of the user that you want to query or modify. The value of this
+	// parameter is typically your user's username, but it can be any of their alias
+	// attributes. If username isn't an alias attribute in your user pool, you can
+	// also use their sub in this request.
 	//
 	// This member is required.
 	Username *string

@@ -3870,6 +3870,17 @@ func awsAwsjson11_serializeDocumentIpAddressUpdate(v *types.IpAddressUpdate, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentProtocolList(v []types.Protocol, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentResolverRuleConfig(v *types.ResolverRuleConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3963,6 +3974,11 @@ func awsAwsjson11_serializeDocumentTargetAddress(v *types.TargetAddress, value s
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("Protocol")
+		ok.String(string(v.Protocol))
 	}
 
 	return nil
@@ -4291,6 +4307,13 @@ func awsAwsjson11_serializeOpDocumentCreateResolverEndpointInput(v *CreateResolv
 	if v.PreferredInstanceType != nil {
 		ok := object.Key("PreferredInstanceType")
 		ok.String(*v.PreferredInstanceType)
+	}
+
+	if v.Protocols != nil {
+		ok := object.Key("Protocols")
+		if err := awsAwsjson11_serializeDocumentProtocolList(v.Protocols, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ResolverEndpointType) > 0 {
@@ -5412,6 +5435,13 @@ func awsAwsjson11_serializeOpDocumentUpdateResolverEndpointInput(v *UpdateResolv
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.Protocols != nil {
+		ok := object.Key("Protocols")
+		if err := awsAwsjson11_serializeDocumentProtocolList(v.Protocols, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ResolverEndpointId != nil {

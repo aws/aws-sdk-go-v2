@@ -1136,6 +1136,9 @@ func awsAwsjson11_deserializeOpErrorCreateResolverEndpoint(response *smithyhttp.
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -1397,6 +1400,9 @@ func awsAwsjson11_deserializeOpErrorCreateResolverRule(response *smithyhttp.Resp
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -8351,6 +8357,9 @@ func awsAwsjson11_deserializeOpErrorUpdateResolverEndpoint(response *smithyhttp.
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -8474,6 +8483,9 @@ func awsAwsjson11_deserializeOpErrorUpdateResolverRule(response *smithyhttp.Resp
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -10775,6 +10787,42 @@ func awsAwsjson11_deserializeDocumentOutpostResolverList(v *[]types.OutpostResol
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentProtocolList(v *[]types.Protocol, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Protocol
+	if *v == nil {
+		cv = []types.Protocol{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Protocol
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Protocol to be of type string, got %T instead", value)
+			}
+			col = types.Protocol(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResolverConfig(v **types.ResolverConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11100,6 +11148,11 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 					return fmt.Errorf("expected OutpostInstanceType to be of type string, got %T instead", value)
 				}
 				sv.PreferredInstanceType = ptr.String(jtv)
+			}
+
+		case "Protocols":
+			if err := awsAwsjson11_deserializeDocumentProtocolList(&sv.Protocols, value); err != nil {
+				return err
 			}
 
 		case "ResolverEndpointType":
@@ -12176,6 +12229,15 @@ func awsAwsjson11_deserializeDocumentTargetAddress(v **types.TargetAddress, valu
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "Protocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Protocol to be of type string, got %T instead", value)
+				}
+				sv.Protocol = types.Protocol(jtv)
 			}
 
 		default:

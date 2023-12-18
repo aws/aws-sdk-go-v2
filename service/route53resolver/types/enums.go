@@ -285,6 +285,26 @@ func (OutpostResolverStatus) Values() []OutpostResolverStatus {
 	}
 }
 
+type Protocol string
+
+// Enum values for Protocol
+const (
+	ProtocolDoh     Protocol = "DoH"
+	ProtocolDo53    Protocol = "Do53"
+	ProtocolDohfips Protocol = "DoH-FIPS"
+)
+
+// Values returns all known values for Protocol. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Protocol) Values() []Protocol {
+	return []Protocol{
+		"DoH",
+		"Do53",
+		"DoH-FIPS",
+	}
+}
+
 type ResolverAutodefinedReverseStatus string
 
 // Enum values for ResolverAutodefinedReverseStatus

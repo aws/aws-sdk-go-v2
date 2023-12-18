@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes specified tags from a resource.
+// Deletes specified tags from an Amazon EKS resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -29,14 +29,12 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource from which to delete tags.
-	// Currently, the supported resources are Amazon EKS clusters and managed node
-	// groups.
+	// The Amazon Resource Name (ARN) of the resource to delete tags from.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The keys of the tags to be removed.
+	// The keys of the tags to remove.
 	//
 	// This member is required.
 	TagKeys []string

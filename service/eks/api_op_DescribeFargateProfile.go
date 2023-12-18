@@ -17,7 +17,7 @@ import (
 	"time"
 )
 
-// Returns descriptive information about an Fargate profile.
+// Describes an Fargate profile.
 func (c *Client) DescribeFargateProfile(ctx context.Context, params *DescribeFargateProfileInput, optFns ...func(*Options)) (*DescribeFargateProfileOutput, error) {
 	if params == nil {
 		params = &DescribeFargateProfileInput{}
@@ -35,7 +35,7 @@ func (c *Client) DescribeFargateProfile(ctx context.Context, params *DescribeFar
 
 type DescribeFargateProfileInput struct {
 
-	// The name of the Amazon EKS cluster associated with the Fargate profile.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string

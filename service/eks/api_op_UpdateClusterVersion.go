@@ -49,8 +49,8 @@ type UpdateClusterVersionInput struct {
 	// This member is required.
 	Version *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde

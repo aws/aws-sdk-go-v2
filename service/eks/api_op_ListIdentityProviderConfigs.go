@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A list of identity provider configurations.
+// Lists the identity provider configurations for your cluster.
 func (c *Client) ListIdentityProviderConfigs(ctx context.Context, params *ListIdentityProviderConfigsInput, optFns ...func(*Options)) (*ListIdentityProviderConfigsOutput, error) {
 	if params == nil {
 		params = &ListIdentityProviderConfigsInput{}
@@ -30,25 +30,25 @@ func (c *Client) ListIdentityProviderConfigs(ctx context.Context, params *ListId
 
 type ListIdentityProviderConfigsInput struct {
 
-	// The cluster name that you want to list identity provider configurations for.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
 
-	// The maximum number of identity provider configurations returned by
-	// ListIdentityProviderConfigs in paginated output. When you use this parameter,
-	// ListIdentityProviderConfigs returns only maxResults results in a single page
-	// along with a nextToken response element. You can see the remaining results of
-	// the initial request by sending another ListIdentityProviderConfigs request with
+	// The maximum number of results, returned in paginated output. You receive
+	// maxResults in a single page, along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another request with
 	// the returned nextToken value. This value can be between 1 and 100. If you don't
-	// use this parameter, ListIdentityProviderConfigs returns up to 100 results and a
-	// nextToken value, if applicable.
+	// use this parameter, 100 results and a nextToken value, if applicable, are
+	// returned.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated
-	// IdentityProviderConfigsRequest where maxResults was used and the results
-	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value.
+	// The nextToken value returned from a previous paginated request, where maxResults
+	// was used and the results exceeded the value of that parameter. Pagination
+	// continues from the end of the previous results that returned the nextToken
+	// value. This value is null when there are no more results to return. This token
+	// should be treated as an opaque identifier that is used only to retrieve the next
+	// items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -161,14 +161,12 @@ var _ ListIdentityProviderConfigsAPIClient = (*Client)(nil)
 // ListIdentityProviderConfigsPaginatorOptions is the paginator options for
 // ListIdentityProviderConfigs
 type ListIdentityProviderConfigsPaginatorOptions struct {
-	// The maximum number of identity provider configurations returned by
-	// ListIdentityProviderConfigs in paginated output. When you use this parameter,
-	// ListIdentityProviderConfigs returns only maxResults results in a single page
-	// along with a nextToken response element. You can see the remaining results of
-	// the initial request by sending another ListIdentityProviderConfigs request with
+	// The maximum number of results, returned in paginated output. You receive
+	// maxResults in a single page, along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another request with
 	// the returned nextToken value. This value can be between 1 and 100. If you don't
-	// use this parameter, ListIdentityProviderConfigs returns up to 100 results and a
-	// nextToken value, if applicable.
+	// use this parameter, 100 results and a nextToken value, if applicable, are
+	// returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

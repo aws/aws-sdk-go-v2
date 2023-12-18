@@ -45,7 +45,11 @@ type ListUsersInput struct {
 	// A JSON array of user attribute names, for example given_name , that you want
 	// Amazon Cognito to include in the response for each user. When you don't provide
 	// an AttributesToGet parameter, Amazon Cognito returns all attributes for each
-	// user.
+	// user. Use AttributesToGet with required attributes in your user pool, or in
+	// conjunction with Filter . Amazon Cognito returns an error if not all users in
+	// the results have set a value for the attribute you request. Attributes that you
+	// can't filter on, including custom attributes, must have a value set in every
+	// user profile before an AttributesToGet parameter returns results.
 	AttributesToGet []string
 
 	// A filter string of the form "AttributeName Filter-Type "AttributeValue"".
@@ -87,8 +91,12 @@ type ListUsersInput struct {
 	// Maximum number of users to be returned.
 	Limit *int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	PaginationToken *string
 
 	noSmithyDocumentSerde
@@ -97,8 +105,10 @@ type ListUsersInput struct {
 // The response from the request to list users.
 type ListUsersOutput struct {
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	PaginationToken *string
 
 	// A list of the user pool users, and their attributes, that match your query.

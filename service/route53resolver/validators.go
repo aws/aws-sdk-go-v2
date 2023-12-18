@@ -1717,9 +1717,6 @@ func validateOpCreateResolverRuleInput(v *CreateResolverRuleInput) error {
 	if len(v.RuleType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleType"))
 	}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))

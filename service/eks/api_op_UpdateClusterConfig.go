@@ -14,11 +14,11 @@ import (
 
 // Updates an Amazon EKS cluster configuration. Your cluster continues to function
 // during the update. The response output includes an update ID that you can use to
-// track the status of your cluster update with the DescribeUpdate API operation.
-// You can use this API operation to enable or disable exporting the Kubernetes
-// control plane logs for your cluster to CloudWatch Logs. By default, cluster
-// control plane logs aren't exported to CloudWatch Logs. For more information, see
-// Amazon EKS Cluster Control Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
+// track the status of your cluster update with DescribeUpdate "/>. You can use
+// this API operation to enable or disable exporting the Kubernetes control plane
+// logs for your cluster to CloudWatch Logs. By default, cluster control plane logs
+// aren't exported to CloudWatch Logs. For more information, see Amazon EKS
+// Cluster control plane logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
 // in the Amazon EKS User Guide . CloudWatch Logs ingestion, archive storage, and
 // data scanning rates apply to exported control plane logs. For more information,
 // see CloudWatch Pricing (http://aws.amazon.com/cloudwatch/pricing/) . You can
@@ -58,8 +58,11 @@ type UpdateClusterConfigInput struct {
 	// This member is required.
 	Name *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// The access configuration for the cluster.
+	AccessConfig *types.UpdateAccessConfigRequest
+
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// Enable or disable exporting the Kubernetes control plane logs for your cluster

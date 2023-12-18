@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an Amazon EKS add-on. When you remove the add-on, it will also be
-// deleted from the cluster. You can always manually start an add-on on the cluster
-// using the Kubernetes API.
+// Deletes an Amazon EKS add-on. When you remove an add-on, it's deleted from the
+// cluster. You can always manually start an add-on on the cluster using the
+// Kubernetes API.
 func (c *Client) DeleteAddon(ctx context.Context, params *DeleteAddonInput, optFns ...func(*Options)) (*DeleteAddonOutput, error) {
 	if params == nil {
 		params = &DeleteAddonInput{}
@@ -39,7 +39,7 @@ type DeleteAddonInput struct {
 	// This member is required.
 	AddonName *string
 
-	// The name of the cluster to delete the add-on from.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string

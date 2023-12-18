@@ -28,10 +28,10 @@ import (
 // Amazon EKS optimized Windows AMI versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html)
 // in the Amazon EKS User Guide. You cannot roll back a node group to an earlier
 // Kubernetes version or AMI version. When a node in a managed node group is
-// terminated due to a scaling action or update, the pods in that node are drained
+// terminated due to a scaling action or update, every Pod on that node is drained
 // first. Amazon EKS attempts to drain the nodes gracefully and will fail if it is
 // unable to do so. You can force the update if Amazon EKS is unable to drain the
-// nodes as a result of a pod disruption budget issue.
+// nodes as a result of a Pod disruption budget issue.
 func (c *Client) UpdateNodegroupVersion(ctx context.Context, params *UpdateNodegroupVersionInput, optFns ...func(*Options)) (*UpdateNodegroupVersionOutput, error) {
 	if params == nil {
 		params = &UpdateNodegroupVersionInput{}
@@ -49,8 +49,7 @@ func (c *Client) UpdateNodegroupVersion(ctx context.Context, params *UpdateNodeg
 
 type UpdateNodegroupVersionInput struct {
 
-	// The name of the Amazon EKS cluster that is associated with the managed node
-	// group to update.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
@@ -60,14 +59,14 @@ type UpdateNodegroupVersionInput struct {
 	// This member is required.
 	NodegroupName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
-	// Force the update if the existing node group's pods are unable to be drained due
-	// to a pod disruption budget issue. If an update fails because pods could not be
+	// Force the update if any Pod on the existing node group can't be drained due to
+	// a Pod disruption budget issue. If an update fails because all Pods can't be
 	// drained, you can force the update after it fails to terminate the old node
-	// whether or not any pods are running on the node.
+	// whether or not any Pod is running on the node.
 	Force bool
 
 	// An object representing a node group's launch template specification. You can

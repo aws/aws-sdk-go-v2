@@ -14,7 +14,7 @@ import (
 
 // Updates a EKS Pod Identity association. Only the IAM role can be changed; an
 // association can't be moved between clusters, namespaces, or service accounts. If
-// you need to edit the namespace or service account, you need to remove the
+// you need to edit the namespace or service account, you need to delete the
 // association and then create a new association with your desired settings.
 func (c *Client) UpdatePodIdentityAssociation(ctx context.Context, params *UpdatePodIdentityAssociationInput, optFns ...func(*Options)) (*UpdatePodIdentityAssociationOutput, error) {
 	if params == nil {
@@ -43,8 +43,8 @@ type UpdatePodIdentityAssociationInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The new IAM role to change the

@@ -11,12 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows a user to update a specific attribute (one at a time). Amazon Cognito
-// doesn't evaluate Identity and Access Management (IAM) policies in requests for
-// this API operation. For this operation, you can't use IAM credentials to
-// authorize requests, and you can't grant IAM permissions in policies. For more
-// information about authorization models in Amazon Cognito, see Using the Amazon
-// Cognito native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// With this operation, your users can update one or more of their attributes with
+// their own credentials. You authorize this API request with the user's access
+// token. To delete an attribute from your user, submit the attribute in your API
+// request with a blank value. Custom attribute values in this request must include
+// the custom: prefix. Amazon Cognito doesn't evaluate Identity and Access
+// Management (IAM) policies in requests for this API operation. For this
+// operation, you can't use IAM credentials to authorize requests, and you can't
+// grant IAM permissions in policies. For more information about authorization
+// models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 // . This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
 // can send SMS messages to US phone numbers. If you use SMS text messages in

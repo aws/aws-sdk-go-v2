@@ -560,6 +560,25 @@ func (OAuthFlowType) Values() []OAuthFlowType {
 	}
 }
 
+type PreTokenGenerationLambdaVersionType string
+
+// Enum values for PreTokenGenerationLambdaVersionType
+const (
+	PreTokenGenerationLambdaVersionTypeV10 PreTokenGenerationLambdaVersionType = "V1_0"
+	PreTokenGenerationLambdaVersionTypeV20 PreTokenGenerationLambdaVersionType = "V2_0"
+)
+
+// Values returns all known values for PreTokenGenerationLambdaVersionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PreTokenGenerationLambdaVersionType) Values() []PreTokenGenerationLambdaVersionType {
+	return []PreTokenGenerationLambdaVersionType{
+		"V1_0",
+		"V2_0",
+	}
+}
+
 type PreventUserExistenceErrorTypes string
 
 // Enum values for PreventUserExistenceErrorTypes

@@ -45,7 +45,12 @@ type ListDevicesInput struct {
 	// The limit of the device request.
 	Limit *int32
 
-	// The pagination token for the list request.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	PaginationToken *string
 
 	noSmithyDocumentSerde
@@ -57,7 +62,10 @@ type ListDevicesOutput struct {
 	// The devices returned in the list devices response.
 	Devices []types.DeviceType
 
-	// The pagination token for the list device response.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	PaginationToken *string
 
 	// Metadata pertaining to the operation's result.

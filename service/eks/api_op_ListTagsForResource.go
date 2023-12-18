@@ -29,9 +29,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) that identifies the resource for which to list
-	// the tags. Currently, the supported resources are Amazon EKS clusters and managed
-	// node groups.
+	// The Amazon Resource Name (ARN) that identifies the resource to list tags for.
 	//
 	// This member is required.
 	ResourceArn *string

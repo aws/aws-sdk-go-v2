@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate encryption configuration to an existing cluster. You can use this API
-// to enable encryption on existing clusters which do not have encryption already
+// Associates an encryption configuration to an existing cluster. Use this API to
+// enable encryption on existing clusters that don't already have encryption
 // enabled. This allows you to implement a defense-in-depth security strategy
 // without migrating applications to new Amazon EKS clusters.
 func (c *Client) AssociateEncryptionConfig(ctx context.Context, params *AssociateEncryptionConfigInput, optFns ...func(*Options)) (*AssociateEncryptionConfigOutput, error) {
@@ -33,7 +33,7 @@ func (c *Client) AssociateEncryptionConfig(ctx context.Context, params *Associat
 
 type AssociateEncryptionConfigInput struct {
 
-	// The name of the cluster that you are associating with encryption configuration.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
@@ -43,7 +43,8 @@ type AssociateEncryptionConfigInput struct {
 	// This member is required.
 	EncryptionConfig []types.EncryptionConfig
 
-	// The client request token you are using with the encryption configuration.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde

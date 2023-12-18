@@ -54,8 +54,10 @@ type ResendConfirmationCodeInput struct {
 	// This member is required.
 	ClientId *string
 
-	// The username attribute of the user to whom you want to resend a confirmation
-	// code.
+	// The username of the user that you want to query or modify. The value of this
+	// parameter is typically your user's username, but it can be any of their alias
+	// attributes. If username isn't an alias attribute in your user pool, you can
+	// also use their sub in this request.
 	//
 	// This member is required.
 	Username *string

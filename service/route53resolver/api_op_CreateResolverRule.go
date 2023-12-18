@@ -39,14 +39,6 @@ type CreateResolverRuleInput struct {
 	// This member is required.
 	CreatorRequestId *string
 
-	// DNS queries for this domain name are forwarded to the IP addresses that you
-	// specify in TargetIps . If a query matches multiple Resolver rules (example.com
-	// and www.example.com), outbound DNS queries are routed using the Resolver rule
-	// that contains the most specific domain name (www.example.com).
-	//
-	// This member is required.
-	DomainName *string
-
 	// When you want to forward DNS queries for specified domain name to resolvers on
 	// your network, specify FORWARD . When you have a forwarding rule to forward DNS
 	// queries for a domain to your network and you want Resolver to process queries
@@ -58,6 +50,12 @@ type CreateResolverRuleInput struct {
 	//
 	// This member is required.
 	RuleType types.RuleTypeOption
+
+	// DNS queries for this domain name are forwarded to the IP addresses that you
+	// specify in TargetIps . If a query matches multiple Resolver rules (example.com
+	// and www.example.com), outbound DNS queries are routed using the Resolver rule
+	// that contains the most specific domain name (www.example.com).
+	DomainName *string
 
 	// A friendly name that lets you easily find a rule in the Resolver dashboard in
 	// the Route 53 console.

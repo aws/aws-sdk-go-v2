@@ -17,10 +17,10 @@ import (
 	"time"
 )
 
-// Returns descriptive information about an Amazon EKS cluster. The API server
-// endpoint and certificate authority data returned by this operation are required
-// for kubelet and kubectl to communicate with your Kubernetes API server. For
-// more information, see Create a kubeconfig for Amazon EKS (https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
+// Describes an Amazon EKS cluster. The API server endpoint and certificate
+// authority data returned by this operation are required for kubelet and kubectl
+// to communicate with your Kubernetes API server. For more information, see
+// Creating or updating a kubeconfig file for an Amazon EKS cluster (https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
 // . The API server endpoint and certificate authority data aren't available until
 // the cluster reaches the ACTIVE state.
 func (c *Client) DescribeCluster(ctx context.Context, params *DescribeClusterInput, optFns ...func(*Options)) (*DescribeClusterOutput, error) {
@@ -40,7 +40,7 @@ func (c *Client) DescribeCluster(ctx context.Context, params *DescribeClusterInp
 
 type DescribeClusterInput struct {
 
-	// The name of the cluster to describe.
+	// The name of your cluster.
 	//
 	// This member is required.
 	Name *string

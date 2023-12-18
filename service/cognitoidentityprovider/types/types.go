@@ -328,17 +328,18 @@ type CustomDomainConfigType struct {
 	noSmithyDocumentSerde
 }
 
-// A custom email sender Lambda configuration type.
+// The properties of a custom email sender Lambda trigger.
 type CustomEmailLambdaVersionConfigType struct {
 
-	// The Amazon Resource Name (ARN) of the Lambda function that Amazon Cognito
-	// activates to send email notifications to users.
+	// The Amazon Resource Name (ARN) of the function that you want to assign to your
+	// Lambda trigger.
 	//
 	// This member is required.
 	LambdaArn *string
 
-	// Signature of the "request" attribute in the "event" information Amazon Cognito
-	// passes to your custom email Lambda function. The only supported value is V1_0 .
+	// The user pool trigger version of the request that Amazon Cognito sends to your
+	// Lambda function. Higher-numbered versions add fields that support new features.
+	// You must use a LambdaVersion of V1_0 with a custom sender function.
 	//
 	// This member is required.
 	LambdaVersion CustomEmailSenderLambdaVersionType
@@ -346,18 +347,18 @@ type CustomEmailLambdaVersionConfigType struct {
 	noSmithyDocumentSerde
 }
 
-// A custom SMS sender Lambda configuration type.
+// The properties of a custom SMS sender Lambda trigger.
 type CustomSMSLambdaVersionConfigType struct {
 
-	// The Amazon Resource Name (ARN) of the Lambda function that Amazon Cognito
-	// activates to send SMS notifications to users.
+	// The Amazon Resource Name (ARN) of the function that you want to assign to your
+	// Lambda trigger.
 	//
 	// This member is required.
 	LambdaArn *string
 
-	// Signature of the "request" attribute in the "event" information that Amazon
-	// Cognito passes to your custom SMS Lambda function. The only supported value is
-	// V1_0 .
+	// The user pool trigger version of the request that Amazon Cognito sends to your
+	// Lambda function. Higher-numbered versions add fields that support new features.
+	// You must use a LambdaVersion of V1_0 with a custom sender function.
 	//
 	// This member is required.
 	LambdaVersion CustomSMSSenderLambdaVersionType
@@ -762,8 +763,17 @@ type LambdaConfigType struct {
 	// A pre-registration Lambda trigger.
 	PreSignUp *string
 
-	// A Lambda trigger that is invoked before token generation.
+	// The Amazon Resource Name (ARN) of the function that you want to assign to your
+	// Lambda trigger. Set this parameter for legacy purposes. If you also set an ARN
+	// in PreTokenGenerationConfig , its value must be identical to PreTokenGeneration
+	// . For new instances of pre token generation triggers, set the LambdaArn of
+	// PreTokenGenerationConfig . You can set
 	PreTokenGeneration *string
+
+	// The detailed configuration of a pre token generation trigger. If you also set
+	// an ARN in PreTokenGeneration , its value must be identical to
+	// PreTokenGenerationConfig .
+	PreTokenGenerationConfig *PreTokenGenerationVersionConfigType
 
 	// The user migration Lambda config type.
 	UserMigration *string
@@ -941,10 +951,32 @@ type PasswordPolicyType struct {
 
 	// The number of days a temporary password is valid in the password policy. If the
 	// user doesn't sign in during this time, an administrator must reset their
-	// password. When you set TemporaryPasswordValidityDays for a user pool, you can
-	// no longer set a value for the legacy UnusedAccountValidityDays parameter in
-	// that user pool.
+	// password. Defaults to 7 . If you submit a value of 0 , Amazon Cognito treats it
+	// as a null value and sets TemporaryPasswordValidityDays to its default value.
+	// When you set TemporaryPasswordValidityDays for a user pool, you can no longer
+	// set a value for the legacy UnusedAccountValidityDays parameter in that user
+	// pool.
 	TemporaryPasswordValidityDays int32
+
+	noSmithyDocumentSerde
+}
+
+// The properties of a pre token generation Lambda trigger.
+type PreTokenGenerationVersionConfigType struct {
+
+	// The Amazon Resource Name (ARN) of the function that you want to assign to your
+	// Lambda trigger. This parameter and the PreTokenGeneration property of
+	// LambdaConfig have the same value. For new instances of pre token generation
+	// triggers, set LambdaArn .
+	//
+	// This member is required.
+	LambdaArn *string
+
+	// The user pool trigger version of the request that Amazon Cognito sends to your
+	// Lambda function. Higher-numbered versions add fields that support new features.
+	//
+	// This member is required.
+	LambdaVersion PreTokenGenerationLambdaVersionType
 
 	noSmithyDocumentSerde
 }
@@ -1085,7 +1117,10 @@ type RiskExceptionConfigurationType struct {
 // IAM-authenticated API operations. Use app client read/write permissions instead.
 type SchemaAttributeType struct {
 
-	// The data format of the values for your attribute.
+	// The data format of the values for your attribute. When you choose an
+	// AttributeDataType , Amazon Cognito validates the input against the data type. A
+	// custom attribute value in your user's ID token is always a string, for example
+	// "custom:isMember" : "true" or "custom:YearsAsMember" : "12" .
 	AttributeDataType AttributeDataType
 
 	// You should use WriteAttributes (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserPoolClientType.html#CognitoUserPools-Type-UserPoolClientType-WriteAttributes)
@@ -1107,7 +1142,14 @@ type SchemaAttributeType struct {
 	// .
 	Mutable *bool
 
-	// The name of your user pool attribute, for example username or custom:costcenter .
+	// The name of your user pool attribute. When you create or update a user pool,
+	// adding a schema attribute creates a custom or developer-only attribute. When you
+	// add an attribute with a Name value of MyAttribute , Amazon Cognito creates the
+	// custom attribute custom:MyAttribute . When DeveloperOnlyAttribute is true ,
+	// Amazon Cognito creates your attribute as dev:MyAttribute . In an operation that
+	// describes a user pool, Amazon Cognito returns this value as value for standard
+	// attributes, custom:value for custom attributes, and dev:value for
+	// developer-only attributes..
 	Name *string
 
 	// Specifies the constraints for an attribute of the number type.
@@ -1618,7 +1660,18 @@ type UserPoolClientType struct {
 	//   existence related errors aren't prevented.
 	PreventUserExistenceErrors PreventUserExistenceErrorTypes
 
-	// The Read-only attributes.
+	// The list of user attributes that you want your app client to have read-only
+	// access to. After your user authenticates in your app, their access token
+	// authorizes them to read their own attribute value for any attribute in this
+	// list. An example of this kind of activity is when your user selects a link to
+	// view their profile information. Your app makes a GetUser (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_GetUser.html)
+	// API request to retrieve and display your user's profile data. When you don't
+	// specify the ReadAttributes for your app client, your app can read the values of
+	// email_verified , phone_number_verified , and the Standard attributes of your
+	// user pool. When your user pool has read access to these default attributes,
+	// ReadAttributes doesn't return any information. Amazon Cognito only populates
+	// ReadAttributes in the API response if you have specified your own custom set of
+	// read attributes.
 	ReadAttributes []string
 
 	// The refresh token time limit. After this limit expires, your user can't use
@@ -1646,7 +1699,25 @@ type UserPoolClientType struct {
 	// The user pool ID for the user pool client.
 	UserPoolId *string
 
-	// The writeable attributes.
+	// The list of user attributes that you want your app client to have write access
+	// to. After your user authenticates in your app, their access token authorizes
+	// them to set or modify their own attribute value for any attribute in this list.
+	// An example of this kind of activity is when you present your user with a form to
+	// update their profile information and they change their last name. Your app then
+	// makes an UpdateUserAttributes (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateUserAttributes.html)
+	// API request and sets family_name to the new value. When you don't specify the
+	// WriteAttributes for your app client, your app can write the values of the
+	// Standard attributes of your user pool. When your user pool has write access to
+	// these default attributes, WriteAttributes doesn't return any information.
+	// Amazon Cognito only populates WriteAttributes in the API response if you have
+	// specified your own custom set of write attributes. If your app client allows
+	// users to sign in through an IdP, this array must include all attributes that you
+	// have mapped to IdP attributes. Amazon Cognito updates mapped attributes when
+	// users sign in to your application through an IdP. If your app client does not
+	// have write access to a mapped attribute, Amazon Cognito throws an error when it
+	// tries to update the attribute. For more information, see Specifying IdP
+	// Attribute Mappings for Your user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html)
+	// .
 	WriteAttributes []string
 
 	noSmithyDocumentSerde
@@ -1824,7 +1895,7 @@ type UserPoolType struct {
 	// .
 	SmsVerificationMessage *string
 
-	// The status of a user pool.
+	// This parameter is no longer used.
 	//
 	// Deprecated: This property is no longer available.
 	Status StatusType

@@ -34,7 +34,7 @@ import (
 // original after the updated profile has finished creating. If any Fargate
 // profiles in a cluster are in the DELETING status, you must wait for that
 // Fargate profile to finish deleting before you can create any other profiles in
-// that cluster. For more information, see Fargate Profile (https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html)
+// that cluster. For more information, see Fargate profile (https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html)
 // in the Amazon EKS User Guide.
 func (c *Client) CreateFargateProfile(ctx context.Context, params *CreateFargateProfileInput, optFns ...func(*Options)) (*CreateFargateProfileOutput, error) {
 	if params == nil {
@@ -53,7 +53,7 @@ func (c *Client) CreateFargateProfile(ctx context.Context, params *CreateFargate
 
 type CreateFargateProfileInput struct {
 
-	// The name of the Amazon EKS cluster to apply the Fargate profile to.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
@@ -63,34 +63,34 @@ type CreateFargateProfileInput struct {
 	// This member is required.
 	FargateProfileName *string
 
-	// The Amazon Resource Name (ARN) of the pod execution role to use for pods that
-	// match the selectors in the Fargate profile. The pod execution role allows
+	// The Amazon Resource Name (ARN) of the Pod execution role to use for a Pod that
+	// matches the selectors in the Fargate profile. The Pod execution role allows
 	// Fargate infrastructure to register with your cluster as a node, and it provides
 	// read access to Amazon ECR image repositories. For more information, see Pod
-	// Execution Role (https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html)
+	// execution role (https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html)
 	// in the Amazon EKS User Guide.
 	//
 	// This member is required.
 	PodExecutionRoleArn *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
-	// The selectors to match for pods to use this Fargate profile. Each selector must
-	// have an associated namespace. Optionally, you can also specify labels for a
-	// namespace. You may specify up to five selectors in a Fargate profile.
+	// The selectors to match for a Pod to use this Fargate profile. Each selector
+	// must have an associated Kubernetes namespace . Optionally, you can also specify
+	// labels for a namespace . You may specify up to five selectors in a Fargate
+	// profile.
 	Selectors []types.FargateProfileSelector
 
-	// The IDs of subnets to launch your pods into. At this time, pods running on
-	// Fargate are not assigned public IP addresses, so only private subnets (with no
-	// direct route to an Internet Gateway) are accepted for this parameter.
+	// The IDs of subnets to launch a Pod into. A Pod running on Fargate isn't
+	// assigned a public IP address, so only private subnets (with no direct route to
+	// an Internet Gateway) are accepted for this parameter.
 	Subnets []string
 
-	// The metadata to apply to the Fargate profile to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
-	// Fargate profile tags do not propagate to any other resources associated with the
-	// Fargate profile, such as the pods that are scheduled with it.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

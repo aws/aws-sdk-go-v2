@@ -56,8 +56,8 @@ type CreateEksAnywhereSubscriptionInput struct {
 	// term.
 	AutoRenew bool
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The number of licenses to purchase with the subscription. Valid values are

@@ -1,0 +1,8 @@
+{
+    "id": "9ef4fa71-ef18-4935-abba-77ce4e289215",
+    "type": "documentation",
+    "description": "A docs-only release to add missing entities to the API reference.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

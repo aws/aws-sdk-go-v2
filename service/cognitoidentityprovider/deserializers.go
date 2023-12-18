@@ -17812,6 +17812,11 @@ func awsAwsjson11_deserializeDocumentLambdaConfigType(v **types.LambdaConfigType
 				sv.PreTokenGeneration = ptr.String(jtv)
 			}
 
+		case "PreTokenGenerationConfig":
+			if err := awsAwsjson11_deserializeDocumentPreTokenGenerationVersionConfigType(&sv.PreTokenGenerationConfig, value); err != nil {
+				return err
+			}
+
 		case "UserMigration":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18732,6 +18737,55 @@ func awsAwsjson11_deserializeDocumentPreconditionNotMetException(v **types.Preco
 					return fmt.Errorf("expected MessageType to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPreTokenGenerationVersionConfigType(v **types.PreTokenGenerationVersionConfigType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PreTokenGenerationVersionConfigType
+	if *v == nil {
+		sv = &types.PreTokenGenerationVersionConfigType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LambdaArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+				}
+				sv.LambdaArn = ptr.String(jtv)
+			}
+
+		case "LambdaVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PreTokenGenerationLambdaVersionType to be of type string, got %T instead", value)
+				}
+				sv.LambdaVersion = types.PreTokenGenerationLambdaVersionType(jtv)
 			}
 
 		default:

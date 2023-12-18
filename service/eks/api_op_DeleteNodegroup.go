@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon EKS node group for a cluster.
+// Deletes a managed node group.
 func (c *Client) DeleteNodegroup(ctx context.Context, params *DeleteNodegroupInput, optFns ...func(*Options)) (*DeleteNodegroupOutput, error) {
 	if params == nil {
 		params = &DeleteNodegroupInput{}
@@ -30,7 +30,7 @@ func (c *Client) DeleteNodegroup(ctx context.Context, params *DeleteNodegroupInp
 
 type DeleteNodegroupInput struct {
 
-	// The name of the Amazon EKS cluster that is associated with your node group.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string

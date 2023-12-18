@@ -251,7 +251,8 @@ func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return
 
 // The specified resource could not be found. You can view your available clusters
 // with ListClusters . You can view your available managed node groups with
-// ListNodegroups . Amazon EKS clusters and node groups are Region-specific.
+// ListNodegroups . Amazon EKS clusters and node groups are Amazon Web Services
+// Region specific.
 type ResourceNotFoundException struct {
 	Message *string
 

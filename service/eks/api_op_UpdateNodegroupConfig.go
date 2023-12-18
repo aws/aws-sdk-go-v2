@@ -34,7 +34,7 @@ func (c *Client) UpdateNodegroupConfig(ctx context.Context, params *UpdateNodegr
 
 type UpdateNodegroupConfigInput struct {
 
-	// The name of the Amazon EKS cluster that the managed node group resides in.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
@@ -44,12 +44,11 @@ type UpdateNodegroupConfigInput struct {
 	// This member is required.
 	NodegroupName *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
-	// The Kubernetes labels to be applied to the nodes in the node group after the
-	// update.
+	// The Kubernetes labels to apply to the nodes in the node group after the update.
 	Labels *types.UpdateLabelsPayload
 
 	// The scaling configuration details for the Auto Scaling group after the update.

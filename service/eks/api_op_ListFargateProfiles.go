@@ -12,7 +12,7 @@ import (
 )
 
 // Lists the Fargate profiles associated with the specified cluster in your Amazon
-// Web Services account in the specified Region.
+// Web Services account in the specified Amazon Web Services Region.
 func (c *Client) ListFargateProfiles(ctx context.Context, params *ListFargateProfilesInput, optFns ...func(*Options)) (*ListFargateProfilesOutput, error) {
 	if params == nil {
 		params = &ListFargateProfilesInput{}
@@ -30,26 +30,25 @@ func (c *Client) ListFargateProfiles(ctx context.Context, params *ListFargatePro
 
 type ListFargateProfilesInput struct {
 
-	// The name of the Amazon EKS cluster that you would like to list Fargate profiles
-	// in.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
 
-	// The maximum number of Fargate profile results returned by ListFargateProfiles
-	// in paginated output. When you use this parameter, ListFargateProfiles returns
-	// only maxResults results in a single page along with a nextToken response
-	// element. You can see the remaining results of the initial request by sending
-	// another ListFargateProfiles request with the returned nextToken value. This
-	// value can be between 1 and 100. If you don't use this parameter,
-	// ListFargateProfiles returns up to 100 results and a nextToken value if
-	// applicable.
+	// The maximum number of results, returned in paginated output. You receive
+	// maxResults in a single page, along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another request with
+	// the returned nextToken value. This value can be between 1 and 100. If you don't
+	// use this parameter, 100 results and a nextToken value, if applicable, are
+	// returned.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated ListFargateProfiles
-	// request where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value.
+	// The nextToken value returned from a previous paginated request, where maxResults
+	// was used and the results exceeded the value of that parameter. Pagination
+	// continues from the end of the previous results that returned the nextToken
+	// value. This value is null when there are no more results to return. This token
+	// should be treated as an opaque identifier that is used only to retrieve the next
+	// items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -60,10 +59,12 @@ type ListFargateProfilesOutput struct {
 	// A list of all of the Fargate profiles associated with the specified cluster.
 	FargateProfileNames []string
 
-	// The nextToken value to include in a future ListFargateProfiles request. When
-	// the results of a ListFargateProfiles request exceed maxResults , you can use
-	// this value to retrieve the next page of results. This value is null when there
-	// are no more results to return.
+	// The nextToken value returned from a previous paginated request, where maxResults
+	// was used and the results exceeded the value of that parameter. Pagination
+	// continues from the end of the previous results that returned the nextToken
+	// value. This value is null when there are no more results to return. This token
+	// should be treated as an opaque identifier that is used only to retrieve the next
+	// items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -162,14 +163,12 @@ var _ ListFargateProfilesAPIClient = (*Client)(nil)
 // ListFargateProfilesPaginatorOptions is the paginator options for
 // ListFargateProfiles
 type ListFargateProfilesPaginatorOptions struct {
-	// The maximum number of Fargate profile results returned by ListFargateProfiles
-	// in paginated output. When you use this parameter, ListFargateProfiles returns
-	// only maxResults results in a single page along with a nextToken response
-	// element. You can see the remaining results of the initial request by sending
-	// another ListFargateProfiles request with the returned nextToken value. This
-	// value can be between 1 and 100. If you don't use this parameter,
-	// ListFargateProfiles returns up to 100 results and a nextToken value if
-	// applicable.
+	// The maximum number of results, returned in paginated output. You receive
+	// maxResults in a single page, along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another request with
+	// the returned nextToken value. This value can be between 1 and 100. If you don't
+	// use this parameter, 100 results and a nextToken value, if applicable, are
+	// returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -37,7 +37,7 @@ type UpdateAddonInput struct {
 	// This member is required.
 	AddonName *string
 
-	// The name of the cluster.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
@@ -47,13 +47,13 @@ type UpdateAddonInput struct {
 	// .
 	AddonVersion *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The set of configuration values for the add-on that's created. The values that
-	// you provide are validated against the schema in DescribeAddonConfiguration (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html)
-	// .
+	// you provide are validated against the schema returned by
+	// DescribeAddonConfiguration .
 	ConfigurationValues *string
 
 	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed

@@ -1,0 +1,8 @@
+{
+    "id": "f665a856-13e7-4a5a-8017-b8683efab70a",
+    "type": "feature",
+    "description": "Add DOH protocols in resolver endpoints.",
+    "modules": [
+        "service/route53resolver"
+    ]
+}

@@ -46,8 +46,12 @@ type ListUserImportJobsInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// An identifier that was returned from the previous call to ListUserImportJobs ,
-	// which can be used to return the next set of import jobs in the list.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	PaginationToken *string
 
 	noSmithyDocumentSerde
@@ -57,8 +61,10 @@ type ListUserImportJobsInput struct {
 // jobs.
 type ListUserImportJobsOutput struct {
 
-	// An identifier that can be used to return the next set of user import jobs in
-	// the list.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	PaginationToken *string
 
 	// The user import jobs.

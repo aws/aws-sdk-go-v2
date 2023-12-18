@@ -129,7 +129,6 @@ type AdminInitiateAuthInput struct {
 	//   - Pre token generation
 	//   - Create auth challenge
 	//   - Define auth challenge
-	//   - Verify auth challenge
 	// For more information, see  Customizing user pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
@@ -195,7 +194,7 @@ type AdminInitiateAuthOutput struct {
 	//   value of any additional attributes.
 	//   - MFA_SETUP : For users who are required to set up an MFA factor before they
 	//   can sign in. The MFA types activated for the user pool will be listed in the
-	//   challenge parameters MFA_CAN_SETUP value. To set up software token MFA, use
+	//   challenge parameters MFAS_CAN_SETUP value. To set up software token MFA, use
 	//   the session returned here from InitiateAuth as an input to
 	//   AssociateSoftwareToken , and use the session returned by VerifySoftwareToken
 	//   as an input to RespondToAuthChallenge with challenge name MFA_SETUP to

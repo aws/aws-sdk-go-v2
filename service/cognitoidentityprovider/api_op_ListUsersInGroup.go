@@ -45,7 +45,7 @@ type ListUsersInGroupInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The limit of the request to list users.
+	// The maximum number of users that you want to retrieve before pagination.
 	Limit *int32
 
 	// An identifier that was returned from the previous call to this operation, which
@@ -61,7 +61,7 @@ type ListUsersInGroupOutput struct {
 	// items in the list.
 	NextToken *string
 
-	// The users returned in the request to list users.
+	// A list of users in the group, and their attributes.
 	Users []types.UserType
 
 	// Metadata pertaining to the operation's result.
@@ -159,7 +159,7 @@ var _ ListUsersInGroupAPIClient = (*Client)(nil)
 
 // ListUsersInGroupPaginatorOptions is the paginator options for ListUsersInGroup
 type ListUsersInGroupPaginatorOptions struct {
-	// The limit of the request to list users.
+	// The maximum number of users that you want to retrieve before pagination.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -13,6 +13,9 @@ import (
 )
 
 // Deregisters a connected cluster to remove it from the Amazon EKS control plane.
+// A connected cluster is a Kubernetes cluster that you've connected to your
+// control plane using the Amazon EKS Connector (https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html)
+// .
 func (c *Client) DeregisterCluster(ctx context.Context, params *DeregisterClusterInput, optFns ...func(*Options)) (*DeregisterClusterOutput, error) {
 	if params == nil {
 		params = &DeregisterClusterInput{}

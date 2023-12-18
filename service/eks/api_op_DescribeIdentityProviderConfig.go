@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns descriptive information about an identity provider configuration.
+// Describes an identity provider configuration.
 func (c *Client) DescribeIdentityProviderConfig(ctx context.Context, params *DescribeIdentityProviderConfigInput, optFns ...func(*Options)) (*DescribeIdentityProviderConfigOutput, error) {
 	if params == nil {
 		params = &DescribeIdentityProviderConfigInput{}
@@ -30,7 +30,7 @@ func (c *Client) DescribeIdentityProviderConfig(ctx context.Context, params *Des
 
 type DescribeIdentityProviderConfigInput struct {
 
-	// The cluster name that the identity provider configuration is associated to.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string

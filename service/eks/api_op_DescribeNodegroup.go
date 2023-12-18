@@ -17,7 +17,7 @@ import (
 	"time"
 )
 
-// Returns descriptive information about an Amazon EKS node group.
+// Describes a managed node group.
 func (c *Client) DescribeNodegroup(ctx context.Context, params *DescribeNodegroupInput, optFns ...func(*Options)) (*DescribeNodegroupOutput, error) {
 	if params == nil {
 		params = &DescribeNodegroupInput{}
@@ -35,7 +35,7 @@ func (c *Client) DescribeNodegroup(ctx context.Context, params *DescribeNodegrou
 
 type DescribeNodegroupInput struct {
 
-	// The name of the Amazon EKS cluster associated with the node group.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string

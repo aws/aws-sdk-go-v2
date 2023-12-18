@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Route 53 Resolver on an Outpost.
+// Creates a Route 53 Resolver on an Outpost.
 func (c *Client) CreateOutpostResolver(ctx context.Context, params *CreateOutpostResolverInput, optFns ...func(*Options)) (*CreateOutpostResolverOutput, error) {
 	if params == nil {
 		params = &CreateOutpostResolverInput{}

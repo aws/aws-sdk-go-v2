@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate an identity provider configuration to a cluster. If you want to
+// Associates an identity provider configuration to a cluster. If you want to
 // authenticate identities using an identity provider, you can create an identity
 // provider configuration and associate it to your cluster. After configuring
-// authentication to your cluster you can create Kubernetes roles and clusterroles
-// to assign permissions to the roles, and then bind the roles to the identities
-// using Kubernetes rolebindings and clusterrolebindings . For more information see
+// authentication to your cluster you can create Kubernetes Role and ClusterRole
+// objects, assign permissions to them, and then bind them to the identities using
+// Kubernetes RoleBinding and ClusterRoleBinding objects. For more information see
 // Using RBAC Authorization (https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 // in the Kubernetes documentation.
 func (c *Client) AssociateIdentityProviderConfig(ctx context.Context, params *AssociateIdentityProviderConfigInput, optFns ...func(*Options)) (*AssociateIdentityProviderConfigOutput, error) {
@@ -37,7 +37,7 @@ func (c *Client) AssociateIdentityProviderConfig(ctx context.Context, params *As
 
 type AssociateIdentityProviderConfigInput struct {
 
-	// The name of the cluster to associate the configuration to.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
@@ -47,12 +47,13 @@ type AssociateIdentityProviderConfigInput struct {
 	// This member is required.
 	Oidc *types.OidcIdentityProviderConfigRequest
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
-	// The metadata to apply to the configuration to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -14,12 +14,15 @@ import (
 
 // Creates a managed node group for an Amazon EKS cluster. You can only create a
 // node group for your cluster that is equal to the current Kubernetes version for
-// the cluster. An Amazon EKS managed node group is an Amazon EC2 Auto Scaling
-// group and associated Amazon EC2 instances that are managed by Amazon Web
-// Services for an Amazon EKS cluster. For more information, see Managed node
-// groups (https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html)
+// the cluster. All node groups are created with the latest AMI release version for
+// the respective minor Kubernetes version of the cluster, unless you deploy a
+// custom AMI using a launch template. For more information about using launch
+// templates, see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
+// . An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and
+// associated Amazon EC2 instances that are managed by Amazon Web Services for an
+// Amazon EKS cluster. For more information, see Managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html)
 // in the Amazon EKS User Guide. Windows AMI types are only supported for
-// commercial Regions that support Windows Amazon EKS.
+// commercial Amazon Web Services Regions that support Windows on Amazon EKS.
 func (c *Client) CreateNodegroup(ctx context.Context, params *CreateNodegroupInput, optFns ...func(*Options)) (*CreateNodegroupOutput, error) {
 	if params == nil {
 		params = &CreateNodegroupInput{}
@@ -37,7 +40,7 @@ func (c *Client) CreateNodegroup(ctx context.Context, params *CreateNodegroupInp
 
 type CreateNodegroupInput struct {
 
-	// The name of the cluster to create the node group in.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
@@ -86,8 +89,8 @@ type CreateNodegroupInput struct {
 	// The capacity type for your node group.
 	CapacityType types.CapacityTypes
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
 	// The root device disk size (in GiB) for your node group instances. The default
@@ -112,8 +115,8 @@ type CreateNodegroupInput struct {
 	// in the Amazon EKS User Guide.
 	InstanceTypes []string
 
-	// The Kubernetes labels to be applied to the nodes in the node group when they
-	// are created.
+	// The Kubernetes labels to apply to the nodes in the node group when they are
+	// created.
 	Labels map[string]string
 
 	// An object representing a node group's launch template specification. If
@@ -148,10 +151,9 @@ type CreateNodegroupInput struct {
 	// for your node group.
 	ScalingConfig *types.NodegroupScalingConfig
 
-	// The metadata to apply to the node group to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
-	// Node group tags do not propagate to any other resources associated with the node
-	// group, such as the Amazon EC2 instances or subnets.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	// The Kubernetes taints to be applied to the nodes in the node group. For more

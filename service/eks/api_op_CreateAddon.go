@@ -33,14 +33,13 @@ func (c *Client) CreateAddon(ctx context.Context, params *CreateAddonInput, optF
 
 type CreateAddonInput struct {
 
-	// The name of the add-on. The name must match one of the names that
-	// DescribeAddonVersions (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html)
-	// returns.
+	// The name of the add-on. The name must match one of the names returned by
+	// DescribeAddonVersions .
 	//
 	// This member is required.
 	AddonName *string
 
-	// The name of the cluster to create the add-on for.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
@@ -55,8 +54,8 @@ type CreateAddonInput struct {
 	ClientRequestToken *string
 
 	// The set of configuration values for the add-on that's created. The values that
-	// you provide are validated against the schema in DescribeAddonConfiguration (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html)
-	// .
+	// you provide are validated against the schema returned by
+	// DescribeAddonConfiguration .
 	ConfigurationValues *string
 
 	// How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are
@@ -89,8 +88,9 @@ type CreateAddonInput struct {
 	// in the Amazon EKS User Guide.
 	ServiceAccountRoleArn *string
 
-	// The metadata to apply to the cluster to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

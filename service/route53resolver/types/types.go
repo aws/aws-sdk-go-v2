@@ -658,6 +658,21 @@ type ResolverEndpoint struct {
 	// The Amazon EC2 instance type.
 	PreferredInstanceType *string
 
+	// Protocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints
+	// only. For an inbound endpoint you can apply the protocols as follows:
+	//   - Do53 and DoH in combination.
+	//   - Do53 and DoH-FIPS in combination.
+	//   - Do53 alone.
+	//   - DoH alone.
+	//   - DoH-FIPS alone.
+	//   - None, which is treated as Do53.
+	// For an outbound endpoint you can apply the protocols as follows:
+	//   - Do53 and DoH in combination.
+	//   - Do53 alone.
+	//   - DoH alone.
+	//   - None, which is treated as Do53.
+	Protocols []Protocol
+
 	// The Resolver endpoint IP address type.
 	ResolverEndpointType ResolverEndpointType
 
@@ -969,6 +984,21 @@ type TargetAddress struct {
 
 	// The port at Ip that you want to forward DNS queries to.
 	Port *int32
+
+	// The protocols for the Resolver endpoints. DoH-FIPS is applicable for inbound
+	// endpoints only. For an inbound endpoint you can apply the protocols as follows:
+	//   - Do53 and DoH in combination.
+	//   - Do53 and DoH-FIPS in combination.
+	//   - Do53 alone.
+	//   - DoH alone.
+	//   - DoH-FIPS alone.
+	//   - None, which is treated as Do53.
+	// For an outbound endpoint you can apply the protocols as follows:
+	//   - Do53 and DoH in combination.
+	//   - Do53 alone.
+	//   - DoH alone.
+	//   - None, which is treated as Do53.
+	Protocol Protocol
 
 	noSmithyDocumentSerde
 }

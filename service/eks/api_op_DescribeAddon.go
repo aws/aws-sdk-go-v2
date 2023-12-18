@@ -42,7 +42,7 @@ type DescribeAddonInput struct {
 	// This member is required.
 	AddonName *string
 
-	// The name of the cluster.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string

@@ -123,7 +123,6 @@ type InitiateAuthInput struct {
 	//   - Pre token generation
 	//   - Create auth challenge
 	//   - Define auth challenge
-	//   - Verify auth challenge
 	// For more information, see  Customizing user pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
@@ -155,9 +154,9 @@ type InitiateAuthOutput struct {
 	AuthenticationResult *types.AuthenticationResultType
 
 	// The name of the challenge that you're responding to with this call. This name
-	// is returned in the AdminInitiateAuth response if you must pass another
-	// challenge. Valid values include the following: All of the following challenges
-	// require USERNAME and SECRET_HASH (if applicable) in the parameters.
+	// is returned in the InitiateAuth response if you must pass another challenge.
+	// Valid values include the following: All of the following challenges require
+	// USERNAME and SECRET_HASH (if applicable) in the parameters.
 	//   - SMS_MFA : Next challenge is to supply an SMS_MFA_CODE , delivered via SMS.
 	//   - PASSWORD_VERIFIER : Next challenge is to supply PASSWORD_CLAIM_SIGNATURE ,
 	//   PASSWORD_CLAIM_SECRET_BLOCK , and TIMESTAMP after the client-side SRP
@@ -183,7 +182,7 @@ type InitiateAuthOutput struct {
 	//   additional attributes.
 	//   - MFA_SETUP : For users who are required to setup an MFA factor before they
 	//   can sign in. The MFA types activated for the user pool will be listed in the
-	//   challenge parameters MFA_CAN_SETUP value. To set up software token MFA, use
+	//   challenge parameters MFAS_CAN_SETUP value. To set up software token MFA, use
 	//   the session returned here from InitiateAuth as an input to
 	//   AssociateSoftwareToken . Use the session returned by VerifySoftwareToken as an
 	//   input to RespondToAuthChallenge with challenge name MFA_SETUP to complete

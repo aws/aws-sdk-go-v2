@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon EKS managed node groups associated with the specified cluster
-// in your Amazon Web Services account in the specified Region. Self-managed node
-// groups are not listed.
+// Lists the managed node groups associated with the specified cluster in your
+// Amazon Web Services account in the specified Amazon Web Services Region.
+// Self-managed node groups aren't listed.
 func (c *Client) ListNodegroups(ctx context.Context, params *ListNodegroupsInput, optFns ...func(*Options)) (*ListNodegroupsOutput, error) {
 	if params == nil {
 		params = &ListNodegroupsInput{}
@@ -31,24 +31,25 @@ func (c *Client) ListNodegroups(ctx context.Context, params *ListNodegroupsInput
 
 type ListNodegroupsInput struct {
 
-	// The name of the Amazon EKS cluster that you would like to list node groups in.
+	// The name of your cluster.
 	//
 	// This member is required.
 	ClusterName *string
 
-	// The maximum number of node group results returned by ListNodegroups in
-	// paginated output. When you use this parameter, ListNodegroups returns only
-	// maxResults results in a single page along with a nextToken response element.
-	// You can see the remaining results of the initial request by sending another
-	// ListNodegroups request with the returned nextToken value. This value can be
-	// between 1 and 100. If you don't use this parameter, ListNodegroups returns up
-	// to 100 results and a nextToken value if applicable.
+	// The maximum number of results, returned in paginated output. You receive
+	// maxResults in a single page, along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another request with
+	// the returned nextToken value. This value can be between 1 and 100. If you don't
+	// use this parameter, 100 results and a nextToken value, if applicable, are
+	// returned.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated ListNodegroups request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
+	// The nextToken value returned from a previous paginated request, where maxResults
+	// was used and the results exceeded the value of that parameter. Pagination
+	// continues from the end of the previous results that returned the nextToken
+	// value. This value is null when there are no more results to return. This token
+	// should be treated as an opaque identifier that is used only to retrieve the next
+	// items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,10 +57,12 @@ type ListNodegroupsInput struct {
 
 type ListNodegroupsOutput struct {
 
-	// The nextToken value to include in a future ListNodegroups request. When the
-	// results of a ListNodegroups request exceed maxResults , you can use this value
-	// to retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// The nextToken value returned from a previous paginated request, where maxResults
+	// was used and the results exceeded the value of that parameter. Pagination
+	// continues from the end of the previous results that returned the nextToken
+	// value. This value is null when there are no more results to return. This token
+	// should be treated as an opaque identifier that is used only to retrieve the next
+	// items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// A list of all of the node groups associated with the specified cluster.
@@ -160,13 +163,12 @@ var _ ListNodegroupsAPIClient = (*Client)(nil)
 
 // ListNodegroupsPaginatorOptions is the paginator options for ListNodegroups
 type ListNodegroupsPaginatorOptions struct {
-	// The maximum number of node group results returned by ListNodegroups in
-	// paginated output. When you use this parameter, ListNodegroups returns only
-	// maxResults results in a single page along with a nextToken response element.
-	// You can see the remaining results of the initial request by sending another
-	// ListNodegroups request with the returned nextToken value. This value can be
-	// between 1 and 100. If you don't use this parameter, ListNodegroups returns up
-	// to 100 results and a nextToken value if applicable.
+	// The maximum number of results, returned in paginated output. You receive
+	// maxResults in a single page, along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another request with
+	// the returned nextToken value. This value can be between 1 and 100. If you don't
+	// use this parameter, 100 results and a nextToken value, if applicable, are
+	// returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

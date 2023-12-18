@@ -41,7 +41,10 @@ type AdminListDevicesInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The user name.
+	// The username of the user that you want to query or modify. The value of this
+	// parameter is typically your user's username, but it can be any of their alias
+	// attributes. If username isn't an alias attribute in your user pool, you can
+	// also use their sub in this request.
 	//
 	// This member is required.
 	Username *string
@@ -49,7 +52,12 @@ type AdminListDevicesInput struct {
 	// The limit of the devices request.
 	Limit *int32
 
-	// The pagination token.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	PaginationToken *string
 
 	noSmithyDocumentSerde
@@ -61,7 +69,10 @@ type AdminListDevicesOutput struct {
 	// The devices in the list of devices response.
 	Devices []types.DeviceType
 
-	// The pagination token.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	PaginationToken *string
 
 	// Metadata pertaining to the operation's result.

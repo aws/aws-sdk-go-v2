@@ -16,14 +16,14 @@ import (
 // EKS cluster and an IAM role with EKS Pod Identity. Use EKS Pod Identity to give
 // temporary IAM credentials to pods and the credentials are rotated automatically.
 // Amazon EKS Pod Identity associations provide the ability to manage credentials
-// for your applications, similar to the way that 7EC2l instance profiles provide
-// credentials to Amazon EC2 instances. If a pod uses a service account that has an
-// association, Amazon EKS sets environment variables in the containers of the pod.
-// The environment variables configure the Amazon Web Services SDKs, including the
-// Command Line Interface, to use the EKS Pod Identity credentials. Pod Identity is
-// a simpler method than IAM roles for service accounts, as this method doesn't use
-// OIDC identity providers. Additionally, you can configure a role for Pod Identity
-// once, and reuse it across clusters.
+// for your applications, similar to the way that Amazon EC2 instance profiles
+// provide credentials to Amazon EC2 instances. If a pod uses a service account
+// that has an association, Amazon EKS sets environment variables in the containers
+// of the pod. The environment variables configure the Amazon Web Services SDKs,
+// including the Command Line Interface, to use the EKS Pod Identity credentials.
+// Pod Identity is a simpler method than IAM roles for service accounts, as this
+// method doesn't use OIDC identity providers. Additionally, you can configure a
+// role for Pod Identity once, and reuse it across clusters.
 func (c *Client) CreatePodIdentityAssociation(ctx context.Context, params *CreatePodIdentityAssociationInput, optFns ...func(*Options)) (*CreatePodIdentityAssociationOutput, error) {
 	if params == nil {
 		params = &CreatePodIdentityAssociationInput{}
@@ -66,13 +66,14 @@ type CreatePodIdentityAssociationInput struct {
 	// This member is required.
 	ServiceAccount *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string
 
-	// The metadata that you apply to a resource to assist with categorization and
-	// organization. Each tag consists of a key and an optional value. You define both.
-	// The following basic restrictions apply to tags:
+	// Metadata that assists with categorization and organization. Each tag consists
+	// of a key and an optional value. You define both. Tags don't propagate to any
+	// other cluster or Amazon Web Services resources. The following basic restrictions
+	// apply to tags:
 	//   - Maximum number of tags per resource – 50
 	//   - For each resource, each tag key must be unique, and each tag key can have
 	//   only one value.
