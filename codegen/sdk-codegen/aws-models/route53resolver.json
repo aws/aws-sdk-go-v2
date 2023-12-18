@@ -575,7 +575,7 @@
                 "FirewallDomainList": {
                     "target": "com.amazonaws.route53resolver#FirewallDomainList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The\n\t\t\tdomain list that you just created.</p>"
+                        "smithy.api#documentation": "<p>The domain list that you just created.</p>"
                     }
                 }
             },
@@ -805,7 +805,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Route 53 Resolver on an Outpost.</p>"
+                "smithy.api#documentation": "<p>Creates a Route 53 Resolver on an Outpost.</p>"
             }
         },
         "com.amazonaws.route53resolver#CreateOutpostResolverRequest": {
@@ -880,6 +880,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
                 },
                 {
@@ -938,8 +941,20 @@
                 "IpAddresses": {
                     "target": "com.amazonaws.route53resolver#IpAddressesRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward \n\t\t\tDNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC. </p>",
+                        "smithy.api#documentation": "<p>The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward \n\t\t\tDNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC. </p>\n         <note>\n            <p>Even though the minimum is 1, Route 53 requires that you create at least two.</p>\n         </note>",
                         "smithy.api#required": {}
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.route53resolver#OutpostArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must also specify a\n\t\t\tvalue for the <code>PreferredInstanceType</code>. </p>"
+                    }
+                },
+                "PreferredInstanceType": {
+                    "target": "com.amazonaws.route53resolver#OutpostInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The  instance type. If you specify this, you must also specify a value for the <code>OutpostArn</code>.</p>"
                     }
                 },
                 "Tags": {
@@ -954,16 +969,10 @@
                         "smithy.api#documentation": "<p>\n\t\t\tFor the endpoint type you can choose either IPv4, IPv6, or dual-stack.\n\t\t\tA dual-stack endpoint means that it will resolve via both IPv4 and IPv6. This\n\t\t\tendpoint type is applied to all IP addresses.\n\t\t</p>"
                     }
                 },
-                "OutpostArn": {
-                    "target": "com.amazonaws.route53resolver#OutpostArn",
+                "Protocols": {
+                    "target": "com.amazonaws.route53resolver#ProtocolList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must also specify a\n\t\t\tvalue for the <code>PreferredInstanceType</code>. </p>"
-                    }
-                },
-                "PreferredInstanceType": {
-                    "target": "com.amazonaws.route53resolver#OutpostInstanceType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The  instance type. If you specify this, you must also specify a value for the <code>OutpostArn</code>.</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tThe protocols you want to use for the endpoint. DoH-FIPS is applicable for inbound endpoints only.\n\t\t</p>\n         <p>For an inbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53  and DoH-FIPS in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>DoH-FIPS alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <p>For an outbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1083,6 +1092,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
                 },
                 {
@@ -1137,8 +1149,7 @@
                 "DomainName": {
                     "target": "com.amazonaws.route53resolver#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>DNS queries for this domain name are forwarded to the IP addresses that you specify in <code>TargetIps</code>. If a query matches \n\t\t\tmultiple Resolver rules (example.com and www.example.com), outbound DNS queries are routed using the Resolver rule that contains \n\t\t\tthe most specific domain name (www.example.com).</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>DNS queries for this domain name are forwarded to the IP addresses that you specify in <code>TargetIps</code>. If a query matches \n\t\t\tmultiple Resolver rules (example.com and www.example.com), outbound DNS queries are routed using the Resolver rule that contains \n\t\t\tthe most specific domain name (www.example.com).</p>"
                     }
                 },
                 "TargetIps": {
@@ -3811,7 +3822,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 2,
                     "max": 20
                 }
             }
@@ -4602,7 +4613,7 @@
                 "ResolverDnssecConfigs": {
                     "target": "com.amazonaws.route53resolver#ResolverDnssecConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that contains one \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html\">ResolverDnssecConfig</a> element \n\t\t\tfor each configuration for DNSSEC validation that is associated with the current Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>An array that contains one \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html\">ResolverDnssecConfig</a> element \n\t\t\tfor each configuration for DNSSEC validation that is associated with the current Amazon Web Services account. \n\t\t\t It doesn't contain disabled DNSSEC configurations for the resource.</p>"
                     }
                 }
             },
@@ -5479,6 +5490,41 @@
         "com.amazonaws.route53resolver#Priority": {
             "type": "integer"
         },
+        "com.amazonaws.route53resolver#Protocol": {
+            "type": "enum",
+            "members": {
+                "DOH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DoH"
+                    }
+                },
+                "DO53": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Do53"
+                    }
+                },
+                "DOHFIPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DoH-FIPS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#ProtocolList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#Protocol"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.route53resolver#PutFirewallRuleGroupPolicy": {
             "type": "operation",
             "input": {
@@ -5915,12 +5961,6 @@
                         "smithy.api#documentation": "<p>The date and time that the endpoint was last modified, in Unix time format and Coordinated Universal Time (UTC).</p>"
                     }
                 },
-                "ResolverEndpointType": {
-                    "target": "com.amazonaws.route53resolver#ResolverEndpointType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tThe Resolver endpoint IP address type.\n\t\t</p>"
-                    }
-                },
                 "OutpostArn": {
                     "target": "com.amazonaws.route53resolver#OutpostArn",
                     "traits": {
@@ -5931,6 +5971,18 @@
                     "target": "com.amazonaws.route53resolver#OutpostInstanceType",
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tThe Amazon EC2 instance type.\n\t\t</p>"
+                    }
+                },
+                "ResolverEndpointType": {
+                    "target": "com.amazonaws.route53resolver#ResolverEndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe Resolver endpoint IP address type.\n\t\t</p>"
+                    }
+                },
+                "Protocols": {
+                    "target": "com.amazonaws.route53resolver#ProtocolList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tProtocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints only.\n\t\t</p>\n         <p>For an inbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53  and DoH-FIPS in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>DoH-FIPS alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <p>For an outbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6873,7 +6925,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -6916,7 +6967,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -6929,7 +6981,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -6943,7 +6994,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -6966,7 +7016,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -7001,7 +7050,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -7012,14 +7060,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -7033,14 +7083,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -7049,11 +7097,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -7102,14 +7150,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -7123,7 +7173,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -7143,7 +7192,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -7154,14 +7202,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -7172,9 +7222,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -8079,6 +8131,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tOne IPv6 address that you want to forward DNS queries to.\n\t\t</p>"
                     }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.route53resolver#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe protocols for the Resolver endpoints. DoH-FIPS is applicable for inbound endpoints only.\n\t\t\t\n\t\t</p>\n         <p>For an inbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53  and DoH-FIPS in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>DoH-FIPS alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <p>For an outbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -8802,6 +8860,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
                 },
                 {
@@ -8818,7 +8879,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the name, or enpoint type for an inbound or an outbound Resolver endpoint. \n\t\t\tYou can only update between IPV4 and DUALSTACK, IPV6 endpoint type can't be updated to other type. </p>"
+                "smithy.api#documentation": "<p>Updates the name, or endpoint type for an inbound or an outbound Resolver endpoint. \n\t\t\tYou can only update between IPV4 and DUALSTACK, IPV6 endpoint type can't be updated to other type. </p>"
             }
         },
         "com.amazonaws.route53resolver#UpdateResolverEndpointRequest": {
@@ -8847,6 +8908,12 @@
                     "target": "com.amazonaws.route53resolver#UpdateIpAddresses",
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tSpecifies the IPv6 address when you update the Resolver endpoint from IPv4 to dual-stack. \n\t\t\tIf you don't specify an IPv6 address, one will be automatically chosen from your subnet.\n\t\t</p>"
+                    }
+                },
+                "Protocols": {
+                    "target": "com.amazonaws.route53resolver#ProtocolList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe protocols you want to use for the endpoint. DoH-FIPS is applicable for inbound endpoints only.\n\t\t</p>\n         <p>For an inbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53  and DoH-FIPS in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>DoH-FIPS alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <p>For an outbound endpoint you can apply the protocols as follows:</p>\n         <ul>\n            <li>\n               <p> Do53  and DoH in combination.</p>\n            </li>\n            <li>\n               <p>Do53 alone.</p>\n            </li>\n            <li>\n               <p>DoH alone.</p>\n            </li>\n            <li>\n               <p>None, which is treated as Do53.</p>\n            </li>\n         </ul>\n         <important>\n            <p> You can't change the protocol of an inbound endpoint directly from only Do53 to only DoH, or DoH-FIPS.\n\t\t\tThis is to prevent a sudden disruption to incoming traffic that\n\t\t\trelies on Do53. To change the protocol from Do53 to DoH, or DoH-FIPS, you must\n\t\t\tfirst enable both Do53 and DoH, or Do53 and DoH-FIPS, to make sure that all incoming traffic\n\t\t\thas transferred to using the DoH protocol, or DoH-FIPS, and then remove the\n\t\t\tDo53.</p>\n         </important>"
                     }
                 }
             },
@@ -8877,6 +8944,9 @@
                 "target": "com.amazonaws.route53resolver#UpdateResolverRuleResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
                 },
@@ -8970,7 +9040,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You have provided an invalid command. Supported values are <code>ADD</code>,\n\t\t\t<code>REMOVE</code>, or <code>REPLACE</code> a domain.</p>",
+                "smithy.api#documentation": "<p>You have provided an invalid command. If you ran the <code>UpdateFirewallDomains</code> request. supported values are <code>ADD</code>,\n\t\t\t<code>REMOVE</code>, or <code>REPLACE</code> a domain.</p>",
                 "smithy.api#error": "client"
             }
         }
