@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.24.0
 	github.com/aws/aws-sdk-go-v2/config v1.26.1
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.15.7
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/acm v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.25.5
@@ -14,7 +14,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/batch v1.30.5
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.42.4
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.32.5
-	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.19.5
+	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.19.6
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.20.5
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.35.5
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.32.0
@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.19.5
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.31.6
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.43.5
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.35.5
@@ -66,9 +66,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.35.5
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.35.5
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.20.5
-	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.23.5
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.47.5
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.41.5
+	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.24.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.47.6
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.41.6
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.25.5
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.25.5
 	github.com/aws/aws-sdk-go-v2/service/ses v1.19.5

@@ -1,8 +1,0 @@
-{
-    "id": "6e67e261-6739-4f7e-9d5a-0b4bfab007f2",
-    "type": "feature",
-    "description": "Add support for EKS Cluster Access Management.",
-    "modules": [
-        "service/eks"
-    ]
-}

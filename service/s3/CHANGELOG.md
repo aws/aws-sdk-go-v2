@@ -1,3 +1,7 @@
+# v1.47.6 (2023-12-18)
+
+* No change notes available for this release.
+
 # v1.47.5 (2023-12-08)
 
 * **Bug Fix**: Add non-vhostable buckets to request path when using legacy V1 endpoint resolver.

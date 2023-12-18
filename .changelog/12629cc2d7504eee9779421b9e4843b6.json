@@ -1,8 +1,0 @@
-{
-    "id": "12629cc2-d750-4eee-9779-421b9e4843b6",
-    "type": "feature",
-    "description": "Amazon Cognito now supports trigger versions that define the fields in the request sent to pre token generation Lambda triggers.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

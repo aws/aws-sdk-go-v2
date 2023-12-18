@@ -1,3 +1,18 @@
+# Release (2023-12-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.32.0](service/cognitoidentityprovider/CHANGELOG.md#v1320-2023-12-18)
+  * **Feature**: Amazon Cognito now supports trigger versions that define the fields in the request sent to pre token generation Lambda triggers.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.36.0](service/eks/CHANGELOG.md#v1360-2023-12-18)
+  * **Feature**: Add support for EKS Cluster Access Management.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.54.1](service/quicksight/CHANGELOG.md#v1541-2023-12-18)
+  * **Documentation**: A docs-only release to add missing entities to the API reference.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.24.0](service/route53resolver/CHANGELOG.md#v1240-2023-12-18)
+  * **Feature**: Add DOH protocols in resolver endpoints.
+
 # Release (2023-12-15)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.54.1 (2023-12-18)
+
+* **Documentation**: A docs-only release to add missing entities to the API reference.
+
 # v1.54.0 (2023-12-14)
 
 * **Feature**: Update Dashboard Links support; SingleAxisOptions support; Scatterplot Query limit support.
