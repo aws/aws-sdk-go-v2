@@ -1322,3 +1322,35 @@ client import path. This module can be retrieved by using `go get`.
 ```sh
 go get github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign
 ```
+
+### {{% alias service=S3 %}} Encryption Client
+
+Starting in {{% alias sdk-go %}}, the Amazon S3 encryption client is a separate
+module under AWS Crypto Tools. The latest version of the S3 encryption client
+for Go, 3.x, is now available at https://github.com/aws/amazon-s3-encryption-client-go.
+This module can be retrieved by using `go get`:
+
+```sh
+go get github.com/aws/amazon-s3-encryption-client-go/v3
+```
+
+The separate `EncryptionClient`
+([v1]({{< apiref v1="service/s3/s3crypto#EncryptionClient" >}}), [v2]({{< apiref v1="service/s3/s3crypto#EncryptionClientV2" >}}))
+and `DecryptionClient`
+([v1]({{< apiref v1="service/s3/s3crypto#DecryptionClient" >}}), [v2]({{< apiref v1="service/s3/s3crypto#DecryptionClientV2" >}}))
+APIs have been replaced with a single client,
+[S3EncryptionClientV3](https://pkg.go.dev/github.com/aws/amazon-s3-encryption-client-go/v3/client#S3EncryptionClientV3),
+that exposes both encrypt and decrypt functionality.
+
+Like other service clients in {{% alias sdk-go %}}, the operation APIs have
+been condensed:
+
+* The `GetObject`, `GetObjectRequest`, and `GetObjectWithContext` decryption
+  APIs are replaced by
+  [GetObject](https://pkg.go.dev/github.com/aws/amazon-s3-encryption-client-go/v3/client#S3EncryptionClientV3.GetObject).
+* The `PutObject`, `PutObjectRequest`, and `PutObjectWithContext` encryption
+  APIs are replaced by
+  [PutObject](https://pkg.go.dev/github.com/aws/amazon-s3-encryption-client-go/v3/client#S3EncryptionClientV3.PutObject).
+
+To learn how to migrate to the 3.x major version of the encryption client, see
+[this guide](https://docs.aws.amazon.com/amazon-s3-encryption-client/latest/developerguide/go-v3-migration.html).
