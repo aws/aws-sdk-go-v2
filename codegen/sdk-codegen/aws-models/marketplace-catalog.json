@@ -44,6 +44,9 @@
             "version": "2018-09-17",
             "operations": [
                 {
+                    "target": "com.amazonaws.marketplacecatalog#BatchDescribeEntities"
+                },
+                {
                     "target": "com.amazonaws.marketplacecatalog#CancelChangeSet"
                 },
                 {
@@ -1005,6 +1008,112 @@
                 }
             }
         },
+        "com.amazonaws.marketplacecatalog#BatchDescribeEntities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacecatalog#BatchDescribeEntitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacecatalog#BatchDescribeEntitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacecatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns metadata and content for multiple entities.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/BatchDescribeEntities",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#BatchDescribeEntitiesRequest": {
+            "type": "structure",
+            "members": {
+                "EntityRequestList": {
+                    "target": "com.amazonaws.marketplacecatalog#EntityRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of entity IDs and the catalogs the entities are present in.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#BatchDescribeEntitiesResponse": {
+            "type": "structure",
+            "members": {
+                "EntityDetails": {
+                    "target": "com.amazonaws.marketplacecatalog#EntityDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about each entity.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.marketplacecatalog#Errors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of errors returned, with <code>EntityId</code> as the key and\n                <code>errorDetail</code> as the value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#BatchDescribeErrorCodeString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 72
+                },
+                "smithy.api#pattern": "^[a-zA-Z_]+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#BatchDescribeErrorDetail": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.marketplacecatalog#BatchDescribeErrorCodeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code returned.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.marketplacecatalog#BatchDescribeErrorMessageContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains an error code and error message.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#BatchDescribeErrorMessageContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
         "com.amazonaws.marketplacecatalog#CancelChangeSet": {
             "type": "operation",
             "input": {
@@ -1102,7 +1211,7 @@
                 "ChangeType": {
                     "target": "com.amazonaws.marketplacecatalog#ChangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Change types are single string values that describe your intention for the change.\n            Each change type is unique for each <code>EntityType</code> provided in the change's\n            scope. For more information on change types available for single-AMI products, see\n                <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information about change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
+                        "smithy.api#documentation": "<p>Change types are single string values that describe your intention for the change.\n            Each change type is unique for each <code>EntityType</code> provided in the change's\n            scope. For more information about change types available for single-AMI products, see\n                <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products\">Working with single-AMI products</a>. Also, for more information about change\n            types available for container-based products, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products\">Working with container products</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2184,6 +2293,63 @@
                 "smithy.api#documentation": "<p>An entity contains data that describes your product, its supported features, and how\n            it can be used or launched by your customer. </p>"
             }
         },
+        "com.amazonaws.marketplacecatalog#EntityDetail": {
+            "type": "structure",
+            "members": {
+                "EntityType": {
+                    "target": "com.amazonaws.marketplacecatalog#EntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity type of the entity, in the format of\n            <code>EntityType@Version</code>.</p>"
+                    }
+                },
+                "EntityArn": {
+                    "target": "com.amazonaws.marketplacecatalog#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the entity.</p>"
+                    }
+                },
+                "EntityIdentifier": {
+                    "target": "com.amazonaws.marketplacecatalog#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entity, in the format of <code>EntityId@RevisionId</code>.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the entity was modified.</p>"
+                    }
+                },
+                "DetailsDocument": {
+                    "target": "com.amazonaws.marketplacecatalog#JsonDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains all the details of the entity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains metadata and details about the entity.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#EntityDetails": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.marketplacecatalog#EntityId"
+            },
+            "value": {
+                "target": "com.amazonaws.marketplacecatalog#EntityDetail"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#EntityId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
         "com.amazonaws.marketplacecatalog#EntityNameString": {
             "type": "string",
             "traits": {
@@ -2192,6 +2358,40 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^\\\\S+[\\\\S\\\\s]*$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#EntityRequest": {
+            "type": "structure",
+            "members": {
+                "Catalog": {
+                    "target": "com.amazonaws.marketplacecatalog#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the catalog the entity is present in. The only value at this time is\n                <code>AWSMarketplace</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entity.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains entity ID and the catalog in which the entity is present.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#EntityRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#EntityRequest"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#EntitySummary": {
@@ -2412,6 +2612,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.marketplacecatalog#ErrorDetail"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#Errors": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.marketplacecatalog#EntityId"
+            },
+            "value": {
+                "target": "com.amazonaws.marketplacecatalog#BatchDescribeErrorDetail"
             }
         },
         "com.amazonaws.marketplacecatalog#ExceptionMessageContent": {
@@ -2760,7 +2969,7 @@
                 "EntityType": {
                     "target": "com.amazonaws.marketplacecatalog#EntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of entities to\n            retrieve. Valid\n            values are: <code>ServerProduct</code>, <code>AmiProduct</code>,\n                <code>ContainerProduct</code>, <code>DataProduct</code>, <code>SaaSProduct</code>,\n                <code>ProcurementPolicy</code>, <code>Experience</code>, <code>Audience</code>,\n                <code>BrandingSettings</code>, <code>Offer</code>, <code>Seller</code>,\n                <code>ResaleAuthorization</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of entities to\n            retrieve. Valid\n            values are: <code>AmiProduct</code>, <code>ContainerProduct</code>,\n                <code>DataProduct</code>, <code>SaaSProduct</code>, <code>ProcurementPolicy</code>,\n                <code>Experience</code>, <code>Audience</code>, <code>BrandingSettings</code>,\n                <code>Offer</code>, <code>Seller</code>,\n            <code>ResaleAuthorization</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },

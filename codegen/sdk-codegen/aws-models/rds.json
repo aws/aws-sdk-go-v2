@@ -689,6 +689,9 @@
                     "target": "com.amazonaws.rds#DescribeDBProxyTargets"
                 },
                 {
+                    "target": "com.amazonaws.rds#DescribeDBRecommendations"
+                },
+                {
                     "target": "com.amazonaws.rds#DescribeDBSecurityGroups"
                 },
                 {
@@ -804,6 +807,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#ModifyDBProxyTargetGroup"
+                },
+                {
+                    "target": "com.amazonaws.rds#ModifyDBRecommendation"
                 },
                 {
                     "target": "com.amazonaws.rds#ModifyDBSnapshot"
@@ -3023,6 +3029,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.</p>"
+            }
+        },
+        "com.amazonaws.rds#ContextAttribute": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of <code>ContextAttribute</code>.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of <code>ContextAttribute</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The additional attributes of <code>RecommendedAction</code> data type.</p>"
+            }
+        },
+        "com.amazonaws.rds#ContextAttributeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#ContextAttribute"
             }
         },
         "com.amazonaws.rds#CopyDBClusterParameterGroup": {
@@ -10403,6 +10435,171 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.rds#DBRecommendation": {
+            "type": "structure",
+            "members": {
+                "RecommendationId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the recommendation.</p>"
+                    }
+                },
+                "TypeId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the type of recommendation. This value determines how the description is rendered.</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity level of the recommendation. The severity level can help you decide the \n            urgency with which to address the recommendation.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>high</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>medium</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>low</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>informational</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the RDS resource associated with the recommendation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the recommendation.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>active</code> - The recommendations which are ready for you to apply.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code> - The applied or scheduled recommendations which are in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resolved</code> - The recommendations which are completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>dismissed</code> - The recommendations that you dismissed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the recommendation was created. For example, <code>2023-09-28T01:13:53.931000+00:00</code>.</p>"
+                    }
+                },
+                "UpdatedTime": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the recommendation was last updated.</p>"
+                    }
+                },
+                "Detection": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the issue identified for this recommendation. The description might contain markdown.</p>"
+                    }
+                },
+                "Recommendation": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the recommendation to resolve an issue. The description might contain markdown.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description of the recommendation. The description might contain markdown.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why this recommendation was created. The information might contain markdown.</p>"
+                    }
+                },
+                "RecommendedActions": {
+                    "target": "com.amazonaws.rds#RecommendedActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of recommended actions.</p>"
+                    }
+                },
+                "Category": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the recommendation.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>performance efficiency</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>security</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>reliability</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cost optimization</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>operational excellence</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sustainability</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service that generated the recommendations.</p>"
+                    }
+                },
+                "TypeDetection": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the recommendation type. The description might contain markdown.</p>"
+                    }
+                },
+                "TypeRecommendation": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description that summarizes the recommendation to fix all the issues of the recommendation type. The description might contain markdown.</p>"
+                    }
+                },
+                "Impact": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description that explains the possible impact of an issue.</p>"
+                    }
+                },
+                "AdditionalInfo": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the recommendation. The information might contain markdown.</p>"
+                    }
+                },
+                "Links": {
+                    "target": "com.amazonaws.rds#DocLinkList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A link to documentation that provides additional information about the recommendation.</p>"
+                    }
+                },
+                "IssueDetails": {
+                    "target": "com.amazonaws.rds#IssueDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the issue that caused the recommendation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The recommendation for your DB instances, DB clusters, and DB parameter groups.</p>"
+            }
+        },
+        "com.amazonaws.rds#DBRecommendationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#DBRecommendation"
+            }
+        },
+        "com.amazonaws.rds#DBRecommendationMessage": {
+            "type": "structure",
+            "members": {
+                "DBRecommendation": {
+                    "target": "com.amazonaws.rds#DBRecommendation"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rds#DBRecommendationsMessage": {
+            "type": "structure",
+            "members": {
+                "DBRecommendations": {
+                    "target": "com.amazonaws.rds#DBRecommendationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of recommendations which is returned from <code>DescribeDBRecommendations</code> API request.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>DBRecommendationsMessage</code> request.  This token can be used \n            later in a <code>DescribeDBRecomendations</code> request.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.rds#DBSecurityGroup": {
             "type": "structure",
             "members": {
@@ -15033,6 +15230,68 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.rds#DescribeDBRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#DescribeDBRecommendationsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#DBRecommendationsMessage"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the recommendations to resolve the issues for your DB instances, DB clusters, and DB parameter groups.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "DBRecommendations",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.rds#DescribeDBRecommendationsMessage": {
+            "type": "structure",
+            "members": {
+                "LastUpdatedAfter": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter to include only the recommendations that were updated after this specified time.</p>"
+                    }
+                },
+                "LastUpdatedBefore": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter to include only the recommendations that were updated before this specified time.</p>"
+                    }
+                },
+                "Locale": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language that you choose to return the list of recommendations.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>en</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>en_UK</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>de</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>es</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>fr</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>it</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ja</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ko</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pt_BR</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>zh_TW</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>zh_CN</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.rds#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that specifies one or more recommendations to describe.</p>\n         <p>Supported Filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>recommendation-id</code> - Accepts a list of recommendation identifiers. The results list\n                only includes the recommendations whose identifier is one of the specified filter values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>status</code> - Accepts a list of recommendation statuses.</p>\n               <p>Valid values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>active</code> - The recommendations which are ready for you to apply.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>pending</code> - The applied or scheduled recommendations which are in progress.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>resolved</code> - The recommendations which are completed.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>dismissed</code> - The recommendations that you dismissed.</p>\n                  </li>\n               </ul>\n               <p>The results list only includes the recommendations whose status is one of the specified filter values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>severity</code> - Accepts a list of recommendation severities. The results list only includes \n                the recommendations whose severity is one of the specified filter values.</p>\n               <p>Valid values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>high</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>medium</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>low</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>informational</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>type-id</code> - Accepts a list of recommendation type identifiers. The results list only\n            includes the recommendations whose type is one of the specified filter values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>dbi-resource-id</code> - Accepts a list of database resource identifiers. The results list only\n                includes the recommendations that generated for the specified databases.</p>\n            </li>\n            <li>\n               <p>\n                  <code>cluster-resource-id</code> - Accepts a list of cluster resource identifiers. The results list only\n                includes the recommendations that generated for the specified clusters.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pg-arn</code> - Accepts a list of parameter group ARNs. The results list only\n                includes the recommendations that generated for the specified parameter groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>cluster-pg-arn</code> - Accepts a list of cluster parameter group ARNs. The results list only\n                includes the recommendations that generated for the specified cluster parameter groups.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of recommendations to include in the response. If more records exist than the \n            specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so \n            that you can retrieve the remaining results.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>DescribeDBRecommendations</code> request. \n            If this parameter is specified, the response includes only records beyond the marker, up to the \n            value specified by <code>MaxRecords</code>.\n           </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.rds#DescribeDBSecurityGroups": {
             "type": "operation",
             "input": {
@@ -17372,6 +17631,32 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.rds#DocLink": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text with the link to documentation for the recommendation.</p>"
+                    }
+                },
+                "Url": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for the documentation for the recommendation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A link to documentation that provides additional information for a recommendation.</p>"
+            }
+        },
+        "com.amazonaws.rds#DocLinkList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#DocLink"
+            }
+        },
         "com.amazonaws.rds#DomainMembership": {
             "type": "structure",
             "members": {
@@ -18384,7 +18669,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter name and value pair that is used to return a more specific list of results \n            from a describe operation. Filters can be used to match a set of resources by specific \n            criteria, such as IDs. The filters supported by a describe operation are documented \n            with the describe operation.</p>\n         <note>\n            <p>Currently, wildcards are not supported in filters.</p>\n         </note>\n         <p>The following actions can be filtered:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DescribeDBClusterBacktracks</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBClusterEndpoints</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBClusters</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBInstances</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePendingMaintenanceActions</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A filter name and value pair that is used to return a more specific list of results \n            from a describe operation. Filters can be used to match a set of resources by specific \n            criteria, such as IDs. The filters supported by a describe operation are documented \n            with the describe operation.</p>\n         <note>\n            <p>Currently, wildcards are not supported in filters.</p>\n         </note>\n         <p>The following actions can be filtered:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DescribeDBClusterBacktracks</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBClusterEndpoints</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBClusters</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBInstances</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBRecommendations</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePendingMaintenanceActions</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.rds#FilterList": {
@@ -19536,6 +19821,20 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.rds#IssueDetails": {
+            "type": "structure",
+            "members": {
+                "PerformanceIssueDetails": {
+                    "target": "com.amazonaws.rds#PerformanceIssueDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description of the issue when the recommendation category is <code>performance</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of an issue with your DB instances, DB clusters, and DB parameter groups.</p>"
+            }
+        },
         "com.amazonaws.rds#KMSKeyNotAccessibleFault": {
             "type": "structure",
             "members": {
@@ -19743,6 +20042,84 @@
                     "min": 20,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.rds#Metric": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a metric.</p>"
+                    }
+                },
+                "References": {
+                    "target": "com.amazonaws.rds#MetricReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of metric references (thresholds).</p>"
+                    }
+                },
+                "StatisticsDetails": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of different statistics for a metric. The description might contain markdown.</p>"
+                    }
+                },
+                "MetricQuery": {
+                    "target": "com.amazonaws.rds#MetricQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query to retrieve metric data points.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The representation of a metric.</p>"
+            }
+        },
+        "com.amazonaws.rds#MetricList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#Metric"
+            }
+        },
+        "com.amazonaws.rds#MetricQuery": {
+            "type": "structure",
+            "members": {
+                "PerformanceInsightsMetricQuery": {
+                    "target": "com.amazonaws.rds#PerformanceInsightsMetricQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Performance Insights query that you can use to retrieve Performance Insights metric data points.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The query to retrieve metric data points.</p>"
+            }
+        },
+        "com.amazonaws.rds#MetricReference": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metric reference.</p>"
+                    }
+                },
+                "ReferenceDetails": {
+                    "target": "com.amazonaws.rds#ReferenceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of a performance issue.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reference (threshold) for a metric.</p>"
+            }
+        },
+        "com.amazonaws.rds#MetricReferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#MetricReference"
             }
         },
         "com.amazonaws.rds#MinimumEngineVersionPerAllowedValue": {
@@ -21525,6 +21902,52 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rds#ModifyDBRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#ModifyDBRecommendationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#DBRecommendationMessage"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the recommendation status and recommended action status for the specified recommendation.</p>"
+            }
+        },
+        "com.amazonaws.rds#ModifyDBRecommendationMessage": {
+            "type": "structure",
+            "members": {
+                "RecommendationId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The identifier of the recommendation to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Locale": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of the modified recommendation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation status to update.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>active</p>\n            </li>\n            <li>\n               <p>dismissed</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "RecommendedActionUpdates": {
+                    "target": "com.amazonaws.rds#RecommendedActionUpdateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of recommended action status to update. You can update multiple recommended actions at one time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#ModifyDBSnapshot": {
@@ -23467,6 +23890,84 @@
                 "smithy.api#documentation": "<p>This data type is used as a response element in the <code>ModifyDBInstance</code> operation and \n          contains changes that will be applied during the next maintenance window.</p>"
             }
         },
+        "com.amazonaws.rds#PerformanceInsightsMetricDimensionGroup": {
+            "type": "structure",
+            "members": {
+                "Dimensions": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of specific dimensions from a dimension group. If this list isn't included, then all of the dimensions in the group were requested, or are present in the response.</p>"
+                    }
+                },
+                "Group": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The available dimension groups for Performance Insights metric type.</p>"
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.rds#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to fetch for this dimension group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A logical grouping of Performance Insights metrics for a related subject area. For example, the <code>db.sql</code> dimension group consists of the following dimensions: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>db.sql.id</code> - The hash of a running SQL statement, generated by Performance Insights.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql.db_id</code> - Either the SQL ID generated by the database engine, or a value generated by Performance Insights that begins with <code>pi-</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql.statement</code> - The full text of the SQL statement that is running, for example, <code>SELECT * FROM employees</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql_tokenized.id</code> - The hash of the SQL digest generated by Performance Insights.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, only the first 500 bytes are returned.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.rds#PerformanceInsightsMetricQuery": {
+            "type": "structure",
+            "members": {
+                "GroupBy": {
+                    "target": "com.amazonaws.rds#PerformanceInsightsMetricDimensionGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A specification for how to aggregate the data points from a query result. You must\n           specify a valid dimension group. Performance Insights will return all of the dimensions within that group,\n           unless you provide the names of specific dimensions within that group. You can also request\n           that Performance Insights return a limited number of values for a dimension.</p>"
+                    }
+                },
+                "Metric": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - A scaled representation of the number of active sessions for the \n                    database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - The raw number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                    operating system counters</a> in the <i>Amazon Aurora User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> \n            and <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than the \n            internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the\n            scaled values, <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less than\n            <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single Performance Insights metric query to process. You must provide the metric to the query. \n            If other parameters aren't specified, Performance Insights returns all data points for the \n            specified metric. Optionally, you can request the data points to be aggregated by dimension \n            group (<code>GroupBy</code>) and return only those data points that match your criteria (<code>Filter</code>).</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be a valid Performance Insights query.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.rds#PerformanceIssueDetails": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the performance issue started.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the performance issue stopped.</p>"
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.rds#MetricList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics that are relevant to the performance issue.</p>"
+                    }
+                },
+                "Analysis": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis of the performance issue. The information might contain markdown.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the performance issue.</p>"
+            }
+        },
         "com.amazonaws.rds#PointInTimeRestoreNotEnabledFault": {
             "type": "structure",
             "members": {
@@ -23976,6 +24477,130 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.rds#RecommendedAction": {
+            "type": "structure",
+            "members": {
+                "ActionId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the recommended action.</p>"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description to summarize the action. The description might contain markdown.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description of the action. The description might contain markdown.</p>"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An API operation for the action.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.rds#RecommendedActionParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for the API operation.</p>"
+                    }
+                },
+                "ApplyModes": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The methods to apply the recommended action.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>manual</code> - The action requires you to resolve the recommendation manually.</p>\n            </li>\n            <li>\n               <p>\n                  <code>immediately</code> - The action is applied immediately.</p>\n            </li>\n            <li>\n               <p>\n                  <code>next-maintainance-window</code> - The action is applied during the next scheduled maintainance.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the action.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ready</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>applied</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>scheduled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>resolved</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "IssueDetails": {
+                    "target": "com.amazonaws.rds#IssueDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the issue.</p>"
+                    }
+                },
+                "ContextAttributes": {
+                    "target": "com.amazonaws.rds#ContextAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supporting attributes to explain the recommended action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The recommended actions to apply to resolve the issues associated with your DB instances, DB clusters, and DB parameter groups.</p>"
+            }
+        },
+        "com.amazonaws.rds#RecommendedActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#RecommendedAction"
+            }
+        },
+        "com.amazonaws.rds#RecommendedActionParameter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the parameter to use with the <code>RecommendedAction</code> API operation.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the parameter to use with the <code>RecommendedAction</code> API operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single parameter to use with the <code>RecommendedAction</code> API operation to apply the action.</p>"
+            }
+        },
+        "com.amazonaws.rds#RecommendedActionParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#RecommendedActionParameter"
+            }
+        },
+        "com.amazonaws.rds#RecommendedActionUpdate": {
+            "type": "structure",
+            "members": {
+                "ActionId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A unique identifier of the updated recommendation action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the updated recommendation action.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>applied</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>scheduled</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The recommended status to update for the specified recommendation action ID.</p>"
+            }
+        },
+        "com.amazonaws.rds#RecommendedActionUpdateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#RecommendedActionUpdate"
+            }
+        },
         "com.amazonaws.rds#RecurringCharge": {
             "type": "structure",
             "members": {
@@ -24003,6 +24628,20 @@
                 "traits": {
                     "smithy.api#xmlName": "RecurringCharge"
                 }
+            }
+        },
+        "com.amazonaws.rds#ReferenceDetails": {
+            "type": "structure",
+            "members": {
+                "ScalarReferenceDetails": {
+                    "target": "com.amazonaws.rds#ScalarReferenceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric reference details when the reference is a scalar.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reference details of a metric.</p>"
             }
         },
         "com.amazonaws.rds#RegisterDBProxyTargets": {
@@ -27340,6 +27979,20 @@
                 "smithy.api#documentation": "<p>The SNS topic ARN does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.rds#ScalarReferenceDetails": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.rds#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a scalar reference.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metric reference details when the reference is a scalar.</p>"
             }
         },
         "com.amazonaws.rds#ScalingConfiguration": {
