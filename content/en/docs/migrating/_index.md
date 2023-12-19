@@ -899,6 +899,96 @@ to wait for a {{% alias service=S3 %}} Bucket to exist, you must construct a `Bu
 [s3.BucketExistsWaiter]({{< apiref "service/s3#BucketExistsWaiter" >}}). The `s3.BucketExistsWaiter` provides a
 `Wait` method which can be used to wait for a bucket to become available.
 
+### Presigned Requests
+
+The V1 SDK technically supported presigning _any_ AWS SDK operation, however,
+this does not accurately represent what is actually supported at the service
+level (and in reality most AWS service operations do not support presigning).
+
+{{% alias sdk-go %}} resolves this by exposing specific `PresignClient`
+implementations in service packages with specific APIs for supported
+presignable operations.
+
+Uses of [Presign]({{< apiref v1="aws/request#Request.Presign" >}}) and
+[PresignRequest]({{< apiref v1="aws/request#Request.PresignRequest" >}}) must
+be converted to use service-specific presigning clients.
+
+The following example shows how to migrate presigning of an S3 GetObject
+request:
+
+```go
+// V1
+
+import (
+	"fmt"
+	"time"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
+)
+
+func main() {
+	sess := session.Must(session.NewSessionWithOptions(session.Options{
+		SharedConfigState: session.SharedConfigEnable,
+	}))
+
+	svc := s3.New(sess)
+	req, _ := svc.GetObjectRequest(&s3.GetObjectInput{
+		Bucket: aws.String("bucket"),
+		Key:    aws.String("key"),
+	})
+
+	// pattern 1
+	url1, err := req.Presign(20 * time.Minute)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(url1)
+
+	// pattern 2
+	url2, header, err := req.PresignRequest(20 * time.Minute)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(url2, header)
+}
+```
+
+```go
+// V2
+
+import (
+	"context"
+	"fmt"
+	"time"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
+)
+
+func main() {
+	cfg, err := config.LoadDefaultConfig(context.Background())
+	if err != nil {
+		panic(err)
+	}
+
+	svc := s3.NewPresignClient(s3.NewFromConfig(cfg))
+	req, err := svc.PresignGetObject(context.Background(), &s3.GetObjectInput{
+		Bucket: aws.String("bucket"),
+		Key:    aws.String("key"),
+	}, func(o *s3.PresignOptions) {
+		o.Expires = 20 * time.Minute
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(req.Method, req.URL, req.SignedHeader)
+}
+```
+
 ## Request customization
 
 The monolithic [request.Request]({{< apiref v1="aws/request#Request" >}}) API
