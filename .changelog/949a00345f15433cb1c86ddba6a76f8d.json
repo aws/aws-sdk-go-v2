@@ -1,8 +1,0 @@
-{
-    "id": "949a0034-5f15-433c-b1c8-6ddba6a76f8d",
-    "type": "feature",
-    "description": "This release adds additional configurations on GraphQL APIs for limits on query depth, resolver count, and introspection",
-    "modules": [
-        "service/appsync"
-    ]
-}

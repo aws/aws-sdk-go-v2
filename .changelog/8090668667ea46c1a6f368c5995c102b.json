@@ -1,8 +1,0 @@
-{
-    "id": "80906686-67ea-46c1-a6f3-68c5995c102b",
-    "type": "feature",
-    "description": "Added support for FSx for OpenZFS on-demand data replication across AWS accounts and/or regions.Added the IncludeShared attribute for DescribeSnapshots.Added the CopyStrategy attribute for OpenZFSVolumeConfiguration.",
-    "modules": [
-        "service/fsx"
-    ]
-}

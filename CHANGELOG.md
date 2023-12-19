@@ -1,3 +1,19 @@
+# Release (2023-12-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.27.0](service/appsync/CHANGELOG.md#v1270-2023-12-19)
+  * **Feature**: This release adds additional configurations on GraphQL APIs for limits on query depth, resolver count, and introspection
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.21.0](service/chimesdkmeetings/CHANGELOG.md#v1210-2023-12-19)
+  * **Feature**: Add meeting features to specify a maximum camera resolution, a maximum content sharing resolution, and a maximum number of attendees for a given meeting.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.142.0](service/ec2/CHANGELOG.md#v11420-2023-12-19)
+  * **Feature**: Provision BYOIPv4 address ranges and advertise them by specifying the network border groups option in Los Angeles, Phoenix and Dallas AWS Local Zones.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.40.0](service/fsx/CHANGELOG.md#v1400-2023-12-19)
+  * **Feature**: Added support for FSx for OpenZFS on-demand data replication across AWS accounts and/or regions.Added the IncludeShared attribute for DescribeSnapshots.Added the CopyStrategy attribute for OpenZFSVolumeConfiguration.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.23.0](service/marketplacecatalog/CHANGELOG.md#v1230-2023-12-19)
+  * **Feature**: AWS Marketplace now supports a new API, BatchDescribeEntities, which returns metadata and content for multiple entities.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.65.0](service/rds/CHANGELOG.md#v1650-2023-12-19)
+  * **Feature**: RDS - The release adds two new APIs: DescribeDBRecommendations and ModifyDBRecommendation
+
 # Release (2023-12-18)
 
 ## General Highlights

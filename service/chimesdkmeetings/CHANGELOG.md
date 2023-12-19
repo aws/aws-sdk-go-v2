@@ -1,3 +1,7 @@
+# v1.21.0 (2023-12-19)
+
+* **Feature**: Add meeting features to specify a maximum camera resolution, a maximum content sharing resolution, and a maximum number of attendees for a given meeting.
+
 # v1.20.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

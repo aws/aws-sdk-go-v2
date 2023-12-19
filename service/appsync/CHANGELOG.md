@@ -1,3 +1,7 @@
+# v1.27.0 (2023-12-19)
+
+* **Feature**: This release adds additional configurations on GraphQL APIs for limits on query depth, resolver count, and introspection
+
 # v1.26.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

@@ -1,3 +1,7 @@
+# v1.23.0 (2023-12-19)
+
+* **Feature**: AWS Marketplace now supports a new API, BatchDescribeEntities, which returns metadata and content for multiple entities.
+
 # v1.22.4 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

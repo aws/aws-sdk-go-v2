@@ -1,3 +1,7 @@
+# v1.65.0 (2023-12-19)
+
+* **Feature**: RDS - The release adds two new APIs: DescribeDBRecommendations and ModifyDBRecommendation
+
 # v1.64.6 (2023-12-15)
 
 * **Documentation**: Updates Amazon RDS documentation by adding code examples
