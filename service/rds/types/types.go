@@ -409,6 +409,18 @@ type ConnectionPoolConfigurationInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The additional attributes of RecommendedAction data type.
+type ContextAttribute struct {
+
+	// The key of ContextAttribute .
+	Key *string
+
+	// The value of ContextAttribute .
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // A value that indicates the AMI information.
 type CustomDBEngineVersionAMI struct {
 
@@ -2145,6 +2157,98 @@ type DBProxyTargetGroup struct {
 	noSmithyDocumentSerde
 }
 
+// The recommendation for your DB instances, DB clusters, and DB parameter groups.
+type DBRecommendation struct {
+
+	// Additional information about the recommendation. The information might contain
+	// markdown.
+	AdditionalInfo *string
+
+	// The category of the recommendation. Valid values:
+	//   - performance efficiency
+	//   - security
+	//   - reliability
+	//   - cost optimization
+	//   - operational excellence
+	//   - sustainability
+	Category *string
+
+	// The time when the recommendation was created. For example,
+	// 2023-09-28T01:13:53.931000+00:00 .
+	CreatedTime *time.Time
+
+	// A detailed description of the recommendation. The description might contain
+	// markdown.
+	Description *string
+
+	// A short description of the issue identified for this recommendation. The
+	// description might contain markdown.
+	Detection *string
+
+	// A short description that explains the possible impact of an issue.
+	Impact *string
+
+	// Details of the issue that caused the recommendation.
+	IssueDetails *IssueDetails
+
+	// A link to documentation that provides additional information about the
+	// recommendation.
+	Links []DocLink
+
+	// The reason why this recommendation was created. The information might contain
+	// markdown.
+	Reason *string
+
+	// A short description of the recommendation to resolve an issue. The description
+	// might contain markdown.
+	Recommendation *string
+
+	// The unique identifier of the recommendation.
+	RecommendationId *string
+
+	// A list of recommended actions.
+	RecommendedActions []RecommendedAction
+
+	// The Amazon Resource Name (ARN) of the RDS resource associated with the
+	// recommendation.
+	ResourceArn *string
+
+	// The severity level of the recommendation. The severity level can help you
+	// decide the urgency with which to address the recommendation. Valid values:
+	//   - high
+	//   - medium
+	//   - low
+	//   - informational
+	Severity *string
+
+	// The Amazon Web Services service that generated the recommendations.
+	Source *string
+
+	// The current status of the recommendation. Valid values:
+	//   - active - The recommendations which are ready for you to apply.
+	//   - pending - The applied or scheduled recommendations which are in progress.
+	//   - resolved - The recommendations which are completed.
+	//   - dismissed - The recommendations that you dismissed.
+	Status *string
+
+	// A short description of the recommendation type. The description might contain
+	// markdown.
+	TypeDetection *string
+
+	// A value that indicates the type of recommendation. This value determines how
+	// the description is rendered.
+	TypeId *string
+
+	// A short description that summarizes the recommendation to fix all the issues of
+	// the recommendation type. The description might contain markdown.
+	TypeRecommendation *string
+
+	// The time when the recommendation was last updated.
+	UpdatedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains the details for an Amazon RDS DB security group. This data type is
 // used as a response element in the DescribeDBSecurityGroups action.
 type DBSecurityGroup struct {
@@ -2468,6 +2572,19 @@ type DescribeDBLogFilesDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A link to documentation that provides additional information for a
+// recommendation.
+type DocLink struct {
+
+	// The text with the link to documentation for the recommendation.
+	Text *string
+
+	// The URL for the documentation for the recommendation.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
 // An Active Directory Domain membership record associated with the DB instance or
 // cluster.
 type DomainMembership struct {
@@ -2776,6 +2893,7 @@ type FailoverState struct {
 //   - DescribeDBClusterEndpoints
 //   - DescribeDBClusters
 //   - DescribeDBInstances
+//   - DescribeDBRecommendations
 //   - DescribePendingMaintenanceActions
 type Filter struct {
 
@@ -2930,6 +3048,17 @@ type IPRange struct {
 	noSmithyDocumentSerde
 }
 
+// The details of an issue with your DB instances, DB clusters, and DB parameter
+// groups.
+type IssueDetails struct {
+
+	// A detailed description of the issue when the recommendation category is
+	// performance .
+	PerformanceIssueDetails *PerformanceIssueDetails
+
+	noSmithyDocumentSerde
+}
+
 // Contains the secret managed by RDS in Amazon Web Services Secrets Manager for
 // the master user password. For more information, see Password management with
 // Amazon Web Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
@@ -2956,6 +3085,47 @@ type MasterUserSecret struct {
 	//   automatic management of database credentials, and then modify the DB instance
 	//   again to turn on automatic management of database credentials.
 	SecretStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// The representation of a metric.
+type Metric struct {
+
+	// The query to retrieve metric data points.
+	MetricQuery *MetricQuery
+
+	// The name of a metric.
+	Name *string
+
+	// A list of metric references (thresholds).
+	References []MetricReference
+
+	// The details of different statistics for a metric. The description might contain
+	// markdown.
+	StatisticsDetails *string
+
+	noSmithyDocumentSerde
+}
+
+// The query to retrieve metric data points.
+type MetricQuery struct {
+
+	// The Performance Insights query that you can use to retrieve Performance
+	// Insights metric data points.
+	PerformanceInsightsMetricQuery *PerformanceInsightsMetricQuery
+
+	noSmithyDocumentSerde
+}
+
+// The reference (threshold) for a metric.
+type MetricReference struct {
+
+	// The name of the metric reference.
+	Name *string
+
+	// The details of a performance issue.
+	ReferenceDetails *ReferenceDetails
 
 	noSmithyDocumentSerde
 }
@@ -3564,6 +3734,86 @@ type PendingModifiedValues struct {
 	noSmithyDocumentSerde
 }
 
+// A logical grouping of Performance Insights metrics for a related subject area.
+// For example, the db.sql dimension group consists of the following dimensions:
+//   - db.sql.id - The hash of a running SQL statement, generated by Performance
+//     Insights.
+//   - db.sql.db_id - Either the SQL ID generated by the database engine, or a
+//     value generated by Performance Insights that begins with pi- .
+//   - db.sql.statement - The full text of the SQL statement that is running, for
+//     example, SELECT * FROM employees .
+//   - db.sql_tokenized.id - The hash of the SQL digest generated by Performance
+//     Insights.
+//
+// Each response element returns a maximum of 500 bytes. For larger elements, such
+// as SQL statements, only the first 500 bytes are returned.
+type PerformanceInsightsMetricDimensionGroup struct {
+
+	// A list of specific dimensions from a dimension group. If this list isn't
+	// included, then all of the dimensions in the group were requested, or are present
+	// in the response.
+	Dimensions []string
+
+	// The available dimension groups for Performance Insights metric type.
+	Group *string
+
+	// The maximum number of items to fetch for this dimension group.
+	Limit *int32
+
+	noSmithyDocumentSerde
+}
+
+// A single Performance Insights metric query to process. You must provide the
+// metric to the query. If other parameters aren't specified, Performance Insights
+// returns all data points for the specified metric. Optionally, you can request
+// the data points to be aggregated by dimension group ( GroupBy ) and return only
+// those data points that match your criteria ( Filter ). Constraints:
+//   - Must be a valid Performance Insights query.
+type PerformanceInsightsMetricQuery struct {
+
+	// A specification for how to aggregate the data points from a query result. You
+	// must specify a valid dimension group. Performance Insights will return all of
+	// the dimensions within that group, unless you provide the names of specific
+	// dimensions within that group. You can also request that Performance Insights
+	// return a limited number of values for a dimension.
+	GroupBy *PerformanceInsightsMetricDimensionGroup
+
+	// The name of a Performance Insights metric to be measured. Valid Values:
+	//   - db.load.avg - A scaled representation of the number of active sessions for
+	//   the database engine.
+	//   - db.sampledload.avg - The raw number of active sessions for the database
+	//   engine.
+	//   - The counter metrics listed in Performance Insights operating system counters (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS)
+	//   in the Amazon Aurora User Guide.
+	// If the number of active sessions is less than an internal Performance Insights
+	// threshold, db.load.avg and db.sampledload.avg are the same value. If the number
+	// of active sessions is greater than the internal threshold, Performance Insights
+	// samples the active sessions, with db.load.avg showing the scaled values,
+	// db.sampledload.avg showing the raw values, and db.sampledload.avg less than
+	// db.load.avg . For most use cases, you can query db.load.avg only.
+	Metric *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of the performance issue.
+type PerformanceIssueDetails struct {
+
+	// The analysis of the performance issue. The information might contain markdown.
+	Analysis *string
+
+	// The time when the performance issue stopped.
+	EndTime *time.Time
+
+	// The metrics that are relevant to the performance issue.
+	Metrics []Metric
+
+	// The time when the performance issue started.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains the processor features of a DB instance class. To specify the number
 // of CPU cores, use the coreCount feature name for the Name parameter. To specify
 // the number of threads per core, use the threadsPerCore feature name for the Name
@@ -3636,6 +3886,80 @@ type RdsCustomClusterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The recommended actions to apply to resolve the issues associated with your DB
+// instances, DB clusters, and DB parameter groups.
+type RecommendedAction struct {
+
+	// The unique identifier of the recommended action.
+	ActionId *string
+
+	// The methods to apply the recommended action. Valid values:
+	//   - manual - The action requires you to resolve the recommendation manually.
+	//   - immediately - The action is applied immediately.
+	//   - next-maintainance-window - The action is applied during the next scheduled
+	//   maintainance.
+	ApplyModes []string
+
+	// The supporting attributes to explain the recommended action.
+	ContextAttributes []ContextAttribute
+
+	// A detailed description of the action. The description might contain markdown.
+	Description *string
+
+	// The details of the issue.
+	IssueDetails *IssueDetails
+
+	// An API operation for the action.
+	Operation *string
+
+	// The parameters for the API operation.
+	Parameters []RecommendedActionParameter
+
+	// The status of the action.
+	//   - ready
+	//   - applied
+	//   - scheduled
+	//   - resolved
+	Status *string
+
+	// A short description to summarize the action. The description might contain
+	// markdown.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// A single parameter to use with the RecommendedAction API operation to apply the
+// action.
+type RecommendedActionParameter struct {
+
+	// The key of the parameter to use with the RecommendedAction API operation.
+	Key *string
+
+	// The value of the parameter to use with the RecommendedAction API operation.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The recommended status to update for the specified recommendation action ID.
+type RecommendedActionUpdate struct {
+
+	// A unique identifier of the updated recommendation action.
+	//
+	// This member is required.
+	ActionId *string
+
+	// The status of the updated recommendation action.
+	//   - applied
+	//   - scheduled
+	//
+	// This member is required.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // This data type is used as a response element in the DescribeReservedDBInstances
 // and DescribeReservedDBInstancesOfferings actions.
 type RecurringCharge struct {
@@ -3645,6 +3969,15 @@ type RecurringCharge struct {
 
 	// The frequency of the recurring charge.
 	RecurringChargeFrequency *string
+
+	noSmithyDocumentSerde
+}
+
+// The reference details of a metric.
+type ReferenceDetails struct {
+
+	// The metric reference details when the reference is a scalar.
+	ScalarReferenceDetails *ScalarReferenceDetails
 
 	noSmithyDocumentSerde
 }
@@ -3764,6 +4097,15 @@ type RestoreWindow struct {
 
 	// The latest time you can restore an instance to.
 	LatestTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The metric reference details when the reference is a scalar.
+type ScalarReferenceDetails struct {
+
+	// The value of a scalar reference.
+	Value *float64
 
 	noSmithyDocumentSerde
 }

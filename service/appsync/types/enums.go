@@ -293,6 +293,25 @@ func (FieldLogLevel) Values() []FieldLogLevel {
 	}
 }
 
+type GraphQLApiIntrospectionConfig string
+
+// Enum values for GraphQLApiIntrospectionConfig
+const (
+	GraphQLApiIntrospectionConfigEnabled  GraphQLApiIntrospectionConfig = "ENABLED"
+	GraphQLApiIntrospectionConfigDisabled GraphQLApiIntrospectionConfig = "DISABLED"
+)
+
+// Values returns all known values for GraphQLApiIntrospectionConfig. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (GraphQLApiIntrospectionConfig) Values() []GraphQLApiIntrospectionConfig {
+	return []GraphQLApiIntrospectionConfig{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type GraphQLApiType string
 
 // Enum values for GraphQLApiType

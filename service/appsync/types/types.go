@@ -618,6 +618,14 @@ type GraphqlApi struct {
 	// The DNS records for the API.
 	Dns map[string]string
 
+	// Sets the value of the GraphQL API to enable ( ENABLED ) or disable ( DISABLED )
+	// introspection. If no value is provided, the introspection configuration will be
+	// set to ENABLED by default. This field will produce an error if the operation
+	// attempts to use the introspection feature while this field is disabled. For more
+	// information about introspection, see GraphQL introspection (https://graphql.org/learn/introspection/)
+	// .
+	IntrospectionConfig GraphQLApiIntrospectionConfig
+
 	// Configuration for Lambda function authorization.
 	LambdaAuthorizerConfig *LambdaAuthorizerConfig
 
@@ -642,6 +650,21 @@ type GraphqlApi struct {
 	// The owner contact information for an API resource. This field accepts any
 	// string input with a length of 0 - 256 characters.
 	OwnerContact *string
+
+	// The maximum depth a query can have in a single request. Depth refers to the
+	// amount of nested levels allowed in the body of query. The default value is 0
+	// (or unspecified), which indicates there's no depth limit. If you set a limit, it
+	// can be between 1 and 75 nested levels. This field will produce a limit error if
+	// the operation falls out of bounds. Note that fields can still be set to nullable
+	// or non-nullable. If a non-nullable field produces an error, the error will be
+	// thrown upwards to the first nullable field available.
+	QueryDepthLimit int32
+
+	// The maximum number of resolvers that can be invoked in a single request. The
+	// default value is 0 (or unspecified), which will set the limit to 10000 . When
+	// specified, the limit value can be between 1 and 10000 . This field will produce
+	// a limit error if the operation falls out of bounds.
+	ResolverCountLimit int32
 
 	// The tags.
 	Tags map[string]string

@@ -52,7 +52,8 @@ type CreateMeetingInput struct {
 	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 ,
 	// ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 ,
 	// eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 .
-	// Available values in AWS GovCloud (US) Regions: us-gov-east-1 , us-gov-west-1 .
+	// Available values in Amazon Web Services GovCloud (US) Regions: us-gov-east-1 ,
+	// us-gov-west-1 .
 	//
 	// This member is required.
 	MediaRegion *string
@@ -82,8 +83,8 @@ type CreateMeetingInput struct {
 	//   - Each resource can have up to 50 tags. For other limits, see Tag Naming and
 	//   Usage Conventions (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions)
 	//   in the AWS General Reference.
-	//   - You can only tag resources that are located in the specified AWS Region for
-	//   the AWS account.
+	//   - You can only tag resources that are located in the specified Amazon Web
+	//   Services Region for the Amazon Web Services account.
 	//   - To add tags to a resource, you need the necessary permissions for the
 	//   service that the resource belongs to as well as permissions for adding tags. For
 	//   more information, see the documentation for each service.

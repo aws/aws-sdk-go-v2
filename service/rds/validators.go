@@ -1430,6 +1430,26 @@ func (m *validateOpDescribeDBProxyTargets) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDBRecommendations struct {
+}
+
+func (*validateOpDescribeDBRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDBRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDBRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDBRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDBSecurityGroups struct {
 }
 
@@ -2165,6 +2185,26 @@ func (m *validateOpModifyDBProxyTargetGroup) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyDBProxyTargetGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyDBRecommendation struct {
+}
+
+func (*validateOpModifyDBRecommendation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyDBRecommendation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyDBRecommendationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyDBRecommendationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3194,6 +3234,10 @@ func addOpDescribeDBProxyTargetsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDescribeDBProxyTargets{}, middleware.After)
 }
 
+func addOpDescribeDBRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDBRecommendations{}, middleware.After)
+}
+
 func addOpDescribeDBSecurityGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDBSecurityGroups{}, middleware.After)
 }
@@ -3340,6 +3384,10 @@ func addOpModifyDBProxyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpModifyDBProxyTargetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyDBProxyTargetGroup{}, middleware.After)
+}
+
+func addOpModifyDBRecommendationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyDBRecommendation{}, middleware.After)
 }
 
 func addOpModifyDBSnapshotAttributeValidationMiddleware(stack *middleware.Stack) error {
@@ -3547,6 +3595,41 @@ func validateOptionConfigurationList(v []types.OptionConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "OptionConfigurationList"}
 	for i := range v {
 		if err := validateOptionConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecommendedActionUpdate(v *types.RecommendedActionUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendedActionUpdate"}
+	if v.ActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionId"))
+	}
+	if v.Status == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecommendedActionUpdateList(v []types.RecommendedActionUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendedActionUpdateList"}
+	for i := range v {
+		if err := validateRecommendedActionUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4825,6 +4908,23 @@ func validateOpDescribeDBProxyTargetsInput(v *DescribeDBProxyTargetsInput) error
 	}
 }
 
+func validateOpDescribeDBRecommendationsInput(v *DescribeDBRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDBRecommendationsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDBSecurityGroupsInput(v *DescribeDBSecurityGroupsInput) error {
 	if v == nil {
 		return nil
@@ -5450,6 +5550,26 @@ func validateOpModifyDBProxyTargetGroupInput(v *ModifyDBProxyTargetGroupInput) e
 	}
 	if v.DBProxyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBProxyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyDBRecommendationInput(v *ModifyDBRecommendationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyDBRecommendationInput"}
+	if v.RecommendationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationId"))
+	}
+	if v.RecommendedActionUpdates != nil {
+		if err := validateRecommendedActionUpdateList(v.RecommendedActionUpdates); err != nil {
+			invalidParams.AddNested("RecommendedActionUpdates", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

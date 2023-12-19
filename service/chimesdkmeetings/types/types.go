@@ -22,6 +22,12 @@ type Attendee struct {
 	// capabilities with a set of values that control what the capabilities can do,
 	// such as SendReceive data. For more information about those values, see . When
 	// using capabilities, be aware of these corner cases:
+	//   - If you specify MeetingFeatures:Video:MaxResolution:None when you create a
+	//   meeting, all API requests that include SendReceive , Send , or Receive for
+	//   AttendeeCapabilities:Video will be rejected with ValidationError 400 .
+	//   - If you specify MeetingFeatures:Content:MaxResolution:None when you create a
+	//   meeting, all API requests that include SendReceive , Send , or Receive for
+	//   AttendeeCapabilities:Content will be rejected with ValidationError 400 .
 	//   - You can't set content capabilities to SendReceive or Receive unless you also
 	//   set video capabilities to SendReceive or Receive . If you don't set the video
 	//   capability to receive, the response will contain an HTTP 400 Bad Request status
@@ -50,18 +56,24 @@ type Attendee struct {
 
 // The media capabilities of an attendee: audio, video, or content. You use the
 // capabilities with a set of values that control what the capabilities can do,
-// such as SendReceive data. For more information about those values, see . When
-// using capabilities, be aware of these corner cases:
+// such as SendReceive data. For more information, refer to and . When using
+// capabilities, be aware of these corner cases:
+//   - If you specify MeetingFeatures:Video:MaxResolution:None when you create a
+//     meeting, all API requests that include SendReceive , Send , or Receive for
+//     AttendeeCapabilities:Video will be rejected with ValidationError 400 .
+//   - If you specify MeetingFeatures:Content:MaxResolution:None when you create a
+//     meeting, all API requests that include SendReceive , Send , or Receive for
+//     AttendeeCapabilities:Content will be rejected with ValidationError 400 .
 //   - You can't set content capabilities to SendReceive or Receive unless you also
 //     set video capabilities to SendReceive or Receive . If you don't set the video
 //     capability to receive, the response will contain an HTTP 400 Bad Request status
 //     code. However, you can set your video capability to receive and you set your
 //     content capability to not receive.
 //   - When you change an audio capability from None or Receive to Send or
-//     SendReceive , and if the attendee left their microphone unmuted, audio will
-//     flow from the attendee to the other meeting participants.
+//     SendReceive , and an attendee unmutes their microphone, audio flows from the
+//     attendee to the other meeting participants.
 //   - When you change a video or content capability from None or Receive to Send
-//     or SendReceive , and if the attendee turned on their video or content streams,
+//     or SendReceive , and the attendee turns on their video or content streams,
 //     remote attendees can receive those streams, but only after media renegotiation
 //     between the client and the Amazon Chime back-end server.
 type AttendeeCapabilities struct {
@@ -84,6 +96,18 @@ type AttendeeCapabilities struct {
 	noSmithyDocumentSerde
 }
 
+// Lists the maximum number of attendees allowed into the meeting. If you specify
+// FHD for MeetingFeatures:Video:MaxResolution , or if you specify UHD for
+// MeetingFeatures:Content:MaxResolution , the maximum number of attendees changes
+// from the default of 250 to 25 .
+type AttendeeFeatures struct {
+
+	// The maximum number of attendees allowed into the meeting.
+	MaxCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // A structure that contains one or more attendee IDs.
 type AttendeeIdItem struct {
 
@@ -101,6 +125,20 @@ type AudioFeatures struct {
 
 	// Makes echo reduction available to clients who connect to the meeting.
 	EchoReduction MeetingFeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+// Lists the content (screen share) features for the meeting. Applies to all
+// attendees. If you specify MeetingFeatures:Content:MaxResolution:None when you
+// create a meeting, all API requests that include SendReceive , Send , or Receive
+// for AttendeeCapabilities:Content will be rejected with ValidationError 400 .
+type ContentFeatures struct {
+
+	// The maximum resolution for the meeting content. Defaults to FHD . To use UHD ,
+	// you must also provide a MeetingFeatures:Attendee:MaxCount value and override
+	// the default size limit of 250 attendees.
+	MaxResolution ContentResolution
 
 	noSmithyDocumentSerde
 }
@@ -165,8 +203,8 @@ type EngineTranscribeMedicalSettings struct {
 	// transcription output.
 	ContentIdentificationType TranscribeMedicalContentIdentificationType
 
-	// The AWS Region passed to Amazon Transcribe Medical. If you don't specify a
-	// Region, Amazon Chime uses the meeting's Region.
+	// The Amazon Web Services Region passed to Amazon Transcribe Medical. If you
+	// don't specify a Region, Amazon Chime uses the meeting's Region.
 	Region TranscribeMedicalRegion
 
 	// The name of the vocabulary passed to Amazon Transcribe Medical.
@@ -252,8 +290,8 @@ type EngineTranscribeSettings struct {
 	// IdentifyLanguage and LanguageOptions .
 	PreferredLanguage TranscribeLanguageCode
 
-	// The AWS Region in which to use Amazon Transcribe. If you don't specify a
-	// Region, then the MediaRegion (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html)
+	// The Amazon Web Services Region in which to use Amazon Transcribe. If you don't
+	// specify a Region, then the MediaRegion (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html)
 	// of the meeting is used. However, if Amazon Transcribe is not available in the
 	// MediaRegion , then a TranscriptFailed event is sent. Use auto to use Amazon
 	// Transcribe in a Region near the meeting’s MediaRegion . For more information,
@@ -314,19 +352,23 @@ type MediaPlacement struct {
 	// The event ingestion URL.
 	EventIngestionUrl *string
 
-	// The screen data URL.
+	// The screen data URL. This parameter is deprecated and no longer used by the
+	// Amazon Chime SDK.
 	ScreenDataUrl *string
 
-	// The screen sharing URL.
+	// The screen sharing URL. This parameter is deprecated and no longer used by the
+	// Amazon Chime SDK.
 	ScreenSharingUrl *string
 
-	// The screen viewing URL.
+	// The screen viewing URL. This parameter is deprecated and no longer used by the
+	// Amazon Chime SDK.
 	ScreenViewingUrl *string
 
 	// The signaling URL.
 	SignalingUrl *string
 
-	// The turn control URL.
+	// The turn control URL. This parameter is deprecated and no longer used by the
+	// Amazon Chime SDK.
 	TurnControlUrl *string
 
 	noSmithyDocumentSerde
@@ -347,7 +389,8 @@ type Meeting struct {
 	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 ,
 	// ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 ,
 	// eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 .
-	// Available values in AWS GovCloud (US) Regions: us-gov-east-1 , us-gov-west-1 .
+	// Available values in Amazon Web Services GovCloud (US) Regions: us-gov-east-1 ,
+	// us-gov-west-1 .
 	MediaRegion *string
 
 	// The ARN of the meeting.
@@ -374,8 +417,17 @@ type Meeting struct {
 // The configuration settings of the features available to a meeting.
 type MeetingFeaturesConfiguration struct {
 
+	// The configuration settings for the attendee features available to a meeting.
+	Attendee *AttendeeFeatures
+
 	// The configuration settings for the audio features available to a meeting.
 	Audio *AudioFeatures
+
+	// The configuration settings for the content features available to a meeting.
+	Content *ContentFeatures
+
+	// The configuration settings for the video features available to a meeting.
+	Video *VideoFeatures
 
 	noSmithyDocumentSerde
 }
@@ -384,7 +436,8 @@ type MeetingFeaturesConfiguration struct {
 // and attendee events occur.
 type NotificationsConfiguration struct {
 
-	// The ARN of the AWS Lambda function in the notifications configuration.
+	// The ARN of the Amazon Web Services Lambda function in the notifications
+	// configuration.
 	LambdaFunctionArn *string
 
 	// The ARN of the SNS topic.
@@ -421,6 +474,21 @@ type TranscriptionConfiguration struct {
 
 	// The transcription configuration settings passed to Amazon Transcribe.
 	EngineTranscribeSettings *EngineTranscribeSettings
+
+	noSmithyDocumentSerde
+}
+
+// The video features set for the meeting. Applies to all attendees. If you
+// specify MeetingFeatures:Video:MaxResolution:None when you create a meeting, all
+// API requests that include SendReceive , Send , or Receive for
+// AttendeeCapabilities:Video will be rejected with ValidationError 400 .
+type VideoFeatures struct {
+
+	// The maximum video resolution for the meeting. Applies to all attendees.
+	// Defaults to HD . To use FHD , you must also provide a
+	// MeetingFeatures:Attendee:MaxCount value and override the default size limit of
+	// 250 attendees.
+	MaxResolution VideoResolution
 
 	noSmithyDocumentSerde
 }

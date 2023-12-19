@@ -4750,6 +4750,70 @@ func (m *awsAwsquery_serializeOpDescribeDBProxyTargets) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDescribeDBRecommendations struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeDBRecommendations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeDBRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeDBRecommendationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeDBRecommendations")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeDBRecommendationsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDescribeDBSecurityGroups struct {
 }
 
@@ -7226,6 +7290,70 @@ func (m *awsAwsquery_serializeOpModifyDBProxyTargetGroup) HandleSerialize(ctx co
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentModifyDBProxyTargetGroupInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpModifyDBRecommendation struct {
+}
+
+func (*awsAwsquery_serializeOpModifyDBRecommendation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyDBRecommendation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyDBRecommendationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyDBRecommendation")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentModifyDBRecommendationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -10179,6 +10307,35 @@ func awsAwsquery_serializeDocumentRdsCustomClusterConfiguration(v *types.RdsCust
 		objectKey.String(*v.TransitGatewayMulticastDomainId)
 	}
 
+	return nil
+}
+
+func awsAwsquery_serializeDocumentRecommendedActionUpdate(v *types.RecommendedActionUpdate, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ActionId != nil {
+		objectKey := object.Key("ActionId")
+		objectKey.String(*v.ActionId)
+	}
+
+	if v.Status != nil {
+		objectKey := object.Key("Status")
+		objectKey.String(*v.Status)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentRecommendedActionUpdateList(v []types.RecommendedActionUpdate, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentRecommendedActionUpdate(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -13255,6 +13412,45 @@ func awsAwsquery_serializeOpDocumentDescribeDBProxyTargetsInput(v *DescribeDBPro
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentDescribeDBRecommendationsInput(v *DescribeDBRecommendationsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Filters != nil {
+		objectKey := object.Key("Filters")
+		if err := awsAwsquery_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.LastUpdatedAfter != nil {
+		objectKey := object.Key("LastUpdatedAfter")
+		objectKey.String(smithytime.FormatDateTime(*v.LastUpdatedAfter))
+	}
+
+	if v.LastUpdatedBefore != nil {
+		objectKey := object.Key("LastUpdatedBefore")
+		objectKey.String(smithytime.FormatDateTime(*v.LastUpdatedBefore))
+	}
+
+	if v.Locale != nil {
+		objectKey := object.Key("Locale")
+		objectKey.String(*v.Locale)
+	}
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxRecords != nil {
+		objectKey := object.Key("MaxRecords")
+		objectKey.Integer(*v.MaxRecords)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDescribeDBSecurityGroupsInput(v *DescribeDBSecurityGroupsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -14955,6 +15151,35 @@ func awsAwsquery_serializeOpDocumentModifyDBProxyTargetGroupInput(v *ModifyDBPro
 	if v.TargetGroupName != nil {
 		objectKey := object.Key("TargetGroupName")
 		objectKey.String(*v.TargetGroupName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentModifyDBRecommendationInput(v *ModifyDBRecommendationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Locale != nil {
+		objectKey := object.Key("Locale")
+		objectKey.String(*v.Locale)
+	}
+
+	if v.RecommendationId != nil {
+		objectKey := object.Key("RecommendationId")
+		objectKey.String(*v.RecommendationId)
+	}
+
+	if v.RecommendedActionUpdates != nil {
+		objectKey := object.Key("RecommendedActionUpdates")
+		if err := awsAwsquery_serializeDocumentRecommendedActionUpdateList(v.RecommendedActionUpdates, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Status != nil {
+		objectKey := object.Key("Status")
+		objectKey.String(*v.Status)
 	}
 
 	return nil

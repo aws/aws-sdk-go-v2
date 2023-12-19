@@ -1,0 +1,8 @@
+{
+    "id": "ecee807b-bef5-41b4-897f-8467dedc8f85",
+    "type": "feature",
+    "description": "AWS Marketplace now supports a new API, BatchDescribeEntities, which returns metadata and content for multiple entities.",
+    "modules": [
+        "service/marketplacecatalog"
+    ]
+}

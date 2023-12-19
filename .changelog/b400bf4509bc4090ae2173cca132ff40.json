@@ -1,0 +1,8 @@
+{
+    "id": "b400bf45-09bc-4090-ae21-73cca132ff40",
+    "type": "feature",
+    "description": "RDS - The release adds two new APIs: DescribeDBRecommendations and ModifyDBRecommendation",
+    "modules": [
+        "service/rds"
+    ]
+}

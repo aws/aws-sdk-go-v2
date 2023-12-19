@@ -12105,6 +12105,15 @@ func awsAwsjson11_deserializeDocumentOpenZFSVolumeConfiguration(v **types.OpenZF
 
 	for key, value := range shape {
 		switch key {
+		case "CopyStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OpenZFSCopyStrategy to be of type string, got %T instead", value)
+				}
+				sv.CopyStrategy = types.OpenZFSCopyStrategy(jtv)
+			}
+
 		case "CopyTagsToSnapshots":
 			if value != nil {
 				jtv, ok := value.(bool)

@@ -9,6 +9,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_BatchDescribeEntities.go",
         "api_op_CancelChangeSet.go",
         "api_op_DeleteResourcePolicy.go",
         "api_op_DescribeChangeSet.go",

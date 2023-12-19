@@ -2879,6 +2879,50 @@ func awsRestjson1_deserializeDocumentAttendeeCapabilities(v **types.AttendeeCapa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAttendeeFeatures(v **types.AttendeeFeatures, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AttendeeFeatures
+	if *v == nil {
+		sv = &types.AttendeeFeatures{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AttendeeMax to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxCount = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAttendeeList(v *[]types.Attendee, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3092,6 +3136,46 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.RequestId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContentFeatures(v **types.ContentFeatures, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContentFeatures
+	if *v == nil {
+		sv = &types.ContentFeatures{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentResolution to be of type string, got %T instead", value)
+				}
+				sv.MaxResolution = types.ContentResolution(jtv)
 			}
 
 		default:
@@ -3502,8 +3586,23 @@ func awsRestjson1_deserializeDocumentMeetingFeaturesConfiguration(v **types.Meet
 
 	for key, value := range shape {
 		switch key {
+		case "Attendee":
+			if err := awsRestjson1_deserializeDocumentAttendeeFeatures(&sv.Attendee, value); err != nil {
+				return err
+			}
+
 		case "Audio":
 			if err := awsRestjson1_deserializeDocumentAudioFeatures(&sv.Audio, value); err != nil {
+				return err
+			}
+
+		case "Content":
+			if err := awsRestjson1_deserializeDocumentContentFeatures(&sv.Content, value); err != nil {
+				return err
+			}
+
+		case "Video":
+			if err := awsRestjson1_deserializeDocumentVideoFeatures(&sv.Video, value); err != nil {
 				return err
 			}
 
@@ -4115,6 +4214,46 @@ func awsRestjson1_deserializeDocumentUnprocessableEntityException(v **types.Unpr
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.RequestId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoFeatures(v **types.VideoFeatures, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoFeatures
+	if *v == nil {
+		sv = &types.VideoFeatures{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VideoResolution to be of type string, got %T instead", value)
+				}
+				sv.MaxResolution = types.VideoResolution(jtv)
 			}
 
 		default:

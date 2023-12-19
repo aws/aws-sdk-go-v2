@@ -1400,6 +1400,18 @@ func awsRestjson1_serializeDocumentAttendeeCapabilities(v *types.AttendeeCapabil
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAttendeeFeatures(v *types.AttendeeFeatures, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxCount != nil {
+		ok := object.Key("MaxCount")
+		ok.Integer(*v.MaxCount)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAttendeeIdItem(v *types.AttendeeIdItem, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1432,6 +1444,18 @@ func awsRestjson1_serializeDocumentAudioFeatures(v *types.AudioFeatures, value s
 	if len(v.EchoReduction) > 0 {
 		ok := object.Key("EchoReduction")
 		ok.String(string(v.EchoReduction))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContentFeatures(v *types.ContentFeatures, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MaxResolution) > 0 {
+		ok := object.Key("MaxResolution")
+		ok.String(string(v.MaxResolution))
 	}
 
 	return nil
@@ -1610,9 +1634,30 @@ func awsRestjson1_serializeDocumentMeetingFeaturesConfiguration(v *types.Meeting
 	object := value.Object()
 	defer object.Close()
 
+	if v.Attendee != nil {
+		ok := object.Key("Attendee")
+		if err := awsRestjson1_serializeDocumentAttendeeFeatures(v.Attendee, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Audio != nil {
 		ok := object.Key("Audio")
 		if err := awsRestjson1_serializeDocumentAudioFeatures(v.Audio, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Content != nil {
+		ok := object.Key("Content")
+		if err := awsRestjson1_serializeDocumentContentFeatures(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Video != nil {
+		ok := object.Key("Video")
+		if err := awsRestjson1_serializeDocumentVideoFeatures(v.Video, ok); err != nil {
 			return err
 		}
 	}
@@ -1710,6 +1755,18 @@ func awsRestjson1_serializeDocumentTranscriptionConfiguration(v *types.Transcrip
 		if err := awsRestjson1_serializeDocumentEngineTranscribeSettings(v.EngineTranscribeSettings, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoFeatures(v *types.VideoFeatures, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MaxResolution) > 0 {
+		ok := object.Key("MaxResolution")
+		ok.String(string(v.MaxResolution))
 	}
 
 	return nil

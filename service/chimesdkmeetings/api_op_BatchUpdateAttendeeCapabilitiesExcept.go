@@ -17,6 +17,12 @@ import (
 // control what the capabilities can do, such as SendReceive data. For more
 // information about those values, see . When using capabilities, be aware of these
 // corner cases:
+//   - If you specify MeetingFeatures:Video:MaxResolution:None when you create a
+//     meeting, all API requests that include SendReceive , Send , or Receive for
+//     AttendeeCapabilities:Video will be rejected with ValidationError 400 .
+//   - If you specify MeetingFeatures:Content:MaxResolution:None when you create a
+//     meeting, all API requests that include SendReceive , Send , or Receive for
+//     AttendeeCapabilities:Content will be rejected with ValidationError 400 .
 //   - You can't set content capabilities to SendReceive or Receive unless you also
 //     set video capabilities to SendReceive or Receive . If you don't set the video
 //     capability to receive, the response will contain an HTTP 400 Bad Request status

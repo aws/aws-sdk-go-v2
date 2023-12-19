@@ -11971,6 +11971,15 @@ func awsRestjson1_deserializeDocumentGraphqlApi(v **types.GraphqlApi, value inte
 				return err
 			}
 
+		case "introspectionConfig":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GraphQLApiIntrospectionConfig to be of type string, got %T instead", value)
+				}
+				sv.IntrospectionConfig = types.GraphQLApiIntrospectionConfig(jtv)
+			}
+
 		case "lambdaAuthorizerConfig":
 			if err := awsRestjson1_deserializeDocumentLambdaAuthorizerConfig(&sv.LambdaAuthorizerConfig, value); err != nil {
 				return err
@@ -12020,6 +12029,32 @@ func awsRestjson1_deserializeDocumentGraphqlApi(v **types.GraphqlApi, value inte
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.OwnerContact = ptr.String(jtv)
+			}
+
+		case "queryDepthLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected QueryDepthLimit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.QueryDepthLimit = int32(i64)
+			}
+
+		case "resolverCountLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ResolverCountLimit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResolverCountLimit = int32(i64)
 			}
 
 		case "tags":

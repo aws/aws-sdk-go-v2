@@ -5590,6 +5590,11 @@ func awsAwsjson11_serializeOpDocumentDescribeSnapshotsInput(v *DescribeSnapshots
 		}
 	}
 
+	if v.IncludeShared != nil {
+		ok := object.Key("IncludeShared")
+		ok.Boolean(*v.IncludeShared)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)

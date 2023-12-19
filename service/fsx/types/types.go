@@ -702,7 +702,9 @@ type CreateFileSystemOntapConfiguration struct {
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
-	//   same value
+	//   same value for file systems with one HA pair.
+	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
+	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 
@@ -2885,6 +2887,21 @@ type OpenZFSUserOrGroupQuota struct {
 // The configuration of an Amazon FSx for OpenZFS volume.
 type OpenZFSVolumeConfiguration struct {
 
+	// Specifies the strategy used when copying data from the snapshot to the new
+	// volume.
+	//   - CLONE - The new volume references the data in the origin snapshot. Cloning a
+	//   snapshot is faster than copying data from the snapshot to a new volume and
+	//   doesn't consume disk throughput. However, the origin snapshot can't be deleted
+	//   if there is a volume using its copied data.
+	//   - FULL_COPY - Copies all data from the snapshot to the new volume. Specify
+	//   this option to create the volume from a snapshot on another FSx for OpenZFS file
+	//   system.
+	// The INCREMENTAL_COPY option is only for updating an existing volume by using a
+	// snapshot from another FSx for OpenZFS file system. For more information, see
+	// CopySnapshotAndUpdateVolume (https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html)
+	// .
+	CopyStrategy OpenZFSCopyStrategy
+
 	// A Boolean value indicating whether tags for the volume should be copied to
 	// snapshots. This value defaults to false . If it's set to true , all tags for the
 	// volume are copied to snapshots where the user doesn't specify tags. If this
@@ -3636,9 +3653,12 @@ type UpdateFileSystemOntapConfiguration struct {
 	//   or 4096 MBps.
 	//   - For SINGLE_AZ_2 , valid values are 3072 or 6144 MBps.
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
-	// following conditions: The value of ThroughputCapacity and
-	// ThroughputCapacityPerHAPair are not the same value. The value of
-	// ThroughputCapacityPerHAPair is not a valid value.
+	// following conditions:
+	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
+	//   same value for file systems with one HA pair.
+	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
+	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).
+	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 
 	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for

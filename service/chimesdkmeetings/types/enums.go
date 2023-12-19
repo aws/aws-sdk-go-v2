@@ -2,6 +2,26 @@
 
 package types
 
+type ContentResolution string
+
+// Enum values for ContentResolution
+const (
+	ContentResolutionNone ContentResolution = "None"
+	ContentResolutionFhd  ContentResolution = "FHD"
+	ContentResolutionUhd  ContentResolution = "UHD"
+)
+
+// Values returns all known values for ContentResolution. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentResolution) Values() []ContentResolution {
+	return []ContentResolution{
+		"None",
+		"FHD",
+		"UHD",
+	}
+}
+
 type MediaCapabilities string
 
 // Enum values for MediaCapabilities
@@ -303,5 +323,25 @@ func (TranscribeVocabularyFilterMethod) Values() []TranscribeVocabularyFilterMet
 		"remove",
 		"mask",
 		"tag",
+	}
+}
+
+type VideoResolution string
+
+// Enum values for VideoResolution
+const (
+	VideoResolutionNone VideoResolution = "None"
+	VideoResolutionHd   VideoResolution = "HD"
+	VideoResolutionFhd  VideoResolution = "FHD"
+)
+
+// Values returns all known values for VideoResolution. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VideoResolution) Values() []VideoResolution {
+	return []VideoResolution{
+		"None",
+		"HD",
+		"FHD",
 	}
 }

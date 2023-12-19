@@ -1,0 +1,8 @@
+{
+    "id": "08b5d091-35a8-4b75-b86b-aeb3f688e068",
+    "type": "feature",
+    "description": "Provision BYOIPv4 address ranges and advertise them by specifying the network border groups option in Los Angeles, Phoenix and Dallas AWS Local Zones.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -50,6 +50,11 @@ type DescribeSnapshotsInput struct {
 	// The filters structure. The supported names are file-system-id or volume-id .
 	Filters []types.SnapshotFilter
 
+	// Set to false (default) if you want to only see the snapshots in your Amazon Web
+	// Services account. Set to true if you want to see the snapshots in your account
+	// and the ones shared with you from another account.
+	IncludeShared *bool
+
 	// The maximum number of resources to return in the response. This value must be
 	// an integer greater than zero.
 	MaxResults *int32

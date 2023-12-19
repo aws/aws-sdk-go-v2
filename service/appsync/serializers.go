@@ -961,6 +961,11 @@ func awsRestjson1_serializeOpDocumentCreateGraphqlApiInput(v *CreateGraphqlApiIn
 		ok.String(string(v.AuthenticationType))
 	}
 
+	if len(v.IntrospectionConfig) > 0 {
+		ok := object.Key("introspectionConfig")
+		ok.String(string(v.IntrospectionConfig))
+	}
+
 	if v.LambdaAuthorizerConfig != nil {
 		ok := object.Key("lambdaAuthorizerConfig")
 		if err := awsRestjson1_serializeDocumentLambdaAuthorizerConfig(v.LambdaAuthorizerConfig, ok); err != nil {
@@ -995,6 +1000,16 @@ func awsRestjson1_serializeOpDocumentCreateGraphqlApiInput(v *CreateGraphqlApiIn
 	if v.OwnerContact != nil {
 		ok := object.Key("ownerContact")
 		ok.String(*v.OwnerContact)
+	}
+
+	if v.QueryDepthLimit != 0 {
+		ok := object.Key("queryDepthLimit")
+		ok.Integer(v.QueryDepthLimit)
+	}
+
+	if v.ResolverCountLimit != 0 {
+		ok := object.Key("resolverCountLimit")
+		ok.Integer(v.ResolverCountLimit)
 	}
 
 	if v.Tags != nil {
@@ -5056,6 +5071,11 @@ func awsRestjson1_serializeOpDocumentUpdateGraphqlApiInput(v *UpdateGraphqlApiIn
 		ok.String(string(v.AuthenticationType))
 	}
 
+	if len(v.IntrospectionConfig) > 0 {
+		ok := object.Key("introspectionConfig")
+		ok.String(string(v.IntrospectionConfig))
+	}
+
 	if v.LambdaAuthorizerConfig != nil {
 		ok := object.Key("lambdaAuthorizerConfig")
 		if err := awsRestjson1_serializeDocumentLambdaAuthorizerConfig(v.LambdaAuthorizerConfig, ok); err != nil {
@@ -5090,6 +5110,16 @@ func awsRestjson1_serializeOpDocumentUpdateGraphqlApiInput(v *UpdateGraphqlApiIn
 	if v.OwnerContact != nil {
 		ok := object.Key("ownerContact")
 		ok.String(*v.OwnerContact)
+	}
+
+	if v.QueryDepthLimit != 0 {
+		ok := object.Key("queryDepthLimit")
+		ok.Integer(v.QueryDepthLimit)
+	}
+
+	if v.ResolverCountLimit != 0 {
+		ok := object.Key("resolverCountLimit")
+		ok.Integer(v.ResolverCountLimit)
 	}
 
 	if v.UserPoolConfig != nil {

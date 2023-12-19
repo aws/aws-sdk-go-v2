@@ -106,13 +106,25 @@ type AmiProductVisibilityFilter struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains an error code and error message.
+type BatchDescribeErrorDetail struct {
+
+	// The error code returned.
+	ErrorCode *string
+
+	// The error message returned.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains the ChangeType , Details , and Entity .
 type Change struct {
 
 	// Change types are single string values that describe your intention for the
 	// change. Each change type is unique for each EntityType provided in the change's
-	// scope. For more information on change types available for single-AMI products,
-	// see Working with single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
+	// scope. For more information about change types available for single-AMI
+	// products, see Working with single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
 	// . Also, for more information about change types available for container-based
 	// products, see Working with container products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products)
 	// .
@@ -422,6 +434,45 @@ type Entity struct {
 
 	// The identifier for the entity.
 	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains metadata and details about the entity.
+type EntityDetail struct {
+
+	// An object that contains all the details of the entity.
+	DetailsDocument document.Interface
+
+	// The Amazon Resource Name (ARN) of the entity.
+	EntityArn *string
+
+	// The ID of the entity, in the format of EntityId@RevisionId .
+	EntityIdentifier *string
+
+	// The entity type of the entity, in the format of EntityType@Version .
+	EntityType *string
+
+	// The last time the entity was modified.
+	LastModifiedDate *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains entity ID and the catalog in which the entity is
+// present.
+type EntityRequest struct {
+
+	// The name of the catalog the entity is present in. The only value at this time
+	// is AWSMarketplace .
+	//
+	// This member is required.
+	Catalog *string
+
+	// The ID of the entity.
+	//
+	// This member is required.
+	EntityId *string
 
 	noSmithyDocumentSerde
 }

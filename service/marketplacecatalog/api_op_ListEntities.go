@@ -35,7 +35,7 @@ type ListEntitiesInput struct {
 	// This member is required.
 	Catalog *string
 
-	// The type of entities to retrieve. Valid values are: ServerProduct , AmiProduct ,
+	// The type of entities to retrieve. Valid values are: AmiProduct ,
 	// ContainerProduct , DataProduct , SaaSProduct , ProcurementPolicy , Experience ,
 	// Audience , BrandingSettings , Offer , Seller , ResaleAuthorization .
 	//
