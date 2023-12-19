@@ -919,9 +919,9 @@ Request handlers which reference `Request.Params` and `Request.Data` must be mig
 
 import (
     "github.com/aws/aws-sdk-go/aws"
-    "github.com/aws/aws-sdk-go/request"
+    "github.com/aws/aws-sdk-go/aws/request"
+    "github.com/aws/aws-sdk-go/aws/session"
     "github.com/aws/aws-sdk-go/service/s3"
-    "github.com/aws/aws-sdk-go/session"
 )
 
 func withPutObjectDefaultACL(acl string) request.Option {
@@ -952,8 +952,8 @@ func main() {
 import (
     "context"
 
-    "github.com/aws/aws/sdk-go-v2/service/s3"
-    "github.com/aws/aws/sdk-go-v2/service/s3/types"
+    "github.com/aws/aws-sdk-go-v2/service/s3"
+    "github.com/aws/aws-sdk-go-v2/service/s3/types"
     "github.com/aws/smithy-go/middleware"
     smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -1012,9 +1012,9 @@ func main() {
 
 import (
     "github.com/aws/aws-sdk-go/aws"
-    "github.com/aws/aws-sdk-go/request"
+    "github.com/aws/aws-sdk-go/aws/request"
+    "github.com/aws/aws-sdk-go/aws/session"
     "github.com/aws/aws-sdk-go/service/s3"
-    "github.com/aws/aws-sdk-go/session"
 )
 
 func readPutObjectOutput(r *request.Request) {
@@ -1042,8 +1042,8 @@ func main() {
 import (
     "context"
 
-    "github.com/aws/aws/sdk-go-v2/config"
-    "github.com/aws/aws/sdk-go-v2/service/s3"
+    "github.com/aws/aws-sdk-go-v2/config"
+    "github.com/aws/aws-sdk-go-v2/service/s3"
     "github.com/aws/smithy-go/middleware"
     smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -1106,7 +1106,10 @@ Request handlers which reference `Request.HTTPRequest` and
 ```go
 // V1
 
-import "github.com/aws/aws-sdk-go/request"
+import (
+    "github.com/aws/aws-sdk-go/aws/request"
+    "github.com/aws/aws-sdk-go/aws/session"
+)
 
 func withHeader(header, val string) request.Option {
     return func(r *request.Request) {
@@ -1174,7 +1177,7 @@ func WithHeader(header, val string) func (*s3.Options) {
 func main() {
     cfg, err := config.LoadDefaultConfig(context.Background())
     if err != nil {
-        // handle error
+        // ...
     }
 
     svc := s3.NewFromConfig(cfg, WithHeader("x-user-header", "..."))
