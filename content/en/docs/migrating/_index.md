@@ -7,8 +7,7 @@ weight: 4
 
 ## Minimum Go Version
 
-The {{% alias sdk-go %}} requires a minimum version of Go 1.15. Migration from AWS SDK for Go to {{% alias sdk-go %}}
-might require you to upgrade your application by one or more Go versions. The latest version of Go can be downloaded on
+The {{% alias sdk-go %}} requires a minimum Go version of {{% alias min-go-version %}}. Migration from v1 to v2 The latest version of Go can be downloaded on
 the [Downloads](https://golang.org/dl/) page. See the [Release History](https://golang.org/doc/devel/release.html) for
 more information about each Go version release, and relevant information required for upgrading.
 
@@ -161,6 +160,67 @@ if err != nil {
 	// handle error
 }
 ```
+
+## Mocking and `*iface`
+
+The `*iface` packages and interfaces therein (e.g. [s3iface.S3API]({{< apiref v1="service/s3/s3iface#S3API" >}}))
+have been removed. These interface definitions are not stable since they are
+broken every time a service adds a new operation.
+
+Usage of `*iface` should be replaced by scoped caller-defined interfaces for
+the service operations being used:
+
+```go
+// V1
+
+import "io"
+
+import "github.com/aws/aws-sdk-go/service/s3"
+import "github.com/aws/aws-sdk-go/service/s3/s3iface"
+
+func GetObjectBytes(client s3iface.S3API, bucket, key string) ([]byte, error) {
+    object, err := client.GetObject(&s3.GetObjectInput{
+        Bucket: &bucket,
+        Key:    &key,
+    })
+    if err != nil {
+        return nil, err
+    }
+    defer object.Body.Close()
+
+    return io.ReadAll(object.Body)
+}
+```
+
+```go
+// V2
+
+import "context"
+import "io"
+
+import "github.com/aws/aws-sdk-go-v2/service/s3"
+
+
+type GetObjectAPIClient interface {
+    GetObject(context.Context, *s3.GetObjectInput, ...func(*s3.Options)) (*s3.GetObjectOutput, error)
+}
+
+func GetObjectBytes(ctx context.Context, client GetObjectAPIClient, bucket, key string) ([]byte, error) {
+    object, err := api.GetObject(ctx, &s3.GetObjectInput{
+        Bucket: &bucket,
+        Key:    &key,
+    })
+    if err != nil {
+        return nil, err
+    }
+    defer object.Body.Close()
+
+    return io.ReadAll(object.Body)
+}
+```
+
+See the [testing guide]({{% ref "/docs/unit-testing.md" %}}) for more
+information.
 
 ## Credentials & Credential Providers
 
@@ -567,16 +627,26 @@ The [endpoints]({{< apiref v1="aws/endpoints" >}}) package no longer exists in t
 client now embeds its required AWS endpoint metadata within the client package. This reduces the overall binary size of
 compiled applications by no longer including endpoint metadata for services not used by your application.
 
+Additionally, each service now exposes its own interface for endpoint
+resolution in `EndpointResolverV2`. Each API takes a unique set of parameters
+for a service `EndpointParameters`, the values of which are sourced by the SDK
+from various locations when an operation is invoked.
+
 By default, service clients use their configured AWS Region to resolve the service endpoint for the target Region. If
-your application requires a custom endpoint to be specified for a particular service and region, you can specify
-a custom [aws.EndpointResolver]({{< apiref "aws#EndpointResolver" >}}) using the `EndpointResolver` field on the
+your application requires a custom endpoint, you can specify custom behavior on `EndpointResolverV2` field on the
 `aws.Config` structure. If your application implements a custom
-[endpoints.Resolver]({{< apiref v1="aws/endpoints#Resolver" >}}) you must migrate it to conform to the
-`aws.EndpointResolver` interface. [aws.EndpointResolverFunc]({{< apiref "aws#EndpointResolverFunc" >}}) is provided as
-a convenient way to wrap a resolver function to satisfy the `aws.EndpointResolver` interface.
+[endpoints.Resolver]({{< apiref v1="aws/endpoints#Resolver" >}}) you must
+migrate it to conform to this new per-service interface.
 
 For more information on endpoints and implementing a custom resolver, see
 [Configuring Client Endpoints]({{% ref "/docs/configuring-sdk/endpoints.md" %}}).
+
+### Authentication
+
+The {{% alias sdk-go %}} supports more advanced authentication behavior, which
+enables the use of newer AWS service features such as codecatalyst and S3
+Express One Zone. Additionally, this behavior can be customized on a per-client
+basis.
 
 ### Invoking API Operations
 
@@ -829,6 +899,358 @@ to wait for a {{% alias service=S3 %}} Bucket to exist, you must construct a `Bu
 [s3.BucketExistsWaiter]({{< apiref "service/s3#BucketExistsWaiter" >}}). The `s3.BucketExistsWaiter` provides a
 `Wait` method which can be used to wait for a bucket to become available.
 
+## Request customization
+
+The monolithic [request.Request]({{< apiref v1="aws/request#Request" >}}) API
+has been re-compartmentalized.
+
+### Operation input/output
+
+The opaque `Request` fields `Params` and `Data`, which hold the operation input
+and output structures respectively, are now accessible within specific
+middleware phases as input/output:
+
+Request handlers which reference `Request.Params` and `Request.Data` must be migrated to middleware.
+
+#### migrating `Params`
+
+```go
+// V1
+
+import (
+    "github.com/aws/aws-sdk-go/aws"
+    "github.com/aws/aws-sdk-go/aws/request"
+    "github.com/aws/aws-sdk-go/aws/session"
+    "github.com/aws/aws-sdk-go/service/s3"
+)
+
+func withPutObjectDefaultACL(acl string) request.Option {
+    return func(r *request.Request) {
+        in, ok := r.Params.(*s3.PutObjectInput)
+        if !ok {
+            return
+        }
+
+        if in.ACL == nil {
+            in.ACL = aws.String(acl)
+        }
+        r.Params = in
+    }
+}
+
+func main() {
+    sess := session.Must(session.NewSession())
+    sess.Handlers.Validate.PushBack(withPutObjectDefaultACL(s3.ObjectCannedACLBucketOwnerFullControl))
+
+    // ...
+}
+```
+
+```go
+// V2
+
+import (
+    "context"
+
+    "github.com/aws/aws-sdk-go-v2/service/s3"
+    "github.com/aws/aws-sdk-go-v2/service/s3/types"
+    "github.com/aws/smithy-go/middleware"
+    smithyhttp "github.com/aws/smithy-go/transport/http"
+)
+
+type withPutObjectDefaultACL struct {
+    acl types.ObjectCannedACL
+}
+
+// implements middleware.InitializeMiddleware, which runs BEFORE a request has
+// been serialized and can act on the operation input
+var _ middleware.InitializeMiddleware = (*withPutObjectDefaultACL)(nil)
+
+func (*withPutObjectDefaultACL) ID() string {
+    return "withPutObjectDefaultACL"
+}
+
+func (m *withPutObjectDefaultACL) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+    out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+    input, ok := in.Parameters.(*s3.PutObjectInput)
+    if !ok {
+        return next.HandleInitialize(ctx, in)
+    }
+
+    if len(input.ACL) == 0 {
+        input.ACL = m.acl
+    }
+    in.Parameters = input
+    return next.HandleInitialize(ctx, in)
+}
+
+// create a helper function to simplify instrumentation of our middleware
+func WithPutObjectDefaultACL(acl types.ObjectCannedACL) func (*s3.Options) {
+    return func(o *s3.Options) {
+        o.APIOptions = append(o.APIOptions, func (s *middleware.Stack) error {
+            return s.Initialize.Add(&withPutObjectDefaultACL{acl: acl}, middleware.After)
+        })
+    }
+}
+
+func main() {
+    cfg, err := config.LoadDefaultConfig(context.Background())
+    if err != nil {
+        // ...
+    }
+
+    svc := s3.NewFromConfig(cfg, WithPutObjectDefaultACL(types.ObjectCannedACLBucketOwnerFullControl))
+    // ...
+}
+```
+
+#### migrating `Data`
+
+```go
+// V1
+
+import (
+    "github.com/aws/aws-sdk-go/aws"
+    "github.com/aws/aws-sdk-go/aws/request"
+    "github.com/aws/aws-sdk-go/aws/session"
+    "github.com/aws/aws-sdk-go/service/s3"
+)
+
+func readPutObjectOutput(r *request.Request) {
+        output, ok := r.Data.(*s3.PutObjectOutput)
+        if !ok {
+            return
+        }
+
+        // ...
+    }
+}
+
+func main() {
+    sess := session.Must(session.NewSession())
+    sess.Handlers.Unmarshal.PushBack(readPutObjectOutput)
+
+    svc := s3.New(sess)
+    // ...
+}
+```
+
+```go
+// V2
+
+import (
+    "context"
+
+    "github.com/aws/aws-sdk-go-v2/config"
+    "github.com/aws/aws-sdk-go-v2/service/s3"
+    "github.com/aws/smithy-go/middleware"
+    smithyhttp "github.com/aws/smithy-go/transport/http"
+)
+
+type readPutObjectOutput struct{}
+
+var _ middleware.DeserializeMiddleware = (*readPutObjectOutput)(nil)
+
+func (*readPutObjectOutput) ID() string {
+    return "readPutObjectOutput"
+}
+
+func (*readPutObjectOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+    out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+    out, metadata, err = next.HandleDeserialize(ctx, in)
+    if err != nil {
+        // ...
+    }
+
+    output, ok := in.Parameters.(*s3.PutObjectOutput)
+    if !ok {
+        return out, metadata, err
+    }
+
+    // inspect output...
+
+    return out, metadata, err
+}
+
+func WithReadPutObjectOutput(o *s3.Options) {
+    o.APIOptions = append(o.APIOptions, func (s *middleware.Stack) error {
+        return s.Initialize.Add(&withReadPutObjectOutput{}, middleware.Before)
+    })
+}
+
+func main() {
+    cfg, err := config.LoadDefaultConfig(context.Background())
+    if err != nil {
+        // ...
+    }
+
+    svc := s3.NewFromConfig(cfg, WithReadPutObjectOutput)
+    // ...
+}
+```
+
+### HTTP request/response
+
+The `HTTPRequest` and `HTTPResponse` fields from `Request` are now exposed in
+specific middleware phases. Since middleware is transport-agnostic, you must
+perform a type assertion on the middleware input or output to reveal the
+underlying HTTP request or response.
+
+Request handlers which reference `Request.HTTPRequest` and
+`Request.HTTPResponse` must be migrated to middleware.
+
+#### migrating `HTTPRequest`
+
+```go
+// V1
+
+import (
+    "github.com/aws/aws-sdk-go/aws/request"
+    "github.com/aws/aws-sdk-go/aws/session"
+)
+
+func withHeader(header, val string) request.Option {
+    return func(r *request.Request) {
+        request.HTTPRequest.Header.Set(header, val)
+    }
+}
+
+func main() {
+    sess := session.Must(session.NewSession())
+    sess.Handlers.Build.PushBack(withHeader("x-user-header", "..."))
+
+    svc := s3.New(sess)
+    // ...
+}
+```
+
+```go
+// V2
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/aws/aws-sdk-go-v2/config"
+    "github.com/aws/aws-sdk-go-v2/service/s3"
+    "github.com/aws/smithy-go/middleware"
+    smithyhttp "github.com/aws/smithy-go/transport/http"
+)
+
+type withHeader struct {
+    header, val string
+}
+
+// implements middleware.BuildMiddleware, which runs AFTER a request has been
+// serialized and can operate on the transport request
+var _ middleware.BuildMiddleware = (*withHeader)(nil)
+
+func (*withHeader) ID() string {
+    return "withHeader"
+}
+
+func (m *withHeader) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+    out middleware.BuildOutput, metadata middleware.Metadata, err error,
+) {
+    req, ok := in.Request.(*smithyhttp.Request)
+    if !ok {
+        return out, metadata, fmt.Errorf("unrecognized transport type %T", in.Request)
+    }
+
+    req.Header.Set(m.header, m.val)
+    return next.HandleBuild(ctx, in)
+}
+
+func WithHeader(header, val string) func (*s3.Options) {
+    return func(o *s3.Options) {
+        o.APIOptions = append(o.APIOptions, func (s *middleware.Stack) error {
+            return s.Build.Add(&withHeader{
+                header: header,
+                val: val,
+            }, middleware.After)
+        })
+    }
+}
+
+func main() {
+    cfg, err := config.LoadDefaultConfig(context.Background())
+    if err != nil {
+        // ...
+    }
+
+    svc := s3.NewFromConfig(cfg, WithHeader("x-user-header", "..."))
+    // ...
+}
+```
+
+### Handler phases
+
+SDK v2 middleware phases are the successor to v1 handler phases.
+
+The following table provides a rough mapping of v1 handler phases to their
+equivalent location within the V2 middleware stack:
+
+| v1 handler name | v2 middleware phase |
+| --------------- | ------------------- |
+| Validate | Initialize |
+| Build | Serialize |
+| Sign | Finalize |
+| Send | n/a (1) |
+| ValidateResponse | Deserialize |
+| Unmarshal | Deserialize |
+| UnmarshalMetadata | Deserialize |
+| UnmarshalError | Deserialize |
+| Retry | Finalize, after `"Retry"` middleware (2) |
+| AfterRetry | Finalize, before `"Retry"` middleware, post-`next.HandleFinalize()` (2,3) |
+| CompleteAttempt | Finalize, end of step |
+| Complete | Initialize, start of step, post-`next.HandleInitialize()` (3) |
+
+(1) The `Send` phase in v1 is effectively the wrapped HTTP client round-trip in
+v2. This behavior is controlled by the `HTTPClient` field on client options.
+
+(2) Any middleware after the `"Retry"` middleware in the Finalize step will be
+part of the retry loop.
+
+(3) The middleware "stack" at operation time is built into a
+repeatedly-decorated handler function. Each handler is responsible for calling
+the next one in the chain. This implicitly means that a middleware step can
+also take action AFTER its next step has been called.
+
+For example, for the Initialize step, which is at the top of the stack, this
+means Initialize middlewares that take action after calling the next handler
+effectively operate at the end of the request:
+
+```go
+// V2
+
+import (
+    "context"
+
+    "github.com/aws/smithy-go/middleware"
+)
+
+type onComplete struct{}
+
+var _ middleware.InitializeMiddleware = (*onComplete)(nil)
+
+func (*onComplete) ID() string {
+    return "onComplete"
+}
+
+func (*onComplete) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+    out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+    out, metadata, err = next.HandleInitialize(ctx, in)
+
+    // the entire operation was invoked above - the deserialized response is
+    // available opaquely in out.Result, run post-op actions here...
+
+    return out, metadata, err
+}
+```
+
 ## Features
 
 ### {{% alias service=EC2 %}} Instance Metadata Service
@@ -860,7 +1282,6 @@ if err != nil {
 	// handle error
 }
 ```
-
 
 ```go
 // V2
@@ -901,3 +1322,35 @@ client import path. This module can be retrieved by using `go get`.
 ```sh
 go get github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign
 ```
+
+### {{% alias service=S3 %}} Encryption Client
+
+Starting in {{% alias sdk-go %}}, the Amazon S3 encryption client is a separate
+module under AWS Crypto Tools. The latest version of the S3 encryption client
+for Go, 3.x, is now available at https://github.com/aws/amazon-s3-encryption-client-go.
+This module can be retrieved by using `go get`:
+
+```sh
+go get github.com/aws/amazon-s3-encryption-client-go/v3
+```
+
+The separate `EncryptionClient`
+([v1]({{< apiref v1="service/s3/s3crypto#EncryptionClient" >}}), [v2]({{< apiref v1="service/s3/s3crypto#EncryptionClientV2" >}}))
+and `DecryptionClient`
+([v1]({{< apiref v1="service/s3/s3crypto#DecryptionClient" >}}), [v2]({{< apiref v1="service/s3/s3crypto#DecryptionClientV2" >}}))
+APIs have been replaced with a single client,
+[S3EncryptionClientV3](https://pkg.go.dev/github.com/aws/amazon-s3-encryption-client-go/v3/client#S3EncryptionClientV3),
+that exposes both encrypt and decrypt functionality.
+
+Like other service clients in {{% alias sdk-go %}}, the operation APIs have
+been condensed:
+
+* The `GetObject`, `GetObjectRequest`, and `GetObjectWithContext` decryption
+  APIs are replaced by
+  [GetObject](https://pkg.go.dev/github.com/aws/amazon-s3-encryption-client-go/v3/client#S3EncryptionClientV3.GetObject).
+* The `PutObject`, `PutObjectRequest`, and `PutObjectWithContext` encryption
+  APIs are replaced by
+  [PutObject](https://pkg.go.dev/github.com/aws/amazon-s3-encryption-client-go/v3/client#S3EncryptionClientV3.PutObject).
+
+To learn how to migrate to the 3.x major version of the encryption client, see
+[this guide](https://docs.aws.amazon.com/amazon-s3-encryption-client/latest/developerguide/go-v3-migration.html).

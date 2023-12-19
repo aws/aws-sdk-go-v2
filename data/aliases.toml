@@ -1,5 +1,6 @@
 sdk-go = "AWS SDK for Go V2"
 sdk-api = "AWS SDK for Go V2 API Reference"
+min-go-version = "1.19"
 
 [service]
 AASlong = "Amazon AppStream"
