@@ -909,6 +909,10 @@ level (and in reality most AWS service operations do not support presigning).
 implementations in service packages with specific APIs for supported
 presignable operations.
 
+**Note: If a service is missing presigning support for an operation that you
+were successfully using in SDK v1, please let us know by
+[filing an issue on GitHub](https://github.com/aws/aws-sdk-go-v2/issues).**
+
 Uses of [Presign]({{< apiref v1="aws/request#Request.Presign" >}}) and
 [PresignRequest]({{< apiref v1="aws/request#Request.PresignRequest" >}}) must
 be converted to use service-specific presigning clients.
