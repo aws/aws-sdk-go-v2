@@ -1,3 +1,7 @@
+# v1.7.0 (2023-12-20)
+
+* **Feature**: Adding Confirmation Status and Execution Status to GetTransaction Response.
+
 # v1.6.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

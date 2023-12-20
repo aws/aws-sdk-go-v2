@@ -1,3 +1,7 @@
+# v1.23.1 (2023-12-20)
+
+* No change notes available for this release.
+
 # v1.23.0 (2023-12-14)
 
 * **Feature**: This release, 1) adds configurable buffering hints for the Splunk destination, and 2) reduces the minimum configurable buffering interval for supported destinations

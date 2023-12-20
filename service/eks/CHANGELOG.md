@@ -1,3 +1,7 @@
+# v1.37.0 (2023-12-20)
+
+* **Feature**: Add support for cluster insights, new EKS capability that surfaces potentially upgrade impacting issues.
+
 # v1.36.0 (2023-12-18)
 
 * **Feature**: Add support for EKS Cluster Access Management.

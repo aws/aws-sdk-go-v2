@@ -1,3 +1,7 @@
+# v1.27.1 (2023-12-20)
+
+* No change notes available for this release.
+
 # v1.27.0 (2023-12-14)
 
 * **Feature**: Updating documentation for Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3.

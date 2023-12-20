@@ -1,3 +1,7 @@
+# v1.44.1 (2023-12-20)
+
+* No change notes available for this release.
+
 # v1.44.0 (2023-12-11)
 
 * **Feature**: Added new resource detail objects to ASFF, including resources for AwsDynamoDbTable, AwsEc2ClientVpnEndpoint, AwsMskCluster, AwsS3AccessPoint, AwsS3Bucket

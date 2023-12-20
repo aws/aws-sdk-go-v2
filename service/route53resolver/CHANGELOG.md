@@ -1,3 +1,7 @@
+# v1.24.1 (2023-12-20)
+
+* No change notes available for this release.
+
 # v1.24.0 (2023-12-18)
 
 * **Feature**: Add DOH protocols in resolver endpoints.

@@ -1,3 +1,7 @@
+# v1.33.0 (2023-12-20)
+
+* **Feature**: Adds the ability to configure time shifting on MediaTailor channels using the TimeShiftConfiguration field
+
 # v1.32.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

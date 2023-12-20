@@ -1,3 +1,7 @@
+# v1.30.1 (2023-12-20)
+
+* No change notes available for this release.
+
 # v1.30.0 (2023-12-12)
 
 * **Feature**: This release introduces the StartLiveTail API to tail ingested logs in near real time.

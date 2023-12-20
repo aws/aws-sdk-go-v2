@@ -1,8 +1,0 @@
-{
-    "id": "7e7c1284-b0a9-4993-9659-76e2d7d87861",
-    "type": "feature",
-    "description": "This release 1) introduces a new API: GetOrganizationStatistics , and 2) adds a new UsageStatisticType TOP_ACCOUNTS_BY_FEATURE for GetUsageStatistics API",
-    "modules": [
-        "service/guardduty"
-    ]
-}

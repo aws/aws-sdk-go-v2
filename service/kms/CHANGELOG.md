@@ -1,3 +1,7 @@
+# v1.27.7 (2023-12-20)
+
+* No change notes available for this release.
+
 # v1.27.6 (2023-12-15)
 
 * **Documentation**: Documentation updates for AWS Key Management Service

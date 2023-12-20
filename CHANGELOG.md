@@ -1,3 +1,22 @@
+# Release (2023-12-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.31.0](service/appstream/CHANGELOG.md#v1310-2023-12-20)
+  * **Feature**: This release introduces configurable clipboard, allowing admins to specify the maximum length of text that can be copied by the users from their device to the remote session and vice-versa.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.37.0](service/eks/CHANGELOG.md#v1370-2023-12-20)
+  * **Feature**: Add support for cluster insights, new EKS capability that surfaces potentially upgrade impacting issues.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.36.0](service/guardduty/CHANGELOG.md#v1360-2023-12-20)
+  * **Feature**: This release 1) introduces a new API: GetOrganizationStatistics , and 2) adds a new UsageStatisticType TOP_ACCOUNTS_BY_FEATURE for GetUsageStatistics API
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.7.0](service/managedblockchainquery/CHANGELOG.md#v170-2023-12-20)
+  * **Feature**: Adding Confirmation Status and Execution Status to GetTransaction Response.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.33.0](service/mediatailor/CHANGELOG.md#v1330-2023-12-20)
+  * **Feature**: Adds the ability to configure time shifting on MediaTailor channels using the TimeShiftConfiguration field
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.36.0](service/route53/CHANGELOG.md#v1360-2023-12-20)
+  * **Feature**: Amazon Route 53 now supports the Canada West (Calgary) Region (ca-west-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 # Release (2023-12-19)
 
 ## Module Highlights

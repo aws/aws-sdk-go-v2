@@ -1,8 +1,0 @@
-{
-    "id": "a0d9e6b3-e846-4ddb-b290-17bbd54f804f",
-    "type": "feature",
-    "description": "Add support for cluster insights, new EKS capability that surfaces potentially upgrade impacting issues.",
-    "modules": [
-        "service/eks"
-    ]
-}

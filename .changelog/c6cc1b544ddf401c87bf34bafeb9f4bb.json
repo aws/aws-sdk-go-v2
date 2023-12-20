@@ -1,8 +1,0 @@
-{
-    "id": "c6cc1b54-4ddf-401c-87bf-34bafeb9f4bb",
-    "type": "feature",
-    "description": "Adding Confirmation Status and Execution Status to GetTransaction Response.",
-    "modules": [
-        "service/managedblockchainquery"
-    ]
-}
