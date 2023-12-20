@@ -738,6 +738,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tier of the channel.</p>"
                     }
+                },
+                "TimeShiftConfiguration": {
+                    "target": "com.amazonaws.mediatailor#TimeShiftConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time-shifted viewing configuration you want to associate to the channel.\n        </p>"
+                    }
                 }
             }
         },
@@ -809,6 +815,12 @@
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The tier of the channel.</p>",
                         "smithy.api#unstable": {}
+                    }
+                },
+                "TimeShiftConfiguration": {
+                    "target": "com.amazonaws.mediatailor#TimeShiftConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time-shifted viewing configuration assigned to the channel.\n        </p>"
                     }
                 }
             }
@@ -1890,6 +1902,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The log configuration for the channel.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "TimeShiftConfiguration": {
+                    "target": "com.amazonaws.mediatailor#TimeShiftConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time-shifted viewing configuration for the channel.\n        </p>"
                     }
                 }
             }
@@ -5545,6 +5563,21 @@
                 }
             }
         },
+        "com.amazonaws.mediatailor#TimeShiftConfiguration": {
+            "type": "structure",
+            "members": {
+                "MaxTimeDelaySeconds": {
+                    "target": "com.amazonaws.mediatailor#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, \n            and the maximum allowed maximum time delay is 21600 seconds (6 hours).\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The configuration for time-shifted viewing.\n        </p>"
+            }
+        },
         "com.amazonaws.mediatailor#TimeSignalMessage": {
             "type": "structure",
             "members": {
@@ -5701,6 +5734,12 @@
                         "smithy.api#documentation": "<p>The channel's output properties.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "TimeShiftConfiguration": {
+                    "target": "com.amazonaws.mediatailor#TimeShiftConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time-shifted viewing configuration you want to associate to the channel.\n        </p>"
+                    }
                 }
             }
         },
@@ -5772,6 +5811,12 @@
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The tier associated with this Channel.</p>",
                         "smithy.api#unstable": {}
+                    }
+                },
+                "TimeShiftConfiguration": {
+                    "target": "com.amazonaws.mediatailor#TimeShiftConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time-shifted viewing configuration for the channel.\n        </p>"
                     }
                 }
             }

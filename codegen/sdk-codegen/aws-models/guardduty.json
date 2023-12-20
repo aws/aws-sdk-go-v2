@@ -1288,13 +1288,13 @@
                 "ManagementType": {
                     "target": "com.amazonaws.guardduty#ManagementType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how the GuardDuty security agent is managed for this resource.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTO_MANAGED</code> indicates that GuardDuty deploys and manages updates for this resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANUAL</code> indicates that you are responsible to deploy, update, and manage the GuardDuty \n          security agent updates for this resource.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>DISABLED</code> status doesn't apply to Amazon \n    EC2 instances and Amazon EKS clusters that run on Amazon EC2 instances.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Indicates how the GuardDuty security agent is managed for this resource.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTO_MANAGED</code> indicates that GuardDuty deploys and manages updates for this resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANUAL</code> indicates that you are responsible to deploy, update, and manage the GuardDuty \n          security agent updates for this resource.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>DISABLED</code> status doesn't apply to Amazon \n    EC2 instances and Amazon EKS clusters.</p>\n         </note>",
                         "smithy.api#jsonName": "managementType"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This API is also used when you use GuardDuty Runtime Monitoring \n      for your Amazon EC2 instances (currently in preview\n      release) and is subject to change.</p>\n         </note>\n         <p>Contains information about the Amazon EC2 instance runtime \n    coverage details.</p>"
+                "smithy.api#documentation": "<note>\n            <p>This API is also used when you use GuardDuty Runtime Monitoring \n      for your Amazon EC2 instances (currently in preview\n      release) and is subject to change. The use of this API is subject to Section 2 of the \n      <a href=\"http://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (\"Betas and Previews\").</p>\n         </note>\n         <p>Contains information about the Amazon EC2 instance runtime \n    coverage details.</p>"
             }
         },
         "com.amazonaws.guardduty#CoverageEcsClusterDetails": {
@@ -1595,7 +1595,7 @@
                 "Ec2InstanceDetails": {
                     "target": "com.amazonaws.guardduty#CoverageEc2InstanceDetails",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>This API is also used when you use GuardDuty Runtime Monitoring \n      for your Amazon EC2 instances (currently in preview\n      release) and is subject to change.</p>\n         </note>\n         <p>Information about the Amazon EC2 instance assessed \n      for runtime coverage.</p>",
+                        "smithy.api#documentation": "<note>\n            <p>This API is also used when you use GuardDuty Runtime Monitoring \n      for your Amazon EC2 instances (currently in preview\n      release) and is subject to change. The use of this API is subject to Section 2 of the \n      <a href=\"http://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (\"Betas and Previews\").</p>\n         </note>\n         <p>Information about the Amazon EC2 instance assessed \n      for runtime coverage.</p>",
                         "smithy.api#jsonName": "ec2InstanceDetails"
                     }
                 }
@@ -2096,7 +2096,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account\n      IDs. This step is a prerequisite for managing the associated member accounts either by\n      invitation or through an organization.</p>\n         <p>As a delegated administrator, using <code>CreateMembers</code> will enable GuardDuty in \n      the added member accounts, with the exception of the\n      organization delegated administrator account. A delegated administrator must enable GuardDuty \n      prior to being added as a member.</p>\n         <p>If you are adding accounts by invitation, before using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a>, use \n      <code>CreateMembers</code> after GuardDuty has been enabled in potential member accounts.</p>\n         <p>If you disassociate a member from a GuardDuty \n      delegated administrator, the member account details \n      obtained from this API, including the associated email addresses, will be retained. \n      This is done so that the delegated administrator can invoke the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a> API without the need to invoke the CreateMembers API again. To \n      remove the details associated with a member account, the delegated administrator must invoke the \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a> API. </p>",
+                "smithy.api#documentation": "<p>Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account\n      IDs. This step is a prerequisite for managing the associated member accounts either by\n      invitation or through an organization.</p>\n         <p>As a delegated administrator, using <code>CreateMembers</code> will enable GuardDuty in \n      the added member accounts, with the exception of the\n      organization delegated administrator account. A delegated administrator must enable GuardDuty \n      prior to being added as a member.</p>\n         <p>When you use CreateMembers as an Organizations delegated \n      administrator, GuardDuty applies your organization's auto-enable settings to the member\n      accounts in this request, irrespective of the accounts being new or existing members. For \n      more information about the existing auto-enable settings for your organization, see\n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeOrganizationConfiguration.html\">DescribeOrganizationConfiguration</a>.</p>\n         <p>If you are adding accounts by invitation, before using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a>, use \n      <code>CreateMembers</code> after GuardDuty has been enabled in potential member accounts.</p>\n         <p>If you disassociate a member from a GuardDuty \n      delegated administrator, the member account details \n      obtained from this API, including the associated email addresses, will be retained. \n      This is done so that the delegated administrator can invoke the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a> API without the need to invoke the CreateMembers API again. To \n      remove the details associated with a member account, the delegated administrator must invoke the \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a> API. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/member",
@@ -4577,20 +4577,20 @@
                 "Issues": {
                     "target": "com.amazonaws.guardduty#Issues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Runtime coverage issues identified for the resource running on AWS Fargate.</p>",
+                        "smithy.api#documentation": "<p>Runtime coverage issues identified for the resource running on Amazon Web Services Fargate.</p>",
                         "smithy.api#jsonName": "issues"
                     }
                 },
                 "ManagementType": {
                     "target": "com.amazonaws.guardduty#ManagementType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how the GuardDuty security agent is managed for this resource.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTO_MANAGED</code> indicates that GuardDuty deploys and manages updates for this resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANUAL</code> indicates that you are responsible to deploy, update, and manage the GuardDuty \n        security agent updates for this resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> indicates that the deployment of the GuardDuty security agent is disabled for this resource.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Indicates how the GuardDuty security agent is managed for this resource.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTO_MANAGED</code> indicates that GuardDuty deploys and manages updates for this resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> indicates that the deployment of the GuardDuty security agent is disabled for this resource.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>MANUAL</code> status doesn't apply to the Amazon Web Services Fargate (Amazon ECS only) woprkloads.</p>\n         </note>",
                         "smithy.api#jsonName": "managementType"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about AWS Fargate details associated with \n      an Amazon ECS cluster.</p>"
+                "smithy.api#documentation": "<p>Contains information about Amazon Web Services Fargate details associated with \n      an Amazon ECS cluster.</p>"
             }
         },
         "com.amazonaws.guardduty#FeatureAdditionalConfiguration": {
@@ -5271,7 +5271,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves aggregated statistics for your account. If you are a GuardDuty administrator, you\n      can retrieve the statistics for all the resources associated with the active member accounts\n      in your organization who have enabled EKS Runtime Monitoring and have the GuardDuty agent running\n      on their EKS nodes.</p>",
+                "smithy.api#documentation": "<p>Retrieves aggregated statistics for your account. If you are a GuardDuty administrator, you\n      can retrieve the statistics for all the resources associated with the active member accounts\n      in your organization who have enabled Runtime Monitoring and have the GuardDuty security agent running\n      on their resources.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/coverage/statistics",
@@ -6132,6 +6132,46 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#GetOrganizationStatistics": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#GetOrganizationStatisticsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves how many active member accounts \n      in your Amazon Web Services organization have\n      each feature enabled within GuardDuty. Only a delegated GuardDuty administrator of an organization can run this API.</p>\n         <p>When you create a new Amazon Web Services organization, it might take up to 24 \n      hours to generate the statistics for the entire organization.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/organization/statistics",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GetOrganizationStatisticsResponse": {
+            "type": "structure",
+            "members": {
+                "OrganizationDetails": {
+                    "target": "com.amazonaws.guardduty#OrganizationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the statistics report for your organization.</p>",
+                        "smithy.api#jsonName": "organizationDetails"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#GetRemainingFreeTrialDays": {
             "type": "operation",
             "input": {
@@ -6536,6 +6576,9 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#GetMembers"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#GetOrganizationStatistics"
                 },
                 {
                     "target": "com.amazonaws.guardduty#GetRemainingFreeTrialDays"
@@ -8726,7 +8769,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists coverage details for your GuardDuty account. If you're a GuardDuty administrator, you can\n      retrieve all resources associated with the active member accounts in your organization.</p>\n         <p>Make sure the accounts have EKS Runtime Monitoring enabled and GuardDuty agent running on\n      their EKS nodes.</p>",
+                "smithy.api#documentation": "<p>Lists coverage details for your GuardDuty account. If you're a GuardDuty administrator, you can\n      retrieve all resources associated with the active member accounts in your organization.</p>\n         <p>Make sure the accounts have Runtime Monitoring enabled and GuardDuty agent running on\n      their resources.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/coverage",
@@ -10593,6 +10636,28 @@
                 "smithy.api#documentation": "<p>An object that contains information on which data sources are automatically enabled for\n      new members within the organization.</p>"
             }
         },
+        "com.amazonaws.guardduty#OrganizationDetails": {
+            "type": "structure",
+            "members": {
+                "UpdatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the organization statistics\n      was last updated. This is in\n      UTC format.</p>",
+                        "smithy.api#jsonName": "updatedAt"
+                    }
+                },
+                "OrganizationStatistics": {
+                    "target": "com.amazonaws.guardduty#OrganizationStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the GuardDuty coverage statistics \n      for members in your Amazon Web Services organization.</p>",
+                        "smithy.api#jsonName": "organizationStatistics"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about GuardDuty coverage statistics for members\n      in your Amazon Web Services organization.</p>"
+            }
+        },
         "com.amazonaws.guardduty#OrganizationEbsVolumes": {
             "type": "structure",
             "members": {
@@ -10679,6 +10744,69 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of features which will be configured for the organization.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationFeatureStatistics": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#OrgFeature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the feature.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "EnabledAccountsCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of accounts that have enabled a specific\n      feature.</p>",
+                        "smithy.api#jsonName": "enabledAccountsCount"
+                    }
+                },
+                "AdditionalConfiguration": {
+                    "target": "com.amazonaws.guardduty#OrganizationFeatureStatisticsAdditionalConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the additional configuration.</p>",
+                        "smithy.api#jsonName": "additionalConfiguration"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the number of accounts\n      that have enabled a specific feature.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationFeatureStatisticsAdditionalConfiguration": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#OrgFeatureAdditionalConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the additional configuration within a feature.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "EnabledAccountsCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of accounts that have enabled the additional\n      configuration.</p>",
+                        "smithy.api#jsonName": "enabledAccountsCount"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the coverage \n      statistic for the additional \n    configuration of the feature.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationFeatureStatisticsAdditionalConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#OrganizationFeatureStatisticsAdditionalConfiguration"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationFeatureStatisticsResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#OrganizationFeatureStatistics"
             }
         },
         "com.amazonaws.guardduty#OrganizationFeaturesConfigurations": {
@@ -10853,6 +10981,49 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains information on the status of scanning EC2 instances with findings\n      for an organization.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationStatistics": {
+            "type": "structure",
+            "members": {
+                "TotalAccountsCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of accounts in your Amazon Web Services organization.</p>",
+                        "smithy.api#jsonName": "totalAccountsCount"
+                    }
+                },
+                "MemberAccountsCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of accounts in your Amazon Web Services organization \n      that are associated with GuardDuty.</p>",
+                        "smithy.api#jsonName": "memberAccountsCount"
+                    }
+                },
+                "ActiveAccountsCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of active accounts in your Amazon Web Services \n      organization that are associated with GuardDuty.</p>",
+                        "smithy.api#jsonName": "activeAccountsCount"
+                    }
+                },
+                "EnabledAccountsCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of accounts that have enabled GuardDuty.</p>",
+                        "smithy.api#jsonName": "enabledAccountsCount"
+                    }
+                },
+                "CountByFeature": {
+                    "target": "com.amazonaws.guardduty#OrganizationFeatureStatisticsResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the coverage \n      statistics for each feature.</p>",
+                        "smithy.api#jsonName": "countByFeature"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the coverage statistics of the \n      features for the entire \n      Amazon Web Services organization.</p>\n         <p>When you create a new Amazon Web Services organization, it might \n      take up to 24 hours to \n      generate the statistics summary for this organization.</p>"
             }
         },
         "com.amazonaws.guardduty#Owner": {
@@ -14227,6 +14398,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SUM_BY_FEATURES"
                     }
+                },
+                "TOP_ACCOUNTS_BY_FEATURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOP_ACCOUNTS_BY_FEATURE"
+                    }
                 }
             }
         },
@@ -14238,6 +14415,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The usage statistic sum organized by account ID.</p>",
                         "smithy.api#jsonName": "sumByAccount"
+                    }
+                },
+                "TopAccountsByFeature": {
+                    "target": "com.amazonaws.guardduty#UsageTopAccountsResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the top 50 accounts by feature that have generated the most\n      GuardDuty usage, in the order from most to least expensive.</p>\n         <p>Currently, this doesn't support <code>RDS_LOGIN_EVENTS</code>.</p>",
+                        "smithy.api#jsonName": "topAccountsByFeature"
                     }
                 },
                 "SumByDataSource": {
@@ -14271,6 +14455,61 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the result of GuardDuty usage. If a UsageStatisticType is provided the result for\n      other types will be null. </p>"
+            }
+        },
+        "com.amazonaws.guardduty#UsageTopAccountResult": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.guardduty#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique account ID.</p>",
+                        "smithy.api#jsonName": "accountId"
+                    }
+                },
+                "Total": {
+                    "target": "com.amazonaws.guardduty#Total",
+                    "traits": {
+                        "smithy.api#jsonName": "total"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on the total of usage based on the topmost 50 \n      account IDs.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#UsageTopAccountsByFeatureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#UsageTopAccountResult"
+            }
+        },
+        "com.amazonaws.guardduty#UsageTopAccountsResult": {
+            "type": "structure",
+            "members": {
+                "Feature": {
+                    "target": "com.amazonaws.guardduty#UsageFeature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Features by which you can generate the usage statistics.</p>\n         <p>\n            <code>RDS_LOGIN_EVENTS</code> is currently not supported \n      with <code>topAccountsByFeature</code>.</p>",
+                        "smithy.api#jsonName": "feature"
+                    }
+                },
+                "Accounts": {
+                    "target": "com.amazonaws.guardduty#UsageTopAccountsByFeatureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accounts that contributed to the total usage cost.</p>",
+                        "smithy.api#jsonName": "accounts"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the usage statistics, calculated\n      by top accounts by feature.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#UsageTopAccountsResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#UsageTopAccountsResult"
             }
         },
         "com.amazonaws.guardduty#Volume": {

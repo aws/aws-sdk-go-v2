@@ -1520,6 +1520,50 @@
                             }
                         },
                         {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "route53",
+                                                "signingRegion": "eu-isoe-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://route53.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "route53",
+                                                "signingRegion": "us-isof-south-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://route53.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
                             "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1574,17 +1618,6 @@
                             "documentation": "Missing region",
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
-                            }
-                        },
-                        {
-                            "documentation": "Partition doesn't support DualStack",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         }
                     ],
@@ -2881,6 +2914,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "il-central-1"
+                    }
+                },
+                "ca_west_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-west-1"
                     }
                 }
             },
@@ -9868,7 +9907,7 @@
                 "Name": {
                     "target": "com.amazonaws.route53#DNSName",
                     "traits": {
-                        "smithy.api#documentation": "<p>For <code>ChangeResourceRecordSets</code> requests, the name of the record that you\n\t\t\twant to create, update, or delete. For <code>ListResourceRecordSets</code> responses,\n\t\t\tthe name of a record in the specified hosted zone.</p>\n         <p>\n            <b>ChangeResourceRecordSets Only</b>\n         </p>\n         <p>Enter a fully qualified domain name, for example, <code>www.example.com</code>. You\n\t\t\tcan optionally include a trailing dot. If you omit the trailing dot, Amazon Route 53\n\t\t\tassumes that the domain name that you specify is fully qualified. This means that Route\n\t\t\t53 treats <code>www.example.com</code> (without a trailing dot) and\n\t\t\t\t<code>www.example.com.</code> (with a trailing dot) as identical.</p>\n         <p>For information about how to specify characters other than <code>a-z</code>,\n\t\t\t\t<code>0-9</code>, and <code>-</code> (hyphen) and how to specify internationalized\n\t\t\tdomain names, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html\">DNS Domain Name\n\t\t\t\tFormat</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n         <p>You can use the asterisk (*) wildcard to replace the leftmost label in a domain name,\n\t\t\tfor example, <code>*.example.com</code>. Note the following:</p>\n         <ul>\n            <li>\n               <p>The * must replace the entire label. For example, you can't specify\n\t\t\t\t\t\t<code>*prod.example.com</code> or <code>prod*.example.com</code>.</p>\n            </li>\n            <li>\n               <p>The * can't replace any of the middle labels, for example,\n\t\t\t\t\tmarketing.*.example.com.</p>\n            </li>\n            <li>\n               <p>If you include * in any position other than the leftmost label in a domain\n\t\t\t\t\tname, DNS treats it as an * character (ASCII 42), not as a wildcard.</p>\n               <important>\n                  <p>You can't use the * wildcard for resource records sets that have a type of\n\t\t\t\t\t\tNS.</p>\n               </important>\n            </li>\n         </ul>\n         <p>You can use the * wildcard as the leftmost label in a domain name, for example,\n\t\t\t\t<code>*.example.com</code>. You can't use an * for one of the middle labels, for\n\t\t\texample, <code>marketing.*.example.com</code>. In addition, the * must replace the\n\t\t\tentire label; for example, you can't specify <code>prod*.example.com</code>.</p>",
+                        "smithy.api#documentation": "<p>For <code>ChangeResourceRecordSets</code> requests, the name of the record that you\n\t\t\twant to create, update, or delete. For <code>ListResourceRecordSets</code> responses,\n\t\t\tthe name of a record in the specified hosted zone.</p>\n         <p>\n            <b>ChangeResourceRecordSets Only</b>\n         </p>\n         <p>Enter a fully qualified domain name, for example, <code>www.example.com</code>. You\n\t\t\tcan optionally include a trailing dot. If you omit the trailing dot, Amazon Route 53\n\t\t\tassumes that the domain name that you specify is fully qualified. This means that Route\n\t\t\t53 treats <code>www.example.com</code> (without a trailing dot) and\n\t\t\t\t<code>www.example.com.</code> (with a trailing dot) as identical.</p>\n         <p>For information about how to specify characters other than <code>a-z</code>,\n\t\t\t\t<code>0-9</code>, and <code>-</code> (hyphen) and how to specify internationalized\n\t\t\tdomain names, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html\">DNS Domain Name\n\t\t\t\tFormat</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n         <p>You can use the asterisk (*) wildcard to replace the leftmost label in a domain name,\n\t\t\tfor example, <code>*.example.com</code>. Note the following:</p>\n         <ul>\n            <li>\n               <p>The * must replace the entire label. For example, you can't specify\n\t\t\t\t\t\t<code>*prod.example.com</code> or <code>prod*.example.com</code>.</p>\n            </li>\n            <li>\n               <p>The * can't replace any of the middle labels, for example,\n\t\t\t\t\tmarketing.*.example.com.</p>\n            </li>\n            <li>\n               <p>If you include * in any position other than the leftmost label in a domain\n\t\t\t\t\tname, DNS treats it as an * character (ASCII 42), not as a wildcard.</p>\n               <important>\n                  <p>You can't use the * wildcard for resource records sets that have a type of\n\t\t\t\t\t\tNS.</p>\n               </important>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10163,6 +10202,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "il-central-1"
+                    }
+                },
+                "ca_west_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-west-1"
                     }
                 }
             },
@@ -11779,6 +11824,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "il-central-1"
+                    }
+                },
+                "ca_west_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-west-1"
                     }
                 }
             },

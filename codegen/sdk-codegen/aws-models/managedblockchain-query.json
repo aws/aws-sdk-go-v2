@@ -24,7 +24,7 @@
                 "contractIdentifier": {
                     "target": "com.amazonaws.managedblockchainquery#ContractIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The container for the contract identifier containing its blockchain network \n             and address.</p>",
+                        "smithy.api#documentation": "<p>The container for the contract identifier containing its blockchain network \n       and address.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -274,6 +274,17 @@
                 "smithy.api#pattern": "^[-A-Za-z0-9]{13,74}$"
             }
         },
+        "com.amazonaws.managedblockchainquery#ConfirmationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FINAL",
+                        "name": "FINAL"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.managedblockchainquery#ContractFilter": {
             "type": "structure",
             "members": {
@@ -374,6 +385,21 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ExecutionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
+                    }
+                ]
             }
         },
         "com.amazonaws.managedblockchainquery#GetAssetContract": {
@@ -1154,6 +1180,11 @@
                         "documentation": "Ethereum main network"
                     },
                     {
+                        "value": "ETHEREUM_SEPOLIA_TESTNET",
+                        "name": "ETHEREUM_SEPOLIA_TESTNET",
+                        "documentation": "SEPOLIA network (ethereum testnet)"
+                    },
+                    {
                         "value": "BITCOIN_MAINNET",
                         "name": "BITCOIN_MAINNET",
                         "documentation": "Bitcoin main network"
@@ -1162,11 +1193,6 @@
                         "value": "BITCOIN_TESTNET",
                         "name": "BITCOIN_TESTNET",
                         "documentation": "Bitcoin test network"
-                    },
-                    {
-                        "value": "ETHEREUM_SEPOLIA_TESTNET",
-                        "name": "ETHEREUM_SEPOLIA_TESTNET",
-                        "documentation": "SEPOLIA network (ethereum testnet)"
                     }
                 ]
             }
@@ -2324,8 +2350,10 @@
                 "status": {
                     "target": "com.amazonaws.managedblockchainquery#QueryTransactionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the transaction.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "The status field in the GetTransaction response is deprecated and is replaced with the confirmationStatus and executionStatus fields."
+                        },
+                        "smithy.api#documentation": "<p>The status of the transaction.</p>\n         <important>\n            <p>This property is deprecated. You must use the <code>confirmationStatus</code> \n            and the <code>executionStatus</code> properties to determine if the <code>status</code> \n            of the transaction is <code>FINAL</code> or <code>FAILED</code>.</p>\n            <ul>\n               <li>\n                  <p>Transactions with a <code>status</code> of <code>FINAL</code> will now have the <code>confirmationStatus</code> set \n               to <code>FINAL</code> and the <code>executionStatus</code> set to <code>SUCCEEDED</code>.</p>\n               </li>\n               <li>\n                  <p>Transactions with a <code>status</code> of <code>FAILED</code> will now have the <code>confirmationStatus</code> set \n               to <code>FINAL</code> and the <code>executionStatus</code> set to <code>FAILED</code>.</p>\n               </li>\n            </ul>\n         </important>"
                     }
                 },
                 "to": {
@@ -2393,6 +2421,18 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>"
+                    }
+                },
+                "confirmationStatus": {
+                    "target": "com.amazonaws.managedblockchainquery#ConfirmationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the transaction has reached Finality.</p>"
+                    }
+                },
+                "executionStatus": {
+                    "target": "com.amazonaws.managedblockchainquery#ExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies whether the transaction has succeeded or failed.</p>"
                     }
                 }
             },
