@@ -15,6 +15,8 @@ import (
 	"unicode"
 )
 
+var customBase64Encoding = base64.NewEncoding("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-~").WithPadding('_')
+
 // An AWSEpochTime wraps a time value providing JSON serialization needed for
 // AWS Policy epoch time fields.
 type AWSEpochTime struct {
@@ -101,14 +103,12 @@ func (p *Policy) Sign(signer crypto.Signer) (b64Signature, b64Policy []byte, err
 	if err != nil {
 		return nil, nil, err
 	}
-	awsEscapeEncoded(b64Policy)
 
 	// Build and escape the signature
 	b64Signature, err = signEncodedPolicy(randReader, jsonPolicy, signer)
 	if err != nil {
 		return nil, nil, err
 	}
-	awsEscapeEncoded(b64Signature)
 
 	return b64Signature, b64Policy, nil
 }
@@ -192,8 +192,8 @@ func encodePolicy(p *Policy) (b64Policy, jsonPolicy []byte, err error) {
 	// whitespace within the encoding.
 	jsonPolicy = bytes.TrimSpace(jsonPolicy)
 
-	b64Policy = make([]byte, base64.StdEncoding.EncodedLen(len(jsonPolicy)))
-	base64.StdEncoding.Encode(b64Policy, jsonPolicy)
+	b64Policy = make([]byte, customBase64Encoding.EncodedLen(len(jsonPolicy)))
+	customBase64Encoding.Encode(b64Policy, jsonPolicy)
 	return b64Policy, jsonPolicy, nil
 }
 
@@ -209,25 +209,9 @@ func signEncodedPolicy(randReader io.Reader, jsonPolicy []byte, signer crypto.Si
 		return nil, fmt.Errorf("failed to sign policy, %s", err.Error())
 	}
 
-	b64Sig := make([]byte, base64.StdEncoding.EncodedLen(len(sig)))
-	base64.StdEncoding.Encode(b64Sig, sig)
+	b64Sig := make([]byte, customBase64Encoding.EncodedLen(len(sig)))
+	customBase64Encoding.Encode(b64Sig, sig)
 	return b64Sig, nil
-}
-
-// special characters to be replaced with awsEscapeEncoded
-var invalidEncodedChar = map[byte]byte{
-	'+': '-',
-	'=': '_',
-	'/': '~',
-}
-
-// awsEscapeEncoded will replace base64 encoding's special characters to be URL safe.
-func awsEscapeEncoded(b []byte) {
-	for i, v := range b {
-		if r, ok := invalidEncodedChar[v]; ok {
-			b[i] = r
-		}
-	}
 }
 
 func isASCII(u string) bool {
