@@ -2625,6 +2625,15 @@ func awsRestjson1_deserializeDocumentTransaction(v **types.Transaction, value in
 				sv.BlockNumber = ptr.String(jtv)
 			}
 
+		case "confirmationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfirmationStatus to be of type string, got %T instead", value)
+				}
+				sv.ConfirmationStatus = types.ConfirmationStatus(jtv)
+			}
+
 		case "contractAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2650,6 +2659,15 @@ func awsRestjson1_deserializeDocumentTransaction(v **types.Transaction, value in
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.EffectiveGasPrice = ptr.String(jtv)
+			}
+
+		case "executionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionStatus to be of type string, got %T instead", value)
+				}
+				sv.ExecutionStatus = types.ExecutionStatus(jtv)
 			}
 
 		case "from":

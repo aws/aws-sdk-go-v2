@@ -4592,6 +4592,11 @@ func awsAwsjson11_serializeDocumentUserSetting(v *types.UserSetting, value smith
 		ok.String(string(v.Action))
 	}
 
+	if v.MaximumLength != nil {
+		ok := object.Key("MaximumLength")
+		ok.Integer(*v.MaximumLength)
+	}
+
 	if len(v.Permission) > 0 {
 		ok := object.Key("Permission")
 		ok.String(string(v.Permission))

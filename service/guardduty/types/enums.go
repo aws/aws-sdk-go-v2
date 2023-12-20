@@ -882,11 +882,12 @@ type UsageStatisticType string
 
 // Enum values for UsageStatisticType
 const (
-	UsageStatisticTypeSumByAccount    UsageStatisticType = "SUM_BY_ACCOUNT"
-	UsageStatisticTypeSumByDataSource UsageStatisticType = "SUM_BY_DATA_SOURCE"
-	UsageStatisticTypeSumByResource   UsageStatisticType = "SUM_BY_RESOURCE"
-	UsageStatisticTypeTopResources    UsageStatisticType = "TOP_RESOURCES"
-	UsageStatisticTypeSumByFeatures   UsageStatisticType = "SUM_BY_FEATURES"
+	UsageStatisticTypeSumByAccount         UsageStatisticType = "SUM_BY_ACCOUNT"
+	UsageStatisticTypeSumByDataSource      UsageStatisticType = "SUM_BY_DATA_SOURCE"
+	UsageStatisticTypeSumByResource        UsageStatisticType = "SUM_BY_RESOURCE"
+	UsageStatisticTypeTopResources         UsageStatisticType = "TOP_RESOURCES"
+	UsageStatisticTypeSumByFeatures        UsageStatisticType = "SUM_BY_FEATURES"
+	UsageStatisticTypeTopAccountsByFeature UsageStatisticType = "TOP_ACCOUNTS_BY_FEATURE"
 )
 
 // Values returns all known values for UsageStatisticType. Note that this can be
@@ -899,5 +900,6 @@ func (UsageStatisticType) Values() []UsageStatisticType {
 		"SUM_BY_RESOURCE",
 		"TOP_RESOURCES",
 		"SUM_BY_FEATURES",
+		"TOP_ACCOUNTS_BY_FEATURE",
 	}
 }

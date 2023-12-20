@@ -12,47 +12,34 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves aggregated statistics for your account. If you are a GuardDuty
-// administrator, you can retrieve the statistics for all the resources associated
-// with the active member accounts in your organization who have enabled Runtime
-// Monitoring and have the GuardDuty security agent running on their resources.
-func (c *Client) GetCoverageStatistics(ctx context.Context, params *GetCoverageStatisticsInput, optFns ...func(*Options)) (*GetCoverageStatisticsOutput, error) {
+// Retrieves how many active member accounts in your Amazon Web Services
+// organization have each feature enabled within GuardDuty. Only a delegated
+// GuardDuty administrator of an organization can run this API. When you create a
+// new Amazon Web Services organization, it might take up to 24 hours to generate
+// the statistics for the entire organization.
+func (c *Client) GetOrganizationStatistics(ctx context.Context, params *GetOrganizationStatisticsInput, optFns ...func(*Options)) (*GetOrganizationStatisticsOutput, error) {
 	if params == nil {
-		params = &GetCoverageStatisticsInput{}
+		params = &GetOrganizationStatisticsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCoverageStatistics", params, optFns, c.addOperationGetCoverageStatisticsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOrganizationStatistics", params, optFns, c.addOperationGetOrganizationStatisticsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetCoverageStatisticsOutput)
+	out := result.(*GetOrganizationStatisticsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetCoverageStatisticsInput struct {
-
-	// The unique ID of the GuardDuty detector associated to the coverage statistics.
-	//
-	// This member is required.
-	DetectorId *string
-
-	// Represents the statistics type used to aggregate the coverage details.
-	//
-	// This member is required.
-	StatisticsType []types.CoverageStatisticsType
-
-	// Represents the criteria used to filter the coverage statistics
-	FilterCriteria *types.CoverageFilterCriteria
-
+type GetOrganizationStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
-type GetCoverageStatisticsOutput struct {
+type GetOrganizationStatisticsOutput struct {
 
-	// Represents the count aggregated by the statusCode and resourceType .
-	CoverageStatistics *types.CoverageStatistics
+	// Information about the statistics report for your organization.
+	OrganizationDetails *types.OrganizationDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,19 +47,19 @@ type GetCoverageStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetCoverageStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOrganizationStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCoverageStatistics{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOrganizationStatistics{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCoverageStatistics{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOrganizationStatistics{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCoverageStatistics"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOrganizationStatistics"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -115,10 +102,7 @@ func (c *Client) addOperationGetCoverageStatisticsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetCoverageStatisticsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCoverageStatistics(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOrganizationStatistics(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -139,10 +123,10 @@ func (c *Client) addOperationGetCoverageStatisticsMiddlewares(stack *middleware.
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetCoverageStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetOrganizationStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetCoverageStatistics",
+		OperationName: "GetOrganizationStatistics",
 	}
 }

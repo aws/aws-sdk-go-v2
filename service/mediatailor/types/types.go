@@ -1089,6 +1089,19 @@ type SpliceInsertMessage struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for time-shifted viewing.
+type TimeShiftConfiguration struct {
+
+	// The maximum time delay for time-shifted viewing. The minimum allowed maximum
+	// time delay is 0 seconds, and the maximum allowed maximum time delay is 21600
+	// seconds (6 hours).
+	//
+	// This member is required.
+	MaxTimeDelaySeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The SCTE-35 time_signal message can be sent with one or more
 // segmentation_descriptor messages. A time_signal message can be sent only if a
 // single segmentation_descriptor message is sent. The time_signal message

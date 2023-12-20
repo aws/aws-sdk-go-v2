@@ -156,6 +156,22 @@ func (CapacityTypes) Values() []CapacityTypes {
 	}
 }
 
+type Category string
+
+// Enum values for Category
+const (
+	CategoryUpgradeReadiness Category = "UPGRADE_READINESS"
+)
+
+// Values returns all known values for Category. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Category) Values() []Category {
+	return []Category{
+		"UPGRADE_READINESS",
+	}
+}
+
 type ClusterIssueCode string
 
 // Enum values for ClusterIssueCode
@@ -416,6 +432,28 @@ func (FargateProfileStatus) Values() []FargateProfileStatus {
 		"DELETING",
 		"CREATE_FAILED",
 		"DELETE_FAILED",
+	}
+}
+
+type InsightStatusValue string
+
+// Enum values for InsightStatusValue
+const (
+	InsightStatusValuePassing InsightStatusValue = "PASSING"
+	InsightStatusValueWarning InsightStatusValue = "WARNING"
+	InsightStatusValueError   InsightStatusValue = "ERROR"
+	InsightStatusValueUnknown InsightStatusValue = "UNKNOWN"
+)
+
+// Values returns all known values for InsightStatusValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InsightStatusValue) Values() []InsightStatusValue {
+	return []InsightStatusValue{
+		"PASSING",
+		"WARNING",
+		"ERROR",
+		"UNKNOWN",
 	}
 }
 

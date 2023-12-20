@@ -510,6 +510,26 @@ func (m *validateOpDescribeIdentityProviderConfig) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeInsight struct {
+}
+
+func (*validateOpDescribeInsight) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeInsight) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeInsightInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeInsightInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeNodegroup struct {
 }
 
@@ -705,6 +725,26 @@ func (m *validateOpListIdentityProviderConfigs) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListIdentityProviderConfigsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListInsights struct {
+}
+
+func (*validateOpListInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInsightsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1110,6 +1150,10 @@ func addOpDescribeIdentityProviderConfigValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpDescribeIdentityProviderConfig{}, middleware.After)
 }
 
+func addOpDescribeInsightValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeInsight{}, middleware.After)
+}
+
 func addOpDescribeNodegroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNodegroup{}, middleware.After)
 }
@@ -1148,6 +1192,10 @@ func addOpListFargateProfilesValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListIdentityProviderConfigsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIdentityProviderConfigs{}, middleware.After)
+}
+
+func addOpListInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInsights{}, middleware.After)
 }
 
 func addOpListNodegroupsValidationMiddleware(stack *middleware.Stack) error {
@@ -1757,6 +1805,24 @@ func validateOpDescribeIdentityProviderConfigInput(v *DescribeIdentityProviderCo
 	}
 }
 
+func validateOpDescribeInsightInput(v *DescribeInsightInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeInsightInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeNodegroupInput(v *DescribeNodegroupInput) error {
 	if v == nil {
 		return nil
@@ -1922,6 +1988,21 @@ func validateOpListIdentityProviderConfigsInput(v *ListIdentityProviderConfigsIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListIdentityProviderConfigsInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInsightsInput(v *ListInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInsightsInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}

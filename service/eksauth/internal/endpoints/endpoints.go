@@ -200,6 +200,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "eks-auth.ca-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "eks-auth.ca-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "eks-auth.eu-central-1.api.aws",

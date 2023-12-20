@@ -206,6 +206,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "internetmonitor-fips.ca-central-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "internetmonitor.ca-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.eu-central-1.api.aws",

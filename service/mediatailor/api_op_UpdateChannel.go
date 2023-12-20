@@ -49,6 +49,9 @@ type UpdateChannelInput struct {
 	// .
 	FillerSlate *types.SlateSource
 
+	// The time-shifted viewing configuration you want to associate to the channel.
+	TimeShiftConfiguration *types.TimeShiftConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -92,6 +95,9 @@ type UpdateChannelOutput struct {
 
 	// The tier associated with this Channel.
 	Tier *string
+
+	// The time-shifted viewing configuration for the channel.
+	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

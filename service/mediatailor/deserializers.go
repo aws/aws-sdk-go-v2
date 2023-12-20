@@ -556,6 +556,11 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				sv.Tier = ptr.String(jtv)
 			}
 
+		case "TimeShiftConfiguration":
+			if err := awsRestjson1_deserializeDocumentTimeShiftConfiguration(&sv.TimeShiftConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -2493,6 +2498,11 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Tier = ptr.String(jtv)
+			}
+
+		case "TimeShiftConfiguration":
+			if err := awsRestjson1_deserializeDocumentTimeShiftConfiguration(&sv.TimeShiftConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6277,6 +6287,11 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Tier = ptr.String(jtv)
+			}
+
+		case "TimeShiftConfiguration":
+			if err := awsRestjson1_deserializeDocumentTimeShiftConfiguration(&sv.TimeShiftConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -10469,6 +10484,50 @@ func awsRestjson1_deserializeDocumentSpliceInsertMessage(v **types.SpliceInsertM
 					return err
 				}
 				sv.UniqueProgramId = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTimeShiftConfiguration(v **types.TimeShiftConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeShiftConfiguration
+	if *v == nil {
+		sv = &types.TimeShiftConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxTimeDelaySeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxTimeDelaySeconds = ptr.Int32(int32(i64))
 			}
 
 		default:

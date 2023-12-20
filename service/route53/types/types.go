@@ -1228,10 +1228,6 @@ type ResourceRecordSet struct {
 	//   - If you include * in any position other than the leftmost label in a domain
 	//   name, DNS treats it as an * character (ASCII 42), not as a wildcard. You can't
 	//   use the * wildcard for resource records sets that have a type of NS.
-	// You can use the * wildcard as the leftmost label in a domain name, for example,
-	// *.example.com . You can't use an * for one of the middle labels, for example,
-	// marketing.*.example.com . In addition, the * must replace the entire label; for
-	// example, you can't specify prod*.example.com .
 	//
 	// This member is required.
 	Name *string

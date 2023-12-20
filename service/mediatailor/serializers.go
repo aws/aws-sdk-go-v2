@@ -288,6 +288,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.String(string(v.Tier))
 	}
 
+	if v.TimeShiftConfiguration != nil {
+		ok := object.Key("TimeShiftConfiguration")
+		if err := awsRestjson1_serializeDocumentTimeShiftConfiguration(v.TimeShiftConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3240,6 +3247,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		}
 	}
 
+	if v.TimeShiftConfiguration != nil {
+		ok := object.Key("TimeShiftConfiguration")
+		if err := awsRestjson1_serializeDocumentTimeShiftConfiguration(v.TimeShiftConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4341,6 +4355,18 @@ func awsRestjson1_serializeDocumentSpliceInsertMessage(v *types.SpliceInsertMess
 	if v.UniqueProgramId != nil {
 		ok := object.Key("UniqueProgramId")
 		ok.Integer(*v.UniqueProgramId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTimeShiftConfiguration(v *types.TimeShiftConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxTimeDelaySeconds != nil {
+		ok := object.Key("MaxTimeDelaySeconds")
+		ok.Integer(*v.MaxTimeDelaySeconds)
 	}
 
 	return nil

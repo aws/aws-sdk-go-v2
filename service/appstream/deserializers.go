@@ -2115,6 +2115,9 @@ func awsAwsjson11_deserializeOpErrorCreateStack(response *smithyhttp.Response, m
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
+
 	case strings.EqualFold("ResourceAlreadyExistsException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceAlreadyExistsException(response, errorBody)
 
@@ -14204,6 +14207,19 @@ func awsAwsjson11_deserializeDocumentUserSetting(v **types.UserSetting, value in
 					return fmt.Errorf("expected Action to be of type string, got %T instead", value)
 				}
 				sv.Action = types.Action(jtv)
+			}
+
+		case "MaximumLength":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumLength = ptr.Int32(int32(i64))
 			}
 
 		case "Permission":

@@ -67,6 +67,9 @@ type CreateChannelInput struct {
 	// The tier of the channel.
 	Tier types.Tier
 
+	// The time-shifted viewing configuration you want to associate to the channel.
+	TimeShiftConfiguration *types.TimeShiftConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -105,6 +108,9 @@ type CreateChannelOutput struct {
 
 	// The tier of the channel.
 	Tier *string
+
+	// The time-shifted viewing configuration assigned to the channel.
+	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

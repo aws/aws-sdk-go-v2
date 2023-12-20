@@ -296,11 +296,6 @@ type Transaction struct {
 	// This member is required.
 	NumberOfTransactions *int64
 
-	// The status of the transaction.
-	//
-	// This member is required.
-	Status QueryTransactionStatus
-
 	// The identifier of the transaction. It is generated whenever a transaction is
 	// verified and added to the blockchain.
 	//
@@ -331,6 +326,9 @@ type Transaction struct {
 	// The block number in which the transaction is recorded.
 	BlockNumber *string
 
+	// Specifies whether the transaction has reached Finality.
+	ConfirmationStatus ConfirmationStatus
+
 	// The blockchain address for the contract.
 	ContractAddress *string
 
@@ -339,6 +337,9 @@ type Transaction struct {
 
 	// The effective gas price.
 	EffectiveGasPrice *string
+
+	// Identifies whether the transaction has succeeded or failed.
+	ExecutionStatus ExecutionStatus
 
 	// The initiator of the transaction. It is either in the form a public key or a
 	// contract address.
@@ -355,6 +356,18 @@ type Transaction struct {
 
 	// The signature of the transaction. The Z coordinate of a point V.
 	SignatureV *int32
+
+	// The status of the transaction. This property is deprecated. You must use the
+	// confirmationStatus and the executionStatus properties to determine if the status
+	// of the transaction is FINAL or FAILED .
+	//   - Transactions with a status of FINAL will now have the confirmationStatus set
+	//   to FINAL and the executionStatus set to SUCCEEDED .
+	//   - Transactions with a status of FAILED will now have the confirmationStatus
+	//   set to FINAL and the executionStatus set to FAILED .
+	//
+	// Deprecated: The status field in the GetTransaction response is deprecated and
+	// is replaced with the confirmationStatus and executionStatus fields.
+	Status QueryTransactionStatus
 
 	// The transaction fee.
 	TransactionFee *string

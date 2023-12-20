@@ -206,6 +206,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "kendra-ranking-fips.ca-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "kendra-ranking.ca-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-2",
 			}: endpoints.Endpoint{
 				Hostname: "kendra-ranking.eu-central-2.api.aws",

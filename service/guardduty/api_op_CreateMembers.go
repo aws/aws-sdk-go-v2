@@ -18,8 +18,13 @@ import (
 // through an organization. As a delegated administrator, using CreateMembers will
 // enable GuardDuty in the added member accounts, with the exception of the
 // organization delegated administrator account. A delegated administrator must
-// enable GuardDuty prior to being added as a member. If you are adding accounts by
-// invitation, before using InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
+// enable GuardDuty prior to being added as a member. When you use CreateMembers as
+// an Organizations delegated administrator, GuardDuty applies your organization's
+// auto-enable settings to the member accounts in this request, irrespective of the
+// accounts being new or existing members. For more information about the existing
+// auto-enable settings for your organization, see
+// DescribeOrganizationConfiguration (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeOrganizationConfiguration.html)
+// . If you are adding accounts by invitation, before using InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
 // , use CreateMembers after GuardDuty has been enabled in potential member
 // accounts. If you disassociate a member from a GuardDuty delegated administrator,
 // the member account details obtained from this API, including the associated

@@ -261,6 +261,21 @@ type Certificate struct {
 	noSmithyDocumentSerde
 }
 
+// Details about clients using the deprecated resources.
+type ClientStat struct {
+
+	// The timestamp of the last request seen from the Kubernetes client.
+	LastRequestTime *time.Time
+
+	// The number of requests from the Kubernetes client seen over the last 30 days.
+	NumberOfRequestsLast30Days int32
+
+	// The user agent of the Kubernetes client using the deprecated resource.
+	UserAgent *string
+
+	noSmithyDocumentSerde
+}
+
 // An object representing an Amazon EKS cluster.
 type Cluster struct {
 
@@ -474,6 +489,30 @@ type CreateAccessConfigRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The summary information about deprecated resource usage for an insight check in
+// the UPGRADE_READINESS category.
+type DeprecationDetail struct {
+
+	// Details about Kubernetes clients using the deprecated resources.
+	ClientStats []ClientStat
+
+	// The newer version of the resource to migrate to if applicable.
+	ReplacedWith *string
+
+	// The version of the software where the newer resource version became available
+	// to migrate to if applicable.
+	StartServingReplacementVersion *string
+
+	// The version of the software where the deprecated resource version will stop
+	// being served.
+	StopServingVersion *string
+
+	// The deprecated version of the resource.
+	Usage *string
+
+	noSmithyDocumentSerde
+}
+
 // An EKS Anywhere subscription authorizing the customer to support for licensed
 // clusters and access to EKS Anywhere Curated Packages.
 type EksAnywhereSubscription struct {
@@ -663,6 +702,137 @@ type IdentityProviderConfigResponse struct {
 
 	// An object representing an OpenID Connect (OIDC) identity provider configuration.
 	Oidc *OidcIdentityProviderConfig
+
+	noSmithyDocumentSerde
+}
+
+// A check that provides recommendations to remedy potential upgrade-impacting
+// issues.
+type Insight struct {
+
+	// Links to sources that provide additional context on the insight.
+	AdditionalInfo map[string]string
+
+	// The category of the insight.
+	Category Category
+
+	// Summary information that relates to the category of the insight. Currently only
+	// returned with certain insights having category UPGRADE_READINESS .
+	CategorySpecificSummary *InsightCategorySpecificSummary
+
+	// The description of the insight which includes alert criteria, remediation
+	// recommendation, and additional resources (contains Markdown).
+	Description *string
+
+	// The ID of the insight.
+	Id *string
+
+	// An object containing more detail on the status of the insight resource.
+	InsightStatus *InsightStatus
+
+	// The Kubernetes minor version associated with an insight if applicable.
+	KubernetesVersion *string
+
+	// The time Amazon EKS last successfully completed a refresh of this insight check
+	// on the cluster.
+	LastRefreshTime *time.Time
+
+	// The time the status of the insight last changed.
+	LastTransitionTime *time.Time
+
+	// The name of the insight.
+	Name *string
+
+	// A summary of how to remediate the finding of this insight if applicable.
+	Recommendation *string
+
+	// The details about each resource listed in the insight check result.
+	Resources []InsightResourceDetail
+
+	noSmithyDocumentSerde
+}
+
+// Summary information that relates to the category of the insight. Currently only
+// returned with certain insights having category UPGRADE_READINESS .
+type InsightCategorySpecificSummary struct {
+
+	// The summary information about deprecated resource usage for an insight check in
+	// the UPGRADE_READINESS category.
+	DeprecationDetails []DeprecationDetail
+
+	noSmithyDocumentSerde
+}
+
+// Returns information about the resource being evaluated.
+type InsightResourceDetail struct {
+
+	// The Amazon Resource Name (ARN) if applicable.
+	Arn *string
+
+	// An object containing more detail on the status of the insight resource.
+	InsightStatus *InsightStatus
+
+	// The Kubernetes resource URI if applicable.
+	KubernetesResourceUri *string
+
+	noSmithyDocumentSerde
+}
+
+// The criteria to use for the insights.
+type InsightsFilter struct {
+
+	// The categories to use to filter insights.
+	Categories []Category
+
+	// The Kubernetes versions to use to filter the insights.
+	KubernetesVersions []string
+
+	// The statuses to use to filter the insights.
+	Statuses []InsightStatusValue
+
+	noSmithyDocumentSerde
+}
+
+// The status of the insight.
+type InsightStatus struct {
+
+	// Explanation on the reasoning for the status of the resource.
+	Reason *string
+
+	// The status of the resource.
+	Status InsightStatusValue
+
+	noSmithyDocumentSerde
+}
+
+// The summarized description of the insight.
+type InsightSummary struct {
+
+	// The category of the insight.
+	Category Category
+
+	// The description of the insight which includes alert criteria, remediation
+	// recommendation, and additional resources (contains Markdown).
+	Description *string
+
+	// The ID of the insight.
+	Id *string
+
+	// An object containing more detail on the status of the insight.
+	InsightStatus *InsightStatus
+
+	// The Kubernetes minor version associated with an insight if applicable.
+	KubernetesVersion *string
+
+	// The time Amazon EKS last successfully completed a refresh of this insight check
+	// on the cluster.
+	LastRefreshTime *time.Time
+
+	// The time the status of the insight last changed.
+	LastTransitionTime *time.Time
+
+	// The name of the insight.
+	Name *string
 
 	noSmithyDocumentSerde
 }

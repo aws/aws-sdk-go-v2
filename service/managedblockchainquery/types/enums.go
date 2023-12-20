@@ -2,6 +2,22 @@
 
 package types
 
+type ConfirmationStatus string
+
+// Enum values for ConfirmationStatus
+const (
+	ConfirmationStatusFinal ConfirmationStatus = "FINAL"
+)
+
+// Values returns all known values for ConfirmationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfirmationStatus) Values() []ConfirmationStatus {
+	return []ConfirmationStatus{
+		"FINAL",
+	}
+}
+
 type ErrorType string
 
 // Enum values for ErrorType
@@ -19,6 +35,24 @@ func (ErrorType) Values() []ErrorType {
 	return []ErrorType{
 		"VALIDATION_EXCEPTION",
 		"RESOURCE_NOT_FOUND_EXCEPTION",
+	}
+}
+
+type ExecutionStatus string
+
+// Enum values for ExecutionStatus
+const (
+	ExecutionStatusFailed    ExecutionStatus = "FAILED"
+	ExecutionStatusSucceeded ExecutionStatus = "SUCCEEDED"
+)
+
+// Values returns all known values for ExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStatus) Values() []ExecutionStatus {
+	return []ExecutionStatus{
+		"FAILED",
+		"SUCCEEDED",
 	}
 }
 
@@ -45,12 +79,12 @@ type QueryNetwork string
 const (
 	// Ethereum main network
 	QueryNetworkEthereumMainnet QueryNetwork = "ETHEREUM_MAINNET"
+	// SEPOLIA network (ethereum testnet)
+	QueryNetworkEthereumSepoliaTestnet QueryNetwork = "ETHEREUM_SEPOLIA_TESTNET"
 	// Bitcoin main network
 	QueryNetworkBitcoinMainnet QueryNetwork = "BITCOIN_MAINNET"
 	// Bitcoin test network
 	QueryNetworkBitcoinTestnet QueryNetwork = "BITCOIN_TESTNET"
-	// SEPOLIA network (ethereum testnet)
-	QueryNetworkEthereumSepoliaTestnet QueryNetwork = "ETHEREUM_SEPOLIA_TESTNET"
 )
 
 // Values returns all known values for QueryNetwork. Note that this can be
@@ -59,9 +93,9 @@ const (
 func (QueryNetwork) Values() []QueryNetwork {
 	return []QueryNetwork{
 		"ETHEREUM_MAINNET",
+		"ETHEREUM_SEPOLIA_TESTNET",
 		"BITCOIN_MAINNET",
 		"BITCOIN_TESTNET",
-		"ETHEREUM_SEPOLIA_TESTNET",
 	}
 }
 

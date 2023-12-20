@@ -1,0 +1,8 @@
+{
+    "id": "874e7789-31c0-4a39-8ef6-9e8806f2f2d3",
+    "type": "feature",
+    "description": "This release introduces configurable clipboard, allowing admins to specify the maximum length of text that can be copied by the users from their device to the remote session and vice-versa.",
+    "modules": [
+        "service/appstream"
+    ]
+}

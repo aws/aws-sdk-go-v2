@@ -1260,6 +1260,21 @@ func validateScheduleConfiguration(v *types.ScheduleConfiguration) error {
 	}
 }
 
+func validateTimeShiftConfiguration(v *types.TimeShiftConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeShiftConfiguration"}
+	if v.MaxTimeDelaySeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxTimeDelaySeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTransition(v *types.Transition) error {
 	if v == nil {
 		return nil
@@ -1345,6 +1360,11 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	}
 	if len(v.PlaybackMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PlaybackMode"))
+	}
+	if v.TimeShiftConfiguration != nil {
+		if err := validateTimeShiftConfiguration(v.TimeShiftConfiguration); err != nil {
+			invalidParams.AddNested("TimeShiftConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1956,6 +1976,11 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 	} else if v.Outputs != nil {
 		if err := validateRequestOutputs(v.Outputs); err != nil {
 			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeShiftConfiguration != nil {
+		if err := validateTimeShiftConfiguration(v.TimeShiftConfiguration); err != nil {
+			invalidParams.AddNested("TimeShiftConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

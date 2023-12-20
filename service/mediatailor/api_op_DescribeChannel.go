@@ -82,6 +82,9 @@ type DescribeChannelOutput struct {
 	// The channel's tier.
 	Tier *string
 
+	// The time-shifted viewing configuration for the channel.
+	TimeShiftConfiguration *types.TimeShiftConfiguration
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

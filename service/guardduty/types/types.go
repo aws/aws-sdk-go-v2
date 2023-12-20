@@ -439,8 +439,10 @@ type Country struct {
 }
 
 // This API is also used when you use GuardDuty Runtime Monitoring for your Amazon
-// EC2 instances (currently in preview release) and is subject to change. Contains
-// information about the Amazon EC2 instance runtime coverage details.
+// EC2 instances (currently in preview release) and is subject to change. The use
+// of this API is subject to Section 2 of the Amazon Web Services Service Terms (http://aws.amazon.com/service-terms/)
+// ("Betas and Previews"). Contains information about the Amazon EC2 instance
+// runtime coverage details.
 type CoverageEc2InstanceDetails struct {
 
 	// Information about the installed security agent.
@@ -461,7 +463,7 @@ type CoverageEc2InstanceDetails struct {
 	//   - MANUAL indicates that you are responsible to deploy, update, and manage the
 	//   GuardDuty security agent updates for this resource.
 	// The DISABLED status doesn't apply to Amazon EC2 instances and Amazon EKS
-	// clusters that run on Amazon EC2 instances.
+	// clusters.
 	ManagementType ManagementType
 
 	noSmithyDocumentSerde
@@ -577,8 +579,10 @@ type CoverageResource struct {
 type CoverageResourceDetails struct {
 
 	// This API is also used when you use GuardDuty Runtime Monitoring for your Amazon
-	// EC2 instances (currently in preview release) and is subject to change.
-	// Information about the Amazon EC2 instance assessed for runtime coverage.
+	// EC2 instances (currently in preview release) and is subject to change. The use
+	// of this API is subject to Section 2 of the Amazon Web Services Service Terms (http://aws.amazon.com/service-terms/)
+	// ("Betas and Previews"). Information about the Amazon EC2 instance assessed for
+	// runtime coverage.
 	Ec2InstanceDetails *CoverageEc2InstanceDetails
 
 	// Information about the Amazon ECS cluster that is assessed for runtime coverage.
@@ -1020,20 +1024,21 @@ type Evidence struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about AWS Fargate details associated with an Amazon ECS
-// cluster.
+// Contains information about Amazon Web Services Fargate details associated with
+// an Amazon ECS cluster.
 type FargateDetails struct {
 
-	// Runtime coverage issues identified for the resource running on AWS Fargate.
+	// Runtime coverage issues identified for the resource running on Amazon Web
+	// Services Fargate.
 	Issues []string
 
 	// Indicates how the GuardDuty security agent is managed for this resource.
 	//   - AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this
 	//   resource.
-	//   - MANUAL indicates that you are responsible to deploy, update, and manage the
-	//   GuardDuty security agent updates for this resource.
 	//   - DISABLED indicates that the deployment of the GuardDuty security agent is
 	//   disabled for this resource.
+	// The MANUAL status doesn't apply to the Amazon Web Services Fargate (Amazon ECS
+	// only) woprkloads.
 	ManagementType ManagementType
 
 	noSmithyDocumentSerde
@@ -2019,6 +2024,21 @@ type OrganizationDataSourceConfigurationsResult struct {
 	noSmithyDocumentSerde
 }
 
+// Information about GuardDuty coverage statistics for members in your Amazon Web
+// Services organization.
+type OrganizationDetails struct {
+
+	// Information about the GuardDuty coverage statistics for members in your Amazon
+	// Web Services organization.
+	OrganizationStatistics *OrganizationStatistics
+
+	// The timestamp at which the organization statistics was last updated. This is in
+	// UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Organization-wide EBS volumes scan configuration.
 type OrganizationEbsVolumes struct {
 
@@ -2090,6 +2110,34 @@ type OrganizationFeatureConfigurationResult struct {
 	// The name of the feature that is configured for the member accounts within the
 	// organization.
 	Name OrgFeature
+
+	noSmithyDocumentSerde
+}
+
+// Information about the number of accounts that have enabled a specific feature.
+type OrganizationFeatureStatistics struct {
+
+	// Name of the additional configuration.
+	AdditionalConfiguration []OrganizationFeatureStatisticsAdditionalConfiguration
+
+	// Total number of accounts that have enabled a specific feature.
+	EnabledAccountsCount *int32
+
+	// Name of the feature.
+	Name OrgFeature
+
+	noSmithyDocumentSerde
+}
+
+// Information about the coverage statistic for the additional configuration of
+// the feature.
+type OrganizationFeatureStatisticsAdditionalConfiguration struct {
+
+	// Total number of accounts that have enabled the additional configuration.
+	EnabledAccountsCount *int32
+
+	// Name of the additional configuration within a feature.
+	Name OrgFeatureAdditionalConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2206,6 +2254,32 @@ type OrganizationScanEc2InstanceWithFindingsResult struct {
 
 	// Describes the configuration for scanning EBS volumes for an organization.
 	EbsVolumes *OrganizationEbsVolumesResult
+
+	noSmithyDocumentSerde
+}
+
+// Information about the coverage statistics of the features for the entire Amazon
+// Web Services organization. When you create a new Amazon Web Services
+// organization, it might take up to 24 hours to generate the statistics summary
+// for this organization.
+type OrganizationStatistics struct {
+
+	// Total number of active accounts in your Amazon Web Services organization that
+	// are associated with GuardDuty.
+	ActiveAccountsCount *int32
+
+	// Retrieves the coverage statistics for each feature.
+	CountByFeature []OrganizationFeatureStatistics
+
+	// Total number of accounts that have enabled GuardDuty.
+	EnabledAccountsCount *int32
+
+	// Total number of accounts in your Amazon Web Services organization that are
+	// associated with GuardDuty.
+	MemberAccountsCount *int32
+
+	// Total number of accounts in your Amazon Web Services organization.
+	TotalAccountsCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -3139,9 +3213,39 @@ type UsageStatistics struct {
 	// The usage statistic sum organized by resource.
 	SumByResource []UsageResourceResult
 
+	// Lists the top 50 accounts by feature that have generated the most GuardDuty
+	// usage, in the order from most to least expensive. Currently, this doesn't
+	// support RDS_LOGIN_EVENTS .
+	TopAccountsByFeature []UsageTopAccountsResult
+
 	// Lists the top 50 resources that have generated the most GuardDuty usage, in
 	// order from most to least expensive.
 	TopResources []UsageResourceResult
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on the total of usage based on the topmost 50 account IDs.
+type UsageTopAccountResult struct {
+
+	// The unique account ID.
+	AccountId *string
+
+	// Contains the total usage with the corresponding currency unit for that value.
+	Total *Total
+
+	noSmithyDocumentSerde
+}
+
+// Information about the usage statistics, calculated by top accounts by feature.
+type UsageTopAccountsResult struct {
+
+	// The accounts that contributed to the total usage cost.
+	Accounts []UsageTopAccountResult
+
+	// Features by which you can generate the usage statistics. RDS_LOGIN_EVENTS is
+	// currently not supported with topAccountsByFeature .
+	Feature UsageFeature
 
 	noSmithyDocumentSerde
 }

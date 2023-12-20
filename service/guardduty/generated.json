@@ -47,6 +47,7 @@
         "api_op_GetMasterAccount.go",
         "api_op_GetMemberDetectors.go",
         "api_op_GetMembers.go",
+        "api_op_GetOrganizationStatistics.go",
         "api_op_GetRemainingFreeTrialDays.go",
         "api_op_GetThreatIntelSet.go",
         "api_op_GetUsageStatistics.go",
