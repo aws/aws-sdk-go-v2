@@ -25,11 +25,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-07-31T13:48:53-04:00" />
+<meta property="article:modified_time" content="2023-10-06T22:55:58+03:00" />
 <meta itemprop="name" content="Configuring Client Endpoints">
 <meta itemprop="description" content="Customizing service client endpoints."><meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2023-07-31T13:48:53-04:00" />
-<meta itemprop="wordCount" content="1630">
+<meta itemprop="dateModified" content="2023-10-06T22:55:58+03:00" />
+<meta itemprop="wordCount" content="1658">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Configuring Client Endpoints"/>
 <meta name="twitter:description" content="Customizing service client endpoints."/>
@@ -104,7 +104,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.810a5299d837b395cdd69648bfec2e99.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.ba2b7a89f1555398e1c5839c9aee3bc1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.810a5299d837b395cdd69648bfec2e99.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.ba2b7a89f1555398e1c5839c9aee3bc1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -144,7 +144,9 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-aws-sdk-go-v2docsconfiguring-sdk-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/" title="Configuring the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsconfiguring-sdk"><span class="">Configuring the SDK</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsconfiguring-sdkauth-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/auth/" title="Configuring Authentication" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkauth"><span class="">Authentication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" title="Configuring Client Endpoints" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints"><span class="td-sidebar-nav-active-item">Endpoints</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/" title="Customizing the HTTP Client" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http"><span class="">HTTP Client</span></a>
@@ -175,6 +177,13 @@
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsmiddleware-li">
   <a href="/aws-sdk-go-v2/docs/middleware/" title="Customizing the AWS SDK for Go V2 Client Requests" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsmiddleware"><span class="">Middleware</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docsfaq-li">
+  <a href="/aws-sdk-go-v2/docs/faq/" title="Frequently Asked Questions" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsfaq"><span class="">FAQ / Troubleshooting</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsfaqtiming-operations-li">
+  <a href="/aws-sdk-go-v2/docs/faq/timing-operations/" title="Timing SDK operations" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsfaqtiming-operations"><span class="">Timing Operations</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsunit-testing-li">
   <a href="/aws-sdk-go-v2/docs/unit-testing/" title="Unit Testing with the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsunit-testing"><span class="">Testing</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docscloud9-go-li">
@@ -635,9 +644,13 @@ endpoint resolution using <code>EndpointResolverV2</code>.</p>
 </span></span><span style="display:flex;"><span>        <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#8f5902;font-style:italic">/* input params or caller context indicate we must route somewhere */</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">smithyEndpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#000">URI</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">url</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://custom.service.endpoint/&#34;</span><span style="color:#000;font-weight:bold">),</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">u</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">url</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://custom.service.endpoint/&#34;</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#000">err</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">URI</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">u</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">nil</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// delegate back to the default v2 resolver otherwise
@@ -850,9 +863,13 @@ resolver that returns a modifiable endpoint:</p>
 </span></span><span style="display:flex;"><span>        <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// This value will be used as-is when making the request.
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">smithyEndpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#000">URI</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">url</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://custom.endpoint.api/&#34;</span><span style="color:#000;font-weight:bold">),</span>
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000">u</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">url</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://custom.endpoint.api/&#34;</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#000">err</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">URI</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">u</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">nil</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
@@ -862,7 +879,7 @@ resolver that returns a modifiable endpoint:</p>
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified July 31, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/99a28aa065f3069d07a2d9445c0c63a7ff559c2f">update devguide for endpointsv2 (#2205) (99a28aa065)</a>
+  Last modified October 6, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/52072aba6a7566a97e009a8b629707bfa9dfce75">Fix code snippets in devguide for endpointsv2 (#2301) (52072aba6a)</a>
 </div>
 
 </div>

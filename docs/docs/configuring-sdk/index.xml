@@ -15,6 +15,265 @@
     
     
     <item>
+      <title>Docs: Configuring Authentication</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/auth/</link>
+      <pubDate>Fri, 01 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/auth/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The AWS SDK for Go V2 provides the ability to configure the authentication
+behavior service. In most cases, the default configuration will suffice, but
+configuring custom authentication allows for additional behavior such as
+working with pre-release service features.&lt;/p&gt;
+&lt;h2 id=&#34;definitions&#34;&gt;Definitions&lt;/h2&gt;
+&lt;p&gt;This section provides a high-level description of authentication components in
+the AWS SDK for Go V2.&lt;/p&gt;
+&lt;h3 id=&#34;authscheme&#34;&gt;&lt;code&gt;AuthScheme&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;An &lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/transport/http#AuthScheme&#34;&gt;AuthScheme&lt;/a&gt; is the
+interface that defines the workflow through which the SDK retrieves a caller
+identity and attaches it to an operation request.&lt;/p&gt;
+&lt;p&gt;An auth scheme uses the following components, described in detail further
+below:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A unique ID which identifies the scheme&lt;/li&gt;
+&lt;li&gt;An identity resolver, which returns a caller identity used in the signing
+process (e.g. your AWS credentials)&lt;/li&gt;
+&lt;li&gt;A signer, which performs the actual injection of caller identity into the
+operation&amp;rsquo;s transport request (e.g. the &lt;code&gt;Authorization&lt;/code&gt; HTTP header)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each service client options includes an &lt;code&gt;AuthSchemes&lt;/code&gt; field, which by default
+is populated with the list of auth schemes supported by that service.&lt;/p&gt;
+&lt;h3 id=&#34;authschemeresolver&#34;&gt;&lt;code&gt;AuthSchemeResolver&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Each service client options includes an &lt;code&gt;AuthSchemeResolver&lt;/code&gt; field. This
+interface, defined per-service, is the API called by the SDK to determine the
+possible authentication options for each operation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IMPORTANT:&lt;/strong&gt; The auth scheme resolver does NOT dictate what auth scheme is
+used. It returns a list of schemes that &lt;em&gt;can&lt;/em&gt; be used (&amp;ldquo;options&amp;rdquo;), the final
+scheme is selected through a fixed algorithm described
+&lt;a href=&#34;#auth-scheme-resolution-workflow&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;option&#34;&gt;&lt;code&gt;Option&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Returned from a call to &lt;code&gt;ResolverAuthSchemes&lt;/code&gt;, an &lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/auth#Option&#34;&gt;Option&lt;/a&gt; represents a possible authentication option.&lt;/p&gt;
+&lt;p&gt;An option consists of three sets of information:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;An ID representing the possible scheme&lt;/li&gt;
+&lt;li&gt;An opaque set of properties to be provided to the scheme&amp;rsquo;s identity resolver&lt;/li&gt;
+&lt;li&gt;An opaque set of properties to be provided to the scheme&amp;rsquo;s signer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;a-note-on-properties&#34;&gt;a note on properties&lt;/h4&gt;
+&lt;p&gt;For 99% of use cases, callers need not be concerned with the opaque properties
+for identity resolution and signing. The SDK will pull out the necessary
+properties for each scheme and pass them to the strongly-typed interfaces
+exposed in the SDK. For example, the default auth resolver for services encode
+the SigV4 option to have signer properties for the signing name and region, the
+values of which are passed to the client&amp;rsquo;s configured
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#Signer&#34;&gt;v4.HTTPSigner&lt;/a&gt; implementation when SigV4
+is selected.&lt;/p&gt;
+&lt;h3 id=&#34;identity&#34;&gt;&lt;code&gt;Identity&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;An &lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/auth#Identity&#34;&gt;Identity&lt;/a&gt; is an abstract
+representation of who the SDK caller is.&lt;/p&gt;
+&lt;p&gt;The most common type of identity used in the SDK is a set of &lt;code&gt;aws.Credentials&lt;/code&gt;.
+For most use cases, the caller need not concern themselves with &lt;code&gt;Identity&lt;/code&gt; as
+an abstraction and can work with the concrete types directly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; to preserve backwards compatibility and prevent API confusion, the
+AWS SDK-specific identity type &lt;code&gt;aws.Credentials&lt;/code&gt; does not directly satisfy the
+&lt;code&gt;Identity&lt;/code&gt; interface. This mapping is handled internally.&lt;/p&gt;
+&lt;h3 id=&#34;identityresolver&#34;&gt;&lt;code&gt;IdentityResolver&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/auth#IdentityResolver&#34;&gt;IdentityResolver&lt;/a&gt; is the
+interface through which an &lt;code&gt;Identity&lt;/code&gt; is retrieved.&lt;/p&gt;
+&lt;p&gt;Concrete versions of &lt;code&gt;IdentityResolver&lt;/code&gt; exist in the SDK in strongly-typed form
+(e.g. &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#CredentialsProvider&#34;&gt;aws.CredentialsProvider&lt;/a&gt;), the
+SDK handles this mapping internally.&lt;/p&gt;
+&lt;p&gt;A caller will only need to directly implement the &lt;code&gt;IdentityResolver&lt;/code&gt; interface
+when defining an external auth scheme.&lt;/p&gt;
+&lt;h3 id=&#34;signer&#34;&gt;&lt;code&gt;Signer&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/transport/http#Signer&#34;&gt;Signer&lt;/a&gt; is the interface
+through which a request is supplemented with the retrieved caller &lt;code&gt;Identity&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Concrete versions of &lt;code&gt;Signer&lt;/code&gt; exist in the SDK in strongly-typed form
+(e.g. &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#HTTPSigner&#34;&gt;v4.HTTPSigner&lt;/a&gt;), the SDK
+handles this mapping internally.&lt;/p&gt;
+&lt;p&gt;A caller will only need to directly implement the &lt;code&gt;Signer&lt;/code&gt; interface
+when defining an external auth scheme.&lt;/p&gt;
+&lt;h3 id=&#34;authresolverparameters&#34;&gt;&lt;code&gt;AuthResolverParameters&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Each service takes a specific set of inputs which are passed to its resolution
+function, defined in each service package as &lt;code&gt;AuthResolverParameters&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The base resolver parameters are as follows:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;name&lt;/th&gt;
+&lt;th&gt;type&lt;/th&gt;
+&lt;th&gt;description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Operation&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;string&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The name of the operation being invoked.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Region&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;string&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The client&amp;rsquo;s AWS region. Only present for services that use SigV4[A].&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;If you are implementing your own resolver, you should never need to construct
+your own instance of its parameters. The SDK will source these values
+per-request and pass them to your implementation.&lt;/p&gt;
+&lt;h2 id=&#34;auth-scheme-resolution-workflow&#34;&gt;Auth scheme resolution workflow&lt;/h2&gt;
+&lt;p&gt;When you call an AWS service operation through the SDK, the following sequence
+of actions occurs after the request has been serialized:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The SDK calls the client&amp;rsquo;s &lt;code&gt;AuthSchemeResolver.ResolveAuthSchemes()&lt;/code&gt; API,
+sourcing the input parameters as necessary, to obtain a list of possible
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/auth#Option&#34;&gt;Options&lt;/a&gt; for the operation.&lt;/li&gt;
+&lt;li&gt;The SDK iterates over that list and selects the first scheme that satisfies
+the following conditions.
+&lt;ul&gt;
+&lt;li&gt;A scheme with matching ID is present in the client&amp;rsquo;s own &lt;code&gt;AuthSchemes&lt;/code&gt; list&lt;/li&gt;
+&lt;li&gt;The scheme&amp;rsquo;s identity resolver exists (is non-&lt;code&gt;nil&lt;/code&gt;) on the client&amp;rsquo;s Options
+(checked via the scheme&amp;rsquo;s &lt;code&gt;GetIdentityResolver&lt;/code&gt; method, the mapping to the
+concrete identity resolver types described above is handled internally) (1)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Assuming a viable scheme was selected, the SDK invokes its
+&lt;code&gt;GetIdentityResolver()&lt;/code&gt; API to retrieve the caller&amp;rsquo;s identity. For example,
+the builtin SigV4 auth scheme will map to the client&amp;rsquo;s &lt;code&gt;Credentials&lt;/code&gt; provider
+internally.&lt;/li&gt;
+&lt;li&gt;The SDK calls the identity resolver&amp;rsquo;s &lt;code&gt;GetIdentity()&lt;/code&gt; (e.g.
+&lt;code&gt;aws.CredentialProvider.Retrieve()&lt;/code&gt; for SigV4).&lt;/li&gt;
+&lt;li&gt;The SDK calls the endpoint resolver&amp;rsquo;s &lt;code&gt;ResolveEndpoint()&lt;/code&gt; to find the
+endpoint for the request. The endpoint may include additional metadata that
+influences the signing process (e.g. unique signing name for S3 Object Lambda).&lt;/li&gt;
+&lt;li&gt;The SDK calls the auth scheme&amp;rsquo;s &lt;code&gt;Signer()&lt;/code&gt; API to retrieve its signer, and
+uses its &lt;code&gt;SignRequest()&lt;/code&gt; API to sign the request with the
+previously-retrieved caller identity.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;(1) If the SDK encounters the anonymous option (ID &lt;code&gt;smithy.api#noAuth&lt;/code&gt;) in the
+list, it is selected automatically, as there is no corresponding identity
+resolver.&lt;/p&gt;
+&lt;h2 id=&#34;natively-supported-authschemes&#34;&gt;Natively-supported &lt;code&gt;AuthScheme&lt;/code&gt;s&lt;/h2&gt;
+&lt;p&gt;The following auth schemes are natively supported by AWS SDK for Go V2.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Scheme ID&lt;/th&gt;
+&lt;th&gt;Identity resolver&lt;/th&gt;
+&lt;th&gt;Signer&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html&#34;&gt;SigV4&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;aws.auth#sigv4&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Credentials&#34;&gt;aws.CredentialsProvider&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#Signer&#34;&gt;v4.HTTPSigner&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;The current default for most AWS service operations.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SigV4A&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;aws.auth#sigv4a&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;aws.CredentialsProvider&lt;/td&gt;
+&lt;td&gt;n/a&lt;/td&gt;
+&lt;td&gt;SigV4A usage is limited at this time, the signer implementation is internal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SigV4Express&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;com.amazonaws.s3#sigv4express&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#ExpressCredentialsProvider&#34;&gt;s3.ExpressCredentialsProvider&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;v4.HTTPSigner&lt;/td&gt;
+&lt;td&gt;Used for &lt;a href=&#34;https://aws.amazon.com/s3/storage-classes/express-one-zone/&#34;&gt;Express One Zone&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HTTP Bearer&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;smithy.api#httpBearerAuth&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/auth/bearer#TokenProvider&#34;&gt;smithybearer.TokenProvider&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/auth/bearer#Signer&#34;&gt;smithybearer.Signer&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Used by &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/codecatalyst&#34;&gt;codecatalyst&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Anonymous&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;smithy.api#noAuth&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;n/a&lt;/td&gt;
+&lt;td&gt;n/a&lt;/td&gt;
+&lt;td&gt;No authentication - no identity is required, and the request is not signed or authenticated.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;identity-configuration&#34;&gt;Identity configuration&lt;/h3&gt;
+&lt;p&gt;In AWS SDK for Go V2, the identity components of an auth scheme are
+configured in SDK client &lt;code&gt;Options&lt;/code&gt;. The SDK will automatically pick up and use
+the values for these components for the scheme it selects when an operation is
+called.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; For backwards compatibility reasons, the SDK implicitly allows the
+use of the anonymous auth scheme if no identity resolvers are configured.
+This can be manually achieved by setting all identity resolvers on a client&amp;rsquo;s
+&lt;code&gt;Options&lt;/code&gt; to &lt;code&gt;nil&lt;/code&gt; (the sigv4 identity resolver can also be set to
+&lt;code&gt;aws.AnonymousCredentials{}&lt;/code&gt;).&lt;/p&gt;
+&lt;h3 id=&#34;signer-configuration&#34;&gt;Signer configuration&lt;/h3&gt;
+&lt;p&gt;In AWS SDK for Go V2, the signer components of an auth scheme are
+configured in SDK client &lt;code&gt;Options&lt;/code&gt;. The SDK will automatically pick up and use
+the values for these components for the scheme it selects when an operation is
+called. No additional configuration is necessary.&lt;/p&gt;
+&lt;h4 id=&#34;custom-auth-scheme&#34;&gt;Custom auth scheme&lt;/h4&gt;
+&lt;p&gt;In order to define a custom auth scheme and configure it for use, the caller
+must do the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Define an &lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/transport/http#AuthScheme&#34;&gt;AuthScheme&lt;/a&gt;
+implementation&lt;/li&gt;
+&lt;li&gt;Register the scheme on the SDK client&amp;rsquo;s &lt;code&gt;AuthSchemes&lt;/code&gt; list&lt;/li&gt;
+&lt;li&gt;Instrument the SDK client&amp;rsquo;s &lt;code&gt;AuthSchemeResolver&lt;/code&gt; to return an auth &lt;code&gt;Option&lt;/code&gt;
+with the scheme&amp;rsquo;s ID where applicable&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div class=&#34;pageinfo pageinfo-warning&#34;&gt;
+&lt;p&gt;The following services have unique or customized authentication behavior. We
+recommend you delegate to the default implementation and wrap accordingly if
+you require custom authentication behavior therein:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Service&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;S3&lt;/td&gt;
+&lt;td&gt;Conditional use of SigV4A and SigV4Express depending on operation input.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;EventBridge&lt;/td&gt;
+&lt;td&gt;Conditional use of SigV4A depending on operation input.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Cognito&lt;/td&gt;
+&lt;td&gt;Certain operations are anonymous-only.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSO&lt;/td&gt;
+&lt;td&gt;Certain operations are anonymous-only.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;STS&lt;/td&gt;
+&lt;td&gt;Certain operations are anonymous-only.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;/div&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Configuring Client Endpoints</title>
       <link>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
@@ -154,9 +413,13 @@ endpoint resolution using &lt;code&gt;EndpointResolverV2&lt;/code&gt;.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000&#34;&gt;smithyendpoints&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;/* input params or caller context indicate we must route somewhere */&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;smithyEndpoints&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#000&#34;&gt;URI&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;url&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Parse&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://custom.service.endpoint/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;url&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Parse&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://custom.service.endpoint/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;smithyendpoints&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{},&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;smithyendpoints&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#000&#34;&gt;URI&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// delegate back to the default v2 resolver otherwise
@@ -369,9 +632,13 @@ resolver that returns a modifiable endpoint:&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000&#34;&gt;smithyendpoints&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// This value will be used as-is when making the request.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;smithyEndpoints&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000&#34;&gt;URI&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;url&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Parse&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://custom.endpoint.api/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;url&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Parse&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://custom.endpoint.api/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;smithyendpoints&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{},&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;smithyendpoints&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000&#34;&gt;URI&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;svc&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;NewFromConfig&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cfg&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;o&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;svc&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Options&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;

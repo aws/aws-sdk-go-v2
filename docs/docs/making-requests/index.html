@@ -25,11 +25,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-10-06T12:21:54-07:00" />
+<meta property="article:modified_time" content="2023-12-21T11:24:35-05:00" />
 <meta itemprop="name" content="Using the AWS SDK for Go V2 with AWS Services">
 <meta itemprop="description" content="Construct service clients and make operation calls to send requests to AWS services."><meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-10-06T12:21:54-07:00" />
-<meta itemprop="wordCount" content="2692">
+<meta itemprop="dateModified" content="2023-12-21T11:24:35-05:00" />
+<meta itemprop="wordCount" content="2734">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Using the AWS SDK for Go V2 with AWS Services"/>
 <meta name="twitter:description" content="Construct service clients and make operation calls to send requests to AWS services."/>
@@ -104,7 +104,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.810a5299d837b395cdd69648bfec2e99.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.ba2b7a89f1555398e1c5839c9aee3bc1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.810a5299d837b395cdd69648bfec2e99.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.ba2b7a89f1555398e1c5839c9aee3bc1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -144,7 +144,9 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docsconfiguring-sdk-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/" title="Configuring the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsconfiguring-sdk"><span class="">Configuring the SDK</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkauth-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/auth/" title="Configuring Authentication" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkauth"><span class="">Authentication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" title="Configuring Client Endpoints" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints"><span class="">Endpoints</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/" title="Customizing the HTTP Client" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http"><span class="">HTTP Client</span></a>
@@ -175,6 +177,13 @@
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsmiddleware-li">
   <a href="/aws-sdk-go-v2/docs/middleware/" title="Customizing the AWS SDK for Go V2 Client Requests" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsmiddleware"><span class="">Middleware</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docsfaq-li">
+  <a href="/aws-sdk-go-v2/docs/faq/" title="Frequently Asked Questions" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsfaq"><span class="">FAQ / Troubleshooting</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsfaqtiming-operations-li">
+  <a href="/aws-sdk-go-v2/docs/faq/timing-operations/" title="Timing SDK operations" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsfaqtiming-operations"><span class="">Timing Operations</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsunit-testing-li">
   <a href="/aws-sdk-go-v2/docs/unit-testing/" title="Unit Testing with the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsunit-testing"><span class="">Testing</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docscloud9-go-li">
@@ -680,12 +689,22 @@ struct should not be accessed in the event that a non-nil error is returned by t
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></div><p>For more information on error handling, including how to inspect for specific error types, see the
 <a href="https://aws.github.io/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a> documentation.</p>
-<h4 id="responses-with-ioreadcloser">Responses with io.ReadCloser</h4>
-<p>Some API operations return a response struct that contain an output member that is an <code>io.ReadCloser</code>. If you&rsquo;re making
-requests with these operations, always be sure to call <code>io.ReadCloser</code> member&rsquo;s <code>Close</code> method after you&rsquo;ve completed
-reading the content.</p>
-<p>For example Amazon S3 <code>GetObject</code> operation returns a response
-whose <code>Body</code> member is an <code>io.ReadCloser</code>:</p>
+<h4 id="responses-with-ioreadcloser">Responses with <code>io.ReadCloser</code></h4>
+<p>Some API operations return a response struct that contain an output member that
+is an <code>io.ReadCloser</code>. This will be the case for API operations that expose
+some element of their output in the body of the HTTP response itself.</p>
+<p>For example, Amazon S3 <code>GetObject</code> operation returns a response
+whose <code>Body</code> member is an <code>io.ReadCloser</code> for accessing the object payload.</p>
+
+
+<div class="pageinfo pageinfo-warning">
+<p><strong>You MUST ALWAYS <code>Close()</code> any <code>io.ReadCloser</code> output members, regardless of
+whether you&rsquo;ve consumed its content. Failure to do so can leak resources and
+potentially create issues with reading response bodies for operations called in
+the future.</strong></p>
+
+</div>
+
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span><span style="color:#ce5c00;font-weight:bold">...</span><span style="color:#000;font-weight:bold">})</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// handle error
@@ -703,7 +722,7 @@ whose <code>Body</code> member is an <code>io.ReadCloser</code>:</p>
 <p>All service operation output structs include a <code>ResultMetadata</code> member of type
 <a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#Metadata">middleware.Metadata</a>. <code>middleware.Metadata</code> is used by the SDK middleware
 to provide additional information from a service response that is not modeled by the service. This includes metadata
-like the <code>RequestID</code>. For example to retrieve the <code>RequestID</code> associated with a service response to assit AWS Support in
+like the <code>RequestID</code>. For example to retrieve the <code>RequestID</code> associated with a service response to assist AWS Support in
 troubleshooting a request:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;fmt&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
@@ -1004,7 +1023,7 @@ retryable function. The waiter-specific options also provides <code>APIOptions</
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified October 6, 2022: <a href="https://github.com/aws/aws-sdk-go-v2/commit/4b56845262ccafb8cab42bb03931c797e80f4809">Update making-requests.md (#1879) (4b56845262)</a>
+  Last modified December 21, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/aa70a99eac48cad92dfe6a0904f40e831b0f9d50">docs: add FAQ/troubleshooting and operation timing guide (aa70a99eac)</a>
 </div>
 
 </div>

@@ -100,7 +100,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.810a5299d837b395cdd69648bfec2e99.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.ba2b7a89f1555398e1c5839c9aee3bc1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -122,7 +122,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.810a5299d837b395cdd69648bfec2e99.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.ba2b7a89f1555398e1c5839c9aee3bc1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -140,7 +140,9 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docsconfiguring-sdk-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/" title="Configuring the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsconfiguring-sdk"><span class="">Configuring the SDK</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkauth-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/auth/" title="Configuring Authentication" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkauth"><span class="">Authentication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" title="Configuring Client Endpoints" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints"><span class="">Endpoints</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/" title="Customizing the HTTP Client" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http"><span class="">HTTP Client</span></a>
@@ -171,6 +173,13 @@
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsmiddleware-li">
   <a href="/aws-sdk-go-v2/docs/middleware/" title="Customizing the AWS SDK for Go V2 Client Requests" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsmiddleware"><span class="">Middleware</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docsfaq-li">
+  <a href="/aws-sdk-go-v2/docs/faq/" title="Frequently Asked Questions" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsfaq"><span class="">FAQ / Troubleshooting</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsfaqtiming-operations-li">
+  <a href="/aws-sdk-go-v2/docs/faq/timing-operations/" title="Timing SDK operations" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsfaqtiming-operations"><span class="">Timing Operations</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsunit-testing-li">
   <a href="/aws-sdk-go-v2/docs/unit-testing/" title="Unit Testing with the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsunit-testing"><span class="">Testing</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docscloud9-go-li">
@@ -424,6 +433,7 @@
             <li></li>
           </ul>
         </li>
+        <li><a href="#mocking-and-iface">Mocking and <code>*iface</code></a></li>
         <li><a href="#credentials--credential-providers">Credentials &amp; Credential Providers</a>
           <ul>
             <li><a href="#static-credentials">Static Credentials</a></li>
@@ -437,12 +447,21 @@
           <ul>
             <li><a href="#client-construction">Client Construction</a></li>
             <li><a href="#endpoints">Endpoints</a></li>
+            <li><a href="#authentication">Authentication</a></li>
             <li><a href="#invoking-api-operations">Invoking API Operations</a></li>
             <li><a href="#service-data-types">Service Data Types</a></li>
             <li><a href="#pointer-parameters">Pointer Parameters</a></li>
             <li><a href="#errors-types">Errors Types</a></li>
             <li><a href="#paginators">Paginators</a></li>
             <li><a href="#waiters">Waiters</a></li>
+            <li><a href="#presigned-requests">Presigned Requests</a></li>
+          </ul>
+        </li>
+        <li><a href="#request-customization">Request customization</a>
+          <ul>
+            <li><a href="#operation-inputoutput">Operation input/output</a></li>
+            <li><a href="#http-requestresponse">HTTP request/response</a></li>
+            <li><a href="#handler-phases">Handler phases</a></li>
           </ul>
         </li>
         <li><a href="#features">Features</a>
@@ -450,6 +469,7 @@
             <li><a href="#amazon-ec2-instance-metadata-service">Amazon EC2 Instance Metadata Service</a></li>
             <li><a href="#amazon-s3-transfer-manager">Amazon S3 Transfer Manager</a></li>
             <li><a href="#amazon-cloudfront-signing-utilities">Amazon CloudFront Signing Utilities</a></li>
+            <li><a href="#amazon-s3-encryption-client">Amazon S3 Encryption Client</a></li>
           </ul>
         </li>
       </ul>
@@ -514,8 +534,7 @@
 		
 	</header>
 	<h2 id="minimum-go-version">Minimum Go Version</h2>
-<p>The AWS SDK for Go V2 requires a minimum version of Go 1.15. Migration from AWS SDK for Go to AWS SDK for Go V2
-might require you to upgrade your application by one or more Go versions. The latest version of Go can be downloaded on
+<p>The AWS SDK for Go V2 requires a minimum Go version of 1.19. Migration from v1 to v2 The latest version of Go can be downloaded on
 the <a href="https://golang.org/dl/">Downloads</a> page. See the <a href="https://golang.org/doc/devel/release.html">Release History</a> for
 more information about each Go version release, and relevant information required for upgrading.</p>
 <h2 id="modularization">Modularization</h2>
@@ -670,7 +689,58 @@ configuration.</p>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#8f5902;font-style:italic">// handle error
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><h2 id="credentials--credential-providers">Credentials &amp; Credential Providers</h2>
+</span></span></code></pre></div><h2 id="mocking-and-iface">Mocking and <code>*iface</code></h2>
+<p>The <code>*iface</code> packages and interfaces therein (e.g. <a href="https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3iface#S3API">s3iface.S3API</a>)
+have been removed. These interface definitions are not stable since they are
+broken every time a service adds a new operation.</p>
+<p>Usage of <code>*iface</code> should be replaced by scoped caller-defined interfaces for
+the service operations being used:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;io&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/service/s3/s3iface&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">GetObjectBytes</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span> <span style="color:#000">s3iface</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">S3API</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">key</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">([]</span><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">object</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">key</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">nil</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">object</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Body</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Close</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">io</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ReadAll</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">object</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Body</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V2
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;io&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">GetObjectAPIClient</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">...</span><span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">GetObjectBytes</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">client</span> <span style="color:#000">GetObjectAPIClient</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">key</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">([]</span><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">object</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">api</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">key</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">nil</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">object</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Body</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Close</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">io</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ReadAll</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">object</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Body</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><p>See the <a href="https://aws.github.io/aws-sdk-go-v2/docs/unit-testing/">testing guide</a> for more
+information.</p>
+<h2 id="credentials--credential-providers">Credentials &amp; Credential Providers</h2>
 <p>The <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/credentials">aws/credentials</a> package and associated credential providers have been
 relocated to the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/credentials">credentials</a> package location. The <code>credentials</code> package is a Go module that
 you retrieve by using <code>go get</code>.</p>
@@ -1019,15 +1089,22 @@ service client using values from an <code>aws.Config</code>. The <code>aws.Confi
 <p>The <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/endpoints">endpoints</a> package no longer exists in the AWS SDK for Go V2. Each service
 client now embeds its required AWS endpoint metadata within the client package. This reduces the overall binary size of
 compiled applications by no longer including endpoint metadata for services not used by your application.</p>
+<p>Additionally, each service now exposes its own interface for endpoint
+resolution in <code>EndpointResolverV2</code>. Each API takes a unique set of parameters
+for a service <code>EndpointParameters</code>, the values of which are sourced by the SDK
+from various locations when an operation is invoked.</p>
 <p>By default, service clients use their configured AWS Region to resolve the service endpoint for the target Region. If
-your application requires a custom endpoint to be specified for a particular service and region, you can specify
-a custom <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointResolver">aws.EndpointResolver</a> using the <code>EndpointResolver</code> field on the
+your application requires a custom endpoint, you can specify custom behavior on <code>EndpointResolverV2</code> field on the
 <code>aws.Config</code> structure. If your application implements a custom
-<a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/endpoints#Resolver">endpoints.Resolver</a> you must migrate it to conform to the
-<code>aws.EndpointResolver</code> interface. <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointResolverFunc">aws.EndpointResolverFunc</a> is provided as
-a convenient way to wrap a resolver function to satisfy the <code>aws.EndpointResolver</code> interface.</p>
+<a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/endpoints#Resolver">endpoints.Resolver</a> you must
+migrate it to conform to this new per-service interface.</p>
 <p>For more information on endpoints and implementing a custom resolver, see
 <a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/">Configuring Client Endpoints</a>.</p>
+<h3 id="authentication">Authentication</h3>
+<p>The AWS SDK for Go V2 supports more advanced authentication behavior, which
+enables the use of newer AWS service features such as codecatalyst and S3
+Express One Zone. Additionally, this behavior can be customized on a per-client
+basis.</p>
 <h3 id="invoking-api-operations">Invoking API Operations</h3>
 <p>The number of service client operation methods have been reduced significantly. The <code>&lt;OperationName&gt;Request</code>,
 <code>&lt;OperationName&gt;WithContext</code>, and <code>&lt;OperationName&gt;</code> methods have all been consolidated into single operation method, <code>&lt;OperationName&gt;</code>.</p>
@@ -1235,7 +1312,445 @@ to wait for a Amazon S3 Bucket to exist, you must construct a <code>BucketExists
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#NewBucketExistsWaiter">s3.NewBucketExistsWaiter</a> constructor to create a
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#BucketExistsWaiter">s3.BucketExistsWaiter</a>. The <code>s3.BucketExistsWaiter</code> provides a
 <code>Wait</code> method which can be used to wait for a bucket to become available.</p>
-<h2 id="features">Features</h2>
+<h3 id="presigned-requests">Presigned Requests</h3>
+<p>The V1 SDK technically supported presigning <em>any</em> AWS SDK operation, however,
+this does not accurately represent what is actually supported at the service
+level (and in reality most AWS service operations do not support presigning).</p>
+<p>AWS SDK for Go V2 resolves this by exposing specific <code>PresignClient</code>
+implementations in service packages with specific APIs for supported
+presignable operations.</p>
+<p><strong>Note: If a service is missing presigning support for an operation that you
+were successfully using in SDK v1, please let us know by
+<a href="https://github.com/aws/aws-sdk-go-v2/issues">filing an issue on GitHub</a>.</strong></p>
+<p>Uses of <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/request#Request.Presign">Presign</a> and
+<a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/request#Request.PresignRequest">PresignRequest</a> must
+be converted to use service-specific presigning clients.</p>
+<p>The following example shows how to migrate presigning of an S3 GetObject
+request:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/aws&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/aws/session&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">sess</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">session</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Must</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">session</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewSessionWithOptions</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">session</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000">SharedConfigState</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">session</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">SharedConfigEnable</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">}))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">svc</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">New</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">sess</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">req</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">_</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectRequest</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;key&#34;</span><span style="color:#000;font-weight:bold">),</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#8f5902;font-style:italic">// pattern 1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">url1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">req</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Presign</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">20</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Minute</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">url1</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#8f5902;font-style:italic">// pattern 2
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">url2</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">header</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">req</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PresignRequest</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">20</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Minute</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">url2</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">header</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V2
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">svc</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewPresignClient</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">req</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PresignGetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;key&#34;</span><span style="color:#000;font-weight:bold">),</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PresignOptions</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Expires</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">20</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Minute</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">req</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Method</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">req</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">URL</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">req</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">SignedHeader</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><h2 id="request-customization">Request customization</h2>
+<p>The monolithic <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/request#Request">request.Request</a> API
+has been re-compartmentalized.</p>
+<h3 id="operation-inputoutput">Operation input/output</h3>
+<p>The opaque <code>Request</code> fields <code>Params</code> and <code>Data</code>, which hold the operation input
+and output structures respectively, are now accessible within specific
+middleware phases as input/output:</p>
+<p>Request handlers which reference <code>Request.Params</code> and <code>Request.Data</code> must be migrated to middleware.</p>
+<h4 id="migrating-params">migrating <code>Params</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/aws&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/aws/request&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/aws/session&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">withPutObjectDefaultACL</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">acl</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">request</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Option</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">r</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">request</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Request</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">in</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ok</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">r</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Params</span><span style="color:#000;font-weight:bold">.(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectInput</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">!</span><span style="color:#000">ok</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ACL</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">in</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ACL</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">acl</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">r</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Params</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">in</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">sess</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">session</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Must</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">session</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewSession</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">sess</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Handlers</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Validate</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PushBack</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">withPutObjectDefaultACL</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ObjectCannedACLBucketOwnerFullControl</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V2
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3/types&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/middleware&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">smithyhttp</span> <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/transport/http&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">withPutObjectDefaultACL</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">acl</span> <span style="color:#000">types</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ObjectCannedACL</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// implements middleware.InitializeMiddleware, which runs BEFORE a request has
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// been serialized and can act on the operation input
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">_</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeMiddleware</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">withPutObjectDefaultACL</span><span style="color:#000;font-weight:bold">)(</span><span style="color:#204a87;font-weight:bold">nil</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">withPutObjectDefaultACL</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ID</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#4e9a06">&#34;withPutObjectDefaultACL&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">m</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">withPutObjectDefaultACL</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeHandler</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">out</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">input</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ok</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parameters</span><span style="color:#000;font-weight:bold">.(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectInput</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">!</span><span style="color:#000">ok</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#204a87">len</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">input</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ACL</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#0000cf;font-weight:bold">0</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">input</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ACL</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">m</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">acl</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">in</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parameters</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">input</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// create a helper function to simplify instrumentation of our middleware
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">WithPutObjectDefaultACL</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">acl</span> <span style="color:#000">types</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ObjectCannedACL</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87">append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Stack</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">s</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Initialize</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">withPutObjectDefaultACL</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">acl</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">acl</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">After</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">svc</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">WithPutObjectDefaultACL</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">types</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ObjectCannedACLBucketOwnerFullControl</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><h4 id="migrating-data">migrating <code>Data</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/aws&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/aws/request&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/aws/session&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">readPutObjectOutput</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">r</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">request</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Request</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ok</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">r</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Data</span><span style="color:#000;font-weight:bold">.(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectOutput</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">!</span><span style="color:#000">ok</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">sess</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">session</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Must</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">session</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewSession</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">sess</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Handlers</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Unmarshal</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PushBack</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">readPutObjectOutput</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">svc</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">New</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">sess</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V2
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/middleware&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">smithyhttp</span> <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/transport/http&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">readPutObjectOutput</span> <span style="color:#204a87;font-weight:bold">struct</span><span style="color:#000;font-weight:bold">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">_</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">DeserializeMiddleware</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">readPutObjectOutput</span><span style="color:#000;font-weight:bold">)(</span><span style="color:#204a87;font-weight:bold">nil</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">readPutObjectOutput</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ID</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#4e9a06">&#34;readPutObjectOutput&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">readPutObjectOutput</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">HandleDeserialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">DeserializeInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">DeserializeHandler</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">out</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">DeserializeOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleDeserialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ok</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parameters</span><span style="color:#000;font-weight:bold">.(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectOutput</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">!</span><span style="color:#000">ok</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// inspect output...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">WithReadPutObjectOutput</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87">append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Stack</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">s</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Initialize</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">withReadPutObjectOutput</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Before</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">svc</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">WithReadPutObjectOutput</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><h3 id="http-requestresponse">HTTP request/response</h3>
+<p>The <code>HTTPRequest</code> and <code>HTTPResponse</code> fields from <code>Request</code> are now exposed in
+specific middleware phases. Since middleware is transport-agnostic, you must
+perform a type assertion on the middleware input or output to reveal the
+underlying HTTP request or response.</p>
+<p>Request handlers which reference <code>Request.HTTPRequest</code> and
+<code>Request.HTTPResponse</code> must be migrated to middleware.</p>
+<h4 id="migrating-httprequest">migrating <code>HTTPRequest</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/aws/request&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go/aws/session&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">withHeader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">header</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">val</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">request</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Option</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">r</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">request</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Request</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">request</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HTTPRequest</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Header</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Set</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">header</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">val</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">sess</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">session</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Must</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">session</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewSession</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">sess</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Handlers</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Build</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PushBack</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">withHeader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;x-user-header&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;...&#34;</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">svc</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">New</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">sess</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V2
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/middleware&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">smithyhttp</span> <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/transport/http&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">withHeader</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">header</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">val</span> <span style="color:#204a87;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// implements middleware.BuildMiddleware, which runs AFTER a request has been
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// serialized and can operate on the transport request
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">_</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BuildMiddleware</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">withHeader</span><span style="color:#000;font-weight:bold">)(</span><span style="color:#204a87;font-weight:bold">nil</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">withHeader</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ID</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#4e9a06">&#34;withHeader&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">m</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">withHeader</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">HandleBuild</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BuildInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BuildHandler</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">out</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BuildOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">req</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ok</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Request</span><span style="color:#000;font-weight:bold">.(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">smithyhttp</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Request</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">!</span><span style="color:#000">ok</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;unrecognized transport type %T&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Request</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">req</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Header</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Set</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">m</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">header</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">m</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">val</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleBuild</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">WithHeader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">header</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">val</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87">append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Stack</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">s</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Build</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">withHeader</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">header</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">header</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">val</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">val</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">},</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">After</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">svc</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">WithHeader</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;x-user-header&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;...&#34;</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><h3 id="handler-phases">Handler phases</h3>
+<p>SDK v2 middleware phases are the successor to v1 handler phases.</p>
+<p>The following table provides a rough mapping of v1 handler phases to their
+equivalent location within the V2 middleware stack:</p>
+<table>
+<thead>
+<tr>
+<th>v1 handler name</th>
+<th>v2 middleware phase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validate</td>
+<td>Initialize</td>
+</tr>
+<tr>
+<td>Build</td>
+<td>Serialize</td>
+</tr>
+<tr>
+<td>Sign</td>
+<td>Finalize</td>
+</tr>
+<tr>
+<td>Send</td>
+<td>n/a (1)</td>
+</tr>
+<tr>
+<td>ValidateResponse</td>
+<td>Deserialize</td>
+</tr>
+<tr>
+<td>Unmarshal</td>
+<td>Deserialize</td>
+</tr>
+<tr>
+<td>UnmarshalMetadata</td>
+<td>Deserialize</td>
+</tr>
+<tr>
+<td>UnmarshalError</td>
+<td>Deserialize</td>
+</tr>
+<tr>
+<td>Retry</td>
+<td>Finalize, after <code>&quot;Retry&quot;</code> middleware (2)</td>
+</tr>
+<tr>
+<td>AfterRetry</td>
+<td>Finalize, before <code>&quot;Retry&quot;</code> middleware, post-<code>next.HandleFinalize()</code> (2,3)</td>
+</tr>
+<tr>
+<td>CompleteAttempt</td>
+<td>Finalize, end of step</td>
+</tr>
+<tr>
+<td>Complete</td>
+<td>Initialize, start of step, post-<code>next.HandleInitialize()</code> (3)</td>
+</tr>
+</tbody>
+</table>
+<p>(1) The <code>Send</code> phase in v1 is effectively the wrapped HTTP client round-trip in
+v2. This behavior is controlled by the <code>HTTPClient</code> field on client options.</p>
+<p>(2) Any middleware after the <code>&quot;Retry&quot;</code> middleware in the Finalize step will be
+part of the retry loop.</p>
+<p>(3) The middleware &ldquo;stack&rdquo; at operation time is built into a
+repeatedly-decorated handler function. Each handler is responsible for calling
+the next one in the chain. This implicitly means that a middleware step can
+also take action AFTER its next step has been called.</p>
+<p>For example, for the Initialize step, which is at the top of the stack, this
+means Initialize middlewares that take action after calling the next handler
+effectively operate at the end of the request:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V2
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/middleware&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">onComplete</span> <span style="color:#204a87;font-weight:bold">struct</span><span style="color:#000;font-weight:bold">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">_</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeMiddleware</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">onComplete</span><span style="color:#000;font-weight:bold">)(</span><span style="color:#204a87;font-weight:bold">nil</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">onComplete</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ID</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#4e9a06">&#34;onComplete&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">onComplete</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeHandler</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">out</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// the entire operation was invoked above - the deserialized response is
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#8f5902;font-style:italic">// available opaquely in out.Result, run post-op actions here...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><h2 id="features">Features</h2>
 <h3 id="amazon-ec2-instance-metadata-service">Amazon EC2 Instance Metadata Service</h3>
 <p>The AWS SDK for Go V2 provides an Amazon EC2 Instance Metadata Service (IMDS) client that you can use
 to query the local IMDS when executing your application on an Amazon EC2 instance. The IMDS client is
@@ -1283,7 +1798,32 @@ Download manager client.</p>
 <p>The AWS SDK for Go V2 provides Amazon CloudFront signing utilities in a Go module outside the service
 client import path. This module can be retrieved by using <code>go get</code>.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>go get github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign
-</span></span></code></pre></div>
+</span></span></code></pre></div><h3 id="amazon-s3-encryption-client">Amazon S3 Encryption Client</h3>
+<p>Starting in AWS SDK for Go V2, the Amazon S3 encryption client is a separate
+module under AWS Crypto Tools. The latest version of the S3 encryption client
+for Go, 3.x, is now available at <a href="https://github.com/aws/amazon-s3-encryption-client-go">https://github.com/aws/amazon-s3-encryption-client-go</a>.
+This module can be retrieved by using <code>go get</code>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>go get github.com/aws/amazon-s3-encryption-client-go/v3
+</span></span></code></pre></div><p>The separate <code>EncryptionClient</code>
+(<a href="https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3crypto#EncryptionClient">v1</a>, <a href="https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3crypto#EncryptionClientV2">v2</a>)
+and <code>DecryptionClient</code>
+(<a href="https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3crypto#DecryptionClient">v1</a>, <a href="https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3crypto#DecryptionClientV2">v2</a>)
+APIs have been replaced with a single client,
+<a href="https://pkg.go.dev/github.com/aws/amazon-s3-encryption-client-go/v3/client#S3EncryptionClientV3">S3EncryptionClientV3</a>,
+that exposes both encrypt and decrypt functionality.</p>
+<p>Like other service clients in AWS SDK for Go V2, the operation APIs have
+been condensed:</p>
+<ul>
+<li>The <code>GetObject</code>, <code>GetObjectRequest</code>, and <code>GetObjectWithContext</code> decryption
+APIs are replaced by
+<a href="https://pkg.go.dev/github.com/aws/amazon-s3-encryption-client-go/v3/client#S3EncryptionClientV3.GetObject">GetObject</a>.</li>
+<li>The <code>PutObject</code>, <code>PutObjectRequest</code>, and <code>PutObjectWithContext</code> encryption
+APIs are replaced by
+<a href="https://pkg.go.dev/github.com/aws/amazon-s3-encryption-client-go/v3/client#S3EncryptionClientV3.PutObject">PutObject</a>.</li>
+</ul>
+<p>To learn how to migrate to the 3.x major version of the encryption client, see
+<a href="https://docs.aws.amazon.com/amazon-s3-encryption-client/latest/developerguide/go-v3-migration.html">this guide</a>.</p>
+
         <div class="section-index">
     
     
@@ -1299,7 +1839,7 @@ client import path. This module can be retrieved by using <code>go get</code>.</
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified May 16, 2022: <a href="https://github.com/aws/aws-sdk-go-v2/commit/875683b873aee61942bcde4bb0b8664960c31280">Fix typo in migration docs (#1709) (875683b873)</a>
+  Last modified December 19, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/54f1c1eab5eda35589bb078238393378e2ee15c8">docs: migration guide for presigning (#2432) (54f1c1eab5)</a>
 </div>
 
 </div>
