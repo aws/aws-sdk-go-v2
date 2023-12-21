@@ -7,6 +7,22 @@ import (
 	"time"
 )
 
+// Summary information about the Application Association.
+type ApplicationAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the Application.
+	ApplicationArn *string
+
+	// The Amazon Resource Name (ARN) of the Application Association.
+	ApplicationAssociationArn *string
+
+	// The identifier for the client that is associated with the Application
+	// Association.
+	ClientId *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for where the application should be loaded from.
 type ApplicationSourceConfig struct {
 

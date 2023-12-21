@@ -25807,6 +25807,30 @@ func awsAwsjson11_serializeDocumentRedshiftDatasetDefinition(v *types.RedshiftDa
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRemoteDebugConfig(v *types.RemoteDebugConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableRemoteDebug != nil {
+		ok := object.Key("EnableRemoteDebug")
+		ok.Boolean(*v.EnableRemoteDebug)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRemoteDebugConfigForUpdate(v *types.RemoteDebugConfigForUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableRemoteDebug != nil {
+		ok := object.Key("EnableRemoteDebug")
+		ok.Boolean(*v.EnableRemoteDebug)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRenderableTask(v *types.RenderableTask, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -27843,6 +27867,36 @@ func awsAwsjson11_serializeDocumentVectorConfig(v *types.VectorConfig, value smi
 		ok.Integer(*v.Dimension)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVisibilityConditions(v *types.VisibilityConditions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVisibilityConditionsList(v []types.VisibilityConditions, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentVisibilityConditions(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -30587,6 +30641,13 @@ func awsAwsjson11_serializeOpDocumentCreateTrainingJobInput(v *CreateTrainingJob
 	if v.ProfilerRuleConfigurations != nil {
 		ok := object.Key("ProfilerRuleConfigurations")
 		if err := awsAwsjson11_serializeDocumentProfilerRuleConfigurations(v.ProfilerRuleConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RemoteDebugConfig != nil {
+		ok := object.Key("RemoteDebugConfig")
+		if err := awsAwsjson11_serializeDocumentRemoteDebugConfig(v.RemoteDebugConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -36365,6 +36426,13 @@ func awsAwsjson11_serializeOpDocumentSearchInput(v *SearchInput, value smithyjso
 		ok.String(string(v.SortOrder))
 	}
 
+	if v.VisibilityConditions != nil {
+		ok := object.Key("VisibilityConditions")
+		if err := awsAwsjson11_serializeDocumentVisibilityConditionsList(v.VisibilityConditions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -37719,6 +37787,13 @@ func awsAwsjson11_serializeOpDocumentUpdateTrainingJobInput(v *UpdateTrainingJob
 	if v.ProfilerRuleConfigurations != nil {
 		ok := object.Key("ProfilerRuleConfigurations")
 		if err := awsAwsjson11_serializeDocumentProfilerRuleConfigurations(v.ProfilerRuleConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RemoteDebugConfig != nil {
+		ok := object.Key("RemoteDebugConfig")
+		if err := awsAwsjson11_serializeDocumentRemoteDebugConfigForUpdate(v.RemoteDebugConfig, ok); err != nil {
 			return err
 		}
 	}

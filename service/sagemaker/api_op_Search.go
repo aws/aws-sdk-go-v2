@@ -73,6 +73,9 @@ type SearchInput struct {
 	// default is Descending .
 	SortOrder types.SearchSortOrder
 
+	// Limits the results of your search request to the resources that you can access.
+	VisibilityConditions []types.VisibilityConditions
+
 	noSmithyDocumentSerde
 }
 

@@ -614,11 +614,11 @@ type DBCluster struct {
 	// The ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
 
-	// Indicates whether the HTTP endpoint for an Aurora Serverless v1 DB cluster is
-	// enabled. When enabled, the HTTP endpoint provides a connectionless web service
-	// API for running SQL queries on the Aurora Serverless v1 DB cluster. You can also
-	// query your database from inside the RDS console with the query editor. For more
-	// information, see Using the Data API for Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
+	// Indicates whether the HTTP endpoint is enabled for an Aurora DB cluster. When
+	// enabled, the HTTP endpoint provides a connectionless web service API (RDS Data
+	// API) for running SQL queries on the DB cluster. You can also query your database
+	// from inside the RDS console with the RDS query editor. For more information, see
+	// Using RDS Data API (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
 	// in the Amazon Aurora User Guide.
 	HttpEndpointEnabled *bool
 

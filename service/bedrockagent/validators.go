@@ -1192,6 +1192,61 @@ func validatePromptOverrideConfiguration(v *types.PromptOverrideConfiguration) e
 	}
 }
 
+func validateRdsConfiguration(v *types.RdsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RdsConfiguration"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.CredentialsSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialsSecretArn"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.FieldMapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldMapping"))
+	} else if v.FieldMapping != nil {
+		if err := validateRdsFieldMapping(v.FieldMapping); err != nil {
+			invalidParams.AddNested("FieldMapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRdsFieldMapping(v *types.RdsFieldMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RdsFieldMapping"}
+	if v.PrimaryKeyField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryKeyField"))
+	}
+	if v.VectorField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VectorField"))
+	}
+	if v.TextField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextField"))
+	}
+	if v.MetadataField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataField"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedisEnterpriseCloudConfiguration(v *types.RedisEnterpriseCloudConfiguration) error {
 	if v == nil {
 		return nil
@@ -1277,6 +1332,11 @@ func validateStorageConfiguration(v *types.StorageConfiguration) error {
 	if v.RedisEnterpriseCloudConfiguration != nil {
 		if err := validateRedisEnterpriseCloudConfiguration(v.RedisEnterpriseCloudConfiguration); err != nil {
 			invalidParams.AddNested("RedisEnterpriseCloudConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RdsConfiguration != nil {
+		if err := validateRdsConfiguration(v.RdsConfiguration); err != nil {
+			invalidParams.AddNested("RdsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

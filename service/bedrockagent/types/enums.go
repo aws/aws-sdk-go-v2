@@ -281,6 +281,7 @@ const (
 	KnowledgeBaseStorageTypeOpensearchServerless KnowledgeBaseStorageType = "OPENSEARCH_SERVERLESS"
 	KnowledgeBaseStorageTypePinecone             KnowledgeBaseStorageType = "PINECONE"
 	KnowledgeBaseStorageTypeRedisEnterpriseCloud KnowledgeBaseStorageType = "REDIS_ENTERPRISE_CLOUD"
+	KnowledgeBaseStorageTypeRds                  KnowledgeBaseStorageType = "RDS"
 )
 
 // Values returns all known values for KnowledgeBaseStorageType. Note that this
@@ -291,6 +292,7 @@ func (KnowledgeBaseStorageType) Values() []KnowledgeBaseStorageType {
 		"OPENSEARCH_SERVERLESS",
 		"PINECONE",
 		"REDIS_ENTERPRISE_CLOUD",
+		"RDS",
 	}
 }
 

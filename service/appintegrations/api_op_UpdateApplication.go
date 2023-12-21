@@ -45,10 +45,17 @@ type UpdateApplicationInput struct {
 	// The name of the application.
 	Name *string
 
+	// The configuration of events or requests that the application has access to.
+	Permissions []string
+
 	// The events that the application publishes.
+	//
+	// Deprecated: Publications has been replaced with Permissions
 	Publications []types.Publication
 
 	// The events that the application subscribes.
+	//
+	// Deprecated: Subscriptions has been replaced with Permissions
 	Subscriptions []types.Subscription
 
 	noSmithyDocumentSerde

@@ -5340,6 +5340,19 @@ func awsRestjson1_serializeDocument__listOfInputDestinationRequest(v []types.Inp
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfInputDeviceConfigurableAudioChannelPairConfig(v []types.InputDeviceConfigurableAudioChannelPairConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentInputDeviceConfigurableAudioChannelPairConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfInputDeviceRequest(v []types.InputDeviceRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -8910,9 +8923,33 @@ func awsRestjson1_serializeDocumentInputDestinationRequest(v *types.InputDestina
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInputDeviceConfigurableAudioChannelPairConfig(v *types.InputDeviceConfigurableAudioChannelPairConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.Integer(*v.Id)
+	}
+
+	if len(v.Profile) > 0 {
+		ok := object.Key("profile")
+		ok.String(string(v.Profile))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInputDeviceConfigurableSettings(v *types.InputDeviceConfigurableSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AudioChannelPairs != nil {
+		ok := object.Key("audioChannelPairs")
+		if err := awsRestjson1_serializeDocument__listOfInputDeviceConfigurableAudioChannelPairConfig(v.AudioChannelPairs, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.Codec) > 0 {
 		ok := object.Key("codec")

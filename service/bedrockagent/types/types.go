@@ -1052,6 +1052,63 @@ type PromptOverrideConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the configurations to use RDS to store knowledge base data.
+type RdsConfiguration struct {
+
+	// Arn of a SecretsManager Secret.
+	//
+	// This member is required.
+	CredentialsSecretArn *string
+
+	// Name of the database within RDS
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// A mapping of Bedrock Knowledge Base fields to RDS column names
+	//
+	// This member is required.
+	FieldMapping *RdsFieldMapping
+
+	// Arn of a RDS Resource.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// Name of the table within RDS
+	//
+	// This member is required.
+	TableName *string
+
+	noSmithyDocumentSerde
+}
+
+// A mapping of Bedrock Knowledge Base fields to RDS column names
+type RdsFieldMapping struct {
+
+	// Name of the column
+	//
+	// This member is required.
+	MetadataField *string
+
+	// Name of the column
+	//
+	// This member is required.
+	PrimaryKeyField *string
+
+	// Name of the column
+	//
+	// This member is required.
+	TextField *string
+
+	// Name of the column
+	//
+	// This member is required.
+	VectorField *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the configurations to use Redis Enterprise Cloud to store knowledge
 // base data.
 type RedisEnterpriseCloudConfiguration struct {
@@ -1149,6 +1206,9 @@ type StorageConfiguration struct {
 
 	// Contains the configurations to use Pinecone to store knowledge base data.
 	PineconeConfiguration *PineconeConfiguration
+
+	// Contains the configurations to use RDS to store knowledge base data.
+	RdsConfiguration *RdsConfiguration
 
 	// Contains the configurations to use Redis Enterprise Cloud to store knowledge
 	// base data.

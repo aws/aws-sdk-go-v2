@@ -9958,6 +9958,145 @@ func awsRestjson1_deserializeDocumentPromptOverrideConfiguration(v **types.Promp
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRdsConfiguration(v **types.RdsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RdsConfiguration
+	if *v == nil {
+		sv = &types.RdsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "credentialsSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.CredentialsSecretArn = ptr.String(jtv)
+			}
+
+		case "databaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RdsDatabaseName to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "fieldMapping":
+			if err := awsRestjson1_deserializeDocumentRdsFieldMapping(&sv.FieldMapping, value); err != nil {
+				return err
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RdsArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "tableName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RdsTableName to be of type string, got %T instead", value)
+				}
+				sv.TableName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRdsFieldMapping(v **types.RdsFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RdsFieldMapping
+	if *v == nil {
+		sv = &types.RdsFieldMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metadataField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+				}
+				sv.MetadataField = ptr.String(jtv)
+			}
+
+		case "primaryKeyField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+				}
+				sv.PrimaryKeyField = ptr.String(jtv)
+			}
+
+		case "textField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+				}
+				sv.TextField = ptr.String(jtv)
+			}
+
+		case "vectorField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+				}
+				sv.VectorField = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRecommendedActions(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10430,6 +10569,11 @@ func awsRestjson1_deserializeDocumentStorageConfiguration(v **types.StorageConfi
 
 		case "pineconeConfiguration":
 			if err := awsRestjson1_deserializeDocumentPineconeConfiguration(&sv.PineconeConfiguration, value); err != nil {
+				return err
+			}
+
+		case "rdsConfiguration":
+			if err := awsRestjson1_deserializeDocumentRdsConfiguration(&sv.RdsConfiguration, value); err != nil {
 				return err
 			}
 

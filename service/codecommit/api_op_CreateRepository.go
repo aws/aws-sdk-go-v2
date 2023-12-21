@@ -41,6 +41,14 @@ type CreateRepositoryInput struct {
 	// This member is required.
 	RepositoryName *string
 
+	// The ID of the encryption key. You can view the ID of an encryption key in the
+	// KMS console, or use the KMS APIs to programmatically retrieve a key ID. For more
+	// information about acceptable values for kmsKeyID, see KeyId (https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId)
+	// in the Decrypt API description in the Key Management Service API Reference. If
+	// no key is specified, the default aws/codecommit Amazon Web Services managed key
+	// is used.
+	KmsKeyId *string
+
 	// A comment or description about the new repository. The description field for a
 	// repository accepts all HTML characters and all valid Unicode characters.
 	// Applications that do not HTML-encode the description and display it in a webpage

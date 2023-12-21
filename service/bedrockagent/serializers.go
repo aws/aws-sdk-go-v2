@@ -4142,6 +4142,67 @@ func awsRestjson1_serializeDocumentPromptOverrideConfiguration(v *types.PromptOv
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRdsConfiguration(v *types.RdsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CredentialsSecretArn != nil {
+		ok := object.Key("credentialsSecretArn")
+		ok.String(*v.CredentialsSecretArn)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("databaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.FieldMapping != nil {
+		ok := object.Key("fieldMapping")
+		if err := awsRestjson1_serializeDocumentRdsFieldMapping(v.FieldMapping, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("resourceArn")
+		ok.String(*v.ResourceArn)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("tableName")
+		ok.String(*v.TableName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRdsFieldMapping(v *types.RdsFieldMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataField != nil {
+		ok := object.Key("metadataField")
+		ok.String(*v.MetadataField)
+	}
+
+	if v.PrimaryKeyField != nil {
+		ok := object.Key("primaryKeyField")
+		ok.String(*v.PrimaryKeyField)
+	}
+
+	if v.TextField != nil {
+		ok := object.Key("textField")
+		ok.String(*v.TextField)
+	}
+
+	if v.VectorField != nil {
+		ok := object.Key("vectorField")
+		ok.String(*v.VectorField)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRedisEnterpriseCloudConfiguration(v *types.RedisEnterpriseCloudConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4277,6 +4338,13 @@ func awsRestjson1_serializeDocumentStorageConfiguration(v *types.StorageConfigur
 	if v.PineconeConfiguration != nil {
 		ok := object.Key("pineconeConfiguration")
 		if err := awsRestjson1_serializeDocumentPineconeConfiguration(v.PineconeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RdsConfiguration != nil {
+		ok := object.Key("rdsConfiguration")
+		if err := awsRestjson1_serializeDocumentRdsConfiguration(v.RdsConfiguration, ok); err != nil {
 			return err
 		}
 	}

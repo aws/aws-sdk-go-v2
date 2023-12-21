@@ -1,0 +1,8 @@
+{
+    "id": "edc72d22-4f04-441c-ab21-a73edeb54a41",
+    "type": "feature",
+    "description": "Adds Waiters for successful creation and deletion of Graph, Graph Snapshot, Import Task and Private Endpoints for Neptune Analytics",
+    "modules": [
+        "service/neptunegraph"
+    ]
+}

@@ -39,6 +39,9 @@ type CreateWorkspaceInput struct {
 	// idempotency of the request.
 	ClientToken *string
 
+	// Optional, customer managed KMS key used to encrypt data for this workspace
+	KmsKeyArn *string
+
 	// Optional, user-provided tags for this workspace.
 	Tags map[string]string
 
@@ -62,6 +65,9 @@ type CreateWorkspaceOutput struct {
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	// Customer managed KMS key ARN for this workspace
+	KmsKeyArn *string
 
 	// The tags of this workspace.
 	Tags map[string]string

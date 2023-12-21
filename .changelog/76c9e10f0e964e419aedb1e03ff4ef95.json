@@ -1,0 +1,8 @@
+{
+    "id": "76c9e10f-0e96-4e41-9aed-b1e03ff4ef95",
+    "type": "feature",
+    "description": "This release introduces Amazon Aurora as a vector store on Knowledge Bases for Amazon Bedrock",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

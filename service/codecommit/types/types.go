@@ -196,6 +196,27 @@ type BatchGetCommitsError struct {
 	noSmithyDocumentSerde
 }
 
+// Returns information about errors in a BatchGetRepositories operation.
+type BatchGetRepositoriesError struct {
+
+	// An error code that specifies the type of failure.
+	ErrorCode BatchGetRepositoriesErrorCodeEnum
+
+	// An error message that provides detail about why the repository either was not
+	// found or was not in a valid state.
+	ErrorMessage *string
+
+	// The ID of a repository that either could not be found or was not in a valid
+	// state.
+	RepositoryId *string
+
+	// The name of a repository that either could not be found or was not in a valid
+	// state.
+	RepositoryName *string
+
+	noSmithyDocumentSerde
+}
+
 // Returns information about a specific Git blob object.
 type BlobMetadata struct {
 
@@ -1025,6 +1046,10 @@ type RepositoryMetadata struct {
 
 	// The repository's default branch name.
 	DefaultBranch *string
+
+	// The ID of the Key Management Service encryption key used to encrypt and decrypt
+	// the repository.
+	KmsKeyId *string
 
 	// The date and time the repository was last modified, in timestamp format.
 	LastModifiedDate *time.Time

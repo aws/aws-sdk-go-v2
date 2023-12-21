@@ -1560,7 +1560,7 @@ type EncoderSettings struct {
 	// Settings for caption decriptions
 	CaptionDescriptions []CaptionDescription
 
-	// Color correction settings
+	// Color Correction Settings
 	ColorCorrectionSettings *ColorCorrectionSettings
 
 	// Feature Activations
@@ -2949,8 +2949,33 @@ type InputDestinationVpc struct {
 	noSmithyDocumentSerde
 }
 
+// One audio configuration that specifies the format for one audio pair that the
+// device produces as output.
+type InputDeviceConfigurableAudioChannelPairConfig struct {
+
+	// The ID for one audio pair configuration, a value from 1 to 8.
+	Id *int32
+
+	// The profile to set for one audio pair configuration. Choose an enumeration
+	// value. Each value describes one audio configuration using the format (rate
+	// control algorithm)-(codec)_(quality)-(bitrate in bytes). For example,
+	// CBR-AAC_HQ-192000. Or choose DISABLED, in which case the device won't produce
+	// audio for this pair.
+	Profile InputDeviceConfigurableAudioChannelPairProfile
+
+	noSmithyDocumentSerde
+}
+
 // Configurable settings for the input device.
 type InputDeviceConfigurableSettings struct {
+
+	// An array of eight audio configurations, one for each audio pair in the source.
+	// Set up each audio configuration either to exclude the pair, or to format it and
+	// include it in the output from the device. This parameter applies only to UHD
+	// devices, and only when the device is configured as the source for a MediaConnect
+	// flow. For an HD device, you configure the audio by setting up audio selectors in
+	// the channel configuration.
+	AudioChannelPairs []InputDeviceConfigurableAudioChannelPairConfig
 
 	// Choose the codec for the video that the device produces. Only UHD devices can
 	// specify this parameter.
@@ -3156,6 +3181,22 @@ type InputDeviceSummary struct {
 	noSmithyDocumentSerde
 }
 
+// One audio configuration that specifies the format for one audio pair that the
+// device produces as output.
+type InputDeviceUhdAudioChannelPairConfig struct {
+
+	// The ID for one audio pair configuration, a value from 1 to 8.
+	Id *int32
+
+	// The profile for one audio pair configuration. This property describes one audio
+	// configuration in the format (rate control algorithm)-(codec)_(quality)-(bitrate
+	// in bytes). For example, CBR-AAC_HQ-192000. Or DISABLED, in which case the device
+	// won't produce audio for this pair.
+	Profile InputDeviceUhdAudioChannelPairProfile
+
+	noSmithyDocumentSerde
+}
+
 // Settings that describe the active source from the input device, and the video
 // characteristics of that source.
 type InputDeviceUhdSettings struct {
@@ -3163,6 +3204,12 @@ type InputDeviceUhdSettings struct {
 	// If you specified Auto as the configured input, specifies which of the sources
 	// is currently active (SDI or HDMI).
 	ActiveInput InputDeviceActiveInput
+
+	// An array of eight audio configurations, one for each audio pair in the source.
+	// Each audio configuration specifies either to exclude the pair, or to format it
+	// and include it in the output from the UHD device. Applies only when the device
+	// is configured as the source for a MediaConnect flow.
+	AudioChannelPairs []InputDeviceUhdAudioChannelPairConfig
 
 	// The codec for the video that the device produces.
 	Codec InputDeviceCodec

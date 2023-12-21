@@ -69786,6 +69786,46 @@ func awsAwsjson11_deserializeDocumentRegisterModelStepMetadata(v **types.Registe
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRemoteDebugConfig(v **types.RemoteDebugConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RemoteDebugConfig
+	if *v == nil {
+		sv = &types.RemoteDebugConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnableRemoteDebug":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableRemoteDebug to be of type *bool, got %T instead", value)
+				}
+				sv.EnableRemoteDebug = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRenderingError(v **types.RenderingError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -89286,6 +89326,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeTrainingJobOutput(v **DescribeTra
 					return fmt.Errorf("expected ProfilingStatus to be of type string, got %T instead", value)
 				}
 				sv.ProfilingStatus = types.ProfilingStatus(jtv)
+			}
+
+		case "RemoteDebugConfig":
+			if err := awsAwsjson11_deserializeDocumentRemoteDebugConfig(&sv.RemoteDebugConfig, value); err != nil {
+				return err
 			}
 
 		case "ResourceConfig":

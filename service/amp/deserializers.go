@@ -876,6 +876,15 @@ func awsRestjson1_deserializeOpDocumentCreateWorkspaceOutput(v **CreateWorkspace
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "kmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
 		case "status":
 			if err := awsRestjson1_deserializeDocumentWorkspaceStatus(&sv.Status, value); err != nil {
 				return err
@@ -5950,6 +5959,15 @@ func awsRestjson1_deserializeDocumentWorkspaceDescription(v **types.WorkspaceDes
 				}
 			}
 
+		case "kmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
 		case "prometheusEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6081,6 +6099,15 @@ func awsRestjson1_deserializeDocumentWorkspaceSummary(v **types.WorkspaceSummary
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "kmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
 			}
 
 		case "status":

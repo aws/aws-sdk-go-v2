@@ -48,6 +48,10 @@ type BatchGetRepositoriesInput struct {
 // Represents the output of a batch get repositories operation.
 type BatchGetRepositoriesOutput struct {
 
+	// Returns information about any errors returned when attempting to retrieve
+	// information about the repositories.
+	Errors []types.BatchGetRepositoriesError
+
 	// A list of repositories returned by the batch get repositories operation.
 	Repositories []types.RepositoryMetadata
 

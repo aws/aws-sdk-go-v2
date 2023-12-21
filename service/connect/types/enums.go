@@ -627,9 +627,10 @@ type Grouping string
 
 // Enum values for Grouping
 const (
-	GroupingQueue          Grouping = "QUEUE"
-	GroupingChannel        Grouping = "CHANNEL"
-	GroupingRoutingProfile Grouping = "ROUTING_PROFILE"
+	GroupingQueue                 Grouping = "QUEUE"
+	GroupingChannel               Grouping = "CHANNEL"
+	GroupingRoutingProfile        Grouping = "ROUTING_PROFILE"
+	GroupingRoutingStepExpression Grouping = "ROUTING_STEP_EXPRESSION"
 )
 
 // Values returns all known values for Grouping. Note that this can be expanded in
@@ -640,6 +641,7 @@ func (Grouping) Values() []Grouping {
 		"QUEUE",
 		"CHANNEL",
 		"ROUTING_PROFILE",
+		"ROUTING_STEP_EXPRESSION",
 	}
 }
 
@@ -1957,6 +1959,46 @@ func (SearchableQueueType) Values() []SearchableQueueType {
 	}
 }
 
+type SearchContactsMatchType string
+
+// Enum values for SearchContactsMatchType
+const (
+	SearchContactsMatchTypeMatchAll SearchContactsMatchType = "MATCH_ALL"
+	SearchContactsMatchTypeMatchAny SearchContactsMatchType = "MATCH_ANY"
+)
+
+// Values returns all known values for SearchContactsMatchType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SearchContactsMatchType) Values() []SearchContactsMatchType {
+	return []SearchContactsMatchType{
+		"MATCH_ALL",
+		"MATCH_ANY",
+	}
+}
+
+type SearchContactsTimeRangeType string
+
+// Enum values for SearchContactsTimeRangeType
+const (
+	SearchContactsTimeRangeTypeInitiationTimestamp       SearchContactsTimeRangeType = "INITIATION_TIMESTAMP"
+	SearchContactsTimeRangeTypeScheduledTimestamp        SearchContactsTimeRangeType = "SCHEDULED_TIMESTAMP"
+	SearchContactsTimeRangeTypeConnectedToAgentTimestamp SearchContactsTimeRangeType = "CONNECTED_TO_AGENT_TIMESTAMP"
+	SearchContactsTimeRangeTypeDisconnectTimestamp       SearchContactsTimeRangeType = "DISCONNECT_TIMESTAMP"
+)
+
+// Values returns all known values for SearchContactsTimeRangeType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchContactsTimeRangeType) Values() []SearchContactsTimeRangeType {
+	return []SearchContactsTimeRangeType{
+		"INITIATION_TIMESTAMP",
+		"SCHEDULED_TIMESTAMP",
+		"CONNECTED_TO_AGENT_TIMESTAMP",
+		"DISCONNECT_TIMESTAMP",
+	}
+}
+
 type SingleSelectQuestionRuleCategoryAutomationCondition string
 
 // Enum values for SingleSelectQuestionRuleCategoryAutomationCondition
@@ -1973,6 +2015,32 @@ func (SingleSelectQuestionRuleCategoryAutomationCondition) Values() []SingleSele
 	return []SingleSelectQuestionRuleCategoryAutomationCondition{
 		"PRESENT",
 		"NOT_PRESENT",
+	}
+}
+
+type SortableFieldName string
+
+// Enum values for SortableFieldName
+const (
+	SortableFieldNameInitiationTimestamp       SortableFieldName = "INITIATION_TIMESTAMP"
+	SortableFieldNameScheduledTimestamp        SortableFieldName = "SCHEDULED_TIMESTAMP"
+	SortableFieldNameConnectedToAgentTimestamp SortableFieldName = "CONNECTED_TO_AGENT_TIMESTAMP"
+	SortableFieldNameDisconnectTimestamp       SortableFieldName = "DISCONNECT_TIMESTAMP"
+	SortableFieldNameInitiationMethod          SortableFieldName = "INITIATION_METHOD"
+	SortableFieldNameChannel                   SortableFieldName = "CHANNEL"
+)
+
+// Values returns all known values for SortableFieldName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortableFieldName) Values() []SortableFieldName {
+	return []SortableFieldName{
+		"INITIATION_TIMESTAMP",
+		"SCHEDULED_TIMESTAMP",
+		"CONNECTED_TO_AGENT_TIMESTAMP",
+		"DISCONNECT_TIMESTAMP",
+		"INITIATION_METHOD",
+		"CHANNEL",
 	}
 }
 

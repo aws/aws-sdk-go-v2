@@ -4250,6 +4250,61 @@ func (m *awsAwsjson11_serializeOpUpdateRepositoryDescription) HandleSerialize(ct
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateRepositoryEncryptionKey struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateRepositoryEncryptionKey) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateRepositoryEncryptionKey) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateRepositoryEncryptionKeyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdateRepositoryEncryptionKey")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateRepositoryEncryptionKeyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateRepositoryName struct {
 }
 
@@ -4977,6 +5032,11 @@ func awsAwsjson11_serializeOpDocumentCreatePullRequestInput(v *CreatePullRequest
 func awsAwsjson11_serializeOpDocumentCreateRepositoryInput(v *CreateRepositoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
 
 	if v.RepositoryDescription != nil {
 		ok := object.Key("repositoryDescription")
@@ -6680,6 +6740,23 @@ func awsAwsjson11_serializeOpDocumentUpdateRepositoryDescriptionInput(v *UpdateR
 	if v.RepositoryDescription != nil {
 		ok := object.Key("repositoryDescription")
 		ok.String(*v.RepositoryDescription)
+	}
+
+	if v.RepositoryName != nil {
+		ok := object.Key("repositoryName")
+		ok.String(*v.RepositoryName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateRepositoryEncryptionKeyInput(v *UpdateRepositoryEncryptionKeyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
 	}
 
 	if v.RepositoryName != nil {

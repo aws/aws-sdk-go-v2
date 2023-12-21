@@ -1782,6 +1782,12 @@ func awsAwsjson11_deserializeOpErrorCreateRepository(response *smithyhttp.Respon
 	case strings.EqualFold("EncryptionKeyDisabledException", errorCode):
 		return awsAwsjson11_deserializeErrorEncryptionKeyDisabledException(response, errorBody)
 
+	case strings.EqualFold("EncryptionKeyInvalidIdException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyInvalidIdException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyInvalidUsageException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyInvalidUsageException(response, errorBody)
+
 	case strings.EqualFold("EncryptionKeyNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEncryptionKeyNotFoundException(response, errorBody)
 
@@ -11357,6 +11363,147 @@ func awsAwsjson11_deserializeOpErrorUpdateRepositoryDescription(response *smithy
 	}
 }
 
+type awsAwsjson11_deserializeOpUpdateRepositoryEncryptionKey struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateRepositoryEncryptionKey) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateRepositoryEncryptionKey) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateRepositoryEncryptionKey(response, &metadata)
+	}
+	output := &UpdateRepositoryEncryptionKeyOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateRepositoryEncryptionKeyOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateRepositoryEncryptionKey(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("EncryptionIntegrityChecksFailedException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionIntegrityChecksFailedException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyAccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyDisabledException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyDisabledException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyInvalidIdException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyInvalidIdException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyInvalidUsageException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyInvalidUsageException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyNotFoundException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyRequiredException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyRequiredException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyUnavailableException(response, errorBody)
+
+	case strings.EqualFold("InvalidRepositoryNameException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidRepositoryNameException(response, errorBody)
+
+	case strings.EqualFold("RepositoryDoesNotExistException", errorCode):
+		return awsAwsjson11_deserializeErrorRepositoryDoesNotExistException(response, errorBody)
+
+	case strings.EqualFold("RepositoryNameRequiredException", errorCode):
+		return awsAwsjson11_deserializeErrorRepositoryNameRequiredException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpUpdateRepositoryName struct {
 }
 
@@ -12890,6 +13037,76 @@ func awsAwsjson11_deserializeErrorEncryptionKeyDisabledException(response *smith
 	return output
 }
 
+func awsAwsjson11_deserializeErrorEncryptionKeyInvalidIdException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.EncryptionKeyInvalidIdException{}
+	err := awsAwsjson11_deserializeDocumentEncryptionKeyInvalidIdException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorEncryptionKeyInvalidUsageException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.EncryptionKeyInvalidUsageException{}
+	err := awsAwsjson11_deserializeDocumentEncryptionKeyInvalidUsageException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorEncryptionKeyNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -12910,6 +13127,41 @@ func awsAwsjson11_deserializeErrorEncryptionKeyNotFoundException(response *smith
 
 	output := &types.EncryptionKeyNotFoundException{}
 	err := awsAwsjson11_deserializeDocumentEncryptionKeyNotFoundException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorEncryptionKeyRequiredException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.EncryptionKeyRequiredException{}
+	err := awsAwsjson11_deserializeDocumentEncryptionKeyRequiredException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -19389,6 +19641,107 @@ func awsAwsjson11_deserializeDocumentBatchGetCommitsErrorsList(v *[]types.BatchG
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentBatchGetRepositoriesError(v **types.BatchGetRepositoriesError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetRepositoriesError
+	if *v == nil {
+		sv = &types.BatchGetRepositoriesError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchGetRepositoriesErrorCodeEnum to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchGetRepositoriesErrorCodeEnum(jtv)
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "repositoryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RepositoryId to be of type string, got %T instead", value)
+				}
+				sv.RepositoryId = ptr.String(jtv)
+			}
+
+		case "repositoryName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RepositoryName to be of type string, got %T instead", value)
+				}
+				sv.RepositoryName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBatchGetRepositoriesErrorsList(v *[]types.BatchGetRepositoriesError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchGetRepositoriesError
+	if *v == nil {
+		cv = []types.BatchGetRepositoriesError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchGetRepositoriesError
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentBatchGetRepositoriesError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBeforeCommitIdAndAfterCommitIdAreSameException(v **types.BeforeCommitIdAndAfterCommitIdAreSameException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21552,6 +21905,86 @@ func awsAwsjson11_deserializeDocumentEncryptionKeyDisabledException(v **types.En
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEncryptionKeyInvalidIdException(v **types.EncryptionKeyInvalidIdException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EncryptionKeyInvalidIdException
+	if *v == nil {
+		sv = &types.EncryptionKeyInvalidIdException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEncryptionKeyInvalidUsageException(v **types.EncryptionKeyInvalidUsageException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EncryptionKeyInvalidUsageException
+	if *v == nil {
+		sv = &types.EncryptionKeyInvalidUsageException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEncryptionKeyNotFoundException(v **types.EncryptionKeyNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21568,6 +22001,46 @@ func awsAwsjson11_deserializeDocumentEncryptionKeyNotFoundException(v **types.En
 	var sv *types.EncryptionKeyNotFoundException
 	if *v == nil {
 		sv = &types.EncryptionKeyNotFoundException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEncryptionKeyRequiredException(v **types.EncryptionKeyRequiredException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EncryptionKeyRequiredException
+	if *v == nil {
+		sv = &types.EncryptionKeyRequiredException{}
 	} else {
 		sv = *v
 	}
@@ -28345,6 +28818,15 @@ func awsAwsjson11_deserializeDocumentRepositoryMetadata(v **types.RepositoryMeta
 				sv.DefaultBranch = ptr.String(jtv)
 			}
 
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
 		case "lastModifiedDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -30462,6 +30944,11 @@ func awsAwsjson11_deserializeOpDocumentBatchGetRepositoriesOutput(v **BatchGetRe
 
 	for key, value := range shape {
 		switch key {
+		case "errors":
+			if err := awsAwsjson11_deserializeDocumentBatchGetRepositoriesErrorsList(&sv.Errors, value); err != nil {
+				return err
+			}
+
 		case "repositories":
 			if err := awsAwsjson11_deserializeDocumentRepositoryMetadataList(&sv.Repositories, value); err != nil {
 				return err
@@ -33355,6 +33842,64 @@ func awsAwsjson11_deserializeOpDocumentUpdatePullRequestTitleOutput(v **UpdatePu
 		case "pullRequest":
 			if err := awsAwsjson11_deserializeDocumentPullRequest(&sv.PullRequest, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentUpdateRepositoryEncryptionKeyOutput(v **UpdateRepositoryEncryptionKeyOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateRepositoryEncryptionKeyOutput
+	if *v == nil {
+		sv = &UpdateRepositoryEncryptionKeyOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		case "originalKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.OriginalKmsKeyId = ptr.String(jtv)
+			}
+
+		case "repositoryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RepositoryId to be of type string, got %T instead", value)
+				}
+				sv.RepositoryId = ptr.String(jtv)
 			}
 
 		default:

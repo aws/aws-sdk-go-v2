@@ -12902,6 +12902,32 @@ type RegisterModelStepMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for remote debugging for the CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+// API. To learn more about the remote debugging functionality of SageMaker, see
+// Access a training container through Amazon Web Services Systems Manager (SSM)
+// for remote debugging (https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html)
+// .
+type RemoteDebugConfig struct {
+
+	// If set to True, enables remote debugging.
+	EnableRemoteDebug *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for remote debugging for the UpdateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateTrainingJob.html)
+// API. To learn more about the remote debugging functionality of SageMaker, see
+// Access a training container through Amazon Web Services Systems Manager (SSM)
+// for remote debugging (https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html)
+// .
+type RemoteDebugConfigForUpdate struct {
+
+	// If set to True, enables remote debugging.
+	EnableRemoteDebug *bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains input values for a task.
 type RenderableTask struct {
 
@@ -13662,7 +13688,6 @@ type SecondaryStatusTransition struct {
 	//   - Launched instance was unhealthy, replacing it!
 	//   - Preparing the instances for training.
 	// Training
-	//   - Downloading the training image.
 	//   - Training image download completed. Training in progress.
 	// Status messages are subject to change. Therefore, we recommend not including
 	// them in code that programmatically initiates actions. For examples, don't use
@@ -16089,6 +16114,19 @@ type Vertex struct {
 	// The type of the lineage entity resource. For example: DataSet , Model , Endpoint
 	// , etc...
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// The list of key-value pairs that you specify for your resources.
+type VisibilityConditions struct {
+
+	// The key for that specifies the tag that you're using to filter the search
+	// results. The key must start with Tags. .
+	Key *string
+
+	// The value for the tag that you're using to filter the search results.
+	Value *string
 
 	noSmithyDocumentSerde
 }

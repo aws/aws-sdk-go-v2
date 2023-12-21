@@ -435,6 +435,9 @@ type WorkspaceDescription struct {
 	// Alias of this workspace.
 	Alias *string
 
+	// The customer managed KMS key of this workspace.
+	KmsKeyArn *string
+
 	// Prometheus endpoint URI.
 	PrometheusEndpoint *string
 
@@ -480,6 +483,9 @@ type WorkspaceSummary struct {
 
 	// Alias of this workspace.
 	Alias *string
+
+	// Customer managed KMS key ARN for this workspace
+	KmsKeyArn *string
 
 	// The tags of this workspace.
 	Tags map[string]string

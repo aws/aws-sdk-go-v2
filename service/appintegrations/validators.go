@@ -70,6 +70,26 @@ func (m *validateOpCreateEventIntegration) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteApplication struct {
+}
+
+func (*validateOpDeleteApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataIntegration struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpGetEventIntegration) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEventIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListApplicationAssociations struct {
+}
+
+func (*validateOpListApplicationAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplicationAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -342,6 +382,10 @@ func addOpCreateEventIntegrationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateEventIntegration{}, middleware.After)
 }
 
+func addOpDeleteApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApplication{}, middleware.After)
+}
+
 func addOpDeleteDataIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataIntegration{}, middleware.After)
 }
@@ -360,6 +404,10 @@ func addOpGetDataIntegrationValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetEventIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEventIntegration{}, middleware.After)
+}
+
+func addOpListApplicationAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplicationAssociations{}, middleware.After)
 }
 
 func addOpListDataIntegrationAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -629,6 +677,21 @@ func validateOpCreateEventIntegrationInput(v *CreateEventIntegrationInput) error
 	}
 }
 
+func validateOpDeleteApplicationInput(v *DeleteApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDataIntegrationInput(v *DeleteDataIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -696,6 +759,21 @@ func validateOpGetEventIntegrationInput(v *GetEventIntegrationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetEventIntegrationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApplicationAssociationsInput(v *ListApplicationAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationAssociationsInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

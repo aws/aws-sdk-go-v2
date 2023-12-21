@@ -1,0 +1,8 @@
+{
+    "id": "f55e20ca-4ab2-4453-bfe8-09a672ea4732",
+    "type": "feature",
+    "description": "MediaLive now supports the ability to configure the audio that an AWS Elemental Link UHD device produces, when the device is configured as the source for a flow in AWS Elemental MediaConnect.",
+    "modules": [
+        "service/medialive"
+    ]
+}

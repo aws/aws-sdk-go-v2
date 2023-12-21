@@ -2830,6 +2830,32 @@ func (e *InvalidOptionGroupStateFault) ErrorCode() string {
 }
 func (e *InvalidOptionGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The operation can't be performed because another operation is in progress.
+type InvalidResourceStateFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidResourceStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidResourceStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidResourceStateFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidResourceStateFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidResourceStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Cannot restore from VPC backup to non-VPC DB instance.
 type InvalidRestoreFault struct {
 	Message *string

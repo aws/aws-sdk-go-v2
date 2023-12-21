@@ -1147,6 +1147,62 @@ func (e *EncryptionKeyDisabledException) ErrorCode() string {
 }
 func (e *EncryptionKeyDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The Key Management Service encryption key is not valid.
+type EncryptionKeyInvalidIdException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EncryptionKeyInvalidIdException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EncryptionKeyInvalidIdException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EncryptionKeyInvalidIdException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "EncryptionKeyInvalidIdException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *EncryptionKeyInvalidIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A KMS encryption key was used to try and encrypt or decrypt a repository, but
+// either the repository or the key was not in a valid state to support the
+// operation.
+type EncryptionKeyInvalidUsageException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EncryptionKeyInvalidUsageException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EncryptionKeyInvalidUsageException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EncryptionKeyInvalidUsageException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "EncryptionKeyInvalidUsageException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *EncryptionKeyInvalidUsageException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // No encryption key was found.
 type EncryptionKeyNotFoundException struct {
 	Message *string
@@ -1172,6 +1228,32 @@ func (e *EncryptionKeyNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EncryptionKeyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A KMS encryption key ID is required but was not specified.
+type EncryptionKeyRequiredException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EncryptionKeyRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EncryptionKeyRequiredException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EncryptionKeyRequiredException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "EncryptionKeyRequiredException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *EncryptionKeyRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The encryption key is not available.
 type EncryptionKeyUnavailableException struct {

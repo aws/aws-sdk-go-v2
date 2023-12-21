@@ -490,6 +490,11 @@ func awsRestjson1_serializeOpDocumentCreateWorkspaceInput(v *CreateWorkspaceInpu
 		ok.String(*v.ClientToken)
 	}
 
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {

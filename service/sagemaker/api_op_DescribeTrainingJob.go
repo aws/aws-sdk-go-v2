@@ -245,6 +245,12 @@ type DescribeTrainingJobOutput struct {
 	// Profiling status of a training job.
 	ProfilingStatus types.ProfilingStatus
 
+	// Configuration for remote debugging. To learn more about the remote debugging
+	// functionality of SageMaker, see Access a training container through Amazon Web
+	// Services Systems Manager (SSM) for remote debugging (https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html)
+	// .
+	RemoteDebugConfig *types.RemoteDebugConfig
+
 	// The number of times to retry the job when the job fails due to an
 	// InternalServerError .
 	RetryStrategy *types.RetryStrategy

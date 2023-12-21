@@ -1890,6 +1890,26 @@ func (m *validateOpDescribeValidDBInstanceModifications) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableHttpEndpoint struct {
+}
+
+func (*validateOpDisableHttpEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableHttpEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableHttpEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableHttpEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDownloadDBLogFilePortion struct {
 }
 
@@ -1905,6 +1925,26 @@ func (m *validateOpDownloadDBLogFilePortion) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDownloadDBLogFilePortionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableHttpEndpoint struct {
+}
+
+func (*validateOpEnableHttpEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableHttpEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableHttpEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableHttpEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3326,8 +3366,16 @@ func addOpDescribeValidDBInstanceModificationsValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpDescribeValidDBInstanceModifications{}, middleware.After)
 }
 
+func addOpDisableHttpEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableHttpEndpoint{}, middleware.After)
+}
+
 func addOpDownloadDBLogFilePortionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDownloadDBLogFilePortion{}, middleware.After)
+}
+
+func addOpEnableHttpEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableHttpEndpoint{}, middleware.After)
 }
 
 func addOpFailoverDBClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -5307,6 +5355,21 @@ func validateOpDescribeValidDBInstanceModificationsInput(v *DescribeValidDBInsta
 	}
 }
 
+func validateOpDisableHttpEndpointInput(v *DisableHttpEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableHttpEndpointInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDownloadDBLogFilePortionInput(v *DownloadDBLogFilePortionInput) error {
 	if v == nil {
 		return nil
@@ -5317,6 +5380,21 @@ func validateOpDownloadDBLogFilePortionInput(v *DownloadDBLogFilePortionInput) e
 	}
 	if v.LogFileName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogFileName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableHttpEndpointInput(v *EnableHttpEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableHttpEndpointInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

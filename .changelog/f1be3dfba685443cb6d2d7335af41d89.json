@@ -1,0 +1,8 @@
+{
+    "id": "f1be3dfb-a685-443c-b6d2-d7335af41d89",
+    "type": "feature",
+    "description": "This release updates Amazon Managed Service for Prometheus APIs to support customer managed KMS keys.",
+    "modules": [
+        "service/amp"
+    ]
+}

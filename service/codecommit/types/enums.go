@@ -20,6 +20,33 @@ func (ApprovalState) Values() []ApprovalState {
 	}
 }
 
+type BatchGetRepositoriesErrorCodeEnum string
+
+// Enum values for BatchGetRepositoriesErrorCodeEnum
+const (
+	BatchGetRepositoriesErrorCodeEnumEncryptionIntegrityChecksFailedException BatchGetRepositoriesErrorCodeEnum = "EncryptionIntegrityChecksFailedException"
+	BatchGetRepositoriesErrorCodeEnumEncryptionKeyAccessDeniedException       BatchGetRepositoriesErrorCodeEnum = "EncryptionKeyAccessDeniedException"
+	BatchGetRepositoriesErrorCodeEnumEncryptionKeyDisabledException           BatchGetRepositoriesErrorCodeEnum = "EncryptionKeyDisabledException"
+	BatchGetRepositoriesErrorCodeEnumEncryptionKeyNotFoundException           BatchGetRepositoriesErrorCodeEnum = "EncryptionKeyNotFoundException"
+	BatchGetRepositoriesErrorCodeEnumEncryptionKeyUnavailableException        BatchGetRepositoriesErrorCodeEnum = "EncryptionKeyUnavailableException"
+	BatchGetRepositoriesErrorCodeEnumRepositoryDoesNotExistException          BatchGetRepositoriesErrorCodeEnum = "RepositoryDoesNotExistException"
+)
+
+// Values returns all known values for BatchGetRepositoriesErrorCodeEnum. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BatchGetRepositoriesErrorCodeEnum) Values() []BatchGetRepositoriesErrorCodeEnum {
+	return []BatchGetRepositoriesErrorCodeEnum{
+		"EncryptionIntegrityChecksFailedException",
+		"EncryptionKeyAccessDeniedException",
+		"EncryptionKeyDisabledException",
+		"EncryptionKeyNotFoundException",
+		"EncryptionKeyUnavailableException",
+		"RepositoryDoesNotExistException",
+	}
+}
+
 type ChangeTypeEnum string
 
 // Enum values for ChangeTypeEnum

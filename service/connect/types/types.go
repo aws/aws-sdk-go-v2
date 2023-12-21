@@ -58,6 +58,30 @@ type AgentContactReference struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that defines agent hierarchy group levels which can be used to
+// filter search results. Important: Agent hierarchy group level information in
+// search result is a snapshot, it does not represent current agent hierarchy who
+// handled the contact.
+type AgentHierarchyGroups struct {
+
+	// The identifiers for level 1 hierarchy groups.
+	L1Ids []string
+
+	// The identifiers for level 2 hierarchy groups.
+	L2Ids []string
+
+	// The identifiers for level 3 hierarchy groups.
+	L3Ids []string
+
+	// The identifiers for level 4 hierarchy groups.
+	L4Ids []string
+
+	// The identifiers for level 5 hierarchy groups.
+	L5Ids []string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the agent who accepted the contact.
 type AgentInfo struct {
 
@@ -505,6 +529,18 @@ type Contact struct {
 	// If this contact was queued, this contains information about the queue.
 	QueueInfo *QueueInfo
 
+	// An integer that represents the queue priority to be applied to the contact
+	// (lower priorities are routed preferentially). Cannot be specified if the
+	// QueueTimeAdjustmentSeconds is specified. Must be statically defined, must be
+	// larger than zero, and a valid integer value. Default Value is 5.
+	QueuePriority *int64
+
+	// An integer that represents the queue time adjust to be applied to the contact,
+	// in seconds (longer / larger queue time are routed preferentially). Cannot be
+	// specified if the QueuePriority is specified. Must be statically defined and a
+	// valid integer value.
+	QueueTimeAdjustmentSeconds *int32
+
 	// The contactId that is related (https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html#relatedcontactid)
 	// to this contact.
 	RelatedContactId *string
@@ -525,6 +561,17 @@ type Contact struct {
 
 	// Information about Amazon Connect Wisdom.
 	WisdomInfo *WisdomInfo
+
+	noSmithyDocumentSerde
+}
+
+// A structure that defines filters can be used to search within outputs analyzed
+// by Amazon Connect Contact Lens in a contact.
+type ContactAnalysis struct {
+
+	// A structure that defines filters can be used to search with text within an
+	// Amazon Connect Contact Lens analyzed transcript.
+	Transcript *Transcript
 
 	noSmithyDocumentSerde
 }
@@ -672,6 +719,78 @@ type ContactFlowSummary struct {
 
 	// The name of the flow.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Information of returned contact.
+type ContactSearchSummary struct {
+
+	// Information about the agent who accepted the contact.
+	AgentInfo *ContactSearchSummaryAgentInfo
+
+	// The Amazon Resource Name (ARN) of the contact
+	Arn *string
+
+	// How the contact reached your contact center.
+	Channel Channel
+
+	// The timestamp when the customer endpoint disconnected from Amazon Connect.
+	DisconnectTimestamp *time.Time
+
+	// The identifier of the contact summary.
+	Id *string
+
+	// If this contact is related to other contacts, this is the ID of the initial
+	// contact.
+	InitialContactId *string
+
+	// Indicates how the contact was initiated.
+	InitiationMethod ContactInitiationMethod
+
+	// The date and time this contact was initiated, in UTC time. For INBOUND, this is
+	// when the contact arrived. For OUTBOUND, this is when the agent began dialing.
+	// For CALLBACK, this is when the callback contact was created. For TRANSFER and
+	// QUEUE_TRANSFER, this is when the transfer was initiated. For API, this is when
+	// the request arrived. For EXTERNAL_OUTBOUND, this is when the agent started
+	// dialing the external participant. For MONITOR, this is when the supervisor
+	// started listening to a contact.
+	InitiationTimestamp *time.Time
+
+	// If this contact is not the first contact, this is the ID of the previous
+	// contact.
+	PreviousContactId *string
+
+	// If this contact was queued, this contains information about the queue.
+	QueueInfo *ContactSearchSummaryQueueInfo
+
+	// The timestamp, in Unix epoch time format, at which to start running the inbound
+	// flow.
+	ScheduledTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Information about the agent who accepted the contact.
+type ContactSearchSummaryAgentInfo struct {
+
+	// The timestamp when the contact was connected to the agent.
+	ConnectedToAgentTimestamp *time.Time
+
+	// The identifier of the agent who accepted the contact.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// If this contact was queued, this contains information about the queue.
+type ContactSearchSummaryQueueInfo struct {
+
+	// The timestamp when the contact was added to the queue.
+	EnqueueTimestamp *time.Time
+
+	// The unique identifier for the queue.
+	Id *string
 
 	noSmithyDocumentSerde
 }
@@ -845,6 +964,9 @@ type Dimensions struct {
 
 	// Information about the routing profile assigned to the user.
 	RoutingProfile *RoutingProfileReference
+
+	// The expression of a step in a routing criteria.
+	RoutingStepExpression *string
 
 	noSmithyDocumentSerde
 }
@@ -1724,6 +1846,10 @@ type Filters struct {
 
 	// A list of up to 100 routing profile IDs or ARNs.
 	RoutingProfiles []string
+
+	// A list of expressions as a filter, in which an expression is an object of a
+	// step in a routing criteria.
+	RoutingStepExpressions []string
 
 	noSmithyDocumentSerde
 }
@@ -2875,6 +3001,73 @@ type PhoneNumberSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// Information about a predefined attribute.
+type PredefinedAttribute struct {
+
+	// Last modified region.
+	LastModifiedRegion *string
+
+	// Last modified time.
+	LastModifiedTime *time.Time
+
+	// The name of the predefined attribute.
+	Name *string
+
+	// The values of the predefined attribute.
+	Values PredefinedAttributeValues
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return predefined attributes.
+type PredefinedAttributeSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []PredefinedAttributeSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []PredefinedAttributeSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition. The
+	// currently supported values for FieldName are name and description .
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a predefined attribute.
+type PredefinedAttributeSummary struct {
+
+	// Last modified region.
+	LastModifiedRegion *string
+
+	// Last modified time.
+	LastModifiedTime *time.Time
+
+	// The name of the predefined attribute.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about values of a predefined attribute.
+//
+// The following types satisfy this interface:
+//
+//	PredefinedAttributeValuesMemberStringList
+type PredefinedAttributeValues interface {
+	isPredefinedAttributeValues()
+}
+
+// Predefined attribute values of type string list.
+type PredefinedAttributeValuesMemberStringList struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*PredefinedAttributeValuesMemberStringList) isPredefinedAttributeValues() {}
 
 // Information about a problem detail.
 type ProblemDetail struct {
@@ -4074,6 +4267,85 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that defines searchable contact attributes which can be used to
+// filter search results.
+type SearchableContactAttributes struct {
+
+	// The array of searhale contact attribute criteria
+	//
+	// This member is required.
+	Criteria []SearchableContactAttributesCriteria
+
+	// The match type of multiple searchable contact attributes criteria.
+	MatchType SearchContactsMatchType
+
+	noSmithyDocumentSerde
+}
+
+// The criteria of searchable contact attributes.
+type SearchableContactAttributesCriteria struct {
+
+	// The searchable contact attribute key
+	//
+	// This member is required.
+	Key *string
+
+	// The array of contact attribute values used to filter search results.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// A structure of time range that you want to search results
+type SearchContactsTimeRange struct {
+
+	// The end time of the time range.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The start time of the time range.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The type of timestamp to search
+	//
+	// This member is required.
+	Type SearchContactsTimeRangeType
+
+	noSmithyDocumentSerde
+}
+
+// A structure of search criteria to be used to return contacts
+type SearchCriteria struct {
+
+	// The agent hierarchy groups
+	AgentHierarchyGroups *AgentHierarchyGroups
+
+	// The array of agent ids
+	AgentIds []string
+
+	// The array of channels
+	Channels []Channel
+
+	// The ContactAnalysis object used in search criteria
+	ContactAnalysis *ContactAnalysis
+
+	// The array of initiaton methods
+	InitiationMethods []ContactInitiationMethod
+
+	// The array of queue ids.
+	QueueIds []string
+
+	// The SearchableContactAttributes object used in search criteria
+	SearchableContactAttributes *SearchableContactAttributes
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information of the security key.
 type SecurityKey struct {
 
@@ -4141,7 +4413,8 @@ type SecurityProfileSearchCriteria struct {
 	// A list of conditions which would be applied together with an OR condition.
 	OrConditions []SecurityProfileSearchCriteria
 
-	// A leaf node condition which can be used to specify a string condition.
+	// A leaf node condition which can be used to specify a string condition. The
+	// currently supported values for FieldName are name and description .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -4301,7 +4574,24 @@ type SingleSelectQuestionRuleCategoryAutomation struct {
 	noSmithyDocumentSerde
 }
 
-// A leaf node condition which can be used to specify a string condition.
+// A structure that defines the sort by and a sort order
+type Sort struct {
+
+	// The name of the field on which to sort.
+	//
+	// This member is required.
+	FieldName SortableFieldName
+
+	// An ascending or descending sort.
+	//
+	// This member is required.
+	Order SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// A leaf node condition which can be used to specify a string condition. The
+// currently supported values for FieldName are name and description .
 type StringCondition struct {
 
 	// The type of comparison to be made when evaluating the string condition.
@@ -4645,6 +4935,41 @@ type TrafficDistributionGroupUserSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The transcript object used to search results.
+type Transcript struct {
+
+	// The array of transcript search criteria
+	//
+	// This member is required.
+	Criteria []TranscriptCriteria
+
+	// The match type of multiple transcript criteira
+	MatchType SearchContactsMatchType
+
+	noSmithyDocumentSerde
+}
+
+// The transcript criteria used to search
+type TranscriptCriteria struct {
+
+	// The match type of search texts in a transcript criteria.
+	//
+	// This member is required.
+	MatchType SearchContactsMatchType
+
+	// The participant role in a transcript
+	//
+	// This member is required.
+	ParticipantRole ParticipantRole
+
+	// The words or phrases used to search within a transcript.
+	//
+	// This member is required.
+	SearchText []string
+
+	noSmithyDocumentSerde
+}
+
 // The UpdateCase action definition.
 type UpdateCaseActionDefinition struct {
 
@@ -4862,6 +5187,45 @@ type UserPhoneConfig struct {
 
 	// The phone number for the user's desk phone.
 	DeskPhoneNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about proficiency of a user.
+type UserProficiency struct {
+
+	// The name of user's proficiency. You must use name of predefined attribute
+	// present in the Amazon Connect instance.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The value of user's proficiency. You must use value of predefined attribute
+	// present in the Amazon Connect instance.
+	//
+	// This member is required.
+	AttributeValue *string
+
+	// The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.
+	//
+	// This member is required.
+	Level *float32
+
+	noSmithyDocumentSerde
+}
+
+// Information about proficiency to be disassociated from the user.
+type UserProficiencyDisassociate struct {
+
+	// The name of user's proficiency.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The value of user's proficiency.
+	//
+	// This member is required.
+	AttributeValue *string
 
 	noSmithyDocumentSerde
 }
@@ -5244,6 +5608,7 @@ func (*UnknownUnionMember) isEvaluationFormNumericQuestionAutomation()          
 func (*UnknownUnionMember) isEvaluationFormQuestionTypeProperties()               {}
 func (*UnknownUnionMember) isEvaluationFormSingleSelectQuestionAutomationOption() {}
 func (*UnknownUnionMember) isParticipantTimerValue()                              {}
+func (*UnknownUnionMember) isPredefinedAttributeValues()                          {}
 func (*UnknownUnionMember) isRealtimeContactAnalysisSegment()                     {}
 func (*UnknownUnionMember) isRealTimeContactAnalysisTimeData()                    {}
 func (*UnknownUnionMember) isReferenceSummary()                                   {}

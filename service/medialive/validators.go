@@ -2181,11 +2181,6 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 			invalidParams.AddNested("CaptionDescriptions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ColorCorrectionSettings != nil {
-		if err := validateColorCorrectionSettings(v.ColorCorrectionSettings); err != nil {
-			invalidParams.AddNested("ColorCorrectionSettings", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.GlobalConfiguration != nil {
 		if err := validateGlobalConfiguration(v.GlobalConfiguration); err != nil {
 			invalidParams.AddNested("GlobalConfiguration", err.(smithy.InvalidParamsError))
@@ -2220,6 +2215,11 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 	if v.ThumbnailConfiguration != nil {
 		if err := validateThumbnailConfiguration(v.ThumbnailConfiguration); err != nil {
 			invalidParams.AddNested("ThumbnailConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ColorCorrectionSettings != nil {
+		if err := validateColorCorrectionSettings(v.ColorCorrectionSettings); err != nil {
+			invalidParams.AddNested("ColorCorrectionSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

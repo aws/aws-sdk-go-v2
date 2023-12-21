@@ -12729,6 +12729,40 @@ func awsRestjson1_deserializeDocument__listOfInputDeviceSummary(v *[]types.Input
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfInputDeviceUhdAudioChannelPairConfig(v *[]types.InputDeviceUhdAudioChannelPairConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InputDeviceUhdAudioChannelPairConfig
+	if *v == nil {
+		cv = []types.InputDeviceUhdAudioChannelPairConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InputDeviceUhdAudioChannelPairConfig
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInputDeviceUhdAudioChannelPairConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfInputSecurityGroup(v *[]types.InputSecurityGroup, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22339,6 +22373,59 @@ func awsRestjson1_deserializeDocumentInputDeviceSummary(v **types.InputDeviceSum
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInputDeviceUhdAudioChannelPairConfig(v **types.InputDeviceUhdAudioChannelPairConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InputDeviceUhdAudioChannelPairConfig
+	if *v == nil {
+		sv = &types.InputDeviceUhdAudioChannelPairConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Id = ptr.Int32(int32(i64))
+			}
+
+		case "profile":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputDeviceUhdAudioChannelPairProfile to be of type string, got %T instead", value)
+				}
+				sv.Profile = types.InputDeviceUhdAudioChannelPairProfile(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDeviceUhdSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22368,6 +22455,11 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 					return fmt.Errorf("expected InputDeviceActiveInput to be of type string, got %T instead", value)
 				}
 				sv.ActiveInput = types.InputDeviceActiveInput(jtv)
+			}
+
+		case "audioChannelPairs":
+			if err := awsRestjson1_deserializeDocument__listOfInputDeviceUhdAudioChannelPairConfig(&sv.AudioChannelPairs, value); err != nil {
+				return err
 			}
 
 		case "codec":

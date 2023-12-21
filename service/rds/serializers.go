@@ -6222,6 +6222,70 @@ func (m *awsAwsquery_serializeOpDescribeValidDBInstanceModifications) HandleSeri
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDisableHttpEndpoint struct {
+}
+
+func (*awsAwsquery_serializeOpDisableHttpEndpoint) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDisableHttpEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisableHttpEndpointInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DisableHttpEndpoint")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentDisableHttpEndpointInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDownloadDBLogFilePortion struct {
 }
 
@@ -6266,6 +6330,70 @@ func (m *awsAwsquery_serializeOpDownloadDBLogFilePortion) HandleSerialize(ctx co
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentDownloadDBLogFilePortionInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpEnableHttpEndpoint struct {
+}
+
+func (*awsAwsquery_serializeOpEnableHttpEndpoint) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpEnableHttpEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*EnableHttpEndpointInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("EnableHttpEndpoint")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentEnableHttpEndpointInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -14227,6 +14355,18 @@ func awsAwsquery_serializeOpDocumentDescribeValidDBInstanceModificationsInput(v 
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentDisableHttpEndpointInput(v *DisableHttpEndpointInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ResourceArn != nil {
+		objectKey := object.Key("ResourceArn")
+		objectKey.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDownloadDBLogFilePortionInput(v *DownloadDBLogFilePortionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -14249,6 +14389,18 @@ func awsAwsquery_serializeOpDocumentDownloadDBLogFilePortionInput(v *DownloadDBL
 	if v.NumberOfLines != nil {
 		objectKey := object.Key("NumberOfLines")
 		objectKey.Integer(*v.NumberOfLines)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentEnableHttpEndpointInput(v *EnableHttpEndpointInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ResourceArn != nil {
+		objectKey := object.Key("ResourceArn")
+		objectKey.String(*v.ResourceArn)
 	}
 
 	return nil
