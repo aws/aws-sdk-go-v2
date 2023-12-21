@@ -12226,6 +12226,12 @@
                         "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n                <code>InternalServerError</code>.</p>"
                     }
                 },
+                "RemoteDebugConfig": {
+                    "target": "com.amazonaws.sagemaker#RemoteDebugConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for remote debugging. To learn more about the remote \n            debugging functionality of SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html\">Access a training container through Amazon Web Services Systems Manager (SSM) \n                for remote debugging</a>.</p>"
+                    }
+                },
                 "InfraCheckConfig": {
                     "target": "com.amazonaws.sagemaker#InfraCheckConfig",
                     "traits": {
@@ -22933,6 +22939,12 @@
                         "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n                <code>InternalServerError</code>.</p>"
                     }
                 },
+                "RemoteDebugConfig": {
+                    "target": "com.amazonaws.sagemaker#RemoteDebugConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for remote debugging. To learn more about the remote \n            debugging functionality of SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html\">Access a training container through Amazon Web Services Systems Manager (SSM) \n                for remote debugging</a>.</p>"
+                    }
+                },
                 "InfraCheckConfig": {
                     "target": "com.amazonaws.sagemaker#InfraCheckConfig",
                     "traits": {
@@ -25387,6 +25399,9 @@
             "type": "boolean"
         },
         "com.amazonaws.sagemaker#EnableIotRoleAlias": {
+            "type": "boolean"
+        },
+        "com.amazonaws.sagemaker#EnableRemoteDebug": {
             "type": "boolean"
         },
         "com.amazonaws.sagemaker#EnableSagemakerServicecatalogPortfolio": {
@@ -52202,6 +52217,34 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.sagemaker#RemoteDebugConfig": {
+            "type": "structure",
+            "members": {
+                "EnableRemoteDebug": {
+                    "target": "com.amazonaws.sagemaker#EnableRemoteDebug",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to True, enables remote debugging.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for remote debugging for the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API. To learn more about the remote \n            debugging functionality of SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html\">Access a training container through Amazon Web Services Systems Manager (SSM) \n                for remote debugging</a>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RemoteDebugConfigForUpdate": {
+            "type": "structure",
+            "members": {
+                "EnableRemoteDebug": {
+                    "target": "com.amazonaws.sagemaker#EnableRemoteDebug",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to True, enables remote debugging.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for remote debugging for the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateTrainingJob.html\">UpdateTrainingJob</a> API. To learn more about the remote \n            debugging functionality of SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html\">Access a training container through Amazon Web Services Systems Manager (SSM) \n                for remote debugging</a>.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#RenderUiTemplate": {
             "type": "operation",
             "input": {
@@ -55648,6 +55691,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      A cross account filter option. When the value is <code>\"CrossAccount\"</code> the \n      search results will only include resources made discoverable to you from other \n      accounts. When the value is <code>\"SameAccount\"</code> or <code>null</code> the \n      search results will only include resources from your account. Default is \n      <code>null</code>. For more information on searching for resources made \n      discoverable to your account, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html\">\n        Search discoverable resources</a> in the SageMaker Developer Guide.\n      The maximum number of <code>ResourceCatalog</code>s viewable is 1000.\n    </p>"
                     }
+                },
+                "VisibilityConditions": {
+                    "target": "com.amazonaws.sagemaker#VisibilityConditionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Limits the results of your search request to the resources that you can access.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -55832,7 +55881,7 @@
                 "StatusMessage": {
                     "target": "com.amazonaws.sagemaker#StatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed description of the progress within a secondary status.\n            </p>\n         <p>SageMaker provides secondary statuses and status messages that apply to each of\n            them:</p>\n         <dl>\n            <dt>Starting</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Starting the training job.</p>\n                  </li>\n                  <li>\n                     <p>Launching requested ML\n                                instances.</p>\n                  </li>\n                  <li>\n                     <p>Insufficient\n                                capacity error from EC2 while launching instances,\n                                retrying!</p>\n                  </li>\n                  <li>\n                     <p>Launched\n                                instance was unhealthy, replacing it!</p>\n                  </li>\n                  <li>\n                     <p>Preparing the instances for training.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Training</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Downloading the training image.</p>\n                  </li>\n                  <li>\n                     <p>Training\n                                image download completed. Training in\n                                progress.</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <important>\n            <p>Status messages are subject to change. Therefore, we recommend not including them\n                in code that programmatically initiates actions. For examples, don't use status\n                messages in if statements.</p>\n         </important>\n         <p>To have an overview of your training job's progress, view\n                <code>TrainingJobStatus</code> and <code>SecondaryStatus</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrainingJob.html\">DescribeTrainingJob</a>, and <code>StatusMessage</code> together. For example,\n            at the start of a training job, you might see the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TrainingJobStatus</code> - InProgress</p>\n            </li>\n            <li>\n               <p>\n                  <code>SecondaryStatus</code> - Training</p>\n            </li>\n            <li>\n               <p>\n                  <code>StatusMessage</code> - Downloading the training image</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A detailed description of the progress within a secondary status.\n            </p>\n         <p>SageMaker provides secondary statuses and status messages that apply to each of\n            them:</p>\n         <dl>\n            <dt>Starting</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Starting the training job.</p>\n                  </li>\n                  <li>\n                     <p>Launching requested ML\n                                instances.</p>\n                  </li>\n                  <li>\n                     <p>Insufficient\n                                capacity error from EC2 while launching instances,\n                                retrying!</p>\n                  </li>\n                  <li>\n                     <p>Launched\n                                instance was unhealthy, replacing it!</p>\n                  </li>\n                  <li>\n                     <p>Preparing the instances for training.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Training</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Training\n                                image download completed. Training in\n                                progress.</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <important>\n            <p>Status messages are subject to change. Therefore, we recommend not including them\n                in code that programmatically initiates actions. For examples, don't use status\n                messages in if statements.</p>\n         </important>\n         <p>To have an overview of your training job's progress, view\n                <code>TrainingJobStatus</code> and <code>SecondaryStatus</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrainingJob.html\">DescribeTrainingJob</a>, and <code>StatusMessage</code> together. For example,\n            at the start of a training job, you might see the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TrainingJobStatus</code> - InProgress</p>\n            </li>\n            <li>\n               <p>\n                  <code>SecondaryStatus</code> - Training</p>\n            </li>\n            <li>\n               <p>\n                  <code>StatusMessage</code> - Downloading the training image</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -64405,6 +64454,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The training job <code>ResourceConfig</code> to update warm pool retention\n            length.</p>"
                     }
+                },
+                "RemoteDebugConfig": {
+                    "target": "com.amazonaws.sagemaker#RemoteDebugConfigForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for remote debugging while the training job is running. You can\n            update the remote debugging configuration when the <code>SecondaryStatus</code> of the job\n            is <code>Downloading</code> or <code>Training</code>.To learn more about the remote \n            debugging functionality of SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html\">Access a training container through Amazon Web Services Systems Manager (SSM) \n                for remote debugging</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -65311,6 +65366,58 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#Vertex"
+            }
+        },
+        "com.amazonaws.sagemaker#VisibilityConditions": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.sagemaker#VisibilityConditionsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for that specifies the tag that you're using to filter the search results. The key must start with <code>Tags.</code>.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#VisibilityConditionsValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the tag that you're using to filter the search results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of key-value pairs that you specify for your resources.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#VisibilityConditionsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.sagemaker#VisibilityConditionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#VisibilityConditions"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#VisibilityConditionsValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
             }
         },
         "com.amazonaws.sagemaker#VolumeSizeInGB": {

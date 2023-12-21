@@ -1516,6 +1516,12 @@
                     "traits": {
                         "smithy.api#documentation": "Optional, user-provided tags for this workspace."
                     }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.amp#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "Optional, customer managed KMS key used to encrypt data for this workspace"
+                    }
                 }
             },
             "traits": {
@@ -1550,6 +1556,12 @@
                     "target": "com.amazonaws.amp#TagMap",
                     "traits": {
                         "smithy.api#documentation": "The tags of this workspace."
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.amp#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "Customer managed KMS key ARN for this workspace"
                     }
                 }
             },
@@ -2577,6 +2589,20 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.amp#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::KMS::Key"
+                },
+                "smithy.api#documentation": "A KMS Key ARN.",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:kms:[a-z0-9\\-]+:\\d+:key/[a-f0-9\\-]+$"
             }
         },
         "com.amazonaws.amp#ListRuleGroupsNamespaces": {
@@ -4659,6 +4685,12 @@
                     "traits": {
                         "smithy.api#documentation": "The tags of this workspace."
                     }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.amp#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "The customer managed KMS key of this workspace."
+                    }
                 }
             },
             "traits": {
@@ -4770,6 +4802,12 @@
                     "target": "com.amazonaws.amp#TagMap",
                     "traits": {
                         "smithy.api#documentation": "The tags of this workspace."
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.amp#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "Customer managed KMS key ARN for this workspace"
                     }
                 }
             },

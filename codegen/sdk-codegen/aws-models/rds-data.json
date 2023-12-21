@@ -9,7 +9,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -29,7 +29,7 @@
                 "target": "com.amazonaws.rdsdata#ArrayValue"
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of arrays.</p>\n        <note>\n            <p>Some array entries can be null.</p>\n        </note>"
+                "smithy.api#documentation": "<p>An array of arrays.</p>\n         <note>\n            <p>Some array entries can be null.</p>\n         </note>"
             }
         },
         "com.amazonaws.rdsdata#ArrayValue": {
@@ -87,7 +87,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>There is an error in the call or in a SQL statement.</p>",
+                "smithy.api#documentation": "<p>There is an error in the call or in a SQL statement. (This error only appears in calls from Aurora Serverless v1 databases.)</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -108,20 +108,41 @@
                     "target": "com.amazonaws.rdsdata#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#DatabaseErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#ForbiddenException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#HttpEndpointNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#InvalidSecretException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#SecretsErrorException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#ServiceUnavailableError"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#StatementTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#TransactionNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs a batch SQL statement over an array of data.</p>\n        <p>You can run bulk update and insert operations for multiple records using a DML \n            statement with different parameter sets. Bulk operations can provide a significant \n            performance improvement over individual insert and update operations.</p>\n        <note>\n            <p>If a call isn't part of a transaction because it doesn't include the <code>transactionID</code> parameter,\n                changes that result from the call are committed automatically.</p>\n            <p>There isn't a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request\n                submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn't\n                process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the\n                number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and\n                the size of each parameter set.</p>\n            <p>The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Runs a batch SQL statement over an array of data.</p>\n         <p>You can run bulk update and insert operations for multiple records using a DML \n            statement with different parameter sets. Bulk operations can provide a significant \n            performance improvement over individual insert and update operations.</p>\n         <note>\n            <p>If a call isn't part of a transaction because it doesn't include the <code>transactionID</code> parameter,\n                changes that result from the call are committed automatically.</p>\n            <p>There isn't a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request\n                submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn't\n                process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the\n                number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and\n                the size of each parameter set.</p>\n            <p>The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -142,7 +163,7 @@
                 "secretArn": {
                     "target": "com.amazonaws.rdsdata#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in\n            the secret.</p>\n        <p>For information about creating the secret, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html\">Create a database secret</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in\n            the secret.</p>\n         <p>For information about creating the secret, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html\">Create a database secret</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -162,19 +183,19 @@
                 "schema": {
                     "target": "com.amazonaws.rdsdata#DbName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database schema.</p>\n        <note>\n            <p>Currently, the <code>schema</code> parameter isn't supported.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The name of the database schema.</p>\n         <note>\n            <p>Currently, the <code>schema</code> parameter isn't supported.</p>\n         </note>"
                     }
                 },
                 "parameterSets": {
                     "target": "com.amazonaws.rdsdata#SqlParameterSets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter set for the batch operation.</p>\n        <p>The SQL statement is executed as many times as the number of parameter sets provided. \n          To execute a SQL statement with no parameters, use one of the following options:</p>\n        <ul>\n            <li>\n                <p>Specify one or more empty parameter sets.</p>\n            </li>\n            <li>\n                <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p>\n            </li>\n         </ul>\n        <note>\n            <p>Array parameters are not supported.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The parameter set for the batch operation.</p>\n         <p>The SQL statement is executed as many times as the number of parameter sets provided. \n          To execute a SQL statement with no parameters, use one of the following options:</p>\n         <ul>\n            <li>\n               <p>Specify one or more empty parameter sets.</p>\n            </li>\n            <li>\n               <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Array parameters are not supported.</p>\n         </note>"
                     }
                 },
                 "transactionId": {
                     "target": "com.amazonaws.rdsdata#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of a transaction that was started by using the\n                <code>BeginTransaction</code> operation. Specify the transaction ID of the\n            transaction that you want to include the SQL statement in.</p>\n        <p>If the SQL statement is not part of a transaction, don't set this\n            parameter.</p>"
+                        "smithy.api#documentation": "<p>The identifier of a transaction that was started by using the\n                <code>BeginTransaction</code> operation. Specify the transaction ID of the\n            transaction that you want to include the SQL statement in.</p>\n         <p>If the SQL statement is not part of a transaction, don't set this\n            parameter.</p>"
                     }
                 }
             },
@@ -212,20 +233,41 @@
                     "target": "com.amazonaws.rdsdata#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#DatabaseErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#ForbiddenException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#HttpEndpointNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#InvalidSecretException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#SecretsErrorException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#ServiceUnavailableError"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#StatementTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#TransactionNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a SQL transaction.</p>\n        <note>\n            <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24\n                hours.</p>\n            <p>A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's\n                committed, it's rolled back automatically.</p>\n            <p>DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate\n                    <code>ExecuteStatement</code> call with <code>continueAfterTimeout</code> enabled.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Starts a SQL transaction.</p>\n         <note>\n            <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24\n                hours.</p>\n            <p>A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's\n                committed, it's rolled back automatically.</p>\n            <p>DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate\n                    <code>ExecuteStatement</code> call with <code>continueAfterTimeout</code> enabled.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -296,7 +338,7 @@
                 "target": "com.amazonaws.rdsdata#BoxedBoolean"
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of Boolean values.</p>\n        <note>\n            <p>Some array entries can be null.</p>\n        </note>"
+                "smithy.api#documentation": "<p>An array of Boolean values.</p>\n         <note>\n            <p>Some array entries can be null.</p>\n         </note>"
             }
         },
         "com.amazonaws.rdsdata#BoxedBoolean": {
@@ -431,19 +473,40 @@
                     "target": "com.amazonaws.rdsdata#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#DatabaseErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#HttpEndpointNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#InternalServerErrorException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#InvalidSecretException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#SecretsErrorException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#ServiceUnavailableError"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#StatementTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#TransactionNotFoundException"
                 }
             ],
             "traits": {
@@ -498,6 +561,41 @@
                 "smithy.api#documentation": "<p>The response elements represent the output of a commit transaction request.</p>"
             }
         },
+        "com.amazonaws.rdsdata#DatabaseErrorException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rdsdata#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There was an error in processing the SQL statement.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rdsdata#DatabaseNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rdsdata#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DB cluster doesn't have a DB instance.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.rdsdata#DatabaseUnavailableException": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The writer instance in the DB cluster isn't available.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 504
+            }
+        },
         "com.amazonaws.rdsdata#DbName": {
             "type": "string",
             "traits": {
@@ -527,7 +625,7 @@
                 "target": "com.amazonaws.rdsdata#BoxedDouble"
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of floating-point numbers.</p>\n        <note>\n            <p>Some array entries can be null.</p>\n        </note>"
+                "smithy.api#documentation": "<p>An array of floating-point numbers.</p>\n         <note>\n            <p>Some array entries can be null.</p>\n         </note>"
             }
         },
         "com.amazonaws.rdsdata#ErrorMessage": {
@@ -563,7 +661,7 @@
                     "message": "The ExecuteSql API is deprecated, please use the ExecuteStatement API.",
                     "since": "2019-03-21"
                 },
-                "smithy.api#documentation": "<p>Runs one or more SQL statements.</p>\n        <note>\n            <p>This operation is deprecated. Use the <code>BatchExecuteStatement</code> or\n                    <code>ExecuteStatement</code> operation.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Runs one or more SQL statements.</p>\n         <note>\n            <p>This operation isn't supported for Aurora PostgreSQL Serverless v2 and provisioned DB clusters, and for Aurora Serverless v1 DB clusters, \n            the operation is deprecated. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -584,14 +682,14 @@
                 "awsSecretStoreArn": {
                     "target": "com.amazonaws.rdsdata#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password\n            for the credentials in the secret.</p>\n        <p>For information about creating the secret, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html\">Create a database secret</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password\n            for the credentials in the secret.</p>\n         <p>For information about creating the secret, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html\">Create a database secret</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "sqlStatements": {
                     "target": "com.amazonaws.rdsdata#SqlStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more SQL statements to run on the DB cluster.</p>\n        <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL\n            statement is permitted, including data definition, data manipulation, and commit\n            statements. </p>",
+                        "smithy.api#documentation": "<p>One or more SQL statements to run on the DB cluster.</p>\n         <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL\n            statement is permitted, including data definition, data manipulation, and commit\n            statements. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -642,20 +740,44 @@
                     "target": "com.amazonaws.rdsdata#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#DatabaseErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#ForbiddenException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#HttpEndpointNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#InvalidSecretException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#SecretsErrorException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#ServiceUnavailableError"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#StatementTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#TransactionNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#UnsupportedResultException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs a SQL statement against a database.</p>\n        <note>\n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>\n            <p>If the binary response data from the database is more than 1 MB, the call is terminated.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Runs a SQL statement against a database.</p>\n         <note>\n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>\n            <p>If the binary response data from the database is more than 1 MB, the call is terminated.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -676,7 +798,7 @@
                 "secretArn": {
                     "target": "com.amazonaws.rdsdata#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in\n            the secret.</p>\n        <p>For information about creating the secret, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html\">Create a database secret</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in\n            the secret.</p>\n         <p>For information about creating the secret, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html\">Create a database secret</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -696,19 +818,19 @@
                 "schema": {
                     "target": "com.amazonaws.rdsdata#DbName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database schema.</p>\n        <note>\n            <p>Currently, the <code>schema</code> parameter isn't supported.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The name of the database schema.</p>\n         <note>\n            <p>Currently, the <code>schema</code> parameter isn't supported.</p>\n         </note>"
                     }
                 },
                 "parameters": {
                     "target": "com.amazonaws.rdsdata#SqlParametersList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters for the SQL statement.</p>\n        <note>\n            <p>Array parameters are not supported.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The parameters for the SQL statement.</p>\n         <note>\n            <p>Array parameters are not supported.</p>\n         </note>"
                     }
                 },
                 "transactionId": {
                     "target": "com.amazonaws.rdsdata#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of a transaction that was started by using the\n                <code>BeginTransaction</code> operation. Specify the transaction ID of the\n            transaction that you want to include the SQL statement in.</p>\n        <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>"
+                        "smithy.api#documentation": "<p>The identifier of a transaction that was started by using the\n                <code>BeginTransaction</code> operation. Specify the transaction ID of the\n            transaction that you want to include the SQL statement in.</p>\n         <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>"
                     }
                 },
                 "includeResultMetadata": {
@@ -722,7 +844,7 @@
                     "target": "com.amazonaws.rdsdata#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A value that indicates whether to continue running the statement after \n            the call times out. By default, the statement stops running when the call \n            times out.</p>\n        <note>\n            <p>For DDL statements, we recommend continuing to run the statement after \n               the call times out. When a DDL statement terminates before it is finished \n               running, it can result in errors and possibly corrupted data structures.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to continue running the statement after \n            the call times out. By default, the statement stops running when the call \n            times out.</p>\n         <note>\n            <p>For DDL statements, we recommend continuing to run the statement after \n               the call times out. When a DDL statement terminates before it is finished \n               running, it can result in errors and possibly corrupted data structures.</p>\n         </note>"
                     }
                 },
                 "resultSetOptions": {
@@ -734,7 +856,7 @@
                 "formatRecordsAs": {
                     "target": "com.amazonaws.rdsdata#RecordsFormatType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to format the result set as a single JSON string.\n        This parameter only applies to <code>SELECT</code> statements and is ignored for\n        other types of statements. Allowed values are <code>NONE</code> and <code>JSON</code>.\n        The default value is <code>NONE</code>. The result is returned in the <code>formattedRecords</code> field.</p>\n        <p>For usage information about the JSON format for result sets, see\n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using the Data API</a>\n          in the <i>Amazon Aurora User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to format the result set as a single JSON string.\n        This parameter only applies to <code>SELECT</code> statements and is ignored for\n        other types of statements. Allowed values are <code>NONE</code> and <code>JSON</code>.\n        The default value is <code>NONE</code>. The result is returned in the <code>formattedRecords</code> field.</p>\n         <p>For usage information about the JSON format for result sets, see\n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using the Data API</a>\n          in the <i>Amazon Aurora User Guide</i>.</p>"
                     }
                 }
             },
@@ -767,13 +889,13 @@
                 "generatedFields": {
                     "target": "com.amazonaws.rdsdata#FieldList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Values for fields generated during a DML request.</p>\n        \n        <note>\n            <p>The <code>generatedFields</code> data isn't supported by Aurora PostgreSQL.\n                To get the values of generated fields, use the <code>RETURNING</code> clause. For\n                more information, see <a href=\"https://www.postgresql.org/docs/10/dml-returning.html\">Returning Data From\n                    Modified Rows</a> in the PostgreSQL documentation.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Values for fields generated during a DML request.</p>\n         <note>\n            <p>The <code>generatedFields</code> data isn't supported by Aurora PostgreSQL.\n                To get the values of generated fields, use the <code>RETURNING</code> clause. For\n                more information, see <a href=\"https://www.postgresql.org/docs/10/dml-returning.html\">Returning Data From\n                    Modified Rows</a> in the PostgreSQL documentation.</p>\n         </note>"
                     }
                 },
                 "formattedRecords": {
                     "target": "com.amazonaws.rdsdata#FormattedSqlRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string value that represents the result set of a <code>SELECT</code> statement\n        in JSON format. This value is only present when the <code>formatRecordsAs</code>\n        parameter is set to <code>JSON</code>.</p>\n        <p>The size limit for this field is currently 10 MB. If the JSON-formatted string representing the\n          result set requires more than 10 MB, the call returns an error.</p>"
+                        "smithy.api#documentation": "<p>A string value that represents the result set of a <code>SELECT</code> statement\n        in JSON format. This value is only present when the <code>formatRecordsAs</code>\n        parameter is set to <code>JSON</code>.</p>\n         <p>The size limit for this field is currently 10 MB. If the JSON-formatted string representing the\n          result set requires more than 10 MB, the call returns an error.</p>"
                     }
                 }
             },
@@ -856,6 +978,19 @@
         "com.amazonaws.rdsdata#FormattedSqlRecords": {
             "type": "string"
         },
+        "com.amazonaws.rdsdata#HttpEndpointNotEnabledException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rdsdata#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The HTTP endpoint for using RDS Data API isn't enabled for the DB cluster.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.rdsdata#Id": {
             "type": "string",
             "traits": {
@@ -879,6 +1014,19 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.rdsdata#InvalidSecretException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rdsdata#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Secrets Manager secret used with the request isn't valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.rdsdata#Long": {
             "type": "long",
             "traits": {
@@ -891,7 +1039,7 @@
                 "target": "com.amazonaws.rdsdata#BoxedLong"
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of integers.</p>\n        <note>\n            <p>Some array entries can be null.</p>\n        </note>"
+                "smithy.api#documentation": "<p>An array of integers.</p>\n         <note>\n            <p>Some array entries can be null.</p>\n         </note>"
             }
         },
         "com.amazonaws.rdsdata#LongReturnType": {
@@ -967,7 +1115,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<fullname>Amazon RDS Data Service</fullname>\n        <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora Serverless v1 DB cluster. To run these\n            statements, you work with the Data Service API.</p>\n        <note>\n            <p>The Data Service API isn't supported on Amazon Aurora Serverless v2 DB clusters.</p>\n        </note>\n        <p>For more information about the Data Service API, see\n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using the Data API</a>\n          in the <i>Amazon Aurora User Guide</i>.</p>",
+                "smithy.api#documentation": "<fullname>RDS Data API</fullname>\n         <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora DB cluster. To run these\n            statements, you use the RDS Data API (Data API).</p>\n         <p>Data API is available with the following types of Aurora databases:</p>\n         <ul>\n            <li>\n               <p>Aurora PostgreSQL - Serverless v2, Serverless v1, and provisioned</p>\n            </li>\n            <li>\n               <p>Aurora MySQL - Serverless v1 only</p>\n            </li>\n         </ul>\n         <p>For more information about the Data API, see\n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using RDS Data API</a>\n          in the <i>Amazon Aurora User Guide</i>.</p>",
                 "smithy.api#title": "AWS RDS DataService",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1011,7 +1159,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1054,7 +1201,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -1067,7 +1215,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1081,7 +1228,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -1104,7 +1250,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1139,7 +1284,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1150,14 +1294,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1171,14 +1317,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -1187,11 +1331,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1202,14 +1346,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1223,7 +1369,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1243,7 +1388,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1254,14 +1398,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -1272,9 +1418,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1610,7 +1758,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A record returned by a call.</p>\n        <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </note>"
+                "smithy.api#documentation": "<p>A record returned by a call.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
             }
         },
         "com.amazonaws.rdsdata#Records": {
@@ -1657,7 +1805,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result set returned by a SQL statement.</p>\n        <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </note>"
+                "smithy.api#documentation": "<p>The result set returned by a SQL statement.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
             }
         },
         "com.amazonaws.rdsdata#ResultSetMetadata": {
@@ -1687,7 +1835,7 @@
                 "decimalReturnType": {
                     "target": "com.amazonaws.rdsdata#DecimalReturnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates how a field of <code>DECIMAL</code> type is represented\n            in the response. The value of <code>STRING</code>, the default, specifies that\n            it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code>\n            specifies that it is converted to a Long value if its scale is 0, or to a Double\n            value otherwise.</p>\n        <note>\n            <p>Conversion to Double or Long can result in roundoff errors due to precision loss.\n                We recommend converting to String, especially when working with currency values.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>A value that indicates how a field of <code>DECIMAL</code> type is represented\n            in the response. The value of <code>STRING</code>, the default, specifies that\n            it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code>\n            specifies that it is converted to a Long value if its scale is 0, or to a Double\n            value otherwise.</p>\n         <note>\n            <p>Conversion to Double or Long can result in roundoff errors due to precision loss.\n                We recommend converting to String, especially when working with currency values.</p>\n         </note>"
                     }
                 },
                 "longReturnType": {
@@ -1717,19 +1865,40 @@
                     "target": "com.amazonaws.rdsdata#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#DatabaseErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#HttpEndpointNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#InternalServerErrorException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#InvalidSecretException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#SecretsErrorException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#ServiceUnavailableError"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#StatementTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#TransactionNotFoundException"
                 }
             ],
             "traits": {
@@ -1790,11 +1959,24 @@
                 "target": "com.amazonaws.rdsdata#Value"
             }
         },
+        "com.amazonaws.rdsdata#SecretsErrorException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rdsdata#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There was a problem with the Secrets Manager secret used with the request, caused by one of the following conditions:</p>\n         <ul>\n            <li>\n               <p>RDS Data API timed out retrieving the secret.</p>\n            </li>\n            <li>\n               <p>The secret provided wasn't found.</p>\n            </li>\n            <li>\n               <p>The secret couldn't be decrypted.</p>\n            </li>\n         </ul>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.rdsdata#ServiceUnavailableError": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The service specified by the <code>resourceArn</code> parameter is not\n            available.</p>",
+                "smithy.api#documentation": "<p>The service specified by the <code>resourceArn</code> parameter isn't\n            available.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
@@ -1817,7 +1999,7 @@
                 "typeHint": {
                     "target": "com.amazonaws.rdsdata#TypeHint",
                     "traits": {
-                        "smithy.api#documentation": "<p>A hint that specifies the correct object type for data type mapping. Possible values\n            are as follows:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object \n              of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object \n                    of <code>DECIMAL</code> type to the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - The corresponding <code>String</code> parameter value is sent as an\n           object of <code>JSON</code> type to the database.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object \n                    of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object \n              of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UUID</code> - The corresponding <code>String</code> parameter value is sent as an object of\n             <code>UUID</code> type to the database.\n          </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A hint that specifies the correct object type for data type mapping. Possible values\n            are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object \n              of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object \n                    of <code>DECIMAL</code> type to the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - The corresponding <code>String</code> parameter value is sent as an\n           object of <code>JSON</code> type to the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object \n                    of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object \n              of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UUID</code> - The corresponding <code>String</code> parameter value is sent as an object of\n             <code>UUID</code> type to the database.\n          </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1869,7 +2051,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a SQL statement.</p>\n        \n        <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </note>"
+                "smithy.api#documentation": "<p>The result of a SQL statement.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
             }
         },
         "com.amazonaws.rdsdata#SqlStatementResults": {
@@ -1910,7 +2092,7 @@
                 "target": "com.amazonaws.rdsdata#String"
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of strings.</p>\n        <note>\n            <p>Some array entries can be null.</p>\n        </note>"
+                "smithy.api#documentation": "<p>An array of strings.</p>\n         <note>\n            <p>Some array entries can be null.</p>\n         </note>"
             }
         },
         "com.amazonaws.rdsdata#StructValue": {
@@ -1924,7 +2106,20 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure value returned by a call.</p>\n        <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </note>"
+                "smithy.api#documentation": "<p>A structure value returned by a call.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.rdsdata#TransactionNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rdsdata#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The transaction ID wasn't found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.rdsdata#TransactionStatus": {
@@ -1964,6 +2159,19 @@
                         "name": "DECIMAL"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.rdsdata#UnsupportedResultException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rdsdata#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There was a problem with the result because of one of the following conditions:</p>\n         <ul>\n            <li>\n               <p>It contained an unsupported data type.</p>\n            </li>\n            <li>\n               <p>It contained a multidimensional array.</p>\n            </li>\n            <li>\n               <p>The size was too large.</p>\n            </li>\n         </ul>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.rdsdata#UpdateResult": {
@@ -2051,7 +2259,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the value of a column.</p>\n        \n        <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Contains the value of a column.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
             }
         }
     }

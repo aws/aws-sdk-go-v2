@@ -56,6 +56,9 @@
                     "target": "com.amazonaws.appintegrations#CreateEventIntegration"
                 },
                 {
+                    "target": "com.amazonaws.appintegrations#DeleteApplication"
+                },
+                {
                     "target": "com.amazonaws.appintegrations#DeleteDataIntegration"
                 },
                 {
@@ -69,6 +72,9 @@
                 },
                 {
                     "target": "com.amazonaws.appintegrations#GetEventIntegration"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ListApplicationAssociations"
                 },
                 {
                     "target": "com.amazonaws.appintegrations#ListApplications"
@@ -877,6 +883,44 @@
                 }
             }
         },
+        "com.amazonaws.appintegrations#ApplicationAssociationSummary": {
+            "type": "structure",
+            "members": {
+                "ApplicationAssociationArn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Application Association.</p>"
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Application.</p>"
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.appintegrations#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the client that is associated with the Application Association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about the Application Association.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#ApplicationAssociationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#ApplicationAssociationSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.appintegrations#ApplicationName": {
             "type": "string",
             "traits": {
@@ -1042,6 +1086,9 @@
                 },
                 {
                     "target": "com.amazonaws.appintegrations#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -1106,12 +1153,18 @@
                 "Subscriptions": {
                     "target": "com.amazonaws.appintegrations#SubscriptionList",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Subscriptions has been replaced with Permissions"
+                        },
                         "smithy.api#documentation": "<p>The events that the application subscribes.</p>"
                     }
                 },
                 "Publications": {
                     "target": "com.amazonaws.appintegrations#PublicationList",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Publications has been replaced with Permissions"
+                        },
                         "smithy.api#documentation": "<p>The events that the application publishes.</p>"
                     }
                 },
@@ -1126,6 +1179,12 @@
                     "target": "com.amazonaws.appintegrations#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.appintegrations#PermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of events or requests that the application has access to.</p>"
                     }
                 }
             },
@@ -1505,6 +1564,73 @@
                 }
             }
         },
+        "com.amazonaws.appintegrations#DeleteApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#DeleteApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#DeleteApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the Application. Only Applications that don't have any Application Associations can be deleted.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete an application",
+                        "documentation": "The following deletes an application.",
+                        "input": {
+                            "Arn": "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/applications/{Arn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#DeleteApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.appintegrations#ArnOrUUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appintegrations#DeleteApplicationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appintegrations#DeleteDataIntegration": {
             "type": "operation",
             "input": {
@@ -1623,7 +1749,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1000
                 },
                 "smithy.api#pattern": ".*"
@@ -2005,12 +2131,18 @@
                 "Subscriptions": {
                     "target": "com.amazonaws.appintegrations#SubscriptionList",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Subscriptions has been replaced with Permissions"
+                        },
                         "smithy.api#documentation": "<p>The events that the application subscribes.</p>"
                     }
                 },
                 "Publications": {
                     "target": "com.amazonaws.appintegrations#PublicationList",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Publications has been replaced with Permissions"
+                        },
                         "smithy.api#documentation": "<p>The events that the application publishes.</p>"
                     }
                 },
@@ -2030,6 +2162,12 @@
                     "target": "com.amazonaws.appintegrations#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.appintegrations#PermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of events or requests that the application has access to.</p>"
                     }
                 }
             },
@@ -2293,6 +2431,115 @@
                 "smithy.api#documentation": "<p>The request is not valid. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.appintegrations#ListApplicationAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#ListApplicationAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#ListApplicationAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of application associations for an application.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list application associations of an application",
+                        "documentation": "The following retrives application associations of an application",
+                        "input": {
+                            "ApplicationId": "98542c53-e8ac-4570-9c85-c6552c8d9c5e"
+                        },
+                        "output": {
+                            "ApplicationAssociations": [
+                                {
+                                    "ApplicationArn": "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e",
+                                    "ApplicationAssociationArn": "arn:aws:app-integrations:us-west-2:0123456789012:application-association/98542c53-e8ac-4570-9c85-c6552c8d9c5e/461dfb57-320a-454d-9bba-bb560845ff38",
+                                    "ClientId": "connect.amazonaws.com"
+                                }
+                            ],
+                            "NextToken": "abc"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{ApplicationId}/associations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ApplicationAssociations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ListApplicationAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.appintegrations#ArnOrUUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the Application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appintegrations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appintegrations#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appintegrations#ListApplicationAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "ApplicationAssociations": {
+                    "target": "com.amazonaws.appintegrations#ApplicationAssociationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Application Associations for the Application.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appintegrations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#ListApplications": {
@@ -2867,6 +3114,29 @@
                 "smithy.api#documentation": "<p>The configuration for what data should be pulled from the source.</p>"
             }
         },
+        "com.amazonaws.appintegrations#Permission": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The permission of an event or request that the application has access to.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-\\*]+$"
+            }
+        },
+        "com.amazonaws.appintegrations#PermissionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#Permission"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                }
+            }
+        },
         "com.amazonaws.appintegrations#Publication": {
             "type": "structure",
             "members": {
@@ -3152,6 +3422,19 @@
                 "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
+        "com.amazonaws.appintegrations#UnsupportedOperationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appintegrations#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation is not supported.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.appintegrations#UntagResource": {
             "type": "operation",
             "input": {
@@ -3237,6 +3520,9 @@
                 },
                 {
                     "target": "com.amazonaws.appintegrations#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -3291,13 +3577,25 @@
                 "Subscriptions": {
                     "target": "com.amazonaws.appintegrations#SubscriptionList",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Subscriptions has been replaced with Permissions"
+                        },
                         "smithy.api#documentation": "<p>The events that the application subscribes.</p>"
                     }
                 },
                 "Publications": {
                     "target": "com.amazonaws.appintegrations#PublicationList",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Publications has been replaced with Permissions"
+                        },
                         "smithy.api#documentation": "<p>The events that the application publishes.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.appintegrations#PermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of events or requests that the application has access to.</p>"
                     }
                 }
             },

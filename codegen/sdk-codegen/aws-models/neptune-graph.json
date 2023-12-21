@@ -2662,6 +2662,68 @@
                     "ApiType": {
                         "value": "ControlPlane"
                     }
+                },
+                "smithy.waiters#waitable": {
+                    "GraphAvailable": {
+                        "documentation": "Wait until Graph is Available",
+                        "minDelay": 60,
+                        "maxDelay": 28800,
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "AVAILABLE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "GraphDeleted": {
+                        "documentation": "Wait until Graph is Deleted",
+                        "minDelay": 60,
+                        "maxDelay": 3600,
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status != 'DELETING'",
+                                        "expected": "true",
+                                        "comparator": "booleanEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ]
+                    }
                 }
             }
         },
@@ -2814,6 +2876,68 @@
                     "ApiType": {
                         "value": "ControlPlane"
                     }
+                },
+                "smithy.waiters#waitable": {
+                    "GraphSnapshotAvailable": {
+                        "documentation": "Wait until GraphSnapshot is Available",
+                        "minDelay": 60,
+                        "maxDelay": 7200,
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "AVAILABLE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "GraphSnapshotDeleted": {
+                        "documentation": "Wait until GraphSnapshot is Deleted",
+                        "minDelay": 60,
+                        "maxDelay": 3600,
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status != 'DELETING'",
+                                        "expected": "true",
+                                        "comparator": "booleanEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ]
+                    }
                 }
             }
         },
@@ -2920,6 +3044,92 @@
                 "smithy.rules#staticContextParams": {
                     "ApiType": {
                         "value": "ControlPlane"
+                    }
+                },
+                "smithy.waiters#waitable": {
+                    "ImportTaskSuccessful": {
+                        "documentation": "Wait until Import Task is Successful",
+                        "minDelay": 60,
+                        "maxDelay": 28800,
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CANCELLING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CANCELLED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "ROLLING_BACK",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "SUCCEEDED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "ImportTaskCancelled": {
+                        "documentation": "Wait until Import Task is Cancelled",
+                        "minDelay": 60,
+                        "maxDelay": 3600,
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status != 'CANCELLING'",
+                                        "expected": "true",
+                                        "comparator": "booleanEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CANCELLED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
                     }
                 }
             }
@@ -3046,6 +3256,68 @@
                 "smithy.rules#staticContextParams": {
                     "ApiType": {
                         "value": "ControlPlane"
+                    }
+                },
+                "smithy.waiters#waitable": {
+                    "PrivateGraphEndpointAvailable": {
+                        "documentation": "Wait until PrivateGraphEndpoint is Available",
+                        "minDelay": 10,
+                        "maxDelay": 1800,
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "AVAILABLE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "PrivateGraphEndpointDeleted": {
+                        "documentation": "Wait until PrivateGraphEndpoint is Deleted",
+                        "minDelay": 10,
+                        "maxDelay": 1800,
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status != 'DELETING'",
+                                        "expected": "true",
+                                        "comparator": "booleanEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ]
                     }
                 }
             }

@@ -1817,6 +1817,16 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
+        "com.amazonaws.bedrockagent#ColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Name of the column",
+                "smithy.api#length": {
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-]+$"
+            }
+        },
         "com.amazonaws.bedrockagent#ConflictException": {
             "type": "structure",
             "members": {
@@ -4477,6 +4487,12 @@
                     "traits": {
                         "smithy.api#enumValue": "REDIS_ENTERPRISE_CLOUD"
                     }
+                },
+                "RDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDS"
+                    }
                 }
             },
             "traits": {
@@ -5703,6 +5719,103 @@
                 "smithy.api#documentation": "Prompt Type."
             }
         },
+        "com.amazonaws.bedrockagent#RdsArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Arn of a RDS Resource.",
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):rds:[a-zA-Z0-9-]*:[0-9]{12}:cluster:[a-zA-Z0-9-]{1,63}$"
+            }
+        },
+        "com.amazonaws.bedrockagent#RdsConfiguration": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrockagent#RdsArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "credentialsSecretArn": {
+                    "target": "com.amazonaws.bedrockagent#SecretArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.bedrockagent#RdsDatabaseName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "tableName": {
+                    "target": "com.amazonaws.bedrockagent#RdsTableName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldMapping": {
+                    "target": "com.amazonaws.bedrockagent#RdsFieldMapping",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Contains the configurations to use RDS to store knowledge base data."
+            }
+        },
+        "com.amazonaws.bedrockagent#RdsDatabaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Name of the database within RDS",
+                "smithy.api#length": {
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-]+$"
+            }
+        },
+        "com.amazonaws.bedrockagent#RdsFieldMapping": {
+            "type": "structure",
+            "members": {
+                "primaryKeyField": {
+                    "target": "com.amazonaws.bedrockagent#ColumnName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "vectorField": {
+                    "target": "com.amazonaws.bedrockagent#ColumnName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "textField": {
+                    "target": "com.amazonaws.bedrockagent#ColumnName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadataField": {
+                    "target": "com.amazonaws.bedrockagent#ColumnName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A mapping of Bedrock Knowledge Base fields to RDS column names"
+            }
+        },
+        "com.amazonaws.bedrockagent#RdsTableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Name of the table within RDS",
+                "smithy.api#length": {
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\.\\-]+$"
+            }
+        },
         "com.amazonaws.bedrockagent#RecommendedAction": {
             "type": "string",
             "traits": {
@@ -5906,7 +6019,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "Arn of a SecretsManager Secret.",
-                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9/_+=.@-]{1,63}$"
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$"
             }
         },
         "com.amazonaws.bedrockagent#ServerSideEncryptionConfiguration": {
@@ -6082,6 +6195,9 @@
                 },
                 "redisEnterpriseCloudConfiguration": {
                     "target": "com.amazonaws.bedrockagent#RedisEnterpriseCloudConfiguration"
+                },
+                "rdsConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#RdsConfiguration"
                 }
             },
             "traits": {
