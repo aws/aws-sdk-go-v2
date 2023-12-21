@@ -1,3 +1,27 @@
+# Release (2023-12-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.22.0](service/amp/CHANGELOG.md#v1220-2023-12-21)
+  * **Feature**: This release updates Amazon Managed Service for Prometheus APIs to support customer managed KMS keys.
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.23.0](service/appintegrations/CHANGELOG.md#v1230-2023-12-21)
+  * **Feature**: The Amazon AppIntegrations service adds DeleteApplication API for deleting applications, and updates APIs to support third party applications reacting to workspace events and make data requests to Amazon Connect for agent and contact events.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.2.0](service/bedrockagent/CHANGELOG.md#v120-2023-12-21)
+  * **Feature**: This release introduces Amazon Aurora as a vector store on Knowledge Bases for Amazon Bedrock
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.20.0](service/codecommit/CHANGELOG.md#v1200-2023-12-21)
+  * **Feature**: AWS CodeCommit now supports customer managed keys from AWS Key Management Service. UpdateRepositoryEncryptionKey is added for updating the key configuration. CreateRepository, GetRepository, BatchGetRepositories are updated with new input or output parameters.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.87.0](service/connect/CHANGELOG.md#v1870-2023-12-21)
+  * **Feature**: Adds APIs to manage User Proficiencies and Predefined Attributes. Enhances StartOutboundVoiceContact API input. Introduces SearchContacts API. Enhances DescribeContact API. Adds an API to update Routing Attributes in QueuePriority and QueueTimeAdjustmentSeconds.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.44.0](service/medialive/CHANGELOG.md#v1440-2023-12-21)
+  * **Feature**: MediaLive now supports the ability to configure the audio that an AWS Elemental Link UHD device produces, when the device is configured as the source for a flow in AWS Elemental MediaConnect.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.1.0](service/neptunegraph/CHANGELOG.md#v110-2023-12-21)
+  * **Feature**: Adds Waiters for successful creation and deletion of Graph, Graph Snapshot, Import Task and Private Endpoints for Neptune Analytics
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.66.0](service/rds/CHANGELOG.md#v1660-2023-12-21)
+  * **Feature**: This release adds support for using RDS Data API with Aurora PostgreSQL Serverless v2 and provisioned DB clusters.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.19.0](service/rdsdata/CHANGELOG.md#v1190-2023-12-21)
+  * **Feature**: This release adds support for using RDS Data API with Aurora PostgreSQL Serverless v2 and provisioned DB clusters.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.122.0](service/sagemaker/CHANGELOG.md#v11220-2023-12-21)
+  * **Feature**: Amazon SageMaker Training now provides model training container access for debugging purposes. Amazon SageMaker Search now provides the ability to use visibility conditions to limit resource access to a single domain or multiple domains.
+
 # Release (2023-12-20)
 
 ## General Highlights

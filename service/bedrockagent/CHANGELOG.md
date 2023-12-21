@@ -1,3 +1,7 @@
+# v1.2.0 (2023-12-21)
+
+* **Feature**: This release introduces Amazon Aurora as a vector store on Knowledge Bases for Amazon Bedrock
+
 # v1.1.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

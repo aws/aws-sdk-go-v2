@@ -1,3 +1,7 @@
+# v1.122.0 (2023-12-21)
+
+* **Feature**: Amazon SageMaker Training now provides model training container access for debugging purposes. Amazon SageMaker Search now provides the ability to use visibility conditions to limit resource access to a single domain or multiple domains.
+
 # v1.121.0 (2023-12-15)
 
 * **Feature**: This release 1) introduces a new API: DeleteCompilationJob , and 2) adds InfraCheckConfig for Create/Describe training job API

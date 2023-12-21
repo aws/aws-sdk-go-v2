@@ -1,8 +1,0 @@
-{
-    "id": "58823dab-db31-49b5-8332-4622fdc66bd8",
-    "type": "feature",
-    "description": "The Amazon AppIntegrations service adds DeleteApplication API for deleting applications, and updates APIs to support third party applications reacting to workspace events and make data requests to Amazon Connect for agent and contact events.",
-    "modules": [
-        "service/appintegrations"
-    ]
-}

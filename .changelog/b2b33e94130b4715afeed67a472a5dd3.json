@@ -1,8 +1,0 @@
-{
-    "id": "b2b33e94-130b-4715-afee-d67a472a5dd3",
-    "type": "feature",
-    "description": "Adds APIs to manage User Proficiencies and Predefined Attributes. Enhances StartOutboundVoiceContact API input. Introduces SearchContacts API. Enhances DescribeContact API. Adds an API to update Routing Attributes in QueuePriority and QueueTimeAdjustmentSeconds.",
-    "modules": [
-        "service/connect"
-    ]
-}

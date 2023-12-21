@@ -1,8 +1,0 @@
-{
-    "id": "5c2076ee-46e2-4217-bf95-60b2cf0da43f",
-    "type": "feature",
-    "description": "This release adds support for using RDS Data API with Aurora PostgreSQL Serverless v2 and provisioned DB clusters.",
-    "modules": [
-        "service/rdsdata"
-    ]
-}
