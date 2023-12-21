@@ -4,7 +4,6 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.115.4">
-<link rel="alternate" type="application/rss&#43;xml" href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/index.xml">
 <meta name="robots" content="index, follow">
 
 
@@ -19,17 +18,21 @@
 <link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-192x192.png" sizes="192x192">
 
-<title>Code Examples | AWS SDK for Go V2</title>
-<meta name="description" content="The AWS SDK for Go V2 examples can help you write your own Go applications that use Amazon Web Services. The examples
-assume you have already set up …">
-<meta property="og:title" content="Code Examples" />
-<meta property="og:description" content="The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go applications that use AWS services." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/" />
-<meta itemprop="name" content="Code Examples">
-<meta itemprop="description" content="The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go applications that use AWS services."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Code Examples"/>
-<meta name="twitter:description" content="The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go applications that use AWS services."/>
+<title>Configuring Authentication | AWS SDK for Go V2</title>
+<meta name="description" content="Customizing service client authentication.">
+<meta property="og:title" content="Configuring Authentication" />
+<meta property="og:description" content="Customizing service client authentication." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/auth/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-12-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-12-19T10:46:55-05:00" />
+<meta itemprop="name" content="Configuring Authentication">
+<meta itemprop="description" content="Customizing service client authentication."><meta itemprop="datePublished" content="2023-12-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-12-19T10:46:55-05:00" />
+<meta itemprop="wordCount" content="1200">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Configuring Authentication"/>
+<meta name="twitter:description" content="Customizing service client authentication."/>
 
 
 
@@ -47,7 +50,7 @@ assume you have already set up …">
   crossorigin="anonymous"></script>
 
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -138,18 +141,18 @@ assume you have already set up …">
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsgetting-started-li">
   <a href="/aws-sdk-go-v2/docs/getting-started/" title="Getting Started with the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsgetting-started"><span class="">Getting Started</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docsconfiguring-sdk-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-aws-sdk-go-v2docsconfiguring-sdk-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/" title="Configuring the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsconfiguring-sdk"><span class="">Configuring the SDK</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkauth-li">
-  <a href="/aws-sdk-go-v2/docs/configuring-sdk/auth/" title="Configuring Authentication" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkauth"><span class="">Authentication</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-aws-sdk-go-v2docsconfiguring-sdkauth-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/auth/" title="Configuring Authentication" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkauth"><span class="td-sidebar-nav-active-item">Authentication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" title="Configuring Client Endpoints" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints"><span class="">Endpoints</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/" title="Customizing the HTTP Client" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http"><span class="">HTTP Client</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdklogging-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsconfiguring-sdklogging-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/logging/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdklogging"><span class="">Logging</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkretries-timeouts-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsconfiguring-sdkretries-timeouts-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/retries-timeouts/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkretries-timeouts"><span class="">Retries and Timeouts</span></a>
 </li>
   </ul>
@@ -202,10 +205,10 @@ assume you have already set up …">
   <a href="/aws-sdk-go-v2/docs/security/tls/" title="TLS Version in AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssecuritytls"><span class="">TLS Version</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-aws-sdk-go-v2docscode-examples-li">
-  <a href="/aws-sdk-go-v2/docs/code-examples/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examples"><span class="td-sidebar-nav-active-item">Code Examples</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-examples-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examples"><span class="">Code Examples</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-examplescloudwatch-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplescloudwatch-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/cloudwatch/" title="Amazon CloudWatch Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplescloudwatch"><span class="">Amazon CloudWatch</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplescloudwatchcreatecustommetric-li">
@@ -222,7 +225,7 @@ assume you have already set up …">
   <a href="/aws-sdk-go-v2/docs/code-examples/cloudwatch/putevent/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplescloudwatchputevent"><span class="">PutEventv2</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-examplesdynamodb-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplesdynamodb-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/dynamodb/" title="Amazon DynamoDB Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesdynamodb"><span class="">Amazon DynamoDB</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesdynamodbdescribetable-li">
@@ -231,7 +234,7 @@ assume you have already set up …">
   <a href="/aws-sdk-go-v2/docs/code-examples/dynamodb/scanitems/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesdynamodbscanitems"><span class="">ScanItemsv2</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-examplesec2-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/ec2/" title="Amazon EC2 Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2"><span class="">Amazon EC2</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2createimage-li">
@@ -252,7 +255,7 @@ assume you have already set up …">
   <a href="/aws-sdk-go-v2/docs/code-examples/ec2/stopinstances/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2stopinstances"><span class="">StopInstancesv2</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-exampless3-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-exampless3-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/s3/" title="Amazon S3 Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3"><span class="">Amazon S3</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3copyobject-li">
@@ -277,7 +280,7 @@ assume you have already set up …">
   <a href="/aws-sdk-go-v2/docs/code-examples/s3/putobject/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3putobject"><span class="">PutObjectv2</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-examplessns-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplessns-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/sns/" title="Amazon SNS Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessns"><span class="">Amazon SNS</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessnscreatetopic-li">
@@ -292,7 +295,7 @@ assume you have already set up …">
   <a href="/aws-sdk-go-v2/docs/code-examples/sns/subscribe/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessnssubscribe"><span class="">Subscribev2</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-examplessqs-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplessqs-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/sqs/" title="Amazon SQS Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqs"><span class="">Amazon SQS</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqschangemsgvisibility-li">
@@ -321,7 +324,7 @@ assume you have already set up …">
   <a href="/aws-sdk-go-v2/docs/code-examples/sqs/sendmessage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqssendmessage"><span class="">SendMessagev2</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-exampleskms-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-exampleskms-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/kms/" title="AWS KMS Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampleskms"><span class="">AWS KMS</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampleskmscreatekey-li">
@@ -334,14 +337,14 @@ assume you have already set up …">
   <a href="/aws-sdk-go-v2/docs/code-examples/kms/reencryptdata/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampleskmsreencryptdata"><span class="">ReEncryptDatav2</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-examplessts-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplessts-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/sts/" title="AWS STS Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessts"><span class="">AWS STS</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesstsassumerole-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/sts/assumerole/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesstsassumerole"><span class="">AssumeRolev2</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-examplesssm-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplesssm-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/ssm/" title="AWS Systems Manager Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesssm"><span class="">AWS Systems Manager</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesssmdeleteparameter-li">
@@ -352,7 +355,7 @@ assume you have already set up …">
   <a href="/aws-sdk-go-v2/docs/code-examples/ssm/putparameter/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesssmputparameter"><span class="">PutParameterv2</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-examplesiam-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplesiam-li">
   <a href="/aws-sdk-go-v2/docs/code-examples/iam/" title="IAM Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiam"><span class="">IAM</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamaccesskeylastused-li">
@@ -412,16 +415,43 @@ assume you have already set up …">
           <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
             
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href="https://github.com/aws/aws-sdk-go-v2/tree/documentation/content/en/docs/code-examples/_index.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> View page source</a>
-  <a href="https://github.com/aws/aws-sdk-go-v2/edit/documentation/content/en/docs/code-examples/_index.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-  <a href="https://github.com/aws/aws-sdk-go-v2/new/documentation/content/en/docs/code-examples/_index.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Create child page</a>
-  <a href="https://github.com/aws/aws-sdk-go-v2/issues/new?title=Code%20Examples" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/aws/aws-sdk-go-v2/tree/documentation/content/en/docs/configuring-sdk/auth.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+  <a href="https://github.com/aws/aws-sdk-go-v2/edit/documentation/content/en/docs/configuring-sdk/auth.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/aws/aws-sdk-go-v2/new/documentation/content/en/docs/configuring-sdk/auth.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+  <a href="https://github.com/aws/aws-sdk-go-v2/issues/new?title=Configuring%20Authentication" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> Create documentation issue</a>
   <a href="https://github.com/aws/aws-sdk-go-v2/issues/new" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
   
 </div>
 
             
 
+
+<div class="td-toc"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#definitions">Definitions</a>
+          <ul>
+            <li><a href="#authscheme"><code>AuthScheme</code></a></li>
+            <li><a href="#authschemeresolver"><code>AuthSchemeResolver</code></a></li>
+            <li><a href="#option"><code>Option</code></a></li>
+            <li><a href="#identity"><code>Identity</code></a></li>
+            <li><a href="#identityresolver"><code>IdentityResolver</code></a></li>
+            <li><a href="#signer"><code>Signer</code></a></li>
+            <li><a href="#authresolverparameters"><code>AuthResolverParameters</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#auth-scheme-resolution-workflow">Auth scheme resolution workflow</a></li>
+        <li><a href="#natively-supported-authschemes">Natively-supported <code>AuthScheme</code>s</a>
+          <ul>
+            <li><a href="#identity-configuration">Identity configuration</a></li>
+            <li><a href="#signer-configuration">Signer configuration</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
 
 
 
@@ -455,15 +485,18 @@ assume you have already set up …">
   <li class="breadcrumb-item">
     <a href="https://aws.github.io/aws-sdk-go-v2/docs/">Developer Guide</a>
   </li>
+  <li class="breadcrumb-item">
+    <a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/">Configuring the SDK</a>
+  </li>
   <li class="breadcrumb-item active" aria-current="page">
-    <a href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/" aria-disabled="true" class="btn-link disabled">Code Examples</a>
+    <a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/auth/" aria-disabled="true" class="btn-link disabled">Authentication</a>
   </li>
   </ol>
 </nav>
             
 <div class="td-content">
-	<h1>Code Examples</h1>
-  
+	<h1>Configuring Authentication</h1>
+	<div class="lead">Customizing service client authentication.</div>
 	<header class="article-meta">
 		
 
@@ -478,119 +511,262 @@ assume you have already set up …">
   
 
 		
-	</header>
-	<p>The AWS SDK for Go V2 examples can help you write your own Go applications that use Amazon Web Services. The examples
-assume you have already set up and configured the SDK (that is, you have imported all required packages and set your
-credentials and region). For more information, see <a href="https://aws.github.io/aws-sdk-go-v2/docs/getting-started/">Getting Started</a> and
-<a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/">Configuring the SDK</a>.</p>
-<p>Find the source code for these examples and others in the AWS documentation code examples repository on
-<a href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/gov2">GitHub</a>.
-To propose a new code example for the AWS documentation team to consider producing, create a new request. The team is
-looking to produce code examples that cover broader scenarios and use cases, versus simple code snippets that cover only
-individual API calls. For instructions, see the Proposing new code examples section in the
-<a href="https://github.com/awsdocs/aws-doc-sdk-examples">Readme on GitHub</a>.</p>
+	</header>    
+	<p>The AWS SDK for Go V2 provides the ability to configure the authentication
+behavior service. In most cases, the default configuration will suffice, but
+configuring custom authentication allows for additional behavior such as
+working with pre-release service features.</p>
+<h2 id="definitions">Definitions</h2>
+<p>This section provides a high-level description of authentication components in
+the AWS SDK for Go V2.</p>
+<h3 id="authscheme"><code>AuthScheme</code></h3>
+<p>An <a href="https://pkg.go.dev/github.com/aws/smithy-go/transport/http#AuthScheme">AuthScheme</a> is the
+interface that defines the workflow through which the SDK retrieves a caller
+identity and attaches it to an operation request.</p>
+<p>An auth scheme uses the following components, described in detail further
+below:</p>
+<ul>
+<li>A unique ID which identifies the scheme</li>
+<li>An identity resolver, which returns a caller identity used in the signing
+process (e.g. your AWS credentials)</li>
+<li>A signer, which performs the actual injection of caller identity into the
+operation&rsquo;s transport request (e.g. the <code>Authorization</code> HTTP header)</li>
+</ul>
+<p>Each service client options includes an <code>AuthSchemes</code> field, which by default
+is populated with the list of auth schemes supported by that service.</p>
+<h3 id="authschemeresolver"><code>AuthSchemeResolver</code></h3>
+<p>Each service client options includes an <code>AuthSchemeResolver</code> field. This
+interface, defined per-service, is the API called by the SDK to determine the
+possible authentication options for each operation.</p>
+<p><strong>IMPORTANT:</strong> The auth scheme resolver does NOT dictate what auth scheme is
+used. It returns a list of schemes that <em>can</em> be used (&ldquo;options&rdquo;), the final
+scheme is selected through a fixed algorithm described
+<a href="#auth-scheme-resolution-workflow">here</a>.</p>
+<h3 id="option"><code>Option</code></h3>
+<p>Returned from a call to <code>ResolverAuthSchemes</code>, an <a href="https://pkg.go.dev/github.com/aws/smithy-go/auth#Option">Option</a> represents a possible authentication option.</p>
+<p>An option consists of three sets of information:</p>
+<ul>
+<li>An ID representing the possible scheme</li>
+<li>An opaque set of properties to be provided to the scheme&rsquo;s identity resolver</li>
+<li>An opaque set of properties to be provided to the scheme&rsquo;s signer</li>
+</ul>
+<h4 id="a-note-on-properties">a note on properties</h4>
+<p>For 99% of use cases, callers need not be concerned with the opaque properties
+for identity resolution and signing. The SDK will pull out the necessary
+properties for each scheme and pass them to the strongly-typed interfaces
+exposed in the SDK. For example, the default auth resolver for services encode
+the SigV4 option to have signer properties for the signing name and region, the
+values of which are passed to the client&rsquo;s configured
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#Signer">v4.HTTPSigner</a> implementation when SigV4
+is selected.</p>
+<h3 id="identity"><code>Identity</code></h3>
+<p>An <a href="https://pkg.go.dev/github.com/aws/smithy-go/auth#Identity">Identity</a> is an abstract
+representation of who the SDK caller is.</p>
+<p>The most common type of identity used in the SDK is a set of <code>aws.Credentials</code>.
+For most use cases, the caller need not concern themselves with <code>Identity</code> as
+an abstraction and can work with the concrete types directly.</p>
+<p><strong>Note:</strong> to preserve backwards compatibility and prevent API confusion, the
+AWS SDK-specific identity type <code>aws.Credentials</code> does not directly satisfy the
+<code>Identity</code> interface. This mapping is handled internally.</p>
+<h3 id="identityresolver"><code>IdentityResolver</code></h3>
+<p><a href="https://pkg.go.dev/github.com/aws/smithy-go/auth#IdentityResolver">IdentityResolver</a> is the
+interface through which an <code>Identity</code> is retrieved.</p>
+<p>Concrete versions of <code>IdentityResolver</code> exist in the SDK in strongly-typed form
+(e.g. <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#CredentialsProvider">aws.CredentialsProvider</a>), the
+SDK handles this mapping internally.</p>
+<p>A caller will only need to directly implement the <code>IdentityResolver</code> interface
+when defining an external auth scheme.</p>
+<h3 id="signer"><code>Signer</code></h3>
+<p><a href="https://pkg.go.dev/github.com/aws/smithy-go/transport/http#Signer">Signer</a> is the interface
+through which a request is supplemented with the retrieved caller <code>Identity</code>.</p>
+<p>Concrete versions of <code>Signer</code> exist in the SDK in strongly-typed form
+(e.g. <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#HTTPSigner">v4.HTTPSigner</a>), the SDK
+handles this mapping internally.</p>
+<p>A caller will only need to directly implement the <code>Signer</code> interface
+when defining an external auth scheme.</p>
+<h3 id="authresolverparameters"><code>AuthResolverParameters</code></h3>
+<p>Each service takes a specific set of inputs which are passed to its resolution
+function, defined in each service package as <code>AuthResolverParameters</code>.</p>
+<p>The base resolver parameters are as follows:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Operation</code></td>
+<td><code>string</code></td>
+<td>The name of the operation being invoked.</td>
+</tr>
+<tr>
+<td><code>Region</code></td>
+<td><code>string</code></td>
+<td>The client&rsquo;s AWS region. Only present for services that use SigV4[A].</td>
+</tr>
+</tbody>
+</table>
+<p>If you are implementing your own resolver, you should never need to construct
+your own instance of its parameters. The SDK will source these values
+per-request and pass them to your implementation.</p>
+<h2 id="auth-scheme-resolution-workflow">Auth scheme resolution workflow</h2>
+<p>When you call an AWS service operation through the SDK, the following sequence
+of actions occurs after the request has been serialized:</p>
+<ol>
+<li>The SDK calls the client&rsquo;s <code>AuthSchemeResolver.ResolveAuthSchemes()</code> API,
+sourcing the input parameters as necessary, to obtain a list of possible
+<a href="https://pkg.go.dev/github.com/aws/smithy-go/auth#Option">Options</a> for the operation.</li>
+<li>The SDK iterates over that list and selects the first scheme that satisfies
+the following conditions.
+<ul>
+<li>A scheme with matching ID is present in the client&rsquo;s own <code>AuthSchemes</code> list</li>
+<li>The scheme&rsquo;s identity resolver exists (is non-<code>nil</code>) on the client&rsquo;s Options
+(checked via the scheme&rsquo;s <code>GetIdentityResolver</code> method, the mapping to the
+concrete identity resolver types described above is handled internally) (1)</li>
+</ul>
+</li>
+<li>Assuming a viable scheme was selected, the SDK invokes its
+<code>GetIdentityResolver()</code> API to retrieve the caller&rsquo;s identity. For example,
+the builtin SigV4 auth scheme will map to the client&rsquo;s <code>Credentials</code> provider
+internally.</li>
+<li>The SDK calls the identity resolver&rsquo;s <code>GetIdentity()</code> (e.g.
+<code>aws.CredentialProvider.Retrieve()</code> for SigV4).</li>
+<li>The SDK calls the endpoint resolver&rsquo;s <code>ResolveEndpoint()</code> to find the
+endpoint for the request. The endpoint may include additional metadata that
+influences the signing process (e.g. unique signing name for S3 Object Lambda).</li>
+<li>The SDK calls the auth scheme&rsquo;s <code>Signer()</code> API to retrieve its signer, and
+uses its <code>SignRequest()</code> API to sign the request with the
+previously-retrieved caller identity.</li>
+</ol>
+<p>(1) If the SDK encounters the anonymous option (ID <code>smithy.api#noAuth</code>) in the
+list, it is selected automatically, as there is no corresponding identity
+resolver.</p>
+<h2 id="natively-supported-authschemes">Natively-supported <code>AuthScheme</code>s</h2>
+<p>The following auth schemes are natively supported by AWS SDK for Go V2.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Scheme ID</th>
+<th>Identity resolver</th>
+<th>Signer</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html">SigV4</a></td>
+<td><code>aws.auth#sigv4</code></td>
+<td><a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Credentials">aws.CredentialsProvider</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#Signer">v4.HTTPSigner</a></td>
+<td>The current default for most AWS service operations.</td>
+</tr>
+<tr>
+<td>SigV4A</td>
+<td><code>aws.auth#sigv4a</code></td>
+<td>aws.CredentialsProvider</td>
+<td>n/a</td>
+<td>SigV4A usage is limited at this time, the signer implementation is internal.</td>
+</tr>
+<tr>
+<td>SigV4Express</td>
+<td><code>com.amazonaws.s3#sigv4express</code></td>
+<td><a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#ExpressCredentialsProvider">s3.ExpressCredentialsProvider</a></td>
+<td>v4.HTTPSigner</td>
+<td>Used for <a href="https://aws.amazon.com/s3/storage-classes/express-one-zone/">Express One Zone</a>.</td>
+</tr>
+<tr>
+<td>HTTP Bearer</td>
+<td><code>smithy.api#httpBearerAuth</code></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/auth/bearer#TokenProvider">smithybearer.TokenProvider</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/auth/bearer#Signer">smithybearer.Signer</a></td>
+<td>Used by <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/codecatalyst">codecatalyst</a>.</td>
+</tr>
+<tr>
+<td>Anonymous</td>
+<td><code>smithy.api#noAuth</code></td>
+<td>n/a</td>
+<td>n/a</td>
+<td>No authentication - no identity is required, and the request is not signed or authenticated.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="identity-configuration">Identity configuration</h3>
+<p>In AWS SDK for Go V2, the identity components of an auth scheme are
+configured in SDK client <code>Options</code>. The SDK will automatically pick up and use
+the values for these components for the scheme it selects when an operation is
+called.</p>
+<p><strong>Note:</strong> For backwards compatibility reasons, the SDK implicitly allows the
+use of the anonymous auth scheme if no identity resolvers are configured.
+This can be manually achieved by setting all identity resolvers on a client&rsquo;s
+<code>Options</code> to <code>nil</code> (the sigv4 identity resolver can also be set to
+<code>aws.AnonymousCredentials{}</code>).</p>
+<h3 id="signer-configuration">Signer configuration</h3>
+<p>In AWS SDK for Go V2, the signer components of an auth scheme are
+configured in SDK client <code>Options</code>. The SDK will automatically pick up and use
+the values for these components for the scheme it selects when an operation is
+called. No additional configuration is necessary.</p>
+<h4 id="custom-auth-scheme">Custom auth scheme</h4>
+<p>In order to define a custom auth scheme and configure it for use, the caller
+must do the following:</p>
+<ol>
+<li>Define an <a href="https://pkg.go.dev/github.com/aws/smithy-go/transport/http#AuthScheme">AuthScheme</a>
+implementation</li>
+<li>Register the scheme on the SDK client&rsquo;s <code>AuthSchemes</code> list</li>
+<li>Instrument the SDK client&rsquo;s <code>AuthSchemeResolver</code> to return an auth <code>Option</code>
+with the scheme&rsquo;s ID where applicable</li>
+</ol>
 
-        <div class="section-index">
-    
-    
-    
-    
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/aws-sdk-go-v2/docs/code-examples/cloudwatch/">Amazon CloudWatch Examples</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/aws-sdk-go-v2/docs/code-examples/dynamodb/">Amazon DynamoDB Examples</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/aws-sdk-go-v2/docs/code-examples/ec2/">Amazon EC2 Examples</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/aws-sdk-go-v2/docs/code-examples/s3/">Amazon S3 Examples</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/aws-sdk-go-v2/docs/code-examples/sns/">Amazon SNS Examples</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/aws-sdk-go-v2/docs/code-examples/sqs/">Amazon SQS Examples</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/aws-sdk-go-v2/docs/code-examples/kms/">AWS KMS Examples</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/aws-sdk-go-v2/docs/code-examples/sts/">AWS STS Examples</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/aws-sdk-go-v2/docs/code-examples/ssm/">AWS Systems Manager Examples</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/aws-sdk-go-v2/docs/code-examples/iam/">IAM Examples</a>
-                </h5>
-                <p></p>
-            </div>
-        
-    
+
+<div class="pageinfo pageinfo-warning">
+<p>The following services have unique or customized authentication behavior. We
+recommend you delegate to the default implementation and wrap accordingly if
+you require custom authentication behavior therein:</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S3</td>
+<td>Conditional use of SigV4A and SigV4Express depending on operation input.</td>
+</tr>
+<tr>
+<td>EventBridge</td>
+<td>Conditional use of SigV4A depending on operation input.</td>
+</tr>
+<tr>
+<td>Cognito</td>
+<td>Certain operations are anonymous-only.</td>
+</tr>
+<tr>
+<td>SSO</td>
+<td>Certain operations are anonymous-only.</td>
+</tr>
+<tr>
+<td>STS</td>
+<td>Certain operations are anonymous-only.</td>
+</tr>
+</tbody>
+</table>
+
 </div>
+
 
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified August 10, 2022: <a href="https://github.com/aws/aws-sdk-go-v2/commit/36ceefc1bbb79201f73b2757f24ccdf5faff71fc">Developer Guide Updates (#1798) (36ceefc1bb)</a>
+  Last modified December 19, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/766cb48e5344b1b6f9ee7969acd9ecf0a5ecc83a">Add authentication config guide (#2426) (766cb48e53)</a>
 </div>
 
 </div>
+
 
           </main>
         </div>

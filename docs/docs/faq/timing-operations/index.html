@@ -1,0 +1,819 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.115.4">
+<meta name="robots" content="index, follow">
+
+
+<link rel="shortcut icon" href="/aws-sdk-go-v2/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/aws-sdk-go-v2/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-192x192.png" sizes="192x192">
+
+<title>Timing SDK operations | AWS SDK for Go V2</title>
+<meta name="description" content="How to perform basic instrumentation in the {{% alias sdk-go %}} to time SDK operations">
+<meta property="og:title" content="Timing SDK operations" />
+<meta property="og:description" content="How to perform basic instrumentation in the {{% alias sdk-go %}} to time SDK operations" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/faq/timing-operations/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2023-12-21T16:57:52-05:00" />
+<meta itemprop="name" content="Timing SDK operations">
+<meta itemprop="description" content="How to perform basic instrumentation in the {{% alias sdk-go %}} to time SDK operations">
+<meta itemprop="dateModified" content="2023-12-21T16:57:52-05:00" />
+<meta itemprop="wordCount" content="885">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Timing SDK operations"/>
+<meta name="twitter:description" content="How to perform basic instrumentation in the {{% alias sdk-go %}} to time SDK operations"/>
+
+
+
+
+<link rel="preload" href="/aws-sdk-go-v2/scss/main.min.87610f09204d68e51368928a578a8f99ecd38bf9a2435e6664f3dd133ddcdf44.css" as="style">
+<link href="/aws-sdk-go-v2/scss/main.min.87610f09204d68e51368928a578a8f99ecd38bf9a2435e6664f3dd133ddcdf44.css" rel="stylesheet" integrity="">
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/aws-sdk-go-v2/">
+		<span class="navbar-logo"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 304 182" style="enable-background:new 0 0 304 182"><style>.st0{fill:#fff}.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#f90}</style><g><path class="st0" d="M86.4 66.4c0 3.7.4 6.7 1.1 8.9.8 2.2 1.8 4.6 3.2 7.2.5.8.7 1.6.7 2.3.0 1-.6 2-1.9 3L83.2 92c-.9.6-1.8.9-2.6.9-1 0-2-.5-3-1.4C76.2 90 75 88.4 74 86.8c-1-1.7-2-3.6-3.1-5.9-7.8 9.2-17.6 13.8-29.4 13.8-8.4.0-15.1-2.4-20-7.2s-7.4-11.2-7.4-19.2c0-8.5 3-15.4 9.1-20.6s14.2-7.8 24.5-7.8c3.4.0 6.9.3 10.6.8s7.5 1.3 11.5 2.2v-7.3c0-7.6-1.6-12.9-4.7-16-3.2-3.1-8.6-4.6-16.3-4.6-3.5.0-7.1.4-10.8 1.3-3.7.9-7.3 2-10.8 3.4-1.6.7-2.8 1.1-3.5 1.3s-1.2.3-1.6.3c-1.4.0-2.1-1-2.1-3.1v-4.9c0-1.6.2-2.8.7-3.5.5-.7 1.4-1.4 2.8-2.1 3.5-1.8 7.7-3.3 12.6-4.5 4.9-1.3 10.1-1.9 15.6-1.9 11.9.0 20.6 2.7 26.2 8.1 5.5 5.4 8.3 13.6 8.3 24.6V66.4zM45.8 81.6c3.3.0 6.7-.6 10.3-1.8 3.6-1.2 6.8-3.4 9.5-6.4 1.6-1.9 2.8-4 3.4-6.4.6-2.4 1-5.3 1-8.7v-4.2c-2.9-.7-6-1.3-9.2-1.7-3.2-.4-6.3-.6-9.4-.6-6.7.0-11.6 1.3-14.9 4s-4.9 6.5-4.9 11.5c0 4.7 1.2 8.2 3.7 10.6C37.7 80.4 41.2 81.6 45.8 81.6zm80.3 10.8c-1.8.0-3-.3-3.8-1-.8-.6-1.5-2-2.1-3.9L96.7 10.2c-.6-2-.9-3.3-.9-4 0-1.6.8-2.5 2.4-2.5h9.8c1.9.0 3.2.3 3.9 1 .8.6 1.4 2 2 3.9l16.8 66.2 15.6-66.2c.5-2 1.1-3.3 1.9-3.9.8-.6 2.2-1 4-1h8c1.9.0 3.2.3 4 1 .8.6 1.5 2 1.9 3.9l15.8 67 17.3-67c.6-2 1.3-3.3 2-3.9.8-.6 2.1-1 3.9-1h9.3c1.6.0 2.5.8 2.5 2.5.0.5-.1 1-.2 1.6s-.3 1.4-.7 2.5l-24.1 77.3c-.6 2-1.3 3.3-2.1 3.9-.8.6-2.1 1-3.8 1h-8.6c-1.9.0-3.2-.3-4-1s-1.5-2-1.9-4L156 23l-15.4 64.4c-.5 2-1.1 3.3-1.9 4s-2.2 1-4 1H126.1zM254.6 95.1c-5.2.0-10.4-.6-15.4-1.8s-8.9-2.5-11.5-4c-1.6-.9-2.7-1.9-3.1-2.8-.4-.9-.6-1.9-.6-2.8v-5.1c0-2.1.8-3.1 2.3-3.1.6.0 1.2.1 1.8.3.6.2 1.5.6 2.5 1 3.4 1.5 7.1 2.7 11 3.5 4 .8 7.9 1.2 11.9 1.2 6.3.0 11.2-1.1 14.6-3.3s5.2-5.4 5.2-9.5c0-2.8-.9-5.1-2.7-7s-5.2-3.6-10.1-5.2L246 52c-7.3-2.3-12.7-5.7-16-10.2-3.3-4.4-5-9.3-5-14.5.0-4.2.9-7.9 2.7-11.1 1.8-3.2 4.2-6 7.2-8.2 3-2.3 6.4-4 10.4-5.2 4-1.2 8.2-1.7 12.6-1.7 2.2.0 4.5.1 6.7.4 2.3.3 4.4.7 6.5 1.1 2 .5 3.9 1 5.7 1.6 1.8.6 3.2 1.2 4.2 1.8 1.4.8 2.4 1.6 3 2.5.6.8.9 1.9.9 3.3v4.7c0 2.1-.8 3.2-2.3 3.2-.8.0-2.1-.4-3.8-1.2-5.7-2.6-12.1-3.9-19.2-3.9-5.7.0-10.2.9-13.3 2.8-3.1 1.9-4.7 4.8-4.7 8.9.0 2.8 1 5.2 3 7.1s5.7 3.8 11 5.5l14.2 4.5c7.2 2.3 12.4 5.5 15.5 9.6s4.6 8.8 4.6 14c0 4.3-.9 8.2-2.6 11.6-1.8 3.4-4.2 6.4-7.3 8.8-3.1 2.5-6.8 4.3-11.1 5.6C264.4 94.4 259.7 95.1 254.6 95.1z"/><g><path class="st1" d="M273.5 143.7c-32.9 24.3-80.7 37.2-121.8 37.2-57.6.0-109.5-21.3-148.7-56.7-3.1-2.8-.3-6.6 3.4-4.4 42.4 24.6 94.7 39.5 148.8 39.5 36.5.0 76.6-7.6 113.5-23.2C274.2 133.6 278.9 139.7 273.5 143.7z"/><path class="st1" d="M287.2 128.1c-4.2-5.4-27.8-2.6-38.5-1.3-3.2.4-3.7-2.4-.8-4.5 18.8-13.2 49.7-9.4 53.3-5 3.6 4.5-1 35.4-18.6 50.2-2.7 2.3-5.3 1.1-4.1-1.9C282.5 155.7 291.4 133.4 287.2 128.1z"/></g></g></svg></span><span class="font-weight-bold">AWS SDK for Go V2</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/aws-sdk-go-v2/docs/" ><span class="active">Developer Guide</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2" target="_blank" ><span>API Reference</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/aws/aws-sdk-go-v2" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block"><input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.f367ad73ebaf545fd290f98fd7fb18f5.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.f367ad73ebaf545fd290f98fd7fb18f5.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-aws-sdk-go-v2docs-li">
+  <a href="/aws-sdk-go-v2/docs/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-aws-sdk-go-v2docs"><span class="">Developer Guide</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsgetting-started-li">
+  <a href="/aws-sdk-go-v2/docs/getting-started/" title="Getting Started with the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsgetting-started"><span class="">Getting Started</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docsconfiguring-sdk-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/" title="Configuring the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsconfiguring-sdk"><span class="">Configuring the SDK</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkauth-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/auth/" title="Configuring Authentication" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkauth"><span class="">Authentication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" title="Configuring Client Endpoints" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints"><span class="">Endpoints</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/" title="Customizing the HTTP Client" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http"><span class="">HTTP Client</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdklogging-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/logging/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdklogging"><span class="">Logging</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkretries-timeouts-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/retries-timeouts/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkretries-timeouts"><span class="">Retries and Timeouts</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsmigrating-li">
+  <a href="/aws-sdk-go-v2/docs/migrating/" title="Migrating to the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsmigrating"><span class="">Migrating</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsmaking-requests-li">
+  <a href="/aws-sdk-go-v2/docs/making-requests/" title="Using the AWS SDK for Go V2 with AWS Services" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsmaking-requests"><span class="">Using AWS Services</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docshandling-errors-li">
+  <a href="/aws-sdk-go-v2/docs/handling-errors/" title="Handling Errors in the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docshandling-errors"><span class="">Handling Errors</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docssdk-utilities-li">
+  <a href="/aws-sdk-go-v2/docs/sdk-utilities/" title="Using the AWS SDK for Go V2 Utilities" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docssdk-utilities"><span class="">SDK Utilities</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docssdk-utilitiesrds-li">
+  <a href="/aws-sdk-go-v2/docs/sdk-utilities/rds/" title="Amazon RDS Utilities" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssdk-utilitiesrds"><span class="">Amazon RDS</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docssdk-utilitiescloudfront-li">
+  <a href="/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/" title="Amazon CloudFront Utilities" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssdk-utilitiescloudfront"><span class="">Amazon CloudFront</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docssdk-utilitiesec2-imds-li">
+  <a href="/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/" title="Amazon EC2 Instance Metadata Service" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssdk-utilitiesec2-imds"><span class="">Amazon EC2 IMDS</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docssdk-utilitiess3-li">
+  <a href="/aws-sdk-go-v2/docs/sdk-utilities/s3/" title="Amazon S3 Utilities" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssdk-utilitiess3"><span class="">Amazon S3</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsmiddleware-li">
+  <a href="/aws-sdk-go-v2/docs/middleware/" title="Customizing the AWS SDK for Go V2 Client Requests" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsmiddleware"><span class="">Middleware</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-aws-sdk-go-v2docsfaq-li">
+  <a href="/aws-sdk-go-v2/docs/faq/" title="Frequently Asked Questions" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsfaq"><span class="">FAQ / Troubleshooting</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-aws-sdk-go-v2docsfaqtiming-operations-li">
+  <a href="/aws-sdk-go-v2/docs/faq/timing-operations/" title="Timing SDK operations" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsfaqtiming-operations"><span class="td-sidebar-nav-active-item">Timing Operations</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsunit-testing-li">
+  <a href="/aws-sdk-go-v2/docs/unit-testing/" title="Unit Testing with the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsunit-testing"><span class="">Testing</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docscloud9-go-li">
+  <a href="/aws-sdk-go-v2/docs/cloud9-go/" title="Using AWS Cloud9 with the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docscloud9-go"><span class="">Using Cloud9 with the SDK</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docssecurity-li">
+  <a href="/aws-sdk-go-v2/docs/security/" title="Security for this AWS Product or Service" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docssecurity"><span class="">Security</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docssecuritycompliance-validation-li">
+  <a href="/aws-sdk-go-v2/docs/security/compliance-validation/" title="Compliance Validation for this AWS Product or Service" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssecuritycompliance-validation"><span class="">Compliance Validation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docssecurityiam-li">
+  <a href="/aws-sdk-go-v2/docs/security/iam/" title="Identity and Access Management for this AWS Product or Service" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssecurityiam"><span class="">Identity and Access Management</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docssecurityinfrastructure-security-li">
+  <a href="/aws-sdk-go-v2/docs/security/infrastructure-security/" title="Infrastructure Security for this AWS Product or Service" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssecurityinfrastructure-security"><span class="">Infrastructure Security</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docssecuritydisaster-recovery-resiliency-li">
+  <a href="/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/" title="Resilience for this AWS Product or Service" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssecuritydisaster-recovery-resiliency"><span class="">Resilience</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docssecuritydata-protection-li">
+  <a href="/aws-sdk-go-v2/docs/security/data-protection/" title="Data Protection in this AWS Product or Service" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssecuritydata-protection"><span class="">Data Protection</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docssecuritytls-li">
+  <a href="/aws-sdk-go-v2/docs/security/tls/" title="TLS Version in AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docssecuritytls"><span class="">TLS Version</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docscode-examples-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examples"><span class="">Code Examples</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplescloudwatch-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/cloudwatch/" title="Amazon CloudWatch Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplescloudwatch"><span class="">Amazon CloudWatch</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplescloudwatchcreatecustommetric-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/cloudwatch/createcustommetric/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplescloudwatchcreatecustommetric"><span class="">CreateCustomMetricv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplescloudwatchcreateenablemetricalarm-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/cloudwatch/createenablemetricalarm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplescloudwatchcreateenablemetricalarm"><span class="">CreateEnableMetricAlarmv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplescloudwatchdescribealarms-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/cloudwatch/describealarms/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplescloudwatchdescribealarms"><span class="">DescribeAlarmsv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplescloudwatchdisablealarm-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/cloudwatch/disablealarm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplescloudwatchdisablealarm"><span class="">DisableAlarmv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplescloudwatchlistmetrics-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/cloudwatch/listmetrics/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplescloudwatchlistmetrics"><span class="">ListMetricsv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplescloudwatchputevent-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/cloudwatch/putevent/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplescloudwatchputevent"><span class="">PutEventv2</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplesdynamodb-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/dynamodb/" title="Amazon DynamoDB Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesdynamodb"><span class="">Amazon DynamoDB</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesdynamodbdescribetable-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/dynamodb/describetable/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesdynamodbdescribetable"><span class="">DescribeTablev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesdynamodbscanitems-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/dynamodb/scanitems/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesdynamodbscanitems"><span class="">ScanItemsv2</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ec2/" title="Amazon EC2 Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2"><span class="">Amazon EC2</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2createimage-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ec2/createimage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2createimage"><span class="">CreateImagev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2createinstance-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ec2/createinstance/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2createinstance"><span class="">CreateInstancev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2describeinstances-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ec2/describeinstances/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2describeinstances"><span class="">DescribeInstancesv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2describevpcendpoints-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ec2/describevpcendpoints/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2describevpcendpoints"><span class="">DescribeVpcEndpointsv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2monitorinstances-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ec2/monitorinstances/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2monitorinstances"><span class="">MonitorInstancesv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2rebootinstances-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ec2/rebootinstances/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2rebootinstances"><span class="">RebootInstancesv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2startinstances-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ec2/startinstances/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2startinstances"><span class="">StartInstancesv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesec2stopinstances-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ec2/stopinstances/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesec2stopinstances"><span class="">StopInstancesv2</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-exampless3-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/" title="Amazon S3 Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3"><span class="">Amazon S3</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3copyobject-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/copyobject/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3copyobject"><span class="">CopyObjectv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3createbucket-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/createbucket/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3createbucket"><span class="">CreateBucketv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3deletebucket-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/deletebucket/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3deletebucket"><span class="">DeleteBucketv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3deleteobject-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/deleteobject/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3deleteobject"><span class="">DeleteObjectv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3generatepresignedurl-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/generatepresignedurl/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3generatepresignedurl"><span class="">GeneratePresignedURLv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3getbucketacl-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/getbucketacl/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3getbucketacl"><span class="">GetBucketAclv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3getobjectacl-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/getobjectacl/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3getobjectacl"><span class="">GetObjectAclv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3listbuckets-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/listbuckets/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3listbuckets"><span class="">ListBucketsv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3listobjects-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/listobjects/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3listobjects"><span class="">ListObjectsv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampless3putobject-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/s3/putobject/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampless3putobject"><span class="">PutObjectv2</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplessns-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sns/" title="Amazon SNS Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessns"><span class="">Amazon SNS</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessnscreatetopic-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sns/createtopic/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessnscreatetopic"><span class="">CreateTopicv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessnslistsubscriptions-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sns/listsubscriptions/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessnslistsubscriptions"><span class="">ListSubscriptionsv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessnslisttopics-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sns/listtopics/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessnslisttopics"><span class="">ListTopicsv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessnspublish-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sns/publish/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessnspublish"><span class="">Publishv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessnssubscribe-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sns/subscribe/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessnssubscribe"><span class="">Subscribev2</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplessqs-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/" title="Amazon SQS Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqs"><span class="">Amazon SQS</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqschangemsgvisibility-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/changemsgvisibility/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqschangemsgvisibility"><span class="">ChangeMsgVisibilityv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqsconfigurelpqueue-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/configurelpqueue/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqsconfigurelpqueue"><span class="">ConfigureLPQueuev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqscreatelpqueue-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/createlpqueue/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqscreatelpqueue"><span class="">CreateLPQueuev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqscreatequeue-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/createqueue/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqscreatequeue"><span class="">CreateQueuev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqsdeadletterqueue-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/deadletterqueue/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqsdeadletterqueue"><span class="">DeadLetterQueuev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqsdeletemessage-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/deletemessage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqsdeletemessage"><span class="">DeleteMessagev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqsdeletequeue-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/deletequeue/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqsdeletequeue"><span class="">DeleteQueuev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqsgetqueueurl-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/getqueueurl/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqsgetqueueurl"><span class="">GetQueueURLv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqslistqueues-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/listqueues/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqslistqueues"><span class="">ListQueuesv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqsreceivelpmessage-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/receivelpmessage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqsreceivelpmessage"><span class="">ReceiveLPMessagev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqsreceivemessage-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/receivemessage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqsreceivemessage"><span class="">ReceiveMessagev2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplessqssendmessage-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sqs/sendmessage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessqssendmessage"><span class="">SendMessagev2</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-exampleskms-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/kms/" title="AWS KMS Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampleskms"><span class="">AWS KMS</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampleskmscreatekey-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/kms/createkey/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampleskmscreatekey"><span class="">CreateKeyv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampleskmsdecryptdata-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/kms/decryptdata/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampleskmsdecryptdata"><span class="">DecryptDatav2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampleskmsencryptdata-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/kms/encryptdata/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampleskmsencryptdata"><span class="">EncryptDatav2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-exampleskmsreencryptdata-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/kms/reencryptdata/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-exampleskmsreencryptdata"><span class="">ReEncryptDatav2</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplessts-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sts/" title="AWS STS Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplessts"><span class="">AWS STS</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesstsassumerole-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/sts/assumerole/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesstsassumerole"><span class="">AssumeRolev2</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplesssm-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ssm/" title="AWS Systems Manager Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesssm"><span class="">AWS Systems Manager</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesssmdeleteparameter-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ssm/deleteparameter/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesssmdeleteparameter"><span class="">DeleteParameterv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesssmgetparameter-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ssm/getparameter/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesssmgetparameter"><span class="">GetParameterv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesssmputparameter-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/ssm/putparameter/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesssmputparameter"><span class="">PutParameterv2</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-aws-sdk-go-v2docscode-examplesiam-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/" title="IAM Examples" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiam"><span class="">IAM</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamaccesskeylastused-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/accesskeylastused/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamaccesskeylastused"><span class="">AccessKeyLastUsedv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamattachuserpolicy-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/attachuserpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamattachuserpolicy"><span class="">AttachUserPolicyv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamcreateaccesskey-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/createaccesskey/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamcreateaccesskey"><span class="">CreateAccessKeyv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamcreateaccountalias-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/createaccountalias/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamcreateaccountalias"><span class="">CreateAccountAliasv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamcreatepolicy-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/createpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamcreatepolicy"><span class="">CreatePolicyv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamcreateuser-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/createuser/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamcreateuser"><span class="">CreateUserv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamdeleteaccesskey-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/deleteaccesskey/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamdeleteaccesskey"><span class="">DeleteAccessKeyv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamdeleteaccountalias-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/deleteaccountalias/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamdeleteaccountalias"><span class="">DeleteAccountAliasv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamdeleteservercert-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/deleteservercert/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamdeleteservercert"><span class="">DeleteServerCertv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamdeleteuser-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/deleteuser/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamdeleteuser"><span class="">DeleteUserv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamdetachuserpolicy-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/detachuserpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamdetachuserpolicy"><span class="">DetachUserPolicyv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamgetpolicy-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/getpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamgetpolicy"><span class="">GetPolicyv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamgetservercert-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/getservercert/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamgetservercert"><span class="">GetServerCertv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamlistaccesskeys-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/listaccesskeys/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamlistaccesskeys"><span class="">ListAccessKeysv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamlistaccountaliases-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/listaccountaliases/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamlistaccountaliases"><span class="">ListAccountAliasesv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamlistadmins-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/listadmins/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamlistadmins"><span class="">ListAdminsv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamlistservercerts-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/listservercerts/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamlistservercerts"><span class="">ListServerCertsv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamlistusers-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/listusers/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamlistusers"><span class="">ListUsersv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamupdateaccesskey-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/updateaccesskey/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamupdateaccesskey"><span class="">UpdateAccessKeyv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamupdateservercert-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/updateservercert/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamupdateservercert"><span class="">UpdateServerCertv2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docscode-examplesiamupdateuser-li">
+  <a href="/aws-sdk-go-v2/docs/code-examples/iam/updateuser/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docscode-examplesiamupdateuser"><span class="">UpdateUserv2</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/aws/aws-sdk-go-v2/tree/documentation/content/en/docs/faq/timing-operations.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+  <a href="https://github.com/aws/aws-sdk-go-v2/edit/documentation/content/en/docs/faq/timing-operations.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/aws/aws-sdk-go-v2/new/documentation/content/en/docs/faq/timing-operations.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+  <a href="https://github.com/aws/aws-sdk-go-v2/issues/new?title=Timing%20SDK%20operations" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/aws/aws-sdk-go-v2/issues/new" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            
+
+
+
+
+            
+
+	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="https://aws.github.io/aws-sdk-go-v2/docs/">Developer Guide</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="https://aws.github.io/aws-sdk-go-v2/docs/faq/">FAQ / Troubleshooting</a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="https://aws.github.io/aws-sdk-go-v2/docs/faq/timing-operations/" aria-disabled="true" class="btn-link disabled">Timing Operations</a>
+  </li>
+  </ol>
+</nav>
+            
+<div class="td-content">
+	<h1>Timing SDK operations</h1>
+	<div class="lead">How to perform basic instrumentation in the AWS SDK for Go V2 to time SDK operations</div>
+	<header class="article-meta">
+		
+
+  
+    
+
+
+  
+    
+
+
+  
+
+		
+	</header>    
+	<p>When debugging timeout / latency issues in the SDK, it is critical to identify
+the components of the operation lifecycle which are taking more time to execute
+than expected. As a starting point, you will generally need to inspect the
+timing breakdown between the overall operation call and the HTTP call itself.</p>
+<p>The following sample program implements a basic instrumentation probe in terms
+of <code>smithy-go</code> middleware for SQS clients and demonstrates how it is used. The
+probe emits the following information for each operation call:</p>
+<ul>
+<li>AWS request ID</li>
+<li>service ID</li>
+<li>operation name</li>
+<li>operation invocation time</li>
+<li>http call time</li>
+</ul>
+<p>Each emitted message is prefixed with a unique (to a single operation)
+&ldquo;invocation ID&rdquo; which is set at the beginning of the handler stack.</p>
+<p>The entry point for instrumentation is exposed as <code>WithOperationTiming</code>, which
+is parameterized to accept a message handling function which will receive
+instrumentation &ldquo;events&rdquo; as formatted strings. <code>PrintfMSGHandler</code> is provided
+as a convenience which will simply dump messages to stdout.</p>
+<p>The service used here is interchangeable - ALL service client options accept
+<code>APIOptions</code> and an <code>HTTPClient</code> as configuration. For example,
+<code>WithOperationTiming</code> could instead be declared as:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">WithOperationTiming</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">msgHandler</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">WithOperationTiming</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">msgHandler</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// etc.
+</span></span></span></code></pre></div><p>If you change it, be sure to change the signature of the function it returns as
+well.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;sync&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">awsmiddleware</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws/middleware&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">awshttp</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws/transport/http&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/sqs&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/middleware&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">smithyrand</span> <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/rand&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// WithOperationTiming instruments an SQS client to dump timing information for
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// the following spans:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">//   - overall operation time
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">//   - HTTPClient call time
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">//
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// This instrumentation will also emit the request ID, service name, and
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// operation name for each invocation.
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">//
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// Accepts a message &#34;handler&#34; which is invoked with formatted messages to be
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// handled externally, you can use the declared PrintfMSGHandler to simply dump
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// these values to stdout.
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">WithOperationTiming</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">msgHandler</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">sqs</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">sqs</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87">append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">addTimingMiddlewares</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HTTPClient</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">timedHTTPClient</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">client</span><span style="color:#000;font-weight:bold">:</span>     <span style="color:#000">awshttp</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewBuildableClient</span><span style="color:#000;font-weight:bold">(),</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// PrintfMSGHandler writes messages to stdout.
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">PrintfMSGHandler</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">msg</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;%s\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">invokeIDKey</span> <span style="color:#204a87;font-weight:bold">struct</span><span style="color:#000;font-weight:bold">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">setInvokeID</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">id</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithStackValue</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">invokeIDKey</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#000">id</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">getInvokeID</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">id</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">_</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetStackValue</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">invokeIDKey</span><span style="color:#000;font-weight:bold">{}).(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">id</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// Records the current time, and returns a function to be called when the
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// target span of events is completed. The return function will emit the given
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// span name and time elapsed to the given message consumer.
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">timeSpan</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">name</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">consumer</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Now</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">elapsed</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Now</span><span style="color:#000;font-weight:bold">().</span><span style="color:#000">Sub</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">start</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">consumer</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Sprintf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;[%s] %s: %s&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">getInvokeID</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">name</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">elapsed</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">timedHTTPClient</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">client</span>     <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">awshttp</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BuildableClient</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">msgHandler</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">timedHTTPClient</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">Do</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">r</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">http</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Request</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">http</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Response</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">timeSpan</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">r</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#4e9a06">&#34;http&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">c</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">)()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">c</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Do</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">r</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">nil</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;inner client do: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">addInvokeIDMiddleware</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">msgHandler</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">addInvokeIDMiddleware</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ID</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#4e9a06">&#34;addInvokeID&#34;</span> <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">addInvokeIDMiddleware</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeHandler</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">out</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">md</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">id</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">smithyrand</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewUUID</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">smithyrand</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Reader</span><span style="color:#000;font-weight:bold">).</span><span style="color:#000">GetUUID</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">md</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;new uuid: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">setInvokeID</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">id</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">timeOperationMiddleware</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">msgHandler</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">timeOperationMiddleware</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ID</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#4e9a06">&#34;timeOperation&#34;</span> <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">m</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">timeOperationMiddleware</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeHandler</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">timeSpan</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;operation&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">m</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">)()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">emitMetadataMiddleware</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">msgHandler</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">emitMetadataMiddleware</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ID</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#4e9a06">&#34;emitMetadata&#34;</span> <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">m</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">emitMetadataMiddleware</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeHandler</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">md</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">invokeID</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">getInvokeID</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">requestID</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">_</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">awsmiddleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetRequestIDMetadata</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">md</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">service</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">awsmiddleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetServiceID</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">operation</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">awsmiddleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetOperationName</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">m</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Sprintf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">`[%s] requestID = &#34;%s&#34;`</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">invokeID</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">requestID</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">m</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Sprintf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">`[%s] service   = &#34;%s&#34;`</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">invokeID</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">service</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">m</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Sprintf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">`[%s] operation = &#34;%s&#34;`</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">invokeID</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">operation</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">out</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">md</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">addTimingMiddlewares</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">mh</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Stack</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Stack</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Initialize</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">timeOperationMiddleware</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">mh</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Before</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;add time operation middleware: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Initialize</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">addInvokeIDMiddleware</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">mh</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Before</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;add invoke id middleware: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Initialize</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Insert</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">emitMetadataMiddleware</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">msgHandler</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">mh</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#4e9a06">&#34;RegisterServiceMetadata&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">After</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;add emit metadata middleware: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatal</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;load default config: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">svc</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">sqs</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">WithOperationTiming</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">PrintfMSGHandler</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">wg</span> <span style="color:#000">sync</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WaitGroup</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span> <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#0000cf;font-weight:bold">6</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span><span style="color:#ce5c00;font-weight:bold">++</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">wg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">go</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">defer</span> <span style="color:#000">wg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Done</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ListQueues</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#204a87;font-weight:bold">nil</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;list queues: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">wg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Wait</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><p>A sample output of this program:</p>
+<pre tabindex="0"><code>[e9a801bb-c51d-45c8-8e9f-a202e263fde8] http: 192.24067ms
+[e9a801bb-c51d-45c8-8e9f-a202e263fde8] requestID = &#34;dbee3082-96a3-5b23-adca-6d005696fa94&#34;
+[e9a801bb-c51d-45c8-8e9f-a202e263fde8] service   = &#34;SQS&#34;
+[e9a801bb-c51d-45c8-8e9f-a202e263fde8] operation = &#34;ListQueues&#34;
+[e9a801bb-c51d-45c8-8e9f-a202e263fde8] operation: 193.098393ms
+[0740f0e0-953e-4328-94fc-830a5052e763] http: 195.185732ms
+[0740f0e0-953e-4328-94fc-830a5052e763] requestID = &#34;48b301fa-fc9f-5f1f-9007-5c783caa9322&#34;
+[0740f0e0-953e-4328-94fc-830a5052e763] service   = &#34;SQS&#34;
+[0740f0e0-953e-4328-94fc-830a5052e763] operation = &#34;ListQueues&#34;
+[0740f0e0-953e-4328-94fc-830a5052e763] operation: 195.725491ms
+[c0589832-f351-4cc7-84f1-c656eb79dbd7] http: 200.52383ms
+[444030d0-6743-4de5-bd91-bc40b2b94c55] http: 200.525919ms
+[c0589832-f351-4cc7-84f1-c656eb79dbd7] requestID = &#34;4a73cc82-b47b-56e1-b327-9100744e1b1f&#34;
+[c0589832-f351-4cc7-84f1-c656eb79dbd7] service   = &#34;SQS&#34;
+[c0589832-f351-4cc7-84f1-c656eb79dbd7] operation = &#34;ListQueues&#34;
+[c0589832-f351-4cc7-84f1-c656eb79dbd7] operation: 201.214365ms
+[444030d0-6743-4de5-bd91-bc40b2b94c55] requestID = &#34;ca1523ed-1879-5610-bf5d-7e6fd84cabee&#34;
+[444030d0-6743-4de5-bd91-bc40b2b94c55] service   = &#34;SQS&#34;
+[444030d0-6743-4de5-bd91-bc40b2b94c55] operation = &#34;ListQueues&#34;
+[444030d0-6743-4de5-bd91-bc40b2b94c55] operation: 201.197071ms
+[079e8dbd-bb93-43ab-89e5-a7bb392b86a5] http: 206.449568ms
+[12b2b39d-df86-4648-a436-ff0482d13340] http: 206.526603ms
+[079e8dbd-bb93-43ab-89e5-a7bb392b86a5] requestID = &#34;64229710-b552-56ed-8f96-ca927567ec7b&#34;
+[079e8dbd-bb93-43ab-89e5-a7bb392b86a5] service   = &#34;SQS&#34;
+[079e8dbd-bb93-43ab-89e5-a7bb392b86a5] operation = &#34;ListQueues&#34;
+[079e8dbd-bb93-43ab-89e5-a7bb392b86a5] operation: 207.252357ms
+[12b2b39d-df86-4648-a436-ff0482d13340] requestID = &#34;76d9cbc0-07aa-58aa-98b7-9642c79f9851&#34;
+[12b2b39d-df86-4648-a436-ff0482d13340] service   = &#34;SQS&#34;
+[12b2b39d-df86-4648-a436-ff0482d13340] operation = &#34;ListQueues&#34;
+[12b2b39d-df86-4648-a436-ff0482d13340] operation: 207.360621ms
+</code></pre>
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">
+  Last modified December 21, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/3f113799524a997bf4d686c7cbc556143b968aeb">docs: add FAQ/troubleshooting and operation timing guide (#2434) (3f11379952)</a>
+</div>
+
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Blog" aria-label="Blog">
+    <a class="text-white" target="_blank" rel="noopener" href="https://aws.amazon.com/blogs/developer/category/developer-tools/aws-sdk-for-go/" aria-label="Blog">
+      <i class="fa fa-rss"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/aws/aws-sdk-go-v2" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2023 Amazon Web Services, Inc. or its affiliates. All Rights Reserved</small>
+        
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+    integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA=="
+    crossorigin="anonymous"></script>
+
+
+
+
+
+<script src='/js/tabpane-persist.js'></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/aws-sdk-go-v2/js/main.min.91798a335c881f1b6b805085ba4aa22d1dbd2b0b18d105d05189fa104ddae350.js" integrity="sha256-kXmKM1yIHxtrgFCFukqiLR29KwsY0QXQUYn6EE3a41A=" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>
