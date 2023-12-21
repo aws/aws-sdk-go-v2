@@ -233,14 +233,21 @@ if err != nil {
 For more information on error handling, including how to inspect for specific error types, see the
 [Handling Errors]({{% ref "handling-errors.md" %}}) documentation.
 
-#### Responses with io.ReadCloser
+#### Responses with `io.ReadCloser`
 
-Some API operations return a response struct that contain an output member that is an `io.ReadCloser`. If you're making
-requests with these operations, always be sure to call `io.ReadCloser` member's `Close` method after you've completed
-reading the content.
+Some API operations return a response struct that contain an output member that
+is an `io.ReadCloser`. This will be the case for API operations that expose
+some element of their output in the body of the HTTP response itself.
 
-For example {{% alias service=S3 %}} `GetObject` operation returns a response
-whose `Body` member is an `io.ReadCloser`:
+For example, {{% alias service=S3 %}} `GetObject` operation returns a response
+whose `Body` member is an `io.ReadCloser` for accessing the object payload.
+
+{{% pageinfo color="warning" %}}
+**You MUST ALWAYS `Close()` any `io.ReadCloser` output members, regardless of
+whether you've consumed its content. Failure to do so can leak resources and
+potentially create issues with reading response bodies for operations called in
+the future.**
+{{% /pageinfo %}}
 
 ```go
 resp, err := s3svc.GetObject(context.TODO(), &s3.GetObjectInput{...})

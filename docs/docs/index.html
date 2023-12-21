@@ -20,10 +20,8 @@
 <link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/android-192x192.png" sizes="192x192">
 
 <title>Developer Guide | AWS SDK for Go V2</title>
-<meta name="description" content="
-
-
-On October 31, 2023, the AWS SDK for Go (v1 and v2) will start following the Go release policy cadence. See the blog post for more information. …">
+<meta name="description" content="Welcome to the AWS SDK for Go. The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go
+applications that use AWS …">
 <meta property="og:title" content="Developer Guide" />
 <meta property="og:description" content="The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go applications that use AWS services." />
 <meta property="og:type" content="website" />
@@ -103,7 +101,7 @@ On October 31, 2023, the AWS SDK for Go (v1 and v2) will start following the Go 
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.810a5299d837b395cdd69648bfec2e99.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.ba2b7a89f1555398e1c5839c9aee3bc1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +123,7 @@ On October 31, 2023, the AWS SDK for Go (v1 and v2) will start following the Go 
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.810a5299d837b395cdd69648bfec2e99.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.ba2b7a89f1555398e1c5839c9aee3bc1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -143,7 +141,9 @@ On October 31, 2023, the AWS SDK for Go (v1 and v2) will start following the Go 
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docsconfiguring-sdk-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/" title="Configuring the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsconfiguring-sdk"><span class="">Configuring the SDK</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkauth-li">
+  <a href="/aws-sdk-go-v2/docs/configuring-sdk/auth/" title="Configuring Authentication" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkauth"><span class="">Authentication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" title="Configuring Client Endpoints" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints"><span class="">Endpoints</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http-li">
   <a href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/" title="Customizing the HTTP Client" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http"><span class="">HTTP Client</span></a>
@@ -174,6 +174,13 @@ On October 31, 2023, the AWS SDK for Go (v1 and v2) will start following the Go 
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsmiddleware-li">
   <a href="/aws-sdk-go-v2/docs/middleware/" title="Customizing the AWS SDK for Go V2 Client Requests" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsmiddleware"><span class="">Middleware</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-aws-sdk-go-v2docsfaq-li">
+  <a href="/aws-sdk-go-v2/docs/faq/" title="Frequently Asked Questions" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-aws-sdk-go-v2docsfaq"><span class="">FAQ / Troubleshooting</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-aws-sdk-go-v2docsfaqtiming-operations-li">
+  <a href="/aws-sdk-go-v2/docs/faq/timing-operations/" title="Timing SDK operations" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsfaqtiming-operations"><span class="">Timing Operations</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docsunit-testing-li">
   <a href="/aws-sdk-go-v2/docs/unit-testing/" title="Unit Testing with the AWS SDK for Go V2" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-aws-sdk-go-v2docsunit-testing"><span class="">Testing</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-aws-sdk-go-v2docscloud9-go-li">
@@ -479,14 +486,7 @@ On October 31, 2023, the AWS SDK for Go (v1 and v2) will start following the Go 
 
 		
 	</header>
-	
-
-<div class="pageinfo pageinfo-warning">
-<p>On October 31, 2023, the AWS SDK for Go (v1 and v2) will start following the Go <a href="https://go.dev/doc/devel/release#policy">release policy</a> cadence. See the <a href="https://aws.amazon.com/blogs/developer/aws-sdk-for-go-aligns-with-go-release-policy-on-supported-runtimes/">blog post</a> for more information.</p>
-
-</div>
-
-<p>Welcome to the AWS SDK for Go. The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go
+	<p>Welcome to the AWS SDK for Go. The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go
 applications that use AWS services, such as Amazon Elastic Compute Cloud (Amazon EC2) and Amazon Simple Storage
 Service (Amazon S3).</p>
 <p>The SDK removes the complexity of coding directly against a web service interface. It hides a lot of the lower-level
@@ -573,6 +573,14 @@ following in the AWS SDKs and Tools Shared Configuration and Credentials Referen
             
             <div class="entry">
                 <h5>
+                    <a href="/aws-sdk-go-v2/docs/faq/">Frequently Asked Questions</a>
+                </h5>
+                <p>Answers to some commonly-asked questions about the AWS SDK for Go V2</p>
+            </div>
+        
+            
+            <div class="entry">
+                <h5>
                     <a href="/aws-sdk-go-v2/docs/unit-testing/">Unit Testing with the AWS SDK for Go V2</a>
                 </h5>
                 <p>How to mock the AWS SDK for Go V2 when unit testing your application.</p>
@@ -608,7 +616,7 @@ following in the AWS SDKs and Tools Shared Configuration and Credentials Referen
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified June 29, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/8f349923c59f3887dcfd96da1653ed7ad8f68128">add Go runtime policy warning (#2150) (8f349923c5)</a>
+  Last modified December 19, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/33023c3b7f8f134c28556c88e11cc238d83fde0c">true up migration guide: iface, endpoints, auth, request customization, s3crypto (#2431) (33023c3b7f)</a>
 </div>
 
 </div>
