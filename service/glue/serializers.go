@@ -11785,6 +11785,17 @@ func awsAwsjson11_serializeDocumentActionList(v []types.Action, value smithyjson
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAdditionalContextMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAdditionalOptions(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17569,6 +17580,40 @@ func awsAwsjson11_serializeDocumentPublicKeysList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentQuerySessionContext(v *types.QuerySessionContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalContext != nil {
+		ok := object.Key("AdditionalContext")
+		if err := awsAwsjson11_serializeDocumentAdditionalContextMap(v.AdditionalContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClusterId != nil {
+		ok := object.Key("ClusterId")
+		ok.String(*v.ClusterId)
+	}
+
+	if v.QueryAuthorizationId != nil {
+		ok := object.Key("QueryAuthorizationId")
+		ok.String(*v.QueryAuthorizationId)
+	}
+
+	if v.QueryId != nil {
+		ok := object.Key("QueryId")
+		ok.String(*v.QueryId)
+	}
+
+	if v.QueryStartTime != nil {
+		ok := object.Key("QueryStartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.QueryStartTime))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRecipe(v *types.Recipe, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19627,6 +19672,23 @@ func awsAwsjson11_serializeDocumentStringList(v []string, value smithyjson.Value
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSupportedDialect(v *types.SupportedDialect, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Dialect) > 0 {
+		ok := object.Key("Dialect")
+		ok.String(string(v.Dialect))
+	}
+
+	if v.DialectVersion != nil {
+		ok := object.Key("DialectVersion")
+		ok.String(*v.DialectVersion)
+	}
+
 	return nil
 }
 
@@ -23597,6 +23659,18 @@ func awsAwsjson11_serializeOpDocumentGetUnfilteredPartitionMetadataInput(v *GetU
 		}
 	}
 
+	if v.QuerySessionContext != nil {
+		ok := object.Key("QuerySessionContext")
+		if err := awsAwsjson11_serializeDocumentQuerySessionContext(v.QuerySessionContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
+	}
+
 	if v.SupportedPermissionTypes != nil {
 		ok := object.Key("SupportedPermissionTypes")
 		if err := awsAwsjson11_serializeDocumentPermissionTypeList(v.SupportedPermissionTypes, ok); err != nil {
@@ -23648,6 +23722,18 @@ func awsAwsjson11_serializeOpDocumentGetUnfilteredPartitionsMetadataInput(v *Get
 		ok.String(*v.NextToken)
 	}
 
+	if v.QuerySessionContext != nil {
+		ok := object.Key("QuerySessionContext")
+		if err := awsAwsjson11_serializeDocumentQuerySessionContext(v.QuerySessionContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
+	}
+
 	if v.Segment != nil {
 		ok := object.Key("Segment")
 		if err := awsAwsjson11_serializeDocumentSegment(v.Segment, ok); err != nil {
@@ -23694,6 +23780,32 @@ func awsAwsjson11_serializeOpDocumentGetUnfilteredTableMetadataInput(v *GetUnfil
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.Permissions != nil {
+		ok := object.Key("Permissions")
+		if err := awsAwsjson11_serializeDocumentPermissionList(v.Permissions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QuerySessionContext != nil {
+		ok := object.Key("QuerySessionContext")
+		if err := awsAwsjson11_serializeDocumentQuerySessionContext(v.QuerySessionContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
+	}
+
+	if v.SupportedDialect != nil {
+		ok := object.Key("SupportedDialect")
+		if err := awsAwsjson11_serializeDocumentSupportedDialect(v.SupportedDialect, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SupportedPermissionTypes != nil {

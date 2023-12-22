@@ -52,6 +52,14 @@ type GetTemporaryGlueTableCredentialsInput struct {
 	// permissions on the requested resource(s).
 	Permissions []types.Permission
 
+	// A structure used as a protocol between query engines and Lake Formation or
+	// Glue. Contains both a Lake Formation generated authorization identifier and
+	// information from the request's authorization context.
+	QuerySessionContext *types.QuerySessionContext
+
+	// The Amazon S3 path for the table.
+	S3Path *string
+
 	// A list of supported permission types for the table. Valid values are
 	// COLUMN_PERMISSION and CELL_FILTER_PERMISSION .
 	SupportedPermissionTypes []types.PermissionType
@@ -72,6 +80,9 @@ type GetTemporaryGlueTableCredentialsOutput struct {
 
 	// The session token for the temporary credentials.
 	SessionToken *string
+
+	// The Amazon S3 path for the temporary credentials.
+	VendedS3Path []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -413,6 +413,7 @@ func (e *FederationSourceException) ErrorCode() string {
 }
 func (e *FederationSourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A federation source failed, but the operation may be retried.
 type FederationSourceRetryableException struct {
 	Message *string
 

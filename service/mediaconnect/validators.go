@@ -310,6 +310,26 @@ func (m *validateOpDescribeFlow) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFlowSourceMetadata struct {
+}
+
+func (*validateOpDescribeFlowSourceMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFlowSourceMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFlowSourceMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFlowSourceMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeGateway struct {
 }
 
@@ -928,6 +948,10 @@ func addOpDescribeBridgeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFlow{}, middleware.After)
+}
+
+func addOpDescribeFlowSourceMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFlowSourceMetadata{}, middleware.After)
 }
 
 func addOpDescribeGatewayValidationMiddleware(stack *middleware.Stack) error {
@@ -2034,6 +2058,21 @@ func validateOpDescribeFlowInput(v *DescribeFlowInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeFlowInput"}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFlowSourceMetadataInput(v *DescribeFlowSourceMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFlowSourceMetadataInput"}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
 	}

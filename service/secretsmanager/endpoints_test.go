@@ -1083,7 +1083,7 @@ func TestEndpointCase27(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://secretsmanager-fips.us-east-1.api.aws")
+	uri, _ := url.Parse("https://secretsmanager-fips.us-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -1122,7 +1122,7 @@ func TestEndpointCase28(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://secretsmanager.us-east-1.api.aws")
+	uri, _ := url.Parse("https://secretsmanager.us-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -1317,7 +1317,7 @@ func TestEndpointCase33(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://secretsmanager.cn-north-1.api.amazonwebservices.com.cn")
+	uri, _ := url.Parse("https://secretsmanager.cn-north-1.amazonaws.com.cn")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -1512,7 +1512,7 @@ func TestEndpointCase38(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://secretsmanager-fips.us-gov-east-1.api.aws")
+	uri, _ := url.Parse("https://secretsmanager-fips.us-gov-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -1551,7 +1551,7 @@ func TestEndpointCase39(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://secretsmanager.us-gov-east-1.api.aws")
+	uri, _ := url.Parse("https://secretsmanager.us-gov-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,

@@ -1,0 +1,8 @@
+{
+    "id": "58ac0e6b-be25-48f7-b94b-c7220d56a265",
+    "type": "feature",
+    "description": "Added additional examples for some operations.",
+    "modules": [
+        "service/s3"
+    ]
+}

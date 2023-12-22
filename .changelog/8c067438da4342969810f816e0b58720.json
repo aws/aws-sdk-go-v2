@@ -1,0 +1,8 @@
+{
+    "id": "8c067438-da43-4296-9810-f816e0b58720",
+    "type": "feature",
+    "description": "This release adds additional configurations for Query Session Context on the following APIs: GetUnfilteredTableMetadata, GetUnfilteredPartitionMetadata, GetUnfilteredPartitionsMetadata.",
+    "modules": [
+        "service/glue"
+    ]
+}

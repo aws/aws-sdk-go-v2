@@ -94,6 +94,15 @@ type GetUnfilteredPartitionsMetadataInput struct {
 	// partitions.
 	NextToken *string
 
+	// A structure used as a protocol between query engines and Lake Formation or
+	// Glue. Contains both a Lake Formation generated authorization identifier and
+	// information from the request's authorization context.
+	QuerySessionContext *types.QuerySessionContext
+
+	// Specified only if the base tables belong to a different Amazon Web Services
+	// Region.
+	Region *string
+
 	// The segment of the table's partitions to scan in this request.
 	Segment *types.Segment
 

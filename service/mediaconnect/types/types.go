@@ -781,6 +781,22 @@ type FmtpRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The frame resolution used by the video stream.
+type FrameResolution struct {
+
+	// The number of pixels in the height of the video frame.
+	//
+	// This member is required.
+	FrameHeight *int32
+
+	// The number of pixels in the width of the video frame.
+	//
+	// This member is required.
+	FrameWidth *int32
+
+	noSmithyDocumentSerde
+}
+
 // The settings for a gateway, including its networks.
 type Gateway struct {
 
@@ -1795,6 +1811,82 @@ type Transport struct {
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi and SRT caller-based streams.
 	StreamId *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of the transport stream in the current flow's source.
+type TransportMediaInfo struct {
+
+	// The list of transport stream programs in the current flow's source.
+	//
+	// This member is required.
+	Programs []TransportStreamProgram
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of an elementary transport stream.
+type TransportStream struct {
+
+	// The Packet ID (PID) as it is reported in the Program Map Table.
+	//
+	// This member is required.
+	Pid *int32
+
+	// The Stream Type as it is reported in the Program Map Table.
+	//
+	// This member is required.
+	StreamType *string
+
+	// The number of channels in the audio stream.
+	Channels *int32
+
+	// The codec used by the stream.
+	Codec *string
+
+	// The frame rate used by the video stream.
+	FrameRate *string
+
+	// The frame resolution used by the video stream.
+	FrameResolution *FrameResolution
+
+	// The sample rate used by the audio stream.
+	SampleRate *int32
+
+	// The sample bit size used by the audio stream.
+	SampleSize *int32
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of a single transport stream program.
+type TransportStreamProgram struct {
+
+	// The Program Clock Reference (PCR) Packet ID (PID) as it is reported in the
+	// Program Association Table.
+	//
+	// This member is required.
+	PcrPid *int32
+
+	// The program number as it is reported in the Program Association Table.
+	//
+	// This member is required.
+	ProgramNumber *int32
+
+	// The program Packet ID (PID) as it is reported in the Program Association Table.
+	//
+	// This member is required.
+	ProgramPid *int32
+
+	// The list of elementary transport streams in the program. The list includes
+	// video, audio, and data streams.
+	//
+	// This member is required.
+	Streams []TransportStream
+
+	// The program name as it is reported in the Program Association Table.
+	ProgramName *string
 
 	noSmithyDocumentSerde
 }

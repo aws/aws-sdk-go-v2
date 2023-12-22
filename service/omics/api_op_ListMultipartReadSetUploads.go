@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all multipart read set uploads and their statuses.
+// Lists multipart read set uploads and for in progress uploads. Once the upload
+// is completed, a read set is created and the upload will no longer be returned in
+// the respone.
 func (c *Client) ListMultipartReadSetUploads(ctx context.Context, params *ListMultipartReadSetUploadsInput, optFns ...func(*Options)) (*ListMultipartReadSetUploadsOutput, error) {
 	if params == nil {
 		params = &ListMultipartReadSetUploadsInput{}

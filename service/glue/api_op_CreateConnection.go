@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a connection definition in the Data Catalog.
+// Creates a connection definition in the Data Catalog. Connections used for
+// creating federated resources require the IAM glue:PassConnection permission.
 func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionInput, optFns ...func(*Options)) (*CreateConnectionOutput, error) {
 	if params == nil {
 		params = &CreateConnectionInput{}

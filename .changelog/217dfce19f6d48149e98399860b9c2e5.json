@@ -1,0 +1,8 @@
+{
+    "id": "217dfce1-9f6d-4814-9e98-399860b9c2e5",
+    "type": "feature",
+    "description": "Update endpoint rules and examples.",
+    "modules": [
+        "service/secretsmanager"
+    ]
+}

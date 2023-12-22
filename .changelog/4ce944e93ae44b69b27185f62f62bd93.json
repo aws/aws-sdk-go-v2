@@ -1,0 +1,8 @@
+{
+    "id": "4ce944e9-3ae4-4b69-b271-85f62f62bd93",
+    "type": "feature",
+    "description": "Adding Claude 2.1 support to Bedrock Agents",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

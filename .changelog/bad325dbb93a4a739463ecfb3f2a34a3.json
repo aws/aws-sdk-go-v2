@@ -1,0 +1,8 @@
+{
+    "id": "bad325db-b93a-4a73-9463-ecfb3f2a34a3",
+    "type": "feature",
+    "description": "This release adds additional configurations on GetTemporaryGlueTableCredentials for Query Session Context.",
+    "modules": [
+        "service/lakeformation"
+    ]
+}

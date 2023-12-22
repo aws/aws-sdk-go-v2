@@ -61442,6 +61442,29 @@ func awsAwsjson11_deserializeOpDocumentGetUnfilteredTableMetadataOutput(v **GetU
 				sv.IsRegisteredWithLakeFormation = jtv
 			}
 
+		case "Permissions":
+			if err := awsAwsjson11_deserializeDocumentPermissionList(&sv.Permissions, value); err != nil {
+				return err
+			}
+
+		case "QueryAuthorizationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HashString to be of type string, got %T instead", value)
+				}
+				sv.QueryAuthorizationId = ptr.String(jtv)
+			}
+
+		case "ResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnString to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
 		case "Table":
 			if err := awsAwsjson11_deserializeDocumentTable(&sv.Table, value); err != nil {
 				return err

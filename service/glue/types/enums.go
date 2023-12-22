@@ -2085,6 +2085,26 @@ func (UpdateCatalogBehavior) Values() []UpdateCatalogBehavior {
 	}
 }
 
+type ViewDialect string
+
+// Enum values for ViewDialect
+const (
+	ViewDialectRedshift ViewDialect = "REDSHIFT"
+	ViewDialectAthena   ViewDialect = "ATHENA"
+	ViewDialectSpark    ViewDialect = "SPARK"
+)
+
+// Values returns all known values for ViewDialect. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ViewDialect) Values() []ViewDialect {
+	return []ViewDialect{
+		"REDSHIFT",
+		"ATHENA",
+		"SPARK",
+	}
+}
+
 type WorkerType string
 
 // Enum values for WorkerType

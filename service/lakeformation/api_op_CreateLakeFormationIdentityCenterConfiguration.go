@@ -38,7 +38,7 @@ type CreateLakeFormationIdentityCenterConfigurationInput struct {
 	CatalogId *string
 
 	// A list of the account IDs of Amazon Web Services accounts of third-party
-	// applications that are allowed to to access data managed by Lake Formation.
+	// applications that are allowed to access data managed by Lake Formation.
 	ExternalFiltering *types.ExternalFilteringConfiguration
 
 	// The ARN of the IAM Identity Center instance for which the operation will be

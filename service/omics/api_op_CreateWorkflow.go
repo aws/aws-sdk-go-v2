@@ -60,7 +60,7 @@ type CreateWorkflowInput struct {
 	// A parameter template for the workflow.
 	ParameterTemplate map[string]types.WorkflowParameter
 
-	// A storage capacity for the workflow in gigabytes.
+	// A storage capacity for the workflow in gibibytes.
 	StorageCapacity *int32
 
 	// Tags for the workflow.

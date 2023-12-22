@@ -2520,6 +2520,18 @@ func awsRestjson1_serializeOpDocumentGetTemporaryGlueTableCredentialsInput(v *Ge
 		}
 	}
 
+	if v.QuerySessionContext != nil {
+		ok := object.Key("QuerySessionContext")
+		if err := awsRestjson1_serializeDocumentQuerySessionContext(v.QuerySessionContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3Path != nil {
+		ok := object.Key("S3Path")
+		ok.String(*v.S3Path)
+	}
+
 	if v.SupportedPermissionTypes != nil {
 		ok := object.Key("SupportedPermissionTypes")
 		if err := awsRestjson1_serializeDocumentPermissionTypeList(v.SupportedPermissionTypes, ok); err != nil {
@@ -4712,6 +4724,17 @@ func awsRestjson1_serializeOpDocumentUpdateTableStorageOptimizerInput(v *UpdateT
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdditionalContextMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAddObjectInput(v *types.AddObjectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5397,6 +5420,40 @@ func awsRestjson1_serializeDocumentQueryPlanningContext(v *types.QueryPlanningCo
 	if v.TransactionId != nil {
 		ok := object.Key("TransactionId")
 		ok.String(*v.TransactionId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuerySessionContext(v *types.QuerySessionContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalContext != nil {
+		ok := object.Key("AdditionalContext")
+		if err := awsRestjson1_serializeDocumentAdditionalContextMap(v.AdditionalContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClusterId != nil {
+		ok := object.Key("ClusterId")
+		ok.String(*v.ClusterId)
+	}
+
+	if v.QueryAuthorizationId != nil {
+		ok := object.Key("QueryAuthorizationId")
+		ok.String(*v.QueryAuthorizationId)
+	}
+
+	if v.QueryId != nil {
+		ok := object.Key("QueryId")
+		ok.String(*v.QueryId)
+	}
+
+	if v.QueryStartTime != nil {
+		ok := object.Key("QueryStartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.QueryStartTime))
 	}
 
 	return nil

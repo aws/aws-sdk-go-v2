@@ -4326,6 +4326,11 @@ func awsRestjson1_deserializeOpDocumentGetTemporaryGlueTableCredentialsOutput(v 
 				sv.SessionToken = ptr.String(jtv)
 			}
 
+		case "VendedS3Path":
+			if err := awsRestjson1_deserializeDocumentPathStringList(&sv.VendedS3Path, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -10275,6 +10280,42 @@ func awsRestjson1_deserializeDocumentPartitionValuesList(v *[]string, value inte
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected PartitionValueString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPathStringList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PathString to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
