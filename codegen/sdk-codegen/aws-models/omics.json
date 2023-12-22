@@ -2459,7 +2459,7 @@
                 "storageCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A storage capacity for the workflow in gigabytes.</p>",
+                        "smithy.api#documentation": "<p>A storage capacity for the workflow in gibibytes.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 100000
@@ -8323,7 +8323,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list multipart read set uploads",
-                "smithy.api#documentation": "<p>\n      Lists all multipart read set uploads and their statuses. \n    </p>",
+                "smithy.api#documentation": "<p>\n      Lists multipart read set uploads and for in progress uploads. Once the upload is completed, a read set is created and the upload will no longer be returned in the respone.\n    </p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },

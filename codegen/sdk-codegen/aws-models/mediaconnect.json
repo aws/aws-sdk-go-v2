@@ -2523,6 +2523,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mediaconnect#DescribeFlowSourceMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediaconnect#DescribeFlowSourceMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediaconnect#DescribeFlowSourceMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediaconnect#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Displays details of the flow's source stream. The response contains information about the contents of the stream and its programs.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/flows/{FlowArn}/source-metadata",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediaconnect#DescribeFlowSourceMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "FlowArn": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Amazon Resource Name (ARN) of the flow.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mediaconnect#DescribeFlowSourceMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "FlowArn": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the flow that DescribeFlowSourceMetadata was performed on.",
+                        "smithy.api#jsonName": "flowArn"
+                    }
+                },
+                "Messages": {
+                    "target": "com.amazonaws.mediaconnect#__listOfMessageDetail",
+                    "traits": {
+                        "smithy.api#documentation": "Provides a status code and message regarding issues found with the flow source metadata.",
+                        "smithy.api#jsonName": "messages"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.mediaconnect#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "The timestamp of the most recent change in metadata for this flow’s source.",
+                        "smithy.api#jsonName": "timestamp"
+                    }
+                },
+                "TransportMediaInfo": {
+                    "target": "com.amazonaws.mediaconnect#TransportMediaInfo",
+                    "traits": {
+                        "smithy.api#jsonName": "transportMediaInfo"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.mediaconnect#DescribeGateway": {
             "type": "operation",
             "input": {
@@ -3477,6 +3565,32 @@
                 "smithy.api#documentation": "Exception raised by AWS Elemental MediaConnect. See the error message and documentation for the operation for more information on the cause of this exception.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.mediaconnect#FrameResolution": {
+            "type": "structure",
+            "members": {
+                "FrameHeight": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The number of pixels in the height of the video frame.",
+                        "smithy.api#jsonName": "frameHeight",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FrameWidth": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The number of pixels in the width of the video frame.",
+                        "smithy.api#jsonName": "frameWidth",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The frame resolution used by the video stream."
             }
         },
         "com.amazonaws.mediaconnect#Gateway": {
@@ -5090,6 +5204,9 @@
                 },
                 {
                     "target": "com.amazonaws.mediaconnect#DescribeFlow"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#DescribeFlowSourceMetadata"
                 },
                 {
                     "target": "com.amazonaws.mediaconnect#DescribeGateway"
@@ -8390,6 +8507,141 @@
                 "smithy.api#documentation": "Attributes related to the transport stream that are used in a source or output."
             }
         },
+        "com.amazonaws.mediaconnect#TransportMediaInfo": {
+            "type": "structure",
+            "members": {
+                "Programs": {
+                    "target": "com.amazonaws.mediaconnect#__listOfTransportStreamProgram",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The list of transport stream programs in the current flow's source.",
+                        "smithy.api#jsonName": "programs",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The metadata of the transport stream in the current flow's source."
+            }
+        },
+        "com.amazonaws.mediaconnect#TransportStream": {
+            "type": "structure",
+            "members": {
+                "Channels": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The number of channels in the audio stream.",
+                        "smithy.api#jsonName": "channels"
+                    }
+                },
+                "Codec": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The codec used by the stream.",
+                        "smithy.api#jsonName": "codec"
+                    }
+                },
+                "FrameRate": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The frame rate used by the video stream.",
+                        "smithy.api#jsonName": "frameRate"
+                    }
+                },
+                "FrameResolution": {
+                    "target": "com.amazonaws.mediaconnect#FrameResolution",
+                    "traits": {
+                        "smithy.api#jsonName": "frameResolution"
+                    }
+                },
+                "Pid": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The Packet ID (PID) as it is reported in the Program Map Table.",
+                        "smithy.api#jsonName": "pid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SampleRate": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The sample rate used by the audio stream.",
+                        "smithy.api#jsonName": "sampleRate"
+                    }
+                },
+                "SampleSize": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The sample bit size used by the audio stream.",
+                        "smithy.api#jsonName": "sampleSize"
+                    }
+                },
+                "StreamType": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The Stream Type as it is reported in the Program Map Table.",
+                        "smithy.api#jsonName": "streamType",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The metadata of an elementary transport stream."
+            }
+        },
+        "com.amazonaws.mediaconnect#TransportStreamProgram": {
+            "type": "structure",
+            "members": {
+                "PcrPid": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The Program Clock Reference (PCR) Packet ID (PID) as it is reported in the Program Association Table.",
+                        "smithy.api#jsonName": "pcrPid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProgramName": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The program name as it is reported in the Program Association Table.",
+                        "smithy.api#jsonName": "programName"
+                    }
+                },
+                "ProgramNumber": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The program number as it is reported in the Program Association Table.",
+                        "smithy.api#jsonName": "programNumber",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProgramPid": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The program Packet ID (PID) as it is reported in the Program Association Table.",
+                        "smithy.api#jsonName": "programPid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Streams": {
+                    "target": "com.amazonaws.mediaconnect#__listOfTransportStream",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The list of elementary transport streams in the program. The list includes video, audio, and data streams.",
+                        "smithy.api#jsonName": "streams",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The metadata of a single transport stream program."
+            }
+        },
         "com.amazonaws.mediaconnect#UntagResource": {
             "type": "operation",
             "input": {
@@ -10222,6 +10474,18 @@
                 "target": "com.amazonaws.mediaconnect#Source"
             }
         },
+        "com.amazonaws.mediaconnect#__listOfTransportStream": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconnect#TransportStream"
+            }
+        },
+        "com.amazonaws.mediaconnect#__listOfTransportStreamProgram": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconnect#TransportStreamProgram"
+            }
+        },
         "com.amazonaws.mediaconnect#__listOfVpcInterface": {
             "type": "list",
             "member": {
@@ -10257,6 +10521,12 @@
         },
         "com.amazonaws.mediaconnect#__string": {
             "type": "string"
+        },
+        "com.amazonaws.mediaconnect#__timestampIso8601": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
         }
     }
 }

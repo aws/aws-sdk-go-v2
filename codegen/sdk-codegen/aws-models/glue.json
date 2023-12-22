@@ -1729,6 +1729,15 @@
                 "target": "com.amazonaws.glue#Action"
             }
         },
+        "com.amazonaws.glue#AdditionalContextMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#ContextKey"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#ContextValue"
+            }
+        },
         "com.amazonaws.glue#AdditionalOptionKeys": {
             "type": "enum",
             "members": {
@@ -6973,6 +6982,24 @@
                 "target": "com.amazonaws.glue#GenericString"
             }
         },
+        "com.amazonaws.glue#ContextKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.glue#ContextValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.glue#ContextWords": {
             "type": "list",
             "member": {
@@ -7764,7 +7791,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a connection definition in the Data Catalog.</p>"
+                "smithy.api#documentation": "<p>Creates a connection definition in the Data Catalog.</p>\n         <p>Connections used for creating federated resources require the IAM <code>glue:PassConnection</code> permission.</p>"
             }
         },
         "com.amazonaws.glue#CreateConnectionRequest": {
@@ -14401,10 +14428,14 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.glue#MessageString"
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>A federation source failed, but the operation may be retried.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -19686,6 +19717,12 @@
         "com.amazonaws.glue#GetUnfilteredPartitionMetadataRequest": {
             "type": "structure",
             "members": {
+                "Region": {
+                    "target": "com.amazonaws.glue#ValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specified only if the base tables belong to a different Amazon Web Services Region.</p>"
+                    }
+                },
                 "CatalogId": {
                     "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
@@ -19725,6 +19762,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>(Required) A list of supported permission types. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "QuerySessionContext": {
+                    "target": "com.amazonaws.glue#QuerySessionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>"
                     }
                 }
             },
@@ -19805,6 +19848,12 @@
         "com.amazonaws.glue#GetUnfilteredPartitionsMetadataRequest": {
             "type": "structure",
             "members": {
+                "Region": {
+                    "target": "com.amazonaws.glue#ValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specified only if the base tables belong to a different Amazon Web Services Region.</p>"
+                    }
+                },
                 "CatalogId": {
                     "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
@@ -19861,6 +19910,12 @@
                     "target": "com.amazonaws.glue#PageSize",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of partitions to return in a single response.</p>"
+                    }
+                },
+                "QuerySessionContext": {
+                    "target": "com.amazonaws.glue#QuerySessionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>"
                     }
                 }
             },
@@ -19929,6 +19984,12 @@
         "com.amazonaws.glue#GetUnfilteredTableMetadataRequest": {
             "type": "structure",
             "members": {
+                "Region": {
+                    "target": "com.amazonaws.glue#ValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specified only if the base tables belong to a different Amazon Web Services Region.</p>"
+                    }
+                },
                 "CatalogId": {
                     "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
@@ -19962,6 +20023,24 @@
                         "smithy.api#documentation": "<p>(Required) A list of supported permission types. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "SupportedDialect": {
+                    "target": "com.amazonaws.glue#SupportedDialect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure specifying the dialect and dialect version used by the query engine.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.glue#PermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Lake Formation data permissions of the caller on the table. Used to authorize the call when no view context is found.</p>"
+                    }
+                },
+                "QuerySessionContext": {
+                    "target": "com.amazonaws.glue#QuerySessionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19994,6 +20073,24 @@
                     "target": "com.amazonaws.glue#ColumnRowFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of column row filters.</p>"
+                    }
+                },
+                "QueryAuthorizationId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cryptographically generated query identifier generated by Glue or Lake Formation.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.glue#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN of the parent resource extracted from the request.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.glue#PermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Lake Formation data permissions of the caller on the table. Used to authorize the call when no view context is found.</p>"
                     }
                 }
             },
@@ -25713,6 +25810,9 @@
         "com.amazonaws.glue#NullableInteger": {
             "type": "integer"
         },
+        "com.amazonaws.glue#NullableString": {
+            "type": "string"
+        },
         "com.amazonaws.glue#OneInput": {
             "type": "list",
             "member": {
@@ -27297,6 +27397,44 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#QuerySessionContext": {
+            "type": "structure",
+            "members": {
+                "QueryId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier generated by the query engine for the query.</p>"
+                    }
+                },
+                "QueryStartTime": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp provided by the query engine for when the query started.</p>"
+                    }
+                },
+                "ClusterId": {
+                    "target": "com.amazonaws.glue#NullableString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier string for the consumer cluster.</p>"
+                    }
+                },
+                "QueryAuthorizationId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cryptographically generated query identifier generated by Glue or Lake Formation.</p>"
+                    }
+                },
+                "AdditionalContext": {
+                    "target": "com.amazonaws.glue#AdditionalContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An opaque string-string map passed by the query engine.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>"
             }
         },
         "com.amazonaws.glue#QuoteChar": {
@@ -32578,6 +32716,26 @@
                 "target": "com.amazonaws.glue#GenericString"
             }
         },
+        "com.amazonaws.glue#SupportedDialect": {
+            "type": "structure",
+            "members": {
+                "Dialect": {
+                    "target": "com.amazonaws.glue#ViewDialect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dialect of the query engine.</p>"
+                    }
+                },
+                "DialectVersion": {
+                    "target": "com.amazonaws.glue#ViewDialectVersionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the dialect of the query engine. For example, 3.0.0.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure specifying the dialect and dialect version used by the query engine.</p>"
+            }
+        },
         "com.amazonaws.glue#Table": {
             "type": "structure",
             "members": {
@@ -36424,6 +36582,38 @@
                     "max": 100000
                 },
                 "smithy.api#pattern": "^[1-9][0-9]*|[1-9][0-9]*-[1-9][0-9]*$"
+            }
+        },
+        "com.amazonaws.glue#ViewDialect": {
+            "type": "enum",
+            "members": {
+                "REDSHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REDSHIFT"
+                    }
+                },
+                "ATHENA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATHENA"
+                    }
+                },
+                "SPARK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPARK"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#ViewDialectVersionString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.glue#ViewTextString": {

@@ -1,0 +1,2713 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.networkmonitor#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.networkmonitor#AddressFamily": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#AggregationPeriod": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 30
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*$"
+            }
+        },
+        "com.amazonaws.networkmonitor#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This operation attempted to create a resource that already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.networkmonitor#CreateMonitor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#CreateMonitorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#CreateMonitorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a monitor"
+                },
+                "smithy.api#documentation": "<p>Creates a monitor between a source subnet and destination IP address. Within a monitor you'll create one or more probes that monitor network traffic between your source Amazon Web Services VPC subnets and your destination IP addresses. Each probe then aggregates and sends metrics to Amazon CloudWatch.</p>",
+                "smithy.api#http": {
+                    "uri": "/monitors",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#CreateMonitorInput": {
+            "type": "structure",
+            "members": {
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name identifying the monitor. It can contain only letters, underscores (_), or dashes (-), and can be up to 255 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "probes": {
+                    "target": "com.amazonaws.networkmonitor#CreateMonitorProbeInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays a list of all of the probes created for a monitor.</p>"
+                    }
+                },
+                "aggregationPeriod": {
+                    "target": "com.amazonaws.networkmonitor#AggregationPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in seconds, that metrics are aggregated and sent to Amazon CloudWatch. Valid values are either <code>30</code> or <code>60</code>. </p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier to ensure the idempotency of the request. Only returned if a client token was provided in the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs created and assigned to the monitor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#CreateMonitorOutput": {
+            "type": "structure",
+            "members": {
+                "monitorArn": {
+                    "target": "com.amazonaws.networkmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.networkmonitor#MonitorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregationPeriod": {
+                    "target": "com.amazonaws.networkmonitor#AggregationPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds that metrics are aggregated by and sent to Amazon CloudWatch. This will be either <code>30</code> or <code>60</code>. </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs assigned to the monitor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#CreateMonitorProbeInput": {
+            "type": "structure",
+            "members": {
+                "sourceArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the subnet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.networkmonitor#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination IP address. This will be either <code>IPV4</code> or <code>IPV6</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationPort": {
+                    "target": "com.amazonaws.networkmonitor#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port associated with the <code>destination</code>. This is required only if the <code>protocol</code> is <code>TCP</code> and must be a number between <code>1</code> and <code>65536</code>.</p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.networkmonitor#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "packetSize": {
+                    "target": "com.amazonaws.networkmonitor#PacketSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                    }
+                },
+                "probeTags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs created and assigned to the monitor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a monitor probe.</p>"
+            }
+        },
+        "com.amazonaws.networkmonitor#CreateMonitorProbeInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmonitor#CreateMonitorProbeInput"
+            }
+        },
+        "com.amazonaws.networkmonitor#CreateProbe": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#CreateProbeInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#CreateProbeOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a probe"
+                },
+                "smithy.api#documentation": "<p>Create a probe within a monitor. Once you create a probe, and it begins monitoring your network traffic, you'll incur billing charges for that probe. </p>",
+                "smithy.api#http": {
+                    "uri": "/monitors/{monitorName}/probes",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#CreateProbeInput": {
+            "type": "structure",
+            "members": {
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor to associated with the probe. To get a list of available monitors, use <code>ListMonitors</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "probe": {
+                    "target": "com.amazonaws.networkmonitor#ProbeInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the details of an individual probe for a monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier to ensure the idempotency of the request. Only returned if a client token was provided in the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs created and assigned to the probe.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#CreateProbeOutput": {
+            "type": "structure",
+            "members": {
+                "probeId": {
+                    "target": "com.amazonaws.networkmonitor#ProbeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the probe for which details are returned.</p>"
+                    }
+                },
+                "probeArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the probe.</p>"
+                    }
+                },
+                "sourceArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the probe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.networkmonitor#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination IP address for the monitor. This will be either an IPv4 or IPv6 address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationPort": {
+                    "target": "com.amazonaws.networkmonitor#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port associated with the <code>destination</code>. This is required only if the <code>protocol</code> is <code>TCP</code> and must be a number between <code>1</code> and <code>65536</code>.</p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.networkmonitor#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "packetSize": {
+                    "target": "com.amazonaws.networkmonitor#PacketSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                    }
+                },
+                "addressFamily": {
+                    "target": "com.amazonaws.networkmonitor#AddressFamily",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the IP address is <code>IPV4</code> or <code>IPV6</code>.</p>"
+                    }
+                },
+                "vpcId": {
+                    "target": "com.amazonaws.networkmonitor#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the source VPC or subnet.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.networkmonitor#ProbeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the probe.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.networkmonitor#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date that the probe was created.</p>"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "com.amazonaws.networkmonitor#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date when the probe was last modified. </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs assigned to the probe.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#DeleteMonitor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#DeleteMonitorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#DeleteMonitorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a monitor"
+                },
+                "smithy.api#documentation": "<p>Deletes a specified monitor.</p>",
+                "smithy.api#http": {
+                    "uri": "/monitors/{monitorName}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#DeleteMonitorInput": {
+            "type": "structure",
+            "members": {
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor to delete. Use the <code>ListMonitors</code> action to get a list of your current monitors. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#DeleteMonitorOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#DeleteProbe": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#DeleteProbeInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#DeleteProbeOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a probe"
+                },
+                "smithy.api#documentation": "<p>Deletes the specified monitor. Once a probe is deleted you'll no longer incur any billing fees for that probe.</p>",
+                "smithy.api#http": {
+                    "uri": "/monitors/{monitorName}/probes/{probeId}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#DeleteProbeInput": {
+            "type": "structure",
+            "members": {
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor to delete. For a list of the available monitors, use the <code>ListMonitors</code> action.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "probeId": {
+                    "target": "com.amazonaws.networkmonitor#ProbeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the probe to delete. Run <code>GetMonitor</code> to get a lst of all probes and probe IDs associated with the monitor.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#DeleteProbeOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#Destination": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#GetMonitor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#GetMonitorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#GetMonitorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get information about a monitor"
+                },
+                "smithy.api#documentation": "<p>Returns details about a specific monitor.</p>",
+                "smithy.api#http": {
+                    "uri": "/monitors/{monitorName}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#GetMonitorInput": {
+            "type": "structure",
+            "members": {
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor that details are returned for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#GetMonitorOutput": {
+            "type": "structure",
+            "members": {
+                "monitorArn": {
+                    "target": "com.amazonaws.networkmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the selected monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor. To get a list of the current monitors and their names, use the <code>ListMonitors</code> action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.networkmonitor#MonitorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of the state of each monitor. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregationPeriod": {
+                    "target": "com.amazonaws.networkmonitor#AggregationPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation period for the specified monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs assigned to the monitor.</p>"
+                    }
+                },
+                "probes": {
+                    "target": "com.amazonaws.networkmonitor#ProbeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details about each probe associated with that monitor. </p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.networkmonitor#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date when the monitor was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedAt": {
+                    "target": "com.amazonaws.networkmonitor#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date when the monitor was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#GetProbe": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#GetProbeInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#GetProbeOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get information about a probe"
+                },
+                "smithy.api#documentation": "<p>Returns the details about a probe. You'll need both the <code>monitorName</code> and <code>probeId</code>. </p>",
+                "smithy.api#http": {
+                    "uri": "/monitors/{monitorName}/probes/{probeId}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#GetProbeInput": {
+            "type": "structure",
+            "members": {
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor associated with the probe. Run <code>ListMonitors</code> to get a list of monitor names.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "probeId": {
+                    "target": "com.amazonaws.networkmonitor#ProbeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the probe to get information about. Run <code>GetMonitor</code> action to get a list of probes and probe IDs for the  monitor.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#GetProbeOutput": {
+            "type": "structure",
+            "members": {
+                "probeId": {
+                    "target": "com.amazonaws.networkmonitor#ProbeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the probe for which details are returned.</p>"
+                    }
+                },
+                "probeArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the probe.</p>"
+                    }
+                },
+                "sourceArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the probe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.networkmonitor#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination IP address for the monitor. This will be either an IPv4 or IPv6 address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationPort": {
+                    "target": "com.amazonaws.networkmonitor#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port associated with the <code>destination</code>. This is required only if the <code>protocol</code> is <code>TCP</code> and must be a number between <code>1</code> and <code>65536</code>.</p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.networkmonitor#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "packetSize": {
+                    "target": "com.amazonaws.networkmonitor#PacketSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                    }
+                },
+                "addressFamily": {
+                    "target": "com.amazonaws.networkmonitor#AddressFamily",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the IP address is <code>IPV4</code> or <code>IPV6</code>.</p>"
+                    }
+                },
+                "vpcId": {
+                    "target": "com.amazonaws.networkmonitor#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the source VPC or subnet.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.networkmonitor#ProbeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the probe.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.networkmonitor#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date that the probe was created.</p>"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "com.amazonaws.networkmonitor#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date that the probe was last modified.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs assigned to the probe.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#Iso8601Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.networkmonitor#ListMonitors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#ListMonitorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#ListMonitorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list all monitors in an account and their statuses"
+                },
+                "smithy.api#documentation": "<p>Returns a list of all of your monitors.</p>",
+                "smithy.api#http": {
+                    "uri": "/monitors",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "monitors"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#ListMonitorsInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.networkmonitor#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.networkmonitor#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "state": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of all monitors and their states.</p>",
+                        "smithy.api#httpQuery": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#ListMonitorsOutput": {
+            "type": "structure",
+            "members": {
+                "monitors": {
+                    "target": "com.amazonaws.networkmonitor#MonitorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists individual details about each of your monitors.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list the tags for a resource"
+                },
+                "smithy.api#documentation": "<p>Lists the tags assigned to this resource.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.networkmonitor#MonitorResource",
+                        "ids": {
+                            "monitorName": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.networkmonitor#ProbeResource",
+                        "ids": {
+                            "monitorName": "resourceArn",
+                            "probeId": "resourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmonitor#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the tags assigned to the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#MonitorArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:.*$"
+            }
+        },
+        "com.amazonaws.networkmonitor#MonitorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmonitor#MonitorSummary"
+            }
+        },
+        "com.amazonaws.networkmonitor#MonitorResource": {
+            "type": "resource",
+            "identifiers": {
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.networkmonitor#CreateMonitor"
+            },
+            "read": {
+                "target": "com.amazonaws.networkmonitor#GetMonitor"
+            },
+            "update": {
+                "target": "com.amazonaws.networkmonitor#UpdateMonitor"
+            },
+            "delete": {
+                "target": "com.amazonaws.networkmonitor#DeleteMonitor"
+            },
+            "list": {
+                "target": "com.amazonaws.networkmonitor#ListMonitors"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "monitor/{monitorName}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "monitor"
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#MonitorState": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#MonitorSummary": {
+            "type": "structure",
+            "members": {
+                "monitorArn": {
+                    "target": "com.amazonaws.networkmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.networkmonitor#MonitorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregationPeriod": {
+                    "target": "com.amazonaws.networkmonitor#AggregationPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in seconds, that metrics are collected and sent to Amazon CloudWatch. Valid values are either <code>30</code> or <code>60</code>.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs assigned to the monitor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Displays summary information about a monitor.</p>"
+            }
+        },
+        "com.amazonaws.networkmonitor#NetworkMonitor": {
+            "type": "service",
+            "version": "2023-08-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.networkmonitor#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.networkmonitor#MonitorResource"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ProbeResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "NetworkMonitor",
+                    "arnNamespace": "networkmonitor",
+                    "cloudFormationName": "NetworkMonitor",
+                    "cloudTrailEventSource": "networkmonitor.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "networkmonitor"
+                },
+                "aws.iam#defineConditionKeys": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by the tag key-value pairs attached to the resource",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by the tag key-value pairs in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+                    },
+                    "aws:TagKeys": {
+                        "type": "ArrayOfString",
+                        "documentation": "Filters access by the tag keys in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+                    }
+                },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Content-Type",
+                        "X-Amz-Requested-Operation"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Amazon CloudWatch Network Monitor is an Amazon Web Services active network monitoring\n            service that identifies if a network issues exists within the Amazon Web Services network\n            or your own company network.  Within Network Monitor you'll choose the source VPCs and\n            subnets from the Amazon Web Services network in which you operate and then you'll choose\n            the destination IP addresses from your on-premises network. From these sources and\n            destinations, Network Monitor creates a monitor containing all the possible source and\n            destination combinations, each of which is called a probe, within a single monitor.\n            These probes then monitor network traffic to help you identify where network issues might be affecting your traffic.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/what-is-network-monitor.html\">Using Amazon CloudWatch Network Monitor</a> in the <i>Amazon CloudWatch User Guide</i>.</p>",
+                "smithy.api#title": "Amazon CloudWatch Network Monitor",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://networkmonitor-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://networkmonitor-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://networkmonitor.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://networkmonitor.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://networkmonitor.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#PacketSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 56,
+                    "max": 8500
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#Port": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65536
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#Probe": {
+            "type": "structure",
+            "members": {
+                "probeId": {
+                    "target": "com.amazonaws.networkmonitor#ProbeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the probe.</p>"
+                    }
+                },
+                "probeArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the probe.</p>"
+                    }
+                },
+                "sourceArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the probe source subnet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.networkmonitor#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the probe. This should be either an <code>IPV4</code> or <code>IPV6</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationPort": {
+                    "target": "com.amazonaws.networkmonitor#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination port for the probe. This is required only if the <code>protocol</code> is <code>TCP</code> and must be a number between <code>1</code> and <code>65536</code>.</p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.networkmonitor#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network protocol for the destination. This can be either <code>TCP</code> or <code>ICMP</code>. If the protocol is <code>TCP</code>, then <code>port</code> is also required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "packetSize": {
+                    "target": "com.amazonaws.networkmonitor#PacketSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the packets traveling between the <code>source</code> and <code>destination</code>. This must be a number between <code>56</code> and </p>"
+                    }
+                },
+                "addressFamily": {
+                    "target": "com.amazonaws.networkmonitor#AddressFamily",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 or IPv6 address for the probe.</p>"
+                    }
+                },
+                "vpcId": {
+                    "target": "com.amazonaws.networkmonitor#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the source VPC subnet.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.networkmonitor#ProbeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the probe.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.networkmonitor#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date the probe was created.</p>"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "com.amazonaws.networkmonitor#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date that the probe was last modified.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs created and assigned to the probe.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes information about a monitor probe.</p>"
+            }
+        },
+        "com.amazonaws.networkmonitor#ProbeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^probe-[a-z0-9A-Z-]{21,64}$"
+            }
+        },
+        "com.amazonaws.networkmonitor#ProbeInput": {
+            "type": "structure",
+            "members": {
+                "sourceArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the subnet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.networkmonitor#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination IP address. This will be either <code>IPV4</code> or <code>IPV6</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationPort": {
+                    "target": "com.amazonaws.networkmonitor#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port associated with the <code>destination</code>. This is required only if the <code>protocol</code> is <code>TCP</code> and must be a number between <code>1</code> and <code>65536</code>.</p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.networkmonitor#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "packetSize": {
+                    "target": "com.amazonaws.networkmonitor#PacketSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs created and assigned to the monitor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a probe when creating a probe or monitor.</p>"
+            }
+        },
+        "com.amazonaws.networkmonitor#ProbeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmonitor#Probe"
+            }
+        },
+        "com.amazonaws.networkmonitor#ProbeResource": {
+            "type": "resource",
+            "identifiers": {
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName"
+                },
+                "probeId": {
+                    "target": "com.amazonaws.networkmonitor#ProbeId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.networkmonitor#CreateProbe"
+            },
+            "read": {
+                "target": "com.amazonaws.networkmonitor#GetProbe"
+            },
+            "update": {
+                "target": "com.amazonaws.networkmonitor#UpdateProbe"
+            },
+            "delete": {
+                "target": "com.amazonaws.networkmonitor#DeleteProbe"
+            },
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "probe"
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#ProbeState": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#Protocol": {
+            "type": "enum",
+            "members": {
+                "TCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP"
+                    }
+                },
+                "ICMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#ResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.networkmonitor#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.networkmonitor#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This request exceeds a service quota.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.networkmonitor#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmonitor#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.networkmonitor#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.networkmonitor#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to add tags to a resource"
+                },
+                "smithy.api#documentation": "<p>Adds key-value pairs to a monitor or probe.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the monitor or probe to tag.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs assigned to the monitor or probe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.networkmonitor#MonitorResource",
+                        "ids": {
+                            "monitorName": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.networkmonitor#ProbeResource",
+                        "ids": {
+                            "monitorName": "resourceArn",
+                            "probeId": "resourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmonitor#TagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.networkmonitor#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to remove tags from a resource"
+                },
+                "smithy.api#documentation": "<p>Removes a key-value pair from a monitor or probe.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the monitor or probe that the tag should be removed from. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.networkmonitor#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pa</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.networkmonitor#MonitorResource",
+                        "ids": {
+                            "monitorName": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.networkmonitor#ProbeResource",
+                        "ids": {
+                            "monitorName": "resourceArn",
+                            "probeId": "resourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmonitor#UntagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#UpdateMonitor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#UpdateMonitorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#UpdateMonitorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update a monitor"
+                },
+                "smithy.api#documentation": "<p>Updates the <code>aggregationPeriod</code> for a monitor. Monitors support an <code>aggregationPeriod</code> of either <code>30</code> or <code>60</code> seconds.</p>",
+                "smithy.api#http": {
+                    "uri": "/monitors/{monitorName}",
+                    "method": "PATCH"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#UpdateMonitorInput": {
+            "type": "structure",
+            "members": {
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor to update. Run <code>ListMonitors</code> to get a list of monitor names.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregationPeriod": {
+                    "target": "com.amazonaws.networkmonitor#AggregationPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation time, in seconds, to change to. This must be either <code>30</code> or <code>60</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#UpdateMonitorOutput": {
+            "type": "structure",
+            "members": {
+                "monitorArn": {
+                    "target": "com.amazonaws.networkmonitor#MonitorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the monitor that was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor that was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.networkmonitor#MonitorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the updated monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregationPeriod": {
+                    "target": "com.amazonaws.networkmonitor#AggregationPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The changed aggregation period.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs associated with the monitor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#UpdateProbe": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmonitor#UpdateProbeInput"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmonitor#UpdateProbeOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update a probe"
+                },
+                "smithy.api#documentation": "<p>Updates a monitor probe. This action requires both the <code>monitorName</code> and <code>probeId</code> parameters. Run <code>ListMonitors</code> to get a list of monitor names. Run <code>GetMonitor</code> to get a list of probes and probe IDs. </p>",
+                "smithy.api#http": {
+                    "uri": "/monitors/{monitorName}/probes/{probeId}",
+                    "method": "PATCH"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#UpdateProbeInput": {
+            "type": "structure",
+            "members": {
+                "monitorName": {
+                    "target": "com.amazonaws.networkmonitor#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the monitor that the probe was updated for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "probeId": {
+                    "target": "com.amazonaws.networkmonitor#ProbeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run <code>GetMonitor</code> to get a list of probes and probe IDs.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.networkmonitor#ProbeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the probe update.</p>"
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.networkmonitor#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated IP address for the probe destination. This must be either an IPv4 or IPv6 address.</p>"
+                    }
+                },
+                "destinationPort": {
+                    "target": "com.amazonaws.networkmonitor#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated port for the probe destination. This is required only if the <code>protocol</code> is <code>TCP</code> and must be a number between <code>1</code> and <code>65536</code>.</p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.networkmonitor#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated network protocol for the destination. This can be either <code>TCP</code> or <code>ICMP</code>. If the protocol is <code>TCP</code>, then <code>port</code> is also required.</p>"
+                    }
+                },
+                "packetSize": {
+                    "target": "com.amazonaws.networkmonitor#PacketSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>he updated packets size for network traffic between the source and destination. This must be a number between <code>56</code> and <code>8500</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#UpdateProbeOutput": {
+            "type": "structure",
+            "members": {
+                "probeId": {
+                    "target": "com.amazonaws.networkmonitor#ProbeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated ID of the probe.</p>"
+                    }
+                },
+                "probeArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated ARN of the probe.</p>"
+                    }
+                },
+                "sourceArn": {
+                    "target": "com.amazonaws.networkmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated ARN of the source subnet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.networkmonitor#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated destination IP address for the probe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationPort": {
+                    "target": "com.amazonaws.networkmonitor#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated destination port. This will be a number between <code>1</code> and <code>65536</code>.</p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.networkmonitor#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated protocol for the probe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "packetSize": {
+                    "target": "com.amazonaws.networkmonitor#PacketSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated packet size for the probe. </p>"
+                    }
+                },
+                "addressFamily": {
+                    "target": "com.amazonaws.networkmonitor#AddressFamily",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated IP address family. This will be either <code>IPV4</code> or <code>IPV6</code>.</p>"
+                    }
+                },
+                "vpcId": {
+                    "target": "com.amazonaws.networkmonitor#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated ID of the source VPC subnet ID.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.networkmonitor#ProbeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the updated probe.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.networkmonitor#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date that the probe was created.</p>"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "com.amazonaws.networkmonitor#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date that the probe was last updated.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.networkmonitor#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update tags for a probe.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmonitor#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One of the parameters for the request is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.networkmonitor#VpcId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^vpc-[a-zA-Z0-9]{8,32}$"
+            }
+        }
+    }
+}
