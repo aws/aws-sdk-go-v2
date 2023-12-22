@@ -1,3 +1,7 @@
+# v1.26.0 (2023-12-22)
+
+* **Feature**: Update endpoint rules and examples.
+
 # v1.25.6 (2023-12-20)
 
 * No change notes available for this release.

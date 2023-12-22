@@ -1,8 +1,0 @@
-{
-    "id": "80cd128a-8e1e-47d4-a7c2-e96601711a65",
-    "type": "documentation",
-    "description": "Provides minor corrections and an updated description of APIs.",
-    "modules": [
-        "service/omics"
-    ]
-}

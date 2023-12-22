@@ -1,3 +1,7 @@
+# v1.16.6 (2023-12-22)
+
+* **Documentation**: Provides minor corrections and an updated description of APIs.
+
 # v1.16.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

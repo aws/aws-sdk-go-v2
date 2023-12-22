@@ -1,8 +1,0 @@
-{
-    "id": "11e9f232-0f98-4868-aea1-5a3f8e40a14b",
-    "type": "feature",
-    "description": "This release adds the DescribeSourceMetadata API. This API can be used to view the stream information of the flow's source.",
-    "modules": [
-        "service/mediaconnect"
-    ]
-}

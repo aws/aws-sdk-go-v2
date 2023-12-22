@@ -1,3 +1,20 @@
+# Release (2023-12-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.73.0](service/glue/CHANGELOG.md#v1730-2023-12-22)
+  * **Feature**: This release adds additional configurations for Query Session Context on the following APIs: GetUnfilteredTableMetadata, GetUnfilteredPartitionMetadata, GetUnfilteredPartitionsMetadata.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.29.0](service/lakeformation/CHANGELOG.md#v1290-2023-12-22)
+  * **Feature**: This release adds additional configurations on GetTemporaryGlueTableCredentials for Query Session Context.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.25.0](service/mediaconnect/CHANGELOG.md#v1250-2023-12-22)
+  * **Feature**: This release adds the DescribeSourceMetadata API. This API can be used to view the stream information of the flow's source.
+* `github.com/aws/aws-sdk-go-v2/service/networkmonitor`: [v1.0.0](service/networkmonitor/CHANGELOG.md#v100-2023-12-22)
+  * **Release**: New AWS service client module
+  * **Feature**: CloudWatch Network Monitor is a new service within CloudWatch that will help network administrators and operators continuously monitor network performance metrics such as round-trip-time and packet loss between their AWS-hosted applications and their on-premises locations.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.16.6](service/omics/CHANGELOG.md#v1166-2023-12-22)
+  * **Documentation**: Provides minor corrections and an updated description of APIs.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.26.0](service/secretsmanager/CHANGELOG.md#v1260-2023-12-22)
+  * **Feature**: Update endpoint rules and examples.
+
 # Release (2023-12-21)
 
 ## Module Highlights

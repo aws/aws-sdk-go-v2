@@ -1,3 +1,7 @@
+# v1.25.0 (2023-12-22)
+
+* **Feature**: This release adds the DescribeSourceMetadata API. This API can be used to view the stream information of the flow's source.
+
 # v1.24.6 (2023-12-19)
 
 * No change notes available for this release.
