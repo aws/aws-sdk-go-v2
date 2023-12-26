@@ -1,3 +1,9 @@
+# Release (2023-12-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.28.6](service/iam/CHANGELOG.md#v1286-2023-12-26)
+  * **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+
 # Release (2023-12-22)
 
 ## Module Highlights

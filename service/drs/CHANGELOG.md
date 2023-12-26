@@ -1,3 +1,7 @@
+# v1.21.1 (2023-12-26)
+
+* No change notes available for this release.
+
 # v1.21.0 (2023-12-13)
 
 * **Feature**: Adding AgentVersion to SourceServer and RecoveryInstance structures
