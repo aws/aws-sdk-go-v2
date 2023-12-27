@@ -1,3 +1,9 @@
+# Release (2023-12-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.36.0](service/emr/CHANGELOG.md#v1360-2023-12-27)
+  * **Feature**: Add support for customers to modify cluster attribute auto-terminate post cluster launch
+
 # Release (2023-12-26)
 
 ## Module Highlights
