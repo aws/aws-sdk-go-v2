@@ -57,6 +57,7 @@
         "api_op_RemoveManagedScalingPolicy.go",
         "api_op_RemoveTags.go",
         "api_op_RunJobFlow.go",
+        "api_op_SetKeepJobFlowAliveWhenNoSteps.go",
         "api_op_SetTerminationProtection.go",
         "api_op_SetVisibleToAllUsers.go",
         "api_op_StartNotebookExecution.go",

@@ -1,0 +1,8 @@
+{
+    "id": "49a327f0-b360-4f25-bbc9-3a9c14127d70",
+    "type": "feature",
+    "description": "Add support for customers to modify cluster attribute auto-terminate post cluster launch",
+    "modules": [
+        "service/emr"
+    ]
+}

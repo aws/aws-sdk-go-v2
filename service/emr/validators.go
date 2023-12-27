@@ -770,6 +770,26 @@ func (m *validateOpRunJobFlow) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSetKeepJobFlowAliveWhenNoSteps struct {
+}
+
+func (*validateOpSetKeepJobFlowAliveWhenNoSteps) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetKeepJobFlowAliveWhenNoSteps) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetKeepJobFlowAliveWhenNoStepsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetKeepJobFlowAliveWhenNoStepsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetTerminationProtection struct {
 }
 
@@ -1060,6 +1080,10 @@ func addOpRemoveTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRunJobFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRunJobFlow{}, middleware.After)
+}
+
+func addOpSetKeepJobFlowAliveWhenNoStepsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetKeepJobFlowAliveWhenNoSteps{}, middleware.After)
 }
 
 func addOpSetTerminationProtectionValidationMiddleware(stack *middleware.Stack) error {
@@ -2600,6 +2624,24 @@ func validateOpRunJobFlowInput(v *RunJobFlowInput) error {
 		if err := validatePlacementGroupConfigList(v.PlacementGroupConfigs); err != nil {
 			invalidParams.AddNested("PlacementGroupConfigs", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetKeepJobFlowAliveWhenNoStepsInput(v *SetKeepJobFlowAliveWhenNoStepsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetKeepJobFlowAliveWhenNoStepsInput"}
+	if v.JobFlowIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobFlowIds"))
+	}
+	if v.KeepJobFlowAliveWhenNoSteps == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeepJobFlowAliveWhenNoSteps"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
