@@ -10,18 +10,37 @@ import (
 	"io/ioutil"
 	"strings"
 	"testing"
-
+	"net/http"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/logging"
 	"github.com/google/go-cmp/cmp"
+	"github.com/aws/aws-sdk-go/aws/awserr"
 )
+
+var (
+	isInitialCall = true
+)
+
+type retryClient struct {
+    baseClient aws.HTTPClient
+}
+
+func (c *retryClient) Do(req *http.Request) (*http.Response, error) {
+    if isInitialCall {
+        isInitialCall = false
+        // use retryable error
+        return nil, awserr.New("ErrCodeSerialization", "mock retryable error on initial call", nil)
+    }
+    return c.baseClient.Do(req)
+}
 
 func TestInteg_ObjectChecksums(t *testing.T) {
 	cases := map[string]map[string]struct {
 		disableHTTPS bool
+		retry        bool
 		params       *s3.PutObjectInput
 		expectErr    string
 
@@ -86,6 +105,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 				},
 			},
 			"autofill trailing checksum": {
+				retry: true,
 				params: &s3.PutObjectInput{
 					Body:              strings.NewReader("hello world"),
 					ChecksumAlgorithm: s3types.ChecksumAlgorithmCrc32c,
@@ -341,6 +361,15 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 					s3Options := func(o *s3.Options) {
 						o.Logger = logger
 						o.EndpointOptions.DisableHTTPS = c.disableHTTPS
+					}
+
+					if c.retry {
+						opts := s3client.Options()
+						baseClient := opts.HTTPClient
+						opts.HTTPClient = &retryClient{
+							baseClient: baseClient,
+						}
+						s3client = s3.New(opts)
 					}
 
 					t.Logf("putting bucket: %q, object: %q", *c.params.Bucket, *c.params.Key)
