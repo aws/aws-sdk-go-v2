@@ -2795,6 +2795,9 @@
                     "target": "com.amazonaws.emr#RunJobFlow"
                 },
                 {
+                    "target": "com.amazonaws.emr#SetKeepJobFlowAliveWhenNoSteps"
+                },
+                {
                     "target": "com.amazonaws.emr#SetTerminationProtection"
                 },
                 {
@@ -8933,6 +8936,47 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.emr#SessionMappingSummary"
+            }
+        },
+        "com.amazonaws.emr#SetKeepJobFlowAliveWhenNoSteps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#SetKeepJobFlowAliveWhenNoStepsInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerError"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>You can use the <code>SetKeepJobFlowAliveWhenNoSteps</code> to configure a cluster (job flow) to terminate after the step execution, i.e., all your \n         steps are executed. If you want a transient cluster that shuts down after the last of the current executing steps are completed, \n         you can configure <code>SetKeepJobFlowAliveWhenNoSteps</code> to false. If you want a long running cluster, configure <code>SetKeepJobFlowAliveWhenNoSteps</code> to true.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html\">Managing Cluster Termination</a> in the <i>Amazon EMR Management Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.emr#SetKeepJobFlowAliveWhenNoStepsInput": {
+            "type": "structure",
+            "members": {
+                "JobFlowIds": {
+                    "target": "com.amazonaws.emr#XmlStringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of strings that uniquely identify the clusters to protect. This identifier is returned by \n         <a href=\"https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html\">RunJobFlow</a> and can also \n         be obtained from <a href=\"https://docs.aws.amazon.com/emr/latest/APIReference/API_DescribeJobFlows.html\">DescribeJobFlows</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeepJobFlowAliveWhenNoSteps": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A Boolean that indicates whether to terminate the cluster after all steps are executed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.emr#SetTerminationProtection": {
