@@ -71,8 +71,6 @@ type computeInputPayloadChecksum struct {
 	// header for the decoded length of the underlying stream. Will only be set
 	// when used with trailing checksums, and aws-chunked content-encoding.
 	EnableDecodedContentLengthHeader bool
-
-	useTrailer bool
 }
 
 // ID provides the middleware's identifier.
@@ -178,15 +176,7 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 				// ContentSHA256Header middleware handles the header
 				ctx = v4.SetPayloadHash(ctx, streamingUnsignedPayloadTrailerPayloadHash)
 			}
-
-			m.useTrailer = true
-			mw := &addInputChecksumTrailer{
-				EnableTrailingChecksum:           m.EnableTrailingChecksum,
-				RequireChecksum:                  m.RequireChecksum,
-				EnableComputePayloadHash:         m.EnableComputePayloadHash,
-				EnableDecodedContentLengthHeader: m.EnableDecodedContentLengthHeader,
-			}
-			return mw.HandleFinalize(ctx, in, next)
+			return next.HandleFinalize(ctx, in)
 		}
 
 		// If trailing checksums are not enabled but protocol is still HTTPS
