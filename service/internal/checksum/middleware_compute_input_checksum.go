@@ -73,6 +73,8 @@ type computeInputPayloadChecksum struct {
 	EnableDecodedContentLengthHeader bool
 }
 
+type useTrailer struct {}
+
 // ID provides the middleware's identifier.
 func (m *computeInputPayloadChecksum) ID() string {
 	return "AWSChecksum:ComputeInputPayloadChecksum"
@@ -176,6 +178,7 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 				// ContentSHA256Header middleware handles the header
 				ctx = v4.SetPayloadHash(ctx, streamingUnsignedPayloadTrailerPayloadHash)
 			}
+			ctx = context.WithValue(ctx, useTrailer{}, true)
 			return next.HandleFinalize(ctx, in)
 		}
 
@@ -258,6 +261,10 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 ) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
+	v, ok := ctx.Value(useTrailer{}).(bool)
+	if !ok || !v {
+		return next.HandleFinalize(ctx, in)
+	}
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, computeInputTrailingChecksumError{
