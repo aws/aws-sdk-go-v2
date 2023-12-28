@@ -24336,6 +24336,26 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#DockerSettings": {
+            "type": "structure",
+            "members": {
+                "EnableDockerAccess": {
+                    "target": "com.amazonaws.sagemaker#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the domain can access Docker.</p>"
+                    }
+                },
+                "VpcOnlyTrustedAccounts": {
+                    "target": "com.amazonaws.sagemaker#VpcOnlyTrustedAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Web Services accounts that are trusted when the domain is created in VPC-only mode.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of settings that configure the domain's Docker interaction.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#DocumentSchemaVersion": {
             "type": "string",
             "traits": {
@@ -24473,6 +24493,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>.</p>"
                     }
+                },
+                "DockerSettings": {
+                    "target": "com.amazonaws.sagemaker#DockerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of settings that configure the domain's Docker interaction.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24498,6 +24524,12 @@
                     "target": "com.amazonaws.sagemaker#DomainSecurityGroupIds",
                     "traits": {
                         "smithy.api#documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for\n            communication between Domain-level apps and user apps.</p>"
+                    }
+                },
+                "DockerSettings": {
+                    "target": "com.amazonaws.sagemaker#DockerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of settings that configure the domain's Docker interaction.</p>"
                     }
                 }
             },
@@ -65460,6 +65492,12 @@
                     "max": 32
                 },
                 "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#VpcOnlyTrustedAccounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AccountId"
             }
         },
         "com.amazonaws.sagemaker#VpcSecurityGroupIds": {

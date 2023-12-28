@@ -2838,6 +2838,12 @@
                     "traits": {
                         "smithy.api#enumValue": "GitLab"
                     }
+                },
+                "GITLAB_SELF_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GitLabSelfManaged"
+                    }
                 }
             }
         },

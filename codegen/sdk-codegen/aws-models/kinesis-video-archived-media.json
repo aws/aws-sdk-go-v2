@@ -108,7 +108,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -151,7 +150,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -164,7 +164,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -178,7 +177,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -201,7 +199,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -236,7 +233,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -247,14 +243,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -268,14 +266,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -284,11 +280,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -299,14 +295,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -320,7 +318,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -340,7 +337,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -351,14 +347,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -369,9 +367,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1634,6 +1634,9 @@
                     "target": "com.amazonaws.kinesisvideoarchivedmedia#InvalidArgumentException"
                 },
                 {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#NoDataRetentionException"
+                },
+                {
                     "target": "com.amazonaws.kinesisvideoarchivedmedia#NotAuthorizedException"
                 },
                 {
@@ -1641,7 +1644,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of Images corresponding to each timestamp for a given time range, sampling interval, and image format configuration.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of images corresponding to each timestamp for a given time range,\n            sampling interval, and image format configuration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/getImages",
@@ -1694,7 +1697,7 @@
                 "SamplingInterval": {
                     "target": "com.amazonaws.kinesisvideoarchivedmedia#SamplingInterval",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time interval in milliseconds (ms) at which the images need to be generated from\n            the stream, with a default of 3000 ms. The minimum value that can be provided is 200 ms.\n            If the timestamp range is less than the sampling interval, the Image from the\n                <code>startTimestamp</code> will be returned if available. </p>\n         <note>\n            <p>The minimum value of 200 ms is a hard limit.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 200 ms (5 images per second). If the timestamp range is less than the sampling interval, the image from the <code>startTimestamp</code> will be returned if available.\n        </p>"
                     }
                 },
                 "Format": {
@@ -2171,7 +2174,7 @@
                 "FragmentSelector": {
                     "target": "com.amazonaws.kinesisvideoarchivedmedia#FragmentSelector",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the timestamp range and timestamp origin for the range of fragments to\n            return.</p>"
+                        "smithy.api#documentation": "<p>Describes the timestamp range and timestamp origin for the range of fragments to\n            return.</p>\n         <note>\n            <p>This is only required when the <code>NextToken</code> isn't passed in the API.</p>\n         </note>"
                     }
                 }
             },
@@ -2245,7 +2248,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A streaming session was requested for a stream that does not retain data (that is, has\n            a <code>DataRetentionInHours</code> of 0). </p>",
+                "smithy.api#documentation": "<p>\n            <code>GetImages</code> was requested for a stream that does not retain data (that is, has\n            a <code>DataRetentionInHours</code> of 0). </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
