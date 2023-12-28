@@ -71,6 +71,8 @@ type computeInputPayloadChecksum struct {
 	// header for the decoded length of the underlying stream. Will only be set
 	// when used with trailing checksums, and aws-chunked content-encoding.
 	EnableDecodedContentLengthHeader bool
+
+	useTrailer bool
 }
 
 type useTrailer struct {}
@@ -178,6 +180,7 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 				// ContentSHA256Header middleware handles the header
 				ctx = v4.SetPayloadHash(ctx, streamingUnsignedPayloadTrailerPayloadHash)
 			}
+			m.useTrailer = true
 			ctx = context.WithValue(ctx, useTrailer{}, true)
 			return next.HandleFinalize(ctx, in)
 		}
