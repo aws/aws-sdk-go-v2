@@ -1,3 +1,13 @@
+# Release (2023-12-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.22.0](service/codestarconnections/CHANGELOG.md#v1220-2023-12-28)
+  * **Feature**: New integration with the GitLab self-managed provider type.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.21.0](service/kinesisvideoarchivedmedia/CHANGELOG.md#v1210-2023-12-28)
+  * **Feature**: NoDataRetentionException thrown when GetImages requested for a Stream that does not retain data (that is, has a DataRetentionInHours of 0).
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.123.0](service/sagemaker/CHANGELOG.md#v11230-2023-12-28)
+  * **Feature**: Amazon SageMaker Studio now supports Docker access from within app container
+
 # Release (2023-12-27)
 
 ## Module Highlights

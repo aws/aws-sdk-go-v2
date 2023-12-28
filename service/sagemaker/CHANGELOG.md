@@ -1,3 +1,7 @@
+# v1.123.0 (2023-12-28)
+
+* **Feature**: Amazon SageMaker Studio now supports Docker access from within app container
+
 # v1.122.1 (2023-12-26)
 
 * No change notes available for this release.

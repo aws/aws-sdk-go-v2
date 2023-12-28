@@ -1,8 +1,0 @@
-{
-    "id": "96246283-219e-4f5a-a889-91cdf7e5c7a9",
-    "type": "feature",
-    "description": "New integration with the GitLab self-managed provider type.",
-    "modules": [
-        "service/codestarconnections"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "c000533d-0aa6-4331-8117-d6d3e0db38d2",
-    "type": "feature",
-    "description": "Amazon SageMaker Studio now supports Docker access from within app container",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
