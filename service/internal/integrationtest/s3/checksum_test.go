@@ -17,7 +17,6 @@ import (
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/logging"
 	"github.com/google/go-cmp/cmp"
-	"github.com/aws/aws-sdk-go/aws/awserr"
 )
 
 var (
@@ -28,11 +27,22 @@ type retryClient struct {
     baseClient aws.HTTPClient
 }
 
+type mockConnectionError struct{ err error }
+
+func (m mockConnectionError) ConnectionError() bool {
+	return true
+}
+func (m mockConnectionError) Error() string {
+	return fmt.Sprintf("request error: %v", m.err)
+}
+func (m mockConnectionError) Unwrap() error {
+	return m.err
+}
+
 func (c *retryClient) Do(req *http.Request) (*http.Response, error) {
     if isInitialCall {
         isInitialCall = false
-        // use retryable error
-        return nil, awserr.New("ErrCodeSerialization", "mock retryable error on initial call", nil)
+        return nil, mockConnectionError{}
     }
     return c.baseClient.Do(req)
 }
