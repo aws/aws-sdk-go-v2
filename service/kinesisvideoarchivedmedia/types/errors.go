@@ -143,8 +143,8 @@ func (e *MissingCodecPrivateDataException) ErrorCode() string {
 }
 func (e *MissingCodecPrivateDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A streaming session was requested for a stream that does not retain data (that
-// is, has a DataRetentionInHours of 0).
+// GetImages was requested for a stream that does not retain data (that is, has a
+// DataRetentionInHours of 0).
 type NoDataRetentionException struct {
 	Message *string
 

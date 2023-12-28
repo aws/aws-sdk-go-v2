@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Retrieves a list of Images corresponding to each timestamp for a given time
+// Retrieves a list of images corresponding to each timestamp for a given time
 // range, sampling interval, and image format configuration.
 func (c *Client) GetImages(ctx context.Context, params *GetImagesInput, optFns ...func(*Options)) (*GetImagesOutput, error) {
 	if params == nil {
@@ -83,10 +83,9 @@ type GetImagesInput struct {
 	NextToken *string
 
 	// The time interval in milliseconds (ms) at which the images need to be generated
-	// from the stream, with a default of 3000 ms. The minimum value that can be
-	// provided is 200 ms. If the timestamp range is less than the sampling interval,
-	// the Image from the startTimestamp will be returned if available. The minimum
-	// value of 200 ms is a hard limit.
+	// from the stream. The minimum value that can be provided is 200 ms (5 images per
+	// second). If the timestamp range is less than the sampling interval, the image
+	// from the startTimestamp will be returned if available.
 	SamplingInterval *int32
 
 	// The Amazon Resource Name (ARN) of the stream from which to retrieve the images.

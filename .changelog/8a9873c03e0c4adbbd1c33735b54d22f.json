@@ -1,0 +1,8 @@
+{
+    "id": "8a9873c0-3e0c-4adb-bd1c-33735b54d22f",
+    "type": "feature",
+    "description": "NoDataRetentionException thrown when GetImages requested for a Stream that does not retain data (that is, has a DataRetentionInHours of 0).",
+    "modules": [
+        "service/kinesisvideoarchivedmedia"
+    ]
+}

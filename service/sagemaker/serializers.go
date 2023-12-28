@@ -20409,6 +20409,25 @@ func awsAwsjson11_serializeDocumentDirectDeploySettings(v *types.DirectDeploySet
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDockerSettings(v *types.DockerSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EnableDockerAccess) > 0 {
+		ok := object.Key("EnableDockerAccess")
+		ok.String(string(v.EnableDockerAccess))
+	}
+
+	if v.VpcOnlyTrustedAccounts != nil {
+		ok := object.Key("VpcOnlyTrustedAccounts")
+		if err := awsAwsjson11_serializeDocumentVpcOnlyTrustedAccounts(v.VpcOnlyTrustedAccounts, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDomainSecurityGroupIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -20423,6 +20442,13 @@ func awsAwsjson11_serializeDocumentDomainSecurityGroupIds(v []string, value smit
 func awsAwsjson11_serializeDocumentDomainSettings(v *types.DomainSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DockerSettings != nil {
+		ok := object.Key("DockerSettings")
+		if err := awsAwsjson11_serializeDocumentDockerSettings(v.DockerSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.ExecutionRoleIdentityConfig) > 0 {
 		ok := object.Key("ExecutionRoleIdentityConfig")
@@ -20449,6 +20475,13 @@ func awsAwsjson11_serializeDocumentDomainSettings(v *types.DomainSettings, value
 func awsAwsjson11_serializeDocumentDomainSettingsForUpdate(v *types.DomainSettingsForUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DockerSettings != nil {
+		ok := object.Key("DockerSettings")
+		if err := awsAwsjson11_serializeDocumentDockerSettings(v.DockerSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.ExecutionRoleIdentityConfig) > 0 {
 		ok := object.Key("ExecutionRoleIdentityConfig")
@@ -27918,6 +27951,17 @@ func awsAwsjson11_serializeDocumentVpcConfig(v *types.VpcConfig, value smithyjso
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVpcOnlyTrustedAccounts(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

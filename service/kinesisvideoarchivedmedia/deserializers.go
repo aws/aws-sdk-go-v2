@@ -605,6 +605,9 @@ func awsRestjson1_deserializeOpErrorGetImages(response *smithyhttp.Response, met
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidArgumentException(response, errorBody)
 
+	case strings.EqualFold("NoDataRetentionException", errorCode):
+		return awsRestjson1_deserializeErrorNoDataRetentionException(response, errorBody)
+
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsRestjson1_deserializeErrorNotAuthorizedException(response, errorBody)
 

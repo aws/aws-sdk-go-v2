@@ -53,7 +53,7 @@ func (c *Client) ListFragments(ctx context.Context, params *ListFragmentsInput, 
 type ListFragmentsInput struct {
 
 	// Describes the timestamp range and timestamp origin for the range of fragments
-	// to return.
+	// to return. This is only required when the NextToken isn't passed in the API.
 	FragmentSelector *types.FragmentSelector
 
 	// The total number of fragments to return. If the total number of fragments

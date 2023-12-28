@@ -3954,6 +3954,19 @@ type DirectDeploySettings struct {
 	noSmithyDocumentSerde
 }
 
+// A collection of settings that configure the domain's Docker interaction.
+type DockerSettings struct {
+
+	// Indicates whether the domain can access Docker.
+	EnableDockerAccess FeatureStatus
+
+	// The list of Amazon Web Services accounts that are trusted when the domain is
+	// created in VPC-only mode.
+	VpcOnlyTrustedAccounts []string
+
+	noSmithyDocumentSerde
+}
+
 // The domain's details.
 type DomainDetails struct {
 
@@ -3985,6 +3998,9 @@ type DomainDetails struct {
 // specified through the CreateDomain API call.
 type DomainSettings struct {
 
+	// A collection of settings that configure the domain's Docker interaction.
+	DockerSettings *DockerSettings
+
 	// The configuration for attaching a SageMaker user profile name to the execution
 	// role as a sts:SourceIdentity key (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html)
 	// .
@@ -4002,6 +4018,9 @@ type DomainSettings struct {
 
 // A collection of Domain configuration settings to update.
 type DomainSettingsForUpdate struct {
+
+	// A collection of settings that configure the domain's Docker interaction.
+	DockerSettings *DockerSettings
 
 	// The configuration for attaching a SageMaker user profile name to the execution
 	// role as a sts:SourceIdentity key (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html)
