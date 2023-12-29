@@ -288,6 +288,8 @@ const (
 	RuntimeDotnet6    Runtime = "DOTNET_6"
 	RuntimePhp81      Runtime = "PHP_81"
 	RuntimeRuby31     Runtime = "RUBY_31"
+	RuntimePython311  Runtime = "PYTHON_311"
+	RuntimeNodejs18   Runtime = "NODEJS_18"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -305,6 +307,8 @@ func (Runtime) Values() []Runtime {
 		"DOTNET_6",
 		"PHP_81",
 		"RUBY_31",
+		"PYTHON_311",
+		"NODEJS_18",
 	}
 }
 

@@ -1677,6 +1677,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteKeyInput(v *DeleteKeyInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ForceDelete != nil {
+		encoder.SetQuery("forceDelete").Boolean(*v.ForceDelete)
+	}
+
 	if v.KeyName == nil || len(*v.KeyName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member KeyName must not be empty")}
 	}

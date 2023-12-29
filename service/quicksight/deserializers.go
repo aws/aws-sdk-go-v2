@@ -28897,6 +28897,9 @@ func awsRestjson1_deserializeOpErrorUpdateDashboardLinks(response *smithyhttp.Re
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedUserEditionException", errorCode):
+		return awsRestjson1_deserializeErrorUnsupportedUserEditionException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -81163,6 +81166,15 @@ func awsRestjson1_deserializeDocumentTopicDetails(v **types.TopicDetails, value 
 					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "UserExperienceVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TopicUserExperienceVersion to be of type string, got %T instead", value)
+				}
+				sv.UserExperienceVersion = types.TopicUserExperienceVersion(jtv)
 			}
 
 		default:

@@ -35350,6 +35350,11 @@ func awsRestjson1_serializeDocumentTopicDetails(v *types.TopicDetails, value smi
 		ok.String(*v.Name)
 	}
 
+	if len(v.UserExperienceVersion) > 0 {
+		ok := object.Key("UserExperienceVersion")
+		ok.String(string(v.UserExperienceVersion))
+	}
+
 	return nil
 }
 

@@ -4238,6 +4238,24 @@ func (TopicTimeGranularity) Values() []TopicTimeGranularity {
 	}
 }
 
+type TopicUserExperienceVersion string
+
+// Enum values for TopicUserExperienceVersion
+const (
+	TopicUserExperienceVersionLegacy              TopicUserExperienceVersion = "LEGACY"
+	TopicUserExperienceVersionNewReaderExperience TopicUserExperienceVersion = "NEW_READER_EXPERIENCE"
+)
+
+// Values returns all known values for TopicUserExperienceVersion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicUserExperienceVersion) Values() []TopicUserExperienceVersion {
+	return []TopicUserExperienceVersion{
+		"LEGACY",
+		"NEW_READER_EXPERIENCE",
+	}
+}
+
 type UndefinedSpecifiedValueType string
 
 // Enum values for UndefinedSpecifiedValueType

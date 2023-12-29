@@ -13453,6 +13453,9 @@ type TopicDetails struct {
 	// The name of the topic.
 	Name *string
 
+	// The user experience version of a topic.
+	UserExperienceVersion TopicUserExperienceVersion
+
 	noSmithyDocumentSerde
 }
 

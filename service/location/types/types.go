@@ -51,8 +51,8 @@ type ApiKeyRestrictions struct {
 	//   - The resources must be in the same partition , region , and account-id as the
 	//   key that is being created.
 	//   - Other than wildcards, you must include the full ARN, including the arn ,
-	//   partition , service , region , account-id and resource-id , delimited by
-	//   colons (:).
+	//   partition , service , region , account-id and resource-id delimited by colons
+	//   (:).
 	//   - No spaces allowed, even with wildcards. For example,
 	//   arn:aws:geo:region:account-id:map/ExampleMap* .
 	// For more information about ARN format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
