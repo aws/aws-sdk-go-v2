@@ -3989,7 +3989,7 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.apprunner#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>App Runner provides you with the option to choose between <i>Internet Protocol version 4 (IPv4)</i> and <i>dual-stack</i> (IPv4 and IPv6) \n      for your incoming public network configuration. This is an optional parameter. \n      If you do not specify an <code>IpAddressType</code>, it defaults to select IPv4.</p>\n         <note>\n            <p>\n        Currently, App Runner supports dual-stack for only Public endpoint. Only IPv4 is supported for Private endpoint. \n        If you update a service that's using dual-stack Public endpoint to a Private endpoint, your App Runner service will default to support only IPv4 for Private endpoint and fail to receive traffic originating from IPv6 endpoint.  \n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>App Runner provides you with the option to choose between <i>Internet Protocol version 4 (IPv4)</i> and <i>dual stack</i> (IPv4 and IPv6) \n      for your incoming public network configuration. This is an optional parameter. \n      If you do not specify an <code>IpAddressType</code>, it defaults to select IPv4.</p>\n         <note>\n            <p>\n        Currently, App Runner supports dual stack for only Public endpoint. Only IPv4 is supported for Private endpoint. \n        If you update a service that's using dual-stack Public endpoint to a Private endpoint, your App Runner service will default to support only IPv4 for Private endpoint and fail to receive traffic originating from IPv6 endpoint.  \n      </p>\n         </note>"
                     }
                 }
             },
@@ -4501,6 +4501,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RUBY_31"
+                    }
+                },
+                "PYTHON_311": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PYTHON_311"
+                    }
+                },
+                "NODEJS_18": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NODEJS_18"
                     }
                 }
             }

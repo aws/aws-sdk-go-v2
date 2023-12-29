@@ -28058,7 +28058,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^arn:aws:quicksight:[\\w\\-]+:\\d+:analysis/[\\w\\-]{1,512}$"
+                "smithy.api#pattern": "^arn:aws[\\w\\-]*:quicksight:[\\w\\-]+:\\d+:analysis/[\\w\\-]{1,512}$"
             }
         },
         "com.amazonaws.quicksight#LinkEntityArnList": {
@@ -46420,6 +46420,12 @@
                         "smithy.api#documentation": "<p>The description of the topic.</p>"
                     }
                 },
+                "UserExperienceVersion": {
+                    "target": "com.amazonaws.quicksight#TopicUserExperienceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user experience version of a topic.</p>"
+                    }
+                },
                 "DataSets": {
                     "target": "com.amazonaws.quicksight#Datasets",
                     "traits": {
@@ -46991,6 +46997,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "YEAR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TopicUserExperienceVersion": {
+            "type": "enum",
+            "members": {
+                "LEGACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEGACY"
+                    }
+                },
+                "NEW_READER_EXPERIENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_READER_EXPERIENCE"
                     }
                 }
             }
@@ -48370,6 +48393,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
                 }
             ],
             "traits": {

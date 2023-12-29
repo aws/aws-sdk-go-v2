@@ -109,7 +109,7 @@
                 "AllowResources": {
                     "target": "com.amazonaws.location#GeoArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of allowed resource ARNs that a API key bearer can perform actions on.</p>\n         <ul>\n            <li>\n               <p>The ARN must be the correct ARN for a map, place, or route ARN. You may \n                    include wildcards in the resource-id to match multiple resources of the \n                    same type.</p>\n            </li>\n            <li>\n               <p>The resources must be in the same <code>partition</code>, \n                    <code>region</code>, and <code>account-id</code> as the key that is being \n                    created.</p>\n            </li>\n            <li>\n               <p>Other than wildcards, you must include the full ARN, including the \n                    <code>arn</code>, <code>partition</code>, <code>service</code>,\n                    <code>region</code>, <code>account-id</code> and <code>resource-id</code>,\n                    delimited by colons (:).</p>\n            </li>\n            <li>\n               <p>No spaces allowed, even with wildcards. For example,\n                    <code>arn:aws:geo:region:<i>account-id</i>:map/ExampleMap*</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names\n            (ARNs)</a>.</p>",
+                        "smithy.api#documentation": "<p>A list of allowed resource ARNs that a API key bearer can perform actions on.</p>\n         <ul>\n            <li>\n               <p>The ARN must be the correct ARN for a map, place, or route ARN. You may \n                    include wildcards in the resource-id to match multiple resources of the \n                    same type.</p>\n            </li>\n            <li>\n               <p>The resources must be in the same <code>partition</code>, \n                    <code>region</code>, and <code>account-id</code> as the key that is being \n                    created.</p>\n            </li>\n            <li>\n               <p>Other than wildcards, you must include the full ARN, including the \n                    <code>arn</code>, <code>partition</code>, <code>service</code>,\n                    <code>region</code>, <code>account-id</code> and <code>resource-id</code>\n                    delimited by colons (:).</p>\n            </li>\n            <li>\n               <p>No spaces allowed, even with wildcards. For example,\n                    <code>arn:aws:geo:region:<i>account-id</i>:map/ExampleMap*</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names\n            (ARNs)</a>.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 5
@@ -2330,6 +2330,13 @@
                         "smithy.api#documentation": "<p>The name of the API key to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "ForceDelete": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ForceDelete bypasses an API key's expiry conditions and deletes the key. Set the parameter <code>true</code> to delete the key or to <code>false</code> to not preemptively delete the API key.</p>\n         <p>Valid values: <code>true</code>, or <code>false</code>.</p>\n         <p>Required: No</p>\n         <note>\n            <p>This action is irreversible. Only use ForceDelete if you are certain the key is no longer in use.</p>\n         </note>",
+                        "smithy.api#httpQuery": "forceDelete"
                     }
                 }
             }
