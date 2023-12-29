@@ -1,8 +1,0 @@
-{
-    "id": "c8dd40b3-1830-4995-9375-b624d56a8fb1",
-    "type": "feature",
-    "description": "Add LinkEntityArn support for different partitions; Add UnsupportedUserEditionException in UpdateDashboardLinks API; Add support for New Reader Experience Topics",
-    "modules": [
-        "service/quicksight"
-    ]
-}

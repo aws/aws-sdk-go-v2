@@ -1,8 +1,0 @@
-{
-    "id": "5d73dcdd-c642-4e6e-9c62-2465a3391912",
-    "type": "feature",
-    "description": "This release introduces a new parameter to bypasses an API key's expiry conditions and delete the key.",
-    "modules": [
-        "service/location"
-    ]
-}

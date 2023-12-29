@@ -1,8 +1,0 @@
-{
-    "id": "05721c32-2362-45c6-abdf-8846aaa9da78",
-    "type": "feature",
-    "description": "AWS App Runner adds Python 3.11 and Node.js 18 runtimes.",
-    "modules": [
-        "service/apprunner"
-    ]
-}

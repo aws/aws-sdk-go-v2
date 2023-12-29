@@ -1,3 +1,7 @@
+# v1.55.0 (2023-12-29)
+
+* **Feature**: Add LinkEntityArn support for different partitions; Add UnsupportedUserEditionException in UpdateDashboardLinks API; Add support for New Reader Experience Topics
+
 # v1.54.1 (2023-12-18)
 
 * **Documentation**: A docs-only release to add missing entities to the API reference.

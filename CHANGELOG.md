@@ -1,3 +1,13 @@
+# Release (2023-12-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.26.0](service/apprunner/CHANGELOG.md#v1260-2023-12-29)
+  * **Feature**: AWS App Runner adds Python 3.11 and Node.js 18 runtimes.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.34.0](service/location/CHANGELOG.md#v1340-2023-12-29)
+  * **Feature**: This release introduces a new parameter to bypasses an API key's expiry conditions and delete the key.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.55.0](service/quicksight/CHANGELOG.md#v1550-2023-12-29)
+  * **Feature**: Add LinkEntityArn support for different partitions; Add UnsupportedUserEditionException in UpdateDashboardLinks API; Add support for New Reader Experience Topics
+
 # Release (2023-12-28)
 
 ## Module Highlights
