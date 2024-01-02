@@ -98,8 +98,7 @@ func AddInputMiddleware(stack *middleware.Stack, options InputMiddlewareOptions)
 			EnableComputePayloadHash:         inputChecksum.EnableComputePayloadHash,
 			EnableDecodedContentLengthHeader: inputChecksum.EnableDecodedContentLengthHeader,
 		}
-		err = stack.Finalize.Insert(trailerMiddleware, "Retry", middleware.After)
-		if err != nil {
+		if err := stack.Finalize.Insert(trailerMiddleware, "Retry", middleware.After); err != nil {
 			return err
 		}
 	}

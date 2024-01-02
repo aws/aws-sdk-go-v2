@@ -181,7 +181,7 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 				ctx = v4.SetPayloadHash(ctx, streamingUnsignedPayloadTrailerPayloadHash)
 			}
 			m.useTrailer = true
-			ctx = context.WithValue(ctx, useTrailer{}, true)
+			ctx = middleware.WithStackValue(ctx, useTrailer{}, true)
 			return next.HandleFinalize(ctx, in)
 		}
 
@@ -264,8 +264,7 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 ) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
-	v, ok := ctx.Value(useTrailer{}).(bool)
-	if !ok || !v {
+	if enabled, _ := middleware.GetStackValue(ctx, useTrailer{}).(bool); !enabled {
 		return next.HandleFinalize(ctx, in)
 	}
 	req, ok := in.Request.(*smithyhttp.Request)

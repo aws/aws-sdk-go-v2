@@ -19,11 +19,8 @@ import (
 	"testing"
 )
 
-var (
-	isInitialCall = true
-)
-
 type retryClient struct {
+	isRetriedCall bool
 	baseClient aws.HTTPClient
 }
 
@@ -40,8 +37,8 @@ func (m mockConnectionError) Unwrap() error {
 }
 
 func (c *retryClient) Do(req *http.Request) (*http.Response, error) {
-	if isInitialCall {
-		isInitialCall = false
+	if !c.isRetriedCall {
+		c.isRetriedCall = true
 		return nil, mockConnectionError{}
 	}
 	return c.baseClient.Do(req)
@@ -375,9 +372,8 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 
 					if c.retry {
 						opts := s3client.Options()
-						baseClient := opts.HTTPClient
 						opts.HTTPClient = &retryClient{
-							baseClient: baseClient,
+							baseClient: opts.HTTPClient,
 						}
 						s3client = s3.New(opts)
 					}
