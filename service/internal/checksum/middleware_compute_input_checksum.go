@@ -75,7 +75,7 @@ type computeInputPayloadChecksum struct {
 	useTrailer bool
 }
 
-type useTrailer struct {}
+type useTrailer struct{}
 
 // ID provides the middleware's identifier.
 func (m *computeInputPayloadChecksum) ID() string {

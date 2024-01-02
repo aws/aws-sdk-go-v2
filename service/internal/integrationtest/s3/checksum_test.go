@@ -7,16 +7,16 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"
-	"strings"
-	"testing"
-	"net/http"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/logging"
 	"github.com/google/go-cmp/cmp"
+	"io/ioutil"
+	"net/http"
+	"strings"
+	"testing"
 )
 
 var (
@@ -24,7 +24,7 @@ var (
 )
 
 type retryClient struct {
-    baseClient aws.HTTPClient
+	baseClient aws.HTTPClient
 }
 
 type mockConnectionError struct{ err error }
@@ -40,11 +40,11 @@ func (m mockConnectionError) Unwrap() error {
 }
 
 func (c *retryClient) Do(req *http.Request) (*http.Response, error) {
-    if isInitialCall {
-        isInitialCall = false
-        return nil, mockConnectionError{}
-    }
-    return c.baseClient.Do(req)
+	if isInitialCall {
+		isInitialCall = false
+		return nil, mockConnectionError{}
+	}
+	return c.baseClient.Do(req)
 }
 
 func TestInteg_ObjectChecksums(t *testing.T) {

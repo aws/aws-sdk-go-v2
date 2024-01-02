@@ -34,12 +34,19 @@ public final class SdkGoTypes {
         public static final Symbol IsCredentialsProvider = AwsGoDependency.AWS_CORE.valueSymbol("IsCredentialsProvider");
         public static final Symbol AnonymousCredentials = AwsGoDependency.AWS_CORE.pointableSymbol("AnonymousCredentials");
 
+
         public static final class Middleware {
             public static final Symbol GetRequiresLegacyEndpoints = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("GetRequiresLegacyEndpoints");
             public static final Symbol GetSigningName = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("GetSigningName");
             public static final Symbol GetSigningRegion = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("GetSigningRegion");
             public static final Symbol SetSigningName = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("SetSigningName");
             public static final Symbol SetSigningRegion = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("SetSigningRegion");
+        }
+
+
+        public static final class Retry {
+            public static final Symbol Attempt = AwsGoDependency.AWS_RETRY.pointableSymbol("Attempt");
+            public static final Symbol MetricsHeader = AwsGoDependency.AWS_RETRY.pointableSymbol("MetricsHeader");
         }
     }
 

@@ -41,7 +41,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Content-Length": []string{"11"},
 				"Content-Type":   []string{"application/octet-stream"},
 				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
@@ -63,7 +62,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Content-Length": []string{"11"},
 				"Content-Type":   []string{"application/octet-stream"},
 				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
@@ -86,7 +84,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Content-Length": []string{"11"},
 				"Content-Type":   []string{"application/octet-stream"},
 				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
@@ -108,7 +105,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
@@ -127,7 +123,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
@@ -147,7 +142,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 				"Content-Length": []string{"100"},
 			},
@@ -169,7 +163,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Content-Length": []string{"11"},
 				"Content-Type":   []string{"application/octet-stream"},
 				"Host":           []string{"mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com"},
@@ -211,7 +204,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Content-Length": []string{"11"},
 				"Content-Type":   []string{"application/octet-stream"},
 				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
@@ -236,7 +228,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
@@ -324,7 +315,6 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Content-Length": []string{"11"},
 				"Content-Type":   []string{"application/octet-stream"},
 				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
@@ -350,7 +340,6 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Content-Length": []string{"11"},
 				"Content-Type":   []string{"application/octet-stream"},
 				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
@@ -377,7 +366,6 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Content-Length": []string{"11"},
 				"Content-Type":   []string{"application/octet-stream"},
 				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
@@ -403,7 +391,6 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
@@ -426,7 +413,6 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"Amz-Sdk-Request": []string{"attempt=1; max=1"},
 				"Host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
