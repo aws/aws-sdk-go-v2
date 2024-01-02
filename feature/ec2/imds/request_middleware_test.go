@@ -33,6 +33,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 		"api request": {
 			AddMiddleware: func(stack *middleware.Stack, options Options) error {
 				return addAPIRequestMiddleware(stack, options,
+					"TestRequest"
 					func(interface{}) (string, error) {
 						return "/mockPath", nil
 					},
@@ -590,6 +591,7 @@ func TestRequestGetToken(t *testing.T) {
 					func(stack *middleware.Stack, options Options) error {
 						return addAPIRequestMiddleware(stack,
 							client.options.Copy(),
+							"TestRequest"
 							func(interface{}) (string, error) {
 								return "/latest/foo", nil
 							},
