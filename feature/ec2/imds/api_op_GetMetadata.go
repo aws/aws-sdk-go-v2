@@ -58,7 +58,7 @@ func addGetMetadataMiddleware(stack *middleware.Stack, options Options) error {
 		options,
 		"GetMetadata",
 		buildGetMetadataPath,
-		buildGetMetadataOutput,)
+		buildGetMetadataOutput)
 }
 
 func buildGetMetadataPath(params interface{}) (string, error) {

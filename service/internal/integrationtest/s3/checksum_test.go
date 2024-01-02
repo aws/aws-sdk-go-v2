@@ -21,7 +21,7 @@ import (
 
 type retryClient struct {
 	isRetriedCall bool
-	baseClient aws.HTTPClient
+	baseClient    aws.HTTPClient
 }
 
 type mockConnectionError struct{ err error }
