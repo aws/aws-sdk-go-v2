@@ -329,15 +329,8 @@ func AddRetryMiddlewares(stack *smithymiddle.Stack, options AddRetryMiddlewaresO
 	})
 
 	// index retry to before signing, if signing exists
-	_, ok := stack.Finalize.Get("Signing")
-	if !ok {
-		if err := stack.Finalize.Add(attempt, smithymiddle.After); err != nil {
-			return err
-		}
-	} else {
-		if err := stack.Finalize.Insert(attempt, "Signing", smithymiddle.Before); err != nil {
-			return err
-		}
+	if err := stack.Finalize.Insert(attempt, "Signing", smithymiddle.Before); err != nil {
+		return err
 	}
 
 	if err := stack.Finalize.Insert(&MetricsHeader{}, attempt.ID(), smithymiddle.After); err != nil {
