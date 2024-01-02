@@ -21,11 +21,7 @@ func addAPIRequestMiddleware(stack *middleware.Stack,
 	getPath func(interface{}) (string, error),
 	getOutput func(*smithyhttp.Response) (interface{}, error),
 ) (err error) {
-	if err := addProtocolFinalizerMiddlewares(stack, options, operation); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
-
-	err = addRequestMiddleware(stack, options, "GET", getPath, getOutput)
+	err = addRequestMiddleware(stack, options, "GET", operation, getPath, getOutput)
 	if err != nil {
 		return err
 	}
@@ -49,6 +45,7 @@ func addAPIRequestMiddleware(stack *middleware.Stack,
 func addRequestMiddleware(stack *middleware.Stack,
 	options Options,
 	method string,
+	operation string,
 	getPath func(interface{}) (string, error),
 	getOutput func(*smithyhttp.Response) (interface{}, error),
 ) (err error) {
@@ -104,6 +101,10 @@ func addRequestMiddleware(stack *middleware.Stack,
 	err = addSetLoggerMiddleware(stack, options)
 	if err != nil {
 		return err
+	}
+
+	if err := addProtocolFinalizerMiddlewares(stack, options, operation); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
 	// Retry support

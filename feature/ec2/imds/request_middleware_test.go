@@ -33,7 +33,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 		"api request": {
 			AddMiddleware: func(stack *middleware.Stack, options Options) error {
 				return addAPIRequestMiddleware(stack, options,
-					"TestRequest"
+					"TestRequest",
 					func(interface{}) (string, error) {
 						return "/mockPath", nil
 					},
@@ -54,9 +54,13 @@ func TestAddRequestMiddleware(t *testing.T) {
 				"UserAgent",
 			},
 			ExpectFinalize: []string{
+				"ResolveAuthScheme",
+				"GetIdentity",
+				"ResolveEndpointV2",
 				"Retry",
 				"APITokenProvider",
 				"RetryMetricsHeader",
+				"Signing",
 			},
 			ExpectDeserialize: []string{
 				"APITokenProvider",
@@ -67,7 +71,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 
 		"base request": {
 			AddMiddleware: func(stack *middleware.Stack, options Options) error {
-				return addRequestMiddleware(stack, options, "POST",
+				return addRequestMiddleware(stack, options, "POST", "TestRequest",
 					func(interface{}) (string, error) {
 						return "/mockPath", nil
 					},
@@ -88,8 +92,12 @@ func TestAddRequestMiddleware(t *testing.T) {
 				"UserAgent",
 			},
 			ExpectFinalize: []string{
+				"ResolveAuthScheme",
+				"GetIdentity",
+				"ResolveEndpointV2",
 				"Retry",
 				"RetryMetricsHeader",
+				"Signing",
 			},
 			ExpectDeserialize: []string{
 				"OperationDeserializer",
@@ -591,7 +599,7 @@ func TestRequestGetToken(t *testing.T) {
 					func(stack *middleware.Stack, options Options) error {
 						return addAPIRequestMiddleware(stack,
 							client.options.Copy(),
-							"TestRequest"
+							"TestRequest",
 							func(interface{}) (string, error) {
 								return "/latest/foo", nil
 							},
