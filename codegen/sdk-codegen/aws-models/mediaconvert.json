@@ -72,7 +72,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "AAC Profile."
+                "smithy.api#documentation": "Specify the AAC profile. For the widest player compatibility and where higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds parametric stereo, which optimizes for encoding stereo audio at very low bitrates."
             }
         },
         "com.amazonaws.mediaconvert#AacCodingMode": {
@@ -130,7 +130,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Rate Control Mode."
+                "smithy.api#documentation": "Specify the AAC rate control mode. For a constant bitrate: Choose CBR. Your AAC output bitrate will be equal to the value that you choose for Bitrate. For a variable bitrate: Choose VBR. Your AAC output bitrate will vary according to your audio content and the value that you choose for Bitrate quality."
             }
         },
         "com.amazonaws.mediaconvert#AacRawFormat": {
@@ -173,7 +173,7 @@
                 "CodecProfile": {
                     "target": "com.amazonaws.mediaconvert#AacCodecProfile",
                     "traits": {
-                        "smithy.api#documentation": "AAC Profile.",
+                        "smithy.api#documentation": "Specify the AAC profile. For the widest player compatibility and where higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds parametric stereo, which optimizes for encoding stereo audio at very low bitrates.",
                         "smithy.api#jsonName": "codecProfile"
                     }
                 },
@@ -187,7 +187,7 @@
                 "RateControlMode": {
                     "target": "com.amazonaws.mediaconvert#AacRateControlMode",
                     "traits": {
-                        "smithy.api#documentation": "Rate Control Mode.",
+                        "smithy.api#documentation": "Specify the AAC rate control mode. For a constant bitrate: Choose CBR. Your AAC output bitrate will be equal to the value that you choose for Bitrate. For a variable bitrate: Choose VBR. Your AAC output bitrate will vary according to your audio content and the value that you choose for Bitrate quality.",
                         "smithy.api#jsonName": "rateControlMode"
                     }
                 },
@@ -201,7 +201,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.mediaconvert#__integerMin8000Max96000",
                     "traits": {
-                        "smithy.api#documentation": "Specify the Sample rate in Hz. Valid sample rates depend on the Profile and Coding mode that you select. The following list shows valid sample rates for each Profile and Coding mode. * LC Profile, Coding mode 1.0, 2.0, and Receiver Mix: 8000, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 88200, 96000. * LC Profile, Coding mode 5.1: 32000, 44100, 48000, 96000. * HEV1 Profile, Coding mode 1.0 and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1 Profile, Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. * HEV2 Profile, Coding mode 2.0: 22050, 24000, 32000, 44100, 48000.",
+                        "smithy.api#documentation": "Specify the AAC sample rate in samples per second (Hz). Valid sample rates depend on the AAC profile and Coding mode that you select. For a list of supported sample rates, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html",
                         "smithy.api#jsonName": "sampleRate"
                     }
                 },
@@ -215,7 +215,7 @@
                 "VbrQuality": {
                     "target": "com.amazonaws.mediaconvert#AacVbrQuality",
                     "traits": {
-                        "smithy.api#documentation": "VBR Quality Level - Only used if rate_control_mode is VBR.",
+                        "smithy.api#documentation": "Specify the quality of your variable bitrate (VBR) AAC audio. For a list of approximate VBR bitrates, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac_vbr",
                         "smithy.api#jsonName": "vbrQuality"
                     }
                 }
@@ -273,7 +273,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "VBR Quality Level - Only used if rate_control_mode is VBR."
+                "smithy.api#documentation": "Specify the quality of your variable bitrate (VBR) AAC audio. For a list of approximate VBR bitrates, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac_vbr"
             }
         },
         "com.amazonaws.mediaconvert#Ac3BitstreamMode": {
@@ -4751,6 +4751,58 @@
                 "smithy.api#documentation": "Specify the event message box (eMSG) version for ID3 timed metadata in your output.\nFor more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.3 Syntax.\nLeave blank to use the default value Version 0.\nWhen you specify Version 1, you must also set ID3 metadata to Passthrough."
             }
         },
+        "com.amazonaws.mediaconvert#ColorConversion3DLUTSetting": {
+            "type": "structure",
+            "members": {
+                "FileInput": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin14PatternS3CubeCUBEHttpsCubeCUBE",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the input file S3, HTTP, or HTTPS URL for your 3D LUT .cube file. Note that MediaConvert accepts 3D LUT files up to 8MB in size.",
+                        "smithy.api#jsonName": "fileInput"
+                    }
+                },
+                "InputColorSpace": {
+                    "target": "com.amazonaws.mediaconvert#ColorSpace",
+                    "traits": {
+                        "smithy.api#documentation": "Specify which inputs use this 3D LUT, according to their color space.",
+                        "smithy.api#jsonName": "inputColorSpace"
+                    }
+                },
+                "InputMasteringLuminance": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Specify which inputs use this 3D LUT, according to their luminance. To apply this 3D LUT to HDR10 or P3D65 (HDR) inputs with a specific mastering luminance: Enter an integer from 0 to 2147483647, corresponding to the input's Maximum luminance value. To apply this 3D LUT to any input regardless of its luminance: Leave blank, or enter 0.",
+                        "smithy.api#jsonName": "inputMasteringLuminance"
+                    }
+                },
+                "OutputColorSpace": {
+                    "target": "com.amazonaws.mediaconvert#ColorSpace",
+                    "traits": {
+                        "smithy.api#documentation": "Specify which outputs use this 3D LUT, according to their color space.",
+                        "smithy.api#jsonName": "outputColorSpace"
+                    }
+                },
+                "OutputMasteringLuminance": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Specify which outputs use this 3D LUT, according to their luminance. To apply this 3D LUT to HDR10 or P3D65 (HDR) outputs with a specific luminance: Enter an integer from 0 to 2147483647, corresponding to the output's luminance. To apply this 3D LUT to any output regardless of its luminance: Leave blank, or enter 0.",
+                        "smithy.api#jsonName": "outputMasteringLuminance"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Custom 3D lut settings"
+            }
+        },
+        "com.amazonaws.mediaconvert#ColorConversion3DLUTSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#ColorConversion3DLUTSetting"
+            },
+            "traits": {
+                "smithy.api#documentation": "Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs."
+            }
+        },
         "com.amazonaws.mediaconvert#ColorCorrector": {
             "type": "structure",
             "members": {
@@ -4801,6 +4853,13 @@
                     "traits": {
                         "smithy.api#documentation": "Hue in degrees.",
                         "smithy.api#jsonName": "hue"
+                    }
+                },
+                "MaxLuminance": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the maximum mastering display luminance. Enter an integer from 0 to 2147483647, in units of 0.0001 nits. For example, enter 10000000 for 1000 nits.",
+                        "smithy.api#jsonName": "maxLuminance"
                     }
                 },
                 "SampleRangeConversion": {
@@ -5149,6 +5208,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RAW"
+                    }
+                },
+                "Y4M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Y4M"
                     }
                 }
             },
@@ -13727,6 +13792,13 @@
                         "smithy.api#jsonName": "availBlanking"
                     }
                 },
+                "ColorConversion3DLUTSettings": {
+                    "target": "com.amazonaws.mediaconvert#ColorConversion3DLUTSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs.",
+                        "smithy.api#jsonName": "colorConversion3DLUTSettings"
+                    }
+                },
                 "Esam": {
                     "target": "com.amazonaws.mediaconvert#EsamSettings",
                     "traits": {
@@ -13991,6 +14063,13 @@
                     "traits": {
                         "smithy.api#documentation": "Settings for ad avail blanking. Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.",
                         "smithy.api#jsonName": "availBlanking"
+                    }
+                },
+                "ColorConversion3DLUTSettings": {
+                    "target": "com.amazonaws.mediaconvert#ColorConversion3DLUTSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs.",
+                        "smithy.api#jsonName": "colorConversion3DLUTSettings"
                     }
                 },
                 "Esam": {
@@ -22441,6 +22520,229 @@
                 }
             }
         },
+        "com.amazonaws.mediaconvert#UncompressedFourcc": {
+            "type": "enum",
+            "members": {
+                "I420": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "I420"
+                    }
+                },
+                "I422": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "I422"
+                    }
+                },
+                "I444": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "I444"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The four character code for the uncompressed video."
+            }
+        },
+        "com.amazonaws.mediaconvert#UncompressedFramerateControl": {
+            "type": "enum",
+            "members": {
+                "INITIALIZE_FROM_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZE_FROM_SOURCE"
+                    }
+                },
+                "SPECIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPECIFIED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction."
+            }
+        },
+        "com.amazonaws.mediaconvert#UncompressedFramerateConversionAlgorithm": {
+            "type": "enum",
+            "members": {
+                "DUPLICATE_DROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE_DROP"
+                    }
+                },
+                "INTERPOLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERPOLATE"
+                    }
+                },
+                "FRAMEFORMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRAMEFORMER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. For numerically simple conversions, such as 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate. For numerically complex conversions, to avoid stutter: Choose Interpolate. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence: Choose FrameFormer to do motion-compensated interpolation. FrameFormer uses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost. When you choose FrameFormer, your input video resolution must be at least 128x96."
+            }
+        },
+        "com.amazonaws.mediaconvert#UncompressedInterlaceMode": {
+            "type": "enum",
+            "members": {
+                "INTERLACED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERLACED"
+                    }
+                },
+                "PROGRESSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROGRESSIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Optional. Choose the scan line type for this output. If you don't specify a value, MediaConvert will create a progressive output."
+            }
+        },
+        "com.amazonaws.mediaconvert#UncompressedScanTypeConversionMode": {
+            "type": "enum",
+            "members": {
+                "INTERLACED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERLACED"
+                    }
+                },
+                "INTERLACED_OPTIMIZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERLACED_OPTIMIZE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing, for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine to None or Soft. You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode to a value other than Progressive."
+            }
+        },
+        "com.amazonaws.mediaconvert#UncompressedSettings": {
+            "type": "structure",
+            "members": {
+                "Fourcc": {
+                    "target": "com.amazonaws.mediaconvert#UncompressedFourcc",
+                    "traits": {
+                        "smithy.api#documentation": "The four character code for the uncompressed video.",
+                        "smithy.api#jsonName": "fourcc"
+                    }
+                },
+                "FramerateControl": {
+                    "target": "com.amazonaws.mediaconvert#UncompressedFramerateControl",
+                    "traits": {
+                        "smithy.api#documentation": "Use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction.",
+                        "smithy.api#jsonName": "framerateControl"
+                    }
+                },
+                "FramerateConversionAlgorithm": {
+                    "target": "com.amazonaws.mediaconvert#UncompressedFramerateConversionAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. For numerically simple conversions, such as 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate. For numerically complex conversions, to avoid stutter: Choose Interpolate. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence: Choose FrameFormer to do motion-compensated interpolation. FrameFormer uses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost. When you choose FrameFormer, your input video resolution must be at least 128x96.",
+                        "smithy.api#jsonName": "framerateConversionAlgorithm"
+                    }
+                },
+                "FramerateDenominator": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.",
+                        "smithy.api#jsonName": "framerateDenominator"
+                    }
+                },
+                "FramerateNumerator": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.",
+                        "smithy.api#jsonName": "framerateNumerator"
+                    }
+                },
+                "InterlaceMode": {
+                    "target": "com.amazonaws.mediaconvert#UncompressedInterlaceMode",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Choose the scan line type for this output. If you don't specify a value, MediaConvert will create a progressive output.",
+                        "smithy.api#jsonName": "interlaceMode"
+                    }
+                },
+                "ScanTypeConversionMode": {
+                    "target": "com.amazonaws.mediaconvert#UncompressedScanTypeConversionMode",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing, for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine to None or Soft. You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode to a value other than Progressive.",
+                        "smithy.api#jsonName": "scanTypeConversionMode"
+                    }
+                },
+                "SlowPal": {
+                    "target": "com.amazonaws.mediaconvert#UncompressedSlowPal",
+                    "traits": {
+                        "smithy.api#documentation": "Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Framerate to 25.",
+                        "smithy.api#jsonName": "slowPal"
+                    }
+                },
+                "Telecine": {
+                    "target": "com.amazonaws.mediaconvert#UncompressedTelecine",
+                    "traits": {
+                        "smithy.api#documentation": "When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.",
+                        "smithy.api#jsonName": "telecine"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Required when you set Codec, under VideoDescription>CodecSettings to the value UNCOMPRESSED."
+            }
+        },
+        "com.amazonaws.mediaconvert#UncompressedSlowPal": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Framerate to 25."
+            }
+        },
+        "com.amazonaws.mediaconvert#UncompressedTelecine": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "HARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HARD"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture."
+            }
+        },
         "com.amazonaws.mediaconvert#UntagResource": {
             "type": "operation",
             "input": {
@@ -23104,6 +23406,12 @@
                         "smithy.api#enumValue": "PRORES"
                     }
                 },
+                "UNCOMPRESSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNCOMPRESSED"
+                    }
+                },
                 "VC3": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -23192,6 +23500,13 @@
                         "smithy.api#jsonName": "proresSettings"
                     }
                 },
+                "UncompressedSettings": {
+                    "target": "com.amazonaws.mediaconvert#UncompressedSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Required when you set Codec, under VideoDescription>CodecSettings to the value UNCOMPRESSED.",
+                        "smithy.api#jsonName": "uncompressedSettings"
+                    }
+                },
                 "Vc3Settings": {
                     "target": "com.amazonaws.mediaconvert#Vc3Settings",
                     "traits": {
@@ -23222,7 +23537,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Video codec settings contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec. For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings"
+                "smithy.api#documentation": "Video codec settings contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec. For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * UNCOMPRESSED, UncompressedSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings"
             }
         },
         "com.amazonaws.mediaconvert#VideoDescription": {
@@ -23245,7 +23560,7 @@
                 "CodecSettings": {
                     "target": "com.amazonaws.mediaconvert#VideoCodecSettings",
                     "traits": {
-                        "smithy.api#documentation": "Video codec settings contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec. For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings",
+                        "smithy.api#documentation": "Video codec settings contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec. For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * UNCOMPRESSED, UncompressedSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings",
                         "smithy.api#jsonName": "codecSettings"
                     }
                 },
@@ -23547,6 +23862,13 @@
                     "traits": {
                         "smithy.api#documentation": "Use these settings to provide HDR 10 metadata that is missing or inaccurate in your input video. Appropriate values vary depending on the input video and must be provided by a color grader. The color grader generates these values during the HDR 10 mastering process. The valid range for each of these settings is 0 to 50,000. Each increment represents 0.00002 in CIE1931 color coordinate. Related settings - When you specify these values, you must also set Color space to HDR 10. To specify whether the the values you specify here take precedence over the values in the metadata of your input file, set Color space usage. To specify whether color metadata is included in an output, set Color metadata. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.",
                         "smithy.api#jsonName": "hdr10Metadata"
+                    }
+                },
+                "MaxLuminance": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the maximum mastering display luminance. Enter an integer from 0 to 2147483647, in units of 0.0001 nits. For example, enter 10000000 for 1000 nits.",
+                        "smithy.api#jsonName": "maxLuminance"
                     }
                 },
                 "PadVideo": {
@@ -26351,6 +26673,15 @@
                     "min": 14
                 },
                 "smithy.api#pattern": "^((s3://(.*?)\\.(bmp|BMP|png|PNG|tga|TGA))|(https?://(.*?)\\.(bmp|BMP|png|PNG|tga|TGA)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
+            }
+        },
+        "com.amazonaws.mediaconvert#__stringMin14PatternS3CubeCUBEHttpsCubeCUBE": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 14
+                },
+                "smithy.api#pattern": "^((s3://(.*?)\\.(cube|CUBE))|(https?://(.*?)\\.(cube|CUBE)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
             }
         },
         "com.amazonaws.mediaconvert#__stringMin14PatternS3Mov09PngHttpsMov09Png": {

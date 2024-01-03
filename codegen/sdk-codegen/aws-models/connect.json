@@ -354,7 +354,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines agent hierarchy group levels which can be used to filter search results. Important: Agent hierarchy group level information in search result is a snapshot, it does not represent current agent hierarchy who handled the contact.</p>"
+                "smithy.api#documentation": "<p>A structure that defines search criteria for contacts using agent hierarchy group levels.\n   For more information about agent hierarchies, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html\">Set Up Agent Hierarchies</a> in the\n    <i>Amazon Connect Administrator Guide</i>.</p>"
             }
         },
         "com.amazonaws.connect#AgentInfo": {
@@ -4586,12 +4586,12 @@
                 "Transcript": {
                     "target": "com.amazonaws.connect#Transcript",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that defines filters can be used to search with text within an Amazon Connect Contact Lens analyzed transcript.</p>"
+                        "smithy.api#documentation": "<p>Search criteria based on transcript analyzed by Amazon Connect Contact Lens.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines filters can be used to search within outputs analyzed by Amazon Connect Contact Lens in a contact.</p>"
+                "smithy.api#documentation": "<p>A structure that defines search criteria for contacts using analysis outputs from Amazon\n   Connect Contact Lens.</p>"
             }
         },
         "com.amazonaws.connect#ContactDataRequest": {
@@ -5157,7 +5157,7 @@
                 "Arn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact.</p>"
                     }
                 },
                 "Id": {
@@ -5205,7 +5205,7 @@
                 "InitiationTimestamp": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time this contact was initiated, in UTC time. For INBOUND, this is when the contact arrived. For OUTBOUND, this is when the agent began dialing. For CALLBACK, this is when the callback contact was created. For TRANSFER and QUEUE_TRANSFER, this is when the transfer was initiated. For API, this is when the request arrived. For EXTERNAL_OUTBOUND, this is when the agent started dialing the external participant. For MONITOR, this is when the supervisor started listening to a contact.</p>"
+                        "smithy.api#documentation": "<p>The date and time this contact was initiated, in UTC time. For <code>INBOUND</code>, this is\n   when the contact arrived. For <code>OUTBOUND</code>, this is when the agent began dialing. For\n    <code>CALLBACK</code>, this is when the callback contact was created. For <code>TRANSFER</code>\n   and <code>QUEUE_TRANSFER</code>, this is when the transfer was initiated. For API, this is when\n   the request arrived. For <code>EXTERNAL_OUTBOUND</code>, this is when the agent started dialing\n   the external participant. For <code>MONITOR</code>, this is when the supervisor started listening\n   to a contact.</p>"
                     }
                 },
                 "DisconnectTimestamp": {
@@ -13973,7 +13973,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1024
+                    "max": 3072
                 }
             }
         },
@@ -28135,14 +28135,14 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance</p>",
+                        "smithy.api#documentation": "<p>The identifier of Amazon Connect instance. You can find the instance ID in the Amazon\n   Resource Name (ARN) of the instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TimeRange": {
                     "target": "com.amazonaws.connect#SearchContactsTimeRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time range that you want to search results</p>",
+                        "smithy.api#documentation": "<p>Time range that you want to search results.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -28161,13 +28161,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#LargeNextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>"
                     }
                 },
                 "Sort": {
                     "target": "com.amazonaws.connect#Sort",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a field to sort by and a sort order</p>"
+                        "smithy.api#documentation": "<p>Specifies a field to sort by and a sort order.</p>"
                     }
                 }
             },
@@ -28208,7 +28208,7 @@
                 "Type": {
                     "target": "com.amazonaws.connect#SearchContactsTimeRangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of timestamp to search</p>",
+                        "smithy.api#documentation": "<p>The type of timestamp to search.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -28228,7 +28228,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure of time range that you want to search results</p>"
+                "smithy.api#documentation": "<p>A structure of time range that you want to search results.</p>"
             }
         },
         "com.amazonaws.connect#SearchContactsTimeRangeType": {
@@ -28266,48 +28266,48 @@
                 "AgentIds": {
                     "target": "com.amazonaws.connect#AgentResourceIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of agent ids</p>"
+                        "smithy.api#documentation": "<p>The identifiers of agents who handled the contacts.</p>"
                     }
                 },
                 "AgentHierarchyGroups": {
                     "target": "com.amazonaws.connect#AgentHierarchyGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>The agent hierarchy groups</p>"
+                        "smithy.api#documentation": "<p>The agent hierarchy groups of the agent at the time of handling the contact.</p>"
                     }
                 },
                 "Channels": {
                     "target": "com.amazonaws.connect#ChannelList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of channels</p>"
+                        "smithy.api#documentation": "<p>The list of channels associated with contacts.</p>"
                     }
                 },
                 "ContactAnalysis": {
                     "target": "com.amazonaws.connect#ContactAnalysis",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ContactAnalysis object used in search criteria</p>"
+                        "smithy.api#documentation": "<p>Search criteria based on analysis outputs from Amazon Connect Contact Lens.</p>"
                     }
                 },
                 "InitiationMethods": {
                     "target": "com.amazonaws.connect#InitiationMethodList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of initiaton methods</p>"
+                        "smithy.api#documentation": "<p>The list of initiation methods associated with contacts.</p>"
                     }
                 },
                 "QueueIds": {
                     "target": "com.amazonaws.connect#QueueIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of queue ids.</p>"
+                        "smithy.api#documentation": "<p>The list of queue IDs associated with contacts.</p>"
                     }
                 },
                 "SearchableContactAttributes": {
                     "target": "com.amazonaws.connect#SearchableContactAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SearchableContactAttributes object used in search criteria</p>"
+                        "smithy.api#documentation": "<p>The search criteria based on user-defined contact attributes that have been configured for\n   contact search. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html\">Search by customer contact\n    attributes</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <important>\n            <p>To use <code>SearchableContactAttributes</code> in a search request, the\n     <code>GetContactAttributes</code> action is required to perform an API request. For more\n    information, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions\">https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions</a>Actions defined by Amazon Connect.</p>\n         </important>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure of search criteria to be used to return contacts</p>"
+                "smithy.api#documentation": "<p>A structure of search criteria to be used to return contacts.</p>"
             }
         },
         "com.amazonaws.connect#SearchHoursOfOperations": {
@@ -29406,19 +29406,19 @@
                 "Criteria": {
                     "target": "com.amazonaws.connect#SearchableContactAttributesCriteriaList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of searhale contact attribute criteria</p>",
+                        "smithy.api#documentation": "<p>The list of criteria based on user-defined contact attributes that are configured for\n   contact search.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MatchType": {
                     "target": "com.amazonaws.connect#SearchContactsMatchType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The match type of multiple searchable contact attributes criteria.</p>"
+                        "smithy.api#documentation": "<p>The match type combining search criteria using multiple searchable contact\n   attributes.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines searchable contact attributes which can be used to filter search results. </p>"
+                "smithy.api#documentation": "<p>A structure that defines search criteria based on user-defined contact attributes that are\n   configured for contact search.</p>"
             }
         },
         "com.amazonaws.connect#SearchableContactAttributesCriteria": {
@@ -29427,20 +29427,20 @@
                 "Key": {
                     "target": "com.amazonaws.connect#SearchableContactAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The searchable contact attribute key</p>",
+                        "smithy.api#documentation": "<p>The key containing a searchable user-defined contact attribute.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Values": {
                     "target": "com.amazonaws.connect#SearchableContactAttributeValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of contact attribute values used to filter search results.</p>",
+                        "smithy.api#documentation": "<p>The list of values to search for within a user-defined contact attribute.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The criteria of searchable contact attributes.</p>"
+                "smithy.api#documentation": "<p>The search criteria based on user-defned contact attribute key and values to search\n   on.</p>"
             }
         },
         "com.amazonaws.connect#SearchableContactAttributesCriteriaList": {
@@ -30078,7 +30078,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines the sort by and a sort order</p>"
+                "smithy.api#documentation": "<p>A structure that defineds the field name to sort by and a sort order.</p>"
             }
         },
         "com.amazonaws.connect#SortOrder": {
@@ -32615,19 +32615,19 @@
                 "Criteria": {
                     "target": "com.amazonaws.connect#TranscriptCriteriaList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of transcript search criteria</p>",
+                        "smithy.api#documentation": "<p>The list of search criteria based on Contact Lens conversational analytics\n   transcript.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MatchType": {
                     "target": "com.amazonaws.connect#SearchContactsMatchType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The match type of multiple transcript criteira</p>"
+                        "smithy.api#documentation": "<p>The match type combining search criteria using multiple transcript criteria.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The transcript object used to search results.</p>"
+                "smithy.api#documentation": "<p>A structure that defines search criteria and matching logic to search for contacts by\n   matching text with transcripts analyzed by Amazon Connect Contact Lens.</p>"
             }
         },
         "com.amazonaws.connect#TranscriptCriteria": {
@@ -32650,13 +32650,13 @@
                 "MatchType": {
                     "target": "com.amazonaws.connect#SearchContactsMatchType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The match type of search texts in a transcript criteria.</p>",
+                        "smithy.api#documentation": "<p>The match type combining search criteria using multiple search texts in a transcript\n   criteria.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The transcript criteria used to search</p>"
+                "smithy.api#documentation": "<p>A structure that defines search criteria base on words or phrases, participants in the\n   Contact Lens conversational analytics transcript.</p>"
             }
         },
         "com.amazonaws.connect#TranscriptCriteriaList": {
@@ -37116,7 +37116,7 @@
                 "StringCondition": {
                     "target": "com.amazonaws.connect#StringCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <note>\n            <p>The currently supported values for <code>FieldName</code> are <code>name</code>,\n     <code>description</code>, and <code>resourceID</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <p>The currently supported values for <code>FieldName</code> are <code>username</code>,\n    <code>firstname</code>, <code>lastname</code>, <code>resourceId</code>,\n    <code>routingProfileId</code>, <code>securityProfileId</code>, <code>agentGroupId</code>, and\n    <code>agentGroupPathIds</code>.</p>"
                     }
                 },
                 "HierarchyGroupCondition": {
