@@ -152,10 +152,10 @@ func addProtocolFinalizerMiddlewares(stack *smithymiddleware.Stack, options Opti
 		return fmt.Errorf("add ResolveAuthScheme: %w", err)
 	}
 	if err := stack.Finalize.Insert(&getIdentityMiddleware{options: options}, "ResolveAuthScheme", smithymiddleware.After); err != nil {
-		return fmt.Errorf("add GetIdentity: %v", err)
+		return fmt.Errorf("add GetIdentity: %w", err)
 	}
 	if err := stack.Finalize.Insert(&resolveEndpointV2Middleware{options: options}, "GetIdentity", smithymiddleware.After); err != nil {
-		return fmt.Errorf("add ResolveEndpointV2: %v", err)
+		return fmt.Errorf("add ResolveEndpointV2: %w", err)
 	}
 	if err := stack.Finalize.Insert(&signRequestMiddleware{}, "ResolveEndpointV2", smithymiddleware.After); err != nil {
 		return fmt.Errorf("add Signing: %w", err)

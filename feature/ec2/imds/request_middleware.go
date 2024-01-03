@@ -104,7 +104,7 @@ func addRequestMiddleware(stack *middleware.Stack,
 	}
 
 	if err := addProtocolFinalizerMiddlewares(stack, options, operation); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
+		return fmt.Errorf("add protocol finalizers: %w", err)
 	}
 
 	// Retry support
@@ -295,10 +295,10 @@ func addProtocolFinalizerMiddlewares(stack *middleware.Stack, options Options, o
 		return fmt.Errorf("add ResolveAuthScheme: %w", err)
 	}
 	if err := stack.Finalize.Insert(&getIdentityMiddleware{options: options}, "ResolveAuthScheme", middleware.After); err != nil {
-		return fmt.Errorf("add GetIdentity: %v", err)
+		return fmt.Errorf("add GetIdentity: %w", err)
 	}
 	if err := stack.Finalize.Insert(&resolveEndpointV2Middleware{options: options}, "GetIdentity", middleware.After); err != nil {
-		return fmt.Errorf("add ResolveEndpointV2: %v", err)
+		return fmt.Errorf("add ResolveEndpointV2: %w", err)
 	}
 	if err := stack.Finalize.Insert(&signRequestMiddleware{}, "ResolveEndpointV2", middleware.After); err != nil {
 		return fmt.Errorf("add Signing: %w", err)
