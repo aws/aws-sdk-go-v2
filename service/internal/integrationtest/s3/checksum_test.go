@@ -29,8 +29,8 @@ type mockConnectionError struct{ err error }
 func (m mockConnectionError) ConnectionError() bool {
 	return true
 }
-func (m mockConnectionError) Error() error {
-	return fmt.Errorf("request error: %w", m.err)
+func (m mockConnectionError) Error() string {
+	return fmt.Sprintf("request error: %v", m.err)
 }
 func (m mockConnectionError) Unwrap() error {
 	return m.err
