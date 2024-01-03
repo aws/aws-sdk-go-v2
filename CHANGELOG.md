@@ -1,3 +1,11 @@
+# Release (2024-01-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.88.0](service/connect/CHANGELOG.md#v1880-2024-01-03)
+  * **Feature**: Amazon Connect, Contact Lens Evaluation API increase evaluation notes max length to 3072.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.49.0](service/mediaconvert/CHANGELOG.md#v1490-2024-01-03)
+  * **Feature**: This release includes video engine updates including HEVC improvements, support for ingesting VP9 encoded video in MP4 containers, and support for user-specified 3D LUTs.
+
 # Release (2023-12-29)
 
 ## Module Highlights
