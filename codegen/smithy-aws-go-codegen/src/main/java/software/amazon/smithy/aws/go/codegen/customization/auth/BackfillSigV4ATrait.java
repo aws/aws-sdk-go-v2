@@ -16,9 +16,9 @@
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.aws.traits.auth.SigV4ATrait;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.go.codegen.GoSettings;
-import software.amazon.smithy.go.codegen.auth.SigV4aTrait;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -28,8 +28,8 @@ import software.amazon.smithy.utils.SetUtils;
 /**
  * Throws the aws.auth#sigv4a trait onto the service such that auth codegen picks it up.
  */
-public class BackfillSigV4aTrait implements GoIntegration {
-    private boolean isBackfillSigV4aService(ServiceShape service) {
+public class BackfillSigV4ATrait implements GoIntegration {
+    private boolean isBackfillService(ServiceShape service) {
         final String sdkId = service.expectTrait(ServiceTrait.class).getSdkId();
         return sdkId.equalsIgnoreCase("s3") || sdkId.equalsIgnoreCase("eventbridge");
     };
@@ -37,15 +37,18 @@ public class BackfillSigV4aTrait implements GoIntegration {
     @Override
     public Model preprocessModel(Model model, GoSettings settings) {
         ServiceShape service = settings.getService(model);
-        if (!isBackfillSigV4aService(service)) {
+        if (!isBackfillService(service)) {
             return model;
         }
 
+        var v4a = SigV4ATrait.builder()
+                .name(service.expectTrait(SigV4Trait.class).getName())
+                .build();
         return model.toBuilder()
                 .addShape(
                         service.toBuilder()
-                                .addTrait(new SigV4aTrait())
-                                .addTrait(new AuthTrait(SetUtils.of(SigV4Trait.ID, SigV4aTrait.ID)))
+                                .addTrait(v4a)
+                                .addTrait(new AuthTrait(SetUtils.of(SigV4Trait.ID, SigV4ATrait.ID)))
                                 .build()
                 )
                 .build();

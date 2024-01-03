@@ -16,16 +16,16 @@
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
 import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
+import software.amazon.smithy.aws.traits.auth.SigV4ATrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
-import software.amazon.smithy.go.codegen.auth.SigV4aTrait;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
-import software.amazon.smithy.go.codegen.integration.auth.SigV4aDefinition;
+import software.amazon.smithy.go.codegen.integration.auth.SigV4ADefinition;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
@@ -43,7 +43,7 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
     public List<RuntimeClientPlugin> getClientPlugins() {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
-                        .addAuthSchemeDefinition(SigV4aTrait.ID, new AwsSigV4a())
+                        .addAuthSchemeDefinition(SigV4ATrait.ID, new AwsSigV4A())
                         .build()
         );
     }
@@ -52,12 +52,12 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
     public void writeAdditionalFiles(
             GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator
     ) {
-        if (settings.getService(model).hasTrait(SigV4aTrait.class)) {
+        if (settings.getService(model).hasTrait(SigV4ATrait.class)) {
             goDelegator.useFileWriter("options.go", settings.getModuleName(), generateAdditionalSource());
         }
     }
 
-    public static class AwsSigV4a extends SigV4aDefinition {
+    public static class AwsSigV4A extends SigV4ADefinition {
         @Override
         public GoWriter.Writable generateDefaultAuthScheme() {
             return goTemplate("""
@@ -67,7 +67,7 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
                         LogSigning: options.ClientLogMode.IsSigning(),
                     })""",
                     SdkGoTypes.Internal.Auth.NewHTTPAuthScheme,
-                    SigV4aTrait.ID.toString(),
+                    SigV4ATrait.ID.toString(),
                     SdkGoTypes.Internal.V4A.SignerAdapter);
         }
 
