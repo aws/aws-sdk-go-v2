@@ -773,8 +773,15 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 						EnableComputePayloadHash:         true,
 						EnableDecodedContentLengthHeader: true,
 					}
+
 					if c.optionsFn != nil {
 						c.optionsFn(m)
+					}
+					trailerMiddleware := &addInputChecksumTrailer{
+						EnableTrailingChecksum:           m.EnableTrailingChecksum,
+						RequireChecksum:                  m.RequireChecksum,
+						EnableComputePayloadHash:         m.EnableComputePayloadHash,
+						EnableDecodedContentLengthHeader: m.EnableDecodedContentLengthHeader,
 					}
 
 					ctx := context.Background()
@@ -809,6 +816,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 
 					// Build middleware
 					stack.Finalize.Add(m, middleware.After)
+					stack.Finalize.Add(trailerMiddleware, middleware.After)
 
 					// Validate defer to finalize was performed as expected
 					stack.Finalize.Add(middleware.FinalizeMiddlewareFunc(

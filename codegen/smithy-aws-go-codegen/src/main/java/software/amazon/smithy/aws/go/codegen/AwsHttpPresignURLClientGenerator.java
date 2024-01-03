@@ -375,6 +375,14 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                             if _, ok := stack.Finalize.Get(($1P)(nil).ID()); ok {
                                 stack.Finalize.Remove(($1P)(nil).ID())
                             }""", SdkGoTypes.ServiceInternal.AcceptEncoding.DisableGzip);
+                    writer.write("""
+                        if _, ok := stack.Finalize.Get(($1P)(nil).ID()); ok {
+                            stack.Finalize.Remove(($1P)(nil).ID())
+                        }""", SdkGoTypes.Aws.Retry.Attempt);
+                    writer.write("""
+                        if _, ok := stack.Finalize.Get(($1P)(nil).ID()); ok {
+                            stack.Finalize.Remove(($1P)(nil).ID())
+                        }""", SdkGoTypes.Aws.Retry.MetricsHeader);
                     writer.write("stack.Deserialize.Clear()");
                     writer.write("stack.Build.Remove(($P)(nil).ID())", requestInvocationID);
                     writer.write("stack.Build.Remove($S)", "UserAgent");
