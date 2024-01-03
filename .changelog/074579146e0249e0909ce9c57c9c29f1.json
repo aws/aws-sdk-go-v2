@@ -1,0 +1,8 @@
+{
+    "id": "07457914-6e02-49e0-909c-e9c57c9c29f1",
+    "type": "documentation",
+    "description": "removing incorrect doc string from config",
+    "modules": [
+        "."
+    ]
+}
