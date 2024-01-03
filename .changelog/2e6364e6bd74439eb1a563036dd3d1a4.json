@@ -1,0 +1,8 @@
+{
+    "id": "2e6364e6-bd74-439e-b1a5-63036dd3d1a4",
+    "type": "feature",
+    "description": "This release includes video engine updates including HEVC improvements, support for ingesting VP9 encoded video in MP4 containers, and support for user-specified 3D LUTs.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

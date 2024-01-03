@@ -34,7 +34,12 @@ type AacSettings struct {
 	// on Bitrate control mode and Profile.
 	Bitrate *int32
 
-	// AAC Profile.
+	// Specify the AAC profile. For the widest player compatibility and where higher
+	// bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved
+	// audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds
+	// spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE
+	// v2) adds parametric stereo, which optimizes for encoding stereo audio at very
+	// low bitrates.
 	CodecProfile AacCodecProfile
 
 	// The Coding mode that you specify determines the number of audio channels and
@@ -47,28 +52,29 @@ type AacSettings struct {
 	// channels, C, L, R, Ls, Rs, LFE.
 	CodingMode AacCodingMode
 
-	// Rate Control Mode.
+	// Specify the AAC rate control mode. For a constant bitrate: Choose CBR. Your AAC
+	// output bitrate will be equal to the value that you choose for Bitrate. For a
+	// variable bitrate: Choose VBR. Your AAC output bitrate will vary according to
+	// your audio content and the value that you choose for Bitrate quality.
 	RateControlMode AacRateControlMode
 
 	// Enables LATM/LOAS AAC output. Note that if you use LATM/LOAS AAC in an output,
 	// you must choose "No container" for the output container.
 	RawFormat AacRawFormat
 
-	// Specify the Sample rate in Hz. Valid sample rates depend on the Profile and
-	// Coding mode that you select. The following list shows valid sample rates for
-	// each Profile and Coding mode. * LC Profile, Coding mode 1.0, 2.0, and Receiver
-	// Mix: 8000, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 88200, 96000. * LC
-	// Profile, Coding mode 5.1: 32000, 44100, 48000, 96000. * HEV1 Profile, Coding
-	// mode 1.0 and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1 Profile,
-	// Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. * HEV2 Profile, Coding mode
-	// 2.0: 22050, 24000, 32000, 44100, 48000.
+	// Specify the AAC sample rate in samples per second (Hz). Valid sample rates
+	// depend on the AAC profile and Coding mode that you select. For a list of
+	// supported sample rates, see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html
 	SampleRate *int32
 
 	// Use MPEG-2 AAC instead of MPEG-4 AAC audio for raw or MPEG-2 Transport Stream
 	// containers.
 	Specification AacSpecification
 
-	// VBR Quality Level - Only used if rate_control_mode is VBR.
+	// Specify the quality of your variable bitrate (VBR) AAC audio. For a list of
+	// approximate VBR bitrates, see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac_vbr
 	VbrQuality AacVbrQuality
 
 	noSmithyDocumentSerde
@@ -1808,6 +1814,35 @@ type CmfcSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Custom 3D lut settings
+type ColorConversion3DLUTSetting struct {
+
+	// Specify the input file S3, HTTP, or HTTPS URL for your 3D LUT .cube file. Note
+	// that MediaConvert accepts 3D LUT files up to 8MB in size.
+	FileInput *string
+
+	// Specify which inputs use this 3D LUT, according to their color space.
+	InputColorSpace ColorSpace
+
+	// Specify which inputs use this 3D LUT, according to their luminance. To apply
+	// this 3D LUT to HDR10 or P3D65 (HDR) inputs with a specific mastering luminance:
+	// Enter an integer from 0 to 2147483647, corresponding to the input's Maximum
+	// luminance value. To apply this 3D LUT to any input regardless of its luminance:
+	// Leave blank, or enter 0.
+	InputMasteringLuminance *int32
+
+	// Specify which outputs use this 3D LUT, according to their color space.
+	OutputColorSpace ColorSpace
+
+	// Specify which outputs use this 3D LUT, according to their luminance. To apply
+	// this 3D LUT to HDR10 or P3D65 (HDR) outputs with a specific luminance: Enter an
+	// integer from 0 to 2147483647, corresponding to the output's luminance. To apply
+	// this 3D LUT to any output regardless of its luminance: Leave blank, or enter 0.
+	OutputMasteringLuminance *int32
+
+	noSmithyDocumentSerde
+}
+
 // Settings for color correction.
 type ColorCorrector struct {
 
@@ -1864,6 +1899,10 @@ type ColorCorrector struct {
 
 	// Hue in degrees.
 	Hue *int32
+
+	// Specify the maximum mastering display luminance. Enter an integer from 0 to
+	// 2147483647, in units of 0.0001 nits. For example, enter 10000000 for 1000 nits.
+	MaxLuminance *int32
 
 	// Specify how MediaConvert limits the color sample range for this output. To
 	// create a limited range output from a full range input: Choose Limited range
@@ -4995,6 +5034,10 @@ type JobSettings struct {
 	// and audio muted during SCTE-35 triggered ad avails.
 	AvailBlanking *AvailBlanking
 
+	// Use 3D LUTs to specify custom color mapping behavior when you convert from one
+	// color space into another. You can include up to 8 different 3D LUTs.
+	ColorConversion3DLUTSettings []ColorConversion3DLUTSetting
+
 	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad
 	// insertion, you can ignore these settings.
 	Esam *EsamSettings
@@ -5140,6 +5183,10 @@ type JobTemplateSettings struct {
 	// Settings for ad avail blanking. Video can be blanked or overlaid with an image,
 	// and audio muted during SCTE-35 triggered ad avails.
 	AvailBlanking *AvailBlanking
+
+	// Use 3D LUTs to specify custom color mapping behavior when you convert from one
+	// color space into another. You can include up to 8 different 3D LUTs.
+	ColorConversion3DLUTSettings []ColorConversion3DLUTSetting
 
 	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad
 	// insertion, you can ignore these settings.
@@ -7500,6 +7547,85 @@ type TtmlDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Required when you set Codec, under VideoDescription>CodecSettings to the value
+// UNCOMPRESSED.
+type UncompressedSettings struct {
+
+	// The four character code for the uncompressed video.
+	Fourcc UncompressedFourcc
+
+	// Use the Framerate setting to specify the frame rate for this output. If you
+	// want to keep the same frame rate as the input video, choose Follow source. If
+	// you want to do frame rate conversion, choose a frame rate from the dropdown list
+	// or choose Custom. The framerates shown in the dropdown list are decimal
+	// approximations of fractions. If you choose Custom, specify your frame rate as a
+	// fraction.
+	FramerateControl UncompressedFramerateControl
+
+	// Choose the method that you want MediaConvert to use when increasing or
+	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
+	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
+	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// results in a smooth picture, but might introduce undesirable video artifacts.
+	// For complex frame rate conversions, especially if your source video has already
+	// been converted from its original cadence: Choose FrameFormer to do
+	// motion-compensated interpolation. FrameFormer uses the best conversion method
+	// frame by frame. Note that using FrameFormer increases the transcoding time and
+	// incurs a significant add-on cost. When you choose FrameFormer, your input video
+	// resolution must be at least 128x96.
+	FramerateConversionAlgorithm UncompressedFramerateConversionAlgorithm
+
+	// When you use the API for transcode jobs that use frame rate conversion, specify
+	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
+	// FramerateDenominator to specify the denominator of this fraction. In this
+	// example, use 1001 for the value of FramerateDenominator. When you use the
+	// console for transcode jobs that use frame rate conversion, provide the value as
+	// a decimal number for Framerate. In this example, specify 23.976.
+	FramerateDenominator *int32
+
+	// When you use the API for transcode jobs that use frame rate conversion, specify
+	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
+	// FramerateNumerator to specify the numerator of this fraction. In this example,
+	// use 24000 for the value of FramerateNumerator. When you use the console for
+	// transcode jobs that use frame rate conversion, provide the value as a decimal
+	// number for Framerate. In this example, specify 23.976.
+	FramerateNumerator *int32
+
+	// Optional. Choose the scan line type for this output. If you don't specify a
+	// value, MediaConvert will create a progressive output.
+	InterlaceMode UncompressedInterlaceMode
+
+	// Use this setting for interlaced outputs, when your output frame rate is half of
+	// your input frame rate. In this situation, choose Optimized interlacing to create
+	// a better quality interlaced output. In this case, each progressive frame from
+	// the input corresponds to an interlaced field in the output. Keep the default
+	// value, Basic interlacing, for all other output frame rates. With basic
+	// interlacing, MediaConvert performs any frame rate conversion first and then
+	// interlaces the frames. When you choose Optimized interlacing and you set your
+	// output frame rate to a value that isn't suitable for optimized interlacing,
+	// MediaConvert automatically falls back to basic interlacing. Required settings:
+	// To use optimized interlacing, you must set Telecine to None or Soft. You can't
+	// use optimized interlacing for hard telecine outputs. You must also set Interlace
+	// mode to a value other than Progressive.
+	ScanTypeConversionMode UncompressedScanTypeConversionMode
+
+	// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
+	// second (fps). Enable slow PAL to create a 25 fps output by relabeling the video
+	// frames and resampling your audio. Note that enabling this setting will slightly
+	// reduce the duration of your video. Related settings: You must also set Framerate
+	// to 25.
+	SlowPal UncompressedSlowPal
+
+	// When you do frame rate conversion from 23.976 frames per second (fps) to 29.97
+	// fps, and your output scan type is interlaced, you can optionally enable hard
+	// telecine to create a smoother picture. When you keep the default value, None,
+	// MediaConvert does a standard frame rate conversion to 29.97 without doing
+	// anything with the field polarity to create a smoother picture.
+	Telecine UncompressedTelecine
+
+	noSmithyDocumentSerde
+}
+
 // Required when you set Codec to the value VC3
 type Vc3Settings struct {
 
@@ -7591,8 +7717,8 @@ type Vc3Settings struct {
 // object. The following lists the codec enum, settings object pairs. * AV1,
 // Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings
 // * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES,
-// ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC,
-// XavcSettings
+// ProresSettings * UNCOMPRESSED, UncompressedSettings * VC3, Vc3Settings * VP8,
+// Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings
 type VideoCodecSettings struct {
 
 	// Required when you set Codec, under VideoDescription>CodecSettings to the value
@@ -7628,6 +7754,10 @@ type VideoCodecSettings struct {
 
 	// Required when you set Codec to the value PRORES.
 	ProresSettings *ProresSettings
+
+	// Required when you set Codec, under VideoDescription>CodecSettings to the value
+	// UNCOMPRESSED.
+	UncompressedSettings *UncompressedSettings
 
 	// Required when you set Codec to the value VC3
 	Vc3Settings *Vc3Settings
@@ -7667,8 +7797,8 @@ type VideoDescription struct {
 	// object. The following lists the codec enum, settings object pairs. * AV1,
 	// Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings
 	// * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES,
-	// ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC,
-	// XavcSettings
+	// ProresSettings * UNCOMPRESSED, UncompressedSettings * VC3, Vc3Settings * VP8,
+	// Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings
 	CodecSettings *VideoCodecSettings
 
 	// Choose Insert for this setting to include color metadata in this output. Choose
@@ -7941,6 +8071,10 @@ type VideoSelector struct {
 	// information about MediaConvert HDR jobs, see
 	// https://docs.aws.amazon.com/console/mediaconvert/hdr.
 	Hdr10Metadata *Hdr10Metadata
+
+	// Specify the maximum mastering display luminance. Enter an integer from 0 to
+	// 2147483647, in units of 0.0001 nits. For example, enter 10000000 for 1000 nits.
+	MaxLuminance *int32
 
 	// Use this setting if your input has video and audio durations that don't align,
 	// and your output or player has strict alignment requirements. Examples: Input

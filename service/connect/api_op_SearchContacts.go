@@ -31,12 +31,12 @@ func (c *Client) SearchContacts(ctx context.Context, params *SearchContactsInput
 type SearchContactsInput struct {
 
 	// The identifier of Amazon Connect instance. You can find the instance ID in the
-	// Amazon Resource Name (ARN) of the instance
+	// Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// Time range that you want to search results
+	// Time range that you want to search results.
 	//
 	// This member is required.
 	TimeRange *types.SearchContactsTimeRange
@@ -51,7 +51,7 @@ type SearchContactsInput struct {
 	// The search criteria to be used to return contacts.
 	SearchCriteria *types.SearchCriteria
 
-	// Specifies a field to sort by and a sort order
+	// Specifies a field to sort by and a sort order.
 	Sort *types.Sort
 
 	noSmithyDocumentSerde

@@ -2130,6 +2130,7 @@ const (
 	ContainerTypeMxf  ContainerType = "MXF"
 	ContainerTypeWebm ContainerType = "WEBM"
 	ContainerTypeRaw  ContainerType = "RAW"
+	ContainerTypeY4m  ContainerType = "Y4M"
 )
 
 // Values returns all known values for ContainerType. Note that this can be
@@ -2148,6 +2149,7 @@ func (ContainerType) Values() []ContainerType {
 		"MXF",
 		"WEBM",
 		"RAW",
+		"Y4M",
 	}
 }
 
@@ -7855,6 +7857,139 @@ func (Type) Values() []Type {
 	}
 }
 
+type UncompressedFourcc string
+
+// Enum values for UncompressedFourcc
+const (
+	UncompressedFourccI420 UncompressedFourcc = "I420"
+	UncompressedFourccI422 UncompressedFourcc = "I422"
+	UncompressedFourccI444 UncompressedFourcc = "I444"
+)
+
+// Values returns all known values for UncompressedFourcc. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UncompressedFourcc) Values() []UncompressedFourcc {
+	return []UncompressedFourcc{
+		"I420",
+		"I422",
+		"I444",
+	}
+}
+
+type UncompressedFramerateControl string
+
+// Enum values for UncompressedFramerateControl
+const (
+	UncompressedFramerateControlInitializeFromSource UncompressedFramerateControl = "INITIALIZE_FROM_SOURCE"
+	UncompressedFramerateControlSpecified            UncompressedFramerateControl = "SPECIFIED"
+)
+
+// Values returns all known values for UncompressedFramerateControl. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (UncompressedFramerateControl) Values() []UncompressedFramerateControl {
+	return []UncompressedFramerateControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
+
+type UncompressedFramerateConversionAlgorithm string
+
+// Enum values for UncompressedFramerateConversionAlgorithm
+const (
+	UncompressedFramerateConversionAlgorithmDuplicateDrop UncompressedFramerateConversionAlgorithm = "DUPLICATE_DROP"
+	UncompressedFramerateConversionAlgorithmInterpolate   UncompressedFramerateConversionAlgorithm = "INTERPOLATE"
+	UncompressedFramerateConversionAlgorithmFrameformer   UncompressedFramerateConversionAlgorithm = "FRAMEFORMER"
+)
+
+// Values returns all known values for UncompressedFramerateConversionAlgorithm.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (UncompressedFramerateConversionAlgorithm) Values() []UncompressedFramerateConversionAlgorithm {
+	return []UncompressedFramerateConversionAlgorithm{
+		"DUPLICATE_DROP",
+		"INTERPOLATE",
+		"FRAMEFORMER",
+	}
+}
+
+type UncompressedInterlaceMode string
+
+// Enum values for UncompressedInterlaceMode
+const (
+	UncompressedInterlaceModeInterlaced  UncompressedInterlaceMode = "INTERLACED"
+	UncompressedInterlaceModeProgressive UncompressedInterlaceMode = "PROGRESSIVE"
+)
+
+// Values returns all known values for UncompressedInterlaceMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UncompressedInterlaceMode) Values() []UncompressedInterlaceMode {
+	return []UncompressedInterlaceMode{
+		"INTERLACED",
+		"PROGRESSIVE",
+	}
+}
+
+type UncompressedScanTypeConversionMode string
+
+// Enum values for UncompressedScanTypeConversionMode
+const (
+	UncompressedScanTypeConversionModeInterlaced         UncompressedScanTypeConversionMode = "INTERLACED"
+	UncompressedScanTypeConversionModeInterlacedOptimize UncompressedScanTypeConversionMode = "INTERLACED_OPTIMIZE"
+)
+
+// Values returns all known values for UncompressedScanTypeConversionMode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (UncompressedScanTypeConversionMode) Values() []UncompressedScanTypeConversionMode {
+	return []UncompressedScanTypeConversionMode{
+		"INTERLACED",
+		"INTERLACED_OPTIMIZE",
+	}
+}
+
+type UncompressedSlowPal string
+
+// Enum values for UncompressedSlowPal
+const (
+	UncompressedSlowPalDisabled UncompressedSlowPal = "DISABLED"
+	UncompressedSlowPalEnabled  UncompressedSlowPal = "ENABLED"
+)
+
+// Values returns all known values for UncompressedSlowPal. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UncompressedSlowPal) Values() []UncompressedSlowPal {
+	return []UncompressedSlowPal{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type UncompressedTelecine string
+
+// Enum values for UncompressedTelecine
+const (
+	UncompressedTelecineNone UncompressedTelecine = "NONE"
+	UncompressedTelecineHard UncompressedTelecine = "HARD"
+)
+
+// Values returns all known values for UncompressedTelecine. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UncompressedTelecine) Values() []UncompressedTelecine {
+	return []UncompressedTelecine{
+		"NONE",
+		"HARD",
+	}
+}
+
 type Vc3Class string
 
 // Enum values for Vc3Class
@@ -8016,6 +8151,7 @@ const (
 	VideoCodecMpeg2        VideoCodec = "MPEG2"
 	VideoCodecPassthrough  VideoCodec = "PASSTHROUGH"
 	VideoCodecProres       VideoCodec = "PRORES"
+	VideoCodecUncompressed VideoCodec = "UNCOMPRESSED"
 	VideoCodecVc3          VideoCodec = "VC3"
 	VideoCodecVp8          VideoCodec = "VP8"
 	VideoCodecVp9          VideoCodec = "VP9"
@@ -8035,6 +8171,7 @@ func (VideoCodec) Values() []VideoCodec {
 		"MPEG2",
 		"PASSTHROUGH",
 		"PRORES",
+		"UNCOMPRESSED",
 		"VC3",
 		"VP8",
 		"VP9",

@@ -4354,6 +4354,51 @@ func awsRestjson1_serializeDocumentCmfcSettings(v *types.CmfcSettings, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentColorConversion3DLUTSetting(v *types.ColorConversion3DLUTSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileInput != nil {
+		ok := object.Key("fileInput")
+		ok.String(*v.FileInput)
+	}
+
+	if len(v.InputColorSpace) > 0 {
+		ok := object.Key("inputColorSpace")
+		ok.String(string(v.InputColorSpace))
+	}
+
+	if v.InputMasteringLuminance != nil {
+		ok := object.Key("inputMasteringLuminance")
+		ok.Integer(*v.InputMasteringLuminance)
+	}
+
+	if len(v.OutputColorSpace) > 0 {
+		ok := object.Key("outputColorSpace")
+		ok.String(string(v.OutputColorSpace))
+	}
+
+	if v.OutputMasteringLuminance != nil {
+		ok := object.Key("outputMasteringLuminance")
+		ok.Integer(*v.OutputMasteringLuminance)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentColorConversion3DLUTSettings(v []types.ColorConversion3DLUTSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentColorConversion3DLUTSetting(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentColorCorrector(v *types.ColorCorrector, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4395,6 +4440,11 @@ func awsRestjson1_serializeDocumentColorCorrector(v *types.ColorCorrector, value
 	if v.Hue != nil {
 		ok := object.Key("hue")
 		ok.Integer(*v.Hue)
+	}
+
+	if v.MaxLuminance != nil {
+		ok := object.Key("maxLuminance")
+		ok.Integer(*v.MaxLuminance)
 	}
 
 	if len(v.SampleRangeConversion) > 0 {
@@ -7085,6 +7135,13 @@ func awsRestjson1_serializeDocumentJobSettings(v *types.JobSettings, value smith
 		}
 	}
 
+	if v.ColorConversion3DLUTSettings != nil {
+		ok := object.Key("colorConversion3DLUTSettings")
+		if err := awsRestjson1_serializeDocumentColorConversion3DLUTSettings(v.ColorConversion3DLUTSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Esam != nil {
 		ok := object.Key("esam")
 		if err := awsRestjson1_serializeDocumentEsamSettings(v.Esam, ok); err != nil {
@@ -7175,6 +7232,13 @@ func awsRestjson1_serializeDocumentJobTemplateSettings(v *types.JobTemplateSetti
 	if v.AvailBlanking != nil {
 		ok := object.Key("availBlanking")
 		if err := awsRestjson1_serializeDocumentAvailBlanking(v.AvailBlanking, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ColorConversion3DLUTSettings != nil {
+		ok := object.Key("colorConversion3DLUTSettings")
+		if err := awsRestjson1_serializeDocumentColorConversion3DLUTSettings(v.ColorConversion3DLUTSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -9251,6 +9315,58 @@ func awsRestjson1_serializeDocumentTtmlDestinationSettings(v *types.TtmlDestinat
 	return nil
 }
 
+func awsRestjson1_serializeDocumentUncompressedSettings(v *types.UncompressedSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Fourcc) > 0 {
+		ok := object.Key("fourcc")
+		ok.String(string(v.Fourcc))
+	}
+
+	if len(v.FramerateControl) > 0 {
+		ok := object.Key("framerateControl")
+		ok.String(string(v.FramerateControl))
+	}
+
+	if len(v.FramerateConversionAlgorithm) > 0 {
+		ok := object.Key("framerateConversionAlgorithm")
+		ok.String(string(v.FramerateConversionAlgorithm))
+	}
+
+	if v.FramerateDenominator != nil {
+		ok := object.Key("framerateDenominator")
+		ok.Integer(*v.FramerateDenominator)
+	}
+
+	if v.FramerateNumerator != nil {
+		ok := object.Key("framerateNumerator")
+		ok.Integer(*v.FramerateNumerator)
+	}
+
+	if len(v.InterlaceMode) > 0 {
+		ok := object.Key("interlaceMode")
+		ok.String(string(v.InterlaceMode))
+	}
+
+	if len(v.ScanTypeConversionMode) > 0 {
+		ok := object.Key("scanTypeConversionMode")
+		ok.String(string(v.ScanTypeConversionMode))
+	}
+
+	if len(v.SlowPal) > 0 {
+		ok := object.Key("slowPal")
+		ok.String(string(v.SlowPal))
+	}
+
+	if len(v.Telecine) > 0 {
+		ok := object.Key("telecine")
+		ok.String(string(v.Telecine))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVc3Settings(v *types.Vc3Settings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9357,6 +9473,13 @@ func awsRestjson1_serializeDocumentVideoCodecSettings(v *types.VideoCodecSetting
 	if v.ProresSettings != nil {
 		ok := object.Key("proresSettings")
 		if err := awsRestjson1_serializeDocumentProresSettings(v.ProresSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UncompressedSettings != nil {
+		ok := object.Key("uncompressedSettings")
+		if err := awsRestjson1_serializeDocumentUncompressedSettings(v.UncompressedSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -9644,6 +9767,11 @@ func awsRestjson1_serializeDocumentVideoSelector(v *types.VideoSelector, value s
 		if err := awsRestjson1_serializeDocumentHdr10Metadata(v.Hdr10Metadata, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.MaxLuminance != nil {
+		ok := object.Key("maxLuminance")
+		ok.Integer(*v.MaxLuminance)
 	}
 
 	if len(v.PadVideo) > 0 {

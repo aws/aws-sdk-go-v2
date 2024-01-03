@@ -58,10 +58,10 @@ type AgentContactReference struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that defines agent hierarchy group levels which can be used to
-// filter search results. Important: Agent hierarchy group level information in
-// search result is a snapshot, it does not represent current agent hierarchy who
-// handled the contact.
+// A structure that defines search criteria for contacts using agent hierarchy
+// group levels. For more information about agent hierarchies, see Set Up Agent
+// Hierarchies (https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html)
+// in the Amazon Connect Administrator Guide.
 type AgentHierarchyGroups struct {
 
 	// The identifiers for level 1 hierarchy groups.
@@ -565,12 +565,11 @@ type Contact struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that defines filters can be used to search within outputs analyzed
-// by Amazon Connect Contact Lens in a contact.
+// A structure that defines search criteria for contacts using analysis outputs
+// from Amazon Connect Contact Lens.
 type ContactAnalysis struct {
 
-	// A structure that defines filters can be used to search with text within an
-	// Amazon Connect Contact Lens analyzed transcript.
+	// Search criteria based on transcript analyzed by Amazon Connect Contact Lens.
 	Transcript *Transcript
 
 	noSmithyDocumentSerde
@@ -729,7 +728,7 @@ type ContactSearchSummary struct {
 	// Information about the agent who accepted the contact.
 	AgentInfo *ContactSearchSummaryAgentInfo
 
-	// The Amazon Resource Name (ARN) of the contact
+	// The Amazon Resource Name (ARN) of the contact.
 	Arn *string
 
 	// How the contact reached your contact center.
@@ -748,12 +747,12 @@ type ContactSearchSummary struct {
 	// Indicates how the contact was initiated.
 	InitiationMethod ContactInitiationMethod
 
-	// The date and time this contact was initiated, in UTC time. For INBOUND, this is
-	// when the contact arrived. For OUTBOUND, this is when the agent began dialing.
-	// For CALLBACK, this is when the callback contact was created. For TRANSFER and
-	// QUEUE_TRANSFER, this is when the transfer was initiated. For API, this is when
-	// the request arrived. For EXTERNAL_OUTBOUND, this is when the agent started
-	// dialing the external participant. For MONITOR, this is when the supervisor
+	// The date and time this contact was initiated, in UTC time. For INBOUND , this is
+	// when the contact arrived. For OUTBOUND , this is when the agent began dialing.
+	// For CALLBACK , this is when the callback contact was created. For TRANSFER and
+	// QUEUE_TRANSFER , this is when the transfer was initiated. For API, this is when
+	// the request arrived. For EXTERNAL_OUTBOUND , this is when the agent started
+	// dialing the external participant. For MONITOR , this is when the supervisor
 	// started listening to a contact.
 	InitiationTimestamp *time.Time
 
@@ -4267,30 +4266,33 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that defines searchable contact attributes which can be used to
-// filter search results.
+// A structure that defines search criteria based on user-defined contact
+// attributes that are configured for contact search.
 type SearchableContactAttributes struct {
 
-	// The array of searhale contact attribute criteria
+	// The list of criteria based on user-defined contact attributes that are
+	// configured for contact search.
 	//
 	// This member is required.
 	Criteria []SearchableContactAttributesCriteria
 
-	// The match type of multiple searchable contact attributes criteria.
+	// The match type combining search criteria using multiple searchable contact
+	// attributes.
 	MatchType SearchContactsMatchType
 
 	noSmithyDocumentSerde
 }
 
-// The criteria of searchable contact attributes.
+// The search criteria based on user-defned contact attribute key and values to
+// search on.
 type SearchableContactAttributesCriteria struct {
 
-	// The searchable contact attribute key
+	// The key containing a searchable user-defined contact attribute.
 	//
 	// This member is required.
 	Key *string
 
-	// The array of contact attribute values used to filter search results.
+	// The list of values to search for within a user-defined contact attribute.
 	//
 	// This member is required.
 	Values []string
@@ -4298,7 +4300,7 @@ type SearchableContactAttributesCriteria struct {
 	noSmithyDocumentSerde
 }
 
-// A structure of time range that you want to search results
+// A structure of time range that you want to search results.
 type SearchContactsTimeRange struct {
 
 	// The end time of the time range.
@@ -4311,7 +4313,7 @@ type SearchContactsTimeRange struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The type of timestamp to search
+	// The type of timestamp to search.
 	//
 	// This member is required.
 	Type SearchContactsTimeRangeType
@@ -4319,28 +4321,35 @@ type SearchContactsTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// A structure of search criteria to be used to return contacts
+// A structure of search criteria to be used to return contacts.
 type SearchCriteria struct {
 
-	// The agent hierarchy groups
+	// The agent hierarchy groups of the agent at the time of handling the contact.
 	AgentHierarchyGroups *AgentHierarchyGroups
 
-	// The array of agent ids
+	// The identifiers of agents who handled the contacts.
 	AgentIds []string
 
-	// The array of channels
+	// The list of channels associated with contacts.
 	Channels []Channel
 
-	// The ContactAnalysis object used in search criteria
+	// Search criteria based on analysis outputs from Amazon Connect Contact Lens.
 	ContactAnalysis *ContactAnalysis
 
-	// The array of initiaton methods
+	// The list of initiation methods associated with contacts.
 	InitiationMethods []ContactInitiationMethod
 
-	// The array of queue ids.
+	// The list of queue IDs associated with contacts.
 	QueueIds []string
 
-	// The SearchableContactAttributes object used in search criteria
+	// The search criteria based on user-defined contact attributes that have been
+	// configured for contact search. For more information, see Search by customer
+	// contact attributes (https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html)
+	// in the Amazon Connect Administrator Guide. To use SearchableContactAttributes
+	// in a search request, the GetContactAttributes action is required to perform an
+	// API request. For more information, see
+	// https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions)
+	// Actions defined by Amazon Connect.
 	SearchableContactAttributes *SearchableContactAttributes
 
 	noSmithyDocumentSerde
@@ -4574,7 +4583,7 @@ type SingleSelectQuestionRuleCategoryAutomation struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that defines the sort by and a sort order
+// A structure that defineds the field name to sort by and a sort order.
 type Sort struct {
 
 	// The name of the field on which to sort.
@@ -4935,24 +4944,29 @@ type TrafficDistributionGroupUserSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The transcript object used to search results.
+// A structure that defines search criteria and matching logic to search for
+// contacts by matching text with transcripts analyzed by Amazon Connect Contact
+// Lens.
 type Transcript struct {
 
-	// The array of transcript search criteria
+	// The list of search criteria based on Contact Lens conversational analytics
+	// transcript.
 	//
 	// This member is required.
 	Criteria []TranscriptCriteria
 
-	// The match type of multiple transcript criteira
+	// The match type combining search criteria using multiple transcript criteria.
 	MatchType SearchContactsMatchType
 
 	noSmithyDocumentSerde
 }
 
-// The transcript criteria used to search
+// A structure that defines search criteria base on words or phrases, participants
+// in the Contact Lens conversational analytics transcript.
 type TranscriptCriteria struct {
 
-	// The match type of search texts in a transcript criteria.
+	// The match type combining search criteria using multiple search texts in a
+	// transcript criteria.
 	//
 	// This member is required.
 	MatchType SearchContactsMatchType
@@ -5275,8 +5289,9 @@ type UserSearchCriteria struct {
 	OrConditions []UserSearchCriteria
 
 	// A leaf node condition which can be used to specify a string condition. The
-	// currently supported values for FieldName are name , description , and resourceID
-	// .
+	// currently supported values for FieldName are username , firstname , lastname ,
+	// resourceId , routingProfileId , securityProfileId , agentGroupId , and
+	// agentGroupPathIds .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde

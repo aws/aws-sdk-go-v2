@@ -9244,6 +9244,124 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentColorConversion3DLUTSetting(v **types.ColorConversion3DLUTSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ColorConversion3DLUTSetting
+	if *v == nil {
+		sv = &types.ColorConversion3DLUTSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fileInput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin14PatternS3CubeCUBEHttpsCubeCUBE to be of type string, got %T instead", value)
+				}
+				sv.FileInput = ptr.String(jtv)
+			}
+
+		case "inputColorSpace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColorSpace to be of type string, got %T instead", value)
+				}
+				sv.InputColorSpace = types.ColorSpace(jtv)
+			}
+
+		case "inputMasteringLuminance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InputMasteringLuminance = ptr.Int32(int32(i64))
+			}
+
+		case "outputColorSpace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColorSpace to be of type string, got %T instead", value)
+				}
+				sv.OutputColorSpace = types.ColorSpace(jtv)
+			}
+
+		case "outputMasteringLuminance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OutputMasteringLuminance = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentColorConversion3DLUTSettings(v *[]types.ColorConversion3DLUTSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ColorConversion3DLUTSetting
+	if *v == nil {
+		cv = []types.ColorConversion3DLUTSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ColorConversion3DLUTSetting
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentColorConversion3DLUTSetting(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9331,6 +9449,19 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 					return err
 				}
 				sv.Hue = ptr.Int32(int32(i64))
+			}
+
+		case "maxLuminance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxLuminance = ptr.Int32(int32(i64))
 			}
 
 		case "sampleRangeConversion":
@@ -15683,6 +15814,11 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 				return err
 			}
 
+		case "colorConversion3DLUTSettings":
+			if err := awsRestjson1_deserializeDocumentColorConversion3DLUTSettings(&sv.ColorConversion3DLUTSettings, value); err != nil {
+				return err
+			}
+
 		case "esam":
 			if err := awsRestjson1_deserializeDocumentEsamSettings(&sv.Esam, value); err != nil {
 				return err
@@ -15946,6 +16082,11 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 
 		case "availBlanking":
 			if err := awsRestjson1_deserializeDocumentAvailBlanking(&sv.AvailBlanking, value); err != nil {
+				return err
+			}
+
+		case "colorConversion3DLUTSettings":
+			if err := awsRestjson1_deserializeDocumentColorConversion3DLUTSettings(&sv.ColorConversion3DLUTSettings, value); err != nil {
 				return err
 			}
 
@@ -21281,6 +21422,126 @@ func awsRestjson1_deserializeDocumentTtmlDestinationSettings(v **types.TtmlDesti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.UncompressedSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UncompressedSettings
+	if *v == nil {
+		sv = &types.UncompressedSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fourcc":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UncompressedFourcc to be of type string, got %T instead", value)
+				}
+				sv.Fourcc = types.UncompressedFourcc(jtv)
+			}
+
+		case "framerateControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UncompressedFramerateControl to be of type string, got %T instead", value)
+				}
+				sv.FramerateControl = types.UncompressedFramerateControl(jtv)
+			}
+
+		case "framerateConversionAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UncompressedFramerateConversionAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.FramerateConversionAlgorithm = types.UncompressedFramerateConversionAlgorithm(jtv)
+			}
+
+		case "framerateDenominator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateDenominator = ptr.Int32(int32(i64))
+			}
+
+		case "framerateNumerator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateNumerator = ptr.Int32(int32(i64))
+			}
+
+		case "interlaceMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UncompressedInterlaceMode to be of type string, got %T instead", value)
+				}
+				sv.InterlaceMode = types.UncompressedInterlaceMode(jtv)
+			}
+
+		case "scanTypeConversionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UncompressedScanTypeConversionMode to be of type string, got %T instead", value)
+				}
+				sv.ScanTypeConversionMode = types.UncompressedScanTypeConversionMode(jtv)
+			}
+
+		case "slowPal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UncompressedSlowPal to be of type string, got %T instead", value)
+				}
+				sv.SlowPal = types.UncompressedSlowPal(jtv)
+			}
+
+		case "telecine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UncompressedTelecine to be of type string, got %T instead", value)
+				}
+				sv.Telecine = types.UncompressedTelecine(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21464,6 +21725,11 @@ func awsRestjson1_deserializeDocumentVideoCodecSettings(v **types.VideoCodecSett
 
 		case "proresSettings":
 			if err := awsRestjson1_deserializeDocumentProresSettings(&sv.ProresSettings, value); err != nil {
+				return err
+			}
+
+		case "uncompressedSettings":
+			if err := awsRestjson1_deserializeDocumentUncompressedSettings(&sv.UncompressedSettings, value); err != nil {
 				return err
 			}
 
@@ -22017,6 +22283,19 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 		case "hdr10Metadata":
 			if err := awsRestjson1_deserializeDocumentHdr10Metadata(&sv.Hdr10Metadata, value); err != nil {
 				return err
+			}
+
+		case "maxLuminance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxLuminance = ptr.Int32(int32(i64))
 			}
 
 		case "padVideo":
