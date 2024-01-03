@@ -30,7 +30,7 @@ func (m mockConnectionError) ConnectionError() bool {
 	return true
 }
 func (m mockConnectionError) Error() string {
-	return fmt.Printf("request error: %w", m.err)
+	return fmt.Errorf("request error: %w", m.err)
 }
 func (m mockConnectionError) Unwrap() error {
 	return m.err
