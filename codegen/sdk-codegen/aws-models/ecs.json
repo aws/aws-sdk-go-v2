@@ -33,7 +33,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1415,7 +1418,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1450,6 +1456,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The managed termination protection setting to use for the Auto Scaling group capacity\n\t\t\tprovider. This determines whether the Auto Scaling group has managed termination\n\t\t\tprotection. The default is off.</p>\n         <important>\n            <p>When using managed termination protection, managed scaling must also be used\n\t\t\t\totherwise managed termination protection doesn't work.</p>\n         </important>\n         <p>When managed termination protection is on, Amazon ECS prevents the Amazon EC2 instances in an Auto\n\t\t\tScaling group that contain tasks from being terminated during a scale-in action. The\n\t\t\tAuto Scaling group and each instance in the Auto Scaling group must have instance\n\t\t\tprotection from scale-in actions on as well. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance Protection</a> in the <i>Auto Scaling User Guide</i>.</p>\n         <p>When managed termination protection is off, your Amazon EC2 instances aren't protected from\n\t\t\ttermination when the Auto Scaling group scales in.</p>"
                     }
+                },
+                "managedDraining": {
+                    "target": "com.amazonaws.ecs#ManagedDraining",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The managed draining option for the Auto Scaling group capacity provider. When you enable this, Amazon ECS manages and gracefully drains the EC2 container instances that are in the Auto Scaling group capacity provider.</p>\n         <p>The default is <code>ENABLED</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1469,6 +1481,12 @@
                     "target": "com.amazonaws.ecs#ManagedTerminationProtection",
                     "traits": {
                         "smithy.api#documentation": "<p>The managed termination protection setting to use for the Auto Scaling group capacity\n\t\t\tprovider. This determines whether the Auto Scaling group has managed termination\n\t\t\tprotection.</p>\n         <important>\n            <p>When using managed termination protection, managed scaling must also be used\n\t\t\t\totherwise managed termination protection doesn't work.</p>\n         </important>\n         <p>When managed termination protection is on, Amazon ECS prevents the Amazon EC2 instances in an Auto\n\t\t\tScaling group that contain tasks from being terminated during a scale-in action. The\n\t\t\tAuto Scaling group and each instance in the Auto Scaling group must have instance\n\t\t\tprotection from scale-in actions on. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance Protection</a> in the <i>Auto Scaling User Guide</i>.</p>\n         <p>When managed termination protection is off, your Amazon EC2 instances aren't protected from\n\t\t\ttermination when the Auto Scaling group scales in.</p>"
+                    }
+                },
+                "managedDraining": {
+                    "target": "com.amazonaws.ecs#ManagedDraining",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The managed draining option for the Auto Scaling group capacity provider. When you enable this, Amazon ECS manages and gracefully drains the EC2 container instances that are in the Auto Scaling group capacity provider.</p>\n         <p>The default is <code>ENABLED</code>.</p>"
                     }
                 }
             },
@@ -1507,7 +1525,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1734,7 +1755,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1868,7 +1892,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1880,7 +1907,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1892,7 +1922,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1945,7 +1978,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2064,7 +2100,10 @@
                     }
                 },
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3109,6 +3148,61 @@
                                 "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/default/hello_world:6"
                             }
                         }
+                    },
+                    {
+                        "title": "To create a new service behind a load balancer",
+                        "documentation": "This example creates a service in your default region called ``ecs-simple-service-elb``. The service uses the ``ecs-demo`` task definition and it maintains 10 copies of that task. You must reference an existing load balancer in the same region by its name.",
+                        "input": {
+                            "loadBalancers": [
+                                {
+                                    "containerName": "simple-app",
+                                    "containerPort": 80,
+                                    "loadBalancerName": "EC2Contai-EcsElast-15DCDAURT3ZO2"
+                                }
+                            ],
+                            "serviceName": "ecs-simple-service-elb",
+                            "role": "ecsServiceRole",
+                            "taskDefinition": "console-sample-app-static",
+                            "desiredCount": 10
+                        },
+                        "output": {
+                            "service": {
+                                "clusterArn": "arn:aws:ecs:us-east-1:012345678910:cluster/default",
+                                "createdAt": "2016-08-29T16:02:54.884Z",
+                                "deploymentConfiguration": {
+                                    "maximumPercent": 200,
+                                    "minimumHealthyPercent": 100
+                                },
+                                "deployments": [
+                                    {
+                                        "createdAt": "2016-08-29T16:02:54.884Z",
+                                        "desiredCount": 10,
+                                        "id": "ecs-svc/9223370564343000923",
+                                        "pendingCount": 0,
+                                        "runningCount": 0,
+                                        "status": "PRIMARY",
+                                        "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/console-sample-app-static:6",
+                                        "updatedAt": "2016-08-29T16:02:54.884Z"
+                                    }
+                                ],
+                                "desiredCount": 10,
+                                "events": [],
+                                "loadBalancers": [
+                                    {
+                                        "containerName": "simple-app",
+                                        "containerPort": 80,
+                                        "loadBalancerName": "EC2Contai-EcsElast-15DCDAURT3ZO2"
+                                    }
+                                ],
+                                "pendingCount": 0,
+                                "roleArn": "arn:aws:iam::012345678910:role/ecsServiceRole",
+                                "runningCount": 0,
+                                "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-simple-service-elb",
+                                "serviceName": "ecs-simple-service-elb",
+                                "status": "ACTIVE",
+                                "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/default/console-sample-app-static:6"
+                            }
+                        }
                     }
                 ]
             }
@@ -3320,7 +3414,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a task set in the specified cluster and service. This is used when a service\n\t\t\tuses the <code>EXTERNAL</code> deployment controller type. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment\n\t\t\t\ttypes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Create a task set in the specified cluster and service. This is used when a service\n\t\t\tuses the <code>EXTERNAL</code> deployment controller type. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment\n\t\t\t\ttypes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You can create a maximum of 5 tasks sets for a deployment.</p>"
             }
         },
         "com.amazonaws.ecs#CreateTaskSetRequest": {
@@ -3457,6 +3551,21 @@
                         "output": {
                             "setting": {
                                 "name": "serviceLongArnFormat",
+                                "value": "enabled",
+                                "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To delete the account settings for a specific IAM user or IAM role",
+                        "documentation": "This example deletes the account setting for a specific IAM user or IAM role for the specified resource type. Only the root user can view or modify the account settings for another user.",
+                        "input": {
+                            "name": "containerInstanceLongArnFormat",
+                            "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                        },
+                        "output": {
+                            "setting": {
+                                "name": "containerInstanceLongArnFormat",
                                 "value": "enabled",
                                 "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
                             }
@@ -6279,7 +6388,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6377,7 +6489,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6462,6 +6577,33 @@
                         "documentation": "This example displays the effective account settings for your account.",
                         "input": {
                             "effectiveSettings": true
+                        },
+                        "output": {
+                            "settings": [
+                                {
+                                    "name": "containerInstanceLongArnFormat",
+                                    "value": "disabled",
+                                    "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                                },
+                                {
+                                    "name": "serviceLongArnFormat",
+                                    "value": "enabled",
+                                    "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                                },
+                                {
+                                    "name": "taskLongArnFormat",
+                                    "value": "disabled",
+                                    "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To view the effective account settings for a specific IAM user or IAM role",
+                        "documentation": "This example displays the effective account settings for the specified user or role.",
+                        "input": {
+                            "effectiveSettings": true,
+                            "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
                         },
                         "output": {
                             "settings": [
@@ -7120,6 +7262,19 @@
                                 "hpcc-c4-8xlarge"
                             ]
                         }
+                    },
+                    {
+                        "title": "To filter your registered task definition families",
+                        "documentation": "This example lists the task definition revisions that start with \"hpcc\".",
+                        "input": {
+                            "familyPrefix": "hpcc"
+                        },
+                        "output": {
+                            "families": [
+                                "hpcc",
+                                "hpcc-c4-8xlarge"
+                            ]
+                        }
                     }
                 ],
                 "smithy.api#paginated": {
@@ -7211,6 +7366,21 @@
                             "taskDefinitionArns": [
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep300:2",
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:3",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:4",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:5",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:6"
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To list the registered task definitions in a family",
+                        "documentation": "This example lists the task definition revisions of a specified family.",
+                        "input": {
+                            "familyPrefix": "wordpress"
+                        },
+                        "output": {
+                            "taskDefinitionArns": [
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:3",
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:4",
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:5",
@@ -7323,6 +7493,19 @@
                             "taskArns": [
                                 "arn:aws:ecs:us-east-1:012345678910:task/default/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84",
                                 "arn:aws:ecs:us-east-1:012345678910:task/default/6b809ef6-c67e-4467-921f-ee261c15a0a1"
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To list the tasks on a particular container instance",
+                        "documentation": "This example lists the tasks of a specified container instance. Specifying a ``containerInstance`` value limits  the  results  to  tasks  that belong to that container instance.",
+                        "input": {
+                            "cluster": "default",
+                            "containerInstance": "f6bbb147-5370-4ace-8c73-c7181ded911f"
+                        },
+                        "output": {
+                            "taskArns": [
+                                "arn:aws:ecs:us-east-1:012345678910:task/default/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84"
                             ]
                         }
                     }
@@ -7640,6 +7823,23 @@
                 "target": "com.amazonaws.ecs#ManagedAgent"
             }
         },
+        "com.amazonaws.ecs#ManagedDraining": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ecs#ManagedScaling": {
             "type": "structure",
             "members": {
@@ -7743,7 +7943,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7787,7 +7990,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7924,7 +8130,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8137,7 +8346,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8149,7 +8361,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8348,6 +8563,22 @@
                         "output": {
                             "setting": {
                                 "name": "serviceLongArnFormat",
+                                "value": "enabled",
+                                "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To modify the account settings for a specific IAM user or IAM role",
+                        "documentation": "This example modifies the account setting for a specific IAM user or IAM role to opt in to the new ARN and resource ID format for Amazon ECS container instances. If you’re using this command as the root user, then changes apply to the entire AWS account, unless an IAM user or role explicitly overrides these settings for themselves.",
+                        "input": {
+                            "name": "containerInstanceLongArnFormat",
+                            "value": "enabled",
+                            "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                        },
+                        "output": {
+                            "setting": {
+                                "name": "containerInstanceLongArnFormat",
                                 "value": "enabled",
                                 "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
                             }
@@ -8991,7 +9222,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9003,7 +9237,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9406,7 +9643,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9789,7 +10029,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9801,7 +10044,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10672,7 +10918,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10684,7 +10933,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11431,7 +11683,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11683,7 +11938,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12107,7 +12365,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.ecs#String"
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12164,6 +12425,15 @@
                         "input": {
                             "service": "my-http-service",
                             "taskDefinition": "amazon-ecs-sample"
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "To change the number of tasks in a service",
+                        "documentation": "This example updates the desired count of the my-http-service service to 10.",
+                        "input": {
+                            "service": "my-http-service",
+                            "desiredCount": 10
                         },
                         "output": {}
                     }
@@ -12437,6 +12707,47 @@
                                     "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772",
                                     "protectionEnabled": true,
                                     "expirationDate": "2022-11-02T06:56:32.553Z"
+                                }
+                            ],
+                            "failures": []
+                        }
+                    },
+                    {
+                        "title": "To set task scale-in protection for the default time period in minutes",
+                        "documentation": "This example enables task scale-in protection for a task, without specifying the expiresInMinutes parameter, for the default protection period of 120 minutes.",
+                        "input": {
+                            "cluster": "test-task-protection",
+                            "tasks": [
+                                "b8b1cf532d0e46ba8d44a40d1de16772"
+                            ],
+                            "protectionEnabled": true
+                        },
+                        "output": {
+                            "protectedTasks": [
+                                {
+                                    "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772",
+                                    "protectionEnabled": true,
+                                    "expirationDate": "2022-11-02T06:56:32.553Z"
+                                }
+                            ],
+                            "failures": []
+                        }
+                    },
+                    {
+                        "title": "To remove task scale-in protection",
+                        "documentation": "This example removes scale-in protection for a task.",
+                        "input": {
+                            "cluster": "test-task-protection",
+                            "tasks": [
+                                "b8b1cf532d0e46ba8d44a40d1de16772"
+                            ],
+                            "protectionEnabled": false
+                        },
+                        "output": {
+                            "protectedTasks": [
+                                {
+                                    "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772",
+                                    "protectionEnabled": false
                                 }
                             ],
                             "failures": []

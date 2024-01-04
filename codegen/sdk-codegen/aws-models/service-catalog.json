@@ -1710,6 +1710,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
                     }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.servicecatalog#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. </p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -2512,7 +2519,7 @@
                     "target": "com.amazonaws.servicecatalog#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Enables or disables <code>Principal</code> sharing when creating the portfolio share. If this flag is not provided,\n         principal sharing is disabled. </p>\n         <p>When you enable Principal Name Sharing for a portfolio share, the share recipient\n         account end users with a principal that matches any of the associated IAM\n         patterns can provision products from the portfolio. Once\n         shared, the share recipient can view associations of <code>PrincipalType</code>: \n         <code>IAM_PATTERN</code> on their portfolio. You can create the principals in the recipient account before or \n         after creating the share. </p>"
+                        "smithy.api#documentation": "<p>This parameter is only supported for portfolios with an <b>OrganizationalNode</b> \n      Type of <code>ORGANIZATION</code> or <code>ORGANIZATIONAL_UNIT</code>. </p>\n         <p>Enables or disables <code>Principal</code> sharing when creating the portfolio share. If you do \n         <b>not</b> provide this flag, principal sharing is disabled. </p>\n         <p>When you enable Principal Name Sharing for a portfolio share, the share recipient\n         account end users with a principal that matches any of the associated IAM\n         patterns can provision products from the portfolio. Once\n         shared, the share recipient can view associations of <code>PrincipalType</code>: \n         <code>IAM_PATTERN</code> on their portfolio. You can create the principals in the recipient account before or \n         after creating the share. </p>"
                     }
                 }
             },
@@ -3428,6 +3435,13 @@
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
                         "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.servicecatalog#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. </p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -4971,6 +4985,13 @@
                     "target": "com.amazonaws.servicecatalog#AcceptLanguage",
                     "traits": {
                         "smithy.api#documentation": "<p>The language code.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>jp</code> - Japanese</p>\n            </li>\n            <li>\n               <p>\n                  <code>zh</code> - Chinese</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.servicecatalog#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. </p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },

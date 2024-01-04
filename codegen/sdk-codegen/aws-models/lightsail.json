@@ -300,7 +300,7 @@
                 "duration": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of idle time in minutes after which your virtual computer will automatically stop.</p>\n         <important>\n            <p>This add-on only applies to Lightsail for Research resources.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The amount of idle time in minutes after which your virtual computer will automatically\n      stop.</p>\n         <important>\n            <p>This add-on only applies to Lightsail for Research resources.</p>\n         </important>"
                     }
                 }
             },
@@ -394,7 +394,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type (e.g., <code>Alarm</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type of the alarm.</p>"
                     }
                 },
                 "supportCode": {
@@ -726,7 +726,7 @@
                 "diskName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique Lightsail disk name (e.g., <code>my-disk</code>).</p>",
+                        "smithy.api#documentation": "<p>The unique Lightsail disk name (<code>my-disk</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -740,7 +740,7 @@
                 "diskPath": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The disk path to expose to the instance (e.g., <code>/dev/xvdf</code>).</p>",
+                        "smithy.api#documentation": "<p>The disk path to expose to the instance (<code>/dev/xvdf</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1003,7 +1003,7 @@
                 "path": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path of the disk (e.g., <code>/dev/xvdf</code>).</p>"
+                        "smithy.api#documentation": "<p>The path of the disk (<code>/dev/xvdf</code>).</p>"
                     }
                 },
                 "sizeInGb": {
@@ -1229,25 +1229,25 @@
                 "blueprintId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the virtual private server image (e.g., <code>app_wordpress_4_4</code> or\n        <code>app_lamp_7_0</code>).</p>"
+                        "smithy.api#documentation": "<p>The ID for the virtual private server image (<code>app_wordpress_4_4</code> or\n        <code>app_lamp_7_0</code>).</p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The friendly name of the blueprint (e.g., <code>Amazon Linux</code>).</p>"
+                        "smithy.api#documentation": "<p>The friendly name of the blueprint (<code>Amazon Linux</code>).</p>"
                     }
                 },
                 "group": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The group name of the blueprint (e.g., <code>amazon-linux</code>).</p>"
+                        "smithy.api#documentation": "<p>The group name of the blueprint (<code>amazon-linux</code>).</p>"
                     }
                 },
                 "type": {
                     "target": "com.amazonaws.lightsail#BlueprintType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the blueprint (e.g., <code>os</code> or <code>app</code>).</p>"
+                        "smithy.api#documentation": "<p>The type of the blueprint (<code>os</code> or <code>app</code>).</p>"
                     }
                 },
                 "description": {
@@ -1271,7 +1271,7 @@
                 "version": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the operating system, application, or stack (e.g.,\n        <code>2016.03.0</code>).</p>"
+                        "smithy.api#documentation": "<p>The version number of the operating system, application, or stack (\n        <code>2016.03.0</code>).</p>"
                     }
                 },
                 "versionCode": {
@@ -1338,7 +1338,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type of the bucket (for example, <code>Bucket</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type of the bucket.</p>"
                     }
                 },
                 "accessRules": {
@@ -1582,31 +1582,31 @@
                 "price": {
                     "target": "com.amazonaws.lightsail#float",
                     "traits": {
-                        "smithy.api#documentation": "<p>The price in US dollars (e.g., <code>5.0</code>) of the bundle.</p>"
+                        "smithy.api#documentation": "<p>The price in US dollars (<code>5.0</code>) of the bundle.</p>"
                     }
                 },
                 "cpuCount": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of vCPUs included in the bundle (e.g., <code>2</code>).</p>"
+                        "smithy.api#documentation": "<p>The number of vCPUs included in the bundle (<code>2</code>).</p>"
                     }
                 },
                 "diskSizeInGb": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the SSD (e.g., <code>30</code>).</p>"
+                        "smithy.api#documentation": "<p>The size of the SSD (<code>30</code>).</p>"
                     }
                 },
                 "bundleId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle ID (e.g., <code>micro_1_0</code>).</p>"
+                        "smithy.api#documentation": "<p>The bundle ID (<code>micro_1_0</code>).</p>"
                     }
                 },
                 "instanceType": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 instance type (e.g., <code>t2.micro</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type (<code>t2.micro</code>).</p>"
                     }
                 },
                 "isActive": {
@@ -1618,25 +1618,25 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A friendly name for the bundle (e.g., <code>Micro</code>).</p>"
+                        "smithy.api#documentation": "<p>A friendly name for the bundle (<code>Micro</code>).</p>"
                     }
                 },
                 "power": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A numeric value that represents the power of the bundle (e.g., <code>500</code>). You can\n      use the bundle's power value in conjunction with a blueprint's minimum power value to\n      determine whether the blueprint will run on the bundle. For example, you need a bundle with a\n      power value of 500 or more to create an instance that uses a blueprint with a minimum power\n      value of 500.</p>"
+                        "smithy.api#documentation": "<p>A numeric value that represents the power of the bundle (<code>500</code>). You can\n      use the bundle's power value in conjunction with a blueprint's minimum power value to\n      determine whether the blueprint will run on the bundle. For example, you need a bundle with a\n      power value of 500 or more to create an instance that uses a blueprint with a minimum power\n      value of 500.</p>"
                     }
                 },
                 "ramSizeInGb": {
                     "target": "com.amazonaws.lightsail#float",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of RAM in GB (e.g., <code>2.0</code>).</p>"
+                        "smithy.api#documentation": "<p>The amount of RAM in GB (<code>2.0</code>).</p>"
                     }
                 },
                 "transferPerMonthInGb": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data transfer rate per month in GB (e.g., <code>2000</code>).</p>"
+                        "smithy.api#documentation": "<p>The data transfer rate per month in GB (<code>2000</code>).</p>"
                     }
                 },
                 "supportedPlatforms": {
@@ -1770,7 +1770,7 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#CertificateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the certificate (e.g., <code>my-certificate</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the certificate (<code>my-certificate</code>).</p>"
                     }
                 },
                 "domainName": {
@@ -1794,7 +1794,7 @@
                 "subjectAlternativeNames": {
                     "target": "com.amazonaws.lightsail#SubjectAlternativeNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (e.g., <code>example2.com</code>)\n      and subdomains (e.g., <code>blog.example.com</code>) of the certificate.</p>"
+                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (<code>example2.com</code>)\n      and subdomains (<code>blog.example.com</code>) of the certificate.</p>"
                     }
                 },
                 "domainValidationRecords": {
@@ -1918,6 +1918,17 @@
         },
         "com.amazonaws.lightsail#CertificateName": {
             "type": "string"
+        },
+        "com.amazonaws.lightsail#CertificateProvider": {
+            "type": "enum",
+            "members": {
+                "LetsEncrypt": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LetsEncrypt"
+                    }
+                }
+            }
         },
         "com.amazonaws.lightsail#CertificateStatus": {
             "type": "enum",
@@ -2122,7 +2133,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type (e.g., <code>CloudFormationStackRecord</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type (<code>CloudFormationStackRecord</code>).</p>"
                     }
                 },
                 "state": {
@@ -2160,7 +2171,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#CloudFormationStackRecordSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type (e.g., <code>ExportSnapshotRecord</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type (<code>ExportSnapshotRecord</code>).</p>"
                     }
                 },
                 "name": {
@@ -2274,7 +2285,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type (e.g., <code>ContactMethod</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type of the contact method.</p>"
                     }
                 },
                 "supportCode": {
@@ -2474,7 +2485,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type of the container service (i.e.,\n        <code>ContainerService</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type of the container service.</p>"
                     }
                 },
                 "tags": {
@@ -2578,7 +2589,7 @@
                 "state": {
                     "target": "com.amazonaws.lightsail#ContainerServiceDeploymentState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the deployment.</p>\n         <p>A deployment can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Activating</code> - The deployment is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Active</code> - The deployment was successfully created, and it's currently\n          running on the container service. The container service can have only one deployment in an\n          active state at a time.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Inactive</code> - The deployment was previously successfully created, but it is\n          not currently running on the container service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - The deployment failed. Use the <code>GetContainerLog</code>\n          action to view the log events for the containers in the deployment to try to determine the\n          reason for the failure.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the deployment.</p>\n         <p>A deployment can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVATING</code> - The deployment is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The deployment was successfully created, and it's currently\n          running on the container service. The container service can have only one deployment in an\n          active state at a time.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> - The deployment was previously successfully created, but it is\n          not currently running on the container service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The deployment failed. Use the <code>GetContainerLog</code>\n          action to view the log events for the containers in the deployment to try to determine the\n          reason for the failure.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "containers": {
@@ -2843,7 +2854,7 @@
                 "powerId": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the power (e.g., <code>nano-1</code>).</p>"
+                        "smithy.api#documentation": "<p>The ID of the power (<code>nano-1</code>).</p>"
                     }
                 },
                 "price": {
@@ -2867,7 +2878,7 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The friendly name of the power (e.g., <code>nano</code>).</p>"
+                        "smithy.api#documentation": "<p>The friendly name of the power (<code>nano</code>).</p>"
                     }
                 },
                 "isActive": {
@@ -3500,14 +3511,14 @@
                 "domainName": {
                     "target": "com.amazonaws.lightsail#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name (e.g., <code>example.com</code>) for the certificate.</p>",
+                        "smithy.api#documentation": "<p>The domain name (<code>example.com</code>) for the certificate.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "subjectAlternativeNames": {
                     "target": "com.amazonaws.lightsail#SubjectAlternativeNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (e.g., <code>example2.com</code>)\n      and subdomains (e.g., <code>blog.example.com</code>) for the certificate.</p>\n         <p>You can specify a maximum of nine alternate domains (in addition to the primary domain\n      name).</p>\n         <p>Wildcard domain entries (e.g., <code>*.example.com</code>) are not supported.</p>"
+                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (<code>example2.com</code>)\n      and subdomains (<code>blog.example.com</code>) for the certificate.</p>\n         <p>You can specify a maximum of nine alternate domains (in addition to the primary domain\n      name).</p>\n         <p>Wildcard domain entries (<code>*.example.com</code>) are not supported.</p>"
                     }
                 },
                 "tags": {
@@ -3947,7 +3958,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a block storage disk that can be attached to an Amazon Lightsail instance in the\n      same Availability Zone (e.g., <code>us-east-2a</code>).</p>\n         <p>The <code>create disk</code> operation supports tag-based access control via request tags.\n      For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a block storage disk that can be attached to an Amazon Lightsail instance in the\n      same Availability Zone (<code>us-east-2a</code>).</p>\n         <p>The <code>create disk</code> operation supports tag-based access control via request tags.\n      For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/CreateDisk",
@@ -3987,7 +3998,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting\n      disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g.,\n        <code>us-east-2a</code>).</p>\n         <p>The <code>create disk from snapshot</code> operation supports tag-based access control via\n      request tags and resource tags applied to the resource identified by <code>disk snapshot\n        name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting\n      disk can be attached to an Amazon Lightsail instance in the same Availability Zone (<code>us-east-2a</code>).</p>\n         <p>The <code>create disk from snapshot</code> operation supports tag-based access control via\n      request tags and resource tags applied to the resource identified by <code>disk snapshot\n        name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/CreateDiskFromSnapshot",
@@ -4001,27 +4012,27 @@
                 "diskName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique Lightsail disk name (e.g., <code>my-disk</code>).</p>",
+                        "smithy.api#documentation": "<p>The unique Lightsail disk name (<code>my-disk</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "diskSnapshotName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the disk snapshot (e.g., <code>my-snapshot</code>) from which to create the\n      new storage disk.</p>\n         <p>Constraint:</p>\n         <ul>\n            <li>\n               <p>This parameter cannot be defined together with the <code>source disk name</code>\n          parameter. The <code>disk snapshot name</code> and <code>source disk name</code>\n          parameters are mutually exclusive.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the disk snapshot (<code>my-snapshot</code>) from which to create the\n      new storage disk.</p>\n         <p>Constraint:</p>\n         <ul>\n            <li>\n               <p>This parameter cannot be defined together with the <code>source disk name</code>\n          parameter. The <code>disk snapshot name</code> and <code>source disk name</code>\n          parameters are mutually exclusive.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "availabilityZone": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>).\n      Choose the same Availability Zone as the Lightsail instance where you want to create the\n      disk.</p>\n         <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently\n      available.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone where you want to create the disk (<code>us-east-2a</code>).\n      Choose the same Availability Zone as the Lightsail instance where you want to create the\n      disk.</p>\n         <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently\n      available.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "sizeInGb": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the disk in GB (e.g., <code>32</code>).</p>",
+                        "smithy.api#documentation": "<p>The size of the disk in GB (<code>32</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4080,21 +4091,21 @@
                 "diskName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique Lightsail disk name (e.g., <code>my-disk</code>).</p>",
+                        "smithy.api#documentation": "<p>The unique Lightsail disk name (<code>my-disk</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "availabilityZone": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>).\n      Use the same Availability Zone as the Lightsail instance to which you want to attach the\n      disk.</p>\n         <p>Use the <code>get regions</code> operation to list the Availability Zones where\n      Lightsail is currently available.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone where you want to create the disk (<code>us-east-2a</code>).\n      Use the same Availability Zone as the Lightsail instance to which you want to attach the\n      disk.</p>\n         <p>Use the <code>get regions</code> operation to list the Availability Zones where\n      Lightsail is currently available.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "sizeInGb": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the disk in GB (e.g., <code>32</code>).</p>",
+                        "smithy.api#documentation": "<p>The size of the disk in GB (<code>32</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4175,20 +4186,20 @@
                 "diskName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name of the source disk (e.g., <code>Disk-Virginia-1</code>).</p>\n         <note>\n            <p>This parameter cannot be defined together with the <code>instance name</code> parameter.\n        The <code>disk name</code> and <code>instance name</code> parameters are mutually\n        exclusive.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The unique name of the source disk (<code>Disk-Virginia-1</code>).</p>\n         <note>\n            <p>This parameter cannot be defined together with the <code>instance name</code> parameter.\n        The <code>disk name</code> and <code>instance name</code> parameters are mutually\n        exclusive.</p>\n         </note>"
                     }
                 },
                 "diskSnapshotName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the destination disk snapshot (e.g., <code>my-disk-snapshot</code>) based on\n      the source disk.</p>",
+                        "smithy.api#documentation": "<p>The name of the destination disk snapshot (<code>my-disk-snapshot</code>) based on\n      the source disk.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "instanceName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name of the source instance (e.g., <code>Amazon_Linux-512MB-Virginia-1</code>).\n      When this is defined, a snapshot of the instance's system volume is created.</p>\n         <note>\n            <p>This parameter cannot be defined together with the <code>disk name</code> parameter. The\n          <code>instance name</code> and <code>disk name</code> parameters are mutually\n        exclusive.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The unique name of the source instance (<code>Amazon_Linux-512MB-Virginia-1</code>).\n      When this is defined, a snapshot of the instance's system volume is created.</p>\n         <note>\n            <p>This parameter cannot be defined together with the <code>disk name</code> parameter. The\n          <code>instance name</code> and <code>disk name</code> parameters are mutually\n        exclusive.</p>\n         </note>"
                     }
                 },
                 "tags": {
@@ -4365,7 +4376,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain resource for the specified domain (e.g., example.com).</p>\n         <p>The <code>create domain</code> operation supports tag-based access control via request\n      tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a domain resource for the specified domain (example.com).</p>\n         <p>The <code>create domain</code> operation supports tag-based access control via request\n      tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/CreateDomain",
@@ -4419,7 +4430,7 @@
                 "domainName": {
                     "target": "com.amazonaws.lightsail#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name (e.g., <code>example.com</code>) for which you want to create the domain\n      entry.</p>",
+                        "smithy.api#documentation": "<p>The domain name (<code>example.com</code>) for which you want to create the domain\n      entry.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4455,7 +4466,7 @@
                 "domainName": {
                     "target": "com.amazonaws.lightsail#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name to manage (e.g., <code>example.com</code>).</p>",
+                        "smithy.api#documentation": "<p>The domain name to manage (<code>example.com</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4510,7 +4521,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates two URLs that are used to access a virtual computer’s graphical user interface (GUI)\n      session. The primary URL initiates a web-based NICE DCV session to the virtual computer's application. The secondary URL initiates a web-based NICE DCV session to the virtual computer's operating session. </p>\n         <p>Use <code>StartGUISession</code> to open the session.</p>",
+                "smithy.api#documentation": "<p>Creates two URLs that are used to access a virtual computer’s graphical user interface\n      (GUI) session. The primary URL initiates a web-based NICE DCV session to the virtual\n      computer's application. The secondary URL initiates a web-based NICE DCV session to the\n      virtual computer's operating session. </p>\n         <p>Use <code>StartGUISession</code> to open the session.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/create-gui-session-access-details",
@@ -4765,7 +4776,7 @@
                 "bundleId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle of specification information for your virtual private server (or\n        <i>instance</i>), including the pricing plan (e.g.,\n      <code>micro_1_0</code>).</p>",
+                        "smithy.api#documentation": "<p>The bundle of specification information for your virtual private server (or\n        <i>instance</i>), including the pricing plan (<code>micro_1_0</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4857,20 +4868,20 @@
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
                         "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>(Deprecated) The name for your custom image.</p>\n         <note>\n            <p>In releases prior to June 12, 2017, this parameter was ignored by the API. It is now\n        deprecated.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>(Discontinued) The name for your custom image.</p>\n         <note>\n            <p>In releases prior to June 12, 2017, this parameter was ignored by the API. It is now\n        discontinued.</p>\n         </note>"
                     }
                 },
                 "blueprintId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for a virtual private server image (e.g., <code>app_wordpress_4_4</code> or\n        <code>app_lamp_7_0</code>). Use the <code>get blueprints</code> operation to return a list\n      of available images (or <i>blueprints</i>).</p>\n         <note>\n            <p>Use active blueprints when creating new instances. Inactive blueprints are listed to\n        support customers with existing instances and are not necessarily available to create new\n        instances. Blueprints are marked inactive when they become outdated due to operating system\n        updates or new application releases.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The ID for a virtual private server image (<code>app_wordpress_4_4</code> or\n        <code>app_lamp_7_0</code>). Use the <code>get blueprints</code> operation to return a list\n      of available images (or <i>blueprints</i>).</p>\n         <note>\n            <p>Use active blueprints when creating new instances. Inactive blueprints are listed to\n        support customers with existing instances and are not necessarily available to create new\n        instances. Blueprints are marked inactive when they become outdated due to operating system\n        updates or new application releases.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "bundleId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle of specification information for your virtual private server (or\n        <i>instance</i>), including the pricing plan (e.g.,\n      <code>micro_1_0</code>).</p>",
+                        "smithy.api#documentation": "<p>The bundle of specification information for your virtual private server (or\n        <i>instance</i>), including the pricing plan (<code>micro_1_0</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5077,7 +5088,7 @@
                 "healthCheckPath": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path you provided to perform the load balancer health check. If you didn't specify a\n      health check path, Lightsail uses the root path of your website (e.g.,\n      <code>\"/\"</code>).</p>\n         <p>You may want to specify a custom health check path other than the root of your application\n      if your home page loads slowly or has a lot of media or scripting on it.</p>"
+                        "smithy.api#documentation": "<p>The path you provided to perform the load balancer health check. If you didn't specify a\n      health check path, Lightsail uses the root path of your website (<code>\"/\"</code>).</p>\n         <p>You may want to specify a custom health check path other than the root of your application\n      if your home page loads slowly or has a lot of media or scripting on it.</p>"
                     }
                 },
                 "certificateName": {
@@ -5089,13 +5100,13 @@
                 "certificateDomainName": {
                     "target": "com.amazonaws.lightsail#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name with which your certificate is associated (e.g.,\n      <code>example.com</code>).</p>\n         <p>If you specify <code>certificateDomainName</code>, then <code>certificateName</code> is\n      required (and vice-versa).</p>"
+                        "smithy.api#documentation": "<p>The domain name with which your certificate is associated (<code>example.com</code>).</p>\n         <p>If you specify <code>certificateDomainName</code>, then <code>certificateName</code> is\n      required (and vice-versa).</p>"
                     }
                 },
                 "certificateAlternativeNames": {
                     "target": "com.amazonaws.lightsail#DomainNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional alternative domains and subdomains to use with your SSL/TLS certificate\n      (e.g., <code>www.example.com</code>, <code>example.com</code>, <code>m.example.com</code>,\n        <code>blog.example.com</code>).</p>"
+                        "smithy.api#documentation": "<p>The optional alternative domains and subdomains to use with your SSL/TLS certificate\n      (<code>www.example.com</code>, <code>example.com</code>, <code>m.example.com</code>,\n        <code>blog.example.com</code>).</p>"
                     }
                 },
                 "tags": {
@@ -5195,14 +5206,14 @@
                 "certificateDomainName": {
                     "target": "com.amazonaws.lightsail#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name (e.g., <code>example.com</code>) for your SSL/TLS certificate.</p>",
+                        "smithy.api#documentation": "<p>The domain name (<code>example.com</code>) for your SSL/TLS certificate.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "certificateAlternativeNames": {
                     "target": "com.amazonaws.lightsail#DomainNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings listing alternative domains and subdomains for your SSL/TLS\n      certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9\n      alternative names (in addition to the 1 primary domain). We do not support wildcards (e.g.,\n        <code>*.example.com</code>).</p>"
+                        "smithy.api#documentation": "<p>An array of strings listing alternative domains and subdomains for your SSL/TLS\n      certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9\n      alternative names (in addition to the 1 primary domain). We do not support wildcards (<code>*.example.com</code>).</p>"
                     }
                 },
                 "tags": {
@@ -6148,7 +6159,7 @@
                 "diskName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name of the disk you want to delete (e.g., <code>my-disk</code>).</p>",
+                        "smithy.api#documentation": "<p>The unique name of the disk you want to delete (<code>my-disk</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6223,7 +6234,7 @@
                 "diskSnapshotName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the disk snapshot you want to delete (e.g.,\n      <code>my-disk-snapshot</code>).</p>",
+                        "smithy.api#documentation": "<p>The name of the disk snapshot you want to delete (<code>my-disk-snapshot</code>).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7177,7 +7188,7 @@
                 "diskName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name of the disk you want to detach from your instance (e.g.,\n        <code>my-disk</code>).</p>",
+                        "smithy.api#documentation": "<p>The unique name of the disk you want to detach from your instance (<code>my-disk</code>).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7454,7 +7465,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type (e.g., <code>Disk</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type (<code>Disk</code>).</p>"
                     }
                 },
                 "tags": {
@@ -7515,14 +7526,14 @@
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
                         "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>(Deprecated) The attachment state of the disk.</p>\n         <note>\n            <p>In releases prior to November 14, 2017, this parameter returned <code>attached</code>\n        for system disks in the API response. It is now deprecated, but still included in the\n        response. Use <code>isAttached</code> instead.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>(Discontinued) The attachment state of the disk.</p>\n         <note>\n            <p>In releases prior to November 14, 2017, this parameter returned <code>attached</code>\n        for system disks in the API response. It is now discontinued, but still included in the\n        response. Use <code>isAttached</code> instead.</p>\n         </note>"
                     }
                 },
                 "gbInUse": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
                         "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>(Deprecated) The number of GB in use by the disk.</p>\n         <note>\n            <p>In releases prior to November 14, 2017, this parameter was not included in the API\n        response. It is now deprecated.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>(Discontinued) The number of GB in use by the disk.</p>\n         <note>\n            <p>In releases prior to November 14, 2017, this parameter was not included in the API\n        response. It is now discontinued.</p>\n         </note>"
                     }
                 },
                 "autoMountStatus": {
@@ -7554,7 +7565,7 @@
                 "sizeInGb": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the disk in GB (e.g., <code>32</code>).</p>"
+                        "smithy.api#documentation": "<p>The size of the disk in GB (<code>32</code>).</p>"
                     }
                 },
                 "isSystemDisk": {
@@ -7592,7 +7603,7 @@
                 "newDiskName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new disk name (e.g., <code>my-new-disk</code>).</p>"
+                        "smithy.api#documentation": "<p>The new disk name (<code>my-new-disk</code>).</p>"
                     }
                 }
             },
@@ -7612,7 +7623,7 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the disk snapshot (e.g., <code>my-disk-snapshot</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the disk snapshot (<code>my-disk-snapshot</code>).</p>"
                     }
                 },
                 "arn": {
@@ -7642,7 +7653,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type (e.g., <code>DiskSnapshot</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type (<code>DiskSnapshot</code>).</p>"
                     }
                 },
                 "tags": {
@@ -7710,7 +7721,7 @@
                 "sizeInGb": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the disk in GB (e.g., <code>32</code>).</p>"
+                        "smithy.api#documentation": "<p>The size of the disk in GB (<code>32</code>).</p>"
                     }
                 }
             },
@@ -7934,7 +7945,7 @@
                 "arn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain recordset (e.g.,\n        <code>arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain recordset (<code>arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "supportCode": {
@@ -8002,7 +8013,7 @@
                 "target": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target IP address (e.g., <code>192.0.2.0</code>), or AWS name server (e.g.,\n        <code>ns-111.awsdns-22.com.</code>).</p>\n         <p>For Lightsail load balancers, the value looks like\n        <code>ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com</code>. For\n      Lightsail distributions, the value looks like <code>exampled1182ne.cloudfront.net</code>.\n      For Lightsail container services, the value looks like\n        <code>container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com</code>. Be sure to\n      also set <code>isAlias</code> to <code>true</code> when setting up an A record for a\n      Lightsail load balancer, distribution, or container service.</p>"
+                        "smithy.api#documentation": "<p>The target IP address (<code>192.0.2.0</code>), or AWS name server (<code>ns-111.awsdns-22.com.</code>).</p>\n         <p>For Lightsail load balancers, the value looks like\n        <code>ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com</code>. For\n      Lightsail distributions, the value looks like <code>exampled1182ne.cloudfront.net</code>.\n      For Lightsail container services, the value looks like\n        <code>container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com</code>. Be sure to\n      also set <code>isAlias</code> to <code>true</code> when setting up an A record for a\n      Lightsail load balancer, distribution, or container service.</p>"
                     }
                 },
                 "isAlias": {
@@ -8021,7 +8032,7 @@
                     "target": "com.amazonaws.lightsail#DomainEntryOptions",
                     "traits": {
                         "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>(Deprecated) The options for the domain entry.</p>\n         <note>\n            <p>In releases prior to November 29, 2017, this parameter was not included in the API\n        response. It is now deprecated.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>(Discontinued) The options for the domain entry.</p>\n         <note>\n            <p>In releases prior to November 29, 2017, this parameter was not included in the API\n        response. It is now discontinued.</p>\n         </note>"
                     }
                 }
             },
@@ -8179,6 +8190,17 @@
         "com.amazonaws.lightsail#EligibleToRenew": {
             "type": "string"
         },
+        "com.amazonaws.lightsail#EmailAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 254
+                },
+                "smithy.api#pattern": "^[\\w!#$%&.'*+\\/=?^_\\x60{|}~\\-]{1,64}@[a-zA-Z0-9\\-]{1,63}(\\.[a-zA-Z0-9\\-]{1,63}){0,8}(\\.[a-zA-Z]{2,63})$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.lightsail#EnableAddOn": {
             "type": "operation",
             "input": {
@@ -8319,7 +8341,7 @@
                 "timePeriod": {
                     "target": "com.amazonaws.lightsail#TimePeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period of time, in days, that an estimate covers. The period has a start date and an end date. The start date must come before the end date.</p>"
+                        "smithy.api#documentation": "<p>The period of time, in days, that an estimate covers. The period has a start date and an\n      end date. The start date must come before the end date.</p>"
                     }
                 }
             },
@@ -8403,7 +8425,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type (e.g., <code>ExportSnapshotRecord</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type (<code>ExportSnapshotRecord</code>).</p>"
                     }
                 },
                 "state": {
@@ -8441,7 +8463,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ExportSnapshotRecordSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type (e.g., <code>InstanceSnapshot</code> or\n        <code>DiskSnapshot</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type (<code>InstanceSnapshot</code> or\n        <code>DiskSnapshot</code>).</p>"
                     }
                 },
                 "createdAt": {
@@ -8781,7 +8803,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type (e.g., <code>Instance</code> or <code>Disk</code>).</p>"
+                        "smithy.api#documentation": "<p>The resource type of the automatic snapshot. The possible values are <code>Instance</code>, and <code>Disk</code>.</p>"
                     }
                 },
                 "autoSnapshots": {
@@ -9312,7 +9334,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about one or more Amazon Lightsail SSL/TLS certificates.</p>\n         <note>\n            <p>To get a summary of a certificate, omit <code>includeCertificateDetails</code> from\n        your request. The response will include only the certificate Amazon Resource Name (ARN),\n        certificate name, domain name, and tags.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns information about one or more Amazon Lightsail SSL/TLS certificates.</p>\n         <note>\n            <p>To get a summary of a certificate, omit <code>includeCertificateDetails</code> from your\n        request. The response will include only the certificate Amazon Resource Name (ARN),\n        certificate name, domain name, and tags.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/GetCertificates",
@@ -9345,7 +9367,7 @@
                 "pageToken": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetCertificates</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>"
+                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetCertificates</code> request. If your\n      results are paginated, the response will return a next page token that you can specify as the\n      page token in a subsequent request.</p>"
                     }
                 }
             },
@@ -9365,7 +9387,7 @@
                 "nextPageToken": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results available. The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged.</p>"
+                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results available. The value of\n        <code>NextPageToken</code> is a unique pagination token for each page. Make the call again\n      using the returned token to retrieve the next page. Keep all other arguments unchanged.</p>"
                     }
                 }
             },
@@ -10035,7 +10057,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the cost estimate for a specified resource. A cost estimate will not generate for a resource that has been deleted.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the cost estimate for a specified resource. A cost estimate\n      will not generate for a resource that has been deleted.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/budgettracker/getCostEstimate",
@@ -10132,7 +10154,7 @@
                 "diskName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the disk (e.g., <code>my-disk</code>).</p>",
+                        "smithy.api#documentation": "<p>The name of the disk (<code>my-disk</code>).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10201,7 +10223,7 @@
                 "diskSnapshotName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the disk snapshot (e.g., <code>my-disk-snapshot</code>).</p>",
+                        "smithy.api#documentation": "<p>The name of the disk snapshot (<code>my-disk-snapshot</code>).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10493,7 +10515,7 @@
                 "createTime": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of the last cache reset (e.g., <code>1479734909.17</code>) in Unix time\n      format.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of the last cache reset (<code>1479734909.17</code>) in Unix time\n      format.</p>"
                     }
                 }
             },
@@ -12212,7 +12234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets operations for a specific resource (e.g., an instance or a static IP).</p>",
+                "smithy.api#documentation": "<p>Gets operations for a specific resource (an instance or a static IP).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/GetOperationsForResource",
@@ -12254,7 +12276,7 @@
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
                         "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>(Deprecated) Returns the number of pages of results that remain.</p>\n         <note>\n            <p>In releases prior to June 12, 2017, this parameter returned <code>null</code> by the\n        API. It is now deprecated, and the API returns the <code>next page token</code> parameter\n        instead.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>(Discontinued) Returns the number of pages of results that remain.</p>\n         <note>\n            <p>In releases prior to June 12, 2017, this parameter returned <code>null</code> by the\n        API. It is now discontinued, and the API returns the <code>next page token</code> parameter\n        instead.</p>\n         </note>"
                     }
                 },
                 "nextPageToken": {
@@ -12348,13 +12370,13 @@
                 "includeAvailabilityZones": {
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether to also include Availability Zones in your get regions\n      request. Availability Zones are indicated with a letter: e.g., <code>us-east-2a</code>.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value indicating whether to also include Availability Zones in your get regions\n      request. Availability Zones are indicated with a letter: <code>us-east-2a</code>.</p>"
                     }
                 },
                 "includeRelationalDatabaseAvailabilityZones": {
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether to also include Availability Zones for databases in\n      your get regions request. Availability Zones are indicated with a letter (e.g.,\n        <code>us-east-2a</code>).</p>"
+                        "smithy.api#documentation": "<p>A Boolean value indicating whether to also include Availability Zones for databases in\n      your get regions request. Availability Zones are indicated with a letter (<code>us-east-2a</code>).</p>"
                     }
                 }
             },
@@ -13363,6 +13385,81 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lightsail#GetSetupHistory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#GetSetupHistoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#GetSetupHistoryResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns detailed information for five of the most recent <code>SetupInstanceHttps</code> requests that were ran on the target instance.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/get-setup-history",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#GetSetupHistoryRequest": {
+            "type": "structure",
+            "members": {
+                "resourceName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource for which you are requesting information.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pageToken": {
+                    "target": "com.amazonaws.lightsail#SetupHistoryPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetSetupHistory</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#GetSetupHistoryResult": {
+            "type": "structure",
+            "members": {
+                "setupHistory": {
+                    "target": "com.amazonaws.lightsail#setupHistoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The historical information that's returned.</p>"
+                    }
+                },
+                "nextPageToken": {
+                    "target": "com.amazonaws.lightsail#SetupHistoryPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetSetupHistory</code> request and specify\n      the next page token using the pageToken parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lightsail#GetStaticIp": {
             "type": "operation",
             "input": {
@@ -13856,7 +13953,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN)\n      distribution.</p>\n         <p>An origin can be a Lightsail instance, bucket, or load balancer. A distribution pulls\n      content from an origin, caches it, and serves it to viewers via a worldwide network of edge\n      servers.</p>"
+                "smithy.api#documentation": "<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN)\n      distribution.</p>\n         <p>An origin can be a Lightsail instance, bucket, container service, or load balancer. A distribution pulls\n      content from an origin, caches it, and serves it to viewers via a worldwide network of edge\n      servers.</p>"
             }
         },
         "com.amazonaws.lightsail#Instance": {
@@ -13865,13 +13962,13 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name the user gave the instance (e.g., <code>Amazon_Linux-1GB-Ohio-1</code>).</p>"
+                        "smithy.api#documentation": "<p>The name the user gave the instance (<code>Amazon_Linux-1GB-Ohio-1</code>).</p>"
                     }
                 },
                 "arn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance (e.g.,\n        <code>arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance (<code>arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "supportCode": {
@@ -13883,7 +13980,7 @@
                 "createdAt": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the instance was created (e.g., <code>1479734909.17</code>) in Unix\n      time format.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the instance was created (<code>1479734909.17</code>) in Unix\n      time format.</p>"
                     }
                 },
                 "location": {
@@ -13907,19 +14004,19 @@
                 "blueprintId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blueprint ID (e.g., <code>os_amlinux_2016_03</code>).</p>"
+                        "smithy.api#documentation": "<p>The blueprint ID (<code>os_amlinux_2016_03</code>).</p>"
                     }
                 },
                 "blueprintName": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The friendly name of the blueprint (e.g., <code>Amazon Linux</code>).</p>"
+                        "smithy.api#documentation": "<p>The friendly name of the blueprint (<code>Amazon Linux</code>).</p>"
                     }
                 },
                 "bundleId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle for the instance (e.g., <code>micro_1_0</code>).</p>"
+                        "smithy.api#documentation": "<p>The bundle for the instance (<code>micro_1_0</code>).</p>"
                     }
                 },
                 "addOns": {
@@ -13973,19 +14070,19 @@
                 "state": {
                     "target": "com.amazonaws.lightsail#InstanceState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status code and the state (e.g., <code>running</code>) for the instance.</p>"
+                        "smithy.api#documentation": "<p>The status code and the state (<code>running</code>) for the instance.</p>"
                     }
                 },
                 "username": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user name for connecting to the instance (e.g., <code>ec2-user</code>).</p>"
+                        "smithy.api#documentation": "<p>The user name for connecting to the instance (<code>ec2-user</code>).</p>"
                     }
                 },
                 "sshKeyName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SSH key being used to connect to the instance (e.g.,\n        <code>LightsailDefaultKeyPair</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the SSH key being used to connect to the instance (<code>LightsailDefaultKeyPair</code>).</p>"
                     }
                 },
                 "metadataOptions": {
@@ -14005,7 +14102,7 @@
                 "certKey": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>For SSH access, the public key to use when accessing your instance For OpenSSH clients\n      (e.g., command line SSH), you should save this value to <code>tempkey-cert.pub</code>.</p>"
+                        "smithy.api#documentation": "<p>For SSH access, the public key to use when accessing your instance For OpenSSH clients\n      (command line SSH), you should save this value to <code>tempkey-cert.pub</code>.</p>"
                     }
                 },
                 "expiresAt": {
@@ -14035,7 +14132,7 @@
                 "privateKey": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>For SSH access, the temporary private key. For OpenSSH clients (e.g., command line SSH),\n      you should save this value to <code>tempkey</code>).</p>"
+                        "smithy.api#documentation": "<p>For SSH access, the temporary private key. For OpenSSH clients (command line SSH),\n      you should save this value to <code>tempkey</code>).</p>"
                     }
                 },
                 "protocol": {
@@ -14097,7 +14194,7 @@
                 "instanceType": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type (e.g., <code>t2.micro</code>) to use for the new Amazon EC2 instance.</p>",
+                        "smithy.api#documentation": "<p>The instance type (<code>t2.micro</code>) to use for the new Amazon EC2 instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14150,7 +14247,7 @@
                 "ramSizeInGb": {
                     "target": "com.amazonaws.lightsail#float",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of RAM in GB on the instance (e.g., <code>1.0</code>).</p>"
+                        "smithy.api#documentation": "<p>The amount of RAM in GB on the instance (<code>1.0</code>).</p>"
                     }
                 }
             },
@@ -14611,7 +14708,7 @@
                 "arn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot (e.g.,\n        <code>arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot (<code>arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "supportCode": {
@@ -14623,7 +14720,7 @@
                 "createdAt": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the snapshot was created (e.g., <code>1479907467.024</code>).</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the snapshot was created (<code>1479907467.024</code>).</p>"
                     }
                 },
                 "location": {
@@ -14671,19 +14768,19 @@
                 "fromInstanceArn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g.,\n        <code>arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance from which the snapshot was created (<code>arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "fromBlueprintId": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blueprint ID from which you created the snapshot (e.g., <code>os_debian_8_3</code>). A\n      blueprint is a virtual private server (or <i>instance</i>) image used to create\n      instances quickly.</p>"
+                        "smithy.api#documentation": "<p>The blueprint ID from which you created the snapshot (<code>os_debian_8_3</code>). A\n      blueprint is a virtual private server (or <i>instance</i>) image used to create\n      instances quickly.</p>"
                     }
                 },
                 "fromBundleId": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle ID from which you created the snapshot (e.g., <code>micro_1_0</code>).</p>"
+                        "smithy.api#documentation": "<p>The bundle ID from which you created the snapshot (<code>micro_1_0</code>).</p>"
                     }
                 },
                 "isFromAutoSnapshot": {
@@ -14709,13 +14806,13 @@
                 "fromBundleId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bundle ID from which the source instance was created (e.g.,\n      <code>micro_1_0</code>).</p>"
+                        "smithy.api#documentation": "<p>The bundle ID from which the source instance was created (<code>micro_1_0</code>).</p>"
                     }
                 },
                 "fromBlueprintId": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blueprint ID from which the source instance (e.g., <code>os_debian_8_3</code>).</p>"
+                        "smithy.api#documentation": "<p>The blueprint ID from which the source instance (<code>os_debian_8_3</code>).</p>"
                     }
                 },
                 "fromDiskInfo": {
@@ -14770,7 +14867,7 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the instance (e.g., <code>running</code> or <code>pending</code>).</p>"
+                        "smithy.api#documentation": "<p>The state of the instance (<code>running</code> or <code>pending</code>).</p>"
                     }
                 }
             },
@@ -14917,7 +15014,7 @@
                 "arn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the key pair (e.g.,\n        <code>arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the key pair (<code>arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "supportCode": {
@@ -14929,7 +15026,7 @@
                 "createdAt": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the key pair was created (e.g., <code>1479816991.349</code>).</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the key pair was created (<code>1479816991.349</code>).</p>"
                     }
                 },
                 "location": {
@@ -15003,7 +15100,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Lightsail resource type (e.g., <code>Distribution</code>).</p>"
+                        "smithy.api#documentation": "<p>The Lightsail resource type (<code>Distribution</code>).</p>"
                     }
                 },
                 "alternativeDomainNames": {
@@ -15469,6 +15566,9 @@
                     "target": "com.amazonaws.lightsail#GetRelationalDatabaseSnapshots"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#GetSetupHistory"
+                },
+                {
                     "target": "com.amazonaws.lightsail#GetStaticIp"
                 },
                 {
@@ -15515,6 +15615,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#SetResourceAccessForBucket"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#SetupInstanceHttps"
                 },
                 {
                     "target": "com.amazonaws.lightsail#StartGUISession"
@@ -16396,7 +16499,7 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the load balancer (e.g., <code>my-load-balancer</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the load balancer (<code>my-load-balancer</code>).</p>"
                     }
                 },
                 "arn": {
@@ -16420,13 +16523,13 @@
                 "location": {
                     "target": "com.amazonaws.lightsail#ResourceLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where your load balancer was created (e.g., <code>us-east-2a</code>).\n      Lightsail automatically creates your load balancer across Availability Zones.</p>"
+                        "smithy.api#documentation": "<p>The AWS Region where your load balancer was created (<code>us-east-2a</code>).\n      Lightsail automatically creates your load balancer across Availability Zones.</p>"
                     }
                 },
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type (e.g., <code>LoadBalancer</code>.</p>"
+                        "smithy.api#documentation": "<p>The resource type (<code>LoadBalancer</code>.</p>"
                     }
                 },
                 "tags": {
@@ -16697,7 +16800,7 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SSL/TLS certificate (e.g., <code>my-certificate</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the SSL/TLS certificate (<code>my-certificate</code>).</p>"
                     }
                 },
                 "arn": {
@@ -16727,7 +16830,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type (e.g., <code>LoadBalancerTlsCertificate</code>).</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Instance</code>\n                  </b> - A Lightsail instance (a\n          virtual private server)</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>StaticIp</code>\n                  </b> - A static IP address</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>KeyPair</code>\n                  </b> - The key pair used to connect\n          to a Lightsail instance</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>InstanceSnapshot</code>\n                  </b> - A Lightsail\n          instance snapshot</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Domain</code>\n                  </b> - A DNS zone</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PeeredVpc</code>\n                  </b> - A peered VPC</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>LoadBalancer</code>\n                  </b> - A Lightsail load\n          balancer</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>LoadBalancerTlsCertificate</code>\n                  </b> - An SSL/TLS\n          certificate associated with a Lightsail load balancer</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Disk</code>\n                  </b> - A Lightsail block storage\n          disk</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskSnapshot</code>\n                  </b> - A block storage disk\n          snapshot</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The resource type (<code>LoadBalancerTlsCertificate</code>).</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Instance</code>\n                  </b> - A Lightsail instance (a\n          virtual private server)</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>StaticIp</code>\n                  </b> - A static IP address</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>KeyPair</code>\n                  </b> - The key pair used to connect\n          to a Lightsail instance</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>InstanceSnapshot</code>\n                  </b> - A Lightsail\n          instance snapshot</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Domain</code>\n                  </b> - A DNS zone</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PeeredVpc</code>\n                  </b> - A peered VPC</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>LoadBalancer</code>\n                  </b> - A Lightsail load\n          balancer</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>LoadBalancerTlsCertificate</code>\n                  </b> - An SSL/TLS\n          certificate associated with a Lightsail load balancer</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Disk</code>\n                  </b> - A Lightsail block storage\n          disk</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DiskSnapshot</code>\n                  </b> - A block storage disk\n          snapshot</p>\n            </li>\n         </ul>"
                     }
                 },
                 "tags": {
@@ -16841,7 +16944,7 @@
                 "subjectAlternativeNames": {
                     "target": "com.amazonaws.lightsail#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (e.g., <code>example2.com</code>)\n      and subdomains (e.g., <code>blog.example.com</code>) for the certificate.</p>"
+                        "smithy.api#documentation": "<p>An array of strings that specify the alternate domains (<code>example2.com</code>)\n      and subdomains (<code>blog.example.com</code>) for the certificate.</p>"
                     }
                 }
             },
@@ -17331,7 +17434,7 @@
                 "timestamp": {
                     "target": "com.amazonaws.lightsail#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp (e.g., <code>1479816991.349</code>).</p>"
+                        "smithy.api#documentation": "<p>The timestamp (<code>1479816991.349</code>).</p>"
                     }
                 },
                 "unit": {
@@ -17975,7 +18078,7 @@
                 "createdAt": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the operation was initialized (e.g.,\n      <code>1479816991.349</code>).</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the operation was initialized (<code>1479816991.349</code>).</p>"
                     }
                 },
                 "location": {
@@ -17993,7 +18096,7 @@
                 "operationDetails": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the operation (e.g., <code>Debian-1GB-Ohio-1</code>).</p>"
+                        "smithy.api#documentation": "<p>Details about the operation (<code>Debian-1GB-Ohio-1</code>).</p>"
                     }
                 },
                 "operationType": {
@@ -18011,7 +18114,7 @@
                 "statusChangedAt": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the status was changed (e.g., <code>1479816991.349</code>).</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the status was changed (<code>1479816991.349</code>).</p>"
                     }
                 },
                 "errorCode": {
@@ -18588,6 +18691,12 @@
                     "traits": {
                         "smithy.api#enumValue": "StopGUISession"
                     }
+                },
+                "SetupInstanceHttps": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SetupInstanceHttps"
+                    }
                 }
             }
         },
@@ -18603,7 +18712,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type of the origin resource (e.g., <i>Instance</i>).</p>"
+                        "smithy.api#documentation": "<p>The resource type of the origin resource (<i>Instance</i>).</p>"
                     }
                 },
                 "regionName": {
@@ -19437,25 +19546,25 @@
                 "continentCode": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The continent code (e.g., <code>NA</code>, meaning North America).</p>"
+                        "smithy.api#documentation": "<p>The continent code (<code>NA</code>, meaning North America).</p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the Amazon Web Services Region (e.g., <code>This region is recommended\n        to serve users in the eastern United States and eastern Canada</code>).</p>"
+                        "smithy.api#documentation": "<p>The description of the Amazon Web Services Region (<code>This region is recommended\n        to serve users in the eastern United States and eastern Canada</code>).</p>"
                     }
                 },
                 "displayName": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name (e.g., <code>Ohio</code>).</p>"
+                        "smithy.api#documentation": "<p>The display name (<code>Ohio</code>).</p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.lightsail#RegionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The region name (e.g., <code>us-east-2</code>).</p>"
+                        "smithy.api#documentation": "<p>The region name (<code>us-east-2</code>).</p>"
                     }
                 },
                 "availabilityZones": {
@@ -20486,7 +20595,7 @@
                 "createTime": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of the reset cache request (e.g., <code>1479734909.17</code>) in Unix time\n      format.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of the reset cache request (<code>1479734909.17</code>) in Unix time\n      format.</p>"
                     }
                 },
                 "operation": {
@@ -20900,7 +21009,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a web-based, remote graphical user interface (GUI), NICE DCV session. The session is used to access a virtual\n      computer’s operating system or application.</p>"
+                "smithy.api#documentation": "<p>Describes a web-based, remote graphical user interface (GUI), NICE DCV session. The\n      session is used to access a virtual computer’s operating system or application.</p>"
             }
         },
         "com.amazonaws.lightsail#Sessions": {
@@ -20955,7 +21064,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.lightsail#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>The possible values are <code>Distribution</code>, <code>Instance</code>, and\n        <code>LoadBalancer</code>.</p>\n         <note>\n            <p>Distribution-related APIs are available only in the N. Virginia (<code>us-east-1</code>)\n          Amazon Web Services Region. Set your Amazon Web Services Region configuration to\n          <code>us-east-1</code> to create, view, or edit distributions.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>The resource values are <code>Distribution</code>, <code>Instance</code>, and\n        <code>LoadBalancer</code>.</p>\n         <note>\n            <p>Distribution-related APIs are available only in the N. Virginia (<code>us-east-1</code>)\n          Amazon Web Services Region. Set your Amazon Web Services Region configuration to\n          <code>us-east-1</code> to create, view, or edit distributions.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21069,6 +21178,300 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lightsail#SetupDomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-]{1,63}(\\.[a-zA-Z0-9\\-]{1,63}){0,8}(\\.[a-zA-Z]{2,63})$"
+            }
+        },
+        "com.amazonaws.lightsail#SetupDomainNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#SetupDomainName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.lightsail#SetupExecutionDetails": {
+            "type": "structure",
+            "members": {
+                "command": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command that was executed.</p>"
+                    }
+                },
+                "dateTime": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the request was run.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target resource.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.lightsail#SetupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the <code>SetupInstanceHttps</code> request.</p>"
+                    }
+                },
+                "standardError": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text written by the command to stderr.</p>"
+                    }
+                },
+                "standardOutput": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text written by the command to stdout.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the script..</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details about the commands that were run.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#SetupExecutionDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#SetupExecutionDetails"
+            }
+        },
+        "com.amazonaws.lightsail#SetupHistory": {
+            "type": "structure",
+            "members": {
+                "operationId": {
+                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A GUID that's used to identify the operation.</p>"
+                    }
+                },
+                "request": {
+                    "target": "com.amazonaws.lightsail#SetupRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the specified request.</p>"
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.lightsail#SetupHistoryResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target resource name for the request.</p>"
+                    }
+                },
+                "executionDetails": {
+                    "target": "com.amazonaws.lightsail#SetupExecutionDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the full details of the request.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.lightsail#SetupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the commands that were ran on the target resource.</p>\n         <p>The status of each command is also returned.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#SetupHistoryPageToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 24,
+                    "max": 40
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+/=]+$"
+            }
+        },
+        "com.amazonaws.lightsail#SetupHistoryResource": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Lightsail resource.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lightsail resource.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the resource was created.</p>"
+                    }
+                },
+                "location": {
+                    "target": "com.amazonaws.lightsail#ResourceLocation"
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.lightsail#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Lightsail resource type. For example, <code>Instance</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Lightsail resource that <code>SetupHistory</code> was ran on. </p>"
+            }
+        },
+        "com.amazonaws.lightsail#SetupInstanceHttps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#SetupInstanceHttpsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#SetupInstanceHttpsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an SSL/TLS certificate that secures traffic for your website. After the\n      certificate is created, it is installed on the specified Lightsail instance.</p>\n         <p>If you provide more than one domain name in the request, at least one name must be less than or equal to 63 characters in length.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/setup-instance-https",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#SetupInstanceHttpsRequest": {
+            "type": "structure",
+            "members": {
+                "instanceName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Lightsail instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "emailAddress": {
+                    "target": "com.amazonaws.lightsail#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contact method for SSL/TLS certificate renewal alerts. You can enter one email\n      address. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainNames": {
+                    "target": "com.amazonaws.lightsail#SetupDomainNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain and subdomains that were specified for the SSL/TLS\n      certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "certificateProvider": {
+                    "target": "com.amazonaws.lightsail#CertificateProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate authority that issues the SSL/TLS certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#SetupInstanceHttpsResult": {
+            "type": "structure",
+            "members": {
+                "operations": {
+                    "target": "com.amazonaws.lightsail#OperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The available API operations for <code>SetupInstanceHttps</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lightsail#SetupRequest": {
+            "type": "structure",
+            "members": {
+                "instanceName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Lightsail instance.</p>"
+                    }
+                },
+                "domainNames": {
+                    "target": "com.amazonaws.lightsail#SetupDomainNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain and subdomains that the SSL/TLS certificate secures.</p>"
+                    }
+                },
+                "certificateProvider": {
+                    "target": "com.amazonaws.lightsail#CertificateProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Certificate Authority (CA) that issues the SSL/TLS certificate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information that was submitted during the <code>SetupInstanceHttps</code> request. Email\n      information is redacted for privacy.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#SetupStatus": {
+            "type": "enum",
+            "members": {
+                "Succeeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "succeeded"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                },
+                "InProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inProgress"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lightsail#StartGUISession": {
             "type": "operation",
             "input": {
@@ -21095,7 +21498,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a graphical user interface (GUI) session that’s used to access a virtual\n      computer’s operating system and application. The session will be active for 1 hour. Use this action to resume the session after it expires. </p>",
+                "smithy.api#documentation": "<p>Initiates a graphical user interface (GUI) session that’s used to access a virtual\n      computer’s operating system and application. The session will be active for 1 hour. Use this\n      action to resume the session after it expires. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/start-gui-session",
@@ -21276,13 +21679,13 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the static IP (e.g., <code>StaticIP-Ohio-EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the static IP (<code>StaticIP-Ohio-EXAMPLE</code>).</p>"
                     }
                 },
                 "arn": {
                     "target": "com.amazonaws.lightsail#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the static IP (e.g.,\n        <code>arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the static IP (<code>arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).</p>"
                     }
                 },
                 "supportCode": {
@@ -21294,7 +21697,7 @@
                 "createdAt": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the static IP was created (e.g., <code>1479735304.222</code>).</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the static IP was created (<code>1479735304.222</code>).</p>"
                     }
                 },
                 "location": {
@@ -21318,7 +21721,7 @@
                 "attachedTo": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance where the static IP is attached (e.g.,\n      <code>Amazon_Linux-1GB-Ohio-1</code>).</p>"
+                        "smithy.api#documentation": "<p>The instance where the static IP is attached (<code>Amazon_Linux-1GB-Ohio-1</code>).</p>"
                     }
                 },
                 "isAttached": {
@@ -21446,7 +21849,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates a web-based NICE DCV session that’s used to access a virtual computer’s\n      operating system or application. The session will close and any unsaved data will be lost.</p>",
+                "smithy.api#documentation": "<p>Terminates a web-based NICE DCV session that’s used to access a virtual computer’s\n      operating system or application. The session will close and any unsaved data will be\n      lost.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/stop-gui-session",
@@ -21535,7 +21938,7 @@
                 "duration": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of idle time in minutes after which your virtual computer will automatically stop.</p>"
+                        "smithy.api#documentation": "<p>The amount of idle time in minutes after which your virtual computer will automatically\n      stop.</p>"
                     }
                 }
             },
@@ -21879,18 +22282,18 @@
                 "start": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The beginning of the time period. The start date is inclusive. For example, if <code>start</code> is <code>2017-01-01</code>, Lightsail for Research retrieves cost and usage data starting at <code>2017-01-01</code> up to the end date. The start date must be equal to or no later than the current date to avoid a validation error.</p>"
+                        "smithy.api#documentation": "<p>The beginning of the time period. The start date is inclusive. For example, if\n        <code>start</code> is <code>2017-01-01</code>, Lightsail for Research retrieves cost and usage data starting\n      at <code>2017-01-01</code> up to the end date. The start date must be equal to or no later\n      than the current date to avoid a validation error.</p>"
                     }
                 },
                 "end": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period. The end date is exclusive. For example, if <code>end</code> is <code>2017-05-01</code>, Lightsail for Research retrieves cost and usage data from the start date up to, but not including, <code>2017-05-01</code>.</p>"
+                        "smithy.api#documentation": "<p>The end of the time period. The end date is exclusive. For example, if <code>end</code> is\n        <code>2017-05-01</code>, Lightsail for Research retrieves cost and usage data from the start date up to, but\n      not including, <code>2017-05-01</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sets the start date and end date for retrieving a cost estimate. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>.</p>"
+                "smithy.api#documentation": "<p>Sets the start date and end date for retrieving a cost estimate. The start date is\n      inclusive, but the end date is exclusive. For example, if <code>start</code> is\n        <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and\n      usage data is retrieved from <code>2017-01-01</code> up to and including\n        <code>2017-04-30</code> but not including <code>2017-05-01</code>.</p>"
             }
         },
         "com.amazonaws.lightsail#TreatMissingData": {
@@ -22726,7 +23129,7 @@
                 "loadBalancerName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the load balancer that you want to modify (e.g.,\n      <code>my-load-balancer</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the load balancer that you want to modify (<code>my-load-balancer</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -22976,6 +23379,12 @@
         },
         "com.amazonaws.lightsail#long": {
             "type": "long"
+        },
+        "com.amazonaws.lightsail#setupHistoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#SetupHistory"
+            }
         },
         "com.amazonaws.lightsail#string": {
             "type": "string"

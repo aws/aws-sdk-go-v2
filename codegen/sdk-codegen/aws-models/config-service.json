@@ -1821,7 +1821,7 @@
                 "recordingMode": {
                     "target": "com.amazonaws.configservice#RecordingMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the default recording frequency that Config uses to record configuration changes.\n\t\t\t\n\t\t\tConfig supports <i>Continuous recording</i> and <i>Daily recording</i>.</p>\n         <ul>\n            <li>\n               <p>Continuous recording allows you to record configuration changes continuously whenever a change occurs.</p>\n            </li>\n            <li>\n               <p>Daily recording allows you record configuration data once every 24 hours, only if a change has occurred.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Firewall Manager depends on continuous recording to monitor your resources. If you are using Firewall Manager,\n\t\t\tit is recommended that you set the recording frequency to Continuous.</p>\n         </note>\n         <p>You can also override the recording frequency for specific resource types.</p>"
+                        "smithy.api#documentation": "<p>Specifies the default recording frequency that Config uses to record configuration changes.\n\t\t\t\n\t\t\tConfig supports <i>Continuous recording</i> and <i>Daily recording</i>.</p>\n         <ul>\n            <li>\n               <p>Continuous recording allows you to record configuration changes continuously whenever a change occurs.</p>\n            </li>\n            <li>\n               <p>Daily recording allows you to receive a configuration item (CI) representing the most recent state of your resources over the last 24-hour period, only if it’s different from the previous CI recorded.\n\t\t\t</p>\n            </li>\n         </ul>\n         <note>\n            <p>Firewall Manager depends on continuous recording to monitor your resources. If you are using Firewall Manager,\n\t\t\tit is recommended that you set the recording frequency to Continuous.</p>\n         </note>\n         <p>You can also override the recording frequency for specific resource types.</p>"
                     }
                 }
             },
@@ -10732,7 +10732,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the default recording frequency that Config uses to record configuration changes.\n\t\t\t\n\t\t\tConfig supports <i>Continuous recording</i> and <i>Daily recording</i>.</p>\n         <ul>\n            <li>\n               <p>Continuous recording allows you to record configuration changes continuously whenever a change occurs.</p>\n            </li>\n            <li>\n               <p>Daily recording allows you record configuration data once every 24 hours, only if a change has occurred.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Firewall Manager depends on continuous recording to monitor your resources. If you are using Firewall Manager,\n\t\t\tit is recommended that you set the recording frequency to Continuous.</p>\n         </note>\n         <p>You can also override the recording frequency for specific resource types.</p>"
+                "smithy.api#documentation": "<p>Specifies the default recording frequency that Config uses to record configuration changes.\n\t\t\t\n\t\t\tConfig supports <i>Continuous recording</i> and <i>Daily recording</i>.</p>\n         <ul>\n            <li>\n               <p>Continuous recording allows you to record configuration changes continuously whenever a change occurs.</p>\n            </li>\n            <li>\n               <p>Daily recording allows you to receive a configuration item (CI) representing the most recent state of your resources over the last 24-hour period, only if it’s different from the previous CI recorded.\n\t\t\t</p>\n            </li>\n         </ul>\n         <note>\n            <p>Firewall Manager depends on continuous recording to monitor your resources. If you are using Firewall Manager,\n\t\t\tit is recommended that you set the recording frequency to Continuous.</p>\n         </note>\n         <p>You can also override the recording frequency for specific resource types.</p>"
             }
         },
         "com.amazonaws.configservice#RecordingModeOverride": {
@@ -10754,7 +10754,7 @@
                 "recordingFrequency": {
                     "target": "com.amazonaws.configservice#RecordingFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The recording frequency that will be applied to all the resource types specified in the override.</p>\n         <ul>\n            <li>\n               <p>Continuous recording allows you to record configuration changes continuously whenever a change occurs.</p>\n            </li>\n            <li>\n               <p>Daily recording allows you record configuration data once every 24 hours, only if a change has occurred.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Firewall Manager depends on continuous recording to monitor your resources. If you are using Firewall Manager,\n\t\t\tit is recommended that you set the recording frequency to Continuous.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The recording frequency that will be applied to all the resource types specified in the override.</p>\n         <ul>\n            <li>\n               <p>Continuous recording allows you to record configuration changes continuously whenever a change occurs.</p>\n            </li>\n            <li>\n               <p>Daily recording allows you to receive a configuration item (CI) representing the most recent state of your resources over the last 24-hour period, only if it’s different from the previous CI recorded.\n\t\t\t</p>\n            </li>\n         </ul>\n         <note>\n            <p>Firewall Manager depends on continuous recording to monitor your resources. If you are using Firewall Manager,\n\t\t\tit is recommended that you set the recording frequency to Continuous.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10944,7 +10944,7 @@
                 "RetryAttemptSeconds": {
                     "target": "com.amazonaws.configservice#AutoRemediationAttemptSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum time in seconds that Config runs auto-remediation. If you do not select a number, the default is 60 seconds. </p>\n         <p>For example, if you specify RetryAttemptSeconds as 50 seconds and MaximumAutomaticAttempts as 5, \n\t\tConfig will run auto-remediations 5 times within 50 seconds before throwing an exception.</p>"
+                        "smithy.api#documentation": "<p>Time window to determine whether or not to add a remediation exception to prevent infinite remediation attempts.\n\t\t\tIf <code>MaximumAutomaticAttempts</code> remediation attempts have been made under <code>RetryAttemptSeconds</code>, a remediation exception will be added to the resource.\n\t\t\tIf you do not select a number, the default is 60 seconds.\n\t\t</p>\n         <p>For example, if you specify <code>RetryAttemptSeconds</code> as 50 seconds and <code>MaximumAutomaticAttempts</code> as 5, \n\t\t\tConfig will run auto-remediations 5 times within 50 seconds before adding a remediation exception to the resource.</p>"
                     }
                 },
                 "Arn": {
@@ -14012,6 +14012,114 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS::ResourceExplorer2::Index"
+                    }
+                },
+                "AppStreamFleet": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::AppStream::Fleet"
+                    }
+                },
+                "CognitoUserPool": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Cognito::UserPool"
+                    }
+                },
+                "CognitoUserPoolClient": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Cognito::UserPoolClient"
+                    }
+                },
+                "CognitoUserPoolGroup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Cognito::UserPoolGroup"
+                    }
+                },
+                "EC2NetworkInsightsAccessScope": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::NetworkInsightsAccessScope"
+                    }
+                },
+                "EC2NetworkInsightsAnalysis": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::NetworkInsightsAnalysis"
+                    }
+                },
+                "GrafanaWorkspace": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Grafana::Workspace"
+                    }
+                },
+                "GroundStationDataflowEndpointGroup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::GroundStation::DataflowEndpointGroup"
+                    }
+                },
+                "ImageBuilderImageRecipe": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ImageBuilder::ImageRecipe"
+                    }
+                },
+                "KMSAlias": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::KMS::Alias"
+                    }
+                },
+                "M2Environment": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::M2::Environment"
+                    }
+                },
+                "QuickSightDataSource": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::QuickSight::DataSource"
+                    }
+                },
+                "QuickSightTemplate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::QuickSight::Template"
+                    }
+                },
+                "QuickSightTheme": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::QuickSight::Theme"
+                    }
+                },
+                "RDSOptionGroup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::RDS::OptionGroup"
+                    }
+                },
+                "RedshiftEndpointAccess": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Redshift::EndpointAccess"
+                    }
+                },
+                "Route53ResolverFirewallRuleGroup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Route53Resolver::FirewallRuleGroup"
+                    }
+                },
+                "SSMDocument": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SSM::Document"
                     }
                 }
             }

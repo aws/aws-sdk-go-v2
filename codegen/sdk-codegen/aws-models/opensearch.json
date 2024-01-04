@@ -32,7 +32,7 @@
         "com.amazonaws.opensearch#ARN": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain. See <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html\">Identifiers for IAM Entities\n   </a> in <i>Using AWS Identity and Access Management</i> for more information.\n  </p>",
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain. See <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html\">Identifiers for IAM Entities\n  </a> in <i>Using Amazon Web Services Identity and Access Management</i> for more information.\n  </p>",
                 "smithy.api#length": {
                     "min": 20,
                     "max": 2048
@@ -3015,7 +3015,7 @@
                 "IPAddressType": {
                     "target": "com.amazonaws.opensearch#IPAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
+                        "smithy.api#documentation": "<p>Specify either dual stack or IPv4 as your IP address type. Dual stack allows you to share\n   domain resources across IPv4 and IPv6 address types, and is the recommended option. \n   If you set your IP address type to dual stack, you can't change your address type later.</p>"
                     }
                 },
                 "SnapshotOptions": {
@@ -4959,13 +4959,13 @@
                     "target": "com.amazonaws.opensearch#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n    <code>nextToken</code> to get the next page of results.</p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n   <code>nextToken</code> to get the next page of results.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>DescribePackageFilters</code> operation returns a\n    <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent\n    <code>DescribePackageFilters</code> operations, which returns results in the next page.</p>"
+                        "smithy.api#documentation": "<p>If your initial <code>DescribePackageFilters</code> operation returns a\n   <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent\n   <code>DescribePackageFilters</code> operations, which returns results in the next page.</p>"
                     }
                 }
             },
@@ -4986,7 +4986,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Make the call again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n   <code>nextToken</code> is a unique pagination token for each page. Make the call again using the\n   returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -5378,7 +5378,7 @@
                 "IPAddressType": {
                     "target": "com.amazonaws.opensearch#IPAddressTypeStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
+                        "smithy.api#documentation": "<p>Choose either dual stack or IPv4 as your IP address type. \n   Dual stack allows you to share domain resources across IPv4 and IPv6 address types, and is the recommended option. \n   If you set your IP address type to dual stack, you can't change your address type later.</p>"
                     }
                 },
                 "SnapshotOptions": {
@@ -5476,7 +5476,7 @@
                 "TLSSecurityPolicy": {
                     "target": "com.amazonaws.opensearch#TLSSecurityPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can\n   be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-0-2019-07:</b> TLS security policy that\n     supports TLS version 1.0 to TLS version 1.2</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-2019-07:</b> TLS security policy that\n     supports only TLS version 1.2</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can\n   be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-0-2019-07:</b> TLS security policy that\n     supports TLS version 1.0 to TLS version 1.2</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-2019-07:</b> TLS security policy that\n     supports only TLS version 1.2</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy-Min-TLS-1-2-PFS-2023-10:</b> TLS security policy that\n     supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CustomEndpointEnabled": {
@@ -5932,12 +5932,15 @@
                     }
                 },
                 "EndpointV2": {
-                    "target": "com.amazonaws.opensearch#ServiceUrl"
+                    "target": "com.amazonaws.opensearch#ServiceUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>IPAddressType</code> to set to <code>dualstack</code>, a version 2 domain endpoint is provisioned.\n   This endpoint functions like a normal endpoint, except that it works with both IPv4 and IPv6 IP addresses.\n   Normal endpoints work only with IPv4 IP addresses.\n  </p>"
+                    }
                 },
                 "Endpoints": {
                     "target": "com.amazonaws.opensearch#EndpointsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints.. Example\n    <code>key, value</code>:\n    <code>'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'</code>.</p>"
+                        "smithy.api#documentation": "<p>The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints. Example\n    <code>key, value</code>:\n    <code>'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'</code>.</p>"
                     }
                 },
                 "Processing": {
@@ -10966,7 +10969,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of <code>SkipUnavailable</code> setting for the outbound connection.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>ENABLED</b> - The <code>SkipUnavailable</code> setting is enabled\n    for the connection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLED</b> - The <code>SkipUnavailable</code> setting is disabled\n     for the connection.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The status of <code>SkipUnavailable</code> setting for the outbound connection.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>ENABLED</b> - The <code>SkipUnavailable</code> setting is enabled\n     for the connection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLED</b> - The <code>SkipUnavailable</code> setting is disabled\n     for the connection.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.opensearch#SlotList": {
@@ -11339,6 +11342,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Policy-Min-TLS-1-2-2019-07"
                     }
+                },
+                "POLICY_MIN_TLS_1_2_PFS_2023_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Policy-Min-TLS-1-2-PFS-2023-10"
+                    }
                 }
             }
         },
@@ -11610,7 +11619,7 @@
                 "IPAddressType": {
                     "target": "com.amazonaws.opensearch#IPAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
+                        "smithy.api#documentation": "<p>Specify either dual stack or IPv4 as your IP address type. Dual stack allows you to share domain resources across\n   IPv4 and IPv6 address types, and is the recommended option. \n   If your IP address type is currently set to dual stack, you can't change it.\n  </p>"
                     }
                 },
                 "LogPublishingOptions": {

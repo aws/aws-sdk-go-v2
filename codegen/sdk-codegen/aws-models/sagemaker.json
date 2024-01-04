@@ -4657,6 +4657,15 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#CapacityUnit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000000
+                }
+            }
+        },
         "com.amazonaws.sagemaker#CaptureContentTypeHeader": {
             "type": "structure",
             "members": {
@@ -9429,6 +9438,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Use this to configure an <code>OfflineFeatureStore</code>. This parameter allows you to\n         specify:</p>\n         <ul>\n            <li>\n               <p>The Amazon Simple Storage Service (Amazon S3) location of an\n                  <code>OfflineStore</code>.</p>\n            </li>\n            <li>\n               <p>A configuration for an Amazon Web Services Glue or Amazon Web Services Hive data\n               catalog. </p>\n            </li>\n            <li>\n               <p>An KMS encryption key to encrypt the Amazon S3 location used for\n                  <code>OfflineStore</code>. If KMS encryption key is not specified, by default we\n               encrypt all data at rest using Amazon Web Services KMS key. By defining your <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html\">bucket-level\n                  key</a> for SSE, you can reduce Amazon Web Services KMS requests costs by up to\n               99 percent.</p>\n            </li>\n            <li>\n               <p>Format for the offline store table. Supported formats are Glue (Default) and\n                  <a href=\"https://iceberg.apache.org/\">Apache Iceberg</a>.</p>\n            </li>\n         </ul>\n         <p>To learn more about this parameter, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OfflineStoreConfig.html\">OfflineStoreConfig</a>.</p>"
                     }
+                },
+                "ThroughputConfig": {
+                    "target": "com.amazonaws.sagemaker#ThroughputConfig"
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
@@ -18487,6 +18499,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of the offline store. It includes the following configurations:</p>\n         <ul>\n            <li>\n               <p>Amazon S3 location of the offline store.</p>\n            </li>\n            <li>\n               <p>Configuration of the Glue data catalog.</p>\n            </li>\n            <li>\n               <p>Table format of the offline store.</p>\n            </li>\n            <li>\n               <p>Option to disable the automatic creation of a Glue table for the offline\n               store.</p>\n            </li>\n            <li>\n               <p>Encryption configuration.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "ThroughputConfig": {
+                    "target": "com.amazonaws.sagemaker#ThroughputConfigDescription"
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
@@ -59273,6 +59288,105 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
             }
         },
+        "com.amazonaws.sagemaker#ThroughputConfig": {
+            "type": "structure",
+            "members": {
+                "ThroughputMode": {
+                    "target": "com.amazonaws.sagemaker#ThroughputMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The mode used for your feature group throughput: <code>ON_DEMAND</code> or\n            <code>PROVISIONED</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProvisionedReadCapacityUnits": {
+                    "target": "com.amazonaws.sagemaker#CapacityUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p> For provisioned feature groups with online store enabled, this indicates the read\n         throughput you are billed for and can consume without throttling. </p>\n         <p>This field is not applicable for on-demand feature groups. </p>"
+                    }
+                },
+                "ProvisionedWriteCapacityUnits": {
+                    "target": "com.amazonaws.sagemaker#CapacityUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p> For provisioned feature groups, this indicates the write throughput you are billed for\n         and can consume without throttling. </p>\n         <p>This field is not applicable for on-demand feature groups. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Used to set feature group throughput configuration. There are two modes:\n            <code>ON_DEMAND</code> and <code>PROVISIONED</code>. With on-demand mode, you are\n         charged for data reads and writes that your application performs on your feature group. You\n         do not need to specify read and write throughput because Feature Store accommodates your\n         workloads as they ramp up and down. You can switch a feature group to on-demand only once\n         in a 24 hour period. With provisioned throughput mode, you specify the read and write\n         capacity per second that you expect your application to require, and you are billed based\n         on those limits. Exceeding provisioned throughput will result in your requests being\n         throttled. </p>\n         <p>Note: <code>PROVISIONED</code> throughput mode is supported only for feature groups that\n         are offline-only, or use the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType\">\n               <code>Standard</code>\n            </a> tier online store. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ThroughputConfigDescription": {
+            "type": "structure",
+            "members": {
+                "ThroughputMode": {
+                    "target": "com.amazonaws.sagemaker#ThroughputMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The mode used for your feature group throughput: <code>ON_DEMAND</code> or\n            <code>PROVISIONED</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProvisionedReadCapacityUnits": {
+                    "target": "com.amazonaws.sagemaker#CapacityUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p> For provisioned feature groups with online store enabled, this indicates the read\n         throughput you are billed for and can consume without throttling. </p>\n         <p>This field is not applicable for on-demand feature groups. </p>"
+                    }
+                },
+                "ProvisionedWriteCapacityUnits": {
+                    "target": "com.amazonaws.sagemaker#CapacityUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p> For provisioned feature groups, this indicates the write throughput you are billed for\n         and can consume without throttling. </p>\n         <p>This field is not applicable for on-demand feature groups. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Active throughput configuration of the feature group. Used to set feature group\n         throughput configuration. There are two modes: <code>ON_DEMAND</code> and\n            <code>PROVISIONED</code>. With on-demand mode, you are charged for data reads and writes\n         that your application performs on your feature group. You do not need to specify read and\n         write throughput because Feature Store accommodates your workloads as they ramp up and\n         down. You can switch a feature group to on-demand only once in a 24 hour period. With\n         provisioned throughput mode, you specify the read and write capacity per second that you\n         expect your application to require, and you are billed based on those limits. Exceeding\n         provisioned throughput will result in your requests being throttled. </p>\n         <p>Note: <code>PROVISIONED</code> throughput mode is supported only for feature groups that\n         are offline-only, or use the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType\">\n               <code>Standard</code>\n            </a> tier online store. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ThroughputConfigUpdate": {
+            "type": "structure",
+            "members": {
+                "ThroughputMode": {
+                    "target": "com.amazonaws.sagemaker#ThroughputMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Target throughput mode of the feature group. Throughput update is an asynchronous\n         operation, and the outcome should be monitored by polling <code>LastUpdateStatus</code>\n         field in <code>DescribeFeatureGroup</code> response. You cannot update a feature group's\n         throughput while another update is in progress. </p>"
+                    }
+                },
+                "ProvisionedReadCapacityUnits": {
+                    "target": "com.amazonaws.sagemaker#CapacityUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For provisioned feature groups with online store enabled, this indicates the read\n         throughput you are billed for and can consume without throttling. </p>"
+                    }
+                },
+                "ProvisionedWriteCapacityUnits": {
+                    "target": "com.amazonaws.sagemaker#CapacityUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For provisioned feature groups, this indicates the write throughput you are billed for\n         and can consume without throttling. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The new throughput configuration for the feature group. You can switch between on-demand\n         and provisioned modes or update the read / write capacity of provisioned feature groups.\n         You can switch a feature group to on-demand only once in a 24 hour period. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ThroughputMode": {
+            "type": "enum",
+            "members": {
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnDemand"
+                    }
+                },
+                "PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Provisioned"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#TimeSeriesConfig": {
             "type": "structure",
             "members": {
@@ -63148,6 +63262,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Updates the feature group online store configuration.</p>"
                     }
+                },
+                "ThroughputConfig": {
+                    "target": "com.amazonaws.sagemaker#ThroughputConfigUpdate"
                 }
             },
             "traits": {
