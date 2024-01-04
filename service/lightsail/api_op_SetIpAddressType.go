@@ -44,7 +44,7 @@ type SetIpAddressTypeInput struct {
 	// This member is required.
 	ResourceName *string
 
-	// The resource type. The possible values are Distribution , Instance , and
+	// The resource type. The resource values are Distribution , Instance , and
 	// LoadBalancer . Distribution-related APIs are available only in the N. Virginia (
 	// us-east-1 ) Amazon Web Services Region. Set your Amazon Web Services Region
 	// configuration to us-east-1 to create, view, or edit distributions.

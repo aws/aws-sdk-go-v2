@@ -30,7 +30,7 @@ func (c *Client) GetDisk(ctx context.Context, params *GetDiskInput, optFns ...fu
 
 type GetDiskInput struct {
 
-	// The name of the disk (e.g., my-disk ).
+	// The name of the disk ( my-disk ).
 	//
 	// This member is required.
 	DiskName *string

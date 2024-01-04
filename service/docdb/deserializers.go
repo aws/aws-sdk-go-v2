@@ -11552,6 +11552,35 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				return err
 			}
 
+		case strings.EqualFold("PerformanceInsightsEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.PerformanceInsightsEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("PerformanceInsightsKMSKeyId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PerformanceInsightsKMSKeyId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("PreferredBackupWindow", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

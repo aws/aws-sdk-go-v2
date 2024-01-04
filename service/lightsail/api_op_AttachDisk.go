@@ -35,12 +35,12 @@ func (c *Client) AttachDisk(ctx context.Context, params *AttachDiskInput, optFns
 
 type AttachDiskInput struct {
 
-	// The unique Lightsail disk name (e.g., my-disk ).
+	// The unique Lightsail disk name ( my-disk ).
 	//
 	// This member is required.
 	DiskName *string
 
-	// The disk path to expose to the instance (e.g., /dev/xvdf ).
+	// The disk path to expose to the instance ( /dev/xvdf ).
 	//
 	// This member is required.
 	DiskPath *string

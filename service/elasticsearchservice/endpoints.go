@@ -390,6 +390,63 @@ func (r *resolver) ResolveEndpoint(
 			}
 			if _UseDualStack == true {
 				if true == _PartitionResult.SupportsDualStack {
+					if "aws" == _PartitionResult.Name {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://aos.")
+							out.WriteString(_Region)
+							out.WriteString(".api.aws")
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+						}, nil
+					}
+					if "aws-cn" == _PartitionResult.Name {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://aos.")
+							out.WriteString(_Region)
+							out.WriteString(".api.amazonwebservices.com.cn")
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+						}, nil
+					}
+					if "aws-us-gov" == _PartitionResult.Name {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://aos.")
+							out.WriteString(_Region)
+							out.WriteString(".api.aws")
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+						}, nil
+					}
 					uriString := func() string {
 						var out strings.Builder
 						out.WriteString("https://es.")

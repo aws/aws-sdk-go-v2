@@ -1,0 +1,8 @@
+{
+    "id": "13cc0f97-3293-43f3-80f1-022f76ac58c4",
+    "type": "feature",
+    "description": "This release adds support to set up an HTTPS endpoint on an instance.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

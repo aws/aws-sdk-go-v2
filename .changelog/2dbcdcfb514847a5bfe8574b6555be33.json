@@ -1,0 +1,8 @@
+{
+    "id": "2dbcdcfb-5148-47a5-bfe8-574b6555be33",
+    "type": "feature",
+    "description": "Added Idempotency token support to Service Catalog  AssociateServiceActionWithProvisioningArtifact, DisassociateServiceActionFromProvisioningArtifact, DeleteServiceAction API",
+    "modules": [
+        "service/servicecatalog"
+    ]
+}

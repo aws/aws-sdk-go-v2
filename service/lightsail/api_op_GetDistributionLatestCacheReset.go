@@ -42,7 +42,7 @@ type GetDistributionLatestCacheResetInput struct {
 
 type GetDistributionLatestCacheResetOutput struct {
 
-	// The timestamp of the last cache reset (e.g., 1479734909.17 ) in Unix time format.
+	// The timestamp of the last cache reset ( 1479734909.17 ) in Unix time format.
 	CreateTime *time.Time
 
 	// The status of the last cache reset.

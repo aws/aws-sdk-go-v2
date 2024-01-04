@@ -73790,6 +73790,72 @@ func awsAwsjson11_deserializeDocumentTextGenerationResolvedAttributes(v **types.
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentThroughputConfigDescription(v **types.ThroughputConfigDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThroughputConfigDescription
+	if *v == nil {
+		sv = &types.ThroughputConfigDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProvisionedReadCapacityUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CapacityUnit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProvisionedReadCapacityUnits = ptr.Int32(int32(i64))
+			}
+
+		case "ProvisionedWriteCapacityUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CapacityUnit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProvisionedWriteCapacityUnits = ptr.Int32(int32(i64))
+			}
+
+		case "ThroughputMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ThroughputMode to be of type string, got %T instead", value)
+				}
+				sv.ThroughputMode = types.ThroughputMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTimeSeriesConfig(v **types.TimeSeriesConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -84879,6 +84945,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeFeatureGroupOutput(v **DescribeFe
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "ThroughputConfig":
+			if err := awsAwsjson11_deserializeDocumentThroughputConfigDescription(&sv.ThroughputConfig, value); err != nil {
+				return err
 			}
 
 		default:

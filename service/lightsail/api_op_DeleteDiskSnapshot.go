@@ -39,7 +39,7 @@ func (c *Client) DeleteDiskSnapshot(ctx context.Context, params *DeleteDiskSnaps
 
 type DeleteDiskSnapshotInput struct {
 
-	// The name of the disk snapshot you want to delete (e.g., my-disk-snapshot ).
+	// The name of the disk snapshot you want to delete ( my-disk-snapshot ).
 	//
 	// This member is required.
 	DiskSnapshotName *string

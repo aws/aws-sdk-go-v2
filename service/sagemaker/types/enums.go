@@ -6136,6 +6136,24 @@ func (TargetPlatformOs) Values() []TargetPlatformOs {
 	}
 }
 
+type ThroughputMode string
+
+// Enum values for ThroughputMode
+const (
+	ThroughputModeOnDemand    ThroughputMode = "OnDemand"
+	ThroughputModeProvisioned ThroughputMode = "Provisioned"
+)
+
+// Values returns all known values for ThroughputMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThroughputMode) Values() []ThroughputMode {
+	return []ThroughputMode{
+		"OnDemand",
+		"Provisioned",
+	}
+}
+
 type TrafficRoutingConfigType string
 
 // Enum values for TrafficRoutingConfigType

@@ -36,8 +36,7 @@ func (c *Client) DetachDisk(ctx context.Context, params *DetachDiskInput, optFns
 
 type DetachDiskInput struct {
 
-	// The unique name of the disk you want to detach from your instance (e.g., my-disk
-	// ).
+	// The unique name of the disk you want to detach from your instance ( my-disk ).
 	//
 	// This member is required.
 	DiskName *string

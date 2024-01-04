@@ -12,45 +12,49 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a domain resource for the specified domain (example.com). The create
-// domain operation supports tag-based access control via request tags. For more
-// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
-func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
+// Returns detailed information for five of the most recent SetupInstanceHttps
+// requests that were ran on the target instance.
+func (c *Client) GetSetupHistory(ctx context.Context, params *GetSetupHistoryInput, optFns ...func(*Options)) (*GetSetupHistoryOutput, error) {
 	if params == nil {
-		params = &CreateDomainInput{}
+		params = &GetSetupHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDomain", params, optFns, c.addOperationCreateDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSetupHistory", params, optFns, c.addOperationGetSetupHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateDomainOutput)
+	out := result.(*GetSetupHistoryOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateDomainInput struct {
+type GetSetupHistoryInput struct {
 
-	// The domain name to manage ( example.com ).
+	// The name of the resource for which you are requesting information.
 	//
 	// This member is required.
-	DomainName *string
+	ResourceName *string
 
-	// The tag keys and optional values to add to the resource during create. Use the
-	// TagResource action to tag a resource after it's created.
-	Tags []types.Tag
+	// The token to advance to the next page of results from your request. To get a
+	// page token, perform an initial GetSetupHistory request. If your results are
+	// paginated, the response will return a next page token that you can specify as
+	// the page token in a subsequent request.
+	PageToken *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateDomainOutput struct {
+type GetSetupHistoryOutput struct {
 
-	// An array of objects that describe the result of the action, such as the status
-	// of the request, the timestamp of the request, and the resources affected by the
-	// request.
-	Operation *types.Operation
+	// The token to advance to the next page of results from your request. A next page
+	// token is not returned if there are no more results to display. To get the next
+	// page of results, perform another GetSetupHistory request and specify the next
+	// page token using the pageToken parameter.
+	NextPageToken *string
+
+	// The historical information that's returned.
+	SetupHistory []types.SetupHistory
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,19 +62,19 @@ type CreateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSetupHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDomain{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSetupHistory{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDomain{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSetupHistory{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDomain"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSetupHistory"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -113,10 +117,10 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateDomainValidationMiddleware(stack); err != nil {
+	if err = addOpGetSetupHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDomain(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSetupHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -137,10 +141,10 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateDomain(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetSetupHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateDomain",
+		OperationName: "GetSetupHistory",
 	}
 }

@@ -42,19 +42,19 @@ type CreateInstancesInput struct {
 	// This member is required.
 	AvailabilityZone *string
 
-	// The ID for a virtual private server image (e.g., app_wordpress_4_4 or
-	// app_lamp_7_0 ). Use the get blueprints operation to return a list of available
-	// images (or blueprints). Use active blueprints when creating new instances.
-	// Inactive blueprints are listed to support customers with existing instances and
-	// are not necessarily available to create new instances. Blueprints are marked
-	// inactive when they become outdated due to operating system updates or new
-	// application releases.
+	// The ID for a virtual private server image ( app_wordpress_4_4 or app_lamp_7_0 ).
+	// Use the get blueprints operation to return a list of available images (or
+	// blueprints). Use active blueprints when creating new instances. Inactive
+	// blueprints are listed to support customers with existing instances and are not
+	// necessarily available to create new instances. Blueprints are marked inactive
+	// when they become outdated due to operating system updates or new application
+	// releases.
 	//
 	// This member is required.
 	BlueprintId *string
 
 	// The bundle of specification information for your virtual private server (or
-	// instance), including the pricing plan (e.g., micro_1_0 ).
+	// instance), including the pricing plan ( micro_1_0 ).
 	//
 	// This member is required.
 	BundleId *string
@@ -69,8 +69,8 @@ type CreateInstancesInput struct {
 	// An array of objects representing the add-ons to enable for the new instance.
 	AddOns []types.AddOnRequest
 
-	// (Deprecated) The name for your custom image. In releases prior to June 12,
-	// 2017, this parameter was ignored by the API. It is now deprecated.
+	// (Discontinued) The name for your custom image. In releases prior to June 12,
+	// 2017, this parameter was ignored by the API. It is now discontinued.
 	//
 	// Deprecated: This member has been deprecated.
 	CustomImageName *string

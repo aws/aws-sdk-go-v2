@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets operations for a specific resource (e.g., an instance or a static IP).
+// Gets operations for a specific resource (an instance or a static IP).
 func (c *Client) GetOperationsForResource(ctx context.Context, params *GetOperationsForResourceInput, optFns ...func(*Options)) (*GetOperationsForResourceOutput, error) {
 	if params == nil {
 		params = &GetOperationsForResourceInput{}
@@ -46,9 +46,9 @@ type GetOperationsForResourceInput struct {
 
 type GetOperationsForResourceOutput struct {
 
-	// (Deprecated) Returns the number of pages of results that remain. In releases
+	// (Discontinued) Returns the number of pages of results that remain. In releases
 	// prior to June 12, 2017, this parameter returned null by the API. It is now
-	// deprecated, and the API returns the next page token parameter instead.
+	// discontinued, and the API returns the next page token parameter instead.
 	//
 	// Deprecated: This member has been deprecated.
 	NextPageCount *string

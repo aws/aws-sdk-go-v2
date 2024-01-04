@@ -5736,6 +5736,11 @@ func awsAwsjson11_serializeOpDocumentAssociateServiceActionWithProvisioningArtif
 		ok.String(*v.AcceptLanguage)
 	}
 
+	if v.IdempotencyToken != nil {
+		ok := object.Key("IdempotencyToken")
+		ok.String(*v.IdempotencyToken)
+	}
+
 	if v.ProductId != nil {
 		ok := object.Key("ProductId")
 		ok.String(*v.ProductId)
@@ -6344,6 +6349,11 @@ func awsAwsjson11_serializeOpDocumentDeleteServiceActionInput(v *DeleteServiceAc
 		ok.String(*v.Id)
 	}
 
+	if v.IdempotencyToken != nil {
+		ok := object.Key("IdempotencyToken")
+		ok.String(*v.IdempotencyToken)
+	}
+
 	return nil
 }
 
@@ -6806,6 +6816,11 @@ func awsAwsjson11_serializeOpDocumentDisassociateServiceActionFromProvisioningAr
 	if v.AcceptLanguage != nil {
 		ok := object.Key("AcceptLanguage")
 		ok.String(*v.AcceptLanguage)
+	}
+
+	if v.IdempotencyToken != nil {
+		ok := object.Key("IdempotencyToken")
+		ok.String(*v.IdempotencyToken)
 	}
 
 	if v.ProductId != nil {

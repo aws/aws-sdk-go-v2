@@ -3175,6 +3175,11 @@ func awsAwsjson11_serializeDocumentAutoScalingGroupProvider(v *types.AutoScaling
 		ok.String(*v.AutoScalingGroupArn)
 	}
 
+	if len(v.ManagedDraining) > 0 {
+		ok := object.Key("managedDraining")
+		ok.String(string(v.ManagedDraining))
+	}
+
 	if v.ManagedScaling != nil {
 		ok := object.Key("managedScaling")
 		if err := awsAwsjson11_serializeDocumentManagedScaling(v.ManagedScaling, ok); err != nil {
@@ -3193,6 +3198,11 @@ func awsAwsjson11_serializeDocumentAutoScalingGroupProvider(v *types.AutoScaling
 func awsAwsjson11_serializeDocumentAutoScalingGroupProviderUpdate(v *types.AutoScalingGroupProviderUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.ManagedDraining) > 0 {
+		ok := object.Key("managedDraining")
+		ok.String(string(v.ManagedDraining))
+	}
 
 	if v.ManagedScaling != nil {
 		ok := object.Key("managedScaling")

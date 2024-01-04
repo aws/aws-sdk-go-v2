@@ -601,6 +601,24 @@ func (ManagedAgentName) Values() []ManagedAgentName {
 	}
 }
 
+type ManagedDraining string
+
+// Enum values for ManagedDraining
+const (
+	ManagedDrainingEnabled  ManagedDraining = "ENABLED"
+	ManagedDrainingDisabled ManagedDraining = "DISABLED"
+)
+
+// Values returns all known values for ManagedDraining. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedDraining) Values() []ManagedDraining {
+	return []ManagedDraining{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ManagedScalingStatus string
 
 // Enum values for ManagedScalingStatus

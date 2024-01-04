@@ -39,6 +39,11 @@ type DeleteServiceActionInput struct {
 	//   - zh - Chinese
 	AcceptLanguage *string
 
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests from the same Amazon Web Services account use the same idempotency
+	// token, the same response is returned for each repeated request.
+	IdempotencyToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -104,6 +109,9 @@ func (c *Client) addOperationDeleteServiceActionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opDeleteServiceActionMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteServiceActionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -126,6 +134,39 @@ func (c *Client) addOperationDeleteServiceActionMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpDeleteServiceAction struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpDeleteServiceAction) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpDeleteServiceAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*DeleteServiceActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteServiceActionInput ")
+	}
+
+	if input.IdempotencyToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.IdempotencyToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opDeleteServiceActionMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteServiceAction{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDeleteServiceAction(region string) *awsmiddleware.RegisterServiceMetadata {

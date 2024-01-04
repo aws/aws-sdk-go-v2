@@ -42,8 +42,7 @@ type ResetDistributionCacheInput struct {
 
 type ResetDistributionCacheOutput struct {
 
-	// The timestamp of the reset cache request (e.g., 1479734909.17 ) in Unix time
-	// format.
+	// The timestamp of the reset cache request ( 1479734909.17 ) in Unix time format.
 	CreateTime *time.Time
 
 	// An array of objects that describe the result of the action, such as the status

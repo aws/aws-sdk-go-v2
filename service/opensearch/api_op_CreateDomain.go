@@ -97,7 +97,10 @@ type CreateDomainInput struct {
 	// .
 	EngineVersion *string
 
-	// The type of IP addresses supported by the endpoint for the domain.
+	// Specify either dual stack or IPv4 as your IP address type. Dual stack allows
+	// you to share domain resources across IPv4 and IPv6 address types, and is the
+	// recommended option. If you set your IP address type to dual stack, you can't
+	// change your address type later.
 	IPAddressType types.IPAddressType
 
 	// Key-value pairs to configure log publishing.

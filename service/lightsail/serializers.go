@@ -6782,6 +6782,61 @@ func (m *awsAwsjson11_serializeOpGetRelationalDatabaseSnapshots) HandleSerialize
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetSetupHistory struct {
+}
+
+func (*awsAwsjson11_serializeOpGetSetupHistory) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetSetupHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetSetupHistoryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Lightsail_20161128.GetSetupHistory")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetSetupHistoryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetStaticIp struct {
 }
 
@@ -7647,6 +7702,61 @@ func (m *awsAwsjson11_serializeOpSetResourceAccessForBucket) HandleSerialize(ctx
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentSetResourceAccessForBucketInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpSetupInstanceHttps struct {
+}
+
+func (*awsAwsjson11_serializeOpSetupInstanceHttps) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpSetupInstanceHttps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SetupInstanceHttpsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Lightsail_20161128.SetupInstanceHttps")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentSetupInstanceHttpsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -9564,6 +9674,17 @@ func awsAwsjson11_serializeDocumentRelationalDatabaseParameterList(v []types.Rel
 }
 
 func awsAwsjson11_serializeDocumentResourceNameList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSetupDomainNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -12162,6 +12283,23 @@ func awsAwsjson11_serializeOpDocumentGetRelationalDatabaseSnapshotsInput(v *GetR
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetSetupHistoryInput(v *GetSetupHistoryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PageToken != nil {
+		ok := object.Key("pageToken")
+		ok.String(*v.PageToken)
+	}
+
+	if v.ResourceName != nil {
+		ok := object.Key("resourceName")
+		ok.String(*v.ResourceName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetStaticIpInput(v *GetStaticIpInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12455,6 +12593,35 @@ func awsAwsjson11_serializeOpDocumentSetResourceAccessForBucketInput(v *SetResou
 	if v.ResourceName != nil {
 		ok := object.Key("resourceName")
 		ok.String(*v.ResourceName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentSetupInstanceHttpsInput(v *SetupInstanceHttpsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CertificateProvider) > 0 {
+		ok := object.Key("certificateProvider")
+		ok.String(string(v.CertificateProvider))
+	}
+
+	if v.DomainNames != nil {
+		ok := object.Key("domainNames")
+		if err := awsAwsjson11_serializeDocumentSetupDomainNameList(v.DomainNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EmailAddress != nil {
+		ok := object.Key("emailAddress")
+		ok.String(*v.EmailAddress)
+	}
+
+	if v.InstanceName != nil {
+		ok := object.Key("instanceName")
+		ok.String(*v.InstanceName)
 	}
 
 	return nil

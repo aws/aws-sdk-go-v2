@@ -1,0 +1,8 @@
+{
+    "id": "c0e6fa33-9ce9-4096-8669-a12f49e3cd73",
+    "type": "feature",
+    "description": "Adding support for provisioned throughput mode for SageMaker Feature Groups",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

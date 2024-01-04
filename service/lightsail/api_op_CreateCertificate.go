@@ -44,15 +44,15 @@ type CreateCertificateInput struct {
 	// This member is required.
 	CertificateName *string
 
-	// The domain name (e.g., example.com ) for the certificate.
+	// The domain name ( example.com ) for the certificate.
 	//
 	// This member is required.
 	DomainName *string
 
-	// An array of strings that specify the alternate domains (e.g., example2.com ) and
-	// subdomains (e.g., blog.example.com ) for the certificate. You can specify a
-	// maximum of nine alternate domains (in addition to the primary domain name).
-	// Wildcard domain entries (e.g., *.example.com ) are not supported.
+	// An array of strings that specify the alternate domains ( example2.com ) and
+	// subdomains ( blog.example.com ) for the certificate. You can specify a maximum
+	// of nine alternate domains (in addition to the primary domain name). Wildcard
+	// domain entries ( *.example.com ) are not supported.
 	SubjectAlternativeNames []string
 
 	// The tag keys and optional values to add to the certificate during create. Use

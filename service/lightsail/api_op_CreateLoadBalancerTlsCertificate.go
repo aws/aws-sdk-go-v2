@@ -35,7 +35,7 @@ func (c *Client) CreateLoadBalancerTlsCertificate(ctx context.Context, params *C
 
 type CreateLoadBalancerTlsCertificateInput struct {
 
-	// The domain name (e.g., example.com ) for your SSL/TLS certificate.
+	// The domain name ( example.com ) for your SSL/TLS certificate.
 	//
 	// This member is required.
 	CertificateDomainName *string
@@ -57,7 +57,7 @@ type CreateLoadBalancerTlsCertificateInput struct {
 	// An array of strings listing alternative domains and subdomains for your SSL/TLS
 	// certificate. Lightsail will de-dupe the names for you. You can have a maximum of
 	// 9 alternative names (in addition to the 1 primary domain). We do not support
-	// wildcards (e.g., *.example.com ).
+	// wildcards ( *.example.com ).
 	CertificateAlternativeNames []string
 
 	// The tag keys and optional values to add to the resource during create. Use the

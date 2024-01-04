@@ -255,6 +255,22 @@ func (CertificateDomainValidationStatus) Values() []CertificateDomainValidationS
 	}
 }
 
+type CertificateProvider string
+
+// Enum values for CertificateProvider
+const (
+	CertificateProviderLetsEncrypt CertificateProvider = "LetsEncrypt"
+)
+
+// Values returns all known values for CertificateProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateProvider) Values() []CertificateProvider {
+	return []CertificateProvider{
+		"LetsEncrypt",
+	}
+}
+
 type CertificateStatus string
 
 // Enum values for CertificateStatus
@@ -1528,6 +1544,7 @@ const (
 	OperationTypeUpdateInstanceMetadataOptions        OperationType = "UpdateInstanceMetadataOptions"
 	OperationTypeStartGUISession                      OperationType = "StartGUISession"
 	OperationTypeStopGUISession                       OperationType = "StopGUISession"
+	OperationTypeSetupInstanceHttps                   OperationType = "SetupInstanceHttps"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -1617,6 +1634,7 @@ func (OperationType) Values() []OperationType {
 		"UpdateInstanceMetadataOptions",
 		"StartGUISession",
 		"StopGUISession",
+		"SetupInstanceHttps",
 	}
 }
 
@@ -1962,6 +1980,26 @@ func (ResourceType) Values() []ResourceType {
 		"Distribution",
 		"Certificate",
 		"Bucket",
+	}
+}
+
+type SetupStatus string
+
+// Enum values for SetupStatus
+const (
+	SetupStatusSucceeded  SetupStatus = "succeeded"
+	SetupStatusFailed     SetupStatus = "failed"
+	SetupStatusInProgress SetupStatus = "inProgress"
+)
+
+// Values returns all known values for SetupStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SetupStatus) Values() []SetupStatus {
+	return []SetupStatus{
+		"succeeded",
+		"failed",
+		"inProgress",
 	}
 }
 

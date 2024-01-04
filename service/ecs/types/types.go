@@ -83,6 +83,12 @@ type AutoScalingGroupProvider struct {
 	// This member is required.
 	AutoScalingGroupArn *string
 
+	// The managed draining option for the Auto Scaling group capacity provider. When
+	// you enable this, Amazon ECS manages and gracefully drains the EC2 container
+	// instances that are in the Auto Scaling group capacity provider. The default is
+	// ENABLED .
+	ManagedDraining ManagedDraining
+
 	// The managed scaling settings for the Auto Scaling group capacity provider.
 	ManagedScaling *ManagedScaling
 
@@ -105,6 +111,12 @@ type AutoScalingGroupProvider struct {
 
 // The details of the Auto Scaling group capacity provider to update.
 type AutoScalingGroupProviderUpdate struct {
+
+	// The managed draining option for the Auto Scaling group capacity provider. When
+	// you enable this, Amazon ECS manages and gracefully drains the EC2 container
+	// instances that are in the Auto Scaling group capacity provider. The default is
+	// ENABLED .
+	ManagedDraining ManagedDraining
 
 	// The managed scaling settings for the Auto Scaling group capacity provider.
 	ManagedScaling *ManagedScaling

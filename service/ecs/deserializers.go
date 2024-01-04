@@ -8128,6 +8128,15 @@ func awsAwsjson11_deserializeDocumentAutoScalingGroupProvider(v **types.AutoScal
 				sv.AutoScalingGroupArn = ptr.String(jtv)
 			}
 
+		case "managedDraining":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedDraining to be of type string, got %T instead", value)
+				}
+				sv.ManagedDraining = types.ManagedDraining(jtv)
+			}
+
 		case "managedScaling":
 			if err := awsAwsjson11_deserializeDocumentManagedScaling(&sv.ManagedScaling, value); err != nil {
 				return err

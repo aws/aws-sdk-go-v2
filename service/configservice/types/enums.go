@@ -1065,6 +1065,24 @@ const (
 	ResourceTypeLambdaCodeSigningConfig                              ResourceType = "AWS::Lambda::CodeSigningConfig"
 	ResourceTypeNetworkManagerConnectPeer                            ResourceType = "AWS::NetworkManager::ConnectPeer"
 	ResourceTypeResourceExplorer2Index                               ResourceType = "AWS::ResourceExplorer2::Index"
+	ResourceTypeAppStreamFleet                                       ResourceType = "AWS::AppStream::Fleet"
+	ResourceTypeCognitoUserPool                                      ResourceType = "AWS::Cognito::UserPool"
+	ResourceTypeCognitoUserPoolClient                                ResourceType = "AWS::Cognito::UserPoolClient"
+	ResourceTypeCognitoUserPoolGroup                                 ResourceType = "AWS::Cognito::UserPoolGroup"
+	ResourceTypeEC2NetworkInsightsAccessScope                        ResourceType = "AWS::EC2::NetworkInsightsAccessScope"
+	ResourceTypeEC2NetworkInsightsAnalysis                           ResourceType = "AWS::EC2::NetworkInsightsAnalysis"
+	ResourceTypeGrafanaWorkspace                                     ResourceType = "AWS::Grafana::Workspace"
+	ResourceTypeGroundStationDataflowEndpointGroup                   ResourceType = "AWS::GroundStation::DataflowEndpointGroup"
+	ResourceTypeImageBuilderImageRecipe                              ResourceType = "AWS::ImageBuilder::ImageRecipe"
+	ResourceTypeKMSAlias                                             ResourceType = "AWS::KMS::Alias"
+	ResourceTypeM2Environment                                        ResourceType = "AWS::M2::Environment"
+	ResourceTypeQuickSightDataSource                                 ResourceType = "AWS::QuickSight::DataSource"
+	ResourceTypeQuickSightTemplate                                   ResourceType = "AWS::QuickSight::Template"
+	ResourceTypeQuickSightTheme                                      ResourceType = "AWS::QuickSight::Theme"
+	ResourceTypeRDSOptionGroup                                       ResourceType = "AWS::RDS::OptionGroup"
+	ResourceTypeRedshiftEndpointAccess                               ResourceType = "AWS::Redshift::EndpointAccess"
+	ResourceTypeRoute53ResolverFirewallRuleGroup                     ResourceType = "AWS::Route53Resolver::FirewallRuleGroup"
+	ResourceTypeSSMDocument                                          ResourceType = "AWS::SSM::Document"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1461,6 +1479,24 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::Lambda::CodeSigningConfig",
 		"AWS::NetworkManager::ConnectPeer",
 		"AWS::ResourceExplorer2::Index",
+		"AWS::AppStream::Fleet",
+		"AWS::Cognito::UserPool",
+		"AWS::Cognito::UserPoolClient",
+		"AWS::Cognito::UserPoolGroup",
+		"AWS::EC2::NetworkInsightsAccessScope",
+		"AWS::EC2::NetworkInsightsAnalysis",
+		"AWS::Grafana::Workspace",
+		"AWS::GroundStation::DataflowEndpointGroup",
+		"AWS::ImageBuilder::ImageRecipe",
+		"AWS::KMS::Alias",
+		"AWS::M2::Environment",
+		"AWS::QuickSight::DataSource",
+		"AWS::QuickSight::Template",
+		"AWS::QuickSight::Theme",
+		"AWS::RDS::OptionGroup",
+		"AWS::Redshift::EndpointAccess",
+		"AWS::Route53Resolver::FirewallRuleGroup",
+		"AWS::SSM::Document",
 	}
 }
 

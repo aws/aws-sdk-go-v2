@@ -63,7 +63,7 @@ type UpdateLoadBalancerAttributeInput struct {
 	// This member is required.
 	AttributeValue *string
 
-	// The name of the load balancer that you want to modify (e.g., my-load-balancer .
+	// The name of the load balancer that you want to modify ( my-load-balancer .
 	//
 	// This member is required.
 	LoadBalancerName *string

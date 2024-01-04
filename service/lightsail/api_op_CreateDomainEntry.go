@@ -42,8 +42,7 @@ type CreateDomainEntryInput struct {
 	// This member is required.
 	DomainEntry *types.DomainEntry
 
-	// The domain name (e.g., example.com ) for which you want to create the domain
-	// entry.
+	// The domain name ( example.com ) for which you want to create the domain entry.
 	//
 	// This member is required.
 	DomainName *string

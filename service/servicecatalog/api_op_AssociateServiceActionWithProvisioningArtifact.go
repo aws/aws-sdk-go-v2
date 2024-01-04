@@ -49,6 +49,11 @@ type AssociateServiceActionWithProvisioningArtifactInput struct {
 	//   - zh - Chinese
 	AcceptLanguage *string
 
+	// A unique identifier that you provide to ensure idempotency. If multiple
+	// requests from the same Amazon Web Services account use the same idempotency
+	// token, the same response is returned for each repeated request.
+	IdempotencyToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -114,6 +119,9 @@ func (c *Client) addOperationAssociateServiceActionWithProvisioningArtifactMiddl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opAssociateServiceActionWithProvisioningArtifactMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateServiceActionWithProvisioningArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -136,6 +144,39 @@ func (c *Client) addOperationAssociateServiceActionWithProvisioningArtifactMiddl
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpAssociateServiceActionWithProvisioningArtifact struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpAssociateServiceActionWithProvisioningArtifact) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpAssociateServiceActionWithProvisioningArtifact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*AssociateServiceActionWithProvisioningArtifactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *AssociateServiceActionWithProvisioningArtifactInput ")
+	}
+
+	if input.IdempotencyToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.IdempotencyToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opAssociateServiceActionWithProvisioningArtifactMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateServiceActionWithProvisioningArtifact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opAssociateServiceActionWithProvisioningArtifact(region string) *awsmiddleware.RegisterServiceMetadata {

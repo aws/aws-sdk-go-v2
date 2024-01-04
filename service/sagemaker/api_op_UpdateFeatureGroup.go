@@ -54,6 +54,12 @@ type UpdateFeatureGroupInput struct {
 	// Updates the feature group online store configuration.
 	OnlineStoreConfig *types.OnlineStoreConfigUpdate
 
+	// The new throughput configuration for the feature group. You can switch between
+	// on-demand and provisioned modes or update the read / write capacity of
+	// provisioned feature groups. You can switch a feature group to on-demand only
+	// once in a 24 hour period.
+	ThroughputConfig *types.ThroughputConfigUpdate
+
 	noSmithyDocumentSerde
 }
 

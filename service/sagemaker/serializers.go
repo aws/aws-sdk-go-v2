@@ -27001,6 +27001,50 @@ func awsAwsjson11_serializeDocumentTextGenerationJobConfig(v *types.TextGenerati
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentThroughputConfig(v *types.ThroughputConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProvisionedReadCapacityUnits != nil {
+		ok := object.Key("ProvisionedReadCapacityUnits")
+		ok.Integer(*v.ProvisionedReadCapacityUnits)
+	}
+
+	if v.ProvisionedWriteCapacityUnits != nil {
+		ok := object.Key("ProvisionedWriteCapacityUnits")
+		ok.Integer(*v.ProvisionedWriteCapacityUnits)
+	}
+
+	if len(v.ThroughputMode) > 0 {
+		ok := object.Key("ThroughputMode")
+		ok.String(string(v.ThroughputMode))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentThroughputConfigUpdate(v *types.ThroughputConfigUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProvisionedReadCapacityUnits != nil {
+		ok := object.Key("ProvisionedReadCapacityUnits")
+		ok.Integer(*v.ProvisionedReadCapacityUnits)
+	}
+
+	if v.ProvisionedWriteCapacityUnits != nil {
+		ok := object.Key("ProvisionedWriteCapacityUnits")
+		ok.Integer(*v.ProvisionedWriteCapacityUnits)
+	}
+
+	if len(v.ThroughputMode) > 0 {
+		ok := object.Key("ThroughputMode")
+		ok.String(string(v.ThroughputMode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTimeSeriesConfig(v *types.TimeSeriesConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -29131,6 +29175,13 @@ func awsAwsjson11_serializeOpDocumentCreateFeatureGroupInput(v *CreateFeatureGro
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ThroughputConfig != nil {
+		ok := object.Key("ThroughputConfig")
+		if err := awsAwsjson11_serializeDocumentThroughputConfig(v.ThroughputConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -37195,6 +37246,13 @@ func awsAwsjson11_serializeOpDocumentUpdateFeatureGroupInput(v *UpdateFeatureGro
 	if v.OnlineStoreConfig != nil {
 		ok := object.Key("OnlineStoreConfig")
 		if err := awsAwsjson11_serializeDocumentOnlineStoreConfigUpdate(v.OnlineStoreConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ThroughputConfig != nil {
+		ok := object.Key("ThroughputConfig")
+		if err := awsAwsjson11_serializeDocumentThroughputConfigUpdate(v.ThroughputConfig, ok); err != nil {
 			return err
 		}
 	}

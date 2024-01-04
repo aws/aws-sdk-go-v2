@@ -35,7 +35,7 @@ func (c *Client) DeleteDisk(ctx context.Context, params *DeleteDiskInput, optFns
 
 type DeleteDiskInput struct {
 
-	// The unique name of the disk you want to delete (e.g., my-disk ).
+	// The unique name of the disk you want to delete ( my-disk ).
 	//
 	// This member is required.
 	DiskName *string

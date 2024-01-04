@@ -11679,6 +11679,21 @@ func validateTextGenerationJobConfig(v *types.TextGenerationJobConfig) error {
 	}
 }
 
+func validateThroughputConfig(v *types.ThroughputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ThroughputConfig"}
+	if len(v.ThroughputMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ThroughputMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTimeSeriesConfig(v *types.TimeSeriesConfig) error {
 	if v == nil {
 		return nil
@@ -12959,6 +12974,11 @@ func validateOpCreateFeatureGroupInput(v *CreateFeatureGroupInput) error {
 	if v.OfflineStoreConfig != nil {
 		if err := validateOfflineStoreConfig(v.OfflineStoreConfig); err != nil {
 			invalidParams.AddNested("OfflineStoreConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ThroughputConfig != nil {
+		if err := validateThroughputConfig(v.ThroughputConfig); err != nil {
+			invalidParams.AddNested("ThroughputConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {

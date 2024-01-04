@@ -15,7 +15,8 @@ import (
 // Create a task set in the specified cluster and service. This is used when a
 // service uses the EXTERNAL deployment controller type. For more information, see
 // Amazon ECS deployment types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
-// in the Amazon Elastic Container Service Developer Guide.
+// in the Amazon Elastic Container Service Developer Guide. You can create a
+// maximum of 5 tasks sets for a deployment.
 func (c *Client) CreateTaskSet(ctx context.Context, params *CreateTaskSetInput, optFns ...func(*Options)) (*CreateTaskSetOutput, error) {
 	if params == nil {
 		params = &CreateTaskSetInput{}

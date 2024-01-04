@@ -495,6 +495,15 @@ type DBInstance struct {
 	// only when changes are pending. Specific changes are identified by subelements.
 	PendingModifiedValues *PendingModifiedValues
 
+	// Set to true if Amazon RDS Performance Insights is enabled for the DB instance,
+	// and otherwise false .
+	PerformanceInsightsEnabled *bool
+
+	// The KMS key identifier for encryption of Performance Insights data. The KMS key
+	// ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias
+	// for the KMS encryption key.
+	PerformanceInsightsKMSKeyId *string
+
 	// Specifies the daily time range during which automated backups are created if
 	// automated backups are enabled, as determined by the BackupRetentionPeriod .
 	PreferredBackupWindow *string

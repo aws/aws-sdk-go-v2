@@ -49,12 +49,11 @@ type CreateLoadBalancerInput struct {
 	LoadBalancerName *string
 
 	// The optional alternative domains and subdomains to use with your SSL/TLS
-	// certificate (e.g., www.example.com , example.com , m.example.com ,
-	// blog.example.com ).
+	// certificate ( www.example.com , example.com , m.example.com , blog.example.com ).
 	CertificateAlternativeNames []string
 
-	// The domain name with which your certificate is associated (e.g., example.com ).
-	// If you specify certificateDomainName , then certificateName is required (and
+	// The domain name with which your certificate is associated ( example.com ). If
+	// you specify certificateDomainName , then certificateName is required (and
 	// vice-versa).
 	CertificateDomainName *string
 
@@ -63,8 +62,8 @@ type CreateLoadBalancerInput struct {
 	CertificateName *string
 
 	// The path you provided to perform the load balancer health check. If you didn't
-	// specify a health check path, Lightsail uses the root path of your website (e.g.,
-	// "/" ). You may want to specify a custom health check path other than the root of
+	// specify a health check path, Lightsail uses the root path of your website ( "/"
+	// ). You may want to specify a custom health check path other than the root of
 	// your application if your home page loads slowly or has a lot of media or
 	// scripting on it.
 	HealthCheckPath *string

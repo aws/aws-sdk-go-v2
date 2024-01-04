@@ -12,45 +12,56 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a domain resource for the specified domain (example.com). The create
-// domain operation supports tag-based access control via request tags. For more
-// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
-func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
+// Creates an SSL/TLS certificate that secures traffic for your website. After the
+// certificate is created, it is installed on the specified Lightsail instance. If
+// you provide more than one domain name in the request, at least one name must be
+// less than or equal to 63 characters in length.
+func (c *Client) SetupInstanceHttps(ctx context.Context, params *SetupInstanceHttpsInput, optFns ...func(*Options)) (*SetupInstanceHttpsOutput, error) {
 	if params == nil {
-		params = &CreateDomainInput{}
+		params = &SetupInstanceHttpsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDomain", params, optFns, c.addOperationCreateDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetupInstanceHttps", params, optFns, c.addOperationSetupInstanceHttpsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateDomainOutput)
+	out := result.(*SetupInstanceHttpsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateDomainInput struct {
+type SetupInstanceHttpsInput struct {
 
-	// The domain name to manage ( example.com ).
+	// The certificate authority that issues the SSL/TLS certificate.
 	//
 	// This member is required.
-	DomainName *string
+	CertificateProvider types.CertificateProvider
 
-	// The tag keys and optional values to add to the resource during create. Use the
-	// TagResource action to tag a resource after it's created.
-	Tags []types.Tag
+	// The name of the domain and subdomains that were specified for the SSL/TLS
+	// certificate.
+	//
+	// This member is required.
+	DomainNames []string
+
+	// The contact method for SSL/TLS certificate renewal alerts. You can enter one
+	// email address.
+	//
+	// This member is required.
+	EmailAddress *string
+
+	// The name of the Lightsail instance.
+	//
+	// This member is required.
+	InstanceName *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateDomainOutput struct {
+type SetupInstanceHttpsOutput struct {
 
-	// An array of objects that describe the result of the action, such as the status
-	// of the request, the timestamp of the request, and the resources affected by the
-	// request.
-	Operation *types.Operation
+	// The available API operations for SetupInstanceHttps .
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,19 +69,19 @@ type CreateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetupInstanceHttpsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDomain{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetupInstanceHttps{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDomain{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetupInstanceHttps{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDomain"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "SetupInstanceHttps"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -113,10 +124,10 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateDomainValidationMiddleware(stack); err != nil {
+	if err = addOpSetupInstanceHttpsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDomain(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetupInstanceHttps(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -137,10 +148,10 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateDomain(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opSetupInstanceHttps(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateDomain",
+		OperationName: "SetupInstanceHttps",
 	}
 }

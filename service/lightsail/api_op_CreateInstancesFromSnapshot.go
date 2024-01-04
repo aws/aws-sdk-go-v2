@@ -45,7 +45,7 @@ type CreateInstancesFromSnapshotInput struct {
 	AvailabilityZone *string
 
 	// The bundle of specification information for your virtual private server (or
-	// instance), including the pricing plan (e.g., micro_1_0 ).
+	// instance), including the pricing plan ( micro_1_0 ).
 	//
 	// This member is required.
 	BundleId *string
