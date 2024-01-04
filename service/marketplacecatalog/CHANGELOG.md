@@ -1,3 +1,7 @@
+# v1.23.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-12-19)
 
 * **Feature**: AWS Marketplace now supports a new API, BatchDescribeEntities, which returns metadata and content for multiple entities.

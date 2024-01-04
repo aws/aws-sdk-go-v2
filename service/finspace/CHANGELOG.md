@@ -1,3 +1,7 @@
+# v1.20.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2023-12-08)
 
 * **Feature**: Releasing Scaling Group, Dataview, and Volume APIs

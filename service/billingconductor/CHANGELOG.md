@@ -1,3 +1,7 @@
+# v1.14.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2023-12-14)
 
 * **Feature**: Billing Conductor is releasing a new API, GetBillingGroupCostReport, which provides the ability to retrieve/view the Billing Group Cost Report broken down by attributes for a specific billing group.

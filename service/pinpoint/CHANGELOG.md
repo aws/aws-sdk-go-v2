@@ -1,3 +1,7 @@
+# v1.26.7 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.6 (2023-12-11)
 
 * **Documentation**: This release includes Amazon Pinpoint API documentation updates pertaining to campaign message sending rate limits.

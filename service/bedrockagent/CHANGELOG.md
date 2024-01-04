@@ -1,3 +1,7 @@
+# v1.2.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2023-12-21)
 
 * **Feature**: This release introduces Amazon Aurora as a vector store on Knowledge Bases for Amazon Bedrock

@@ -1,3 +1,8 @@
+# v1.124.0 (2024-01-04)
+
+* **Feature**: Adding support for provisioned throughput mode for SageMaker Feature Groups
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.123.0 (2023-12-28)
 
 * **Feature**: Amazon SageMaker Studio now supports Docker access from within app container

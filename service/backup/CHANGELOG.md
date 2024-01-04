@@ -1,3 +1,7 @@
+# v1.31.3 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.2 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

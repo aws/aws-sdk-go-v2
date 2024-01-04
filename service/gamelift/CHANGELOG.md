@@ -1,3 +1,7 @@
+# v1.28.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2023-12-14)
 
 * **Feature**: Amazon GameLift adds the ability to add and update the game properties of active game sessions.

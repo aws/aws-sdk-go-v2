@@ -1,3 +1,7 @@
+# v1.31.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2023-12-20)
 
 * **Feature**: This release introduces configurable clipboard, allowing admins to specify the maximum length of text that can be copied by the users from their device to the remote session and vice-versa.

@@ -1,3 +1,8 @@
+# v1.28.0 (2024-01-04)
+
+* **Feature**: This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.1 (2023-12-20)
 
 * No change notes available for this release.

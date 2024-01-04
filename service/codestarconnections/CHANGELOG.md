@@ -1,3 +1,7 @@
+# v1.22.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2023-12-28)
 
 * **Feature**: New integration with the GitLab self-managed provider type.

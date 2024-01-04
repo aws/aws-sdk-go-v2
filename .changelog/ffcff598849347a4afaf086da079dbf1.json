@@ -1,8 +1,0 @@
-{
-    "id": "ffcff598-8493-47a4-afaf-086da079dbf1",
-    "type": "feature",
-    "description": "This release adds support for managed instance draining which facilitates graceful termination of Amazon ECS instances.",
-    "modules": [
-        "service/ecs"
-    ]
-}

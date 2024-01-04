@@ -1,3 +1,7 @@
+# v1.22.6 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.5 (2023-12-15)
 
 * **Documentation**: Updated Cloud9 API documentation for AL2023 release

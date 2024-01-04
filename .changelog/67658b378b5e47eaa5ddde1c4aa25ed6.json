@@ -1,8 +1,0 @@
-{
-    "id": "67658b37-8b5e-47ea-a5dd-de1c4aa25ed6",
-    "type": "feature",
-    "description": "This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints.",
-    "modules": [
-        "service/elasticsearchservice"
-    ]
-}

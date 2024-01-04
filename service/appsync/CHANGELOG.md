@@ -1,3 +1,7 @@
+# v1.27.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2023-12-19)
 
 * **Feature**: This release adds additional configurations on GraphQL APIs for limits on query depth, resolver count, and introspection

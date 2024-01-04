@@ -1,3 +1,7 @@
+# v1.26.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-12-29)
 
 * **Feature**: AWS App Runner adds Python 3.11 and Node.js 18 runtimes.

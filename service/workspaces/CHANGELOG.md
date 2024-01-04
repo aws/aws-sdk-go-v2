@@ -1,3 +1,7 @@
+# v1.35.7 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.6 (2023-12-14)
 
 * **Documentation**: Updated note to ensure customers understand running modes.

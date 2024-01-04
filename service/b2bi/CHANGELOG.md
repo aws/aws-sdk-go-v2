@@ -1,3 +1,7 @@
+# v1.0.0-preview.10 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.9 (2023-12-14)
 
 * **Documentation**: Documentation updates for AWS B2B Data Interchange

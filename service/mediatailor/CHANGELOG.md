@@ -1,3 +1,7 @@
+# v1.33.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2023-12-20)
 
 * **Feature**: Adds the ability to configure time shifting on MediaTailor channels using the TimeShiftConfiguration field

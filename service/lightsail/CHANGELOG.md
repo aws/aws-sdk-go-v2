@@ -1,3 +1,8 @@
+# v1.33.0 (2024-01-04)
+
+* **Feature**: This release adds support to set up an HTTPS endpoint on an instance.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.5 (2023-12-08)
 
 * **Bug Fix**: Reinstate presence of default Retryer in functional options, but still respect max attempts set therein.

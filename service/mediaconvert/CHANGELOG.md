@@ -1,3 +1,7 @@
+# v1.49.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2024-01-03)
 
 * **Feature**: This release includes video engine updates including HEVC improvements, support for ingesting VP9 encoded video in MP4 containers, and support for user-specified 3D LUTs.

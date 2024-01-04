@@ -1,8 +1,0 @@
-{
-    "id": "5114105b-2218-40e5-9e15-c2b3e227bee7",
-    "type": "feature",
-    "description": "Adding PerformanceInsightsEnabled and PerformanceInsightsKMSKeyId fields to DescribeDBInstances Response.",
-    "modules": [
-        "service/docdb"
-    ]
-}

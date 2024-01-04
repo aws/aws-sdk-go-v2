@@ -1,3 +1,7 @@
+# v1.25.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2023-12-22)
 
 * **Feature**: This release adds the DescribeSourceMetadata API. This API can be used to view the stream information of the flow's source.

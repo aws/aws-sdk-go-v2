@@ -1,3 +1,8 @@
+# v1.36.0 (2024-01-04)
+
+* **Feature**: This release adds support for managed instance draining which facilitates graceful termination of Amazon ECS instances.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.6 (2023-12-20)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.36.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2023-12-27)
 
 * **Feature**: Add support for customers to modify cluster attribute auto-terminate post cluster launch

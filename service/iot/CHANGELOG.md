@@ -1,3 +1,7 @@
+# v1.47.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.0 (2023-12-14)
 
 * **Feature**: This release adds the ability to self-manage certificate signing in AWS IoT Core fleet provisioning using the new certificate provider resource.

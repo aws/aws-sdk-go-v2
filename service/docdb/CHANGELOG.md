@@ -1,3 +1,8 @@
+# v1.30.0 (2024-01-04)
+
+* **Feature**: Adding PerformanceInsightsEnabled and PerformanceInsightsKMSKeyId fields to DescribeDBInstances Response.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.6 (2023-12-27)
 
 * No change notes available for this release.

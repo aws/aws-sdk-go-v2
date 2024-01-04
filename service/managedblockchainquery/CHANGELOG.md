@@ -1,3 +1,7 @@
+# v1.7.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2023-12-20)
 
 * **Feature**: Adding Confirmation Status and Execution Status to GetTransaction Response.

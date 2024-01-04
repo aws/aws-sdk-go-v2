@@ -1,3 +1,7 @@
+# v1.26.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-12-22)
 
 * **Feature**: Update endpoint rules and examples.

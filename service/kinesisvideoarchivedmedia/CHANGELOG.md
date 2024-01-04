@@ -1,3 +1,7 @@
+# v1.21.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-12-28)
 
 * **Feature**: NoDataRetentionException thrown when GetImages requested for a Stream that does not retain data (that is, has a DataRetentionInHours of 0).

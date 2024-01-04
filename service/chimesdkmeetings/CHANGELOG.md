@@ -1,3 +1,7 @@
+# v1.21.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-12-19)
 
 * **Feature**: Add meeting features to specify a maximum camera resolution, a maximum content sharing resolution, and a maximum number of attendees for a given meeting.

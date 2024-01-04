@@ -1,3 +1,7 @@
+# v1.29.1 (2024-01-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2023-12-22)
 
 * **Feature**: This release adds additional configurations on GetTemporaryGlueTableCredentials for Query Session Context.

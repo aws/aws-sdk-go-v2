@@ -1,3 +1,28 @@
+# Release (2024-01-04)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.24.1
+  * **Documentation**: removing incorrect doc string from config
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.44.0](service/configservice/CHANGELOG.md#v1440-2024-01-04)
+  * **Feature**: Updated ResourceType enum with new resource types onboarded by AWS Config in November and December 2023.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.30.0](service/docdb/CHANGELOG.md#v1300-2024-01-04)
+  * **Feature**: Adding PerformanceInsightsEnabled and PerformanceInsightsKMSKeyId fields to DescribeDBInstances Response.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.36.0](service/ecs/CHANGELOG.md#v1360-2024-01-04)
+  * **Feature**: This release adds support for managed instance draining which facilitates graceful termination of Amazon ECS instances.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.25.0](service/elasticsearchservice/CHANGELOG.md#v1250-2024-01-04)
+  * **Feature**: This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.33.0](service/lightsail/CHANGELOG.md#v1330-2024-01-04)
+  * **Feature**: This release adds support to set up an HTTPS endpoint on an instance.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.28.0](service/opensearch/CHANGELOG.md#v1280-2024-01-04)
+  * **Feature**: This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.124.0](service/sagemaker/CHANGELOG.md#v11240-2024-01-04)
+  * **Feature**: Adding support for provisioned throughput mode for SageMaker Feature Groups
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.26.0](service/servicecatalog/CHANGELOG.md#v1260-2024-01-04)
+  * **Feature**: Added Idempotency token support to Service Catalog  AssociateServiceActionWithProvisioningArtifact, DisassociateServiceActionFromProvisioningArtifact, DeleteServiceAction API
+
 # Release (2024-01-03)
 
 ## Module Highlights
