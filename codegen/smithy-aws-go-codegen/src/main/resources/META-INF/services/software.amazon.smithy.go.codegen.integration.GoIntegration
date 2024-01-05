@@ -1,4 +1,4 @@
-software.amazon.smithy.aws.go.codegen.customization.auth.BackfillSigV4aTrait
+software.amazon.smithy.aws.go.codegen.customization.auth.BackfillSigV4ATrait
 software.amazon.smithy.aws.go.codegen.AddProtocols
 software.amazon.smithy.aws.go.codegen.ClientResolvedDefaultsMode
 software.amazon.smithy.aws.go.codegen.AddAwsConfigFields

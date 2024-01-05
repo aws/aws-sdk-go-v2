@@ -1,0 +1,10 @@
+{
+    "id": "261461c4-95de-4ce0-9c41-eb674762b213",
+    "type": "feature",
+    "collapse": true,
+    "description": "Support smithy sigv4a trait for codegen.",
+    "modules": [
+        "service/eventbridge",
+        "service/s3"
+    ]
+}
