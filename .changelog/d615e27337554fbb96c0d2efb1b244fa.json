@@ -1,0 +1,8 @@
+{
+    "id": "d615e273-3755-4fbb-96c0-d2efb1b244fa",
+    "type": "feature",
+    "description": "Minor trait updates for User APIs",
+    "modules": [
+        "service/connect"
+    ]
+}

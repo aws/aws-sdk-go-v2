@@ -1,0 +1,8 @@
+{
+    "id": "2f7e03cb-df01-45a9-99aa-798c2f3f9a7c",
+    "type": "documentation",
+    "description": "use_fips_ssl and require_ssl parameter support for Workgroup, UpdateWorkgroup, and CreateWorkgroup",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}
