@@ -729,7 +729,7 @@
                 "XksProxyUriEndpoint": {
                     "target": "com.amazonaws.kms#XksProxyUriEndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the endpoint that KMS uses to send requests to the external key store proxy\n      (XKS proxy). This parameter is required for custom key stores with a\n        <code>CustomKeyStoreType</code> of <code>EXTERNAL_KEY_STORE</code>.</p>\n         <p>The protocol must be HTTPS. KMS communicates on port 443. Do not specify the port in the\n        <code>XksProxyUriEndpoint</code> value.</p>\n         <p>For external key stores with <code>XksProxyConnectivity</code> value of\n        <code>VPC_ENDPOINT_SERVICE</code>, specify <code>https://</code> followed by the private DNS\n      name of the VPC endpoint service.</p>\n         <p>For external key stores with <code>PUBLIC_ENDPOINT</code> connectivity, this endpoint must\n      be reachable before you create the custom key store. KMS connects to the external key store\n      proxy while creating the custom key store. For external key stores with\n        <code>VPC_ENDPOINT_SERVICE</code> connectivity, KMS connects when you call the <a>ConnectCustomKeyStore</a> operation.</p>\n         <p>The value of this parameter must begin with <code>https://</code>. The remainder can\n      contain upper and lower case letters (A-Z and a-z), numbers (0-9), dots (<code>.</code>), and\n      hyphens (<code>-</code>). Additional slashes (<code>/</code> and <code>\\</code>) are not\n      permitted.</p>\n         <p>\n            <b>Uniqueness requirements: </b>\n         </p>\n         <ul>\n            <li>\n               <p>The combined <code>XksProxyUriEndpoint</code> and <code>XksProxyUriPath</code> values\n          must be unique in the Amazon Web Services account and Region.</p>\n            </li>\n            <li>\n               <p>An external key store with <code>PUBLIC_ENDPOINT</code> connectivity cannot use the\n          same <code>XksProxyUriEndpoint</code> value as an external key store with\n            <code>VPC_ENDPOINT_SERVICE</code> connectivity in the same Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>Each external key store with <code>VPC_ENDPOINT_SERVICE</code> connectivity must have\n          its own private DNS name. The <code>XksProxyUriEndpoint</code> value for external key\n          stores with <code>VPC_ENDPOINT_SERVICE</code> connectivity (private DNS name) must be\n          unique in the Amazon Web Services account and Region.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the endpoint that KMS uses to send requests to the external key store proxy\n      (XKS proxy). This parameter is required for custom key stores with a\n        <code>CustomKeyStoreType</code> of <code>EXTERNAL_KEY_STORE</code>.</p>\n         <p>The protocol must be HTTPS. KMS communicates on port 443. Do not specify the port in the\n        <code>XksProxyUriEndpoint</code> value.</p>\n         <p>For external key stores with <code>XksProxyConnectivity</code> value of\n        <code>VPC_ENDPOINT_SERVICE</code>, specify <code>https://</code> followed by the private DNS\n      name of the VPC endpoint service.</p>\n         <p>For external key stores with <code>PUBLIC_ENDPOINT</code> connectivity, this endpoint must\n      be reachable before you create the custom key store. KMS connects to the external key store\n      proxy while creating the custom key store. For external key stores with\n        <code>VPC_ENDPOINT_SERVICE</code> connectivity, KMS connects when you call the <a>ConnectCustomKeyStore</a> operation.</p>\n         <p>The value of this parameter must begin with <code>https://</code>. The remainder can\n      contain upper and lower case letters (A-Z and a-z), numbers (0-9), dots (<code>.</code>), and\n      hyphens (<code>-</code>). Additional slashes (<code>/</code> and <code>\\</code>) are not\n      permitted.</p>\n         <p>\n            <b>Uniqueness requirements: </b>\n         </p>\n         <ul>\n            <li>\n               <p>The combined <code>XksProxyUriEndpoint</code> and <code>XksProxyUriPath</code> values\n          must be unique in the Amazon Web Services account and Region.</p>\n            </li>\n            <li>\n               <p>An external key store with <code>PUBLIC_ENDPOINT</code> connectivity cannot use the\n          same <code>XksProxyUriEndpoint</code> value as an external key store with\n            <code>VPC_ENDPOINT_SERVICE</code> connectivity in this Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>Each external key store with <code>VPC_ENDPOINT_SERVICE</code> connectivity must have\n          its own private DNS name. The <code>XksProxyUriEndpoint</code> value for external key\n          stores with <code>VPC_ENDPOINT_SERVICE</code> connectivity (private DNS name) must be\n          unique in the Amazon Web Services account and Region.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "XksProxyUriPath": {
@@ -1448,6 +1448,20 @@
                             "Plaintext": "<binary data>",
                             "EncryptionAlgorithm": "SYMMETRIC_DEFAULT"
                         }
+                    },
+                    {
+                        "title": "To decrypt data with an asymmetric encryption KMS key",
+                        "documentation": "The following example decrypts data that was encrypted with an asymmetric encryption KMS key. When the KMS encryption key is asymmetric, you must specify the KMS key ID and the encryption algorithm that was used to encrypt the data.",
+                        "input": {
+                            "CiphertextBlob": "<binary data>",
+                            "KeyId": "0987dcba-09fe-87dc-65ba-ab0987654321",
+                            "EncryptionAlgorithm": "RSAES_OAEP_SHA_256"
+                        },
+                        "output": {
+                            "KeyId": "arn:aws:kms:us-west-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
+                            "Plaintext": "<binary data>",
+                            "EncryptionAlgorithm": "RSAES_OAEP_SHA_256"
+                        }
                     }
                 ]
             }
@@ -1836,7 +1850,174 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides detailed information about a KMS key. You can run <code>DescribeKey</code> on a\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed\n        key</a> or an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed key</a>.</p>\n         <p>This detailed information includes the key ARN, creation date (and deletion date, if\n      applicable), the key state, and the origin and expiration date (if any) of the key material.\n      It includes fields, like <code>KeySpec</code>, that help you distinguish different types of\n      KMS keys. It also displays the key usage (encryption, signing, or generating and verifying\n      MACs) and the algorithms that the KMS key supports. </p>\n         <p>For <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">multi-Region keys</a>, <code>DescribeKey</code> displays the primary key and all\n      related replica keys. For KMS keys in <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html\">CloudHSM key stores</a>, it includes information\n      about the key store, such as the key store ID and the CloudHSM cluster ID. For KMS keys in <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html\">external key stores</a>,\n      it includes the custom key store ID and the ID of the external key.</p>\n         <p>\n            <code>DescribeKey</code> does not return the following information:</p>\n         <ul>\n            <li>\n               <p>Aliases associated with the KMS key. To get this information, use <a>ListAliases</a>.</p>\n            </li>\n            <li>\n               <p>Whether automatic key rotation is enabled on the KMS key. To get this information, use\n            <a>GetKeyRotationStatus</a>. Also, some key states prevent a KMS key from\n          being automatically rotated. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotate-keys-how-it-works\">How Automatic Key Rotation\n            Works</a> in the <i>Key Management Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Tags on the KMS key. To get this information, use <a>ListResourceTags</a>.</p>\n            </li>\n            <li>\n               <p>Key policies and grants on the KMS key. To get this information, use <a>GetKeyPolicy</a> and <a>ListGrants</a>.</p>\n            </li>\n         </ul>\n         <p>In general, <code>DescribeKey</code> is a non-mutating operation. It returns data about\n      KMS keys, but doesn't change them. However, Amazon Web Services services use <code>DescribeKey</code> to\n      create <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services\n        managed keys</a> from a <i>predefined Amazon Web Services alias</i> with no key\n      ID.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:DescribeKey</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetKeyPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKeyRotationStatus</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListGrants</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListKeys</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListResourceTags</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRetirableGrants</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>"
+                "smithy.api#documentation": "<p>Provides detailed information about a KMS key. You can run <code>DescribeKey</code> on a\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed\n        key</a> or an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed key</a>.</p>\n         <p>This detailed information includes the key ARN, creation date (and deletion date, if\n      applicable), the key state, and the origin and expiration date (if any) of the key material.\n      It includes fields, like <code>KeySpec</code>, that help you distinguish different types of\n      KMS keys. It also displays the key usage (encryption, signing, or generating and verifying\n      MACs) and the algorithms that the KMS key supports. </p>\n         <p>For <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">multi-Region keys</a>, <code>DescribeKey</code> displays the primary key and all\n      related replica keys. For KMS keys in <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html\">CloudHSM key stores</a>, it includes information\n      about the key store, such as the key store ID and the CloudHSM cluster ID. For KMS keys in <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html\">external key stores</a>,\n      it includes the custom key store ID and the ID of the external key.</p>\n         <p>\n            <code>DescribeKey</code> does not return the following information:</p>\n         <ul>\n            <li>\n               <p>Aliases associated with the KMS key. To get this information, use <a>ListAliases</a>.</p>\n            </li>\n            <li>\n               <p>Whether automatic key rotation is enabled on the KMS key. To get this information, use\n            <a>GetKeyRotationStatus</a>. Also, some key states prevent a KMS key from\n          being automatically rotated. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotate-keys-how-it-works\">How Automatic Key Rotation\n            Works</a> in the <i>Key Management Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Tags on the KMS key. To get this information, use <a>ListResourceTags</a>.</p>\n            </li>\n            <li>\n               <p>Key policies and grants on the KMS key. To get this information, use <a>GetKeyPolicy</a> and <a>ListGrants</a>.</p>\n            </li>\n         </ul>\n         <p>In general, <code>DescribeKey</code> is a non-mutating operation. It returns data about\n      KMS keys, but doesn't change them. However, Amazon Web Services services use <code>DescribeKey</code> to\n      create <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services\n        managed keys</a> from a <i>predefined Amazon Web Services alias</i> with no key\n      ID.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:DescribeKey</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetKeyPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKeyRotationStatus</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListGrants</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListKeys</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListResourceTags</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRetirableGrants</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get details about an RSA asymmetric KMS key",
+                        "documentation": "The following example gets metadata for an asymmetric RSA KMS key used for signing and verification.",
+                        "input": {
+                            "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab"
+                        },
+                        "output": {
+                            "KeyMetadata": {
+                                "AWSAccountId": "111122223333",
+                                "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
+                                "Arn": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+                                "CreationDate": 1.571767572317E9,
+                                "CustomerMasterKeySpec": "RSA_2048",
+                                "Enabled": false,
+                                "Description": "",
+                                "KeyState": "Disabled",
+                                "Origin": "AWS_KMS",
+                                "MultiRegion": false,
+                                "KeyManager": "CUSTOMER",
+                                "KeySpec": "RSA_2048",
+                                "KeyUsage": "SIGN_VERIFY",
+                                "SigningAlgorithms": [
+                                    "RSASSA_PKCS1_V1_5_SHA_256",
+                                    "RSASSA_PKCS1_V1_5_SHA_384",
+                                    "RSASSA_PKCS1_V1_5_SHA_512",
+                                    "RSASSA_PSS_SHA_256",
+                                    "RSASSA_PSS_SHA_384",
+                                    "RSASSA_PSS_SHA_512"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "title": "To get details about a multi-Region key",
+                        "documentation": "The following example gets metadata for a multi-Region replica key. This multi-Region key is a symmetric encryption key. DescribeKey returns information about the primary key and all of its replicas.",
+                        "input": {
+                            "KeyId": "arn:aws:kms:ap-northeast-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab"
+                        },
+                        "output": {
+                            "KeyMetadata": {
+                                "MultiRegion": true,
+                                "AWSAccountId": "111122223333",
+                                "Arn": "arn:aws:kms:ap-northeast-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab",
+                                "CreationDate": 1.586329200918E9,
+                                "Description": "",
+                                "Enabled": true,
+                                "KeyId": "mrk-1234abcd12ab34cd56ef1234567890ab",
+                                "KeyManager": "CUSTOMER",
+                                "KeyState": "Enabled",
+                                "KeyUsage": "ENCRYPT_DECRYPT",
+                                "Origin": "AWS_KMS",
+                                "CustomerMasterKeySpec": "SYMMETRIC_DEFAULT",
+                                "EncryptionAlgorithms": [
+                                    "SYMMETRIC_DEFAULT"
+                                ],
+                                "MultiRegionConfiguration": {
+                                    "MultiRegionKeyType": "PRIMARY",
+                                    "PrimaryKey": {
+                                        "Arn": "arn:aws:kms:us-west-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab",
+                                        "Region": "us-west-2"
+                                    },
+                                    "ReplicaKeys": [
+                                        {
+                                            "Arn": "arn:aws:kms:eu-west-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab",
+                                            "Region": "eu-west-1"
+                                        },
+                                        {
+                                            "Arn": "arn:aws:kms:ap-northeast-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab",
+                                            "Region": "ap-northeast-1"
+                                        },
+                                        {
+                                            "Arn": "arn:aws:kms:sa-east-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab",
+                                            "Region": "sa-east-1"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "To get details about an HMAC KMS key",
+                        "documentation": "The following example gets the metadata of an HMAC KMS key.",
+                        "input": {
+                            "KeyId": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+                        },
+                        "output": {
+                            "KeyMetadata": {
+                                "AWSAccountId": "123456789012",
+                                "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
+                                "Arn": "arn:aws:kms:us-west-2:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+                                "CreationDate": 1.566160362664E9,
+                                "Enabled": true,
+                                "Description": "Development test key",
+                                "KeyUsage": "GENERATE_VERIFY_MAC",
+                                "KeyState": "Enabled",
+                                "Origin": "AWS_KMS",
+                                "KeyManager": "CUSTOMER",
+                                "CustomerMasterKeySpec": "HMAC_256",
+                                "MacAlgorithms": [
+                                    "HMAC_SHA_256"
+                                ],
+                                "MultiRegion": false
+                            }
+                        }
+                    },
+                    {
+                        "title": "To get details about a KMS key in an AWS CloudHSM key store",
+                        "documentation": "The following example gets the metadata of a KMS key in an AWS CloudHSM key store.",
+                        "input": {
+                            "KeyId": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+                        },
+                        "output": {
+                            "KeyMetadata": {
+                                "AWSAccountId": "123456789012",
+                                "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
+                                "Arn": "arn:aws:kms:us-west-2:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+                                "CreationDate": 1.646160362664E9,
+                                "Description": "CloudHSM key store test key",
+                                "Enabled": true,
+                                "MultiRegion": false,
+                                "KeyManager": "CUSTOMER",
+                                "KeyState": "Enabled",
+                                "KeyUsage": "ENCRYPT_DECRYPT",
+                                "Origin": "AWS_CLOUDHSM",
+                                "CloudHsmClusterId": "cluster-234abcdefABC",
+                                "CustomKeyStoreId": "cks-1234567890abcdef0",
+                                "KeySpec": "SYMMETRIC_DEFAULT",
+                                "CustomerMasterKeySpec": "SYMMETRIC_DEFAULT",
+                                "EncryptionAlgorithms": [
+                                    "SYMMETRIC_DEFAULT"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "title": "To get details about a KMS key in an external key store",
+                        "documentation": "The following example gets the metadata of a KMS key in an external key store.",
+                        "input": {
+                            "KeyId": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+                        },
+                        "output": {
+                            "KeyMetadata": {
+                                "Arn": "arn:aws:kms:us-west-2:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+                                "AWSAccountId": "123456789012",
+                                "CreationDate": 1.646160362664E9,
+                                "CustomerMasterKeySpec": "SYMMETRIC_DEFAULT",
+                                "CustomKeyStoreId": "cks-1234567890abcdef0",
+                                "Description": "External key store test key",
+                                "Enabled": true,
+                                "EncryptionAlgorithms": [
+                                    "SYMMETRIC_DEFAULT"
+                                ],
+                                "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
+                                "KeyManager": "CUSTOMER",
+                                "KeySpec": "SYMMETRIC_DEFAULT",
+                                "KeyState": "Enabled",
+                                "KeyUsage": "ENCRYPT_DECRYPT",
+                                "MultiRegion": false,
+                                "Origin": "EXTERNAL_KEY_STORE",
+                                "XksKeyConfiguration": {
+                                    "Id": "bb8562717f809024"
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.kms#DescribeKeyRequest": {
@@ -2250,6 +2431,20 @@
                             "CiphertextBlob": "<binary data>",
                             "KeyId": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab",
                             "EncryptionAlgorithm": "SYMMETRIC_DEFAULT"
+                        }
+                    },
+                    {
+                        "title": "To encrypt data with an asymmetric encryption KMS key",
+                        "documentation": "The following example encrypts data with the specified RSA asymmetric KMS key. When you encrypt with an asymmetric key, you must specify the encryption algorithm.",
+                        "input": {
+                            "KeyId": "0987dcba-09fe-87dc-65ba-ab0987654321",
+                            "Plaintext": "<binary data>",
+                            "EncryptionAlgorithm": "RSAES_OAEP_SHA_256"
+                        },
+                        "output": {
+                            "CiphertextBlob": "<binary data>",
+                            "KeyId": "arn:aws:kms:us-west-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
+                            "EncryptionAlgorithm": "RSAES_OAEP_SHA_256"
                         }
                     }
                 ]
@@ -3345,7 +3540,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the public key and an import token you need to import or reimport key material for\n      a KMS key. </p>\n         <p>By default, KMS keys are created with key material that KMS generates. This operation\n      supports <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">Importing key\n        material</a>, an advanced feature that lets you generate and import the cryptographic\n      key material for a KMS key. For more information about importing key material into KMS, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">Importing key\n        material</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>Before calling <code>GetParametersForImport</code>, use the <a>CreateKey</a>\n      operation with an <code>Origin</code> value of <code>EXTERNAL</code> to create a KMS key with\n      no key material. You can import key material for a symmetric encryption KMS key, HMAC KMS key,\n      asymmetric encryption KMS key, or asymmetric signing KMS key. You can also import key material\n      into a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">multi-Region key</a> of\n      any supported type. However, you can't import key material into a KMS key in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key\n        store</a>. You can also use <code>GetParametersForImport</code> to get a public key and\n      import token to <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#reimport-key-material\">reimport\n        the original key material</a> into a KMS key whose key material expired or was\n      deleted.</p>\n         <p>\n            <code>GetParametersForImport</code> returns the items that you need to import your key\n      material.</p>\n         <ul>\n            <li>\n               <p>The public key (or \"wrapping key\") of an RSA key pair that KMS generates.</p>\n               <p>You will use this public key to encrypt (\"wrap\") your key material while it's in\n          transit to KMS. </p>\n            </li>\n            <li>\n               <p>A import token that ensures that KMS can decrypt your key material and associate it\n          with the correct KMS key.</p>\n            </li>\n         </ul>\n         <p>The public key and its import token are permanently linked and must be used together. Each\n      public key and import token set is valid for 24 hours. The expiration date and time appear in\n      the <code>ParametersValidTo</code> field in the <code>GetParametersForImport</code> response.\n      You cannot use an expired public key or import token in an <a>ImportKeyMaterial</a>\n      request. If your key and token expire, send another <code>GetParametersForImport</code>\n      request.</p>\n         <p>\n            <code>GetParametersForImport</code> requires the following information:</p>\n         <ul>\n            <li>\n               <p>The key ID of the KMS key for which you are importing the key material.</p>\n            </li>\n            <li>\n               <p>The key spec of the public key (\"wrapping key\") that you will use to encrypt your key\n          material during import.</p>\n            </li>\n            <li>\n               <p>The wrapping algorithm that you will use with the public key to encrypt your key\n          material.</p>\n            </li>\n         </ul>\n         <p>You can use the same or a different public key spec and wrapping algorithm each time you\n      import or reimport the same key material. </p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GetParametersForImport</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ImportKeyMaterial</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteImportedKeyMaterial</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>"
+                "smithy.api#documentation": "<p>Returns the public key and an import token you need to import or reimport key material for\n      a KMS key. </p>\n         <p>By default, KMS keys are created with key material that KMS generates. This operation\n      supports <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">Importing key\n        material</a>, an advanced feature that lets you generate and import the cryptographic\n      key material for a KMS key. For more information about importing key material into KMS, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">Importing key\n        material</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>Before calling <code>GetParametersForImport</code>, use the <a>CreateKey</a>\n      operation with an <code>Origin</code> value of <code>EXTERNAL</code> to create a KMS key with\n      no key material. You can import key material for a symmetric encryption KMS key, HMAC KMS key,\n      asymmetric encryption KMS key, or asymmetric signing KMS key. You can also import key material\n      into a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">multi-Region key</a> of any supported type. However, you can't import key material into\n      a KMS key in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>. You can also use <code>GetParametersForImport</code> to get a\n      public key and import token to <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#reimport-key-material\">reimport the original key\n        material</a> into a KMS key whose key material expired or was deleted.</p>\n         <p>\n            <code>GetParametersForImport</code> returns the items that you need to import your key\n      material.</p>\n         <ul>\n            <li>\n               <p>The public key (or \"wrapping key\") of an RSA key pair that KMS generates.</p>\n               <p>You will use this public key to encrypt (\"wrap\") your key material while it's in\n          transit to KMS. </p>\n            </li>\n            <li>\n               <p>A import token that ensures that KMS can decrypt your key material and associate it\n          with the correct KMS key.</p>\n            </li>\n         </ul>\n         <p>The public key and its import token are permanently linked and must be used together. Each\n      public key and import token set is valid for 24 hours. The expiration date and time appear in\n      the <code>ParametersValidTo</code> field in the <code>GetParametersForImport</code> response.\n      You cannot use an expired public key or import token in an <a>ImportKeyMaterial</a>\n      request. If your key and token expire, send another <code>GetParametersForImport</code>\n      request.</p>\n         <p>\n            <code>GetParametersForImport</code> requires the following information:</p>\n         <ul>\n            <li>\n               <p>The key ID of the KMS key for which you are importing the key material.</p>\n            </li>\n            <li>\n               <p>The key spec of the public key (\"wrapping key\") that you will use to encrypt your key\n          material during import.</p>\n            </li>\n            <li>\n               <p>The wrapping algorithm that you will use with the public key to encrypt your key\n          material.</p>\n            </li>\n         </ul>\n         <p>You can use the same or a different public key spec and wrapping algorithm each time you\n      import or reimport the same key material. </p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GetParametersForImport</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ImportKeyMaterial</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteImportedKeyMaterial</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>"
             }
         },
         "com.amazonaws.kms#GetParametersForImportRequest": {
@@ -5798,7 +5993,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Replicates a multi-Region key into the specified Region. This operation creates a\n      multi-Region replica key based on a multi-Region primary key in a different Region of the same\n      Amazon Web Services partition. You can create multiple replicas of a primary key, but each must be in a\n      different Region. To create a multi-Region primary key, use the <a>CreateKey</a>\n      operation.</p>\n         <p>This operation supports <i>multi-Region keys</i>, an KMS feature that lets you create multiple\n      interoperable KMS keys in different Amazon Web Services Regions. Because these KMS keys have the same key ID, key\n      material, and other metadata, you can use them interchangeably to encrypt data in one Amazon Web Services Region and decrypt\n      it in a different Amazon Web Services Region without re-encrypting the data or making a cross-Region call. For more information about multi-Region keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">Multi-Region keys in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>A <i>replica key</i> is a fully-functional KMS key that can be used\n      independently of its primary and peer replica keys. A primary key and its replica keys share\n      properties that make them interoperable. They have the same <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id\">key ID</a> and key material. They also\n      have the same <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-spec\">key\n        spec</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-usage\">key\n        usage</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-origin\">key\n        material origin</a>, and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html\">automatic key rotation status</a>. KMS automatically synchronizes these shared\n      properties among related multi-Region keys. All other properties of a replica key can differ,\n      including its <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">key\n        policy</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html\">tags</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html\">aliases</a>, and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a>. KMS pricing and quotas for KMS keys apply to each\n      primary key and replica key.</p>\n         <p>When this operation completes, the new replica key has a transient key state of\n        <code>Creating</code>. This key state changes to <code>Enabled</code> (or\n        <code>PendingImport</code>) after a few seconds when the process of creating the new replica\n      key is complete. While the key state is <code>Creating</code>, you can manage key, but you\n      cannot yet use it in cryptographic operations. If you are creating and using the replica key\n      programmatically, retry on <code>KMSInvalidStateException</code> or call\n        <code>DescribeKey</code> to check its <code>KeyState</code> value before using it. For\n      details about the <code>Creating</code> key state, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>You cannot create more than one replica of a primary key in any Region. If the Region\n      already includes a replica of the key you're trying to replicate, <code>ReplicateKey</code>\n      returns an <code>AlreadyExistsException</code> error. If the key state of the existing replica\n      is <code>PendingDeletion</code>, you can cancel the scheduled key deletion (<a>CancelKeyDeletion</a>) or wait for the key to be deleted. The new replica key you\n      create will have the same <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-sync-properties\">shared\n        properties</a> as the original replica key.</p>\n         <p>The CloudTrail log of a <code>ReplicateKey</code> operation records a\n        <code>ReplicateKey</code> operation in the primary key's Region and a <a>CreateKey</a> operation in the replica key's Region.</p>\n         <p>If you replicate a multi-Region primary key with imported key material, the replica key is\n      created with no key material. You must import the same key material that you imported into the\n      primary key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-import.html\">Importing key material into multi-Region keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>To convert a replica key to a primary key, use the <a>UpdatePrimaryRegion</a>\n      operation.</p>\n         <note>\n            <p>\n               <code>ReplicateKey</code> uses different default values for the <code>KeyPolicy</code>\n        and <code>Tags</code> parameters than those used in the KMS console. For details, see the\n        parameter descriptions.</p>\n         </note>\n         <p>\n            <b>Cross-account use</b>: No. You cannot use this operation to\n      create a replica key in a different Amazon Web Services account. </p>\n         <p>\n            <b>Required permissions</b>: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>kms:ReplicateKey</code> on the primary key (in the primary key's Region).\n          Include this permission in the primary key's key policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kms:CreateKey</code> in an IAM policy in the replica Region.</p>\n            </li>\n            <li>\n               <p>To use the <code>Tags</code> parameter, <code>kms:TagResource</code> in an IAM policy\n          in the replica Region.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Related operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdatePrimaryRegion</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Replicates a multi-Region key into the specified Region. This operation creates a\n      multi-Region replica key based on a multi-Region primary key in a different Region of the same\n      Amazon Web Services partition. You can create multiple replicas of a primary key, but each must be in a\n      different Region. To create a multi-Region primary key, use the <a>CreateKey</a>\n      operation.</p>\n         <p>This operation supports <i>multi-Region keys</i>, an KMS feature that lets you create multiple\n      interoperable KMS keys in different Amazon Web Services Regions. Because these KMS keys have the same key ID, key\n      material, and other metadata, you can use them interchangeably to encrypt data in one Amazon Web Services Region and decrypt\n      it in a different Amazon Web Services Region without re-encrypting the data or making a cross-Region call. For more information about multi-Region keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">Multi-Region keys in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>A <i>replica key</i> is a fully-functional KMS key that can be used\n      independently of its primary and peer replica keys. A primary key and its replica keys share\n      properties that make them interoperable. They have the same <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id\">key ID</a> and key material. They also\n      have the same <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-spec\">key\n        spec</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-usage\">key\n        usage</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-origin\">key\n        material origin</a>, and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html\">automatic key rotation status</a>. KMS automatically synchronizes these shared\n      properties among related multi-Region keys. All other properties of a replica key can differ,\n      including its <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">key\n        policy</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html\">tags</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html\">aliases</a>, and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a>. KMS pricing and quotas for KMS keys apply to each\n      primary key and replica key.</p>\n         <p>When this operation completes, the new replica key has a transient key state of\n        <code>Creating</code>. This key state changes to <code>Enabled</code> (or\n        <code>PendingImport</code>) after a few seconds when the process of creating the new replica\n      key is complete. While the key state is <code>Creating</code>, you can manage key, but you\n      cannot yet use it in cryptographic operations. If you are creating and using the replica key\n      programmatically, retry on <code>KMSInvalidStateException</code> or call\n        <code>DescribeKey</code> to check its <code>KeyState</code> value before using it. For\n      details about the <code>Creating</code> key state, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>You cannot create more than one replica of a primary key in any Region. If the Region\n      already includes a replica of the key you're trying to replicate, <code>ReplicateKey</code>\n      returns an <code>AlreadyExistsException</code> error. If the key state of the existing replica\n      is <code>PendingDeletion</code>, you can cancel the scheduled key deletion (<a>CancelKeyDeletion</a>) or wait for the key to be deleted. The new replica key you\n      create will have the same <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-sync-properties\">shared\n        properties</a> as the original replica key.</p>\n         <p>The CloudTrail log of a <code>ReplicateKey</code> operation records a\n        <code>ReplicateKey</code> operation in the primary key's Region and a <a>CreateKey</a> operation in the replica key's Region.</p>\n         <p>If you replicate a multi-Region primary key with imported key material, the replica key is\n      created with no key material. You must import the same key material that you imported into the\n      primary key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-import.html\">Importing key material into multi-Region\n        keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>To convert a replica key to a primary key, use the <a>UpdatePrimaryRegion</a>\n      operation.</p>\n         <note>\n            <p>\n               <code>ReplicateKey</code> uses different default values for the <code>KeyPolicy</code>\n        and <code>Tags</code> parameters than those used in the KMS console. For details, see the\n        parameter descriptions.</p>\n         </note>\n         <p>\n            <b>Cross-account use</b>: No. You cannot use this operation to\n      create a replica key in a different Amazon Web Services account. </p>\n         <p>\n            <b>Required permissions</b>: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>kms:ReplicateKey</code> on the primary key (in the primary key's Region).\n          Include this permission in the primary key's key policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kms:CreateKey</code> in an IAM policy in the replica Region.</p>\n            </li>\n            <li>\n               <p>To use the <code>Tags</code> parameter, <code>kms:TagResource</code> in an IAM policy\n          in the replica Region.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Related operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdatePrimaryRegion</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To replicate a multi-Region key in a different AWS Region",
@@ -6206,6 +6401,21 @@
                             "KeyId": "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab",
                             "Signature": "<binary data>",
                             "SigningAlgorithm": "ECDSA_SHA_384"
+                        }
+                    },
+                    {
+                        "title": "To digitally sign a message digest with an asymmetric KMS key.",
+                        "documentation": "This operation uses the private key in an asymmetric RSA signing KMS key to generate a digital signature for a message digest. In this example, a large message was hashed and the resulting digest is provided in the Message parameter. To tell KMS not to hash the message again, the MessageType field is set to DIGEST",
+                        "input": {
+                            "KeyId": "alias/RSA_signing_key",
+                            "Message": "<message digest to be signed>",
+                            "MessageType": "DIGEST",
+                            "SigningAlgorithm": "RSASSA_PKCS1_V1_5_SHA_256"
+                        },
+                        "output": {
+                            "KeyId": "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
+                            "Signature": "<binary data>",
+                            "SigningAlgorithm": "RSASSA_PKCS1_V1_5_SHA_256"
                         }
                     }
                 ]
@@ -8129,6 +8339,44 @@
                             "NewCustomKeyStoreName": "DevelopmentKeys"
                         },
                         "output": {}
+                    },
+                    {
+                        "title": "To edit the password of an AWS CloudHSM key store",
+                        "documentation": "This example tells AWS KMS the password for the kmsuser crypto user in the AWS CloudHSM cluster that is associated with the AWS KMS custom key store. (It does not change the password in the CloudHSM cluster.) This operation does not return any data.",
+                        "input": {
+                            "CustomKeyStoreId": "cks-1234567890abcdef0",
+                            "KeyStorePassword": "ExamplePassword"
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "To associate the custom key store with a different, but related, AWS CloudHSM cluster.",
+                        "documentation": "This example changes the AWS CloudHSM cluster that is associated with an AWS CloudHSM key store to a related cluster, such as a different backup of the same cluster. This operation does not return any data. To verify that the operation worked, use the DescribeCustomKeyStores operation.",
+                        "input": {
+                            "CustomKeyStoreId": "cks-1234567890abcdef0",
+                            "CloudHsmClusterId": "cluster-234abcdefABC"
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "To edit the proxy URI path of an external key store.",
+                        "documentation": "This example updates the proxy URI path for an external key store",
+                        "input": {
+                            "CustomKeyStoreId": "cks-1234567890abcdef0",
+                            "XksProxyUriPath": "/new-path/kms/xks/v1"
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "To update the proxy connectivity of an external key store to VPC_ENDPOINT_SERVICE",
+                        "documentation": "To change the external key store proxy connectivity option from public endpoint connectivity to VPC endpoint service connectivity, in addition to changing the <code>XksProxyConnectivity</code> value, you must change the <code>XksProxyUriEndpoint</code> value to reflect the private DNS name associated with the VPC endpoint service. You must also add an <code>XksProxyVpcEndpointServiceName</code> value.",
+                        "input": {
+                            "CustomKeyStoreId": "cks-1234567890abcdef0",
+                            "XksProxyConnectivity": "VPC_ENDPOINT_SERVICE",
+                            "XksProxyUriEndpoint": "https://myproxy-private.xks.example.com",
+                            "XksProxyVpcEndpointServiceName": "com.amazonaws.vpce.us-east-1.vpce-svc-example"
+                        },
+                        "output": {}
                     }
                 ]
             }
@@ -8386,6 +8634,22 @@
                             "SignatureValid": true,
                             "SigningAlgorithm": "ECDSA_SHA_384"
                         }
+                    },
+                    {
+                        "title": "To use an asymmetric KMS key to verify a digital signature on a message digest",
+                        "documentation": "This operation uses the public key in an RSA asymmetric signing key pair to verify the digital signature of a message digest. Hashing a message into a digest before sending it to KMS lets you verify messages that exceed the 4096-byte message size limit. To indicate that the value of Message is a digest, use the MessageType parameter ",
+                        "input": {
+                            "KeyId": "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
+                            "Message": "<message digest to be verified>",
+                            "MessageType": "DIGEST",
+                            "Signature": "<binary data>",
+                            "SigningAlgorithm": "RSASSA_PSS_SHA_512"
+                        },
+                        "output": {
+                            "KeyId": "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
+                            "SignatureValid": true,
+                            "SigningAlgorithm": "RSASSA_PSS_SHA_512"
+                        }
                     }
                 ]
             }
@@ -8639,7 +8903,7 @@
                     "code": "XksKeyAlreadyInUse",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was rejected because the (<code>XksKeyId</code>) is already associated with a\n      KMS key in this external key store. Each KMS key in an external key store must be associated\n      with a different external key.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because the (<code>XksKeyId</code>) is already associated with\n      another KMS key in this external key store. Each KMS key in an external key store must be\n      associated with a different external key.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -8830,7 +9094,7 @@
                     "code": "XksProxyInvalidConfigurationException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was rejected because the Amazon VPC endpoint service configuration does not fulfill\n      the requirements for an external key store proxy. For details, see the exception\n      message.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because the external key store proxy is not configured correctly.\n      To identify the cause, see the error message that accompanies the exception.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -8864,7 +9128,7 @@
                     "code": "XksProxyUriEndpointInUseException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was rejected because the concatenation of the <code>XksProxyUriEndpoint</code>\n      is already associated with an external key store in the Amazon Web Services account and Region. Each\n      external key store in an account and Region must use a unique external key store proxy\n      address.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because the <code>XksProxyUriEndpoint</code> is already\n      associated with another external key store in this Amazon Web Services Region. To identify the cause,\n      see the error message that accompanies the exception. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -8891,7 +9155,7 @@
                     "code": "XksProxyUriInUseException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was rejected because the concatenation of the <code>XksProxyUriEndpoint</code>\n      and <code>XksProxyUriPath</code> is already associated with an external key store in the\n      Amazon Web Services account and Region. Each external key store in an account and Region must use a unique\n      external key store proxy API address.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because the concatenation of the <code>XksProxyUriEndpoint</code>\n      and <code>XksProxyUriPath</code> is already associated with another external key store in this\n      Amazon Web Services Region. Each external key store in a Region must use a unique external key store proxy\n      API address.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -8935,7 +9199,7 @@
                     "code": "XksProxyVpcEndpointServiceInUseException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was rejected because the specified Amazon VPC endpoint service is already\n      associated with an external key store in the Amazon Web Services account and Region. Each external key store\n      in an Amazon Web Services account and Region must use a different Amazon VPC endpoint service.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because the specified Amazon VPC endpoint service is already\n      associated with another external key store in this Amazon Web Services Region. Each external key store in a\n      Region must use a different Amazon VPC endpoint service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -8952,7 +9216,7 @@
                     "code": "XksProxyVpcEndpointServiceInvalidConfigurationException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was rejected because the Amazon VPC endpoint service configuration does not fulfill\n      the requirements for an external key store proxy. For details, see the exception message and\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/vpc-connectivity.html#xks-vpc-requirements\">review the requirements</a> for Amazon VPC endpoint service connectivity for an external key\n      store.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because the Amazon VPC endpoint service configuration does not fulfill\n      the requirements for an external key store. To identify the cause, see the error message that\n      accompanies the exception and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/vpc-connectivity.html#xks-vpc-requirements\">review the\n        requirements</a> for Amazon VPC endpoint service connectivity for an external key\n      store.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

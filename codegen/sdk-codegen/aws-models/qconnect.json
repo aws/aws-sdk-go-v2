@@ -5728,7 +5728,8 @@
                     "outputToken": "nextToken",
                     "pageSize": "maxResults",
                     "items": "results"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.qconnect#SearchQuickResponsesRequest": {

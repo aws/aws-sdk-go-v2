@@ -316,7 +316,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connect#AgentHierarchyGroups": {
@@ -389,7 +390,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connect#AgentPauseDurationInSeconds": {
@@ -8081,7 +8083,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains credentials to use for federation.</p>"
+                "smithy.api#documentation": "<p>Contains credentials to use for federation.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connect#CrossChannelBehavior": {
@@ -11587,7 +11590,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 4096
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connect#Description250": {
@@ -12698,7 +12702,10 @@
             }
         },
         "com.amazonaws.connect#Email": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.connect#EmailReference": {
             "type": "structure",
@@ -13973,7 +13980,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 3072
+                    "max": 1024
                 }
             }
         },
@@ -22450,7 +22457,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 512
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connect#Name128": {
@@ -22955,7 +22963,8 @@
         "com.amazonaws.connect#Password": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d\\S]{8,64}$/$"
+                "smithy.api#pattern": "^/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d\\S]{8,64}$/$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connect#PauseContact": {
