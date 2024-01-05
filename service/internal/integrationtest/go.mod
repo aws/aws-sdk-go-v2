@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.24.1
 	github.com/aws/aws-sdk-go-v2/config v1.26.3
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.15.10
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.15.11
 	github.com/aws/aws-sdk-go-v2/service/acm v1.22.7
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.21.7
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.25.7
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.19.6
 	github.com/aws/aws-sdk-go-v2/service/emr v1.36.1
-	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.26.7
+	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.19.6
@@ -53,7 +53,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.19.6
 	github.com/aws/aws-sdk-go-v2/service/iot v1.47.1
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.24.7
-	github.com/aws/aws-sdk-go-v2/service/kms v1.27.8
+	github.com/aws/aws-sdk-go-v2/service/kms v1.27.9
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.49.7
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.18.6
@@ -67,7 +67,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.20.6
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.24.2
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.47.8
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.41.8
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.26.0

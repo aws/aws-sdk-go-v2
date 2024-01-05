@@ -1,3 +1,7 @@
+# v1.15.6 (2024-01-05)
+
+* **Documentation**: use_fips_ssl and require_ssl parameter support for Workgroup, UpdateWorkgroup, and CreateWorkgroup
+
 # v1.15.5 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

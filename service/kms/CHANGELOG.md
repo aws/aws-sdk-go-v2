@@ -1,3 +1,7 @@
+# v1.27.9 (2024-01-05)
+
+* **Documentation**: Documentation updates for AWS Key Management Service (KMS).
+
 # v1.27.8 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

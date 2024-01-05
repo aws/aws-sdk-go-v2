@@ -1,8 +1,0 @@
-{
-    "id": "9648cb06-315e-449f-b20a-b7c889c6bf69",
-    "type": "feature",
-    "description": "Marked SearchQuickResponses API as readonly.",
-    "modules": [
-        "service/qconnect"
-    ]
-}

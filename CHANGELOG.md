@@ -1,3 +1,15 @@
+# Release (2024-01-05)
+
+## General Highlights
+* **Feature**: Support smithy sigv4a trait for codegen.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.27.9](service/kms/CHANGELOG.md#v1279-2024-01-05)
+  * **Documentation**: Documentation updates for AWS Key Management Service (KMS).
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.15.6](service/redshiftserverless/CHANGELOG.md#v1156-2024-01-05)
+  * **Documentation**: use_fips_ssl and require_ssl parameter support for Workgroup, UpdateWorkgroup, and CreateWorkgroup
+
 # Release (2024-01-04)
 
 ## General Highlights
