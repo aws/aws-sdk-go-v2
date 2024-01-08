@@ -1,3 +1,13 @@
+# Release (2024-01-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.27.0](service/codebuild/CHANGELOG.md#v1270-2024-01-08)
+  * **Feature**: Aws CodeBuild now supports new compute type BUILD_GENERAL1_XLARGE
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.143.0](service/ec2/CHANGELOG.md#v11430-2024-01-08)
+  * **Feature**: Amazon EC2 R7iz bare metal instances are powered by custom 4th generation Intel Xeon Scalable processors.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.25.0](service/route53resolver/CHANGELOG.md#v1250-2024-01-08)
+  * **Feature**: This release adds support for query type configuration on firewall rules that enables customers for granular action (ALLOW, ALERT, BLOCK) by DNS query type.
+
 # Release (2024-01-05)
 
 ## General Highlights

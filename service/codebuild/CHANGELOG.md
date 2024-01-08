@@ -1,3 +1,7 @@
+# v1.27.0 (2024-01-08)
+
+* **Feature**: Aws CodeBuild now supports new compute type BUILD_GENERAL1_XLARGE
+
 # v1.26.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

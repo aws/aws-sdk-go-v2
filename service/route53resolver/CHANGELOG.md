@@ -1,3 +1,7 @@
+# v1.25.0 (2024-01-08)
+
+* **Feature**: This release adds support for query type configuration on firewall rules that enables customers for granular action (ALLOW, ALERT, BLOCK) by DNS query type.
+
 # v1.24.2 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

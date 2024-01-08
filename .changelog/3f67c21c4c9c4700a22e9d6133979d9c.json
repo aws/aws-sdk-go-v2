@@ -1,8 +1,0 @@
-{
-    "id": "3f67c21c-4c9c-4700-a22e-9d6133979d9c",
-    "type": "feature",
-    "description": "Amazon EC2 R7iz bare metal instances are powered by custom 4th generation Intel Xeon Scalable processors.",
-    "modules": [
-        "service/ec2"
-    ]
-}
