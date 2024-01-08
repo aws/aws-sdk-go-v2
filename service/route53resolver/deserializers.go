@@ -9702,6 +9702,15 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				sv.Priority = ptr.Int32(int32(i64))
 			}
 
+		case "Qtype":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Qtype to be of type string, got %T instead", value)
+				}
+				sv.Qtype = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

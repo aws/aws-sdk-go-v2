@@ -1,0 +1,8 @@
+{
+    "id": "c5190839-e343-4a6e-a239-bfaf925e4419",
+    "type": "feature",
+    "description": "This release adds support for query type configuration on firewall rules that enables customers for granular action (ALLOW, ALERT, BLOCK) by DNS query type.",
+    "modules": [
+        "service/route53resolver"
+    ]
+}

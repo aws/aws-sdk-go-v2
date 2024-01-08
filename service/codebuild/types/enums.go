@@ -227,6 +227,7 @@ const (
 	ComputeTypeBuildGeneral1Small   ComputeType = "BUILD_GENERAL1_SMALL"
 	ComputeTypeBuildGeneral1Medium  ComputeType = "BUILD_GENERAL1_MEDIUM"
 	ComputeTypeBuildGeneral1Large   ComputeType = "BUILD_GENERAL1_LARGE"
+	ComputeTypeBuildGeneral1Xlarge  ComputeType = "BUILD_GENERAL1_XLARGE"
 	ComputeTypeBuildGeneral12xlarge ComputeType = "BUILD_GENERAL1_2XLARGE"
 	ComputeTypeBuildLambda1gb       ComputeType = "BUILD_LAMBDA_1GB"
 	ComputeTypeBuildLambda2gb       ComputeType = "BUILD_LAMBDA_2GB"
@@ -243,6 +244,7 @@ func (ComputeType) Values() []ComputeType {
 		"BUILD_GENERAL1_SMALL",
 		"BUILD_GENERAL1_MEDIUM",
 		"BUILD_GENERAL1_LARGE",
+		"BUILD_GENERAL1_XLARGE",
 		"BUILD_GENERAL1_2XLARGE",
 		"BUILD_LAMBDA_1GB",
 		"BUILD_LAMBDA_2GB",

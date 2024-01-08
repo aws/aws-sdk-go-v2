@@ -1180,6 +1180,8 @@ type ProjectEnvironment struct {
 	//   - BUILD_GENERAL1_MEDIUM : Use up to 7 GB memory and 4 vCPUs for builds.
 	//   - BUILD_GENERAL1_LARGE : Use up to 16 GB memory and 8 vCPUs for builds,
 	//   depending on your environment type.
+	//   - BUILD_GENERAL1_XLARGE : Use up to 70 GB memory and 36 vCPUs for builds,
+	//   depending on your environment type.
 	//   - BUILD_GENERAL1_2XLARGE : Use up to 145 GB memory, 72 vCPUs, and 824 GB of
 	//   SSD storage for builds. This compute type supports Docker images up to 100 GB
 	//   uncompressed.

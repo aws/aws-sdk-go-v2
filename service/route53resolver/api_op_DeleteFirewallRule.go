@@ -41,6 +41,23 @@ type DeleteFirewallRuleInput struct {
 	// This member is required.
 	FirewallRuleGroupId *string
 
+	// The DNS query type that the rule you are deleting evaluates. Allowed values
+	// are;
+	//   - A: Returns an IPv4 address.
+	//   - AAAA: Returns an Ipv6 address.
+	//   - CAA: Restricts CAs that can create SSL/TLS certifications for the domain.
+	//   - CNAME: Returns another domain name.
+	//   - DS: Record that identifies the DNSSEC signing key of a delegated zone.
+	//   - MX: Specifies mail servers.
+	//   - NAPTR: Regular-expression-based rewriting of domain names.
+	//   - NS: Authoritative name servers.
+	//   - PTR: Maps an IP address to a domain name.
+	//   - SOA: Start of authority record for the zone.
+	//   - SPF: Lists the servers authorized to send emails from a domain.
+	//   - SRV: Application specific values that identify servers.
+	//   - TXT: Verifies email senders and application-specific values.
+	Qtype *string
+
 	noSmithyDocumentSerde
 }
 

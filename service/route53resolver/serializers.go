@@ -4231,6 +4231,11 @@ func awsAwsjson11_serializeOpDocumentCreateFirewallRuleInput(v *CreateFirewallRu
 		ok.Integer(*v.Priority)
 	}
 
+	if v.Qtype != nil {
+		ok := object.Key("Qtype")
+		ok.String(*v.Qtype)
+	}
+
 	return nil
 }
 
@@ -4449,6 +4454,11 @@ func awsAwsjson11_serializeOpDocumentDeleteFirewallRuleInput(v *DeleteFirewallRu
 	if v.FirewallRuleGroupId != nil {
 		ok := object.Key("FirewallRuleGroupId")
 		ok.String(*v.FirewallRuleGroupId)
+	}
+
+	if v.Qtype != nil {
+		ok := object.Key("Qtype")
+		ok.String(*v.Qtype)
 	}
 
 	return nil
@@ -5362,6 +5372,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFirewallRuleInput(v *UpdateFirewallRu
 	if v.Priority != nil {
 		ok := object.Key("Priority")
 		ok.Integer(*v.Priority)
+	}
+
+	if v.Qtype != nil {
+		ok := object.Key("Qtype")
+		ok.String(*v.Qtype)
 	}
 
 	return nil

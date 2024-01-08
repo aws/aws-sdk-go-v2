@@ -1,0 +1,8 @@
+{
+    "id": "a9071db9-6954-4974-aeaf-296cabe91d93",
+    "type": "feature",
+    "description": "Aws CodeBuild now supports new compute type BUILD_GENERAL1_XLARGE",
+    "modules": [
+        "service/codebuild"
+    ]
+}
