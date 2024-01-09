@@ -51,6 +51,7 @@ tasks["smithyBuildJar"].enabled = false
 
 tasks.create<SmithyBuild>("buildSdk") {
     addRuntimeClasspath = true
+    allowUnknownTraits = true
 }
 
 // Generates a smithy-build.json file by creating a new projection for every
