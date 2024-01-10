@@ -1,8 +1,0 @@
-{
-    "id": "fba8ba1d-a951-4f5a-84d3-b282cc224228",
-    "type": "feature",
-    "description": "Add support for account level subscription filter policies to PutAccountPolicy, DescribeAccountPolicies, and DeleteAccountPolicy APIs. Additionally, PutAccountPolicy has been modified with new optional \"selectionCriteria\" parameter for resource selection.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

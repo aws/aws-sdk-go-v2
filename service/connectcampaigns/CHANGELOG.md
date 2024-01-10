@@ -1,3 +1,7 @@
+# v1.8.0 (2024-01-10)
+
+* **Feature**: Minor pattern updates for Campaign and Dial Request API fields.
+
 # v1.7.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

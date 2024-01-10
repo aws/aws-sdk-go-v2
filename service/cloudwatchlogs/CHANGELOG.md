@@ -1,3 +1,7 @@
+# v1.31.0 (2024-01-10)
+
+* **Feature**: Add support for account level subscription filter policies to PutAccountPolicy, DescribeAccountPolicies, and DeleteAccountPolicy APIs. Additionally, PutAccountPolicy has been modified with new optional "selectionCriteria" parameter for resource selection.
+
 # v1.30.2 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

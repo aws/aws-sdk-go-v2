@@ -1,8 +1,0 @@
-{
-    "id": "802192ca-7509-40a3-869e-072182074594",
-    "type": "feature",
-    "description": "Minor pattern updates for Campaign and Dial Request API fields.",
-    "modules": [
-        "service/connectcampaigns"
-    ]
-}

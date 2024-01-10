@@ -1,3 +1,7 @@
+# v1.37.0 (2024-01-10)
+
+* **Feature**: Route53 now supports geoproximity routing in AWS regions
+
 # v1.36.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

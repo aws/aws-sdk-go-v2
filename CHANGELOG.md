@@ -1,3 +1,21 @@
+# Release (2024-01-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.31.0](service/cloudwatchlogs/CHANGELOG.md#v1310-2024-01-10)
+  * **Feature**: Add support for account level subscription filter policies to PutAccountPolicy, DescribeAccountPolicies, and DeleteAccountPolicy APIs. Additionally, PutAccountPolicy has been modified with new optional "selectionCriteria" parameter for resource selection.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.8.0](service/connectcampaigns/CHANGELOG.md#v180-2024-01-10)
+  * **Feature**: Minor pattern updates for Campaign and Dial Request API fields.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.35.0](service/location/CHANGELOG.md#v1350-2024-01-10)
+  * **Feature**: This release adds API support for custom layers for the maps service APIs: CreateMap, UpdateMap, DescribeMap.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.3.0](service/qconnect/CHANGELOG.md#v130-2024-01-10)
+  * **Feature**: QueryAssistant and GetRecommendations will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024 you will need to create a new Assistant in the Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.15.7](service/redshiftserverless/CHANGELOG.md#v1157-2024-01-10)
+  * **Documentation**: Updates to ConfigParameter for RSS workgroup, removal of use_fips_ssl
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.37.0](service/route53/CHANGELOG.md#v1370-2024-01-10)
+  * **Feature**: Route53 now supports geoproximity routing in AWS regions
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.21.0](service/wisdom/CHANGELOG.md#v1210-2024-01-10)
+  * **Feature**: QueryAssistant and GetRecommendations will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024 you will need to create a new Assistant in the Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.
+
 # Release (2024-01-08)
 
 ## Module Highlights
