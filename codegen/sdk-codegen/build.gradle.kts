@@ -39,7 +39,9 @@ plugins {
 }
 
 dependencies {
+    val smithyVersion: String by project
     implementation(project(":smithy-aws-go-codegen"))
+    implementation("software.amazon.smithy:smithy-smoke-test-traits:$smithyVersion")
 }
 
 // This project doesn't produce a JAR.
