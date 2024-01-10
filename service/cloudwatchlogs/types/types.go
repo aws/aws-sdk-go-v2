@@ -28,6 +28,9 @@ type AccountPolicy struct {
 	// The scope of the account policy.
 	Scope Scope
 
+	// The log group selection criteria for this subscription filter policy.
+	SelectionCriteria *string
+
 	noSmithyDocumentSerde
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "a46b349f-2e29-4908-a39a-8c2b2a35f1f3",
+    "type": "feature",
+    "description": "This release adds API support for custom layers for the maps service APIs: CreateMap, UpdateMap, DescribeMap.",
+    "modules": [
+        "service/location"
+    ]
+}

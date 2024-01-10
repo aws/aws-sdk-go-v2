@@ -18,6 +18,11 @@ import (
 // Short poll is the default behavior and only returns recommendations already
 // available. To perform a manual query against an assistant, use QueryAssistant (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_QueryAssistant.html)
 // .
+//
+// Deprecated: GetRecommendations API will be discontinued starting June 1, 2024.
+// To receive generative responses after March 1, 2024 you will need to create a
+// new Assistant in the Connect console and integrate the Amazon Q in Connect
+// JavaScript library (amazon-q-connectjs) into your applications.
 func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendationsInput, optFns ...func(*Options)) (*GetRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetRecommendationsInput{}

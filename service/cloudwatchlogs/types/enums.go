@@ -220,7 +220,8 @@ type PolicyType string
 
 // Enum values for PolicyType
 const (
-	PolicyTypeDataProtectionPolicy PolicyType = "DATA_PROTECTION_POLICY"
+	PolicyTypeDataProtectionPolicy     PolicyType = "DATA_PROTECTION_POLICY"
+	PolicyTypeSubscriptionFilterPolicy PolicyType = "SUBSCRIPTION_FILTER_POLICY"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -229,6 +230,7 @@ const (
 func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"DATA_PROTECTION_POLICY",
+		"SUBSCRIPTION_FILTER_POLICY",
 	}
 }
 

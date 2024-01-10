@@ -5377,6 +5377,17 @@ func awsRestjson1_serializeDocumentCountryCodeList(v []string, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomLayerList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDataSourceConfiguration(v *types.DataSourceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5541,6 +5552,13 @@ func awsRestjson1_serializeDocumentMapConfiguration(v *types.MapConfiguration, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomLayers != nil {
+		ok := object.Key("CustomLayers")
+		if err := awsRestjson1_serializeDocumentCustomLayerList(v.CustomLayers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PoliticalView != nil {
 		ok := object.Key("PoliticalView")
 		ok.String(*v.PoliticalView)
@@ -5557,6 +5575,13 @@ func awsRestjson1_serializeDocumentMapConfiguration(v *types.MapConfiguration, v
 func awsRestjson1_serializeDocumentMapConfigurationUpdate(v *types.MapConfigurationUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomLayers != nil {
+		ok := object.Key("CustomLayers")
+		if err := awsRestjson1_serializeDocumentCustomLayerList(v.CustomLayers, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.PoliticalView != nil {
 		ok := object.Key("PoliticalView")

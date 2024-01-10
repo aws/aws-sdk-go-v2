@@ -46,7 +46,7 @@ type GetDNSSECOutput struct {
 	// This member is required.
 	KeySigningKeys []types.KeySigningKey
 
-	// A string repesenting the status of DNSSEC.
+	// A string representing the status of DNSSEC.
 	//
 	// This member is required.
 	Status *types.DNSSECStatus

@@ -56,7 +56,7 @@ type GetGeoLocationInput struct {
 
 	// Amazon Route 53 uses the two-letter country codes that are specified in ISO
 	// standard 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) .
-	// Route 53 also supports the contry code UA forr Ukraine.
+	// Route 53 also supports the country code UA for Ukraine.
 	CountryCode *string
 
 	// The code for the subdivision, such as a particular state within the United

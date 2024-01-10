@@ -9680,6 +9680,15 @@ func awsAwsjson11_deserializeDocumentAccountPolicy(v **types.AccountPolicy, valu
 				sv.Scope = types.Scope(jtv)
 			}
 
+		case "selectionCriteria":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SelectionCriteria to be of type string, got %T instead", value)
+				}
+				sv.SelectionCriteria = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

@@ -1,0 +1,8 @@
+{
+    "id": "1e71c55a-cef6-4047-9543-9ce5bee2debb",
+    "type": "documentation",
+    "description": "Updates to ConfigParameter for RSS workgroup, removal of use_fips_ssl",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

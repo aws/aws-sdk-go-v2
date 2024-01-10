@@ -231,7 +231,7 @@ type AliasTarget struct {
 	// Specify the hosted zone ID for the region that you created the environment in.
 	// The environment must have a regionalized subdomain. For a list of regions and
 	// the corresponding hosted zone IDs, see Elastic Beanstalk endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html)
-	// in the the Amazon Web Services General Reference. ELB load balancer Specify the
+	// in the Amazon Web Services General Reference. ELB load balancer Specify the
 	// value of the hosted zone ID for the load balancer. Use the following methods to
 	// get the hosted zone ID:
 	//   - Elastic Load Balancing endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/elb.html)
@@ -487,6 +487,24 @@ type CollectionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A complex type that lists the coordinates for a geoproximity resource record.
+type Coordinates struct {
+
+	// Specifies a coordinate of the north–south position of a geographic point on the
+	// surface of the Earth (-90 - 90).
+	//
+	// This member is required.
+	Latitude *string
+
+	// Specifies a coordinate of the east–west position of a geographic point on the
+	// surface of the Earth (-180 - 180).
+	//
+	// This member is required.
+	Longitude *string
+
+	noSmithyDocumentSerde
+}
+
 // A complex type that lists the name servers in a delegation set, as well as the
 // CallerReference and the ID for the delegation set.
 type DelegationSet struct {
@@ -526,7 +544,7 @@ type Dimension struct {
 	noSmithyDocumentSerde
 }
 
-// A string repesenting the status of DNSSEC signing.
+// A string representing the status of DNSSEC signing.
 type DNSSECStatus struct {
 
 	// A string that represents the current hosted zone signing status. Status can
@@ -569,7 +587,7 @@ type GeoLocation struct {
 	// For geolocation resource record sets, the two-letter code for a country. Amazon
 	// Route 53 uses the two-letter country codes that are specified in ISO standard
 	// 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) . Route 53
-	// also supports the contry code UA forr Ukraine.
+	// also supports the country code UA for Ukraine.
 	CountryCode *string
 
 	// For geolocation resource record sets, the two-letter code for a state of the
@@ -610,6 +628,45 @@ type GeoLocationDetails struct {
 	// The full name of the subdivision. Route 53 currently supports only states in
 	// the United States.
 	SubdivisionName *string
+
+	noSmithyDocumentSerde
+}
+
+// (Resource record sets only): A complex type that lets you control how Amazon
+// Route 53 responds to DNS queries based on the geographic origin of the query and
+// your resources. Only one of , LocalZoneGroup , Coordinates , or Amazon Web
+// ServicesRegion is allowed per request at a time. For more information about
+// geoproximity routing, see Geoproximity routing (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html)
+// in the Amazon Route 53 Developer Guide.
+type GeoProximityLocation struct {
+
+	// The Amazon Web Services Region the resource you are directing DNS traffic to,
+	// is in.
+	AWSRegion *string
+
+	// The bias increases or decreases the size of the geographic region from which
+	// Route 53 routes traffic to a resource. To use Bias to change the size of the
+	// geographic region, specify the applicable value for the bias:
+	//   - To expand the size of the geographic region from which Route 53 routes
+	//   traffic to a resource, specify a positive integer from 1 to 99 for the bias.
+	//   Route 53 shrinks the size of adjacent regions.
+	//   - To shrink the size of the geographic region from which Route 53 routes
+	//   traffic to a resource, specify a negative bias of -1 to -99. Route 53 expands
+	//   the size of adjacent regions.
+	Bias *int32
+
+	// Contains the longitude and latitude for a geographic region.
+	Coordinates *Coordinates
+
+	// Specifies an Amazon Web Services Local Zone Group. A local Zone Group is
+	// usually the Local Zone code without the ending character. For example, if the
+	// Local Zone is us-east-1-bue-1a the Local Zone Group is us-east-1-bue-1 . You can
+	// identify the Local Zones Group for a specific Local Zone by using the
+	// describe-availability-zones (https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-availability-zones.html)
+	// CLI command: This command returns: "GroupName": "us-west-2-den-1" , specifying
+	// that the Local Zone us-west-2-den-1a belongs to the Local Zone Group
+	// us-west-2-den-1 .
+	LocalZoneGroup *string
 
 	noSmithyDocumentSerde
 }
@@ -684,7 +741,7 @@ type HealthCheckConfig struct {
 	//   checks, Route 53 adds up the number of health checks that Route 53 health
 	//   checkers consider to be healthy and compares that number with the value of
 	//   HealthThreshold .
-	//   - RECOVERY_CONTROL: The health check is assocated with a Route53 Application
+	//   - RECOVERY_CONTROL: The health check is associated with a Route53 Application
 	//   Recovery Controller routing control. If the routing control state is ON , the
 	//   health check is considered healthy. If the state is OFF , the health check is
 	//   considered unhealthy.
@@ -1320,30 +1377,33 @@ type ResourceRecordSet struct {
 	// Amazon Route 53 responds to DNS queries based on the geographic origin of the
 	// query. For example, if you want all queries from Africa to be routed to a web
 	// server with an IP address of 192.0.2.111 , create a resource record set with a
-	// Type of A and a ContinentCode of AF . Although creating geolocation and
-	// geolocation alias resource record sets in a private hosted zone is allowed, it's
-	// not supported. If you create separate resource record sets for overlapping
-	// geographic regions (for example, one resource record set for a continent and one
-	// for a country on the same continent), priority goes to the smallest geographic
-	// region. This allows you to route most queries for a continent to one resource
-	// and to route queries for a country on that continent to a different resource.
-	// You can't create two geolocation resource record sets that specify the same
-	// geographic location. The value * in the CountryCode element matches all
-	// geographic locations that aren't specified in other geolocation resource record
-	// sets that have the same values for the Name and Type elements. Geolocation
-	// works by mapping IP addresses to locations. However, some IP addresses aren't
-	// mapped to geographic locations, so even if you create geolocation resource
-	// record sets that cover all seven continents, Route 53 will receive some DNS
-	// queries from locations that it can't identify. We recommend that you create a
-	// resource record set for which the value of CountryCode is * . Two groups of
-	// queries are routed to the resource that you specify in this record: queries that
-	// come from locations for which you haven't created geolocation resource record
-	// sets and queries from IP addresses that aren't mapped to a location. If you
-	// don't create a * resource record set, Route 53 returns a "no answer" response
-	// for queries from those locations. You can't create non-geolocation resource
-	// record sets that have the same values for the Name and Type elements as
-	// geolocation resource record sets.
+	// Type of A and a ContinentCode of AF . If you create separate resource record
+	// sets for overlapping geographic regions (for example, one resource record set
+	// for a continent and one for a country on the same continent), priority goes to
+	// the smallest geographic region. This allows you to route most queries for a
+	// continent to one resource and to route queries for a country on that continent
+	// to a different resource. You can't create two geolocation resource record sets
+	// that specify the same geographic location. The value * in the CountryCode
+	// element matches all geographic locations that aren't specified in other
+	// geolocation resource record sets that have the same values for the Name and Type
+	// elements. Geolocation works by mapping IP addresses to locations. However, some
+	// IP addresses aren't mapped to geographic locations, so even if you create
+	// geolocation resource record sets that cover all seven continents, Route 53 will
+	// receive some DNS queries from locations that it can't identify. We recommend
+	// that you create a resource record set for which the value of CountryCode is * .
+	// Two groups of queries are routed to the resource that you specify in this
+	// record: queries that come from locations for which you haven't created
+	// geolocation resource record sets and queries from IP addresses that aren't
+	// mapped to a location. If you don't create a * resource record set, Route 53
+	// returns a "no answer" response for queries from those locations. You can't
+	// create non-geolocation resource record sets that have the same values for the
+	// Name and Type elements as geolocation resource record sets.
 	GeoLocation *GeoLocation
+
+	// GeoproximityLocation resource record sets only: A complex type that lets you
+	// control how Route 53 responds to DNS queries based on the geographic origin of
+	// the query and your resources.
+	GeoProximityLocation *GeoProximityLocation
 
 	// If you want Amazon Route 53 to return this resource record set in response to a
 	// DNS query only when the status of a health check is healthy, include the

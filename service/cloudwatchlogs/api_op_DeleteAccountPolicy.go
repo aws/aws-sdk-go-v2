@@ -12,9 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a CloudWatch Logs account policy. To use this operation, you must be
-// signed on with the logs:DeleteDataProtectionPolicy and logs:DeleteAccountPolicy
-// permissions.
+// Deletes a CloudWatch Logs account policy. This stops the policy from applying
+// to all log groups or a subset of log groups in the account. Log-group level
+// policies will still be in effect. To use this operation, you must be signed on
+// with the correct permissions depending on the type of policy that you are
+// deleting.
+//   - To delete a data protection policy, you must have the
+//     logs:DeleteDataProtectionPolicy and logs:DeleteAccountPolicy permissions.
+//   - To delete a subscription filter policy, you must have the
+//     logs:DeleteSubscriptionFilter and logs:DeleteAccountPolicy permissions.
 func (c *Client) DeleteAccountPolicy(ctx context.Context, params *DeleteAccountPolicyInput, optFns ...func(*Options)) (*DeleteAccountPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteAccountPolicyInput{}
@@ -37,8 +43,7 @@ type DeleteAccountPolicyInput struct {
 	// This member is required.
 	PolicyName *string
 
-	// The type of policy to delete. Currently, the only valid value is
-	// DATA_PROTECTION_POLICY .
+	// The type of policy to delete.
 	//
 	// This member is required.
 	PolicyType types.PolicyType

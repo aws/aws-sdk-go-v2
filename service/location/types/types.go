@@ -979,6 +979,13 @@ type MapConfiguration struct {
 	// This member is required.
 	Style *string
 
+	// Specifies the custom layers for the style. Leave unset to not enable any custom
+	// layer, or, for styles that support custom layers, you can enable layer(s), such
+	// as POI layer for the VectorEsriNavigation style. Default is unset . Not all map
+	// resources or styles support custom layers. See Custom Layers for more
+	// information.
+	CustomLayers []string
+
 	// Specifies the political view for the style. Leave unset to not use a political
 	// view, or, for styles that support specific political views, you can choose a
 	// view, such as IND for the Indian view. Default is unset. Not all map resources
@@ -991,6 +998,13 @@ type MapConfiguration struct {
 
 // Specifies the political view for the style.
 type MapConfigurationUpdate struct {
+
+	// Specifies the custom layers for the style. Leave unset to not enable any custom
+	// layer, or, for styles that support custom layers, you can enable layer(s), such
+	// as POI layer for the VectorEsriNavigation style. Default is unset . Not all map
+	// resources or styles support custom layers. See Custom Layers for more
+	// information.
+	CustomLayers []string
 
 	// Specifies the political view for the style. Set to an empty string to not use a
 	// political view, or, for styles that support specific political views, you can

@@ -1,0 +1,8 @@
+{
+    "id": "c7c0b9e6-b5e2-4201-be92-2aa8ec8991f2",
+    "type": "feature",
+    "description": "Route53 now supports geoproximity routing in AWS regions",
+    "modules": [
+        "service/route53"
+    ]
+}
