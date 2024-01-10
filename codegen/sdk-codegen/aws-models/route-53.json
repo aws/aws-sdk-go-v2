@@ -1625,6 +1625,15 @@
                 }
             }
         },
+        "com.amazonaws.route53#AWSRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.route53#AccountLimit": {
             "type": "structure",
             "members": {
@@ -1800,7 +1809,7 @@
                 "HostedZoneId": {
                     "target": "com.amazonaws.route53#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <i>Alias resource records sets only</i>: The value used depends on where\n\t\t\tyou want to route traffic:</p>\n         <dl>\n            <dt>Amazon API Gateway custom regional APIs and edge-optimized APIs</dt>\n            <dd>\n               <p>Specify the hosted zone ID for your API. You can get the applicable value\n\t\t\t\t\t\tusing the CLI command <a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html\">get-domain-names</a>:</p>\n               <ul>\n                  <li>\n                     <p>For regional APIs, specify the value of\n\t\t\t\t\t\t\t\t\t<code>regionalHostedZoneId</code>.</p>\n                  </li>\n                  <li>\n                     <p>For edge-optimized APIs, specify the value of\n\t\t\t\t\t\t\t\t\t<code>distributionHostedZoneId</code>.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon Virtual Private Cloud interface VPC endpoint</dt>\n            <dd>\n               <p>Specify the hosted zone ID for your interface endpoint. You can get the\n\t\t\t\t\t\tvalue of <code>HostedZoneId</code> using the CLI command\n\t\t\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html\">describe-vpc-endpoints</a>.</p>\n            </dd>\n            <dt>CloudFront distribution</dt>\n            <dd>\n               <p>Specify <code>Z2FDTNDATAQYW2</code>.</p>\n               <note>\n                  <p>Alias resource record sets for CloudFront can't be created in a\n\t\t\t\t\t\t\tprivate zone.</p>\n               </note>\n            </dd>\n            <dt>Elastic Beanstalk environment</dt>\n            <dd>\n               <p>Specify the hosted zone ID for the region that you created the environment\n\t\t\t\t\t\tin. The environment must have a regionalized subdomain. For a list of\n\t\t\t\t\t\tregions and the corresponding hosted zone IDs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html\">Elastic Beanstalk endpoints and quotas</a> in the the\n\t\t\t\t\t\t\t<i>Amazon Web Services General Reference</i>.</p>\n            </dd>\n            <dt>ELB load balancer</dt>\n            <dd>\n               <p>Specify the value of the hosted zone ID for the load balancer. Use the\n\t\t\t\t\t\tfollowing methods to get the hosted zone ID:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/elb.html\">Elastic Load Balancing endpoints and quotas</a> topic in\n\t\t\t\t\t\t\t\tthe <i>Amazon Web Services General Reference</i>: Use\n\t\t\t\t\t\t\t\tthe value that corresponds with the region that you created your\n\t\t\t\t\t\t\t\tload balancer in. Note that there are separate columns for\n\t\t\t\t\t\t\t\tApplication and Classic Load Balancers and for Network Load\n\t\t\t\t\t\t\t\tBalancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Amazon Web Services Management Console</b>: Go to the\n\t\t\t\t\t\t\t\tAmazon EC2 page, choose <b>Load\n\t\t\t\t\t\t\t\t\tBalancers</b> in the navigation pane, select the load\n\t\t\t\t\t\t\t\tbalancer, and get the value of the <b>Hosted\n\t\t\t\t\t\t\t\t\tzone</b> field on the <b>Description</b> tab.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Elastic Load Balancing API</b>: Use\n\t\t\t\t\t\t\t\t\t<code>DescribeLoadBalancers</code> to get the applicable value.\n\t\t\t\t\t\t\t\tFor more information, see the applicable guide:</p>\n                     <ul>\n                        <li>\n                           <p>Classic Load Balancers: Use <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> to get the value of\n\t\t\t\t\t\t\t\t\t\t\t<code>CanonicalHostedZoneNameId</code>.</p>\n                        </li>\n                        <li>\n                           <p>Application and Network Load Balancers: Use <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> to get the value of\n\t\t\t\t\t\t\t\t\t\t\t<code>CanonicalHostedZoneId</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CLI</b>: Use\n\t\t\t\t\t\t\t\t\t<code>describe-load-balancers</code> to get the applicable\n\t\t\t\t\t\t\t\tvalue. For more information, see the applicable guide:</p>\n                     <ul>\n                        <li>\n                           <p>Classic Load Balancers: Use <a href=\"http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html\">describe-load-balancers</a> to get the value of\n\t\t\t\t\t\t\t\t\t\t\t<code>CanonicalHostedZoneNameId</code>.</p>\n                        </li>\n                        <li>\n                           <p>Application and Network Load Balancers: Use <a href=\"http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html\">describe-load-balancers</a> to get the value of\n\t\t\t\t\t\t\t\t\t\t\t<code>CanonicalHostedZoneId</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Global Accelerator accelerator</dt>\n            <dd>\n               <p>Specify <code>Z2BJ6XQ5FK7U4H</code>.</p>\n            </dd>\n            <dt>An Amazon S3 bucket configured as a static website</dt>\n            <dd>\n               <p>Specify the hosted zone ID for the region that you created the bucket in.\n\t\t\t\t\t\tFor more information about valid values, see the table <a href=\"https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints\">Amazon S3\n\t\t\t\t\t\t\tWebsite Endpoints</a> in the <i>Amazon Web Services General\n\t\t\t\t\t\t\tReference</i>.</p>\n            </dd>\n            <dt>Another Route 53 resource record set in your hosted zone</dt>\n            <dd>\n               <p>Specify the hosted zone ID of your hosted zone. (An alias resource record\n\t\t\t\t\t\tset can't reference a resource record set in a different hosted\n\t\t\t\t\t\tzone.)</p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>\n            <i>Alias resource records sets only</i>: The value used depends on where\n\t\t\tyou want to route traffic:</p>\n         <dl>\n            <dt>Amazon API Gateway custom regional APIs and edge-optimized APIs</dt>\n            <dd>\n               <p>Specify the hosted zone ID for your API. You can get the applicable value\n\t\t\t\t\t\tusing the CLI command <a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html\">get-domain-names</a>:</p>\n               <ul>\n                  <li>\n                     <p>For regional APIs, specify the value of\n\t\t\t\t\t\t\t\t\t<code>regionalHostedZoneId</code>.</p>\n                  </li>\n                  <li>\n                     <p>For edge-optimized APIs, specify the value of\n\t\t\t\t\t\t\t\t\t<code>distributionHostedZoneId</code>.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon Virtual Private Cloud interface VPC endpoint</dt>\n            <dd>\n               <p>Specify the hosted zone ID for your interface endpoint. You can get the\n\t\t\t\t\t\tvalue of <code>HostedZoneId</code> using the CLI command\n\t\t\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html\">describe-vpc-endpoints</a>.</p>\n            </dd>\n            <dt>CloudFront distribution</dt>\n            <dd>\n               <p>Specify <code>Z2FDTNDATAQYW2</code>.</p>\n               <note>\n                  <p>Alias resource record sets for CloudFront can't be created in a\n\t\t\t\t\t\t\tprivate zone.</p>\n               </note>\n            </dd>\n            <dt>Elastic Beanstalk environment</dt>\n            <dd>\n               <p>Specify the hosted zone ID for the region that you created the environment in. The\n\t\t\t\t\t\tenvironment must have a regionalized subdomain. For a list of regions and\n\t\t\t\t\t\tthe corresponding hosted zone IDs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html\">Elastic Beanstalk\n\t\t\t\t\t\t\tendpoints and quotas</a> in the <i>Amazon Web Services\n\t\t\t\t\t\t\tGeneral Reference</i>.</p>\n            </dd>\n            <dt>ELB load balancer</dt>\n            <dd>\n               <p>Specify the value of the hosted zone ID for the load balancer. Use the\n\t\t\t\t\t\tfollowing methods to get the hosted zone ID:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/elb.html\">Elastic Load Balancing endpoints and quotas</a> topic in\n\t\t\t\t\t\t\t\tthe <i>Amazon Web Services General Reference</i>: Use\n\t\t\t\t\t\t\t\tthe value that corresponds with the region that you created your\n\t\t\t\t\t\t\t\tload balancer in. Note that there are separate columns for\n\t\t\t\t\t\t\t\tApplication and Classic Load Balancers and for Network Load\n\t\t\t\t\t\t\t\tBalancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Amazon Web Services Management Console</b>: Go to the\n\t\t\t\t\t\t\t\tAmazon EC2 page, choose <b>Load\n\t\t\t\t\t\t\t\t\tBalancers</b> in the navigation pane, select the load\n\t\t\t\t\t\t\t\tbalancer, and get the value of the <b>Hosted\n\t\t\t\t\t\t\t\t\tzone</b> field on the <b>Description</b> tab.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Elastic Load Balancing API</b>: Use\n\t\t\t\t\t\t\t\t\t<code>DescribeLoadBalancers</code> to get the applicable value.\n\t\t\t\t\t\t\t\tFor more information, see the applicable guide:</p>\n                     <ul>\n                        <li>\n                           <p>Classic Load Balancers: Use <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> to get the value of\n\t\t\t\t\t\t\t\t\t\t\t<code>CanonicalHostedZoneNameId</code>.</p>\n                        </li>\n                        <li>\n                           <p>Application and Network Load Balancers: Use <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> to get the value of\n\t\t\t\t\t\t\t\t\t\t\t<code>CanonicalHostedZoneId</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CLI</b>: Use\n\t\t\t\t\t\t\t\t\t<code>describe-load-balancers</code> to get the applicable\n\t\t\t\t\t\t\t\tvalue. For more information, see the applicable guide:</p>\n                     <ul>\n                        <li>\n                           <p>Classic Load Balancers: Use <a href=\"http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html\">describe-load-balancers</a> to get the value of\n\t\t\t\t\t\t\t\t\t\t\t<code>CanonicalHostedZoneNameId</code>.</p>\n                        </li>\n                        <li>\n                           <p>Application and Network Load Balancers: Use <a href=\"http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html\">describe-load-balancers</a> to get the value of\n\t\t\t\t\t\t\t\t\t\t\t<code>CanonicalHostedZoneId</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Global Accelerator accelerator</dt>\n            <dd>\n               <p>Specify <code>Z2BJ6XQ5FK7U4H</code>.</p>\n            </dd>\n            <dt>An Amazon S3 bucket configured as a static website</dt>\n            <dd>\n               <p>Specify the hosted zone ID for the region that you created the bucket in.\n\t\t\t\t\t\tFor more information about valid values, see the table <a href=\"https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints\">Amazon S3\n\t\t\t\t\t\t\tWebsite Endpoints</a> in the <i>Amazon Web Services General\n\t\t\t\t\t\t\tReference</i>.</p>\n            </dd>\n            <dt>Another Route 53 resource record set in your hosted zone</dt>\n            <dd>\n               <p>Specify the hosted zone ID of your hosted zone. (An alias resource record\n\t\t\t\t\t\tset can't reference a resource record set in a different hosted\n\t\t\t\t\t\tzone.)</p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1936,6 +1945,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that contains the response information for the\n\t\t\t\t<code>AssociateVPCWithHostedZone</code> request.</p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53#Bias": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": -99,
+                    "max": 99
+                }
             }
         },
         "com.amazonaws.route53#Change": {
@@ -2184,6 +2202,510 @@
                         "output": {
                             "ChangeInfo": {
                                 "Comment": "Web server for example.com",
+                                "Id": "/change/C2682N5HXP0BZ4",
+                                "Status": "PENDING",
+                                "SubmittedAt": "2017-02-10T01:36:41.958Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create weighted resource record sets",
+                        "documentation": "The following example creates two weighted resource record sets. The resource with a Weight of 100 will get 1/3rd of traffic (100/100+200), and the other resource will get the rest of the traffic for example.com.",
+                        "input": {
+                            "HostedZoneId": "Z3M3LMPEXAMPLE",
+                            "ChangeBatch": {
+                                "Comment": "Web servers for example.com",
+                                "Changes": [
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Seattle data center",
+                                            "Weight": 100,
+                                            "TTL": 60,
+                                            "ResourceRecords": [
+                                                {
+                                                    "Value": "192.0.2.44"
+                                                }
+                                            ],
+                                            "HealthCheckId": "abcdef11-2222-3333-4444-555555fedcba"
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Portland data center",
+                                            "Weight": 200,
+                                            "TTL": 60,
+                                            "ResourceRecords": [
+                                                {
+                                                    "Value": "192.0.2.45"
+                                                }
+                                            ],
+                                            "HealthCheckId": "abcdef66-7777-8888-9999-000000fedcba"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "ChangeInfo": {
+                                "Comment": "Web servers for example.com",
+                                "Id": "/change/C2682N5HXP0BZ4",
+                                "Status": "PENDING",
+                                "SubmittedAt": "2017-02-10T01:36:41.958Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create an alias resource record set",
+                        "documentation": "The following example creates an alias resource record set that routes traffic to a CloudFront distribution.",
+                        "input": {
+                            "HostedZoneId": "Z3M3LMPEXAMPLE",
+                            "ChangeBatch": {
+                                "Comment": "CloudFront distribution for example.com",
+                                "Changes": [
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z2FDTNDATAQYW2",
+                                                "DNSName": "d123rk29d0stfj.cloudfront.net",
+                                                "EvaluateTargetHealth": false
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "ChangeInfo": {
+                                "Comment": "CloudFront distribution for example.com",
+                                "Id": "/change/C2682N5HXP0BZ4",
+                                "Status": "PENDING",
+                                "SubmittedAt": "2017-02-10T01:36:41.958Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create weighted alias resource record sets",
+                        "documentation": "The following example creates two weighted alias resource record sets that route traffic to ELB load balancers. The resource with a Weight of 100 will get 1/3rd of traffic (100/100+200), and the other resource will get the rest of the traffic for example.com.",
+                        "input": {
+                            "HostedZoneId": "Z3M3LMPEXAMPLE",
+                            "ChangeBatch": {
+                                "Comment": "ELB load balancers for example.com",
+                                "Changes": [
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Ohio region",
+                                            "Weight": 100,
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z3AADJGX6KTTL2",
+                                                "DNSName": "example-com-123456789.us-east-2.elb.amazonaws.com ",
+                                                "EvaluateTargetHealth": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Oregon region",
+                                            "Weight": 200,
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z1H1FL5HABSF5",
+                                                "DNSName": "example-com-987654321.us-west-2.elb.amazonaws.com ",
+                                                "EvaluateTargetHealth": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "ChangeInfo": {
+                                "Comment": "ELB load balancers for example.com",
+                                "Id": "/change/C2682N5HXP0BZ4",
+                                "Status": "PENDING",
+                                "SubmittedAt": "2017-02-10T01:36:41.958Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create latency resource record sets",
+                        "documentation": "The following example creates two latency resource record sets that route traffic to EC2 instances. Traffic for example.com is routed either to the Ohio region or the Oregon region, depending on the latency between the user and those regions.",
+                        "input": {
+                            "HostedZoneId": "Z3M3LMPEXAMPLE",
+                            "ChangeBatch": {
+                                "Comment": "EC2 instances for example.com",
+                                "Changes": [
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Ohio region",
+                                            "Region": "us-east-2",
+                                            "TTL": 60,
+                                            "ResourceRecords": [
+                                                {
+                                                    "Value": "192.0.2.44"
+                                                }
+                                            ],
+                                            "HealthCheckId": "abcdef11-2222-3333-4444-555555fedcba"
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Oregon region",
+                                            "Region": "us-west-2",
+                                            "TTL": 60,
+                                            "ResourceRecords": [
+                                                {
+                                                    "Value": "192.0.2.45"
+                                                }
+                                            ],
+                                            "HealthCheckId": "abcdef66-7777-8888-9999-000000fedcba"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "ChangeInfo": {
+                                "Comment": "EC2 instances for example.com",
+                                "Id": "/change/C2682N5HXP0BZ4",
+                                "Status": "PENDING",
+                                "SubmittedAt": "2017-02-10T01:36:41.958Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create latency alias resource record sets",
+                        "documentation": "The following example creates two latency alias resource record sets that route traffic for example.com to ELB load balancers. Requests are routed either to the Ohio region or the Oregon region, depending on the latency between the user and those regions.",
+                        "input": {
+                            "HostedZoneId": "Z3M3LMPEXAMPLE",
+                            "ChangeBatch": {
+                                "Comment": "ELB load balancers for example.com",
+                                "Changes": [
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Ohio region",
+                                            "Region": "us-east-2",
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z3AADJGX6KTTL2",
+                                                "DNSName": "example-com-123456789.us-east-2.elb.amazonaws.com ",
+                                                "EvaluateTargetHealth": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Oregon region",
+                                            "Region": "us-west-2",
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z1H1FL5HABSF5",
+                                                "DNSName": "example-com-987654321.us-west-2.elb.amazonaws.com ",
+                                                "EvaluateTargetHealth": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "ChangeInfo": {
+                                "Comment": "ELB load balancers for example.com",
+                                "Id": "/change/C2682N5HXP0BZ4",
+                                "Status": "PENDING",
+                                "SubmittedAt": "2017-02-10T01:36:41.958Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create failover resource record sets",
+                        "documentation": "The following example creates primary and secondary failover resource record sets that route traffic to EC2 instances. Traffic is generally routed to the primary resource, in the Ohio region. If that resource is unavailable, traffic is routed to the secondary resource, in the Oregon region.",
+                        "input": {
+                            "HostedZoneId": "Z3M3LMPEXAMPLE",
+                            "ChangeBatch": {
+                                "Comment": "Failover configuration for example.com",
+                                "Changes": [
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Ohio region",
+                                            "Failover": "PRIMARY",
+                                            "TTL": 60,
+                                            "ResourceRecords": [
+                                                {
+                                                    "Value": "192.0.2.44"
+                                                }
+                                            ],
+                                            "HealthCheckId": "abcdef11-2222-3333-4444-555555fedcba"
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Oregon region",
+                                            "Failover": "SECONDARY",
+                                            "TTL": 60,
+                                            "ResourceRecords": [
+                                                {
+                                                    "Value": "192.0.2.45"
+                                                }
+                                            ],
+                                            "HealthCheckId": "abcdef66-7777-8888-9999-000000fedcba"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "ChangeInfo": {
+                                "Comment": "Failover configuration for example.com",
+                                "Id": "/change/C2682N5HXP0BZ4",
+                                "Status": "PENDING",
+                                "SubmittedAt": "2017-02-10T01:36:41.958Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create failover alias resource record sets",
+                        "documentation": "The following example creates primary and secondary failover alias resource record sets that route traffic to ELB load balancers. Traffic is generally routed to the primary resource, in the Ohio region. If that resource is unavailable, traffic is routed to the secondary resource, in the Oregon region.",
+                        "input": {
+                            "HostedZoneId": "Z3M3LMPEXAMPLE",
+                            "ChangeBatch": {
+                                "Comment": "Failover alias configuration for example.com",
+                                "Changes": [
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Ohio region",
+                                            "Failover": "PRIMARY",
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z3AADJGX6KTTL2",
+                                                "DNSName": "example-com-123456789.us-east-2.elb.amazonaws.com ",
+                                                "EvaluateTargetHealth": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Oregon region",
+                                            "Failover": "SECONDARY",
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z1H1FL5HABSF5",
+                                                "DNSName": "example-com-987654321.us-west-2.elb.amazonaws.com ",
+                                                "EvaluateTargetHealth": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "ChangeInfo": {
+                                "Comment": "Failover alias configuration for example.com",
+                                "Id": "/change/C2682N5HXP0BZ4",
+                                "Status": "PENDING",
+                                "SubmittedAt": "2017-02-10T01:36:41.958Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create geolocation resource record sets",
+                        "documentation": "The following example creates four geolocation resource record sets that use IPv4 addresses to route traffic to resources such as web servers running on EC2 instances. Traffic is routed to one of four IP addresses, for North America (NA), for South America (SA), for Europe (EU), and for all other locations (*).",
+                        "input": {
+                            "HostedZoneId": "Z3M3LMPEXAMPLE",
+                            "ChangeBatch": {
+                                "Comment": "Geolocation configuration for example.com",
+                                "Changes": [
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "North America",
+                                            "GeoLocation": {
+                                                "ContinentCode": "NA"
+                                            },
+                                            "TTL": 60,
+                                            "ResourceRecords": [
+                                                {
+                                                    "Value": "192.0.2.44"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "South America",
+                                            "GeoLocation": {
+                                                "ContinentCode": "SA"
+                                            },
+                                            "TTL": 60,
+                                            "ResourceRecords": [
+                                                {
+                                                    "Value": "192.0.2.45"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Europe",
+                                            "GeoLocation": {
+                                                "ContinentCode": "EU"
+                                            },
+                                            "TTL": 60,
+                                            "ResourceRecords": [
+                                                {
+                                                    "Value": "192.0.2.46"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Other locations",
+                                            "GeoLocation": {
+                                                "CountryCode": "*"
+                                            },
+                                            "TTL": 60,
+                                            "ResourceRecords": [
+                                                {
+                                                    "Value": "192.0.2.47"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "ChangeInfo": {
+                                "Comment": "Geolocation configuration for example.com",
+                                "Id": "/change/C2682N5HXP0BZ4",
+                                "Status": "PENDING",
+                                "SubmittedAt": "2017-02-10T01:36:41.958Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create geolocation alias resource record sets",
+                        "documentation": "The following example creates four geolocation alias resource record sets that route traffic to ELB load balancers. Traffic is routed to one of four IP addresses, for North America (NA), for South America (SA), for Europe (EU), and for all other locations (*).",
+                        "input": {
+                            "HostedZoneId": "Z3M3LMPEXAMPLE",
+                            "ChangeBatch": {
+                                "Comment": "Geolocation alias configuration for example.com",
+                                "Changes": [
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "North America",
+                                            "GeoLocation": {
+                                                "ContinentCode": "NA"
+                                            },
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z3AADJGX6KTTL2",
+                                                "DNSName": "example-com-123456789.us-east-2.elb.amazonaws.com ",
+                                                "EvaluateTargetHealth": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "South America",
+                                            "GeoLocation": {
+                                                "ContinentCode": "SA"
+                                            },
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z2P70J7HTTTPLU",
+                                                "DNSName": "example-com-234567890.sa-east-1.elb.amazonaws.com ",
+                                                "EvaluateTargetHealth": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Europe",
+                                            "GeoLocation": {
+                                                "ContinentCode": "EU"
+                                            },
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z215JYRZR1TBD5",
+                                                "DNSName": "example-com-234567890.eu-central-1.elb.amazonaws.com ",
+                                                "EvaluateTargetHealth": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Action": "CREATE",
+                                        "ResourceRecordSet": {
+                                            "Name": "example.com",
+                                            "Type": "A",
+                                            "SetIdentifier": "Other locations",
+                                            "GeoLocation": {
+                                                "CountryCode": "*"
+                                            },
+                                            "AliasTarget": {
+                                                "HostedZoneId": "Z1LMS91P8CMLE5",
+                                                "DNSName": "example-com-234567890.ap-southeast-1.elb.amazonaws.com ",
+                                                "EvaluateTargetHealth": true
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "ChangeInfo": {
+                                "Comment": "Geolocation alias configuration for example.com",
                                 "Id": "/change/C2682N5HXP0BZ4",
                                 "Status": "PENDING",
                                 "SubmittedAt": "2017-02-10T01:36:41.958Z"
@@ -2492,7 +3014,7 @@
                 "LocationName": {
                     "target": "com.amazonaws.route53#CidrLocationNameDefaultNotAllowed",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the location that is associated with the CIDR\n\t\t\tcollection.</p>",
+                        "smithy.api#documentation": "<p>Name of the location that is associated with the CIDR collection.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3057,6 +3579,28 @@
                 "smithy.api#documentation": "<p>You tried to update a traffic policy instance by using a traffic policy version that\n\t\t\thas a different DNS type than the current type for the instance. You specified the type\n\t\t\tin the JSON document in the <code>CreateTrafficPolicy</code> or\n\t\t\t\t<code>CreateTrafficPolicyVersion</code>request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.route53#Coordinates": {
+            "type": "structure",
+            "members": {
+                "Latitude": {
+                    "target": "com.amazonaws.route53#Latitude",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies a coordinate of the north–south position of a geographic point on the surface of\n\t\t\tthe Earth (-90 - 90). </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Longitude": {
+                    "target": "com.amazonaws.route53#Longitude",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies a coordinate of the east–west position of a geographic point on the surface of\n\t\t\tthe Earth (-180 - 180). </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tA complex type that lists the coordinates for a geoproximity resource record.\n\t\t</p>"
             }
         },
         "com.amazonaws.route53#CreateCidrCollection": {
@@ -4023,7 +4567,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A string repesenting the status of DNSSEC signing.</p>"
+                "smithy.api#documentation": "<p>A string representing the status of DNSSEC signing.</p>"
             }
         },
         "com.amazonaws.route53#DeactivateKeySigningKey": {
@@ -5102,7 +5646,7 @@
                 "CountryCode": {
                     "target": "com.amazonaws.route53#GeoLocationCountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>For geolocation resource record sets, the two-letter code for a country.</p>\n         <p>Amazon Route 53 uses the two-letter country codes that are specified in <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO standard 3166-1\n\t\t\t\talpha-2</a>.</p>\n         <p>Route 53 also supports the contry code <b>UA</b> forr Ukraine.</p>"
+                        "smithy.api#documentation": "<p>For geolocation resource record sets, the two-letter code for a country.</p>\n         <p>Amazon Route 53 uses the two-letter country codes that are specified in <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO standard 3166-1\n\t\t\t\talpha-2</a>.</p>\n         <p>Route 53 also supports the country code <b>UA</b> for\n\t\t\tUkraine.</p>"
                     }
                 },
                 "SubdivisionCode": {
@@ -5221,6 +5765,38 @@
                     "min": 1,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.route53#GeoProximityLocation": {
+            "type": "structure",
+            "members": {
+                "AWSRegion": {
+                    "target": "com.amazonaws.route53#AWSRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Web Services Region the resource you are directing DNS traffic to, is in. </p>"
+                    }
+                },
+                "LocalZoneGroup": {
+                    "target": "com.amazonaws.route53#LocalZoneGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tSpecifies an Amazon Web Services Local Zone Group.\n\t\t</p>\n         <p>A local Zone Group is usually the Local Zone code without the ending character. For example, \n\t\t\tif the Local Zone is <code>us-east-1-bue-1a</code> the Local Zone Group is <code>us-east-1-bue-1</code>.</p>\n         <p>You can identify the Local Zones Group for a specific Local Zone by using the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-availability-zones.html\">describe-availability-zones</a> CLI command:</p>\n         <p>This command returns: <code>\"GroupName\": \"us-west-2-den-1\"</code>, specifying that the Local Zone <code>us-west-2-den-1a</code> \n\t\t\tbelongs to the Local Zone Group <code>us-west-2-den-1</code>.</p>"
+                    }
+                },
+                "Coordinates": {
+                    "target": "com.amazonaws.route53#Coordinates",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Contains the longitude and latitude for a geographic region. </p>"
+                    }
+                },
+                "Bias": {
+                    "target": "com.amazonaws.route53#Bias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe bias increases or decreases the size of the geographic region from which Route 53 routes traffic to a resource.\n\t\t</p>\n         <p>To use <code>Bias</code> to change the size of the geographic region, specify the \n\t\t\tapplicable value for the bias:</p>\n         <ul>\n            <li>\n               <p>To expand the size of the geographic region from which Route 53 routes traffic to a resource, specify a \n\t\t\t\tpositive integer from 1 to 99 for the bias. Route 53 shrinks the size of adjacent regions. </p>\n            </li>\n            <li>\n               <p>To shrink the size of the geographic region from which Route 53 routes traffic to a resource, specify a \n\t\t\t\tnegative bias of -1 to -99. Route 53 expands the size of adjacent regions. </p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> (Resource record sets only): A complex type that lets you control how Amazon Route 53\n\t\t\tresponds to DNS queries based on the geographic origin of the query and your resources.\n\t\t\tOnly one of , <code>LocalZoneGroup</code>, <code>Coordinates</code>, or <code>Amazon Web ServicesRegion</code> is allowed per request at a time.</p>\n         <p>For more information about geoproximity routing, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html\">Geoproximity routing</a> in the\n\t\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.route53#GetAccountLimit": {
@@ -5452,7 +6028,7 @@
                 "Status": {
                     "target": "com.amazonaws.route53#DNSSECStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string repesenting the status of DNSSEC.</p>",
+                        "smithy.api#documentation": "<p>A string representing the status of DNSSEC.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5506,7 +6082,7 @@
                 "CountryCode": {
                     "target": "com.amazonaws.route53#GeoLocationCountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Route 53 uses the two-letter country codes that are specified in <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO standard 3166-1\n\t\t\t\talpha-2</a>.</p>\n         <p>Route 53 also supports the contry code <b>UA</b> forr Ukraine.</p>",
+                        "smithy.api#documentation": "<p>Amazon Route 53 uses the two-letter country codes that are specified in <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO standard 3166-1\n\t\t\t\talpha-2</a>.</p>\n         <p>Route 53 also supports the country code <b>UA</b> for\n\t\t\tUkraine.</p>",
                         "smithy.api#httpQuery": "countrycode"
                     }
                 },
@@ -6416,7 +6992,7 @@
                 "Type": {
                     "target": "com.amazonaws.route53#HealthCheckType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of health check that you want to create, which indicates how Amazon Route 53\n\t\t\tdetermines whether an endpoint is healthy.</p>\n         <important>\n            <p>You can't change the value of <code>Type</code> after you create a health\n\t\t\t\tcheck.</p>\n         </important>\n         <p>You can create the following types of health checks:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>HTTP</b>: Route 53 tries to establish a TCP\n\t\t\t\t\tconnection. If successful, Route 53 submits an HTTP request and waits for an\n\t\t\t\t\tHTTP status code of 200 or greater and less than 400.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTPS</b>: Route 53 tries to establish a TCP\n\t\t\t\t\tconnection. If successful, Route 53 submits an HTTPS request and waits for an\n\t\t\t\t\tHTTP status code of 200 or greater and less than 400.</p>\n               <important>\n                  <p>If you specify <code>HTTPS</code> for the value of <code>Type</code>, the\n\t\t\t\t\t\tendpoint must support TLS v1.0 or later.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <b>HTTP_STR_MATCH</b>: Route 53 tries to establish a\n\t\t\t\t\tTCP connection. If successful, Route 53 submits an HTTP request and searches the\n\t\t\t\t\tfirst 5,120 bytes of the response body for the string that you specify in\n\t\t\t\t\t\t<code>SearchString</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTPS_STR_MATCH</b>: Route 53 tries to establish\n\t\t\t\t\ta TCP connection. If successful, Route 53 submits an <code>HTTPS</code> request\n\t\t\t\t\tand searches the first 5,120 bytes of the response body for the string that you\n\t\t\t\t\tspecify in <code>SearchString</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>TCP</b>: Route 53 tries to establish a TCP\n\t\t\t\t\tconnection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>CLOUDWATCH_METRIC</b>: The health check is\n\t\t\t\t\tassociated with a CloudWatch alarm. If the state of the alarm is\n\t\t\t\t\t<code>OK</code>, the health check is considered healthy. If the state is\n\t\t\t\t\t\t<code>ALARM</code>, the health check is considered unhealthy. If CloudWatch\n\t\t\t\t\tdoesn't have sufficient data to determine whether the state is <code>OK</code>\n\t\t\t\t\tor <code>ALARM</code>, the health check status depends on the setting for\n\t\t\t\t\t\t<code>InsufficientDataHealthStatus</code>: <code>Healthy</code>,\n\t\t\t\t\t\t<code>Unhealthy</code>, or <code>LastKnownStatus</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <b>CALCULATED</b>: For health checks that monitor\n\t\t\t\t\tthe status of other health checks, Route 53 adds up the number of health checks\n\t\t\t\t\tthat Route 53 health checkers consider to be healthy and compares that number\n\t\t\t\t\twith the value of <code>HealthThreshold</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <b>RECOVERY_CONTROL</b>: The health check is\n\t\t\t\t\tassocated with a Route53 Application Recovery Controller routing control. If the\n\t\t\t\t\trouting control state is <code>ON</code>, the health check is considered\n\t\t\t\t\thealthy. If the state is <code>OFF</code>, the health check is considered\n\t\t\t\t\tunhealthy. </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html\">How Route 53 Determines Whether an Endpoint Is Healthy</a> in the\n\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The type of health check that you want to create, which indicates how Amazon Route 53\n\t\t\tdetermines whether an endpoint is healthy.</p>\n         <important>\n            <p>You can't change the value of <code>Type</code> after you create a health\n\t\t\t\tcheck.</p>\n         </important>\n         <p>You can create the following types of health checks:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>HTTP</b>: Route 53 tries to establish a TCP\n\t\t\t\t\tconnection. If successful, Route 53 submits an HTTP request and waits for an\n\t\t\t\t\tHTTP status code of 200 or greater and less than 400.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTPS</b>: Route 53 tries to establish a TCP\n\t\t\t\t\tconnection. If successful, Route 53 submits an HTTPS request and waits for an\n\t\t\t\t\tHTTP status code of 200 or greater and less than 400.</p>\n               <important>\n                  <p>If you specify <code>HTTPS</code> for the value of <code>Type</code>, the\n\t\t\t\t\t\tendpoint must support TLS v1.0 or later.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <b>HTTP_STR_MATCH</b>: Route 53 tries to establish a\n\t\t\t\t\tTCP connection. If successful, Route 53 submits an HTTP request and searches the\n\t\t\t\t\tfirst 5,120 bytes of the response body for the string that you specify in\n\t\t\t\t\t\t<code>SearchString</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTPS_STR_MATCH</b>: Route 53 tries to establish\n\t\t\t\t\ta TCP connection. If successful, Route 53 submits an <code>HTTPS</code> request\n\t\t\t\t\tand searches the first 5,120 bytes of the response body for the string that you\n\t\t\t\t\tspecify in <code>SearchString</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>TCP</b>: Route 53 tries to establish a TCP\n\t\t\t\t\tconnection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>CLOUDWATCH_METRIC</b>: The health check is\n\t\t\t\t\tassociated with a CloudWatch alarm. If the state of the alarm is\n\t\t\t\t\t<code>OK</code>, the health check is considered healthy. If the state is\n\t\t\t\t\t\t<code>ALARM</code>, the health check is considered unhealthy. If CloudWatch\n\t\t\t\t\tdoesn't have sufficient data to determine whether the state is <code>OK</code>\n\t\t\t\t\tor <code>ALARM</code>, the health check status depends on the setting for\n\t\t\t\t\t\t<code>InsufficientDataHealthStatus</code>: <code>Healthy</code>,\n\t\t\t\t\t\t<code>Unhealthy</code>, or <code>LastKnownStatus</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <b>CALCULATED</b>: For health checks that monitor\n\t\t\t\t\tthe status of other health checks, Route 53 adds up the number of health checks\n\t\t\t\t\tthat Route 53 health checkers consider to be healthy and compares that number\n\t\t\t\t\twith the value of <code>HealthThreshold</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <b>RECOVERY_CONTROL</b>: The health check is associated with a\n\t\t\t\t\tRoute53 Application Recovery Controller routing control. If the routing control\n\t\t\t\t\tstate is <code>ON</code>, the health check is considered healthy. If the state\n\t\t\t\t\tis <code>OFF</code>, the health check is considered unhealthy. </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html\">How Route 53 Determines Whether an Endpoint Is Healthy</a> in the\n\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7439,6 +8015,16 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.route53#Latitude": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                },
+                "smithy.api#pattern": "^[-+]?[0-9]{1,2}(\\.[0-9]{0,2})?$"
+            }
+        },
         "com.amazonaws.route53#LimitValue": {
             "type": "long",
             "traits": {
@@ -7773,7 +8359,7 @@
                 "MaxItems": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) The maximum number of geolocations to be included in the response body for\n\t\t\tthis request. If more than <code>maxitems</code> geolocations remain to be listed, then\n\t\t\tthe value of the <code>IsTruncated</code> element in the response is\n\t\t\t<code>true</code>.</p>",
+                        "smithy.api#documentation": "<p>(Optional) The maximum number of geolocations to be included in the response body for this\n\t\t\trequest. If more than <code>maxitems</code> geolocations remain to be listed, then the\n\t\t\tvalue of the <code>IsTruncated</code> element in the response is\n\t\t\t<code>true</code>.</p>",
                         "smithy.api#httpQuery": "maxitems"
                     }
                 }
@@ -9302,6 +9888,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.route53#LocalZoneGroup": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.route53#LocationSummaries": {
             "type": "list",
             "member": {
@@ -9320,6 +9915,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that contains information about the CIDR location.</p>"
+            }
+        },
+        "com.amazonaws.route53#Longitude": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7
+                },
+                "smithy.api#pattern": "^[-+]?[0-9]{1,3}(\\.[0-9]{0,2})?$"
             }
         },
         "com.amazonaws.route53#MeasureLatency": {
@@ -9939,7 +10544,7 @@
                 "GeoLocation": {
                     "target": "com.amazonaws.route53#GeoLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <i>Geolocation resource record sets only:</i> A complex type that lets\n\t\t\tyou control how Amazon Route 53 responds to DNS queries based on the geographic origin\n\t\t\tof the query. For example, if you want all queries from Africa to be routed to a web\n\t\t\tserver with an IP address of <code>192.0.2.111</code>, create a resource record set with\n\t\t\ta <code>Type</code> of <code>A</code> and a <code>ContinentCode</code> of\n\t\t\t\t<code>AF</code>.</p>\n         <note>\n            <p>Although creating geolocation and geolocation alias resource record sets in a\n\t\t\t\tprivate hosted zone is allowed, it's not supported.</p>\n         </note>\n         <p>If you create separate resource record sets for overlapping geographic regions (for\n\t\t\texample, one resource record set for a continent and one for a country on the same\n\t\t\tcontinent), priority goes to the smallest geographic region. This allows you to route\n\t\t\tmost queries for a continent to one resource and to route queries for a country on that\n\t\t\tcontinent to a different resource.</p>\n         <p>You can't create two geolocation resource record sets that specify the same geographic\n\t\t\tlocation.</p>\n         <p>The value <code>*</code> in the <code>CountryCode</code> element matches all\n\t\t\tgeographic locations that aren't specified in other geolocation resource record sets\n\t\t\tthat have the same values for the <code>Name</code> and <code>Type</code>\n\t\t\telements.</p>\n         <important>\n            <p>Geolocation works by mapping IP addresses to locations. However, some IP addresses\n\t\t\t\taren't mapped to geographic locations, so even if you create geolocation resource\n\t\t\t\trecord sets that cover all seven continents, Route 53 will receive some DNS queries\n\t\t\t\tfrom locations that it can't identify. We recommend that you create a resource\n\t\t\t\trecord set for which the value of <code>CountryCode</code> is <code>*</code>. Two\n\t\t\t\tgroups of queries are routed to the resource that you specify in this record:\n\t\t\t\tqueries that come from locations for which you haven't created geolocation resource\n\t\t\t\trecord sets and queries from IP addresses that aren't mapped to a location. If you\n\t\t\t\tdon't create a <code>*</code> resource record set, Route 53 returns a \"no answer\"\n\t\t\t\tresponse for queries from those locations.</p>\n         </important>\n         <p>You can't create non-geolocation resource record sets that have the same values for\n\t\t\tthe <code>Name</code> and <code>Type</code> elements as geolocation resource record\n\t\t\tsets.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>Geolocation resource record sets only:</i> A complex type that lets you\n\t\t\tcontrol how Amazon Route 53 responds to DNS queries based on the geographic origin of\n\t\t\tthe query. For example, if you want all queries from Africa to be routed to a web server\n\t\t\twith an IP address of <code>192.0.2.111</code>, create a resource record set with a\n\t\t\t\t<code>Type</code> of <code>A</code> and a <code>ContinentCode</code> of\n\t\t\t\t<code>AF</code>.</p>\n         <p>If you create separate resource record sets for overlapping geographic regions (for\n\t\t\texample, one resource record set for a continent and one for a country on the same\n\t\t\tcontinent), priority goes to the smallest geographic region. This allows you to route\n\t\t\tmost queries for a continent to one resource and to route queries for a country on that\n\t\t\tcontinent to a different resource.</p>\n         <p>You can't create two geolocation resource record sets that specify the same geographic\n\t\t\tlocation.</p>\n         <p>The value <code>*</code> in the <code>CountryCode</code> element matches all\n\t\t\tgeographic locations that aren't specified in other geolocation resource record sets\n\t\t\tthat have the same values for the <code>Name</code> and <code>Type</code>\n\t\t\telements.</p>\n         <important>\n            <p>Geolocation works by mapping IP addresses to locations. However, some IP addresses\n\t\t\t\taren't mapped to geographic locations, so even if you create geolocation resource\n\t\t\t\trecord sets that cover all seven continents, Route 53 will receive some DNS queries\n\t\t\t\tfrom locations that it can't identify. We recommend that you create a resource\n\t\t\t\trecord set for which the value of <code>CountryCode</code> is <code>*</code>. Two\n\t\t\t\tgroups of queries are routed to the resource that you specify in this record:\n\t\t\t\tqueries that come from locations for which you haven't created geolocation resource\n\t\t\t\trecord sets and queries from IP addresses that aren't mapped to a location. If you\n\t\t\t\tdon't create a <code>*</code> resource record set, Route 53 returns a \"no answer\"\n\t\t\t\tresponse for queries from those locations.</p>\n         </important>\n         <p>You can't create non-geolocation resource record sets that have the same values for\n\t\t\tthe <code>Name</code> and <code>Type</code> elements as geolocation resource record\n\t\t\tsets.</p>"
                     }
                 },
                 "Failover": {
@@ -9986,6 +10591,12 @@
                 },
                 "CidrRoutingConfig": {
                     "target": "com.amazonaws.route53#CidrRoutingConfig"
+                },
+                "GeoProximityLocation": {
+                    "target": "com.amazonaws.route53#GeoProximityLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <i> GeoproximityLocation resource record sets only:</i> A complex type that lets you control how\n\t\t\t\tRoute 53 responds to DNS queries based on the geographic origin of the\n\t\t\tquery and your resources. </p>"
+                    }
                 }
             },
             "traits": {
@@ -11229,7 +11840,7 @@
                 "FullyQualifiedDomainName": {
                     "target": "com.amazonaws.route53#FullyQualifiedDomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Route 53 behavior depends on whether you specify a value for\n\t\t\t\t<code>IPAddress</code>.</p>\n         <note>\n            <p>If a health check already has a value for <code>IPAddress</code>, you can change\n\t\t\t\tthe value. However, you can't update an existing health check to add or remove the\n\t\t\t\tvalue of <code>IPAddress</code>. </p>\n         </note>\n         <p>\n            <b>If you specify a value for</b>\n            <code>IPAddress</code>:</p>\n         <p>Route 53 sends health check requests to the specified IPv4 or IPv6 address and passes\n\t\t\tthe value of <code>FullyQualifiedDomainName</code> in the <code>Host</code> header for\n\t\t\tall health checks except TCP health checks. This is typically the fully qualified DNS\n\t\t\tname of the endpoint on which you want Route 53 to perform health checks.</p>\n         <p>When Route 53 checks the health of an endpoint, here is how it constructs the\n\t\t\t\t<code>Host</code> header:</p>\n         <ul>\n            <li>\n               <p>If you specify a value of <code>80</code> for <code>Port</code> and\n\t\t\t\t\t\t<code>HTTP</code> or <code>HTTP_STR_MATCH</code> for <code>Type</code>,\n\t\t\t\t\tRoute 53 passes the value of <code>FullyQualifiedDomainName</code> to the\n\t\t\t\t\tendpoint in the <code>Host</code> header.</p>\n            </li>\n            <li>\n               <p>If you specify a value of <code>443</code> for <code>Port</code> and\n\t\t\t\t\t\t<code>HTTPS</code> or <code>HTTPS_STR_MATCH</code> for <code>Type</code>,\n\t\t\t\t\tRoute 53 passes the value of <code>FullyQualifiedDomainName</code> to the\n\t\t\t\t\tendpoint in the <code>Host</code> header.</p>\n            </li>\n            <li>\n               <p>If you specify another value for <code>Port</code> and any value except\n\t\t\t\t\t\t<code>TCP</code> for <code>Type</code>, Route 53 passes\n\t\t\t\t\t\t\t<i>\n                     <code>FullyQualifiedDomainName</code>:<code>Port</code>\n                  </i>\n\t\t\t\t\tto the endpoint in the <code>Host</code> header.</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value for <code>FullyQualifiedDomainName</code>, Route 53\n\t\t\tsubstitutes the value of <code>IPAddress</code> in the <code>Host</code> header in each\n\t\t\tof the above cases.</p>\n         <p>\n            <b>If you don't specify a value for</b>\n            <code>IPAddress</code>:</p>\n         <p>If you don't specify a value for <code>IPAddress</code>, Route 53 sends a DNS request\n\t\t\tto the domain that you specify in <code>FullyQualifiedDomainName</code> at the interval\n\t\t\tyou specify in <code>RequestInterval</code>. Using an IPv4 address that is returned by\n\t\t\tDNS, Route 53 then checks the health of the endpoint.</p>\n         <note>\n            <p>If you don't specify a value for <code>IPAddress</code>, Route 53 uses only IPv4\n\t\t\t\tto send health checks to the endpoint. If there's no resource record set with a type\n\t\t\t\tof A for the name that you specify for <code>FullyQualifiedDomainName</code>, the\n\t\t\t\thealth check fails with a \"DNS resolution failed\" error.</p>\n         </note>\n         <p>If you want to check the health of weighted, latency, or failover resource record sets\n\t\t\tand you choose to specify the endpoint only by <code>FullyQualifiedDomainName</code>, we\n\t\t\trecommend that you create a separate health check for each endpoint. For example, create\n\t\t\ta health check for each HTTP server that is serving content for www.example.com. For the\n\t\t\tvalue of <code>FullyQualifiedDomainName</code>, specify the domain name of the server\n\t\t\t(such as <code>us-east-2-www.example.com</code>), not the name of the resource record\n\t\t\tsets (www.example.com).</p>\n         <important>\n            <p>In this configuration, if the value of <code>FullyQualifiedDomainName</code>\n\t\t\t\tmatches the name of the resource record sets and you then associate the health check\n\t\t\t\twith those resource record sets, health check results will be unpredictable.</p>\n         </important>\n         <p>In addition, if the value of <code>Type</code> is <code>HTTP</code>,\n\t\t\t\t<code>HTTPS</code>, <code>HTTP_STR_MATCH</code>, or <code>HTTPS_STR_MATCH</code>,\n\t\t\tRoute 53 passes the value of <code>FullyQualifiedDomainName</code> in the\n\t\t\t\t<code>Host</code> header, as it does when you specify a value for\n\t\t\t\t<code>IPAddress</code>. If the value of <code>Type</code> is <code>TCP</code>, Route\n\t\t\t53 doesn't pass a <code>Host</code> header.</p>"
+                        "smithy.api#documentation": "<p>Amazon Route 53 behavior depends on whether you specify a value for\n\t\t\t\t<code>IPAddress</code>.</p>\n         <note>\n            <p>If a health check already has a value for <code>IPAddress</code>, you can change\n\t\t\t\tthe value. However, you can't update an existing health check to add or remove the\n\t\t\t\tvalue of <code>IPAddress</code>. </p>\n         </note>\n         <p>\n            <b>If you specify a value for</b>\n            <code>IPAddress</code>:</p>\n         <p>Route 53 sends health check requests to the specified IPv4 or IPv6 address and passes\n\t\t\tthe value of <code>FullyQualifiedDomainName</code> in the <code>Host</code> header for\n\t\t\tall health checks except TCP health checks. This is typically the fully qualified DNS\n\t\t\tname of the endpoint on which you want Route 53 to perform health checks.</p>\n         <p>When Route 53 checks the health of an endpoint, here is how it constructs the\n\t\t\t\t<code>Host</code> header:</p>\n         <ul>\n            <li>\n               <p>If you specify a value of <code>80</code> for <code>Port</code> and\n\t\t\t\t\t\t<code>HTTP</code> or <code>HTTP_STR_MATCH</code> for <code>Type</code>,\n\t\t\t\t\tRoute 53 passes the value of <code>FullyQualifiedDomainName</code> to the\n\t\t\t\t\tendpoint in the <code>Host</code> header.</p>\n            </li>\n            <li>\n               <p>If you specify a value of <code>443</code> for <code>Port</code> and\n\t\t\t\t\t\t<code>HTTPS</code> or <code>HTTPS_STR_MATCH</code> for <code>Type</code>,\n\t\t\t\t\tRoute 53 passes the value of <code>FullyQualifiedDomainName</code> to the\n\t\t\t\t\tendpoint in the <code>Host</code> header.</p>\n            </li>\n            <li>\n               <p>If you specify another value for <code>Port</code> and any value except\n\t\t\t\t\t\t<code>TCP</code> for <code>Type</code>, Route 53 passes\n\t\t\t\t\t\t\t<i>\n                     <code>FullyQualifiedDomainName</code>:<code>Port</code>\n                  </i>\n\t\t\t\t\tto the endpoint in the <code>Host</code> header.</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value for <code>FullyQualifiedDomainName</code>, Route 53\n\t\t\tsubstitutes the value of <code>IPAddress</code> in the <code>Host</code> header in each\n\t\t\tof the above cases.</p>\n         <p>\n            <b>If you don't specify a value for</b>\n            <code>IPAddress</code>:</p>\n         <p>If you don't specify a value for <code>IPAddress</code>, Route 53 sends a DNS request\n\t\t\tto the domain that you specify in <code>FullyQualifiedDomainName</code> at the interval\n\t\t\tyou specify in <code>RequestInterval</code>. Using an IPv4 address that is returned by\n\t\t\tDNS, Route 53 then checks the health of the endpoint.</p>\n         <p>If you don't specify a value for <code>IPAddress</code>, you can’t update the health check to remove the <code>FullyQualifiedDomainName</code>; if you don’t specify a value for <code>IPAddress</code> on creation, a \n\t\t\t<code>FullyQualifiedDomainName</code> is required.</p>\n         <note>\n            <p>If you don't specify a value for <code>IPAddress</code>, Route 53 uses only IPv4\n\t\t\t\tto send health checks to the endpoint. If there's no resource record set with a type\n\t\t\t\tof A for the name that you specify for <code>FullyQualifiedDomainName</code>, the\n\t\t\t\thealth check fails with a \"DNS resolution failed\" error.</p>\n         </note>\n         <p>If you want to check the health of weighted, latency, or failover resource record sets\n\t\t\tand you choose to specify the endpoint only by <code>FullyQualifiedDomainName</code>, we\n\t\t\trecommend that you create a separate health check for each endpoint. For example, create\n\t\t\ta health check for each HTTP server that is serving content for www.example.com. For the\n\t\t\tvalue of <code>FullyQualifiedDomainName</code>, specify the domain name of the server\n\t\t\t(such as <code>us-east-2-www.example.com</code>), not the name of the resource record\n\t\t\tsets (www.example.com).</p>\n         <important>\n            <p>In this configuration, if the value of <code>FullyQualifiedDomainName</code>\n\t\t\t\tmatches the name of the resource record sets and you then associate the health check\n\t\t\t\twith those resource record sets, health check results will be unpredictable.</p>\n         </important>\n         <p>In addition, if the value of <code>Type</code> is <code>HTTP</code>,\n\t\t\t\t<code>HTTPS</code>, <code>HTTP_STR_MATCH</code>, or <code>HTTPS_STR_MATCH</code>,\n\t\t\tRoute 53 passes the value of <code>FullyQualifiedDomainName</code> in the\n\t\t\t\t<code>Host</code> header, as it does when you specify a value for\n\t\t\t\t<code>IPAddress</code>. If the value of <code>Type</code> is <code>TCP</code>, Route\n\t\t\t53 doesn't pass a <code>Host</code> header.</p>"
                     }
                 },
                 "SearchString": {

@@ -2216,6 +2216,27 @@
                 }
             }
         },
+        "com.amazonaws.location#CustomLayer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[-._\\w]+$"
+            }
+        },
+        "com.amazonaws.location#CustomLayerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.location#CustomLayer"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.location#DataSourceConfiguration": {
             "type": "structure",
             "members": {
@@ -6560,6 +6581,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the political view for the style. Leave unset to not use a political \n            view, or, for styles that support specific political views, you can choose a view, \n            such as <code>IND</code> for the Indian view.</p>\n         <p>Default is unset.</p>\n         <note>\n            <p>Not all map resources or styles support political view styles. See \n                <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views\">Political \n                    views</a> \n                for more information.</p>\n         </note>"
                     }
+                },
+                "CustomLayers": {
+                    "target": "com.amazonaws.location#CustomLayerList",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Specifies the custom layers for the style. Leave unset to not enable any custom layer, or, for styles that support custom layers, you can enable layer(s), such as POI layer for the VectorEsriNavigation style.\nDefault is <code>unset</code>.</p>\n         <note>\n            <p>Not all map resources or styles support custom layers. See Custom Layers for more information.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -6573,6 +6601,13 @@
                     "target": "com.amazonaws.location#CountryCode3OrEmpty",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the political view for the style. Set to an empty string to not use a\n            political view, or, for styles that support specific political views, you can choose a \n            view, such as <code>IND</code> for the Indian view.</p>\n         <note>\n            <p>Not all map resources or styles support political view styles. See \n                <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views\">Political \n                    views</a> \n                for more information.</p>\n         </note>"
+                    }
+                },
+                "CustomLayers": {
+                    "target": "com.amazonaws.location#CustomLayerList",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Specifies the custom layers for the style. Leave unset to not enable any custom layer, or, for styles that support custom layers, you can enable layer(s), such as POI layer for the VectorEsriNavigation style.\nDefault is <code>unset</code>.</p>\n         <note>\n            <p>Not all map resources or styles support custom layers. See Custom Layers for more information.</p>\n         </note>"
                     }
                 }
             },
