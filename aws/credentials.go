@@ -90,6 +90,9 @@ type Credentials struct {
 	// The time the credentials will expire at. Should be ignored if CanExpire
 	// is false.
 	Expires time.Time
+
+	// AWS Account ID resolved from identity and used for optional endpoint2.0 routing
+	AccountID string
 }
 
 // Expired returns if the credentials have expired.
