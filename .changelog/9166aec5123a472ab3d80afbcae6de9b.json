@@ -1,0 +1,11 @@
+{
+    "id": "9166aec5-123a-472a-b3d8-0afbcae6de9b",
+    "type": "feature",
+    "collapse": true,
+    "description": "Allow identity resolvers to resolve aws account id",
+    "modules": [
+        ".",
+        "config",
+        "credentials"
+    ]
+}
