@@ -168,7 +168,7 @@ type CredentialProcessResponse struct {
 	// The date on which the current credentials expire.
 	Expiration *time.Time
 
-	// The aws account ID for this op and could be used for endpoint2.0 routing
+	// The ID of the account for credentials
 	AccountID string `json:"AccountId"`
 }
 
