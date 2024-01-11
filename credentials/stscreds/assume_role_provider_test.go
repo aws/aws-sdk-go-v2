@@ -58,7 +58,7 @@ func TestAssumeRoleProvider(t *testing.T) {
 		t.Errorf("Expect session token to match")
 	}
 	if e, a := "131990247566", creds.AccountID; e != a {
-		t.Errorf("Expect account id to match")
+		t.Error("Expect account id to match")
 	}
 }
 

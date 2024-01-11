@@ -116,7 +116,7 @@ const (
 
 	s3DisableExpressSessionAuthKey = "s3_disable_express_session_auth"
 
-	accountID = "aws_account_id"
+	accountIDKey = "aws_account_id"
 )
 
 // defaultSharedConfigProfile allows for swapping the default profile for testing
@@ -1132,7 +1132,7 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 		SecretAccessKey: section.String(secretAccessKey),
 		SessionToken:    section.String(sessionTokenKey),
 		Source:          fmt.Sprintf("SharedConfigCredentials: %s", section.SourceFile[accessKeyIDKey]),
-		AccountID:       section.String(accountID),
+		AccountID:       section.String(accountIDKey),
 	}
 
 	if creds.HasKeys() {

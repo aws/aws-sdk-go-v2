@@ -91,7 +91,7 @@ type Credentials struct {
 	// is false.
 	Expires time.Time
 
-	// AWS Account ID resolved from identity and used for optional endpoint2.0 routing
+	// The ID of the account for the credentials.
 	AccountID string
 }
 

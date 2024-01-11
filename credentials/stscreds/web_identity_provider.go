@@ -136,7 +136,6 @@ func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials
 		return aws.Credentials{}, fmt.Errorf("failed to retrieve credentials, %w", err)
 	}
 
-	// extract accountID from arn with format "arn:partition:service:region:account-id:[resource-section]"
 	var accountID string
 	if resp.AssumedRoleUser != nil {
 		accountID = getAccountID(resp.AssumedRoleUser)
@@ -157,9 +156,14 @@ func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials
 	return value, nil
 }
 
-func getAccountID(assumedRoleUser *types.AssumedRoleUser) string {
-	if arn := assumedRoleUser.Arn; arn != nil && len(*arn) > 0 {
-		return strings.Split(*arn, ":")[4]
+// extract accountID from arn with format "arn:partition:service:region:account-id:[resource-section]"
+func getAccountID(u *types.AssumedRoleUser) string {
+	if u.Arn == nil {
+		return ""
 	}
-	return ""
+	parts := strings.Split(*u.Arn, ":")
+	if len(parts) < 5 {
+		return ""
+	}
+	return parts[4]
 }

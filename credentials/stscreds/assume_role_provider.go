@@ -308,7 +308,6 @@ func (p *AssumeRoleProvider) Retrieve(ctx context.Context) (aws.Credentials, err
 		return aws.Credentials{Source: ProviderName}, err
 	}
 
-	// extract accountID from arn with format "arn:partition:service:region:account-id:[resource-section]"
 	var accountID string
 	if resp.AssumedRoleUser != nil {
 		accountID = getAccountID(resp.AssumedRoleUser)
