@@ -4643,6 +4643,9 @@
             }
         },
         "com.amazonaws.iot#Boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.iot#Boolean2": {
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
@@ -7445,7 +7448,7 @@
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n        job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n        Up to 25  package version ARNs are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n        Up to 25  package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -7585,7 +7588,7 @@
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -8549,9 +8552,8 @@
                     }
                 },
                 "enabled": {
-                    "target": "com.amazonaws.iot#Enabled",
+                    "target": "com.amazonaws.iot#Enabled2",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True to enable the provisioning template, otherwise false.</p>"
                     }
                 },
@@ -13743,7 +13745,7 @@
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -14054,9 +14056,8 @@
                     }
                 },
                 "enabled": {
-                    "target": "com.amazonaws.iot#Enabled",
+                    "target": "com.amazonaws.iot#Enabled2",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if the provisioning template is enabled, otherwise false.</p>"
                     }
                 },
@@ -16178,6 +16179,9 @@
             "traits": {
                 "smithy.api#default": false
             }
+        },
+        "com.amazonaws.iot#Enabled2": {
+            "type": "boolean"
         },
         "com.amazonaws.iot#EnabledBoolean": {
             "type": "boolean"
@@ -19164,7 +19168,7 @@
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.The package version must be in either the Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -27629,9 +27633,8 @@
                     }
                 },
                 "enabled": {
-                    "target": "com.amazonaws.iot#Enabled",
+                    "target": "com.amazonaws.iot#Enabled2",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if the fleet provision template is enabled, otherwise false.</p>"
                     }
                 },
@@ -31850,7 +31853,6 @@
                 "connected": {
                     "target": "com.amazonaws.iot#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if the thing is connected to the Amazon Web Services IoT Core service; false if it is not\n      connected.</p>"
                     }
                 },
@@ -32298,7 +32300,7 @@
             "type": "structure",
             "members": {
                 "deprecated": {
-                    "target": "com.amazonaws.iot#Boolean",
+                    "target": "com.amazonaws.iot#Boolean2",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the thing type is deprecated. If <b>true</b>, no new things could be\n\t\t\tassociated with this type.</p>"
@@ -34549,6 +34551,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.iot#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.iot#InternalServerException"
                 },
                 {
@@ -34580,6 +34585,9 @@
                 "target": "com.amazonaws.iot#UpdatePackageConfigurationResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.iot#ConflictException"
+                },
                 {
                     "target": "com.amazonaws.iot#InternalServerException"
                 },
@@ -34687,6 +34695,9 @@
                 "target": "com.amazonaws.iot#UpdatePackageVersionResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.iot#ConflictException"
+                },
                 {
                     "target": "com.amazonaws.iot#InternalServerException"
                 },
@@ -34819,9 +34830,8 @@
                     }
                 },
                 "enabled": {
-                    "target": "com.amazonaws.iot#Enabled",
+                    "target": "com.amazonaws.iot#Enabled2",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True to enable the provisioning template, otherwise false.</p>"
                     }
                 },

@@ -1829,6 +1829,20 @@
                 }
             }
         },
+        "com.amazonaws.eventbridge#AppSyncParameters": {
+            "type": "structure",
+            "members": {
+                "GraphQLOperation": {
+                    "target": "com.amazonaws.eventbridge#GraphQLOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GraphQL operation; that is, the query, mutation, or subscription to be parsed and executed by the GraphQL service.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appsync/latest/devguide/graphql-architecture.html#graphql-operations\">Operations</a> in the <i>AppSync User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the GraphQL operation to be parsed and executed, if the event target is an AppSync API.</p>"
+            }
+        },
         "com.amazonaws.eventbridge#Archive": {
             "type": "structure",
             "members": {
@@ -5443,6 +5457,16 @@
                 "smithy.api#documentation": "<p>The failover configuration for an endpoint. This includes what triggers failover and what happens when it's triggered.</p>"
             }
         },
+        "com.amazonaws.eventbridge#GraphQLOperation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1048576
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.eventbridge#HeaderKey": {
             "type": "string",
             "traits": {
@@ -7393,7 +7417,7 @@
                 "State": {
                     "target": "com.amazonaws.eventbridge#RuleState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the rule.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DISABLED</code>: The rule is disabled. EventBridge does not match any events against the rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code>: The rule is enabled. \n          EventBridge matches events against the rule, <i>except</i> for Amazon Web Services management events delivered through CloudTrail.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS</code>: The rule is enabled for all\n        events, including Amazon Web Services management events delivered through CloudTrail.</p>\n               <p>Management events provide visibility into management operations that are performed on\n          resources in your Amazon Web Services account. These are also known as control plane\n          operations. For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events\">Logging management events</a> in the <i>CloudTrail User\n            Guide</i>, and <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-cloudtrail\">Filtering management events from Amazon Web Services services</a> in the\n            <i>Amazon EventBridge User Guide</i>.</p>\n               <p>This value is only valid for rules on the <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses\">default</a> event bus \n          or <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html\">custom event buses</a>. \n          It does not apply to <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html\">partner event buses</a>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates whether the rule is enabled or disabled.</p>"
                     }
                 },
                 "Description": {
@@ -8154,7 +8178,7 @@
                 "State": {
                     "target": "com.amazonaws.eventbridge#RuleState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the rule.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DISABLED</code>: The rule is disabled. EventBridge does not match any events against the rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code>: The rule is enabled. \n          EventBridge matches events against the rule, <i>except</i> for Amazon Web Services management events delivered through CloudTrail.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS</code>: The rule is enabled for all\n        events, including Amazon Web Services management events delivered through CloudTrail.</p>\n               <p>Management events provide visibility into management operations that are performed on\n          resources in your Amazon Web Services account. These are also known as control plane\n          operations. For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events\">Logging management events</a> in the <i>CloudTrail User\n            Guide</i>, and <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-cloudtrail\">Filtering management events from Amazon Web Services services</a> in the\n            <i>Amazon EventBridge User Guide</i>.</p>\n               <p>This value is only valid for rules on the <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses\">default</a> event bus \n          or <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html\">custom event buses</a>. \n          It does not apply to <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html\">partner event buses</a>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the rule.</p>"
                     }
                 },
                 "Description": {
@@ -8826,6 +8850,12 @@
                     "target": "com.amazonaws.eventbridge#RetryPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>RetryPolicy</code> object that contains the retry policy configuration to use\n      for the dead-letter queue.</p>"
+                    }
+                },
+                "AppSyncParameters": {
+                    "target": "com.amazonaws.eventbridge#AppSyncParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the GraphQL operation to be parsed and executed, if the event target is an AppSync API.</p>"
                     }
                 }
             },
