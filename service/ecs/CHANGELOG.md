@@ -1,3 +1,7 @@
+# v1.37.0 (2024-01-11)
+
+* **Feature**: This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.
+
 # v1.36.0 (2024-01-04)
 
 * **Feature**: This release adds support for managed instance draining which facilitates graceful termination of Amazon ECS instances.

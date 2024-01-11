@@ -1,8 +1,0 @@
-{
-    "id": "2dd338de-bc71-4d4f-b8ec-37656bacd3dd",
-    "type": "feature",
-    "description": "This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.",
-    "modules": [
-        "service/ecs"
-    ]
-}

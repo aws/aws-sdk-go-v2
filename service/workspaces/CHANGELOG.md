@@ -1,3 +1,7 @@
+# v1.35.8 (2024-01-11)
+
+* **Documentation**: Added AWS Workspaces RebootWorkspaces API - Extended Reboot documentation update
+
 # v1.35.7 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

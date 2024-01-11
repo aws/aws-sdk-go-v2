@@ -32,9 +32,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.22.8
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.26.8
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.143.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.144.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.24.7
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.36.0
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.34.7
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.20.6
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.19.6
 	github.com/aws/aws-sdk-go-v2/service/emr v1.36.1
-	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.27.0
+	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.19.6
@@ -51,7 +51,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.22.6
 	github.com/aws/aws-sdk-go-v2/service/iam v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.19.6
-	github.com/aws/aws-sdk-go-v2/service/iot v1.47.1
+	github.com/aws/aws-sdk-go-v2/service/iot v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.24.7
 	github.com/aws/aws-sdk-go-v2/service/kms v1.27.9
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.49.7
@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.41.8
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.26.1
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.19.6
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.24.7
@@ -85,7 +85,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.18.6
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.19.6
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.43.6
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.35.7
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.35.8
 	github.com/aws/smithy-go v1.19.0
 	github.com/google/go-cmp v0.5.8
 )

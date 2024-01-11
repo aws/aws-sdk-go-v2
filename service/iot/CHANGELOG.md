@@ -1,3 +1,7 @@
+# v1.48.0 (2024-01-11)
+
+* **Feature**: Add ConflictException to Update APIs of AWS IoT Software Package Catalog
+
 # v1.47.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

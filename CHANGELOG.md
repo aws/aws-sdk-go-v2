@@ -1,3 +1,21 @@
+# Release (2024-01-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.144.0](service/ec2/CHANGELOG.md#v11440-2024-01-11)
+  * **Feature**: This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.37.0](service/ecs/CHANGELOG.md#v1370-2024-01-11)
+  * **Feature**: This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.28.0](service/eventbridge/CHANGELOG.md#v1280-2024-01-11)
+  * **Feature**: Adding AppSync as an EventBridge Target
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.48.0](service/iot/CHANGELOG.md#v1480-2024-01-11)
+  * **Feature**: Add ConflictException to Update APIs of AWS IoT Software Package Catalog
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.11.0](service/iotfleetwise/CHANGELOG.md#v1110-2024-01-11)
+  * **Feature**: The following dataTypes have been removed: CUSTOMER_DECODED_INTERFACE in NetworkInterfaceType; CUSTOMER_DECODED_SIGNAL_INFO_IS_NULL in SignalDecoderFailureReason; CUSTOMER_DECODED_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL in NetworkInterfaceFailureReason; CUSTOMER_DECODED_SIGNAL in SignalDecoderType
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.26.2](service/secretsmanager/CHANGELOG.md#v1262-2024-01-11)
+  * **Documentation**: Doc only update for Secrets Manager
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.35.8](service/workspaces/CHANGELOG.md#v1358-2024-01-11)
+  * **Documentation**: Added AWS Workspaces RebootWorkspaces API - Extended Reboot documentation update
+
 # Release (2024-01-10)
 
 ## Module Highlights
