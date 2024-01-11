@@ -25,12 +25,16 @@ import (
 // instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon
 // EC2. However, customers who have used Amazon EI at least once during the past
 // 30-day period are considered current customers and will be able to continue
-// using the service. The Amazon ECS API follows an eventual consistency model.
-// This is because of the distributed nature of the system supporting the API. This
-// means that the result of an API command you run that affects your Amazon ECS
-// resources might not be immediately visible to all subsequent commands you run.
-// Keep this in mind when you carry out an API command that immediately follows a
-// previous API command. To manage eventual consistency, you can do the following:
+// using the service. You can attach Amazon EBS volumes to Amazon ECS tasks by
+// configuring the volume when creating or updating a service. For more infomation,
+// see Amazon EBS volumes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types)
+// in the Amazon Elastic Container Service Developer Guide. The Amazon ECS API
+// follows an eventual consistency model. This is because of the distributed nature
+// of the system supporting the API. This means that the result of an API command
+// you run that affects your Amazon ECS resources might not be immediately visible
+// to all subsequent commands you run. Keep this in mind when you carry out an API
+// command that immediately follows a previous API command. To manage eventual
+// consistency, you can do the following:
 //   - Confirm the state of the resource before you run a command to modify it.
 //     Run the DescribeTasks command using an exponential backoff algorithm to ensure
 //     that you allow enough time for the previous command to propagate through the
@@ -203,6 +207,12 @@ type RunTaskInput struct {
 	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
 	//   prefix do not count against your tags per resource limit.
 	Tags []types.Tag
+
+	// The details of the volume that was configuredAtLaunch . You can configure the
+	// size, volumeType, IOPS, throughput, snapshot and encryption in in
+	// TaskManagedEBSVolumeConfiguration (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TaskManagedEBSVolumeConfiguration.html)
+	// . The name of the volume must match the name from the task definition.
+	VolumeConfigurations []types.TaskVolumeConfiguration
 
 	noSmithyDocumentSerde
 }

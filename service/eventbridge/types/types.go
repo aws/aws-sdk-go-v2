@@ -40,6 +40,18 @@ type ApiDestination struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the GraphQL operation to be parsed and executed, if the event target
+// is an AppSync API.
+type AppSyncParameters struct {
+
+	// The GraphQL operation; that is, the query, mutation, or subscription to be
+	// parsed and executed by the GraphQL service. For more information, see Operations (https://docs.aws.amazon.com/appsync/latest/devguide/graphql-architecture.html#graphql-operations)
+	// in the AppSync User Guide.
+	GraphQLOperation *string
+
+	noSmithyDocumentSerde
+}
+
 // An Archive object that contains details about an archive.
 type Archive struct {
 
@@ -1226,24 +1238,7 @@ type Rule struct {
 	// .
 	ScheduleExpression *string
 
-	// The state of the rule. Valid values include:
-	//   - DISABLED : The rule is disabled. EventBridge does not match any events
-	//   against the rule.
-	//   - ENABLED : The rule is enabled. EventBridge matches events against the rule,
-	//   except for Amazon Web Services management events delivered through CloudTrail.
-	//   - ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS : The rule is enabled for all
-	//   events, including Amazon Web Services management events delivered through
-	//   CloudTrail. Management events provide visibility into management operations that
-	//   are performed on resources in your Amazon Web Services account. These are also
-	//   known as control plane operations. For more information, see Logging
-	//   management events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events)
-	//   in the CloudTrail User Guide, and Filtering management events from Amazon Web
-	//   Services services (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-cloudtrail)
-	//   in the Amazon EventBridge User Guide. This value is only valid for rules on the
-	//   default (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses)
-	//   event bus or custom event buses (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html)
-	//   . It does not apply to partner event buses (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html)
-	//   .
+	// The state of the rule.
 	State RuleState
 
 	noSmithyDocumentSerde
@@ -1370,6 +1365,10 @@ type Target struct {
 	//
 	// This member is required.
 	Id *string
+
+	// Contains the GraphQL operation to be parsed and executed, if the event target
+	// is an AppSync API.
+	AppSyncParameters *AppSyncParameters
 
 	// If the event target is an Batch job, this contains the job definition, job
 	// name, and other parameters. For more information, see Jobs (https://docs.aws.amazon.com/batch/latest/userguide/jobs.html)

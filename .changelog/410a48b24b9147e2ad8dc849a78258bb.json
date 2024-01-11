@@ -1,0 +1,8 @@
+{
+    "id": "410a48b2-4b91-47e2-ad8d-c849a78258bb",
+    "type": "feature",
+    "description": "Adding AppSync as an EventBridge Target",
+    "modules": [
+        "service/eventbridge"
+    ]
+}

@@ -70591,6 +70591,19 @@ func awsEc2query_deserializeDocumentEbsInstanceBlockDevice(v **types.EbsInstance
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("associatedResource", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AssociatedResource = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("attachTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -70648,6 +70661,19 @@ func awsEc2query_deserializeDocumentEbsInstanceBlockDevice(v **types.EbsInstance
 			{
 				xtv := string(val)
 				sv.VolumeId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("volumeOwnerId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VolumeOwnerId = ptr.String(xtv)
 			}
 
 		default:
@@ -134108,6 +134134,19 @@ func awsEc2query_deserializeDocumentVolumeAttachment(v **types.VolumeAttachment,
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("associatedResource", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AssociatedResource = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("attachTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -134165,6 +134204,19 @@ func awsEc2query_deserializeDocumentVolumeAttachment(v **types.VolumeAttachment,
 			{
 				xtv := string(val)
 				sv.InstanceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("instanceOwningService", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.InstanceOwningService = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("status", t.Name.Local):
@@ -139998,6 +140050,19 @@ func awsEc2query_deserializeOpDocumentAttachVolumeOutput(v **AttachVolumeOutput,
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("associatedResource", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AssociatedResource = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("attachTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -140055,6 +140120,19 @@ func awsEc2query_deserializeOpDocumentAttachVolumeOutput(v **AttachVolumeOutput,
 			{
 				xtv := string(val)
 				sv.InstanceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("instanceOwningService", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.InstanceOwningService = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("status", t.Name.Local):
@@ -156384,6 +156462,19 @@ func awsEc2query_deserializeOpDocumentDetachVolumeOutput(v **DetachVolumeOutput,
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("associatedResource", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AssociatedResource = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("attachTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -156441,6 +156532,19 @@ func awsEc2query_deserializeOpDocumentDetachVolumeOutput(v **DetachVolumeOutput,
 			{
 				xtv := string(val)
 				sv.InstanceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("instanceOwningService", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.InstanceOwningService = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("status", t.Name.Local):

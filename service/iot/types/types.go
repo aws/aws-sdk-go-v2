@@ -1942,8 +1942,13 @@ type Job struct {
 	Description *string
 
 	// The package version Amazon Resource Names (ARNs) that are installed on the
-	// device when the job successfully completes. Note:The following Length
-	// Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
+	// device when the job successfully completes. The package version must be in
+	// either the Published or Deprecated state when the job deploys. For more
+	// information, see Package version lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
+	// .The package version must be in either the Published or Deprecated state when
+	// the job deploys. For more information, see Package version lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
+	// . Note:The following Length Constraints relates to a single ARN. Up to 25
+	// package version ARNs are allowed.
 	DestinationPackageVersions []string
 
 	// A key-value map that pairs the patterns that need to be replaced in a managed
@@ -3037,7 +3042,7 @@ type ProvisioningTemplateSummary struct {
 	Description *string
 
 	// True if the fleet provision template is enabled, otherwise false.
-	Enabled bool
+	Enabled *bool
 
 	// The date when the provisioning template summary was last modified.
 	LastModifiedDate *time.Time
@@ -3834,7 +3839,7 @@ type ThingConnectivity struct {
 
 	// True if the thing is connected to the Amazon Web Services IoT Core service;
 	// false if it is not connected.
-	Connected bool
+	Connected *bool
 
 	// The reason why the client is disconnected. If the thing has been disconnected
 	// for approximately an hour, the disconnectReason value might be missing.

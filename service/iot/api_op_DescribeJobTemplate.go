@@ -51,8 +51,11 @@ type DescribeJobTemplateOutput struct {
 	Description *string
 
 	// The package version Amazon Resource Names (ARNs) that are installed on the
-	// device when the job successfully completes. Note:The following Length
-	// Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
+	// device when the job successfully completes. The package version must be in
+	// either the Published or Deprecated state when the job deploys. For more
+	// information, see Package version lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
+	// . Note:The following Length Constraints relates to a single ARN. Up to 25
+	// package version ARNs are allowed.
 	DestinationPackageVersions []string
 
 	// The job document.

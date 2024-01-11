@@ -1,0 +1,8 @@
+{
+    "id": "017b441b-eae6-4d63-80fd-a61d04c88a7e",
+    "type": "feature",
+    "description": "Add ConflictException to Update APIs of AWS IoT Software Package Catalog",
+    "modules": [
+        "service/iot"
+    ]
+}

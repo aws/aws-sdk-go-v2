@@ -15587,9 +15587,9 @@ func awsRestjson1_deserializeOpDocumentDescribeProvisioningTemplateOutput(v **De
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected Enabled2 to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "lastModifiedDate":
@@ -37341,6 +37341,9 @@ func awsRestjson1_deserializeOpErrorUpdatePackage(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -37433,6 +37436,9 @@ func awsRestjson1_deserializeOpErrorUpdatePackageConfiguration(response *smithyh
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -37522,6 +37528,9 @@ func awsRestjson1_deserializeOpErrorUpdatePackageVersion(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -52813,9 +52822,9 @@ func awsRestjson1_deserializeDocumentProvisioningTemplateSummary(v **types.Provi
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected Enabled2 to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "lastModifiedDate":
@@ -56944,7 +56953,7 @@ func awsRestjson1_deserializeDocumentThingConnectivity(v **types.ThingConnectivi
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Connected = jtv
+				sv.Connected = ptr.Bool(jtv)
 			}
 
 		case "disconnectReason":
@@ -57720,7 +57729,7 @@ func awsRestjson1_deserializeDocumentThingTypeMetadata(v **types.ThingTypeMetada
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected Boolean2 to be of type *bool, got %T instead", value)
 				}
 				sv.Deprecated = jtv
 			}

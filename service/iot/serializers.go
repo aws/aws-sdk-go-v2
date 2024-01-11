@@ -3544,9 +3544,9 @@ func awsRestjson1_serializeOpDocumentCreateProvisioningTemplateInput(v *CreatePr
 		ok.String(*v.Description)
 	}
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	if v.PreProvisioningHook != nil {
@@ -19543,9 +19543,9 @@ func awsRestjson1_serializeOpDocumentUpdateProvisioningTemplateInput(v *UpdatePr
 		ok.String(*v.Description)
 	}
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	if v.PreProvisioningHook != nil {

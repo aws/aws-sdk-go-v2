@@ -27,6 +27,10 @@ import (
 // your service behind one or more load balancers. The load balancers distribute
 // traffic across the tasks that are associated with the service. For more
 // information, see Service load balancing (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
+// in the Amazon Elastic Container Service Developer Guide. You can attach Amazon
+// EBS volumes to Amazon ECS tasks by configuring the volume when creating or
+// updating a service. volumeConfigurations is only supported for REPLICA service
+// and not DAEMON service. For more infomation, see Amazon EBS volumes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types)
 // in the Amazon Elastic Container Service Developer Guide. Tasks for services that
 // don't use a load balancer are considered healthy if they're in the RUNNING
 // state. Tasks for services that use a load balancer are considered healthy if
@@ -341,6 +345,11 @@ type CreateServiceInput struct {
 	// deployment types, see Amazon ECS deployment types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 	// .
 	TaskDefinition *string
+
+	// The configuration for a volume specified in the task definition as a volume
+	// that is configured at launch time. Currently, the only supported volume type is
+	// an Amazon EBS volume.
+	VolumeConfigurations []types.ServiceVolumeConfiguration
 
 	noSmithyDocumentSerde
 }
