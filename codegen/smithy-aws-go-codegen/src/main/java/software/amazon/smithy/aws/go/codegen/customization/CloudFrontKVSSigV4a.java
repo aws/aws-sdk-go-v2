@@ -38,22 +38,33 @@ public class CloudFrontKVSSigV4a implements GoIntegration {
         return serviceId.equalsIgnoreCase("cloudfrontkeyvaluestore");
     }
 
+    private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
+
+
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
-        return ListUtils.of(
-                    RuntimeClientPlugin.builder()
-                         .configFields(
-                            ListUtils.of(
-                                    ConfigField.builder()
-                                            .name(AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
-                                            .type(SymbolUtils.createValueSymbolBuilder(
-                                                            AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
-                                                    .build())
-                                            .documentation("Signature Version 4a (SigV4a) Signer")
-                                            .build()
-                            )
-                        )
-                        .build()
+        return runtimeClientPlugins;
+    }
+
+    @Override
+    public void processFinalizedModel(GoSettings settings, Model model) {
+        if (!isCFKVSService(model, model.expectShape(settings.getService(), ServiceShape.class))) {
+            return;
+        }
+        runtimeClientPlugins.add(
+            RuntimeClientPlugin.builder()
+            .configFields(
+               ListUtils.of(
+                       ConfigField.builder()
+                               .name(AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
+                               .type(SymbolUtils.createValueSymbolBuilder(
+                                               AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
+                                       .build())
+                               .documentation("Signature Version 4a (SigV4a) Signer")
+                               .build()
+               )
+           )
+           .build()
         );
     }
 
