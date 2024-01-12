@@ -97,6 +97,9 @@ type Options struct {
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
 
+	// Signature Version 4a (SigV4a) Signer
+	httpSignerV4a httpSignerV4a
+
 	// The initial DefaultsMode used when the client options were constructed. If the
 	// DefaultsMode was set to aws.DefaultsModeAuto this will store what the resolved
 	// value was at that point in time. Currently does not support per operation call

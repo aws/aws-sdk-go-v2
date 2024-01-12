@@ -435,6 +435,27 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 	return nil
 }
 
+type httpSignerV4a interface {
+	SignHTTP(ctx context.Context, credentials v4a.Credentials, r *http.Request, payloadHash,
+		service string, regionSet []string, signingTime time.Time,
+		optFns ...func(*v4a.SignerOptions)) error
+}
+
+func resolveHTTPSignerV4a(o *Options) {
+	if o.httpSignerV4a != nil {
+		return
+	}
+	o.httpSignerV4a = newDefaultV4aSigner(*o)
+}
+
+func newDefaultV4aSigner(o Options) *v4a.Signer {
+	return v4a.NewSigner(func(so *v4a.SignerOptions) {
+		so.Logger = o.Logger
+		so.LogSigning = o.ClientLogMode.IsSigning()
+		so.DisableURIPathEscaping = false
+	})
+}
+
 func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
 	return awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
 }
