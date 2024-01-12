@@ -80,6 +80,8 @@ const (
 	awsRequestMinCompressionSizeBytes = "AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES"
 
 	awsS3DisableExpressSessionAuthEnv = "AWS_S3_DISABLE_EXPRESS_SESSION_AUTH"
+
+	awsAccountIDEnv = "AWS_ACCOUNT_ID"
 )
 
 var (
@@ -309,6 +311,7 @@ func NewEnvConfig() (EnvConfig, error) {
 	setStringFromEnvVal(&creds.AccessKeyID, credAccessEnvKeys)
 	setStringFromEnvVal(&creds.SecretAccessKey, credSecretEnvKeys)
 	if creds.HasKeys() {
+		creds.AccountID = os.Getenv(awsAccountIDEnv)
 		creds.SessionToken = os.Getenv(awsSessionTokenEnvVar)
 		cfg.Credentials = creds
 	}

@@ -81,6 +81,17 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 				Source: CredentialsSourceName,
 			},
 		},
+		{
+			Env: map[string]string{
+				"AWS_ACCESS_KEY_ID":     "AKID",
+				"AWS_SECRET_ACCESS_KEY": "SECRET",
+				"AWS_ACCOUNT_ID":        "012345678901",
+			},
+			Val: aws.Credentials{
+				AccessKeyID: "AKID", SecretAccessKey: "SECRET", AccountID: "012345678901",
+				Source: CredentialsSourceName,
+			},
+		},
 	}
 
 	for i, c := range cases {

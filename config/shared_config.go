@@ -115,6 +115,8 @@ const (
 	requestMinCompressionSizeBytes = "request_min_compression_size_bytes"
 
 	s3DisableExpressSessionAuthKey = "s3_disable_express_session_auth"
+
+	accountIDKey = "aws_account_id"
 )
 
 // defaultSharedConfigProfile allows for swapping the default profile for testing
@@ -1130,6 +1132,7 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 		SecretAccessKey: section.String(secretAccessKey),
 		SessionToken:    section.String(sessionTokenKey),
 		Source:          fmt.Sprintf("SharedConfigCredentials: %s", section.SourceFile[accessKeyIDKey]),
+		AccountID:       section.String(accountIDKey),
 	}
 
 	if creds.HasKeys() {

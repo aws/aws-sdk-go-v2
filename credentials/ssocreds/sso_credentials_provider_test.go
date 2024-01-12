@@ -110,6 +110,7 @@ func TestProvider(t *testing.T) {
 				CanExpire:       true,
 				Expires:         time.Date(2021, 01, 20, 21, 22, 23, 0.123e9, time.UTC),
 				Source:          ProviderName,
+				AccountID:       "012345678901",
 			},
 		},
 		"custom cached token file": {
@@ -144,6 +145,7 @@ func TestProvider(t *testing.T) {
 				CanExpire:       true,
 				Expires:         time.Date(2021, 01, 20, 21, 22, 23, 0.123e9, time.UTC),
 				Source:          ProviderName,
+				AccountID:       "012345678901",
 			},
 		},
 		"expired access token": {

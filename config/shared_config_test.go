@@ -730,6 +730,19 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
+		"profile with aws account ID": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "account_id",
+			Expected: SharedConfig{
+				Profile: "account_id",
+				Credentials: aws.Credentials{
+					AccessKeyID:     "account_id_akid",
+					SecretAccessKey: "account_id_secret",
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					AccountID:       "012345678901",
+				},
+			},
+		},
 	}
 
 	for name, c := range cases {
