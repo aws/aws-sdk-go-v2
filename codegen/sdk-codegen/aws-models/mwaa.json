@@ -26,6 +26,15 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.mwaa#AirflowIdentity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.mwaa#AirflowVersion": {
             "type": "string",
             "traits": {
@@ -1247,6 +1256,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Airflow web server hostname for the environment.</p>"
                     }
+                },
+                "IamIdentity": {
+                    "target": "com.amazonaws.mwaa#IamIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM identity creating the web login token. This might be an IAM user, or an assumed or federated identity. For example, <code>assumed-role/Admin/your-name</code>.</p>"
+                    }
+                },
+                "AirflowIdentity": {
+                    "target": "com.amazonaws.mwaa#AirflowIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name of the Apache Airflow identity creating the web login token.</p>"
+                    }
                 }
             }
         },
@@ -1717,6 +1738,9 @@
                 },
                 "smithy.api#pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
             }
+        },
+        "com.amazonaws.mwaa#IamIdentity": {
+            "type": "string"
         },
         "com.amazonaws.mwaa#IamRoleArn": {
             "type": "string",
