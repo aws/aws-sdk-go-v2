@@ -1,3 +1,7 @@
+# v1.21.0 (2024-01-12)
+
+* **Feature**: Introduce new Supervisor participant role
+
 # v1.20.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

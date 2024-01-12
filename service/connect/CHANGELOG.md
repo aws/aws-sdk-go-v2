@@ -1,3 +1,7 @@
+# v1.89.0 (2024-01-12)
+
+* **Feature**: Supervisor Barge for Chat is now supported through the MonitorContact API.
+
 # v1.88.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

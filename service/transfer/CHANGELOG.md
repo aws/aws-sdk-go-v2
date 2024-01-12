@@ -1,3 +1,7 @@
+# v1.40.0 (2024-01-12)
+
+* **Feature**: AWS Transfer Family now supports static IP addresses for SFTP & AS2 connectors and for async MDNs on AS2 servers.
+
 # v1.39.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

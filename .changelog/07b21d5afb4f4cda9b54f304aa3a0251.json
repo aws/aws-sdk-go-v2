@@ -1,8 +1,0 @@
-{
-    "id": "07b21d5a-fb4f-4cda-9b54-f304aa3a0251",
-    "type": "feature",
-    "description": "AWS Transfer Family now supports static IP addresses for SFTP \u0026 AS2 connectors and for async MDNs on AS2 servers.",
-    "modules": [
-        "service/transfer"
-    ]
-}

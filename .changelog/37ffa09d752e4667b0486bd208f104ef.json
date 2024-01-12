@@ -1,8 +1,0 @@
-{
-    "id": "37ffa09d-752e-4667-b048-6bd208f104ef",
-    "type": "feature",
-    "description": "Supervisor Barge for Chat is now supported through the MonitorContact API.",
-    "modules": [
-        "service/connect"
-    ]
-}

@@ -1,3 +1,22 @@
+# Release (2024-01-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.89.0](service/connect/CHANGELOG.md#v1890-2024-01-12)
+  * **Feature**: Supervisor Barge for Chat is now supported through the MonitorContact API.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.21.0](service/connectparticipant/CHANGELOG.md#v1210-2024-01-12)
+  * **Feature**: Introduce new Supervisor participant role
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.35.1](service/location/CHANGELOG.md#v1351-2024-01-12)
+  * **Documentation**: Location SDK documentation update. Added missing fonts to the MapConfiguration data type. Updated note for the SubMunicipality property in the place data type.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.23.0](service/mwaa/CHANGELOG.md#v1230-2024-01-12)
+  * **Feature**: This Amazon MWAA feature release includes new fields in CreateWebLoginToken response model. The new fields IamIdentity and AirflowIdentity will let you match identifications, as the Airflow identity length is currently hashed to 64 characters.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.42.0](service/s3control/CHANGELOG.md#v1420-2024-01-12)
+  * **Feature**: S3 On Outposts team adds dualstack endpoints support for S3Control and S3Outposts API calls.
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.0.0](service/supplychain/CHANGELOG.md#v100-2024-01-12)
+  * **Release**: New AWS service client module
+  * **Feature**: This release includes APIs CreateBillOfMaterialsImportJob and GetBillOfMaterialsImportJob.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.40.0](service/transfer/CHANGELOG.md#v1400-2024-01-12)
+  * **Feature**: AWS Transfer Family now supports static IP addresses for SFTP & AS2 connectors and for async MDNs on AS2 servers.
+
 # Release (2024-01-11)
 
 ## Module Highlights

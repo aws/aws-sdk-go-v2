@@ -1,3 +1,7 @@
+# v1.42.0 (2024-01-12)
+
+* **Feature**: S3 On Outposts team adds dualstack endpoints support for S3Control and S3Outposts API calls.
+
 # v1.41.8 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions
