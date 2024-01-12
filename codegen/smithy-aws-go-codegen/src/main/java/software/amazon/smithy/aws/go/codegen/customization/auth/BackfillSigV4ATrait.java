@@ -31,10 +31,11 @@ import software.amazon.smithy.utils.SetUtils;
 public class BackfillSigV4ATrait implements GoIntegration {
     private boolean isBackfillService(ServiceShape service) {
         final String sdkId = service.expectTrait(ServiceTrait.class).getSdkId();
+        final String serviceId = sdkId.replace("-", "").replace(" ", "").toLowerCase();
         return (
-            sdkId.equalsIgnoreCase("s3") ||
-            sdkId.equalsIgnoreCase("eventbridge") ||
-            sdkId.equalsIgnoreCase("cloudfrontkeyvaluestore")
+            serviceId.equalsIgnoreCase("s3") ||
+            serviceId.equalsIgnoreCase("eventbridge") ||
+            serviceId.equalsIgnoreCase("cloudfrontkeyvaluestore")
         );
     };
 
