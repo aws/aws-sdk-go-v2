@@ -1,6 +1,7 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
+import java.util.ArrayList;
 import software.amazon.smithy.aws.go.codegen.AddAwsConfigFields;
 import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4;
@@ -84,6 +85,7 @@ public class CloudFrontKVSSigV4a implements GoIntegration {
         goDelegator.useShapeWriter(serviceShape, writer -> {
             writerSignerInterface(writer);
             writerConfigFieldResolver(writer, serviceShape);
+            writeNewV4ASignerFunc(writer, serviceShape);
         });
 
     }
@@ -91,6 +93,10 @@ public class CloudFrontKVSSigV4a implements GoIntegration {
 
     private void writerSignerInterface(GoWriter writer) {
         AwsSignatureVersion4aUtils.writerSignerInterface(writer);
+    }
+
+    private void writeNewV4ASignerFunc(GoWriter writer, ServiceShape serviceShape) {
+        AwsSignatureVersion4aUtils.writeNewV4ASignerFunc(writer, serviceShape);
     }
 
     private void writerConfigFieldResolver(GoWriter writer, ServiceShape serviceShape) {
