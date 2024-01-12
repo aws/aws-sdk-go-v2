@@ -31,13 +31,21 @@ import software.amazon.smithy.utils.SetUtils;
 public class BackfillSigV4ATrait implements GoIntegration {
     private boolean isBackfillService(ServiceShape service) {
         final String sdkId = service.expectTrait(ServiceTrait.class).getSdkId();
-        return sdkId.equalsIgnoreCase("s3") || sdkId.equalsIgnoreCase("eventbridge");
+        return (
+            sdkId.equalsIgnoreCase("s3") ||
+            sdkId.equalsIgnoreCase("eventbridge") ||
+            sdkId.equalsIgnoreCase("cloudfrontkeyvaluestore")
+        );
     };
 
     @Override
     public Model preprocessModel(Model model, GoSettings settings) {
         ServiceShape service = settings.getService(model);
         if (!isBackfillService(service)) {
+            return model;
+        }
+
+        if (settings.getService(model).hasTrait(SigV4ATrait.class)) {
             return model;
         }
 
