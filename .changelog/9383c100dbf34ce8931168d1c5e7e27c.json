@@ -1,0 +1,8 @@
+{
+    "id": "9383c100-dbf3-4ce8-9311-68d1c5e7e27c",
+    "type": "feature",
+    "description": "This Amazon MWAA feature release includes new fields in CreateWebLoginToken response model. The new fields IamIdentity and AirflowIdentity will let you match identifications, as the Airflow identity length is currently hashed to 64 characters.",
+    "modules": [
+        "service/mwaa"
+    ]
+}

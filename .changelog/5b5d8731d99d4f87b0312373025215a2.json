@@ -1,0 +1,8 @@
+{
+    "id": "5b5d8731-d99d-4f87-b031-2373025215a2",
+    "type": "feature",
+    "description": "Introduce new Supervisor participant role",
+    "modules": [
+        "service/connectparticipant"
+    ]
+}

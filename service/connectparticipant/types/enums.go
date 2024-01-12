@@ -82,10 +82,11 @@ type ParticipantRole string
 
 // Enum values for ParticipantRole
 const (
-	ParticipantRoleAgent     ParticipantRole = "AGENT"
-	ParticipantRoleCustomer  ParticipantRole = "CUSTOMER"
-	ParticipantRoleSystem    ParticipantRole = "SYSTEM"
-	ParticipantRoleCustomBot ParticipantRole = "CUSTOM_BOT"
+	ParticipantRoleAgent      ParticipantRole = "AGENT"
+	ParticipantRoleCustomer   ParticipantRole = "CUSTOMER"
+	ParticipantRoleSystem     ParticipantRole = "SYSTEM"
+	ParticipantRoleCustomBot  ParticipantRole = "CUSTOM_BOT"
+	ParticipantRoleSupervisor ParticipantRole = "SUPERVISOR"
 )
 
 // Values returns all known values for ParticipantRole. Note that this can be
@@ -97,6 +98,7 @@ func (ParticipantRole) Values() []ParticipantRole {
 		"CUSTOMER",
 		"SYSTEM",
 		"CUSTOM_BOT",
+		"SUPERVISOR",
 	}
 }
 
@@ -111,6 +113,7 @@ const (
 	ResourceTypeHierarchyLevel ResourceType = "HIERARCHY_LEVEL"
 	ResourceTypeHierarchyGroup ResourceType = "HIERARCHY_GROUP"
 	ResourceTypeUser           ResourceType = "USER"
+	ResourceTypePhoneNumber    ResourceType = "PHONE_NUMBER"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -125,6 +128,7 @@ func (ResourceType) Values() []ResourceType {
 		"HIERARCHY_LEVEL",
 		"HIERARCHY_GROUP",
 		"USER",
+		"PHONE_NUMBER",
 	}
 }
 

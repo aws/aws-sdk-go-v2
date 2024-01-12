@@ -1,0 +1,8 @@
+{
+    "id": "c464520d-3bc3-4515-b45a-ea9a22f196ec",
+    "type": "feature",
+    "description": "This release includes APIs CreateBillOfMaterialsImportJob and GetBillOfMaterialsImportJob.",
+    "modules": [
+        "service/supplychain"
+    ]
+}

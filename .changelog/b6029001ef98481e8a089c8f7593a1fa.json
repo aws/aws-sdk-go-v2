@@ -1,0 +1,8 @@
+{
+    "id": "b6029001-ef98-481e-8a08-9c8f7593a1fa",
+    "type": "feature",
+    "description": "S3 On Outposts team adds dualstack endpoints support for S3Control and S3Outposts API calls.",
+    "modules": [
+        "service/s3control"
+    ]
+}

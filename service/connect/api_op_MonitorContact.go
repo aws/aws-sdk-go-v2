@@ -50,6 +50,7 @@ type MonitorContactInput struct {
 
 	// Specify which monitoring actions the user is allowed to take. For example,
 	// whether the user is allowed to escalate from silent monitoring to barge.
+	// AllowedMonitorCapabilities is required if barge is enabled.
 	AllowedMonitorCapabilities []types.MonitorCapability
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency

@@ -52,8 +52,10 @@ type GetMetricDataInput struct {
 	// The queues, up to 100, or channels, to use to filter the metrics returned.
 	// Metric data is retrieved only for the resources associated with the queues or
 	// channels included in the filter. You can include both queue IDs and queue ARNs
-	// in the same request. VOICE, CHAT, and TASK channels are supported. To filter by
-	// Queues , enter the queue ID/ARN, not the name of the queue.
+	// in the same request. VOICE, CHAT, and TASK channels are supported.
+	// RoutingStepExpression is not a valid filter for GetMetricData and we recommend
+	// switching to GetMetricDataV2 for more up-to-date features. To filter by Queues ,
+	// enter the queue ID/ARN, not the name of the queue.
 	//
 	// This member is required.
 	Filters *types.Filters
@@ -106,6 +108,8 @@ type GetMetricDataInput struct {
 	// grouped by queue, the metrics returned are grouped by queue. The values returned
 	// apply to the metrics for each queue rather than aggregated for all queues. If no
 	// grouping is specified, a summary of metrics for all queues is returned.
+	// RoutingStepExpression is not a valid filter for GetMetricData and we recommend
+	// switching to GetMetricDataV2 for more up-to-date features.
 	Groupings []types.Grouping
 
 	// The maximum number of results to return per page.

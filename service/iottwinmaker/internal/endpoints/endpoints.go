@@ -408,6 +408,27 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "api-cn-north-1",
+			}: endpoints.Endpoint{
+				Hostname: "api.iottwinmaker.cn-north-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-north-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "cn-north-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "data-cn-north-1",
+			}: endpoints.Endpoint{
+				Hostname: "data.iottwinmaker.cn-north-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-north-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-iso",
