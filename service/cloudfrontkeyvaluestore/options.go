@@ -4,9 +4,11 @@ package cloudfrontkeyvaluestore
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
+	"github.com/aws/aws-sdk-go-v2/internal/v4a"
 	smithyauth "github.com/aws/smithy-go/auth"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
@@ -126,6 +128,9 @@ func (o Options) GetIdentityResolver(schemeID string) smithyauth.IdentityResolve
 	if schemeID == "aws.auth#sigv4" {
 		return getSigV4IdentityResolver(o)
 	}
+	if schemeID == "aws.auth#sigv4a" {
+		return getSigV4AIdentityResolver(o)
+	}
 	if schemeID == "smithy.api#noAuth" {
 		return &smithyauth.AnonymousIdentityResolver{}
 	}
@@ -204,6 +209,46 @@ func WithSigV4SigningRegion(region string) func(*Options) {
 		o.APIOptions = append(o.APIOptions, func(s *middleware.Stack) error {
 			return s.Initialize.Add(
 				middleware.InitializeMiddlewareFunc("withSigV4SigningRegion", fn),
+				middleware.Before,
+			)
+		})
+	}
+}
+
+func getSigV4AIdentityResolver(o Options) smithyauth.IdentityResolver {
+	if o.Credentials != nil {
+		return &v4a.CredentialsProviderAdapter{
+			Provider: &v4a.SymmetricCredentialAdaptor{
+				SymmetricProvider: o.Credentials,
+			},
+		}
+	}
+	return nil
+}
+
+// WithSigV4ASigningRegions applies an override to the authentication workflow to
+// use the given signing region set for SigV4A-authenticated operations.
+//
+// This is an advanced setting. The value here is FINAL, taking precedence over
+// the resolved signing region set from both auth scheme resolution and endpoint
+// resolution.
+func WithSigV4ASigningRegions(regions []string) func(*Options) {
+	fn := func(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+		out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+	) {
+		rscheme := getResolvedAuthScheme(ctx)
+		if rscheme == nil {
+			return out, metadata, fmt.Errorf("no resolved auth scheme")
+		}
+
+		smithyhttp.SetSigV4ASigningRegions(&rscheme.SignerProperties, regions)
+		return next.HandleFinalize(ctx, in)
+	}
+	return func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(s *middleware.Stack) error {
+			return s.Finalize.Insert(
+				middleware.FinalizeMiddlewareFunc("withSigV4ASigningRegions", fn),
+				"Signing",
 				middleware.Before,
 			)
 		})
