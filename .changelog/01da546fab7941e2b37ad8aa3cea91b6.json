@@ -1,0 +1,8 @@
+{
+    "id": "01da546f-ab79-41e2-b37a-d8aa3cea91b6",
+    "type": "feature",
+    "description": "This release will have ValidationException thrown if certain invalid app types are provided. The release will also throw ValidationException if more than 10 account ids are provided in VpcOnlyTrustedAccounts.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}
