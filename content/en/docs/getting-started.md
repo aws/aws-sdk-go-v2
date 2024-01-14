@@ -105,8 +105,9 @@ import (
 )
 
 func main() {
-	// Load the Shared AWS Configuration (~/.aws/config)
-	cfg, err := config.LoadDefaultConfig(context.TODO())
+	// Load the Shared AWS Configuration (~/.aws/credentials)
+	// Load the Region  Configuration (~/.aws/config)
+	cfg, err := config.LoadDefaultConfig(context.TODO(),config.WithSharedConfigProfile("Your-username"))
 	if err != nil {
 		log.Fatal(err)
 	}
