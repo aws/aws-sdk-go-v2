@@ -1,3 +1,7 @@
+# v1.125.0 (2024-01-14)
+
+* **Feature**: This release will have ValidationException thrown if certain invalid app types are provided. The release will also throw ValidationException if more than 10 account ids are provided in VpcOnlyTrustedAccounts.
+
 # v1.124.0 (2024-01-04)
 
 * **Feature**: Adding support for provisioned throughput mode for SageMaker Feature Groups
