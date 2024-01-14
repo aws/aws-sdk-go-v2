@@ -423,6 +423,12 @@
                     "traits": {
                         "smithy.api#enumValue": "S3Object"
                     }
+                },
+                "S3PREFIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3Prefix"
+                    }
                 }
             }
         },
@@ -1554,18 +1560,6 @@
                         "smithy.api#enumValue": "TensorBoard"
                     }
                 },
-                "VSCode": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "VSCode"
-                    }
-                },
-                "Savitur": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Savitur"
-                    }
-                },
                 "CodeEditor": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -1584,12 +1578,6 @@
                         "smithy.api#enumValue": "RStudioServerPro"
                     }
                 },
-                "RSession": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "RSession"
-                    }
-                },
                 "RSessionGateway": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -1600,24 +1588,6 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Canvas"
-                    }
-                },
-                "DatasetManager": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DatasetManager"
-                    }
-                },
-                "SageMakerLite": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "SageMakerLite"
-                    }
-                },
-                "Local": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Local"
                     }
                 }
             }
@@ -58229,18 +58199,6 @@
                         "smithy.api#enumValue": "KernelGateway"
                     }
                 },
-                "VSCode": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "VSCode"
-                    }
-                },
-                "Savitur": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Savitur"
-                    }
-                },
                 "CodeEditor": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -65615,6 +65573,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#AccountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.sagemaker#VpcSecurityGroupIds": {
