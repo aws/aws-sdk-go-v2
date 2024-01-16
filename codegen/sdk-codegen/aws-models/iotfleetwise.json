@@ -732,7 +732,7 @@
                 "expression": {
                     "target": "com.amazonaws.iotfleetwise#eventExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logical expression used to recognize what data to collect. For example,\n                <code>$variable.Vehicle.OutsideAirTemperature &gt;= 105.0</code>.</p>",
+                        "smithy.api#documentation": "<p>The logical expression used to recognize what data to collect. For example,\n            <code>$variable.`Vehicle.OutsideAirTemperature` &gt;= 105.0</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5267,6 +5267,13 @@
                         "smithy.api#documentation": "<p> The maximum number of items to return, between 1 and 100, inclusive. </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "signalNodeType": {
+                    "target": "com.amazonaws.iotfleetwise#SignalNodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of node in the signal catalog.</p>",
+                        "smithy.api#httpQuery": "signalNodeType"
+                    }
                 }
             }
         },
@@ -7275,6 +7282,47 @@
                 }
             }
         },
+        "com.amazonaws.iotfleetwise#SignalNodeType": {
+            "type": "enum",
+            "members": {
+                "SENSOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SENSOR"
+                    }
+                },
+                "ACTUATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTUATOR"
+                    }
+                },
+                "ATTRIBUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTRIBUTE"
+                    }
+                },
+                "BRANCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BRANCH"
+                    }
+                },
+                "CUSTOM_STRUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_STRUCT"
+                    }
+                },
+                "CUSTOM_PROPERTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_PROPERTY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotfleetwise#SpoolingMode": {
             "type": "enum",
             "members": {
@@ -8838,6 +8886,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time the vehicle was last updated in seconds since epoch (January 1, 1970 at midnight UTC time). </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.iotfleetwise#attributesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:</p>\n         <p>\n            <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>"
                     }
                 }
             },

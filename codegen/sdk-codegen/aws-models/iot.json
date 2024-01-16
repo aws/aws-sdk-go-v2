@@ -25786,18 +25786,6 @@
                     "traits": {
                         "smithy.api#enumValue": "PRINCIPAL_ID"
                     }
-                },
-                "EVENT_TYPE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "EVENT_TYPE"
-                    }
-                },
-                "DEVICE_DEFENDER": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DEVICE_DEFENDER"
-                    }
                 }
             }
         },
