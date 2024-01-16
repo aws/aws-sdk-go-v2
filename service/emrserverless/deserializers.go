@@ -3121,7 +3121,7 @@ func awsRestjson1_deserializeDocumentInitialCapacityConfig(v **types.InitialCapa
 				if err != nil {
 					return err
 				}
-				sv.WorkerCount = i64
+				sv.WorkerCount = ptr.Int64(i64)
 			}
 
 		default:

@@ -1509,9 +1509,9 @@ func awsRestjson1_serializeDocumentInitialCapacityConfig(v *types.InitialCapacit
 		}
 	}
 
-	{
+	if v.WorkerCount != nil {
 		ok := object.Key("workerCount")
-		ok.Long(v.WorkerCount)
+		ok.Long(*v.WorkerCount)
 	}
 
 	return nil
