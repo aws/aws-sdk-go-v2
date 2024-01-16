@@ -1,8 +1,0 @@
-{
-    "id": "46aa29e6-54b1-42a3-a522-6c750736f1be",
-    "type": "feature",
-    "description": "This release adds ContentType and TaxonomyLevel attributes to DetectModerationLabels and GetMediaAnalysisJob API responses.",
-    "modules": [
-        "service/rekognition"
-    ]
-}

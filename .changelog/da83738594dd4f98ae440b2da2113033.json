@@ -1,8 +1,0 @@
-{
-    "id": "da837385-94dd-4f98-ae44-0b2da2113033",
-    "type": "feature",
-    "description": "Updated APIs: SignalNodeType query parameter has been added to ListSignalCatalogNodesRequest and ListVehiclesResponse has been extended with attributes field.",
-    "modules": [
-        "service/iotfleetwise"
-    ]
-}

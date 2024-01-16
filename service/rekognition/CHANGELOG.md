@@ -1,3 +1,7 @@
+# v1.36.0 (2024-01-16)
+
+* **Feature**: This release adds ContentType and TaxonomyLevel attributes to DetectModerationLabels and GetMediaAnalysisJob API responses.
+
 # v1.35.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

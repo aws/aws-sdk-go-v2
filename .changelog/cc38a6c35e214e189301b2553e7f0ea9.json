@@ -1,8 +1,0 @@
-{
-    "id": "cc38a6c3-5e21-4e18-9301-b2553e7f0ea9",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon Personalize",
-    "modules": [
-        "service/personalizeruntime"
-    ]
-}

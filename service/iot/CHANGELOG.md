@@ -1,3 +1,7 @@
+# v1.49.0 (2024-01-16)
+
+* **Feature**: Revert release of LogTargetTypes
+
 # v1.48.0 (2024-01-11)
 
 * **Feature**: Add ConflictException to Update APIs of AWS IoT Software Package Catalog

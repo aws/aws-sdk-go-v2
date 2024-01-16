@@ -1,3 +1,26 @@
+# Release (2024-01-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.49.0](service/iot/CHANGELOG.md#v1490-2024-01-16)
+  * **Feature**: Revert release of LogTargetTypes
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.12.0](service/iotfleetwise/CHANGELOG.md#v1120-2024-01-16)
+  * **Feature**: Updated APIs: SignalNodeType query parameter has been added to ListSignalCatalogNodesRequest and ListVehiclesResponse has been extended with attributes field.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.35.0](service/macie2/CHANGELOG.md#v1350-2024-01-16)
+  * **Feature**: This release adds support for analyzing Amazon S3 objects that are encrypted using dual-layer server-side encryption with AWS KMS keys (DSSE-KMS). It also adds support for reporting DSSE-KMS details in statistics and metadata about encryption settings for S3 buckets and objects.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.7.0](service/paymentcryptography/CHANGELOG.md#v170-2024-01-16)
+  * **Feature**: Provide an additional option for key exchange using RSA wrap/unwrap in addition to tr-34/tr-31 in ImportKey and ExportKey operations. Added new key usage (type) TR31_M1_ISO_9797_1_MAC_KEY, for use with Generate/VerifyMac dataplane operations  with ISO9797 Algorithm 1 MAC calculations.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.30.7](service/personalize/CHANGELOG.md#v1307-2024-01-16)
+  * **Documentation**: Documentation updates for Amazon Personalize.
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.20.7](service/personalizeruntime/CHANGELOG.md#v1207-2024-01-16)
+  * **Documentation**: Documentation updates for Amazon Personalize
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.36.0](service/rekognition/CHANGELOG.md#v1360-2024-01-16)
+  * **Feature**: This release adds ContentType and TaxonomyLevel attributes to DetectModerationLabels and GetMediaAnalysisJob API responses.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.44.3](service/securityhub/CHANGELOG.md#v1443-2024-01-16)
+  * **Documentation**: Documentation updates for AWS Security Hub
+
 # Release (2024-01-14)
 
 ## Module Highlights
