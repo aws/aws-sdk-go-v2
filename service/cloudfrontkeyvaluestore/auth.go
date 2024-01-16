@@ -122,6 +122,16 @@ var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyaut
 func serviceAuthOptions(params *AuthResolverParameters) []*smithyauth.Option {
 	return []*smithyauth.Option{
 		{
+			SchemeID: smithyauth.SchemeIDSigV4A,
+			SignerProperties: func() smithy.Properties {
+				var props smithy.Properties
+				smithyhttp.SetSigV4ASigningName(&props, "cloudfront-keyvaluestore")
+				smithyhttp.SetSigV4ASigningRegions(&props, []string{params.Region})
+				return props
+			}(),
+		},
+
+		{
 			SchemeID: smithyauth.SchemeIDSigV4,
 			SignerProperties: func() smithy.Properties {
 				var props smithy.Properties
