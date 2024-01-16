@@ -54,16 +54,50 @@ type ExportDukptInitialKey struct {
 	noSmithyDocumentSerde
 }
 
+// Parameter information for key material export using asymmetric RSA wrap and
+// unwrap key exchange method.
+type ExportKeyCryptogram struct {
+
+	// The KeyARN of the certificate chain that signs the wrapping key certificate
+	// during RSA wrap and unwrap key export.
+	//
+	// This member is required.
+	CertificateAuthorityPublicKeyIdentifier *string
+
+	// The wrapping key certificate in PEM format (base64 encoded). Amazon Web
+	// Services Payment Cryptography uses this certificate to wrap the key under
+	// export.
+	//
+	// This member is required.
+	WrappingKeyCertificate *string
+
+	// The wrapping spec for the key under export.
+	WrappingSpec WrappingKeySpec
+
+	noSmithyDocumentSerde
+}
+
 // Parameter information for key material export from Amazon Web Services Payment
-// Cryptography using TR-31 or TR-34 key exchange method.
+// Cryptography using TR-31 or TR-34 or RSA wrap and unwrap key exchange method.
 //
 // The following types satisfy this interface:
 //
+//	ExportKeyMaterialMemberKeyCryptogram
 //	ExportKeyMaterialMemberTr31KeyBlock
 //	ExportKeyMaterialMemberTr34KeyBlock
 type ExportKeyMaterial interface {
 	isExportKeyMaterial()
 }
+
+// Parameter information for key material export using asymmetric RSA wrap and
+// unwrap key exchange method
+type ExportKeyMaterialMemberKeyCryptogram struct {
+	Value ExportKeyCryptogram
+
+	noSmithyDocumentSerde
+}
+
+func (*ExportKeyMaterialMemberKeyCryptogram) isExportKeyMaterial() {}
 
 // Parameter information for key material export using symmetric TR-31 key
 // exchange method.
@@ -137,11 +171,47 @@ type ExportTr34KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
+// Parameter information for key material import using asymmetric RSA wrap and
+// unwrap key exchange method.
+type ImportKeyCryptogram struct {
+
+	// Specifies whether the key is exportable from the service.
+	//
+	// This member is required.
+	Exportable *bool
+
+	// The import token that initiates key import using the asymmetric RSA wrap and
+	// unwrap key exchange method into AWS Payment Cryptography. It expires after 7
+	// days. You can use the same import token to import multiple keys to the same
+	// service account.
+	//
+	// This member is required.
+	ImportToken *string
+
+	// The role of the key, the algorithm it supports, and the cryptographic
+	// operations allowed with the key. This data is immutable after the key is
+	// created.
+	//
+	// This member is required.
+	KeyAttributes *KeyAttributes
+
+	// The RSA wrapped key cryptogram under import.
+	//
+	// This member is required.
+	WrappedKeyCryptogram *string
+
+	// The wrapping spec for the wrapped key cryptogram.
+	WrappingSpec WrappingKeySpec
+
+	noSmithyDocumentSerde
+}
+
 // Parameter information for key material import into Amazon Web Services Payment
-// Cryptography using TR-31 or TR-34 key exchange method.
+// Cryptography using TR-31 or TR-34 or RSA wrap and unwrap key exchange method.
 //
 // The following types satisfy this interface:
 //
+//	ImportKeyMaterialMemberKeyCryptogram
 //	ImportKeyMaterialMemberRootCertificatePublicKey
 //	ImportKeyMaterialMemberTr31KeyBlock
 //	ImportKeyMaterialMemberTr34KeyBlock
@@ -149,6 +219,16 @@ type ExportTr34KeyBlock struct {
 type ImportKeyMaterial interface {
 	isImportKeyMaterial()
 }
+
+// Parameter information for key material import using asymmetric RSA wrap and
+// unwrap key exchange method.
+type ImportKeyMaterialMemberKeyCryptogram struct {
+	Value ImportKeyCryptogram
+
+	noSmithyDocumentSerde
+}
+
+func (*ImportKeyMaterialMemberKeyCryptogram) isImportKeyMaterial() {}
 
 // Parameter information for root public key certificate import.
 type ImportKeyMaterialMemberRootCertificatePublicKey struct {

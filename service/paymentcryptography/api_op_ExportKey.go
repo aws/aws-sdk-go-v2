@@ -21,43 +21,46 @@ import (
 // operations outside of Amazon Web Services Payment Cryptography For symmetric key
 // exchange, Amazon Web Services Payment Cryptography uses the ANSI X9 TR-31 norm
 // in accordance with PCI PIN guidelines. And for asymmetric key exchange, Amazon
-// Web Services Payment Cryptography supports ANSI X9 TR-34 norm . Asymmetric key
-// exchange methods are typically used to establish bi-directional trust between
-// the two parties exhanging keys and are used for initial key exchange such as Key
-// Encryption Key (KEK). After which you can export working keys using symmetric
-// method to perform various cryptographic operations within Amazon Web Services
-// Payment Cryptography. The TR-34 norm is intended for exchanging 3DES keys only
-// and keys are imported in a WrappedKeyBlock format. Key attributes (such as
-// KeyUsage, KeyAlgorithm, KeyModesOfUse, Exportability) are contained within the
-// key block. You can also use ExportKey functionality to generate and export an
-// IPEK (Initial Pin Encryption Key) from Amazon Web Services Payment Cryptography
-// using either TR-31 or TR-34 export key exchange. IPEK is generated from BDK
-// (Base Derivation Key) and ExportDukptInitialKey attribute KSN ( KeySerialNumber
-// ). The generated IPEK does not persist within Amazon Web Services Payment
-// Cryptography and has to be re-generated each time during export. To export KEK
-// or IPEK using TR-34 Using this operation, you can export initial key using TR-34
-// asymmetric key exchange. You can only export KEK generated within Amazon Web
-// Services Payment Cryptography. In TR-34 terminology, the sending party of the
-// key is called Key Distribution Host (KDH) and the receiving party of the key is
-// called Key Receiving Device (KRD). During key export process, KDH is Amazon Web
-// Services Payment Cryptography which initiates key export and KRD is the user
-// receiving the key. To initiate TR-34 key export, the KRD must obtain an export
-// token by calling GetParametersForExport . This operation also generates a key
-// pair for the purpose of key export, signs the key and returns back the signing
-// public key certificate (also known as KDH signing certificate) and root
-// certificate chain. The KDH uses the private key to sign the the export payload
-// and the signing public key certificate is provided to KRD to verify the
-// signature. The KRD can import the root certificate into its Hardware Security
-// Module (HSM), as required. The export token and the associated KDH signing
-// certificate expires after 7 days. Next the KRD generates a key pair for the the
-// purpose of encrypting the KDH key and provides the public key cerificate (also
-// known as KRD wrapping certificate) back to KDH. The KRD will also import the
-// root cerificate chain into Amazon Web Services Payment Cryptography by calling
-// ImportKey for RootCertificatePublicKey . The KDH, Amazon Web Services Payment
-// Cryptography, will use the KRD wrapping cerificate to encrypt (wrap) the key
-// under export and signs it with signing private key to generate a TR-34
-// WrappedKeyBlock. For more information on TR-34 key export, see section
-// Exporting symmetric keys (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-export.html)
+// Web Services Payment Cryptography supports ANSI X9 TR-34 norm and RSA wrap and
+// unwrap key exchange mechanism. Asymmetric key exchange methods are typically
+// used to establish bi-directional trust between the two parties exhanging keys
+// and are used for initial key exchange such as Key Encryption Key (KEK). After
+// which you can export working keys using symmetric method to perform various
+// cryptographic operations within Amazon Web Services Payment Cryptography. The
+// TR-34 norm is intended for exchanging 3DES keys only and keys are imported in a
+// WrappedKeyBlock format. Key attributes (such as KeyUsage, KeyAlgorithm,
+// KeyModesOfUse, Exportability) are contained within the key block. With RSA wrap
+// and unwrap, you can exchange both 3DES and AES-128 keys. The keys are imported
+// in a WrappedKeyCryptogram format and you will need to specify the key attributes
+// during import. You can also use ExportKey functionality to generate and export
+// an IPEK (Initial Pin Encryption Key) from Amazon Web Services Payment
+// Cryptography using either TR-31 or TR-34 export key exchange. IPEK is generated
+// from BDK (Base Derivation Key) and ExportDukptInitialKey attribute KSN (
+// KeySerialNumber ). The generated IPEK does not persist within Amazon Web
+// Services Payment Cryptography and has to be re-generated each time during
+// export. To export initial keys (KEK) or IPEK using TR-34 Using this operation,
+// you can export initial key using TR-34 asymmetric key exchange. You can only
+// export KEK generated within Amazon Web Services Payment Cryptography. In TR-34
+// terminology, the sending party of the key is called Key Distribution Host (KDH)
+// and the receiving party of the key is called Key Receiving Device (KRD). During
+// key export process, KDH is Amazon Web Services Payment Cryptography which
+// initiates key export and KRD is the user receiving the key. To initiate TR-34
+// key export, the KRD must obtain an export token by calling
+// GetParametersForExport . This operation also generates a key pair for the
+// purpose of key export, signs the key and returns back the signing public key
+// certificate (also known as KDH signing certificate) and root certificate chain.
+// The KDH uses the private key to sign the the export payload and the signing
+// public key certificate is provided to KRD to verify the signature. The KRD can
+// import the root certificate into its Hardware Security Module (HSM), as
+// required. The export token and the associated KDH signing certificate expires
+// after 7 days. Next the KRD generates a key pair for the the purpose of
+// encrypting the KDH key and provides the public key cerificate (also known as KRD
+// wrapping certificate) back to KDH. The KRD will also import the root cerificate
+// chain into Amazon Web Services Payment Cryptography by calling ImportKey for
+// RootCertificatePublicKey . The KDH, Amazon Web Services Payment Cryptography,
+// will use the KRD wrapping cerificate to encrypt (wrap) the key under export and
+// signs it with signing private key to generate a TR-34 WrappedKeyBlock. For more
+// information on TR-34 key export, see section Exporting symmetric keys (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-export.html)
 // in the Amazon Web Services Payment Cryptography User Guide. Set the following
 // parameters:
 //   - ExportAttributes : Specify export attributes in case of IPEK export. This
@@ -75,11 +78,30 @@ import (
 //     Amazon Web Services Payment Cryptography.
 //
 // When this operation is successful, Amazon Web Services Payment Cryptography
-// returns the KEK or IPEK as a TR-34 WrappedKeyBlock. To export WK (Working Key)
-// or IPEK using TR-31 Using this operation, you can export working keys or IPEK
-// using TR-31 symmetric key exchange. In TR-31, you must use an initial key such
-// as KEK to encrypt or wrap the key under export. To establish a KEK, you can use
-// CreateKey or ImportKey . Set the following parameters:
+// returns the KEK or IPEK as a TR-34 WrappedKeyBlock. To export initial keys (KEK)
+// or IPEK using RSA Wrap and Unwrap Using this operation, you can export initial
+// key using asymmetric RSA wrap and unwrap key exchange method. To initiate
+// export, generate an asymmetric key pair on the receiving HSM and obtain the
+// public key certificate in PEM format (base64 encoded) for the purpose of
+// wrapping and the root certifiate chain. Import the root certificate into Amazon
+// Web Services Payment Cryptography by calling ImportKey for
+// RootCertificatePublicKey . Next call ExportKey and set the following
+// parameters:
+//   - CertificateAuthorityPublicKeyIdentifier : The KeyARN of the certificate
+//     chain that signed wrapping key certificate.
+//   - KeyMaterial : Set to KeyCryptogram .
+//   - WrappingKeyCertificate : The public key certificate in PEM format (base64
+//     encoded) obtained by the receiving HSM and signed by the root certificate
+//     (CertificateAuthorityPublicKeyIdentifier) imported into Amazon Web Services
+//     Payment Cryptography. The receiving HSM uses its private key component to unwrap
+//     the WrappedKeyCryptogram.
+//
+// When this operation is successful, Amazon Web Services Payment Cryptography
+// returns the WrappedKeyCryptogram. To export working keys or IPEK using TR-31
+// Using this operation, you can export working keys or IPEK using TR-31 symmetric
+// key exchange. In TR-31, you must use an initial key such as KEK to encrypt or
+// wrap the key under export. To establish a KEK, you can use CreateKey or
+// ImportKey . Set the following parameters:
 //   - ExportAttributes : Specify export attributes in case of IPEK export. This
 //     parameter is optional for KEK export.
 //   - ExportKeyIdentifier : The KeyARN of the KEK or BDK (in case of IPEK) under
@@ -87,9 +109,9 @@ import (
 //   - KeyMaterial : Use Tr31KeyBlock parameters.
 //
 // When this operation is successful, Amazon Web Services Payment Cryptography
-// returns the WK or IPEK as a TR-31 WrappedKeyBlock. Cross-account use: This
-// operation can't be used across different Amazon Web Services accounts. Related
-// operations:
+// returns the working key or IPEK as a TR-31 WrappedKeyBlock. Cross-account use:
+// This operation can't be used across different Amazon Web Services accounts.
+// Related operations:
 //   - GetParametersForExport
 //   - ImportKey
 func (c *Client) ExportKey(ctx context.Context, params *ExportKeyInput, optFns ...func(*Options)) (*ExportKeyOutput, error) {
@@ -130,7 +152,7 @@ type ExportKeyInput struct {
 type ExportKeyOutput struct {
 
 	// The key material under export as a TR-34 WrappedKeyBlock or a TR-31
-	// WrappedKeyBlock.
+	// WrappedKeyBlock. or a RSA WrappedKeyCryptogram.
 	WrappedKey *types.WrappedKey
 
 	// Metadata pertaining to the operation's result.

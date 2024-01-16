@@ -54,18 +54,18 @@ type GetSensitiveDataOccurrencesAvailabilityOutput struct {
 	//   object by using Macie.
 	//   - INVALID_CLASSIFICATION_RESULT - There isn't a corresponding sensitive data
 	//   discovery result for the finding. Or the corresponding sensitive data discovery
-	//   result isn't available, is malformed or corrupted, or uses an unsupported
-	//   storage format. Macie can't verify the location of the sensitive data to
-	//   retrieve.
+	//   result isn't available in the current Amazon Web Services Region, is malformed
+	//   or corrupted, or uses an unsupported storage format. Macie can't verify the
+	//   location of the sensitive data to retrieve.
 	//   - INVALID_RESULT_SIGNATURE - The corresponding sensitive data discovery
 	//   result is stored in an S3 object that wasn't signed by Macie. Macie can't verify
 	//   the integrity and authenticity of the sensitive data discovery result.
 	//   Therefore, Macie can't verify the location of the sensitive data to retrieve.
-	//   - MEMBER_ROLE_TOO_PERMISSIVE - The affected member account is configured to
-	//   retrieve occurrences of sensitive data by using an IAM role whose trust or
-	//   permissions policy doesn't meet Macie requirements for restricting access to the
-	//   role. Or the role's trust policy doesn't specify the correct external ID. Macie
-	//   can't assume the role to retrieve the sensitive data.
+	//   - MEMBER_ROLE_TOO_PERMISSIVE - The trust or permissions policy for the IAM
+	//   role in the affected member account doesn't meet Macie requirements for
+	//   restricting access to the role. Or the role's trust policy doesn't specify the
+	//   correct external ID for your organization. Macie can't assume the role to
+	//   retrieve the sensitive data.
 	//   - MISSING_GET_MEMBER_PERMISSION - You're not allowed to retrieve information
 	//   about the association between your account and the affected account. Macie can't
 	//   determine whether you’re allowed to access the affected S3 object as the
@@ -74,8 +74,8 @@ type GetSensitiveDataOccurrencesAvailabilityOutput struct {
 	//   exceeds the size quota for retrieving occurrences of sensitive data from this
 	//   type of file.
 	//   - OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object was
-	//   renamed, moved, or deleted. Or the object was changed after Macie created the
-	//   finding.
+	//   renamed, moved, deleted, or changed after Macie created the finding. Or the
+	//   object is encrypted with an KMS key that's currently disabled.
 	//   - RESULT_NOT_SIGNED - The corresponding sensitive data discovery result is
 	//   stored in an S3 object that hasn't been signed. Macie can't verify the integrity
 	//   and authenticity of the sensitive data discovery result. Therefore, Macie can't

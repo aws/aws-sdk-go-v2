@@ -37,7 +37,7 @@ type UpdateRevealConfigurationInput struct {
 	// This member is required.
 	Configuration *types.RevealConfiguration
 
-	// The access method and settings to use to retrieve the sensitive data.
+	// The access method and settings to use when retrieving the sensitive data.
 	RetrievalConfiguration *types.UpdateRetrievalConfiguration
 
 	noSmithyDocumentSerde
@@ -49,7 +49,7 @@ type UpdateRevealConfigurationOutput struct {
 	// configuration for the Amazon Macie account.
 	Configuration *types.RevealConfiguration
 
-	// The access method and settings to use to retrieve the sensitive data.
+	// The access method and settings to use when retrieving the sensitive data.
 	RetrievalConfiguration *types.RetrievalConfiguration
 
 	// Metadata pertaining to the operation's result.

@@ -1,0 +1,8 @@
+{
+    "id": "ec4602f2-3439-4e6f-831e-4918b0d08393",
+    "type": "feature",
+    "description": "Revert release of LogTargetTypes",
+    "modules": [
+        "service/iot"
+    ]
+}

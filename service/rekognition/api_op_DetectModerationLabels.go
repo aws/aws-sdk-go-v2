@@ -69,6 +69,10 @@ type DetectModerationLabelsInput struct {
 
 type DetectModerationLabelsOutput struct {
 
+	// A list of predicted results for the type of content an image contains. For
+	// example, the image content might be from animation, sports, or a video game.
+	ContentTypes []types.ContentType
+
 	// Shows the results of the human in the loop evaluation.
 	HumanLoopActivationOutput *types.HumanLoopActivationOutput
 

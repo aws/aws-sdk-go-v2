@@ -423,6 +423,32 @@ func (SignalDecoderType) Values() []SignalDecoderType {
 	}
 }
 
+type SignalNodeType string
+
+// Enum values for SignalNodeType
+const (
+	SignalNodeTypeSensor         SignalNodeType = "SENSOR"
+	SignalNodeTypeActuator       SignalNodeType = "ACTUATOR"
+	SignalNodeTypeAttribute      SignalNodeType = "ATTRIBUTE"
+	SignalNodeTypeBranch         SignalNodeType = "BRANCH"
+	SignalNodeTypeCustomStruct   SignalNodeType = "CUSTOM_STRUCT"
+	SignalNodeTypeCustomProperty SignalNodeType = "CUSTOM_PROPERTY"
+)
+
+// Values returns all known values for SignalNodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SignalNodeType) Values() []SignalNodeType {
+	return []SignalNodeType{
+		"SENSOR",
+		"ACTUATOR",
+		"ATTRIBUTE",
+		"BRANCH",
+		"CUSTOM_STRUCT",
+		"CUSTOM_PROPERTY",
+	}
+}
+
 type SpoolingMode string
 
 // Enum values for SpoolingMode

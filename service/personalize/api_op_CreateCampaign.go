@@ -16,22 +16,26 @@ import (
 // GetRecommendations (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
 // and GetPersonalizedRanking (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html)
 // APIs, a campaign is specified in the request. Minimum Provisioned TPS and
-// Auto-Scaling A high minProvisionedTPS will increase your bill. We recommend
+// Auto-Scaling A high minProvisionedTPS will increase your cost. We recommend
 // starting with 1 for minProvisionedTPS (the default). Track your usage using
-// Amazon CloudWatch metrics, and increase the minProvisionedTPS as necessary. A
-// transaction is a single GetRecommendations or GetPersonalizedRanking call.
-// Transactions per second (TPS) is the throughput and unit of billing for Amazon
-// Personalize. The minimum provisioned TPS ( minProvisionedTPS ) specifies the
-// baseline throughput provisioned by Amazon Personalize, and thus, the minimum
-// billing charge. If your TPS increases beyond minProvisionedTPS , Amazon
-// Personalize auto-scales the provisioned capacity up and down, but never below
-// minProvisionedTPS . There's a short time delay while the capacity is increased
-// that might cause loss of transactions. The actual TPS used is calculated as the
-// average requests/second within a 5-minute window. You pay for maximum of either
-// the minimum provisioned TPS or the actual TPS. We recommend starting with a low
+// Amazon CloudWatch metrics, and increase the minProvisionedTPS as necessary.
+// When you create an Amazon Personalize campaign, you can specify the minimum
+// provisioned transactions per second ( minProvisionedTPS ) for the campaign. This
+// is the baseline transaction throughput for the campaign provisioned by Amazon
+// Personalize. It sets the minimum billing charge for the campaign while it is
+// active. A transaction is a single GetRecommendations or GetPersonalizedRanking
+// request. The default minProvisionedTPS is 1. If your TPS increases beyond the
+// minProvisionedTPS , Amazon Personalize auto-scales the provisioned capacity up
+// and down, but never below minProvisionedTPS . There's a short time delay while
+// the capacity is increased that might cause loss of transactions. When your
+// traffic reduces, capacity returns to the minProvisionedTPS . You are charged for
+// the the minimum provisioned TPS or, if your requests exceed the
+// minProvisionedTPS , the actual TPS. The actual TPS is the total number of
+// recommendation requests you make. We recommend starting with a low
 // minProvisionedTPS , track your usage using Amazon CloudWatch metrics, and then
-// increase the minProvisionedTPS as necessary. Status A campaign can be in one of
-// the following states:
+// increase the minProvisionedTPS as necessary. For more information about
+// campaign costs, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
+// . Status A campaign can be in one of the following states:
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //   - DELETE PENDING > DELETE IN_PROGRESS
 //

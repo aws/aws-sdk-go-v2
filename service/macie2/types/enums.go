@@ -250,10 +250,11 @@ type EncryptionType string
 
 // Enum values for EncryptionType
 const (
-	EncryptionTypeNone    EncryptionType = "NONE"
-	EncryptionTypeAes256  EncryptionType = "AES256"
-	EncryptionTypeAwsKms  EncryptionType = "aws:kms"
-	EncryptionTypeUnknown EncryptionType = "UNKNOWN"
+	EncryptionTypeNone       EncryptionType = "NONE"
+	EncryptionTypeAes256     EncryptionType = "AES256"
+	EncryptionTypeAwsKms     EncryptionType = "aws:kms"
+	EncryptionTypeUnknown    EncryptionType = "UNKNOWN"
+	EncryptionTypeAwsKmsDsse EncryptionType = "aws:kms:dsse"
 )
 
 // Values returns all known values for EncryptionType. Note that this can be
@@ -265,6 +266,7 @@ func (EncryptionType) Values() []EncryptionType {
 		"AES256",
 		"aws:kms",
 		"UNKNOWN",
+		"aws:kms:dsse",
 	}
 }
 
@@ -1022,9 +1024,10 @@ type Type string
 
 // Enum values for Type
 const (
-	TypeNone   Type = "NONE"
-	TypeAes256 Type = "AES256"
-	TypeAwsKms Type = "aws:kms"
+	TypeNone       Type = "NONE"
+	TypeAes256     Type = "AES256"
+	TypeAwsKms     Type = "aws:kms"
+	TypeAwsKmsDsse Type = "aws:kms:dsse"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
@@ -1035,6 +1038,7 @@ func (Type) Values() []Type {
 		"NONE",
 		"AES256",
 		"aws:kms",
+		"aws:kms:dsse",
 	}
 }
 

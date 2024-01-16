@@ -5124,6 +5124,11 @@ func awsAwsjson10_serializeOpDocumentListSignalCatalogNodesInput(v *ListSignalCa
 		ok.String(*v.NextToken)
 	}
 
+	if len(v.SignalNodeType) > 0 {
+		ok := object.Key("signalNodeType")
+		ok.String(string(v.SignalNodeType))
+	}
+
 	return nil
 }
 

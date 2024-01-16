@@ -1,0 +1,8 @@
+{
+    "id": "902251d4-46f2-4389-a2fe-49ed39e41132",
+    "type": "documentation",
+    "description": "Documentation updates for AWS Security Hub",
+    "modules": [
+        "service/securityhub"
+    ]
+}
