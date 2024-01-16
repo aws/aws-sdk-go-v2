@@ -81,7 +81,7 @@ public class CloudFrontKVSSigV4a implements GoIntegration {
 
     @Override
     public void processFinalizedModel(GoSettings settings, Model model) {
-        if (!isCFKVSService(model, model.expectShape(settings.getService(), ServiceShape.class))) {
+        if (!isCFKVSService(model, settings.getService(model))) {
             return;
         }
         runtimeClientPlugins.add(
@@ -90,9 +90,9 @@ public class CloudFrontKVSSigV4a implements GoIntegration {
                         ListUtils.of(
                                 ConfigField.builder()
                                         .name(AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
-                                        .type(SymbolUtils.createValueSymbolBuilder(
-                                                        AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
-                                                .build())
+                                        .type(SymbolUtils.buildPackageSymbol(
+                                            AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
+                                        )
                                         .documentation("Signature Version 4a (SigV4a) Signer")
                                         .build()
                         )
