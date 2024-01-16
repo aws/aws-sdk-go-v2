@@ -128,11 +128,11 @@ func (o Options) Copy() Options {
 }
 
 func (o Options) GetIdentityResolver(schemeID string) smithyauth.IdentityResolver {
-	if schemeID == "aws.auth#sigv4" {
-		return getSigV4IdentityResolver(o)
-	}
 	if schemeID == "aws.auth#sigv4a" {
 		return getSigV4AIdentityResolver(o)
+	}
+	if schemeID == "aws.auth#sigv4" {
+		return getSigV4IdentityResolver(o)
 	}
 	if schemeID == "smithy.api#noAuth" {
 		return &smithyauth.AnonymousIdentityResolver{}

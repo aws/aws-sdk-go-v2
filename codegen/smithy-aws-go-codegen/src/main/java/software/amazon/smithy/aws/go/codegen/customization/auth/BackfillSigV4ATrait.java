@@ -34,8 +34,7 @@ public class BackfillSigV4ATrait implements GoIntegration {
         final String serviceId = sdkId.replace("-", "").replace(" ", "").toLowerCase();
         return (
             serviceId.equalsIgnoreCase("s3") ||
-            serviceId.equalsIgnoreCase("eventbridge") ||
-            serviceId.equalsIgnoreCase("cloudfrontkeyvaluestore")
+            serviceId.equalsIgnoreCase("eventbridge")
         );
     };
 

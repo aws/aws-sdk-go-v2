@@ -7,6 +7,8 @@ import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4;
 import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4aUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.aws.traits.auth.SigV4ATrait;
+import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
@@ -21,7 +23,9 @@ import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
+import software.amazon.smithy.model.traits.AuthTrait;
 import software.amazon.smithy.utils.ListUtils;
+import software.amazon.smithy.utils.SetUtils;
 
 /**
  * This integration configures the CloudFront Key Value Store client for Signature Version 4a
@@ -48,25 +52,60 @@ public class CloudFrontKVSSigV4a implements GoIntegration {
     }
 
     @Override
+    public Model preprocessModel(Model model, GoSettings settings) {
+        ServiceShape service = settings.getService(model);
+        if (!isCFKVSService(model, service)) {
+            return model;
+        }
+
+        if (settings.getService(model).hasTrait(SigV4ATrait.class)) {
+            return model;
+        }
+
+        var v4a = SigV4ATrait.builder()
+                .name(service.expectTrait(SigV4Trait.class).getName())
+                .build();
+
+        return model.toBuilder()
+                .addShape(
+                        service.toBuilder()
+                                .addTrait(v4a)
+                                .addTrait(new AuthTrait(SetUtils.of(SigV4ATrait.ID, SigV4Trait.ID)))
+                                .build()
+                )
+                .build();
+    }
+
+    @Override
     public void processFinalizedModel(GoSettings settings, Model model) {
         if (!isCFKVSService(model, model.expectShape(settings.getService(), ServiceShape.class))) {
             return;
         }
         runtimeClientPlugins.add(
-            RuntimeClientPlugin.builder()
-            .configFields(
-               ListUtils.of(
-                       ConfigField.builder()
-                               .name(AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
-                               .type(SymbolUtils.createValueSymbolBuilder(
-                                               AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
-                                       .build())
-                               .documentation("Signature Version 4a (SigV4a) Signer")
-                               .build()
-               )
-           )
-           .build()
-        );
+                RuntimeClientPlugin.builder()
+                    .configFields(
+                        ListUtils.of(
+                                ConfigField.builder()
+                                        .name(AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
+                                        .type(SymbolUtils.createValueSymbolBuilder(
+                                                        AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
+                                                .build())
+                                        .documentation("Signature Version 4a (SigV4a) Signer")
+                                        .build()
+                        )
+                    )
+                    .build());
+        runtimeClientPlugins.add(
+                RuntimeClientPlugin.builder()
+                    .servicePredicate(CloudFrontKVSSigV4a::isCFKVSService)
+                    .addConfigFieldResolver(
+                            ConfigFieldResolver.builder()
+                                    .location(ConfigFieldResolver.Location.CLIENT)
+                                    .target(ConfigFieldResolver.Target.INITIALIZATION)
+                                    .resolver(SymbolUtils.createValueSymbolBuilder(
+                                            AwsSignatureVersion4aUtils.SIGNER_RESOLVER).build())
+                                    .build())
+                    .build());
     }
 
     @Override

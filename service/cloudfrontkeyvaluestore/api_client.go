@@ -52,6 +52,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveEndpointResolverV2(&options)
 
+	resolveHTTPSignerV4a(&options)
+
 	resolveAuthSchemeResolver(&options)
 
 	for _, fn := range optFns {
@@ -167,13 +169,13 @@ func resolveAuthSchemeResolver(options *Options) {
 func resolveAuthSchemes(options *Options) {
 	if options.AuthSchemes == nil {
 		options.AuthSchemes = []smithyhttp.AuthScheme{
-			internalauth.NewHTTPAuthScheme("aws.auth#sigv4", &internalauthsmithy.V4SignerAdapter{
-				Signer:     options.HTTPSignerV4,
+			internalauth.NewHTTPAuthScheme("aws.auth#sigv4a", &v4a.SignerAdapter{
+				Signer:     options.httpSignerV4a,
 				Logger:     options.Logger,
 				LogSigning: options.ClientLogMode.IsSigning(),
 			}),
-			internalauth.NewHTTPAuthScheme("aws.auth#sigv4a", &v4a.SignerAdapter{
-				Signer:     options.httpSignerV4a,
+			internalauth.NewHTTPAuthScheme("aws.auth#sigv4", &internalauthsmithy.V4SignerAdapter{
+				Signer:     options.HTTPSignerV4,
 				Logger:     options.Logger,
 				LogSigning: options.ClientLogMode.IsSigning(),
 			}),
