@@ -70,6 +70,9 @@ public class CloudFrontKVSSigV4a implements GoIntegration {
                 .addShape(
                         service.toBuilder()
                                 .addTrait(v4a)
+                                // FUTURE: https://github.com/aws/smithy-go/issues/493
+                                // we are keeping sigv4 at the end of this list (it will never be selected)
+                                // as a stopgap to drive codegen of payload checksum routines
                                 .addTrait(new AuthTrait(SetUtils.of(SigV4ATrait.ID, SigV4Trait.ID)))
                                 .build()
                 )
