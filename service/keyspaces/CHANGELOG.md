@@ -1,3 +1,7 @@
+# v1.8.0 (2024-01-17)
+
+* **Feature**: This release adds support for Multi-Region Replication with provisioned tables, and Keyspaces auto scaling APIs
+
 # v1.7.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

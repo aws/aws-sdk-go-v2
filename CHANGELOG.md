@@ -1,3 +1,14 @@
+# Release (2024-01-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.26.9](service/dynamodb/CHANGELOG.md#v1269-2024-01-17)
+  * **Documentation**: Updating note for enabling streams for UpdateTable.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.8.0](service/keyspaces/CHANGELOG.md#v180-2024-01-17)
+  * **Feature**: This release adds support for Multi-Region Replication with provisioned tables, and Keyspaces auto scaling APIs
+
 # Release (2024-01-16)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "ea815345-a3bd-4503-9136-5d21e53422c8",
-    "type": "documentation",
-    "description": "Updating note for enabling streams for UpdateTable.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

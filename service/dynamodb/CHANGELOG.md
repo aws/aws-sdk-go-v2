@@ -1,3 +1,7 @@
+# v1.26.9 (2024-01-17)
+
+* **Documentation**: Updating note for enabling streams for UpdateTable.
+
 # v1.26.8 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

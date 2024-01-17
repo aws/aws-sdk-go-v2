@@ -1,8 +1,0 @@
-{
-    "id": "8d38094d-8010-4d59-889a-8b422297f78d",
-    "type": "feature",
-    "description": "This release adds support for Multi-Region Replication with provisioned tables, and Keyspaces auto scaling APIs",
-    "modules": [
-        "service/keyspaces"
-    ]
-}
