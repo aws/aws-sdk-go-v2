@@ -10,31 +10,34 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Returns information about the table, including the table's name and current
-// status, the keyspace name, configuration settings, and metadata. To read table
-// metadata using GetTable , Select action permissions for the table and system
-// tables are required to complete the operation.
-func (c *Client) GetTable(ctx context.Context, params *GetTableInput, optFns ...func(*Options)) (*GetTableOutput, error) {
+// Returns auto scaling related settings of the specified table in JSON format. If
+// the table is a multi-Region table, the Amazon Web Services Region specific auto
+// scaling settings of the table are included. Amazon Keyspaces auto scaling helps
+// you provision throughput capacity for variable workloads efficiently by
+// increasing and decreasing your table's read and write capacity automatically in
+// response to application traffic. For more information, see Managing throughput
+// capacity automatically with Amazon Keyspaces auto scaling (https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html)
+// in the Amazon Keyspaces Developer Guide.
+func (c *Client) GetTableAutoScalingSettings(ctx context.Context, params *GetTableAutoScalingSettingsInput, optFns ...func(*Options)) (*GetTableAutoScalingSettingsOutput, error) {
 	if params == nil {
-		params = &GetTableInput{}
+		params = &GetTableAutoScalingSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTable", params, optFns, c.addOperationGetTableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTableAutoScalingSettings", params, optFns, c.addOperationGetTableAutoScalingSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetTableOutput)
+	out := result.(*GetTableAutoScalingSettingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetTableInput struct {
+type GetTableAutoScalingSettingsInput struct {
 
-	// The name of the keyspace that the table is stored in.
+	// The name of the keyspace.
 	//
 	// This member is required.
 	KeyspaceName *string
@@ -47,58 +50,29 @@ type GetTableInput struct {
 	noSmithyDocumentSerde
 }
 
-type GetTableOutput struct {
+type GetTableAutoScalingSettingsOutput struct {
 
-	// The name of the keyspace that the specified table is stored in.
+	// The name of the keyspace.
 	//
 	// This member is required.
 	KeyspaceName *string
 
-	// The Amazon Resource Name (ARN) of the specified table.
+	// The Amazon Resource Name (ARN) of the table.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The name of the specified table.
+	// The name of the table.
 	//
 	// This member is required.
 	TableName *string
 
-	// The read/write throughput capacity mode for a table. The options are:
-	//   - throughputMode:PAY_PER_REQUEST
-	//   - throughputMode:PROVISIONED
-	CapacitySpecification *types.CapacitySpecificationSummary
+	// The auto scaling settings of the table.
+	AutoScalingSpecification *types.AutoScalingSpecification
 
-	// The client-side timestamps setting of the table.
-	ClientSideTimestamps *types.ClientSideTimestamps
-
-	// The the description of the specified table.
-	Comment *types.Comment
-
-	// The creation timestamp of the specified table.
-	CreationTimestamp *time.Time
-
-	// The default Time to Live settings in seconds of the specified table.
-	DefaultTimeToLive *int32
-
-	// The encryption settings of the specified table.
-	EncryptionSpecification *types.EncryptionSpecification
-
-	// The point-in-time recovery status of the specified table.
-	PointInTimeRecovery *types.PointInTimeRecoverySummary
-
-	// Returns the Amazon Web Services Region specific settings of all Regions a
-	// multi-Region table is replicated in.
-	ReplicaSpecifications []types.ReplicaSpecificationSummary
-
-	// The schema definition of the specified table.
-	SchemaDefinition *types.SchemaDefinition
-
-	// The current status of the specified table.
-	Status types.TableStatus
-
-	// The custom Time to Live settings of the specified table.
-	Ttl *types.TimeToLive
+	// The Amazon Web Services Region specific settings of a multi-Region table.
+	// Returns the settings for all Regions the table is replicated in.
+	ReplicaSpecifications []types.ReplicaAutoScalingSpecification
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -106,19 +80,19 @@ type GetTableOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTableAutoScalingSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetTable{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetTableAutoScalingSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetTable{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetTableAutoScalingSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTable"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTableAutoScalingSettings"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -161,10 +135,10 @@ func (c *Client) addOperationGetTableMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetTableValidationMiddleware(stack); err != nil {
+	if err = addOpGetTableAutoScalingSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTable(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTableAutoScalingSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -185,10 +159,10 @@ func (c *Client) addOperationGetTableMiddlewares(stack *middleware.Stack, option
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetTable(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetTableAutoScalingSettings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetTable",
+		OperationName: "GetTableAutoScalingSettings",
 	}
 }

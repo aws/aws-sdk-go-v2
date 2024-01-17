@@ -68,6 +68,17 @@ type CreateTableInput struct {
 	// This member is required.
 	TableName *string
 
+	// The optional auto scaling settings for a table in provisioned capacity mode.
+	// Specifies if the service can manage throughput capacity automatically on your
+	// behalf. Auto scaling helps you provision throughput capacity for variable
+	// workloads efficiently by increasing and decreasing your table's read and write
+	// capacity automatically in response to application traffic. For more information,
+	// see Managing throughput capacity automatically with Amazon Keyspaces auto
+	// scaling (https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html)
+	// in the Amazon Keyspaces Developer Guide. By default, auto scaling is disabled
+	// for a table.
+	AutoScalingSpecification *types.AutoScalingSpecification
+
 	// Specifies the read/write throughput capacity mode for the table. The options
 	// are:
 	//   - throughputMode:PAY_PER_REQUEST and
@@ -113,6 +124,20 @@ type CreateTableInput struct {
 	// see Point-in-time recovery (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html)
 	// in the Amazon Keyspaces Developer Guide.
 	PointInTimeRecovery *types.PointInTimeRecovery
+
+	// The optional Amazon Web Services Region specific settings of a multi-Region
+	// table. These settings overwrite the general settings of the table for the
+	// specified Region. For a multi-Region table in provisioned capacity mode, you can
+	// configure the table's read capacity differently for each Region's replica. The
+	// write capacity, however, remains synchronized between all replicas to ensure
+	// that there's enough capacity to replicate writes across all Regions. To define
+	// the read capacity for a table replica in a specific Region, you can do so by
+	// configuring the following parameters.
+	//   - region : The Region where these settings are applied. (Required)
+	//   - readCapacityUnits : The provisioned read capacity units. (Optional)
+	//   - readCapacityAutoScaling : The read capacity auto scaling settings for the
+	//   table. (Optional)
+	ReplicaSpecifications []types.ReplicaSpecification
 
 	// A list of key-value pair tags to be attached to the resource. For more
 	// information, see Adding tags and labels to Amazon Keyspaces resources (https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html)

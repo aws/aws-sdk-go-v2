@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Restores the specified table to the specified point in time within the
+// Restores the table to the specified point in time within the
 // earliest_restorable_timestamp and the current time. For more information about
 // restore points, see Time window for PITR continuous backups (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_window)
 // in the Amazon Keyspaces Developer Guide. Any number of users can execute up to 4
@@ -23,20 +23,20 @@ import (
 // (day:hour:minute:second) to a new table. The Time to Live (TTL) settings are
 // also restored to the state based on the selected timestamp. In addition to the
 // table's schema, data, and TTL settings, RestoreTable restores the capacity
-// mode, encryption, and point-in-time recovery settings from the source table.
-// Unlike the table's schema data and TTL settings, which are restored based on the
-// selected timestamp, these settings are always restored based on the table's
-// settings as of the current time or when the table was deleted. You can also
-// overwrite these settings during restore:
+// mode, auto scaling settings, encryption settings, and point-in-time recovery
+// settings from the source table. Unlike the table's schema data and TTL settings,
+// which are restored based on the selected timestamp, these settings are always
+// restored based on the table's settings as of the current time or when the table
+// was deleted. You can also overwrite these settings during restore:
 //   - Read/write capacity mode
-//   - Provisioned throughput capacity settings
+//   - Provisioned throughput capacity units
+//   - Auto scaling settings
 //   - Point-in-time (PITR) settings
 //   - Tags
 //
 // For more information, see PITR restore settings (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_settings)
 // in the Amazon Keyspaces Developer Guide. Note that the following settings are
 // not restored, and you must configure them manually for the new table:
-//   - Automatic scaling policies (for tables that use provisioned capacity mode)
 //   - Identity and Access Management (IAM) policies
 //   - Amazon CloudWatch metrics and alarms
 func (c *Client) RestoreTable(ctx context.Context, params *RestoreTableInput, optFns ...func(*Options)) (*RestoreTableOutput, error) {
@@ -76,6 +76,16 @@ type RestoreTableInput struct {
 	// This member is required.
 	TargetTableName *string
 
+	// The optional auto scaling settings for the restored table in provisioned
+	// capacity mode. Specifies if the service can manage throughput capacity of a
+	// provisioned table automatically on your behalf. Amazon Keyspaces auto scaling
+	// helps you provision throughput capacity for variable workloads efficiently by
+	// increasing and decreasing your table's read and write capacity automatically in
+	// response to application traffic. For more information, see Managing throughput
+	// capacity automatically with Amazon Keyspaces auto scaling (https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html)
+	// in the Amazon Keyspaces Developer Guide.
+	AutoScalingSpecification *types.AutoScalingSpecification
+
 	// Specifies the read/write throughput capacity mode for the target table. The
 	// options are:
 	//   - throughputMode:PAY_PER_REQUEST
@@ -106,6 +116,9 @@ type RestoreTableInput struct {
 	// see Point-in-time recovery (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html)
 	// in the Amazon Keyspaces Developer Guide.
 	PointInTimeRecoveryOverride *types.PointInTimeRecovery
+
+	// The optional Region specific settings of a multi-Regional table.
+	ReplicaSpecifications []types.ReplicaSpecification
 
 	// The restore timestamp in ISO 8601 format.
 	RestoreTimestamp *time.Time

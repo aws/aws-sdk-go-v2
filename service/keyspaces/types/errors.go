@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have sufficient access to perform this action.
+// You don't have sufficient access permissions to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -33,7 +33,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Keyspaces could not complete the requested action. This error may occur
+// Amazon Keyspaces couldn't complete the requested action. This error may occur
 // if you try to perform an action and the same or a different action is already in
 // progress, or if you try to create a resource that already exists.
 type ConflictException struct {

@@ -13,8 +13,9 @@ import (
 )
 
 // Adds new columns to the table or updates one of the table's settings, for
-// example capacity mode, encryption, point-in-time recovery, or ttl settings. Note
-// that you can only update one specific table setting per update operation.
+// example capacity mode, auto scaling, encryption, point-in-time recovery, or ttl
+// settings. Note that you can only update one specific table setting per update
+// operation.
 func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optFns ...func(*Options)) (*UpdateTableOutput, error) {
 	if params == nil {
 		params = &UpdateTableInput{}
@@ -47,6 +48,18 @@ type UpdateTableInput struct {
 	//   - type - An Amazon Keyspaces data type. For more information, see Data types (https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types)
 	//   in the Amazon Keyspaces Developer Guide.
 	AddColumns []types.ColumnDefinition
+
+	// The optional auto scaling settings to update for a table in provisioned
+	// capacity mode. Specifies if the service can manage throughput capacity of a
+	// provisioned table automatically on your behalf. Amazon Keyspaces auto scaling
+	// helps you provision throughput capacity for variable workloads efficiently by
+	// increasing and decreasing your table's read and write capacity automatically in
+	// response to application traffic. If auto scaling is already enabled for the
+	// table, you can use UpdateTable to update the minimum and maximum values or the
+	// auto scaling policy settings independently. For more information, see Managing
+	// throughput capacity automatically with Amazon Keyspaces auto scaling (https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html)
+	// in the Amazon Keyspaces Developer Guide.
+	AutoScalingSpecification *types.AutoScalingSpecification
 
 	// Modifies the read/write throughput capacity mode for the table. The options
 	// are:
@@ -88,6 +101,9 @@ type UpdateTableInput struct {
 	// see Point-in-time recovery (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html)
 	// in the Amazon Keyspaces Developer Guide.
 	PointInTimeRecovery *types.PointInTimeRecovery
+
+	// The Region specific settings of a multi-Regional table.
+	ReplicaSpecifications []types.ReplicaSpecification
 
 	// Modifies Time to Live custom settings for the table. The options are:
 	//   - status:enabled
