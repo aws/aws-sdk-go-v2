@@ -5210,7 +5210,7 @@ func awsRestjson1_deserializeOpDocumentPutLaunchActionOutput(v **PutLaunchAction
 				if err != nil {
 					return err
 				}
-				sv.Order = int32(i64)
+				sv.Order = ptr.Int32(int32(i64))
 			}
 
 		case "parameters":
@@ -10216,7 +10216,7 @@ func awsRestjson1_deserializeDocumentLaunchAction(v **types.LaunchAction, value 
 				if err != nil {
 					return err
 				}
-				sv.Order = int32(i64)
+				sv.Order = ptr.Int32(int32(i64))
 			}
 
 		case "parameters":
@@ -11334,7 +11334,7 @@ func awsRestjson1_deserializeDocumentPITPolicyRule(v **types.PITPolicyRule, valu
 				if err != nil {
 					return err
 				}
-				sv.Interval = int32(i64)
+				sv.Interval = ptr.Int32(int32(i64))
 			}
 
 		case "retentionDuration":
@@ -11347,7 +11347,7 @@ func awsRestjson1_deserializeDocumentPITPolicyRule(v **types.PITPolicyRule, valu
 				if err != nil {
 					return err
 				}
-				sv.RetentionDuration = int32(i64)
+				sv.RetentionDuration = ptr.Int32(int32(i64))
 			}
 
 		case "ruleID":

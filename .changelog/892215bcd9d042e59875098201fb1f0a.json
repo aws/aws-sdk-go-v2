@@ -1,0 +1,8 @@
+{
+    "id": "892215bc-d9d0-42e5-9875-098201fb1f0a",
+    "type": "feature",
+    "description": "Increasing TestMapping inputFileContent file size limit to 5MB and adding file size limit 250KB for TestParsing input file. This release also includes exposing InternalServerException for Tag APIs.",
+    "modules": [
+        "service/b2bi"
+    ]
+}

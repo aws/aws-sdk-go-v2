@@ -73,9 +73,11 @@ type GetCurrentMetricDataInput struct {
 	// Metric data is retrieved only for the resources associated with the queues or
 	// routing profiles, and by any channels included in the filter. (You cannot filter
 	// by both queue AND routing profile.) You can include both resource IDs and
-	// resource ARNs in the same request. When using RoutingStepExpression , you need
-	// to pass exactly one QueueId . Currently tagging is only supported on the
-	// resources that are passed in the filter.
+	// resource ARNs in the same request. When using the RoutingStepExpression filter,
+	// you need to pass exactly one QueueId . The filter is also case sensitive so when
+	// using the RoutingStepExpression filter, grouping by ROUTING_STEP_EXPRESSION is
+	// required. Currently tagging is only supported on the resources that are passed
+	// in the filter.
 	//
 	// This member is required.
 	Filters *types.Filters

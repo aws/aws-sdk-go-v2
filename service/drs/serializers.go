@@ -1142,9 +1142,9 @@ func awsRestjson1_serializeOpDocumentDescribeJobLogItemsInput(v *DescribeJobLogI
 		ok.String(*v.JobID)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1229,9 +1229,9 @@ func awsRestjson1_serializeOpDocumentDescribeJobsInput(v *DescribeJobsInput, val
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1316,9 +1316,9 @@ func awsRestjson1_serializeOpDocumentDescribeLaunchConfigurationTemplatesInput(v
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1403,9 +1403,9 @@ func awsRestjson1_serializeOpDocumentDescribeRecoveryInstancesInput(v *DescribeR
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1490,9 +1490,9 @@ func awsRestjson1_serializeOpDocumentDescribeRecoverySnapshotsInput(v *DescribeR
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1580,9 +1580,9 @@ func awsRestjson1_serializeOpDocumentDescribeReplicationConfigurationTemplatesIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1674,9 +1674,9 @@ func awsRestjson1_serializeOpDocumentDescribeSourceNetworksInput(v *DescribeSour
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1761,9 +1761,9 @@ func awsRestjson1_serializeOpDocumentDescribeSourceServersInput(v *DescribeSourc
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2343,9 +2343,9 @@ func awsRestjson1_serializeOpDocumentListExtensibleSourceServersInput(v *ListExt
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2435,9 +2435,9 @@ func awsRestjson1_serializeOpDocumentListLaunchActionsInput(v *ListLaunchActions
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2689,9 +2689,9 @@ func awsRestjson1_serializeOpDocumentPutLaunchActionInput(v *PutLaunchActionInpu
 		ok.Boolean(*v.Optional)
 	}
 
-	{
+	if v.Order != nil {
 		ok := object.Key("order")
-		ok.Integer(v.Order)
+		ok.Integer(*v.Order)
 	}
 
 	if v.Parameters != nil {
@@ -4648,14 +4648,14 @@ func awsRestjson1_serializeDocumentPITPolicyRule(v *types.PITPolicyRule, value s
 		ok.Boolean(*v.Enabled)
 	}
 
-	{
+	if v.Interval != nil {
 		ok := object.Key("interval")
-		ok.Integer(v.Interval)
+		ok.Integer(*v.Interval)
 	}
 
-	{
+	if v.RetentionDuration != nil {
 		ok := object.Key("retentionDuration")
-		ok.Integer(v.RetentionDuration)
+		ok.Integer(*v.RetentionDuration)
 	}
 
 	if v.RuleID != 0 {

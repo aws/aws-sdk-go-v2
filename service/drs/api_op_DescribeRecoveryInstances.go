@@ -34,7 +34,7 @@ type DescribeRecoveryInstancesInput struct {
 	Filters *types.DescribeRecoveryInstancesRequestFilters
 
 	// Maximum number of Recovery Instances to retrieve.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token of the next Recovery Instance to retrieve.
 	NextToken *string
@@ -168,8 +168,8 @@ func NewDescribeRecoveryInstancesPaginator(client DescribeRecoveryInstancesAPICl
 	}
 
 	options := DescribeRecoveryInstancesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -199,7 +199,11 @@ func (p *DescribeRecoveryInstancesPaginator) NextPage(ctx context.Context, optFn
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeRecoveryInstances(ctx, &params, optFns...)
 	if err != nil {

@@ -541,6 +541,44 @@ func (S3BackupMode) Values() []S3BackupMode {
 	}
 }
 
+type SnowflakeDataLoadingOption string
+
+// Enum values for SnowflakeDataLoadingOption
+const (
+	SnowflakeDataLoadingOptionJsonMapping                      SnowflakeDataLoadingOption = "JSON_MAPPING"
+	SnowflakeDataLoadingOptionVariantContentMapping            SnowflakeDataLoadingOption = "VARIANT_CONTENT_MAPPING"
+	SnowflakeDataLoadingOptionVariantContentAndMetadataMapping SnowflakeDataLoadingOption = "VARIANT_CONTENT_AND_METADATA_MAPPING"
+)
+
+// Values returns all known values for SnowflakeDataLoadingOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnowflakeDataLoadingOption) Values() []SnowflakeDataLoadingOption {
+	return []SnowflakeDataLoadingOption{
+		"JSON_MAPPING",
+		"VARIANT_CONTENT_MAPPING",
+		"VARIANT_CONTENT_AND_METADATA_MAPPING",
+	}
+}
+
+type SnowflakeS3BackupMode string
+
+// Enum values for SnowflakeS3BackupMode
+const (
+	SnowflakeS3BackupModeFailedDataOnly SnowflakeS3BackupMode = "FailedDataOnly"
+	SnowflakeS3BackupModeAllData        SnowflakeS3BackupMode = "AllData"
+)
+
+// Values returns all known values for SnowflakeS3BackupMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SnowflakeS3BackupMode) Values() []SnowflakeS3BackupMode {
+	return []SnowflakeS3BackupMode{
+		"FailedDataOnly",
+		"AllData",
+	}
+}
+
 type SplunkS3BackupMode string
 
 // Enum values for SplunkS3BackupMode

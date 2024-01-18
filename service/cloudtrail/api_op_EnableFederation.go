@@ -18,13 +18,13 @@ import (
 // and run SQL queries against your event data using Amazon Athena. The table
 // metadata stored in the Glue Data Catalog lets the Athena query engine know how
 // to find, read, and process the data that you want to query. When you enable Lake
-// query federation, CloudTrail creates a federated database named aws:cloudtrail
-// (if the database doesn't already exist) and a federated table in the Glue Data
-// Catalog. The event data store ID is used for the table name. CloudTrail
-// registers the role ARN and event data store in Lake Formation (https://docs.aws.amazon.com/lake-formation/latest/dg/how-it-works.html)
-// , the service responsible for revoking or granting permissions to the federated
-// resources in the Glue Data Catalog. For more information about Lake query
-// federation, see Federate an event data store (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html)
+// query federation, CloudTrail creates a managed database named aws:cloudtrail
+// (if the database doesn't already exist) and a managed federated table in the
+// Glue Data Catalog. The event data store ID is used for the table name.
+// CloudTrail registers the role ARN and event data store in Lake Formation (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation-lake-formation.html)
+// , the service responsible for allowing fine-grained access control of the
+// federated resources in the Glue Data Catalog. For more information about Lake
+// query federation, see Federate an event data store (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html)
 // .
 func (c *Client) EnableFederation(ctx context.Context, params *EnableFederationInput, optFns ...func(*Options)) (*EnableFederationOutput, error) {
 	if params == nil {

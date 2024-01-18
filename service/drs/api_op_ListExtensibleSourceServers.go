@@ -39,7 +39,7 @@ type ListExtensibleSourceServersInput struct {
 	StagingAccountID *string
 
 	// The maximum number of extensible source servers to retrieve.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token of the next extensible source server to retrieve.
 	NextToken *string
@@ -177,8 +177,8 @@ func NewListExtensibleSourceServersPaginator(client ListExtensibleSourceServersA
 	}
 
 	options := ListExtensibleSourceServersPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -208,7 +208,11 @@ func (p *ListExtensibleSourceServersPaginator) NextPage(ctx context.Context, opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListExtensibleSourceServers(ctx, &params, optFns...)
 	if err != nil {

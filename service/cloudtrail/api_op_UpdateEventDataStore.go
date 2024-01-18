@@ -20,11 +20,11 @@ import (
 // set to EXTENDABLE_RETENTION_PRICING , or between 7 and 2557 if BillingMode is
 // set to FIXED_RETENTION_PRICING . By default, TerminationProtection is enabled.
 // For event data stores for CloudTrail events, AdvancedEventSelectors includes or
-// excludes management, data, or Insights events in your event data store. For more
+// excludes management or data events in your event data store. For more
 // information about AdvancedEventSelectors , see AdvancedEventSelectors (https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html)
-// . For event data stores for Config configuration items, Audit Manager evidence,
-// or non-Amazon Web Services events, AdvancedEventSelectors includes events of
-// that type in your event data store.
+// . For event data stores for CloudTrail Insights events, Config configuration
+// items, Audit Manager evidence, or non-Amazon Web Services events,
+// AdvancedEventSelectors includes events of that type in your event data store.
 func (c *Client) UpdateEventDataStore(ctx context.Context, params *UpdateEventDataStoreInput, optFns ...func(*Options)) (*UpdateEventDataStoreOutput, error) {
 	if params == nil {
 		params = &UpdateEventDataStoreInput{}

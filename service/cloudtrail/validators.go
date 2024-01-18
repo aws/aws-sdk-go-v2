@@ -430,6 +430,26 @@ func (m *validateOpListImportFailures) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInsightsMetricData struct {
+}
+
+func (*validateOpListInsightsMetricData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInsightsMetricData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInsightsMetricDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInsightsMetricDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListQueries struct {
 }
 
@@ -872,6 +892,10 @@ func addOpGetTrailStatusValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListImportFailuresValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImportFailures{}, middleware.After)
+}
+
+func addOpListInsightsMetricDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInsightsMetricData{}, middleware.After)
 }
 
 func addOpListQueriesValidationMiddleware(stack *middleware.Stack) error {
@@ -1506,6 +1530,27 @@ func validateOpListImportFailuresInput(v *ListImportFailuresInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListImportFailuresInput"}
 	if v.ImportId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInsightsMetricDataInput(v *ListInsightsMetricDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInsightsMetricDataInput"}
+	if v.EventSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventSource"))
+	}
+	if v.EventName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventName"))
+	}
+	if len(v.InsightType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

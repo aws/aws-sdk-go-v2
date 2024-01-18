@@ -2843,6 +2843,11 @@ func awsAwsjson11_deserializeDocumentDestinationDescription(v **types.Destinatio
 				return err
 			}
 
+		case "SnowflakeDestinationDescription":
+			if err := awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(&sv.SnowflakeDestinationDescription, value); err != nil {
+				return err
+			}
+
 		case "SplunkDestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentSplunkDestinationDescription(&sv.SplunkDestinationDescription, value); err != nil {
 				return err
@@ -5550,6 +5555,290 @@ func awsAwsjson11_deserializeDocumentServiceUnavailableException(v **types.Servi
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.SnowflakeDestinationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnowflakeDestinationDescription
+	if *v == nil {
+		sv = &types.SnowflakeDestinationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccountUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeAccountUrl to be of type string, got %T instead", value)
+				}
+				sv.AccountUrl = ptr.String(jtv)
+			}
+
+		case "CloudWatchLoggingOptions":
+			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
+				return err
+			}
+
+		case "ContentColumnName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeContentColumnName to be of type string, got %T instead", value)
+				}
+				sv.ContentColumnName = ptr.String(jtv)
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeDatabase to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "DataLoadingOption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeDataLoadingOption to be of type string, got %T instead", value)
+				}
+				sv.DataLoadingOption = types.SnowflakeDataLoadingOption(jtv)
+			}
+
+		case "MetaDataColumnName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeMetaDataColumnName to be of type string, got %T instead", value)
+				}
+				sv.MetaDataColumnName = ptr.String(jtv)
+			}
+
+		case "ProcessingConfiguration":
+			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
+				return err
+			}
+
+		case "RetryOptions":
+			if err := awsAwsjson11_deserializeDocumentSnowflakeRetryOptions(&sv.RetryOptions, value); err != nil {
+				return err
+			}
+
+		case "RoleARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleARN to be of type string, got %T instead", value)
+				}
+				sv.RoleARN = ptr.String(jtv)
+			}
+
+		case "S3BackupMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeS3BackupMode to be of type string, got %T instead", value)
+				}
+				sv.S3BackupMode = types.SnowflakeS3BackupMode(jtv)
+			}
+
+		case "S3DestinationDescription":
+			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
+				return err
+			}
+
+		case "Schema":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeSchema to be of type string, got %T instead", value)
+				}
+				sv.Schema = ptr.String(jtv)
+			}
+
+		case "SnowflakeRoleConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSnowflakeRoleConfiguration(&sv.SnowflakeRoleConfiguration, value); err != nil {
+				return err
+			}
+
+		case "SnowflakeVpcConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSnowflakeVpcConfiguration(&sv.SnowflakeVpcConfiguration, value); err != nil {
+				return err
+			}
+
+		case "Table":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeTable to be of type string, got %T instead", value)
+				}
+				sv.Table = ptr.String(jtv)
+			}
+
+		case "User":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeUser to be of type string, got %T instead", value)
+				}
+				sv.User = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSnowflakeRetryOptions(v **types.SnowflakeRetryOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnowflakeRetryOptions
+	if *v == nil {
+		sv = &types.SnowflakeRetryOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DurationInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeRetryDurationInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationInSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSnowflakeRoleConfiguration(v **types.SnowflakeRoleConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnowflakeRoleConfiguration
+	if *v == nil {
+		sv = &types.SnowflakeRoleConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "SnowflakeRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeRole to be of type string, got %T instead", value)
+				}
+				sv.SnowflakeRole = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSnowflakeVpcConfiguration(v **types.SnowflakeVpcConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnowflakeVpcConfiguration
+	if *v == nil {
+		sv = &types.SnowflakeVpcConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PrivateLinkVpceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakePrivateLinkVpceId to be of type string, got %T instead", value)
+				}
+				sv.PrivateLinkVpceId = ptr.String(jtv)
 			}
 
 		default:

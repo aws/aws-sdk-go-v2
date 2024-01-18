@@ -75,7 +75,9 @@ type GetMetricDataV2Input struct {
 	//   conversational analytics. connect:Chat , connect:SMS , connect:Telephony , and
 	//   connect:WebRTC are valid filterValue examples (not exhaustive) for the
 	//   contact/segmentAttributes/connect:Subtype filter key. ROUTING_STEP_EXPRESSION
-	//   is a valid filter key with a filter value up to 3000 length.
+	//   is a valid filter key with a filter value up to 3000 length. This filter is case
+	//   and order sensitive. JSON string fields must be sorted in ascending order and
+	//   JSON array order should be kept as is.
 	//
 	// This member is required.
 	Filters []types.FilterV2
@@ -179,57 +181,62 @@ type GetMetricDataV2Input struct {
 	// INITIATION_METHOD , DISCONNECT_REASON Valid groupings and filters: Queue,
 	// Channel, Routing Profile, Agent, Agent Hierarchy, Feature,
 	// contact/segmentAttributes/connect:Subtype, RoutingStepExpression Feature is a
-	// valid filter but not a valid grouping. CONTACTS_HOLD_ABANDONS Unit: Count Valid
-	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype CONTACTS_ON_HOLD_AGENT_DISCONNECT
-	// Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy CONTACTS_ON_HOLD_CUSTOMER_DISCONNECT Unit: Count Valid groupings
-	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// CONTACTS_PUT_ON_HOLD Unit: Count Valid groupings and filters: Queue, Channel,
-	// Routing Profile, Agent, Agent Hierarchy CONTACTS_TRANSFERRED_OUT_EXTERNAL Unit:
-	// Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy CONTACTS_TRANSFERRED_OUT_INTERNAL Unit: Percent Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy CONTACTS_QUEUED
-	// Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy, contact/segmentAttributes/connect:Subtype
-	// CONTACTS_RESOLVED_IN_X Unit: Count Valid groupings and filters: Queue, Channel,
-	// Routing Profile, contact/segmentAttributes/connect:Subtype Threshold: For
-	// ThresholdValue enter any whole number from 1 to 604800 (inclusive), in seconds.
-	// For Comparison , you must enter LT (for "Less than"). CONTACTS_TRANSFERRED_OUT
-	// Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype Feature is a
-	// valid filter but not a valid grouping. CONTACTS_TRANSFERRED_OUT_BY_AGENT Unit:
-	// Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
-	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUE Unit: Count Valid groupings and filters:
-	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype MAX_QUEUED_TIME Unit: Seconds Valid
-	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype PERCENT_CONTACTS_STEP_EXPIRED Unit:
-	// Percent Valid groupings and filters: Queue, RoutingStepExpression
-	// PERCENT_CONTACTS_STEP_JOINED Unit: Percent Valid groupings and filters: Queue,
-	// RoutingStepExpression PERCENT_NON_TALK_TIME This metric is available only for
-	// contacts analyzed by Contact Lens conversational analytics. Unit: Percentage
+	// valid filter but not a valid grouping. CONTACTS_HANDLED_BY_CONNECTED_TO_AGENT
+	// Unit: Count Valid metric filter key: INITIATION_METHOD Valid groupings and
+	// filters: Queue, Channel, Agent, Agent Hierarchy,
+	// contact/segmentAttributes/connect:Subtype CONTACTS_HOLD_ABANDONS Unit: Count
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype PERCENT_TALK_TIME This
-	// metric is available only for contacts analyzed by Contact Lens conversational
-	// analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing
-	// Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
-	// PERCENT_TALK_TIME_AGENT This metric is available only for contacts analyzed by
-	// Contact Lens conversational analytics. Unit: Percentage Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype PERCENT_TALK_TIME_CUSTOMER This metric
-	// is available only for contacts analyzed by Contact Lens conversational
-	// analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing
-	// Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
-	// SERVICE_LEVEL You can include up to 20 SERVICE_LEVEL metrics in a request. Unit:
-	// Percent Valid groupings and filters: Queue, Channel, Routing Profile Threshold:
-	// For ThresholdValue , enter any whole number from 1 to 604800 (inclusive), in
-	// seconds. For Comparison , you must enter LT (for "Less than").
-	// STEP_CONTACTS_QUEUED Unit: Count Valid groupings and filters: Queue,
-	// RoutingStepExpression SUM_AFTER_CONTACT_WORK_TIME Unit: Seconds Valid groupings
+	// Hierarchy, contact/segmentAttributes/connect:Subtype
+	// CONTACTS_ON_HOLD_AGENT_DISCONNECT Unit: Count Valid groupings and filters:
+	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy
+	// CONTACTS_ON_HOLD_CUSTOMER_DISCONNECT Unit: Count Valid groupings and filters:
+	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy CONTACTS_PUT_ON_HOLD
+	// Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+	// Agent Hierarchy CONTACTS_TRANSFERRED_OUT_EXTERNAL Unit: Count Valid groupings
 	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// SUM_CONNECTING_TIME_AGENT Unit: Seconds Valid metric filter key:
+	// CONTACTS_TRANSFERRED_OUT_INTERNAL Unit: Percent Valid groupings and filters:
+	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy CONTACTS_QUEUED Unit:
+	// Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype CONTACTS_QUEUED_BY_ENQUEUE
+	// Unit: Count Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
+	// contact/segmentAttributes/connect:Subtype CONTACTS_RESOLVED_IN_X Unit: Count
+	// Valid groupings and filters: Queue, Channel, Routing Profile,
+	// contact/segmentAttributes/connect:Subtype Threshold: For ThresholdValue enter
+	// any whole number from 1 to 604800 (inclusive), in seconds. For Comparison , you
+	// must enter LT (for "Less than"). CONTACTS_TRANSFERRED_OUT Unit: Count Valid
+	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
+	// Feature, contact/segmentAttributes/connect:Subtype Feature is a valid filter but
+	// not a valid grouping. CONTACTS_TRANSFERRED_OUT_BY_AGENT Unit: Count Valid
+	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
+	// contact/segmentAttributes/connect:Subtype CONTACTS_TRANSFERRED_OUT_FROM_QUEUE
+	// Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+	// Agent Hierarchy, contact/segmentAttributes/connect:Subtype MAX_QUEUED_TIME Unit:
+	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+	// Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+	// PERCENT_CONTACTS_STEP_EXPIRED Unit: Percent Valid groupings and filters: Queue,
+	// RoutingStepExpression PERCENT_CONTACTS_STEP_JOINED Unit: Percent Valid groupings
+	// and filters: Queue, RoutingStepExpression PERCENT_NON_TALK_TIME This metric is
+	// available only for contacts analyzed by Contact Lens conversational analytics.
+	// Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile,
+	// Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+	// PERCENT_TALK_TIME This metric is available only for contacts analyzed by Contact
+	// Lens conversational analytics. Unit: Percentage Valid groupings and filters:
+	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
+	// contact/segmentAttributes/connect:Subtype PERCENT_TALK_TIME_AGENT This metric is
+	// available only for contacts analyzed by Contact Lens conversational analytics.
+	// Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile,
+	// Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+	// PERCENT_TALK_TIME_CUSTOMER This metric is available only for contacts analyzed
+	// by Contact Lens conversational analytics. Unit: Percentage Valid groupings and
+	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
+	// contact/segmentAttributes/connect:Subtype SERVICE_LEVEL You can include up to 20
+	// SERVICE_LEVEL metrics in a request. Unit: Percent Valid groupings and filters:
+	// Queue, Channel, Routing Profile Threshold: For ThresholdValue , enter any whole
+	// number from 1 to 604800 (inclusive), in seconds. For Comparison , you must enter
+	// LT (for "Less than"). STEP_CONTACTS_QUEUED Unit: Count Valid groupings and
+	// filters: Queue, RoutingStepExpression SUM_AFTER_CONTACT_WORK_TIME Unit: Seconds
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy SUM_CONNECTING_TIME_AGENT Unit: Seconds Valid metric filter key:
 	// INITIATION_METHOD . This metric only supports the following filter keys as
 	// INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK | API Valid groupings and
 	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy The Negate key

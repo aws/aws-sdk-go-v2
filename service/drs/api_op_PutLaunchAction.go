@@ -73,7 +73,7 @@ type PutLaunchActionInput struct {
 	// Launch action order.
 	//
 	// This member is required.
-	Order int32
+	Order *int32
 
 	// Launch configuration template Id or Source Server Id
 	//
@@ -113,7 +113,7 @@ type PutLaunchActionOutput struct {
 	Optional *bool
 
 	// Launch action order.
-	Order int32
+	Order *int32
 
 	// Launch action parameters.
 	Parameters map[string]types.LaunchActionParameter

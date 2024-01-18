@@ -1,0 +1,8 @@
+{
+    "id": "2fe880b9-a393-473a-88e4-a86a74693c7f",
+    "type": "feature",
+    "description": "Allow support for Snowflake as a Kinesis Data Firehose delivery destination.",
+    "modules": [
+        "service/firehose"
+    ]
+}

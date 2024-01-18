@@ -140,6 +140,9 @@ type CreateDeliveryStreamInput struct {
 	// Deprecated: This member has been deprecated.
 	S3DestinationConfiguration *types.S3DestinationConfiguration
 
+	// Configure Snowflake destination
+	SnowflakeDestinationConfiguration *types.SnowflakeDestinationConfiguration
+
 	// The destination in Splunk. You can specify only one destination.
 	SplunkDestinationConfiguration *types.SplunkDestinationConfiguration
 

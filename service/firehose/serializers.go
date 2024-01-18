@@ -2571,6 +2571,258 @@ func awsAwsjson11_serializeDocumentSerializer(v *types.Serializer, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSnowflakeDestinationConfiguration(v *types.SnowflakeDestinationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountUrl != nil {
+		ok := object.Key("AccountUrl")
+		ok.String(*v.AccountUrl)
+	}
+
+	if v.CloudWatchLoggingOptions != nil {
+		ok := object.Key("CloudWatchLoggingOptions")
+		if err := awsAwsjson11_serializeDocumentCloudWatchLoggingOptions(v.CloudWatchLoggingOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContentColumnName != nil {
+		ok := object.Key("ContentColumnName")
+		ok.String(*v.ContentColumnName)
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if len(v.DataLoadingOption) > 0 {
+		ok := object.Key("DataLoadingOption")
+		ok.String(string(v.DataLoadingOption))
+	}
+
+	if v.KeyPassphrase != nil {
+		ok := object.Key("KeyPassphrase")
+		ok.String(*v.KeyPassphrase)
+	}
+
+	if v.MetaDataColumnName != nil {
+		ok := object.Key("MetaDataColumnName")
+		ok.String(*v.MetaDataColumnName)
+	}
+
+	if v.PrivateKey != nil {
+		ok := object.Key("PrivateKey")
+		ok.String(*v.PrivateKey)
+	}
+
+	if v.ProcessingConfiguration != nil {
+		ok := object.Key("ProcessingConfiguration")
+		if err := awsAwsjson11_serializeDocumentProcessingConfiguration(v.ProcessingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetryOptions != nil {
+		ok := object.Key("RetryOptions")
+		if err := awsAwsjson11_serializeDocumentSnowflakeRetryOptions(v.RetryOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleARN != nil {
+		ok := object.Key("RoleARN")
+		ok.String(*v.RoleARN)
+	}
+
+	if len(v.S3BackupMode) > 0 {
+		ok := object.Key("S3BackupMode")
+		ok.String(string(v.S3BackupMode))
+	}
+
+	if v.S3Configuration != nil {
+		ok := object.Key("S3Configuration")
+		if err := awsAwsjson11_serializeDocumentS3DestinationConfiguration(v.S3Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Schema != nil {
+		ok := object.Key("Schema")
+		ok.String(*v.Schema)
+	}
+
+	if v.SnowflakeRoleConfiguration != nil {
+		ok := object.Key("SnowflakeRoleConfiguration")
+		if err := awsAwsjson11_serializeDocumentSnowflakeRoleConfiguration(v.SnowflakeRoleConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SnowflakeVpcConfiguration != nil {
+		ok := object.Key("SnowflakeVpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentSnowflakeVpcConfiguration(v.SnowflakeVpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		ok.String(*v.Table)
+	}
+
+	if v.User != nil {
+		ok := object.Key("User")
+		ok.String(*v.User)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSnowflakeDestinationUpdate(v *types.SnowflakeDestinationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountUrl != nil {
+		ok := object.Key("AccountUrl")
+		ok.String(*v.AccountUrl)
+	}
+
+	if v.CloudWatchLoggingOptions != nil {
+		ok := object.Key("CloudWatchLoggingOptions")
+		if err := awsAwsjson11_serializeDocumentCloudWatchLoggingOptions(v.CloudWatchLoggingOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContentColumnName != nil {
+		ok := object.Key("ContentColumnName")
+		ok.String(*v.ContentColumnName)
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if len(v.DataLoadingOption) > 0 {
+		ok := object.Key("DataLoadingOption")
+		ok.String(string(v.DataLoadingOption))
+	}
+
+	if v.KeyPassphrase != nil {
+		ok := object.Key("KeyPassphrase")
+		ok.String(*v.KeyPassphrase)
+	}
+
+	if v.MetaDataColumnName != nil {
+		ok := object.Key("MetaDataColumnName")
+		ok.String(*v.MetaDataColumnName)
+	}
+
+	if v.PrivateKey != nil {
+		ok := object.Key("PrivateKey")
+		ok.String(*v.PrivateKey)
+	}
+
+	if v.ProcessingConfiguration != nil {
+		ok := object.Key("ProcessingConfiguration")
+		if err := awsAwsjson11_serializeDocumentProcessingConfiguration(v.ProcessingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetryOptions != nil {
+		ok := object.Key("RetryOptions")
+		if err := awsAwsjson11_serializeDocumentSnowflakeRetryOptions(v.RetryOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleARN != nil {
+		ok := object.Key("RoleARN")
+		ok.String(*v.RoleARN)
+	}
+
+	if len(v.S3BackupMode) > 0 {
+		ok := object.Key("S3BackupMode")
+		ok.String(string(v.S3BackupMode))
+	}
+
+	if v.S3Update != nil {
+		ok := object.Key("S3Update")
+		if err := awsAwsjson11_serializeDocumentS3DestinationUpdate(v.S3Update, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Schema != nil {
+		ok := object.Key("Schema")
+		ok.String(*v.Schema)
+	}
+
+	if v.SnowflakeRoleConfiguration != nil {
+		ok := object.Key("SnowflakeRoleConfiguration")
+		if err := awsAwsjson11_serializeDocumentSnowflakeRoleConfiguration(v.SnowflakeRoleConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		ok.String(*v.Table)
+	}
+
+	if v.User != nil {
+		ok := object.Key("User")
+		ok.String(*v.User)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSnowflakeRetryOptions(v *types.SnowflakeRetryOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationInSeconds != nil {
+		ok := object.Key("DurationInSeconds")
+		ok.Integer(*v.DurationInSeconds)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSnowflakeRoleConfiguration(v *types.SnowflakeRoleConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.SnowflakeRole != nil {
+		ok := object.Key("SnowflakeRole")
+		ok.String(*v.SnowflakeRole)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSnowflakeVpcConfiguration(v *types.SnowflakeVpcConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PrivateLinkVpceId != nil {
+		ok := object.Key("PrivateLinkVpceId")
+		ok.String(*v.PrivateLinkVpceId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSplunkBufferingHints(v *types.SplunkBufferingHints, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2896,6 +3148,13 @@ func awsAwsjson11_serializeOpDocumentCreateDeliveryStreamInput(v *CreateDelivery
 		}
 	}
 
+	if v.SnowflakeDestinationConfiguration != nil {
+		ok := object.Key("SnowflakeDestinationConfiguration")
+		if err := awsAwsjson11_serializeDocumentSnowflakeDestinationConfiguration(v.SnowflakeDestinationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SplunkDestinationConfiguration != nil {
 		ok := object.Key("SplunkDestinationConfiguration")
 		if err := awsAwsjson11_serializeDocumentSplunkDestinationConfiguration(v.SplunkDestinationConfiguration, ok); err != nil {
@@ -3167,6 +3426,13 @@ func awsAwsjson11_serializeOpDocumentUpdateDestinationInput(v *UpdateDestination
 	if v.S3DestinationUpdate != nil {
 		ok := object.Key("S3DestinationUpdate")
 		if err := awsAwsjson11_serializeDocumentS3DestinationUpdate(v.S3DestinationUpdate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SnowflakeDestinationUpdate != nil {
+		ok := object.Key("SnowflakeDestinationUpdate")
+		if err := awsAwsjson11_serializeDocumentSnowflakeDestinationUpdate(v.SnowflakeDestinationUpdate, ok); err != nil {
 			return err
 		}
 	}
