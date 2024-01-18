@@ -1,3 +1,26 @@
+# Release (2024-01-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.11](service/b2bi/CHANGELOG.md#v100-preview11-2024-01-18)
+  * **Feature**: Increasing TestMapping inputFileContent file size limit to 5MB and adding file size limit 250KB for TestParsing input file. This release also includes exposing InternalServerException for Tag APIs.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.36.0](service/cloudtrail/CHANGELOG.md#v1360-2024-01-18)
+  * **Feature**: This release adds a new API ListInsightsMetricData to retrieve metric data from CloudTrail Insights.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.90.0](service/connect/CHANGELOG.md#v1900-2024-01-18)
+  * **Feature**: GetMetricDataV2 now supports 3 groupings
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.22.0](service/drs/CHANGELOG.md#v1220-2024-01-18)
+  * **Feature**: Removed invalid and unnecessary default values.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.15.0](service/emrserverless/CHANGELOG.md#v1150-2024-01-18)
+  * **Feature**: **BREAKFIX**: Correct nullability of InitialCapacityConfig's WorkerCount field. The type of this value has changed from int64 to *int64. Due to this field being marked required, with an enforced minimum of 1, but a default of 0, the former type would result in automatic failure behavior without caller intervention. Calling code will need to be updated accordingly.
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.17.0](service/evidently/CHANGELOG.md#v1170-2024-01-18)
+  * **Feature**: **BREAKFIX**: Correct nullability of GetExperimentResultsInput's Period field. The type of this value has changed from int64 to *int64. Due to the nature of default value serialization, the former type could cause unexpected/incorrect behavior when set to its zero value. Calling code will need to be updated accordingly.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.24.0](service/firehose/CHANGELOG.md#v1240-2024-01-18)
+  * **Feature**: Allow support for Snowflake as a Kinesis Data Firehose delivery destination.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.23.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1230-2024-01-18)
+  * **Feature**: Increase BatchGetRecord limits from 10 items to 100 items
+
 # Release (2024-01-17)
 
 ## General Highlights

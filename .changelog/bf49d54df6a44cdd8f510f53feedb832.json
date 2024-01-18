@@ -1,8 +1,0 @@
-{
-    "id": "bf49d54d-f6a4-4cdd-8f51-0f53feedb832",
-    "type": "feature",
-    "description": "GetMetricDataV2 now supports 3 groupings",
-    "modules": [
-        "service/connect"
-    ]
-}

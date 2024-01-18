@@ -1,3 +1,7 @@
+# v1.24.0 (2024-01-18)
+
+* **Feature**: Allow support for Snowflake as a Kinesis Data Firehose delivery destination.
+
 # v1.23.2 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

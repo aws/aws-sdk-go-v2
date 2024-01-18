@@ -1,8 +1,0 @@
-{
-    "id": "b00461b7-0e99-4a1a-831e-987d3689de26",
-    "type": "feature",
-    "description": "Removed invalid and unnecessary default values.",
-    "modules": [
-        "service/drs"
-    ]
-}

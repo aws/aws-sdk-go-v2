@@ -1,8 +1,0 @@
-{
-    "id": "11bdec22-ee60-43ca-8daf-5be3aad2724f",
-    "type": "feature",
-    "description": "Increase BatchGetRecord limits from 10 items to 100 items",
-    "modules": [
-        "service/sagemakerfeaturestoreruntime"
-    ]
-}

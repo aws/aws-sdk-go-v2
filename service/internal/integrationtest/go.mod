@@ -2,8 +2,8 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.24.1
-	github.com/aws/aws-sdk-go-v2/config v1.26.4
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.15.12
+	github.com/aws/aws-sdk-go-v2/config v1.26.5
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.15.13
 	github.com/aws/aws-sdk-go-v2/service/acm v1.22.7
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.21.7
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.25.7
@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.32.6
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.19.7
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.20.6
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.35.7
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.32.2
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.20.1
@@ -44,7 +44,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.19.6
 	github.com/aws/aws-sdk-go-v2/service/emr v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.28.0
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.23.2
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.19.6
 	github.com/aws/aws-sdk-go-v2/service/glue v1.73.1
@@ -92,7 +92,7 @@ require (
 
 require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.5.4 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.16.15 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.16.16 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.14.11 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.10 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.10 // indirect
@@ -103,7 +103,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.8.11 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.10.10 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.16.10 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.18.6 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.18.7 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.21.7 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )

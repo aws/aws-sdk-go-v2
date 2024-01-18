@@ -1,3 +1,7 @@
+# v1.15.0 (2024-01-18)
+
+* **Feature**: **BREAKFIX**: Correct nullability of InitialCapacityConfig's WorkerCount field. The type of this value has changed from int64 to *int64. Due to this field being marked required, with an enforced minimum of 1, but a default of 0, the former type would result in automatic failure behavior without caller intervention. Calling code will need to be updated accordingly.
+
 # v1.14.7 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions
