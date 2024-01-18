@@ -286,7 +286,7 @@ type InitialCapacityConfig struct {
 	// The number of workers in the initial capacity configuration.
 	//
 	// This member is required.
-	WorkerCount int64
+	WorkerCount *int64
 
 	// The resource configuration of the initial capacity configuration.
 	WorkerConfiguration *WorkerResourceConfig

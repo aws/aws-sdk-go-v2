@@ -440,6 +440,9 @@ func validateInitialCapacityConfig(v *types.InitialCapacityConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InitialCapacityConfig"}
+	if v.WorkerCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkerCount"))
+	}
 	if v.WorkerConfiguration != nil {
 		if err := validateWorkerResourceConfig(v.WorkerConfiguration); err != nil {
 			invalidParams.AddNested("WorkerConfiguration", err.(smithy.InvalidParamsError))
