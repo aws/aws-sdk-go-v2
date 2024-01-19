@@ -4757,7 +4757,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 40
+                    "max": 100
                 }
             }
         },
