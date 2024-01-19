@@ -1,8 +1,0 @@
-{
-    "id": "0b4e24e6-9ff3-4ce4-8279-7da344bef773",
-    "type": "feature",
-    "description": "This release adds support for including ApproximateCreationDateTimePrecision configurations in EnableKinesisStreamingDestination API, adds the same as an optional field in the response of DescribeKinesisStreamingDestination, and adds support for a new UpdateKinesisStreamingDestination API.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

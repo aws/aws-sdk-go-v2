@@ -1,3 +1,7 @@
+# v1.28.0 (2024-01-19)
+
+* **Feature**: Release CodeBuild Reserved Capacity feature
+
 # v1.27.0 (2024-01-08)
 
 * **Feature**: Aws CodeBuild now supports new compute type BUILD_GENERAL1_XLARGE

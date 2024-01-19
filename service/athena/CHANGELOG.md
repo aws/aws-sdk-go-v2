@@ -1,3 +1,7 @@
+# v1.38.0 (2024-01-19)
+
+* **Feature**: Introducing new NotebookS3LocationUri parameter to Athena ImportNotebook API. Payload is no longer required and either Payload or NotebookS3LocationUri needs to be provided (not both) for a successful ImportNotebook API call. If both are provided, an InvalidRequestException will be thrown.
+
 # v1.37.4 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

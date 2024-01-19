@@ -1,3 +1,16 @@
+# Release (2024-01-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.38.0](service/athena/CHANGELOG.md#v1380-2024-01-19)
+  * **Feature**: Introducing new NotebookS3LocationUri parameter to Athena ImportNotebook API. Payload is no longer required and either Payload or NotebookS3LocationUri needs to be provided (not both) for a successful ImportNotebook API call. If both are provided, an InvalidRequestException will be thrown.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.28.0](service/codebuild/CHANGELOG.md#v1280-2024-01-19)
+  * **Feature**: Release CodeBuild Reserved Capacity feature
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.27.0](service/dynamodb/CHANGELOG.md#v1270-2024-01-19)
+  * **Feature**: This release adds support for including ApproximateCreationDateTimePrecision configurations in EnableKinesisStreamingDestination API, adds the same as an optional field in the response of DescribeKinesisStreamingDestination, and adds support for a new UpdateKinesisStreamingDestination API.
+
 # Release (2024-01-18)
 
 ## General Highlights
