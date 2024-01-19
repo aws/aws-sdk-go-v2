@@ -1399,8 +1399,9 @@ type WorkGroupConfiguration struct {
 	EngineVersion *EngineVersion
 
 	// The ARN of the execution role used to access user resources for Spark sessions
-	// and Identity Center enabled workgroups. This property applies only to Spark
-	// enabled workgroups and Identity Center enabled workgroups.
+	// and IAM Identity Center enabled workgroups. This property applies only to Spark
+	// enabled workgroups and IAM Identity Center enabled workgroups. The property is
+	// required for IAM Identity Center enabled workgroups.
 	ExecutionRole *string
 
 	// Specifies whether the workgroup is IAM Identity Center supported.

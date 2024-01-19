@@ -90,6 +90,10 @@ type StartBuildInput struct {
 	// ones already defined in the build project.
 	EnvironmentVariablesOverride []types.EnvironmentVariable
 
+	// A ProjectFleet object specified for this build that overrides the one defined
+	// in the build project.
+	FleetOverride *types.ProjectFleet
+
 	// The user-defined depth of history, with a minimum value of 0, that overrides,
 	// for this build only, any previous depth of history defined in the build project.
 	GitCloneDepthOverride *int32

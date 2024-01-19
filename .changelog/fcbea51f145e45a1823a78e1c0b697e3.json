@@ -1,0 +1,8 @@
+{
+    "id": "fcbea51f-145e-45a1-823a-78e1c0b697e3",
+    "type": "feature",
+    "description": "Release CodeBuild Reserved Capacity feature",
+    "modules": [
+        "service/codebuild"
+    ]
+}

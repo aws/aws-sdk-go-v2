@@ -2259,9 +2259,6 @@ func validateOpImportNotebookInput(v *ImportNotebookInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Payload == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}

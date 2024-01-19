@@ -12,9 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Imports a single ipynb file to a Spark enabled workgroup. The maximum file size
-// that can be imported is 10 megabytes. If an ipynb file with the same name
-// already exists in the workgroup, throws an error.
+// Imports a single ipynb file to a Spark enabled workgroup. To import the
+// notebook, the request must specify a value for either Payload or
+// NoteBookS3LocationUri . If neither is specified or both are specified, an
+// InvalidRequestException occurs. The maximum file size that can be imported is 10
+// megabytes. If an ipynb file with the same name already exists in the workgroup,
+// throws an error.
 func (c *Client) ImportNotebook(ctx context.Context, params *ImportNotebookInput, optFns ...func(*Options)) (*ImportNotebookOutput, error) {
 	if params == nil {
 		params = &ImportNotebookInput{}
@@ -37,11 +40,6 @@ type ImportNotebookInput struct {
 	// This member is required.
 	Name *string
 
-	// The notebook content to be imported.
-	//
-	// This member is required.
-	Payload *string
-
 	// The notebook content type. Currently, the only valid type is IPYNB .
 	//
 	// This member is required.
@@ -59,6 +57,12 @@ type ImportNotebookInput struct {
 	// Web Services SDK or the Amazon Web Services CLI, you must provide this token or
 	// the action will fail.
 	ClientRequestToken *string
+
+	// A URI that specifies the Amazon S3 location of a notebook file in ipynb format.
+	NotebookS3LocationUri *string
+
+	// The notebook content to be imported. The payload must be in ipynb format.
+	Payload *string
 
 	noSmithyDocumentSerde
 }

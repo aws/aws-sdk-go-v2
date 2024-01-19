@@ -1,0 +1,8 @@
+{
+    "id": "2b66a07b-53c0-4b51-a378-83358bc75caf",
+    "type": "feature",
+    "description": "Increased Quick Response name max length to 100",
+    "modules": [
+        "service/qconnect"
+    ]
+}

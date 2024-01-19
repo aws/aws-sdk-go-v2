@@ -334,6 +334,104 @@ func (FileSystemType) Values() []FileSystemType {
 	}
 }
 
+type FleetContextCode string
+
+// Enum values for FleetContextCode
+const (
+	FleetContextCodeCreateFailed FleetContextCode = "CREATE_FAILED"
+	FleetContextCodeUpdateFailed FleetContextCode = "UPDATE_FAILED"
+)
+
+// Values returns all known values for FleetContextCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FleetContextCode) Values() []FleetContextCode {
+	return []FleetContextCode{
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+	}
+}
+
+type FleetScalingMetricType string
+
+// Enum values for FleetScalingMetricType
+const (
+	FleetScalingMetricTypeFleetUtilizationRate FleetScalingMetricType = "FLEET_UTILIZATION_RATE"
+)
+
+// Values returns all known values for FleetScalingMetricType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FleetScalingMetricType) Values() []FleetScalingMetricType {
+	return []FleetScalingMetricType{
+		"FLEET_UTILIZATION_RATE",
+	}
+}
+
+type FleetScalingType string
+
+// Enum values for FleetScalingType
+const (
+	FleetScalingTypeTargetTrackingScaling FleetScalingType = "TARGET_TRACKING_SCALING"
+)
+
+// Values returns all known values for FleetScalingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FleetScalingType) Values() []FleetScalingType {
+	return []FleetScalingType{
+		"TARGET_TRACKING_SCALING",
+	}
+}
+
+type FleetSortByType string
+
+// Enum values for FleetSortByType
+const (
+	FleetSortByTypeName             FleetSortByType = "NAME"
+	FleetSortByTypeCreatedTime      FleetSortByType = "CREATED_TIME"
+	FleetSortByTypeLastModifiedTime FleetSortByType = "LAST_MODIFIED_TIME"
+)
+
+// Values returns all known values for FleetSortByType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FleetSortByType) Values() []FleetSortByType {
+	return []FleetSortByType{
+		"NAME",
+		"CREATED_TIME",
+		"LAST_MODIFIED_TIME",
+	}
+}
+
+type FleetStatusCode string
+
+// Enum values for FleetStatusCode
+const (
+	FleetStatusCodeCreating             FleetStatusCode = "CREATING"
+	FleetStatusCodeUpdating             FleetStatusCode = "UPDATING"
+	FleetStatusCodeRotating             FleetStatusCode = "ROTATING"
+	FleetStatusCodeDeleting             FleetStatusCode = "DELETING"
+	FleetStatusCodeCreateFailed         FleetStatusCode = "CREATE_FAILED"
+	FleetStatusCodeUpdateRollbackFailed FleetStatusCode = "UPDATE_ROLLBACK_FAILED"
+	FleetStatusCodeActive               FleetStatusCode = "ACTIVE"
+)
+
+// Values returns all known values for FleetStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FleetStatusCode) Values() []FleetStatusCode {
+	return []FleetStatusCode{
+		"CREATING",
+		"UPDATING",
+		"ROTATING",
+		"DELETING",
+		"CREATE_FAILED",
+		"UPDATE_ROLLBACK_FAILED",
+		"ACTIVE",
+	}
+}
+
 type ImagePullCredentialsType string
 
 // Enum values for ImagePullCredentialsType
