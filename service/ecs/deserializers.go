@@ -14973,6 +14973,16 @@ func awsAwsjson11_deserializeDocumentServiceConnectService(v **types.ServiceConn
 				sv.PortName = ptr.String(jtv)
 			}
 
+		case "timeout":
+			if err := awsAwsjson11_deserializeDocumentTimeoutConfiguration(&sv.Timeout, value); err != nil {
+				return err
+			}
+
+		case "tls":
+			if err := awsAwsjson11_deserializeDocumentServiceConnectTlsConfiguration(&sv.Tls, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15096,6 +15106,100 @@ func awsAwsjson11_deserializeDocumentServiceConnectServiceResourceList(v *[]type
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceConnectTlsCertificateAuthority(v **types.ServiceConnectTlsCertificateAuthority, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceConnectTlsCertificateAuthority
+	if *v == nil {
+		sv = &types.ServiceConnectTlsCertificateAuthority{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "awsPcaAuthorityArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AwsPcaAuthorityArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceConnectTlsConfiguration(v **types.ServiceConnectTlsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceConnectTlsConfiguration
+	if *v == nil {
+		sv = &types.ServiceConnectTlsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "issuerCertificateAuthority":
+			if err := awsAwsjson11_deserializeDocumentServiceConnectTlsCertificateAuthority(&sv.IssuerCertificateAuthority, value); err != nil {
+				return err
+			}
+
+		case "kmsKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKey = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -17312,6 +17416,63 @@ func awsAwsjson11_deserializeDocumentTaskSets(v *[]types.TaskSet, value interfac
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTimeoutConfiguration(v **types.TimeoutConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeoutConfiguration
+	if *v == nil {
+		sv = &types.TimeoutConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "idleTimeoutSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IdleTimeoutSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "perRequestTimeoutSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PerRequestTimeoutSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

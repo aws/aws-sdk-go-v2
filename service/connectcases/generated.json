@@ -19,6 +19,7 @@
         "api_op_CreateTemplate.go",
         "api_op_DeleteDomain.go",
         "api_op_GetCase.go",
+        "api_op_GetCaseAuditEvents.go",
         "api_op_GetCaseEventConfiguration.go",
         "api_op_GetDomain.go",
         "api_op_GetLayout.go",

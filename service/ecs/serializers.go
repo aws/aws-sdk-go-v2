@@ -5170,6 +5170,20 @@ func awsAwsjson11_serializeDocumentServiceConnectService(v *types.ServiceConnect
 		ok.String(*v.PortName)
 	}
 
+	if v.Timeout != nil {
+		ok := object.Key("timeout")
+		if err := awsAwsjson11_serializeDocumentTimeoutConfiguration(v.Timeout, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tls != nil {
+		ok := object.Key("tls")
+		if err := awsAwsjson11_serializeDocumentServiceConnectTlsConfiguration(v.Tls, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5183,6 +5197,42 @@ func awsAwsjson11_serializeDocumentServiceConnectServiceList(v []types.ServiceCo
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectTlsCertificateAuthority(v *types.ServiceConnectTlsCertificateAuthority, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwsPcaAuthorityArn != nil {
+		ok := object.Key("awsPcaAuthorityArn")
+		ok.String(*v.AwsPcaAuthorityArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectTlsConfiguration(v *types.ServiceConnectTlsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IssuerCertificateAuthority != nil {
+		ok := object.Key("issuerCertificateAuthority")
+		if err := awsAwsjson11_serializeDocumentServiceConnectTlsCertificateAuthority(v.IssuerCertificateAuthority, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KmsKey != nil {
+		ok := object.Key("kmsKey")
+		ok.String(*v.KmsKey)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
 	return nil
 }
 
@@ -5639,6 +5689,23 @@ func awsAwsjson11_serializeDocumentTaskVolumeConfigurations(v []types.TaskVolume
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTimeoutConfiguration(v *types.TimeoutConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdleTimeoutSeconds != nil {
+		ok := object.Key("idleTimeoutSeconds")
+		ok.Integer(*v.IdleTimeoutSeconds)
+	}
+
+	if v.PerRequestTimeoutSeconds != nil {
+		ok := object.Key("perRequestTimeoutSeconds")
+		ok.Integer(*v.PerRequestTimeoutSeconds)
+	}
+
 	return nil
 }
 

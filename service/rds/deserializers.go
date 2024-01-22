@@ -1816,6 +1816,9 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("GlobalClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalClusterNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("InsufficientDBInstanceCapacity", errorCode):
+		return awsAwsquery_deserializeErrorInsufficientDBInstanceCapacityFault(response, errorBody)
+
 	case strings.EqualFold("InsufficientStorageClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientStorageClusterCapacityFault(response, errorBody)
 

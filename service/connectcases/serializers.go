@@ -296,6 +296,13 @@ func awsRestjson1_serializeOpDocumentCreateCaseInput(v *CreateCaseInput, value s
 		}
 	}
 
+	if v.PerformedBy != nil {
+		ok := object.Key("performedBy")
+		if err := awsRestjson1_serializeDocumentUserUnion(v.PerformedBy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TemplateId != nil {
 		ok := object.Key("templateId")
 		ok.String(*v.TemplateId)
@@ -954,6 +961,108 @@ func awsRestjson1_serializeOpDocumentGetCaseInput(v *GetCaseInput, value smithyj
 		if err := awsRestjson1_serializeDocumentFieldIdentifierList(v.Fields, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetCaseAuditEvents struct {
+}
+
+func (*awsRestjson1_serializeOpGetCaseAuditEvents) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetCaseAuditEvents) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCaseAuditEventsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{domainId}/cases/{caseId}/audit-history")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetCaseAuditEventsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetCaseAuditEventsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetCaseAuditEventsInput(v *GetCaseAuditEventsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CaseId == nil || len(*v.CaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member caseId must not be empty")}
+	}
+	if v.CaseId != nil {
+		if err := encoder.SetURI("caseId").String(*v.CaseId); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainId == nil || len(*v.DomainId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member domainId must not be empty")}
+	}
+	if v.DomainId != nil {
+		if err := encoder.SetURI("domainId").String(*v.DomainId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetCaseAuditEventsInput(v *GetCaseAuditEventsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2357,6 +2466,13 @@ func awsRestjson1_serializeOpDocumentUpdateCaseInput(v *UpdateCaseInput, value s
 		}
 	}
 
+	if v.PerformedBy != nil {
+		ok := object.Key("performedBy")
+		if err := awsRestjson1_serializeDocumentUserUnion(v.PerformedBy, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3118,6 +3234,10 @@ func awsRestjson1_serializeDocumentFieldValueUnion(v types.FieldValueUnion, valu
 
 	case *types.FieldValueUnionMemberStringValue:
 		av := object.Key("stringValue")
+		av.String(uv.Value)
+
+	case *types.FieldValueUnionMemberUserArnValue:
+		av := object.Key("userArnValue")
 		av.String(uv.Value)
 
 	default:

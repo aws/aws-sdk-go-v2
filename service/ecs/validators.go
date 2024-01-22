@@ -2024,6 +2024,11 @@ func validateServiceConnectService(v *types.ServiceConnectService) error {
 			invalidParams.AddNested("ClientAliases", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tls != nil {
+		if err := validateServiceConnectTlsConfiguration(v.Tls); err != nil {
+			invalidParams.AddNested("Tls", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2040,6 +2045,21 @@ func validateServiceConnectServiceList(v []types.ServiceConnectService) error {
 		if err := validateServiceConnectService(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceConnectTlsConfiguration(v *types.ServiceConnectTlsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceConnectTlsConfiguration"}
+	if v.IssuerCertificateAuthority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IssuerCertificateAuthority"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

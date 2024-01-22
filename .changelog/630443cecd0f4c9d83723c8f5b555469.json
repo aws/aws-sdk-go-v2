@@ -1,0 +1,8 @@
+{
+    "id": "630443ce-cd0f-4c9d-8372-3c8f5b555469",
+    "type": "documentation",
+    "description": "Doc-only update around removing AL1 from list of available AMIs for Cloud9",
+    "modules": [
+        "service/cloud9"
+    ]
+}

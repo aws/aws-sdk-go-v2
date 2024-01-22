@@ -7,6 +7,39 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
 )
 
+func ExampleAuditEventFieldValueUnion_outputUsage() {
+	var union types.AuditEventFieldValueUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AuditEventFieldValueUnionMemberBooleanValue:
+		_ = v.Value // Value is bool
+
+	case *types.AuditEventFieldValueUnionMemberDoubleValue:
+		_ = v.Value // Value is float64
+
+	case *types.AuditEventFieldValueUnionMemberEmptyValue:
+		_ = v.Value // Value is types.EmptyFieldValue
+
+	case *types.AuditEventFieldValueUnionMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.AuditEventFieldValueUnionMemberUserArnValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EmptyFieldValue
+var _ *string
+var _ *bool
+var _ *float64
+
 func ExampleCaseFilter_outputUsage() {
 	var union types.CaseFilter
 	// type switches can be used to check the union value
@@ -83,6 +116,9 @@ func ExampleFieldValueUnion_outputUsage() {
 		_ = v.Value // Value is types.EmptyFieldValue
 
 	case *types.FieldValueUnionMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.FieldValueUnionMemberUserArnValue:
 		_ = v.Value // Value is string
 
 	case *types.UnknownUnionMember:

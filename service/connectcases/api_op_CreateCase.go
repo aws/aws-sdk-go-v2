@@ -12,9 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a case in the specified Cases domain. Case system and custom fields are
-// taken as an array id/value pairs with a declared data types. The following
-// fields are required when creating a case:
+// If you provide a value for PerformedBy.UserArn you must also have
+// connect:DescribeUser (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html)
+// permission on the User ARN resource that you provide Creates a case in the
+// specified Cases domain. Case system and custom fields are taken as an array
+// id/value pairs with a declared data types. The following fields are required
+// when creating a case:
 //   - customer_id - You must provide the full customer profile ARN in this format:
 //     arn:aws:profile:your_AWS_Region:your_AWS_account
 //     ID:domains/your_profiles_domain_name/profiles/profile_ID
@@ -58,6 +61,9 @@ type CreateCaseInput struct {
 	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
 	// .
 	ClientToken *string
+
+	// Represents the identity of the person who performed the action.
+	PerformedBy types.UserUnion
 
 	noSmithyDocumentSerde
 }

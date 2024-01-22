@@ -1,0 +1,8 @@
+{
+    "id": "dd8ab7fa-0f65-4ea1-9269-998b9fa500be",
+    "type": "feature",
+    "description": "This release adds support for Transport Layer Security (TLS) and Configurable Timeout to ECS Service Connect. TLS facilitates privacy and data security for inter-service communications, while Configurable Timeout allows customized per-request timeout and idle timeout for Service Connect services.",
+    "modules": [
+        "service/ecs"
+    ]
+}

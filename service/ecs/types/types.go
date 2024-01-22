@@ -3266,6 +3266,13 @@ type ServiceConnectService struct {
 	// proxy.
 	IngressPortOverride *int32
 
+	// A reference to an object that represents the configured timeouts for Service
+	// Connect.
+	Timeout *TimeoutConfiguration
+
+	// An object that represents the configuration for Service Connect TLS.
+	Tls *ServiceConnectTlsConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -3292,6 +3299,34 @@ type ServiceConnectServiceResource struct {
 	// discoveryName isn't specified, the port mapping name from the task definition is
 	// used in portName.namespace .
 	DiscoveryName *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the Amazon Web Services Private Certificate Authority
+// certificate.
+type ServiceConnectTlsCertificateAuthority struct {
+
+	// The ARN of the Amazon Web Services Private Certificate Authority certificate.
+	AwsPcaAuthorityArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the configuration for Service Connect TLS.
+type ServiceConnectTlsConfiguration struct {
+
+	// The signer certificate authority.
+	//
+	// This member is required.
+	IssuerCertificateAuthority *ServiceConnectTlsCertificateAuthority
+
+	// The Amazon Web Services Key Management Service key.
+	KmsKey *string
+
+	// The Amazon Resource Name (ARN) of the IAM role that's associated with the
+	// Service Connect TLS.
+	RoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -4340,6 +4375,26 @@ type TaskVolumeConfiguration struct {
 	// one volume created for each task. The Amazon EBS volumes are visible in your
 	// account in the Amazon EC2 console once they are created.
 	ManagedEBSVolume *TaskManagedEBSVolumeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the timeout configurations for Service Connect. If
+// idleTimeout is set to a time that is less than perRequestTimeout , the
+// connection will close when the idleTimeout is reached and not the
+// perRequestTimeout .
+type TimeoutConfiguration struct {
+
+	// The amount of time in seconds a connection will stay active while idle. A value
+	// of 0 can be set to disable idleTimeout . The idleTimeout default for HTTP / HTTP2
+	// / GRPC is 5 minutes. The idleTimeout default for TCP is 1 hour.
+	IdleTimeoutSeconds *int32
+
+	// The amount of time waiting for the upstream to respond with a complete response
+	// per request. A value of 0 can be set to disable perRequestTimeout .
+	// perRequestTimeout can only be set if Service Connect appProtocol isn't TCP .
+	// Only idleTimeout is allowed for TCP appProtocol .
+	PerRequestTimeoutSeconds *int32
 
 	noSmithyDocumentSerde
 }
