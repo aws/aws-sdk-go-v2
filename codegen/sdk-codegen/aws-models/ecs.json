@@ -5558,6 +5558,15 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.ecs#Duration": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2147483647
+                }
+            }
+        },
         "com.amazonaws.ecs#EBSKMSKeyId": {
             "type": "string"
         },
@@ -10015,6 +10024,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The port number for the Service Connect proxy to listen on.</p>\n         <p>Use the value of this field to bypass the proxy for traffic on the port number\n\t\t\tspecified in the named <code>portMapping</code> in the task definition of this\n\t\t\tapplication, and then use it in your VPC security groups to allow traffic into the proxy\n\t\t\tfor this Amazon ECS service.</p>\n         <p>In <code>awsvpc</code> mode and Fargate, the default value is the container port\n\t\t\tnumber. The container port number is in the <code>portMapping</code> in the task\n\t\t\tdefinition. In bridge mode, the default value is the ephemeral port of the\n\t\t\tService Connect proxy.</p>"
                     }
+                },
+                "timeout": {
+                    "target": "com.amazonaws.ecs#TimeoutConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A reference to an object that represents the configured timeouts for Service Connect.</p>"
+                    }
+                },
+                "tls": {
+                    "target": "com.amazonaws.ecs#ServiceConnectTlsConfiguration"
                 }
             },
             "traits": {
@@ -10051,6 +10069,47 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#ServiceConnectServiceResource"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectTlsCertificateAuthority": {
+            "type": "structure",
+            "members": {
+                "awsPcaAuthorityArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Private Certificate Authority certificate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the Amazon Web Services Private Certificate Authority certificate.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectTlsConfiguration": {
+            "type": "structure",
+            "members": {
+                "issuerCertificateAuthority": {
+                    "target": "com.amazonaws.ecs#ServiceConnectTlsCertificateAuthority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signer certificate authority.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKey": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service key.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that's associated with the Service Connect TLS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the configuration for Service Connect TLS.</p>"
             }
         },
         "com.amazonaws.ecs#ServiceEvent": {
@@ -12069,6 +12128,26 @@
                 "target": "com.amazonaws.ecs#Task"
             }
         },
+        "com.amazonaws.ecs#TimeoutConfiguration": {
+            "type": "structure",
+            "members": {
+                "idleTimeoutSeconds": {
+                    "target": "com.amazonaws.ecs#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time in seconds a connection will stay active while idle. A \n\t\t\tvalue of <code>0</code> can be set to disable <code>idleTimeout</code>.</p>\n         <p>The <code>idleTimeout</code> default for\n\t\t\t<code>HTTP</code>/<code>HTTP2</code>/<code>GRPC</code> is 5 minutes.</p>\n         <p>The <code>idleTimeout</code> default for <code>TCP</code> is 1 hour.</p>"
+                    }
+                },
+                "perRequestTimeoutSeconds": {
+                    "target": "com.amazonaws.ecs#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time waiting for the upstream to respond with a complete response \n\t\t\tper request. A value of <code>0</code> can be set to disable <code>perRequestTimeout</code>. \n\t\t\t<code>perRequestTimeout</code> can only be set if Service Connect <code>appProtocol</code> \n\t\t\tisn't <code>TCP</code>. Only <code>idleTimeout</code> is allowed for <code>TCP</code>\n            <code>appProtocol</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the timeout configurations for Service Connect.</p>\n         <note>\n            <p>If <code>idleTimeout</code> is set to a time that is less than\n\t\t\t\t<code>perRequestTimeout</code>, the connection will close when the\n\t\t\t\t<code>idleTimeout</code> is reached and not the\n\t\t\t\t<code>perRequestTimeout</code>.</p>\n         </note>"
+            }
+        },
         "com.amazonaws.ecs#Timestamp": {
             "type": "timestamp"
         },
@@ -13296,7 +13375,7 @@
                 "configuredAtLaunch": {
                     "target": "com.amazonaws.ecs#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the volume should be configured at launch time. This is used to\n\t\t\tcreate Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each\n\t\t\ttask definition revision may only have one volume configured at launch in the volume\n\t\t\tconfiguration.</p>\n         <p>To configure a volume at launch time, use this task definition revision and specify a\n\t\t\t\t<code>volumeConfigurations</code> object when calling the\n\t\t\t<code>CreateService</code>, <code>UpdateService</code>, <code>RunTask</code> or\n\t\t\t\t<code>StartTask</code> APIs.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the volume should be configured at launch time. This is used to\n\t\t\tcreate Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each\n\t\t\ttask definition revision may only have one volume configured at launch in the volume\n\t\t\tconfiguration.</p>\n         <p>To configure a volume at launch time, use this task definition revision and specify a\n\t\t\t<code>volumeConfigurations</code> object when calling the\n\t\t\t<code>CreateService</code>, <code>UpdateService</code>, <code>RunTask</code> or\n\t\t\t<code>StartTask</code> APIs.</p>"
                     }
                 }
             },

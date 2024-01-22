@@ -3881,6 +3881,9 @@
                     "target": "com.amazonaws.rds#GlobalClusterNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#InsufficientDBInstanceCapacityFault"
+                },
+                {
                     "target": "com.amazonaws.rds#InsufficientStorageClusterCapacityFault"
                 },
                 {
@@ -3972,6 +3975,63 @@
                                 "HostedZoneId": "Z2R2ITUGPM61AM",
                                 "ReaderEndpoint": "sample-cluster.cluster-ro-cnpexample.us-east-1.rds.amazonaws.com",
                                 "CopyTagsToSnapshot": false
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create a PostgreSQL-compatible DB cluster",
+                        "documentation": "The following example creates a PostgreSQL-compatible Aurora DB cluster.",
+                        "input": {
+                            "DBClusterIdentifier": "sample-pg-cluster",
+                            "Engine": "aurora-postgresql",
+                            "MasterUsername": "admin",
+                            "MasterUserPassword": "mypassword",
+                            "VpcSecurityGroupIds": [
+                                "sg-0b91305example"
+                            ],
+                            "DBSubnetGroupName": "default"
+                        },
+                        "output": {
+                            "DBCluster": {
+                                "Endpoint": "sample-pg-cluster.cluster-cnpexample.us-east-1.rds.amazonaws.com",
+                                "HttpEndpointEnabled": false,
+                                "DBClusterMembers": [],
+                                "EngineMode": "provisioned",
+                                "CopyTagsToSnapshot": false,
+                                "HostedZoneId": "Z2R2ITUGPM61AM",
+                                "IAMDatabaseAuthenticationEnabled": false,
+                                "AllocatedStorage": 1,
+                                "VpcSecurityGroups": [
+                                    {
+                                        "VpcSecurityGroupId": "sg-0b91305example",
+                                        "Status": "active"
+                                    }
+                                ],
+                                "DeletionProtection": false,
+                                "StorageEncrypted": false,
+                                "BackupRetentionPeriod": 1,
+                                "PreferredBackupWindow": "09:56-10:26",
+                                "ClusterCreateTime": "2019-06-07T23:26:08.371Z",
+                                "DBClusterParameterGroup": "default.aurora-postgresql9.6",
+                                "EngineVersion": "9.6.9",
+                                "Engine": "aurora-postgresql",
+                                "Status": "creating",
+                                "DBClusterIdentifier": "sample-pg-cluster",
+                                "MultiAZ": false,
+                                "Port": 5432,
+                                "DBClusterArn": "arn:aws:rds:us-east-1:123456789012:cluster:sample-pg-cluster",
+                                "AssociatedRoles": [],
+                                "DbClusterResourceId": "cluster-ANPAJ4AE5446DAEXAMPLE",
+                                "PreferredMaintenanceWindow": "wed:03:33-wed:04:03",
+                                "ReaderEndpoint": "sample-pg-cluster.cluster-ro-cnpexample.us-east-1.rds.amazonaws.com",
+                                "MasterUsername": "master",
+                                "AvailabilityZones": [
+                                    "us-east-1a",
+                                    "us-east-1b",
+                                    "us-east-1c"
+                                ],
+                                "ReadReplicaIdentifiers": [],
+                                "DBSubnetGroup": "default"
                             }
                         }
                     }
@@ -13220,6 +13280,23 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "To describe DB cluster endpoints of a single DB cluster",
+                        "documentation": "The following example retrieves details for the DB cluster endpoints of a single specified DB cluster. Aurora Serverless clusters have only a single endpoint with a type of WRITER.",
+                        "input": {
+                            "DBClusterIdentifier": "serverless-cluster"
+                        },
+                        "output": {
+                            "DBClusterEndpoints": [
+                                {
+                                    "Status": "available",
+                                    "Endpoint": "serverless-cluster.cluster-cnpexample.us-east-1.rds.amazonaws.com",
+                                    "DBClusterIdentifier": "serverless-cluster",
+                                    "EndpointType": "WRITER"
+                                }
+                            ]
+                        }
                     }
                 ],
                 "smithy.api#paginated": {
@@ -22180,6 +22257,30 @@
                                         "AttributeValues": [
                                             "111122223333",
                                             "444455556666"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "title": "To prevent an AWS account from restoring a DB snapshot",
+                        "documentation": "The following example removes permission from the AWS account with the identifier 444455556666 to restore the DB snapshot named mydbsnapshot.",
+                        "input": {
+                            "DBSnapshotIdentifier": "mydbsnapshot",
+                            "AttributeName": "restore",
+                            "ValuesToRemove": [
+                                "444455556666"
+                            ]
+                        },
+                        "output": {
+                            "DBSnapshotAttributesResult": {
+                                "DBSnapshotIdentifier": "mydbsnapshot",
+                                "DBSnapshotAttributes": [
+                                    {
+                                        "AttributeName": "restore",
+                                        "AttributeValues": [
+                                            "111122223333"
                                         ]
                                     }
                                 ]
