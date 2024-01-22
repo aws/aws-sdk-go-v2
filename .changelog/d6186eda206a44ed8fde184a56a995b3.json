@@ -1,8 +1,0 @@
-{
-    "id": "d6186eda-206a-44ed-8fde-184a56a995b3",
-    "type": "feature",
-    "description": "Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS CreateDBCluster API method. This provides enhanced error handling, ensuring a more robust experience when creating database clusters with insufficient instance capacity.",
-    "modules": [
-        "service/rds"
-    ]
-}

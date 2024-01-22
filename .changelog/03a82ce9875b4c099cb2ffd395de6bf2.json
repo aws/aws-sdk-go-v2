@@ -1,8 +1,0 @@
-{
-    "id": "03a82ce9-875b-4c09-9cb2-ffd395de6bf2",
-    "type": "documentation",
-    "description": "Doc only update for quota increase change",
-    "modules": [
-        "service/organizations"
-    ]
-}

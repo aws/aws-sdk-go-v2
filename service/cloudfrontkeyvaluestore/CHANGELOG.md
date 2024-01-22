@@ -1,3 +1,7 @@
+# v1.2.0 (2024-01-22)
+
+* **Feature**: This release improves upon the DescribeKeyValueStore API by returning two additional fields, Status of the KeyValueStore and the FailureReason in case of failures during creation of KeyValueStore.
+
 # v1.1.7 (2024-01-16)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "90a67994-2d3d-4d67-bcd9-ad3335944637",
-    "type": "feature",
-    "description": "Fix FIPS Endpoints in aws-us-gov.",
-    "modules": [
-        "service/appconfigdata"
-    ]
-}

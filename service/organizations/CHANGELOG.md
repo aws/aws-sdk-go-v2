@@ -1,3 +1,7 @@
+# v1.23.7 (2024-01-22)
+
+* **Documentation**: Doc only update for quota increase change
+
 # v1.23.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

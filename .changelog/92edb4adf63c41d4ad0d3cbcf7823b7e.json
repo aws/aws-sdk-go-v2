@@ -1,8 +1,0 @@
-{
-    "id": "92edb4ad-f63c-41d4-ad0d-3cbcf7823b7e",
-    "type": "feature",
-    "description": "This release improves upon the DescribeKeyValueStore API by returning two additional fields, Status of the KeyValueStore and the FailureReason in case of failures during creation of KeyValueStore.",
-    "modules": [
-        "service/cloudfrontkeyvaluestore"
-    ]
-}

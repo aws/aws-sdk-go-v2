@@ -1,3 +1,30 @@
+# Release (2024-01-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.26.6](config/CHANGELOG.md#v1266-2024-01-22)
+  * **Bug Fix**: Remove invalid escaping of shared config values. All values in the shared config file will now be interpreted literally, save for fully-quoted strings which are unwrapped for legacy reasons.
+* `github.com/aws/aws-sdk-go-v2/internal/ini`: [v1.7.3](internal/ini/CHANGELOG.md#v173-2024-01-22)
+  * **Bug Fix**: Remove invalid escaping of shared config values. All values in the shared config file will now be interpreted literally, save for fully-quoted strings which are unwrapped for legacy reasons.
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.12.0](service/appconfigdata/CHANGELOG.md#v1120-2024-01-22)
+  * **Feature**: Fix FIPS Endpoints in aws-us-gov.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.22.7](service/cloud9/CHANGELOG.md#v1227-2024-01-22)
+  * **Documentation**: Doc-only update around removing AL1 from list of available AMIs for Cloud9
+* `github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore`: [v1.2.0](service/cloudfrontkeyvaluestore/CHANGELOG.md#v120-2024-01-22)
+  * **Feature**: This release improves upon the DescribeKeyValueStore API by returning two additional fields, Status of the KeyValueStore and the FailureReason in case of failures during creation of KeyValueStore.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.13.0](service/connectcases/CHANGELOG.md#v1130-2024-01-22)
+  * **Feature**: This release adds the ability to view audit history on a case and introduces a new parameter, performedBy, for CreateCase and UpdateCase API's.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.144.1](service/ec2/CHANGELOG.md#v11441-2024-01-22)
+  * **Documentation**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.38.0](service/ecs/CHANGELOG.md#v1380-2024-01-22)
+  * **Feature**: This release adds support for Transport Layer Security (TLS) and Configurable Timeout to ECS Service Connect. TLS facilitates privacy and data security for inter-service communications, while Configurable Timeout allows customized per-request timeout and idle timeout for Service Connect services.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.23.7](service/organizations/CHANGELOG.md#v1237-2024-01-22)
+  * **Documentation**: Doc only update for quota increase change
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.67.0](service/rds/CHANGELOG.md#v1670-2024-01-22)
+  * **Feature**: Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS CreateDBCluster API method. This provides enhanced error handling, ensuring a more robust experience when creating database clusters with insufficient instance capacity.
+
 # Release (2024-01-19)
 
 ## General Highlights

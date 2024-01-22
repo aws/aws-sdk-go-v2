@@ -1,8 +1,0 @@
-{
-    "id": "c0f7bfcc-574d-4e33-b440-eb4491ee5c3d",
-    "type": "feature",
-    "description": "Allow customer to set zip default through command line arguments.",
-    "modules": [
-        "service/finspace"
-    ]
-}
