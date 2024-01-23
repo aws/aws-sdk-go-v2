@@ -108,6 +108,18 @@
                 "smithy.api#pattern": "^\\d{12}$"
             }
         },
+        "com.amazonaws.inspector2#AccountIdFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.inspector2#AccountIdSet": {
             "type": "list",
             "member": {
@@ -1469,6 +1481,22 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.inspector2#BenchmarkProfile": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.inspector2#BenchmarkVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 8
+                }
+            }
+        },
         "com.amazonaws.inspector2#CancelFindingsReport": {
             "type": "operation",
             "input": {
@@ -1589,6 +1617,1422 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#CheckCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65536
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CheckIdFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisAccountIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#AccountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.inspector2#CisCheckAggregation": {
+            "type": "structure",
+            "members": {
+                "scanArn": {
+                    "target": "com.amazonaws.inspector2#CisScanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan ARN for the CIS check scan ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "checkId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The check ID for the CIS check.</p>"
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS check title.</p>"
+                    }
+                },
+                "checkDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the CIS check.</p>"
+                    }
+                },
+                "level": {
+                    "target": "com.amazonaws.inspector2#CisSecurityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS check level.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID for the CIS check.</p>"
+                    }
+                },
+                "statusCounts": {
+                    "target": "com.amazonaws.inspector2#StatusCounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS check status counts.</p>"
+                    }
+                },
+                "platform": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS check platform.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A CIS check.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisCheckAggregationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisCheckAggregation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisDateFilter": {
+            "type": "structure",
+            "members": {
+                "earliestScanStartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS date filter's earliest scan start time.</p>"
+                    }
+                },
+                "latestScanStartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS date filter's latest scan start time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS date filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisFindingArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-gov|-cn)?:inspector2:[-.a-z0-9]{0,20}:\\d{12}:owner/\\d{12}/cis-finding/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.inspector2#CisFindingArnFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisFindingStatus": {
+            "type": "enum",
+            "members": {
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisFindingStatusComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisFindingStatusFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#CisFindingStatusComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison value of the CIS finding status filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#CisFindingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the CIS finding status filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS finding status filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisFindingStatusFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisFindingStatusFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.inspector2#CisNumberFilter": {
+            "type": "structure",
+            "members": {
+                "upperInclusive": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS number filter's upper inclusive.</p>"
+                    }
+                },
+                "lowerInclusive": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS number filter's lower inclusive.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS number filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisNumberFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisNumberFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.inspector2#CisOwnerId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{12}|o-[a-z0-9]{10,32}$"
+            }
+        },
+        "com.amazonaws.inspector2#CisReportStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisResultStatus": {
+            "type": "enum",
+            "members": {
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisResultStatusComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisResultStatusFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#CisResultStatusComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison value of the CIS result status filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#CisResultStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the CIS result status filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS result status filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisResultStatusFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisResultStatusFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisRuleDetails": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisRuleStatus": {
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "NOT_EVALUATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EVALUATED"
+                    }
+                },
+                "INFORMATIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFORMATIONAL"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPLICABLE"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScan": {
+            "type": "structure",
+            "members": {
+                "scanArn": {
+                    "target": "com.amazonaws.inspector2#CisScanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan's ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanConfigurationArn": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan's configuration ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.inspector2#CisScanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan's status.</p>"
+                    }
+                },
+                "scanName": {
+                    "target": "com.amazonaws.inspector2#CisScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The the name of the scan configuration that's associated with this scan.</p>"
+                    }
+                },
+                "scanDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan's date.</p>"
+                    }
+                },
+                "failedChecks": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan's failed checks.</p>"
+                    }
+                },
+                "totalChecks": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan's total checks.</p>"
+                    }
+                },
+                "targets": {
+                    "target": "com.amazonaws.inspector2#CisTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan's targets.</p>"
+                    }
+                },
+                "scheduledBy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account or organization that schedules the CIS scan.</p>"
+                    }
+                },
+                "securityLevel": {
+                    "target": "com.amazonaws.inspector2#CisSecurityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The security level for the CIS scan. \n         Security level refers to the Benchmark levels that CIS assigns to a profile.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS scan.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisScanArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-us-gov|-cn)?:inspector2:[-.a-z0-9]{0,20}:\\d{12}:owner/(\\d{12}|o-[a-z0-9]{10,32})/cis-scan/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.inspector2#CisScanArnFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanConfiguration": {
+            "type": "structure",
+            "members": {
+                "scanConfigurationArn": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration's scan configuration ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ownerId": {
+                    "target": "com.amazonaws.inspector2#CisOwnerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration's owner ID.</p>"
+                    }
+                },
+                "scanName": {
+                    "target": "com.amazonaws.inspector2#CisScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CIS scan configuration.</p>"
+                    }
+                },
+                "securityLevel": {
+                    "target": "com.amazonaws.inspector2#CisSecurityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration's security level.</p>"
+                    }
+                },
+                "schedule": {
+                    "target": "com.amazonaws.inspector2#Schedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration's schedule.</p>"
+                    }
+                },
+                "targets": {
+                    "target": "com.amazonaws.inspector2#CisTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration's targets.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.inspector2#CisTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration's tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS scan configuration.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisScanConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-us-gov|-cn)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-[0-9]{1}:[0-9]{12}:owner/(o-[a-z0-9]+|[0-9]{12})/cis-configuration/[0-9a-fA-F-]+$"
+            }
+        },
+        "com.amazonaws.inspector2#CisScanConfigurationArnFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisScanConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanConfigurationsSortBy": {
+            "type": "enum",
+            "members": {
+                "SCAN_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCAN_NAME"
+                    }
+                },
+                "SCAN_CONFIGURATION_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCAN_CONFIGURATION_ARN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanDateFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisDateFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisScan"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanNameFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanResultDetails": {
+            "type": "structure",
+            "members": {
+                "scanArn": {
+                    "target": "com.amazonaws.inspector2#CisScanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' scan ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' account ID.</p>"
+                    }
+                },
+                "targetResourceId": {
+                    "target": "com.amazonaws.inspector2#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' target resource ID.</p>"
+                    }
+                },
+                "platform": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' platform.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.inspector2#CisFindingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' status.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' status reason.</p>"
+                    }
+                },
+                "checkId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' check ID.</p>"
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' title.</p>"
+                    }
+                },
+                "checkDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID that's associated with the CIS scan result details.</p>"
+                    }
+                },
+                "remediation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' remediation.</p>"
+                    }
+                },
+                "level": {
+                    "target": "com.amazonaws.inspector2#CisSecurityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' level.</p>"
+                    }
+                },
+                "findingArn": {
+                    "target": "com.amazonaws.inspector2#CisFindingArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan result details' finding ARN.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS scan result details.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisScanResultDetailsFilterCriteria": {
+            "type": "structure",
+            "members": {
+                "findingStatusFilters": {
+                    "target": "com.amazonaws.inspector2#CisFindingStatusFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's finding status filters.</p>"
+                    }
+                },
+                "checkIdFilters": {
+                    "target": "com.amazonaws.inspector2#CheckIdFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's check ID filters.</p>"
+                    }
+                },
+                "titleFilters": {
+                    "target": "com.amazonaws.inspector2#TitleFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's title filters.</p>"
+                    }
+                },
+                "securityLevelFilters": {
+                    "target": "com.amazonaws.inspector2#CisSecurityLevelFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The criteria's security level filters. . \n         Security level refers to the Benchmark levels that CIS assigns to a profile.\n      </p>"
+                    }
+                },
+                "findingArnFilters": {
+                    "target": "com.amazonaws.inspector2#CisFindingArnFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's finding ARN filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS scan result details filter criteria.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisScanResultDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisScanResultDetails"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanResultDetailsSortBy": {
+            "type": "enum",
+            "members": {
+                "CHECK_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHECK_ID"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATUS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanResultsAggregatedByChecksFilterCriteria": {
+            "type": "structure",
+            "members": {
+                "accountIdFilters": {
+                    "target": "com.amazonaws.inspector2#OneAccountIdFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's account ID filters.</p>"
+                    }
+                },
+                "checkIdFilters": {
+                    "target": "com.amazonaws.inspector2#CheckIdFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's check ID filters.</p>"
+                    }
+                },
+                "titleFilters": {
+                    "target": "com.amazonaws.inspector2#TitleFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's title filters.</p>"
+                    }
+                },
+                "platformFilters": {
+                    "target": "com.amazonaws.inspector2#PlatformFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's platform filters.</p>"
+                    }
+                },
+                "failedResourcesFilters": {
+                    "target": "com.amazonaws.inspector2#CisNumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's failed resources filters.</p>"
+                    }
+                },
+                "securityLevelFilters": {
+                    "target": "com.amazonaws.inspector2#CisSecurityLevelFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's security level filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scan results aggregated by checks filter criteria.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisScanResultsAggregatedByChecksSortBy": {
+            "type": "enum",
+            "members": {
+                "CHECK_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHECK_ID"
+                    }
+                },
+                "TITLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TITLE"
+                    }
+                },
+                "PLATFORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLATFORM"
+                    }
+                },
+                "FAILED_COUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_COUNTS"
+                    }
+                },
+                "SECURITY_LEVEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY_LEVEL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanResultsAggregatedByTargetResourceFilterCriteria": {
+            "type": "structure",
+            "members": {
+                "accountIdFilters": {
+                    "target": "com.amazonaws.inspector2#AccountIdFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's account ID filters.</p>"
+                    }
+                },
+                "statusFilters": {
+                    "target": "com.amazonaws.inspector2#CisResultStatusFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's status filter.</p>"
+                    }
+                },
+                "checkIdFilters": {
+                    "target": "com.amazonaws.inspector2#CheckIdFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's check ID filters.</p>"
+                    }
+                },
+                "targetResourceIdFilters": {
+                    "target": "com.amazonaws.inspector2#ResourceIdFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's target resource ID filters.</p>"
+                    }
+                },
+                "targetResourceTagFilters": {
+                    "target": "com.amazonaws.inspector2#ResourceTagFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's target resource tag filters.</p>"
+                    }
+                },
+                "platformFilters": {
+                    "target": "com.amazonaws.inspector2#PlatformFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's platform filters.</p>"
+                    }
+                },
+                "targetStatusFilters": {
+                    "target": "com.amazonaws.inspector2#TargetStatusFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's target status filters.</p>"
+                    }
+                },
+                "targetStatusReasonFilters": {
+                    "target": "com.amazonaws.inspector2#TargetStatusReasonFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's target status reason filters.</p>"
+                    }
+                },
+                "failedChecksFilters": {
+                    "target": "com.amazonaws.inspector2#CisNumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria's failed checks filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scan results aggregated by target resource filter criteria.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisScanResultsAggregatedByTargetResourceSortBy": {
+            "type": "enum",
+            "members": {
+                "RESOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_ID"
+                    }
+                },
+                "FAILED_COUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_COUNTS"
+                    }
+                },
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_ID"
+                    }
+                },
+                "PLATFORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLATFORM"
+                    }
+                },
+                "TARGET_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_STATUS"
+                    }
+                },
+                "TARGET_STATUS_REASON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_STATUS_REASON"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanResultsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanStatus": {
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanStatusComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisScanStatusFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#CisScanStatusComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter comparison value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#CisScanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS scan status filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisScanStatusFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisScanStatusFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.inspector2#CisScheduledByFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisSecurityLevel": {
+            "type": "enum",
+            "members": {
+                "LEVEL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEVEL_1"
+                    }
+                },
+                "LEVEL_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEVEL_2"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisSecurityLevelComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisSecurityLevelFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#CisSecurityLevelComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS security filter comparison value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#CisSecurityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS security filter value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The CIS security level filter. \n         Security level refers to the Benchmark levels that CIS assigns to a profile.\n      </p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisSecurityLevelFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisSecurityLevelFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisSessionMessage": {
+            "type": "structure",
+            "members": {
+                "ruleId": {
+                    "target": "com.amazonaws.inspector2#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule ID for the CIS session message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.inspector2#CisRuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the CIS session message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cisRuleDetails": {
+                    "target": "com.amazonaws.inspector2#CisRuleDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS rule details for the CIS session message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS session message.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisSessionMessages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisSessionMessage"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisSortOrder": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisStringComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                },
+                "PREFIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREFIX"
+                    }
+                },
+                "NOT_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisStringFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#CisStringComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison value of the CIS string filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the CIS string filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS string filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisTagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.inspector2#MapKey"
+            },
+            "value": {
+                "target": "com.amazonaws.inspector2#MapValue"
+            }
+        },
+        "com.amazonaws.inspector2#CisTargetResourceAggregation": {
+            "type": "structure",
+            "members": {
+                "scanArn": {
+                    "target": "com.amazonaws.inspector2#CisScanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan ARN for the CIS target resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetResourceId": {
+                    "target": "com.amazonaws.inspector2#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the target resource.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID for the CIS target resource.</p>"
+                    }
+                },
+                "targetResourceTags": {
+                    "target": "com.amazonaws.inspector2#TargetResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag for the target resource.</p>"
+                    }
+                },
+                "statusCounts": {
+                    "target": "com.amazonaws.inspector2#StatusCounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target resource status counts.</p>"
+                    }
+                },
+                "platform": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform for the CIS target resource.</p>"
+                    }
+                },
+                "targetStatus": {
+                    "target": "com.amazonaws.inspector2#CisTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the target resource.</p>"
+                    }
+                },
+                "targetStatusReason": {
+                    "target": "com.amazonaws.inspector2#CisTargetStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the target resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS target resource aggregation.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisTargetResourceAggregationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisTargetResourceAggregation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisTargetStatus": {
+            "type": "enum",
+            "members": {
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMED_OUT"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisTargetStatusComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisTargetStatusFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#CisTargetStatusComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison value of the CIS target status filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#CisTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the CIS target status filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS target status filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisTargetStatusReason": {
+            "type": "enum",
+            "members": {
+                "SCAN_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCAN_IN_PROGRESS"
+                    }
+                },
+                "UNSUPPORTED_OS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSUPPORTED_OS"
+                    }
+                },
+                "SSM_UNMANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSM_UNMANAGED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CisTargetStatusReasonFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#CisTargetStatusComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison value of the CIS target status reason filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#CisTargetStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the CIS target status reason filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS target status reason filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CisTargets": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.inspector2#CisAccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS target account ids.</p>"
+                    }
+                },
+                "targetResourceTags": {
+                    "target": "com.amazonaws.inspector2#TargetResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS target resource tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CIS targets.</p>"
             }
         },
         "com.amazonaws.inspector2#CisaAction": {
@@ -1884,6 +3328,32 @@
         "com.amazonaws.inspector2#ComponentType": {
             "type": "string"
         },
+        "com.amazonaws.inspector2#ComputePlatform": {
+            "type": "structure",
+            "members": {
+                "vendor": {
+                    "target": "com.amazonaws.inspector2#Vendor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute platform vendor.</p>"
+                    }
+                },
+                "product": {
+                    "target": "com.amazonaws.inspector2#Product",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute platform product.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.inspector2#PlatformVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute platform version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A compute platform.</p>"
+            }
+        },
         "com.amazonaws.inspector2#ConflictException": {
             "type": "structure",
             "members": {
@@ -2009,7 +3479,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.inspector2#CoverageStringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of Amazon Web Services resource types to return coverage statistics for. The values can be <code>AWS_EC2_INSTANCE</code>, <code>AWS_LAMBDA_FUNCTION</code> or <code>AWS_ECR_REPOSITORY</code>.</p>"
+                        "smithy.api#documentation": "<p>An array of Amazon Web Services resource types to return coverage statistics for. The values can be <code>AWS_EC2_INSTANCE</code>, <code>AWS_LAMBDA_FUNCTION</code>, <code>AWS_ECR_CONTAINER_IMAGE</code>,  <code>AWS_ECR_REPOSITORY</code> or <code>AWS_ACCOUNT</code>.</p>"
                     }
                 },
                 "scanType": {
@@ -2255,6 +3725,145 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#CoveredResource"
+            }
+        },
+        "com.amazonaws.inspector2#CreateCisScanConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#CreateCisScanConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#CreateCisScanConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a CIS scan configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample CreateCisScanConfiguration Call",
+                        "input": {
+                            "scanName": "sample",
+                            "securityLevel": "LEVEL_1",
+                            "schedule": {
+                                "daily": {
+                                    "startTime": {
+                                        "timeOfDay": "12:34",
+                                        "timezone": "UTC"
+                                    }
+                                }
+                            },
+                            "targets": {
+                                "accountIds": [
+                                    "SELF"
+                                ],
+                                "targetResourceTags": {
+                                    "key": [
+                                        "value"
+                                    ]
+                                }
+                            }
+                        },
+                        "output": {
+                            "scanConfigurationArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-configuration/624b746d-e080-44ae-8c1d-48e653365a38"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cis/scan-configuration/create"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CreateCisScanConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "scanName": {
+                    "target": "com.amazonaws.inspector2#CisScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan name for the CIS scan configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "securityLevel": {
+                    "target": "com.amazonaws.inspector2#CisSecurityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The security level for the CIS scan configuration. \n         Security level refers to the Benchmark levels that CIS assigns to a profile.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schedule": {
+                    "target": "com.amazonaws.inspector2#Schedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule for the CIS scan configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targets": {
+                    "target": "com.amazonaws.inspector2#CreateCisTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The targets for the CIS scan configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.inspector2#CisTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the CIS scan configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#CreateCisScanConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "scanConfigurationArn": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan configuration ARN for the CIS scan configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#CreateCisTargets": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.inspector2#TargetAccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS target account ids.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetResourceTags": {
+                    "target": "com.amazonaws.inspector2#TargetResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS target resource tags.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates CIS targets.</p>"
             }
         },
         "com.amazonaws.inspector2#CreateFilter": {
@@ -2726,6 +4335,21 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#DailySchedule": {
+            "type": "structure",
+            "members": {
+                "startTime": {
+                    "target": "com.amazonaws.inspector2#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule start time.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A daily schedule.</p>"
+            }
+        },
         "com.amazonaws.inspector2#DateFilter": {
             "type": "structure",
             "members": {
@@ -2760,6 +4384,66 @@
         },
         "com.amazonaws.inspector2#DateTimeTimestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.inspector2#Day": {
+            "type": "enum",
+            "members": {
+                "SUN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUN"
+                    }
+                },
+                "MON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MON"
+                    }
+                },
+                "TUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TUE"
+                    }
+                },
+                "WED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WED"
+                    }
+                },
+                "THU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THU"
+                    }
+                },
+                "FRI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRI"
+                    }
+                },
+                "SAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#DaysList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#Day"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7
+                },
+                "smithy.api#uniqueItems": {}
+            }
         },
         "com.amazonaws.inspector2#DelegatedAdmin": {
             "type": "structure",
@@ -2826,6 +4510,81 @@
                         "name": "DISABLE_IN_PROGRESS"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#DeleteCisScanConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#DeleteCisScanConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#DeleteCisScanConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a CIS scan configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample DeleteCisScanConfiguration Call",
+                        "input": {
+                            "scanConfigurationArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-configuration/624b746d-e080-44ae-8c1d-48e653365a38"
+                        },
+                        "output": {
+                            "scanConfigurationArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-configuration/624b746d-e080-44ae-8c1d-48e653365a38"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cis/scan-configuration/delete"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#DeleteCisScanConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "scanConfigurationArn": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CIS scan configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#DeleteCisScanConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "scanConfigurationArn": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CIS scan configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector2#DeleteFilter": {
@@ -5052,6 +6811,243 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
             }
         },
+        "com.amazonaws.inspector2#GetCisScanReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#GetCisScanReportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#GetCisScanReportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a CIS scan report.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample GetCisScanReport Call",
+                        "input": {
+                            "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38"
+                        },
+                        "output": {
+                            "url": "www.s3.amazon.com/abcdef",
+                            "status": "SUCCEEDED"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cis/scan/report/get"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#GetCisScanReportRequest": {
+            "type": "structure",
+            "members": {
+                "scanArn": {
+                    "target": "com.amazonaws.inspector2#CisScanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetAccounts": {
+                    "target": "com.amazonaws.inspector2#ReportTargetAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target accounts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#GetCisScanReportResponse": {
+            "type": "structure",
+            "members": {
+                "url": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The URL where the CIS scan report PDF can be downloaded.\n      </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.inspector2#CisReportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#GetCisScanResultDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#GetCisScanResultDetailsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#GetCisScanResultDetailsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves CIS scan result details.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample GetCisScanResultDetails Call",
+                        "input": {
+                            "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38",
+                            "targetResourceId": "i-12341234",
+                            "accountId": "123412341234"
+                        },
+                        "output": {
+                            "scanResultDetails": [
+                                {
+                                    "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38",
+                                    "accountId": "123412341234",
+                                    "targetResourceId": "i-12341234",
+                                    "platform": "AMAZON_LINUX_2",
+                                    "status": "PASSED",
+                                    "checkId": "1.1.1.1",
+                                    "title": "title1",
+                                    "checkDescription": "description",
+                                    "remediation": "fix",
+                                    "level": "LEVEL_1"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cis/scan-result/details/get"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "scanResultDetails",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#GetCisScanResultDetailsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.inspector2#GetCisScanResultDetailsRequest": {
+            "type": "structure",
+            "members": {
+                "scanArn": {
+                    "target": "com.amazonaws.inspector2#CisScanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetResourceId": {
+                    "target": "com.amazonaws.inspector2#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target resource ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filterCriteria": {
+                    "target": "com.amazonaws.inspector2#CisScanResultDetailsFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter criteria.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.inspector2#CisScanResultDetailsSortBy",
+                    "traits": {
+                        "smithy.api#default": "CHECK_ID",
+                        "smithy.api#documentation": "<p>The sort by order.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.inspector2#CisSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request that's used to retrieve the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.inspector2#GetCisScanResultDetailsMaxResults",
+                    "traits": {
+                        "smithy.api#default": 300,
+                        "smithy.api#documentation": "<p>The maximum number of CIS scan result details to be returned in a single page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#GetCisScanResultDetailsResponse": {
+            "type": "structure",
+            "members": {
+                "scanResultDetails": {
+                    "target": "com.amazonaws.inspector2#CisScanResultDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan result details.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request that's used to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#GetConfiguration": {
             "type": "operation",
             "input": {
@@ -5702,6 +7698,9 @@
                     "target": "com.amazonaws.inspector2#CancelSbomExport"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#CreateCisScanConfiguration"
+                },
+                {
                     "target": "com.amazonaws.inspector2#CreateFilter"
                 },
                 {
@@ -5709,6 +7708,9 @@
                 },
                 {
                     "target": "com.amazonaws.inspector2#CreateSbomExport"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#DeleteCisScanConfiguration"
                 },
                 {
                     "target": "com.amazonaws.inspector2#DeleteFilter"
@@ -5730,6 +7732,12 @@
                 },
                 {
                     "target": "com.amazonaws.inspector2#EnableDelegatedAdminAccount"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#GetCisScanReport"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#GetCisScanResultDetails"
                 },
                 {
                     "target": "com.amazonaws.inspector2#GetConfiguration"
@@ -5754,6 +7762,18 @@
                 },
                 {
                     "target": "com.amazonaws.inspector2#ListAccountPermissions"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ListCisScanConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ListCisScanResultsAggregatedByChecks"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ListCisScanResultsAggregatedByTargetResource"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ListCisScans"
                 },
                 {
                     "target": "com.amazonaws.inspector2#ListCoverage"
@@ -5789,10 +7809,25 @@
                     "target": "com.amazonaws.inspector2#SearchVulnerabilities"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#SendCisSessionHealth"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#SendCisSessionTelemetry"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#StartCisSession"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#StopCisSession"
+                },
+                {
                     "target": "com.amazonaws.inspector2#TagResource"
                 },
                 {
                     "target": "com.amazonaws.inspector2#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#UpdateCisScanConfiguration"
                 },
                 {
                     "target": "com.amazonaws.inspector2#UpdateConfiguration"
@@ -5873,7 +7908,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -5916,7 +7950,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -5929,7 +7964,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -5943,7 +7977,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -5966,7 +7999,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -6001,7 +8033,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -6012,14 +8043,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -6033,14 +8066,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -6049,11 +8080,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -6064,14 +8095,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -6085,7 +8118,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -6105,7 +8137,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -6116,14 +8147,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -6134,9 +8167,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -7155,6 +9190,692 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#ListCisScanConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#ListCisScanConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#ListCisScanConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists CIS scan configurations.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample ListCisScanConfigurations Call",
+                        "input": {},
+                        "output": {
+                            "scanConfigurations": [
+                                {
+                                    "scanConfigurationArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-configuration/624b746d-e080-44ae-8c1d-48e653365a38",
+                                    "ownerId": "123412341234",
+                                    "scanName": "sample",
+                                    "securityLevel": "LEVEL_1",
+                                    "schedule": {
+                                        "daily": {
+                                            "startTime": {
+                                                "timeOfDay": "12:34",
+                                                "timezone": "UTC"
+                                            }
+                                        }
+                                    },
+                                    "targets": {
+                                        "accountIds": [
+                                            "123412341234"
+                                        ],
+                                        "targetResourceTags": {
+                                            "key": [
+                                                "value"
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cis/scan-configuration/list"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "scanConfigurations",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScanConfigurationsFilterCriteria": {
+            "type": "structure",
+            "members": {
+                "scanNameFilters": {
+                    "target": "com.amazonaws.inspector2#CisScanNameFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scan name filters.</p>"
+                    }
+                },
+                "targetResourceTagFilters": {
+                    "target": "com.amazonaws.inspector2#ResourceTagFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of target resource tag filters.</p>"
+                    }
+                },
+                "scanConfigurationArnFilters": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationArnFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scan configuration ARN filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of CIS scan configurations filter criteria.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScanConfigurationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScanConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "filterCriteria": {
+                    "target": "com.amazonaws.inspector2#ListCisScanConfigurationsFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration filter criteria.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationsSortBy",
+                    "traits": {
+                        "smithy.api#default": "SCAN_NAME",
+                        "smithy.api#documentation": "<p>The CIS scan configuration sort by order.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.inspector2#CisSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration sort order order.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request that's used to retrieve the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.inspector2#ListCisScanConfigurationsMaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of CIS scan configurations to be returned in a single page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScanConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "scanConfigurations": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration scan configurations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request that's used to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScanResultsAggregatedByChecks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#ListCisScanResultsAggregatedByChecksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#ListCisScanResultsAggregatedByChecksResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists scan results aggregated by checks.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample ListCisScanResultsAggregatedByChecks Call",
+                        "input": {
+                            "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38"
+                        },
+                        "output": {
+                            "checkAggregations": [
+                                {
+                                    "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38",
+                                    "checkId": "1.1.1.1",
+                                    "title": "title1",
+                                    "checkDescription": "description",
+                                    "level": "LEVEL_1",
+                                    "accountId": "123412341234",
+                                    "statusCounts": {
+                                        "failed": 0,
+                                        "skipped": 1,
+                                        "passed": 2
+                                    },
+                                    "platform": "AMAZON_LINUX_2"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cis/scan-result/check/list"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "checkAggregations",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScanResultsAggregatedByChecksRequest": {
+            "type": "structure",
+            "members": {
+                "scanArn": {
+                    "target": "com.amazonaws.inspector2#CisScanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filterCriteria": {
+                    "target": "com.amazonaws.inspector2#CisScanResultsAggregatedByChecksFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter criteria.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.inspector2#CisScanResultsAggregatedByChecksSortBy",
+                    "traits": {
+                        "smithy.api#default": "FAILED_COUNTS",
+                        "smithy.api#documentation": "<p>The sort by order.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.inspector2#CisSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request that's used to retrieve the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.inspector2#CisScanResultsMaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of scan results aggregated by checks to be returned in a single page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScanResultsAggregatedByChecksResponse": {
+            "type": "structure",
+            "members": {
+                "checkAggregations": {
+                    "target": "com.amazonaws.inspector2#CisCheckAggregationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The check aggregations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request that's used to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScanResultsAggregatedByTargetResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#ListCisScanResultsAggregatedByTargetResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#ListCisScanResultsAggregatedByTargetResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists scan results aggregated by a target resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample ListCisScanResultsAggregatedByTargetResource Call",
+                        "input": {
+                            "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38"
+                        },
+                        "output": {
+                            "targetResourceAggregations": [
+                                {
+                                    "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38",
+                                    "targetResourceId": "i-12341234",
+                                    "accountId": "123412341234",
+                                    "targetResourceTags": {
+                                        "key": [
+                                            "value"
+                                        ]
+                                    },
+                                    "statusCounts": {
+                                        "failed": 0,
+                                        "skipped": 1,
+                                        "passed": 2
+                                    },
+                                    "platform": "AMAZON_LINUX_2",
+                                    "targetStatus": "COMPLETED"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cis/scan-result/resource/list"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "targetResourceAggregations",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScanResultsAggregatedByTargetResourceRequest": {
+            "type": "structure",
+            "members": {
+                "scanArn": {
+                    "target": "com.amazonaws.inspector2#CisScanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filterCriteria": {
+                    "target": "com.amazonaws.inspector2#CisScanResultsAggregatedByTargetResourceFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter criteria.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.inspector2#CisScanResultsAggregatedByTargetResourceSortBy",
+                    "traits": {
+                        "smithy.api#default": "FAILED_COUNTS",
+                        "smithy.api#documentation": "<p>The sort by order.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.inspector2#CisSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request that's used to retrieve the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.inspector2#CisScanResultsMaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of scan results aggregated by a target resource to be returned in a single page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScanResultsAggregatedByTargetResourceResponse": {
+            "type": "structure",
+            "members": {
+                "targetResourceAggregations": {
+                    "target": "com.amazonaws.inspector2#CisTargetResourceAggregationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource aggregations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request that's used to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#ListCisScansRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#ListCisScansResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a CIS scan list.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample ListCisScans Call",
+                        "input": {},
+                        "output": {
+                            "scans": [
+                                {
+                                    "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38",
+                                    "scanConfigurationArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-configuration/624b746d-e080-44ae-8c1d-48e653365a38",
+                                    "status": "COMPLETED",
+                                    "scanName": "sample",
+                                    "scanDate": "2023-04-12T23:20:50.52Z",
+                                    "failedChecks": 2,
+                                    "totalChecks": 150,
+                                    "targets": {
+                                        "accountIds": [
+                                            "123412341234"
+                                        ],
+                                        "targetResourceTags": {
+                                            "key": [
+                                                "value"
+                                            ]
+                                        }
+                                    },
+                                    "scheduledBy": "Delegated Admin",
+                                    "securityLevel": "LEVEL_1"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cis/scan/list"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "scans",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScansDetailLevel": {
+            "type": "enum",
+            "members": {
+                "ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORGANIZATION"
+                    }
+                },
+                "MEMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEMBER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScansFilterCriteria": {
+            "type": "structure",
+            "members": {
+                "scanNameFilters": {
+                    "target": "com.amazonaws.inspector2#CisScanNameFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scan name filters.</p>"
+                    }
+                },
+                "targetResourceTagFilters": {
+                    "target": "com.amazonaws.inspector2#ResourceTagFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of target resource tag filters.</p>"
+                    }
+                },
+                "targetResourceIdFilters": {
+                    "target": "com.amazonaws.inspector2#ResourceIdFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of target resource ID filters.</p>"
+                    }
+                },
+                "scanStatusFilters": {
+                    "target": "com.amazonaws.inspector2#CisScanStatusFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scan status filters.</p>"
+                    }
+                },
+                "scanAtFilters": {
+                    "target": "com.amazonaws.inspector2#CisScanDateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scan at filters.</p>"
+                    }
+                },
+                "scanConfigurationArnFilters": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationArnFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scan configuration ARN filters.</p>"
+                    }
+                },
+                "scanArnFilters": {
+                    "target": "com.amazonaws.inspector2#CisScanArnFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scan ARN filters.</p>"
+                    }
+                },
+                "scheduledByFilters": {
+                    "target": "com.amazonaws.inspector2#CisScheduledByFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scheduled by filters.</p>"
+                    }
+                },
+                "failedChecksFilters": {
+                    "target": "com.amazonaws.inspector2#CisNumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of failed checks filters.</p>"
+                    }
+                },
+                "targetAccountIdFilters": {
+                    "target": "com.amazonaws.inspector2#AccountIdFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of target account ID filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of CIS scans filter criteria.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScansMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScansRequest": {
+            "type": "structure",
+            "members": {
+                "filterCriteria": {
+                    "target": "com.amazonaws.inspector2#ListCisScansFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan filter criteria.</p>"
+                    }
+                },
+                "detailLevel": {
+                    "target": "com.amazonaws.inspector2#ListCisScansDetailLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detail applied to the CIS scan.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.inspector2#ListCisScansSortBy",
+                    "traits": {
+                        "smithy.api#default": "SCAN_START_DATE",
+                        "smithy.api#documentation": "<p>The CIS scans sort by order.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.inspector2#CisSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scans sort order.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request that's used to retrieve the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.inspector2#ListCisScansMaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScansResponse": {
+            "type": "structure",
+            "members": {
+                "scans": {
+                    "target": "com.amazonaws.inspector2#CisScanList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scans.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request that's used to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListCisScansSortBy": {
+            "type": "enum",
+            "members": {
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATUS"
+                    }
+                },
+                "SCHEDULED_BY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULED_BY"
+                    }
+                },
+                "SCAN_START_DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCAN_START_DATE"
+                    }
+                },
+                "FAILED_CHECKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_CHECKS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.inspector2#ListCoverage": {
             "type": "operation",
             "input": {
@@ -8124,6 +10845,28 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#MonthlySchedule": {
+            "type": "structure",
+            "members": {
+                "startTime": {
+                    "target": "com.amazonaws.inspector2#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The monthly schedule's start time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "day": {
+                    "target": "com.amazonaws.inspector2#Day",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The monthly schedule's day.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A monthly schedule.</p>"
+            }
+        },
         "com.amazonaws.inspector2#NetworkPath": {
             "type": "structure",
             "members": {
@@ -8234,6 +10977,25 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.inspector2#OneAccountIdFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.inspector2#OneTimeSchedule": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A one time schedule.</p>"
             }
         },
         "com.amazonaws.inspector2#Operation": {
@@ -8666,6 +11428,26 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#PlatformFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#PlatformVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 8
+                }
+            }
+        },
         "com.amazonaws.inspector2#Port": {
             "type": "integer",
             "traits": {
@@ -8726,6 +11508,22 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#Product": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.inspector2#Reason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1024
                 }
             }
         },
@@ -8869,6 +11667,18 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "\\b[a-f0-9]{8}\\b-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-\\b[a-f0-9]{12}\\b"
+            }
+        },
+        "com.amazonaws.inspector2#ReportTargetAccounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#AccountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.inspector2#ReportingErrorCode": {
@@ -9186,6 +11996,18 @@
                 "smithy.api#pattern": "(^arn:.*:ecr:.*:\\d{12}:repository\\/(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*(\\/sha256:[a-z0-9]{64})?$)|(^i-([a-z0-9]{8}|[a-z0-9]{17}|\\\\*)$|(^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$))"
             }
         },
+        "com.amazonaws.inspector2#ResourceIdFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.inspector2#ResourceList": {
             "type": "list",
             "member": {
@@ -9440,6 +12262,18 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#ResourceTagFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#TagFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.inspector2#ResourceType": {
             "type": "string",
             "traits": {
@@ -9465,6 +12299,15 @@
         },
         "com.amazonaws.inspector2#RiskScore": {
             "type": "integer"
+        },
+        "com.amazonaws.inspector2#RuleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
         },
         "com.amazonaws.inspector2#Runtime": {
             "type": "string",
@@ -9707,6 +12550,38 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#Schedule": {
+            "type": "union",
+            "members": {
+                "oneTime": {
+                    "target": "com.amazonaws.inspector2#OneTimeSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule's one time.</p>"
+                    }
+                },
+                "daily": {
+                    "target": "com.amazonaws.inspector2#DailySchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule's daily.</p>"
+                    }
+                },
+                "weekly": {
+                    "target": "com.amazonaws.inspector2#WeeklySchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule's weekly.</p>"
+                    }
+                },
+                "monthly": {
+                    "target": "com.amazonaws.inspector2#MonthlySchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule's monthly.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A schedule.</p>"
+            }
+        },
         "com.amazonaws.inspector2#SearchVulnerabilities": {
             "type": "operation",
             "input": {
@@ -9815,6 +12690,173 @@
                 "smithy.api#length": {
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.inspector2#SendCisSessionHealth": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#SendCisSessionHealthRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#SendCisSessionHealthResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Sends a CIS session health. \n         This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. \n         The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample SendCisSessionHealth Call",
+                        "input": {
+                            "scanJobId": "624b746d-e080-44ae-8c1d-48e653365a38",
+                            "sessionToken": "624b746d-e080-44ae-8c1d-48e653365a31"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/cissession/health/send"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#SendCisSessionHealthRequest": {
+            "type": "structure",
+            "members": {
+                "scanJobId": {
+                    "target": "com.amazonaws.inspector2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the scan job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionToken": {
+                    "target": "com.amazonaws.inspector2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token that identifies the CIS session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#SendCisSessionHealthResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#SendCisSessionTelemetry": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#SendCisSessionTelemetryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#SendCisSessionTelemetryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Sends a CIS session telemetry. \n         This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. \n         The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample SendCisSessionTelemetry Call",
+                        "input": {
+                            "scanJobId": "624b746d-e080-44ae-8c1d-48e653365a38",
+                            "sessionToken": "624b746d-e080-44ae-8c1d-48e653365a31",
+                            "messages": [
+                                {
+                                    "ruleId": "1.12.1",
+                                    "status": "FAILED",
+                                    "cisRuleDetails": "dGVzdCBleGFtcGxlCg=="
+                                },
+                                {
+                                    "ruleId": "1.2.1",
+                                    "status": "PASSED",
+                                    "cisRuleDetails": "dGVzdCBleGFtcGxlCg==dGVzdCBleGFtcGxlCg"
+                                }
+                            ]
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/cissession/telemetry/send"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#SendCisSessionTelemetryRequest": {
+            "type": "structure",
+            "members": {
+                "scanJobId": {
+                    "target": "com.amazonaws.inspector2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the scan job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionToken": {
+                    "target": "com.amazonaws.inspector2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token that identifies the CIS session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messages": {
+                    "target": "com.amazonaws.inspector2#CisSessionMessages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS session telemetry messages.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#SendCisSessionTelemetryResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector2#Service": {
@@ -10044,6 +13086,97 @@
                 "smithy.api#pattern": "^sha256:[a-z0-9]{64}$"
             }
         },
+        "com.amazonaws.inspector2#StartCisSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#StartCisSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#StartCisSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Starts a CIS session. \n         This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. \n         The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample SendCisSessionHealth Call",
+                        "input": {
+                            "scanJobId": "624b746d-e080-44ae-8c1d-48e653365a38",
+                            "message": {
+                                "sessionToken": "624b746d-e080-44ae-8c1d-48e653365a31"
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/cissession/start"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#StartCisSessionMessage": {
+            "type": "structure",
+            "members": {
+                "sessionToken": {
+                    "target": "com.amazonaws.inspector2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token that identifies the CIS session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The start CIS session message.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#StartCisSessionRequest": {
+            "type": "structure",
+            "members": {
+                "scanJobId": {
+                    "target": "com.amazonaws.inspector2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the scan job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.inspector2#StartCisSessionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start CIS session message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#StartCisSessionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#State": {
             "type": "structure",
             "members": {
@@ -10104,6 +13237,32 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#StatusCounts": {
+            "type": "structure",
+            "members": {
+                "failed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of checks that failed.</p>"
+                    }
+                },
+                "skipped": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of checks that were skipped.</p>"
+                    }
+                },
+                "passed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of checks that passed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status counts.</p>"
+            }
+        },
         "com.amazonaws.inspector2#Step": {
             "type": "structure",
             "members": {
@@ -10135,6 +13294,247 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 30
+                }
+            }
+        },
+        "com.amazonaws.inspector2#StopCisMessageProgress": {
+            "type": "structure",
+            "members": {
+                "totalChecks": {
+                    "target": "com.amazonaws.inspector2#CheckCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The progress' total checks.</p>"
+                    }
+                },
+                "successfulChecks": {
+                    "target": "com.amazonaws.inspector2#CheckCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The progress' successful checks.</p>"
+                    }
+                },
+                "failedChecks": {
+                    "target": "com.amazonaws.inspector2#CheckCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The progress' failed checks.</p>"
+                    }
+                },
+                "notEvaluatedChecks": {
+                    "target": "com.amazonaws.inspector2#CheckCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The progress' not evaluated checks.</p>"
+                    }
+                },
+                "unknownChecks": {
+                    "target": "com.amazonaws.inspector2#CheckCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The progress' unknown checks.</p>"
+                    }
+                },
+                "notApplicableChecks": {
+                    "target": "com.amazonaws.inspector2#CheckCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The progress' not applicable checks.</p>"
+                    }
+                },
+                "informationalChecks": {
+                    "target": "com.amazonaws.inspector2#CheckCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The progress' informational checks.</p>"
+                    }
+                },
+                "errorChecks": {
+                    "target": "com.amazonaws.inspector2#CheckCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The progress' error checks.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The stop CIS message progress.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#StopCisSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#StopCisSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#StopCisSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Stops a CIS session. \n         This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. \n         The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample StopCisSession Call",
+                        "input": {
+                            "scanJobId": "624b746d-e080-44ae-8c1d-48e653365a38",
+                            "sessionToken": "624b746d-e080-44ae-8c1d-48e653365a31",
+                            "message": {
+                                "status": "FAILED",
+                                "reason": "Failure Reason",
+                                "progress": {
+                                    "informationalChecks": 1,
+                                    "errorChecks": 1,
+                                    "successfulChecks": 5,
+                                    "notApplicableChecks": 0,
+                                    "totalChecks": 10,
+                                    "unknownChecks": 0,
+                                    "notEvaluatedChecks": 2,
+                                    "failedChecks": 0
+                                },
+                                "computePlatform": {
+                                    "vendor": "canonical",
+                                    "product": "ubuntu",
+                                    "version": "20.04"
+                                },
+                                "benchmarkVersion": "2.0.0",
+                                "benchmarkProfile": "xccdf_org.cisecurity.benchmarks_profile_Level_1"
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/cissession/stop"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#StopCisSessionMessage": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.inspector2#StopCisSessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.inspector2#Reason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the message.</p>"
+                    }
+                },
+                "progress": {
+                    "target": "com.amazonaws.inspector2#StopCisMessageProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The progress of the message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "computePlatform": {
+                    "target": "com.amazonaws.inspector2#ComputePlatform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message compute platform.</p>"
+                    }
+                },
+                "benchmarkVersion": {
+                    "target": "com.amazonaws.inspector2#BenchmarkVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message benchmark version.</p>"
+                    }
+                },
+                "benchmarkProfile": {
+                    "target": "com.amazonaws.inspector2#BenchmarkProfile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message benchmark profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The stop CIS session message.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#StopCisSessionRequest": {
+            "type": "structure",
+            "members": {
+                "scanJobId": {
+                    "target": "com.amazonaws.inspector2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the scan job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionToken": {
+                    "target": "com.amazonaws.inspector2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token that identifies the CIS session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.inspector2#StopCisSessionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stop CIS session message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#StopCisSessionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#StopCisSessionStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "INTERRUPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERRUPTED"
+                    }
+                },
+                "UNSUPPORTED_OS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSUPPORTED_OS"
+                    }
                 }
             }
         },
@@ -10263,6 +13663,46 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#TagComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#TagFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#TagComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag filter comparison value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag filter key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag filter value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tag filter.</p>"
+            }
+        },
         "com.amazonaws.inspector2#TagKey": {
             "type": "string",
             "traits": {
@@ -10358,12 +13798,82 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.inspector2#TagValueList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.inspector2#Target": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.inspector2#TargetAccount": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{12}|ALL_ACCOUNTS|SELF$"
+            }
+        },
+        "com.amazonaws.inspector2#TargetAccountList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#TargetAccount"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.inspector2#TargetResourceTags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.inspector2#NonEmptyString"
+            },
+            "value": {
+                "target": "com.amazonaws.inspector2#TagValueList"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.inspector2#TargetStatusFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisTargetStatusFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#TargetStatusReasonFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisTargetStatusReasonFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -10401,6 +13911,43 @@
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {
                     "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.inspector2#Time": {
+            "type": "structure",
+            "members": {
+                "timeOfDay": {
+                    "target": "com.amazonaws.inspector2#TimeOfDay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of day in 24-hour format (00:00).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timezone": {
+                    "target": "com.amazonaws.inspector2#Timezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timezone.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The time.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#TimeOfDay": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
+            }
+        },
+        "com.amazonaws.inspector2#Timezone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
                 }
             }
         },
@@ -10481,6 +14028,18 @@
                 "smithy.api#documentation": "<p>A response that contains details on the results of a finding aggregation by title.</p>"
             }
         },
+        "com.amazonaws.inspector2#TitleFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CisStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.inspector2#TitleSortBy": {
             "type": "string",
             "traits": {
@@ -10532,6 +14091,12 @@
                 "smithy.api#length": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.inspector2#UUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.inspector2#UntagResource": {
@@ -10588,6 +14153,145 @@
         "com.amazonaws.inspector2#UntagResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.inspector2#UpdateCisScanConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#UpdateCisScanConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#UpdateCisScanConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a CIS scan configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample UpdateCisScanConfiguration Call",
+                        "input": {
+                            "scanConfigurationArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-configuration/624b746d-e080-44ae-8c1d-48e653365a38",
+                            "scanName": "sample_new",
+                            "securityLevel": "LEVEL_2",
+                            "schedule": {
+                                "daily": {
+                                    "startTime": {
+                                        "timeOfDay": "12:56",
+                                        "timezone": "UTC"
+                                    }
+                                }
+                            },
+                            "targets": {
+                                "accountIds": [
+                                    "SELF"
+                                ],
+                                "targetResourceTags": {
+                                    "key2": [
+                                        "value2"
+                                    ]
+                                }
+                            }
+                        },
+                        "output": {
+                            "scanConfigurationArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-configuration/624b746d-e080-44ae-8c1d-48e653365a38"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cis/scan-configuration/update"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#UpdateCisScanConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "scanConfigurationArn": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanName": {
+                    "target": "com.amazonaws.inspector2#CisScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan name for the CIS scan configuration.</p>"
+                    }
+                },
+                "securityLevel": {
+                    "target": "com.amazonaws.inspector2#CisSecurityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The security level for the CIS scan configuration. \n         Security level refers to the Benchmark levels that CIS assigns to a profile.\n      </p>"
+                    }
+                },
+                "schedule": {
+                    "target": "com.amazonaws.inspector2#Schedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule for the CIS scan configuration.</p>"
+                    }
+                },
+                "targets": {
+                    "target": "com.amazonaws.inspector2#UpdateCisTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The targets for the CIS scan configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateCisScanConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "scanConfigurationArn": {
+                    "target": "com.amazonaws.inspector2#CisScanConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIS scan configuration ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateCisTargets": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.inspector2#TargetAccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target account ids.</p>"
+                    }
+                },
+                "targetResourceTags": {
+                    "target": "com.amazonaws.inspector2#TargetResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target resource tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates CIS targets.</p>"
+            }
         },
         "com.amazonaws.inspector2#UpdateConfiguration": {
             "type": "operation",
@@ -11182,6 +14886,14 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#Vendor": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 16
+                }
+            }
+        },
         "com.amazonaws.inspector2#VendorCreatedAt": {
             "type": "timestamp"
         },
@@ -11497,6 +15209,28 @@
                     "min": 1,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.inspector2#WeeklySchedule": {
+            "type": "structure",
+            "members": {
+                "startTime": {
+                    "target": "com.amazonaws.inspector2#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weekly schedule's start time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "days": {
+                    "target": "com.amazonaws.inspector2#DaysList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weekly schedule's days.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A weekly schedule.</p>"
             }
         }
     }
