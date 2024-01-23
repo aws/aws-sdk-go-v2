@@ -1,0 +1,8 @@
+{
+    "id": "68010d18-c729-42d3-8201-329465a197ef",
+    "type": "feature",
+    "description": "This release adds support for CIS scans on EC2 instances.",
+    "modules": [
+        "service/inspector2"
+    ]
+}

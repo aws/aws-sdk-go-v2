@@ -150,6 +150,26 @@ func (m *validateOpCancelSbomExport) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCisScanConfiguration struct {
+}
+
+func (*validateOpCreateCisScanConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCisScanConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCisScanConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCisScanConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFilter struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpCreateSbomExport) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateSbomExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCisScanConfiguration struct {
+}
+
+func (*validateOpDeleteCisScanConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCisScanConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCisScanConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCisScanConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +350,46 @@ func (m *validateOpEnable) HandleInitialize(ctx context.Context, in middleware.I
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCisScanReport struct {
+}
+
+func (*validateOpGetCisScanReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCisScanReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCisScanReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCisScanReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCisScanResultDetails struct {
+}
+
+func (*validateOpGetCisScanResultDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCisScanResultDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCisScanResultDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCisScanResultDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEncryptionKey struct {
 }
 
@@ -365,6 +445,86 @@ func (m *validateOpGetSbomExport) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSbomExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCisScanConfigurations struct {
+}
+
+func (*validateOpListCisScanConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCisScanConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCisScanConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCisScanConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCisScanResultsAggregatedByChecks struct {
+}
+
+func (*validateOpListCisScanResultsAggregatedByChecks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCisScanResultsAggregatedByChecks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCisScanResultsAggregatedByChecksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCisScanResultsAggregatedByChecksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCisScanResultsAggregatedByTargetResource struct {
+}
+
+func (*validateOpListCisScanResultsAggregatedByTargetResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCisScanResultsAggregatedByTargetResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCisScanResultsAggregatedByTargetResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCisScanResultsAggregatedByTargetResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCisScans struct {
+}
+
+func (*validateOpListCisScans) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCisScans) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCisScansInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCisScansInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +670,86 @@ func (m *validateOpSearchVulnerabilities) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendCisSessionHealth struct {
+}
+
+func (*validateOpSendCisSessionHealth) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendCisSessionHealth) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendCisSessionHealthInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendCisSessionHealthInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendCisSessionTelemetry struct {
+}
+
+func (*validateOpSendCisSessionTelemetry) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendCisSessionTelemetry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendCisSessionTelemetryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendCisSessionTelemetryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartCisSession struct {
+}
+
+func (*validateOpStartCisSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCisSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCisSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCisSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopCisSession struct {
+}
+
+func (*validateOpStopCisSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopCisSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopCisSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopCisSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -545,6 +785,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCisScanConfiguration struct {
+}
+
+func (*validateOpUpdateCisScanConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCisScanConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCisScanConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCisScanConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -678,6 +938,10 @@ func addOpCancelSbomExportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelSbomExport{}, middleware.After)
 }
 
+func addOpCreateCisScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCisScanConfiguration{}, middleware.After)
+}
+
 func addOpCreateFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFilter{}, middleware.After)
 }
@@ -688,6 +952,10 @@ func addOpCreateFindingsReportValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpCreateSbomExportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSbomExport{}, middleware.After)
+}
+
+func addOpDeleteCisScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCisScanConfiguration{}, middleware.After)
 }
 
 func addOpDeleteFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -710,6 +978,14 @@ func addOpEnableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnable{}, middleware.After)
 }
 
+func addOpGetCisScanReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCisScanReport{}, middleware.After)
+}
+
+func addOpGetCisScanResultDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCisScanResultDetails{}, middleware.After)
+}
+
 func addOpGetEncryptionKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEncryptionKey{}, middleware.After)
 }
@@ -720,6 +996,22 @@ func addOpGetMemberValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetSbomExportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSbomExport{}, middleware.After)
+}
+
+func addOpListCisScanConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCisScanConfigurations{}, middleware.After)
+}
+
+func addOpListCisScanResultsAggregatedByChecksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCisScanResultsAggregatedByChecks{}, middleware.After)
+}
+
+func addOpListCisScanResultsAggregatedByTargetResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCisScanResultsAggregatedByTargetResource{}, middleware.After)
+}
+
+func addOpListCisScansValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCisScans{}, middleware.After)
 }
 
 func addOpListCoverageValidationMiddleware(stack *middleware.Stack) error {
@@ -750,12 +1042,32 @@ func addOpSearchVulnerabilitiesValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpSearchVulnerabilities{}, middleware.After)
 }
 
+func addOpSendCisSessionHealthValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendCisSessionHealth{}, middleware.After)
+}
+
+func addOpSendCisSessionTelemetryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendCisSessionTelemetry{}, middleware.After)
+}
+
+func addOpStartCisSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCisSession{}, middleware.After)
+}
+
+func addOpStopCisSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopCisSession{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateCisScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCisScanConfiguration{}, middleware.After)
 }
 
 func addOpUpdateConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -776,6 +1088,23 @@ func addOpUpdateOrganizationConfigurationValidationMiddleware(stack *middleware.
 
 func addOpUpdateOrgEc2DeepInspectionConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateOrgEc2DeepInspectionConfiguration{}, middleware.After)
+}
+
+func validateAccountIdFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountIdFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAggregationRequest(v types.AggregationRequest) error {
@@ -901,6 +1230,466 @@ func validateAwsEcrContainerAggregation(v *types.AwsEcrContainerAggregation) err
 		if err := validateStringFilterList(v.ImageTags); err != nil {
 			invalidParams.AddNested("ImageTags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCheckIdFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CheckIdFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisFindingArnFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisFindingArnFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisFindingStatusFilter(v *types.CisFindingStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisFindingStatusFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisFindingStatusFilterList(v []types.CisFindingStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisFindingStatusFilterList"}
+	for i := range v {
+		if err := validateCisFindingStatusFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisResultStatusFilter(v *types.CisResultStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisResultStatusFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisResultStatusFilterList(v []types.CisResultStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisResultStatusFilterList"}
+	for i := range v {
+		if err := validateCisResultStatusFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisScanArnFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisScanArnFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisScanConfigurationArnFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisScanConfigurationArnFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisScanNameFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisScanNameFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisScanResultDetailsFilterCriteria(v *types.CisScanResultDetailsFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisScanResultDetailsFilterCriteria"}
+	if v.FindingStatusFilters != nil {
+		if err := validateCisFindingStatusFilterList(v.FindingStatusFilters); err != nil {
+			invalidParams.AddNested("FindingStatusFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CheckIdFilters != nil {
+		if err := validateCheckIdFilterList(v.CheckIdFilters); err != nil {
+			invalidParams.AddNested("CheckIdFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TitleFilters != nil {
+		if err := validateTitleFilterList(v.TitleFilters); err != nil {
+			invalidParams.AddNested("TitleFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SecurityLevelFilters != nil {
+		if err := validateCisSecurityLevelFilterList(v.SecurityLevelFilters); err != nil {
+			invalidParams.AddNested("SecurityLevelFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FindingArnFilters != nil {
+		if err := validateCisFindingArnFilterList(v.FindingArnFilters); err != nil {
+			invalidParams.AddNested("FindingArnFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisScanResultsAggregatedByChecksFilterCriteria(v *types.CisScanResultsAggregatedByChecksFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisScanResultsAggregatedByChecksFilterCriteria"}
+	if v.AccountIdFilters != nil {
+		if err := validateOneAccountIdFilterList(v.AccountIdFilters); err != nil {
+			invalidParams.AddNested("AccountIdFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CheckIdFilters != nil {
+		if err := validateCheckIdFilterList(v.CheckIdFilters); err != nil {
+			invalidParams.AddNested("CheckIdFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TitleFilters != nil {
+		if err := validateTitleFilterList(v.TitleFilters); err != nil {
+			invalidParams.AddNested("TitleFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PlatformFilters != nil {
+		if err := validatePlatformFilterList(v.PlatformFilters); err != nil {
+			invalidParams.AddNested("PlatformFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SecurityLevelFilters != nil {
+		if err := validateCisSecurityLevelFilterList(v.SecurityLevelFilters); err != nil {
+			invalidParams.AddNested("SecurityLevelFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisScanResultsAggregatedByTargetResourceFilterCriteria(v *types.CisScanResultsAggregatedByTargetResourceFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisScanResultsAggregatedByTargetResourceFilterCriteria"}
+	if v.AccountIdFilters != nil {
+		if err := validateAccountIdFilterList(v.AccountIdFilters); err != nil {
+			invalidParams.AddNested("AccountIdFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StatusFilters != nil {
+		if err := validateCisResultStatusFilterList(v.StatusFilters); err != nil {
+			invalidParams.AddNested("StatusFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CheckIdFilters != nil {
+		if err := validateCheckIdFilterList(v.CheckIdFilters); err != nil {
+			invalidParams.AddNested("CheckIdFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetResourceIdFilters != nil {
+		if err := validateResourceIdFilterList(v.TargetResourceIdFilters); err != nil {
+			invalidParams.AddNested("TargetResourceIdFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetResourceTagFilters != nil {
+		if err := validateResourceTagFilterList(v.TargetResourceTagFilters); err != nil {
+			invalidParams.AddNested("TargetResourceTagFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PlatformFilters != nil {
+		if err := validatePlatformFilterList(v.PlatformFilters); err != nil {
+			invalidParams.AddNested("PlatformFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetStatusFilters != nil {
+		if err := validateTargetStatusFilterList(v.TargetStatusFilters); err != nil {
+			invalidParams.AddNested("TargetStatusFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetStatusReasonFilters != nil {
+		if err := validateTargetStatusReasonFilterList(v.TargetStatusReasonFilters); err != nil {
+			invalidParams.AddNested("TargetStatusReasonFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisScanStatusFilter(v *types.CisScanStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisScanStatusFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisScanStatusFilterList(v []types.CisScanStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisScanStatusFilterList"}
+	for i := range v {
+		if err := validateCisScanStatusFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisScheduledByFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisScheduledByFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisSecurityLevelFilter(v *types.CisSecurityLevelFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisSecurityLevelFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisSecurityLevelFilterList(v []types.CisSecurityLevelFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisSecurityLevelFilterList"}
+	for i := range v {
+		if err := validateCisSecurityLevelFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisSessionMessage(v *types.CisSessionMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisSessionMessage"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.CisRuleDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CisRuleDetails"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisSessionMessages(v []types.CisSessionMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisSessionMessages"}
+	for i := range v {
+		if err := validateCisSessionMessage(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisStringFilter(v *types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisStringFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisTargetStatusFilter(v *types.CisTargetStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisTargetStatusFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCisTargetStatusReasonFilter(v *types.CisTargetStatusReasonFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CisTargetStatusReasonFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1042,6 +1831,43 @@ func validateCoverageStringFilterList(v []types.CoverageStringFilter) error {
 	for i := range v {
 		if err := validateCoverageStringFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateCisTargets(v *types.CreateCisTargets) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCisTargets"}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if v.TargetResourceTags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetResourceTags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDailySchedule(v *types.DailySchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DailySchedule"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	} else if v.StartTime != nil {
+		if err := validateTime(v.StartTime); err != nil {
+			invalidParams.AddNested("StartTime", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1384,6 +2210,85 @@ func validateLambdaLayerAggregation(v *types.LambdaLayerAggregation) error {
 	}
 }
 
+func validateListCisScanConfigurationsFilterCriteria(v *types.ListCisScanConfigurationsFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCisScanConfigurationsFilterCriteria"}
+	if v.ScanNameFilters != nil {
+		if err := validateCisScanNameFilterList(v.ScanNameFilters); err != nil {
+			invalidParams.AddNested("ScanNameFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetResourceTagFilters != nil {
+		if err := validateResourceTagFilterList(v.TargetResourceTagFilters); err != nil {
+			invalidParams.AddNested("TargetResourceTagFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScanConfigurationArnFilters != nil {
+		if err := validateCisScanConfigurationArnFilterList(v.ScanConfigurationArnFilters); err != nil {
+			invalidParams.AddNested("ScanConfigurationArnFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListCisScansFilterCriteria(v *types.ListCisScansFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCisScansFilterCriteria"}
+	if v.ScanNameFilters != nil {
+		if err := validateCisScanNameFilterList(v.ScanNameFilters); err != nil {
+			invalidParams.AddNested("ScanNameFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetResourceTagFilters != nil {
+		if err := validateResourceTagFilterList(v.TargetResourceTagFilters); err != nil {
+			invalidParams.AddNested("TargetResourceTagFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetResourceIdFilters != nil {
+		if err := validateResourceIdFilterList(v.TargetResourceIdFilters); err != nil {
+			invalidParams.AddNested("TargetResourceIdFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScanStatusFilters != nil {
+		if err := validateCisScanStatusFilterList(v.ScanStatusFilters); err != nil {
+			invalidParams.AddNested("ScanStatusFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScanConfigurationArnFilters != nil {
+		if err := validateCisScanConfigurationArnFilterList(v.ScanConfigurationArnFilters); err != nil {
+			invalidParams.AddNested("ScanConfigurationArnFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScanArnFilters != nil {
+		if err := validateCisScanArnFilterList(v.ScanArnFilters); err != nil {
+			invalidParams.AddNested("ScanArnFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScheduledByFilters != nil {
+		if err := validateCisScheduledByFilterList(v.ScheduledByFilters); err != nil {
+			invalidParams.AddNested("ScheduledByFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetAccountIdFilters != nil {
+		if err := validateAccountIdFilterList(v.TargetAccountIdFilters); err != nil {
+			invalidParams.AddNested("TargetAccountIdFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMapFilter(v *types.MapFilter) error {
 	if v == nil {
 		return nil
@@ -1444,6 +2349,45 @@ func validateMemberAccountEc2DeepInspectionStatusList(v []types.MemberAccountEc2
 	invalidParams := smithy.InvalidParamsError{Context: "MemberAccountEc2DeepInspectionStatusList"}
 	for i := range v {
 		if err := validateMemberAccountEc2DeepInspectionStatus(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonthlySchedule(v *types.MonthlySchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonthlySchedule"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	} else if v.StartTime != nil {
+		if err := validateTime(v.StartTime); err != nil {
+			invalidParams.AddNested("StartTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Day) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Day"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOneAccountIdFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OneAccountIdFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1530,6 +2474,23 @@ func validatePackageFilterList(v []types.PackageFilter) error {
 	}
 }
 
+func validatePlatformFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PlatformFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRepositoryAggregation(v *types.RepositoryAggregation) error {
 	if v == nil {
 		return nil
@@ -1590,6 +2551,23 @@ func validateResourceFilterCriteria(v *types.ResourceFilterCriteria) error {
 	if v.LambdaFunctionTags != nil {
 		if err := validateResourceMapFilterList(v.LambdaFunctionTags); err != nil {
 			invalidParams.AddNested("LambdaFunctionTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceIdFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceIdFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1669,6 +2647,52 @@ func validateResourceStringFilterList(v []types.ResourceStringFilter) error {
 	}
 }
 
+func validateResourceTagFilterList(v []types.TagFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceTagFilterList"}
+	for i := range v {
+		if err := validateTagFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchedule(v types.Schedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Schedule"}
+	switch uv := v.(type) {
+	case *types.ScheduleMemberDaily:
+		if err := validateDailySchedule(&uv.Value); err != nil {
+			invalidParams.AddNested("[daily]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ScheduleMemberMonthly:
+		if err := validateMonthlySchedule(&uv.Value); err != nil {
+			invalidParams.AddNested("[monthly]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ScheduleMemberWeekly:
+		if err := validateWeeklySchedule(&uv.Value); err != nil {
+			invalidParams.AddNested("[weekly]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSearchVulnerabilitiesFilterCriteria(v *types.SearchVulnerabilitiesFilterCriteria) error {
 	if v == nil {
 		return nil
@@ -1694,6 +2718,39 @@ func validateSortCriteria(v *types.SortCriteria) error {
 	}
 	if len(v.SortOrder) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartCisSessionMessage(v *types.StartCisSessionMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCisSessionMessage"}
+	if v.SessionToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStopCisSessionMessage(v *types.StopCisSessionMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopCisSessionMessage"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.Progress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Progress"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1737,6 +2794,79 @@ func validateStringFilterList(v []types.StringFilter) error {
 	}
 }
 
+func validateTagFilter(v *types.TagFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetStatusFilterList(v []types.CisTargetStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetStatusFilterList"}
+	for i := range v {
+		if err := validateCisTargetStatusFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetStatusReasonFilterList(v []types.CisTargetStatusReasonFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetStatusReasonFilterList"}
+	for i := range v {
+		if err := validateCisTargetStatusReasonFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTime(v *types.Time) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Time"}
+	if v.TimeOfDay == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeOfDay"))
+	}
+	if v.Timezone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timezone"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTitleAggregation(v *types.TitleAggregation) error {
 	if v == nil {
 		return nil
@@ -1751,6 +2881,45 @@ func validateTitleAggregation(v *types.TitleAggregation) error {
 		if err := validateStringFilterList(v.VulnerabilityIds); err != nil {
 			invalidParams.AddNested("VulnerabilityIds", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTitleFilterList(v []types.CisStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TitleFilterList"}
+	for i := range v {
+		if err := validateCisStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWeeklySchedule(v *types.WeeklySchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WeeklySchedule"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	} else if v.StartTime != nil {
+		if err := validateTime(v.StartTime); err != nil {
+			invalidParams.AddNested("StartTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Days == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Days"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1868,6 +3037,38 @@ func validateOpCancelSbomExportInput(v *CancelSbomExportInput) error {
 	}
 }
 
+func validateOpCreateCisScanConfigurationInput(v *CreateCisScanConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCisScanConfigurationInput"}
+	if v.ScanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanName"))
+	}
+	if len(v.SecurityLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityLevel"))
+	}
+	if v.Schedule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schedule"))
+	} else if v.Schedule != nil {
+		if err := validateSchedule(v.Schedule); err != nil {
+			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Targets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Targets"))
+	} else if v.Targets != nil {
+		if err := validateCreateCisTargets(v.Targets); err != nil {
+			invalidParams.AddNested("Targets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFilterInput(v *CreateFilterInput) error {
 	if v == nil {
 		return nil
@@ -1939,6 +3140,21 @@ func validateOpCreateSbomExportInput(v *CreateSbomExportInput) error {
 		if err := validateDestination(v.S3Destination); err != nil {
 			invalidParams.AddNested("S3Destination", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCisScanConfigurationInput(v *DeleteCisScanConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCisScanConfigurationInput"}
+	if v.ScanConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2022,6 +3238,47 @@ func validateOpEnableInput(v *EnableInput) error {
 	}
 }
 
+func validateOpGetCisScanReportInput(v *GetCisScanReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCisScanReportInput"}
+	if v.ScanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCisScanResultDetailsInput(v *GetCisScanResultDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCisScanResultDetailsInput"}
+	if v.ScanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanArn"))
+	}
+	if v.TargetResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetResourceId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.FilterCriteria != nil {
+		if err := validateCisScanResultDetailsFilterCriteria(v.FilterCriteria); err != nil {
+			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEncryptionKeyInput(v *GetEncryptionKeyInput) error {
 	if v == nil {
 		return nil
@@ -2062,6 +3319,80 @@ func validateOpGetSbomExportInput(v *GetSbomExportInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetSbomExportInput"}
 	if v.ReportId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCisScanConfigurationsInput(v *ListCisScanConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCisScanConfigurationsInput"}
+	if v.FilterCriteria != nil {
+		if err := validateListCisScanConfigurationsFilterCriteria(v.FilterCriteria); err != nil {
+			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCisScanResultsAggregatedByChecksInput(v *ListCisScanResultsAggregatedByChecksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCisScanResultsAggregatedByChecksInput"}
+	if v.ScanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanArn"))
+	}
+	if v.FilterCriteria != nil {
+		if err := validateCisScanResultsAggregatedByChecksFilterCriteria(v.FilterCriteria); err != nil {
+			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCisScanResultsAggregatedByTargetResourceInput(v *ListCisScanResultsAggregatedByTargetResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCisScanResultsAggregatedByTargetResourceInput"}
+	if v.ScanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanArn"))
+	}
+	if v.FilterCriteria != nil {
+		if err := validateCisScanResultsAggregatedByTargetResourceFilterCriteria(v.FilterCriteria); err != nil {
+			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCisScansInput(v *ListCisScansInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCisScansInput"}
+	if v.FilterCriteria != nil {
+		if err := validateListCisScansFilterCriteria(v.FilterCriteria); err != nil {
+			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2203,6 +3534,96 @@ func validateOpSearchVulnerabilitiesInput(v *SearchVulnerabilitiesInput) error {
 	}
 }
 
+func validateOpSendCisSessionHealthInput(v *SendCisSessionHealthInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendCisSessionHealthInput"}
+	if v.ScanJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanJobId"))
+	}
+	if v.SessionToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendCisSessionTelemetryInput(v *SendCisSessionTelemetryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendCisSessionTelemetryInput"}
+	if v.ScanJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanJobId"))
+	}
+	if v.SessionToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionToken"))
+	}
+	if v.Messages == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Messages"))
+	} else if v.Messages != nil {
+		if err := validateCisSessionMessages(v.Messages); err != nil {
+			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCisSessionInput(v *StartCisSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCisSessionInput"}
+	if v.ScanJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanJobId"))
+	}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
+	} else if v.Message != nil {
+		if err := validateStartCisSessionMessage(v.Message); err != nil {
+			invalidParams.AddNested("Message", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopCisSessionInput(v *StopCisSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopCisSessionInput"}
+	if v.ScanJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanJobId"))
+	}
+	if v.SessionToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionToken"))
+	}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
+	} else if v.Message != nil {
+		if err := validateStopCisSessionMessage(v.Message); err != nil {
+			invalidParams.AddNested("Message", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -2231,6 +3652,26 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCisScanConfigurationInput(v *UpdateCisScanConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCisScanConfigurationInput"}
+	if v.ScanConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
+	}
+	if v.Schedule != nil {
+		if err := validateSchedule(v.Schedule); err != nil {
+			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -613,6 +613,433 @@ type CisaData struct {
 	noSmithyDocumentSerde
 }
 
+// A CIS check.
+type CisCheckAggregation struct {
+
+	// The scan ARN for the CIS check scan ARN.
+	//
+	// This member is required.
+	ScanArn *string
+
+	// The account ID for the CIS check.
+	AccountId *string
+
+	// The description for the CIS check.
+	CheckDescription *string
+
+	// The check ID for the CIS check.
+	CheckId *string
+
+	// The CIS check level.
+	Level CisSecurityLevel
+
+	// The CIS check platform.
+	Platform *string
+
+	// The CIS check status counts.
+	StatusCounts *StatusCounts
+
+	// The CIS check title.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The CIS date filter.
+type CisDateFilter struct {
+
+	// The CIS date filter's earliest scan start time.
+	EarliestScanStartTime *time.Time
+
+	// The CIS date filter's latest scan start time.
+	LatestScanStartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The CIS finding status filter.
+type CisFindingStatusFilter struct {
+
+	// The comparison value of the CIS finding status filter.
+	//
+	// This member is required.
+	Comparison CisFindingStatusComparison
+
+	// The value of the CIS finding status filter.
+	//
+	// This member is required.
+	Value CisFindingStatus
+
+	noSmithyDocumentSerde
+}
+
+// The CIS number filter.
+type CisNumberFilter struct {
+
+	// The CIS number filter's lower inclusive.
+	LowerInclusive *int32
+
+	// The CIS number filter's upper inclusive.
+	UpperInclusive *int32
+
+	noSmithyDocumentSerde
+}
+
+// The CIS result status filter.
+type CisResultStatusFilter struct {
+
+	// The comparison value of the CIS result status filter.
+	//
+	// This member is required.
+	Comparison CisResultStatusComparison
+
+	// The value of the CIS result status filter.
+	//
+	// This member is required.
+	Value CisResultStatus
+
+	noSmithyDocumentSerde
+}
+
+// The CIS scan.
+type CisScan struct {
+
+	// The CIS scan's ARN.
+	//
+	// This member is required.
+	ScanArn *string
+
+	// The CIS scan's configuration ARN.
+	//
+	// This member is required.
+	ScanConfigurationArn *string
+
+	// The CIS scan's failed checks.
+	FailedChecks *int32
+
+	// The CIS scan's date.
+	ScanDate *time.Time
+
+	// The the name of the scan configuration that's associated with this scan.
+	ScanName *string
+
+	// The account or organization that schedules the CIS scan.
+	ScheduledBy *string
+
+	// The security level for the CIS scan. Security level refers to the Benchmark
+	// levels that CIS assigns to a profile.
+	SecurityLevel CisSecurityLevel
+
+	// The CIS scan's status.
+	Status CisScanStatus
+
+	// The CIS scan's targets.
+	Targets *CisTargets
+
+	// The CIS scan's total checks.
+	TotalChecks *int32
+
+	noSmithyDocumentSerde
+}
+
+// The CIS scan configuration.
+type CisScanConfiguration struct {
+
+	// The CIS scan configuration's scan configuration ARN.
+	//
+	// This member is required.
+	ScanConfigurationArn *string
+
+	// The CIS scan configuration's owner ID.
+	OwnerId *string
+
+	// The name of the CIS scan configuration.
+	ScanName *string
+
+	// The CIS scan configuration's schedule.
+	Schedule Schedule
+
+	// The CIS scan configuration's security level.
+	SecurityLevel CisSecurityLevel
+
+	// The CIS scan configuration's tags.
+	Tags map[string]string
+
+	// The CIS scan configuration's targets.
+	Targets *CisTargets
+
+	noSmithyDocumentSerde
+}
+
+// The CIS scan result details.
+type CisScanResultDetails struct {
+
+	// The CIS scan result details' scan ARN.
+	//
+	// This member is required.
+	ScanArn *string
+
+	// The CIS scan result details' account ID.
+	AccountId *string
+
+	// The account ID that's associated with the CIS scan result details.
+	CheckDescription *string
+
+	// The CIS scan result details' check ID.
+	CheckId *string
+
+	// The CIS scan result details' finding ARN.
+	FindingArn *string
+
+	// The CIS scan result details' level.
+	Level CisSecurityLevel
+
+	// The CIS scan result details' platform.
+	Platform *string
+
+	// The CIS scan result details' remediation.
+	Remediation *string
+
+	// The CIS scan result details' status.
+	Status CisFindingStatus
+
+	// The CIS scan result details' status reason.
+	StatusReason *string
+
+	// The CIS scan result details' target resource ID.
+	TargetResourceId *string
+
+	// The CIS scan result details' title.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The CIS scan result details filter criteria.
+type CisScanResultDetailsFilterCriteria struct {
+
+	// The criteria's check ID filters.
+	CheckIdFilters []CisStringFilter
+
+	// The criteria's finding ARN filters.
+	FindingArnFilters []CisStringFilter
+
+	// The criteria's finding status filters.
+	FindingStatusFilters []CisFindingStatusFilter
+
+	// The criteria's security level filters. . Security level refers to the Benchmark
+	// levels that CIS assigns to a profile.
+	SecurityLevelFilters []CisSecurityLevelFilter
+
+	// The criteria's title filters.
+	TitleFilters []CisStringFilter
+
+	noSmithyDocumentSerde
+}
+
+// The scan results aggregated by checks filter criteria.
+type CisScanResultsAggregatedByChecksFilterCriteria struct {
+
+	// The criteria's account ID filters.
+	AccountIdFilters []CisStringFilter
+
+	// The criteria's check ID filters.
+	CheckIdFilters []CisStringFilter
+
+	// The criteria's failed resources filters.
+	FailedResourcesFilters []CisNumberFilter
+
+	// The criteria's platform filters.
+	PlatformFilters []CisStringFilter
+
+	// The criteria's security level filters.
+	SecurityLevelFilters []CisSecurityLevelFilter
+
+	// The criteria's title filters.
+	TitleFilters []CisStringFilter
+
+	noSmithyDocumentSerde
+}
+
+// The scan results aggregated by target resource filter criteria.
+type CisScanResultsAggregatedByTargetResourceFilterCriteria struct {
+
+	// The criteria's account ID filters.
+	AccountIdFilters []CisStringFilter
+
+	// The criteria's check ID filters.
+	CheckIdFilters []CisStringFilter
+
+	// The criteria's failed checks filters.
+	FailedChecksFilters []CisNumberFilter
+
+	// The criteria's platform filters.
+	PlatformFilters []CisStringFilter
+
+	// The criteria's status filter.
+	StatusFilters []CisResultStatusFilter
+
+	// The criteria's target resource ID filters.
+	TargetResourceIdFilters []CisStringFilter
+
+	// The criteria's target resource tag filters.
+	TargetResourceTagFilters []TagFilter
+
+	// The criteria's target status filters.
+	TargetStatusFilters []CisTargetStatusFilter
+
+	// The criteria's target status reason filters.
+	TargetStatusReasonFilters []CisTargetStatusReasonFilter
+
+	noSmithyDocumentSerde
+}
+
+// The CIS scan status filter.
+type CisScanStatusFilter struct {
+
+	// The filter comparison value.
+	//
+	// This member is required.
+	Comparison CisScanStatusComparison
+
+	// The filter value.
+	//
+	// This member is required.
+	Value CisScanStatus
+
+	noSmithyDocumentSerde
+}
+
+// The CIS security level filter. Security level refers to the Benchmark levels
+// that CIS assigns to a profile.
+type CisSecurityLevelFilter struct {
+
+	// The CIS security filter comparison value.
+	//
+	// This member is required.
+	Comparison CisSecurityLevelComparison
+
+	// The CIS security filter value.
+	//
+	// This member is required.
+	Value CisSecurityLevel
+
+	noSmithyDocumentSerde
+}
+
+// The CIS session message.
+type CisSessionMessage struct {
+
+	// The CIS rule details for the CIS session message.
+	//
+	// This member is required.
+	CisRuleDetails []byte
+
+	// The rule ID for the CIS session message.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The status of the CIS session message.
+	//
+	// This member is required.
+	Status CisRuleStatus
+
+	noSmithyDocumentSerde
+}
+
+// The CIS string filter.
+type CisStringFilter struct {
+
+	// The comparison value of the CIS string filter.
+	//
+	// This member is required.
+	Comparison CisStringComparison
+
+	// The value of the CIS string filter.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The CIS target resource aggregation.
+type CisTargetResourceAggregation struct {
+
+	// The scan ARN for the CIS target resource.
+	//
+	// This member is required.
+	ScanArn *string
+
+	// The account ID for the CIS target resource.
+	AccountId *string
+
+	// The platform for the CIS target resource.
+	Platform *string
+
+	// The target resource status counts.
+	StatusCounts *StatusCounts
+
+	// The ID of the target resource.
+	TargetResourceId *string
+
+	// The tag for the target resource.
+	TargetResourceTags map[string][]string
+
+	// The status of the target resource.
+	TargetStatus CisTargetStatus
+
+	// The reason for the target resource.
+	TargetStatusReason CisTargetStatusReason
+
+	noSmithyDocumentSerde
+}
+
+// The CIS targets.
+type CisTargets struct {
+
+	// The CIS target account ids.
+	AccountIds []string
+
+	// The CIS target resource tags.
+	TargetResourceTags map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+// The CIS target status filter.
+type CisTargetStatusFilter struct {
+
+	// The comparison value of the CIS target status filter.
+	//
+	// This member is required.
+	Comparison CisTargetStatusComparison
+
+	// The value of the CIS target status filter.
+	//
+	// This member is required.
+	Value CisTargetStatus
+
+	noSmithyDocumentSerde
+}
+
+// The CIS target status reason filter.
+type CisTargetStatusReasonFilter struct {
+
+	// The comparison value of the CIS target status reason filter.
+	//
+	// This member is required.
+	Comparison CisTargetStatusComparison
+
+	// The value of the CIS target status reason filter.
+	//
+	// This member is required.
+	Value CisTargetStatusReason
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on where a code vulnerability is located in your Lambda
 // function.
 type CodeFilePath struct {
@@ -750,6 +1177,21 @@ type CodeVulnerabilityDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A compute platform.
+type ComputePlatform struct {
+
+	// The compute platform product.
+	Product *string
+
+	// The compute platform vendor.
+	Vendor *string
+
+	// The compute platform version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // a structure that contains information on the count of resources within a group.
 type Counts struct {
 
@@ -806,8 +1248,8 @@ type CoverageFilterCriteria struct {
 	ResourceId []CoverageStringFilter
 
 	// An array of Amazon Web Services resource types to return coverage statistics
-	// for. The values can be AWS_EC2_INSTANCE , AWS_LAMBDA_FUNCTION or
-	// AWS_ECR_REPOSITORY .
+	// for. The values can be AWS_EC2_INSTANCE , AWS_LAMBDA_FUNCTION ,
+	// AWS_ECR_CONTAINER_IMAGE , AWS_ECR_REPOSITORY or AWS_ACCOUNT .
 	ResourceType []CoverageStringFilter
 
 	// The scan status code to filter on. Valid values are: ValidationException ,
@@ -890,6 +1332,22 @@ type CoveredResource struct {
 
 	// The status of the scan covering the resource.
 	ScanStatus *ScanStatus
+
+	noSmithyDocumentSerde
+}
+
+// Creates CIS targets.
+type CreateCisTargets struct {
+
+	// The CIS target account ids.
+	//
+	// This member is required.
+	AccountIds []string
+
+	// The CIS target resource tags.
+	//
+	// This member is required.
+	TargetResourceTags map[string][]string
 
 	noSmithyDocumentSerde
 }
@@ -991,6 +1449,17 @@ type CvssScoreDetails struct {
 
 	// The source of the CVSS data.
 	CvssSource *string
+
+	noSmithyDocumentSerde
+}
+
+// A daily schedule.
+type DailySchedule struct {
+
+	// The schedule start time.
+	//
+	// This member is required.
+	StartTime *Time
 
 	noSmithyDocumentSerde
 }
@@ -1951,6 +2420,57 @@ type LambdaVpcConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A list of CIS scan configurations filter criteria.
+type ListCisScanConfigurationsFilterCriteria struct {
+
+	// The list of scan configuration ARN filters.
+	ScanConfigurationArnFilters []CisStringFilter
+
+	// The list of scan name filters.
+	ScanNameFilters []CisStringFilter
+
+	// The list of target resource tag filters.
+	TargetResourceTagFilters []TagFilter
+
+	noSmithyDocumentSerde
+}
+
+// A list of CIS scans filter criteria.
+type ListCisScansFilterCriteria struct {
+
+	// The list of failed checks filters.
+	FailedChecksFilters []CisNumberFilter
+
+	// The list of scan ARN filters.
+	ScanArnFilters []CisStringFilter
+
+	// The list of scan at filters.
+	ScanAtFilters []CisDateFilter
+
+	// The list of scan configuration ARN filters.
+	ScanConfigurationArnFilters []CisStringFilter
+
+	// The list of scan name filters.
+	ScanNameFilters []CisStringFilter
+
+	// The list of scan status filters.
+	ScanStatusFilters []CisScanStatusFilter
+
+	// The list of scheduled by filters.
+	ScheduledByFilters []CisStringFilter
+
+	// The list of target account ID filters.
+	TargetAccountIdFilters []CisStringFilter
+
+	// The list of target resource ID filters.
+	TargetResourceIdFilters []CisStringFilter
+
+	// The list of target resource tag filters.
+	TargetResourceTagFilters []TagFilter
+
+	noSmithyDocumentSerde
+}
+
 // An object that describes details of a map filter.
 type MapFilter struct {
 
@@ -2028,6 +2548,22 @@ type MemberAccountEc2DeepInspectionStatusState struct {
 	noSmithyDocumentSerde
 }
 
+// A monthly schedule.
+type MonthlySchedule struct {
+
+	// The monthly schedule's day.
+	//
+	// This member is required.
+	Day Day
+
+	// The monthly schedule's start time.
+	//
+	// This member is required.
+	StartTime *Time
+
+	noSmithyDocumentSerde
+}
+
 // Information on the network path associated with a finding.
 type NetworkPath struct {
 
@@ -2068,6 +2604,11 @@ type NumberFilter struct {
 	// The highest number to be included in the filter.
 	UpperInclusive *float64
 
+	noSmithyDocumentSerde
+}
+
+// A one time schedule.
+type OneTimeSchedule struct {
 	noSmithyDocumentSerde
 }
 
@@ -2525,6 +3066,54 @@ type ScanStatus struct {
 	noSmithyDocumentSerde
 }
 
+// A schedule.
+//
+// The following types satisfy this interface:
+//
+//	ScheduleMemberDaily
+//	ScheduleMemberMonthly
+//	ScheduleMemberOneTime
+//	ScheduleMemberWeekly
+type Schedule interface {
+	isSchedule()
+}
+
+// The schedule's daily.
+type ScheduleMemberDaily struct {
+	Value DailySchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleMemberDaily) isSchedule() {}
+
+// The schedule's monthly.
+type ScheduleMemberMonthly struct {
+	Value MonthlySchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleMemberMonthly) isSchedule() {}
+
+// The schedule's one time.
+type ScheduleMemberOneTime struct {
+	Value OneTimeSchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleMemberOneTime) isSchedule() {}
+
+// The schedule's weekly.
+type ScheduleMemberWeekly struct {
+	Value WeeklySchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleMemberWeekly) isSchedule() {}
+
 // Details on the criteria used to define the filter for a vulnerability search.
 type SearchVulnerabilitiesFilterCriteria struct {
 
@@ -2570,6 +3159,17 @@ type SortCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// The start CIS session message.
+type StartCisSessionMessage struct {
+
+	// The unique token that identifies the CIS session.
+	//
+	// This member is required.
+	SessionToken *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that described the state of Amazon Inspector scans for an account.
 type State struct {
 
@@ -2591,6 +3191,21 @@ type State struct {
 	noSmithyDocumentSerde
 }
 
+// The status counts.
+type StatusCounts struct {
+
+	// The number of checks that failed.
+	Failed *int32
+
+	// The number of checks that passed.
+	Passed *int32
+
+	// The number of checks that were skipped.
+	Skipped *int32
+
+	noSmithyDocumentSerde
+}
+
 // Details about the step associated with a finding.
 type Step struct {
 
@@ -2603,6 +3218,64 @@ type Step struct {
 	//
 	// This member is required.
 	ComponentType *string
+
+	noSmithyDocumentSerde
+}
+
+// The stop CIS message progress.
+type StopCisMessageProgress struct {
+
+	// The progress' error checks.
+	ErrorChecks int32
+
+	// The progress' failed checks.
+	FailedChecks int32
+
+	// The progress' informational checks.
+	InformationalChecks int32
+
+	// The progress' not applicable checks.
+	NotApplicableChecks int32
+
+	// The progress' not evaluated checks.
+	NotEvaluatedChecks int32
+
+	// The progress' successful checks.
+	SuccessfulChecks int32
+
+	// The progress' total checks.
+	TotalChecks int32
+
+	// The progress' unknown checks.
+	UnknownChecks int32
+
+	noSmithyDocumentSerde
+}
+
+// The stop CIS session message.
+type StopCisSessionMessage struct {
+
+	// The progress of the message.
+	//
+	// This member is required.
+	Progress *StopCisMessageProgress
+
+	// The status of the message.
+	//
+	// This member is required.
+	Status StopCisSessionStatus
+
+	// The message benchmark profile.
+	BenchmarkProfile *string
+
+	// The message benchmark version.
+	BenchmarkVersion *string
+
+	// The message compute platform.
+	ComputePlatform *ComputePlatform
+
+	// The reason for the message.
+	Reason *string
 
 	noSmithyDocumentSerde
 }
@@ -2631,6 +3304,43 @@ type SuggestedFix struct {
 
 	// The fix's description.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// The tag filter.
+type TagFilter struct {
+
+	// The tag filter comparison value.
+	//
+	// This member is required.
+	Comparison TagComparison
+
+	// The tag filter key.
+	//
+	// This member is required.
+	Key *string
+
+	// The tag filter value.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The time.
+type Time struct {
+
+	// The time of day in 24-hour format (00:00).
+	//
+	// This member is required.
+	TimeOfDay *string
+
+	// The timezone.
+	//
+	// This member is required.
+	Timezone *string
 
 	noSmithyDocumentSerde
 }
@@ -2676,6 +3386,18 @@ type TitleAggregationResponse struct {
 
 	// The vulnerability ID of the finding.
 	VulnerabilityId *string
+
+	noSmithyDocumentSerde
+}
+
+// Updates CIS targets.
+type UpdateCisTargets struct {
+
+	// The target account ids.
+	AccountIds []string
+
+	// The target resource tags.
+	TargetResourceTags map[string][]string
 
 	noSmithyDocumentSerde
 }
@@ -2835,6 +3557,22 @@ type VulnerablePackage struct {
 	noSmithyDocumentSerde
 }
 
+// A weekly schedule.
+type WeeklySchedule struct {
+
+	// The weekly schedule's days.
+	//
+	// This member is required.
+	Days []Day
+
+	// The weekly schedule's start time.
+	//
+	// This member is required.
+	StartTime *Time
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -2848,3 +3586,4 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAggregationRequest()  {}
 func (*UnknownUnionMember) isAggregationResponse() {}
+func (*UnknownUnionMember) isSchedule()            {}
