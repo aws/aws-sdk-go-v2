@@ -18,8 +18,6 @@ body:
       options:
         - label: I've read the [Migration Guide](https://aws.github.io/aws-sdk-go-v2/docs/migrating/).
           required: true
-        - label: I've reviewed the [Developer Guide](https://aws.github.io/aws-sdk-go-v2/docs/).
-          required: true
         - label: I've checked [AWS Forums](https://forums.aws.amazon.com) and [StackOverflow](https://stackoverflow.com/questions/tagged/aws-sdk-go) for similar migration issues.
           required: true
 
@@ -30,7 +28,7 @@ body:
       description: Please specify the version of Go you are using.
       placeholder: e.g., Go 1.20, Go 1.21
     validations:
-      required: false
+      required: true
 
   - type: textarea
     id: migration-issue-description
