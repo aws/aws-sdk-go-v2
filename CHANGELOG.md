@@ -1,3 +1,9 @@
+# Release (2024-01-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.21.0](service/inspector2/CHANGELOG.md#v1210-2024-01-23)
+  * **Feature**: This release adds support for CIS scans on EC2 instances.
+
 # Release (2024-01-22)
 
 ## General Highlights

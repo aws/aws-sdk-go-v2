@@ -1,3 +1,7 @@
+# v1.21.0 (2024-01-23)
+
+* **Feature**: This release adds support for CIS scans on EC2 instances.
+
 # v1.20.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions
