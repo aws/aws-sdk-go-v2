@@ -1,36 +1,39 @@
+/*
+ * Copyright 2024 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ *
+ *
+ */
+
 package software.amazon.smithy.aws.go.codegen.customization;
 
-import java.util.List;
-import java.util.ArrayList;
-import software.amazon.smithy.aws.go.codegen.AddAwsConfigFields;
-import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
-import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4;
-import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4aUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.aws.traits.auth.SigV4ATrait;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
-import software.amazon.smithy.codegen.core.Symbol;
-import software.amazon.smithy.codegen.core.SymbolProvider;
-import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
-import software.amazon.smithy.go.codegen.GoWriter;
-import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SymbolUtils;
-import software.amazon.smithy.go.codegen.integration.ConfigField;
-import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
-import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
-import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.traits.AuthTrait;
-import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.SetUtils;
 
 /**
  * This integration configures the CloudFront Key Value Store client for Signature Version 4a
  */
 public class CloudFrontKVSSigV4a implements GoIntegration {
+    // hardcoded from model so we don't have to extract it from whatever auth trait
+    private static final String SIGNING_NAME = "cloudfront-keyvaluestore";
+
     /**
      * Return true if service is CFKVS.
      *
@@ -43,14 +46,6 @@ public class CloudFrontKVSSigV4a implements GoIntegration {
         return serviceId.equalsIgnoreCase("cloudfrontkeyvaluestore");
     }
 
-    private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
-
-
-    @Override
-    public List<RuntimeClientPlugin> getClientPlugins() {
-        return runtimeClientPlugins;
-    }
-
     @Override
     public Model preprocessModel(Model model, GoSettings settings) {
         ServiceShape service = settings.getService(model);
@@ -58,91 +53,16 @@ public class CloudFrontKVSSigV4a implements GoIntegration {
             return model;
         }
 
-        if (settings.getService(model).hasTrait(SigV4ATrait.class)) {
-            return model;
-        }
-
-        var v4a = SigV4ATrait.builder()
-                .name(service.expectTrait(SigV4Trait.class).getName())
-                .build();
-
+        // we MUST preserve the sigv4 trait as released since it affects the exported API
+        // (signer interface and config field)
         return model.toBuilder()
                 .addShape(
                         service.toBuilder()
-                                .addTrait(v4a)
-                                // FUTURE: https://github.com/aws/smithy-go/issues/493
-                                // we are keeping sigv4 at the end of this list (it will never be selected)
-                                // as a stopgap to drive codegen of payload checksum routines
+                                .addTrait(SigV4ATrait.builder().name(SIGNING_NAME).build())
+                                .addTrait(SigV4Trait.builder().name(SIGNING_NAME).build())
                                 .addTrait(new AuthTrait(SetUtils.of(SigV4ATrait.ID, SigV4Trait.ID)))
                                 .build()
                 )
                 .build();
     }
-
-    @Override
-    public void processFinalizedModel(GoSettings settings, Model model) {
-        if (!isCFKVSService(model, settings.getService(model))) {
-            return;
-        }
-        runtimeClientPlugins.add(
-                RuntimeClientPlugin.builder()
-                    .configFields(
-                        ListUtils.of(
-                                ConfigField.builder()
-                                        .name(AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
-                                        .type(SymbolUtils.buildPackageSymbol(
-                                            AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
-                                        )
-                                        .documentation("Signature Version 4a (SigV4a) Signer")
-                                        .build()
-                        )
-                    )
-                    .build());
-        runtimeClientPlugins.add(
-                RuntimeClientPlugin.builder()
-                    .servicePredicate(CloudFrontKVSSigV4a::isCFKVSService)
-                    .addConfigFieldResolver(
-                            ConfigFieldResolver.builder()
-                                    .location(ConfigFieldResolver.Location.CLIENT)
-                                    .target(ConfigFieldResolver.Target.INITIALIZATION)
-                                    .resolver(SymbolUtils.createValueSymbolBuilder(
-                                            AwsSignatureVersion4aUtils.SIGNER_RESOLVER).build())
-                                    .build())
-                    .build());
-    }
-
-    @Override
-    public void writeAdditionalFiles(
-            GoSettings settings,
-            Model model,
-            SymbolProvider symbolProvider,
-            GoDelegator goDelegator
-    ) {
-
-        if (!isCFKVSService(model, model.expectShape(settings.getService(), ServiceShape.class))) {
-            return;
-        }
-
-        ServiceShape serviceShape = settings.getService(model);
-        goDelegator.useShapeWriter(serviceShape, writer -> {
-            writerSignerInterface(writer);
-            writerConfigFieldResolver(writer, serviceShape);
-            writeNewV4ASignerFunc(writer, serviceShape);
-        });
-
-    }
-
-
-    private void writerSignerInterface(GoWriter writer) {
-        AwsSignatureVersion4aUtils.writerSignerInterface(writer);
-    }
-
-    private void writeNewV4ASignerFunc(GoWriter writer, ServiceShape serviceShape) {
-        AwsSignatureVersion4aUtils.writeNewV4ASignerFunc(writer, serviceShape);
-    }
-
-    private void writerConfigFieldResolver(GoWriter writer, ServiceShape serviceShape) {
-        AwsSignatureVersion4aUtils.writerConfigFieldResolver(writer, serviceShape);
-    }
-
 }

@@ -454,7 +454,6 @@ func newDefaultV4aSigner(o Options) *v4a.Signer {
 	return v4a.NewSigner(func(so *v4a.SignerOptions) {
 		so.Logger = o.Logger
 		so.LogSigning = o.ClientLogMode.IsSigning()
-		so.DisableURIPathEscaping = false
 	})
 }
 

@@ -15,7 +15,6 @@ import (
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	"github.com/aws/aws-sdk-go-v2/internal/v4a"
-	ebcust "github.com/aws/aws-sdk-go-v2/service/eventbridge/internal/customizations"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -50,9 +49,9 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveHTTPSignerV4(&options)
 
-	resolveHTTPSignerV4a(&options)
-
 	resolveEndpointResolverV2(&options)
+
+	resolveHTTPSignerV4a(&options)
 
 	resolveAuthSchemeResolver(&options)
 
@@ -61,8 +60,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	}
 
 	finalizeRetryMaxAttempts(&options)
-
-	resolveCredentialProvider(&options)
 
 	ignoreAnonymousAuth(&options)
 
@@ -98,8 +95,6 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	finalizeOperationRetryMaxAttempts(&options, *c)
 
 	finalizeClientEndpointResolverOptions(&options)
-
-	resolveCredentialProvider(&options)
 
 	finalizeOperationEndpointAuthResolver(&options)
 
@@ -413,54 +408,6 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 	return retry.AddRetryMiddlewares(stack, mo)
 }
 
-func resolveCredentialProvider(o *Options) {
-	if o.Credentials == nil {
-		return
-	}
-
-	if _, ok := o.Credentials.(v4a.CredentialsProvider); ok {
-		return
-	}
-
-	if aws.IsCredentialsProvider(o.Credentials, (*aws.AnonymousCredentials)(nil)) {
-		return
-	}
-
-	o.Credentials = &v4a.SymmetricCredentialAdaptor{SymmetricProvider: o.Credentials}
-}
-
-func swapWithCustomHTTPSignerMiddleware(stack *middleware.Stack, o Options) error {
-	mw := ebcust.NewSignHTTPRequestMiddleware(ebcust.SignHTTPRequestMiddlewareOptions{
-		CredentialsProvider: o.Credentials,
-		V4Signer:            o.HTTPSignerV4,
-		V4aSigner:           o.httpSignerV4a,
-		LogSigning:          o.ClientLogMode.IsSigning(),
-	})
-
-	return ebcust.RegisterSigningMiddleware(stack, mw)
-}
-
-type httpSignerV4a interface {
-	SignHTTP(ctx context.Context, credentials v4a.Credentials, r *http.Request, payloadHash,
-		service string, regionSet []string, signingTime time.Time,
-		optFns ...func(*v4a.SignerOptions)) error
-}
-
-func resolveHTTPSignerV4a(o *Options) {
-	if o.httpSignerV4a != nil {
-		return
-	}
-	o.httpSignerV4a = newDefaultV4aSigner(*o)
-}
-
-func newDefaultV4aSigner(o Options) *v4a.Signer {
-	return v4a.NewSigner(func(so *v4a.SignerOptions) {
-		so.Logger = o.Logger
-		so.LogSigning = o.ClientLogMode.IsSigning()
-		so.DisableURIPathEscaping = false
-	})
-}
-
 // resolves dual-stack endpoint configuration
 func resolveUseDualStackEndpoint(cfg aws.Config, o *Options) error {
 	if len(cfg.ConfigSources) == 0 {
@@ -489,6 +436,26 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 		o.EndpointOptions.UseFIPSEndpoint = value
 	}
 	return nil
+}
+
+type httpSignerV4a interface {
+	SignHTTP(ctx context.Context, credentials v4a.Credentials, r *http.Request, payloadHash,
+		service string, regionSet []string, signingTime time.Time,
+		optFns ...func(*v4a.SignerOptions)) error
+}
+
+func resolveHTTPSignerV4a(o *Options) {
+	if o.httpSignerV4a != nil {
+		return
+	}
+	o.httpSignerV4a = newDefaultV4aSigner(*o)
+}
+
+func newDefaultV4aSigner(o Options) *v4a.Signer {
+	return v4a.NewSigner(func(so *v4a.SignerOptions) {
+		so.Logger = o.Logger
+		so.LogSigning = o.ClientLogMode.IsSigning()
+	})
 }
 
 func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
