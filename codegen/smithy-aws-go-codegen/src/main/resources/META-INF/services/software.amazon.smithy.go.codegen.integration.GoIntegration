@@ -40,7 +40,6 @@ software.amazon.smithy.aws.go.codegen.customization.S3PaginationExtensions
 software.amazon.smithy.aws.go.codegen.AwsHttpPresignURLClientGenerator
 software.amazon.smithy.aws.go.codegen.ResolveClientConfigFromSources
 software.amazon.smithy.aws.go.codegen.customization.S3GetBucketLocation
-software.amazon.smithy.aws.go.codegen.customization.S3SignatureVersion4a
 software.amazon.smithy.aws.go.codegen.RequestResponseLogging
 software.amazon.smithy.aws.go.codegen.customization.S3AddPutObjectUnseekableBodyDoc
 software.amazon.smithy.aws.go.codegen.customization.BackfillEc2UnboxedToBoxedShapes

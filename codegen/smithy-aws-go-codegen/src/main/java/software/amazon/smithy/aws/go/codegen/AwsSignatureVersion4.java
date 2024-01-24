@@ -17,6 +17,8 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.List;
 import java.util.Map;
+
+import software.amazon.smithy.aws.traits.auth.SigV4ATrait;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -153,5 +155,11 @@ public final class AwsSignatureVersion4 implements GoIntegration {
     public static boolean hasSigV4AuthScheme(Model model, ServiceShape service, OperationShape operation) {
         Map<ShapeId, Trait> auth = ServiceIndex.of(model).getEffectiveAuthSchemes(service.getId(), operation.getId());
         return auth.containsKey(SigV4Trait.ID) && !operation.hasTrait(OptionalAuthTrait.class);
+    }
+
+    public static boolean hasSigV4X(Model model, ServiceShape service, OperationShape operation) {
+        var auth = ServiceIndex.of(model)
+                .getEffectiveAuthSchemes(service.getId(), operation.getId());
+        return auth.containsKey(SigV4Trait.ID) || auth.containsKey(SigV4ATrait.ID);
     }
 }
