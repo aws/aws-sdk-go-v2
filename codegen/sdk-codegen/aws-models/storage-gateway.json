@@ -4392,7 +4392,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a description of the specified Amazon Resource Name (ARN) of virtual tapes. If a\n            <code>TapeARN</code> is not specified, returns a description of all virtual tapes\n         associated with the specified gateway. This operation is only supported in the tape gateway\n         type.</p>",
+                "smithy.api#documentation": "<p>Returns a description of virtual tapes that correspond to the specified Amazon Resource\n         Names (ARNs). If <code>TapeARN</code> is not specified, returns a description of the\n         virtual tapes associated with the specified gateway. This operation is only supported for\n         the tape gateway type.</p>\n         <p>The operation supports pagination. By default, the operation returns a maximum of up to\n         100 tapes. You can optionally specify the <code>Limit</code> field in the body to limit the\n         number of tapes in the response. If the number of tapes returned in the response is\n         truncated, the response includes a <code>Marker</code> field. You can use this\n            <code>Marker</code> value in your subsequent request to retrieve the next set of\n         tapes.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To describe virtual tape(s) associated with gateway",
@@ -4520,6 +4520,22 @@
                             ],
                             "UploadBufferUsedInBytes": 161061273600,
                             "UploadBufferAllocatedInBytes": 0
+                        }
+                    },
+                    {
+                        "title": "To describe upload buffer of a gateway",
+                        "documentation": "Returns information about the upload buffer of a gateway including disk IDs and the amount of upload buffer space allocated and used.",
+                        "input": {
+                            "GatewayARN": "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"
+                        },
+                        "output": {
+                            "GatewayARN": "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B",
+                            "DiskIds": [
+                                "pci-0000:03:00.0-scsi-0:0:0:0",
+                                "pci-0000:04:00.0-scsi-0:1:0:0"
+                            ],
+                            "UploadBufferUsedInBytes": 0,
+                            "UploadBufferAllocatedInBytes": 161061273600
                         }
                     }
                 ]
@@ -5962,6 +5978,18 @@
                     "target": "com.amazonaws.storagegateway#HostEnvironmentId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for the specific instance of the host platform running the gateway.\n         This value is only available for certain host environments, and its format depends on the\n         host environment type.</p>"
+                    }
+                },
+                "DeprecationDate": {
+                    "target": "com.amazonaws.storagegateway#DeprecationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date after which this gateway will not receive software updates for new features and bug\n         fixes.</p>"
+                    }
+                },
+                "SoftwareVersion": {
+                    "target": "com.amazonaws.storagegateway#SoftwareVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the software running on the gateway appliance.</p>"
                     }
                 }
             },
@@ -7448,7 +7476,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends you notification through CloudWatch Events when all files written to your file\n         share have been uploaded to S3. Amazon S3.</p>\n         <p>Storage Gateway can send a notification through Amazon CloudWatch Events when all\n         files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you\n         make a request for notification. When the upload is done, Storage Gateway sends you\n         notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to\n         send the notification through event targets such as Amazon SNS or Lambda function. This operation is only supported for S3 File Gateways.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification\">Getting\n            file upload notification</a> in the <i>Amazon S3 File Gateway User\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Sends you notification through CloudWatch Events when all files written to your file\n         share have been uploaded to Amazon S3.</p>\n         <p>Storage Gateway can send a notification through Amazon CloudWatch Events when all\n         files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you\n         make a request for notification. When the upload is done, Storage Gateway sends you\n         notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to\n         send the notification through event targets such as Amazon SNS or Lambda function. This operation is only supported for S3 File Gateways.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification\">Getting\n            file upload notification</a> in the <i>Amazon S3 File Gateway User\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.storagegateway#NotifyWhenUploadedInput": {
@@ -7707,7 +7735,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Refreshes the cached inventory of objects for the specified file share. This operation\n         finds objects in the Amazon S3 bucket that were added, removed, or replaced since\n         the gateway last listed the bucket's contents and cached the results. This operation\n         does not import files into the S3 File Gateway cache storage. It only updates the cached\n         inventory to reflect changes in the inventory of the objects in the S3 bucket. This\n         operation is only supported in the S3 File Gateway types.</p>\n         <p>You can subscribe to be notified through an Amazon CloudWatch event when your\n            <code>RefreshCache</code> operation completes. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>. This operation is Only supported for S3 File Gateways.</p>\n         <p>When this API is called, it only initiates the refresh operation. When the API call\n         completes and returns a success code, it doesn't necessarily mean that the file\n         refresh has completed. You should use the refresh-complete notification to determine that\n         the operation has completed before you check for new files on the gateway file share. You\n         can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code>\n         operation completes.</p>\n         <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two\n         refreshes at any time. We recommend using the refresh-complete CloudWatch event\n         notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>Wait at least 60 seconds between consecutive RefreshCache API requests.</p>\n               </li>\n               <li>\n                  <p>If you invoke the RefreshCache API when two requests are already being\n                  processed, any new request will cause an\n                     <code>InvalidGatewayRequestException</code> error because too many requests\n                  were sent to the server.</p>\n               </li>\n            </ul>\n         </important>\n         <note>\n            <p>The S3 bucket name does not need to be included when entering the list of folders in\n            the FolderList parameter.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Refreshes the cached inventory of objects for the specified file share. This operation\n         finds objects in the Amazon S3 bucket that were added, removed, or replaced since\n         the gateway last listed the bucket's contents and cached the results. This operation\n         does not import files into the S3 File Gateway cache storage. It only updates the cached\n         inventory to reflect changes in the inventory of the objects in the S3 bucket. This\n         operation is only supported in the S3 File Gateway types.</p>\n         <p>You can subscribe to be notified through an Amazon CloudWatch event when your\n            <code>RefreshCache</code> operation completes. For more information, see <a href=\"https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification\">Getting\n            notified about file operations</a> in the <i>Amazon S3 File Gateway User\n            Guide</i>. This operation is Only supported for S3 File Gateways.</p>\n         <p>When this API is called, it only initiates the refresh operation. When the API call\n         completes and returns a success code, it doesn't necessarily mean that the file\n         refresh has completed. You should use the refresh-complete notification to determine that\n         the operation has completed before you check for new files on the gateway file share. You\n         can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code>\n         operation completes.</p>\n         <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two\n         refreshes at any time. We recommend using the refresh-complete CloudWatch event\n         notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification\">Getting\n            notified about file operations</a> in the <i>Amazon S3 File Gateway User\n            Guide</i>.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>Wait at least 60 seconds between consecutive RefreshCache API requests.</p>\n               </li>\n               <li>\n                  <p>If you invoke the RefreshCache API when two requests are already being\n                  processed, any new request will cause an\n                     <code>InvalidGatewayRequestException</code> error because too many requests\n                  were sent to the server.</p>\n               </li>\n            </ul>\n         </important>\n         <note>\n            <p>The S3 bucket name does not need to be included when entering the list of folders in\n            the FolderList parameter.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification\">Getting\n            notified about file operations</a> in the <i>Amazon S3 File Gateway User\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.storagegateway#RefreshCacheInput": {
@@ -8455,7 +8483,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Shuts down a gateway. To specify which gateway to shut down, use the Amazon Resource\n         Name (ARN) of the gateway in the body of your request.</p>\n         <p>The operation shuts down the gateway service component running in the gateway's\n         virtual machine (VM) and not the host VM.</p>\n         <note>\n            <p>If you want to shut down the VM, it is recommended that you first shut down the\n            gateway component in the VM to avoid unpredictable conditions.</p>\n         </note>\n         <p>After the gateway is shutdown, you cannot call any other API except <a>StartGateway</a>, <a>DescribeGatewayInformation</a>, and <a>ListGateways</a>. For more information, see <a>ActivateGateway</a>.\n         Your applications cannot read from or write to the gateway's storage volumes, and\n         there are no snapshots taken.</p>\n         <note>\n            <p>When you make a shutdown request, you will get a <code>200 OK</code> success response\n            immediately. However, it might take some time for the gateway to shut down. You can call\n            the <a>DescribeGatewayInformation</a> API to check the status. For more\n            information, see <a>ActivateGateway</a>.</p>\n         </note>\n         <p>If do not intend to use the gateway again, you must delete the gateway (using <a>DeleteGateway</a>) to no longer pay software charges associated with the\n         gateway.</p>",
+                "smithy.api#documentation": "<p>Shuts down a Tape Gateway or Volume Gateway. To specify which gateway to shut down, use\n         the Amazon Resource Name (ARN) of the gateway in the body of your request.</p>\n         <note>\n            <p>This API action cannot be used to shut down S3 File Gateway or FSx File\n            Gateway.</p>\n         </note>\n         <p>The operation shuts down the gateway service component running in the gateway's\n         virtual machine (VM) and not the host VM.</p>\n         <note>\n            <p>If you want to shut down the VM, it is recommended that you first shut down the\n            gateway component in the VM to avoid unpredictable conditions.</p>\n         </note>\n         <p>After the gateway is shutdown, you cannot call any other API except <a>StartGateway</a>, <a>DescribeGatewayInformation</a>, and <a>ListGateways</a>. For more information, see <a>ActivateGateway</a>.\n         Your applications cannot read from or write to the gateway's storage volumes, and\n         there are no snapshots taken.</p>\n         <note>\n            <p>When you make a shutdown request, you will get a <code>200 OK</code> success response\n            immediately. However, it might take some time for the gateway to shut down. You can call\n            the <a>DescribeGatewayInformation</a> API to check the status. For more\n            information, see <a>ActivateGateway</a>.</p>\n         </note>\n         <p>If do not intend to use the gateway again, you must delete the gateway (using <a>DeleteGateway</a>) to no longer pay software charges associated with the\n         gateway.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To shut down a gateway service",
@@ -9003,7 +9031,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -9046,7 +9073,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -9059,7 +9087,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -9073,7 +9100,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -9096,7 +9122,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -9131,7 +9156,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -9142,14 +9166,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -9163,14 +9189,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -9179,11 +9203,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -9194,14 +9218,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -9215,7 +9241,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -9235,7 +9260,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -9246,14 +9270,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -9264,9 +9290,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
