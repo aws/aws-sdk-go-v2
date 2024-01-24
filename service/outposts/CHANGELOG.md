@@ -1,3 +1,7 @@
+# v1.35.0 (2024-01-24)
+
+* **Feature**: DeviceSerialNumber parameter is now optional in StartConnection API
+
 # v1.34.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

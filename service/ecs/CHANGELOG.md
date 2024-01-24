@@ -1,3 +1,7 @@
+# v1.38.1 (2024-01-24)
+
+* **Documentation**: Documentation updates for Amazon ECS.
+
 # v1.38.0 (2024-01-22)
 
 * **Feature**: This release adds support for Transport Layer Security (TLS) and Configurable Timeout to ECS Service Connect. TLS facilitates privacy and data security for inter-service communications, while Configurable Timeout allows customized per-request timeout and idle timeout for Service Connect services.

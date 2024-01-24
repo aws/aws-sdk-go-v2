@@ -1,3 +1,7 @@
+# v1.145.0 (2024-01-24)
+
+* **Feature**: Introduced a new clientToken request parameter on CreateNetworkAcl and CreateRouteTable APIs. The clientToken parameter allows idempotent operations on the APIs.
+
 # v1.144.1 (2024-01-22)
 
 * **Documentation**: Documentation updates for Amazon EC2.

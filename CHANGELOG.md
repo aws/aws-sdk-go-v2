@@ -1,3 +1,20 @@
+# Release (2024-01-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.145.0](service/ec2/CHANGELOG.md#v11450-2024-01-24)
+  * **Feature**: Introduced a new clientToken request parameter on CreateNetworkAcl and CreateRouteTable APIs. The clientToken parameter allows idempotent operations on the APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.38.1](service/ecs/CHANGELOG.md#v1381-2024-01-24)
+  * **Documentation**: Documentation updates for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.35.0](service/outposts/CHANGELOG.md#v1350-2024-01-24)
+  * **Feature**: DeviceSerialNumber parameter is now optional in StartConnection API
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.68.0](service/rds/CHANGELOG.md#v1680-2024-01-24)
+  * **Feature**: This release adds support for Aurora Limitless Database.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.25.0](service/storagegateway/CHANGELOG.md#v1250-2024-01-24)
+  * **Feature**: Add DeprecationDate and SoftwareVersion to response of ListGateways.
+
 # Release (2024-01-23)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.68.0 (2024-01-24)
+
+* **Feature**: This release adds support for Aurora Limitless Database.
+
 # v1.67.0 (2024-01-22)
 
 * **Feature**: Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS CreateDBCluster API method. This provides enhanced error handling, ensuring a more robust experience when creating database clusters with insufficient instance capacity.

@@ -1,8 +1,0 @@
-{
-    "id": "6b8bfd62-832a-429c-af33-ec3e5f7f740f",
-    "type": "feature",
-    "description": "DeviceSerialNumber parameter is now optional in StartConnection API",
-    "modules": [
-        "service/outposts"
-    ]
-}

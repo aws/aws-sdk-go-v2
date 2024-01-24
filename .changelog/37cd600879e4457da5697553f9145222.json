@@ -1,8 +1,0 @@
-{
-    "id": "37cd6008-79e4-457d-a569-7553f9145222",
-    "type": "feature",
-    "description": "Introduced a new clientToken request parameter on CreateNetworkAcl and CreateRouteTable APIs. The clientToken parameter allows idempotent operations on the APIs.",
-    "modules": [
-        "service/ec2"
-    ]
-}
