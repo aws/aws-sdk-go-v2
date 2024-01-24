@@ -642,6 +642,9 @@ type DBCluster struct {
 	// The latest time to which a database can be restored with point-in-time restore.
 	LatestRestorableTime *time.Time
 
+	// The details for Aurora Limitless Database.
+	LimitlessDatabase *LimitlessDatabase
+
 	// Indicates whether an Aurora DB cluster has in-cluster write forwarding enabled,
 	// not enabled, requested, or is in the process of enabling it.
 	LocalWriteForwardingStatus LocalWriteForwardingStatus
@@ -2294,6 +2297,52 @@ type DBSecurityGroupMembership struct {
 	noSmithyDocumentSerde
 }
 
+type DBShardGroup struct {
+
+	// Specifies whether to create standby instances for the DB shard group. Valid
+	// values are the following:
+	//   - 0 - Creates a single, primary DB instance for each physical shard. This is
+	//   the default value, and the only one supported for the preview.
+	//   - 1 - Creates a primary DB instance and a standby instance in a different
+	//   Availability Zone (AZ) for each physical shard.
+	//   - 2 - Creates a primary DB instance and two standby instances in different
+	//   AZs for each physical shard.
+	ComputeRedundancy *int32
+
+	// The name of the primary DB cluster for the DB shard group.
+	DBClusterIdentifier *string
+
+	// The name of the DB shard group.
+	DBShardGroupIdentifier *string
+
+	// The Amazon Web Services Region-unique, immutable identifier for the DB shard
+	// group.
+	DBShardGroupResourceId *string
+
+	// The connection endpoint for the DB shard group.
+	Endpoint *string
+
+	// The maximum capacity of the DB shard group in Aurora capacity units (ACUs).
+	MaxACU *float64
+
+	// Indicates whether the DB shard group is publicly accessible. When the DB shard
+	// group is publicly accessible, its Domain Name System (DNS) endpoint resolves to
+	// the private IP address from within the DB shard group's virtual private cloud
+	// (VPC). It resolves to the public IP address from outside of the DB shard group's
+	// VPC. Access to the DB shard group is ultimately controlled by the security group
+	// it uses. That public access isn't permitted if the security group assigned to
+	// the DB shard group doesn't permit it. When the DB shard group isn't publicly
+	// accessible, it is an internal DB shard group with a DNS name that resolves to a
+	// private IP address. For more information, see CreateDBShardGroup . This setting
+	// is only for Aurora Limitless Database.
+	PubliclyAccessible *bool
+
+	// The status of the DB shard group.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the details of an Amazon RDS DB snapshot. This data type is used as a
 // response element in the DescribeDBSnapshots action.
 type DBSnapshot struct {
@@ -3055,6 +3104,19 @@ type IssueDetails struct {
 	// A detailed description of the issue when the recommendation category is
 	// performance .
 	PerformanceIssueDetails *PerformanceIssueDetails
+
+	noSmithyDocumentSerde
+}
+
+// Contains details for Aurora Limitless Database.
+type LimitlessDatabase struct {
+
+	// The minimum required capacity for Aurora Limitless Database in Aurora capacity
+	// units (ACUs).
+	MinRequiredACU *float64
+
+	// The status of Aurora Limitless Database.
+	Status LimitlessDatabaseStatus
 
 	noSmithyDocumentSerde
 }

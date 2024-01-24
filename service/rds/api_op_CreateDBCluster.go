@@ -190,6 +190,11 @@ type CreateDBClusterInput struct {
 	// in the Amazon Aurora User Guide. Valid for Cluster Type: Aurora DB clusters only
 	EnableIAMDatabaseAuthentication *bool
 
+	// Specifies whether to enable Aurora Limitless Database. You must enable Aurora
+	// Limitless Database to create a DB shard group. Valid for: Aurora DB clusters
+	// only
+	EnableLimitlessDatabase *bool
+
 	// Specifies whether read replicas can forward write operations to the writer DB
 	// instance in the DB cluster. By default, write operations aren't allowed on
 	// reader DB instances. Valid for: Aurora DB clusters only

@@ -140,7 +140,9 @@ type AutoScalingGroupProviderUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing the networking details for a task or service.
+// An object representing the networking details for a task or service. For
+// example
+// awsvpcConfiguration={subnets=["subnet-12344321"],securityGroups=["sg-12344321"]}
 type AwsVpcConfiguration struct {
 
 	// The IDs of the subnets associated with the task or service. There's a limit of
@@ -1034,7 +1036,7 @@ type ContainerDefinition struct {
 	// system with the exception of the nofile resource limit parameter which Fargate
 	// overrides. The nofile resource limit sets a restriction on the number of open
 	// files that a container can use. The default nofile soft limit is 1024 and the
-	// default hard limit is 4096 . This parameter requires version 1.18 of the Docker
+	// default hard limit is 65535 . This parameter requires version 1.18 of the Docker
 	// Remote API or greater on your container instance. To check the Docker Remote API
 	// version on your container instance, log in to your container instance and run
 	// the following command: sudo docker version --format '{{.Server.APIVersion}}'
@@ -1091,6 +1093,10 @@ type ContainerDefinition struct {
 // Fargate launch type, the task or service requires the following platforms:
 //   - Linux platform version 1.3.0 or later.
 //   - Windows platform version 1.0.0 or later.
+//
+// For more information about how to create a container dependency, see Container
+// dependency (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency)
+// in the Amazon Elastic Container Service Developer Guide.
 type ContainerDependency struct {
 
 	// The dependency condition of the container. The following are the available
@@ -1551,7 +1557,7 @@ type DeploymentConfiguration struct {
 	//   healthy when all essential containers within the task have passed their health
 	//   checks. The amount of time the service scheduler can wait for is determined by
 	//   the container health check settings.
-	// For services are that do use a load balancer, the following should be noted:
+	// For services that do use a load balancer, the following should be noted:
 	//   - If a task has no essential containers with a health check defined, the
 	//   service scheduler will wait for the load balancer target group health check to
 	//   return a healthy status before counting the task towards the minimum healthy
@@ -3270,7 +3276,8 @@ type ServiceConnectService struct {
 	// Connect.
 	Timeout *TimeoutConfiguration
 
-	// An object that represents the configuration for Service Connect TLS.
+	// A reference to an object that represents a Transport Layer Security (TLS)
+	// configuration.
 	Tls *ServiceConnectTlsConfiguration
 
 	noSmithyDocumentSerde
@@ -3764,13 +3771,7 @@ type Task struct {
 	// The stop code indicating why a task was stopped. The stoppedReason might
 	// contain additional details. For more information about stop code, see Stopped
 	// tasks error codes (https://docs.aws.amazon.com/AmazonECS/latest/userguide/stopped-task-error-codes.html)
-	// in the Amazon ECS User Guide. The following are valid values:
-	//   - TaskFailedToStart
-	//   - EssentialContainerExited
-	//   - UserInitiated
-	//   - TerminationNotice
-	//   - ServiceSchedulerInitiated
-	//   - SpotInterruption
+	// in the Amazon ECS User Guide.
 	StopCode TaskStopCode
 
 	// The Unix timestamp for the time when the task was stopped. More specifically,
@@ -4429,7 +4430,7 @@ type Tmpfs struct {
 // the exception of the nofile resource limit parameter which Fargate overrides.
 // The nofile resource limit sets a restriction on the number of open files that a
 // container can use. The default nofile soft limit is 1024 and the default hard
-// limit is 4096 . You can specify the ulimit settings for a container in a task
+// limit is 65535 . You can specify the ulimit settings for a container in a task
 // definition.
 type Ulimit struct {
 

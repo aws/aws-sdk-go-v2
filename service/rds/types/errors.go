@@ -1393,6 +1393,59 @@ func (e *DBSecurityGroupQuotaExceededFault) ErrorCode() string {
 }
 func (e *DBSecurityGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified DB shard group name must be unique in your Amazon Web Services
+// account in the specified Amazon Web Services Region.
+type DBShardGroupAlreadyExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DBShardGroupAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBShardGroupAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBShardGroupAlreadyExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DBShardGroupAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DBShardGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified DB shard group name wasn't found.
+type DBShardGroupNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DBShardGroupNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBShardGroupNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBShardGroupNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DBShardGroupNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DBShardGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // DBSnapshotIdentifier is already used by an existing snapshot.
 type DBSnapshotAlreadyExistsFault struct {
 	Message *string
@@ -2537,6 +2590,32 @@ func (e *InvalidDBSecurityGroupStateFault) ErrorCode() string {
 }
 func (e *InvalidDBSecurityGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The DB shard group must be in the available state.
+type InvalidDBShardGroupStateFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidDBShardGroupStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDBShardGroupStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDBShardGroupStateFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidDBShardGroupState"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidDBShardGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The state of the DB snapshot doesn't allow deletion.
 type InvalidDBSnapshotStateFault struct {
 	Message *string
@@ -2804,6 +2883,33 @@ func (e *InvalidIntegrationStateFault) ErrorCode() string {
 }
 func (e *InvalidIntegrationStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The maximum capacity of the DB shard group must be 48-7168 Aurora capacity
+// units (ACUs).
+type InvalidMaxAcuFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidMaxAcuFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidMaxAcuFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidMaxAcuFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidMaxAcu"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidMaxAcuFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The option group isn't in the available state.
 type InvalidOptionGroupStateFault struct {
 	Message *string
@@ -2989,6 +3095,33 @@ func (e *KMSKeyNotAccessibleFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The maximum number of DB shard groups for your Amazon Web Services account in
+// the specified Amazon Web Services Region has been reached.
+type MaxDBShardGroupLimitReached struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MaxDBShardGroupLimitReached) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MaxDBShardGroupLimitReached) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MaxDBShardGroupLimitReached) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MaxDBShardGroupLimitReached"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MaxDBShardGroupLimitReached) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The network type is invalid for the DB instance. Valid nework type values are
 // IPV4 and DUAL .
@@ -3759,3 +3892,29 @@ func (e *TenantDatabaseQuotaExceededFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TenantDatabaseQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified DB engine version isn't supported for Aurora Limitless Database.
+type UnsupportedDBEngineVersionFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnsupportedDBEngineVersionFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnsupportedDBEngineVersionFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnsupportedDBEngineVersionFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnsupportedDBEngineVersion"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnsupportedDBEngineVersionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

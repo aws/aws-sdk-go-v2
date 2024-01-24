@@ -387,6 +387,10 @@ type FileSystemAssociationSummary struct {
 // Describes a gateway object.
 type GatewayInfo struct {
 
+	// Date after which this gateway will not receive software updates for new
+	// features and bug fixes.
+	DeprecationDate *string
+
 	// The ID of the Amazon EC2 instance that was used to launch the gateway.
 	Ec2InstanceId *string
 
@@ -418,6 +422,9 @@ type GatewayInfo struct {
 	// gateway. This value is only available for certain host environments, and its
 	// format depends on the host environment type.
 	HostEnvironmentId *string
+
+	// The version number of the software running on the gateway appliance.
+	SoftwareVersion *string
 
 	noSmithyDocumentSerde
 }

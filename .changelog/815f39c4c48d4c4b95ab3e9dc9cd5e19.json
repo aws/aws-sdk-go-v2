@@ -1,0 +1,8 @@
+{
+    "id": "815f39c4-c48d-4c4b-95ab-3e9dc9cd5e19",
+    "type": "feature",
+    "description": "This release adds support for Aurora Limitless Database.",
+    "modules": [
+        "service/rds"
+    ]
+}

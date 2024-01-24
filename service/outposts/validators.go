@@ -817,9 +817,6 @@ func validateOpStartConnectionInput(v *StartConnectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartConnectionInput"}
-	if v.DeviceSerialNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceSerialNumber"))
-	}
 	if v.AssetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
 	}

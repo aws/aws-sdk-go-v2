@@ -51,7 +51,7 @@ type StopTaskInput struct {
 	// An optional message specified when a task is stopped. For example, if you're
 	// using a custom scheduler, you can use this parameter to specify the reason for
 	// stopping the task here, and the message appears in subsequent DescribeTasks API
-	// operations on this task. Up to 255 characters are allowed in this message.
+	// operations on this task.
 	Reason *string
 
 	noSmithyDocumentSerde

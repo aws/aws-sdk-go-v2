@@ -142777,6 +142777,19 @@ func awsEc2query_deserializeOpDocumentCreateNetworkAclOutput(v **CreateNetworkAc
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("clientToken", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ClientToken = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("networkAcl", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentNetworkAcl(&sv.NetworkAcl, nodeDecoder); err != nil {
@@ -143282,6 +143295,19 @@ func awsEc2query_deserializeOpDocumentCreateRouteTableOutput(v **CreateRouteTabl
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("clientToken", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ClientToken = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("routeTable", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentRouteTable(&sv.RouteTable, nodeDecoder); err != nil {
