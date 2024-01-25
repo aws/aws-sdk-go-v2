@@ -1,3 +1,7 @@
+# v1.34.0 (2024-01-25)
+
+* **Feature**: This release adds support for IPv6-only instance plans.
+
 # v1.33.0 (2024-01-04)
 
 * **Feature**: This release adds support to set up an HTTPS endpoint on an instance.

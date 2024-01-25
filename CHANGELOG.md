@@ -1,3 +1,11 @@
+# Release (2024-01-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.26.0](service/acmpca/CHANGELOG.md#v1260-2024-01-25)
+  * **Feature**: AWS Private CA now supports an option to omit the CDP extension from issued certificates, when CRL revocation is enabled.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.34.0](service/lightsail/CHANGELOG.md#v1340-2024-01-25)
+  * **Feature**: This release adds support for IPv6-only instance plans.
+
 # Release (2024-01-24)
 
 ## General Highlights

@@ -55,7 +55,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.24.7
 	github.com/aws/aws-sdk-go-v2/service/kms v1.27.9
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.49.7
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.33.0
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.18.6
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.19.6

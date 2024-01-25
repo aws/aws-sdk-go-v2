@@ -1,8 +1,0 @@
-{
-    "id": "d428af5a-e4a0-4553-a652-5ec1c396163a",
-    "type": "feature",
-    "description": "This release adds support for IPv6-only instance plans.",
-    "modules": [
-        "service/lightsail"
-    ]
-}
