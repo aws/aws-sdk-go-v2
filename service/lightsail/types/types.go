@@ -628,6 +628,10 @@ type Bundle struct {
 	// The price in US dollars ( 5.0 ) of the bundle.
 	Price *float32
 
+	// An integer that indicates the public ipv4 address count included in the bundle,
+	// the value is either 0 or 1.
+	PublicIpv4AddressCount *int32
+
 	// The amount of RAM in GB ( 2.0 ).
 	RamSizeInGb *float32
 
@@ -2052,6 +2056,9 @@ type InstanceAccessDetails struct {
 
 	// The public IP address of the Amazon Lightsail instance.
 	IpAddress *string
+
+	// The IPv6 address of the Amazon Lightsail instance.
+	Ipv6Addresses []string
 
 	// For RDP access, the password for your Amazon Lightsail instance. Password will
 	// be an empty string if the password for your new instance is not ready yet. When

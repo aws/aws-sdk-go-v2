@@ -22678,6 +22678,19 @@ func awsAwsjson11_deserializeDocumentBundle(v **types.Bundle, value interface{})
 				}
 			}
 
+		case "publicIpv4AddressCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PublicIpv4AddressCount = ptr.Int32(int32(i64))
+			}
+
 		case "ramSizeInGb":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -27322,6 +27335,11 @@ func awsAwsjson11_deserializeDocumentInstanceAccessDetails(v **types.InstanceAcc
 					return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
 				}
 				sv.IpAddress = ptr.String(jtv)
+			}
+
+		case "ipv6Addresses":
+			if err := awsAwsjson11_deserializeDocumentIpv6AddressList(&sv.Ipv6Addresses, value); err != nil {
+				return err
 			}
 
 		case "password":

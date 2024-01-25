@@ -251,12 +251,14 @@ type CertificateAuthorityConfiguration struct {
 // supported. You can enable CRLs for your new or an existing private CA by setting
 // the Enabled parameter to true . Your private CA writes CRLs to an S3 bucket that
 // you specify in the S3BucketName parameter. You can hide the name of your bucket
-// by specifying a value for the CustomCname parameter. Your private CA copies the
-// CNAME or the S3 bucket name to the CRL Distribution Points extension of each
-// certificate it issues. Your S3 bucket policy must give write permission to
-// Amazon Web Services Private CA. Amazon Web Services Private CA assets that are
-// stored in Amazon S3 can be protected with encryption. For more information, see
-// Encrypting Your CRLs (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption)
+// by specifying a value for the CustomCname parameter. Your private CA by default
+// copies the CNAME or the S3 bucket name to the CRL Distribution Points extension
+// of each certificate it issues. If you want to configure this default behavior to
+// be something different, you can set the
+// CrlDistributionPointExtensionConfiguration parameter. Your S3 bucket policy must
+// give write permission to Amazon Web Services Private CA. Amazon Web Services
+// Private CA assets that are stored in Amazon S3 can be protected with encryption.
+// For more information, see Encrypting Your CRLs (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption)
 // . Your private CA uses the value in the ExpirationInDays parameter to calculate
 // the nextUpdate field in the CRL. The CRL is refreshed prior to a certificate's
 // expiration date or when a certificate is revoked. When a certificate is revoked,
@@ -302,6 +304,12 @@ type CrlConfiguration struct {
 	// This member is required.
 	Enabled *bool
 
+	// Configures the behavior of the CRL Distribution Point extension for
+	// certificates issued by your certificate authority. If this field is not
+	// provided, then the CRl Distribution Point Extension will be present and contain
+	// the default CRL URL.
+	CrlDistributionPointExtensionConfiguration *CrlDistributionPointExtensionConfiguration
+
 	// Name inserted into the certificate CRL Distribution Points extension that
 	// enables the use of an alias for the CRL distribution point. Use this value if
 	// you don't want the name of your S3 bucket to be public. The content of a
@@ -337,6 +345,28 @@ type CrlConfiguration struct {
 	// the S3 bucket (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-bpa)
 	// .
 	S3ObjectAcl S3ObjectAcl
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration information for the default behavior of the CRL
+// Distribution Point (CDP) extension in certificates issued by your CA. This
+// extension contains a link to download the CRL, so you can check whether a
+// certificate has been revoked. To choose whether you want this extension omitted
+// or not in certificates issued by your CA, you can set the OmitExtension
+// parameter.
+type CrlDistributionPointExtensionConfiguration struct {
+
+	// Configures whether the CRL Distribution Point extension should be populated
+	// with the default URL to the CRL. If set to true , then the CDP extension will
+	// not be present in any certificates issued by that CA unless otherwise specified
+	// through CSR or API passthrough. Only set this if you have another way to
+	// distribute the CRL Distribution Points ffor certificates issued by your CA, such
+	// as the Matter Distributed Compliance Ledger This configuration cannot be enabled
+	// with a custom CNAME set.
+	//
+	// This member is required.
+	OmitExtension *bool
 
 	noSmithyDocumentSerde
 }

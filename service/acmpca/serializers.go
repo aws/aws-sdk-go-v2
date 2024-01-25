@@ -1494,6 +1494,13 @@ func awsAwsjson11_serializeDocumentCrlConfiguration(v *types.CrlConfiguration, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.CrlDistributionPointExtensionConfiguration != nil {
+		ok := object.Key("CrlDistributionPointExtensionConfiguration")
+		if err := awsAwsjson11_serializeDocumentCrlDistributionPointExtensionConfiguration(v.CrlDistributionPointExtensionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CustomCname != nil {
 		ok := object.Key("CustomCname")
 		ok.String(*v.CustomCname)
@@ -1517,6 +1524,18 @@ func awsAwsjson11_serializeDocumentCrlConfiguration(v *types.CrlConfiguration, v
 	if len(v.S3ObjectAcl) > 0 {
 		ok := object.Key("S3ObjectAcl")
 		ok.String(string(v.S3ObjectAcl))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCrlDistributionPointExtensionConfiguration(v *types.CrlDistributionPointExtensionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OmitExtension != nil {
+		ok := object.Key("OmitExtension")
+		ok.Boolean(*v.OmitExtension)
 	}
 
 	return nil

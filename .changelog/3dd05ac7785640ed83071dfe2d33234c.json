@@ -1,0 +1,8 @@
+{
+    "id": "3dd05ac7-7856-40ed-8307-1dfe2d33234c",
+    "type": "feature",
+    "description": "AWS Private CA now supports an option to omit the CDP extension from issued certificates, when CRL revocation is enabled.",
+    "modules": [
+        "service/acmpca"
+    ]
+}
