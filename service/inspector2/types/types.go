@@ -162,7 +162,8 @@ type AggregationRequestMemberImageLayerAggregation struct {
 
 func (*AggregationRequestMemberImageLayerAggregation) isAggregationRequest() {}
 
-// Returns an object with findings aggregated by AWS Lambda function.
+// Returns an object with findings aggregated by Amazon Web Services Lambda
+// function.
 type AggregationRequestMemberLambdaFunctionAggregation struct {
 	Value LambdaFunctionAggregation
 
@@ -171,7 +172,7 @@ type AggregationRequestMemberLambdaFunctionAggregation struct {
 
 func (*AggregationRequestMemberLambdaFunctionAggregation) isAggregationRequest() {}
 
-// Returns an object with findings aggregated by AWS Lambda layer.
+// Returns an object with findings aggregated by Amazon Web Services Lambda layer.
 type AggregationRequestMemberLambdaLayerAggregation struct {
 	Value LambdaLayerAggregation
 
@@ -289,7 +290,7 @@ type AggregationResponseMemberImageLayerAggregation struct {
 
 func (*AggregationResponseMemberImageLayerAggregation) isAggregationResponse() {}
 
-// An aggregation of findings by AWS Lambda function.
+// An aggregation of findings by Amazon Web Services Lambda function.
 type AggregationResponseMemberLambdaFunctionAggregation struct {
 	Value LambdaFunctionAggregationResponse
 
@@ -298,7 +299,7 @@ type AggregationResponseMemberLambdaFunctionAggregation struct {
 
 func (*AggregationResponseMemberLambdaFunctionAggregation) isAggregationResponse() {}
 
-// An aggregation of findings by AWS Lambda layer.
+// An aggregation of findings by Amazon Web Services Lambda layer.
 type AggregationResponseMemberLambdaLayerAggregation struct {
 	Value LambdaLayerAggregationResponse
 
@@ -408,12 +409,12 @@ type AutoEnable struct {
 	// This member is required.
 	Ecr *bool
 
-	// Represents whether AWS Lambda standard scans are automatically enabled for new
-	// members of your Amazon Inspector organization.
+	// Represents whether Amazon Web Services Lambda standard scans are automatically
+	// enabled for new members of your Amazon Inspector organization.
 	Lambda *bool
 
-	// Represents whether AWS Lambda code scans are automatically enabled for new
-	// members of your Amazon Inspector organization.
+	// Represents whether Lambda code scans are automatically enabled for new members
+	// of your Amazon Inspector organization.
 	LambdaCode *bool
 
 	noSmithyDocumentSerde
@@ -547,43 +548,43 @@ type AwsEcrContainerImageDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of information about the AWS Lambda function.
+// A summary of information about the Amazon Web Services Lambda function.
 type AwsLambdaFunctionDetails struct {
 
-	// The SHA256 hash of the AWS Lambda function's deployment package.
+	// The SHA256 hash of the Amazon Web Services Lambda function's deployment package.
 	//
 	// This member is required.
 	CodeSha256 *string
 
-	// The AWS Lambda function's execution role.
+	// The Amazon Web Services Lambda function's execution role.
 	//
 	// This member is required.
 	ExecutionRoleArn *string
 
-	// The name of the AWS Lambda function.
+	// The name of the Amazon Web Services Lambda function.
 	//
 	// This member is required.
 	FunctionName *string
 
-	// The runtime environment for the AWS Lambda function.
+	// The runtime environment for the Amazon Web Services Lambda function.
 	//
 	// This member is required.
 	Runtime Runtime
 
-	// The version of the AWS Lambda function.
+	// The version of the Amazon Web Services Lambda function.
 	//
 	// This member is required.
 	Version *string
 
-	// The instruction set architecture that the AWS Lambda function supports.
-	// Architecture is a string array with one of the valid values. The default
-	// architecture value is x86_64 .
+	// The instruction set architecture that the Amazon Web Services Lambda function
+	// supports. Architecture is a string array with one of the valid values. The
+	// default architecture value is x86_64 .
 	Architectures []Architecture
 
 	// The date and time that a user last updated the configuration, in ISO 8601 format (https://www.iso.org/iso-8601-date-and-time-format.html)
 	LastModifiedAt *time.Time
 
-	// The AWS Lambda function's  layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+	// The Amazon Web Services Lambda function's  layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
 	// . A Lambda function can have up to five layers.
 	Layers []string
 
@@ -591,7 +592,7 @@ type AwsLambdaFunctionDetails struct {
 	// for .zip file archive.
 	PackageType PackageType
 
-	// The AWS Lambda function's networking configuration.
+	// The Amazon Web Services Lambda function's networking configuration.
 	VpcConfig *LambdaVpcConfig
 
 	noSmithyDocumentSerde
@@ -1231,13 +1232,19 @@ type CoverageFilterCriteria struct {
 	// The Amazon ECR repository name to filter on.
 	EcrRepositoryName []CoverageStringFilter
 
-	// Returns coverage statistics for AWS Lambda functions filtered by function names.
+	// The date an image was last pulled at.
+	ImagePulledAt []CoverageDateFilter
+
+	// Returns coverage statistics for Amazon Web Services Lambda functions filtered
+	// by function names.
 	LambdaFunctionName []CoverageStringFilter
 
-	// Returns coverage statistics for AWS Lambda functions filtered by runtime.
+	// Returns coverage statistics for Amazon Web Services Lambda functions filtered
+	// by runtime.
 	LambdaFunctionRuntime []CoverageStringFilter
 
-	// Returns coverage statistics for AWS Lambda functions filtered by tag.
+	// Returns coverage statistics for Amazon Web Services Lambda functions filtered
+	// by tag.
 	LambdaFunctionTags []CoverageMapFilter
 
 	// Filters Amazon Web Services resources based on whether Amazon Inspector has
@@ -1595,13 +1602,13 @@ type Ec2Metadata struct {
 // Details about the ECR automated re-scan duration setting for your environment.
 type EcrConfiguration struct {
 
-	// The ECR automated re-scan duration defines how long an ECR image will be
-	// actively scanned by Amazon Inspector. When the number of days since an image was
-	// last pushed exceeds the automated re-scan duration the monitoring state of that
-	// image becomes inactive and all associated findings are scheduled for closure.
+	// The rescan duration configured for image push date.
 	//
 	// This member is required.
 	RescanDuration EcrRescanDuration
+
+	// The rescan duration configured for image pull date.
+	PullDateRescanDuration EcrPullDateRescanDuration
 
 	noSmithyDocumentSerde
 }
@@ -1609,8 +1616,7 @@ type EcrConfiguration struct {
 // Details about the state of the ECR scans for your environment.
 type EcrConfigurationState struct {
 
-	// An object that contains details about the state of the ECR automated re-scan
-	// setting.
+	// An object that contains details about the state of the ECR re-scan settings.
 	RescanDurationState *EcrRescanDurationState
 
 	noSmithyDocumentSerde
@@ -1618,6 +1624,9 @@ type EcrConfigurationState struct {
 
 // Information on the Amazon ECR image metadata associated with a finding.
 type EcrContainerImageMetadata struct {
+
+	// The date an image was last pulled at.
+	ImagePulledAt *time.Time
 
 	// Tags associated with the Amazon ECR image metadata.
 	Tags []string
@@ -1637,14 +1646,18 @@ type EcrRepositoryMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the state of any changes to the ECR automated re-scan duration
-// setting.
+// Details about the state of your ECR re-scan duration settings. The ECR re-scan
+// duration defines how long an ECR image will be actively scanned by Amazon
+// Inspector. When the number of days since an image was last pushed exceeds the
+// duration configured for image pull date, and the duration configured for image
+// pull date, the monitoring state of that image becomes inactive and all
+// associated findings are scheduled for closure.
 type EcrRescanDurationState struct {
 
-	// The ECR automated re-scan duration defines how long an ECR image will be
-	// actively scanned by Amazon Inspector. When the number of days since an image was
-	// last pushed exceeds the automated re-scan duration the monitoring state of that
-	// image becomes inactive and all associated findings are scheduled for closure.
+	// The rescan duration configured for image pull date.
+	PullDateRescanDuration EcrPullDateRescanDuration
+
+	// The rescan duration configured for image push date.
 	RescanDuration EcrRescanDuration
 
 	// The status of changes to the ECR automated re-scan duration.
@@ -1869,7 +1882,8 @@ type FilterCriteria struct {
 	// The EPSS score used to filter findings.
 	EpssScore []NumberFilter
 
-	// Filters the list of AWS Lambda findings by the availability of exploits.
+	// Filters the list of Amazon Web Services Lambda findings by the availability of
+	// exploits.
 	ExploitAvailable []StringFilter
 
 	// Details on the finding ARNs used to filter findings.
@@ -1893,22 +1907,24 @@ type FilterCriteria struct {
 	// The Amazon Inspector score to filter on.
 	InspectorScore []NumberFilter
 
-	// Filters the list of AWS Lambda functions by execution role.
+	// Filters the list of Amazon Web Services Lambda functions by execution role.
 	LambdaFunctionExecutionRoleArn []StringFilter
 
-	// Filters the list of AWS Lambda functions by the date and time that a user last
-	// updated the configuration, in ISO 8601 format (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// Filters the list of Amazon Web Services Lambda functions by the date and time
+	// that a user last updated the configuration, in ISO 8601 format (https://www.iso.org/iso-8601-date-and-time-format.html)
 	LambdaFunctionLastModifiedAt []DateFilter
 
-	// Filters the list of AWS Lambda functions by the function's  layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+	// Filters the list of Amazon Web Services Lambda functions by the function's
+	// layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
 	// . A Lambda function can have up to five layers.
 	LambdaFunctionLayers []StringFilter
 
-	// Filters the list of AWS Lambda functions by the name of the function.
+	// Filters the list of Amazon Web Services Lambda functions by the name of the
+	// function.
 	LambdaFunctionName []StringFilter
 
-	// Filters the list of AWS Lambda functions by the runtime environment for the
-	// Lambda function.
+	// Filters the list of Amazon Web Services Lambda functions by the runtime
+	// environment for the Lambda function.
 	LambdaFunctionRuntime []StringFilter
 
 	// Details on the date and time a finding was last seen used to filter findings.
@@ -2275,10 +2291,12 @@ type InspectorScoreDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The details that define a findings aggregation based on AWS Lambda functions.
+// The details that define a findings aggregation based on Amazon Web Services
+// Lambda functions.
 type LambdaFunctionAggregation struct {
 
-	// The AWS Lambda function names to include in the aggregation results.
+	// The Amazon Web Services Lambda function names to include in the aggregation
+	// results.
 	FunctionNames []StringFilter
 
 	// The tags to include in the aggregation results.
@@ -2287,7 +2305,8 @@ type LambdaFunctionAggregation struct {
 	// The resource IDs to include in the aggregation results.
 	ResourceIds []StringFilter
 
-	// Returns findings aggregated by AWS Lambda function runtime environments.
+	// Returns findings aggregated by Amazon Web Services Lambda function runtime
+	// environments.
 	Runtimes []StringFilter
 
 	// The finding severity to use for sorting the results.
@@ -2299,8 +2318,8 @@ type LambdaFunctionAggregation struct {
 	noSmithyDocumentSerde
 }
 
-// A response that contains the results of an AWS Lambda function finding
-// aggregation.
+// A response that contains the results of an Amazon Web Services Lambda function
+// finding aggregation.
 type LambdaFunctionAggregationResponse struct {
 
 	// The resource IDs included in the aggregation results.
@@ -2308,17 +2327,19 @@ type LambdaFunctionAggregationResponse struct {
 	// This member is required.
 	ResourceId *string
 
-	// The ID of the AWS account that owns the AWS Lambda function.
+	// The ID of the Amazon Web Services account that owns the Amazon Web Services
+	// Lambda function.
 	AccountId *string
 
-	// The AWS Lambda function names included in the aggregation results.
+	// The Amazon Web Services Lambda function names included in the aggregation
+	// results.
 	FunctionName *string
 
 	// The tags included in the aggregation results.
 	LambdaTags map[string]string
 
-	// The date that the AWS Lambda function included in the aggregation results was
-	// last changed.
+	// The date that the Amazon Web Services Lambda function included in the
+	// aggregation results was last changed.
 	LastModifiedAt *time.Time
 
 	// The runtimes included in the aggregation results.
@@ -2330,36 +2351,37 @@ type LambdaFunctionAggregationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// The AWS Lambda function metadata.
+// The Amazon Web Services Lambda function metadata.
 type LambdaFunctionMetadata struct {
 
 	// The name of a function.
 	FunctionName *string
 
-	// The resource tags on an AWS Lambda function.
+	// The resource tags on an Amazon Web Services Lambda function.
 	FunctionTags map[string]string
 
-	// The layers for an AWS Lambda function. A Lambda function can have up to five
-	// layers.
+	// The layers for an Amazon Web Services Lambda function. A Lambda function can
+	// have up to five layers.
 	Layers []string
 
-	// An AWS Lambda function's runtime.
+	// An Amazon Web Services Lambda function's runtime.
 	Runtime Runtime
 
 	noSmithyDocumentSerde
 }
 
-// The details that define a findings aggregation based on an AWS Lambda
-// function's layers.
+// The details that define a findings aggregation based on an Amazon Web Services
+// Lambda function's layers.
 type LambdaLayerAggregation struct {
 
-	// The names of the AWS Lambda functions associated with the layers.
+	// The names of the Amazon Web Services Lambda functions associated with the
+	// layers.
 	FunctionNames []StringFilter
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Lambda function layer.
 	LayerArns []StringFilter
 
-	// The resource IDs for the AWS Lambda function layers.
+	// The resource IDs for the Amazon Web Services Lambda function layers.
 	ResourceIds []StringFilter
 
 	// The finding severity to use for sorting the results.
@@ -2371,26 +2393,27 @@ type LambdaLayerAggregation struct {
 	noSmithyDocumentSerde
 }
 
-// A response that contains the results of an AWS Lambda function layer finding
-// aggregation.
+// A response that contains the results of an Amazon Web Services Lambda function
+// layer finding aggregation.
 type LambdaLayerAggregationResponse struct {
 
-	// The account ID of the AWS Lambda function layer.
+	// The account ID of the Amazon Web Services Lambda function layer.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The names of the AWS Lambda functions associated with the layers.
+	// The names of the Amazon Web Services Lambda functions associated with the
+	// layers.
 	//
 	// This member is required.
 	FunctionName *string
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Lambda function layer.
 	//
 	// This member is required.
 	LayerArn *string
 
-	// The Resource ID of the AWS Lambda function layer.
+	// The Resource ID of the Amazon Web Services Lambda function layer.
 	//
 	// This member is required.
 	ResourceId *string
@@ -2401,13 +2424,13 @@ type LambdaLayerAggregationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// The VPC security groups and subnets that are attached to an AWS Lambda
-// function. For more information, see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
+// The VPC security groups and subnets that are attached to an Amazon Web Services
+// Lambda function. For more information, see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
 // .
 type LambdaVpcConfig struct {
 
-	// The VPC security groups and subnets that are attached to an AWS Lambda
-	// function. For more information, see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
+	// The VPC security groups and subnets that are attached to an Amazon Web Services
+	// Lambda function. For more information, see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
 	// .
 	SecurityGroupIds []string
 
@@ -2854,7 +2877,8 @@ type ResourceDetails struct {
 	// in the finding.
 	AwsEcrContainerImage *AwsEcrContainerImageDetails
 
-	// A summary of the information about an AWS Lambda function affected by a finding.
+	// A summary of the information about an Amazon Web Services Lambda function
+	// affected by a finding.
 	AwsLambdaFunction *AwsLambdaFunctionDetails
 
 	noSmithyDocumentSerde
@@ -2875,10 +2899,10 @@ type ResourceFilterCriteria struct {
 	// The ECR repository names used as resource filter criteria.
 	EcrRepositoryName []ResourceStringFilter
 
-	// The AWS Lambda function name used as resource filter criteria.
+	// The Amazon Web Services Lambda function name used as resource filter criteria.
 	LambdaFunctionName []ResourceStringFilter
 
-	// The AWS Lambda function tags used as resource filter criteria.
+	// The Amazon Web Services Lambda function tags used as resource filter criteria.
 	LambdaFunctionTags []ResourceMapFilter
 
 	// The resource IDs used as resource filter criteria.
@@ -2923,7 +2947,8 @@ type ResourceScanMetadata struct {
 	// resides in.
 	EcrRepository *EcrRepositoryMetadata
 
-	// An object that contains metadata details for an AWS Lambda function.
+	// An object that contains metadata details for an Amazon Web Services Lambda
+	// function.
 	LambdaFunction *LambdaFunctionMetadata
 
 	noSmithyDocumentSerde
@@ -2968,7 +2993,7 @@ type ResourceStatus struct {
 	// This member is required.
 	Ecr Status
 
-	// The status of Amazon Inspector scanning for AWS Lambda function.
+	// The status of Amazon Inspector scanning for Amazon Web Services Lambda function.
 	Lambda Status
 
 	// The status of Amazon Inspector scanning for custom application code for Amazon
@@ -3547,8 +3572,8 @@ type VulnerablePackage struct {
 	// The code to run in your environment to update packages with a fix available.
 	Remediation *string
 
-	// The Amazon Resource Number (ARN) of the AWS Lambda function affected by a
-	// finding.
+	// The Amazon Resource Number (ARN) of the Amazon Web Services Lambda function
+	// affected by a finding.
 	SourceLambdaLayerArn *string
 
 	// The source layer hash of the vulnerable package.

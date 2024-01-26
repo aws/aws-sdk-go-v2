@@ -1,0 +1,8 @@
+{
+    "id": "f08191f6-90f7-4c34-9aef-f18b6e3837fc",
+    "type": "feature",
+    "description": "Update list and string length limits for predefined attributes.",
+    "modules": [
+        "service/connect"
+    ]
+}

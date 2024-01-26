@@ -13334,6 +13334,22 @@ func awsRestjson1_deserializeDocumentEcrContainerImageMetadata(v **types.EcrCont
 
 	for key, value := range shape {
 		switch key {
+		case "imagePulledAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ImagePulledAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateTimeTimestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
@@ -13419,6 +13435,15 @@ func awsRestjson1_deserializeDocumentEcrRescanDurationState(v **types.EcrRescanD
 
 	for key, value := range shape {
 		switch key {
+		case "pullDateRescanDuration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EcrPullDateRescanDuration to be of type string, got %T instead", value)
+				}
+				sv.PullDateRescanDuration = types.EcrPullDateRescanDuration(jtv)
+			}
+
 		case "rescanDuration":
 			if value != nil {
 				jtv, ok := value.(string)

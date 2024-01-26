@@ -8575,10 +8575,15 @@ type Model struct {
 	noSmithyDocumentSerde
 }
 
-// The access configuration file for the ML model. You can explicitly accept the
-// model end-user license agreement (EULA) within the ModelAccessConfig . For more
-// information, see End-user license agreements (https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula)
-// .
+// The access configuration file to control access to the ML model. You can
+// explicitly accept the model end-user license agreement (EULA) within the
+// ModelAccessConfig .
+//   - If you are a Jumpstart user, see the End-user license agreements (https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula)
+//     section for more details on accepting the EULA.
+//   - If you are an AutoML user, see the Optional Parameters section of Create an
+//     AutoML job to fine-tune text generation models using the API for details on
+//     How to set the EULA acceptance when fine-tuning a model using the AutoML API (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-finetune-llms.html#autopilot-llms-finetuning-api-optional-params)
+//     .
 type ModelAccessConfig struct {
 
 	// Specifies agreement to the model end-user license agreement (EULA). The
@@ -13317,7 +13322,7 @@ type S3DataSource struct {
 
 	// Depending on the value specified for the S3DataType , identifies either a key
 	// name prefix or a manifest. For example:
-	//   - A key name prefix might look like this: s3://bucketname/exampleprefix
+	//   - A key name prefix might look like this: s3://bucketname/exampleprefix/
 	//   - A manifest might look like this: s3://bucketname/example.manifest A manifest
 	//   is an S3 object which is a JSON file consisting of an array of elements. The
 	//   first element is a prefix which is followed by one or more suffixes. SageMaker
@@ -14441,10 +14446,15 @@ type TextGenerationJobConfig struct {
 	// AutoMLJobCompletionCriteria defaults to 72h (259200s).
 	CompletionCriteria *AutoMLJobCompletionCriteria
 
-	// The access configuration file for the ML model. You can explicitly accept the
-	// model end-user license agreement (EULA) within the ModelAccessConfig . For more
-	// information, see End-user license agreements (https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula)
-	// .
+	// The access configuration file to control access to the ML model. You can
+	// explicitly accept the model end-user license agreement (EULA) within the
+	// ModelAccessConfig .
+	//   - If you are a Jumpstart user, see the End-user license agreements (https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula)
+	//   section for more details on accepting the EULA.
+	//   - If you are an AutoML user, see the Optional Parameters section of Create an
+	//   AutoML job to fine-tune text generation models using the API for details on
+	//   How to set the EULA acceptance when fine-tuning a model using the AutoML API (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-finetune-llms.html#autopilot-llms-finetuning-api-optional-params)
+	//   .
 	ModelAccessConfig *ModelAccessConfig
 
 	// The hyperparameters used to configure and optimize the learning process of the
@@ -14514,17 +14524,16 @@ type ThroughputConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Active throughput configuration of the feature group. Used to set feature group
-// throughput configuration. There are two modes: ON_DEMAND and PROVISIONED . With
-// on-demand mode, you are charged for data reads and writes that your application
-// performs on your feature group. You do not need to specify read and write
-// throughput because Feature Store accommodates your workloads as they ramp up and
-// down. You can switch a feature group to on-demand only once in a 24 hour period.
-// With provisioned throughput mode, you specify the read and write capacity per
-// second that you expect your application to require, and you are billed based on
-// those limits. Exceeding provisioned throughput will result in your requests
-// being throttled. Note: PROVISIONED throughput mode is supported only for
-// feature groups that are offline-only, or use the Standard (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType)
+// Active throughput configuration of the feature group. There are two modes:
+// ON_DEMAND and PROVISIONED . With on-demand mode, you are charged for data reads
+// and writes that your application performs on your feature group. You do not need
+// to specify read and write throughput because Feature Store accommodates your
+// workloads as they ramp up and down. You can switch a feature group to on-demand
+// only once in a 24 hour period. With provisioned throughput mode, you specify the
+// read and write capacity per second that you expect your application to require,
+// and you are billed based on those limits. Exceeding provisioned throughput will
+// result in your requests being throttled. Note: PROVISIONED throughput mode is
+// supported only for feature groups that are offline-only, or use the Standard (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType)
 // tier online store.
 type ThroughputConfigDescription struct {
 
@@ -15548,7 +15557,7 @@ type TransformS3DataSource struct {
 
 	// Depending on the value specified for the S3DataType , identifies either a key
 	// name prefix or a manifest. For example:
-	//   - A key name prefix might look like this: s3://bucketname/exampleprefix .
+	//   - A key name prefix might look like this: s3://bucketname/exampleprefix/ .
 	//   - A manifest might look like this: s3://bucketname/example.manifest The
 	//   manifest is an S3 object which is a JSON file with the following format: [
 	//   {"prefix": "s3://customer_bucket/some/prefix/"}, "relative/path/to/custdata-1",

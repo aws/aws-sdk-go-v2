@@ -5684,6 +5684,13 @@ func awsRestjson1_serializeDocumentCoverageFilterCriteria(v *types.CoverageFilte
 		}
 	}
 
+	if v.ImagePulledAt != nil {
+		ok := object.Key("imagePulledAt")
+		if err := awsRestjson1_serializeDocumentCoverageDateFilterList(v.ImagePulledAt, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LambdaFunctionName != nil {
 		ok := object.Key("lambdaFunctionName")
 		if err := awsRestjson1_serializeDocumentCoverageStringFilterList(v.LambdaFunctionName, ok); err != nil {
@@ -5972,6 +5979,11 @@ func awsRestjson1_serializeDocumentEc2InstanceAggregation(v *types.Ec2InstanceAg
 func awsRestjson1_serializeDocumentEcrConfiguration(v *types.EcrConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.PullDateRescanDuration) > 0 {
+		ok := object.Key("pullDateRescanDuration")
+		ok.String(string(v.PullDateRescanDuration))
+	}
 
 	if len(v.RescanDuration) > 0 {
 		ok := object.Key("rescanDuration")

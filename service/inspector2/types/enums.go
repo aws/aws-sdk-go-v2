@@ -738,6 +738,30 @@ func (Ec2Platform) Values() []Ec2Platform {
 	}
 }
 
+type EcrPullDateRescanDuration string
+
+// Enum values for EcrPullDateRescanDuration
+const (
+	EcrPullDateRescanDurationDays14  EcrPullDateRescanDuration = "DAYS_14"
+	EcrPullDateRescanDurationDays30  EcrPullDateRescanDuration = "DAYS_30"
+	EcrPullDateRescanDurationDays60  EcrPullDateRescanDuration = "DAYS_60"
+	EcrPullDateRescanDurationDays90  EcrPullDateRescanDuration = "DAYS_90"
+	EcrPullDateRescanDurationDays180 EcrPullDateRescanDuration = "DAYS_180"
+)
+
+// Values returns all known values for EcrPullDateRescanDuration. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EcrPullDateRescanDuration) Values() []EcrPullDateRescanDuration {
+	return []EcrPullDateRescanDuration{
+		"DAYS_14",
+		"DAYS_30",
+		"DAYS_60",
+		"DAYS_90",
+		"DAYS_180",
+	}
+}
+
 type EcrRescanDuration string
 
 // Enum values for EcrRescanDuration
@@ -745,6 +769,9 @@ const (
 	EcrRescanDurationLifetime EcrRescanDuration = "LIFETIME"
 	EcrRescanDurationDays30   EcrRescanDuration = "DAYS_30"
 	EcrRescanDurationDays180  EcrRescanDuration = "DAYS_180"
+	EcrRescanDurationDays14   EcrRescanDuration = "DAYS_14"
+	EcrRescanDurationDays60   EcrRescanDuration = "DAYS_60"
+	EcrRescanDurationDays90   EcrRescanDuration = "DAYS_90"
 )
 
 // Values returns all known values for EcrRescanDuration. Note that this can be
@@ -755,6 +782,9 @@ func (EcrRescanDuration) Values() []EcrRescanDuration {
 		"LIFETIME",
 		"DAYS_30",
 		"DAYS_180",
+		"DAYS_14",
+		"DAYS_60",
+		"DAYS_90",
 	}
 }
 

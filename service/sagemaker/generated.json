@@ -93,6 +93,7 @@
         "api_op_DeleteHub.go",
         "api_op_DeleteHubContent.go",
         "api_op_DeleteHumanTaskUi.go",
+        "api_op_DeleteHyperParameterTuningJob.go",
         "api_op_DeleteImage.go",
         "api_op_DeleteImageVersion.go",
         "api_op_DeleteInferenceComponent.go",

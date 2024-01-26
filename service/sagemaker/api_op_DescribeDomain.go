@@ -82,7 +82,7 @@ type DescribeDomainOutput struct {
 	// The failure reason.
 	FailureReason *string
 
-	// The ID of the Amazon Elastic File System (EFS) managed by this Domain.
+	// The ID of the Amazon Elastic File System managed by this Domain.
 	HomeEfsFileSystemId *string
 
 	// Use KmsKeyId .
