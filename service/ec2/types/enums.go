@@ -5831,7 +5831,7 @@ type NetworkInterfaceType string
 // Enum values for NetworkInterfaceType
 const (
 	NetworkInterfaceTypeInterface                     NetworkInterfaceType = "interface"
-	NetworkInterfaceTypeNatGateway                    NetworkInterfaceType = "natGateway"
+	NetworkInterfaceTypeNatGateway                    NetworkInterfaceType = "nat_gateway"
 	NetworkInterfaceTypeEfa                           NetworkInterfaceType = "efa"
 	NetworkInterfaceTypeTrunk                         NetworkInterfaceType = "trunk"
 	NetworkInterfaceTypeLoadBalancer                  NetworkInterfaceType = "load_balancer"
@@ -5855,7 +5855,7 @@ const (
 func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 	return []NetworkInterfaceType{
 		"interface",
-		"natGateway",
+		"nat_gateway",
 		"efa",
 		"trunk",
 		"load_balancer",
