@@ -1,8 +1,0 @@
-{
-    "id": "69ff0e0e-cd27-4c26-bcb4-68f246693931",
-    "type": "feature",
-    "description": "Amazon SageMaker Automatic Model Tuning now provides an API to programmatically delete tuning jobs.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

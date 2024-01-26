@@ -1,3 +1,11 @@
+# Release (2024-01-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.22.0](service/inspector2/CHANGELOG.md#v1220-2024-01-26)
+  * **Feature**: This release adds ECR container image scanning based on their lastRecordedPullTime.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.126.0](service/sagemaker/CHANGELOG.md#v11260-2024-01-26)
+  * **Feature**: Amazon SageMaker Automatic Model Tuning now provides an API to programmatically delete tuning jobs.
+
 # Release (2024-01-25)
 
 ## Module Highlights

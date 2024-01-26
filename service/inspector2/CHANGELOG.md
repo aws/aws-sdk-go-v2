@@ -1,3 +1,7 @@
+# v1.22.0 (2024-01-26)
+
+* **Feature**: This release adds ECR container image scanning based on their lastRecordedPullTime.
+
 # v1.21.0 (2024-01-23)
 
 * **Feature**: This release adds support for CIS scans on EC2 instances.

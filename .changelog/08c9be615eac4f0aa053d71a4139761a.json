@@ -1,8 +1,0 @@
-{
-    "id": "08c9be61-5eac-4f0a-a053-d71a4139761a",
-    "type": "feature",
-    "description": "This release adds ECR container image scanning based on their lastRecordedPullTime.",
-    "modules": [
-        "service/inspector2"
-    ]
-}

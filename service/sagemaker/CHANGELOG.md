@@ -1,3 +1,7 @@
+# v1.126.0 (2024-01-26)
+
+* **Feature**: Amazon SageMaker Automatic Model Tuning now provides an API to programmatically delete tuning jobs.
+
 # v1.125.0 (2024-01-14)
 
 * **Feature**: This release will have ValidationException thrown if certain invalid app types are provided. The release will also throw ValidationException if more than 10 account ids are provided in VpcOnlyTrustedAccounts.
