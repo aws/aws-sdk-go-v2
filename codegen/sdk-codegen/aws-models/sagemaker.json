@@ -8787,7 +8787,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <code>Domain</code>. A domain consists of an associated\n    Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application,\n    policy, and Amazon Virtual Private Cloud (VPC) configurations.\n    Users within a domain can share notebook files and other artifacts with each other.</p>\n         <p>\n            <b>EFS storage</b>\n         </p>\n         <p>When a domain is created, an EFS volume is created for use by all of the users within the\n    domain. Each user receives a private home directory within the EFS volume for notebooks,\n    Git repositories, and data files.</p>\n         <p>SageMaker uses the Amazon Web Services Key Management Service (Amazon Web Services KMS) to encrypt the EFS volume attached to the domain with\n     an Amazon Web Services managed key by default. For more control, you can specify a\n     customer managed key. For more information, see\n    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html\">Protect Data at\n      Rest Using Encryption</a>.</p>\n         <p>\n            <b>VPC configuration</b>\n         </p>\n         <p>All traffic between the domain and the EFS volume is through the specified\n      VPC and subnets. For other traffic, you can specify the <code>AppNetworkAccessType</code>\n    parameter. <code>AppNetworkAccessType</code> corresponds to the network access type that you\n      choose when you onboard to the domain. The following options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic goes through a VPC managed by\n        Amazon SageMaker, which allows internet access. This is the default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All traffic is through the specified VPC and subnets.\n        Internet access is disabled by default. To allow internet access, you must specify a\n        NAT gateway.</p>\n               <p>When internet access is disabled, you won't be able to run a Amazon SageMaker Studio notebook or to\n        train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime\n        or a NAT gateway and your security groups allow outbound connections.</p>\n            </li>\n         </ul>\n         <important>\n            <p>NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules\n       in order to launch a Amazon SageMaker Studio app successfully.</p>\n         </important>\n         <p>For more information, see\n    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html\">Connect\n       Amazon SageMaker Studio Notebooks to Resources in a VPC</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a <code>Domain</code>. A domain consists of an associated Amazon Elastic File System volume, a list\n      of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC)\n      configurations. Users within a domain can share notebook files and other artifacts with each\n      other.</p>\n         <p>\n            <b>EFS storage</b>\n         </p>\n         <p>When a domain is created, an EFS volume is created for use by all of the users within the\n      domain. Each user receives a private home directory within the EFS volume for notebooks, Git\n      repositories, and data files.</p>\n         <p>SageMaker uses the Amazon Web Services Key Management Service (Amazon Web Services KMS) to\n      encrypt the EFS volume attached to the domain with an Amazon Web Services managed key by\n      default. For more control, you can specify a customer managed key. For more information, see\n        <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html\">Protect Data\n        at Rest Using Encryption</a>.</p>\n         <p>\n            <b>VPC configuration</b>\n         </p>\n         <p>All traffic between the domain and the Amazon EFS volume is through the specified VPC and\n      subnets. For other traffic, you can specify the <code>AppNetworkAccessType</code> parameter.\n        <code>AppNetworkAccessType</code> corresponds to the network access type that you choose\n      when you onboard to the domain. The following options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic goes through a VPC managed by\n          Amazon SageMaker, which allows internet access. This is the default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All traffic is through the specified VPC and subnets. Internet\n          access is disabled by default. To allow internet access, you must specify a NAT\n          gateway.</p>\n               <p>When internet access is disabled, you won't be able to run a Amazon SageMaker Studio notebook\n          or to train or host models unless your VPC has an interface endpoint to the SageMaker API and\n          runtime or a NAT gateway and your security groups allow outbound connections.</p>\n            </li>\n         </ul>\n         <important>\n            <p>NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules\n        in order to launch a Amazon SageMaker Studio app successfully.</p>\n         </important>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html\">Connect Amazon SageMaker Studio\n        Notebooks to Resources in a VPC</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateDomainRequest": {
@@ -8813,7 +8813,7 @@
                     "target": "com.amazonaws.sagemaker#UserSettings",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The default settings to use to create a user profile when <code>UserSettings</code> isn't specified\n         in the call to the <code>CreateUserProfile</code> API.</p>\n         <p>\n            <code>SecurityGroups</code> is aggregated when specified in both calls. For all other\n         settings in <code>UserSettings</code>, the values specified in <code>CreateUserProfile</code>\n         take precedence over those specified in <code>CreateDomain</code>.</p>",
+                        "smithy.api#documentation": "<p>The default settings to use to create a user profile when <code>UserSettings</code> isn't\n      specified in the call to the <code>CreateUserProfile</code> API.</p>\n         <p>\n            <code>SecurityGroups</code> is aggregated when specified in both calls. For all other\n      settings in <code>UserSettings</code>, the values specified in <code>CreateUserProfile</code>\n      take precedence over those specified in <code>CreateDomain</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8842,13 +8842,13 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags to associated with the Domain. Each tag consists of a key and an optional value.\n         Tag keys must be unique per resource. Tags are searchable using the\n         <code>Search</code> API.</p>\n         <p>Tags that you specify for the Domain are also added to all Apps that the\n          Domain launches.</p>"
+                        "smithy.api#documentation": "<p>Tags to associated with the Domain. Each tag consists of a key and an optional value. Tag\n      keys must be unique per resource. Tags are searchable using the <code>Search</code>\n      API.</p>\n         <p>Tags that you specify for the Domain are also added to all Apps that the Domain\n      launches.</p>"
                     }
                 },
                 "AppNetworkAccessType": {
                     "target": "com.amazonaws.sagemaker#AppNetworkAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the VPC used for non-EFS traffic. The default value is\n        <code>PublicInternetOnly</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by\n            Amazon SageMaker, which allows direct internet access</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All traffic is through the specified VPC and subnets</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the VPC used for non-EFS traffic. The default value is\n        <code>PublicInternetOnly</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by\n          Amazon SageMaker, which allows direct internet access</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All traffic is through the specified VPC and subnets</p>\n            </li>\n         </ul>"
                     }
                 },
                 "HomeEfsFileSystemKmsKeyId": {
@@ -8863,13 +8863,13 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>SageMaker uses Amazon Web Services KMS to encrypt the EFS volume attached to the domain with an Amazon Web Services managed\n         key by default. For more control, specify a customer managed key.</p>"
+                        "smithy.api#documentation": "<p>SageMaker uses Amazon Web Services KMS to encrypt the EFS volume attached to the domain with an\n        Amazon Web Services managed key by default. For more control, specify a customer managed\n      key.</p>"
                     }
                 },
                 "AppSecurityGroupManagement": {
                     "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided. If setting up the domain for use with RStudio, this value must be set to\n                <code>Service</code>.</p>"
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n      communication in <code>VPCOnly</code> mode. Required when\n        <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n        <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n      provided. If setting up the domain for use with RStudio, this value must be set to\n        <code>Service</code>.</p>"
                     }
                 },
                 "DefaultSpaceSettings": {
@@ -14170,7 +14170,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used to delete a domain.\n      If you onboarded with IAM mode, you will need to delete your domain to onboard again using IAM Identity Center.\n     Use with caution. All of the members of the domain will lose access to their EFS volume,\n     including data, notebooks, and other artifacts.\n   </p>"
+                "smithy.api#documentation": "<p>Used to delete a domain. If you onboarded with IAM mode, you will need to delete your\n      domain to onboard again using IAM Identity Center. Use with caution. All of the members of the\n      domain will lose access to their EFS volume, including data, notebooks, and other artifacts.\n    </p>"
             }
         },
         "com.amazonaws.sagemaker#DeleteDomainRequest": {
@@ -14187,7 +14187,7 @@
                 "RetentionPolicy": {
                     "target": "com.amazonaws.sagemaker#RetentionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted.\n           By default, all resources are retained (not automatically deleted).\n       </p>"
+                        "smithy.api#documentation": "<p>The retention policy for this domain, which specifies whether resources will be retained\n      after the Domain is deleted. By default, all resources are retained (not automatically\n      deleted). </p>"
                     }
                 }
             },
@@ -14582,6 +14582,34 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteHyperParameterTuningJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DeleteHyperParameterTuningJobRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a hyperparameter tuning job. The <code>DeleteHyperParameterTuningJob</code>\n            API deletes only the tuning job entry that was created in SageMaker when you called the\n            <code>CreateHyperParameterTuningJob</code> API. It does not delete training jobs,\n            artifacts, or the IAM role that you specified when creating the model.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteHyperParameterTuningJobRequest": {
+            "type": "structure",
+            "members": {
+                "HyperParameterTuningJobName": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningJobName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hyperparameter tuning job that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sagemaker#DeleteImage": {
@@ -17588,7 +17616,7 @@
                 "HomeEfsFileSystemId": {
                     "target": "com.amazonaws.sagemaker#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Elastic File System (EFS) managed by this Domain.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Elastic File System managed by this Domain.</p>"
                     }
                 },
                 "SingleSignOnManagedApplicationInstanceId": {
@@ -17600,7 +17628,7 @@
                 "SingleSignOnApplicationArn": {
                     "target": "com.amazonaws.sagemaker#SingleSignOnApplicationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the application managed by SageMaker in IAM Identity Center. This value is only returned for domains created after October 1, 2023.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the application managed by SageMaker in IAM Identity Center. This value is\n      only returned for domains created after October 1, 2023.</p>"
                     }
                 },
                 "Status": {
@@ -17630,7 +17658,7 @@
                 "SecurityGroupIdForDomainBoundary": {
                     "target": "com.amazonaws.sagemaker#SecurityGroupId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the security group that authorizes traffic between the\n                <code>RSessionGateway</code> apps and the <code>RStudioServerPro</code> app.</p>"
+                        "smithy.api#documentation": "<p>The ID of the security group that authorizes traffic between the\n        <code>RSessionGateway</code> apps and the <code>RStudioServerPro</code> app.</p>"
                     }
                 },
                 "AuthMode": {
@@ -17642,7 +17670,7 @@
                 "DefaultUserSettings": {
                     "target": "com.amazonaws.sagemaker#UserSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings which are applied to UserProfiles in this domain if settings are not explicitly specified\n           in a given UserProfile.\n       </p>"
+                        "smithy.api#documentation": "<p>Settings which are applied to UserProfiles in this domain if settings are not explicitly\n      specified in a given UserProfile. </p>"
                     }
                 },
                 "DomainSettings": {
@@ -17654,7 +17682,7 @@
                 "AppNetworkAccessType": {
                     "target": "com.amazonaws.sagemaker#AppNetworkAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the VPC used for non-EFS traffic. The default value is\n        <code>PublicInternetOnly</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by\n            Amazon SageMaker, which allows direct internet access</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All traffic is through the specified VPC and subnets</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the VPC used for non-EFS traffic. The default value is\n        <code>PublicInternetOnly</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by\n          Amazon SageMaker, which allows direct internet access</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All traffic is through the specified VPC and subnets</p>\n            </li>\n         </ul>"
                     }
                 },
                 "HomeEfsFileSystemKmsKeyId": {
@@ -17687,13 +17715,13 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services KMS customer managed key used to encrypt\n         the EFS volume attached to the domain.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS customer managed key used to encrypt the EFS volume attached to\n      the domain.</p>"
                     }
                 },
                 "AppSecurityGroupManagement": {
                     "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided.</p>"
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n      communication in <code>VPCOnly</code> mode. Required when\n        <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n        <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n      provided.</p>"
                     }
                 },
                 "DefaultSpaceSettings": {
@@ -19194,7 +19222,7 @@
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningJobStatus",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The status of the tuning job: InProgress, Completed, Failed, Stopping, or\n            Stopped.</p>",
+                        "smithy.api#documentation": "<p>The status of the tuning job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -20946,7 +20974,7 @@
                     "target": "com.amazonaws.sagemaker#ArnOrName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of gthe model group to describe.</p>",
+                        "smithy.api#documentation": "<p>The name of the model group to describe.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -24464,19 +24492,19 @@
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.sagemaker#DomainSecurityGroupIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for\n            communication between Domain-level apps and user apps.</p>"
+                        "smithy.api#documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for communication\n      between Domain-level apps and user apps.</p>"
                     }
                 },
                 "RStudioServerProDomainSettings": {
                     "target": "com.amazonaws.sagemaker#RStudioServerProDomainSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level\n            app.</p>"
+                        "smithy.api#documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level\n      app.</p>"
                     }
                 },
                 "ExecutionRoleIdentityConfig": {
                     "target": "com.amazonaws.sagemaker#ExecutionRoleIdentityConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>.</p>"
                     }
                 },
                 "DockerSettings": {
@@ -24487,7 +24515,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of settings that apply to the <code>SageMaker Domain</code>. These\n            settings are specified through the <code>CreateDomain</code> API call.</p>"
+                "smithy.api#documentation": "<p>A collection of settings that apply to the <code>SageMaker Domain</code>. These settings\n      are specified through the <code>CreateDomain</code> API call.</p>"
             }
         },
         "com.amazonaws.sagemaker#DomainSettingsForUpdate": {
@@ -24496,19 +24524,19 @@
                 "RStudioServerProDomainSettingsForUpdate": {
                     "target": "com.amazonaws.sagemaker#RStudioServerProDomainSettingsForUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to update. A\n            single <code>RStudioServerPro</code> application is created for a domain.</p>"
+                        "smithy.api#documentation": "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to update. A\n      single <code>RStudioServerPro</code> application is created for a domain.</p>"
                     }
                 },
                 "ExecutionRoleIdentityConfig": {
                     "target": "com.amazonaws.sagemaker#ExecutionRoleIdentityConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>. This configuration can only be modified if there\n            are no apps in the <code>InService</code> or <code>Pending</code> state.</p>"
+                        "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>. This configuration can only be modified if there are no\n      apps in the <code>InService</code> or <code>Pending</code> state.</p>"
                     }
                 },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.sagemaker#DomainSecurityGroupIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for\n            communication between Domain-level apps and user apps.</p>"
+                        "smithy.api#documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for communication\n      between Domain-level apps and user apps.</p>"
                     }
                 },
                 "DockerSettings": {
@@ -35288,13 +35316,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token.\n        Use it in your next request to receive the next set of results.</p>"
+                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token. Use it in your next\n      request to receive the next set of results.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of items to return in the response. If the total\n          number of items available is more than the value specified, a <code>NextToken</code>\n          is provided in the response. To resume pagination, provide the <code>NextToken</code>\n          value in the as part of a subsequent call. The default value is 10.</p>"
+                        "smithy.api#documentation": "<p>The total number of items to return in the response. If the total number of items\n      available is more than the value specified, a <code>NextToken</code> is provided in the\n      response. To resume pagination, provide the <code>NextToken</code> value in the as part of a\n      subsequent call. The default value is 10.</p>"
                     }
                 }
             },
@@ -35314,7 +35342,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token.\n        Use it in your next request to receive the next set of results.</p>"
+                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token. Use it in your next\n      request to receive the next set of results.</p>"
                     }
                 }
             },
@@ -41599,13 +41627,13 @@
                     "target": "com.amazonaws.sagemaker#AcceptEula",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Specifies agreement to the model end-user license agreement (EULA). The\n         <code>AcceptEula</code> value must be explicitly defined as <code>True</code> in\n         order to accept the EULA that this model requires. You are responsible for reviewing and\n         complying with any applicable license terms and making sure they are acceptable for your\n         use case before downloading or using a model.</p>",
+                        "smithy.api#documentation": "<p>Specifies agreement to the model end-user license agreement (EULA). The\n            <code>AcceptEula</code> value must be explicitly defined as <code>True</code> in order\n         to accept the EULA that this model requires. You are responsible for reviewing and\n         complying with any applicable license terms and making sure they are acceptable for your\n         use case before downloading or using a model.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The access configuration file for the ML model. You can explicitly accept the model\n         end-user license agreement (EULA) within the <code>ModelAccessConfig</code>. For more\n         information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula\">End-user license agreements</a>.</p>"
+                "smithy.api#documentation": "<p>The access configuration file to control access to the ML model. You can explicitly accept the model\n         end-user license agreement (EULA) within the <code>ModelAccessConfig</code>.</p>\n         <ul>\n            <li>\n               <p>If you are a Jumpstart user, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula\">End-user license agreements</a> section for more details on accepting the EULA.</p>\n            </li>\n            <li>\n               <p>If you are an AutoML user, see the  <i>Optional Parameters</i> section of\n               <i>Create an AutoML job to fine-tune text generation models using the\n                  API</i> for details on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-finetune-llms.html#autopilot-llms-finetuning-api-optional-params\">How to set the EULA acceptance when fine-tuning a model using the AutoML\n                  API</a>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sagemaker#ModelApprovalStatus": {
@@ -53188,7 +53216,7 @@
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Depending on the value specified for the <code>S3DataType</code>, identifies either\n            a key name prefix or a manifest. For example: </p>\n         <ul>\n            <li>\n               <p> A key name prefix might look like this:\n                        <code>s3://bucketname/exampleprefix</code>\n               </p>\n            </li>\n            <li>\n               <p> A manifest might look like this:\n                        <code>s3://bucketname/example.manifest</code>\n               </p>\n               <p> A manifest is an S3 object which is a JSON file consisting of an array of\n                    elements. The first element is a prefix which is followed by one or more\n                    suffixes. SageMaker appends the suffix elements to the prefix to get a full set of\n                        <code>S3Uri</code>. Note that the prefix must be a valid non-empty\n                        <code>S3Uri</code> that precludes users from specifying a manifest whose\n                    individual <code>S3Uri</code> is sourced from different S3 buckets.</p>\n               <p> The following code example shows a valid manifest format: </p>\n               <p>\n                  <code>[ {\"prefix\": \"s3://customer_bucket/some/prefix/\"},</code>\n               </p>\n               <p>\n                  <code> \"relative/path/to/custdata-1\",</code>\n               </p>\n               <p>\n                  <code> \"relative/path/custdata-2\",</code>\n               </p>\n               <p>\n                  <code> ...</code>\n               </p>\n               <p>\n                  <code> \"relative/path/custdata-N\"</code>\n               </p>\n               <p>\n                  <code>]</code>\n               </p>\n               <p> This JSON is equivalent to the following <code>S3Uri</code>\n                    list:</p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-2</code>\n               </p>\n               <p>\n                  <code>...</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-N</code>\n               </p>\n               <p>The complete set of <code>S3Uri</code> in this manifest is the input data\n                    for the channel for this data source. The object that each <code>S3Uri</code>\n                    points to must be readable by the IAM role that SageMaker uses to perform tasks on\n                    your behalf. </p>\n            </li>\n         </ul>\n         <p>Your input bucket must be located in same Amazon Web Services region as your\n            training job.</p>",
+                        "smithy.api#documentation": "<p>Depending on the value specified for the <code>S3DataType</code>, identifies either\n            a key name prefix or a manifest. For example: </p>\n         <ul>\n            <li>\n               <p> A key name prefix might look like this:\n\t\t<code>s3://bucketname/exampleprefix/</code>\n               </p>\n            </li>\n            <li>\n               <p> A manifest might look like this:\n                        <code>s3://bucketname/example.manifest</code>\n               </p>\n               <p> A manifest is an S3 object which is a JSON file consisting of an array of\n                    elements. The first element is a prefix which is followed by one or more\n                    suffixes. SageMaker appends the suffix elements to the prefix to get a full set of\n                        <code>S3Uri</code>. Note that the prefix must be a valid non-empty\n                        <code>S3Uri</code> that precludes users from specifying a manifest whose\n                    individual <code>S3Uri</code> is sourced from different S3 buckets.</p>\n               <p> The following code example shows a valid manifest format: </p>\n               <p>\n                  <code>[ {\"prefix\": \"s3://customer_bucket/some/prefix/\"},</code>\n               </p>\n               <p>\n                  <code> \"relative/path/to/custdata-1\",</code>\n               </p>\n               <p>\n                  <code> \"relative/path/custdata-2\",</code>\n               </p>\n               <p>\n                  <code> ...</code>\n               </p>\n               <p>\n                  <code> \"relative/path/custdata-N\"</code>\n               </p>\n               <p>\n                  <code>]</code>\n               </p>\n               <p> This JSON is equivalent to the following <code>S3Uri</code>\n                    list:</p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-2</code>\n               </p>\n               <p>\n                  <code>...</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-N</code>\n               </p>\n               <p>The complete set of <code>S3Uri</code> in this manifest is the input data\n                    for the channel for this data source. The object that each <code>S3Uri</code>\n                    points to must be readable by the IAM role that SageMaker uses to perform tasks on\n                    your behalf. </p>\n            </li>\n         </ul>\n         <p>Your input bucket must be located in same Amazon Web Services region as your\n            training job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -53268,7 +53296,7 @@
                 "ModelAccessConfig": {
                     "target": "com.amazonaws.sagemaker#ModelAccessConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the access configuration file for the ML model. You can explicitly accept\n         the model end-user license agreement (EULA) within the <code>ModelAccessConfig</code>.\n         You are responsible for reviewing and complying with any applicable license terms and\n         making sure they are acceptable for your use case before downloading or using a\n         model.</p>"
+                        "smithy.api#documentation": "<p>Specifies the access configuration file for the ML model. You can explicitly accept the\n         model end-user license agreement (EULA) within the <code>ModelAccessConfig</code>. You are\n         responsible for reviewing and complying with any applicable license terms and making sure\n         they are acceptable for your use case before downloading or using a model.</p>"
                     }
                 }
             },
@@ -53603,6 +53631,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteHumanTaskUi"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DeleteHyperParameterTuningJob"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteImage"
@@ -58073,7 +58104,7 @@
                 "MaxPendingTimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxPendingTimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can be pending before it is stopped.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can be\n         pending before it is stopped.</p>"
                     }
                 }
             },
@@ -59199,7 +59230,7 @@
                 "CompletionCriteria": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobCompletionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long a fine-tuning job is allowed to run. For <code>TextGenerationJobConfig</code>\n         problem types, the <code>MaxRuntimePerTrainingJobInSeconds</code> attribute of <code>AutoMLJobCompletionCriteria</code> defaults to 72h\n         (259200s).</p>"
+                        "smithy.api#documentation": "<p>How long a fine-tuning job is allowed to run. For <code>TextGenerationJobConfig</code>\n         problem types, the <code>MaxRuntimePerTrainingJobInSeconds</code> attribute of\n            <code>AutoMLJobCompletionCriteria</code> defaults to 72h (259200s).</p>"
                     }
                 },
                 "BaseModelName": {
@@ -59299,7 +59330,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Active throughput configuration of the feature group. Used to set feature group\n         throughput configuration. There are two modes: <code>ON_DEMAND</code> and\n            <code>PROVISIONED</code>. With on-demand mode, you are charged for data reads and writes\n         that your application performs on your feature group. You do not need to specify read and\n         write throughput because Feature Store accommodates your workloads as they ramp up and\n         down. You can switch a feature group to on-demand only once in a 24 hour period. With\n         provisioned throughput mode, you specify the read and write capacity per second that you\n         expect your application to require, and you are billed based on those limits. Exceeding\n         provisioned throughput will result in your requests being throttled. </p>\n         <p>Note: <code>PROVISIONED</code> throughput mode is supported only for feature groups that\n         are offline-only, or use the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType\">\n               <code>Standard</code>\n            </a> tier online store. </p>"
+                "smithy.api#documentation": "<p>Active throughput configuration of the feature group. There are two modes:\n            <code>ON_DEMAND</code> and <code>PROVISIONED</code>. With on-demand mode, you are\n         charged for data reads and writes that your application performs on your feature group. You\n         do not need to specify read and write throughput because Feature Store accommodates your\n         workloads as they ramp up and down. You can switch a feature group to on-demand only once\n         in a 24 hour period. With provisioned throughput mode, you specify the read and write\n         capacity per second that you expect your application to require, and you are billed based\n         on those limits. Exceeding provisioned throughput will result in your requests being\n         throttled. </p>\n         <p>Note: <code>PROVISIONED</code> throughput mode is supported only for feature groups that\n         are offline-only, or use the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType\">\n               <code>Standard</code>\n            </a> tier online store. </p>"
             }
         },
         "com.amazonaws.sagemaker#ThroughputConfigUpdate": {
@@ -61470,7 +61501,7 @@
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a\n            key name prefix or a manifest. For example:</p>\n         <ul>\n            <li>\n               <p> A key name prefix might look like this:\n                        <code>s3://bucketname/exampleprefix</code>. </p>\n            </li>\n            <li>\n               <p> A manifest might look like this:\n                        <code>s3://bucketname/example.manifest</code>\n               </p>\n               <p> The manifest is an S3 object which is a JSON file with the following format: </p>\n               <p>\n                  <code>[ {\"prefix\": \"s3://customer_bucket/some/prefix/\"},</code>\n               </p>\n               <p>\n                  <code>\"relative/path/to/custdata-1\",</code>\n               </p>\n               <p>\n                  <code>\"relative/path/custdata-2\",</code>\n               </p>\n               <p>\n                  <code>...</code>\n               </p>\n               <p>\n                  <code>\"relative/path/custdata-N\"</code>\n               </p>\n               <p>\n                  <code>]</code>\n               </p>\n               <p> The preceding JSON matches the following <code>S3Uris</code>: </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-2</code>\n               </p>\n               <p>\n                  <code>...</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-N</code>\n               </p>\n               <p> The complete set of <code>S3Uris</code> in this manifest constitutes the\n                    input data for the channel for this datasource. The object that each\n                        <code>S3Uris</code> points to must be readable by the IAM role that Amazon SageMaker\n                    uses to perform tasks on your behalf.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a\n            key name prefix or a manifest. For example:</p>\n         <ul>\n            <li>\n               <p> A key name prefix might look like this:\n\t\t<code>s3://bucketname/exampleprefix/</code>. </p>\n            </li>\n            <li>\n               <p> A manifest might look like this:\n                        <code>s3://bucketname/example.manifest</code>\n               </p>\n               <p> The manifest is an S3 object which is a JSON file with the following format: </p>\n               <p>\n                  <code>[ {\"prefix\": \"s3://customer_bucket/some/prefix/\"},</code>\n               </p>\n               <p>\n                  <code>\"relative/path/to/custdata-1\",</code>\n               </p>\n               <p>\n                  <code>\"relative/path/custdata-2\",</code>\n               </p>\n               <p>\n                  <code>...</code>\n               </p>\n               <p>\n                  <code>\"relative/path/custdata-N\"</code>\n               </p>\n               <p>\n                  <code>]</code>\n               </p>\n               <p> The preceding JSON matches the following <code>S3Uris</code>: </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-2</code>\n               </p>\n               <p>\n                  <code>...</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-N</code>\n               </p>\n               <p> The complete set of <code>S3Uris</code> in this manifest constitutes the\n                    input data for the channel for this datasource. The object that each\n                        <code>S3Uris</code> points to must be readable by the IAM role that Amazon SageMaker\n                    uses to perform tasks on your behalf.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -62938,7 +62969,7 @@
                 "AppSecurityGroupManagement": {
                     "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided. If setting up the domain for use with RStudio, this value must be set to\n                <code>Service</code>.</p>"
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n      communication in <code>VPCOnly</code> mode. Required when\n      <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n      <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n      provided. If setting up the domain for use with RStudio, this value must be set to\n      <code>Service</code>.</p>"
                     }
                 },
                 "DefaultSpaceSettings": {
@@ -62950,13 +62981,13 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.sagemaker#Subnets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC subnets that Studio uses for communication.</p>\n         <p>If removing subnets, ensure there are no apps in the <code>InService</code>,\n    <code>Pending</code>, or <code>Deleting</code> state.</p>"
+                        "smithy.api#documentation": "<p>The VPC subnets that Studio uses for communication.</p>\n         <p>If removing subnets, ensure there are no apps in the <code>InService</code>,\n      <code>Pending</code>, or <code>Deleting</code> state.</p>"
                     }
                 },
                 "AppNetworkAccessType": {
                     "target": "com.amazonaws.sagemaker#AppNetworkAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the VPC used for non-EFS traffic.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by Amazon SageMaker,\n     which allows direct internet access.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets.</p>\n            </li>\n         </ul>\n         <p>This configuration can only be modified if there are no apps in the <code>InService</code>,\n    <code>Pending</code>, or <code>Deleting</code> state. The configuration cannot be updated if\n    <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is already set\n   or <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is provided\n   as part of the same request.</p>"
+                        "smithy.api#documentation": "<p>Specifies the VPC used for non-EFS traffic.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by\n          Amazon SageMaker, which allows direct internet access.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All Studio traffic is through the specified VPC and\n          subnets.</p>\n            </li>\n         </ul>\n         <p>This configuration can only be modified if there are no apps in the\n      <code>InService</code>, <code>Pending</code>, or <code>Deleting</code> state. The\n      configuration cannot be updated if\n      <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is already\n      set or <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n      provided as part of the same request.</p>"
                     }
                 }
             },
@@ -62992,7 +63023,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deploys the new <code>EndpointConfig</code> specified in the request, switches to\n            using newly created endpoint, and then deletes resources provisioned for the endpoint\n            using the previous <code>EndpointConfig</code> (there is no availability loss). </p>\n         <p>When SageMaker receives the request, it sets the endpoint status to\n                <code>Updating</code>. After updating the endpoint, it sets the status to\n                <code>InService</code>. To check the status of an endpoint, use the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html\">DescribeEndpoint</a> API.\n            \n        </p>\n         <note>\n            <p>You must not delete an <code>EndpointConfig</code> in use by an endpoint that is\n                live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code>\n                operations are being performed on the endpoint. To update an endpoint, you must\n                create a new <code>EndpointConfig</code>.</p>\n            <p>If you delete the <code>EndpointConfig</code> of an endpoint that is active or\n                being created or updated you may lose visibility into the instance type the endpoint\n                is using. The endpoint must be deleted in order to stop incurring charges.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deploys the <code>EndpointConfig</code> specified in the request\n            to a new fleet of instances. SageMaker shifts endpoint traffic to the new instances\n            with the updated endpoint configuration and then deletes the old instances\n            using the previous <code>EndpointConfig</code> (there is no availability loss).\n        For more information about how to control the update and traffic shifting process, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails.html\">\n                Update models in production</a>.</p>\n         <p>When SageMaker receives the request, it sets the endpoint status to\n                <code>Updating</code>. After updating the endpoint, it sets the status to\n                <code>InService</code>. To check the status of an endpoint, use the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html\">DescribeEndpoint</a> API.\n            \n        </p>\n         <note>\n            <p>You must not delete an <code>EndpointConfig</code> in use by an endpoint that is\n                live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code>\n                operations are being performed on the endpoint. To update an endpoint, you must\n                create a new <code>EndpointConfig</code>.</p>\n            <p>If you delete the <code>EndpointConfig</code> of an endpoint that is active or\n                being created or updated you may lose visibility into the instance type the endpoint\n                is using. The endpoint must be deleted in order to stop incurring charges.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#UpdateEndpointInput": {

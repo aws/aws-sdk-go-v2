@@ -284,13 +284,13 @@
                 "lambdaLayerAggregation": {
                     "target": "com.amazonaws.inspector2#LambdaLayerAggregation",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns an object with findings aggregated by AWS Lambda layer.</p>"
+                        "smithy.api#documentation": "<p>Returns an object with findings aggregated by Amazon Web Services Lambda layer.</p>"
                     }
                 },
                 "lambdaFunctionAggregation": {
                     "target": "com.amazonaws.inspector2#LambdaFunctionAggregation",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns an object with findings aggregated by AWS Lambda function.</p>"
+                        "smithy.api#documentation": "<p>Returns an object with findings aggregated by Amazon Web Services Lambda function.</p>"
                     }
                 }
             },
@@ -377,13 +377,13 @@
                 "lambdaLayerAggregation": {
                     "target": "com.amazonaws.inspector2#LambdaLayerAggregationResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>An aggregation of findings by AWS Lambda layer.</p>"
+                        "smithy.api#documentation": "<p>An aggregation of findings by Amazon Web Services Lambda layer.</p>"
                     }
                 },
                 "lambdaFunctionAggregation": {
                     "target": "com.amazonaws.inspector2#LambdaFunctionAggregationResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>An aggregation of findings by AWS Lambda function.</p>"
+                        "smithy.api#documentation": "<p>An aggregation of findings by Amazon Web Services Lambda function.</p>"
                     }
                 }
             },
@@ -679,13 +679,13 @@
                 "lambda": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents whether AWS Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization.\n      </p>"
+                        "smithy.api#documentation": "<p>Represents whether Amazon Web Services Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization.\n      </p>"
                     }
                 },
                 "lambdaCode": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents whether AWS Lambda code scans are automatically enabled for new members of your Amazon Inspector organization.\n         \n      </p>"
+                        "smithy.api#documentation": "<p>Represents whether Lambda code scans are automatically enabled for new members of your Amazon Inspector organization.\n         \n      </p>"
                     }
                 }
             },
@@ -946,48 +946,48 @@
                 "functionName": {
                     "target": "com.amazonaws.inspector2#FunctionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the AWS Lambda function.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Lambda function.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "runtime": {
                     "target": "com.amazonaws.inspector2#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The runtime environment for the AWS Lambda function.</p>",
+                        "smithy.api#documentation": "<p>The runtime environment for the Amazon Web Services Lambda function.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "codeSha256": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SHA256 hash of the AWS Lambda function's deployment package.</p>",
+                        "smithy.api#documentation": "<p>The SHA256 hash of the Amazon Web Services Lambda function's deployment package.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "version": {
                     "target": "com.amazonaws.inspector2#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the AWS Lambda function.</p>",
+                        "smithy.api#documentation": "<p>The version of the Amazon Web Services Lambda function.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "executionRoleArn": {
                     "target": "com.amazonaws.inspector2#ExecutionRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Lambda function's execution role.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Lambda function's execution role.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "layers": {
                     "target": "com.amazonaws.inspector2#LayerList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Lambda function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">\n         layers</a>. A Lambda function can have up to five layers.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Lambda function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">\n         layers</a>. A Lambda function can have up to five layers.</p>"
                     }
                 },
                 "vpcConfig": {
                     "target": "com.amazonaws.inspector2#LambdaVpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Lambda function's networking configuration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Lambda function's networking configuration.</p>"
                     }
                 },
                 "packageType": {
@@ -999,7 +999,7 @@
                 "architectures": {
                     "target": "com.amazonaws.inspector2#ArchitectureList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instruction set architecture that the AWS Lambda function supports. Architecture is a string array with one of the \n         valid values. The default architecture value is <code>x86_64</code>.</p>"
+                        "smithy.api#documentation": "<p>The instruction set architecture that the Amazon Web Services Lambda function supports. Architecture is a string array with one of the \n         valid values. The default architecture value is <code>x86_64</code>.</p>"
                     }
                 },
                 "lastModifiedAt": {
@@ -1010,7 +1010,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A summary of information about the AWS Lambda function.</p>"
+                "smithy.api#documentation": "<p> A summary of information about the Amazon Web Services Lambda function.</p>"
             }
         },
         "com.amazonaws.inspector2#BadRequestException": {
@@ -2770,7 +2770,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 50
+                    "max": 150
                 }
             }
         },
@@ -3509,25 +3509,31 @@
                 "lambdaFunctionName": {
                     "target": "com.amazonaws.inspector2#CoverageStringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns coverage statistics for AWS Lambda functions filtered by function names.</p>"
+                        "smithy.api#documentation": "<p>Returns coverage statistics for Amazon Web Services Lambda functions filtered by function names.</p>"
                     }
                 },
                 "lambdaFunctionTags": {
                     "target": "com.amazonaws.inspector2#CoverageMapFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns coverage statistics for AWS Lambda functions filtered by tag.</p>"
+                        "smithy.api#documentation": "<p>Returns coverage statistics for Amazon Web Services Lambda functions filtered by tag.</p>"
                     }
                 },
                 "lambdaFunctionRuntime": {
                     "target": "com.amazonaws.inspector2#CoverageStringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns coverage statistics for AWS Lambda functions filtered by runtime.</p>"
+                        "smithy.api#documentation": "<p>Returns coverage statistics for Amazon Web Services Lambda functions filtered by runtime.</p>"
                     }
                 },
                 "lastScannedAt": {
                     "target": "com.amazonaws.inspector2#CoverageDateFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>Filters Amazon Web Services resources based on whether Amazon Inspector has checked them for vulnerabilities within the specified time range.</p>"
+                    }
+                },
+                "imagePulledAt": {
+                    "target": "com.amazonaws.inspector2#CoverageDateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date an image was last pulled at.</p>"
                     }
                 }
             },
@@ -5142,8 +5148,14 @@
                 "rescanDuration": {
                     "target": "com.amazonaws.inspector2#EcrRescanDuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ECR automated re-scan duration defines how long an ECR image will be actively scanned by Amazon Inspector. When the number of days since an image was last pushed exceeds the automated re-scan duration the monitoring state of that image becomes <code>inactive</code> and all associated findings are scheduled for closure.</p>",
+                        "smithy.api#documentation": "<p>The rescan duration configured for image push date.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "pullDateRescanDuration": {
+                    "target": "com.amazonaws.inspector2#EcrPullDateRescanDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rescan duration configured for image pull date.</p>"
                     }
                 }
             },
@@ -5157,7 +5169,7 @@
                 "rescanDurationState": {
                     "target": "com.amazonaws.inspector2#EcrRescanDurationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains details about the state of the ECR automated re-scan setting.</p>"
+                        "smithy.api#documentation": "<p>An object that contains details about the state of the ECR re-scan settings.</p>"
                     }
                 }
             },
@@ -5173,10 +5185,43 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Tags associated with the Amazon ECR image metadata.</p>"
                     }
+                },
+                "imagePulledAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date an image was last pulled at.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information on the Amazon ECR image metadata associated with a finding.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#EcrPullDateRescanDuration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DAYS_14",
+                        "name": "DAYS_14"
+                    },
+                    {
+                        "value": "DAYS_30",
+                        "name": "DAYS_30"
+                    },
+                    {
+                        "value": "DAYS_60",
+                        "name": "DAYS_60"
+                    },
+                    {
+                        "value": "DAYS_90",
+                        "name": "DAYS_90"
+                    },
+                    {
+                        "value": "DAYS_180",
+                        "name": "DAYS_180"
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector2#EcrRepositoryMetadata": {
@@ -5214,6 +5259,18 @@
                     {
                         "value": "DAYS_180",
                         "name": "DAYS_180"
+                    },
+                    {
+                        "value": "DAYS_14",
+                        "name": "DAYS_14"
+                    },
+                    {
+                        "value": "DAYS_60",
+                        "name": "DAYS_60"
+                    },
+                    {
+                        "value": "DAYS_90",
+                        "name": "DAYS_90"
                     }
                 ]
             }
@@ -5224,7 +5281,7 @@
                 "rescanDuration": {
                     "target": "com.amazonaws.inspector2#EcrRescanDuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ECR automated re-scan duration defines how long an ECR image will be actively scanned by Amazon Inspector. When the number of days since an image was last pushed exceeds the automated re-scan duration the monitoring state of that image becomes <code>inactive</code> and all associated findings are scheduled for closure.</p>"
+                        "smithy.api#documentation": "<p>The rescan duration configured for image push date.\n         \n         </p>"
                     }
                 },
                 "status": {
@@ -5238,10 +5295,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp representing when the last time the ECR scan duration setting was changed.</p>"
                     }
+                },
+                "pullDateRescanDuration": {
+                    "target": "com.amazonaws.inspector2#EcrPullDateRescanDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rescan duration configured for image pull date.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the state of any changes to the ECR automated re-scan duration setting.</p>"
+                "smithy.api#documentation": "<p>Details about the state of your ECR re-scan duration settings. The ECR re-scan duration defines how long an ECR image will be actively scanned by Amazon Inspector. When the number of days since an image was last pushed exceeds the duration configured for image pull date, and the duration configured for image pull date, the monitoring state of that image becomes <code>inactive</code> and all associated findings are scheduled for closure.</p>"
             }
         },
         "com.amazonaws.inspector2#EcrRescanDurationStatus": {
@@ -6089,37 +6152,37 @@
                 "lambdaFunctionName": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda functions by the name of the function.</p>"
+                        "smithy.api#documentation": "<p>Filters the list of Amazon Web Services Lambda functions by the name of the function.</p>"
                     }
                 },
                 "lambdaFunctionLayers": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda functions by the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">\n         layers</a>. A Lambda function can have up to five layers.</p>"
+                        "smithy.api#documentation": "<p>Filters the list of Amazon Web Services Lambda functions by the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">\n         layers</a>. A Lambda function can have up to five layers.</p>"
                     }
                 },
                 "lambdaFunctionRuntime": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda functions by the runtime environment for the Lambda function.</p>"
+                        "smithy.api#documentation": "<p>Filters the list of Amazon Web Services Lambda functions by the runtime environment for the Lambda function.</p>"
                     }
                 },
                 "lambdaFunctionLastModifiedAt": {
                     "target": "com.amazonaws.inspector2#DateFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda functions by the date and time that a user last updated the configuration, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601 format</a>\n         </p>"
+                        "smithy.api#documentation": "<p>Filters the list of Amazon Web Services Lambda functions by the date and time that a user last updated the configuration, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601 format</a>\n         </p>"
                     }
                 },
                 "lambdaFunctionExecutionRoleArn": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda functions by execution role.</p>"
+                        "smithy.api#documentation": "<p>Filters the list of Amazon Web Services Lambda functions by execution role.</p>"
                     }
                 },
                 "exploitAvailable": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda findings by the availability of exploits.</p>"
+                        "smithy.api#documentation": "<p>Filters the list of Amazon Web Services Lambda findings by the availability of exploits.</p>"
                     }
                 },
                 "codeVulnerabilityDetectorName": {
@@ -8817,13 +8880,13 @@
                 "functionNames": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Lambda function names to include in the aggregation results.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Lambda function names to include in the aggregation results.</p>"
                     }
                 },
                 "runtimes": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns findings aggregated by AWS Lambda function runtime environments.</p>"
+                        "smithy.api#documentation": "<p>Returns findings aggregated by Amazon Web Services Lambda function runtime environments.</p>"
                     }
                 },
                 "functionTags": {
@@ -8846,7 +8909,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details that define a findings aggregation based on AWS Lambda functions.</p>"
+                "smithy.api#documentation": "<p>The details that define a findings aggregation based on Amazon Web Services Lambda functions.</p>"
             }
         },
         "com.amazonaws.inspector2#LambdaFunctionAggregationResponse": {
@@ -8862,7 +8925,7 @@
                 "functionName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Lambda function names included in the aggregation results.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Lambda function names included in the aggregation results.</p>"
                     }
                 },
                 "runtime": {
@@ -8880,7 +8943,7 @@
                 "accountId": {
                     "target": "com.amazonaws.inspector2#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the AWS Lambda function.\n      </p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the Amazon Web Services Lambda function.\n      </p>"
                     }
                 },
                 "severityCounts": {
@@ -8889,12 +8952,12 @@
                 "lastModifiedAt": {
                     "target": "com.amazonaws.inspector2#DateTimeTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date that the AWS Lambda function included in the aggregation results was last changed.</p>"
+                        "smithy.api#documentation": "<p>The date that the Amazon Web Services Lambda function included in the aggregation results was last changed.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A response that contains the results of an AWS Lambda function finding aggregation.</p>"
+                "smithy.api#documentation": "<p>A response that contains the results of an Amazon Web Services Lambda function finding aggregation.</p>"
             }
         },
         "com.amazonaws.inspector2#LambdaFunctionMetadata": {
@@ -8903,13 +8966,13 @@
                 "functionTags": {
                     "target": "com.amazonaws.inspector2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource tags on an AWS Lambda function.</p>"
+                        "smithy.api#documentation": "<p>The resource tags on an Amazon Web Services Lambda function.</p>"
                     }
                 },
                 "layers": {
                     "target": "com.amazonaws.inspector2#LambdaLayerList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The layers for an AWS Lambda function. A Lambda function can have up to five layers.</p>"
+                        "smithy.api#documentation": "<p>The layers for an Amazon Web Services Lambda function. A Lambda function can have up to five layers.</p>"
                     }
                 },
                 "functionName": {
@@ -8921,12 +8984,12 @@
                 "runtime": {
                     "target": "com.amazonaws.inspector2#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>An AWS Lambda function's runtime.</p>"
+                        "smithy.api#documentation": "<p>An Amazon Web Services Lambda function's runtime.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The AWS Lambda function metadata.</p>"
+                "smithy.api#documentation": "<p>The Amazon Web Services Lambda function metadata.</p>"
             }
         },
         "com.amazonaws.inspector2#LambdaFunctionSortBy": {
@@ -8954,19 +9017,19 @@
                 "functionNames": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the AWS Lambda functions associated with the layers.</p>"
+                        "smithy.api#documentation": "<p>The names of the Amazon Web Services Lambda functions associated with the layers.</p>"
                     }
                 },
                 "resourceIds": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource IDs for the AWS Lambda function layers.</p>"
+                        "smithy.api#documentation": "<p>The resource IDs for the Amazon Web Services Lambda function layers.</p>"
                     }
                 },
                 "layerArns": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function layer.\n      </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Lambda function layer.\n      </p>"
                     }
                 },
                 "sortOrder": {
@@ -8983,7 +9046,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details that define a findings aggregation based on an AWS Lambda function's layers.</p>"
+                "smithy.api#documentation": "<p>The details that define a findings aggregation based on an Amazon Web Services Lambda function's layers.</p>"
             }
         },
         "com.amazonaws.inspector2#LambdaLayerAggregationResponse": {
@@ -8992,28 +9055,28 @@
                 "functionName": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the AWS Lambda functions associated with the layers.</p>",
+                        "smithy.api#documentation": "<p>The names of the Amazon Web Services Lambda functions associated with the layers.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceId": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Resource ID of the AWS Lambda function layer.</p>",
+                        "smithy.api#documentation": "<p>The Resource ID of the Amazon Web Services Lambda function layer.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "layerArn": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function layer.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Lambda function layer.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "accountId": {
                     "target": "com.amazonaws.inspector2#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the AWS Lambda function layer.</p>",
+                        "smithy.api#documentation": "<p>The account ID of the Amazon Web Services Lambda function layer.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9022,7 +9085,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A response that contains the results of an AWS Lambda function layer finding aggregation.</p>"
+                "smithy.api#documentation": "<p>A response that contains the results of an Amazon Web Services Lambda function layer finding aggregation.</p>"
             }
         },
         "com.amazonaws.inspector2#LambdaLayerArn": {
@@ -9074,7 +9137,7 @@
                 "securityGroupIds": {
                     "target": "com.amazonaws.inspector2#SecurityGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to an AWS Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
+                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to an Amazon Web Services Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
                     }
                 },
                 "vpcId": {
@@ -9085,7 +9148,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to an AWS Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
+                "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to an Amazon Web Services Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
             }
         },
         "com.amazonaws.inspector2#LastSeen": {
@@ -11922,7 +11985,7 @@
                 "awsLambdaFunction": {
                     "target": "com.amazonaws.inspector2#AwsLambdaFunctionDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A summary of the information about an AWS Lambda function affected by a finding.</p>"
+                        "smithy.api#documentation": "<p>A summary of the information about an Amazon Web Services Lambda function affected by a finding.</p>"
                     }
                 }
             },
@@ -11960,7 +12023,7 @@
                 "lambdaFunctionName": {
                     "target": "com.amazonaws.inspector2#ResourceStringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Lambda function name used as resource filter criteria.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Lambda function name used as resource filter criteria.</p>"
                     }
                 },
                 "ecrImageTags": {
@@ -11978,7 +12041,7 @@
                 "lambdaFunctionTags": {
                     "target": "com.amazonaws.inspector2#ResourceMapFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Lambda function tags used as resource filter criteria.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Lambda function tags used as resource filter criteria.</p>"
                     }
                 }
             },
@@ -12111,7 +12174,7 @@
                 "lambdaFunction": {
                     "target": "com.amazonaws.inspector2#LambdaFunctionMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains metadata details for an AWS Lambda function.</p>"
+                        "smithy.api#documentation": "<p>An object that contains metadata details for an Amazon Web Services Lambda function.</p>"
                     }
                 }
             },
@@ -12190,7 +12253,7 @@
                 "lambda": {
                     "target": "com.amazonaws.inspector2#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of Amazon Inspector scanning for AWS Lambda function.</p>"
+                        "smithy.api#documentation": "<p>The status of Amazon Inspector scanning for Amazon Web Services Lambda function.</p>"
                     }
                 },
                 "lambdaCode": {
@@ -14449,7 +14512,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an encryption key. A <code>ResourceNotFoundException</code> means that an AWS owned key is being used for encryption.</p>",
+                "smithy.api#documentation": "<p>Updates an encryption key. A <code>ResourceNotFoundException</code> means that an Amazon Web Services owned key is being used for encryption.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -15188,7 +15251,7 @@
                 "sourceLambdaLayerArn": {
                     "target": "com.amazonaws.inspector2#LambdaLayerArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the AWS Lambda function affected by a finding.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the Amazon Web Services Lambda function affected by a finding.</p>"
                     }
                 }
             },
