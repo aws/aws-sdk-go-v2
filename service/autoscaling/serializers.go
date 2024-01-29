@@ -4696,6 +4696,11 @@ func awsAwsquery_serializeDocumentInstanceRequirements(v *types.InstanceRequirem
 		}
 	}
 
+	if v.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice != nil {
+		objectKey := object.Key("MaxSpotPriceAsPercentageOfOptimalOnDemandPrice")
+		objectKey.Integer(*v.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice)
+	}
+
 	if v.MemoryGiBPerVCpu != nil {
 		objectKey := object.Key("MemoryGiBPerVCpu")
 		if err := awsAwsquery_serializeDocumentMemoryGiBPerVCpuRequest(v.MemoryGiBPerVCpu, objectKey); err != nil {

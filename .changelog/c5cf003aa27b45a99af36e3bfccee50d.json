@@ -1,0 +1,8 @@
+{
+    "id": "c5cf003a-a27b-45a9-9af3-6e3bfccee50d",
+    "type": "documentation",
+    "description": "Comprehend PII analysis now supports Spanish input documents.",
+    "modules": [
+        "service/comprehend"
+    ]
+}

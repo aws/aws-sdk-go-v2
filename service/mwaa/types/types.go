@@ -77,8 +77,7 @@ type Environment struct {
 	// .
 	ExecutionRoleArn *string
 
-	// The Amazon Web Services Key Management Service (KMS) encryption key used to
-	// encrypt the data in your environment.
+	// The KMS encryption key used to encrypt the data in your environment.
 	KmsKey *string
 
 	// The status of the last update on the environment.
@@ -188,10 +187,15 @@ type Environment struct {
 	//   - DELETING - Indicates the request to delete the environment is in progress.
 	//   - DELETED - Indicates the request to delete the environment is complete, and
 	//   the environment has been deleted.
-	//   - UNAVAILABLE - Indicates the request failed, but the environment was unable
-	//   to rollback and is not in a stable state.
+	//   - UNAVAILABLE - Indicates the request failed, but the environment did not
+	//   return to its previous state and is not stable.
 	//   - UPDATE_FAILED - Indicates the request to update the environment failed, and
-	//   the environment has rolled back successfully and is ready to use.
+	//   the environment was restored to its previous state successfully and is ready to
+	//   use.
+	//   - MAINTENANCE - Indicates that the environment is undergoing maintenance.
+	//   Depending on the type of work Amazon MWAA is performing, your environment might
+	//   become unavailable during this process. After all operations are done, your
+	//   environment will return to its status prior to mainteneace operations.
 	// We recommend reviewing our troubleshooting guide for a list of common errors
 	// and their solutions. For more information, see Amazon MWAA troubleshooting (https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html)
 	// .
@@ -208,7 +212,7 @@ type Environment struct {
 	// .
 	WebserverAccessMode WebserverAccessMode
 
-	// The Apache Airflow Web server host name for the Amazon MWAA environment. For
+	// The Apache Airflow web server host name for the Amazon MWAA environment. For
 	// more information, see Accessing the Apache Airflow UI (https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html)
 	// .
 	WebserverUrl *string

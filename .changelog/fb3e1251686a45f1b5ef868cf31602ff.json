@@ -1,0 +1,8 @@
+{
+    "id": "fb3e1251-686a-45f1-b5ef-868cf31602ff",
+    "type": "feature",
+    "description": "Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS RestoreDBClusterFromSnapshot and RestoreDBClusterToPointInTime API methods. This provides enhanced error handling, ensuring a more robust experience.",
+    "modules": [
+        "service/rds"
+    ]
+}

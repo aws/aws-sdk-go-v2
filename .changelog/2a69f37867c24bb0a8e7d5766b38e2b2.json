@@ -1,0 +1,8 @@
+{
+    "id": "2a69f378-67c2-4bb0-a8e7-d5766b38e2b2",
+    "type": "feature",
+    "description": "EC2 Auto Scaling customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}
