@@ -1,8 +1,0 @@
-{
-    "id": "b0f7630a-d197-4b01-bc74-0aca53d9dfbc",
-    "type": "documentation",
-    "description": "Modified description of createaddress to include direction to add path when providing a JSON file.",
-    "modules": [
-        "service/snowball"
-    ]
-}

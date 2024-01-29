@@ -1,8 +1,0 @@
-{
-    "id": "fc667014-8d7b-4271-b548-145536d7e97d",
-    "type": "feature",
-    "description": "This release adds MAINTENANCE environment status for Amazon MWAA environments.",
-    "modules": [
-        "service/mwaa"
-    ]
-}

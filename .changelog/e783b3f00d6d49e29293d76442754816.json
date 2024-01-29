@@ -1,8 +1,0 @@
-{
-    "id": "e783b3f0-0d6d-49e2-9293-d76442754816",
-    "type": "feature",
-    "description": "EC2 Fleet customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type.",
-    "modules": [
-        "service/ec2"
-    ]
-}

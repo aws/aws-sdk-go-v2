@@ -1,3 +1,7 @@
+# v1.24.7 (2024-01-29)
+
+* **Documentation**: Modified description of createaddress to include direction to add path when providing a JSON file.
+
 # v1.24.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

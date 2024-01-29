@@ -1,3 +1,19 @@
+# Release (2024-01-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.37.0](service/autoscaling/CHANGELOG.md#v1370-2024-01-29)
+  * **Feature**: EC2 Auto Scaling customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type.
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.29.7](service/comprehend/CHANGELOG.md#v1297-2024-01-29)
+  * **Documentation**: Comprehend PII analysis now supports Spanish input documents.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.146.0](service/ec2/CHANGELOG.md#v11460-2024-01-29)
+  * **Feature**: EC2 Fleet customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.24.0](service/mwaa/CHANGELOG.md#v1240-2024-01-29)
+  * **Feature**: This release adds MAINTENANCE environment status for Amazon MWAA environments.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.69.0](service/rds/CHANGELOG.md#v1690-2024-01-29)
+  * **Feature**: Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS RestoreDBClusterFromSnapshot and RestoreDBClusterToPointInTime API methods. This provides enhanced error handling, ensuring a more robust experience.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.24.7](service/snowball/CHANGELOG.md#v1247-2024-01-29)
+  * **Documentation**: Modified description of createaddress to include direction to add path when providing a JSON file.
+
 # Release (2024-01-26)
 
 ## Module Highlights
