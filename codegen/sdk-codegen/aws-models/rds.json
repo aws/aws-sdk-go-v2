@@ -26808,6 +26808,9 @@
                     "target": "com.amazonaws.rds#InsufficientDBClusterCapacityFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#InsufficientDBInstanceCapacityFault"
+                },
+                {
                     "target": "com.amazonaws.rds#InsufficientStorageClusterCapacityFault"
                 },
                 {
@@ -27133,6 +27136,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#InsufficientDBClusterCapacityFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InsufficientDBInstanceCapacityFault"
                 },
                 {
                     "target": "com.amazonaws.rds#InsufficientStorageClusterCapacityFault"

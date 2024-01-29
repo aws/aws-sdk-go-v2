@@ -2291,7 +2291,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only valid language.</p>",
+                        "smithy.api#documentation": "<p>The language of the input documents.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4756,7 +4756,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only valid language.</p>",
+                        "smithy.api#documentation": "<p>The language of the input text.   \n      Enter the language code for English (en) or Spanish (es).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10070,7 +10070,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code of the input documents</p>"
+                        "smithy.api#documentation": "<p>The language code of the input documents.</p>"
                     }
                 },
                 "DataAccessRoleArn": {
@@ -11674,7 +11674,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only valid language.</p>",
+                        "smithy.api#documentation": "<p>The language of the input documents. \n      Enter the language code for English (en) or Spanish (es).</p>",
                         "smithy.api#required": {}
                     }
                 },
