@@ -1,0 +1,8 @@
+{
+    "id": "af9e76d7-a2d4-43e4-9f42-aff71dd60556",
+    "type": "documentation",
+    "description": "Update the SDKs for text changes in the APIs.",
+    "modules": [
+        "service/route53"
+    ]
+}

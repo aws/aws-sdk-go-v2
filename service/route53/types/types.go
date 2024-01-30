@@ -632,9 +632,8 @@ type GeoLocationDetails struct {
 	noSmithyDocumentSerde
 }
 
-// (Resource record sets only): A complex type that lets you control how Amazon
-// Route 53 responds to DNS queries based on the geographic origin of the query and
-// your resources. Only one of , LocalZoneGroup , Coordinates , or Amazon Web
+// (Resource record sets only): A complex type that lets you specify where your
+// resources are located. Only one of LocalZoneGroup , Coordinates , or Amazon Web
 // ServicesRegion is allowed per request at a time. For more information about
 // geoproximity routing, see Geoproximity routing (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html)
 // in the Amazon Route 53 Developer Guide.

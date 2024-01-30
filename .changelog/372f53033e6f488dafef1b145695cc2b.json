@@ -1,0 +1,8 @@
+{
+    "id": "372f5303-3e6f-488d-afef-1b145695cc2b",
+    "type": "feature",
+    "description": "Add new skipDeletionCheck to DeleteDomain. Add new skipDeletionCheck to DeleteProject which also automatically deletes dependent objects",
+    "modules": [
+        "service/datazone"
+    ]
+}
