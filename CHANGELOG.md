@@ -1,3 +1,11 @@
+# Release (2024-01-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.4.0](service/datazone/CHANGELOG.md#v140-2024-01-30)
+  * **Feature**: Add new skipDeletionCheck to DeleteDomain. Add new skipDeletionCheck to DeleteProject which also automatically deletes dependent objects
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.37.1](service/route53/CHANGELOG.md#v1371-2024-01-30)
+  * **Documentation**: Update the SDKs for text changes in the APIs.
+
 # Release (2024-01-29)
 
 ## Module Highlights
