@@ -5796,7 +5796,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> (Resource record sets only): A complex type that lets you control how Amazon Route 53\n\t\t\tresponds to DNS queries based on the geographic origin of the query and your resources.\n\t\t\tOnly one of , <code>LocalZoneGroup</code>, <code>Coordinates</code>, or <code>Amazon Web ServicesRegion</code> is allowed per request at a time.</p>\n         <p>For more information about geoproximity routing, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html\">Geoproximity routing</a> in the\n\t\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p> (Resource record sets only): A complex type that lets you specify where your resources are\n\t\t\tlocated. Only one of <code>LocalZoneGroup</code>, <code>Coordinates</code>, or\n\t\t\t\t\t<code>Amazon Web ServicesRegion</code> is allowed per request at a time.</p>\n         <p>For more information about geoproximity routing, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html\">Geoproximity routing</a> in the\n\t\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.route53#GetAccountLimit": {
