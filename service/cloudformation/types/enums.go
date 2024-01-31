@@ -338,6 +338,97 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 	}
 }
 
+type GeneratedTemplateDeletionPolicy string
+
+// Enum values for GeneratedTemplateDeletionPolicy
+const (
+	GeneratedTemplateDeletionPolicyDelete GeneratedTemplateDeletionPolicy = "DELETE"
+	GeneratedTemplateDeletionPolicyRetain GeneratedTemplateDeletionPolicy = "RETAIN"
+)
+
+// Values returns all known values for GeneratedTemplateDeletionPolicy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (GeneratedTemplateDeletionPolicy) Values() []GeneratedTemplateDeletionPolicy {
+	return []GeneratedTemplateDeletionPolicy{
+		"DELETE",
+		"RETAIN",
+	}
+}
+
+type GeneratedTemplateResourceStatus string
+
+// Enum values for GeneratedTemplateResourceStatus
+const (
+	GeneratedTemplateResourceStatusPending    GeneratedTemplateResourceStatus = "PENDING"
+	GeneratedTemplateResourceStatusInProgress GeneratedTemplateResourceStatus = "IN_PROGRESS"
+	GeneratedTemplateResourceStatusFailed     GeneratedTemplateResourceStatus = "FAILED"
+	GeneratedTemplateResourceStatusComplete   GeneratedTemplateResourceStatus = "COMPLETE"
+)
+
+// Values returns all known values for GeneratedTemplateResourceStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (GeneratedTemplateResourceStatus) Values() []GeneratedTemplateResourceStatus {
+	return []GeneratedTemplateResourceStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETE",
+	}
+}
+
+type GeneratedTemplateStatus string
+
+// Enum values for GeneratedTemplateStatus
+const (
+	GeneratedTemplateStatusCreatePending    GeneratedTemplateStatus = "CREATE_PENDING"
+	GeneratedTemplateStatusUpdatePending    GeneratedTemplateStatus = "UPDATE_PENDING"
+	GeneratedTemplateStatusDeletePending    GeneratedTemplateStatus = "DELETE_PENDING"
+	GeneratedTemplateStatusCreateInProgress GeneratedTemplateStatus = "CREATE_IN_PROGRESS"
+	GeneratedTemplateStatusUpdateInProgress GeneratedTemplateStatus = "UPDATE_IN_PROGRESS"
+	GeneratedTemplateStatusDeleteInProgress GeneratedTemplateStatus = "DELETE_IN_PROGRESS"
+	GeneratedTemplateStatusFailed           GeneratedTemplateStatus = "FAILED"
+	GeneratedTemplateStatusComplete         GeneratedTemplateStatus = "COMPLETE"
+)
+
+// Values returns all known values for GeneratedTemplateStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GeneratedTemplateStatus) Values() []GeneratedTemplateStatus {
+	return []GeneratedTemplateStatus{
+		"CREATE_PENDING",
+		"UPDATE_PENDING",
+		"DELETE_PENDING",
+		"CREATE_IN_PROGRESS",
+		"UPDATE_IN_PROGRESS",
+		"DELETE_IN_PROGRESS",
+		"FAILED",
+		"COMPLETE",
+	}
+}
+
+type GeneratedTemplateUpdateReplacePolicy string
+
+// Enum values for GeneratedTemplateUpdateReplacePolicy
+const (
+	GeneratedTemplateUpdateReplacePolicyDelete GeneratedTemplateUpdateReplacePolicy = "DELETE"
+	GeneratedTemplateUpdateReplacePolicyRetain GeneratedTemplateUpdateReplacePolicy = "RETAIN"
+)
+
+// Values returns all known values for GeneratedTemplateUpdateReplacePolicy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (GeneratedTemplateUpdateReplacePolicy) Values() []GeneratedTemplateUpdateReplacePolicy {
+	return []GeneratedTemplateUpdateReplacePolicy{
+		"DELETE",
+		"RETAIN",
+	}
+}
+
 type HandlerErrorCode string
 
 // Enum values for HandlerErrorCode
@@ -762,6 +853,28 @@ func (ResourceAttribute) Values() []ResourceAttribute {
 	}
 }
 
+type ResourceScanStatus string
+
+// Enum values for ResourceScanStatus
+const (
+	ResourceScanStatusInProgress ResourceScanStatus = "IN_PROGRESS"
+	ResourceScanStatusFailed     ResourceScanStatus = "FAILED"
+	ResourceScanStatusComplete   ResourceScanStatus = "COMPLETE"
+	ResourceScanStatusExpired    ResourceScanStatus = "EXPIRED"
+)
+
+// Values returns all known values for ResourceScanStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceScanStatus) Values() []ResourceScanStatus {
+	return []ResourceScanStatus{
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETE",
+		"EXPIRED",
+	}
+}
+
 type ResourceSignalStatus string
 
 // Enum values for ResourceSignalStatus
@@ -1166,6 +1279,24 @@ func (StackStatus) Values() []StackStatus {
 	}
 }
 
+type TemplateFormat string
+
+// Enum values for TemplateFormat
+const (
+	TemplateFormatJson TemplateFormat = "JSON"
+	TemplateFormatYaml TemplateFormat = "YAML"
+)
+
+// Values returns all known values for TemplateFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TemplateFormat) Values() []TemplateFormat {
+	return []TemplateFormat{
+		"JSON",
+		"YAML",
+	}
+}
+
 type TemplateStage string
 
 // Enum values for TemplateStage
@@ -1259,5 +1390,25 @@ func (Visibility) Values() []Visibility {
 	return []Visibility{
 		"PUBLIC",
 		"PRIVATE",
+	}
+}
+
+type WarningType string
+
+// Enum values for WarningType
+const (
+	WarningTypeMutuallyExclusiveProperties WarningType = "MUTUALLY_EXCLUSIVE_PROPERTIES"
+	WarningTypeUnsupportedProperties       WarningType = "UNSUPPORTED_PROPERTIES"
+	WarningTypeMutuallyExclusiveTypes      WarningType = "MUTUALLY_EXCLUSIVE_TYPES"
+)
+
+// Values returns all known values for WarningType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (WarningType) Values() []WarningType {
+	return []WarningType{
+		"MUTUALLY_EXCLUSIVE_PROPERTIES",
+		"UNSUPPORTED_PROPERTIES",
+		"MUTUALLY_EXCLUSIVE_TYPES",
 	}
 }

@@ -848,7 +848,8 @@ type SourceIpConditionConfig struct {
 	// condition is satisfied if the source IP address of the request matches one of
 	// the CIDR blocks. This condition is not satisfied by the addresses in the
 	// X-Forwarded-For header. To search for addresses in the X-Forwarded-For header,
-	// use HttpHeaderConditionConfig .
+	// use HttpHeaderConditionConfig . The total number of values must be less than, or
+	// equal to five.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -1123,6 +1124,11 @@ type TargetGroupAttribute struct {
 	//   - target_health_state.unhealthy.connection_termination.enabled - Indicates
 	//   whether the load balancer terminates connections to unhealthy targets. The value
 	//   is true or false . The default is true .
+	//   - target_health_state.unhealthy.draining_interval_seconds - The amount of time
+	//   for Elastic Load Balancing to wait before changing the state of an unhealthy
+	//   target from unhealthy.draining to unhealthy . The range is 0-360000 seconds.
+	//   The default value is 0 seconds. Note: This attribute can only be configured when
+	//   target_health_state.unhealthy.connection_termination.enabled is false .
 	// The following attributes are supported only by Gateway Load Balancers:
 	//   - target_failover.on_deregistration - Indicates how the Gateway Load Balancer
 	//   handles existing flows when a target is deregistered. The possible values are

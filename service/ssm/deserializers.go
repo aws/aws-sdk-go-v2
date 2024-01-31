@@ -21760,6 +21760,19 @@ func awsAwsjson11_deserializeDocumentAssociation(v **types.Association, value in
 				sv.DocumentVersion = ptr.String(jtv)
 			}
 
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int32(int32(i64))
+			}
+
 		case "InstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21980,6 +21993,19 @@ func awsAwsjson11_deserializeDocumentAssociationDescription(v **types.Associatio
 					return fmt.Errorf("expected DocumentVersion to be of type string, got %T instead", value)
 				}
 				sv.DocumentVersion = ptr.String(jtv)
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "InstanceId":
@@ -22898,6 +22924,19 @@ func awsAwsjson11_deserializeDocumentAssociationVersionInfo(v **types.Associatio
 					return fmt.Errorf("expected DocumentVersion to be of type string, got %T instead", value)
 				}
 				sv.DocumentVersion = ptr.String(jtv)
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "MaxConcurrency":
@@ -25546,6 +25585,19 @@ func awsAwsjson11_deserializeDocumentCreateAssociationBatchRequestEntry(v **type
 					return fmt.Errorf("expected DocumentVersion to be of type string, got %T instead", value)
 				}
 				sv.DocumentVersion = ptr.String(jtv)
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case "InstanceId":

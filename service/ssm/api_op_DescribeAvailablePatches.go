@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all patches eligible to be included in a patch baseline.
+// Lists all patches eligible to be included in a patch baseline. Currently,
+// DescribeAvailablePatches supports only the Amazon Linux 1, Amazon Linux 2, and
+// Windows Server operating systems.
 func (c *Client) DescribeAvailablePatches(ctx context.Context, params *DescribeAvailablePatchesInput, optFns ...func(*Options)) (*DescribeAvailablePatchesOutput, error) {
 	if params == nil {
 		params = &DescribeAvailablePatchesInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "d7271774-b442-45a6-911b-29ad76f34e35",
+    "type": "feature",
+    "description": "CloudFormation IaC generator allows you to scan existing resources in your account and select resources to generate a template for a new or existing CloudFormation stack.",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

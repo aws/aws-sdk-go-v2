@@ -106,6 +106,19 @@ type UpdateAssociationInput struct {
 	// must set the document version to default .
 	DocumentVersion *string
 
+	// The number of hours the association can run before it is canceled. Duration
+	// applies to associations that are currently running, and any pending and in
+	// progress commands on all targets. If a target was taken offline for the
+	// association to run, it is made available again immediately, without a reboot.
+	// The Duration parameter applies only when both these conditions are true:
+	//   - The association for which you specify a duration is cancelable according to
+	//   the parameters of the SSM command document or Automation runbook associated with
+	//   this execution.
+	//   - The command specifies the ApplyOnlyAtCronInterval (https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociation.html#systemsmanager-UpdateAssociation-request-ApplyOnlyAtCronInterval)
+	//   parameter, which means that the association doesn't run immediately after it is
+	//   updated, but only according to the specified schedule.
+	Duration *int32
+
 	// The maximum number of targets allowed to run the association at the same time.
 	// You can specify a number, for example 10, or a percentage of the target set, for
 	// example 10%. The default value is 100%, which means all targets run the

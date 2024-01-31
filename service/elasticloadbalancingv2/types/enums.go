@@ -344,12 +344,13 @@ type TargetHealthStateEnum string
 
 // Enum values for TargetHealthStateEnum
 const (
-	TargetHealthStateEnumInitial     TargetHealthStateEnum = "initial"
-	TargetHealthStateEnumHealthy     TargetHealthStateEnum = "healthy"
-	TargetHealthStateEnumUnhealthy   TargetHealthStateEnum = "unhealthy"
-	TargetHealthStateEnumUnused      TargetHealthStateEnum = "unused"
-	TargetHealthStateEnumDraining    TargetHealthStateEnum = "draining"
-	TargetHealthStateEnumUnavailable TargetHealthStateEnum = "unavailable"
+	TargetHealthStateEnumInitial           TargetHealthStateEnum = "initial"
+	TargetHealthStateEnumHealthy           TargetHealthStateEnum = "healthy"
+	TargetHealthStateEnumUnhealthy         TargetHealthStateEnum = "unhealthy"
+	TargetHealthStateEnumUnhealthyDraining TargetHealthStateEnum = "unhealthy.draining"
+	TargetHealthStateEnumUnused            TargetHealthStateEnum = "unused"
+	TargetHealthStateEnumDraining          TargetHealthStateEnum = "draining"
+	TargetHealthStateEnumUnavailable       TargetHealthStateEnum = "unavailable"
 )
 
 // Values returns all known values for TargetHealthStateEnum. Note that this can
@@ -360,6 +361,7 @@ func (TargetHealthStateEnum) Values() []TargetHealthStateEnum {
 		"initial",
 		"healthy",
 		"unhealthy",
+		"unhealthy.draining",
 		"unused",
 		"draining",
 		"unavailable",
