@@ -1,8 +1,0 @@
-{
-    "id": "295e8118-a1ba-41d8-aed4-a437d37af31f",
-    "type": "feature",
-    "description": "Update page size limits for GetJobRuns and GetTriggers APIs.",
-    "modules": [
-        "service/glue"
-    ]
-}

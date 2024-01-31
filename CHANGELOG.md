@@ -1,3 +1,15 @@
+# Release (2024-01-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.43.0](service/cloudformation/CHANGELOG.md#v1430-2024-01-31)
+  * **Feature**: CloudFormation IaC generator allows you to scan existing resources in your account and select resources to generate a template for a new or existing CloudFormation stack.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.27.0](service/elasticloadbalancingv2/CHANGELOG.md#v1270-2024-01-31)
+  * **Feature**: This release enables unhealthy target draining intervals for Network Load Balancers.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.74.0](service/glue/CHANGELOG.md#v1740-2024-01-31)
+  * **Feature**: Update page size limits for GetJobRuns and GetTriggers APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.45.0](service/ssm/CHANGELOG.md#v1450-2024-01-31)
+  * **Feature**: This release adds an optional Duration parameter to StateManager Associations. This allows customers to specify how long an apply-only-on-cron association execution should run. Once the specified Duration is out all the ongoing cancellable commands or automations are cancelled.
+
 # Release (2024-01-30)
 
 ## Module Highlights

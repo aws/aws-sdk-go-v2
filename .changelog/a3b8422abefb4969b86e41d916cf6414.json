@@ -1,8 +1,0 @@
-{
-    "id": "a3b8422a-befb-4969-b86e-41d916cf6414",
-    "type": "feature",
-    "description": "This release enables unhealthy target draining intervals for Network Load Balancers.",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

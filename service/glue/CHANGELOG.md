@@ -1,3 +1,7 @@
+# v1.74.0 (2024-01-31)
+
+* **Feature**: Update page size limits for GetJobRuns and GetTriggers APIs.
+
 # v1.73.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions
