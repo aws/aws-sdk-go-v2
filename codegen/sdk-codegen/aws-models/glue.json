@@ -17102,7 +17102,7 @@
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.glue#PageSize",
+                    "target": "com.amazonaws.glue#OrchestrationPageSize200",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum size of the response.</p>"
                     }
@@ -19646,7 +19646,7 @@
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.glue#PageSize",
+                    "target": "com.amazonaws.glue#OrchestrationPageSize200",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum size of the response.</p>"
                     }
@@ -22089,7 +22089,7 @@
                 "Runtime": {
                     "target": "com.amazonaws.glue#RuntimeNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>In Ray jobs, Runtime is used to specify the versions of Ray, Python and additional\n      libraries available in your environment. This field is not used in other job types. For\n      supported runtime environment values, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-runtimes.html\">Working with Ray jobs</a>\n      in the Glue Developer Guide.</p>"
+                        "smithy.api#documentation": "<p>In Ray jobs, Runtime is used to specify the versions of Ray, Python and additional\n      libraries available in your environment. This field is not used in other job types. For\n      supported runtime environment values, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/ray-jobs-section.html\">Supported Ray runtime environments</a>\n      in the Glue Developer Guide.</p>"
                     }
                 }
             },
@@ -23188,7 +23188,7 @@
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.glue#PageSize",
+                    "target": "com.amazonaws.glue#OrchestrationPageSize25",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum size of a list to return.</p>"
                     }
@@ -24616,7 +24616,7 @@
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.glue#PageSize",
+                    "target": "com.amazonaws.glue#OrchestrationPageSize200",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum size of a list to return.</p>"
                     }
@@ -24690,7 +24690,7 @@
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.glue#PageSize",
+                    "target": "com.amazonaws.glue#OrchestrationPageSize25",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum size of a list to return.</p>"
                     }
@@ -25994,6 +25994,24 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[\\.\\-_A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.glue#OrchestrationPageSize200": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#OrchestrationPageSize25": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.glue#OrchestrationRoleArn": {

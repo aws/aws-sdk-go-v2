@@ -1085,6 +1085,9 @@
                     "target": "com.amazonaws.cloudformation#CreateChangeSet"
                 },
                 {
+                    "target": "com.amazonaws.cloudformation#CreateGeneratedTemplate"
+                },
+                {
                     "target": "com.amazonaws.cloudformation#CreateStack"
                 },
                 {
@@ -1101,6 +1104,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudformation#DeleteChangeSet"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#DeleteGeneratedTemplate"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#DeleteStack"
@@ -1124,10 +1130,16 @@
                     "target": "com.amazonaws.cloudformation#DescribeChangeSetHooks"
                 },
                 {
+                    "target": "com.amazonaws.cloudformation#DescribeGeneratedTemplate"
+                },
+                {
                     "target": "com.amazonaws.cloudformation#DescribeOrganizationsAccess"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#DescribePublisher"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#DescribeResourceScan"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#DescribeStackDriftDetectionStatus"
@@ -1178,6 +1190,9 @@
                     "target": "com.amazonaws.cloudformation#ExecuteChangeSet"
                 },
                 {
+                    "target": "com.amazonaws.cloudformation#GetGeneratedTemplate"
+                },
+                {
                     "target": "com.amazonaws.cloudformation#GetStackPolicy"
                 },
                 {
@@ -1196,7 +1211,19 @@
                     "target": "com.amazonaws.cloudformation#ListExports"
                 },
                 {
+                    "target": "com.amazonaws.cloudformation#ListGeneratedTemplates"
+                },
+                {
                     "target": "com.amazonaws.cloudformation#ListImports"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#ListResourceScanRelatedResources"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#ListResourceScanResources"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#ListResourceScans"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#ListStackInstanceResourceDrifts"
@@ -1256,10 +1283,16 @@
                     "target": "com.amazonaws.cloudformation#SignalResource"
                 },
                 {
+                    "target": "com.amazonaws.cloudformation#StartResourceScan"
+                },
+                {
                     "target": "com.amazonaws.cloudformation#StopStackSetOperation"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#TestType"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#UpdateGeneratedTemplate"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#UpdateStack"
@@ -2330,6 +2363,23 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#ConcurrentResourcesLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudformation#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConcurrentResourcesLimitExceeded",
+                    "httpResponseCode": 429
+                },
+                "smithy.api#documentation": "<p>No more than 5 generated templates can be in an <code>InProgress</code> or <code>Pending</code> status at one\n   time. This error is also returned if a generated template that is in an <code>InProgress</code> or\n   <code>Pending</code> status is attempted to be updated or deleted.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
         "com.amazonaws.cloudformation#ConfigurationSchema": {
             "type": "string",
             "traits": {
@@ -2581,6 +2631,103 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudformation#CreateGeneratedTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#CreateGeneratedTemplateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#CreateGeneratedTemplateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#ConcurrentResourcesLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a template from existing resources that are not already managed with CloudFormation. You can check the status of\n   the template generation using the <code>DescribeGeneratedTemplate</code> API action.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a generated template",
+                        "documentation": "This example creates a generated template with a resources file.",
+                        "input": {
+                            "Resources": [
+                                {
+                                    "ResourceType": "AWS::S3::Bucket",
+                                    "ResourceIdentifier": {
+                                        "BucketName": "jazz-bucket"
+                                    }
+                                },
+                                {
+                                    "ResourceType": "AWS::EC2::DHCPOptions",
+                                    "ResourceIdentifier": {
+                                        "DhcpOptionsId": "random-id123"
+                                    }
+                                }
+                            ],
+                            "GeneratedTemplateName": "JazzyTemplate"
+                        },
+                        "output": {
+                            "GeneratedTemplateId": "arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/88f09db1-d211-4cb7-964b-434e2b8469ca"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#CreateGeneratedTemplateInput": {
+            "type": "structure",
+            "members": {
+                "Resources": {
+                    "target": "com.amazonaws.cloudformation#ResourceDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of resources to be included in the generated template.</p>\n         <p> If no resources are specified,the template will be created without any resources. Resources can be added to the\n   template using the <code>UpdateGeneratedTemplate</code> API action.</p>"
+                    }
+                },
+                "GeneratedTemplateName": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name assigned to the generated template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StackName": {
+                    "target": "com.amazonaws.cloudformation#StackName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional name or ARN of a stack to use as the base stack for the generated template.</p>"
+                    }
+                },
+                "TemplateConfiguration": {
+                    "target": "com.amazonaws.cloudformation#TemplateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details of the generated template, including the <code>DeletionPolicy</code> and\n   <code>UpdateReplacePolicy</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#CreateGeneratedTemplateOutput": {
+            "type": "structure",
+            "members": {
+                "GeneratedTemplateId": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the generated template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudformation#CreateStack": {
             "type": "operation",
             "input": {
@@ -2651,7 +2798,7 @@
                 "TimeoutInMinutes": {
                     "target": "com.amazonaws.cloudformation#TimeoutMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time that can pass before the stack status becomes CREATE_FAILED; if <code>DisableRollback</code>\n   is not set or is set to <code>false</code>, the stack will be rolled back.</p>"
+                        "smithy.api#documentation": "<p>The amount of time that can pass before the stack status becomes <code>CREATE_FAILED</code>; if\n   <code>DisableRollback</code> is not set or is set to <code>false</code>, the stack will be rolled back.</p>"
                     }
                 },
                 "NotificationARNs": {
@@ -3140,6 +3287,51 @@
             "traits": {
                 "smithy.api#documentation": "<p>The output for the <a>DeleteChangeSet</a> action.</p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudformation#DeleteGeneratedTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#DeleteGeneratedTemplateInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#ConcurrentResourcesLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deleted a generated template.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a generated template",
+                        "documentation": "This example deletes a generated template",
+                        "input": {
+                            "GeneratedTemplateName": "JazzyTemplate"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#DeleteGeneratedTemplateInput": {
+            "type": "structure",
+            "members": {
+                "GeneratedTemplateName": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of a generated template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudformation#DeleteStack": {
@@ -3833,6 +4025,113 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudformation#DescribeGeneratedTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#DescribeGeneratedTemplateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#DescribeGeneratedTemplateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a generated template. The output includes details about the progress of the creation of a generated\n   template started by a <code>CreateGeneratedTemplate</code> API action or the update of a generated template started\n   with an <code>UpdateGeneratedTemplate</code> API action.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#DescribeGeneratedTemplateInput": {
+            "type": "structure",
+            "members": {
+                "GeneratedTemplateName": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of a generated template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#DescribeGeneratedTemplateOutput": {
+            "type": "structure",
+            "members": {
+                "GeneratedTemplateId": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the generated template. The format is\n   <code>arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}</code>. For example,\n   <code>arn:aws:cloudformation:<i>us-east-1</i>:<i>123456789012</i>:generatedtemplate/<i>2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc</i>\n            </code>.</p>"
+                    }
+                },
+                "GeneratedTemplateName": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the generated template.</p>"
+                    }
+                },
+                "Resources": {
+                    "target": "com.amazonaws.cloudformation#ResourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects describing the details of the resources in the template generation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the template generation. Supported values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreatePending</code> - the creation of the template is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateInProgress</code> - the creation of the template is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePending</code> - the deletion of the template is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteInProgress</code> - the deletion of the template is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePending</code> - the update of the template is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateInProgress</code> - the update of the template is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - the template operation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Complete</code> - the template operation is complete.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.cloudformation#TemplateStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current template generation status. This will provide more details if a failure\n   happened.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.cloudformation#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the generated template was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.cloudformation#LastUpdatedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the generated template was last updated.</p>"
+                    }
+                },
+                "Progress": {
+                    "target": "com.amazonaws.cloudformation#TemplateProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object describing the progress of the template generation.</p>"
+                    }
+                },
+                "StackId": {
+                    "target": "com.amazonaws.cloudformation#StackId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stack ARN of the base stack if a base stack was provided when generating the template.</p>"
+                    }
+                },
+                "TemplateConfiguration": {
+                    "target": "com.amazonaws.cloudformation#TemplateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details of the generated template, including the <code>DeletionPolicy</code> and\n   <code>UpdateReplacePolicy</code>.</p>"
+                    }
+                },
+                "TotalWarnings": {
+                    "target": "com.amazonaws.cloudformation#TotalWarnings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of warnings generated for this template. The warnings are found in the details of each of the\n   resources in the template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudformation#DescribeOrganizationsAccess": {
             "type": "operation",
             "input": {
@@ -3938,6 +4237,101 @@
                     "target": "com.amazonaws.cloudformation#PublisherProfile",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL to the publisher's profile with the identity provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudformation#DescribeResourceScan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#DescribeResourceScanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#DescribeResourceScanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#ResourceScanNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes details of a resource scan.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#DescribeResourceScanInput": {
+            "type": "structure",
+            "members": {
+                "ResourceScanId": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource scan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#DescribeResourceScanOutput": {
+            "type": "structure",
+            "members": {
+                "ResourceScanId": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource scan. The format is\n   <code>arn:${Partition}:cloudformation:${Region}:${Account}:resourceScan/${Id}</code>. An example is\n   <code>arn:aws:cloudformation:<i>us-east-1</i>:<i>123456789012</i>:resourceScan/<i>f5b490f7-7ed4-428a-aa06-31ff25db0772</i>\n            </code>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the resource scan.</p>\n         <dl>\n            <dt>INPROGRESS</dt>\n            <dd>\n               <p>The resource scan is still in progress.</p>\n            </dd>\n            <dt>COMPLETE</dt>\n            <dd>\n               <p>The resource scan is complete.</p>\n            </dd>\n            <dt>EXPIRED</dt>\n            <dd>\n               <p>The resource scan has expired.</p>\n            </dd>\n            <dt>FAILED</dt>\n            <dd>\n               <p>The resource scan has failed.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the resource scan status, providing more information if a failure happened.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.cloudformation#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the resource scan was started.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.cloudformation#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the resource scan was finished.</p>"
+                    }
+                },
+                "PercentageCompleted": {
+                    "target": "com.amazonaws.cloudformation#PercentageCompleted",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of the resource scan that has been completed.</p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.cloudformation#ResourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource types for the specified scan. Resource types are only available for scans with a\n   <code>Status</code> set to <code>COMPLETE</code> or <code>FAILED </code>.</p>"
+                    }
+                },
+                "ResourcesScanned": {
+                    "target": "com.amazonaws.cloudformation#ResourcesScanned",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources that were listed. This is only available for scans with a <code>Status</code> set to\n   <code>COMPLETE</code>, <code>EXPIRED</code>, or <code>FAILED </code>.</p>"
+                    }
+                },
+                "ResourcesRead": {
+                    "target": "com.amazonaws.cloudformation#ResourcesRead",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources that were read. This is only available for scans with a <code>Status</code> set to\n   <code>COMPLETE</code>, <code>EXPIRED</code>, or <code>FAILED </code>.</p>\n         <note>\n            <p>This field may be 0 if the resource scan failed with a <code>ResourceScanLimitExceededException</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -5789,6 +6183,241 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#GeneratedTemplateDeletionPolicy": {
+            "type": "enum",
+            "members": {
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                },
+                "RETAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETAIN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#GeneratedTemplateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#GeneratedTemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#GeneratedTemplateNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudformation#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "GeneratedTemplateNotFound",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The generated template was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudformation#GeneratedTemplateResourceStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#GeneratedTemplateStatus": {
+            "type": "enum",
+            "members": {
+                "CREATE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_PENDING"
+                    }
+                },
+                "UPDATE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_PENDING"
+                    }
+                },
+                "DELETE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_PENDING"
+                    }
+                },
+                "CREATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_IN_PROGRESS"
+                    }
+                },
+                "UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#GeneratedTemplateUpdateReplacePolicy": {
+            "type": "enum",
+            "members": {
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                },
+                "RETAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETAIN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#GetGeneratedTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#GetGeneratedTemplateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#GetGeneratedTemplateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a generated template. If the template is in an <code>InProgress</code> or <code>Pending</code> status\n   then the template returned will be the template when the template was last in a <code>Complete</code> status. If the\n   template has not yet been in a <code>Complete</code> status then an empty template will be returned.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a generated template in JSON format",
+                        "documentation": "This example gets a generated template ins JSON format.",
+                        "input": {
+                            "GeneratedTemplateName": "JazzyTemplate"
+                        },
+                        "output": {
+                            "Status": "COMPLETE",
+                            "TemplateBody": "{\"Metadata\":{\"TemplateId\":\"arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/*\"},\"Parameters\":{\"Stage\":{\"Default\":\"beta\",\"Type\":\"String\"}},\"Resources\":{\"TestRole\":{\"Properties\":{\"AssumeRolePolicyDocument\":{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":{\"Fn::Sub\":[\"arn:${AWS::Partition}:iam::${AccountId}:root\",{\"AccountId\":{\"Fn::AccountIdFromAlias\":\"test-account-alias\"}}]}},\"Action\":\"sts:AssumeRole\"}]}},\"Type\":\"AWS::IAM::Role\",\"DeletionPolicy\":\"Delete\"},\"DocumentationPartl7ob4vsd76vs\":{\"UpdateReplacePolicy\":\"Retain\",\"Type\":\"AWS::ApiGateway::DocumentationPart\",\"DeletionPolicy\":\"Retain\",\"Properties\":{\"RestApiId\":\"l7ob4vsd76\",\"Properties\":\"{\\n  \\\"description\\\" : \\\"ListGeneratedTemplates 200 response\\\"\\n}\",\"Location\":{\"Path\":\"/ListGeneratedTemplates\",\"Type\":\"RESPONSE\",\"Method\":\"POST\",\"StatusCode\":\"200\"}}}}}"
+                        }
+                    },
+                    {
+                        "title": "To get a generated template in YAML format",
+                        "documentation": "This example gets a generated template in YAML format.",
+                        "input": {
+                            "GeneratedTemplateName": "JazzyTemplate",
+                            "Format": "YAML"
+                        },
+                        "output": {
+                            "Status": "COMPLETE",
+                            "TemplateBody": "---\nMetadata:\n  TemplateId: \"arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/*\"\nParameters:\n  Stage:\n    Default: \"beta\"\n    Type: \"String\"\nResources:\n  TestRole:\n    Properties:\n      AssumeRolePolicyDocument:\n        Version: \"2012-10-17\"\n        Statement:\n        - Effect: \"Allow\"\n          Principal:\n            AWS:\n              Fn::Sub:\n              - \"arn:${AWS::Partition}:iam::${AccountId}:root\"\n              - AccountId:\n                  Fn::AccountIdFromAlias: \"test-account-alias\"\n          Action: \"sts:AssumeRole\"\n    Type: \"AWS::IAM::Role\"\n    DeletionPolicy: \"Delete\"\n  DocumentationPartl7ob4vsd76vsnAlFMLXKVm:\n    UpdateReplacePolicy: \"Retain\"\n    Type: \"AWS::ApiGateway::DocumentationPart\"\n    DeletionPolicy: \"Retain\"\n    Properties:\n      RestApiId: \"l7ob4vsd76\"\n      Properties: \"{\\n  \\\"description\\\" : \\\"ListGeneratedTemplates 200 response\\\"\\n\\\n        }\"\n      Location:\n        Path: \"/ListGeneratedTemplates\"\n        Type: \"RESPONSE\"\n        Method: \"POST\"\n        StatusCode: \"200\"\n"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#GetGeneratedTemplateInput": {
+            "type": "structure",
+            "members": {
+                "Format": {
+                    "target": "com.amazonaws.cloudformation#TemplateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language to use to retrieve for the generated template. Supported values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>JSON</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>YAML</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "GeneratedTemplateName": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the generated template. The format is\n   <code>arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}</code>. For example,\n   <code>arn:aws:cloudformation:<i>us-east-1</i>:<i>123456789012</i>:generatedtemplate/<i>2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc</i>\n            </code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#GetGeneratedTemplateOutput": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the template generation. Supported values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreatePending</code> - the creation of the template is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateInProgress</code> - the creation of the template is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePending</code> - the deletion of the template is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteInProgress</code> - the deletion of the template is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePending</code> - the update of the template is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateInProgress</code> - the update of the template is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - the template operation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Complete</code> - the template operation is complete.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TemplateBody": {
+                    "target": "com.amazonaws.cloudformation#TemplateBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template body of the generated template, in the language specified by the <code>Language</code>\n   parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudformation#GetStackPolicy": {
             "type": "operation",
             "input": {
@@ -6512,6 +7141,33 @@
         "com.amazonaws.cloudformation#IsDefaultVersion": {
             "type": "boolean"
         },
+        "com.amazonaws.cloudformation#JazzLogicalResourceIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#LogicalResourceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#JazzResourceIdentifierProperties": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cloudformation#JazzResourceIdentifierPropertyKey"
+            },
+            "value": {
+                "target": "com.amazonaws.cloudformation#JazzResourceIdentifierPropertyValue"
+            }
+        },
+        "com.amazonaws.cloudformation#JazzResourceIdentifierPropertyKey": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudformation#JazzResourceIdentifierPropertyValue": {
+            "type": "string"
+        },
         "com.amazonaws.cloudformation#Key": {
             "type": "string"
         },
@@ -6653,6 +7309,64 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudformation#ListGeneratedTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#ListGeneratedTemplatesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#ListGeneratedTemplatesOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists your generated templates in this Region.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Summaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ListGeneratedTemplatesInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.cloudformation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that identifies the next page of resource scan results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudformation#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value\n   that you can use for the <code>NextToken</code> parameter to get the next set of results. By default the\n   <code>ListGeneratedTemplates</code> API action will return at most 50 results in each response. The maximum value is\n   100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ListGeneratedTemplatesOutput": {
+            "type": "structure",
+            "members": {
+                "Summaries": {
+                    "target": "com.amazonaws.cloudformation#TemplateSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of summaries of the generated templates.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudformation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to a token. To retrieve\n   the next set of results, call <code>ListGeneratedTemplates</code> again and use that value for the\n   <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to an empty\n   string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudformation#ListImports": {
             "type": "operation",
             "input": {
@@ -6705,6 +7419,357 @@
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A string that identifies the next page of exports. If there is no additional page, this value is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ListResourceScanRelatedResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#ListResourceScanRelatedResourcesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#ListResourceScanRelatedResourcesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#ResourceScanInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#ResourceScanNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the related resources for a list of resources from a resource scan. The response indicates whether each\n   returned resource is already managed by CloudFormation.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list resource scan related resources",
+                        "documentation": "This example lists the resources related to the passed in resources",
+                        "input": {
+                            "ResourceScanId": "arn:aws:cloudformation:us-east-1:123456789012:resourceScan/c19304f6-c4f1-4ff8-8e1f-35162e41d7e1",
+                            "Resources": [
+                                {
+                                    "ResourceType": "AWS::S3::Bucket",
+                                    "ResourceIdentifier": {
+                                        "BucketName": "jazz-bucket"
+                                    }
+                                },
+                                {
+                                    "ResourceType": "AWS::EC2::DHCPOptions",
+                                    "ResourceIdentifier": {
+                                        "DhcpOptionsId": "random-id123"
+                                    }
+                                }
+                            ]
+                        },
+                        "output": {
+                            "RelatedResources": [
+                                {
+                                    "ResourceType": "AWS::EC2::VPCDHCPOptionsAssociation",
+                                    "ResourceIdentifier": {
+                                        "VpcId": "vpc-0123456abcdefg",
+                                        "DhcpOptionsId": "dopt-98765edcba"
+                                    },
+                                    "ManagedByStack": false
+                                },
+                                {
+                                    "ResourceType": "AWS::EC2::VPC",
+                                    "ResourceIdentifier": {
+                                        "VpcId": "vpc-0123456abcdefgabc"
+                                    },
+                                    "ManagedByStack": false
+                                },
+                                {
+                                    "ResourceType": "AWS::EC2::VPCDHCPOptionsAssociation",
+                                    "ResourceIdentifier": {
+                                        "VpcId": "vpc-123456abcdef",
+                                        "DhcpOptionsId": "dopt-98765edcba"
+                                    },
+                                    "ManagedByStack": false
+                                },
+                                {
+                                    "ResourceType": "AWS::EC2::VPC",
+                                    "ResourceIdentifier": {
+                                        "VpcId": "vpc-12345678abcd"
+                                    },
+                                    "ManagedByStack": false
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RelatedResources",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ListResourceScanRelatedResourcesInput": {
+            "type": "structure",
+            "members": {
+                "ResourceScanId": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource scan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Resources": {
+                    "target": "com.amazonaws.cloudformation#ScannedResourceIdentifiers",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The list of resources for which you want to get the related resources. Up to 100 resources can be\n   provided.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudformation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that identifies the next page of resource scan results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudformation#BoxedMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value\n   that you can use for the <code>NextToken</code> parameter to get the next set of results. By default the\n   <code>ListResourceScanRelatedResources</code> API action will return up to 100 results in each response. The maximum\n   value is 100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ListResourceScanRelatedResourcesOutput": {
+            "type": "structure",
+            "members": {
+                "RelatedResources": {
+                    "target": "com.amazonaws.cloudformation#RelatedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of up to <code>MaxResults</code> resources in the specified resource scan related to the specified\n   resources.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudformation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to a token. To retrieve\n   the next set of results, call <code>ListResourceScanRelatedResources</code> again and use that value for the\n   <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to an empty\n   string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ListResourceScanResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#ListResourceScanResourcesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#ListResourceScanResourcesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#ResourceScanInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#ResourceScanNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the resources from a resource scan. The results can be filtered by resource identifier, resource type\n   prefix, tag key, and tag value. Only resources that match all specified filters are returned. The response indicates\n   whether each returned resource is already managed by CloudFormation.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list the resources in your resource scan",
+                        "documentation": "This example lists the resources in your resource scan",
+                        "input": {
+                            "ResourceScanId": "arn:aws:cloudformation:us-east-1:123456789012:resourceScan/c19304f6-c4f1-4ff8-8e1f-35162e41d7e1"
+                        },
+                        "output": {
+                            "Resources": [
+                                {
+                                    "ResourceType": "AWS::Amplify::App",
+                                    "ResourceIdentifier": {
+                                        "Arn": "arn:aws:amplify:us-east-1:123456789012:apps/12345678"
+                                    },
+                                    "ManagedByStack": false
+                                },
+                                {
+                                    "ResourceType": "AWS::ApiGateway::Deployment",
+                                    "ResourceIdentifier": {
+                                        "DeploymentId": "1234567",
+                                        "RestApiId": "abcdefgh"
+                                    },
+                                    "ManagedByStack": true
+                                }
+                            ],
+                            "NextToken": "AQICAHjOiFofVZCZ0aEN1VnF1m9jq/xxpTY7MyPexz72BHuAkgETVS8c+PVCFpE6uGVJDxCFAAACbjCCAmoGCSqGSIb3DQEHBqCCAlswggJXAgEAMIICUAYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwJ9QJAYeDzUoBeimECARCAggIh8brcL6H6uMvcZafRTB79hUkdJlOoFavrhYA2U7qdlPUwyvaVqN2DvFMxsl2XC1SaWmr5esMKxg1fLjbOEF32lVQn0Jp8QuoFUvREnqEsR32ZQmiI/Oc9HmwIr/BS3rzljki2Kr8Y0nriS7aFDLUCYsdsRdQ9iL5/iCc6oW7IisCzq1VKcHijlXvuiEipZAinsxEbmYBjmWgT7UYZdrrb6Hq3COEgPzS490ucndtwPjyvuCIMiAfTLMuBgjkzEfp4U97aLwPWaiKw94dMXj/3K67uuH9BjWZO+j6d3nnyZ14FOgI7SQvvVBnxARbTmINttHWjXPrIuE9YuuSWgn6GmuzEEDqkuglOS/OeTHYSPvLPRrFieUiawblljLVoVY9/HDjL/EErSTWiCnytGXIRoMI9Ozp2Yjfm3MBwSDXvMIrscw6QAa3bUA6uJSV2skCBnDoqV8EXd8umh788OgEtDxQ7d/NlUYEhN6AJ0K9TVz/2rZgOlzLCmtvmbIy7loAZCmf/uPNkyu6WuoLWTzQz78SnA8jWPKnxrzhNyPuaIgUH23U3mExhfMRDczitpOo5JM81oHVPECslGoqktLhP55BQqMbJy4w16SZJfr993TXhF5jOZenRN1zDsK3J5cLdJgPK1Ds1Z9DnRKMfXOqoAyme2l94/h0kLIxgAtxOeJFP/g/9hUtt1qGkZeV3Xqw1nkFQnafGIg4fJoWg74Sr7yo="
+                        }
+                    },
+                    {
+                        "title": "To list the resources in your resource scan for specific resource type",
+                        "documentation": "This example lists the resources in your resource scan filtering only the resources that start with the passed in prefix",
+                        "input": {
+                            "ResourceScanId": "arn:aws:cloudformation:us-east-1:123456789012:resourceScan/c19304f6-c4f1-4ff8-8e1f-35162e41d7e1",
+                            "ResourceTypePrefix": "AWS::S3"
+                        },
+                        "output": {
+                            "Resources": [
+                                {
+                                    "ResourceType": "AWS::S3::AccessPoint",
+                                    "ResourceIdentifier": {
+                                        "Name": "test-access-point"
+                                    },
+                                    "ManagedByStack": true
+                                },
+                                {
+                                    "ResourceType": "AWS::S3::BucketPolicy",
+                                    "ResourceIdentifier": {
+                                        "Bucket": "a-random-bucket"
+                                    },
+                                    "ManagedByStack": false
+                                }
+                            ],
+                            "NextToken": "AQICAHjOiFofVZCZ0aEN1VnF1m9jq/xxpTY7MyPexz72BHuAkgETVS8c+PVCFpE6uGVJDxCFAAACbjCCAmoGCSqGSIb3DQEHBqCCAlswggJXAgEAMIICUAYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwJ9QJAYeDzUoBeimECARCAggIh8brcL6H6uMvcZafRTB79hUkdJlOoFavrhYA2U7qdlPUwyvaVqN2DvFMxsl2XC1SaWmr5esMKxg1fLjbOEF32lVQn0Jp8QuoFUvREnqEsR32ZQmiI/Oc9HmwIr/BS3rzljki2Kr8Y0nriS7aFDLUCYsdsRdQ9iL5/iCc6oW7IisCzq1VKcHijlXvuiEipZAinsxEbmYBjmWgT7UYZdrrb6Hq3COEgPzS490ucndtwPjyvuCIMiAfTLMuBgjkzEfp4U97aLwPWaiKw94dMXj/3K67uuH9BjWZO+j6d3nnyZ14FOgI7SQvvVBnxARbTmINttHWjXPrIuE9YuuSWgn6GmuzEEDqkuglOS/OeTHYSPvLPRrFieUiawblljLVoVY9/HDjL/EErSTWiCnytGXIRoMI9Ozp2Yjfm3MBwSDXvMIrscw6QAa3bUA6uJSV2skCBnDoqV8EXd8umh788OgEtDxQ7d/NlUYEhN6AJ0K9TVz/2rZgOlzLCmtvmbIy7loAZCmf/uPNkyu6WuoLWTzQz78SnA8jWPKnxrzhNyPuaIgUH23U3mExhfMRDczitpOo5JM81oHVPECslGoqktLhP55BQqMbJy4w16SZJfr993TXhF5jOZenRN1zDsK3J5cLdJgPK1Ds1Z9DnRKMfXOqoAyme2l94/h0kLIxgAtxOeJFP/g/9hUtt1qGkZeV3Xqw1nkFQnafGIg4fJoWg74Sr7yo="
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Resources",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ListResourceScanResourcesInput": {
+            "type": "structure",
+            "members": {
+                "ResourceScanId": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource scan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.cloudformation#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, the returned resources will have the specified resource identifier (or one of them in the case\n   where the resource has multiple identifiers).</p>"
+                    }
+                },
+                "ResourceTypePrefix": {
+                    "target": "com.amazonaws.cloudformation#ResourceTypePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, the returned resources will be of any of the resource types with the specified prefix.</p>"
+                    }
+                },
+                "TagKey": {
+                    "target": "com.amazonaws.cloudformation#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, the returned resources will have a matching tag key.</p>"
+                    }
+                },
+                "TagValue": {
+                    "target": "com.amazonaws.cloudformation#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, the returned resources will have a matching tag value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudformation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that identifies the next page of resource scan results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudformation#ResourceScannerMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value\n   that you can use for the <code>NextToken</code> parameter to get the next set of results. By default the\n   <code>ListResourceScanResources</code> API action will return at most 100 results in each response. The maximum value\n   is 100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ListResourceScanResourcesOutput": {
+            "type": "structure",
+            "members": {
+                "Resources": {
+                    "target": "com.amazonaws.cloudformation#ScannedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of up to <code>MaxResults</code> resources in the specified resource scan that match all of the specified\n   filters.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudformation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to a token. To retrieve\n   the next set of results, call <code>ListResourceScanResources</code> again and use that value for the\n   <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to an empty\n   string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ListResourceScans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#ListResourceScansInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#ListResourceScansOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List the resource scans from newest to oldest. By default it will return up to 10 resource scans.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ResourceScanSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ListResourceScansInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.cloudformation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that identifies the next page of resource scan results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudformation#ResourceScannerMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value\n   that you can use for the <code>NextToken</code> parameter to get the next set of results. The default value is 10.\n   The maximum value is 100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ListResourceScansOutput": {
+            "type": "structure",
+            "members": {
+                "ResourceScanSummaries": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scans returned.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudformation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to a token. To retrieve\n   the next set of results, call <code>ListResourceScans</code> again and use that value for the <code>NextToken</code>\n   parameter. If the request returns all results, <code>NextToken</code> is set to an empty string.</p>"
                     }
                 }
             },
@@ -7610,6 +8675,9 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#ManagedByStack": {
+            "type": "boolean"
+        },
         "com.amazonaws.cloudformation#ManagedExecution": {
             "type": "structure",
             "members": {
@@ -7726,6 +8794,14 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 5
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#NumberOfResources": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
                 }
             }
         },
@@ -8124,6 +9200,9 @@
                 "target": "com.amazonaws.cloudformation#Parameter"
             }
         },
+        "com.amazonaws.cloudformation#PercentageCompleted": {
+            "type": "double"
+        },
         "com.amazonaws.cloudformation#PermissionModels": {
             "type": "enum",
             "members": {
@@ -8191,6 +9270,9 @@
             }
         },
         "com.amazonaws.cloudformation#Properties": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudformation#PropertyDescription": {
             "type": "string"
         },
         "com.amazonaws.cloudformation#PropertyDifference": {
@@ -8479,6 +9561,9 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudformation#RefreshAllResources": {
+            "type": "boolean"
+        },
         "com.amazonaws.cloudformation#Region": {
             "type": "string",
             "traits": {
@@ -8702,6 +9787,12 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#RelatedResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#ScannedResource"
+            }
+        },
         "com.amazonaws.cloudformation#Replacement": {
             "type": "enum",
             "members": {
@@ -8772,6 +9863,9 @@
             "member": {
                 "target": "com.amazonaws.cloudformation#RequiredActivatedType"
             }
+        },
+        "com.amazonaws.cloudformation#RequiredProperty": {
+            "type": "boolean"
         },
         "com.amazonaws.cloudformation#RequiresRecreation": {
             "type": "enum",
@@ -8943,6 +10037,107 @@
                 "target": "com.amazonaws.cloudformation#ResourceChangeDetail"
             }
         },
+        "com.amazonaws.cloudformation#ResourceDefinition": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.cloudformation#ResourceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of the resource, such as <code>AWS::DynamoDB::Table</code>. For the list of supported resources, see\n      <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html\">IaC\n      generator supported resource types</a> in the <i>CloudFormation User Guide</i>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogicalResourceId": {
+                    "target": "com.amazonaws.cloudformation#LogicalResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical resource id for this resource in the generated template.</p>"
+                    }
+                },
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.cloudformation#ResourceIdentifierProperties",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of up to 256 key-value pairs that identifies the scanned resource. The key is the name of one of the\n   primary identifiers for the resource. (Primary identifiers are specified in the <code>primaryIdentifier</code> list\n   in the resource schema.) The value is the value of that primary identifier. For example, for a\n   <code>AWS::DynamoDB::Table</code> resource, the primary identifiers is <code>TableName</code> so the key-value pair\n   could be <code>\"TableName\": \"MyDDBTable\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier\">primaryIdentifier</a> in the <i>CloudFormation Command Line Interface User guide for extension\n   development</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource included in a generated template. This data type is used with the\n   <code>CreateGeneratedTemplate</code> and <code>UpdateGeneratedTemplate</code> API actions.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#ResourceDefinitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#ResourceDefinition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ResourceDetail": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.cloudformation#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource, such as <code>AWS::DynamoDB::Table</code>. For the list of supported resources, see\n      <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html\">IaC\n      generator supported resource types</a> In the <i>CloudFormation User Guide</i>\n         </p>"
+                    }
+                },
+                "LogicalResourceId": {
+                    "target": "com.amazonaws.cloudformation#LogicalResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical id for this resource in the final generated template.</p>"
+                    }
+                },
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.cloudformation#ResourceIdentifierProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 256 key-value pairs that identifies the resource in the generated template. The key is the name\n   of one of the primary identifiers for the resource. (Primary identifiers are specified in the\n   <code>primaryIdentifier</code> list in the resource schema.) The value is the value of that primary identifier. For\n   example, for a <code>AWS::DynamoDB::Table</code> resource, the primary identifiers is <code>TableName</code> so the\n   key-value pair could be <code>\"TableName\": \"MyDDBTable\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier\">primaryIdentifier</a> in the <i>CloudFormation Command Line Interface User guide for extension\n   development</i>.</p>"
+                    }
+                },
+                "ResourceStatus": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the processing of a resource in a generated template.</p>\n         <dl>\n            <dt>InProgress</dt>\n            <dd>\n               <p>The resource processing is still in progress.</p>\n            </dd>\n            <dt>Complete</dt>\n            <dd>\n               <p>The resource processing is complete.</p>\n            </dd>\n            <dt>Pending</dt>\n            <dd>\n               <p>The resource processing is pending.</p>\n            </dd>\n            <dt>Failed</dt>\n            <dd>\n               <p>The resource processing has failed.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "ResourceStatusReason": {
+                    "target": "com.amazonaws.cloudformation#ResourceStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the resource detail, providing more information if a failure happened.</p>"
+                    }
+                },
+                "Warnings": {
+                    "target": "com.amazonaws.cloudformation#WarningDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The warnings generated for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a resource in a generated template</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#ResourceDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#ResourceDetail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ResourceIdentifier": {
+            "type": "string"
+        },
         "com.amazonaws.cloudformation#ResourceIdentifierProperties": {
             "type": "map",
             "key": {
@@ -9025,6 +10220,145 @@
         },
         "com.amazonaws.cloudformation#ResourceProperties": {
             "type": "string"
+        },
+        "com.amazonaws.cloudformation#ResourceScanId": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudformation#ResourceScanInProgressException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudformation#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceScanInProgress",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>A resource scan is currently in progress. Only one can be run at a time for an account in a Region.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudformation#ResourceScanLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudformation#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceScanLimitExceeded",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The limit on resource scans has been exceeded. Reasons include:</p>\n         <ul>\n            <li>\n               <p>Exceeded the daily quota for resource scans.</p>\n            </li>\n            <li>\n               <p>A resource scan recently failed. You must wait 10 minutes before starting a new resource scan.</p>\n            </li>\n            <li>\n               <p>The last resource scan failed after exceeding 100,000 resources. When this happens, you must wait 24 hours\n     before starting a new resource scan.</p>\n            </li>\n         </ul>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudformation#ResourceScanNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudformation#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceScanNotFound",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The resource scan was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudformation#ResourceScanStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ResourceScanStatusReason": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudformation#ResourceScanSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#ResourceScanSummary"
+            }
+        },
+        "com.amazonaws.cloudformation#ResourceScanSummary": {
+            "type": "structure",
+            "members": {
+                "ResourceScanId": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource scan.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the resource scan.</p>\n         <dl>\n            <dt>INPROGRESS</dt>\n            <dd>\n               <p>The resource scan is still in progress.</p>\n            </dd>\n            <dt>COMPLETE</dt>\n            <dd>\n               <p>The resource scan is complete.</p>\n            </dd>\n            <dt>EXPIRED</dt>\n            <dd>\n               <p>The resource scan has expired.</p>\n            </dd>\n            <dt>FAILED</dt>\n            <dd>\n               <p>The resource scan has failed.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the resource scan status, providing more information if a failure happened.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.cloudformation#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the resource scan was started.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.cloudformation#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the resource scan was finished.</p>"
+                    }
+                },
+                "PercentageCompleted": {
+                    "target": "com.amazonaws.cloudformation#PercentageCompleted",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of the resource scan that has been completed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the resource scan. This is returned by the <code>ListResourceScan</code> API action.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#ResourceScannerMaxResults": {
+            "type": "integer"
         },
         "com.amazonaws.cloudformation#ResourceSignalStatus": {
             "type": "enum",
@@ -9265,10 +10599,51 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#ResourceTypePrefix": {
+            "type": "string"
+        },
         "com.amazonaws.cloudformation#ResourceTypes": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudformation#ResourceType"
+            }
+        },
+        "com.amazonaws.cloudformation#ResourcesFailed": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ResourcesPending": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ResourcesProcessing": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ResourcesRead": {
+            "type": "integer"
+        },
+        "com.amazonaws.cloudformation#ResourcesScanned": {
+            "type": "integer"
+        },
+        "com.amazonaws.cloudformation#ResourcesSucceeded": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.cloudformation#ResourcesToImport": {
@@ -9464,6 +10839,68 @@
                     "min": 1,
                     "max": 4096
                 }
+            }
+        },
+        "com.amazonaws.cloudformation#ScannedResource": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.cloudformation#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource, such as <code>AWS::DynamoDB::Table</code>. For the list of supported resources, see\n      <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html\">IaC\n      generator supported resource types</a> In the <i>CloudFormation User Guide</i>\n         </p>"
+                    }
+                },
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.cloudformation#JazzResourceIdentifierProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 256 key-value pairs that identifies for the scanned resource. The key is the name of one of the\n   primary identifiers for the resource. (Primary identifiers are specified in the <code>primaryIdentifier</code> list\n   in the resource schema.) The value is the value of that primary identifier. For example, for a\n   <code>AWS::DynamoDB::Table</code> resource, the primary identifiers is <code>TableName</code> so the key-value pair\n   could be <code>\"TableName\": \"MyDDBTable\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier\">primaryIdentifier</a> in the <i>CloudFormation Command Line Interface User guide for extension\n   development</i>.</p>"
+                    }
+                },
+                "ManagedByStack": {
+                    "target": "com.amazonaws.cloudformation#ManagedByStack",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, the resource is managed by a CloudFormation stack.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A scanned resource returned by <code>ListResourceScanResources</code> or\n   <code>ListResourceScanRelatedResources</code>.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#ScannedResourceIdentifier": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.cloudformation#ResourceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of the resource, such as <code>AWS::DynamoDB::Table</code>. For the list of supported resources, see\n      <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html\">IaC\n      generator supported resource types</a> In the <i>CloudFormation User Guide</i>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.cloudformation#JazzResourceIdentifierProperties",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of up to 256 key-value pairs that identifies the scanned resource. The key is the name of one of the\n   primary identifiers for the resource. (Primary identifiers are specified in the <code>primaryIdentifier</code> list\n   in the resource schema.) The value is the value of that primary identifier. For example, for a\n   <code>AWS::DynamoDB::Table</code> resource, the primary identifiers is <code>TableName</code> so the key-value pair\n   could be <code>\"TableName\": \"MyDDBTable\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier\">primaryIdentifier</a> in the <i>CloudFormation Command Line Interface User guide for extension\n   development</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a scanned resource. This is used with the <code>ListResourceScanRelatedResources</code> API\n   action.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#ScannedResourceIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#ScannedResourceIdentifier"
+            }
+        },
+        "com.amazonaws.cloudformation#ScannedResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#ScannedResource"
             }
         },
         "com.amazonaws.cloudformation#Scope": {
@@ -11387,7 +12824,7 @@
                 "RegionOrder": {
                     "target": "com.amazonaws.cloudformation#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The order of the Regions where you want to perform the stack operation.</p>"
+                        "smithy.api#documentation": "<p>The order of the Regions where you want to perform the stack operation.</p>\n         <note>\n            <p>\n               <code>RegionOrder</code> isn't followed if <code>AutoDeployment</code> is enabled.</p>\n         </note>"
                     }
                 },
                 "FailureToleranceCount": {
@@ -11982,6 +13419,63 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.cloudformation#StartResourceScan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#StartResourceScanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#StartResourceScanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#ResourceScanInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#ResourceScanLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a scan of the resources in this account in this Region. You can the status of a scan using the\n   <code>ListResourceScans</code> API action.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To start a resource scan",
+                        "documentation": "This example shows how to start a new resource scan",
+                        "output": {
+                            "ResourceScanId": "arn:aws:cloudformation:us-east-1:123456789012:resourceScan/88f09db1-d211-4cb7-964b-434e2b8469ca"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#StartResourceScanInput": {
+            "type": "structure",
+            "members": {
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.cloudformation#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for this <code>StartResourceScan</code> request. Specify this token if you plan to retry\n   requests so that CloudFormation knows that you're not attempting to start a new resource scan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#StartResourceScanOutput": {
+            "type": "structure",
+            "members": {
+                "ResourceScanId": {
+                    "target": "com.amazonaws.cloudformation#ResourceScanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource scan. The format is\n   <code>arn:${Partition}:cloudformation:${Region}:${Account}:resourceScan/${Id}</code>. An example is\n   <code>arn:aws:cloudformation:<i>us-east-1</i>:<i>123456789012</i>:resourceScan/<i>f5b490f7-7ed4-428a-aa06-31ff25db0772</i>\n            </code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudformation#StatusMessage": {
             "type": "string",
             "traits": {
@@ -12128,8 +13622,45 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#TemplateConfiguration": {
+            "type": "structure",
+            "members": {
+                "DeletionPolicy": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateDeletionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DeletionPolicy</code> assigned to resources in the generated template. Supported values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE</code> - delete all resources when the stack is deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RETAIN</code> - retain all resources when the stack is deleted.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html\">\n               <code>DeletionPolicy</code>\n   attribute</a> in the <i>CloudFormation User Guide</i>.</p>"
+                    }
+                },
+                "UpdateReplacePolicy": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateUpdateReplacePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>UpdateReplacePolicy</code> assigned to resources in the generated template. Supported values\n   are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE</code> - delete all resources when the resource is replaced during an update operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RETAIN</code> - retain all resources when the resource is replaced during an update operation.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html\">\n               <code>UpdateReplacePolicy</code>\n   attribute</a> in the <i>CloudFormation User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details of a generated template.</p>"
+            }
+        },
         "com.amazonaws.cloudformation#TemplateDescription": {
             "type": "string"
+        },
+        "com.amazonaws.cloudformation#TemplateFormat": {
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "YAML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YAML"
+                    }
+                }
+            }
         },
         "com.amazonaws.cloudformation#TemplateParameter": {
             "type": "structure",
@@ -12169,6 +13700,38 @@
                 "target": "com.amazonaws.cloudformation#TemplateParameter"
             }
         },
+        "com.amazonaws.cloudformation#TemplateProgress": {
+            "type": "structure",
+            "members": {
+                "ResourcesSucceeded": {
+                    "target": "com.amazonaws.cloudformation#ResourcesSucceeded",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources that succeeded the template generation.</p>"
+                    }
+                },
+                "ResourcesFailed": {
+                    "target": "com.amazonaws.cloudformation#ResourcesFailed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources that failed the template generation.</p>"
+                    }
+                },
+                "ResourcesProcessing": {
+                    "target": "com.amazonaws.cloudformation#ResourcesProcessing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources that are in-process for the template generation.</p>"
+                    }
+                },
+                "ResourcesPending": {
+                    "target": "com.amazonaws.cloudformation#ResourcesPending",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources that are still pending the template generation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the progress of the template generation.</p>"
+            }
+        },
         "com.amazonaws.cloudformation#TemplateStage": {
             "type": "enum",
             "members": {
@@ -12184,6 +13747,71 @@
                         "smithy.api#enumValue": "Processed"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cloudformation#TemplateStatusReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#TemplateSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#TemplateSummary"
+            }
+        },
+        "com.amazonaws.cloudformation#TemplateSummary": {
+            "type": "structure",
+            "members": {
+                "GeneratedTemplateId": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the generated template. The format is\n   <code>arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}</code>. For example,\n   <code>arn:aws:cloudformation:<i>us-east-1</i>:<i>123456789012</i>:generatedtemplate/<i>2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc</i>\n            </code>.</p>"
+                    }
+                },
+                "GeneratedTemplateName": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the generated template.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the template generation. Supported values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreatePending</code> - the creation of the template is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateInProgress</code> - the creation of the template is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePending</code> - the deletion of the template is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteInProgress</code> - the deletion of the template is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePending</code> - the update of the template is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateInProgress</code> - the update of the template is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - the template operation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Complete</code> - the template operation is complete.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.cloudformation#TemplateStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current template generation status. This will provide more details if a failure\n   happened.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.cloudformation#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the generated template was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.cloudformation#LastUpdatedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the generated template was last updated.</p>"
+                    }
+                },
+                "NumberOfResources": {
+                    "target": "com.amazonaws.cloudformation#NumberOfResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources in the generated template. This is a total of resources in pending, in-progress,\n   completed, and failed states.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of a generated template.</p>"
             }
         },
         "com.amazonaws.cloudformation#TemplateSummaryConfig": {
@@ -12344,6 +13972,14 @@
             }
         },
         "com.amazonaws.cloudformation#TotalStackInstancesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#TotalWarnings": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
@@ -12816,6 +14452,140 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudformation#TypeConfigurationIdentifier"
+            }
+        },
+        "com.amazonaws.cloudformation#UpdateGeneratedTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#UpdateGeneratedTemplateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#UpdateGeneratedTemplateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a generated template. This can be used to change the name, add and remove resources, refresh resources,\n   and change the <code>DeletionPolicy</code> and <code>UpdateReplacePolicy</code> settings. You can check the status of\n   the update to the generated template using the <code>DescribeGeneratedTemplate</code> API action.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a generated template's name",
+                        "documentation": "This example updates a generated template with a new name.",
+                        "input": {
+                            "GeneratedTemplateName": "JazzyTemplate",
+                            "NewGeneratedTemplateName": "JazzierTemplate"
+                        },
+                        "output": {
+                            "GeneratedTemplateId": "arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/88f09db1-d211-4cb7-964b-434e2b8469ca"
+                        }
+                    },
+                    {
+                        "title": "To remove resources from a generated template",
+                        "documentation": "This example removes resources from a generated template",
+                        "input": {
+                            "GeneratedTemplateName": "JazzyTemplate",
+                            "RemoveResources": [
+                                "LogicalResourceId1",
+                                "LogicalResourceId2"
+                            ]
+                        },
+                        "output": {
+                            "GeneratedTemplateId": "arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/88f09db1-d211-4cb7-964b-434e2b8469ca"
+                        }
+                    },
+                    {
+                        "title": "To add resources to a generated template",
+                        "documentation": "This example adds resources to a generated template",
+                        "input": {
+                            "GeneratedTemplateName": "JazzyTemplate",
+                            "AddResources": [
+                                {
+                                    "ResourceType": "AWS::S3::Bucket",
+                                    "ResourceIdentifier": {
+                                        "BucketName": "jazz-bucket"
+                                    }
+                                },
+                                {
+                                    "ResourceType": "AWS::EC2::DHCPOptions",
+                                    "ResourceIdentifier": {
+                                        "DhcpOptionsId": "random-id123"
+                                    }
+                                }
+                            ]
+                        },
+                        "output": {
+                            "GeneratedTemplateId": "arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/88f09db1-d211-4cb7-964b-434e2b8469ca"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#UpdateGeneratedTemplateInput": {
+            "type": "structure",
+            "members": {
+                "GeneratedTemplateName": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of a generated template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewGeneratedTemplateName": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional new name to assign to the generated template.</p>"
+                    }
+                },
+                "AddResources": {
+                    "target": "com.amazonaws.cloudformation#ResourceDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of resources to be added to the generated template.</p>"
+                    }
+                },
+                "RemoveResources": {
+                    "target": "com.amazonaws.cloudformation#JazzLogicalResourceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of logical ids for resources to remove from the generated template.</p>"
+                    }
+                },
+                "RefreshAllResources": {
+                    "target": "com.amazonaws.cloudformation#RefreshAllResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, update the resource properties in the generated template with their current live state.\n   This feature is useful when the resource properties in your generated a template does not reflect the live state of\n   the resource properties. This happens when a user update the resource properties after generating a template.</p>"
+                    }
+                },
+                "TemplateConfiguration": {
+                    "target": "com.amazonaws.cloudformation#TemplateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details of the generated template, including the <code>DeletionPolicy</code> and <code>UpdateReplacePolicy</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#UpdateGeneratedTemplateOutput": {
+            "type": "structure",
+            "members": {
+                "GeneratedTemplateId": {
+                    "target": "com.amazonaws.cloudformation#GeneratedTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the generated template. The format is\n   <code>arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}</code>. For example,\n   <code>arn:aws:cloudformation:<i>us-east-1</i>:<i>123456789012</i>:generatedtemplate/<i>2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc</i>\n            </code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudformation#UpdateStack": {
@@ -13417,6 +15187,87 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#WarningDetail": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.cloudformation#WarningType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of this warning. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-write-only-properties.html\">IaC generator and write-only\n   properties</a> in the <i>CloudFormation User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MUTUALLY_EXCLUSIVE_PROPERTIES</code> - The resource requires mutually-exclusive write-only properties.\n     The IaC generator selects one set of mutually exclusive properties and converts the included properties into\n     parameters. The parameter names have a suffix <code>OneOf</code> and the parameter descriptions indicate that the\n     corresponding property can be replaced with other exclusive properties.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNSUPPORTED_PROPERTIES</code> - Unsupported properties are present in the resource. One example of\n     unsupported properties would be a required write-only property that is an array, because a parameter cannot be an\n     array. Another example is an optional write-only property.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MUTUALLY_EXCLUSIVE_TYPES</code> - One or more required write-only properties are found in the resource,\n     and the type of that property can be any of several types.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Currently the resource and property reference documentation does not indicate if a property uses a type of\n    <code>oneOf</code> or <code>anyOf</code>. You need to look at the resource provider schema.</p>\n         </note>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.cloudformation#WarningProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the resource that are impacted by this warning.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The warnings generated for a specific resource for this generated template.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#WarningDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#WarningDetail"
+            }
+        },
+        "com.amazonaws.cloudformation#WarningProperties": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#WarningProperty"
+            }
+        },
+        "com.amazonaws.cloudformation#WarningProperty": {
+            "type": "structure",
+            "members": {
+                "PropertyPath": {
+                    "target": "com.amazonaws.cloudformation#PropertyPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the property. For example, if this is for the <code>S3Bucket</code> member of the <code>Code</code>\n   property, the property path would be <code>Code/S3Bucket</code>.</p>"
+                    }
+                },
+                "Required": {
+                    "target": "com.amazonaws.cloudformation#RequiredProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, the specified property is required.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.cloudformation#PropertyDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the property from the resource provider schema.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A specific property that is impacted by a warning.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#WarningType": {
+            "type": "enum",
+            "members": {
+                "MUTUALLY_EXCLUSIVE_PROPERTIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MUTUALLY_EXCLUSIVE_PROPERTIES"
+                    }
+                },
+                "UNSUPPORTED_PROPERTIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSUPPORTED_PROPERTIES"
+                    }
+                },
+                "MUTUALLY_EXCLUSIVE_TYPES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MUTUALLY_EXCLUSIVE_TYPES"
                     }
                 }
             }

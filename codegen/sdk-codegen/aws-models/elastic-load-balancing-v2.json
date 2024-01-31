@@ -971,6 +971,49 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "To create an HTTPS listener",
+                        "documentation": "This example creates an HTTPS listener for the specified load balancer that forwards requests to the specified target group. Note that you must specify an SSL certificate for an HTTPS listener. You can create and manage certificates using AWS Certificate Manager (ACM). Alternatively, you can create a certificate using SSL/TLS tools, get the certificate signed by a certificate authority (CA), and upload the certificate to AWS Identity and Access Management (IAM).",
+                        "input": {
+                            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
+                            "Protocol": "HTTPS",
+                            "Port": 443,
+                            "SslPolicy": "ELBSecurityPolicy-2015-05",
+                            "Certificates": [
+                                {
+                                    "CertificateArn": "arn:aws:iam::123456789012:server-certificate/my-server-cert"
+                                }
+                            ],
+                            "DefaultActions": [
+                                {
+                                    "Type": "forward",
+                                    "TargetGroupArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "Listeners": [
+                                {
+                                    "Protocol": "HTTPS",
+                                    "DefaultActions": [
+                                        {
+                                            "TargetGroupArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067",
+                                            "Type": "forward"
+                                        }
+                                    ],
+                                    "SslPolicy": "ELBSecurityPolicy-2015-05",
+                                    "Certificates": [
+                                        {
+                                            "CertificateArn": "arn:aws:iam::123456789012:server-certificate/my-server-cert"
+                                        }
+                                    ],
+                                    "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
+                                    "Port": 443,
+                                    "ListenerArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2"
+                                }
+                            ]
+                        }
                     }
                 ]
             }
@@ -1147,6 +1190,49 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "To create an internal load balancer",
+                        "documentation": "This example creates an internal load balancer and enables the Availability Zones for the specified subnets.",
+                        "input": {
+                            "Name": "my-internal-load-balancer",
+                            "Subnets": [
+                                "subnet-b7d581c0",
+                                "subnet-8360a9e7"
+                            ],
+                            "SecurityGroups": [],
+                            "Scheme": "internal"
+                        },
+                        "output": {
+                            "LoadBalancers": [
+                                {
+                                    "VpcId": "vpc-3ac0fb5f",
+                                    "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-internal-load-balancer/5b49b8d4303115c2",
+                                    "State": {
+                                        "Code": "provisioning"
+                                    },
+                                    "DNSName": "internal-my-internal-load-balancer-1529930873.us-west-2.elb.amazonaws.com",
+                                    "SecurityGroups": [
+                                        "sg-5943793c"
+                                    ],
+                                    "LoadBalancerName": "my-internal-load-balancer",
+                                    "CreatedTime": "2016-03-25T21:29:48.850Z",
+                                    "Scheme": "internal",
+                                    "Type": "application",
+                                    "CanonicalHostedZoneId": "Z2P70J7EXAMPLE",
+                                    "AvailabilityZones": [
+                                        {
+                                            "SubnetId": "subnet-8360a9e7",
+                                            "ZoneName": "us-west-2a"
+                                        },
+                                        {
+                                            "SubnetId": "subnet-b7d581c0",
+                                            "ZoneName": "us-west-2b"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
                     }
                 ]
             }
@@ -1165,13 +1251,13 @@
                 "Subnets": {
                     "target": "com.amazonaws.elasticloadbalancingv2#Subnets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You\n      must specify either subnets or subnet mappings, but not both. To specify an Elastic IP\n      address, specify subnet mappings instead of subnets.</p>\n         <p>[Application Load Balancers] You must specify subnets from at least two Availability\n      Zones.</p>\n         <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p>\n         <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local\n      Zones.</p>\n         <p>[Network Load Balancers] You can specify subnets from one or more Availability\n      Zones.</p>\n         <p>[Gateway Load Balancers] You can specify subnets from one or more Availability\n      Zones.</p>"
+                        "smithy.api#documentation": "<p>The IDs of the subnets. You can specify only one subnet per Availability Zone. You\n      must specify either subnets or subnet mappings, but not both. To specify an Elastic IP\n      address, specify subnet mappings instead of subnets.</p>\n         <p>[Application Load Balancers] You must specify subnets from at least two Availability\n      Zones.</p>\n         <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p>\n         <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local\n      Zones.</p>\n         <p>[Network Load Balancers] You can specify subnets from one or more Availability\n      Zones.</p>\n         <p>[Gateway Load Balancers] You can specify subnets from one or more Availability\n      Zones.</p>"
                     }
                 },
                 "SubnetMappings": {
                     "target": "com.amazonaws.elasticloadbalancingv2#SubnetMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You\n      must specify either subnets or subnet mappings, but not both.</p>\n         <p>[Application Load Balancers] You must specify subnets from at least two Availability\n      Zones. You cannot specify Elastic IP addresses for your subnets.</p>\n         <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p>\n         <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local\n      Zones.</p>\n         <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You\n      can specify one Elastic IP address per subnet if you need static IP addresses for your\n      internet-facing load balancer. For internal load balancers, you can specify one private IP\n      address per subnet from the IPv4 range of the subnet. For internet-facing load balancer, you\n      can specify one IPv6 address per subnet.</p>\n         <p>[Gateway Load Balancers] You can specify subnets from one or more Availability Zones. You\n      cannot specify Elastic IP addresses for your subnets.</p>"
+                        "smithy.api#documentation": "<p>The IDs of the subnets. You can specify only one subnet per Availability Zone. You\n      must specify either subnets or subnet mappings, but not both.</p>\n         <p>[Application Load Balancers] You must specify subnets from at least two Availability\n      Zones. You cannot specify Elastic IP addresses for your subnets.</p>\n         <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p>\n         <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local\n      Zones.</p>\n         <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You\n      can specify one Elastic IP address per subnet if you need static IP addresses for your\n      internet-facing load balancer. For internal load balancers, you can specify one private IP\n      address per subnet from the IPv4 range of the subnet. For internet-facing load balancer, you\n      can specify one IPv6 address per subnet.</p>\n         <p>[Gateway Load Balancers] You can specify subnets from one or more Availability Zones. You\n      cannot specify Elastic IP addresses for your subnets.</p>"
                     }
                 },
                 "SecurityGroups": {
@@ -3099,6 +3185,33 @@
                                         "Description": "Given target group is not configured to receive traffic from ELB"
                                     }
                                 },
+                                {
+                                    "HealthCheckPort": "80",
+                                    "Target": {
+                                        "Id": "i-0f76fade",
+                                        "Port": 80
+                                    },
+                                    "TargetHealth": {
+                                        "State": "healthy"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To describe the health of a target",
+                        "documentation": "This example describes the health of the specified target. This target is healthy.",
+                        "input": {
+                            "TargetGroupArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067",
+                            "Targets": [
+                                {
+                                    "Id": "i-0f76fade",
+                                    "Port": 80
+                                }
+                            ]
+                        },
+                        "output": {
+                            "TargetHealthDescriptions": [
                                 {
                                     "HealthCheckPort": "80",
                                     "Target": {
@@ -5823,6 +5936,40 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "To change the server certificate",
+                        "documentation": "This example changes the server certificate for the specified HTTPS listener.",
+                        "input": {
+                            "ListenerArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65",
+                            "Certificates": [
+                                {
+                                    "CertificateArn": "arn:aws:iam::123456789012:server-certificate/my-new-server-cert"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "Listeners": [
+                                {
+                                    "Protocol": "HTTPS",
+                                    "DefaultActions": [
+                                        {
+                                            "TargetGroupArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067",
+                                            "Type": "forward"
+                                        }
+                                    ],
+                                    "SslPolicy": "ELBSecurityPolicy-2015-05",
+                                    "Certificates": [
+                                        {
+                                            "CertificateArn": "arn:aws:iam::123456789012:server-certificate/my-new-server-cert"
+                                        }
+                                    ],
+                                    "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
+                                    "Port": 443,
+                                    "ListenerArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65"
+                                }
+                            ]
+                        }
                     }
                 ]
             }
@@ -5951,6 +6098,88 @@
                                 {
                                     "Value": "",
                                     "Key": "access_logs.s3.bucket"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To change the idle timeout",
+                        "documentation": "This example changes the idle timeout value for the specified load balancer.",
+                        "input": {
+                            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
+                            "Attributes": [
+                                {
+                                    "Key": "idle_timeout.timeout_seconds",
+                                    "Value": "30"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "Attributes": [
+                                {
+                                    "Value": "30",
+                                    "Key": "idle_timeout.timeout_seconds"
+                                },
+                                {
+                                    "Value": "false",
+                                    "Key": "access_logs.s3.enabled"
+                                },
+                                {
+                                    "Value": "",
+                                    "Key": "access_logs.s3.prefix"
+                                },
+                                {
+                                    "Value": "true",
+                                    "Key": "deletion_protection.enabled"
+                                },
+                                {
+                                    "Value": "",
+                                    "Key": "access_logs.s3.bucket"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To enable access logs",
+                        "documentation": "This example enables access logs for the specified load balancer. Note that the S3 bucket must exist in the same region as the load balancer and must have a policy attached that grants access to the Elastic Load Balancing service.",
+                        "input": {
+                            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
+                            "Attributes": [
+                                {
+                                    "Key": "access_logs.s3.enabled",
+                                    "Value": "true"
+                                },
+                                {
+                                    "Key": "access_logs.s3.bucket",
+                                    "Value": "my-loadbalancer-logs"
+                                },
+                                {
+                                    "Key": "access_logs.s3.prefix",
+                                    "Value": "myapp"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "Attributes": [
+                                {
+                                    "Value": "true",
+                                    "Key": "access_logs.s3.enabled"
+                                },
+                                {
+                                    "Value": "my-load-balancer-logs",
+                                    "Key": "access_logs.s3.bucket"
+                                },
+                                {
+                                    "Value": "myapp",
+                                    "Key": "access_logs.s3.prefix"
+                                },
+                                {
+                                    "Value": "60",
+                                    "Key": "idle_timeout.timeout_seconds"
+                                },
+                                {
+                                    "Value": "false",
+                                    "Key": "deletion_protection.enabled"
                                 }
                             ]
                         }
@@ -6772,6 +7001,23 @@
                                 },
                                 {
                                     "Id": "i-ceddcd4d"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To register targets with a target group using port overrides",
+                        "documentation": "This example registers the specified instance with the specified target group using multiple ports. This enables you to register ECS containers on the same instance as targets in the target group.",
+                        "input": {
+                            "TargetGroupArn": "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/3bb63f11dfb0faf9",
+                            "Targets": [
+                                {
+                                    "Id": "i-80c8dd94",
+                                    "Port": 80
+                                },
+                                {
+                                    "Id": "i-80c8dd94",
+                                    "Port": 766
                                 }
                             ]
                         }
@@ -7668,7 +7914,7 @@
                 "Values": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses.\n      Wildcards are not supported.</p>\n         <p>If you specify multiple addresses, the condition is satisfied if the source IP address of\n      the request matches one of the CIDR blocks. This condition is not satisfied by the addresses\n      in the X-Forwarded-For header. To search for addresses in the X-Forwarded-For header, use\n        <a>HttpHeaderConditionConfig</a>.</p>"
+                        "smithy.api#documentation": "<p>The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses.\n      Wildcards are not supported.</p>\n         <p>If you specify multiple addresses, the condition is satisfied if the source IP address of\n      the request matches one of the CIDR blocks. This condition is not satisfied by the addresses\n      in the X-Forwarded-For header. To search for addresses in the X-Forwarded-For header, use\n        <a>HttpHeaderConditionConfig</a>.</p>\n         <p>The total number of values must be less than, or equal to five.</p>"
                     }
                 }
             },
@@ -8072,7 +8318,7 @@
                 "Key": {
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n         <p>The following attributes are supported by all load balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.timeout_seconds</code> - The amount of time, in seconds,\n          for Elastic Load Balancing to wait before changing the state of a deregistering target\n          from <code>draining</code> to <code>unused</code>. The range is 0-3600 seconds. The\n          default value is 300 seconds. If the target is a Lambda function, this attribute is not\n          supported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.enabled</code> - Indicates whether target stickiness is enabled. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.type</code> - Indicates the type of stickiness. The possible values are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>lb_cookie</code> and <code>app_cookie</code> for Application Load Balancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip</code> for Network Load Balancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip_dest_ip</code> and <code>source_ip_dest_ip_proto</code> for Gateway Load Balancers.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>The following attributes are supported by Application Load Balancers and \n      Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross zone load \n          balancing is enabled. The value is <code>true</code>, <code>false</code> or \n          <code>use_load_balancer_configuration</code>. The default is \n          <code>use_load_balancer_configuration</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.dns_failover.minimum_healthy_targets.count</code> - \n          The minimum number of targets that must be healthy.\n          If the number of healthy targets is below this value, mark the zone as unhealthy\n          in DNS, so that traffic is routed only to healthy zones. The possible values are\n          <code>off</code> or an integer from 1 to the maximum number of targets.\n          The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.dns_failover.minimum_healthy_targets.percentage</code> - \n          The minimum percentage of targets that must be healthy.\n          If the percentage of healthy targets is below this value, mark the zone as unhealthy\n          in DNS, so that traffic is routed only to healthy zones. The possible values are\n          <code>off</code> or an integer from 1 to 100. The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.count</code> - \n          The minimum number of targets that must be healthy.  \n          If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets.\n          The possible values are 1 to the maximum number of targets. The default is 1.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.percentage</code> - \n          The minimum percentage of targets that must be healthy. \n          If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets.\n          The possible values are <code>off</code> or an integer from 1 to 100.\n          The default is <code>off</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only if the load balancer is an Application Load\n      Balancer and the target is an instance or an IP address:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>load_balancing.algorithm.type</code> - The load balancing algorithm determines\n          how the load balancer selects targets when routing requests. The value is\n            <code>round_robin</code>, <code>least_outstanding_requests</code>, or <code>weighted_random</code>. The default is\n            <code>round_robin</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>load_balancing.algorithm.anomaly_mitigation</code> - Only available when <code>load_balancing.algorithm.type</code> \n          is <code>weighted_random</code>. Indicates whether anomaly mitigation is enabled. The value is <code>on</code> \n          or <code>off</code>. The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>slow_start.duration_seconds</code> - The time period, in seconds, during which a\n          newly registered target receives an increasing share of the traffic to the target group.\n          After this time period ends, the target receives its full share of traffic. The range is\n          30-900 seconds (15 minutes). The default is 0 seconds (disabled).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.cookie_name</code> - Indicates the name of the\n          application-based cookie. Names that start with the following prefixes are not allowed:\n            <code>AWSALB</code>, <code>AWSALBAPP</code>, and <code>AWSALBTG</code>; they're reserved\n          for use by the load balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the application-based cookie is considered stale. The range is 1 second to\n          1 week (604800 seconds). The default value is 1 day (86400 seconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the load balancer-generated cookie is considered stale. The range is 1\n          second to 1 week (604800 seconds). The default value is 1 day (86400 seconds). </p>\n            </li>\n         </ul>\n         <p>The following attribute is supported only if the load balancer is an Application Load\n      Balancer and the target is a Lambda function:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>lambda.multi_value_headers.enabled</code> - Indicates whether the request and\n          response headers that are exchanged between the load balancer and the Lambda function\n          include arrays of values or strings. The value is <code>true</code> or <code>false</code>.\n          The default is <code>false</code>. If the value is <code>false</code> and the request\n          contains a duplicate header field name or query parameter key, the load balancer uses the\n          last value sent by the client.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only by Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.connection_termination.enabled</code> - Indicates whether\n          the load balancer terminates connections at the end of the deregistration timeout. The\n          value is <code>true</code> or <code>false</code>. For new UDP/TCP_UDP target groups the \n          default is <code>true</code>. Otherwise, the default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>preserve_client_ip.enabled</code> - Indicates whether client IP preservation is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is disabled if\n          the target group type is IP address and the target group protocol is TCP or TLS.\n          Otherwise, the default is enabled. Client IP preservation cannot be disabled for UDP and\n          TCP_UDP target groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is\n            <code>false</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>target_health_state.unhealthy.connection_termination.enabled</code> - Indicates whether \n          the load balancer terminates connections to unhealthy targets. The value is <code>true</code> \n          or <code>false</code>. The default is <code>true</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only by Gateway Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>target_failover.on_deregistration</code> - Indicates how the Gateway Load\n          Balancer handles existing flows when a target is deregistered. The possible values are\n            <code>rebalance</code> and <code>no_rebalance</code>. The default is\n            <code>no_rebalance</code>. The two attributes\n            (<code>target_failover.on_deregistration</code> and\n            <code>target_failover.on_unhealthy</code>) can't be set independently. The value you set\n          for both attributes must be the same.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>target_failover.on_unhealthy</code> - Indicates how the Gateway Load Balancer\n          handles existing flows when a target is unhealthy. The possible values are\n            <code>rebalance</code> and <code>no_rebalance</code>. The default is\n            <code>no_rebalance</code>. The two attributes\n            (<code>target_failover.on_deregistration</code> and\n            <code>target_failover.on_unhealthy</code>) cannot be set independently. The value you\n          set for both attributes must be the same.  </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n         <p>The following attributes are supported by all load balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.timeout_seconds</code> - The amount of time, in seconds,\n          for Elastic Load Balancing to wait before changing the state of a deregistering target\n          from <code>draining</code> to <code>unused</code>. The range is 0-3600 seconds. The\n          default value is 300 seconds. If the target is a Lambda function, this attribute is not\n          supported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.enabled</code> - Indicates whether target stickiness is enabled. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.type</code> - Indicates the type of stickiness. The possible values are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>lb_cookie</code> and <code>app_cookie</code> for Application Load Balancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip</code> for Network Load Balancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip_dest_ip</code> and <code>source_ip_dest_ip_proto</code> for Gateway Load Balancers.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>The following attributes are supported by Application Load Balancers and \n      Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross zone load \n          balancing is enabled. The value is <code>true</code>, <code>false</code> or \n          <code>use_load_balancer_configuration</code>. The default is \n          <code>use_load_balancer_configuration</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.dns_failover.minimum_healthy_targets.count</code> - \n          The minimum number of targets that must be healthy.\n          If the number of healthy targets is below this value, mark the zone as unhealthy\n          in DNS, so that traffic is routed only to healthy zones. The possible values are\n          <code>off</code> or an integer from 1 to the maximum number of targets.\n          The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.dns_failover.minimum_healthy_targets.percentage</code> - \n          The minimum percentage of targets that must be healthy.\n          If the percentage of healthy targets is below this value, mark the zone as unhealthy\n          in DNS, so that traffic is routed only to healthy zones. The possible values are\n          <code>off</code> or an integer from 1 to 100. The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.count</code> - \n          The minimum number of targets that must be healthy.  \n          If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets.\n          The possible values are 1 to the maximum number of targets. The default is 1.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.percentage</code> - \n          The minimum percentage of targets that must be healthy. \n          If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets.\n          The possible values are <code>off</code> or an integer from 1 to 100.\n          The default is <code>off</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only if the load balancer is an Application Load\n      Balancer and the target is an instance or an IP address:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>load_balancing.algorithm.type</code> - The load balancing algorithm determines\n          how the load balancer selects targets when routing requests. The value is\n            <code>round_robin</code>, <code>least_outstanding_requests</code>, or <code>weighted_random</code>. The default is\n            <code>round_robin</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>load_balancing.algorithm.anomaly_mitigation</code> - Only available when <code>load_balancing.algorithm.type</code> \n          is <code>weighted_random</code>. Indicates whether anomaly mitigation is enabled. The value is <code>on</code> \n          or <code>off</code>. The default is <code>off</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>slow_start.duration_seconds</code> - The time period, in seconds, during which a\n          newly registered target receives an increasing share of the traffic to the target group.\n          After this time period ends, the target receives its full share of traffic. The range is\n          30-900 seconds (15 minutes). The default is 0 seconds (disabled).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.cookie_name</code> - Indicates the name of the\n          application-based cookie. Names that start with the following prefixes are not allowed:\n            <code>AWSALB</code>, <code>AWSALBAPP</code>, and <code>AWSALBTG</code>; they're reserved\n          for use by the load balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the application-based cookie is considered stale. The range is 1 second to\n          1 week (604800 seconds). The default value is 1 day (86400 seconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the load balancer-generated cookie is considered stale. The range is 1\n          second to 1 week (604800 seconds). The default value is 1 day (86400 seconds). </p>\n            </li>\n         </ul>\n         <p>The following attribute is supported only if the load balancer is an Application Load\n      Balancer and the target is a Lambda function:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>lambda.multi_value_headers.enabled</code> - Indicates whether the request and\n          response headers that are exchanged between the load balancer and the Lambda function\n          include arrays of values or strings. The value is <code>true</code> or <code>false</code>.\n          The default is <code>false</code>. If the value is <code>false</code> and the request\n          contains a duplicate header field name or query parameter key, the load balancer uses the\n          last value sent by the client.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only by Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.connection_termination.enabled</code> - Indicates whether\n          the load balancer terminates connections at the end of the deregistration timeout. The\n          value is <code>true</code> or <code>false</code>. For new UDP/TCP_UDP target groups the \n          default is <code>true</code>. Otherwise, the default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>preserve_client_ip.enabled</code> - Indicates whether client IP preservation is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is disabled if\n          the target group type is IP address and the target group protocol is TCP or TLS.\n          Otherwise, the default is enabled. Client IP preservation cannot be disabled for UDP and\n          TCP_UDP target groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is\n            <code>false</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>target_health_state.unhealthy.connection_termination.enabled</code> - Indicates whether \n          the load balancer terminates connections to unhealthy targets. The value is <code>true</code> \n          or <code>false</code>. The default is <code>true</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target_health_state.unhealthy.draining_interval_seconds</code> - The amount of time \n          for Elastic Load Balancing to wait before changing the state of an unhealthy target from \n          <code>unhealthy.draining</code> to <code>unhealthy</code>. The range is 0-360000 seconds. \n          The default value is 0 seconds.</p>\n               <p>Note: This attribute can only be configured when \n          <code>target_health_state.unhealthy.connection_termination.enabled</code> is <code>false</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only by Gateway Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>target_failover.on_deregistration</code> - Indicates how the Gateway Load\n          Balancer handles existing flows when a target is deregistered. The possible values are\n            <code>rebalance</code> and <code>no_rebalance</code>. The default is\n            <code>no_rebalance</code>. The two attributes\n            (<code>target_failover.on_deregistration</code> and\n            <code>target_failover.on_unhealthy</code>) can't be set independently. The value you set\n          for both attributes must be the same.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>target_failover.on_unhealthy</code> - Indicates how the Gateway Load Balancer\n          handles existing flows when a target is unhealthy. The possible values are\n            <code>rebalance</code> and <code>no_rebalance</code>. The default is\n            <code>no_rebalance</code>. The two attributes\n            (<code>target_failover.on_deregistration</code> and\n            <code>target_failover.on_unhealthy</code>) cannot be set independently. The value you\n          set for both attributes must be the same.  </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Value": {
@@ -8369,6 +8615,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "unhealthy"
+                    }
+                },
+                "UNHEALTHY_DRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unhealthy.draining"
                     }
                 },
                 "UNUSED": {
