@@ -9,6 +9,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
@@ -28,6 +29,8 @@ const (
 	awsSecretKeyEnvVar       = "AWS_SECRET_KEY"
 
 	awsSessionTokenEnvVar = "AWS_SESSION_TOKEN"
+
+	awsCredentialExpirationEnvVar = "AWS_CREDENTIAL_EXPIRATION"
 
 	awsContainerCredentialsEndpointEnvVar     = "AWS_CONTAINER_CREDENTIALS_FULL_URI"
 	awsContainerCredentialsRelativePathEnvVar = "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
@@ -310,6 +313,14 @@ func NewEnvConfig() (EnvConfig, error) {
 	setStringFromEnvVal(&creds.SecretAccessKey, credSecretEnvKeys)
 	if creds.HasKeys() {
 		creds.SessionToken = os.Getenv(awsSessionTokenEnvVar)
+
+		if expireTimeString, hasExpire := os.LookupEnv(awsCredentialExpirationEnvVar); hasExpire {
+			if expireTime, err := time.Parse(time.RFC3339, expireTimeString); err == nil {
+				creds.Expires = expireTime
+				creds.CanExpire = true
+			}
+		}
+
 		cfg.Credentials = creds
 	}
 

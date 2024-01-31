@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"strconv"
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
@@ -79,6 +80,48 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 			Val: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "TOKEN",
 				Source: CredentialsSourceName,
+			},
+		},
+		{
+			Env: map[string]string{
+				"AWS_ACCESS_KEY":            "AKID",
+				"AWS_SECRET_KEY":            "SECRET",
+				"AWS_CREDENTIAL_EXPIRATION": "2023-01-31T12:30:05Z",
+			},
+			Val: aws.Credentials{
+				AccessKeyID:     "AKID",
+				SecretAccessKey: "SECRET",
+				CanExpire:       true,
+				Expires:         time.Date(2023, 01, 31, 12, 30, 05, 0, time.UTC),
+				Source:          CredentialsSourceName,
+			},
+		},
+		{
+			Env: map[string]string{
+				"AWS_ACCESS_KEY":            "AKID",
+				"AWS_SECRET_KEY":            "SECRET",
+				"AWS_SESSION_TOKEN":         "TOKEN",
+				"AWS_CREDENTIAL_EXPIRATION": "2023-01-31T12:30:05Z",
+			},
+			Val: aws.Credentials{
+				AccessKeyID:     "AKID",
+				SecretAccessKey: "SECRET",
+				SessionToken:    "TOKEN",
+				CanExpire:       true,
+				Expires:         time.Date(2023, 01, 31, 12, 30, 05, 0, time.UTC),
+				Source:          CredentialsSourceName,
+			},
+		},
+		{
+			Env: map[string]string{
+				"AWS_ACCESS_KEY":            "AKID",
+				"AWS_SECRET_KEY":            "SECRET",
+				"AWS_CREDENTIAL_EXPIRATION": "bad format",
+			},
+			Val: aws.Credentials{
+				AccessKeyID:     "AKID",
+				SecretAccessKey: "SECRET",
+				Source:          CredentialsSourceName,
 			},
 		},
 	}
