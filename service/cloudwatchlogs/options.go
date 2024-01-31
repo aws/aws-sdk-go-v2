@@ -5,6 +5,7 @@ package cloudwatchlogs
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	accountidmode "github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	smithyauth "github.com/aws/smithy-go/auth"
@@ -23,6 +24,9 @@ type Options struct {
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
 	APIOptions []func(*middleware.Stack) error
+
+	// Indicates how aws account ID is applied in endpoint2.0 routing
+	AccountIDEndpointMode accountidmode.AIDMode
 
 	// The optional application specific identifier appended to the User-Agent header.
 	AppID string

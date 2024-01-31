@@ -29,6 +29,23 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.dynamodb#ApproximateCreationDateTimePrecision": {
+            "type": "enum",
+            "members": {
+                "MILLISECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MILLISECOND"
+                    }
+                },
+                "MICROSECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MICROSECOND"
+                    }
+                }
+            }
+        },
         "com.amazonaws.dynamodb#ArchivalReason": {
             "type": "string"
         },
@@ -3475,6 +3492,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ENABLE_FAILED"
                     }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
                 }
             }
         },
@@ -3678,6 +3701,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#UpdateItem"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#UpdateKinesisStreamingDestination"
                 },
                 {
                     "target": "com.amazonaws.dynamodb#UpdateTable"
@@ -4789,6 +4815,20 @@
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.dynamodb#EnableKinesisStreamingConfiguration": {
+            "type": "structure",
+            "members": {
+                "ApproximateCreationDateTimePrecision": {
+                    "target": "com.amazonaws.dynamodb#ApproximateCreationDateTimePrecision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Toggle for the precision of Kinesis data stream timestamp. The values are either <code>MILLISECOND</code> or <code>MICROSECOND</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables setting the configuration for Kinesis Streaming.</p>"
             }
         },
         "com.amazonaws.dynamodb#EnableKinesisStreamingDestination": {
@@ -6959,6 +6999,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The human-readable string that corresponds to the replica status.</p>"
                     }
+                },
+                "ApproximateCreationDateTimePrecision": {
+                    "target": "com.amazonaws.dynamodb#ApproximateCreationDateTimePrecision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The precision of the Kinesis data stream timestamp. The values are either <code>MILLISECOND</code> or <code>MICROSECOND</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6987,6 +7033,12 @@
                         "smithy.api#documentation": "<p>The ARN for a Kinesis data stream.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "EnableKinesisStreamingConfiguration": {
+                    "target": "com.amazonaws.dynamodb#EnableKinesisStreamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source for the Kinesis streaming information that is being enabled.</p>"
+                    }
                 }
             }
         },
@@ -7009,6 +7061,12 @@
                     "target": "com.amazonaws.dynamodb#DestinationStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the replication.</p>"
+                    }
+                },
+                "EnableKinesisStreamingConfiguration": {
+                    "target": "com.amazonaws.dynamodb#EnableKinesisStreamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the Kinesis streaming information that is being enabled.</p>"
                     }
                 }
             }
@@ -7777,7 +7835,7 @@
                 "Statement": {
                     "target": "com.amazonaws.dynamodb#PartiQLStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p> A PartiQL statment that uses parameters. </p>",
+                        "smithy.api#documentation": "<p> A PartiQL statement that uses parameters. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7795,7 +7853,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Represents a PartiQL statment that uses parameters. </p>"
+                "smithy.api#documentation": "<p> Represents a PartiQL statement that uses parameters. </p>"
             }
         },
         "com.amazonaws.dynamodb#ParameterizedStatements": {
@@ -11740,6 +11798,112 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the output of an <code>UpdateItem</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.dynamodb#UpdateKinesisStreamingConfiguration": {
+            "type": "structure",
+            "members": {
+                "ApproximateCreationDateTimePrecision": {
+                    "target": "com.amazonaws.dynamodb#ApproximateCreationDateTimePrecision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables updating the precision of Kinesis data stream timestamp. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables updating the configuration for Kinesis Streaming.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#UpdateKinesisStreamingDestination": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dynamodb#UpdateKinesisStreamingDestinationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dynamodb#UpdateKinesisStreamingDestinationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dynamodb#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
+                "smithy.api#documentation": "<p>The command to update the Kinesis stream destination.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#UpdateKinesisStreamingDestinationInput": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.dynamodb#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The table name for the Kinesis streaming destination input.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamArn": {
+                    "target": "com.amazonaws.dynamodb#StreamArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the Kinesis stream input.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdateKinesisStreamingConfiguration": {
+                    "target": "com.amazonaws.dynamodb#UpdateKinesisStreamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command to update the Kinesis stream configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.dynamodb#UpdateKinesisStreamingDestinationOutput": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.dynamodb#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The table name for the Kinesis streaming destination output.</p>"
+                    }
+                },
+                "StreamArn": {
+                    "target": "com.amazonaws.dynamodb#StreamArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the Kinesis stream input.</p>"
+                    }
+                },
+                "DestinationStatus": {
+                    "target": "com.amazonaws.dynamodb#DestinationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the attempt to update the Kinesis streaming destination output.</p>"
+                    }
+                },
+                "UpdateKinesisStreamingConfiguration": {
+                    "target": "com.amazonaws.dynamodb#UpdateKinesisStreamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command to update the Kinesis streaming destination configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },

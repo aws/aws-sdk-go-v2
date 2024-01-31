@@ -48,6 +48,11 @@ public final class SdkGoTypes {
             public static final Symbol Attempt = AwsGoDependency.AWS_RETRY.pointableSymbol("Attempt");
             public static final Symbol MetricsHeader = AwsGoDependency.AWS_RETRY.pointableSymbol("MetricsHeader");
         }
+
+        public static final class AccountID {
+            public static final Symbol AccountID = AwsGoDependency.AWS_ACCOUNT_ID.pointableSymbol("AccountID");
+            public static final Symbol CheckAccountID = AwsGoDependency.AWS_ACCOUNT_ID.pointableSymbol("CheckAccountID");
+        }
     }
 
     public static final class Internal {

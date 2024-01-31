@@ -1,6 +1,7 @@
 package aws
 
 import (
+	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"net/http"
 
 	smithybearer "github.com/aws/smithy-go/auth/bearer"
@@ -162,6 +163,10 @@ type Config struct {
 	// This variable is sourced from environment variable AWS_REQUEST_MIN_COMPRESSION_SIZE_BYTES or
 	// the shared config profile attribute request_min_compression_size_bytes
 	RequestMinCompressSizeBytes int64
+
+	// AccountIDEndpointMode indicates how aws account ID is applied in endpoint2.0 routing.
+	// Will be set to preferred by default. Supported modes are: Preferred, Required and Disabled
+	AccountIDEndpointMode mode.AIDMode
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder
