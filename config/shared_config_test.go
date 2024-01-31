@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"path/filepath"
 	"reflect"
 	"strconv"
@@ -741,6 +742,22 @@ func TestNewSharedConfig(t *testing.T) {
 					AccountID:       "012345678901",
 				},
 			},
+		},
+		"profile with account ID endpoint mode": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "account_id_endpoint_mode",
+			Expected: SharedConfig{
+				Profile:               "account_id_endpoint_mode",
+				AccountIDEndpointMode: mode.Disabled,
+			},
+		},
+		"profile with invalid account ID endpoint mode": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "account_id_endpoint_mode_error",
+			Expected: SharedConfig{
+				Profile: "account_id_endpoint_mode_error",
+			},
+			Err: fmt.Errorf("unknown account id mode, must be preferred/required/disabled"),
 		},
 	}
 

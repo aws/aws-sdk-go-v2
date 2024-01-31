@@ -1,0 +1,27 @@
+package mode
+
+import "fmt"
+
+// AIDMode switches on/off the account ID based endpoint routing
+type AIDMode string
+
+const (
+	Preferred AIDMode = "preferred"
+	Required  AIDMode = "required"
+	Disabled  AIDMode = "disabled"
+)
+
+func (mode *AIDMode) SetFromString(s string) error {
+	switch {
+	case s == "preferred":
+		*mode = Preferred
+	case s == "required":
+		*mode = Required
+	case s == "disabled":
+		*mode = Disabled
+	default:
+		return fmt.Errorf("unknown account id mode, must be preferred/required/disabled")
+	}
+
+	return nil
+}

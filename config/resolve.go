@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -163,6 +164,22 @@ func resolveRequestMinCompressSizeBytes(ctx context.Context, cfg *aws.Config, co
 		minBytes = 10240
 	}
 	cfg.RequestMinCompressSizeBytes = minBytes
+	return nil
+}
+
+// resolveAccountIDEndpointMode extracts the AccountIDEndpointMode from the configs slice's
+// SharedConfig or EnvConfig
+func resolveAccountIDEndpointMode(ctx context.Context, cfg *aws.Config, configs configs) error {
+	m, found, err := getAccountIDEndpointMode(ctx, configs)
+	if err != nil {
+		return err
+	}
+
+	if !found {
+		m = mode.Preferred
+	}
+
+	cfg.AccountIDEndpointMode = m
 	return nil
 }
 

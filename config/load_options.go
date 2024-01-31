@@ -5,6 +5,7 @@ import (
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
@@ -215,6 +216,8 @@ type LoadOptions struct {
 
 	// Whether S3 Express auth is disabled.
 	S3DisableExpressAuth *bool
+
+	AccountIDEndpointMode mode.AIDMode
 }
 
 func (o LoadOptions) getDefaultsMode(ctx context.Context) (aws.DefaultsMode, bool, error) {
@@ -278,6 +281,10 @@ func (o LoadOptions) getRequestMinCompressSizeBytes(ctx context.Context) (int64,
 	return *o.RequestMinCompressSizeBytes, true, nil
 }
 
+func (o LoadOptions) getAccountIDEndpointMode(ctx context.Context) (mode.AIDMode, bool, error) {
+	return o.AccountIDEndpointMode, len(o.AccountIDEndpointMode) > 0, nil
+}
+
 // WithRegion is a helper function to construct functional options
 // that sets Region on config's LoadOptions. Setting the region to
 // an empty string, will result in the region value being ignored.
@@ -319,6 +326,17 @@ func WithRequestMinCompressSizeBytes(RequestMinCompressSizeBytes *int64) LoadOpt
 			return nil
 		}
 		o.RequestMinCompressSizeBytes = RequestMinCompressSizeBytes
+		return nil
+	}
+}
+
+// WithAccountIDEndpointMode is a helper function to construct functional options
+// that sets AccountIDEndpointMode on config's LoadOptions
+func WithAccountIDEndpointMode(m mode.AIDMode) LoadOptionsFunc {
+	return func(o *LoadOptions) error {
+		if m != "" {
+			o.AccountIDEndpointMode = m
+		}
 		return nil
 	}
 }

@@ -7,6 +7,7 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
+import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
@@ -63,7 +64,13 @@ public class LegacyEndpointContextSetter implements GoIntegration {
                 if $T(ctx) {
                     return next.HandleFinalize(ctx, in)
                 }
-                """, SdkGoTypes.Aws.Middleware.GetRequiresLegacyEndpoints);
+                if err := $T(getIdentity(ctx), m.options.AccountIDEndpointMode); err != nil {
+                    return out, metadata, $T("invalid accountID set: %w", err)
+                }
+                """,
+                SdkGoTypes.Aws.Middleware.GetRequiresLegacyEndpoints,
+                SdkGoTypes.Aws.AccountID.CheckAccountID,
+                GoStdlibTypes.Fmt.Errorf);
     }
 
     @Override

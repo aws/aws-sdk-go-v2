@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -224,6 +225,46 @@ func TestResolveDisableRequestCompression(t *testing.T) {
 
 			if e, a := c.ExpectDisable, cfg.DisableRequestCompression; e != a {
 				t.Errorf("expect DisableRequestCompression to be %v , got %v", e, a)
+			}
+		})
+	}
+}
+
+func TestResolveAccountIDEndpointMode(t *testing.T) {
+	cases := map[string]struct {
+		AccountIDEndpointMode mode.AIDMode
+		ExpectMode            mode.AIDMode
+	}{
+		"accountID required for endpoint routing": {
+			AccountIDEndpointMode: mode.Required,
+			ExpectMode:            mode.Required,
+		},
+		"accountID unset": {
+			ExpectMode: mode.Preferred,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			var options LoadOptions
+			optFns := []func(options *LoadOptions) error{
+				WithAccountIDEndpointMode(c.AccountIDEndpointMode),
+			}
+
+			for _, optFn := range optFns {
+				optFn(&options)
+			}
+
+			configs := configs{options}
+
+			var cfg aws.Config
+
+			if err := resolveAccountIDEndpointMode(context.Background(), &cfg, configs); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := c.ExpectMode, cfg.AccountIDEndpointMode; e != a {
+				t.Errorf("expect AccountIDEndpointMode to be %v , got %v", e, a)
 			}
 		})
 	}

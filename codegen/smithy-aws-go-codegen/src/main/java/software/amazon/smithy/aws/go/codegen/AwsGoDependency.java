@@ -65,6 +65,9 @@ public class AwsGoDependency {
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 
+    public static final GoDependency AWS_ACCOUNT_ID = aws("aws/accountid", "accountid");
+    public static final GoDependency AWS_ACCOUNT_ID_ENDPOINT_MODE = aws("aws/accountid/mode", "accountidmode");
+
     protected AwsGoDependency() {
     }
 

@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/accountid"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
@@ -515,7 +516,7 @@ type endpointParamsBinder interface {
 	bindEndpointParams(*EndpointParameters)
 }
 
-func bindEndpointParams(input interface{}, options Options) *EndpointParameters {
+func bindEndpointParams(input interface{}, options Options, ctx context.Context) *EndpointParameters {
 	params := &EndpointParameters{}
 
 	params.Region = bindRegion(options.Region)
@@ -544,6 +545,9 @@ func (m *resolveEndpointV2Middleware) HandleFinalize(ctx context.Context, in mid
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
 		return next.HandleFinalize(ctx, in)
 	}
+	if err := accountid.CheckAccountID(getIdentity(ctx), m.options.AccountIDEndpointMode); err != nil {
+		return out, metadata, fmt.Errorf("invalid accountID set: %w", err)
+	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -554,7 +558,7 @@ func (m *resolveEndpointV2Middleware) HandleFinalize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
 	}
 
-	params := bindEndpointParams(getOperationInput(ctx), m.options)
+	params := bindEndpointParams(getOperationInput(ctx), m.options, ctx)
 	endpt, err := m.options.EndpointResolverV2.ResolveEndpoint(ctx, *params)
 	if err != nil {
 		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)

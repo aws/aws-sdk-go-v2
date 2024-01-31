@@ -242,6 +242,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		Logger:                  cfg.Logger,
 		ClientLogMode:           cfg.ClientLogMode,
 		AppID:                   cfg.AppID,
+		AccountIDEndpointMode:   cfg.AccountIDEndpointMode,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
