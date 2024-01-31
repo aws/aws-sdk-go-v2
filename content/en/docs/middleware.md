@@ -182,7 +182,7 @@ func GetCustomKey(ctx context.Context) (v string) {
 }
 
 func SetCustomKey(ctx context.Context, value string) context.Context {
-	return middleware.WithStackValue(ctx, customkey{}, value)
+	return middleware.WithStackValue(ctx, customKey{}, value)
 }
 
 // ...
@@ -200,7 +200,7 @@ var customInitalize = middleware.InitializeMiddlewareFunc("customInitialize", fu
 var customBuild = middleware.BuildMiddlewareFunc("customBuild", func(
 	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
 ) (
-	out middleware.BuildOutput, metadata Metadata, err error,
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
 	customValue := GetCustomKey(ctx)
 	
