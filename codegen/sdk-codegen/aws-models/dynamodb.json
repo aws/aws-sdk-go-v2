@@ -25,6 +25,14 @@
             {
                 "id": "Service",
                 "namespace": "*"
+            },
+            {
+                "id": "RuleSetAwsBuiltIn.AWS::Auth::AccountId",
+                "namespace": "*"
+            },
+            {
+                "id": "RuleSetParameter.TestCase.Unused",
+                "namespace": "*"
             }
         ]
     },
@@ -3739,6 +3747,12 @@
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
+                        "AccountId": {
+                            "builtIn": "AWS::Auth::AccountId",
+                            "required": false,
+                            "documentation": "The AWS account ID.",
+                            "type": "String"
+                        },
                         "Region": {
                             "builtIn": "AWS::Region",
                             "required": false,
