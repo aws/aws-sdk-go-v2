@@ -61,12 +61,15 @@ type CreateUserPoolClientInput struct {
 	// are valid for one hour.
 	AccessTokenValidity *int32
 
-	// The allowed OAuth flows. code Use a code grant flow, which provides an
-	// authorization code as the response. This code can be exchanged for access tokens
-	// with the /oauth2/token endpoint. implicit Issue the access token (and,
-	// optionally, ID token, based on scopes) directly to your user. client_credentials
-	// Issue the access token from the /oauth2/token endpoint directly to a non-person
-	// user using a combination of the client ID and client secret.
+	// The OAuth grant types that you want your app client to generate. To create an
+	// app client that generates client credentials grants, you must add
+	// client_credentials as the only allowed OAuth flow. code Use a code grant flow,
+	// which provides an authorization code as the response. This code can be exchanged
+	// for access tokens with the /oauth2/token endpoint. implicit Issue the access
+	// token (and, optionally, ID token, based on scopes) directly to your user.
+	// client_credentials Issue the access token from the /oauth2/token endpoint
+	// directly to a non-person user using a combination of the client ID and client
+	// secret.
 	AllowedOAuthFlows []types.OAuthFlowType
 
 	// Set to true to use OAuth 2.0 features in your user pool app client.

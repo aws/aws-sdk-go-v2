@@ -42,21 +42,26 @@ type ListTransactionsInput struct {
 	// This member is required.
 	Network types.QueryNetwork
 
+	// This filter is used to include transactions in the response that haven't
+	// reached finality  (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
+	// . Transactions that have reached finiality are always part of the response.
+	ConfirmationStatusFilter *types.ConfirmationStatusFilter
+
 	// The container for time.
 	FromBlockchainInstant *types.BlockchainInstant
 
-	// The maximum number of transactions to list. Even if additional results can be
-	// retrieved, the request can return less results than maxResults or an empty
-	// array of results. To retrieve the next set of results, make another request with
-	// the returned nextToken value. The value of nextToken is null when there are no
-	// more results to return
+	// The maximum number of transactions to list. Default: 100 Even if additional
+	// results can be retrieved, the request can return less results than maxResults
+	// or an empty array of results. To retrieve the next set of results, make another
+	// request with the returned nextToken value. The value of nextToken is null when
+	// there are no more results to return
 	MaxResults *int32
 
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// Sorts items in an ascending order if the first page starts at fromTime . Sorts
-	// items in a descending order if the first page starts at toTime .
+	// The order by which the results will be sorted. If ASCENNDING is selected, the
+	// results will be ordered by fromTime .
 	Sort *types.ListTransactionsSort
 
 	// The container for time.
@@ -170,11 +175,11 @@ var _ ListTransactionsAPIClient = (*Client)(nil)
 
 // ListTransactionsPaginatorOptions is the paginator options for ListTransactions
 type ListTransactionsPaginatorOptions struct {
-	// The maximum number of transactions to list. Even if additional results can be
-	// retrieved, the request can return less results than maxResults or an empty
-	// array of results. To retrieve the next set of results, make another request with
-	// the returned nextToken value. The value of nextToken is null when there are no
-	// more results to return
+	// The maximum number of transactions to list. Default: 100 Even if additional
+	// results can be retrieved, the request can return less results than maxResults
+	// or an empty array of results. To retrieve the next set of results, make another
+	// request with the returned nextToken value. The value of nextToken is null when
+	// there are no more results to return
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

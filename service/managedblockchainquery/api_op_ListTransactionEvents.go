@@ -13,7 +13,10 @@ import (
 )
 
 // An array of TransactionEvent objects. Each object contains details about the
-// transaction event.
+// transaction event. This action will return transaction details for all
+// transactions that are confirmed on the blockchain, even if they have not reached
+// finality (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
+// .
 func (c *Client) ListTransactionEvents(ctx context.Context, params *ListTransactionEventsInput, optFns ...func(*Options)) (*ListTransactionEventsOutput, error) {
 	if params == nil {
 		params = &ListTransactionEventsInput{}
@@ -42,11 +45,11 @@ type ListTransactionEventsInput struct {
 	// This member is required.
 	TransactionHash *string
 
-	// The maximum number of transaction events to list. Even if additional results
-	// can be retrieved, the request can return less results than maxResults or an
-	// empty array of results. To retrieve the next set of results, make another
-	// request with the returned nextToken value. The value of nextToken is null when
-	// there are no more results to return
+	// The maximum number of transaction events to list. Default: 100 Even if
+	// additional results can be retrieved, the request can return less results than
+	// maxResults or an empty array of results. To retrieve the next set of results,
+	// make another request with the returned nextToken value. The value of nextToken
+	// is null when there are no more results to return
 	MaxResults *int32
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -162,11 +165,11 @@ var _ ListTransactionEventsAPIClient = (*Client)(nil)
 // ListTransactionEventsPaginatorOptions is the paginator options for
 // ListTransactionEvents
 type ListTransactionEventsPaginatorOptions struct {
-	// The maximum number of transaction events to list. Even if additional results
-	// can be retrieved, the request can return less results than maxResults or an
-	// empty array of results. To retrieve the next set of results, make another
-	// request with the returned nextToken value. The value of nextToken is null when
-	// there are no more results to return
+	// The maximum number of transaction events to list. Default: 100 Even if
+	// additional results can be retrieved, the request can return less results than
+	// maxResults or an empty array of results. To retrieve the next set of results,
+	// make another request with the returned nextToken value. The value of nextToken
+	// is null when there are no more results to return
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

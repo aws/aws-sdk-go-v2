@@ -56,7 +56,7 @@ type CreateGraphInput struct {
 	// access to graphs IAM authenticated. ( true to enable, or false to disable.
 	PublicConnectivity *bool
 
-	// The number of replicas in other AZs. Min =0, Max = 2, Default =1
+	// The number of replicas in other AZs. Min =0, Max = 2, Default = 1.
 	ReplicaCount *int32
 
 	// Adds metadata tags to the new graph. These tags can also be used with cost

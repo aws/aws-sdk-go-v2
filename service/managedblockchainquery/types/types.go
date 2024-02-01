@@ -54,7 +54,7 @@ type BatchGetTokenBalanceErrorItem struct {
 	OwnerIdentifier *OwnerIdentifier
 
 	// The container for the identifier for the token including the unique token ID
-	// and its blockchain network. Only the native tokens BTC,ETH, and the ERC-20,
+	// and its blockchain network. Only the native tokens BTC and ETH, and the ERC-20,
 	// ERC-721, and ERC 1155 token standards are supported.
 	TokenIdentifier *TokenIdentifier
 
@@ -70,7 +70,7 @@ type BatchGetTokenBalanceInputItem struct {
 	OwnerIdentifier *OwnerIdentifier
 
 	// The container for the identifier for the token including the unique token ID
-	// and its blockchain network. Only the native tokens BTC,ETH, and the ERC-20,
+	// and its blockchain network. Only the native tokens BTC and ETH, and the ERC-20,
 	// ERC-721, and ERC 1155 token standards are supported.
 	//
 	// This member is required.
@@ -102,7 +102,7 @@ type BatchGetTokenBalanceOutputItem struct {
 	OwnerIdentifier *OwnerIdentifier
 
 	// The container for the identifier for the token including the unique token ID
-	// and its blockchain network. Only the native tokens BTC,ETH, and the ERC-20,
+	// and its blockchain network. Only the native tokens BTC and ETH, and the ERC-20,
 	// ERC-721, and ERC 1155 token standards are supported.
 	TokenIdentifier *TokenIdentifier
 
@@ -115,6 +115,20 @@ type BlockchainInstant struct {
 	// The container of the Timestamp of the blockchain instant. This timestamp will
 	// only be recorded up to the second.
 	Time *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The container for the ConfirmationStatusFilter that filters for the  finality  (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
+// of the results.
+type ConfirmationStatusFilter struct {
+
+	// The container to determine whether to list results that have only reached
+	// finality  (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
+	// . Transactions that have reached finality are always part of the response.
+	//
+	// This member is required.
+	Include []ConfirmationStatus
 
 	noSmithyDocumentSerde
 }
@@ -257,7 +271,7 @@ type TokenFilter struct {
 }
 
 // The container for the identifier for the token including the unique token ID
-// and its blockchain network. Only the native tokens BTC,ETH, and the ERC-20,
+// and its blockchain network. Only the native tokens BTC and ETH, and the ERC-20,
 // ERC-721, and ERC 1155 token standards are supported.
 type TokenIdentifier struct {
 
@@ -269,10 +283,10 @@ type TokenIdentifier struct {
 	// This is the token's contract address.
 	ContractAddress *string
 
-	// The unique identifier of the token. You must specify this container with btc
-	// for the native BTC token, and eth for the native ETH token. For all other token
-	// types you must specify the tokenId in the 64 character hexadecimal tokenid
-	// format.
+	// The unique identifier of the token. For native tokens, use the 3 character
+	// abbreviation that best matches your token. For example, btc for Bitcoin, eth for
+	// Ether, etc. For all other token types you must specify the tokenId in the 64
+	// character hexadecimal tokenid format.
 	TokenId *string
 
 	noSmithyDocumentSerde
@@ -357,18 +371,6 @@ type Transaction struct {
 	// The signature of the transaction. The Z coordinate of a point V.
 	SignatureV *int32
 
-	// The status of the transaction. This property is deprecated. You must use the
-	// confirmationStatus and the executionStatus properties to determine if the status
-	// of the transaction is FINAL or FAILED .
-	//   - Transactions with a status of FINAL will now have the confirmationStatus set
-	//   to FINAL and the executionStatus set to SUCCEEDED .
-	//   - Transactions with a status of FAILED will now have the confirmationStatus
-	//   set to FINAL and the executionStatus set to FAILED .
-	//
-	// Deprecated: The status field in the GetTransaction response is deprecated and
-	// is replaced with the confirmationStatus and executionStatus fields.
-	Status QueryTransactionStatus
-
 	// The transaction fee.
 	TransactionFee *string
 
@@ -443,6 +445,9 @@ type TransactionOutputItem struct {
 	//
 	// This member is required.
 	TransactionTimestamp *time.Time
+
+	// Specifies whether to list transactions that have not reached Finality.
+	ConfirmationStatus ConfirmationStatus
 
 	noSmithyDocumentSerde
 }

@@ -13,8 +13,8 @@ import (
 )
 
 // Gets the balance of a specific token, including native tokens, for a given
-// address (wallet or contract) on the blockchain. Only the native tokens BTC,ETH,
-// and the ERC-20, ERC-721, and ERC 1155 token standards are supported.
+// address (wallet or contract) on the blockchain. Only the native tokens BTC and
+// ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported.
 func (c *Client) GetTokenBalance(ctx context.Context, params *GetTokenBalanceInput, optFns ...func(*Options)) (*GetTokenBalanceOutput, error) {
 	if params == nil {
 		params = &GetTokenBalanceInput{}
@@ -70,7 +70,7 @@ type GetTokenBalanceOutput struct {
 	OwnerIdentifier *types.OwnerIdentifier
 
 	// The container for the identifier for the token including the unique token ID
-	// and its blockchain network. Only the native tokens BTC,ETH, and the ERC-20,
+	// and its blockchain network. Only the native tokens BTC and ETH, and the ERC-20,
 	// ERC-721, and ERC 1155 token standards are supported.
 	TokenIdentifier *types.TokenIdentifier
 

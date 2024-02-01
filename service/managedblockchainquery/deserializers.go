@@ -2741,15 +2741,6 @@ func awsRestjson1_deserializeDocumentTransaction(v **types.Transaction, value in
 				sv.SignatureV = ptr.Int32(int32(i64))
 			}
 
-		case "status":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected QueryTransactionStatus to be of type string, got %T instead", value)
-				}
-				sv.Status = types.QueryTransactionStatus(jtv)
-			}
-
 		case "to":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3005,6 +2996,15 @@ func awsRestjson1_deserializeDocumentTransactionOutputItem(v **types.Transaction
 
 	for key, value := range shape {
 		switch key {
+		case "confirmationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfirmationStatus to be of type string, got %T instead", value)
+				}
+				sv.ConfirmationStatus = types.ConfirmationStatus(jtv)
+			}
+
 		case "network":
 			if value != nil {
 				jtv, ok := value.(string)

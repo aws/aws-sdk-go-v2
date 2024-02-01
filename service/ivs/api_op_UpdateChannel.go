@@ -51,14 +51,19 @@ type UpdateChannelInput struct {
 	// Channel name.
 	Name *string
 
+	// Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN
+	// and enables playback restriction. If this is set to an empty string, playback
+	// restriction policy is disabled.
+	PlaybackRestrictionPolicyArn *string
+
 	// Optional transcode preset for the channel. This is selectable only for
 	// ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default
 	// preset is HIGHER_BANDWIDTH_DELIVERY . For other channel types ( BASIC and
 	// STANDARD ), preset is the empty string ( "" ).
 	Preset types.TranscodePreset
 
-	// Recording-configuration ARN. If this is set to an empty string, recording is
-	// disabled. A value other than an empty string indicates that recording is enabled
+	// Recording-configuration ARN. A valid ARN value here both specifies the ARN and
+	// enables recording. If this is set to an empty string, recording is disabled.
 	RecordingConfigurationArn *string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
@@ -72,7 +77,7 @@ type UpdateChannelInput struct {
 
 type UpdateChannelOutput struct {
 
-	// Object specifying a channel.
+	// Object specifying the updated channel.
 	Channel *types.Channel
 
 	// Metadata pertaining to the operation's result.

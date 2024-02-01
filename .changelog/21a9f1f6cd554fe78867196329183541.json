@@ -1,0 +1,8 @@
+{
+    "id": "21a9f1f6-cd55-4fe7-8867-196329183541",
+    "type": "feature",
+    "description": "Adding new APIs in SDK for Amazon Neptune Analytics. These APIs include operations to execute, cancel, list queries and get the graph summary.",
+    "modules": [
+        "service/neptunegraph"
+    ]
+}

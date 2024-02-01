@@ -4842,6 +4842,40 @@ func awsRestjson1_deserializeDocument__listOfCmafAdditionalManifest(v *[]types.C
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfColorConversion3DLUTSetting(v *[]types.ColorConversion3DLUTSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ColorConversion3DLUTSetting
+	if *v == nil {
+		cv = []types.ColorConversion3DLUTSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ColorConversion3DLUTSetting
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentColorConversion3DLUTSetting(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfDashAdditionalManifest(v *[]types.DashAdditionalManifest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6657,7 +6691,7 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternAZaZ23AZaZ to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternAZaZ23AZaZ09 to be of type string, got %T instead", value)
 				}
 				sv.CustomLanguageCode = ptr.String(jtv)
 			}
@@ -9325,40 +9359,6 @@ func awsRestjson1_deserializeDocumentColorConversion3DLUTSetting(v **types.Color
 		}
 	}
 	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentColorConversion3DLUTSettings(v *[]types.ColorConversion3DLUTSetting, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.([]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var cv []types.ColorConversion3DLUTSetting
-	if *v == nil {
-		cv = []types.ColorConversion3DLUTSetting{}
-	} else {
-		cv = *v
-	}
-
-	for _, value := range shape {
-		var col types.ColorConversion3DLUTSetting
-		destAddr := &col
-		if err := awsRestjson1_deserializeDocumentColorConversion3DLUTSetting(&destAddr, value); err != nil {
-			return err
-		}
-		col = *destAddr
-		cv = append(cv, col)
-
-	}
-	*v = cv
 	return nil
 }
 
@@ -15815,7 +15815,7 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 			}
 
 		case "colorConversion3DLUTSettings":
-			if err := awsRestjson1_deserializeDocumentColorConversion3DLUTSettings(&sv.ColorConversion3DLUTSettings, value); err != nil {
+			if err := awsRestjson1_deserializeDocument__listOfColorConversion3DLUTSetting(&sv.ColorConversion3DLUTSettings, value); err != nil {
 				return err
 			}
 
@@ -16086,7 +16086,7 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 			}
 
 		case "colorConversion3DLUTSettings":
-			if err := awsRestjson1_deserializeDocumentColorConversion3DLUTSettings(&sv.ColorConversion3DLUTSettings, value); err != nil {
+			if err := awsRestjson1_deserializeDocument__listOfColorConversion3DLUTSetting(&sv.ColorConversion3DLUTSettings, value); err != nil {
 				return err
 			}
 
@@ -20355,6 +20355,32 @@ func awsRestjson1_deserializeDocumentRemixSettings(v **types.RemixSettings, valu
 
 	for key, value := range shape {
 		switch key {
+		case "audioDescriptionAudioChannel":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max64 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AudioDescriptionAudioChannel = ptr.Int32(int32(i64))
+			}
+
+		case "audioDescriptionDataChannel":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max64 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AudioDescriptionDataChannel = ptr.Int32(int32(i64))
+			}
+
 		case "channelMapping":
 			if err := awsRestjson1_deserializeDocumentChannelMapping(&sv.ChannelMapping, value); err != nil {
 				return err

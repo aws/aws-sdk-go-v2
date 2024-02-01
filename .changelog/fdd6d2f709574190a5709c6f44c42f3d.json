@@ -1,0 +1,8 @@
+{
+    "id": "fdd6d2f7-0957-4190-a570-9c6f44c42f3d",
+    "type": "feature",
+    "description": "This release introduces a new resource Playback Restriction Policy which can be used to geo-restrict or domain-restrict channel stream playback when associated with a channel.  New APIs to support this resource were introduced in the form of Create/Delete/Get/Update/List.",
+    "modules": [
+        "service/ivs"
+    ]
+}

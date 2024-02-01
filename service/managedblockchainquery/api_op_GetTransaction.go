@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the details of a transaction.
+// Gets the details of a transaction. This action will return transaction details
+// for all transactions that are confirmed on the blockchain, even if they have not
+// reached finality (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
+// .
 func (c *Client) GetTransaction(ctx context.Context, params *GetTransactionInput, optFns ...func(*Options)) (*GetTransactionOutput, error) {
 	if params == nil {
 		params = &GetTransactionInput{}

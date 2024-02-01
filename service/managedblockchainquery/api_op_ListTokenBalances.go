@@ -45,7 +45,11 @@ type ListTokenBalancesInput struct {
 	// This member is required.
 	TokenFilter *types.TokenFilter
 
-	// The maximum number of token balances to return.
+	// The maximum number of token balances to return. Default: 100 Even if additional
+	// results can be retrieved, the request can return less results than maxResults
+	// or an empty array of results. To retrieve the next set of results, make another
+	// request with the returned nextToken value. The value of nextToken is null when
+	// there are no more results to return
 	MaxResults *int32
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -165,7 +169,11 @@ var _ ListTokenBalancesAPIClient = (*Client)(nil)
 
 // ListTokenBalancesPaginatorOptions is the paginator options for ListTokenBalances
 type ListTokenBalancesPaginatorOptions struct {
-	// The maximum number of token balances to return.
+	// The maximum number of token balances to return. Default: 100 Even if additional
+	// results can be retrieved, the request can return less results than maxResults
+	// or an empty array of results. To retrieve the next set of results, make another
+	// request with the returned nextToken value. The value of nextToken is null when
+	// there are no more results to return
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

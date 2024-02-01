@@ -37,7 +37,11 @@ type ListAssetContractsInput struct {
 	// This member is required.
 	ContractFilter *types.ContractFilter
 
-	// The maximum number of contracts to list.
+	// The maximum number of contracts to list. Default: 100 Even if additional
+	// results can be retrieved, the request can return less results than maxResults
+	// or an empty array of results. To retrieve the next set of results, make another
+	// request with the returned nextToken value. The value of nextToken is null when
+	// there are no more results to return
 	MaxResults *int32
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -152,7 +156,11 @@ var _ ListAssetContractsAPIClient = (*Client)(nil)
 // ListAssetContractsPaginatorOptions is the paginator options for
 // ListAssetContracts
 type ListAssetContractsPaginatorOptions struct {
-	// The maximum number of contracts to list.
+	// The maximum number of contracts to list. Default: 100 Even if additional
+	// results can be retrieved, the request can return less results than maxResults
+	// or an empty array of results. To retrieve the next set of results, make another
+	// request with the returned nextToken value. The value of nextToken is null when
+	// there are no more results to return
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

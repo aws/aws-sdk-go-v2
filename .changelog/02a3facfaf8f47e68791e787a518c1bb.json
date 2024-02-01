@@ -1,0 +1,8 @@
+{
+    "id": "02a3facf-af8f-47e6-8791-e787a518c1bb",
+    "type": "feature",
+    "description": "This release includes support for broadcast-mixed audio description tracks.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

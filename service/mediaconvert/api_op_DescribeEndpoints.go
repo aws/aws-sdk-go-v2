@@ -14,6 +14,10 @@ import (
 
 // Send an request with an empty body to the regional API endpoint to get your
 // account API endpoint.
+//
+// Deprecated: DescribeEndpoints and account specific endpoints are no longer
+// required. We recommend that you send your requests directly to the regional
+// endpoint instead.
 func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpointsInput, optFns ...func(*Options)) (*DescribeEndpointsOutput, error) {
 	if params == nil {
 		params = &DescribeEndpointsInput{}
@@ -40,6 +44,10 @@ type DescribeEndpointsInput struct {
 	// return your endpoints if any exist, or to create an endpoint for you and return
 	// it if one doesn't already exist. Specify GET_ONLY to return your endpoints if
 	// any exist, or an empty list if none exist.
+	//
+	// Deprecated: DescribeEndpoints and account specific endpoints are no longer
+	// required. We recommend that you send your requests directly to the regional
+	// endpoint instead.
 	Mode types.DescribeEndpointsMode
 
 	// Use this string, provided with the response to a previous request, to request

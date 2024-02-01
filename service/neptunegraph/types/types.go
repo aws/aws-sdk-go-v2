@@ -7,6 +7,70 @@ import (
 	"time"
 )
 
+// Contains information about an edge in a Neptune Analytics graph.
+type EdgeStructure struct {
+
+	// The number of instances of the edge in the graph.
+	Count *int64
+
+	// A list of the properties associated with the edge.
+	EdgeProperties []string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about the graph.
+type GraphDataSummary struct {
+
+	// A list of the edge labels in the graph.
+	EdgeLabels []string
+
+	// A list of the distinct edge properties in the graph, along with the count of
+	// edges where each property is used.
+	EdgeProperties []map[string]int64
+
+	// This field is only present when the requested mode is DETAILED. It contains a
+	// list of edge structures.
+	EdgeStructures []EdgeStructure
+
+	// A list of distinct node labels in the graph.
+	NodeLabels []string
+
+	// A list of the distinct node properties in the graph, along with the count of
+	// nodes where each property is used.
+	NodeProperties []map[string]int64
+
+	// This field is only present when the requested mode is DETAILED. It contains a
+	// list of node structures.
+	NodeStructures []NodeStructure
+
+	// The number of unique edge labels in the graph.
+	NumEdgeLabels *int64
+
+	// The number of edge properties in the graph.
+	NumEdgeProperties *int64
+
+	// The number of edges in the graph.
+	NumEdges *int64
+
+	// The number of distinct node labels in the graph.
+	NumNodeLabels *int64
+
+	// The number of distinct node properties in the graph.
+	NumNodeProperties *int64
+
+	// The number of nodes in the graph.
+	NumNodes *int64
+
+	// The total number of usages of all edge properties.
+	TotalEdgePropertyValues *int64
+
+	// The total number of usages of all node properties.
+	TotalNodePropertyValues *int64
+
+	noSmithyDocumentSerde
+}
+
 // Details about a graph snapshot.
 type GraphSnapshotSummary struct {
 
@@ -216,6 +280,21 @@ type NeptuneImportOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a node.
+type NodeStructure struct {
+
+	// The number of instances of this node.
+	Count *int64
+
+	// The outgoing edge labels associated with this node.
+	DistinctOutgoingEdgeLabels []string
+
+	// Properties associated with this node.
+	NodeProperties []string
+
+	noSmithyDocumentSerde
+}
+
 // Details about a private graph endpoint.
 type PrivateGraphEndpointSummary struct {
 
@@ -236,6 +315,29 @@ type PrivateGraphEndpointSummary struct {
 
 	// The ID of the VPC endpoint.
 	VpcEndpointId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of the query listed.
+type QuerySummary struct {
+
+	// The running time of the query, in milliseconds.
+	Elapsed *int32
+
+	// A string representation of the id of the query.
+	Id *string
+
+	// The actual query text. The queryString may be truncated if the actual query
+	// string is too long.
+	QueryString *string
+
+	// State of the query.
+	State QueryState
+
+	// The amount of time, in milliseconds, the query has waited in the queue before
+	// being picked up by a worker thread.
+	Waited *int32
 
 	noSmithyDocumentSerde
 }

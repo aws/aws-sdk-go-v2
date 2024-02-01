@@ -46,13 +46,19 @@ type CreateChannelInput struct {
 	// Channel name.
 	Name *string
 
+	// Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN
+	// and enables playback restriction. Default: "" (empty string, no playback
+	// restriction policy is applied).
+	PlaybackRestrictionPolicyArn *string
+
 	// Optional transcode preset for the channel. This is selectable only for
 	// ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default
 	// preset is HIGHER_BANDWIDTH_DELIVERY . For other channel types ( BASIC and
 	// STANDARD ), preset is the empty string ( "" ).
 	Preset types.TranscodePreset
 
-	// Recording-configuration ARN. Default: "" (empty string, recording is disabled).
+	// Recording-configuration ARN. A valid ARN value here both specifies the ARN and
+	// enables recording. Default: "" (empty string, recording is disabled).
 	RecordingConfigurationArn *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value) . See Tagging

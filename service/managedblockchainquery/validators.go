@@ -228,6 +228,21 @@ func validateBatchGetTokenBalanceInputItem(v *types.BatchGetTokenBalanceInputIte
 	}
 }
 
+func validateConfirmationStatusFilter(v *types.ConfirmationStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfirmationStatusFilter"}
+	if v.Include == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Include"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContractFilter(v *types.ContractFilter) error {
 	if v == nil {
 		return nil
@@ -495,6 +510,11 @@ func validateOpListTransactionsInput(v *ListTransactionsInput) error {
 	}
 	if len(v.Network) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Network"))
+	}
+	if v.ConfirmationStatusFilter != nil {
+		if err := validateConfirmationStatusFilter(v.ConfirmationStatusFilter); err != nil {
+			invalidParams.AddNested("ConfirmationStatusFilter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

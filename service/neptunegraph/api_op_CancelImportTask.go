@@ -13,7 +13,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified import task
+// Deletes the specified import task.
 func (c *Client) CancelImportTask(ctx context.Context, params *CancelImportTaskInput, optFns ...func(*Options)) (*CancelImportTaskOutput, error) {
 	if params == nil {
 		params = &CancelImportTaskInput{}
@@ -53,7 +53,7 @@ type CancelImportTaskOutput struct {
 	RoleArn *string
 
 	// A URL identifying to the location of the data to be imported. This can be an
-	// Amazon S3 path, or can point to a Neptune database endpoint or snapshot
+	// Amazon S3 path, or can point to a Neptune database endpoint or snapshot.
 	//
 	// This member is required.
 	Source *string

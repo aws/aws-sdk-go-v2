@@ -1,0 +1,8 @@
+{
+    "id": "340774b4-2dd9-4d7e-ae03-f840995411a4",
+    "type": "feature",
+    "description": "Added CreateIdentityProvider and UpdateIdentityProvider details for new SAML IdP features",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

@@ -37,6 +37,9 @@ type ListChannelsInput struct {
 	// Filters the channel list to match the specified name.
 	FilterByName *string
 
+	// Filters the channel list to match the specified policy.
+	FilterByPlaybackRestrictionPolicyArn *string
+
 	// Filters the channel list to match the specified recording-configuration ARN.
 	FilterByRecordingConfigurationArn *string
 
