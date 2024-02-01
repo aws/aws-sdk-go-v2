@@ -1,8 +1,0 @@
-{
-    "id": "f6cb39dc-954c-4e2c-adf2-5b26a6c656b8",
-    "type": "feature",
-    "description": "This release adds support for transactions that have not reached finality. It also removes support for the status property from the response of the GetTransaction operation. You can use the confirmationStatus and executionStatus properties to determine the status of the transaction.",
-    "modules": [
-        "service/managedblockchainquery"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.8.0 (2024-02-01)
+
+* **Feature**: This release adds support for transactions that have not reached finality. It also removes support for the status property from the response of the GetTransaction operation. You can use the confirmationStatus and executionStatus properties to determine the status of the transaction.
+
 # v1.7.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

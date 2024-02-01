@@ -1,3 +1,7 @@
+# v1.33.0 (2024-02-01)
+
+* **Feature**: Added CreateIdentityProvider and UpdateIdentityProvider details for new SAML IdP features
+
 # v1.32.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

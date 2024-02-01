@@ -1,3 +1,7 @@
+# v1.2.0 (2024-02-01)
+
+* **Feature**: Adding new APIs in SDK for Amazon Neptune Analytics. These APIs include operations to execute, cancel, list queries and get the graph summary.
+
 # v1.1.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

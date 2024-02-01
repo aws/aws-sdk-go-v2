@@ -1,3 +1,17 @@
+# Release (2024-02-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.33.0](service/cognitoidentityprovider/CHANGELOG.md#v1330-2024-02-01)
+  * **Feature**: Added CreateIdentityProvider and UpdateIdentityProvider details for new SAML IdP features
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.31.0](service/ivs/CHANGELOG.md#v1310-2024-02-01)
+  * **Feature**: This release introduces a new resource Playback Restriction Policy which can be used to geo-restrict or domain-restrict channel stream playback when associated with a channel.  New APIs to support this resource were introduced in the form of Create/Delete/Get/Update/List.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.8.0](service/managedblockchainquery/CHANGELOG.md#v180-2024-02-01)
+  * **Feature**: This release adds support for transactions that have not reached finality. It also removes support for the status property from the response of the GetTransaction operation. You can use the confirmationStatus and executionStatus properties to determine the status of the transaction.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.50.0](service/mediaconvert/CHANGELOG.md#v1500-2024-02-01)
+  * **Feature**: This release includes support for broadcast-mixed audio description tracks.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.2.0](service/neptunegraph/CHANGELOG.md#v120-2024-02-01)
+  * **Feature**: Adding new APIs in SDK for Amazon Neptune Analytics. These APIs include operations to execute, cancel, list queries and get the graph summary.
+
 # Release (2024-01-31)
 
 ## Module Highlights
