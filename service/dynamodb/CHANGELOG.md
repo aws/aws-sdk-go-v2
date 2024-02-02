@@ -1,3 +1,7 @@
+# v1.27.1 (2024-02-02)
+
+* **Documentation**: Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.
+
 # v1.27.0 (2024-01-19)
 
 * **Feature**: This release adds support for including ApproximateCreationDateTimePrecision configurations in EnableKinesisStreamingDestination API, adds the same as an optional field in the response of DescribeKinesisStreamingDestination, and adds support for a new UpdateKinesisStreamingDestination API.

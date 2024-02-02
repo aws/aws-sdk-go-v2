@@ -1,3 +1,7 @@
+# v1.127.0 (2024-02-02)
+
+* **Feature**: Amazon SageMaker Canvas adds GenerativeAiSettings support for CanvasAppSettings.
+
 # v1.126.0 (2024-01-26)
 
 * **Feature**: Amazon SageMaker Automatic Model Tuning now provides an API to programmatically delete tuning jobs.

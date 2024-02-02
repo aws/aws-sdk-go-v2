@@ -1,8 +1,0 @@
-{
-    "id": "22553a7c-0f3d-420e-92d6-2117ae720700",
-    "type": "feature",
-    "description": "Amazon SageMaker Canvas adds GenerativeAiSettings support for CanvasAppSettings.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

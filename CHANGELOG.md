@@ -1,3 +1,14 @@
+# Release (2024-02-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.27.1](service/dynamodb/CHANGELOG.md#v1271-2024-02-02)
+  * **Documentation**: Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.127.0](service/sagemaker/CHANGELOG.md#v11270-2024-02-02)
+  * **Feature**: Amazon SageMaker Canvas adds GenerativeAiSettings support for CanvasAppSettings.
+
 # Release (2024-02-01)
 
 ## Module Highlights
