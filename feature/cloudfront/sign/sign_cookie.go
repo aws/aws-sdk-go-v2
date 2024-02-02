@@ -20,9 +20,10 @@ const (
 // A CookieOptions optional additional options that can be applied to the signed
 // cookies.
 type CookieOptions struct {
-	Path   string
-	Domain string
-	Secure bool
+	Path     string
+	Domain   string
+	Secure   bool
+	SameSite http.SameSite
 }
 
 // apply will integration the options provided into the base cookie options
@@ -237,6 +238,7 @@ func createCookies(p *Policy, keyID string, privKey *rsa.PrivateKey, opt CookieO
 		c.Path = opt.Path
 		c.Domain = opt.Domain
 		c.Secure = opt.Secure
+		c.SameSite = opt.SameSite
 	}
 
 	return cookies, nil
