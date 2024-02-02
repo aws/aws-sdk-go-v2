@@ -8,6 +8,7 @@ import (
 	"github.com/aws/smithy-go/auth"
 )
 
+// AccountID retrieves the accountID from identity or ignores that depending on accountID endpoint mode
 func AccountID(identity auth.Identity, mode accountidmode.AIDMode) *string {
 	if ca, ok := identity.(*smithy.CredentialsAdapter); ok && (mode == accountidmode.Preferred || mode == accountidmode.Required) {
 		return aws.String(ca.Credentials.AccountID)
@@ -16,6 +17,8 @@ func AccountID(identity auth.Identity, mode accountidmode.AIDMode) *string {
 	return nil
 }
 
+// CheckAccountID checks accountID mode in case the required accountID misses or
+// accountID endpoint mode is configured with invalid value
 func CheckAccountID(identity auth.Identity, mode accountidmode.AIDMode) error {
 	switch mode {
 	case "":
