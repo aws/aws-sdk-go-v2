@@ -51,7 +51,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
                 .addEndpointBuiltinBinding("AWS::S3::UseArnRegion", BindAwsS3UseArnRegion)
                 .addEndpointBuiltinBinding("AWS::S3::DisableMultiRegionAccessPoints", BindAwsS3DisableMultiRegionAccessPoints)
                 .addEndpointBuiltinBinding("AWS::S3Control::UseArnRegion", BindAwsS3UseArnRegion)
-                .addEndpointBuiltinBinding("AWS::Auth::AccountID", BindAccountID)
+                .addEndpointBuiltinBinding("AWS::Auth::AccountId", BindAccountID)
                 .build());
     }
 

@@ -18,18 +18,20 @@ func AccountID(identity auth.Identity, mode accountidmode.AIDMode) *string {
 
 func CheckAccountID(identity auth.Identity, mode accountidmode.AIDMode) error {
 	switch mode {
+	case "":
 	case accountidmode.Preferred:
 	case accountidmode.Disabled:
 	case accountidmode.Required:
 		if ca, ok := identity.(*smithy.CredentialsAdapter); !ok {
-			return fmt.Errorf("the identity provider could not be converted to a valid " +
-				"credentials adapter and provide an accountID, should try to configure a valid credentials provider")
+			return fmt.Errorf("the accountID is configured to be required, but the " +
+				"identity provider could not be converted to a valid credentials adapter " +
+				"and provide an accountID, should try to configure a valid credentials provider")
 		} else if ca.Credentials.AccountID == "" {
 			return fmt.Errorf("the required accountID could not be empty")
 		}
 	// default check in case invalid mode is configured through request config
 	default:
-		return fmt.Errorf("invalid accountID endpoint mode %s, must be preferred/required/disabled")
+		return fmt.Errorf("invalid accountID endpoint mode %s, must be preferred/required/disabled", mode)
 	}
 
 	return nil
