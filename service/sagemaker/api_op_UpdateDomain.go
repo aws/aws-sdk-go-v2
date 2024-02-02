@@ -54,7 +54,7 @@ type UpdateDomainInput struct {
 	// to Service .
 	AppSecurityGroupManagement types.AppSecurityGroupManagement
 
-	// The default settings used to create a space within the Domain.
+	// The default settings used to create a space within the domain.
 	DefaultSpaceSettings *types.DefaultSpaceSettings
 
 	// A collection of settings.

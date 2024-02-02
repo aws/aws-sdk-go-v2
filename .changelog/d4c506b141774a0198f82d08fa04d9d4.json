@@ -1,0 +1,8 @@
+{
+    "id": "d4c506b1-4177-4a01-98f8-2d08fa04d9d4",
+    "type": "documentation",
+    "description": "Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

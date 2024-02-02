@@ -39205,6 +39205,11 @@ func awsAwsjson11_deserializeDocumentCanvasAppSettings(v **types.CanvasAppSettin
 				return err
 			}
 
+		case "GenerativeAiSettings":
+			if err := awsAwsjson11_deserializeDocumentGenerativeAiSettings(&sv.GenerativeAiSettings, value); err != nil {
+				return err
+			}
+
 		case "IdentityProviderOAuthSettings":
 			if err := awsAwsjson11_deserializeDocumentIdentityProviderOAuthSettings(&sv.IdentityProviderOAuthSettings, value); err != nil {
 				return err
@@ -49752,6 +49757,46 @@ func awsAwsjson11_deserializeDocumentForecastQuantiles(v *[]string, value interf
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGenerativeAiSettings(v **types.GenerativeAiSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GenerativeAiSettings
+	if *v == nil {
+		sv = &types.GenerativeAiSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AmazonBedrockRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.AmazonBedrockRoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -29,7 +29,7 @@ func (c *Client) DeleteSpace(ctx context.Context, params *DeleteSpaceInput, optF
 
 type DeleteSpaceInput struct {
 
-	// The ID of the associated Domain.
+	// The ID of the associated domain.
 	//
 	// This member is required.
 	DomainId *string

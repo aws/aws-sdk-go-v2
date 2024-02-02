@@ -18696,6 +18696,13 @@ func awsAwsjson11_serializeDocumentCanvasAppSettings(v *types.CanvasAppSettings,
 		}
 	}
 
+	if v.GenerativeAiSettings != nil {
+		ok := object.Key("GenerativeAiSettings")
+		if err := awsAwsjson11_serializeDocumentGenerativeAiSettings(v.GenerativeAiSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdentityProviderOAuthSettings != nil {
 		ok := object.Key("IdentityProviderOAuthSettings")
 		if err := awsAwsjson11_serializeDocumentIdentityProviderOAuthSettings(v.IdentityProviderOAuthSettings, ok); err != nil {
@@ -21285,6 +21292,18 @@ func awsAwsjson11_serializeDocumentForecastQuantiles(v []string, value smithyjso
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGenerativeAiSettings(v *types.GenerativeAiSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AmazonBedrockRoleArn != nil {
+		ok := object.Key("AmazonBedrockRoleArn")
+		ok.String(*v.AmazonBedrockRoleArn)
+	}
+
 	return nil
 }
 

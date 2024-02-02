@@ -17,8 +17,8 @@ import (
 // when you create or start a notebook instance. Each lifecycle configuration
 // script has a limit of 16384 characters. The value of the $PATH environment
 // variable that is available to both scripts is /sbin:bin:/usr/sbin:/usr/bin .
-// View CloudWatch Logs for notebook instance lifecycle configurations in log group
-// /aws/sagemaker/NotebookInstances in log stream
+// View Amazon CloudWatch Logs for notebook instance lifecycle configurations in
+// log group /aws/sagemaker/NotebookInstances in log stream
 // [notebook-instance-name]/[LifecycleConfigHook] . Lifecycle configuration scripts
 // cannot run for longer than 5 minutes. If a script runs for longer than 5
 // minutes, it fails and the notebook instance is not created or started. For

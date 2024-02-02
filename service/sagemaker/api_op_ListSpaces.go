@@ -30,7 +30,7 @@ func (c *Client) ListSpaces(ctx context.Context, params *ListSpacesInput, optFns
 
 type ListSpacesInput struct {
 
-	// A parameter to search for the Domain ID.
+	// A parameter to search for the domain ID.
 	DomainIdEquals *string
 
 	// The total number of items to return in the response. If the total number of

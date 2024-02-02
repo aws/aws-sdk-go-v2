@@ -31,7 +31,7 @@ func (c *Client) DescribeSpace(ctx context.Context, params *DescribeSpaceInput, 
 
 type DescribeSpaceInput struct {
 
-	// The ID of the associated Domain.
+	// The ID of the associated domain.
 	//
 	// This member is required.
 	DomainId *string
@@ -49,13 +49,13 @@ type DescribeSpaceOutput struct {
 	// The creation time.
 	CreationTime *time.Time
 
-	// The ID of the associated Domain.
+	// The ID of the associated domain.
 	DomainId *string
 
 	// The failure reason.
 	FailureReason *string
 
-	// The ID of the space's profile in the Amazon Elastic File System volume.
+	// The ID of the space's profile in the Amazon EFS volume.
 	HomeEfsFileSystemUid *string
 
 	// The last modified time.

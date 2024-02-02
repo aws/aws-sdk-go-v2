@@ -13,8 +13,7 @@ import (
 )
 
 // Creates a version of the SageMaker image specified by ImageName . The version
-// represents the Amazon Elastic Container Registry (ECR) container image specified
-// by BaseImage .
+// represents the Amazon ECR container image specified by BaseImage .
 func (c *Client) CreateImageVersion(ctx context.Context, params *CreateImageVersionInput, optFns ...func(*Options)) (*CreateImageVersionOutput, error) {
 	if params == nil {
 		params = &CreateImageVersionInput{}
@@ -33,8 +32,8 @@ func (c *Client) CreateImageVersion(ctx context.Context, params *CreateImageVers
 type CreateImageVersionInput struct {
 
 	// The registry path of the container image to use as the starting point for this
-	// version. The path is an Amazon Elastic Container Registry (ECR) URI in the
-	// following format: .dkr.ecr..amazonaws.com/
+	// version. The path is an Amazon ECR URI in the following format:
+	// .dkr.ecr..amazonaws.com/
 	//
 	// This member is required.
 	BaseImage *string

@@ -870,7 +870,7 @@ type AppDetails struct {
 // The configuration for running a SageMaker image as a KernelGateway app.
 type AppImageConfigDetails struct {
 
-	// The Amazon Resource Name (ARN) of the AppImageConfig.
+	// The ARN of the AppImageConfig.
 	AppImageConfigArn *string
 
 	// The name of the AppImageConfig. Must be unique to your account.
@@ -1586,7 +1586,7 @@ type AutoMLOutputDataConfig struct {
 	// This member is required.
 	S3OutputPath *string
 
-	// The Key Management Service (KMS) encryption key ID.
+	// The Key Management Service encryption key ID.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -2108,6 +2108,9 @@ type CanvasAppSettings struct {
 
 	// The model deployment settings for the SageMaker Canvas application.
 	DirectDeploySettings *DirectDeploySettings
+
+	// The generative AI settings for the SageMaker Canvas application.
+	GenerativeAiSettings *GenerativeAiSettings
 
 	// The settings for connecting to an external data source with OAuth.
 	IdentityProviderOAuthSettings []IdentityProviderOAuthSetting
@@ -3606,7 +3609,7 @@ type DefaultEbsStorageSettings struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of settings that apply to spaces created in the Domain.
+// A collection of settings that apply to spaces created in the domain.
 type DefaultSpaceSettings struct {
 
 	// The ARN of the execution role for the space.
@@ -3618,8 +3621,7 @@ type DefaultSpaceSettings struct {
 	// The KernelGateway app settings.
 	KernelGatewayAppSettings *KernelGatewayAppSettings
 
-	// The security group IDs for the Amazon Virtual Private Cloud that the space uses
-	// for communication.
+	// The security group IDs for the Amazon VPC that the space uses for communication.
 	SecurityGroups []string
 
 	noSmithyDocumentSerde
@@ -5140,8 +5142,7 @@ type FileSource struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Elastic File System (EFS) storage configuration for a SageMaker
-// image.
+// The Amazon Elastic File System storage configuration for a SageMaker image.
 type FileSystemConfig struct {
 
 	// The default POSIX group ID (GID). If not specified, defaults to 100 .
@@ -5356,6 +5357,21 @@ type FlowDefinitionSummary struct {
 	// The reason why the flow definition creation failed. A failure reason is
 	// returned only when the flow definition status is Failed .
 	FailureReason *string
+
+	noSmithyDocumentSerde
+}
+
+// The generative AI settings for the SageMaker Canvas application. Configure
+// these settings for Canvas users starting chats with generative AI foundation
+// models. For more information, see Use generative AI with foundation models (https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-fm-chat.html)
+// .
+type GenerativeAiSettings struct {
+
+	// The ARN of an Amazon Web Services IAM role that allows fine-tuning of large
+	// language models (LLMs) in Amazon Bedrock. The IAM role should have Amazon S3
+	// read and write permissions, as well as a trust relationship that establishes
+	// bedrock.amazonaws.com as a service principal.
+	AmazonBedrockRoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -6328,7 +6344,7 @@ type HyperbandStrategyConfig struct {
 	// The maximum number of resources (such as epochs) that can be used by a training
 	// job launched by a hyperparameter tuning job. Once a job reaches the MaxResource
 	// value, it is stopped. If a value for MaxResource is not provided, and Hyperband
-	// is selected as the hyperparameter tuning strategy, HyperbandTrainingJ attempts
+	// is selected as the hyperparameter tuning strategy, HyperbandTraining attempts
 	// to infer MaxResource from the following keys (if present) in
 	// StaticsHyperParameters (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters)
 	// :
@@ -6341,7 +6357,7 @@ type HyperbandStrategyConfig struct {
 	// generates a validation error. The maximum value is 20,000 epochs. All metrics
 	// that correspond to an objective metric are used to derive early stopping
 	// decisions (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html)
-	// . For distributive (https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html)
+	// . For distributed (https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html)
 	// training jobs, ensure that duplicate metrics are not printed in the logs across
 	// the individual nodes in a training job. If multiple nodes are publishing
 	// duplicate or incorrect metrics, training jobs may make an incorrect stopping
@@ -7886,8 +7902,7 @@ type JupyterLabAppImageConfig struct {
 	// The configuration used to run the application image container.
 	ContainerConfig *ContainerConfig
 
-	// The Amazon Elastic File System (EFS) storage configuration for a SageMaker
-	// image.
+	// The Amazon Elastic File System storage configuration for a SageMaker image.
 	FileSystemConfig *FileSystemConfig
 
 	noSmithyDocumentSerde
@@ -7958,9 +7973,8 @@ type KernelGatewayAppSettings struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the default
 	// SageMaker image used by the KernelGateway app. The Amazon SageMaker Studio UI
 	// does not use the default instance type value set here. The default instance type
-	// set here is used when Apps are created using the Amazon Web Services Command
-	// Line Interface or Amazon Web Services CloudFormation and the instance type
-	// parameter value is not passed.
+	// set here is used when Apps are created using the CLI or CloudFormation and the
+	// instance type parameter value is not passed.
 	DefaultResourceSpec *ResourceSpec
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the
@@ -7980,8 +7994,7 @@ type KernelGatewayImageConfig struct {
 	// This member is required.
 	KernelSpecs []KernelSpec
 
-	// The Amazon Elastic File System (EFS) storage configuration for a SageMaker
-	// image.
+	// The Amazon Elastic File System storage configuration for a SageMaker image.
 	FileSystemConfig *FileSystemConfig
 
 	noSmithyDocumentSerde
@@ -10470,7 +10483,7 @@ type NotebookInstanceLifecycleConfigSummary struct {
 // Contains the notebook instance lifecycle configuration script. Each lifecycle
 // configuration script has a limit of 16384 characters. The value of the $PATH
 // environment variable that is available to both scripts is
-// /sbin:bin:/usr/sbin:/usr/bin . View CloudWatch Logs for notebook instance
+// /sbin:bin:/usr/sbin:/usr/bin . View Amazon CloudWatch Logs for notebook instance
 // lifecycle configurations in log group /aws/sagemaker/NotebookInstances in log
 // stream [notebook-instance-name]/[LifecycleConfigHook] . Lifecycle configuration
 // scripts cannot run for longer than 5 minutes. If a script runs for longer than 5
@@ -13177,12 +13190,11 @@ type ResourceSpec struct {
 	noSmithyDocumentSerde
 }
 
-// The retention policy for data stored on an Amazon Elastic File System (EFS)
-// volume.
+// The retention policy for data stored on an Amazon Elastic File System volume.
 type RetentionPolicy struct {
 
-	// The default is Retain , which specifies to keep the data stored on the EFS
-	// volume. Specify Delete to delete the data stored on the EFS volume.
+	// The default is Retain , which specifies to keep the data stored on the Amazon
+	// EFS volume. Specify Delete to delete the data stored on the Amazon EFS volume.
 	HomeEfsFileSystem RetentionType
 
 	noSmithyDocumentSerde
@@ -13981,7 +13993,7 @@ type SpaceDetails struct {
 	// The creation time.
 	CreationTime *time.Time
 
-	// The ID of the associated Domain.
+	// The ID of the associated domain.
 	DomainId *string
 
 	// The last modified time.
@@ -14270,8 +14282,7 @@ type TabularJobConfig struct {
 	Mode AutoMLMode
 
 	// The type of supervised learning problem available for the model candidates of
-	// the AutoML job V2. For more information, see Amazon SageMaker Autopilot problem
-	// types (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types)
+	// the AutoML job V2. For more information, see SageMaker Autopilot problem types (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types)
 	// . You must either specify the type of supervised learning problem in ProblemType
 	// and provide the AutoMLJobObjective (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html#sagemaker-CreateAutoMLJobV2-request-AutoMLJobObjective)
 	// metric, or none at all.
@@ -14296,7 +14307,7 @@ type TabularResolvedAttributes struct {
 
 	// The type of supervised learning problem available for the model candidates of
 	// the AutoML job V2 (Binary Classification, Multiclass Classification,
-	// Regression). For more information, see Amazon SageMaker Autopilot problem types (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types)
+	// Regression). For more information, see SageMaker Autopilot problem types (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types)
 	// .
 	ProblemType ProblemType
 
@@ -16235,8 +16246,8 @@ type Vertex struct {
 // The list of key-value pairs that you specify for your resources.
 type VisibilityConditions struct {
 
-	// The key for that specifies the tag that you're using to filter the search
-	// results. The key must start with Tags. .
+	// The key that specifies the tag that you're using to filter the search results.
+	// It must be in the following format: Tags./EqualsIfExists .
 	Key *string
 
 	// The value for the tag that you're using to filter the search results.

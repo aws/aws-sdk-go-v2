@@ -41,7 +41,7 @@ type DescribeAppImageConfigInput struct {
 
 type DescribeAppImageConfigOutput struct {
 
-	// The Amazon Resource Name (ARN) of the AppImageConfig.
+	// The ARN of the AppImageConfig.
 	AppImageConfigArn *string
 
 	// The name of the AppImageConfig.

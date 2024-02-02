@@ -83,9 +83,8 @@ type DescribeAutoMLJobOutput struct {
 	// This member is required.
 	OutputDataConfig *types.AutoMLOutputDataConfig
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that has read permission to the input data location and write permission to the
-	// output data location in Amazon S3.
+	// The ARN of the IAM role that has read permission to the input data location and
+	// write permission to the output data location in Amazon S3.
 	//
 	// This member is required.
 	RoleArn *string
