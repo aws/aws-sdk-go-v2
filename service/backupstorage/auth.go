@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-func bindAuthParamsRegion(params *AuthResolverParameters, _ interface{}, options Options, _ interface{}) {
+func bindAuthParamsRegion(params *AuthResolverParameters, _ interface{}, options Options) {
 	params.Region = options.Region
 }
 
@@ -90,12 +90,12 @@ type AuthResolverParameters struct {
 	Region string
 }
 
-func bindAuthResolverParams(operation string, input interface{}, options Options, ctx context.Context) *AuthResolverParameters {
+func bindAuthResolverParams(operation string, input interface{}, options Options) *AuthResolverParameters {
 	params := &AuthResolverParameters{
 		Operation: operation,
 	}
 
-	bindAuthParamsRegion(params, input, options, ctx)
+	bindAuthParamsRegion(params, input, options)
 
 	return params
 }
@@ -190,7 +190,7 @@ func (*resolveAuthSchemeMiddleware) ID() string {
 func (m *resolveAuthSchemeMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
-	params := bindAuthResolverParams(m.operation, getOperationInput(ctx), m.options, ctx)
+	params := bindAuthResolverParams(m.operation, getOperationInput(ctx), m.options)
 	options, err := m.options.AuthSchemeResolver.ResolveAuthSchemes(ctx, params)
 	if err != nil {
 		return out, metadata, fmt.Errorf("resolve auth scheme: %w", err)
