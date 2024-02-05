@@ -1,3 +1,11 @@
+# Release (2024-02-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.75.0](service/glue/CHANGELOG.md#v1750-2024-02-05)
+  * **Feature**: Introduce Catalog Encryption Role within Glue Data Catalog Settings. Introduce SASL/PLAIN as an authentication method for Glue Kafka connections
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.35.9](service/workspaces/CHANGELOG.md#v1359-2024-02-05)
+  * **Documentation**: Added definitions of various WorkSpace states
+
 # Release (2024-02-02)
 
 ## General Highlights

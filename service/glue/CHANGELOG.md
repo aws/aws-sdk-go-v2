@@ -1,3 +1,7 @@
+# v1.75.0 (2024-02-05)
+
+* **Feature**: Introduce Catalog Encryption Role within Glue Data Catalog Settings. Introduce SASL/PLAIN as an authentication method for Glue Kafka connections
+
 # v1.74.0 (2024-01-31)
 
 * **Feature**: Update page size limits for GetJobRuns and GetTriggers APIs.

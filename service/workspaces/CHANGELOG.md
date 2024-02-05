@@ -1,3 +1,7 @@
+# v1.35.9 (2024-02-05)
+
+* **Documentation**: Added definitions of various WorkSpace states
+
 # v1.35.8 (2024-01-11)
 
 * **Documentation**: Added AWS Workspaces RebootWorkspaces API - Extended Reboot documentation update

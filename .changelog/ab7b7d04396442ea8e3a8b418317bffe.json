@@ -1,8 +1,0 @@
-{
-    "id": "ab7b7d04-3964-42ea-8e3a-8b418317bffe",
-    "type": "feature",
-    "description": "Introduce Catalog Encryption Role within Glue Data Catalog Settings. Introduce SASL/PLAIN as an authentication method for Glue Kafka connections",
-    "modules": [
-        "service/glue"
-    ]
-}
