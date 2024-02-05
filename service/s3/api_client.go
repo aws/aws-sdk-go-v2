@@ -266,16 +266,15 @@ func setResolvedDefaultsMode(o *Options) {
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
-		Region:                cfg.Region,
-		DefaultsMode:          cfg.DefaultsMode,
-		RuntimeEnvironment:    cfg.RuntimeEnvironment,
-		HTTPClient:            cfg.HTTPClient,
-		Credentials:           cfg.Credentials,
-		APIOptions:            cfg.APIOptions,
-		Logger:                cfg.Logger,
-		ClientLogMode:         cfg.ClientLogMode,
-		AppID:                 cfg.AppID,
-		AccountIDEndpointMode: cfg.AccountIDEndpointMode,
+		Region:             cfg.Region,
+		DefaultsMode:       cfg.DefaultsMode,
+		RuntimeEnvironment: cfg.RuntimeEnvironment,
+		HTTPClient:         cfg.HTTPClient,
+		Credentials:        cfg.Credentials,
+		APIOptions:         cfg.APIOptions,
+		Logger:             cfg.Logger,
+		ClientLogMode:      cfg.ClientLogMode,
+		AppID:              cfg.AppID,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
