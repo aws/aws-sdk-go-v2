@@ -1,0 +1,8 @@
+{
+    "id": "ea36258c-e45d-4bae-b33c-a9d81fa3b27b",
+    "type": "documentation",
+    "description": "Added definitions of various WorkSpace states",
+    "modules": [
+        "service/workspaces"
+    ]
+}

@@ -1484,9 +1484,16 @@ type Connection struct {
 	//   - ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD - The encrypted version of the Kafka
 	//   client key password (if the user has the Glue encrypt passwords setting
 	//   selected).
-	//   - KAFKA_SASL_MECHANISM - "SCRAM-SHA-512" , "GSSAPI" , or "AWS_MSK_IAM" . These
-	//   are the supported SASL Mechanisms (https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml)
+	//   - KAFKA_SASL_MECHANISM - "SCRAM-SHA-512" , "GSSAPI" , "AWS_MSK_IAM" , or
+	//   "PLAIN" . These are the supported SASL Mechanisms (https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml)
 	//   .
+	//   - KAFKA_SASL_PLAIN_USERNAME - A plaintext username used to authenticate with
+	//   the "PLAIN" mechanism.
+	//   - KAFKA_SASL_PLAIN_PASSWORD - A plaintext password used to authenticate with
+	//   the "PLAIN" mechanism.
+	//   - ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD - The encrypted version of the Kafka
+	//   SASL PLAIN password (if the user has the Glue encrypt passwords setting
+	//   selected).
 	//   - KAFKA_SASL_SCRAM_USERNAME - A plaintext username used to authenticate with
 	//   the "SCRAM-SHA-512" mechanism.
 	//   - KAFKA_SASL_SCRAM_PASSWORD - A plaintext password used to authenticate with
@@ -3194,6 +3201,10 @@ type EncryptionAtRest struct {
 	//
 	// This member is required.
 	CatalogEncryptionMode CatalogEncryptionMode
+
+	// The role that Glue assumes to encrypt and decrypt the Data Catalog objects on
+	// the caller's behalf.
+	CatalogEncryptionServiceRole *string
 
 	// The ID of the KMS key to use for encryption at rest.
 	SseAwsKmsKeyId *string

@@ -37896,6 +37896,15 @@ func awsAwsjson11_deserializeDocumentEncryptionAtRest(v **types.EncryptionAtRest
 				sv.CatalogEncryptionMode = types.CatalogEncryptionMode(jtv)
 			}
 
+		case "CatalogEncryptionServiceRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
+				}
+				sv.CatalogEncryptionServiceRole = ptr.String(jtv)
+			}
+
 		case "SseAwsKmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
