@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -233,15 +232,15 @@ func TestResolveDisableRequestCompression(t *testing.T) {
 
 func TestResolveAccountIDEndpointMode(t *testing.T) {
 	cases := map[string]struct {
-		AccountIDEndpointMode mode.AIDMode
-		ExpectMode            mode.AIDMode
+		AccountIDEndpointMode aws.AccountIDEndpointMode
+		ExpectMode            aws.AccountIDEndpointMode
 	}{
 		"accountID required for endpoint routing": {
-			AccountIDEndpointMode: mode.Required,
-			ExpectMode:            mode.Required,
+			AccountIDEndpointMode: aws.AccountIDEndpointModeRequired,
+			ExpectMode:            aws.AccountIDEndpointModeRequired,
 		},
 		"accountID unset": {
-			ExpectMode: mode.Preferred,
+			ExpectMode: aws.AccountIDEndpointModePreferred,
 		},
 	}
 

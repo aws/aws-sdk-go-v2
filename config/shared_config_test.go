@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"path/filepath"
 	"reflect"
 	"strconv"
@@ -749,7 +748,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:         "account_id_endpoint_mode",
 			Expected: SharedConfig{
 				Profile:               "account_id_endpoint_mode",
-				AccountIDEndpointMode: mode.Disabled,
+				AccountIDEndpointMode: aws.AccountIDEndpointModeDisabled,
 			},
 		},
 		"profile with invalid account ID endpoint mode": {
@@ -758,7 +757,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Expected: SharedConfig{
 				Profile: "account_id_endpoint_mode_error",
 			},
-			Err: fmt.Errorf("unknown account id mode, must be preferred/required/disabled"),
+			Err: fmt.Errorf("invalid value for shared config profile field, account_id_endpoint_mode=blabla, must be preferred/required/disabled"),
 		},
 	}
 

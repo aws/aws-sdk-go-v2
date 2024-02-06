@@ -240,7 +240,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     .build(),
             AwsConfigField.builder()
                     .name(SDK_AID_ENDPOINT_MODE)
-                    .type(getAwsAccountIDModeSymbol("AIDMode"))
+                    .type(SdkGoTypes.Aws.AccountIDEndpointMode)
                     .documentation("Indicates how aws account ID is applied in endpoint2.0 routing")
                     .build()
     );
@@ -263,11 +263,6 @@ public class AddAwsConfigFields implements GoIntegration {
     private static Symbol getAwsRetrySymbol(String symbolName) {
         return SymbolUtils.createValueSymbolBuilder(symbolName,
                 AwsGoDependency.AWS_RETRY).build();
-    }
-
-    private static Symbol getAwsAccountIDModeSymbol(String symbolName) {
-        return SymbolUtils.createValueSymbolBuilder(symbolName,
-                AwsGoDependency.AWS_ACCOUNT_ID_ENDPOINT_MODE).build();
     }
 
     /**

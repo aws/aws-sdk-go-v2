@@ -5,7 +5,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"io"
 	"io/ioutil"
 	"os"
@@ -346,7 +345,7 @@ type SharedConfig struct {
 	// associated with the feature.
 	S3DisableExpressAuth *bool
 
-	AccountIDEndpointMode mode.AIDMode
+	AccountIDEndpointMode aws.AccountIDEndpointMode
 }
 
 func (c SharedConfig) getDefaultsMode(ctx context.Context) (value aws.DefaultsMode, ok bool, err error) {
@@ -1188,14 +1187,21 @@ func updateDisableRequestCompression(disable **bool, sec ini.Section, key string
 	return nil
 }
 
-func updateAIDEndpointMode(m *mode.AIDMode, sec ini.Section, key string) error {
+func updateAIDEndpointMode(m *aws.AccountIDEndpointMode, sec ini.Section, key string) error {
 	if !sec.Has(key) {
 		return nil
 	}
 
 	v := sec.String(key)
-	if err := m.SetFromString(v); err != nil {
-		return fmt.Errorf("invalid value: %s, %q", v, err)
+	switch v {
+	case "preferred":
+		*m = aws.AccountIDEndpointModePreferred
+	case "required":
+		*m = aws.AccountIDEndpointModeRequired
+	case "disabled":
+		*m = aws.AccountIDEndpointModeDisabled
+	default:
+		return fmt.Errorf("invalid value for shared config profile field, %s=%s, must be preferred/required/disabled", key, v)
 	}
 
 	return nil
@@ -1215,7 +1221,7 @@ func (c SharedConfig) getDisableRequestCompression(ctx context.Context) (bool, b
 	return *c.DisableRequestCompression, true, nil
 }
 
-func (c SharedConfig) getAccountIDEndpointMode(ctx context.Context) (mode.AIDMode, bool, error) {
+func (c SharedConfig) getAccountIDEndpointMode(ctx context.Context) (aws.AccountIDEndpointMode, bool, error) {
 	return c.AccountIDEndpointMode, len(c.AccountIDEndpointMode) > 0, nil
 }
 

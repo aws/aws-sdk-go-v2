@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"io"
 	"io/ioutil"
 	"os"
@@ -296,7 +295,7 @@ type EnvConfig struct {
 	S3DisableExpressAuth *bool
 
 	// Indicates whether account ID will be required/ignored in endpoint2.0 routing
-	AccountIDEndpointMode mode.AIDMode
+	AccountIDEndpointMode aws.AccountIDEndpointMode
 }
 
 // loadEnvConfig reads configuration values from the OS's environment variables.
@@ -429,7 +428,7 @@ func (c EnvConfig) getRequestMinCompressSizeBytes(context.Context) (int64, bool,
 	return *c.RequestMinCompressSizeBytes, true, nil
 }
 
-func (c EnvConfig) getAccountIDEndpointMode(context.Context) (mode.AIDMode, bool, error) {
+func (c EnvConfig) getAccountIDEndpointMode(context.Context) (aws.AccountIDEndpointMode, bool, error) {
 	return c.AccountIDEndpointMode, len(c.AccountIDEndpointMode) > 0, nil
 }
 
@@ -507,14 +506,22 @@ func setEC2IMDSEndpointMode(mode *imds.EndpointModeState, keys []string) error {
 	return nil
 }
 
-func setAIDEndPointModeFromEnvVal(mode *mode.AIDMode, keys []string) error {
+func setAIDEndPointModeFromEnvVal(m *aws.AccountIDEndpointMode, keys []string) error {
 	for _, k := range keys {
 		value := os.Getenv(k)
 		if len(value) == 0 {
 			continue
 		}
-		if err := mode.SetFromString(value); err != nil {
-			return fmt.Errorf("invalid value for environment variable, %s=%s, %v", k, value, err)
+
+		switch value {
+		case "preferred":
+			*m = aws.AccountIDEndpointModePreferred
+		case "required":
+			*m = aws.AccountIDEndpointModeRequired
+		case "disabled":
+			*m = aws.AccountIDEndpointModeDisabled
+		default:
+			return fmt.Errorf("invalid value for environment variable, %s=%s, must be preferred/required/disabled", k, value)
 		}
 		break
 	}
