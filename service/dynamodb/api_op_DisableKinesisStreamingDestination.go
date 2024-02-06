@@ -42,9 +42,6 @@ type DisableKinesisStreamingDestinationInput struct {
 	// This member is required.
 	TableName *string
 
-	// The source for the Kinesis streaming information that is being enabled.
-	EnableKinesisStreamingConfiguration *types.EnableKinesisStreamingConfiguration
-
 	noSmithyDocumentSerde
 }
 
@@ -52,9 +49,6 @@ type DisableKinesisStreamingDestinationOutput struct {
 
 	// The current status of the replication.
 	DestinationStatus types.DestinationStatus
-
-	// The destination for the Kinesis streaming information that is being enabled.
-	EnableKinesisStreamingConfiguration *types.EnableKinesisStreamingConfiguration
 
 	// The ARN for the specific Kinesis data stream.
 	StreamArn *string

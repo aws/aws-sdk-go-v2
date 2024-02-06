@@ -975,16 +975,6 @@ type DeleteRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Enables setting the configuration for Kinesis Streaming.
-type EnableKinesisStreamingConfiguration struct {
-
-	// Toggle for the precision of Kinesis data stream timestamp. The values are
-	// either MILLISECOND or MICROSECOND .
-	ApproximateCreationDateTimePrecision ApproximateCreationDateTimePrecision
-
-	noSmithyDocumentSerde
-}
-
 // An endpoint information details.
 type Endpoint struct {
 
@@ -1785,10 +1775,6 @@ type KeySchemaElement struct {
 // Describes a Kinesis data stream destination.
 type KinesisDataStreamDestination struct {
 
-	// The precision of the Kinesis data stream timestamp. The values are either
-	// MILLISECOND or MICROSECOND .
-	ApproximateCreationDateTimePrecision ApproximateCreationDateTimePrecision
-
 	// The current status of replication.
 	DestinationStatus DestinationStatus
 
@@ -1900,10 +1886,10 @@ type LocalSecondaryIndexInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a PartiQL statement that uses parameters.
+// Represents a PartiQL statment that uses parameters.
 type ParameterizedStatement struct {
 
-	// A PartiQL statement that uses parameters.
+	// A PartiQL statment that uses parameters.
 	//
 	// This member is required.
 	Statement *string
@@ -3026,15 +3012,6 @@ type UpdateGlobalSecondaryIndexAction struct {
 	//
 	// This member is required.
 	ProvisionedThroughput *ProvisionedThroughput
-
-	noSmithyDocumentSerde
-}
-
-// Enables updating the configuration for Kinesis Streaming.
-type UpdateKinesisStreamingConfiguration struct {
-
-	// Enables updating the precision of Kinesis data stream timestamp.
-	ApproximateCreationDateTimePrecision ApproximateCreationDateTimePrecision
 
 	noSmithyDocumentSerde
 }
