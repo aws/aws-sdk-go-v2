@@ -1,7 +1,6 @@
 package aws
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"net/http"
 
 	smithybearer "github.com/aws/smithy-go/auth/bearer"
@@ -166,7 +165,7 @@ type Config struct {
 
 	// AccountIDEndpointMode indicates how aws account ID is applied in endpoint2.0 routing.
 	// Will be set to preferred by default. Supported modes are: Preferred, Required and Disabled
-	AccountIDEndpointMode mode.AIDMode
+	AccountIDEndpointMode AccountIDEndpointMode
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder

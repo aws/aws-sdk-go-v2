@@ -1,7 +1,6 @@
 package config
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"os"
 	"reflect"
 	"strconv"
@@ -513,7 +512,7 @@ func TestNewEnvConfig(t *testing.T) {
 				"AWS_ACCOUNT_ID_ENDPOINT_MODE": "required",
 			},
 			Config: EnvConfig{
-				AccountIDEndpointMode: mode.Required,
+				AccountIDEndpointMode: aws.AccountIDEndpointModeRequired,
 			},
 			WantErr: false,
 		},

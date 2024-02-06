@@ -40,6 +40,7 @@ software.amazon.smithy.aws.go.codegen.customization.S3PaginationExtensions
 software.amazon.smithy.aws.go.codegen.AwsHttpPresignURLClientGenerator
 software.amazon.smithy.aws.go.codegen.ResolveClientConfigFromSources
 software.amazon.smithy.aws.go.codegen.customization.S3GetBucketLocation
+software.amazon.smithy.aws.go.codegen.customization.S3SignatureVersion4a
 software.amazon.smithy.aws.go.codegen.RequestResponseLogging
 software.amazon.smithy.aws.go.codegen.customization.S3AddPutObjectUnseekableBodyDoc
 software.amazon.smithy.aws.go.codegen.customization.BackfillEc2UnboxedToBoxedShapes
@@ -72,8 +73,3 @@ software.amazon.smithy.aws.go.codegen.customization.auth.S3ExpressAuthScheme
 software.amazon.smithy.aws.go.codegen.customization.S3BucketContext
 software.amazon.smithy.aws.go.codegen.customization.s3.ExpressDefaultChecksum
 software.amazon.smithy.aws.go.codegen.customization.auth.GlobalAnonymousOption
-software.amazon.smithy.aws.go.codegen.customization.CloudFrontKVSSigV4a
-software.amazon.smithy.aws.go.codegen.customization.BackfillProtocolTestServiceTrait
-software.amazon.smithy.go.codegen.integration.MiddlewareStackSnapshotTests
-software.amazon.smithy.aws.go.codegen.customization.s3.S3ExpiresShapeCustomization
-software.amazon.smithy.aws.go.codegen.ClockSkewGenerator

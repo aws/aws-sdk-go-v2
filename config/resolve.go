@@ -5,7 +5,6 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -176,7 +175,7 @@ func resolveAccountIDEndpointMode(ctx context.Context, cfg *aws.Config, configs 
 	}
 
 	if !found {
-		m = mode.Preferred
+		m = aws.AccountIDEndpointModePreferred
 	}
 
 	cfg.AccountIDEndpointMode = m

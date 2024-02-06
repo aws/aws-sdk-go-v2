@@ -2,7 +2,6 @@ package config
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws/accountid/mode"
 	"io"
 	"net/http"
 
@@ -228,10 +227,10 @@ func getRequestMinCompressSizeBytes(ctx context.Context, configs configs) (value
 
 // accountIDEndpointModeProvider provides access to the AccountIDEndpointMode
 type accountIDEndpointModeProvider interface {
-	getAccountIDEndpointMode(context.Context) (mode.AIDMode, bool, error)
+	getAccountIDEndpointMode(context.Context) (aws.AccountIDEndpointMode, bool, error)
 }
 
-func getAccountIDEndpointMode(ctx context.Context, configs configs) (value mode.AIDMode, found bool, err error) {
+func getAccountIDEndpointMode(ctx context.Context, configs configs) (value aws.AccountIDEndpointMode, found bool, err error) {
 	for _, cfg := range configs {
 		if p, ok := cfg.(accountIDEndpointModeProvider); ok {
 			value, found, err = p.getAccountIDEndpointMode(ctx)

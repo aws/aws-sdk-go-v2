@@ -37,7 +37,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
     private static final GoWriter.Writable BindAwsS3DisableMultiRegionAccessPoints =
             goTemplate("$T(options.DisableMultiRegionAccessPoints)", SdkGoTypes.Aws.Bool);
     private static final GoWriter.Writable BindAccountID =
-            goTemplate("$T(getIdentity(ctx), options.AccountIDEndpointMode)", SdkGoTypes.Aws.AccountID.AccountID);
+            goTemplate("accountID(getIdentity(ctx), options.AccountIDEndpointMode)");
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
