@@ -630,6 +630,26 @@ func (m *validateOpGetFunction) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetGraphqlApiEnvironmentVariables struct {
+}
+
+func (*validateOpGetGraphqlApiEnvironmentVariables) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetGraphqlApiEnvironmentVariables) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetGraphqlApiEnvironmentVariablesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetGraphqlApiEnvironmentVariablesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetGraphqlApi struct {
 }
 
@@ -925,6 +945,26 @@ func (m *validateOpListTypes) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTypesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutGraphqlApiEnvironmentVariables struct {
+}
+
+func (*validateOpPutGraphqlApiEnvironmentVariables) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutGraphqlApiEnvironmentVariables) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutGraphqlApiEnvironmentVariablesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutGraphqlApiEnvironmentVariablesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1334,6 +1374,10 @@ func addOpGetFunctionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFunction{}, middleware.After)
 }
 
+func addOpGetGraphqlApiEnvironmentVariablesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetGraphqlApiEnvironmentVariables{}, middleware.After)
+}
+
 func addOpGetGraphqlApiValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGraphqlApi{}, middleware.After)
 }
@@ -1392,6 +1436,10 @@ func addOpListTypesByAssociationValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListTypesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTypes{}, middleware.After)
+}
+
+func addOpPutGraphqlApiEnvironmentVariablesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutGraphqlApiEnvironmentVariables{}, middleware.After)
 }
 
 func addOpStartDataSourceIntrospectionValidationMiddleware(stack *middleware.Stack) error {
@@ -2371,6 +2419,21 @@ func validateOpGetFunctionInput(v *GetFunctionInput) error {
 	}
 }
 
+func validateOpGetGraphqlApiEnvironmentVariablesInput(v *GetGraphqlApiEnvironmentVariablesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetGraphqlApiEnvironmentVariablesInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetGraphqlApiInput(v *GetGraphqlApiInput) error {
 	if v == nil {
 		return nil
@@ -2621,6 +2684,24 @@ func validateOpListTypesInput(v *ListTypesInput) error {
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutGraphqlApiEnvironmentVariablesInput(v *PutGraphqlApiEnvironmentVariablesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutGraphqlApiEnvironmentVariablesInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.EnvironmentVariables == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentVariables"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

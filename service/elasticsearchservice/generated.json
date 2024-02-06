@@ -13,6 +13,7 @@
         "api_op_AddTags.go",
         "api_op_AssociatePackage.go",
         "api_op_AuthorizeVpcEndpointAccess.go",
+        "api_op_CancelDomainConfigChange.go",
         "api_op_CancelElasticsearchServiceSoftwareUpdate.go",
         "api_op_CreateElasticsearchDomain.go",
         "api_op_CreateOutboundCrossClusterSearchConnection.go",

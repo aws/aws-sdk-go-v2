@@ -11480,6 +11480,15 @@ func awsAwsjson11_deserializeDocumentLogGroup(v **types.LogGroup, value interfac
 				sv.KmsKeyId = ptr.String(jtv)
 			}
 
+		case "logGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.LogGroupArn = ptr.String(jtv)
+			}
+
 		case "logGroupClass":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -68,6 +68,36 @@ func (AutoTuneType) Values() []AutoTuneType {
 	}
 }
 
+type ConfigChangeStatus string
+
+// Enum values for ConfigChangeStatus
+const (
+	ConfigChangeStatusPending          ConfigChangeStatus = "Pending"
+	ConfigChangeStatusInitializing     ConfigChangeStatus = "Initializing"
+	ConfigChangeStatusValidating       ConfigChangeStatus = "Validating"
+	ConfigChangeStatusValidationFailed ConfigChangeStatus = "ValidationFailed"
+	ConfigChangeStatusApplyingChanges  ConfigChangeStatus = "ApplyingChanges"
+	ConfigChangeStatusCompleted        ConfigChangeStatus = "Completed"
+	ConfigChangeStatusPendingUserInput ConfigChangeStatus = "PendingUserInput"
+	ConfigChangeStatusCancelled        ConfigChangeStatus = "Cancelled"
+)
+
+// Values returns all known values for ConfigChangeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigChangeStatus) Values() []ConfigChangeStatus {
+	return []ConfigChangeStatus{
+		"Pending",
+		"Initializing",
+		"Validating",
+		"ValidationFailed",
+		"ApplyingChanges",
+		"Completed",
+		"PendingUserInput",
+		"Cancelled",
+	}
+}
+
 type DeploymentStatus string
 
 // Enum values for DeploymentStatus
@@ -133,6 +163,34 @@ func (DomainPackageStatus) Values() []DomainPackageStatus {
 		"ACTIVE",
 		"DISSOCIATING",
 		"DISSOCIATION_FAILED",
+	}
+}
+
+type DomainProcessingStatusType string
+
+// Enum values for DomainProcessingStatusType
+const (
+	DomainProcessingStatusTypeCreating  DomainProcessingStatusType = "Creating"
+	DomainProcessingStatusTypeActive    DomainProcessingStatusType = "Active"
+	DomainProcessingStatusTypeModifying DomainProcessingStatusType = "Modifying"
+	DomainProcessingStatusTypeUpgrading DomainProcessingStatusType = "UpgradingEngineVersion"
+	DomainProcessingStatusTypeUpdating  DomainProcessingStatusType = "UpdatingServiceSoftware"
+	DomainProcessingStatusTypeIsolated  DomainProcessingStatusType = "Isolated"
+	DomainProcessingStatusTypeDeleting  DomainProcessingStatusType = "Deleting"
+)
+
+// Values returns all known values for DomainProcessingStatusType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DomainProcessingStatusType) Values() []DomainProcessingStatusType {
+	return []DomainProcessingStatusType{
+		"Creating",
+		"Active",
+		"Modifying",
+		"UpgradingEngineVersion",
+		"UpdatingServiceSoftware",
+		"Isolated",
+		"Deleting",
 	}
 }
 
@@ -329,6 +387,24 @@ func (InboundCrossClusterSearchConnectionStatusCode) Values() []InboundCrossClus
 	}
 }
 
+type InitiatedBy string
+
+// Enum values for InitiatedBy
+const (
+	InitiatedByCustomer InitiatedBy = "CUSTOMER"
+	InitiatedByService  InitiatedBy = "SERVICE"
+)
+
+// Values returns all known values for InitiatedBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (InitiatedBy) Values() []InitiatedBy {
+	return []InitiatedBy{
+		"CUSTOMER",
+		"SERVICE",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType
@@ -485,6 +561,24 @@ func (PrincipalType) Values() []PrincipalType {
 	return []PrincipalType{
 		"AWS_ACCOUNT",
 		"AWS_SERVICE",
+	}
+}
+
+type PropertyValueType string
+
+// Enum values for PropertyValueType
+const (
+	PropertyValueTypePlainText       PropertyValueType = "PLAIN_TEXT"
+	PropertyValueTypeStringifiedJson PropertyValueType = "STRINGIFIED_JSON"
+)
+
+// Values returns all known values for PropertyValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PropertyValueType) Values() []PropertyValueType {
+	return []PropertyValueType{
+		"PLAIN_TEXT",
+		"STRINGIFIED_JSON",
 	}
 }
 

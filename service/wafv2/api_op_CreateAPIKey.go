@@ -51,7 +51,7 @@ type CreateAPIKeyInput struct {
 
 	// The client application domains that you want to use this API key for. Example
 	// JSON: "TokenDomains": ["abc.com", "store.abc.com"] Public suffixes aren't
-	// allowed. For example, you can't use usa.gov or co.uk as token domains.
+	// allowed. For example, you can't use gov.au or co.uk as token domains.
 	//
 	// This member is required.
 	TokenDomains []string

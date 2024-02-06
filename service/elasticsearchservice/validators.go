@@ -90,6 +90,26 @@ func (m *validateOpAuthorizeVpcEndpointAccess) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelDomainConfigChange struct {
+}
+
+func (*validateOpCancelDomainConfigChange) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelDomainConfigChange) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelDomainConfigChangeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelDomainConfigChangeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelElasticsearchServiceSoftwareUpdate struct {
 }
 
@@ -826,6 +846,10 @@ func addOpAuthorizeVpcEndpointAccessValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpAuthorizeVpcEndpointAccess{}, middleware.After)
 }
 
+func addOpCancelDomainConfigChangeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelDomainConfigChange{}, middleware.After)
+}
+
 func addOpCancelElasticsearchServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelElasticsearchServiceSoftwareUpdate{}, middleware.After)
 }
@@ -1169,6 +1193,21 @@ func validateOpAuthorizeVpcEndpointAccessInput(v *AuthorizeVpcEndpointAccessInpu
 	}
 	if v.Account == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Account"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelDomainConfigChangeInput(v *CancelDomainConfigChangeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelDomainConfigChangeInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

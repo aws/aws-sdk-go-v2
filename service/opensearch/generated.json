@@ -14,6 +14,7 @@
         "api_op_AddTags.go",
         "api_op_AssociatePackage.go",
         "api_op_AuthorizeVpcEndpointAccess.go",
+        "api_op_CancelDomainConfigChange.go",
         "api_op_CancelServiceSoftwareUpdate.go",
         "api_op_CreateDomain.go",
         "api_op_CreateOutboundConnection.go",

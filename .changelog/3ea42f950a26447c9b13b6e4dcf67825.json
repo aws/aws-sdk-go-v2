@@ -1,0 +1,8 @@
+{
+    "id": "3ea42f95-0a26-447c-9b13-b6e4dcf67825",
+    "type": "feature",
+    "description": "Support for environment variables in AppSync GraphQL APIs",
+    "modules": [
+        "service/appsync"
+    ]
+}

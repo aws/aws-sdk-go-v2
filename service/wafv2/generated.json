@@ -16,6 +16,7 @@
         "api_op_CreateRegexPatternSet.go",
         "api_op_CreateRuleGroup.go",
         "api_op_CreateWebACL.go",
+        "api_op_DeleteAPIKey.go",
         "api_op_DeleteFirewallManagerRuleGroups.go",
         "api_op_DeleteIPSet.go",
         "api_op_DeleteLoggingConfiguration.go",

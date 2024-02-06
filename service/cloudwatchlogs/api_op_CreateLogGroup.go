@@ -21,6 +21,7 @@ import (
 //   - Log group names consist of the following characters: a-z, A-Z, 0-9, '_'
 //     (underscore), '-' (hyphen), '/' (forward slash), '.' (period), and '#' (number
 //     sign)
+//   - Log group names can't start with the string aws/
 //
 // When you create a log group, by default the log events in the log group do not
 // expire. To set a retention policy so that events expire and are deleted after a

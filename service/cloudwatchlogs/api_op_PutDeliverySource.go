@@ -58,8 +58,8 @@ func (c *Client) PutDeliverySource(ctx context.Context, params *PutDeliverySourc
 
 type PutDeliverySourceInput struct {
 
-	// Defines the type of log that the source is sending. For valid values for this
-	// parameter, see the documentation for the source service.
+	// Defines the type of log that the source is sending. For Amazon CodeWhisperer,
+	// the valid value is EVENT_LOGS .
 	//
 	// This member is required.
 	LogType *string

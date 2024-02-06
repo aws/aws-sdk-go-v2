@@ -151,7 +151,7 @@ type UpdateWebACLInput struct {
 	// accepts the resource's host domain plus all domains in the token domain list,
 	// including their prefixed subdomains. Example JSON: "TokenDomains": {
 	// "mywebsite.com", "myotherwebsite.com" } Public suffixes aren't allowed. For
-	// example, you can't use usa.gov or co.uk as token domains.
+	// example, you can't use gov.au or co.uk as token domains.
 	TokenDomains []string
 
 	noSmithyDocumentSerde

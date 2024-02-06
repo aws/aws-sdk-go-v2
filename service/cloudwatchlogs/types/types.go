@@ -562,7 +562,14 @@ type LiveTailSessionUpdate struct {
 // Represents a log group.
 type LogGroup struct {
 
-	// The Amazon Resource Name (ARN) of the log group.
+	// The Amazon Resource Name (ARN) of the log group. This version of the ARN
+	// includes a trailing :* after the log group name. Use this version to refer to
+	// the ARN in IAM policies when specifying permissions for most API actions. The
+	// exception is when specifying permissions for TagResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html)
+	// , UntagResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html)
+	// , and ListTagsForResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html)
+	// . The permissions for those three actions require the ARN version that doesn't
+	// include a trailing :* .
 	Arn *string
 
 	// The creation time of the log group, expressed as the number of milliseconds
@@ -580,6 +587,17 @@ type LogGroup struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
 	KmsKeyId *string
+
+	// The Amazon Resource Name (ARN) of the log group. This version of the ARN
+	// doesn't include a trailing :* after the log group name. Use this version to
+	// refer to the ARN in the following situations:
+	//   - In the logGroupIdentifier input field in many CloudWatch Logs APIs.
+	//   - In the resourceArn field in tagging APIs
+	//   - In IAM policies, when specifying permissions for TagResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html)
+	//   , UntagResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html)
+	//   , and ListTagsForResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html)
+	//   .
+	LogGroupArn *string
 
 	// This specifies the log group class for this log group. There are two classes:
 	//   - The Standard log class supports all CloudWatch Logs features.

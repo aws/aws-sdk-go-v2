@@ -365,14 +365,43 @@ type AWSDomainInformation struct {
 	noSmithyDocumentSerde
 }
 
+// A property change that was cancelled for an Amazon OpenSearch Service domain.
+type CancelledChangeProperty struct {
+
+	// The current value of the property, after the change was cancelled.
+	ActiveValue *string
+
+	// The pending value of the property that was cancelled. This would have been the
+	// eventual value of the property if the chance had not been cancelled.
+	CancelledValue *string
+
+	// The name of the property whose change was cancelled.
+	PropertyName *string
+
+	noSmithyDocumentSerde
+}
+
 // Container for information about a configuration change happening on a domain.
 type ChangeProgressDetails struct {
 
 	// The ID of the configuration change.
 	ChangeId *string
 
+	// The current status of the configuration change.
+	ConfigChangeStatus ConfigChangeStatus
+
+	// The IAM principal who initiated the configuration change.
+	InitiatedBy InitiatedBy
+
+	// The last time that the configuration change was updated.
+	LastUpdatedTime *time.Time
+
 	// A message corresponding to the status of the configuration change.
 	Message *string
+
+	// The time that the configuration change was initiated, in Universal Coordinated
+	// Time (UTC).
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -408,6 +437,15 @@ type ChangeProgressStatusDetails struct {
 
 	// The list of properties in the domain configuration change that have completed.
 	CompletedProperties []string
+
+	// The current status of the configuration change.
+	ConfigChangeStatus ConfigChangeStatus
+
+	// The IAM principal who initiated the configuration change.
+	InitiatedBy InitiatedBy
+
+	// The last time that the status of the configuration change was updated.
+	LastUpdatedTime *time.Time
 
 	// The list of properties in the domain configuration change that are still
 	// pending.
@@ -681,6 +719,9 @@ type DomainConfig struct {
 	// Key-value pairs to configure log publishing.
 	LogPublishingOptions *LogPublishingOptionsStatus
 
+	// Information about the domain properties that are currently being modified.
+	ModifyingProperties []ModifyingProperties
+
 	// Whether node-to-node encryption is enabled or disabled.
 	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptionsStatus
 
@@ -924,6 +965,9 @@ type DomainStatus struct {
 	// for all traffic.
 	DomainEndpointOptions *DomainEndpointOptions
 
+	// The status of any changes that are currently in progress for the domain.
+	DomainProcessingStatus DomainProcessingStatusType
+
 	// Container for EBS-based storage settings for the domain.
 	EBSOptions *EBSOptions
 
@@ -954,6 +998,9 @@ type DomainStatus struct {
 
 	// Log publishing options for the domain.
 	LogPublishingOptions map[string]LogPublishingOption
+
+	// Information about the domain properties that are currently being modified.
+	ModifyingProperties []ModifyingProperties
 
 	// Whether node-to-node encryption is enabled or disabled.
 	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptions
@@ -1091,8 +1138,9 @@ type EBSOptionsStatus struct {
 }
 
 // Specifies whether the domain should encrypt data at rest, and if so, the Key
-// Management Service (KMS) key to use. Can be used only to create a new domain,
-// not update an existing one.
+// Management Service (KMS) key to use. Can only be used when creating a new domain
+// or enabling encryption at rest for the first time on an existing domain. You
+// can't modify this parameter after it's already been specified.
 type EncryptionAtRestOptions struct {
 
 	// True to enable encryption at rest.
@@ -1331,6 +1379,30 @@ type MasterUserOptions struct {
 	// Password for the master user. Only specify if InternalUserDatabaseEnabled is
 	// true .
 	MasterUserPassword *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the domain properties that are currently being modified.
+type ModifyingProperties struct {
+
+	// The current value of the domain property that is being modified.
+	ActiveValue *string
+
+	// The name of the property that is currently being modified.
+	Name *string
+
+	// The value that the property that is currently being modified will eventually
+	// have.
+	PendingValue *string
+
+	// The type of value that is currently being modified. Properties can have two
+	// types:
+	//   - PLAIN_TEXT : Contain direct values such as "1", "True", or
+	//   "c5.large.search".
+	//   - STRINGIFIED_JSON : Contain content in JSON format, such as
+	//   {"Enabled":"True"}".
+	ValueType PropertyValueType
 
 	noSmithyDocumentSerde
 }

@@ -126,10 +126,10 @@ type RunTaskInput struct {
 	// in the Amazon Elastic Container Service Developer Guide. The FARGATE launch
 	// type runs your tasks on Fargate On-Demand infrastructure. Fargate Spot
 	// infrastructure is available for use but a capacity provider strategy must be
-	// used. For more information, see Fargate capacity providers (https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html)
-	// in the Amazon ECS User Guide for Fargate. The EC2 launch type runs your tasks
-	// on Amazon EC2 instances registered to your cluster. The EXTERNAL launch type
-	// runs your tasks on your on-premises server or virtual machine (VM) capacity
+	// used. For more information, see Fargate capacity providers (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html)
+	// in the Amazon ECS Developer Guide. The EC2 launch type runs your tasks on
+	// Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs
+	// your tasks on your on-premises server or virtual machine (VM) capacity
 	// registered to your cluster. A task can use either a launch type or a capacity
 	// provider strategy. If a launchType is specified, the capacityProviderStrategy
 	// parameter must be omitted. When you use cluster auto scaling, you must specify
