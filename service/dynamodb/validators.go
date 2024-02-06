@@ -910,26 +910,6 @@ func (m *validateOpUpdateItem) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpUpdateKinesisStreamingDestination struct {
-}
-
-func (*validateOpUpdateKinesisStreamingDestination) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpUpdateKinesisStreamingDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*UpdateKinesisStreamingDestinationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpUpdateKinesisStreamingDestinationInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpUpdateTable struct {
 }
 
@@ -1168,10 +1148,6 @@ func addOpUpdateGlobalTableSettingsValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateItemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateItem{}, middleware.After)
-}
-
-func addOpUpdateKinesisStreamingDestinationValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateKinesisStreamingDestination{}, middleware.After)
 }
 
 func addOpUpdateTableValidationMiddleware(stack *middleware.Stack) error {
@@ -3365,24 +3341,6 @@ func validateOpUpdateItemInput(v *UpdateItemInput) error {
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpUpdateKinesisStreamingDestinationInput(v *UpdateKinesisStreamingDestinationInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateKinesisStreamingDestinationInput"}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
-	if v.StreamArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
