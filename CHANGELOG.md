@@ -1,3 +1,19 @@
+# Release (2024-02-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.28.0](service/appsync/CHANGELOG.md#v1280-2024-02-06)
+  * **Feature**: Support for environment variables in AppSync GraphQL APIs
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.32.0](service/cloudwatchlogs/CHANGELOG.md#v1320-2024-02-06)
+  * **Feature**: This release adds a new field, logGroupArn, to the response of the logs:DescribeLogGroups action.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.38.2](service/ecs/CHANGELOG.md#v1382-2024-02-06)
+  * **Documentation**: This release is a documentation only update to address customer issues.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.26.0](service/elasticsearchservice/CHANGELOG.md#v1260-2024-02-06)
+  * **Feature**: This release adds clear visibility to the customers on the changes that they make on the domain.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.29.0](service/opensearch/CHANGELOG.md#v1290-2024-02-06)
+  * **Feature**: This release adds clear visibility to the customers on the changes that they make on the domain.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.44.0](service/wafv2/CHANGELOG.md#v1440-2024-02-06)
+  * **Feature**: You can now delete an API key that you've created for use with your CAPTCHA JavaScript integration API.
+
 # Release (2024-02-05)
 
 ## Module Highlights

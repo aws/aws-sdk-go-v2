@@ -1,3 +1,7 @@
+# v1.32.0 (2024-02-06)
+
+* **Feature**: This release adds a new field, logGroupArn, to the response of the logs:DescribeLogGroups action.
+
 # v1.31.0 (2024-01-10)
 
 * **Feature**: Add support for account level subscription filter policies to PutAccountPolicy, DescribeAccountPolicies, and DeleteAccountPolicy APIs. Additionally, PutAccountPolicy has been modified with new optional "selectionCriteria" parameter for resource selection.

@@ -1,8 +1,0 @@
-{
-    "id": "ab14071b-b672-4461-a50c-4e5167322879",
-    "type": "feature",
-    "description": "You can now delete an API key that you've created for use with your CAPTCHA JavaScript integration API.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

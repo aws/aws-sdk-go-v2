@@ -1,8 +1,0 @@
-{
-    "id": "6cc86ae9-97c7-4e2d-90a7-77b55ac81fe3",
-    "type": "documentation",
-    "description": "This release is a documentation only update to address customer issues.",
-    "modules": [
-        "service/ecs"
-    ]
-}

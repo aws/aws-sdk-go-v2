@@ -1,8 +1,0 @@
-{
-    "id": "0b9bcac4-a4d4-49f7-b466-247de1dc83e8",
-    "type": "feature",
-    "description": "This release adds clear visibility to the customers on the changes that they make on the domain.",
-    "modules": [
-        "service/elasticsearchservice"
-    ]
-}
