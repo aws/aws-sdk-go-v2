@@ -63,8 +63,7 @@ public class LegacyEndpointContextSetter implements GoIntegration {
                 if $T(ctx) {
                     return next.HandleFinalize(ctx, in)
                 }
-                """,
-                SdkGoTypes.Aws.Middleware.GetRequiresLegacyEndpoints);
+                """, SdkGoTypes.Aws.Middleware.GetRequiresLegacyEndpoints);
     }
 
     @Override
