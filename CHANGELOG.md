@@ -1,3 +1,13 @@
+# Release (2024-02-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.34.0](service/datasync/CHANGELOG.md#v1340-2024-02-07)
+  * **Feature**: AWS DataSync now supports manifests for specifying files or objects to transfer.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.39.0](service/lexmodelsv2/CHANGELOG.md#v1390-2024-02-07)
+  * **Feature**: This release introduces a new bot replication feature as part of Lex Global Resiliency offering. This feature leverages a new set of APIs that allow customers to create bot replicas and replicate changes to bots across regions.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.40.0](service/redshift/CHANGELOG.md#v1400-2024-02-07)
+  * **Feature**: LisRecommendations API to fetch Amazon Redshift Advisor recommendations.
+
 # Release (2024-02-06)
 
 ## Module Highlights

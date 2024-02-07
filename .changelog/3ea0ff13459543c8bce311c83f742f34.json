@@ -1,8 +1,0 @@
-{
-    "id": "3ea0ff13-4595-43c8-bce3-11c83f742f34",
-    "type": "feature",
-    "description": "AWS DataSync now supports manifests for specifying files or objects to transfer.",
-    "modules": [
-        "service/datasync"
-    ]
-}
