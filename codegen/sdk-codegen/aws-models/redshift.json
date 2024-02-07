@@ -9984,6 +9984,29 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_+.#@$-]+$"
             }
         },
+        "com.amazonaws.redshift#ImpactRankingType": {
+            "type": "enum",
+            "members": {
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                }
+            }
+        },
         "com.amazonaws.redshift#ImportTablesCompleted": {
             "type": "list",
             "member": {
@@ -10792,6 +10815,84 @@
                 "smithy.api#documentation": "<p>The encryption key has exceeded its grant limit in Amazon Web Services KMS.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#ListRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#ListRecommendationsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#ListRecommendationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the Amazon Redshift Advisor recommendations for one or multiple Amazon Redshift clusters in an Amazon Web Services account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Recommendations",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.redshift#ListRecommendationsMessage": {
+            "type": "structure",
+            "members": {
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Redshift cluster for which the list of Advisor recommendations is returned. \n          If the neither the cluster identifier and the cluster namespace ARN parameters are specified, then recommendations for all clusters in the account are returned.</p>"
+                    }
+                },
+                "NamespaceArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Redshift cluster namespace Amazon Resource Name (ARN) for which the list of Advisor recommendations is returned.\n            If the neither the cluster identifier and the cluster namespace ARN parameters are specified, then recommendations for all clusters in the account are returned.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.redshift#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records \n            exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve \n            the next set of records by retrying the command with the returned marker value.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a \n            value is returned in a response, you can retrieve the next set\n            of records by providing this returned marker value in the Marker parameter\n            and retrying the command. If the Marker field is empty, all response\n            records have been retrieved for the request.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#ListRecommendationsResult": {
+            "type": "structure",
+            "members": {
+                "Recommendations": {
+                    "target": "com.amazonaws.redshift#RecommendationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Advisor recommendations for action on the Amazon Redshift cluster.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent \n            request. If a value is returned in a response, you can retrieve the next set\n            of records by providing this returned marker value in the Marker parameter\n            and retrying the command. If the Marker field is empty, all response\n            records have been retrieved for the request.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#LogDestinationType": {
@@ -13272,6 +13373,153 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshift#Recommendation": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the Advisor recommendation.</p>"
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster for which the recommendation is returned.</p>"
+                    }
+                },
+                "NamespaceArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Redshift cluster namespace ARN for which the recommendations is returned.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (UTC) that the recommendation was created.</p>"
+                    }
+                },
+                "RecommendationType": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Advisor recommendation.</p>"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the recommendation.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the recommendation.</p>"
+                    }
+                },
+                "Observation": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of what was observed about your cluster.</p>"
+                    }
+                },
+                "ImpactRanking": {
+                    "target": "com.amazonaws.redshift#ImpactRankingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scale of the impact that the Advisor recommendation has to the performance and cost of the cluster.</p>"
+                    }
+                },
+                "RecommendationText": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the recommendation.</p>"
+                    }
+                },
+                "RecommendedActions": {
+                    "target": "com.amazonaws.redshift#RecommendedActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Amazon Redshift recommended actions.</p>"
+                    }
+                },
+                "ReferenceLinks": {
+                    "target": "com.amazonaws.redshift#ReferenceLinkList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of helpful links for more information about the Advisor recommendation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon Redshift Advisor recommended action on the Amazon Redshift cluster.</p>"
+            }
+        },
+        "com.amazonaws.redshift#RecommendationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#Recommendation",
+                "traits": {
+                    "smithy.api#xmlName": "Recommendation"
+                }
+            }
+        },
+        "com.amazonaws.redshift#RecommendedAction": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific instruction about the command.</p>"
+                    }
+                },
+                "Database": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database name to perform the action on. Only applicable if the type of command is SQL.</p>"
+                    }
+                },
+                "Command": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command to run.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.redshift#RecommendedActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of command.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The recommended action from the Amazon Redshift Advisor recommendation.</p>"
+            }
+        },
+        "com.amazonaws.redshift#RecommendedActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#RecommendedAction",
+                "traits": {
+                    "smithy.api#xmlName": "RecommendedAction"
+                }
+            }
+        },
+        "com.amazonaws.redshift#RecommendedActionType": {
+            "type": "enum",
+            "members": {
+                "SQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL"
+                    }
+                },
+                "CLI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLI"
+                    }
+                }
+            }
+        },
         "com.amazonaws.redshift#RecurringCharge": {
             "type": "structure",
             "members": {
@@ -13736,6 +13984,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#GetResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ListRecommendations"
                 },
                 {
                     "target": "com.amazonaws.redshift#ModifyAquaConfiguration"
@@ -14883,6 +15134,35 @@
                         }
                     ],
                     "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.redshift#ReferenceLink": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hyperlink text that describes the link to more information.</p>"
+                    }
+                },
+                "Link": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL address to find more information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A link to an Amazon Redshift Advisor reference for more information about a recommendation.</p>"
+            }
+        },
+        "com.amazonaws.redshift#ReferenceLinkList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#ReferenceLink",
+                "traits": {
+                    "smithy.api#xmlName": "ReferenceLink"
                 }
             }
         },

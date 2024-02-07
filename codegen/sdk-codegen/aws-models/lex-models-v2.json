@@ -2741,6 +2741,94 @@
                 "smithy.api#pattern": "^(\\bAmazonLexTestAlias\\b|[0-9a-zA-Z][_-]?)+$"
             }
         },
+        "com.amazonaws.lexmodelsv2#BotAliasReplicaSummary": {
+            "type": "structure",
+            "members": {
+                "botAliasId": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAliasId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot alias ID for all the alias bot replications.</p>"
+                    }
+                },
+                "botAliasReplicationStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAliasReplicationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication statuses for all the alias bot replications.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version for all the alias bot replications.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time and date for all the alias bot replications.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time and date updated for all the alias bot replications.</p>"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.lexmodelsv2#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reasons for failure for the aliases bot replications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about all the aliases replication statuses applicable for global resiliency.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAliasReplicaSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#BotAliasReplicaSummary"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAliasReplicationStatus": {
+            "type": "enum",
+            "members": {
+                "Creating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
+                    }
+                },
+                "Updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Updating"
+                    }
+                },
+                "Available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Available"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the operation to replicate the bot alias. Values: Creating, Updating, Available, Deleting, Failed.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#BotAliasStatus": {
             "type": "enum",
             "members": {
@@ -3513,6 +3601,76 @@
                 "target": "com.amazonaws.lexmodelsv2#BotRecommendationSummary"
             }
         },
+        "com.amazonaws.lexmodelsv2#BotReplicaStatus": {
+            "type": "enum",
+            "members": {
+                "Enabling": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enabling"
+                    }
+                },
+                "Enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enabled"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the operation to replicate the bot. Values: Enabling, Enabled, Deleting, Failed.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotReplicaSummary": {
+            "type": "structure",
+            "members": {
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replica region used in the replication statuses summary.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time and date for the replicated bots.</p>"
+                    }
+                },
+                "botReplicaStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotReplicaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation status for the replicated bot applicable.</p>"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.lexmodelsv2#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reasons for the failure for the replicated bot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about all the replication statuses applicable for global resiliency.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotReplicaSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#BotReplicaSummary"
+            }
+        },
         "com.amazonaws.lexmodelsv2#BotSortAttribute": {
             "type": "enum",
             "members": {
@@ -3709,6 +3867,109 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotVersionReplicaSortAttribute": {
+            "type": "enum",
+            "members": {
+                "BotVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotVersion"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotVersionReplicaSortBy": {
+            "type": "structure",
+            "members": {
+                "attribute": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersionReplicaSortAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute of the sort category for the version replicated bots.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order of the sort category for the version replicated bots.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sort category for the version replicated bots.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotVersionReplicaSummary": {
+            "type": "structure",
+            "members": {
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version for the summary information for all the version replication statuses.</p>"
+                    }
+                },
+                "botVersionReplicationStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersionReplicationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version replication status for all the replicated bots.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time of the replication status for all the replicated bots.</p>"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.lexmodelsv2#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reasons for replication failure for all the replicated bots.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information for all the version replication statuses applicable for Global resiliency.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotVersionReplicaSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#BotVersionReplicaSummary"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotVersionReplicationStatus": {
+            "type": "enum",
+            "members": {
+                "Creating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
+                    }
+                },
+                "Available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Available"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the operation to replicate the bot version. Values: Creating, Available, Deleting, Failed.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotVersionSortAttribute": {
@@ -5011,6 +5272,104 @@
                 },
                 "generativeAISettings": {
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateBotReplica": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#CreateBotReplicaRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#CreateBotReplicaResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Action to create a replication of the source bot in the secondary region.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/bots/{botId}/replicas",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateBotReplicaRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for the unique bot ID of the source bot to be replicated in the secondary region.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for the secondary region that will be used in the replication of the source bot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateBotReplicaResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique bot ID of the replicated bot generated.</p>"
+                    }
+                },
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region of the replicated bot generated.</p>"
+                    }
+                },
+                "sourceRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source region for the source bot used for the replicated bot generated.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time of the replicated bot generated.</p>"
+                    }
+                },
+                "botReplicaStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotReplicaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operational status of the replicated bot generated.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6891,6 +7250,93 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lexmodelsv2#DeleteBotReplica": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteBotReplicaRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteBotReplicaResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The action to delete the replicated bot in the secondary region.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/bots/{botId}/replicas/{replicaRegion}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteBotReplicaRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the replicated bot to be deleted from the secondary region</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secondary region of the replicated bot that will be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteBotReplicaResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique bot ID of the replicated bot generated.</p>"
+                    }
+                },
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region of the replicated bot generated.</p>"
+                    }
+                },
+                "botReplicaStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotReplicaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operational status of the replicated bot generated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lexmodelsv2#DeleteBotRequest": {
             "type": "structure",
             "members": {
@@ -8540,6 +8986,108 @@
                     "target": "com.amazonaws.lexmodelsv2#BotRecommendationResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The object representing the URL of the bot definition, the URL of\n         the associated transcript and a statistical summary of the bot\n         recommendation results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotReplica": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeBotReplicaRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeBotReplicaResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Monitors the bot replication status through the UI console.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/bots/{botId}/replicas/{replicaRegion}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotReplicaRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for the unique bot ID of the replicated bot being monitored.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for the region of the replicated bot being monitored.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotReplicaResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique bot ID of the replicated bot being monitored.</p>"
+                    }
+                },
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region of the replicated bot being monitored.</p>"
+                    }
+                },
+                "sourceRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source region of the replicated bot being monitored.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time of the replicated bot being monitored.</p>"
+                    }
+                },
+                "botReplicaStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotReplicaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operational status of the replicated bot being monitored.</p>"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.lexmodelsv2#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure reasons the bot being monitored failed to replicate.</p>"
                     }
                 }
             },
@@ -12616,6 +13164,9 @@
                     "target": "com.amazonaws.lexmodelsv2#CreateBotLocale"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#CreateBotReplica"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#CreateBotVersion"
                 },
                 {
@@ -12650,6 +13201,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DeleteBotLocale"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#DeleteBotReplica"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DeleteBotVersion"
@@ -12695,6 +13249,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotRecommendation"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#DescribeBotReplica"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotResourceGeneration"
@@ -12748,16 +13305,25 @@
                     "target": "com.amazonaws.lexmodelsv2#ListBotAliases"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#ListBotAliasReplicas"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#ListBotLocales"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListBotRecommendations"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#ListBotReplicas"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#ListBotResourceGenerations"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListBots"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListBotVersionReplicas"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListBotVersions"
@@ -13842,6 +14408,116 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lexmodelsv2#ListBotAliasReplicas": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotAliasReplicasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotAliasReplicasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The action to list the replicated bots created from the source bot alias.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/replicas/{replicaRegion}/botaliases",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotAliasReplicasRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for the unique bot ID of the replicated bot created from the source bot alias.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for the secondary region of the replicated bot created from the source bot alias.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for maximum results to list the replicated bots created from the source bot alias.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for the next token for the replicated bot created from the source bot alias.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotAliasReplicasResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique bot ID of the replicated bot created from the source bot alias.</p>"
+                    }
+                },
+                "sourceRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source region of the replicated bot created from the source bot alias.</p>"
+                    }
+                },
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secondary region of the replicated bot created from the source bot alias.</p>"
+                    }
+                },
+                "botAliasReplicaSummaries": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAliasReplicaSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary information of the replicated bot created from the source bot alias.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token for the replicated bots created from the source bot alias.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lexmodelsv2#ListBotAliases": {
             "type": "operation",
             "input": {
@@ -14166,6 +14842,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lexmodelsv2#ListBotReplicas": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotReplicasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotReplicasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The action to list the replicated bots.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/replicas",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotReplicasRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for the unique bot IDs in the list of replicated bots.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotReplicasResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>the unique bot IDs in the list of replicated bots.</p>"
+                    }
+                },
+                "sourceRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source region of the source bots in the list of replicated bots.</p>"
+                    }
+                },
+                "botReplicaSummaries": {
+                    "target": "com.amazonaws.lexmodelsv2#BotReplicaSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary details for the replicated bots.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lexmodelsv2#ListBotResourceGenerations": {
             "type": "operation",
             "input": {
@@ -14283,6 +15032,122 @@
                     "target": "com.amazonaws.lexmodelsv2#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If the total number of results is greater than the number \n         specified in the <code>maxResults</code>, the response returns a token \n         in the <code>nextToken</code> field. Use this token when making a request to \n         return the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotVersionReplicas": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotVersionReplicasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotVersionReplicasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about all the versions replication statuses applicable for Global Resiliency.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/replicas/{replicaRegion}/botversions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotVersionReplicasRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for the unique ID in the list of replicated bots.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for the region used in the list of replicated bots.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum results given in the list of replicated bots.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token given in the list of replicated bots.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersionReplicaSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested sort category for the list of replicated bots.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotVersionReplicasResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the bots in the list of replicated bots.</p>"
+                    }
+                },
+                "sourceRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source region used for the bots in the list of replicated bots.</p>"
+                    }
+                },
+                "replicaRegion": {
+                    "target": "com.amazonaws.lexmodelsv2#ReplicaRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region used for the replicated bots in the list of replicated bots.</p>"
+                    }
+                },
+                "botVersionReplicaSummaries": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersionReplicaSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information summary used for the replicated bots in the list of replicated bots.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used for the replicated bots in the list of replicated bots.</p>"
                     }
                 }
             },
@@ -17724,6 +18589,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the time window that utterance statistics are returned\n            for. The time window is always relative to the last time that the that\n            utterances were aggregated. For example, if the\n            <code>ListAggregatedUtterances</code> operation is called at 1600,\n            the time window is set to 1 hour, and the last refresh time was 1530,\n            only utterances made between 1430 and 1530 are returned.</p>\n         <p>You can choose the time window that statistics should be returned\n            for.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Hours</b> - You can request\n                    utterance statistics for 1, 3, 6, 12, or 24 hour time windows.\n                    Statistics are refreshed every half hour for 1 hour time windows,\n                    and hourly for the other time windows.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Days</b> - You can request\n                    utterance statistics for 3 days. Statistics are refreshed every 6\n                    hours.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Weeks</b> - You can see\n                    statistics for one or two weeks. Statistics are refreshed every\n                    12 hours for one week time windows, and once per day for two week\n                    time windows.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ReplicaRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The region that contains the replicated bots. Minimum value = 2, maximum value = 25.</p>",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ResourceCount": {
