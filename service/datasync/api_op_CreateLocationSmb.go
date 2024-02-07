@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for a Server Message Block (SMB) file server that DataSync
-// can use for a data transfer. Before you begin, make sure that you understand how
-// DataSync accesses an SMB file server (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html)
+// Creates a transfer location for a Server Message Block (SMB) file server.
+// DataSync can use this location as a source or destination for transferring data.
+// Before you begin, make sure that you understand how DataSync accesses SMB file
+// servers (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb)
 // .
 func (c *Client) CreateLocationSmb(ctx context.Context, params *CreateLocationSmbInput, optFns ...func(*Options)) (*CreateLocationSmbOutput, error) {
 	if params == nil {
@@ -58,28 +59,26 @@ type CreateLocationSmbInput struct {
 	// Specifies the name of the share exported by your SMB file server where DataSync
 	// will read or write data. You can include a subdirectory in the share path (for
 	// example, /path/to/subdirectory ). Make sure that other SMB clients in your
-	// network can also mount this path. To copy all data in the specified
-	// subdirectory, DataSync must be able to mount the SMB share and access all of its
-	// data. For more information, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
+	// network can also mount this path. To copy all data in the subdirectory, DataSync
+	// must be able to mount the SMB share and access all of its data. For more
+	// information, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
 	// for SMB locations.
 	//
 	// This member is required.
 	Subdirectory *string
 
-	// Specifies the user name that can mount your SMB file server and has permission
-	// to access the files and folders involved in your transfer. For information about
-	// choosing a user with the right level of access for your transfer, see required
-	// permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
+	// Specifies the user that can mount and access the files, folders, and file
+	// metadata in your SMB file server. For information about choosing a user with the
+	// right level of access for your transfer, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
 	// for SMB locations.
 	//
 	// This member is required.
 	User *string
 
-	// Specifies the Windows domain name that your SMB file server belongs to. If you
-	// have multiple domains in your environment, configuring this parameter makes sure
-	// that DataSync connects to the right file server. For more information, see
-	// required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
-	// for SMB locations.
+	// Specifies the name of the Active Directory domain that your SMB file server
+	// belongs to. If you have multiple Active Directory domains in your environment,
+	// configuring this parameter makes sure that DataSync connects to the right file
+	// server.
 	Domain *string
 
 	// Specifies the version of the SMB protocol that DataSync uses to access your SMB

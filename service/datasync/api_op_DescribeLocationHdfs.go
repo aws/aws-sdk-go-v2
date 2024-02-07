@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Returns metadata, such as the authentication information about the Hadoop
-// Distributed File System (HDFS) location.
+// Provides details about how an DataSync transfer location for a Hadoop
+// Distributed File System (HDFS) is configured.
 func (c *Client) DescribeLocationHdfs(ctx context.Context, params *DescribeLocationHdfsInput, optFns ...func(*Options)) (*DescribeLocationHdfsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationHdfsInput{}
@@ -32,7 +32,7 @@ func (c *Client) DescribeLocationHdfs(ctx context.Context, params *DescribeLocat
 
 type DescribeLocationHdfsInput struct {
 
-	// The Amazon Resource Name (ARN) of the HDFS cluster location to describe.
+	// Specifies the Amazon Resource Name (ARN) of the HDFS location.
 	//
 	// This member is required.
 	LocationArn *string
@@ -42,7 +42,7 @@ type DescribeLocationHdfsInput struct {
 
 type DescribeLocationHdfsOutput struct {
 
-	// The ARNs of the agents that are used to connect to the HDFS cluster.
+	// The ARNs of the DataSync agents that can connect with your HDFS cluster.
 	AgentArns []string
 
 	// The type of authentication used to determine the identity of the user.
@@ -62,25 +62,25 @@ type DescribeLocationHdfsOutput struct {
 	// The URI of the HDFS cluster's Key Management Server (KMS).
 	KmsKeyProviderUri *string
 
-	// The ARN of the HDFS cluster location.
+	// The ARN of the HDFS location.
 	LocationArn *string
 
-	// The URI of the HDFS cluster location.
+	// The URI of the HDFS location.
 	LocationUri *string
 
-	// The NameNode that manage the HDFS namespace.
+	// The NameNode that manages the HDFS namespace.
 	NameNodes []types.HdfsNameNode
 
-	// The Quality of Protection (QOP) configuration specifies the Remote Procedure
-	// Call (RPC) and data transfer protection settings configured on the Hadoop
-	// Distributed File System (HDFS) cluster.
+	// The Quality of Protection (QOP) configuration, which specifies the Remote
+	// Procedure Call (RPC) and data transfer protection settings configured on the
+	// HDFS cluster.
 	QopConfiguration *types.QopConfiguration
 
 	// The number of DataNodes to replicate the data to when writing to the HDFS
 	// cluster.
 	ReplicationFactor *int32
 
-	// The user name used to identify the client on the host operating system. This
+	// The user name to identify the client on the host operating system. This
 	// parameter is used if the AuthenticationType is defined as SIMPLE .
 	SimpleUser *string
 

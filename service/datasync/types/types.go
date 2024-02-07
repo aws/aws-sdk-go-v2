@@ -192,29 +192,18 @@ type FsxProtocolSmb struct {
 	// This member is required.
 	Password *string
 
-	// Specifies a user name that can mount the location and access the files,
-	// folders, and metadata that you need in the SVM. If you provide a user in your
-	// Active Directory, note the following:
-	//   - If you're using Directory Service for Microsoft Active Directory, the user
-	//   must be a member of the Amazon Web Services Delegated FSx Administrators group.
-	//   - If you're using a self-managed Active Directory, the user must be a member
-	//   of either the Domain Admins group or a custom group that you specified for file
-	//   system administration when you created your file system.
-	// Make sure that the user has the permissions it needs to copy the data you want:
-	//   - SE_TCB_NAME : Required to set object ownership and file metadata. With this
-	//   privilege, you also can copy NTFS discretionary access lists (DACLs).
-	//   - SE_SECURITY_NAME : May be needed to copy NTFS system access control lists
-	//   (SACLs). This operation specifically requires the Windows privilege, which is
-	//   granted to members of the Domain Admins group. If you configure your task to
-	//   copy SACLs, make sure that the user has the required privileges. For information
-	//   about copying SACLs, see Ownership and permissions-related options (https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html#configure-ownership-and-permissions)
-	//   .
+	// Specifies a user that can mount and access the files, folders, and metadata in
+	// your SVM. For information about choosing a user with the right level of access
+	// for your transfer, see Using the SMB protocol (https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb)
+	// .
 	//
 	// This member is required.
 	User *string
 
 	// Specifies the fully qualified domain name (FQDN) of the Microsoft Active
-	// Directory that your storage virtual machine (SVM) belongs to.
+	// Directory that your storage virtual machine (SVM) belongs to. If you have
+	// multiple domains in your environment, configuring this setting makes sure that
+	// DataSync connects to the right SVM.
 	Domain *string
 
 	// Specifies the version of the Server Message Block (SMB) protocol that DataSync
@@ -330,6 +319,32 @@ type LocationListEntry struct {
 	// it's the export path to mount the location. For Amazon S3, it's the prefix path
 	// that you mount to and treat as the root of the location.
 	LocationUri *string
+
+	noSmithyDocumentSerde
+}
+
+// Configures a manifest, which is a list of files or objects that you want
+// DataSync to transfer. For more information and configuration examples, see
+// Specifying what DataSync transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
+// .
+type ManifestConfig struct {
+
+	// Specifies what DataSync uses the manifest for.
+	Action ManifestAction
+
+	// Specifies the file format of your manifest. For more information, see Creating
+	// a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html#transferring-with-manifest-create)
+	// .
+	Format ManifestFormat
+
+	// Specifies the manifest that you want DataSync to use and where it's hosted. You
+	// must specify this parameter if you're configuring a new manifest on or after
+	// February 7, 2024. If you don't, you'll get a 400 status code and
+	// ValidationException error stating that you're missing the IAM role for DataSync
+	// to access the S3 bucket where you're hosting your manifest. For more
+	// information, see Providing DataSync access to your manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html#transferring-with-manifest-access)
+	// .
+	Source *SourceManifestConfig
 
 	noSmithyDocumentSerde
 }
@@ -582,64 +597,73 @@ type OnPremConfig struct {
 type Options struct {
 
 	// Specifies whether to preserve metadata indicating the last time a file was read
-	// or written to. If you set Atime to BEST_EFFORT , DataSync attempts to preserve
-	// the original Atime attribute on all source files (that is, the version before
-	// the PREPARING phase of the task execution). The behavior of Atime isn't fully
-	// standard across platforms, so DataSync can only do this on a best-effort basis.
-	// Default value: BEST_EFFORT BEST_EFFORT : Attempt to preserve the per-file Atime
-	// value (recommended). NONE : Ignore Atime . If Atime is set to BEST_EFFORT ,
-	// Mtime must be set to PRESERVE . If Atime is set to NONE , Mtime must also be
-	// NONE .
+	// or written to. The behavior of Atime isn't fully standard across platforms, so
+	// DataSync can only do this on a best-effort basis.
+	//   - BEST_EFFORT (default) - DataSync attempts to preserve the original Atime
+	//   attribute on all source files (that is, the version before the PREPARING phase
+	//   of the task execution). This option is recommended.
+	//   - NONE - Ignores Atime .
+	// If Atime is set to BEST_EFFORT , Mtime must be set to PRESERVE . If Atime is
+	// set to NONE , Mtime must also be NONE .
 	Atime Atime
 
 	// Limits the bandwidth used by a DataSync task. For example, if you want DataSync
 	// to use a maximum of 1 MB, set this value to 1048576 ( =1024*1024 ).
 	BytesPerSecond *int64
 
-	// Specifies the POSIX group ID (GID) of the file's owners. For more information,
-	// see Metadata copied by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied)
-	// . Default value: INT_VALUE . This preserves the integer value of the ID.
-	// INT_VALUE : Preserve the integer value of user ID (UID) and GID (recommended).
-	// NONE : Ignore UID and GID.
+	// Specifies the POSIX group ID (GID) of the file's owners.
+	//   - INT_VALUE (default) - Preserves the integer value of user ID (UID) and GID,
+	//   which is recommended.
+	//   - NONE - Ignores UID and GID.
+	// For more information, see Metadata copied by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied)
+	// .
 	Gid Gid
 
 	// Specifies the type of logs that DataSync publishes to a Amazon CloudWatch Logs
 	// log group. To specify the log group, see CloudWatchLogGroupArn (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateTask.html#DataSync-CreateTask-request-CloudWatchLogGroupArn)
-	// . If you set LogLevel to OFF , no logs are published. BASIC publishes logs on
-	// errors for individual files transferred. TRANSFER publishes logs for every file
-	// or object that is transferred and integrity checked.
+	// .
+	//   - BASIC - Publishes logs with only basic information (such as transfer
+	//   errors).
+	//   - TRANSFER - Publishes logs for all files or objects that your DataSync task
+	//   transfers and performs data-integrity checks on.
+	//   - OFF - No logs are published.
 	LogLevel LogLevel
 
 	// Specifies whether to preserve metadata indicating the last time that a file was
 	// written to before the PREPARING phase of your task execution. This option is
-	// required when you need to run the a task more than once. Default Value: PRESERVE
-	// PRESERVE : Preserve original Mtime (recommended) NONE : Ignore Mtime . If Mtime
-	// is set to PRESERVE , Atime must be set to BEST_EFFORT . If Mtime is set to NONE
-	// , Atime must also be set to NONE .
+	// required when you need to run the a task more than once.
+	//   - PRESERVE (default) - Preserves original Mtime , which is recommended.
+	//   - NONE - Ignores Mtime .
+	// If Mtime is set to PRESERVE , Atime must be set to BEST_EFFORT . If Mtime is
+	// set to NONE , Atime must also be set to NONE .
 	Mtime Mtime
 
-	// Specifies whether object tags are preserved when transferring between object
-	// storage systems. If you want your DataSync task to ignore object tags, specify
-	// the NONE value. Default Value: PRESERVE
+	// Specifies whether you want DataSync to PRESERVE object tags (default behavior)
+	// when transferring between object storage systems. If you want your DataSync task
+	// to ignore object tags, specify the NONE value.
 	ObjectTags ObjectTags
 
-	// Specifies whether data at the destination location should be overwritten or
-	// preserved. If set to NEVER , a destination file for example will not be replaced
-	// by a source file (even if the destination file differs from the source file). If
-	// you modify files in the destination and you sync the files, you can use this
-	// value to protect against overwriting those changes. Some storage classes have
-	// specific behaviors that can affect your Amazon S3 storage cost. For detailed
-	// information, see Considerations when working with Amazon S3 storage classes in
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
-	// .
+	// Specifies whether DataSync should modify or preserve data at the destination
+	// location.
+	//   - ALWAYS (default) - DataSync modifies data in the destination location when
+	//   source data (including metadata) has changed. If DataSync overwrites objects,
+	//   you might incur additional charges for certain Amazon S3 storage classes (for
+	//   example, for retrieval or early deletion). For more information, see Storage
+	//   class considerations with Amazon S3 transfers (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
+	//   .
+	//   - NEVER - DataSync doesn't overwrite data in the destination location even if
+	//   the source data has changed. You can use this option to protect against
+	//   overwriting changes made to files or objects in the destination.
 	OverwriteMode OverwriteMode
 
 	// Specifies which users or groups can access a file for a specific purpose such
 	// as reading, writing, or execution of the file. For more information, see
 	// Metadata copied by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied)
-	// . Default value: PRESERVE PRESERVE : Preserve POSIX-style permissions
-	// (recommended). NONE : Ignore permissions. DataSync can preserve extant
-	// permissions of a source location.
+	// .
+	//   - PRESERVE (default) - Preserves POSIX-style permissions, which is
+	//   recommended.
+	//   - NONE - Ignores POSIX-style permissions.
+	// DataSync can preserve extant permissions of a source location.
 	PosixPermissions PosixPermissions
 
 	// Specifies whether files in the destination location that don't exist in the
@@ -647,46 +671,51 @@ type Options struct {
 	// If your task deletes objects, you might incur minimum storage duration charges
 	// for certain storage classes. For detailed information, see Considerations when
 	// working with Amazon S3 storage classes in DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
-	// . Default value: PRESERVE PRESERVE : Ignore such destination files
-	// (recommended). REMOVE : Delete destination files that aren’t present in the
-	// source. If you set this parameter to REMOVE , you can't set TransferMode to ALL
-	// . When you transfer all data, DataSync doesn't scan your destination location
-	// and doesn't know what to delete.
+	// .
+	//   - PRESERVE (default) - Ignores such destination files, which is recommended.
+	//   - REMOVE - Deletes destination files that aren’t present in the source.
+	// If you set this parameter to REMOVE , you can't set TransferMode to ALL . When
+	// you transfer all data, DataSync doesn't scan your destination location and
+	// doesn't know what to delete.
 	PreserveDeletedFiles PreserveDeletedFiles
 
 	// Specifies whether DataSync should preserve the metadata of block and character
 	// devices in the source location and recreate the files with that device name and
 	// metadata on the destination. DataSync copies only the name and metadata of such
 	// devices. DataSync can't copy the actual contents of these devices because
-	// they're nonterminal and don't return an end-of-file (EOF) marker. Default value:
-	// NONE NONE : Ignore special devices (recommended). PRESERVE : Preserve character
-	// and block device metadata. This option currently isn't supported for Amazon EFS.
+	// they're nonterminal and don't return an end-of-file (EOF) marker.
+	//   - NONE (default) - Ignores special devices (recommended).
+	//   - PRESERVE - Preserves character and block device metadata. This option
+	//   currently isn't supported for Amazon EFS.
 	PreserveDevices PreserveDevices
 
 	// Specifies which components of the SMB security descriptor are copied from
 	// source to destination objects. This value is only used for transfers between SMB
 	// and Amazon FSx for Windows File Server locations or between two FSx for Windows
 	// File Server locations. For more information, see how DataSync handles metadata (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html)
-	// . Default value: OWNER_DACL OWNER_DACL : For each copied object, DataSync copies
-	// the following metadata:
+	// .
+	//   - OWNER_DACL (default) - For each copied object, DataSync copies the following
+	//   metadata:
 	//   - The object owner.
 	//   - NTFS discretionary access control lists (DACLs), which determine whether to
 	//   grant access to an object. DataSync won't copy NTFS system access control lists
 	//   (SACLs) with this option.
-	// OWNER_DACL_SACL : For each copied object, DataSync copies the following
-	// metadata:
+	//   - OWNER_DACL_SACL - For each copied object, DataSync copies the following
+	//   metadata:
 	//   - The object owner.
 	//   - NTFS discretionary access control lists (DACLs), which determine whether to
 	//   grant access to an object.
 	//   - SACLs, which are used by administrators to log attempts to access a secured
 	//   object. Copying SACLs requires granting additional permissions to the Windows
 	//   user that DataSync uses to access your SMB location. For information about
-	//   choosing a user that ensures sufficient permissions to files, folders, and
-	//   metadata, see user .
-	// NONE : None of the SMB security descriptor components are copied. Destination
-	// objects are owned by the user that was provided for accessing the destination
-	// location. DACLs and SACLs are set based on the destination server’s
-	// configuration.
+	//   choosing a user with the right permissions, see required permissions for SMB (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions)
+	//   , FSx for Windows File Server (https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions)
+	//   , or FSx for ONTAP (https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb)
+	//   (depending on the type of location in your transfer).
+	//   - NONE - None of the SMB security descriptor components are copied.
+	//   Destination objects are owned by the user that was provided for accessing the
+	//   destination location. DACLs and SACLs are set based on the destination server’s
+	//   configuration.
 	SecurityDescriptorCopyFlags SmbSecurityDescriptorCopyFlags
 
 	// Specifies whether your transfer tasks should be put into a queue during certain
@@ -696,36 +725,39 @@ type Options struct {
 
 	// Determines whether DataSync transfers only the data and metadata that differ
 	// between the source and the destination location or transfers all the content
-	// from the source (without comparing what's in the destination). CHANGED :
-	// DataSync copies only data or metadata that is new or different content from the
-	// source location to the destination location. ALL : DataSync copies all source
-	// location content to the destination (without comparing what's in the
-	// destination).
+	// from the source (without comparing what's in the destination).
+	//   - CHANGED (default) - DataSync copies only data or metadata that is new or
+	//   different content from the source location to the destination location.
+	//   - ALL - DataSync copies everything in the source to the destination without
+	//   comparing differences between the locations.
 	TransferMode TransferMode
 
-	// Specifies the POSIX user ID (UID) of the file's owner. For more information,
-	// see Metadata copied by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied)
-	// . Default value: INT_VALUE . This preserves the integer value of the ID.
-	// INT_VALUE : Preserve the integer value of UID and group ID (GID) (recommended).
-	// NONE : Ignore UID and GID.
+	// Specifies the POSIX user ID (UID) of the file's owner.
+	//   - INT_VALUE (default) - Preserves the integer value of UID and group ID (GID),
+	//   which is recommended.
+	//   - NONE - Ignores UID and GID.
+	// For more information, see Metadata copied by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied)
+	// .
 	Uid Uid
 
 	// Specifies how and when DataSync checks the integrity of your data during a
-	// transfer. Default value: POINT_IN_TIME_CONSISTENT ONLY_FILES_TRANSFERRED
-	// (recommended): DataSync calculates the checksum of transferred files and
-	// metadata at the source location. At the end of the transfer, DataSync then
-	// compares this checksum to the checksum calculated on those files at the
-	// destination. We recommend this option when transferring to S3 Glacier Flexible
-	// Retrieval or S3 Glacier Deep Archive storage classes. For more information, see
-	// Storage class considerations with Amazon S3 locations (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
-	// . POINT_IN_TIME_CONSISTENT : At the end of the transfer, DataSync scans the
-	// entire source and destination to verify that both locations are fully
-	// synchronized. You can't use this option when transferring to S3 Glacier Flexible
-	// Retrieval or S3 Glacier Deep Archive storage classes. For more information, see
-	// Storage class considerations with Amazon S3 locations (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
-	// . NONE : DataSync doesn't run additional verification at the end of the
-	// transfer. All data transmissions are still integrity-checked with checksum
-	// verification during the transfer.
+	// transfer.
+	//   - ONLY_FILES_TRANSFERRED (recommended) - DataSync calculates the checksum of
+	//   transferred files and metadata at the source location. At the end of the
+	//   transfer, DataSync then compares this checksum to the checksum calculated on
+	//   those files at the destination. We recommend this option when transferring to S3
+	//   Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more
+	//   information, see Storage class considerations with Amazon S3 locations (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
+	//   .
+	//   - POINT_IN_TIME_CONSISTENT (default) - At the end of the transfer, DataSync
+	//   scans the entire source and destination to verify that both locations are fully
+	//   synchronized. You can't use this option when transferring to S3 Glacier Flexible
+	//   Retrieval or S3 Glacier Deep Archive storage classes. For more information, see
+	//   Storage class considerations with Amazon S3 locations (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
+	//   .
+	//   - NONE - DataSync doesn't run additional verification at the end of the
+	//   transfer. All data transmissions are still integrity-checked with checksum
+	//   verification during the transfer.
 	VerifyMode VerifyMode
 
 	noSmithyDocumentSerde
@@ -754,12 +786,12 @@ type P95Metrics struct {
 // number.
 type Platform struct {
 
-	// The version of the DataSync agent. Beginning December 7, 2023, we will
-	// discontinue version 1 DataSync agents. Check the DataSync console to see if you
-	// have affected agents. If you do, replace (https://docs.aws.amazon.com/datasync/latest/userguide/replacing-agent.html)
-	// those agents before then to avoid data transfer or storage discovery
-	// disruptions. If you need more help, contact Amazon Web Services Support (https://aws.amazon.com/contact-us/)
-	// .
+	// The version of the DataSync agent. On December 7, 2023, we discontinued version
+	// 1 DataSync agents. Check the DataSync console to see if you have affected
+	// agents. If you do, replace (https://docs.aws.amazon.com/datasync/latest/userguide/replacing-agent.html)
+	// those agents or delete (https://docs.aws.amazon.com/datasync/latest/userguide/deleting-agent.html)
+	// them if they aren't in use. If you need more help, contact Amazon Web Services
+	// Support (https://aws.amazon.com/contact-us/) .
 	Version *string
 
 	noSmithyDocumentSerde
@@ -844,7 +876,7 @@ type ReportDestinationS3 struct {
 
 	// Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync
 	// to upload a task report to your S3 bucket. For more information, see Allowing
-	// DataSync to upload a task report to an Amazon S3 bucket (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
+	// DataSync to upload a task report to an Amazon S3 bucket (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 	// .
 	//
 	// This member is required.
@@ -964,15 +996,49 @@ type ResourceMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-// used to access an Amazon S3 bucket. For detailed information about using such a
-// role, see Creating a Location for Amazon S3 in the DataSync User Guide.
+// Specifies the Amazon Resource Name (ARN) of the Identity and Access Management
+// (IAM) role that DataSync uses to access your S3 bucket. For more information,
+// see Accessing S3 buckets (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access)
+// .
 type S3Config struct {
 
-	// The ARN of the IAM role for accessing the S3 bucket.
+	// Specifies the ARN of the IAM role that DataSync uses to access your S3 bucket.
 	//
 	// This member is required.
 	BucketAccessRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the S3 bucket where you're hosting the manifest that you want
+// DataSync to use. For more information and configuration examples, see
+// Specifying what DataSync transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
+// .
+type S3ManifestConfig struct {
+
+	// Specifies the Identity and Access Management (IAM) role that allows DataSync to
+	// access your manifest. For more information, see Providing DataSync access to
+	// your manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html#transferring-with-manifest-access)
+	// .
+	//
+	// This member is required.
+	BucketAccessRoleArn *string
+
+	// Specifies the Amazon S3 object key of your manifest. This can include a prefix
+	// (for example, prefix/my-manifest.csv ).
+	//
+	// This member is required.
+	ManifestObjectPath *string
+
+	// Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're hosting
+	// your manifest.
+	//
+	// This member is required.
+	S3BucketArn *string
+
+	// Specifies the object version ID of the manifest that you want DataSync to use.
+	// If you don't set this, DataSync uses the latest version of the object.
+	ManifestObjectVersionId *string
 
 	noSmithyDocumentSerde
 }
@@ -997,6 +1063,20 @@ type SmbMountOptions struct {
 	//   option isn't available when creating an Amazon FSx for NetApp ONTAP location (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationFsxOntap.html)
 	//   .
 	Version SmbVersion
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the manifest that you want DataSync to use and where it's hosted. For
+// more information and configuration examples, see Specifying what DataSync
+// transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
+// .
+type SourceManifestConfig struct {
+
+	// Specifies the S3 bucket where you're hosting your manifest.
+	//
+	// This member is required.
+	S3 *S3ManifestConfig
 
 	noSmithyDocumentSerde
 }
@@ -1030,16 +1110,17 @@ type TagListEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a single entry in a list of task executions. TaskExecutionListEntry
-// returns an array that contains a list of specific invocations of a task when the
-// ListTaskExecutions (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTaskExecutions.html)
-// operation is called.
+// Represents a single entry in a list of DataSync task executions that's returned
+// with the ListTaskExecutions (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTaskExecutions.html)
+// operation.
 type TaskExecutionListEntry struct {
 
-	// The status of a task execution.
+	// The status of a task execution. For more information, see Task execution
+	// statuses (https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-execution-statuses)
+	// .
 	Status TaskExecutionStatus
 
-	// The Amazon Resource Name (ARN) of the task that was executed.
+	// The Amazon Resource Name (ARN) of a task execution.
 	TaskExecutionArn *string
 
 	noSmithyDocumentSerde

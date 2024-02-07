@@ -150,6 +150,26 @@ func (m *validateOpCreateBotLocale) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBotReplica struct {
+}
+
+func (*validateOpCreateBotReplica) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBotReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBotReplicaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBotReplicaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateBotVersion struct {
 }
 
@@ -365,6 +385,26 @@ func (m *validateOpDeleteBotLocale) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteBotLocaleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBotReplica struct {
+}
+
+func (*validateOpDeleteBotReplica) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBotReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBotReplicaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBotReplicaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -665,6 +705,26 @@ func (m *validateOpDescribeBotRecommendation) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeBotRecommendationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeBotReplica struct {
+}
+
+func (*validateOpDescribeBotReplica) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBotReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBotReplicaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBotReplicaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1070,26 @@ func (m *validateOpListBotAliases) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListBotAliasReplicas struct {
+}
+
+func (*validateOpListBotAliasReplicas) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBotAliasReplicas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBotAliasReplicasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBotAliasReplicasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListBotLocales struct {
 }
 
@@ -1050,6 +1130,26 @@ func (m *validateOpListBotRecommendations) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListBotReplicas struct {
+}
+
+func (*validateOpListBotReplicas) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBotReplicas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBotReplicasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBotReplicasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListBotResourceGenerations struct {
 }
 
@@ -1085,6 +1185,26 @@ func (m *validateOpListBots) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListBotsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListBotVersionReplicas struct {
+}
+
+func (*validateOpListBotVersionReplicas) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBotVersionReplicas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBotVersionReplicasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBotVersionReplicasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1938,6 +2058,10 @@ func addOpCreateBotLocaleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBotLocale{}, middleware.After)
 }
 
+func addOpCreateBotReplicaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBotReplica{}, middleware.After)
+}
+
 func addOpCreateBotVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBotVersion{}, middleware.After)
 }
@@ -1980,6 +2104,10 @@ func addOpDeleteBotValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteBotLocaleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBotLocale{}, middleware.After)
+}
+
+func addOpDeleteBotReplicaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBotReplica{}, middleware.After)
 }
 
 func addOpDeleteBotVersionValidationMiddleware(stack *middleware.Stack) error {
@@ -2040,6 +2168,10 @@ func addOpDescribeBotLocaleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeBotRecommendationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeBotRecommendation{}, middleware.After)
+}
+
+func addOpDescribeBotReplicaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBotReplica{}, middleware.After)
 }
 
 func addOpDescribeBotResourceGenerationValidationMiddleware(stack *middleware.Stack) error {
@@ -2110,6 +2242,10 @@ func addOpListBotAliasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBotAliases{}, middleware.After)
 }
 
+func addOpListBotAliasReplicasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBotAliasReplicas{}, middleware.After)
+}
+
 func addOpListBotLocalesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBotLocales{}, middleware.After)
 }
@@ -2118,12 +2254,20 @@ func addOpListBotRecommendationsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpListBotRecommendations{}, middleware.After)
 }
 
+func addOpListBotReplicasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBotReplicas{}, middleware.After)
+}
+
 func addOpListBotResourceGenerationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBotResourceGenerations{}, middleware.After)
 }
 
 func addOpListBotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBots{}, middleware.After)
+}
+
+func addOpListBotVersionReplicasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBotVersionReplicas{}, middleware.After)
 }
 
 func addOpListBotVersionsValidationMiddleware(stack *middleware.Stack) error {
@@ -3364,6 +3508,24 @@ func validateBotVersionLocaleSpecification(v map[string]types.BotVersionLocaleDe
 		if err := validateBotVersionLocaleDetails(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBotVersionReplicaSortBy(v *types.BotVersionReplicaSortBy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BotVersionReplicaSortBy"}
+	if len(v.Attribute) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if len(v.Order) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6406,6 +6568,24 @@ func validateOpCreateBotLocaleInput(v *CreateBotLocaleInput) error {
 	}
 }
 
+func validateOpCreateBotReplicaInput(v *CreateBotReplicaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBotReplicaInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.ReplicaRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicaRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateBotVersionInput(v *CreateBotVersionInput) error {
 	if v == nil {
 		return nil
@@ -6728,6 +6908,24 @@ func validateOpDeleteBotLocaleInput(v *DeleteBotLocaleInput) error {
 	}
 }
 
+func validateOpDeleteBotReplicaInput(v *DeleteBotReplicaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBotReplicaInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.ReplicaRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicaRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBotVersionInput(v *DeleteBotVersionInput) error {
 	if v == nil {
 		return nil
@@ -7005,6 +7203,24 @@ func validateOpDescribeBotRecommendationInput(v *DescribeBotRecommendationInput)
 	}
 	if v.BotRecommendationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotRecommendationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBotReplicaInput(v *DescribeBotReplicaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBotReplicaInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.ReplicaRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicaRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7345,6 +7561,24 @@ func validateOpListBotAliasesInput(v *ListBotAliasesInput) error {
 	}
 }
 
+func validateOpListBotAliasReplicasInput(v *ListBotAliasReplicasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBotAliasReplicasInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.ReplicaRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicaRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListBotLocalesInput(v *ListBotLocalesInput) error {
 	if v == nil {
 		return nil
@@ -7394,6 +7628,21 @@ func validateOpListBotRecommendationsInput(v *ListBotRecommendationsInput) error
 	}
 }
 
+func validateOpListBotReplicasInput(v *ListBotReplicasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBotReplicasInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListBotResourceGenerationsInput(v *ListBotResourceGenerationsInput) error {
 	if v == nil {
 		return nil
@@ -7433,6 +7682,29 @@ func validateOpListBotsInput(v *ListBotsInput) error {
 	if v.Filters != nil {
 		if err := validateBotFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListBotVersionReplicasInput(v *ListBotVersionReplicasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBotVersionReplicasInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.ReplicaRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicaRegion"))
+	}
+	if v.SortBy != nil {
+		if err := validateBotVersionReplicaSortBy(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

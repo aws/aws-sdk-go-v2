@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon FSx for NetApp ONTAP file system that
-// DataSync can use for a data transfer. Before you begin, make sure that you
-// understand how DataSync accesses an FSx for ONTAP file system (https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access)
+// Creates a transfer location for an Amazon FSx for NetApp ONTAP file system.
+// DataSync can use this location as a source or destination for transferring data.
+// Before you begin, make sure that you understand how DataSync accesses FSx for
+// ONTAP file systems (https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access)
 // .
 func (c *Client) CreateLocationFsxOntap(ctx context.Context, params *CreateLocationFsxOntapInput, optFns ...func(*Options)) (*CreateLocationFsxOntapOutput, error) {
 	if params == nil {

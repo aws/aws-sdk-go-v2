@@ -12,8 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon EFS file system that DataSync can access for
-// a transfer. For more information, see Creating a location for Amazon EFS (https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html)
+// Creates a transfer location for an Amazon EFS file system. DataSync can use
+// this location as a source or destination for transferring data. Before you
+// begin, make sure that you understand how DataSync accesses Amazon EFS file
+// systems (https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-access)
 // .
 func (c *Client) CreateLocationEfs(ctx context.Context, params *CreateLocationEfsInput, optFns ...func(*Options)) (*CreateLocationEfsOutput, error) {
 	if params == nil {

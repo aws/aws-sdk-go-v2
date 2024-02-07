@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of executed tasks.
+// Returns a list of executions for an DataSync transfer task.
 func (c *Client) ListTaskExecutions(ctx context.Context, params *ListTaskExecutionsInput, optFns ...func(*Options)) (*ListTaskExecutionsOutput, error) {
 	if params == nil {
 		params = &ListTaskExecutionsInput{}
@@ -31,14 +31,15 @@ func (c *Client) ListTaskExecutions(ctx context.Context, params *ListTaskExecuti
 // ListTaskExecutions
 type ListTaskExecutionsInput struct {
 
-	// The maximum number of executed tasks to list.
+	// Specifies how many results you want in the response.
 	MaxResults *int32
 
-	// An opaque string that indicates the position at which to begin the next list of
-	// the executed tasks.
+	// Specifies an opaque string that indicates the position at which to begin the
+	// next list of results in the response.
 	NextToken *string
 
-	// The Amazon Resource Name (ARN) of the task whose tasks you want to list.
+	// Specifies the Amazon Resource Name (ARN) of the task that you want execution
+	// information about.
 	TaskArn *string
 
 	noSmithyDocumentSerde
@@ -47,11 +48,11 @@ type ListTaskExecutionsInput struct {
 // ListTaskExecutionsResponse
 type ListTaskExecutionsOutput struct {
 
-	// An opaque string that indicates the position at which to begin returning the
-	// next list of executed tasks.
+	// The opaque string that indicates the position to begin the next list of results
+	// in the response.
 	NextToken *string
 
-	// A list of executed tasks.
+	// A list of the task's executions.
 	TaskExecutions []types.TaskExecutionListEntry
 
 	// Metadata pertaining to the operation's result.
@@ -147,7 +148,7 @@ var _ ListTaskExecutionsAPIClient = (*Client)(nil)
 // ListTaskExecutionsPaginatorOptions is the paginator options for
 // ListTaskExecutions
 type ListTaskExecutionsPaginatorOptions struct {
-	// The maximum number of executed tasks to list.
+	// Specifies how many results you want in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -13,7 +13,8 @@ import (
 	"time"
 )
 
-// Returns metadata about your DataSync location for an Amazon EFS file system.
+// Provides details about how an DataSync transfer location for an Amazon EFS file
+// system is configured.
 func (c *Client) DescribeLocationEfs(ctx context.Context, params *DescribeLocationEfsInput, optFns ...func(*Options)) (*DescribeLocationEfsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationEfsInput{}

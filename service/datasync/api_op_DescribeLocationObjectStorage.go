@@ -13,7 +13,8 @@ import (
 	"time"
 )
 
-// Returns metadata about your DataSync location for an object storage system.
+// Provides details about how an DataSync transfer location for an object storage
+// system is configured.
 func (c *Client) DescribeLocationObjectStorage(ctx context.Context, params *DescribeLocationObjectStorageInput, optFns ...func(*Options)) (*DescribeLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &DescribeLocationObjectStorageInput{}
@@ -32,8 +33,7 @@ func (c *Client) DescribeLocationObjectStorage(ctx context.Context, params *Desc
 // DescribeLocationObjectStorageRequest
 type DescribeLocationObjectStorageInput struct {
 
-	// The Amazon Resource Name (ARN) of the object storage system location that you
-	// want information about.
+	// Specifies the Amazon Resource Name (ARN) of the object storage system location.
 	//
 	// This member is required.
 	LocationArn *string
@@ -48,7 +48,8 @@ type DescribeLocationObjectStorageOutput struct {
 	// object storage system.
 	AccessKey *string
 
-	// The ARNs of the DataSync agents that can securely connect with your location.
+	// The ARNs of the DataSync agents that can connect with your object storage
+	// system.
 	AgentArns []string
 
 	// The time that the location was created.
@@ -57,7 +58,7 @@ type DescribeLocationObjectStorageOutput struct {
 	// The ARN of the object storage system location.
 	LocationArn *string
 
-	// The URL of the object storage system location.
+	// The URI of the object storage system location.
 	LocationUri *string
 
 	// The self-signed certificate that DataSync uses to securely authenticate with

@@ -81,6 +81,11 @@ type DescribeTaskOutput struct {
 	// .
 	Includes []types.FilterRule
 
+	// The configuration of the manifest that lists the files or objects to transfer.
+	// For more information, see Specifying what DataSync transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
+	// .
+	ManifestConfig *types.ManifestConfig
+
 	// The name of the task that was described.
 	Name *string
 
@@ -110,8 +115,9 @@ type DescribeTaskOutput struct {
 	// The Amazon Resource Name (ARN) of the task that was described.
 	TaskArn *string
 
-	// The configuration of your task report. For more information, see Creating a
-	// task report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
+	// The configuration of your task report, which provides detailed information
+	// about for your DataSync transfer. For more information, see Creating a task
+	// report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
 	// .
 	TaskReportConfig *types.TaskReportConfig
 

@@ -109,6 +109,7 @@
         "api_op_GetReservedNodeExchangeConfigurationOptions.go",
         "api_op_GetReservedNodeExchangeOfferings.go",
         "api_op_GetResourcePolicy.go",
+        "api_op_ListRecommendations.go",
         "api_op_ModifyAquaConfiguration.go",
         "api_op_ModifyAuthenticationProfile.go",
         "api_op_ModifyCluster.go",

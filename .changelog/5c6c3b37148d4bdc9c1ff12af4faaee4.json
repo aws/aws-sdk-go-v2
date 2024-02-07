@@ -1,0 +1,8 @@
+{
+    "id": "5c6c3b37-148d-4bdc-9c1f-f12af4faaee4",
+    "type": "feature",
+    "description": "This release introduces a new bot replication feature as part of Lex Global Resiliency offering. This feature leverages a new set of APIs that allow customers to create bot replicas and replicate changes to bots across regions.",
+    "modules": [
+        "service/lexmodelsv2"
+    ]
+}

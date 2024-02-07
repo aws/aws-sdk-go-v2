@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an DataSync transfer task.
+// Deletes a transfer task resource from DataSync.
 func (c *Client) DeleteTask(ctx context.Context, params *DeleteTaskInput, optFns ...func(*Options)) (*DeleteTaskOutput, error) {
 	if params == nil {
 		params = &DeleteTaskInput{}

@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for a Network File System (NFS) file server that DataSync
-// can use for a data transfer. For more information, see Configuring transfers to
-// or from an NFS file server (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html)
+// Creates a transfer location for a Network File System (NFS) file server.
+// DataSync can use this location as a source or destination for transferring data.
+// Before you begin, make sure that you understand how DataSync accesses NFS file
+// servers (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs)
 // . If you're copying data to or from an Snowcone device, you can also use
 // CreateLocationNfs to create your transfer location. For more information, see
 // Configuring transfers with Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/nfs-on-snowcone.html)

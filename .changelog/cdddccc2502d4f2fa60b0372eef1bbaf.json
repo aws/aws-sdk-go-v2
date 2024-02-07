@@ -1,0 +1,8 @@
+{
+    "id": "cdddccc2-502d-4f2f-a60b-0372eef1bbaf",
+    "type": "feature",
+    "description": "LisRecommendations API to fetch Amazon Redshift Advisor recommendations.",
+    "modules": [
+        "service/redshift"
+    ]
+}

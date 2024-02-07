@@ -13,7 +13,8 @@ import (
 	"time"
 )
 
-// Returns metadata, such as the path and user information about an SMB location.
+// Provides details about how an DataSync transfer location for a Server Message
+// Block (SMB) file server is configured.
 func (c *Client) DescribeLocationSmb(ctx context.Context, params *DescribeLocationSmbInput, optFns ...func(*Options)) (*DescribeLocationSmbOutput, error) {
 	if params == nil {
 		params = &DescribeLocationSmbInput{}
@@ -32,7 +33,8 @@ func (c *Client) DescribeLocationSmb(ctx context.Context, params *DescribeLocati
 // DescribeLocationSmbRequest
 type DescribeLocationSmbInput struct {
 
-	// The Amazon Resource Name (ARN) of the SMB location to describe.
+	// Specifies the Amazon Resource Name (ARN) of the SMB location that you want
+	// information about.
 	//
 	// This member is required.
 	LocationArn *string
@@ -43,28 +45,27 @@ type DescribeLocationSmbInput struct {
 // DescribeLocationSmbResponse
 type DescribeLocationSmbOutput struct {
 
-	// The Amazon Resource Name (ARN) of the source SMB file system location that is
-	// created.
+	// The ARNs of the DataSync agents that can connect with your SMB file server.
 	AgentArns []string
 
 	// The time that the SMB location was created.
 	CreationTime *time.Time
 
-	// The name of the Windows domain that the SMB server belongs to.
+	// The name of the Microsoft Active Directory domain that the SMB file server
+	// belongs to.
 	Domain *string
 
-	// The Amazon Resource Name (ARN) of the SMB location that was described.
+	// The ARN of the SMB location.
 	LocationArn *string
 
-	// The URL of the source SMB location that was described.
+	// The URI of the SMB location.
 	LocationUri *string
 
-	// The mount options that are available for DataSync to use to access an SMB
-	// location.
+	// The protocol that DataSync use to access your SMB file.
 	MountOptions *types.SmbMountOptions
 
-	// The user who can mount the share, has the permissions to access files and
-	// folders in the SMB share.
+	// The user that can mount and access the files, folders, and file metadata in
+	// your SMB file server.
 	User *string
 
 	// Metadata pertaining to the operation's result.

@@ -54,6 +54,15 @@ type StartTaskExecutionInput struct {
 	// for example, "/folder1|/folder2" .
 	Includes []types.FilterRule
 
+	// Configures a manifest, which is a list of files or objects that you want
+	// DataSync to transfer. For more information and configuration examples, see
+	// Specifying what DataSync transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
+	// . When using this parameter, your caller identity (the role that you're using
+	// DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess (https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess)
+	// policy includes this permission. To remove a manifest configuration, specify
+	// this parameter with an empty value.
+	ManifestConfig *types.ManifestConfig
+
 	// Indicates how your transfer task is configured. These options include how
 	// DataSync handles files, objects, and their associated metadata during your
 	// transfer. You also can specify how to verify data integrity, set bandwidth
@@ -68,7 +77,12 @@ type StartTaskExecutionInput struct {
 	Tags []types.TagListEntry
 
 	// Specifies how you want to configure a task report, which provides detailed
-	// information about for your DataSync transfer.
+	// information about your DataSync transfer. For more information, see Monitoring
+	// your DataSync transfers with task reports (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
+	// . When using this parameter, your caller identity (the role that you're using
+	// DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess (https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess)
+	// policy includes this permission. To remove a task report configuration, specify
+	// this parameter as empty.
 	TaskReportConfig *types.TaskReportConfig
 
 	noSmithyDocumentSerde

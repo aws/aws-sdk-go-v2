@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration of a DataSync transfer task.
+// Updates the configuration of an DataSync transfer task.
 func (c *Client) UpdateTask(ctx context.Context, params *UpdateTaskInput, optFns ...func(*Options)) (*UpdateTaskOutput, error) {
 	if params == nil {
 		params = &UpdateTaskInput{}
@@ -50,6 +50,16 @@ type UpdateTaskInput struct {
 	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
 	Includes []types.FilterRule
 
+	// Configures a manifest, which is a list of files or objects that you want
+	// DataSync to transfer. For more information and configuration examples, see
+	// Specifying what DataSync transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
+	// . When using this parameter, your caller identity (the IAM role that you're
+	// using DataSync with) must have the iam:PassRole permission. The
+	// AWSDataSyncFullAccess (https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess)
+	// policy includes this permission. To remove a manifest configuration, specify
+	// this parameter as empty.
+	ManifestConfig *types.ManifestConfig
+
 	// The name of the task to update.
 	Name *string
 
@@ -70,7 +80,13 @@ type UpdateTaskInput struct {
 	Schedule *types.TaskSchedule
 
 	// Specifies how you want to configure a task report, which provides detailed
-	// information about for your DataSync transfer.
+	// information about your DataSync transfer. For more information, see Monitoring
+	// your DataSync transfers with task reports (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
+	// . When using this parameter, your caller identity (the IAM role that you're
+	// using DataSync with) must have the iam:PassRole permission. The
+	// AWSDataSyncFullAccess (https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess)
+	// policy includes this permission. To remove a task report configuration, specify
+	// this parameter as empty.
 	TaskReportConfig *types.TaskReportConfig
 
 	noSmithyDocumentSerde

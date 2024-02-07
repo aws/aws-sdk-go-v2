@@ -62,6 +62,14 @@ type CreateTaskInput struct {
 	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
 	Includes []types.FilterRule
 
+	// Configures a manifest, which is a list of files or objects that you want
+	// DataSync to transfer. For more information and configuration examples, see
+	// Specifying what DataSync transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
+	// . When using this parameter, your caller identity (the role that you're using
+	// DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess (https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess)
+	// policy includes this permission.
+	ManifestConfig *types.ManifestConfig
+
 	// The name of a task. This value is a text reference that is used to identify the
 	// task in the console.
 	Name *string
@@ -85,7 +93,11 @@ type CreateTaskInput struct {
 	Tags []types.TagListEntry
 
 	// Specifies how you want to configure a task report, which provides detailed
-	// information about for your DataSync transfer.
+	// information about your DataSync transfer. For more information, see Monitoring
+	// your DataSync transfers with task reports (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
+	// . When using this parameter, your caller identity (the role that you're using
+	// DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess (https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess)
+	// policy includes this permission.
 	TaskReportConfig *types.TaskReportConfig
 
 	noSmithyDocumentSerde

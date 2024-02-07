@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon FSx for Windows File Server file system that
-// DataSync can use for a data transfer. Before you begin, make sure that you
-// understand how DataSync accesses an FSx for Windows File Server (https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-location-access)
+// Creates a transfer location for an Amazon FSx for Windows File Server file
+// system. DataSync can use this location as a source or destination for
+// transferring data. Before you begin, make sure that you understand how DataSync
+// accesses FSx for Windows File Server file systems (https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-location-access)
 // .
 func (c *Client) CreateLocationFsxWindows(ctx context.Context, params *CreateLocationFsxWindowsInput, optFns ...func(*Options)) (*CreateLocationFsxWindowsOutput, error) {
 	if params == nil {
@@ -39,9 +40,9 @@ type CreateLocationFsxWindowsInput struct {
 	// This member is required.
 	FsxFilesystemArn *string
 
-	// Specifies the password of the user who has the permissions to access files and
-	// folders in the file system. For more information, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions)
-	// for FSx for Windows File Server locations.
+	// Specifies the password of the user with the permissions to mount and access the
+	// files, folders, and file metadata in your FSx for Windows File Server file
+	// system.
 	//
 	// This member is required.
 	Password *string
@@ -56,19 +57,19 @@ type CreateLocationFsxWindowsInput struct {
 	// This member is required.
 	SecurityGroupArns []string
 
-	// Specifies the user who has the permissions to access files, folders, and
-	// metadata in your file system. For information about choosing a user with the
-	// right level of access for your transfer, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions)
+	// Specifies the user with the permissions to mount and access the files, folders,
+	// and file metadata in your FSx for Windows File Server file system. For
+	// information about choosing a user with the right level of access for your
+	// transfer, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions)
 	// for FSx for Windows File Server locations.
 	//
 	// This member is required.
 	User *string
 
-	// Specifies the name of the Windows domain that the FSx for Windows File Server
-	// belongs to. If you have multiple domains in your environment, configuring this
-	// parameter makes sure that DataSync connects to the right file server. For more
-	// information, see required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions)
-	// for FSx for Windows File Server locations.
+	// Specifies the name of the Microsoft Active Directory domain that the FSx for
+	// Windows File Server file system belongs to. If you have multiple Active
+	// Directory domains in your environment, configuring this parameter makes sure
+	// that DataSync connects to the right file system.
 	Domain *string
 
 	// Specifies a mount path for your file system using forward slashes. This is

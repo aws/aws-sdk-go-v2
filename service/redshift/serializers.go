@@ -6348,6 +6348,70 @@ func (m *awsAwsquery_serializeOpGetResourcePolicy) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpListRecommendations struct {
+}
+
+func (*awsAwsquery_serializeOpListRecommendations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListRecommendationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListRecommendations")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentListRecommendationsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpModifyAquaConfiguration struct {
 }
 
@@ -11768,6 +11832,33 @@ func awsAwsquery_serializeOpDocumentGetResourcePolicyInput(v *GetResourcePolicyI
 	if v.ResourceArn != nil {
 		objectKey := object.Key("ResourceArn")
 		objectKey.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentListRecommendationsInput(v *ListRecommendationsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxRecords != nil {
+		objectKey := object.Key("MaxRecords")
+		objectKey.Integer(*v.MaxRecords)
+	}
+
+	if v.NamespaceArn != nil {
+		objectKey := object.Key("NamespaceArn")
+		objectKey.String(*v.NamespaceArn)
 	}
 
 	return nil

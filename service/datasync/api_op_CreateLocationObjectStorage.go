@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an object storage system that DataSync can access for a
-// transfer. For more information, see Creating a location for object storage (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html)
-// .
+// Creates a transfer location for an object storage system. DataSync can use this
+// location as a source or destination for transferring data. Before you begin,
+// make sure that you understand the prerequisites (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html#create-object-location-prerequisites)
+// for DataSync to work with object storage systems.
 func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *CreateLocationObjectStorageInput, optFns ...func(*Options)) (*CreateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &CreateLocationObjectStorageInput{}
