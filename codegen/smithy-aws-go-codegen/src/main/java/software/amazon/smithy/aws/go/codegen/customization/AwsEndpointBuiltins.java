@@ -5,10 +5,13 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.rulesengine.traits.EndpointRuleSetTrait;
 import software.amazon.smithy.utils.ListUtils;
+import software.amazon.smithy.utils.MapUtils;
 
 import java.util.List;
 
@@ -22,7 +25,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
             goTemplate("options.BaseEndpoint");
 
     private static final GoWriter.Writable BindAwsRegion =
-            goTemplate("bindRegion(options.Region)");
+            goTemplate("$T($T(options.Region))", SdkGoTypes.Aws.String, SdkGoTypes.Internal.Endpoints.MapFIPSRegion);
     private static final GoWriter.Writable BindAwsUseFips =
             goTemplate("$T(options.EndpointOptions.UseFIPSEndpoint == $T)", SdkGoTypes.Aws.Bool, SdkGoTypes.Aws.FIPSEndpointStateEnabled);
     private static final GoWriter.Writable BindAwsUseDualStack =
@@ -37,7 +40,41 @@ public class AwsEndpointBuiltins implements GoIntegration {
     private static final GoWriter.Writable BindAwsS3DisableMultiRegionAccessPoints =
             goTemplate("$T(options.DisableMultiRegionAccessPoints)", SdkGoTypes.Aws.Bool);
     private static final GoWriter.Writable BindAccountID =
-            goTemplate("accountID(getIdentity(ctx), options.AccountIDEndpointMode)");
+            goTemplate("resolveAccountID(getIdentity(ctx), options.AccountIDEndpointMode)");
+
+    @Override
+    public void writeAdditionalFiles(
+            GoSettings settings,
+            Model model,
+            SymbolProvider symbolProvider,
+            GoDelegator goDelegator
+    ) {
+        if (!settings.getService(model).hasTrait(EndpointRuleSetTrait.class)) {
+            return;
+        }
+        goDelegator.useShapeWriter(settings.getService(model), goTemplate("""
+        func resolveAccountID(identity $auth:T, mode $accountIDEndpointMode:T) *string {
+            if mode == $aidModeDisabled:T || mode == $aidModeUnset:T {
+                return nil
+            }
+            
+            if ca, ok := identity.(*$credentialsAdapter:T); ok && ca.Credentials.AccountID != "" {
+                return $string:T(ca.Credentials.AccountID)
+            }
+            
+            return nil
+        }
+        """,
+        MapUtils.of(
+                "auth", SmithyGoTypes.Auth.Identity,
+                "accountIDEndpointMode", SdkGoTypes.Aws.AccountIDEndpointMode,
+                "aidModeUnset", SdkGoTypes.Aws.AccountIDEndpointModeUnset,
+                "aidModeDisabled", SdkGoTypes.Aws.AccountIDEndpointModeDisabled,
+                "credentialsAdapter", SdkGoTypes.Internal.Auth.Smithy.CredentialsAdapter,
+                "string", SdkGoTypes.Aws.String
+        )
+        ));
+    }
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
@@ -53,21 +90,5 @@ public class AwsEndpointBuiltins implements GoIntegration {
                 .addEndpointBuiltinBinding("AWS::S3Control::UseArnRegion", BindAwsS3UseArnRegion)
                 .addEndpointBuiltinBinding("AWS::Auth::AccountId", BindAccountID)
                 .build());
-    }
-
-    @Override
-    public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
-        goDelegator.useFileWriter("endpoints.go", settings.getModuleName(), builtinBindingSource());
-    }
-
-    private GoWriter.Writable builtinBindingSource() {
-        return goTemplate("""
-                func bindRegion(region string) *string {
-                    if region == "" {
-                        return nil
-                    }
-                    return $T($T(region))
-                }
-                """, SdkGoTypes.Aws.String, SdkGoTypes.Internal.Endpoints.MapFIPSRegion);
     }
 }

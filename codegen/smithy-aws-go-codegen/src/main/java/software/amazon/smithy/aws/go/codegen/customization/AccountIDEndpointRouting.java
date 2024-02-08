@@ -32,14 +32,6 @@ public class AccountIDEndpointRouting implements GoIntegration {
             return;
         }
         goDelegator.useShapeWriter(settings.getService(model), goTemplate("""
-        func accountID(identity $auth:T, mode $accountIDEndpointMode:T) *string {
-            if ca, ok := identity.(*$credentialsAdapter:T); ok && (mode == $aidModePreferred:T || mode == $aidModeRequired:T) {
-                return $string:T(ca.Credentials.AccountID)
-            }
-        
-            return nil
-        }
-        
         func checkAccountID(identity $auth:T, mode $accountIDEndpointMode:T) error {
             switch mode {
             case $aidModeUnset:T:
@@ -49,9 +41,11 @@ public class AccountIDEndpointRouting implements GoIntegration {
                 if ca, ok := identity.(*$credentialsAdapter:T); !ok {
                     return $errorf:T("the accountID is configured to be required, but the " +
                         "identity provider could not be converted to a valid credentials adapter " +
-                        "and provide an accountID, should try to configure a valid credentials provider")
+                        "and provide an accountID, should switch to a valid credentials provider " +
+                        "or change to another account id endpoint mode")
                 } else if ca.Credentials.AccountID == "" {
-                    return $errorf:T("the required accountID could not be empty")
+                    return $errorf:T("the required accountID could not be empty, should switch to a valid " +
+                        "credentials provider or change to another account id endpoint mode")
                 }
             // default check in case invalid mode is configured through request config
             default:
@@ -69,8 +63,7 @@ public class AccountIDEndpointRouting implements GoIntegration {
         "aidModeRequired", SdkGoTypes.Aws.AccountIDEndpointModeRequired,
         "aidModeUnset", SdkGoTypes.Aws.AccountIDEndpointModeUnset,
         "aidModeDisabled", SdkGoTypes.Aws.AccountIDEndpointModeDisabled,
-        "errorf", GoStdlibTypes.Fmt.Errorf,
-        "string", SdkGoTypes.Aws.String
+        "errorf", GoStdlibTypes.Fmt.Errorf
         )
         ));
     }
