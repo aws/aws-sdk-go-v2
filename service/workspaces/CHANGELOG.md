@@ -1,3 +1,7 @@
+# v1.36.0 (2024-02-08)
+
+* **Feature**: This release introduces User-Decoupling feature. This feature allows Workspaces Core customers to provision workspaces without providing users. CreateWorkspaces and DescribeWorkspaces APIs will now take a new optional parameter "WorkspaceName".
+
 # v1.35.9 (2024-02-05)
 
 * **Documentation**: Added definitions of various WorkSpace states

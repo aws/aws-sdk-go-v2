@@ -1,3 +1,13 @@
+# Release (2024-02-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.23.0](service/codepipeline/CHANGELOG.md#v1230-2024-02-08)
+  * **Feature**: Add ability to execute pipelines with new parallel & queued execution modes and add support for triggers with filtering on branches and file paths.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.56.0](service/quicksight/CHANGELOG.md#v1560-2024-02-08)
+  * **Feature**: General Interactions for Visuals; Waterfall Chart Color Configuration; Documentation Update
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.36.0](service/workspaces/CHANGELOG.md#v1360-2024-02-08)
+  * **Feature**: This release introduces User-Decoupling feature. This feature allows Workspaces Core customers to provision workspaces without providing users. CreateWorkspaces and DescribeWorkspaces APIs will now take a new optional parameter "WorkspaceName".
+
 # Release (2024-02-07)
 
 ## Module Highlights
