@@ -4261,6 +4261,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated,\n         provide this token to receive the next set of results.</p>"
                     }
+                },
+                "WorkspaceName": {
+                    "target": "com.amazonaws.workspaces#WorkspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-decoupled WorkSpace.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6238,7 +6244,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Reboots the specified WorkSpaces.</p>\n         <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code>,\n         <code>UNHEALTHY</code>, or <code>REBOOTING</code>. Reboot a WorkSpace in the <code>REBOOTING</code> \n         state only if your WorkSpace has been stuck in the <code>REBOOTING</code> state for over 20 minutes.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>"
+                "smithy.api#documentation": "<p>Reboots the specified WorkSpaces.</p>\n         <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code> or\n            <code>UNHEALTHY</code>.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>"
             }
         },
         "com.amazonaws.workspaces#RebootWorkspacesRequest": {
@@ -7909,7 +7915,7 @@
                 "State": {
                     "target": "com.amazonaws.workspaces#WorkspaceState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operational state of the WorkSpace.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> – The WorkSpace is in a waiting state (for example, the WorkSpace is being created).</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> – The WorkSpace is running and has passed the health checks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPAIRED</code> – Refer to <code>UNHEALTHY</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code> – The WorkSpace is not responding to health checks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REBOOTING</code> – The WorkSpace is being rebooted (restarted).</p>\n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> – The WorkSpace is starting up and health checks are being run.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REBUILDING</code> – The WorkSpace is being rebuilt.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTORING</code> – The WorkSpace is being restored.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAINTENANCE</code> – The WorkSpace is undergoing scheduled maintenance by Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN_MAINTENANCE</code>  – The WorkSpace is undergoing maintenance by the WorkSpaces administrator.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERMINATING</code> – The WorkSpace is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERMINATED</code> – The WorkSpace has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code> – The WorkSpace has been suspended for image creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> – The WorkSpace is undergoing an update.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code> – The WorkSpace is being stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code> – The WorkSpace has been stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR </code> – The WorkSpace is an error state (for example, an error occurred during startup).</p>\n            </li>\n         </ul>\n         <note>\n            <p>After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned only\n            briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely\n            returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using\n               <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n               DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace\n            has been successfully terminated.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The operational state of the WorkSpace.</p>\n         <note>\n            <p>After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned only\n            briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely\n            returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using\n               <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n               DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace\n            has been successfully terminated.</p>\n         </note>"
                     }
                 },
                 "BundleId": {
@@ -7958,6 +7964,12 @@
                     "target": "com.amazonaws.workspaces#BooleanObject",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the data stored on the root volume is encrypted.</p>"
+                    }
+                },
+                "WorkspaceName": {
+                    "target": "com.amazonaws.workspaces#WorkspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-decoupled WorkSpace.</p>"
                     }
                 },
                 "WorkspaceProperties": {
@@ -8826,6 +8838,12 @@
                 "target": "com.amazonaws.workspaces#Workspace"
             }
         },
+        "com.amazonaws.workspaces#WorkspaceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_()][a-zA-Z0-9_.()-]{1,63}$"
+            }
+        },
         "com.amazonaws.workspaces#WorkspaceProperties": {
             "type": "structure",
             "members": {
@@ -8889,7 +8907,7 @@
                 "UserName": {
                     "target": "com.amazonaws.workspaces#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user name of the user for the WorkSpace. This user name must exist in the Directory Service directory for the WorkSpace.</p>",
+                        "smithy.api#documentation": "<p>The user name of the user for the WorkSpace. This user name must exist in the Directory Service directory for the WorkSpace.</p>\n         <p>The reserved keyword, <code>[UNDEFINED]</code>, is used when creating user-decoupled WorkSpaces.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8928,6 +8946,12 @@
                     "target": "com.amazonaws.workspaces#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags for the WorkSpace.</p>"
+                    }
+                },
+                "WorkspaceName": {
+                    "target": "com.amazonaws.workspaces#WorkspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-decoupled WorkSpace.</p>"
                     }
                 }
             },
