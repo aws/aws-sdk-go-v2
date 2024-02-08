@@ -2290,6 +2290,13 @@ func awsAwsjson11_serializeDocumentActionExecutionFilter(v *types.ActionExecutio
 	object := value.Object()
 	defer object.Close()
 
+	if v.LatestInPipelineExecution != nil {
+		ok := object.Key("latestInPipelineExecution")
+		if err := awsAwsjson11_serializeDocumentLatestInPipelineExecutionFilter(v.LatestInPipelineExecution, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PipelineExecutionId != nil {
 		ok := object.Key("pipelineExecutionId")
 		ok.String(*v.PipelineExecutionId)
@@ -2808,9 +2815,48 @@ func awsAwsjson11_serializeDocumentFailureDetails(v *types.FailureDetails, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentGitBranchFilterCriteria(v *types.GitBranchFilterCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Excludes != nil {
+		ok := object.Key("excludes")
+		if err := awsAwsjson11_serializeDocumentGitBranchPatternList(v.Excludes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Includes != nil {
+		ok := object.Key("includes")
+		if err := awsAwsjson11_serializeDocumentGitBranchPatternList(v.Includes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGitBranchPatternList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentGitConfiguration(v *types.GitConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.PullRequest != nil {
+		ok := object.Key("pullRequest")
+		if err := awsAwsjson11_serializeDocumentGitPullRequestFilterList(v.PullRequest, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Push != nil {
 		ok := object.Key("push")
@@ -2827,9 +2873,107 @@ func awsAwsjson11_serializeDocumentGitConfiguration(v *types.GitConfiguration, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentGitFilePathFilterCriteria(v *types.GitFilePathFilterCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Excludes != nil {
+		ok := object.Key("excludes")
+		if err := awsAwsjson11_serializeDocumentGitFilePathPatternList(v.Excludes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Includes != nil {
+		ok := object.Key("includes")
+		if err := awsAwsjson11_serializeDocumentGitFilePathPatternList(v.Includes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGitFilePathPatternList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGitPullRequestEventTypeList(v []types.GitPullRequestEventType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGitPullRequestFilter(v *types.GitPullRequestFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Branches != nil {
+		ok := object.Key("branches")
+		if err := awsAwsjson11_serializeDocumentGitBranchFilterCriteria(v.Branches, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Events != nil {
+		ok := object.Key("events")
+		if err := awsAwsjson11_serializeDocumentGitPullRequestEventTypeList(v.Events, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FilePaths != nil {
+		ok := object.Key("filePaths")
+		if err := awsAwsjson11_serializeDocumentGitFilePathFilterCriteria(v.FilePaths, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGitPullRequestFilterList(v []types.GitPullRequestFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentGitPullRequestFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentGitPushFilter(v *types.GitPushFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Branches != nil {
+		ok := object.Key("branches")
+		if err := awsAwsjson11_serializeDocumentGitBranchFilterCriteria(v.Branches, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FilePaths != nil {
+		ok := object.Key("filePaths")
+		if err := awsAwsjson11_serializeDocumentGitFilePathFilterCriteria(v.FilePaths, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Tags != nil {
 		ok := object.Key("tags")
@@ -2944,6 +3088,23 @@ func awsAwsjson11_serializeDocumentLambdaExecutorConfiguration(v *types.LambdaEx
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLatestInPipelineExecutionFilter(v *types.LatestInPipelineExecutionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PipelineExecutionId != nil {
+		ok := object.Key("pipelineExecutionId")
+		ok.String(*v.PipelineExecutionId)
+	}
+
+	if len(v.StartTimeRange) > 0 {
+		ok := object.Key("startTimeRange")
+		ok.String(string(v.StartTimeRange))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOutputArtifact(v *types.OutputArtifact, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2996,6 +3157,11 @@ func awsAwsjson11_serializeDocumentPipelineDeclaration(v *types.PipelineDeclarat
 		if err := awsAwsjson11_serializeDocumentArtifactStoreMap(v.ArtifactStores, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ExecutionMode) > 0 {
+		ok := object.Key("executionMode")
+		ok.String(string(v.ExecutionMode))
 	}
 
 	if v.Name != nil {

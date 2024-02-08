@@ -40,10 +40,12 @@ type UpdateFolderPermissionsInput struct {
 	// This member is required.
 	FolderId *string
 
-	// The permissions that you want to grant on a resource.
+	// The permissions that you want to grant on a resource. Namespace ARNs are not
+	// supported Principal values for folder permissions.
 	GrantPermissions []types.ResourcePermission
 
-	// The permissions that you want to revoke from a resource.
+	// The permissions that you want to revoke from a resource. Namespace ARNs are not
+	// supported Principal values for folder permissions.
 	RevokePermissions []types.ResourcePermission
 
 	noSmithyDocumentSerde

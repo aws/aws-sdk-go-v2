@@ -173,6 +173,26 @@ func (EncryptionKeyType) Values() []EncryptionKeyType {
 	}
 }
 
+type ExecutionMode string
+
+// Enum values for ExecutionMode
+const (
+	ExecutionModeQueued     ExecutionMode = "QUEUED"
+	ExecutionModeSuperseded ExecutionMode = "SUPERSEDED"
+	ExecutionModeParallel   ExecutionMode = "PARALLEL"
+)
+
+// Values returns all known values for ExecutionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionMode) Values() []ExecutionMode {
+	return []ExecutionMode{
+		"QUEUED",
+		"SUPERSEDED",
+		"PARALLEL",
+	}
+}
+
 type ExecutorType string
 
 // Enum values for ExecutorType
@@ -214,6 +234,26 @@ func (FailureType) Values() []FailureType {
 		"RevisionOutOfSync",
 		"RevisionUnavailable",
 		"SystemUnavailable",
+	}
+}
+
+type GitPullRequestEventType string
+
+// Enum values for GitPullRequestEventType
+const (
+	GitPullRequestEventTypeOpen    GitPullRequestEventType = "OPEN"
+	GitPullRequestEventTypeUpdated GitPullRequestEventType = "UPDATED"
+	GitPullRequestEventTypeClosed  GitPullRequestEventType = "CLOSED"
+)
+
+// Values returns all known values for GitPullRequestEventType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GitPullRequestEventType) Values() []GitPullRequestEventType {
+	return []GitPullRequestEventType{
+		"OPEN",
+		"UPDATED",
+		"CLOSED",
 	}
 }
 
@@ -386,6 +426,24 @@ func (StageTransitionType) Values() []StageTransitionType {
 	return []StageTransitionType{
 		"Inbound",
 		"Outbound",
+	}
+}
+
+type StartTimeRange string
+
+// Enum values for StartTimeRange
+const (
+	StartTimeRangeLatest StartTimeRange = "Latest"
+	StartTimeRangeAll    StartTimeRange = "All"
+)
+
+// Values returns all known values for StartTimeRange. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StartTimeRange) Values() []StartTimeRange {
+	return []StartTimeRange{
+		"Latest",
+		"All",
 	}
 }
 

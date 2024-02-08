@@ -907,32 +907,10 @@ type Workspace struct {
 	// The properties of the standby WorkSpace
 	StandbyWorkspacesProperties []StandbyWorkspacesProperties
 
-	// The operational state of the WorkSpace.
-	//   - PENDING – The WorkSpace is in a waiting state (for example, the WorkSpace is
-	//   being created).
-	//   - AVAILABLE – The WorkSpace is running and has passed the health checks.
-	//   - IMPAIRED – Refer to UNHEALTHY state.
-	//   - UNHEALTHY – The WorkSpace is not responding to health checks.
-	//   - REBOOTING – The WorkSpace is being rebooted (restarted).
-	//   - STARTING – The WorkSpace is starting up and health checks are being run.
-	//   - REBUILDING – The WorkSpace is being rebuilt.
-	//   - RESTORING – The WorkSpace is being restored.
-	//   - MAINTENANCE – The WorkSpace is undergoing scheduled maintenance by Amazon
-	//   Web Services.
-	//   - ADMIN_MAINTENANCE – The WorkSpace is undergoing maintenance by the
-	//   WorkSpaces administrator.
-	//   - TERMINATING – The WorkSpace is being deleted.
-	//   - TERMINATED – The WorkSpace has been deleted.
-	//   - SUSPENDED – The WorkSpace has been suspended for image creation.
-	//   - UPDATING – The WorkSpace is undergoing an update.
-	//   - STOPPING – The WorkSpace is being stopped.
-	//   - STOPPED – The WorkSpace has been stopped.
-	//   - ERROR – The WorkSpace is an error state (for example, an error occurred
-	//   during startup).
-	// After a WorkSpace is terminated, the TERMINATED state is returned only briefly
-	// before the WorkSpace directory metadata is cleaned up, so this state is rarely
-	// returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID
-	// by using DescribeWorkSpaces (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html)
+	// The operational state of the WorkSpace. After a WorkSpace is terminated, the
+	// TERMINATED state is returned only briefly before the WorkSpace directory
+	// metadata is cleaned up, so this state is rarely returned. To confirm that a
+	// WorkSpace is terminated, check for the WorkSpace ID by using DescribeWorkSpaces (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html)
 	// . If the WorkSpace ID isn't returned, then the WorkSpace has been successfully
 	// terminated.
 	State WorkspaceState
@@ -952,6 +930,9 @@ type Workspace struct {
 
 	// The identifier of the WorkSpace.
 	WorkspaceId *string
+
+	// The name of the user-decoupled WorkSpace.
+	WorkspaceName *string
 
 	// The properties of the WorkSpace.
 	WorkspaceProperties *WorkspaceProperties
@@ -1324,7 +1305,8 @@ type WorkspaceRequest struct {
 	DirectoryId *string
 
 	// The user name of the user for the WorkSpace. This user name must exist in the
-	// Directory Service directory for the WorkSpace.
+	// Directory Service directory for the WorkSpace. The reserved keyword, [UNDEFINED]
+	// , is used when creating user-decoupled WorkSpaces.
 	//
 	// This member is required.
 	UserName *string
@@ -1341,6 +1323,9 @@ type WorkspaceRequest struct {
 	// The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace.
 	// Amazon WorkSpaces does not support asymmetric KMS keys.
 	VolumeEncryptionKey *string
+
+	// The name of the user-decoupled WorkSpace.
+	WorkspaceName *string
 
 	// The WorkSpace properties.
 	WorkspaceProperties *WorkspaceProperties

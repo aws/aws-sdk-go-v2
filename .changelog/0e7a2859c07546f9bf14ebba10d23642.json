@@ -1,0 +1,8 @@
+{
+    "id": "0e7a2859-c075-46f9-bf14-ebba10d23642",
+    "type": "feature",
+    "description": "Add ability to execute pipelines with new parallel \u0026 queued execution modes and add support for triggers with filtering on branches and file paths.",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

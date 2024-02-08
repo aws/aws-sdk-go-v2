@@ -13710,6 +13710,15 @@ func awsAwsjson11_deserializeDocumentWorkspace(v **types.Workspace, value interf
 				sv.WorkspaceId = ptr.String(jtv)
 			}
 
+		case "WorkspaceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceName to be of type string, got %T instead", value)
+				}
+				sv.WorkspaceName = ptr.String(jtv)
+			}
+
 		case "WorkspaceProperties":
 			if err := awsAwsjson11_deserializeDocumentWorkspaceProperties(&sv.WorkspaceProperties, value); err != nil {
 				return err
@@ -14808,6 +14817,15 @@ func awsAwsjson11_deserializeDocumentWorkspaceRequest(v **types.WorkspaceRequest
 					return fmt.Errorf("expected VolumeEncryptionKey to be of type string, got %T instead", value)
 				}
 				sv.VolumeEncryptionKey = ptr.String(jtv)
+			}
+
+		case "WorkspaceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceName to be of type string, got %T instead", value)
+				}
+				sv.WorkspaceName = ptr.String(jtv)
 			}
 
 		case "WorkspaceProperties":

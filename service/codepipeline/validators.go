@@ -890,6 +890,23 @@ func validateActionDeclaration(v *types.ActionDeclaration) error {
 	}
 }
 
+func validateActionExecutionFilter(v *types.ActionExecutionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionExecutionFilter"}
+	if v.LatestInPipelineExecution != nil {
+		if err := validateLatestInPipelineExecutionFilter(v.LatestInPipelineExecution); err != nil {
+			invalidParams.AddNested("LatestInPipelineExecution", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateActionRevision(v *types.ActionRevision) error {
 	if v == nil {
 		return nil
@@ -1312,6 +1329,24 @@ func validateLambdaExecutorConfiguration(v *types.LambdaExecutorConfiguration) e
 	}
 }
 
+func validateLatestInPipelineExecutionFilter(v *types.LatestInPipelineExecutionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LatestInPipelineExecutionFilter"}
+	if v.PipelineExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineExecutionId"))
+	}
+	if len(v.StartTimeRange) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimeRange"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOutputArtifact(v *types.OutputArtifact) error {
 	if v == nil {
 		return nil
@@ -1372,14 +1407,14 @@ func validatePipelineDeclaration(v *types.PipelineDeclaration) error {
 			invalidParams.AddNested("Stages", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Triggers != nil {
-		if err := validatePipelineTriggerDeclarationList(v.Triggers); err != nil {
-			invalidParams.AddNested("Triggers", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Variables != nil {
 		if err := validatePipelineVariableDeclarationList(v.Variables); err != nil {
 			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Triggers != nil {
+		if err := validatePipelineTriggerDeclarationList(v.Triggers); err != nil {
+			invalidParams.AddNested("Triggers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2028,6 +2063,11 @@ func validateOpListActionExecutionsInput(v *ListActionExecutionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListActionExecutionsInput"}
 	if v.PipelineName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if v.Filter != nil {
+		if err := validateActionExecutionFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

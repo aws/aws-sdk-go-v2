@@ -1,0 +1,8 @@
+{
+    "id": "6fca6f08-8aa8-4fea-a663-37d6338f4c3f",
+    "type": "feature",
+    "description": "This release introduces User-Decoupling feature. This feature allows Workspaces Core customers to provision workspaces without providing users. CreateWorkspaces and DescribeWorkspaces APIs will now take a new optional parameter \"WorkspaceName\".",
+    "modules": [
+        "service/workspaces"
+    ]
+}

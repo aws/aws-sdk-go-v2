@@ -1670,6 +1670,9 @@ type BarChartConfiguration struct {
 	// The field wells of the visual.
 	FieldWells *BarChartFieldWells
 
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
+
 	// The legend display setup of the visual.
 	Legend *LegendOptions
 
@@ -1899,6 +1902,9 @@ type BoxPlotChartConfiguration struct {
 
 	// The field wells of the visual.
 	FieldWells *BoxPlotFieldWells
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The options for the legend setup of a visual.
 	Legend *LegendOptions
@@ -2524,6 +2530,9 @@ type ComboChartConfiguration struct {
 	// The field wells of the visual.
 	FieldWells *ComboChartFieldWells
 
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
+
 	// The legend display setup of the visual.
 	Legend *LegendOptions
 
@@ -2818,6 +2827,17 @@ type ConditionalFormattingSolidColor struct {
 	noSmithyDocumentSerde
 }
 
+// The context menu options for a visual's interactions.
+type ContextMenuOption struct {
+
+	// The availability status of the context menu options. If the value of this
+	// property is set to ENABLED , dashboard readers can interact with the context
+	// menu.
+	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
 // The contribution analysis visual display for a line, pie, or bar chart.
 type ContributionAnalysisDefault struct {
 
@@ -2994,6 +3014,9 @@ type CustomContentConfiguration struct {
 	// The sizing options for the size of the custom content visual. This structure is
 	// required when the ContentType of the visual is 'IMAGE' .
 	ImageScaling CustomContentImageScalingConfiguration
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	noSmithyDocumentSerde
 }
@@ -5349,6 +5372,9 @@ type FilledMapConfiguration struct {
 	// The field wells of the visual.
 	FieldWells *FilledMapFieldWells
 
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
+
 	// The legend display setup of the visual.
 	Legend *LegendOptions
 
@@ -6249,6 +6275,9 @@ type FunnelChartConfiguration struct {
 	// The field well configuration of a FunnelChartVisual .
 	FieldWells *FunnelChartFieldWells
 
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
+
 	// The sort configuration of a FunnelChartVisual .
 	SortConfiguration *FunnelChartSortConfiguration
 
@@ -6386,6 +6415,9 @@ type GaugeChartConfiguration struct {
 
 	// The options that determine the presentation of the GaugeChartVisual .
 	GaugeChartOptions *GaugeChartOptions
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The tooltip configuration of a GaugeChartVisual .
 	TooltipOptions *TooltipOptions
@@ -6566,6 +6598,9 @@ type GeospatialMapConfiguration struct {
 
 	// The field wells of the visual.
 	FieldWells *GeospatialMapFieldWells
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The legend display setup of the visual.
 	Legend *LegendOptions
@@ -6915,6 +6950,9 @@ type HeatMapConfiguration struct {
 	// The field wells of the visual.
 	FieldWells *HeatMapFieldWells
 
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
+
 	// The legend display setup of the visual.
 	Legend *LegendOptions
 
@@ -7027,6 +7065,9 @@ type HistogramConfiguration struct {
 
 	// The field well configuration of a histogram.
 	FieldWells *HistogramFieldWells
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The tooltip configuration of a histogram.
 	Tooltip *TooltipOptions
@@ -7211,6 +7252,9 @@ type InsightConfiguration struct {
 
 	// The custom narrative of the insight visual.
 	CustomNarrative *CustomNarrativeOptions
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	noSmithyDocumentSerde
 }
@@ -7478,6 +7522,9 @@ type KPIConfiguration struct {
 
 	// The field well configuration of a KPI visual.
 	FieldWells *KPIFieldWells
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The options that determine the presentation of a KPI visual.
 	KPIOptions *KPIOptions
@@ -7757,6 +7804,9 @@ type LineChartConfiguration struct {
 
 	// The forecast configuration of a line chart.
 	ForecastConfigurations []ForecastConfiguration
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The legend configuration of a line chart.
 	Legend *LegendOptions
@@ -9251,6 +9301,9 @@ type PieChartConfiguration struct {
 	// The field wells of the visual.
 	FieldWells *PieChartFieldWells
 
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
+
 	// The legend display setup of the visual.
 	Legend *LegendOptions
 
@@ -9425,6 +9478,9 @@ type PivotTableConfiguration struct {
 
 	// The field wells of the visual.
 	FieldWells *PivotTableFieldWells
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The paginated report options for a pivot table visual.
 	PaginatedReportOptions *PivotTablePaginatedReportOptions
@@ -9871,6 +9927,9 @@ type RadarChartConfiguration struct {
 
 	// The field well configuration of a RadarChartVisual .
 	FieldWells *RadarChartFieldWells
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The legend display setup of the visual.
 	Legend *LegendOptions
@@ -10794,6 +10853,9 @@ type SankeyDiagramChartConfiguration struct {
 	// The field well configuration of a sankey diagram.
 	FieldWells *SankeyDiagramFieldWells
 
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
+
 	// The sort configuration of a sankey diagram.
 	SortConfiguration *SankeyDiagramSortConfiguration
 
@@ -10880,6 +10942,9 @@ type ScatterPlotConfiguration struct {
 
 	// The field wells of the visual.
 	FieldWells *ScatterPlotFieldWells
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The legend display setup of the visual.
 	Legend *LegendOptions
@@ -12158,6 +12223,9 @@ type TableConfiguration struct {
 
 	// The field wells of the visual.
 	FieldWells *TableFieldWells
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The paginated report options for a table visual.
 	PaginatedReportOptions *TablePaginatedReportOptions
@@ -13890,6 +13958,9 @@ type TreeMapConfiguration struct {
 	// displayed in a tree map.
 	GroupLabelOptions *ChartAxisLabelOptions
 
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
+
 	// The legend display setup of the visual.
 	Legend *LegendOptions
 
@@ -14400,6 +14471,18 @@ type VisualCustomActionOperation struct {
 	noSmithyDocumentSerde
 }
 
+// The general visual interactions setup for visual publish options
+type VisualInteractionOptions struct {
+
+	// The context menu options for a visual.
+	ContextMenuOption *ContextMenuOption
+
+	// The on-visual menu options for a visual.
+	VisualMenuOption *VisualMenuOption
+
+	noSmithyDocumentSerde
+}
+
 // The menu options for a visual.
 type VisualMenuOption struct {
 
@@ -14559,6 +14642,15 @@ type WaterfallChartAggregatedFieldWells struct {
 	noSmithyDocumentSerde
 }
 
+// The color configuration of a waterfall visual.
+type WaterfallChartColorConfiguration struct {
+
+	// The color configuration for individual groups within a waterfall visual.
+	GroupColorConfiguration *WaterfallChartGroupColorConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a waterfall visual.
 type WaterfallChartConfiguration struct {
 
@@ -14568,11 +14660,17 @@ type WaterfallChartConfiguration struct {
 	// The options that determine the presentation of the category axis label.
 	CategoryAxisLabelOptions *ChartAxisLabelOptions
 
+	// The color configuration of a waterfall visual.
+	ColorConfiguration *WaterfallChartColorConfiguration
+
 	// The data label configuration of a waterfall visual.
 	DataLabels *DataLabelOptions
 
 	// The field well configuration of a waterfall visual.
 	FieldWells *WaterfallChartFieldWells
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The legend configuration of a waterfall visual.
 	Legend *LegendOptions
@@ -14600,6 +14698,21 @@ type WaterfallChartFieldWells struct {
 
 	// The field well configuration of a waterfall visual.
 	WaterfallChartAggregatedFieldWells *WaterfallChartAggregatedFieldWells
+
+	noSmithyDocumentSerde
+}
+
+// The color configuration for individual groups within a waterfall visual.
+type WaterfallChartGroupColorConfiguration struct {
+
+	// Defines the color for the negative bars of a waterfall chart.
+	NegativeBarColor *string
+
+	// Defines the color for the positive bars of a waterfall chart.
+	PositiveBarColor *string
+
+	// Defines the color for the total bars of a waterfall chart.
+	TotalBarColor *string
 
 	noSmithyDocumentSerde
 }
@@ -14713,6 +14826,9 @@ type WordCloudChartConfiguration struct {
 
 	// The field wells of the visual.
 	FieldWells *WordCloudFieldWells
+
+	// The general visual interactions setup for a visual.
+	Interactions *VisualInteractionOptions
 
 	// The sort configuration of a word cloud visual.
 	SortConfiguration *WordCloudSortConfiguration

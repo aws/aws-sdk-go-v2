@@ -1,0 +1,8 @@
+{
+    "id": "964ad086-2b46-4510-95e7-5752aff0215e",
+    "type": "feature",
+    "description": "General Interactions for Visuals; Waterfall Chart Color Configuration; Documentation Update",
+    "modules": [
+        "service/quicksight"
+    ]
+}
