@@ -1,12 +1,18 @@
 package aws
 
-// AccountIDEndpointMode switches on/off the account ID based endpoint routing
+// AccountIDEndpointMode controls how a resolved AWS account ID is handled for endpoint routing.
 type AccountIDEndpointMode string
 
-// enums of valid AccountIDEndpointMode
 const (
-	AccountIDEndpointModeUnset     AccountIDEndpointMode = ""
-	AccountIDEndpointModePreferred AccountIDEndpointMode = "preferred"
-	AccountIDEndpointModeRequired  AccountIDEndpointMode = "required"
-	AccountIDEndpointModeDisabled  AccountIDEndpointMode = "disabled"
+	// AccountIDEndpointModeUnset indicates the AWS account ID will not be used for endpoint routing
+	AccountIDEndpointModeUnset AccountIDEndpointMode = ""
+
+	// AccountIDEndpointModePreferred indicates the AWS account ID will be used for endpoint routing if offered
+	AccountIDEndpointModePreferred = "preferred"
+
+	// AccountIDEndpointModeRequired indicates an error will be returned if the AWS account ID is not resolved from identity
+	AccountIDEndpointModeRequired = "required"
+
+	// AccountIDEndpointModeDisabled indicates the AWS account ID will be ignored during endpoint routing
+	AccountIDEndpointModeDisabled = "disabled"
 )

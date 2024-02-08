@@ -163,8 +163,7 @@ type Config struct {
 	// the shared config profile attribute request_min_compression_size_bytes
 	RequestMinCompressSizeBytes int64
 
-	// AccountIDEndpointMode indicates how aws account ID is applied in endpoint2.0 routing.
-	// Will be set to preferred by default. Supported modes are: Preferred, Required and Disabled
+	// Controls how a resolved AWS account ID is handled for endpoint routing.
 	AccountIDEndpointMode AccountIDEndpointMode
 }
 
