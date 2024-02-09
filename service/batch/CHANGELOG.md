@@ -1,3 +1,7 @@
+# v1.31.0 (2024-02-09)
+
+* **Feature**: This feature allows Batch to support configuration of repository credentials for jobs running on ECS
+
 # v1.30.7 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

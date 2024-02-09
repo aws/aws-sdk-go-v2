@@ -1,3 +1,7 @@
+# v1.38.3 (2024-02-09)
+
+* **Documentation**: Documentation only update for Amazon ECS.
+
 # v1.38.2 (2024-02-06)
 
 * **Documentation**: This release is a documentation only update to address customer issues.

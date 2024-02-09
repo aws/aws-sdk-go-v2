@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/athena v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.37.0
-	github.com/aws/aws-sdk-go-v2/service/batch v1.30.7
+	github.com/aws/aws-sdk-go-v2/service/batch v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.32.6
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.19.7
@@ -34,7 +34,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.146.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.24.7
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.38.2
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.38.3
 	github.com/aws/aws-sdk-go-v2/service/efs v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.34.7
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.20.6
@@ -51,7 +51,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.22.6
 	github.com/aws/aws-sdk-go-v2/service/iam v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.19.6
-	github.com/aws/aws-sdk-go-v2/service/iot v1.49.0
+	github.com/aws/aws-sdk-go-v2/service/iot v1.50.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.24.7
 	github.com/aws/aws-sdk-go-v2/service/kms v1.27.9
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.49.7

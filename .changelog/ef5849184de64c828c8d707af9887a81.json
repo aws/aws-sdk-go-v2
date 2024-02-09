@@ -1,8 +1,0 @@
-{
-    "id": "ef584918-4de6-4c82-8c8d-707af9887a81",
-    "type": "feature",
-    "description": "This release allows AWS IoT Core users to enable Online Certificate Status Protocol (OCSP) Stapling for TLS X.509 Server Certificates when creating and updating AWS IoT Domain Configurations with Custom Domain.",
-    "modules": [
-        "service/iot"
-    ]
-}

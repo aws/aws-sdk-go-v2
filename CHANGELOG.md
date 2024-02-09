@@ -1,3 +1,21 @@
+# Release (2024-02-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.22.2](service/amp/CHANGELOG.md#v1222-2024-02-09)
+  * **Documentation**: Overall documentation updates.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.31.0](service/batch/CHANGELOG.md#v1310-2024-02-09)
+  * **Feature**: This feature allows Batch to support configuration of repository credentials for jobs running on ECS
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.25.0](service/braket/CHANGELOG.md#v1250-2024-02-09)
+  * **Feature**: Creating a job will result in DeviceOfflineException when using an offline device, and DeviceRetiredException when using a retired device.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.2.0](service/costoptimizationhub/CHANGELOG.md#v120-2024-02-09)
+  * **Feature**: Adding includeMemberAccounts field to the response of ListEnrollmentStatuses API.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.38.3](service/ecs/CHANGELOG.md#v1383-2024-02-09)
+  * **Documentation**: Documentation only update for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.50.0](service/iot/CHANGELOG.md#v1500-2024-02-09)
+  * **Feature**: This release allows AWS IoT Core users to enable Online Certificate Status Protocol (OCSP) Stapling for TLS X.509 Server Certificates when creating and updating AWS IoT Domain Configurations with Custom Domain.
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.25.0](service/pricing/CHANGELOG.md#v1250-2024-02-09)
+  * **Feature**: Add Throttling Exception to all APIs.
+
 # Release (2024-02-08)
 
 ## Module Highlights

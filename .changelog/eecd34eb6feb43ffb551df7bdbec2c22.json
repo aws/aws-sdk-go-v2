@@ -1,8 +1,0 @@
-{
-    "id": "eecd34eb-6feb-43ff-b551-df7bdbec2c22",
-    "type": "feature",
-    "description": "This feature allows Batch to support configuration of repository credentials for jobs running on ECS",
-    "modules": [
-        "service/batch"
-    ]
-}
