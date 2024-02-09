@@ -7003,6 +7003,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
                     }
+                },
+                "serverCertificateConfig": {
+                    "target": "com.amazonaws.iot#ServerCertificateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server certificate configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13144,6 +13150,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
                     }
+                },
+                "serverCertificateConfig": {
+                    "target": "com.amazonaws.iot#ServerCertificateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server certificate configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13173,7 +13185,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a unique endpoint specific to the Amazon Web Services account making the call.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeEndpoint</a> action.</p>",
+                "smithy.api#documentation": "<p>Returns or creates a unique endpoint specific to the Amazon Web Services account making the\n         call.</p>\n         <note>\n            <p>The first time <code>DescribeEndpoint</code> is called, an endpoint is created. All subsequent calls to <code>DescribeEndpoint</code> return the same endpoint.</p>\n         </note>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeEndpoint</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/endpoint",
@@ -16123,6 +16135,9 @@
                 "smithy.api#documentation": "<p>Parameters used when defining a mitigation action that enable Amazon Web Services IoT Core logging.</p>"
             }
         },
+        "com.amazonaws.iot#EnableOCSPCheck": {
+            "type": "boolean"
+        },
         "com.amazonaws.iot#EnableTopicRule": {
             "type": "operation",
             "input": {
@@ -18075,7 +18090,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a registration code used to register a CA certificate with IoT.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetRegistrationCode</a> action.</p>",
+                "smithy.api#documentation": "<p>Gets a registration code used to register a CA certificate with IoT.</p>\n         <p>IoT will create a registration code as part of this API call if the registration\n         code doesn't exist or has been deleted. If you already have a registration code, this API\n         call will return the same registration code.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetRegistrationCode</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/registrationcode",
@@ -29757,6 +29772,20 @@
                 }
             }
         },
+        "com.amazonaws.iot#ServerCertificateConfig": {
+            "type": "structure",
+            "members": {
+                "enableOCSPCheck": {
+                    "target": "com.amazonaws.iot#EnableOCSPCheck",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether Online Certificate Status Protocol (OCSP) server\n         certificate check is enabled or not.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-domain-ocsp-config.html\">Configuring OCSP server-certificate stapling in domain\n         configuration</a> from Amazon Web Services IoT Core Developer Guide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The server certificate configuration.</p>"
+            }
+        },
         "com.amazonaws.iot#ServerCertificateStatus": {
             "type": "enum",
             "members": {
@@ -34004,6 +34033,12 @@
                     "target": "com.amazonaws.iot#TlsConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
+                    }
+                },
+                "serverCertificateConfig": {
+                    "target": "com.amazonaws.iot#ServerCertificateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server certificate configuration.</p>"
                     }
                 }
             },
