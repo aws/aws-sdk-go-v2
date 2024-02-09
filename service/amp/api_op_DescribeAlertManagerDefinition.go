@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an alert manager definition.
+// Retrieves the full information about the alert manager definition for a
+// workspace.
 func (c *Client) DescribeAlertManagerDefinition(ctx context.Context, params *DescribeAlertManagerDefinitionInput, optFns ...func(*Options)) (*DescribeAlertManagerDefinitionOutput, error) {
 	if params == nil {
 		params = &DescribeAlertManagerDefinitionInput{}
@@ -31,7 +32,7 @@ func (c *Client) DescribeAlertManagerDefinition(ctx context.Context, params *Des
 // Represents the input of a DescribeAlertManagerDefinition operation.
 type DescribeAlertManagerDefinitionInput struct {
 
-	// The ID of the workspace to describe.
+	// The ID of the workspace to retrieve the alert manager definition from.
 	//
 	// This member is required.
 	WorkspaceId *string
@@ -42,7 +43,7 @@ type DescribeAlertManagerDefinitionInput struct {
 // Represents the output of a DescribeAlertManagerDefinition operation.
 type DescribeAlertManagerDefinitionOutput struct {
 
-	// The properties of the selected workspace's alert manager definition.
+	// The alert manager definition.
 	//
 	// This member is required.
 	AlertManagerDefinition *types.AlertManagerDefinitionDescription

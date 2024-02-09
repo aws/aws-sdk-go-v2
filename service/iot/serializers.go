@@ -2070,6 +2070,13 @@ func awsRestjson1_serializeOpDocumentCreateDomainConfigurationInput(v *CreateDom
 		}
 	}
 
+	if v.ServerCertificateConfig != nil {
+		ok := object.Key("serverCertificateConfig")
+		if err := awsRestjson1_serializeDocumentServerCertificateConfig(v.ServerCertificateConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ServiceType) > 0 {
 		ok := object.Key("serviceType")
 		ok.String(string(v.ServiceType))
@@ -18520,6 +18527,13 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigurationInput(v *UpdateDom
 		ok.Boolean(v.RemoveAuthorizerConfig)
 	}
 
+	if v.ServerCertificateConfig != nil {
+		ok := object.Key("serverCertificateConfig")
+		if err := awsRestjson1_serializeDocumentServerCertificateConfig(v.ServerCertificateConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TlsConfig != nil {
 		ok := object.Key("tlsConfig")
 		if err := awsRestjson1_serializeDocumentTlsConfig(v.TlsConfig, ok); err != nil {
@@ -23439,6 +23453,18 @@ func awsRestjson1_serializeDocumentServerCertificateArns(v []string, value smith
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServerCertificateConfig(v *types.ServerCertificateConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableOCSPCheck != nil {
+		ok := object.Key("enableOCSPCheck")
+		ok.Boolean(*v.EnableOCSPCheck)
+	}
+
 	return nil
 }
 

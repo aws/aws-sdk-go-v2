@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a rule groups namespace.
+// Deletes one rule groups namespace and its associated rule groups definition.
 func (c *Client) DeleteRuleGroupsNamespace(ctx context.Context, params *DeleteRuleGroupsNamespaceInput, optFns ...func(*Options)) (*DeleteRuleGroupsNamespaceOutput, error) {
 	if params == nil {
 		params = &DeleteRuleGroupsNamespaceInput{}
@@ -30,18 +30,19 @@ func (c *Client) DeleteRuleGroupsNamespace(ctx context.Context, params *DeleteRu
 // Represents the input of a DeleteRuleGroupsNamespace operation.
 type DeleteRuleGroupsNamespaceInput struct {
 
-	// The rule groups namespace name.
+	// The name of the rule groups namespace to delete.
 	//
 	// This member is required.
 	Name *string
 
-	// The ID of the workspace to delete rule group definition.
+	// The ID of the workspace containing the rule groups namespace and definition to
+	// delete.
 	//
 	// This member is required.
 	WorkspaceId *string
 
-	// Optional, unique, case-sensitive, user-provided identifier to ensure the
-	// idempotency of the request.
+	// A unique identifier that you can provide to ensure the idempotency of the
+	// request. Case-sensitive.
 	ClientToken *string
 
 	noSmithyDocumentSerde

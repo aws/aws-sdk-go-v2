@@ -1,0 +1,8 @@
+{
+    "id": "2f25e34c-f07f-490a-bd6b-002bfa34f822",
+    "type": "feature",
+    "description": "Add Throttling Exception to all APIs.",
+    "modules": [
+        "service/pricing"
+    ]
+}

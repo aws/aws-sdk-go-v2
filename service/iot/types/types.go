@@ -3480,6 +3480,18 @@ type SecurityProfileTargetMapping struct {
 	noSmithyDocumentSerde
 }
 
+// The server certificate configuration.
+type ServerCertificateConfig struct {
+
+	// A Boolean value that indicates whether Online Certificate Status Protocol
+	// (OCSP) server certificate check is enabled or not. For more information, see
+	// Configuring OCSP server-certificate stapling in domain configuration (https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-domain-ocsp-config.html)
+	// from Amazon Web Services IoT Core Developer Guide.
+	EnableOCSPCheck *bool
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains information about a server certificate.
 type ServerCertificateSummary struct {
 

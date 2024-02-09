@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete logging configuration.
+// Deletes the logging configuration for a workspace.
 func (c *Client) DeleteLoggingConfiguration(ctx context.Context, params *DeleteLoggingConfigurationInput, optFns ...func(*Options)) (*DeleteLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteLoggingConfigurationInput{}
@@ -30,13 +30,13 @@ func (c *Client) DeleteLoggingConfiguration(ctx context.Context, params *DeleteL
 // Represents the input of a DeleteLoggingConfiguration operation.
 type DeleteLoggingConfigurationInput struct {
 
-	// The ID of the workspace to vend logs to.
+	// The ID of the workspace containing the logging configuration to delete.
 	//
 	// This member is required.
 	WorkspaceId *string
 
-	// Optional, unique, case-sensitive, user-provided identifier to ensure the
-	// idempotency of the request.
+	// A unique identifier that you can provide to ensure the idempotency of the
+	// request. Case-sensitive.
 	ClientToken *string
 
 	noSmithyDocumentSerde

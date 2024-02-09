@@ -12,7 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a rule groups namespace.
+// Updates an existing rule groups namespace within a workspace. A rule groups
+// namespace is associated with exactly one rules file. A workspace can have
+// multiple rule groups namespaces. Use this operation only to update existing rule
+// groups namespaces. To create a new rule groups namespace, use
+// CreateRuleGroupsNamespace . You can't use this operation to add tags to an
+// existing rule groups namespace. Instead, use TagResource .
 func (c *Client) PutRuleGroupsNamespace(ctx context.Context, params *PutRuleGroupsNamespaceInput, optFns ...func(*Options)) (*PutRuleGroupsNamespaceOutput, error) {
 	if params == nil {
 		params = &PutRuleGroupsNamespaceInput{}
@@ -31,23 +36,26 @@ func (c *Client) PutRuleGroupsNamespace(ctx context.Context, params *PutRuleGrou
 // Represents the input of a PutRuleGroupsNamespace operation.
 type PutRuleGroupsNamespaceInput struct {
 
-	// The namespace data that define the rule groups.
+	// The new rules file to use in the namespace. A base64-encoded version of the
+	// YAML rule groups file. For details about the rule groups namespace structure,
+	// see RuleGroupsNamespaceData (https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-RuleGroupsNamespaceData.html)
+	// .
 	//
 	// This member is required.
 	Data []byte
 
-	// The rule groups namespace name.
+	// The name of the rule groups namespace that you are updating.
 	//
 	// This member is required.
 	Name *string
 
-	// The ID of the workspace in which to update the rule group namespace.
+	// The ID of the workspace where you are updating the rule groups namespace.
 	//
 	// This member is required.
 	WorkspaceId *string
 
-	// Optional, unique, case-sensitive, user-provided identifier to ensure the
-	// idempotency of the request.
+	// A unique identifier that you can provide to ensure the idempotency of the
+	// request. Case-sensitive.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -56,22 +64,22 @@ type PutRuleGroupsNamespaceInput struct {
 // Represents the output of a PutRuleGroupsNamespace operation.
 type PutRuleGroupsNamespaceOutput struct {
 
-	// The Amazon Resource Name (ARN) of this rule groups namespace.
+	// The ARN of the rule groups namespace.
 	//
 	// This member is required.
 	Arn *string
 
-	// The rule groups namespace name.
+	// The name of the rule groups namespace that was updated.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of rule groups namespace.
+	// A structure that includes the current status of the rule groups namespace.
 	//
 	// This member is required.
 	Status *types.RuleGroupsNamespaceStatus
 
-	// The tags of this rule groups namespace.
+	// The list of tag keys and values that are associated with the namespace.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

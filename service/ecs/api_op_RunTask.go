@@ -219,7 +219,10 @@ type RunTaskInput struct {
 
 type RunTaskOutput struct {
 
-	// Any failures associated with the call.
+	// Any failures associated with the call. For information about how to address
+	// failures, see Service event messages (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages.html#service-event-messages-list)
+	// and API failure reasons (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	Failures []types.Failure
 
 	// A full description of the tasks that were run. The tasks that were successfully

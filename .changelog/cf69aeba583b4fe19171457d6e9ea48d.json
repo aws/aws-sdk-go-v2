@@ -1,0 +1,8 @@
+{
+    "id": "cf69aeba-583b-4fe1-9171-457d6e9ea48d",
+    "type": "feature",
+    "description": "Creating a job will result in DeviceOfflineException when using an offline device, and DeviceRetiredException when using a retired device.",
+    "modules": [
+        "service/braket"
+    ]
+}

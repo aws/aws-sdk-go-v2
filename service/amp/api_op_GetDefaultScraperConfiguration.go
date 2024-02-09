@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a default configuration.
+// The GetDefaultScraperConfiguration operation returns the default scraper
+// configuration used when Amazon EKS creates a scraper for you.
 func (c *Client) GetDefaultScraperConfiguration(ctx context.Context, params *GetDefaultScraperConfigurationInput, optFns ...func(*Options)) (*GetDefaultScraperConfigurationOutput, error) {
 	if params == nil {
 		params = &GetDefaultScraperConfigurationInput{}
@@ -35,7 +36,9 @@ type GetDefaultScraperConfigurationInput struct {
 // Represents the output of a GetDefaultScraperConfiguration operation.
 type GetDefaultScraperConfigurationOutput struct {
 
-	// The default configuration.
+	// The configuration file. Base 64 encoded. For more information, see Scraper
+	// configuration (https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration)
+	// in the Amazon Managed Service for Prometheus User Guide.
 	//
 	// This member is required.
 	Configuration []byte

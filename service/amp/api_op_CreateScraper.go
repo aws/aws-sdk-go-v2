@@ -12,7 +12,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a scraper.
+// The CreateScraper operation creates a scraper to collect metrics. A scraper
+// pulls metrics from Prometheus-compatible sources within an Amazon EKS cluster,
+// and sends them to your Amazon Managed Service for Prometheus workspace. You can
+// configure the scraper to control what metrics are collected, and what
+// transformations are applied prior to sending them to your workspace. If needed,
+// an IAM role will be created for you that gives Amazon Managed Service for
+// Prometheus access to the metrics in your cluster. For more information, see
+// Using roles for scraping metrics from EKS (https://docs.aws.amazon.com/prometheus/latest/userguide/using-service-linked-roles.html#using-service-linked-roles-prom-scraper)
+// in the Amazon Managed Service for Prometheus User Guide. You cannot update a
+// scraper. If you want to change the configuration of the scraper, create a new
+// scraper and delete the old one. The scrapeConfiguration parameter contains the
+// base64-encoded version of the YAML configuration file. For more information
+// about collectors, including what metrics are collected, and how to configure the
+// scraper, see Amazon Web Services managed collectors (https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector.html)
+// in the Amazon Managed Service for Prometheus User Guide.
 func (c *Client) CreateScraper(ctx context.Context, params *CreateScraperInput, optFns ...func(*Options)) (*CreateScraperOutput, error) {
 	if params == nil {
 		params = &CreateScraperInput{}
@@ -31,30 +45,31 @@ func (c *Client) CreateScraper(ctx context.Context, params *CreateScraperInput, 
 // Represents the input of a CreateScraper operation.
 type CreateScraperInput struct {
 
-	// The destination that the scraper will be producing metrics to.
+	// The Amazon Managed Service for Prometheus workspace to send metrics to.
 	//
 	// This member is required.
 	Destination types.Destination
 
-	// The configuration used to create the scraper.
+	// The configuration file to use in the new scraper. For more information, see
+	// Scraper configuration in the Amazon Managed Service for Prometheus User Guide.
 	//
 	// This member is required.
 	ScrapeConfiguration types.ScrapeConfiguration
 
-	// The source that the scraper will be discovering and collecting metrics from.
+	// The Amazon EKS cluster from which the scraper will collect metrics.
 	//
 	// This member is required.
 	Source types.Source
 
-	// An optional user-assigned alias for this scraper. This alias is for user
-	// reference and does not need to be unique.
+	// (optional) a name to associate with the scraper. This is for your use, and does
+	// not need to be unique.
 	Alias *string
 
-	// Optional, unique, case-sensitive, user-provided identifier to ensure the
-	// idempotency of the request.
+	// (Optional) A unique, case-sensitive identifier that you can provide to ensure
+	// the idempotency of the request.
 	ClientToken *string
 
-	// Optional, user-provided tags for this scraper.
+	// (Optional) The list of tag keys and values to associate with the scraper.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -63,22 +78,22 @@ type CreateScraperInput struct {
 // Represents the output of a CreateScraper operation.
 type CreateScraperOutput struct {
 
-	// The ARN of the scraper that was just created.
+	// The Amazon Resource Name (ARN) of the new scraper.
 	//
 	// This member is required.
 	Arn *string
 
-	// The generated ID of the scraper that was just created.
+	// The ID of the new scraper.
 	//
 	// This member is required.
 	ScraperId *string
 
-	// The status of the scraper that was just created (usually CREATING).
+	// A structure that displays the current status of the scraper.
 	//
 	// This member is required.
 	Status *types.ScraperStatus
 
-	// The tags of this scraper.
+	// The list of tag keys and values that are associated with the scraper.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

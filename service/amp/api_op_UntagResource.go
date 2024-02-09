@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes tags from the specified resource.
+// Removes the specified tags from an Amazon Managed Service for Prometheus
+// resource. The only resources that can be tagged are workspaces and rule groups
+// namespaces.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -29,12 +31,12 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The ARN of the resource.
+	// The ARN of the workspace or rule groups namespace.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// One or more tag keys
+	// The keys of the tags to remove.
 	//
 	// This member is required.
 	TagKeys []string

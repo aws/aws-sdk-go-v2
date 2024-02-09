@@ -31,7 +31,7 @@ func (c *Client) ListEnrollmentStatuses(ctx context.Context, params *ListEnrollm
 
 type ListEnrollmentStatusesInput struct {
 
-	// The enrollment status of a specific account ID in the organization.
+	// The account ID of a member account in the organization.
 	AccountId *string
 
 	// Indicates whether to return the enrollment status for the organization.
@@ -48,7 +48,12 @@ type ListEnrollmentStatusesInput struct {
 
 type ListEnrollmentStatusesOutput struct {
 
-	// The account enrollment statuses.
+	// The enrollment status of all member accounts in the organization if the account
+	// is the management account.
+	IncludeMemberAccounts *bool
+
+	// The enrollment status of a specific account ID, including creation and last
+	// updated timestamps.
 	Items []types.AccountEnrollmentStatus
 
 	// The token to retrieve the next set of results.

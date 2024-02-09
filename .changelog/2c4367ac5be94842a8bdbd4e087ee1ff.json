@@ -1,0 +1,8 @@
+{
+    "id": "2c4367ac-5be9-4842-a8bd-bd4e087ee1ff",
+    "type": "feature",
+    "description": "Adding includeMemberAccounts field to the response of ListEnrollmentStatuses API.",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

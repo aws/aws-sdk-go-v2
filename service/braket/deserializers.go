@@ -473,6 +473,9 @@ func awsRestjson1_deserializeOpErrorCreateJob(response *smithyhttp.Response, met
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
+	case strings.EqualFold("DeviceOfflineException", errorCode):
+		return awsRestjson1_deserializeErrorDeviceOfflineException(response, errorBody)
+
 	case strings.EqualFold("DeviceRetiredException", errorCode):
 		return awsRestjson1_deserializeErrorDeviceRetiredException(response, errorBody)
 

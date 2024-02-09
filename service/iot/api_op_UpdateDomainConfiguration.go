@@ -47,6 +47,9 @@ type UpdateDomainConfigurationInput struct {
 	// Removes the authorization configuration from a domain.
 	RemoveAuthorizerConfig bool
 
+	// The server certificate configuration.
+	ServerCertificateConfig *types.ServerCertificateConfig
+
 	// An object that specifies the TLS configuration for a domain.
 	TlsConfig *types.TlsConfig
 

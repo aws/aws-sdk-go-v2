@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe a rule groups namespace.
+// Returns complete information about one rule groups namespace. To retrieve a
+// list of rule groups namespaces, use ListRuleGroupsNamespaces .
 func (c *Client) DescribeRuleGroupsNamespace(ctx context.Context, params *DescribeRuleGroupsNamespaceInput, optFns ...func(*Options)) (*DescribeRuleGroupsNamespaceOutput, error) {
 	if params == nil {
 		params = &DescribeRuleGroupsNamespaceInput{}
@@ -31,12 +32,12 @@ func (c *Client) DescribeRuleGroupsNamespace(ctx context.Context, params *Descri
 // Represents the input of a DescribeRuleGroupsNamespace operation.
 type DescribeRuleGroupsNamespaceInput struct {
 
-	// The rule groups namespace.
+	// The name of the rule groups namespace that you want information for.
 	//
 	// This member is required.
 	Name *string
 
-	// The ID of the workspace to describe.
+	// The ID of the workspace containing the rule groups namespace.
 	//
 	// This member is required.
 	WorkspaceId *string
@@ -47,7 +48,7 @@ type DescribeRuleGroupsNamespaceInput struct {
 // Represents the output of a DescribeRuleGroupsNamespace operation.
 type DescribeRuleGroupsNamespaceOutput struct {
 
-	// The selected rule groups namespace.
+	// The information about the rule groups namespace.
 	//
 	// This member is required.
 	RuleGroupsNamespace *types.RuleGroupsNamespaceDescription

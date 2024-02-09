@@ -1,0 +1,8 @@
+{
+    "id": "871f6da0-49af-4238-aeaa-b98cd5b9f127",
+    "type": "documentation",
+    "description": "Overall documentation updates.",
+    "modules": [
+        "service/amp"
+    ]
+}

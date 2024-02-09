@@ -13547,6 +13547,11 @@ func awsRestjson1_deserializeOpDocumentDescribeDomainConfigurationOutput(v **Des
 				}
 			}
 
+		case "serverCertificateConfig":
+			if err := awsRestjson1_deserializeDocumentServerCertificateConfig(&sv.ServerCertificateConfig, value); err != nil {
+				return err
+			}
+
 		case "serverCertificates":
 			if err := awsRestjson1_deserializeDocumentServerCertificates(&sv.ServerCertificates, value); err != nil {
 				return err
@@ -54987,6 +54992,46 @@ func awsRestjson1_deserializeDocumentSecurityProfileTargets(v *[]types.SecurityP
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServerCertificateConfig(v **types.ServerCertificateConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServerCertificateConfig
+	if *v == nil {
+		sv = &types.ServerCertificateConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enableOCSPCheck":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableOCSPCheck to be of type *bool, got %T instead", value)
+				}
+				sv.EnableOCSPCheck = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
