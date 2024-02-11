@@ -39,13 +39,9 @@ public class AccountIDEndpointRouting implements GoIntegration {
             case $aidModeDisabled:T:
             case $aidModeRequired:T:
                 if ca, ok := identity.(*$credentialsAdapter:T); !ok {
-                    return $errorf:T("the accountID is configured to be required, but the " +
-                        "identity provider could not be converted to a valid credentials adapter " +
-                        "and provide an accountID, should switch to a valid credentials provider " +
-                        "or change to another account id endpoint mode")
+                    return $errorf:T("accountID is required but not set")
                 } else if ca.Credentials.AccountID == "" {
-                    return $errorf:T("the required accountID could not be empty, should switch to a valid " +
-                        "credentials provider or change to another account id endpoint mode")
+                    return $errorf:T("accountID is required but not set")
                 }
             // default check in case invalid mode is configured through request config
             default:

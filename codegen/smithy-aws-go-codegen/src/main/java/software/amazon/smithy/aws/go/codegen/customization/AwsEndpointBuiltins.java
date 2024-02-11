@@ -54,7 +54,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
         }
         goDelegator.useShapeWriter(settings.getService(model), goTemplate("""
         func resolveAccountID(identity $auth:T, mode $accountIDEndpointMode:T) *string {
-            if mode == $aidModeDisabled:T || mode == $aidModeUnset:T {
+            if mode == $aidModeDisabled:T {
                 return nil
             }
             
