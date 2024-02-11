@@ -7,7 +7,7 @@ const (
 	// AccountIDEndpointModeUnset indicates the AWS account ID will not be used for endpoint routing
 	AccountIDEndpointModeUnset AccountIDEndpointMode = ""
 
-	// AccountIDEndpointModePreferred indicates the AWS account ID will be used for endpoint routing if offered
+	// AccountIDEndpointModePreferred indicates the AWS account ID will be used for endpoint routing if present
 	AccountIDEndpointModePreferred = "preferred"
 
 	// AccountIDEndpointModeRequired indicates an error will be returned if the AWS account ID is not resolved from identity
