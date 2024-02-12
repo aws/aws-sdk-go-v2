@@ -1,8 +1,0 @@
-{
-    "id": "0e0d89e9-762a-4481-a49b-51cf40bd8954",
-    "type": "feature",
-    "description": "Adds support for new options on GraphqlAPIs, Resolvers and  Data Sources for emitting Amazon CloudWatch metrics for enhanced monitoring of AppSync APIs.",
-    "modules": [
-        "service/appsync"
-    ]
-}

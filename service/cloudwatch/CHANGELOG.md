@@ -1,3 +1,7 @@
+# v1.33.0 (2024-02-12)
+
+* **Feature**: This release enables PutMetricData API request payload compression by default.
+
 # v1.32.2 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,15 @@
+# Release (2024-02-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.29.0](service/appsync/CHANGELOG.md#v1290-2024-02-12)
+  * **Feature**: Adds support for new options on GraphqlAPIs, Resolvers and  Data Sources for emitting Amazon CloudWatch metrics for enhanced monitoring of AppSync APIs.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.33.0](service/cloudwatch/CHANGELOG.md#v1330-2024-02-12)
+  * **Feature**: This release enables PutMetricData API request payload compression by default.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.3.0](service/neptunegraph/CHANGELOG.md#v130-2024-02-12)
+  * **Feature**: Adding a new option "parameters" for data plane api ExecuteQuery to support running parameterized query via SDK.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.21.0](service/route53domains/CHANGELOG.md#v1210-2024-02-12)
+  * **Feature**: This release adds bill contact support for RegisterDomain, TransferDomain, UpdateDomainContact and GetDomainDetail API.
+
 # Release (2024-02-09)
 
 ## Module Highlights

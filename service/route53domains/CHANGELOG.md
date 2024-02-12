@@ -1,3 +1,7 @@
+# v1.21.0 (2024-02-12)
+
+* **Feature**: This release adds bill contact support for RegisterDomain, TransferDomain, UpdateDomainContact and GetDomainDetail API.
+
 # v1.20.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

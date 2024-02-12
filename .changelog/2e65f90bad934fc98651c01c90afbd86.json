@@ -1,8 +1,0 @@
-{
-    "id": "2e65f90b-ad93-4fc9-8651-c01c90afbd86",
-    "type": "feature",
-    "description": "This release enables PutMetricData API request payload compression by default.",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

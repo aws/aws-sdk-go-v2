@@ -1,3 +1,7 @@
+# v1.29.0 (2024-02-12)
+
+* **Feature**: Adds support for new options on GraphqlAPIs, Resolvers and  Data Sources for emitting Amazon CloudWatch metrics for enhanced monitoring of AppSync APIs.
+
 # v1.28.0 (2024-02-06)
 
 * **Feature**: Support for environment variables in AppSync GraphQL APIs
