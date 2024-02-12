@@ -1145,11 +1145,39 @@ func awsAwsjson10_serializeDocumentExportDukptInitialKey(v *types.ExportDukptIni
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentExportKeyCryptogram(v *types.ExportKeyCryptogram, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		ok := object.Key("CertificateAuthorityPublicKeyIdentifier")
+		ok.String(*v.CertificateAuthorityPublicKeyIdentifier)
+	}
+
+	if v.WrappingKeyCertificate != nil {
+		ok := object.Key("WrappingKeyCertificate")
+		ok.String(*v.WrappingKeyCertificate)
+	}
+
+	if len(v.WrappingSpec) > 0 {
+		ok := object.Key("WrappingSpec")
+		ok.String(string(v.WrappingSpec))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentExportKeyMaterial(v types.ExportKeyMaterial, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ExportKeyMaterialMemberKeyCryptogram:
+		av := object.Key("KeyCryptogram")
+		if err := awsAwsjson10_serializeDocumentExportKeyCryptogram(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ExportKeyMaterialMemberTr31KeyBlock:
 		av := object.Key("Tr31KeyBlock")
 		if err := awsAwsjson10_serializeDocumentExportTr31KeyBlock(&uv.Value, av); err != nil {
@@ -1213,11 +1241,51 @@ func awsAwsjson10_serializeDocumentExportTr34KeyBlock(v *types.ExportTr34KeyBloc
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentImportKeyCryptogram(v *types.ImportKeyCryptogram, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Exportable != nil {
+		ok := object.Key("Exportable")
+		ok.Boolean(*v.Exportable)
+	}
+
+	if v.ImportToken != nil {
+		ok := object.Key("ImportToken")
+		ok.String(*v.ImportToken)
+	}
+
+	if v.KeyAttributes != nil {
+		ok := object.Key("KeyAttributes")
+		if err := awsAwsjson10_serializeDocumentKeyAttributes(v.KeyAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WrappedKeyCryptogram != nil {
+		ok := object.Key("WrappedKeyCryptogram")
+		ok.String(*v.WrappedKeyCryptogram)
+	}
+
+	if len(v.WrappingSpec) > 0 {
+		ok := object.Key("WrappingSpec")
+		ok.String(string(v.WrappingSpec))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentImportKeyMaterial(v types.ImportKeyMaterial, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ImportKeyMaterialMemberKeyCryptogram:
+		av := object.Key("KeyCryptogram")
+		if err := awsAwsjson10_serializeDocumentImportKeyCryptogram(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ImportKeyMaterialMemberRootCertificatePublicKey:
 		av := object.Key("RootCertificatePublicKey")
 		if err := awsAwsjson10_serializeDocumentRootCertificatePublicKey(&uv.Value, av); err != nil {

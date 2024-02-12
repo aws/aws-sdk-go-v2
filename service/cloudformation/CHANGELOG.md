@@ -1,3 +1,7 @@
+# v1.43.0 (2024-01-31)
+
+* **Feature**: CloudFormation IaC generator allows you to scan existing resources in your account and select resources to generate a template for a new or existing CloudFormation stack.
+
 # v1.42.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

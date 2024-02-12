@@ -30,11 +30,12 @@ import (
 //     CloudTrail with Organizations, see Logging and monitoring in Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration)
 //     in the Organizations User Guide.
 //
-//   - You can close only 10% of member accounts, between 10 and 200, within a
+//   - You can close only 10% of member accounts, between 10 and 1000, within a
 //     rolling 30 day period. This quota is not bound by a calendar month, but starts
 //     when you close an account. After you reach this limit, you can close additional
 //     accounts. For more information, see Closing a member account in your
 //     organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
+//     and Quotas for Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html)
 //     in the Organizations User Guide.
 //
 //   - To reinstate a closed account, contact Amazon Web Services Support within

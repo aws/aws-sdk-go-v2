@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an alert manager definition.
+// Deletes the alert manager definition from a workspace.
 func (c *Client) DeleteAlertManagerDefinition(ctx context.Context, params *DeleteAlertManagerDefinitionInput, optFns ...func(*Options)) (*DeleteAlertManagerDefinitionOutput, error) {
 	if params == nil {
 		params = &DeleteAlertManagerDefinitionInput{}
@@ -30,13 +30,13 @@ func (c *Client) DeleteAlertManagerDefinition(ctx context.Context, params *Delet
 // Represents the input of a DeleteAlertManagerDefinition operation.
 type DeleteAlertManagerDefinitionInput struct {
 
-	// The ID of the workspace in which to delete the alert manager definition.
+	// The ID of the workspace to delete the alert manager definition from.
 	//
 	// This member is required.
 	WorkspaceId *string
 
-	// Optional, unique, case-sensitive, user-provided identifier to ensure the
-	// idempotency of the request.
+	// A unique identifier that you can provide to ensure the idempotency of the
+	// request. Case-sensitive.
 	ClientToken *string
 
 	noSmithyDocumentSerde

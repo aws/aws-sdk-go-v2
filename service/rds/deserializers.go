@@ -1816,6 +1816,9 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("GlobalClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalClusterNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("InsufficientDBInstanceCapacity", errorCode):
+		return awsAwsquery_deserializeErrorInsufficientDBInstanceCapacityFault(response, errorBody)
+
 	case strings.EqualFold("InsufficientStorageClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientStorageClusterCapacityFault(response, errorBody)
 
@@ -3006,6 +3009,132 @@ func awsAwsquery_deserializeOpErrorCreateDBSecurityGroup(response *smithyhttp.Re
 
 	case strings.EqualFold("QuotaExceeded.DBSecurityGroup", errorCode):
 		return awsAwsquery_deserializeErrorDBSecurityGroupQuotaExceededFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpCreateDBShardGroup struct {
+}
+
+func (*awsAwsquery_deserializeOpCreateDBShardGroup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpCreateDBShardGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateDBShardGroup(response, &metadata)
+	}
+	output := &CreateDBShardGroupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("CreateDBShardGroupResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentCreateDBShardGroupOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorCreateDBShardGroup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("DBShardGroupAlreadyExists", errorCode):
+		return awsAwsquery_deserializeErrorDBShardGroupAlreadyExistsFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidMaxAcu", errorCode):
+		return awsAwsquery_deserializeErrorInvalidMaxAcuFault(response, errorBody)
+
+	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
+
+	case strings.EqualFold("MaxDBShardGroupLimitReached", errorCode):
+		return awsAwsquery_deserializeErrorMaxDBShardGroupLimitReached(response, errorBody)
+
+	case strings.EqualFold("UnsupportedDBEngineVersion", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedDBEngineVersionFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5202,6 +5331,120 @@ func awsAwsquery_deserializeOpErrorDeleteDBSecurityGroup(response *smithyhttp.Re
 
 	case strings.EqualFold("InvalidDBSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBSecurityGroupStateFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpDeleteDBShardGroup struct {
+}
+
+func (*awsAwsquery_deserializeOpDeleteDBShardGroup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpDeleteDBShardGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteDBShardGroup(response, &metadata)
+	}
+	output := &DeleteDBShardGroupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("DeleteDBShardGroupResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentDeleteDBShardGroupOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorDeleteDBShardGroup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBShardGroupNotFound", errorCode):
+		return awsAwsquery_deserializeErrorDBShardGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBShardGroupState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBShardGroupStateFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -8531,6 +8774,117 @@ func awsAwsquery_deserializeOpErrorDescribeDBSecurityGroups(response *smithyhttp
 	switch {
 	case strings.EqualFold("DBSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSecurityGroupNotFoundFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpDescribeDBShardGroups struct {
+}
+
+func (*awsAwsquery_deserializeOpDescribeDBShardGroups) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpDescribeDBShardGroups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorDescribeDBShardGroups(response, &metadata)
+	}
+	output := &DescribeDBShardGroupsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("DescribeDBShardGroupsResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentDescribeDBShardGroupsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorDescribeDBShardGroups(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("DBShardGroupNotFound", errorCode):
+		return awsAwsquery_deserializeErrorDBShardGroupNotFoundFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -13159,6 +13513,123 @@ func awsAwsquery_deserializeOpErrorModifyDBRecommendation(response *smithyhttp.R
 	}
 }
 
+type awsAwsquery_deserializeOpModifyDBShardGroup struct {
+}
+
+func (*awsAwsquery_deserializeOpModifyDBShardGroup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpModifyDBShardGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorModifyDBShardGroup(response, &metadata)
+	}
+	output := &ModifyDBShardGroupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("ModifyDBShardGroupResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentModifyDBShardGroupOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorModifyDBShardGroup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBShardGroupAlreadyExists", errorCode):
+		return awsAwsquery_deserializeErrorDBShardGroupAlreadyExistsFault(response, errorBody)
+
+	case strings.EqualFold("DBShardGroupNotFound", errorCode):
+		return awsAwsquery_deserializeErrorDBShardGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidMaxAcu", errorCode):
+		return awsAwsquery_deserializeErrorInvalidMaxAcuFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsquery_deserializeOpModifyDBSnapshot struct {
 }
 
@@ -14530,6 +15001,117 @@ func awsAwsquery_deserializeOpErrorRebootDBInstance(response *smithyhttp.Respons
 	}
 }
 
+type awsAwsquery_deserializeOpRebootDBShardGroup struct {
+}
+
+func (*awsAwsquery_deserializeOpRebootDBShardGroup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpRebootDBShardGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorRebootDBShardGroup(response, &metadata)
+	}
+	output := &RebootDBShardGroupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("RebootDBShardGroupResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentRebootDBShardGroupOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorRebootDBShardGroup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBShardGroupNotFound", errorCode):
+		return awsAwsquery_deserializeErrorDBShardGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBShardGroupState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBShardGroupStateFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsquery_deserializeOpRegisterDBProxyTargets struct {
 }
 
@@ -15636,6 +16218,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterFromSnapshot(response *smithy
 	case strings.EqualFold("InsufficientDBClusterCapacityFault", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientDBClusterCapacityFault(response, errorBody)
 
+	case strings.EqualFold("InsufficientDBInstanceCapacity", errorCode):
+		return awsAwsquery_deserializeErrorInsufficientDBInstanceCapacityFault(response, errorBody)
+
 	case strings.EqualFold("InsufficientStorageClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientStorageClusterCapacityFault(response, errorBody)
 
@@ -15797,6 +16382,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterToPointInTime(response *smith
 
 	case strings.EqualFold("InsufficientDBClusterCapacityFault", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientDBClusterCapacityFault(response, errorBody)
+
+	case strings.EqualFold("InsufficientDBInstanceCapacity", errorCode):
+		return awsAwsquery_deserializeErrorInsufficientDBInstanceCapacityFault(response, errorBody)
 
 	case strings.EqualFold("InsufficientStorageClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientStorageClusterCapacityFault(response, errorBody)
@@ -20140,6 +20728,94 @@ func awsAwsquery_deserializeErrorDBSecurityGroupQuotaExceededFault(response *smi
 	return output
 }
 
+func awsAwsquery_deserializeErrorDBShardGroupAlreadyExistsFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DBShardGroupAlreadyExistsFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentDBShardGroupAlreadyExistsFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorDBShardGroupNotFoundFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DBShardGroupNotFoundFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentDBShardGroupNotFoundFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsAwsquery_deserializeErrorDBSnapshotAlreadyExistsFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DBSnapshotAlreadyExistsFault{}
 	var buff [1024]byte
@@ -21988,6 +22664,50 @@ func awsAwsquery_deserializeErrorInvalidDBSecurityGroupStateFault(response *smit
 	return output
 }
 
+func awsAwsquery_deserializeErrorInvalidDBShardGroupStateFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.InvalidDBShardGroupStateFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentInvalidDBShardGroupStateFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsAwsquery_deserializeErrorInvalidDBSnapshotStateFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidDBSnapshotStateFault{}
 	var buff [1024]byte
@@ -22428,6 +23148,50 @@ func awsAwsquery_deserializeErrorInvalidIntegrationStateFault(response *smithyht
 	return output
 }
 
+func awsAwsquery_deserializeErrorInvalidMaxAcuFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.InvalidMaxAcuFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentInvalidMaxAcuFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsAwsquery_deserializeErrorInvalidOptionGroupStateFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidOptionGroupStateFault{}
 	var buff [1024]byte
@@ -22724,6 +23488,50 @@ func awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response *smithyhttp.R
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentKMSKeyNotAccessibleFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorMaxDBShardGroupLimitReached(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.MaxDBShardGroupLimitReached{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentMaxDBShardGroupLimitReached(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -24000,6 +24808,50 @@ func awsAwsquery_deserializeErrorTenantDatabaseQuotaExceededFault(response *smit
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentTenantDatabaseQuotaExceededFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorUnsupportedDBEngineVersionFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.UnsupportedDBEngineVersionFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentUnsupportedDBEngineVersionFault(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -27175,6 +28027,12 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 					return err
 				}
 				sv.LatestRestorableTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("LimitlessDatabase", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentLimitlessDatabase(&sv.LimitlessDatabase, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("LocalWriteForwardingStatus", t.Name.Local):
@@ -36071,6 +36929,323 @@ func awsAwsquery_deserializeDocumentDBSecurityGroupsUnwrapped(v *[]types.DBSecur
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentDBShardGroup(v **types.DBShardGroup, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBShardGroup
+	if *v == nil {
+		sv = &types.DBShardGroup{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ComputeRedundancy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ComputeRedundancy = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupResourceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Endpoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Endpoint = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MaxACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxACU = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("PubliclyAccessible", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.PubliclyAccessible = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBShardGroupAlreadyExistsFault(v **types.DBShardGroupAlreadyExistsFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBShardGroupAlreadyExistsFault
+	if *v == nil {
+		sv = &types.DBShardGroupAlreadyExistsFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBShardGroupNotFoundFault(v **types.DBShardGroupNotFoundFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBShardGroupNotFoundFault
+	if *v == nil {
+		sv = &types.DBShardGroupNotFoundFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBShardGroupsList(v *[]types.DBShardGroup, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.DBShardGroup
+	if *v == nil {
+		sv = make([]types.DBShardGroup, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("DBShardGroup", t.Name.Local):
+			var col types.DBShardGroup
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentDBShardGroup(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBShardGroupsListUnwrapped(v *[]types.DBShardGroup, decoder smithyxml.NodeDecoder) error {
+	var sv []types.DBShardGroup
+	if *v == nil {
+		sv = make([]types.DBShardGroup, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.DBShardGroup
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentDBShardGroup(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentDBSnapshot(v **types.DBSnapshot, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -42304,6 +43479,55 @@ func awsAwsquery_deserializeDocumentInvalidDBSecurityGroupStateFault(v **types.I
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentInvalidDBShardGroupStateFault(v **types.InvalidDBShardGroupStateFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InvalidDBShardGroupStateFault
+	if *v == nil {
+		sv = &types.InvalidDBShardGroupStateFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentInvalidDBSnapshotStateFault(v **types.InvalidDBSnapshotStateFault, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -42752,6 +43976,55 @@ func awsAwsquery_deserializeDocumentInvalidIntegrationStateFault(v **types.Inval
 	var sv *types.InvalidIntegrationStateFault
 	if *v == nil {
 		sv = &types.InvalidIntegrationStateFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentInvalidMaxAcuFault(v **types.InvalidMaxAcuFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InvalidMaxAcuFault
+	if *v == nil {
+		sv = &types.InvalidMaxAcuFault{}
 	} else {
 		sv = *v
 	}
@@ -43309,6 +44582,72 @@ func awsAwsquery_deserializeDocumentKMSKeyNotAccessibleFault(v **types.KMSKeyNot
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentLimitlessDatabase(v **types.LimitlessDatabase, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.LimitlessDatabase
+	if *v == nil {
+		sv = &types.LimitlessDatabase{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("MinRequiredACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinRequiredACU = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = types.LimitlessDatabaseStatus(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentLogTypeList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -43448,6 +44787,55 @@ func awsAwsquery_deserializeDocumentMasterUserSecret(v **types.MasterUserSecret,
 			{
 				xtv := string(val)
 				sv.SecretStatus = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentMaxDBShardGroupLimitReached(v **types.MaxDBShardGroupLimitReached, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.MaxDBShardGroupLimitReached
+	if *v == nil {
+		sv = &types.MaxDBShardGroupLimitReached{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -52330,6 +53718,55 @@ func awsAwsquery_deserializeDocumentTimezone(v **types.Timezone, decoder smithyx
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentUnsupportedDBEngineVersionFault(v **types.UnsupportedDBEngineVersionFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.UnsupportedDBEngineVersionFault
+	if *v == nil {
+		sv = &types.UnsupportedDBEngineVersionFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentUpgradeTarget(v **types.UpgradeTarget, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -54837,6 +56274,157 @@ func awsAwsquery_deserializeOpDocumentCreateDBSecurityGroupOutput(v **CreateDBSe
 	return nil
 }
 
+func awsAwsquery_deserializeOpDocumentCreateDBShardGroupOutput(v **CreateDBShardGroupOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *CreateDBShardGroupOutput
+	if *v == nil {
+		sv = &CreateDBShardGroupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ComputeRedundancy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ComputeRedundancy = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupResourceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Endpoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Endpoint = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MaxACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxACU = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("PubliclyAccessible", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.PubliclyAccessible = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeOpDocumentCreateDBSnapshotOutput(v **CreateDBSnapshotOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -56126,6 +57714,157 @@ func awsAwsquery_deserializeOpDocumentDeleteDBProxyOutput(v **DeleteDBProxyOutpu
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentDBProxy(&sv.DBProxy, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentDeleteDBShardGroupOutput(v **DeleteDBShardGroupOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DeleteDBShardGroupOutput
+	if *v == nil {
+		sv = &DeleteDBShardGroupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ComputeRedundancy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ComputeRedundancy = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupResourceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Endpoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Endpoint = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MaxACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxACU = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("PubliclyAccessible", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.PubliclyAccessible = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = ptr.String(xtv)
 			}
 
 		default:
@@ -57717,6 +59456,61 @@ func awsAwsquery_deserializeOpDocumentDescribeDBSecurityGroupsOutput(v **Describ
 		case strings.EqualFold("DBSecurityGroups", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentDBSecurityGroups(&sv.DBSecurityGroups, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Marker", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Marker = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentDescribeDBShardGroupsOutput(v **DescribeDBShardGroupsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DescribeDBShardGroupsOutput
+	if *v == nil {
+		sv = &DescribeDBShardGroupsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("DBShardGroups", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDBShardGroupsList(&sv.DBShardGroups, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -60403,6 +62197,157 @@ func awsAwsquery_deserializeOpDocumentModifyDBRecommendationOutput(v **ModifyDBR
 	return nil
 }
 
+func awsAwsquery_deserializeOpDocumentModifyDBShardGroupOutput(v **ModifyDBShardGroupOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *ModifyDBShardGroupOutput
+	if *v == nil {
+		sv = &ModifyDBShardGroupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ComputeRedundancy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ComputeRedundancy = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupResourceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Endpoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Endpoint = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MaxACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxACU = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("PubliclyAccessible", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.PubliclyAccessible = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeOpDocumentModifyDBSnapshotAttributeOutput(v **ModifyDBSnapshotAttributeOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -60891,6 +62836,157 @@ func awsAwsquery_deserializeOpDocumentRebootDBInstanceOutput(v **RebootDBInstanc
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentDBInstance(&sv.DBInstance, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentRebootDBShardGroupOutput(v **RebootDBShardGroupOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *RebootDBShardGroupOutput
+	if *v == nil {
+		sv = &RebootDBShardGroupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ComputeRedundancy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ComputeRedundancy = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupResourceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Endpoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Endpoint = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MaxACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxACU = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("PubliclyAccessible", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.PubliclyAccessible = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = ptr.String(xtv)
 			}
 
 		default:

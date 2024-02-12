@@ -1319,9 +1319,9 @@ func awsRestjson1_serializeOpDocumentGetExperimentResultsInput(v *GetExperimentR
 		}
 	}
 
-	if v.Period != 0 {
+	if v.Period != nil {
 		ok := object.Key("period")
-		ok.Long(v.Period)
+		ok.Long(*v.Period)
 	}
 
 	if v.ReportNames != nil {

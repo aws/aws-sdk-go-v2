@@ -1,3 +1,7 @@
+# v1.17.0 (2024-01-18)
+
+* **Feature**: **BREAKFIX**: Correct nullability of GetExperimentResultsInput's Period field. The type of this value has changed from int64 to *int64. Due to the nature of default value serialization, the former type could cause unexpected/incorrect behavior when set to its zero value. Calling code will need to be updated accordingly.
+
 # v1.16.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

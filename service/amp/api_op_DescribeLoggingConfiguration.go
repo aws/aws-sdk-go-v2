@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes logging configuration.
+// Returns complete information about the current logging configuration of the
+// workspace.
 func (c *Client) DescribeLoggingConfiguration(ctx context.Context, params *DescribeLoggingConfigurationInput, optFns ...func(*Options)) (*DescribeLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeLoggingConfigurationInput{}
@@ -31,7 +32,7 @@ func (c *Client) DescribeLoggingConfiguration(ctx context.Context, params *Descr
 // Represents the input of a DescribeLoggingConfiguration operation.
 type DescribeLoggingConfigurationInput struct {
 
-	// The ID of the workspace to vend logs to.
+	// The ID of the workspace to describe the logging configuration for.
 	//
 	// This member is required.
 	WorkspaceId *string
@@ -42,8 +43,7 @@ type DescribeLoggingConfigurationInput struct {
 // Represents the output of a DescribeLoggingConfiguration operation.
 type DescribeLoggingConfigurationOutput struct {
 
-	// Metadata object containing information about the logging configuration of a
-	// workspace.
+	// A structure that displays the information about the logging configuration.
 	//
 	// This member is required.
 	LoggingConfiguration *types.LoggingConfigurationMetadata

@@ -1,3 +1,7 @@
+# v1.40.0 (2024-02-07)
+
+* **Feature**: LisRecommendations API to fetch Amazon Redshift Advisor recommendations.
+
 # v1.39.8 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

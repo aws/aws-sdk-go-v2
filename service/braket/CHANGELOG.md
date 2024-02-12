@@ -1,3 +1,7 @@
+# v1.25.0 (2024-02-09)
+
+* **Feature**: Creating a job will result in DeviceOfflineException when using an offline device, and DeviceRetiredException when using a retired device.
+
 # v1.24.4 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

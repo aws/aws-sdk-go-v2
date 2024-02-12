@@ -1504,6 +1504,41 @@ func validateCidrRoutingConfig(v *types.CidrRoutingConfig) error {
 	}
 }
 
+func validateCoordinates(v *types.Coordinates) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Coordinates"}
+	if v.Latitude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Latitude"))
+	}
+	if v.Longitude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Longitude"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGeoProximityLocation(v *types.GeoProximityLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeoProximityLocation"}
+	if v.Coordinates != nil {
+		if err := validateCoordinates(v.Coordinates); err != nil {
+			invalidParams.AddNested("Coordinates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHealthCheckConfig(v *types.HealthCheckConfig) error {
 	if v == nil {
 		return nil
@@ -1580,6 +1615,11 @@ func validateResourceRecordSet(v *types.ResourceRecordSet) error {
 	if v.CidrRoutingConfig != nil {
 		if err := validateCidrRoutingConfig(v.CidrRoutingConfig); err != nil {
 			invalidParams.AddNested("CidrRoutingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GeoProximityLocation != nil {
+		if err := validateGeoProximityLocation(v.GeoProximityLocation); err != nil {
+			invalidParams.AddNested("GeoProximityLocation", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

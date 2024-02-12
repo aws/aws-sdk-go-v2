@@ -2031,6 +2031,12 @@
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
                     }
                 },
+                "Duration": {
+                    "target": "com.amazonaws.ssm#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hours that an association can run on specified targets. After the resulting\n   cutoff time passes, associations that are currently running are cancelled, and no pending\n   executions are started on remaining targets.</p>"
+                    }
+                },
                 "TargetMaps": {
                     "target": "com.amazonaws.ssm#TargetMaps",
                     "traits": {
@@ -2241,6 +2247,12 @@
                     "target": "com.amazonaws.ssm#ScheduleOffset",
                     "traits": {
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
+                    }
+                },
+                "Duration": {
+                    "target": "com.amazonaws.ssm#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hours that an association can run on specified targets. After the resulting\n   cutoff time passes, associations that are currently running are cancelled, and no pending\n   executions are started on remaining targets.</p>"
                     }
                 },
                 "TargetMaps": {
@@ -3005,6 +3017,12 @@
                     "target": "com.amazonaws.ssm#ScheduleOffset",
                     "traits": {
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
+                    }
+                },
+                "Duration": {
+                    "target": "com.amazonaws.ssm#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hours that an association can run on specified targets. After the resulting\n   cutoff time passes, associations that are currently running are cancelled, and no pending\n   executions are started on remaining targets.</p>"
                     }
                 },
                 "TargetMaps": {
@@ -5924,6 +5942,12 @@
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
                     }
                 },
+                "Duration": {
+                    "target": "com.amazonaws.ssm#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hours the association can run before it is canceled. Duration applies to\n   associations that are currently running, and any pending and in progress commands on all targets.\n   If a target was taken offline for the association to run, it is made available again immediately,\n   without a reboot. </p>\n         <p>The <code>Duration</code> parameter applies only when both these conditions are true:</p>\n         <ul>\n            <li>\n               <p>The association for which you specify a duration is cancelable according to the parameters\n     of the SSM command document or Automation runbook associated with this execution. </p>\n            </li>\n            <li>\n               <p>The command specifies the <code>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociationBatchRequestEntry.html#systemsmanager-Type-CreateAssociationBatchRequestEntry-ApplyOnlyAtCronInterval\">ApplyOnlyAtCronInterval</a>\n                  </code> parameter, which means that the association doesn't\n     run immediately after it is created, but only according to the specified schedule.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "TargetMaps": {
                     "target": "com.amazonaws.ssm#TargetMaps",
                     "traits": {
@@ -6063,6 +6087,12 @@
                     "target": "com.amazonaws.ssm#ScheduleOffset",
                     "traits": {
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association. For example, if you\n   specified a cron schedule of <code>cron(0 0 ? * THU#2 *)</code>, you could specify an offset of 3\n   to run the association each Sunday after the second Thursday of the month. For more information\n   about cron schedules for associations, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html\">Reference: Cron\n    and rate expressions for Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>To use offsets, you must specify the <code>ApplyOnlyAtCronInterval</code> parameter. This\n    option tells the system not to run an association immediately after you create it. </p>\n         </note>"
+                    }
+                },
+                "Duration": {
+                    "target": "com.amazonaws.ssm#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hours the association can run before it is canceled. Duration applies to\n   associations that are currently running, and any pending and in progress commands on all targets.\n   If a target was taken offline for the association to run, it is made available again immediately,\n   without a reboot. </p>\n         <p>The <code>Duration</code> parameter applies only when both these conditions are true:</p>\n         <ul>\n            <li>\n               <p>The association for which you specify a duration is cancelable according to the parameters\n     of the SSM command document or Automation runbook associated with this execution. </p>\n            </li>\n            <li>\n               <p>The command specifies the <code>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociation.html#systemsmanager-CreateAssociation-request-ApplyOnlyAtCronInterval\">ApplyOnlyAtCronInterval</a>\n                  </code> parameter, which means that the association doesn't\n     run immediately after it is created, but only according to the specified schedule.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "TargetMaps": {
@@ -8253,7 +8283,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all patches eligible to be included in a patch baseline.</p>",
+                "smithy.api#documentation": "<p>Lists all patches eligible to be included in a patch baseline.</p>\n         <note>\n            <p>Currently, <code>DescribeAvailablePatches</code> supports only the Amazon Linux 1, Amazon\n    Linux 2, and Windows Server operating systems.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -8439,7 +8469,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, \"Release 12, Update 6\". This value is unique across all versions of a document, and\n   can't be changed.</p>"
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document, and\n   can't be changed.</p>"
                     }
                 }
             },
@@ -10784,7 +10814,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, \"Release 12, Update 6\". This value is unique across all versions of a document, and\n   can't be changed.</p>"
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document, and\n   can't be changed.</p>"
                     }
                 },
                 "PlatformTypes": {
@@ -11095,7 +11125,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, \"Release 12, Update 6\". This value is unique across all versions of a document, and\n   can't be changed.</p>"
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document, and\n   can't be changed.</p>"
                     }
                 }
             },
@@ -11436,7 +11466,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the artifact associated with the document. For example, \"Release 12, Update\n   6\". This value is unique across all versions of a document, and can't be changed.</p>"
+                        "smithy.api#documentation": "<p>The version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.</p>"
                     }
                 },
                 "CreatedDate": {
@@ -11584,6 +11614,15 @@
                 },
                 "smithy.api#documentation": "<p>You can't specify a managed node ID in more than one association.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#Duration": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 24
+                }
             }
         },
         "com.amazonaws.ssm#EffectiveInstanceAssociationMaxResults": {
@@ -12201,7 +12240,7 @@
                 "Status": {
                     "target": "com.amazonaws.ssm#ConnectionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the connection to the managed node. For example, 'Connected' or 'Not\n   Connected'.</p>"
+                        "smithy.api#documentation": "<p>The status of the connection to the managed node.</p>"
                     }
                 }
             },
@@ -12379,7 +12418,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, \"Release 12, Update 6\". This value is unique across all versions of a document and can't\n   be changed.</p>"
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document and can't\n   be changed.</p>"
                     }
                 },
                 "DocumentVersion": {
@@ -12423,7 +12462,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the artifact associated with the document. For example, \"Release 12, Update\n   6\". This value is unique across all versions of a document, and can't be changed.</p>"
+                        "smithy.api#documentation": "<p>The version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.</p>"
                     }
                 },
                 "DocumentVersion": {
@@ -21808,7 +21847,7 @@
                 "KeyId": {
                     "target": "com.amazonaws.ssm#ParameterKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the query key used for this parameter.</p>"
+                        "smithy.api#documentation": "<p>The alias of the Key Management Service (KMS) key used to encrypt the\n   parameter. Applies to <code>SecureString</code> parameters only</p>"
                     }
                 },
                 "LastModifiedDate": {
@@ -21996,7 +22035,7 @@
                 "KeyId": {
                     "target": "com.amazonaws.ssm#ParameterKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the query key used for this parameter.</p>"
+                        "smithy.api#documentation": "<p>The alias of the Key Management Service (KMS) key used to encrypt the\n   parameter. Applies to <code>SecureString</code> parameters only.</p>"
                     }
                 },
                 "LastModifiedDate": {
@@ -22709,7 +22748,7 @@
                 "CVEIds": {
                     "target": "com.amazonaws.ssm#PatchCVEIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of one or more Common Vulnerabilities and Exposure (CVE) issues that are resolved by\n   the patch.</p>"
+                        "smithy.api#documentation": "<p>The IDs of one or more Common Vulnerabilities and Exposure (CVE) issues that are resolved by\n   the patch.</p>\n         <note>\n            <p>Currently, CVE ID values are reported only for patches with a status of\n     <code>Missing</code> or <code>Failed</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -28268,6 +28307,12 @@
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association. For example, if you\n   specified a cron schedule of <code>cron(0 0 ? * THU#2 *)</code>, you could specify an offset of 3\n   to run the association each Sunday after the second Thursday of the month. For more information\n   about cron schedules for associations, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html\">Reference: Cron\n    and rate expressions for Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>To use offsets, you must specify the <code>ApplyOnlyAtCronInterval</code> parameter. This\n    option tells the system not to run an association immediately after you create it. </p>\n         </note>"
                     }
                 },
+                "Duration": {
+                    "target": "com.amazonaws.ssm#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hours the association can run before it is canceled. Duration applies to\n   associations that are currently running, and any pending and in progress commands on all targets.\n   If a target was taken offline for the association to run, it is made available again immediately,\n   without a reboot. </p>\n         <p>The <code>Duration</code> parameter applies only when both these conditions are true:</p>\n         <ul>\n            <li>\n               <p>The association for which you specify a duration is cancelable according to the parameters\n     of the SSM command document or Automation runbook associated with this execution. </p>\n            </li>\n            <li>\n               <p>The command specifies the <code>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_UpdateAssociation.html#systemsmanager-UpdateAssociation-request-ApplyOnlyAtCronInterval\">ApplyOnlyAtCronInterval</a>\n                  </code> parameter, which means that the association doesn't\n     run immediately after it is updated, but only according to the specified schedule.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "TargetMaps": {
                     "target": "com.amazonaws.ssm#TargetMaps",
                     "traits": {
@@ -28570,7 +28615,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact you are updating with the document.\n   For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and\n   can't be changed.</p>"
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact you are updating with the document.\n   For example, 12.6. This value is unique across all versions of a document, and\n   can't be changed.</p>"
                     }
                 },
                 "DocumentVersion": {

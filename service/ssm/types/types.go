@@ -131,6 +131,11 @@ type Association struct {
 	// shared form another account, you must set the document version to default .
 	DocumentVersion *string
 
+	// The number of hours that an association can run on specified targets. After the
+	// resulting cutoff time passes, associations that are currently running are
+	// cancelled, and no pending executions are started on remaining targets.
+	Duration *int32
+
 	// The managed node ID.
 	InstanceId *string
 
@@ -205,6 +210,11 @@ type AssociationDescription struct {
 
 	// The document version.
 	DocumentVersion *string
+
+	// The number of hours that an association can run on specified targets. After the
+	// resulting cutoff time passes, associations that are currently running are
+	// cancelled, and no pending executions are started on remaining targets.
+	Duration *int32
 
 	// The managed node ID.
 	InstanceId *string
@@ -491,6 +501,11 @@ type AssociationVersionInfo struct {
 	// The version of an Amazon Web Services Systems Manager document (SSM document)
 	// used when the association version was created.
 	DocumentVersion *string
+
+	// The number of hours that an association can run on specified targets. After the
+	// resulting cutoff time passes, associations that are currently running are
+	// cancelled, and no pending executions are started on remaining targets.
+	Duration *int32
 
 	// The maximum number of targets allowed to run the association at the same time.
 	// You can specify a number, for example 10, or a percentage of the target set, for
@@ -1519,6 +1534,19 @@ type CreateAssociationBatchRequestEntry struct {
 	// The document version.
 	DocumentVersion *string
 
+	// The number of hours the association can run before it is canceled. Duration
+	// applies to associations that are currently running, and any pending and in
+	// progress commands on all targets. If a target was taken offline for the
+	// association to run, it is made available again immediately, without a reboot.
+	// The Duration parameter applies only when both these conditions are true:
+	//   - The association for which you specify a duration is cancelable according to
+	//   the parameters of the SSM command document or Automation runbook associated with
+	//   this execution.
+	//   - The command specifies the ApplyOnlyAtCronInterval (https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateAssociationBatchRequestEntry.html#systemsmanager-Type-CreateAssociationBatchRequestEntry-ApplyOnlyAtCronInterval)
+	//   parameter, which means that the association doesn't run immediately after it is
+	//   created, but only according to the specified schedule.
+	Duration *int32
+
 	// The managed node ID. InstanceId has been deprecated. To specify a managed node
 	// ID for an association, use the Targets parameter. Requests that include the
 	// parameter InstanceID with Systems Manager documents (SSM documents) that use
@@ -1794,8 +1822,8 @@ type DocumentIdentifier struct {
 	TargetType *string
 
 	// An optional field specifying the version of the artifact associated with the
-	// document. For example, "Release 12, Update 6". This value is unique across all
-	// versions of a document, and can't be changed.
+	// document. For example, 12.6. This value is unique across all versions of a
+	// document, and can't be changed.
 	VersionName *string
 
 	noSmithyDocumentSerde
@@ -1899,8 +1927,8 @@ type DocumentRequires struct {
 	Version *string
 
 	// An optional field specifying the version of the artifact associated with the
-	// document. For example, "Release 12, Update 6". This value is unique across all
-	// versions of a document, and can't be changed.
+	// document. For example, 12.6. This value is unique across all versions of a
+	// document, and can't be changed.
 	VersionName *string
 
 	noSmithyDocumentSerde
@@ -1998,9 +2026,8 @@ type DocumentVersionInfo struct {
 	// the URL of the S3 bucket is correct."
 	StatusInformation *string
 
-	// The version of the artifact associated with the document. For example, "Release
-	// 12, Update 6". This value is unique across all versions of a document, and can't
-	// be changed.
+	// The version of the artifact associated with the document. For example, 12.6.
+	// This value is unique across all versions of a document, and can't be changed.
 	VersionName *string
 
 	noSmithyDocumentSerde
@@ -3821,7 +3848,8 @@ type ParameterHistory struct {
 	// Information about the parameter.
 	Description *string
 
-	// The ID of the query key used for this parameter.
+	// The alias of the Key Management Service (KMS) key used to encrypt the
+	// parameter. Applies to SecureString parameters only
 	KeyId *string
 
 	// Labels assigned to the parameter version.
@@ -3892,7 +3920,8 @@ type ParameterMetadata struct {
 	// Description of the parameter actions.
 	Description *string
 
-	// The ID of the query key used for this parameter.
+	// The alias of the Key Management Service (KMS) key used to encrypt the
+	// parameter. Applies to SecureString parameters only.
 	KeyId *string
 
 	// Date the parameter was last changed or updated.
@@ -4144,7 +4173,8 @@ type PatchComplianceData struct {
 	Title *string
 
 	// The IDs of one or more Common Vulnerabilities and Exposure (CVE) issues that
-	// are resolved by the patch.
+	// are resolved by the patch. Currently, CVE ID values are reported only for
+	// patches with a status of Missing or Failed .
 	CVEIds *string
 
 	noSmithyDocumentSerde

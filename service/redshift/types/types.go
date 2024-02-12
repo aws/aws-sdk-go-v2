@@ -1341,6 +1341,69 @@ type PendingModifiedValues struct {
 	noSmithyDocumentSerde
 }
 
+// An Amazon Redshift Advisor recommended action on the Amazon Redshift cluster.
+type Recommendation struct {
+
+	// The unique identifier of the cluster for which the recommendation is returned.
+	ClusterIdentifier *string
+
+	// The date and time (UTC) that the recommendation was created.
+	CreatedAt *time.Time
+
+	// The description of the recommendation.
+	Description *string
+
+	// A unique identifier of the Advisor recommendation.
+	Id *string
+
+	// The scale of the impact that the Advisor recommendation has to the performance
+	// and cost of the cluster.
+	ImpactRanking ImpactRankingType
+
+	// The Amazon Redshift cluster namespace ARN for which the recommendations is
+	// returned.
+	NamespaceArn *string
+
+	// The description of what was observed about your cluster.
+	Observation *string
+
+	// The description of the recommendation.
+	RecommendationText *string
+
+	// The type of Advisor recommendation.
+	RecommendationType *string
+
+	// List of Amazon Redshift recommended actions.
+	RecommendedActions []RecommendedAction
+
+	// List of helpful links for more information about the Advisor recommendation.
+	ReferenceLinks []ReferenceLink
+
+	// The title of the recommendation.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The recommended action from the Amazon Redshift Advisor recommendation.
+type RecommendedAction struct {
+
+	// The command to run.
+	Command *string
+
+	// The database name to perform the action on. Only applicable if the type of
+	// command is SQL.
+	Database *string
+
+	// The specific instruction about the command.
+	Text *string
+
+	// The type of command.
+	Type RecommendedActionType
+
+	noSmithyDocumentSerde
+}
+
 // Describes a recurring charge.
 type RecurringCharge struct {
 
@@ -1390,6 +1453,19 @@ type RedshiftIdcApplication struct {
 
 	// A list of service integrations for the Redshift IAM Identity Center application.
 	ServiceIntegrations []ServiceIntegrationsUnion
+
+	noSmithyDocumentSerde
+}
+
+// A link to an Amazon Redshift Advisor reference for more information about a
+// recommendation.
+type ReferenceLink struct {
+
+	// The URL address to find more information.
+	Link *string
+
+	// The hyperlink text that describes the link to more information.
+	Text *string
 
 	noSmithyDocumentSerde
 }

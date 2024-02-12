@@ -80,6 +80,7 @@ const (
 	KeyMaterialTypeTr31KeyBlock                KeyMaterialType = "TR31_KEY_BLOCK"
 	KeyMaterialTypeRootPublicKeyCertificate    KeyMaterialType = "ROOT_PUBLIC_KEY_CERTIFICATE"
 	KeyMaterialTypeTrustedPublicKeyCertificate KeyMaterialType = "TRUSTED_PUBLIC_KEY_CERTIFICATE"
+	KeyMaterialTypeKeyCryptogram               KeyMaterialType = "KEY_CRYPTOGRAM"
 )
 
 // Values returns all known values for KeyMaterialType. Note that this can be
@@ -91,6 +92,7 @@ func (KeyMaterialType) Values() []KeyMaterialType {
 		"TR31_KEY_BLOCK",
 		"ROOT_PUBLIC_KEY_CERTIFICATE",
 		"TRUSTED_PUBLIC_KEY_CERTIFICATE",
+		"KEY_CRYPTOGRAM",
 	}
 }
 
@@ -152,6 +154,7 @@ const (
 	KeyUsageTr31K1KeyBlockProtectionKey            KeyUsage = "TR31_K1_KEY_BLOCK_PROTECTION_KEY"
 	KeyUsageTr31K3AsymmetricKeyForKeyAgreement     KeyUsage = "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT"
 	KeyUsageTr31M3Iso97973MacKey                   KeyUsage = "TR31_M3_ISO_9797_3_MAC_KEY"
+	KeyUsageTr31M1Iso97971MacKey                   KeyUsage = "TR31_M1_ISO_9797_1_MAC_KEY"
 	KeyUsageTr31M6Iso97975CmacKey                  KeyUsage = "TR31_M6_ISO_9797_5_CMAC_KEY"
 	KeyUsageTr31M7HmacKey                          KeyUsage = "TR31_M7_HMAC_KEY"
 	KeyUsageTr31P0PinEncryptionKey                 KeyUsage = "TR31_P0_PIN_ENCRYPTION_KEY"
@@ -181,6 +184,7 @@ func (KeyUsage) Values() []KeyUsage {
 		"TR31_K1_KEY_BLOCK_PROTECTION_KEY",
 		"TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT",
 		"TR31_M3_ISO_9797_3_MAC_KEY",
+		"TR31_M1_ISO_9797_1_MAC_KEY",
 		"TR31_M6_ISO_9797_5_CMAC_KEY",
 		"TR31_M7_HMAC_KEY",
 		"TR31_P0_PIN_ENCRYPTION_KEY",
@@ -225,5 +229,23 @@ func (WrappedKeyMaterialFormat) Values() []WrappedKeyMaterialFormat {
 		"KEY_CRYPTOGRAM",
 		"TR31_KEY_BLOCK",
 		"TR34_KEY_BLOCK",
+	}
+}
+
+type WrappingKeySpec string
+
+// Enum values for WrappingKeySpec
+const (
+	WrappingKeySpecRsaOaepSha256 WrappingKeySpec = "RSA_OAEP_SHA_256"
+	WrappingKeySpecRsaOaepSha512 WrappingKeySpec = "RSA_OAEP_SHA_512"
+)
+
+// Values returns all known values for WrappingKeySpec. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WrappingKeySpec) Values() []WrappingKeySpec {
+	return []WrappingKeySpec{
+		"RSA_OAEP_SHA_256",
+		"RSA_OAEP_SHA_512",
 	}
 }

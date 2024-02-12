@@ -69,7 +69,7 @@ type GetExperimentResultsInput struct {
 	EndTime *time.Time
 
 	// In seconds, the amount of time to aggregate results together.
-	Period int64
+	Period *int64
 
 	// The names of the report types that you want to see. Currently, BayesianInference
 	// is the only valid value.

@@ -3144,6 +3144,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.b2bi#InternalServerException"
+                },
+                {
                     "target": "com.amazonaws.b2bi#ResourceNotFoundException"
                 },
                 {
@@ -3894,6 +3897,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.b2bi#InternalServerException"
+                },
+                {
                     "target": "com.amazonaws.b2bi#ResourceNotFoundException"
                 },
                 {
@@ -4011,7 +4017,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 200000
+                    "max": 5000000
                 }
             }
         },
@@ -4085,7 +4091,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Parses the input EDI (electronic data interchange) file.</p>",
+                "smithy.api#documentation": "<p>Parses the input EDI (electronic data interchange) file. The input file has a file size limit of 250 KB.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Sample TestParsing call",
@@ -4388,6 +4394,9 @@
                 "target": "smithy.api#Unit"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.b2bi#InternalServerException"
+                },
                 {
                     "target": "com.amazonaws.b2bi#ResourceNotFoundException"
                 },

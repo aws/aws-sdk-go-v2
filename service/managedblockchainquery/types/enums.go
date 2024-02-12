@@ -6,7 +6,8 @@ type ConfirmationStatus string
 
 // Enum values for ConfirmationStatus
 const (
-	ConfirmationStatusFinal ConfirmationStatus = "FINAL"
+	ConfirmationStatusFinal    ConfirmationStatus = "FINAL"
+	ConfirmationStatusNonfinal ConfirmationStatus = "NONFINAL"
 )
 
 // Values returns all known values for ConfirmationStatus. Note that this can be
@@ -15,6 +16,7 @@ const (
 func (ConfirmationStatus) Values() []ConfirmationStatus {
 	return []ConfirmationStatus{
 		"FINAL",
+		"NONFINAL",
 	}
 }
 
@@ -163,26 +165,6 @@ func (QueryTransactionEventType) Values() []QueryTransactionEventType {
 		"BITCOIN_VOUT",
 		"INTERNAL_ETH_TRANSFER",
 		"ETH_TRANSFER",
-	}
-}
-
-type QueryTransactionStatus string
-
-// Enum values for QueryTransactionStatus
-const (
-	// The transaction has been confirmed and is final in the blockchain
-	QueryTransactionStatusFinal QueryTransactionStatus = "FINAL"
-	// The transaction completed on the blockchain, but failed
-	QueryTransactionStatusFailed QueryTransactionStatus = "FAILED"
-)
-
-// Values returns all known values for QueryTransactionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (QueryTransactionStatus) Values() []QueryTransactionStatus {
-	return []QueryTransactionStatus{
-		"FINAL",
-		"FAILED",
 	}
 }
 

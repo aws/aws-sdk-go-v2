@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create an alert manager definition.
+// The CreateAlertManagerDefinition operation creates the alert manager definition
+// in a workspace. If a workspace already has an alert manager definition, don't
+// use this operation to update it. Instead, use PutAlertManagerDefinition .
 func (c *Client) CreateAlertManagerDefinition(ctx context.Context, params *CreateAlertManagerDefinitionInput, optFns ...func(*Options)) (*CreateAlertManagerDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateAlertManagerDefinitionInput{}
@@ -31,18 +33,21 @@ func (c *Client) CreateAlertManagerDefinition(ctx context.Context, params *Creat
 // Represents the input of a CreateAlertManagerDefinition operation.
 type CreateAlertManagerDefinitionInput struct {
 
-	// The alert manager definition data.
+	// The alert manager definition to add. A base64-encoded version of the YAML alert
+	// manager definition file. For details about the alert manager definition, see
+	// AlertManagedDefinitionData (https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-AlertManagerDefinitionData.html)
+	// .
 	//
 	// This member is required.
 	Data []byte
 
-	// The ID of the workspace in which to create the alert manager definition.
+	// The ID of the workspace to add the alert manager definition to.
 	//
 	// This member is required.
 	WorkspaceId *string
 
-	// Optional, unique, case-sensitive, user-provided identifier to ensure the
-	// idempotency of the request.
+	// A unique identifier that you can provide to ensure the idempotency of the
+	// request. Case-sensitive.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -51,7 +56,7 @@ type CreateAlertManagerDefinitionInput struct {
 // Represents the output of a CreateAlertManagerDefinition operation.
 type CreateAlertManagerDefinitionOutput struct {
 
-	// The status of alert manager definition.
+	// A structure that displays the current status of the alert manager definition.
 	//
 	// This member is required.
 	Status *types.AlertManagerDefinitionStatus

@@ -47,6 +47,9 @@ type ListSignalCatalogNodesInput struct {
 	// returned, the response does not contain a pagination token value.
 	NextToken *string
 
+	// The type of node in the signal catalog.
+	SignalNodeType types.SignalNodeType
+
 	noSmithyDocumentSerde
 }
 

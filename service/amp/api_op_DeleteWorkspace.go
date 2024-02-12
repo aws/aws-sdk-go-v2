@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AMP workspace.
+// Deletes an existing workspace. When you delete a workspace, the data that has
+// been ingested into it is not immediately deleted. It will be permanently deleted
+// within one month.
 func (c *Client) DeleteWorkspace(ctx context.Context, params *DeleteWorkspaceInput, optFns ...func(*Options)) (*DeleteWorkspaceOutput, error) {
 	if params == nil {
 		params = &DeleteWorkspaceInput{}
@@ -35,8 +37,8 @@ type DeleteWorkspaceInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// Optional, unique, case-sensitive, user-provided identifier to ensure the
-	// idempotency of the request.
+	// A unique identifier that you can provide to ensure the idempotency of the
+	// request. Case-sensitive.
 	ClientToken *string
 
 	noSmithyDocumentSerde

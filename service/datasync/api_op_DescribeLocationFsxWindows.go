@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Returns metadata about an Amazon FSx for Windows File Server location, such as
-// information about its path.
+// Provides details about how an DataSync transfer location for an Amazon FSx for
+// Windows File Server file system is configured.
 func (c *Client) DescribeLocationFsxWindows(ctx context.Context, params *DescribeLocationFsxWindowsInput, optFns ...func(*Options)) (*DescribeLocationFsxWindowsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationFsxWindowsInput{}
@@ -31,8 +31,8 @@ func (c *Client) DescribeLocationFsxWindows(ctx context.Context, params *Describ
 
 type DescribeLocationFsxWindowsInput struct {
 
-	// The Amazon Resource Name (ARN) of the FSx for Windows File Server location to
-	// describe.
+	// Specifies the Amazon Resource Name (ARN) of the FSx for Windows File Server
+	// location.
 	//
 	// This member is required.
 	LocationArn *string
@@ -45,22 +45,23 @@ type DescribeLocationFsxWindowsOutput struct {
 	// The time that the FSx for Windows File Server location was created.
 	CreationTime *time.Time
 
-	// The name of the Windows domain that the FSx for Windows File Server belongs to.
+	// The name of the Microsoft Active Directory domain that the FSx for Windows File
+	// Server file system belongs to.
 	Domain *string
 
-	// The Amazon Resource Name (ARN) of the FSx for Windows File Server location that
-	// was described.
+	// The ARN of the FSx for Windows File Server location.
 	LocationArn *string
 
-	// The URL of the FSx for Windows File Server location that was described.
+	// The uniform resource identifier (URI) of the FSx for Windows File Server
+	// location.
 	LocationUri *string
 
-	// The Amazon Resource Names (ARNs) of the security groups that are configured for
-	// the FSx for Windows File Server file system.
+	// The ARNs of the security groups that are configured for the FSx for Windows
+	// File Server file system.
 	SecurityGroupArns []string
 
-	// The user who has the permissions to access files and folders in the FSx for
-	// Windows File Server file system.
+	// The user with the permissions to mount and access the FSx for Windows File
+	// Server file system.
 	User *string
 
 	// Metadata pertaining to the operation's result.

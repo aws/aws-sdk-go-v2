@@ -117,8 +117,8 @@ type SubmitJobInput struct {
 	// The scheduling priority for the job. This only affects jobs in job queues with
 	// a fair share policy. Jobs with a higher scheduling priority are scheduled before
 	// jobs with a lower scheduling priority. This overrides any scheduling priority in
-	// the job definition. The minimum supported value is 0 and the maximum supported
-	// value is 9999.
+	// the job definition and works only within a single share identifier. The minimum
+	// supported value is 0 and the maximum supported value is 9999.
 	SchedulingPriorityOverride *int32
 
 	// The share identifier for the job. Don't specify this parameter if the job queue

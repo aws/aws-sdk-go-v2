@@ -41,6 +41,14 @@ type CreateWebLoginTokenInput struct {
 
 type CreateWebLoginTokenOutput struct {
 
+	// The user name of the Apache Airflow identity creating the web login token.
+	AirflowIdentity *string
+
+	// The name of the IAM identity creating the web login token. This might be an IAM
+	// user, or an assumed or federated identity. For example,
+	// assumed-role/Admin/your-name .
+	IamIdentity *string
+
 	// The Airflow web server hostname for the environment.
 	WebServerHostname *string
 

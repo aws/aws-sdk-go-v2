@@ -53,7 +53,7 @@ type DescribeProvisioningTemplateOutput struct {
 	Description *string
 
 	// True if the provisioning template is enabled, otherwise false.
-	Enabled bool
+	Enabled *bool
 
 	// The date when the provisioning template was last modified.
 	LastModifiedDate *time.Time

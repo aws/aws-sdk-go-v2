@@ -111,6 +111,34 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The pipeline has reached the limit for concurrent pipeline executions.
+type ConcurrentPipelineExecutionsLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConcurrentPipelineExecutionsLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConcurrentPipelineExecutionsLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConcurrentPipelineExecutionsLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConcurrentPipelineExecutionsLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConcurrentPipelineExecutionsLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // Your request cannot be handled because the pipeline is busy handling ongoing
 // activities. Try again later.
 type ConflictException struct {

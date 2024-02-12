@@ -15063,6 +15063,11 @@ func awsAwsjson11_serializeDocumentEncryptionAtRest(v *types.EncryptionAtRest, v
 		ok.String(string(v.CatalogEncryptionMode))
 	}
 
+	if v.CatalogEncryptionServiceRole != nil {
+		ok := object.Key("CatalogEncryptionServiceRole")
+		ok.String(*v.CatalogEncryptionServiceRole)
+	}
+
 	if v.SseAwsKmsKeyId != nil {
 		ok := object.Key("SseAwsKmsKeyId")
 		ok.String(*v.SseAwsKmsKeyId)

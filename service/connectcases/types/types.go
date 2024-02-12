@@ -7,6 +7,134 @@ import (
 	"time"
 )
 
+// Represents the content of a particular audit event.
+type AuditEvent struct {
+
+	// Unique identifier of a case audit history event.
+	//
+	// This member is required.
+	EventId *string
+
+	// A list of Case Audit History event fields.
+	//
+	// This member is required.
+	Fields []*AuditEventField
+
+	// Time at which an Audit History event took place.
+	//
+	// This member is required.
+	PerformedTime *time.Time
+
+	// The Type of an audit history event.
+	//
+	// This member is required.
+	Type AuditEventType
+
+	// Information of the user which performed the audit.
+	PerformedBy *AuditEventPerformedBy
+
+	// The Type of the related item.
+	RelatedItemType RelatedItemType
+
+	noSmithyDocumentSerde
+}
+
+// Fields for audit event.
+type AuditEventField struct {
+
+	// Unique identifier of field in an Audit History entry.
+	//
+	// This member is required.
+	EventFieldId *string
+
+	// Union of potential field value types.
+	//
+	// This member is required.
+	NewValue AuditEventFieldValueUnion
+
+	// Union of potential field value types.
+	OldValue AuditEventFieldValueUnion
+
+	noSmithyDocumentSerde
+}
+
+// Object to store union of Field values. This data type is a UNION, so only one
+// of the following members can be specified when used or returned.
+//
+// The following types satisfy this interface:
+//
+//	AuditEventFieldValueUnionMemberBooleanValue
+//	AuditEventFieldValueUnionMemberDoubleValue
+//	AuditEventFieldValueUnionMemberEmptyValue
+//	AuditEventFieldValueUnionMemberStringValue
+//	AuditEventFieldValueUnionMemberUserArnValue
+type AuditEventFieldValueUnion interface {
+	isAuditEventFieldValueUnion()
+}
+
+// Can be either null, or have a Boolean value type. Only one value can be
+// provided.
+type AuditEventFieldValueUnionMemberBooleanValue struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*AuditEventFieldValueUnionMemberBooleanValue) isAuditEventFieldValueUnion() {}
+
+// Can be either null, or have a Double value type. Only one value can be provided.
+type AuditEventFieldValueUnionMemberDoubleValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*AuditEventFieldValueUnionMemberDoubleValue) isAuditEventFieldValueUnion() {}
+
+// An empty value. You cannot set EmptyFieldValue on a field that is required on a
+// case template. This structure will never have any data members. It signifies an
+// empty value on a case field.
+type AuditEventFieldValueUnionMemberEmptyValue struct {
+	Value EmptyFieldValue
+
+	noSmithyDocumentSerde
+}
+
+func (*AuditEventFieldValueUnionMemberEmptyValue) isAuditEventFieldValueUnion() {}
+
+// Can be either null, or have a String value type. Only one value can be provided.
+type AuditEventFieldValueUnionMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AuditEventFieldValueUnionMemberStringValue) isAuditEventFieldValueUnion() {}
+
+// Can be either null, or have a String value type formatted as an ARN. Only one
+// value can be provided.
+type AuditEventFieldValueUnionMemberUserArnValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AuditEventFieldValueUnionMemberUserArnValue) isAuditEventFieldValueUnion() {}
+
+// Information of the user which performed the audit.
+type AuditEventPerformedBy struct {
+
+	// Unique identifier of an IAM role.
+	//
+	// This member is required.
+	IamPrincipalArn *string
+
+	// Represents the identity of the person who performed the action.
+	User UserUnion
+
+	noSmithyDocumentSerde
+}
+
 // Content specific to BasicLayout type. It configures fields in the top panel and
 // More Info tab of agent application.
 type BasicLayout struct {
@@ -431,7 +559,8 @@ type FieldValue struct {
 	noSmithyDocumentSerde
 }
 
-// Object to store union of Field values.
+// Object to store union of Field values. The Summary system field accepts 1500
+// characters while all other fields accept 500 characters.
 //
 // The following types satisfy this interface:
 //
@@ -439,6 +568,7 @@ type FieldValue struct {
 //	FieldValueUnionMemberDoubleValue
 //	FieldValueUnionMemberEmptyValue
 //	FieldValueUnionMemberStringValue
+//	FieldValueUnionMemberUserArnValue
 type FieldValueUnion interface {
 	isFieldValueUnion()
 }
@@ -480,6 +610,15 @@ type FieldValueUnionMemberStringValue struct {
 }
 
 func (*FieldValueUnionMemberStringValue) isFieldValueUnion() {}
+
+// Represents the user that performed the audit.
+type FieldValueUnionMemberUserArnValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldValueUnionMemberUserArnValue) isFieldValueUnion() {}
 
 // Object to store detailed field information.
 type GetFieldResponse struct {
@@ -831,12 +970,13 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isCaseFilter()              {}
-func (*UnknownUnionMember) isFieldFilter()             {}
-func (*UnknownUnionMember) isFieldValueUnion()         {}
-func (*UnknownUnionMember) isLayoutContent()           {}
-func (*UnknownUnionMember) isRelatedItemContent()      {}
-func (*UnknownUnionMember) isRelatedItemInputContent() {}
-func (*UnknownUnionMember) isRelatedItemTypeFilter()   {}
-func (*UnknownUnionMember) isSection()                 {}
-func (*UnknownUnionMember) isUserUnion()               {}
+func (*UnknownUnionMember) isAuditEventFieldValueUnion() {}
+func (*UnknownUnionMember) isCaseFilter()                {}
+func (*UnknownUnionMember) isFieldFilter()               {}
+func (*UnknownUnionMember) isFieldValueUnion()           {}
+func (*UnknownUnionMember) isLayoutContent()             {}
+func (*UnknownUnionMember) isRelatedItemContent()        {}
+func (*UnknownUnionMember) isRelatedItemInputContent()   {}
+func (*UnknownUnionMember) isRelatedItemTypeFilter()     {}
+func (*UnknownUnionMember) isSection()                   {}
+func (*UnknownUnionMember) isUserUnion()                 {}

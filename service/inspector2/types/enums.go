@@ -158,6 +158,380 @@ func (AwsEcrContainerSortBy) Values() []AwsEcrContainerSortBy {
 	}
 }
 
+type CisFindingStatus string
+
+// Enum values for CisFindingStatus
+const (
+	CisFindingStatusPassed  CisFindingStatus = "PASSED"
+	CisFindingStatusFailed  CisFindingStatus = "FAILED"
+	CisFindingStatusSkipped CisFindingStatus = "SKIPPED"
+)
+
+// Values returns all known values for CisFindingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisFindingStatus) Values() []CisFindingStatus {
+	return []CisFindingStatus{
+		"PASSED",
+		"FAILED",
+		"SKIPPED",
+	}
+}
+
+type CisFindingStatusComparison string
+
+// Enum values for CisFindingStatusComparison
+const (
+	CisFindingStatusComparisonEquals CisFindingStatusComparison = "EQUALS"
+)
+
+// Values returns all known values for CisFindingStatusComparison. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CisFindingStatusComparison) Values() []CisFindingStatusComparison {
+	return []CisFindingStatusComparison{
+		"EQUALS",
+	}
+}
+
+type CisReportStatus string
+
+// Enum values for CisReportStatus
+const (
+	CisReportStatusSucceeded  CisReportStatus = "SUCCEEDED"
+	CisReportStatusFailed     CisReportStatus = "FAILED"
+	CisReportStatusInProgress CisReportStatus = "IN_PROGRESS"
+)
+
+// Values returns all known values for CisReportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisReportStatus) Values() []CisReportStatus {
+	return []CisReportStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"IN_PROGRESS",
+	}
+}
+
+type CisResultStatus string
+
+// Enum values for CisResultStatus
+const (
+	CisResultStatusPassed  CisResultStatus = "PASSED"
+	CisResultStatusFailed  CisResultStatus = "FAILED"
+	CisResultStatusSkipped CisResultStatus = "SKIPPED"
+)
+
+// Values returns all known values for CisResultStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisResultStatus) Values() []CisResultStatus {
+	return []CisResultStatus{
+		"PASSED",
+		"FAILED",
+		"SKIPPED",
+	}
+}
+
+type CisResultStatusComparison string
+
+// Enum values for CisResultStatusComparison
+const (
+	CisResultStatusComparisonEquals CisResultStatusComparison = "EQUALS"
+)
+
+// Values returns all known values for CisResultStatusComparison. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CisResultStatusComparison) Values() []CisResultStatusComparison {
+	return []CisResultStatusComparison{
+		"EQUALS",
+	}
+}
+
+type CisRuleStatus string
+
+// Enum values for CisRuleStatus
+const (
+	CisRuleStatusFailed        CisRuleStatus = "FAILED"
+	CisRuleStatusPassed        CisRuleStatus = "PASSED"
+	CisRuleStatusNotEvaluated  CisRuleStatus = "NOT_EVALUATED"
+	CisRuleStatusInformational CisRuleStatus = "INFORMATIONAL"
+	CisRuleStatusUnknown       CisRuleStatus = "UNKNOWN"
+	CisRuleStatusNotApplicable CisRuleStatus = "NOT_APPLICABLE"
+	CisRuleStatusError         CisRuleStatus = "ERROR"
+)
+
+// Values returns all known values for CisRuleStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisRuleStatus) Values() []CisRuleStatus {
+	return []CisRuleStatus{
+		"FAILED",
+		"PASSED",
+		"NOT_EVALUATED",
+		"INFORMATIONAL",
+		"UNKNOWN",
+		"NOT_APPLICABLE",
+		"ERROR",
+	}
+}
+
+type CisScanConfigurationsSortBy string
+
+// Enum values for CisScanConfigurationsSortBy
+const (
+	CisScanConfigurationsSortByScanName             CisScanConfigurationsSortBy = "SCAN_NAME"
+	CisScanConfigurationsSortByScanConfigurationArn CisScanConfigurationsSortBy = "SCAN_CONFIGURATION_ARN"
+)
+
+// Values returns all known values for CisScanConfigurationsSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CisScanConfigurationsSortBy) Values() []CisScanConfigurationsSortBy {
+	return []CisScanConfigurationsSortBy{
+		"SCAN_NAME",
+		"SCAN_CONFIGURATION_ARN",
+	}
+}
+
+type CisScanResultDetailsSortBy string
+
+// Enum values for CisScanResultDetailsSortBy
+const (
+	CisScanResultDetailsSortByCheckId CisScanResultDetailsSortBy = "CHECK_ID"
+	CisScanResultDetailsSortByStatus  CisScanResultDetailsSortBy = "STATUS"
+)
+
+// Values returns all known values for CisScanResultDetailsSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CisScanResultDetailsSortBy) Values() []CisScanResultDetailsSortBy {
+	return []CisScanResultDetailsSortBy{
+		"CHECK_ID",
+		"STATUS",
+	}
+}
+
+type CisScanResultsAggregatedByChecksSortBy string
+
+// Enum values for CisScanResultsAggregatedByChecksSortBy
+const (
+	CisScanResultsAggregatedByChecksSortByCheckId       CisScanResultsAggregatedByChecksSortBy = "CHECK_ID"
+	CisScanResultsAggregatedByChecksSortByTitle         CisScanResultsAggregatedByChecksSortBy = "TITLE"
+	CisScanResultsAggregatedByChecksSortByPlatform      CisScanResultsAggregatedByChecksSortBy = "PLATFORM"
+	CisScanResultsAggregatedByChecksSortByFailedCounts  CisScanResultsAggregatedByChecksSortBy = "FAILED_COUNTS"
+	CisScanResultsAggregatedByChecksSortBySecurityLevel CisScanResultsAggregatedByChecksSortBy = "SECURITY_LEVEL"
+)
+
+// Values returns all known values for CisScanResultsAggregatedByChecksSortBy.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CisScanResultsAggregatedByChecksSortBy) Values() []CisScanResultsAggregatedByChecksSortBy {
+	return []CisScanResultsAggregatedByChecksSortBy{
+		"CHECK_ID",
+		"TITLE",
+		"PLATFORM",
+		"FAILED_COUNTS",
+		"SECURITY_LEVEL",
+	}
+}
+
+type CisScanResultsAggregatedByTargetResourceSortBy string
+
+// Enum values for CisScanResultsAggregatedByTargetResourceSortBy
+const (
+	CisScanResultsAggregatedByTargetResourceSortByResourceId         CisScanResultsAggregatedByTargetResourceSortBy = "RESOURCE_ID"
+	CisScanResultsAggregatedByTargetResourceSortByFailedCounts       CisScanResultsAggregatedByTargetResourceSortBy = "FAILED_COUNTS"
+	CisScanResultsAggregatedByTargetResourceSortByAccountId          CisScanResultsAggregatedByTargetResourceSortBy = "ACCOUNT_ID"
+	CisScanResultsAggregatedByTargetResourceSortByPlatform           CisScanResultsAggregatedByTargetResourceSortBy = "PLATFORM"
+	CisScanResultsAggregatedByTargetResourceSortByTargetStatus       CisScanResultsAggregatedByTargetResourceSortBy = "TARGET_STATUS"
+	CisScanResultsAggregatedByTargetResourceSortByTargetStatusReason CisScanResultsAggregatedByTargetResourceSortBy = "TARGET_STATUS_REASON"
+)
+
+// Values returns all known values for
+// CisScanResultsAggregatedByTargetResourceSortBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CisScanResultsAggregatedByTargetResourceSortBy) Values() []CisScanResultsAggregatedByTargetResourceSortBy {
+	return []CisScanResultsAggregatedByTargetResourceSortBy{
+		"RESOURCE_ID",
+		"FAILED_COUNTS",
+		"ACCOUNT_ID",
+		"PLATFORM",
+		"TARGET_STATUS",
+		"TARGET_STATUS_REASON",
+	}
+}
+
+type CisScanStatus string
+
+// Enum values for CisScanStatus
+const (
+	CisScanStatusFailed     CisScanStatus = "FAILED"
+	CisScanStatusCompleted  CisScanStatus = "COMPLETED"
+	CisScanStatusCancelled  CisScanStatus = "CANCELLED"
+	CisScanStatusInProgress CisScanStatus = "IN_PROGRESS"
+)
+
+// Values returns all known values for CisScanStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisScanStatus) Values() []CisScanStatus {
+	return []CisScanStatus{
+		"FAILED",
+		"COMPLETED",
+		"CANCELLED",
+		"IN_PROGRESS",
+	}
+}
+
+type CisScanStatusComparison string
+
+// Enum values for CisScanStatusComparison
+const (
+	CisScanStatusComparisonEquals CisScanStatusComparison = "EQUALS"
+)
+
+// Values returns all known values for CisScanStatusComparison. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisScanStatusComparison) Values() []CisScanStatusComparison {
+	return []CisScanStatusComparison{
+		"EQUALS",
+	}
+}
+
+type CisSecurityLevel string
+
+// Enum values for CisSecurityLevel
+const (
+	CisSecurityLevelLevel1 CisSecurityLevel = "LEVEL_1"
+	CisSecurityLevelLevel2 CisSecurityLevel = "LEVEL_2"
+)
+
+// Values returns all known values for CisSecurityLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisSecurityLevel) Values() []CisSecurityLevel {
+	return []CisSecurityLevel{
+		"LEVEL_1",
+		"LEVEL_2",
+	}
+}
+
+type CisSecurityLevelComparison string
+
+// Enum values for CisSecurityLevelComparison
+const (
+	CisSecurityLevelComparisonEquals CisSecurityLevelComparison = "EQUALS"
+)
+
+// Values returns all known values for CisSecurityLevelComparison. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CisSecurityLevelComparison) Values() []CisSecurityLevelComparison {
+	return []CisSecurityLevelComparison{
+		"EQUALS",
+	}
+}
+
+type CisSortOrder string
+
+// Enum values for CisSortOrder
+const (
+	CisSortOrderAsc  CisSortOrder = "ASC"
+	CisSortOrderDesc CisSortOrder = "DESC"
+)
+
+// Values returns all known values for CisSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisSortOrder) Values() []CisSortOrder {
+	return []CisSortOrder{
+		"ASC",
+		"DESC",
+	}
+}
+
+type CisStringComparison string
+
+// Enum values for CisStringComparison
+const (
+	CisStringComparisonEquals    CisStringComparison = "EQUALS"
+	CisStringComparisonPrefix    CisStringComparison = "PREFIX"
+	CisStringComparisonNotEquals CisStringComparison = "NOT_EQUALS"
+)
+
+// Values returns all known values for CisStringComparison. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisStringComparison) Values() []CisStringComparison {
+	return []CisStringComparison{
+		"EQUALS",
+		"PREFIX",
+		"NOT_EQUALS",
+	}
+}
+
+type CisTargetStatus string
+
+// Enum values for CisTargetStatus
+const (
+	CisTargetStatusTimedOut  CisTargetStatus = "TIMED_OUT"
+	CisTargetStatusCancelled CisTargetStatus = "CANCELLED"
+	CisTargetStatusCompleted CisTargetStatus = "COMPLETED"
+)
+
+// Values returns all known values for CisTargetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisTargetStatus) Values() []CisTargetStatus {
+	return []CisTargetStatus{
+		"TIMED_OUT",
+		"CANCELLED",
+		"COMPLETED",
+	}
+}
+
+type CisTargetStatusComparison string
+
+// Enum values for CisTargetStatusComparison
+const (
+	CisTargetStatusComparisonEquals CisTargetStatusComparison = "EQUALS"
+)
+
+// Values returns all known values for CisTargetStatusComparison. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CisTargetStatusComparison) Values() []CisTargetStatusComparison {
+	return []CisTargetStatusComparison{
+		"EQUALS",
+	}
+}
+
+type CisTargetStatusReason string
+
+// Enum values for CisTargetStatusReason
+const (
+	CisTargetStatusReasonScanInProgress CisTargetStatusReason = "SCAN_IN_PROGRESS"
+	CisTargetStatusReasonUnsupportedOs  CisTargetStatusReason = "UNSUPPORTED_OS"
+	CisTargetStatusReasonSsmUnmanaged   CisTargetStatusReason = "SSM_UNMANAGED"
+)
+
+// Values returns all known values for CisTargetStatusReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisTargetStatusReason) Values() []CisTargetStatusReason {
+	return []CisTargetStatusReason{
+		"SCAN_IN_PROGRESS",
+		"UNSUPPORTED_OS",
+		"SSM_UNMANAGED",
+	}
+}
+
 type CodeSnippetErrorCode string
 
 // Enum values for CodeSnippetErrorCode
@@ -252,6 +626,34 @@ func (Currency) Values() []Currency {
 	}
 }
 
+type Day string
+
+// Enum values for Day
+const (
+	DaySun Day = "SUN"
+	DayMon Day = "MON"
+	DayTue Day = "TUE"
+	DayWed Day = "WED"
+	DayThu Day = "THU"
+	DayFri Day = "FRI"
+	DaySat Day = "SAT"
+)
+
+// Values returns all known values for Day. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Day) Values() []Day {
+	return []Day{
+		"SUN",
+		"MON",
+		"TUE",
+		"WED",
+		"THU",
+		"FRI",
+		"SAT",
+	}
+}
+
 type DelegatedAdminStatus string
 
 // Enum values for DelegatedAdminStatus
@@ -336,6 +738,30 @@ func (Ec2Platform) Values() []Ec2Platform {
 	}
 }
 
+type EcrPullDateRescanDuration string
+
+// Enum values for EcrPullDateRescanDuration
+const (
+	EcrPullDateRescanDurationDays14  EcrPullDateRescanDuration = "DAYS_14"
+	EcrPullDateRescanDurationDays30  EcrPullDateRescanDuration = "DAYS_30"
+	EcrPullDateRescanDurationDays60  EcrPullDateRescanDuration = "DAYS_60"
+	EcrPullDateRescanDurationDays90  EcrPullDateRescanDuration = "DAYS_90"
+	EcrPullDateRescanDurationDays180 EcrPullDateRescanDuration = "DAYS_180"
+)
+
+// Values returns all known values for EcrPullDateRescanDuration. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EcrPullDateRescanDuration) Values() []EcrPullDateRescanDuration {
+	return []EcrPullDateRescanDuration{
+		"DAYS_14",
+		"DAYS_30",
+		"DAYS_60",
+		"DAYS_90",
+		"DAYS_180",
+	}
+}
+
 type EcrRescanDuration string
 
 // Enum values for EcrRescanDuration
@@ -343,6 +769,9 @@ const (
 	EcrRescanDurationLifetime EcrRescanDuration = "LIFETIME"
 	EcrRescanDurationDays30   EcrRescanDuration = "DAYS_30"
 	EcrRescanDurationDays180  EcrRescanDuration = "DAYS_180"
+	EcrRescanDurationDays14   EcrRescanDuration = "DAYS_14"
+	EcrRescanDurationDays60   EcrRescanDuration = "DAYS_60"
+	EcrRescanDurationDays90   EcrRescanDuration = "DAYS_90"
 )
 
 // Values returns all known values for EcrRescanDuration. Note that this can be
@@ -353,6 +782,9 @@ func (EcrRescanDuration) Values() []EcrRescanDuration {
 		"LIFETIME",
 		"DAYS_30",
 		"DAYS_180",
+		"DAYS_14",
+		"DAYS_60",
+		"DAYS_90",
 	}
 }
 
@@ -737,6 +1169,46 @@ func (LambdaLayerSortBy) Values() []LambdaLayerSortBy {
 		"CRITICAL",
 		"HIGH",
 		"ALL",
+	}
+}
+
+type ListCisScansDetailLevel string
+
+// Enum values for ListCisScansDetailLevel
+const (
+	ListCisScansDetailLevelOrganization ListCisScansDetailLevel = "ORGANIZATION"
+	ListCisScansDetailLevelMember       ListCisScansDetailLevel = "MEMBER"
+)
+
+// Values returns all known values for ListCisScansDetailLevel. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListCisScansDetailLevel) Values() []ListCisScansDetailLevel {
+	return []ListCisScansDetailLevel{
+		"ORGANIZATION",
+		"MEMBER",
+	}
+}
+
+type ListCisScansSortBy string
+
+// Enum values for ListCisScansSortBy
+const (
+	ListCisScansSortByStatus        ListCisScansSortBy = "STATUS"
+	ListCisScansSortByScheduledBy   ListCisScansSortBy = "SCHEDULED_BY"
+	ListCisScansSortByScanStartDate ListCisScansSortBy = "SCAN_START_DATE"
+	ListCisScansSortByFailedChecks  ListCisScansSortBy = "FAILED_CHECKS"
+)
+
+// Values returns all known values for ListCisScansSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListCisScansSortBy) Values() []ListCisScansSortBy {
+	return []ListCisScansSortBy{
+		"STATUS",
+		"SCHEDULED_BY",
+		"SCAN_START_DATE",
+		"FAILED_CHECKS",
 	}
 }
 
@@ -1364,6 +1836,28 @@ func (Status) Values() []Status {
 	}
 }
 
+type StopCisSessionStatus string
+
+// Enum values for StopCisSessionStatus
+const (
+	StopCisSessionStatusSuccess       StopCisSessionStatus = "SUCCESS"
+	StopCisSessionStatusFailed        StopCisSessionStatus = "FAILED"
+	StopCisSessionStatusInterrupted   StopCisSessionStatus = "INTERRUPTED"
+	StopCisSessionStatusUnsupportedOs StopCisSessionStatus = "UNSUPPORTED_OS"
+)
+
+// Values returns all known values for StopCisSessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StopCisSessionStatus) Values() []StopCisSessionStatus {
+	return []StopCisSessionStatus{
+		"SUCCESS",
+		"FAILED",
+		"INTERRUPTED",
+		"UNSUPPORTED_OS",
+	}
+}
+
 type StringComparison string
 
 // Enum values for StringComparison
@@ -1381,6 +1875,22 @@ func (StringComparison) Values() []StringComparison {
 		"EQUALS",
 		"PREFIX",
 		"NOT_EQUALS",
+	}
+}
+
+type TagComparison string
+
+// Enum values for TagComparison
+const (
+	TagComparisonEquals TagComparison = "EQUALS"
+)
+
+// Values returns all known values for TagComparison. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TagComparison) Values() []TagComparison {
+	return []TagComparison{
+		"EQUALS",
 	}
 }
 

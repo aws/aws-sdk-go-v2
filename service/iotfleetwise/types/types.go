@@ -307,7 +307,7 @@ func (*CollectionSchemeMemberTimeBasedCollectionScheme) isCollectionScheme() {}
 type ConditionBasedCollectionScheme struct {
 
 	// The logical expression used to recognize what data to collect. For example,
-	// $variable.Vehicle.OutsideAirTemperature >= 105.0 .
+	// $variable.`Vehicle.OutsideAirTemperature` >= 105.0 .
 	//
 	// This member is required.
 	Expression *string
@@ -1475,6 +1475,10 @@ type VehicleSummary struct {
 	//
 	// This member is required.
 	VehicleName *string
+
+	// Static information about a vehicle in a key-value pair. For example:
+	// "engineType" : "1.3 L R2"
+	Attributes map[string]string
 
 	noSmithyDocumentSerde
 }

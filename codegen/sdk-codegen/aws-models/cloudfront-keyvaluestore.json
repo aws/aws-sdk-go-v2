@@ -743,10 +743,10 @@
                 "smithy.api#documentation": "<p>Deletes the key value pair specified by the key.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "Delete 'key1' from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "title": "Delete 'key1' from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
                         "input": {
                             "Key": "key1",
-                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58",
                             "IfMatch": "KV0AB12C3DEF456"
                         },
                         "output": {
@@ -880,17 +880,34 @@
                 "smithy.api#documentation": "<p>Returns metadata information about Key Value Store.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "Describe the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "title": "Describe the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
                         "input": {
-                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58"
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58"
+                        },
+                        "output": {
+                            "ETag": "KV7XY89Z0ABC012",
+                            "ItemCount": 0,
+                            "TotalSizeInBytes": 0,
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "Created": "2023-11-01T22:18:46Z",
+                            "LastModified": "2023-11-01T14:28:17Z",
+                            "Status": "IMPORT_FAILURE",
+                            "FailureReason": "Datasource size exceeds the allowed limit"
+                        }
+                    },
+                    {
+                        "title": "Describe the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-1234a9d35678'",
+                        "input": {
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-1234a9d35678"
                         },
                         "output": {
                             "ETag": "KV7XY89Z0ABC012",
                             "ItemCount": 4,
                             "TotalSizeInBytes": 15,
-                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-1234a9d35678",
                             "Created": "2023-11-01T22:18:46Z",
-                            "LastModified": "2023-11-01T14:28:17Z"
+                            "LastModified": "2023-11-01T14:28:17Z",
+                            "Status": "READY"
                         }
                     }
                 ],
@@ -965,6 +982,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Date and time when the key value pairs in the Key Value Store was last modified.</p>"
                     }
+                },
+                "Status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Key Value Store.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for Key Value Store creation failure.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1001,10 +1030,10 @@
                 "smithy.api#documentation": "<p>Returns a key value pair.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "Get 'key1' from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "title": "Get 'key1' from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
                         "input": {
                             "Key": "key1",
-                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58"
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58"
                         },
                         "output": {
                             "Key": "key1",
@@ -1146,9 +1175,9 @@
                 "smithy.api#documentation": "<p>Returns a list of key value pairs.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "List keys in the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "title": "List keys in the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
                         "input": {
-                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58",
                             "MaxResults": 3
                         },
                         "output": {
@@ -1170,9 +1199,9 @@
                         }
                     },
                     {
-                        "title": "List the next page in the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "title": "List the next page in the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
                         "input": {
-                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58",
                             "MaxResults": 3,
                             "NextToken": "hVTTZndkpBZ0VRZ0R1RF"
                         },
@@ -1327,11 +1356,11 @@
                 "smithy.api#documentation": "<p>Creates a new key value pair or replaces the value of an existing key.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "Put 'key1' with 'value1' into the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "title": "Put 'key1' with 'value1' into the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
                         "input": {
                             "Key": "key1",
                             "Value": "value1",
-                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58",
                             "IfMatch": "KV0AB12C3DEF456"
                         },
                         "output": {
@@ -1512,9 +1541,9 @@
                 "smithy.api#documentation": "<p>Puts or Deletes multiple key value pairs in a single, all-or-nothing operation.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "Put 2 keys into the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "title": "Put 2 keys into the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
                         "input": {
-                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58",
                             "IfMatch": "KV0AB12C3DEF456",
                             "Puts": [
                                 {
@@ -1534,9 +1563,9 @@
                         }
                     },
                     {
-                        "title": "Delete 2 keys from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "title": "Delete 2 keys from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
                         "input": {
-                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58",
                             "IfMatch": "KV0AB12C3DEF456",
                             "Deletes": [
                                 {
@@ -1554,9 +1583,9 @@
                         }
                     },
                     {
-                        "title": "Put 2 keys into and delete 1 key from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
+                        "title": "Put 2 keys into and delete 1 key from the key value store with ARN 'arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58'",
                         "input": {
-                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-key-value-store-327284aa-bcd5-499f-a3ff-26b9a9d31b58",
+                            "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/327284aa-bcd5-499f-a3ff-26b9a9d31b58",
                             "IfMatch": "KV0AB12C3DEF456",
                             "Puts": [
                                 {

@@ -3848,6 +3848,9 @@ func awsAwsjson11_deserializeOpErrorStartPipelineExecution(response *smithyhttp.
 	}
 
 	switch {
+	case strings.EqualFold("ConcurrentPipelineExecutionsLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentPipelineExecutionsLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
 
@@ -4585,6 +4588,41 @@ func awsAwsjson11_deserializeErrorConcurrentModificationException(response *smit
 
 	output := &types.ConcurrentModificationException{}
 	err := awsAwsjson11_deserializeDocumentConcurrentModificationException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorConcurrentPipelineExecutionsLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ConcurrentPipelineExecutionsLimitExceededException{}
+	err := awsAwsjson11_deserializeDocumentConcurrentPipelineExecutionsLimitExceededException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -6319,6 +6357,15 @@ func awsAwsjson11_deserializeDocumentActionExecutionDetail(v **types.ActionExecu
 				sv.Status = types.ActionExecutionStatus(jtv)
 			}
 
+		case "updatedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastUpdatedBy to be of type string, got %T instead", value)
+				}
+				sv.UpdatedBy = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6508,6 +6555,11 @@ func awsAwsjson11_deserializeDocumentActionExecutionResult(v **types.ActionExecu
 
 	for key, value := range shape {
 		switch key {
+		case "errorDetails":
+			if err := awsAwsjson11_deserializeDocumentErrorDetails(&sv.ErrorDetails, value); err != nil {
+				return err
+			}
+
 		case "externalExecutionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8210,6 +8262,46 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentConcurrentPipelineExecutionsLimitExceededException(v **types.ConcurrentPipelineExecutionsLimitExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConcurrentPipelineExecutionsLimitExceededException
+	if *v == nil {
+		sv = &types.ConcurrentPipelineExecutionsLimitExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8478,6 +8570,83 @@ func awsAwsjson11_deserializeDocumentExecutorConfiguration(v **types.ExecutorCon
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentGitBranchFilterCriteria(v **types.GitBranchFilterCriteria, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GitBranchFilterCriteria
+	if *v == nil {
+		sv = &types.GitBranchFilterCriteria{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "excludes":
+			if err := awsAwsjson11_deserializeDocumentGitBranchPatternList(&sv.Excludes, value); err != nil {
+				return err
+			}
+
+		case "includes":
+			if err := awsAwsjson11_deserializeDocumentGitBranchPatternList(&sv.Includes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitBranchPatternList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GitBranchNamePattern to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentGitConfiguration(v **types.GitConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8500,6 +8669,11 @@ func awsAwsjson11_deserializeDocumentGitConfiguration(v **types.GitConfiguration
 
 	for key, value := range shape {
 		switch key {
+		case "pullRequest":
+			if err := awsAwsjson11_deserializeDocumentGitPullRequestFilterList(&sv.PullRequest, value); err != nil {
+				return err
+			}
+
 		case "push":
 			if err := awsAwsjson11_deserializeDocumentGitPushFilterList(&sv.Push, value); err != nil {
 				return err
@@ -8520,6 +8694,199 @@ func awsAwsjson11_deserializeDocumentGitConfiguration(v **types.GitConfiguration
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitFilePathFilterCriteria(v **types.GitFilePathFilterCriteria, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GitFilePathFilterCriteria
+	if *v == nil {
+		sv = &types.GitFilePathFilterCriteria{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "excludes":
+			if err := awsAwsjson11_deserializeDocumentGitFilePathPatternList(&sv.Excludes, value); err != nil {
+				return err
+			}
+
+		case "includes":
+			if err := awsAwsjson11_deserializeDocumentGitFilePathPatternList(&sv.Includes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitFilePathPatternList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GitFilePathPattern to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitPullRequestEventTypeList(v *[]types.GitPullRequestEventType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GitPullRequestEventType
+	if *v == nil {
+		cv = []types.GitPullRequestEventType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GitPullRequestEventType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GitPullRequestEventType to be of type string, got %T instead", value)
+			}
+			col = types.GitPullRequestEventType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitPullRequestFilter(v **types.GitPullRequestFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GitPullRequestFilter
+	if *v == nil {
+		sv = &types.GitPullRequestFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "branches":
+			if err := awsAwsjson11_deserializeDocumentGitBranchFilterCriteria(&sv.Branches, value); err != nil {
+				return err
+			}
+
+		case "events":
+			if err := awsAwsjson11_deserializeDocumentGitPullRequestEventTypeList(&sv.Events, value); err != nil {
+				return err
+			}
+
+		case "filePaths":
+			if err := awsAwsjson11_deserializeDocumentGitFilePathFilterCriteria(&sv.FilePaths, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitPullRequestFilterList(v *[]types.GitPullRequestFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GitPullRequestFilter
+	if *v == nil {
+		cv = []types.GitPullRequestFilter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GitPullRequestFilter
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentGitPullRequestFilter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8545,6 +8912,16 @@ func awsAwsjson11_deserializeDocumentGitPushFilter(v **types.GitPushFilter, valu
 
 	for key, value := range shape {
 		switch key {
+		case "branches":
+			if err := awsAwsjson11_deserializeDocumentGitBranchFilterCriteria(&sv.Branches, value); err != nil {
+				return err
+			}
+
+		case "filePaths":
+			if err := awsAwsjson11_deserializeDocumentGitFilePathFilterCriteria(&sv.FilePaths, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentGitTagFilterCriteria(&sv.Tags, value); err != nil {
 				return err
@@ -10074,6 +10451,15 @@ func awsAwsjson11_deserializeDocumentPipelineDeclaration(v **types.PipelineDecla
 				return err
 			}
 
+		case "executionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionMode to be of type string, got %T instead", value)
+				}
+				sv.ExecutionMode = types.ExecutionMode(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10163,6 +10549,15 @@ func awsAwsjson11_deserializeDocumentPipelineExecution(v **types.PipelineExecuti
 		case "artifactRevisions":
 			if err := awsAwsjson11_deserializeDocumentArtifactRevisionList(&sv.ArtifactRevisions, value); err != nil {
 				return err
+			}
+
+		case "executionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionMode to be of type string, got %T instead", value)
+				}
+				sv.ExecutionMode = types.ExecutionMode(jtv)
 			}
 
 		case "pipelineExecutionId":
@@ -10335,6 +10730,15 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionSummary(v **types.Pipeline
 
 	for key, value := range shape {
 		switch key {
+		case "executionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionMode to be of type string, got %T instead", value)
+				}
+				sv.ExecutionMode = types.ExecutionMode(jtv)
+			}
+
 		case "lastUpdateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10715,6 +11119,15 @@ func awsAwsjson11_deserializeDocumentPipelineSummary(v **types.PipelineSummary, 
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "executionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionMode to be of type string, got %T instead", value)
+				}
+				sv.ExecutionMode = types.ExecutionMode(jtv)
 			}
 
 		case "name":
@@ -11661,6 +12074,40 @@ func awsAwsjson11_deserializeDocumentStageExecution(v **types.StageExecution, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStageExecutionList(v *[]types.StageExecution, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StageExecution
+	if *v == nil {
+		cv = []types.StageExecution{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StageExecution
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentStageExecution(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStageNotFoundException(v **types.StageNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11770,6 +12217,11 @@ func awsAwsjson11_deserializeDocumentStageState(v **types.StageState, value inte
 
 		case "inboundExecution":
 			if err := awsAwsjson11_deserializeDocumentStageExecution(&sv.InboundExecution, value); err != nil {
+				return err
+			}
+
+		case "inboundExecutions":
+			if err := awsAwsjson11_deserializeDocumentStageExecutionList(&sv.InboundExecutions, value); err != nil {
 				return err
 			}
 

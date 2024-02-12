@@ -34,7 +34,7 @@ type DescribeSourceServersInput struct {
 	Filters *types.DescribeSourceServersRequestFilters
 
 	// Maximum number of Source Servers to retrieve.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token of the next Source Server to retrieve.
 	NextToken *string
@@ -167,8 +167,8 @@ func NewDescribeSourceServersPaginator(client DescribeSourceServersAPIClient, pa
 	}
 
 	options := DescribeSourceServersPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -198,7 +198,11 @@ func (p *DescribeSourceServersPaginator) NextPage(ctx context.Context, optFns ..
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeSourceServers(ctx, &params, optFns...)
 	if err != nil {

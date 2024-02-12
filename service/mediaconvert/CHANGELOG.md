@@ -1,3 +1,7 @@
+# v1.50.0 (2024-02-01)
+
+* **Feature**: This release includes support for broadcast-mixed audio description tracks.
+
 # v1.49.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -12,7 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a rule group namespace.
+// The CreateRuleGroupsNamespace operation creates a rule groups namespace within
+// a workspace. A rule groups namespace is associated with exactly one rules file.
+// A workspace can have multiple rule groups namespaces. Use this operation only to
+// create new rule groups namespaces. To update an existing rule groups namespace,
+// use PutRuleGroupsNamespace .
 func (c *Client) CreateRuleGroupsNamespace(ctx context.Context, params *CreateRuleGroupsNamespaceInput, optFns ...func(*Options)) (*CreateRuleGroupsNamespaceOutput, error) {
 	if params == nil {
 		params = &CreateRuleGroupsNamespaceInput{}
@@ -31,26 +35,29 @@ func (c *Client) CreateRuleGroupsNamespace(ctx context.Context, params *CreateRu
 // Represents the input of a CreateRuleGroupsNamespace operation.
 type CreateRuleGroupsNamespaceInput struct {
 
-	// The namespace data that define the rule groups.
+	// The rules file to use in the new namespace. Contains the base64-encoded version
+	// of the YAML rules file. For details about the rule groups namespace structure,
+	// see RuleGroupsNamespaceData (https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-RuleGroupsNamespaceData.html)
+	// .
 	//
 	// This member is required.
 	Data []byte
 
-	// The rule groups namespace name.
+	// The name for the new rule groups namespace.
 	//
 	// This member is required.
 	Name *string
 
-	// The ID of the workspace in which to create the rule group namespace.
+	// The ID of the workspace to add the rule groups namespace.
 	//
 	// This member is required.
 	WorkspaceId *string
 
-	// Optional, unique, case-sensitive, user-provided identifier to ensure the
-	// idempotency of the request.
+	// A unique identifier that you can provide to ensure the idempotency of the
+	// request. Case-sensitive.
 	ClientToken *string
 
-	// Optional, user-provided tags for this rule groups namespace.
+	// The list of tag keys and values to associate with the rule groups namespace.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -59,22 +66,22 @@ type CreateRuleGroupsNamespaceInput struct {
 // Represents the output of a CreateRuleGroupsNamespace operation.
 type CreateRuleGroupsNamespaceOutput struct {
 
-	// The Amazon Resource Name (ARN) of this rule groups namespace.
+	// The Amazon Resource Name (ARN) of the new rule groups namespace.
 	//
 	// This member is required.
 	Arn *string
 
-	// The rule groups namespace name.
+	// The name of the new rule groups namespace.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of rule groups namespace.
+	// A structure that returns the current status of the rule groups namespace.
 	//
 	// This member is required.
 	Status *types.RuleGroupsNamespaceStatus
 
-	// The tags of this rule groups namespace.
+	// The list of tag keys and values that are associated with the namespace.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

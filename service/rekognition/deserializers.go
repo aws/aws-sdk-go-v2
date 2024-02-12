@@ -12360,6 +12360,114 @@ func awsAwsjson11_deserializeDocumentContentModerationDetections(v *[]types.Cont
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentContentType(v **types.ContentType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContentType
+	if *v == nil {
+		sv = &types.ContentType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Confidence":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Confidence = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Confidence = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Percent to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentContentTypes(v *[]types.ContentType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ContentType
+	if *v == nil {
+		cv = []types.ContentType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ContentType
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentContentType(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCoversBodyPart(v **types.CoversBodyPart, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17353,6 +17461,46 @@ func awsAwsjson11_deserializeDocumentMediaAnalysisManifestSummary(v **types.Medi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMediaAnalysisModelVersions(v **types.MediaAnalysisModelVersions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaAnalysisModelVersions
+	if *v == nil {
+		sv = &types.MediaAnalysisModelVersions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Moderation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Moderation = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentMediaAnalysisOperationsConfig(v **types.MediaAnalysisOperationsConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17460,6 +17608,11 @@ func awsAwsjson11_deserializeDocumentMediaAnalysisResults(v **types.MediaAnalysi
 
 	for key, value := range shape {
 		switch key {
+		case "ModelVersions":
+			if err := awsAwsjson11_deserializeDocumentMediaAnalysisModelVersions(&sv.ModelVersions, value); err != nil {
+				return err
+			}
+
 		case "S3Object":
 			if err := awsAwsjson11_deserializeDocumentS3Object(&sv.S3Object, value); err != nil {
 				return err
@@ -17546,6 +17699,19 @@ func awsAwsjson11_deserializeDocumentModerationLabel(v **types.ModerationLabel, 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ParentName = ptr.String(jtv)
+			}
+
+		case "TaxonomyLevel":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected UInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TaxonomyLevel = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -23632,6 +23798,11 @@ func awsAwsjson11_deserializeOpDocumentDetectModerationLabelsOutput(v **DetectMo
 
 	for key, value := range shape {
 		switch key {
+		case "ContentTypes":
+			if err := awsAwsjson11_deserializeDocumentContentTypes(&sv.ContentTypes, value); err != nil {
+				return err
+			}
+
 		case "HumanLoopActivationOutput":
 			if err := awsAwsjson11_deserializeDocumentHumanLoopActivationOutput(&sv.HumanLoopActivationOutput, value); err != nil {
 				return err

@@ -1,3 +1,11 @@
+# v1.28.1 (2024-01-24)
+
+* No change notes available for this release.
+
+# v1.28.0 (2024-01-11)
+
+* **Feature**: Adding AppSync as an EventBridge Target
+
 # v1.27.0 (2024-01-05)
 
 * **Feature**: Support smithy sigv4a trait for codegen.

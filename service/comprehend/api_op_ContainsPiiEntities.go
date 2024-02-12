@@ -32,8 +32,7 @@ func (c *Client) ContainsPiiEntities(ctx context.Context, params *ContainsPiiEnt
 
 type ContainsPiiEntitiesInput struct {
 
-	// The language of the input documents. Currently, English is the only valid
-	// language.
+	// The language of the input documents.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode

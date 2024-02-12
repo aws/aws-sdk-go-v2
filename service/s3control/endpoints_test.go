@@ -1219,7 +1219,7 @@ func TestEndpointCase18(t *testing.T) {
 	}
 }
 
-// outpost access points do not support dualstack@us-west-2
+// outpost access points support dualstack@us-west-2
 func TestEndpointCase19(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
@@ -1234,41 +1234,60 @@ func TestEndpointCase19(t *testing.T) {
 	result, err := resolver.ResolveEndpoint(context.Background(), params)
 	_, _ = result, err
 
-	if err == nil {
-		t.Fatalf("expect error, got none")
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
-	if e, a := "Invalid configuration: Outpost Access Points do not support dual-stack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
+
+	uri, _ := url.Parse("https://s3-outposts.us-west-2.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI: *uri,
+		Headers: func() http.Header {
+			headers := http.Header{}
+			headers.Set("x-amz-account-id", "123456789012")
+			headers.Set("x-amz-outpost-id", "op-01234567890123456")
+			return headers
+		}(),
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
+		t.Errorf("expect headers to match\n%s", diff)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
+		cmp.AllowUnexported(smithy.Properties{}),
+	); diff != "" {
+		t.Errorf("expect properties to match\n%s", diff)
 	}
 }
 
-// outpost access points do not support dualstack@cn-north-1
+// outpost access points support dualstack@af-south-1
 func TestEndpointCase20(t *testing.T) {
 	var params = EndpointParameters{
-		AccessPointName:   ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
-		AccountId:         ptr.String("123456789012"),
-		Region:            ptr.String("cn-north-1"),
-		RequiresAccountId: ptr.Bool(true),
-		UseDualStack:      ptr.Bool(true),
-		UseFIPS:           ptr.Bool(false),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "Invalid configuration: Outpost Access Points do not support dual-stack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
-// outpost access points do not support dualstack@af-south-1
-func TestEndpointCase21(t *testing.T) {
-	var params = EndpointParameters{
-		AccessPointName:   ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
+		AccessPointName:   ptr.String("arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
 		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("af-south-1"),
 		RequiresAccountId: ptr.Bool(true),
@@ -1280,11 +1299,118 @@ func TestEndpointCase21(t *testing.T) {
 	result, err := resolver.ResolveEndpoint(context.Background(), params)
 	_, _ = result, err
 
-	if err == nil {
-		t.Fatalf("expect error, got none")
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
-	if e, a := "Invalid configuration: Outpost Access Points do not support dual-stack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
+
+	uri, _ := url.Parse("https://s3-outposts.af-south-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI: *uri,
+		Headers: func() http.Header {
+			headers := http.Header{}
+			headers.Set("x-amz-account-id", "123456789012")
+			headers.Set("x-amz-outpost-id", "op-01234567890123456")
+			return headers
+		}(),
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
+		t.Errorf("expect headers to match\n%s", diff)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
+		cmp.AllowUnexported(smithy.Properties{}),
+	); diff != "" {
+		t.Errorf("expect properties to match\n%s", diff)
+	}
+}
+
+// outpost access points support fips + dualstack@af-south-1
+func TestEndpointCase21(t *testing.T) {
+	var params = EndpointParameters{
+		AccessPointName:   ptr.String("arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
+		AccountId:         ptr.String("123456789012"),
+		Region:            ptr.String("af-south-1"),
+		RequiresAccountId: ptr.Bool(true),
+		UseDualStack:      ptr.Bool(true),
+		UseFIPS:           ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://s3-outposts-fips.af-south-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI: *uri,
+		Headers: func() http.Header {
+			headers := http.Header{}
+			headers.Set("x-amz-account-id", "123456789012")
+			headers.Set("x-amz-outpost-id", "op-01234567890123456")
+			return headers
+		}(),
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "af-south-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
+		t.Errorf("expect headers to match\n%s", diff)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
+		cmp.AllowUnexported(smithy.Properties{}),
+	); diff != "" {
+		t.Errorf("expect properties to match\n%s", diff)
 	}
 }
 
@@ -1926,8 +2052,68 @@ func TestEndpointCase35(t *testing.T) {
 	}
 }
 
-// CreateBucket + OutpostId endpoint url@us-east-2
+// ListRegionalBucket + OutpostId + fips + dualstack@us-east-2
 func TestEndpointCase36(t *testing.T) {
+	var params = EndpointParameters{
+		AccountId:         ptr.String("123456789012"),
+		OutpostId:         ptr.String("op-123"),
+		Region:            ptr.String("us-east-2"),
+		RequiresAccountId: ptr.Bool(true),
+		UseDualStack:      ptr.Bool(true),
+		UseFIPS:           ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://s3-outposts-fips.us-east-2.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
+		t.Errorf("expect headers to match\n%s", diff)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
+		cmp.AllowUnexported(smithy.Properties{}),
+	); diff != "" {
+		t.Errorf("expect properties to match\n%s", diff)
+	}
+}
+
+// CreateBucket + OutpostId endpoint url@us-east-2
+func TestEndpointCase37(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("blah"),
 		Endpoint:          ptr.String("https://beta.example.com"),
@@ -1988,10 +2174,10 @@ func TestEndpointCase36(t *testing.T) {
 }
 
 // dualstack cannot be used with outposts when an endpoint URL is set@us-west-2.
-func TestEndpointCase37(t *testing.T) {
+func TestEndpointCase38(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
-		Endpoint:          ptr.String("https://beta.example.com"),
+		Endpoint:          ptr.String("https://s3-outposts.us-west-2.api.aws"),
 		Region:            ptr.String("us-west-2"),
 		RequiresAccountId: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(true),
@@ -2005,31 +2191,7 @@ func TestEndpointCase37(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "Invalid configuration: Outpost Access Points do not support dual-stack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
-// Dual-stack cannot be used with outposts@us-west-2
-func TestEndpointCase38(t *testing.T) {
-	var params = EndpointParameters{
-		Bucket:            ptr.String("bucketname"),
-		Endpoint:          ptr.String("https://beta.example.com"),
-		OutpostId:         ptr.String("op-123"),
-		Region:            ptr.String("us-west-2"),
-		RequiresAccountId: ptr.Bool(false),
-		UseDualStack:      ptr.Bool(true),
-		UseFIPS:           ptr.Bool(false),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "Invalid configuration: Outposts do not support dual-stack", err.Error(); !strings.Contains(a, e) {
+	if e, a := "Invalid Configuration: DualStack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
@@ -2355,25 +2517,67 @@ func TestEndpointCase43(t *testing.T) {
 	}
 }
 
-// Outposts do not support dualstack@us-west-2
+// bucket ARN in aws partition with fips + dualstack@us-east-2
 func TestEndpointCase44(t *testing.T) {
 	var params = EndpointParameters{
-		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
-		Region:            ptr.String("us-west-2"),
+		Bucket:            ptr.String("arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
+		Region:            ptr.String("us-east-2"),
 		RequiresAccountId: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(true),
-		UseFIPS:           ptr.Bool(false),
+		UseFIPS:           ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
 	result, err := resolver.ResolveEndpoint(context.Background(), params)
 	_, _ = result, err
 
-	if err == nil {
-		t.Fatalf("expect error, got none")
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
-	if e, a := "Invalid configuration: Outpost buckets do not support dual-stack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
+
+	uri, _ := url.Parse("https://s3-outposts-fips.us-east-2.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI: *uri,
+		Headers: func() http.Header {
+			headers := http.Header{}
+			headers.Set("x-amz-account-id", "123456789012")
+			headers.Set("x-amz-outpost-id", "op-01234567890123456")
+			return headers
+		}(),
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
+		t.Errorf("expect headers to match\n%s", diff)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
+		cmp.AllowUnexported(smithy.Properties{}),
+	); diff != "" {
+		t.Errorf("expect properties to match\n%s", diff)
 	}
 }
 
@@ -2698,7 +2902,7 @@ func TestEndpointCase49(t *testing.T) {
 	}
 }
 
-// Outposts do not support dualstack@us-west-2
+// Outposts support dualstack @us-west-2
 func TestEndpointCase50(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
@@ -2712,11 +2916,53 @@ func TestEndpointCase50(t *testing.T) {
 	result, err := resolver.ResolveEndpoint(context.Background(), params)
 	_, _ = result, err
 
-	if err == nil {
-		t.Fatalf("expect error, got none")
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
-	if e, a := "Invalid configuration: Outpost buckets do not support dual-stack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
+
+	uri, _ := url.Parse("https://s3-outposts.us-west-2.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI: *uri,
+		Headers: func() http.Header {
+			headers := http.Header{}
+			headers.Set("x-amz-account-id", "123456789012")
+			headers.Set("x-amz-outpost-id", "op-01234567890123456")
+			return headers
+		}(),
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
+		t.Errorf("expect headers to match\n%s", diff)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
+		cmp.AllowUnexported(smithy.Properties{}),
+	); diff != "" {
+		t.Errorf("expect properties to match\n%s", diff)
 	}
 }
 
@@ -3041,30 +3287,8 @@ func TestEndpointCase55(t *testing.T) {
 	}
 }
 
-// Outposts do not support dualstack@us-west-2
-func TestEndpointCase56(t *testing.T) {
-	var params = EndpointParameters{
-		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
-		Region:            ptr.String("us-west-2"),
-		RequiresAccountId: ptr.Bool(true),
-		UseDualStack:      ptr.Bool(true),
-		UseFIPS:           ptr.Bool(false),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "Invalid configuration: Outpost buckets do not support dual-stack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // Invalid ARN: missing outpost id and bucket@us-west-2
-func TestEndpointCase57(t *testing.T) {
+func TestEndpointCase56(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost"),
 		Region:            ptr.String("us-west-2"),
@@ -3086,7 +3310,7 @@ func TestEndpointCase57(t *testing.T) {
 }
 
 // Invalid ARN: missing bucket@us-west-2
-func TestEndpointCase58(t *testing.T) {
+func TestEndpointCase57(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456"),
 		Region:            ptr.String("us-west-2"),
@@ -3108,7 +3332,7 @@ func TestEndpointCase58(t *testing.T) {
 }
 
 // Invalid ARN: missing outpost and bucket ids@us-west-2
-func TestEndpointCase59(t *testing.T) {
+func TestEndpointCase58(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:bucket"),
 		Region:            ptr.String("us-west-2"),
@@ -3130,7 +3354,7 @@ func TestEndpointCase59(t *testing.T) {
 }
 
 // Invalid ARN: missing bucket id@us-west-2
-func TestEndpointCase60(t *testing.T) {
+func TestEndpointCase59(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket"),
 		Region:            ptr.String("us-west-2"),
@@ -3152,7 +3376,7 @@ func TestEndpointCase60(t *testing.T) {
 }
 
 // account id inserted into hostname@us-west-2
-func TestEndpointCase61(t *testing.T) {
+func TestEndpointCase60(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("1234567890"),
 		Region:            ptr.String("us-west-2"),
@@ -3211,7 +3435,7 @@ func TestEndpointCase61(t *testing.T) {
 }
 
 // account id prefix with dualstack@us-east-1
-func TestEndpointCase62(t *testing.T) {
+func TestEndpointCase61(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("1234567890"),
 		Region:            ptr.String("us-east-1"),
@@ -3270,7 +3494,7 @@ func TestEndpointCase62(t *testing.T) {
 }
 
 // account id prefix with fips@us-east-1
-func TestEndpointCase63(t *testing.T) {
+func TestEndpointCase62(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("1234567890"),
 		Region:            ptr.String("us-east-1"),
@@ -3329,7 +3553,7 @@ func TestEndpointCase63(t *testing.T) {
 }
 
 // custom account id prefix with fips@us-east-1
-func TestEndpointCase64(t *testing.T) {
+func TestEndpointCase63(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
@@ -3388,7 +3612,7 @@ func TestEndpointCase64(t *testing.T) {
 }
 
 // standard url @ us-east-1
-func TestEndpointCase65(t *testing.T) {
+func TestEndpointCase64(t *testing.T) {
 	var params = EndpointParameters{
 		Region: ptr.String("us-east-1"),
 	}
@@ -3443,7 +3667,7 @@ func TestEndpointCase65(t *testing.T) {
 }
 
 // fips url @ us-east-1
-func TestEndpointCase66(t *testing.T) {
+func TestEndpointCase65(t *testing.T) {
 	var params = EndpointParameters{
 		Region:  ptr.String("us-east-1"),
 		UseFIPS: ptr.Bool(true),
@@ -3499,7 +3723,7 @@ func TestEndpointCase66(t *testing.T) {
 }
 
 // dualstack url @ us-east-1
-func TestEndpointCase67(t *testing.T) {
+func TestEndpointCase66(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseDualStack: ptr.Bool(true),
@@ -3555,7 +3779,7 @@ func TestEndpointCase67(t *testing.T) {
 }
 
 // fips,dualstack url @ us-east-1
-func TestEndpointCase68(t *testing.T) {
+func TestEndpointCase67(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseDualStack: ptr.Bool(true),
@@ -3612,7 +3836,7 @@ func TestEndpointCase68(t *testing.T) {
 }
 
 // standard url @ cn-north-1
-func TestEndpointCase69(t *testing.T) {
+func TestEndpointCase68(t *testing.T) {
 	var params = EndpointParameters{
 		Region: ptr.String("cn-north-1"),
 	}
@@ -3667,7 +3891,7 @@ func TestEndpointCase69(t *testing.T) {
 }
 
 // fips @ cn-north-1
-func TestEndpointCase70(t *testing.T) {
+func TestEndpointCase69(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("cn-north-1"),
 		UseDualStack: ptr.Bool(true),
@@ -3687,7 +3911,7 @@ func TestEndpointCase70(t *testing.T) {
 }
 
 // custom account id prefix @us-east-1
-func TestEndpointCase71(t *testing.T) {
+func TestEndpointCase70(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
@@ -3746,7 +3970,7 @@ func TestEndpointCase71(t *testing.T) {
 }
 
 // invalid account id prefix @us-east-1
-func TestEndpointCase72(t *testing.T) {
+func TestEndpointCase71(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("/?invalid&not-host*label"),
 		Region:            ptr.String("us-east-1"),
@@ -3768,7 +3992,7 @@ func TestEndpointCase72(t *testing.T) {
 }
 
 // custom account id prefix with fips@us-east-1
-func TestEndpointCase73(t *testing.T) {
+func TestEndpointCase72(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
@@ -3827,7 +4051,7 @@ func TestEndpointCase73(t *testing.T) {
 }
 
 // custom account id prefix with dualstack,fips@us-east-1
-func TestEndpointCase74(t *testing.T) {
+func TestEndpointCase73(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
@@ -3886,7 +4110,7 @@ func TestEndpointCase74(t *testing.T) {
 }
 
 // custom account id with custom endpoint
-func TestEndpointCase75(t *testing.T) {
+func TestEndpointCase74(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
@@ -3944,7 +4168,7 @@ func TestEndpointCase75(t *testing.T) {
 }
 
 // RequiresAccountId with AccountId unset
-func TestEndpointCase76(t *testing.T) {
+func TestEndpointCase75(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("us-east-1"),
 		RequiresAccountId: ptr.Bool(true),
@@ -3963,7 +4187,7 @@ func TestEndpointCase76(t *testing.T) {
 }
 
 // RequiresAccountId with AccountId unset and custom endpoint
-func TestEndpointCase77(t *testing.T) {
+func TestEndpointCase76(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("us-east-1"),
 		Endpoint:          ptr.String("https://beta.example.com"),
@@ -3983,7 +4207,7 @@ func TestEndpointCase77(t *testing.T) {
 }
 
 // RequiresAccountId with invalid AccountId and custom endpoint
-func TestEndpointCase78(t *testing.T) {
+func TestEndpointCase77(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("us-east-1"),
 		Endpoint:          ptr.String("https://beta.example.com"),
@@ -4004,7 +4228,7 @@ func TestEndpointCase78(t *testing.T) {
 }
 
 // account id with custom endpoint, fips
-func TestEndpointCase79(t *testing.T) {
+func TestEndpointCase78(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
@@ -4022,6 +4246,63 @@ func TestEndpointCase79(t *testing.T) {
 	}
 
 	uri, _ := url.Parse("https://123456789012.example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
+		t.Errorf("expect headers to match\n%s", diff)
+	}
+
+	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
+		cmp.AllowUnexported(smithy.Properties{}),
+	); diff != "" {
+		t.Errorf("expect properties to match\n%s", diff)
+	}
+}
+
+// custom endpoint, fips
+func TestEndpointCase79(t *testing.T) {
+	var params = EndpointParameters{
+		Region:   ptr.String("us-east-1"),
+		Endpoint: ptr.String("https://example.com"),
+		UseFIPS:  ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:     *uri,
@@ -4119,65 +4400,8 @@ func TestEndpointCase80(t *testing.T) {
 	}
 }
 
-// custom endpoint, fips
-func TestEndpointCase81(t *testing.T) {
-	var params = EndpointParameters{
-		Region:   ptr.String("us-east-1"),
-		Endpoint: ptr.String("https://example.com"),
-		UseFIPS:  ptr.Bool(true),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://example.com")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningName(&sp, "s3")
-						smithyhttp.SetSigV4ASigningName(&sp, "s3")
-
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
-						smithyhttp.SetDisableDoubleEncoding(&sp, true)
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
-	}
-
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
-	}
-}
-
 // custom endpoint, DualStack
-func TestEndpointCase82(t *testing.T) {
+func TestEndpointCase81(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		Endpoint:     ptr.String("https://example.com"),
@@ -4198,7 +4422,7 @@ func TestEndpointCase82(t *testing.T) {
 }
 
 // region not set
-func TestEndpointCase83(t *testing.T) {
+func TestEndpointCase82(t *testing.T) {
 	var params = EndpointParameters{}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -4214,7 +4438,7 @@ func TestEndpointCase83(t *testing.T) {
 }
 
 // invalid partition
-func TestEndpointCase84(t *testing.T) {
+func TestEndpointCase83(t *testing.T) {
 	var params = EndpointParameters{
 		Region: ptr.String("invalid-region 42"),
 	}
@@ -4232,7 +4456,7 @@ func TestEndpointCase84(t *testing.T) {
 }
 
 // ListRegionalBuckets + OutpostId without accountId set.
-func TestEndpointCase85(t *testing.T) {
+func TestEndpointCase84(t *testing.T) {
 	var params = EndpointParameters{
 		OutpostId:         ptr.String("op-123"),
 		Region:            ptr.String("us-east-2"),
@@ -4254,7 +4478,7 @@ func TestEndpointCase85(t *testing.T) {
 }
 
 // ListRegionalBuckets + OutpostId with invalid accountId set.
-func TestEndpointCase86(t *testing.T) {
+func TestEndpointCase85(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("/?invalid&not-host*label"),
 		OutpostId:         ptr.String("op-123"),
@@ -4277,7 +4501,7 @@ func TestEndpointCase86(t *testing.T) {
 }
 
 // accesspoint set but missing accountId
-func TestEndpointCase87(t *testing.T) {
+func TestEndpointCase86(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("myaccesspoint"),
 		Region:            ptr.String("us-west-2"),
@@ -4299,7 +4523,7 @@ func TestEndpointCase87(t *testing.T) {
 }
 
 // outpost accesspoint ARN with missing accountId
-func TestEndpointCase88(t *testing.T) {
+func TestEndpointCase87(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:outpost:op1"),
 		Region:            ptr.String("us-west-2"),
@@ -4321,7 +4545,7 @@ func TestEndpointCase88(t *testing.T) {
 }
 
 // bucket ARN with missing accountId
-func TestEndpointCase89(t *testing.T) {
+func TestEndpointCase88(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:bucket:mybucket"),
 		Region:            ptr.String("us-west-2"),
@@ -4343,7 +4567,7 @@ func TestEndpointCase89(t *testing.T) {
 }
 
 // endpoint url with accesspoint (non-arn)
-func TestEndpointCase90(t *testing.T) {
+func TestEndpointCase89(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("apname"),
 		Endpoint:          ptr.String("https://beta.example.com"),
@@ -4404,7 +4628,7 @@ func TestEndpointCase90(t *testing.T) {
 }
 
 // access point name with an accesspoint arn@us-west-2
-func TestEndpointCase91(t *testing.T) {
+func TestEndpointCase90(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
 		Endpoint:          ptr.String("https://beta.example.com"),
@@ -4469,7 +4693,7 @@ func TestEndpointCase91(t *testing.T) {
 }
 
 // DualStack + Custom endpoint is not supported(non-arn)
-func TestEndpointCase92(t *testing.T) {
+func TestEndpointCase91(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("apname"),
 		Endpoint:          ptr.String("https://beta.example.com"),
@@ -4492,11 +4716,11 @@ func TestEndpointCase92(t *testing.T) {
 	}
 }
 
-// get bucket with endpoint_url and dualstack is not supported@us-west-2
-func TestEndpointCase93(t *testing.T) {
+// get bucket with custom endpoint and dualstack is not supported@us-west-2
+func TestEndpointCase92(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
-		Endpoint:          ptr.String("https://beta.example.com"),
+		Endpoint:          ptr.String("https://s3-outposts.us-west-2.api.aws"),
 		Region:            ptr.String("us-west-2"),
 		RequiresAccountId: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(true),
@@ -4510,13 +4734,13 @@ func TestEndpointCase93(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "Invalid configuration: Outpost buckets do not support dual-stack", err.Error(); !strings.Contains(a, e) {
+	if e, a := "Invalid Configuration: DualStack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
 
 // ListRegionalBuckets + OutpostId with fips in CN.
-func TestEndpointCase94(t *testing.T) {
+func TestEndpointCase93(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("0123456789012"),
 		OutpostId:         ptr.String("op-123"),
@@ -4539,7 +4763,7 @@ func TestEndpointCase94(t *testing.T) {
 }
 
 // ListRegionalBuckets + invalid OutpostId.
-func TestEndpointCase95(t *testing.T) {
+func TestEndpointCase94(t *testing.T) {
 	var params = EndpointParameters{
 		AccountId:         ptr.String("0123456789012"),
 		OutpostId:         ptr.String("?outpost/invalid+"),
@@ -4562,7 +4786,7 @@ func TestEndpointCase95(t *testing.T) {
 }
 
 // bucket ARN with mismatched accountId
-func TestEndpointCase96(t *testing.T) {
+func TestEndpointCase95(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:999999:outpost:op-01234567890123456:bucket:mybucket"),
 		AccountId:         ptr.String("0123456789012"),
@@ -4585,7 +4809,7 @@ func TestEndpointCase96(t *testing.T) {
 }
 
 // OutpostId with invalid region
-func TestEndpointCase97(t *testing.T) {
+func TestEndpointCase96(t *testing.T) {
 	var params = EndpointParameters{
 		OutpostId:         ptr.String("op-123"),
 		Region:            ptr.String("invalid-region 42"),
@@ -4608,7 +4832,7 @@ func TestEndpointCase97(t *testing.T) {
 }
 
 // OutpostId with RequireAccountId unset
-func TestEndpointCase98(t *testing.T) {
+func TestEndpointCase97(t *testing.T) {
 	var params = EndpointParameters{
 		OutpostId:    ptr.String("op-123"),
 		Region:       ptr.String("us-west-2"),
@@ -4667,7 +4891,7 @@ func TestEndpointCase98(t *testing.T) {
 
 // Outpost Accesspoint ARN with arn region and client region mismatch with
 // UseArnRegion=false
-func TestEndpointCase99(t *testing.T) {
+func TestEndpointCase98(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
 		AccountId:         ptr.String("123456789012"),
@@ -4692,7 +4916,7 @@ func TestEndpointCase99(t *testing.T) {
 
 // Outpost Bucket ARN with arn region and client region mismatch with
 // UseArnRegion=false
-func TestEndpointCase100(t *testing.T) {
+func TestEndpointCase99(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
 		Endpoint:          ptr.String("https://beta.example.com"),
@@ -4716,7 +4940,7 @@ func TestEndpointCase100(t *testing.T) {
 }
 
 // Accesspoint ARN with region mismatch and UseArnRegion unset
-func TestEndpointCase101(t *testing.T) {
+func TestEndpointCase100(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
 		AccountId:         ptr.String("123456789012"),
@@ -4781,7 +5005,7 @@ func TestEndpointCase101(t *testing.T) {
 }
 
 // Bucket ARN with region mismatch and UseArnRegion unset
-func TestEndpointCase102(t *testing.T) {
+func TestEndpointCase101(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
 		Region:            ptr.String("us-west-2"),
@@ -4845,7 +5069,7 @@ func TestEndpointCase102(t *testing.T) {
 }
 
 // Outpost Bucket ARN with partition mismatch with UseArnRegion=true
-func TestEndpointCase103(t *testing.T) {
+func TestEndpointCase102(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
 		Region:            ptr.String("us-west-2"),
@@ -4868,7 +5092,7 @@ func TestEndpointCase103(t *testing.T) {
 }
 
 // Accesspoint ARN with partition mismatch and UseArnRegion=true
-func TestEndpointCase104(t *testing.T) {
+func TestEndpointCase103(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
 		AccountId:         ptr.String("123456789012"),
@@ -4892,7 +5116,7 @@ func TestEndpointCase104(t *testing.T) {
 }
 
 // Accesspoint ARN with region mismatch, UseArnRegion=false and custom endpoint
-func TestEndpointCase105(t *testing.T) {
+func TestEndpointCase104(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
 		Region:            ptr.String("us-west-2"),
@@ -4916,7 +5140,7 @@ func TestEndpointCase105(t *testing.T) {
 }
 
 // outpost bucket arn@us-west-2
-func TestEndpointCase106(t *testing.T) {
+func TestEndpointCase105(t *testing.T) {
 	var params = EndpointParameters{
 		Bucket:            ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
 		Region:            ptr.String("us-west-2"),
@@ -4980,7 +5204,7 @@ func TestEndpointCase106(t *testing.T) {
 }
 
 // S3 Snow Control with bucket
-func TestEndpointCase107(t *testing.T) {
+func TestEndpointCase106(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
 		Bucket:       ptr.String("bucketName"),
@@ -5039,7 +5263,7 @@ func TestEndpointCase107(t *testing.T) {
 }
 
 // S3 Snow Control without bucket
-func TestEndpointCase108(t *testing.T) {
+func TestEndpointCase107(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
 		Endpoint:     ptr.String("https://10.0.1.12:433"),
@@ -5097,7 +5321,7 @@ func TestEndpointCase108(t *testing.T) {
 }
 
 // S3 Snow Control with bucket and without port
-func TestEndpointCase109(t *testing.T) {
+func TestEndpointCase108(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
 		Bucket:       ptr.String("bucketName"),
@@ -5156,7 +5380,7 @@ func TestEndpointCase109(t *testing.T) {
 }
 
 // S3 Snow Control with bucket and with DNS
-func TestEndpointCase110(t *testing.T) {
+func TestEndpointCase109(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
 		Bucket:       ptr.String("bucketName"),
@@ -5215,7 +5439,7 @@ func TestEndpointCase110(t *testing.T) {
 }
 
 // S3 Snow Control with FIPS enabled
-func TestEndpointCase111(t *testing.T) {
+func TestEndpointCase110(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
 		Bucket:       ptr.String("bucketName"),
@@ -5237,7 +5461,7 @@ func TestEndpointCase111(t *testing.T) {
 }
 
 // S3 Snow Control with Dualstack enabled
-func TestEndpointCase112(t *testing.T) {
+func TestEndpointCase111(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
 		Bucket:       ptr.String("bucketName"),

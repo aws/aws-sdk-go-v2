@@ -8272,6 +8272,60 @@ func awsAwsjson11_deserializeDocumentLocationListEntry(v **types.LocationListEnt
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentManifestConfig(v **types.ManifestConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManifestConfig
+	if *v == nil {
+		sv = &types.ManifestConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManifestAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.ManifestAction(jtv)
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManifestFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.ManifestFormat(jtv)
+			}
+
+		case "Source":
+			if err := awsAwsjson11_deserializeDocumentSourceManifestConfig(&sv.Source, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentMaxP95Performance(v **types.MaxP95Performance, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10401,6 +10455,73 @@ func awsAwsjson11_deserializeDocumentS3Config(v **types.S3Config, value interfac
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentS3ManifestConfig(v **types.S3ManifestConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3ManifestConfig
+	if *v == nil {
+		sv = &types.S3ManifestConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BucketAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
+				}
+				sv.BucketAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "ManifestObjectPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Subdirectory to be of type string, got %T instead", value)
+				}
+				sv.ManifestObjectPath = ptr.String(jtv)
+			}
+
+		case "ManifestObjectVersionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ObjectVersionId to be of type string, got %T instead", value)
+				}
+				sv.ManifestObjectVersionId = ptr.String(jtv)
+			}
+
+		case "S3BucketArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketArn to be of type string, got %T instead", value)
+				}
+				sv.S3BucketArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSmbMountOptions(v **types.SmbMountOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10430,6 +10551,42 @@ func awsAwsjson11_deserializeDocumentSmbMountOptions(v **types.SmbMountOptions, 
 					return fmt.Errorf("expected SmbVersion to be of type string, got %T instead", value)
 				}
 				sv.Version = types.SmbVersion(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSourceManifestConfig(v **types.SourceManifestConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourceManifestConfig
+	if *v == nil {
+		sv = &types.SourceManifestConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3":
+			if err := awsAwsjson11_deserializeDocumentS3ManifestConfig(&sv.S3, value); err != nil {
+				return err
 			}
 
 		default:
@@ -13483,6 +13640,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 				return err
 			}
 
+		case "ManifestConfig":
+			if err := awsAwsjson11_deserializeDocumentManifestConfig(&sv.ManifestConfig, value); err != nil {
+				return err
+			}
+
 		case "Options":
 			if err := awsAwsjson11_deserializeDocumentOptions(&sv.Options, value); err != nil {
 				return err
@@ -13641,6 +13803,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 
 		case "Includes":
 			if err := awsAwsjson11_deserializeDocumentFilterList(&sv.Includes, value); err != nil {
+				return err
+			}
+
+		case "ManifestConfig":
+			if err := awsAwsjson11_deserializeDocumentManifestConfig(&sv.ManifestConfig, value); err != nil {
 				return err
 			}
 

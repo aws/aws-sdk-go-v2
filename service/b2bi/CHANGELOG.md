@@ -1,3 +1,7 @@
+# v1.0.0-preview.11 (2024-01-18)
+
+* **Feature**: Increasing TestMapping inputFileContent file size limit to 5MB and adding file size limit 250KB for TestParsing input file. This release also includes exposing InternalServerException for Tag APIs.
+
 # v1.0.0-preview.10 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

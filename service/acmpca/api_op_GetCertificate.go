@@ -171,7 +171,7 @@ type CertificateIssuedWaiterOptions struct {
 	APIOptions []func(*middleware.Stack) error
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
-	// CertificateIssuedWaiter will use default minimum delay of 3 seconds. Note that
+	// CertificateIssuedWaiter will use default minimum delay of 1 seconds. Note that
 	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
 	MinDelay time.Duration
 
@@ -204,7 +204,7 @@ type CertificateIssuedWaiter struct {
 // NewCertificateIssuedWaiter constructs a CertificateIssuedWaiter.
 func NewCertificateIssuedWaiter(client GetCertificateAPIClient, optFns ...func(*CertificateIssuedWaiterOptions)) *CertificateIssuedWaiter {
 	options := CertificateIssuedWaiterOptions{}
-	options.MinDelay = 3 * time.Second
+	options.MinDelay = 1 * time.Second
 	options.MaxDelay = 120 * time.Second
 	options.Retryable = certificateIssuedStateRetryable
 

@@ -35,6 +35,7 @@ const (
 	EnvironmentStatusRollingBack      EnvironmentStatus = "ROLLING_BACK"
 	EnvironmentStatusCreatingSnapshot EnvironmentStatus = "CREATING_SNAPSHOT"
 	EnvironmentStatusPending          EnvironmentStatus = "PENDING"
+	EnvironmentStatusMaintenance      EnvironmentStatus = "MAINTENANCE"
 )
 
 // Values returns all known values for EnvironmentStatus. Note that this can be
@@ -53,6 +54,7 @@ func (EnvironmentStatus) Values() []EnvironmentStatus {
 		"ROLLING_BACK",
 		"CREATING_SNAPSHOT",
 		"PENDING",
+		"MAINTENANCE",
 	}
 }
 

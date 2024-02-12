@@ -4568,7 +4568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports a single <code>ipynb</code> file to a Spark enabled workgroup. The maximum\n            file size that can be imported is 10 megabytes. If an <code>ipynb</code> file with the\n            same name already exists in the workgroup, throws an error.</p>"
+                "smithy.api#documentation": "<p>Imports a single <code>ipynb</code> file to a Spark enabled workgroup. To import the\n            notebook, the request must specify a value for either <code>Payload</code> or <code>NoteBookS3LocationUri</code>. If neither is specified or both are specified, an\n            <code>InvalidRequestException</code> occurs. The maximum file size that can be imported is 10\n            megabytes. If an <code>ipynb</code> file with the same name already exists in the\n            workgroup, throws an error.</p>"
             }
         },
         "com.amazonaws.athena#ImportNotebookInput": {
@@ -4591,8 +4591,7 @@
                 "Payload": {
                     "target": "com.amazonaws.athena#Payload",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notebook content to be imported.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The notebook content to be imported. The payload must be in <code>ipynb</code> format.</p>"
                     }
                 },
                 "Type": {
@@ -4600,6 +4599,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The notebook content type. Currently, the only valid type is\n            <code>IPYNB</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "NotebookS3LocationUri": {
+                    "target": "com.amazonaws.athena#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URI that specifies the Amazon S3 location of a notebook file in <code>ipynb</code> format.</p>"
                     }
                 },
                 "ClientRequestToken": {
@@ -4939,7 +4944,7 @@
                 "WorkGroup": {
                     "target": "com.amazonaws.athena#WorkGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the workgroup. Required if\n            making an IAM Identity Center request.</p>"
+                        "smithy.api#documentation": "<p>The name of the workgroup. Required if making an IAM Identity Center request.</p>"
                     }
                 }
             },
@@ -6618,7 +6623,7 @@
                 "ServicePreProcessingTimeInMillis": {
                     "target": "com.amazonaws.athena#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of milliseconds that Athena took to preprocess the query before submitting the query to the query engine.</p>"
+                        "smithy.api#documentation": "<p>The number of milliseconds that Athena took to preprocess the query before\n            submitting the query to the query engine.</p>"
                     }
                 },
                 "QueryPlanningTimeInMillis": {
@@ -6774,7 +6779,7 @@
                 "ServicePreProcessingTimeInMillis": {
                     "target": "com.amazonaws.athena#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The number of milliseconds that Athena spends on preprocessing before it submits the query to the engine.\n        </p>"
+                        "smithy.api#documentation": "<p> The number of milliseconds that Athena spends on preprocessing before it\n            submits the query to the engine. </p>"
                     }
                 },
                 "QueryPlanningTimeInMillis": {
@@ -7185,7 +7190,7 @@
                 "ExecutionRole": {
                     "target": "com.amazonaws.athena#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the execution role used to access user resources for Spark sessions and Identity Center\n            enabled workgroups. This property applies only to Spark enabled workgroups and Identity\n            Center enabled workgroups.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the execution role used to access user resources for Spark sessions and\n            Identity Center enabled workgroups. This property applies only to Spark enabled\n            workgroups and Identity Center enabled workgroups.</p>"
                     }
                 },
                 "WorkingDirectory": {
@@ -8757,7 +8762,7 @@
                 "ExecutionRole": {
                     "target": "com.amazonaws.athena#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the execution role used to access user resources for Spark sessions and Identity Center\n            enabled workgroups. This property applies only to Spark enabled workgroups and Identity\n            Center enabled workgroups.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the execution role used to access user resources for Spark sessions and\n                IAM Identity Center enabled workgroups. This property applies only to Spark enabled\n            workgroups and IAM Identity Center enabled workgroups. The property is required for\n                IAM Identity Center enabled workgroups.</p>"
                     }
                 },
                 "CustomerContentEncryptionConfiguration": {
@@ -8849,7 +8854,7 @@
                 "ExecutionRole": {
                     "target": "com.amazonaws.athena#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the execution role used to access user resources for Spark sessions and Identity Center\n            enabled workgroups. This property applies only to Spark enabled workgroups and Identity\n            Center enabled workgroups.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the execution role used to access user resources for Spark sessions and\n            Identity Center enabled workgroups. This property applies only to Spark enabled\n            workgroups and Identity Center enabled workgroups.</p>"
                     }
                 },
                 "CustomerContentEncryptionConfiguration": {

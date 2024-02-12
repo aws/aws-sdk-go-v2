@@ -1117,6 +1117,31 @@ type BotAliasLocaleSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about all the aliases replication statuses applicable for
+// global resiliency.
+type BotAliasReplicaSummary struct {
+
+	// The bot alias ID for all the alias bot replications.
+	BotAliasId *string
+
+	// The replication statuses for all the alias bot replications.
+	BotAliasReplicationStatus BotAliasReplicationStatus
+
+	// The bot version for all the alias bot replications.
+	BotVersion *string
+
+	// The creation time and date for all the alias bot replications.
+	CreationDateTime *time.Time
+
+	// The reasons for failure for the aliases bot replications.
+	FailureReasons []string
+
+	// The last time and date updated for all the alias bot replications.
+	LastUpdatedDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Summary information about bot aliases returned from the ListBotAliases (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotAliases.html)
 // operation.
 type BotAliasSummary struct {
@@ -1481,6 +1506,25 @@ type BotRecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains summary information about all the replication statuses applicable for
+// global resiliency.
+type BotReplicaSummary struct {
+
+	// The operation status for the replicated bot applicable.
+	BotReplicaStatus BotReplicaStatus
+
+	// The creation time and date for the replicated bots.
+	CreationDateTime *time.Time
+
+	// The reasons for the failure for the replicated bot.
+	FailureReasons []string
+
+	// The replica region used in the replication statuses summary.
+	ReplicaRegion *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies attributes for sorting a list of bots.
 type BotSortBy struct {
 
@@ -1535,6 +1579,43 @@ type BotVersionLocaleDetails struct {
 	//
 	// This member is required.
 	SourceBotVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// The sort category for the version replicated bots.
+type BotVersionReplicaSortBy struct {
+
+	// The attribute of the sort category for the version replicated bots.
+	//
+	// This member is required.
+	Attribute BotVersionReplicaSortAttribute
+
+	// The order of the sort category for the version replicated bots.
+	//
+	// This member is required.
+	Order SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information for all the version replication statuses
+// applicable for Global resiliency.
+type BotVersionReplicaSummary struct {
+
+	// The bot version for the summary information for all the version replication
+	// statuses.
+	BotVersion *string
+
+	// The version replication status for all the replicated bots.
+	BotVersionReplicationStatus BotVersionReplicationStatus
+
+	// The creation date and time of the replication status for all the replicated
+	// bots.
+	CreationDateTime *time.Time
+
+	// The reasons for replication failure for all the replicated bots.
+	FailureReasons []string
 
 	noSmithyDocumentSerde
 }

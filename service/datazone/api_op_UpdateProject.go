@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -81,11 +82,17 @@ type UpdateProjectOutput struct {
 	// The description of the project that is to be updated.
 	Description *string
 
+	// Reasons for failed project deletion
+	FailureReasons []types.ProjectDeletionError
+
 	// The glossary terms of the project that are to be updated.
 	GlossaryTerms []string
 
 	// The timestamp of when the project was last updated.
 	LastUpdatedAt *time.Time
+
+	// Status of the project
+	ProjectStatus types.ProjectStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

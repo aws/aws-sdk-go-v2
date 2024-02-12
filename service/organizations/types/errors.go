@@ -416,7 +416,7 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //     marketplace. All accounts in an organization must be associated with the same
 //     marketplace.
 //   - MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the Amazon Web
-//     Services /> Regions in China. To create an organization, the master must have a
+//     Services Regions in China. To create an organization, the master must have a
 //     valid business license. For more information, contact customer support.
 //   - MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you must
 //     first provide a valid contact address and phone number for the management

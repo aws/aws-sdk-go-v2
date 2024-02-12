@@ -348,6 +348,38 @@ func (LogLevel) Values() []LogLevel {
 	}
 }
 
+type ManifestAction string
+
+// Enum values for ManifestAction
+const (
+	ManifestActionTransfer ManifestAction = "TRANSFER"
+)
+
+// Values returns all known values for ManifestAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ManifestAction) Values() []ManifestAction {
+	return []ManifestAction{
+		"TRANSFER",
+	}
+}
+
+type ManifestFormat string
+
+// Enum values for ManifestFormat
+const (
+	ManifestFormatCsv ManifestFormat = "CSV"
+)
+
+// Values returns all known values for ManifestFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ManifestFormat) Values() []ManifestFormat {
+	return []ManifestFormat{
+		"CSV",
+	}
+}
+
 type Mtime string
 
 // Enum values for Mtime

@@ -394,6 +394,15 @@ func awsRestjson1_deserializeOpDocumentDescribeKeyValueStoreOutput(v **DescribeK
 				}
 			}
 
+		case "FailureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = ptr.String(jtv)
+			}
+
 		case "ItemCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -430,6 +439,15 @@ func awsRestjson1_deserializeOpDocumentDescribeKeyValueStoreOutput(v **DescribeK
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
 			}
 
 		case "TotalSizeInBytes":

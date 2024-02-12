@@ -25,7 +25,8 @@ import (
 // Management (IAM) policies in requests for this API operation. For this
 // operation, you can't use IAM credentials to authorize requests, and you can't
 // grant IAM permissions in policies. For more information about authorization
-// models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// models in Amazon Cognito, see Using the Amazon Cognito user pools API and user
+// pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 // . This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
 // can send SMS messages to US phone numbers. If you use SMS text messages in

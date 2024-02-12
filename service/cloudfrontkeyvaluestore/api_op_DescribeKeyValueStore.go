@@ -71,8 +71,14 @@ type DescribeKeyValueStoreOutput struct {
 	// This member is required.
 	TotalSizeInBytes *int64
 
+	// The reason for Key Value Store creation failure.
+	FailureReason *string
+
 	// Date and time when the key value pairs in the Key Value Store was last modified.
 	LastModified *time.Time
+
+	// The current status of the Key Value Store.
+	Status *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

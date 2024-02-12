@@ -1,3 +1,7 @@
+# v1.22.0 (2024-01-18)
+
+* **Feature**: Removed invalid and unnecessary default values.
+
 # v1.21.2 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -610,6 +610,30 @@ func (AudioRecognitionStrategy) Values() []AudioRecognitionStrategy {
 	}
 }
 
+type BotAliasReplicationStatus string
+
+// Enum values for BotAliasReplicationStatus
+const (
+	BotAliasReplicationStatusCreating  BotAliasReplicationStatus = "Creating"
+	BotAliasReplicationStatusUpdating  BotAliasReplicationStatus = "Updating"
+	BotAliasReplicationStatusAvailable BotAliasReplicationStatus = "Available"
+	BotAliasReplicationStatusDeleting  BotAliasReplicationStatus = "Deleting"
+	BotAliasReplicationStatusFailed    BotAliasReplicationStatus = "Failed"
+)
+
+// Values returns all known values for BotAliasReplicationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BotAliasReplicationStatus) Values() []BotAliasReplicationStatus {
+	return []BotAliasReplicationStatus{
+		"Creating",
+		"Updating",
+		"Available",
+		"Deleting",
+		"Failed",
+	}
+}
+
 type BotAliasStatus string
 
 // Enum values for BotAliasStatus
@@ -784,6 +808,28 @@ func (BotRecommendationStatus) Values() []BotRecommendationStatus {
 	}
 }
 
+type BotReplicaStatus string
+
+// Enum values for BotReplicaStatus
+const (
+	BotReplicaStatusEnabling BotReplicaStatus = "Enabling"
+	BotReplicaStatusEnabled  BotReplicaStatus = "Enabled"
+	BotReplicaStatusDeleting BotReplicaStatus = "Deleting"
+	BotReplicaStatusFailed   BotReplicaStatus = "Failed"
+)
+
+// Values returns all known values for BotReplicaStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BotReplicaStatus) Values() []BotReplicaStatus {
+	return []BotReplicaStatus{
+		"Enabling",
+		"Enabled",
+		"Deleting",
+		"Failed",
+	}
+}
+
 type BotSortAttribute string
 
 // Enum values for BotSortAttribute
@@ -845,6 +891,45 @@ func (BotType) Values() []BotType {
 	return []BotType{
 		"Bot",
 		"BotNetwork",
+	}
+}
+
+type BotVersionReplicaSortAttribute string
+
+// Enum values for BotVersionReplicaSortAttribute
+const (
+	BotVersionReplicaSortAttributeBotVersion BotVersionReplicaSortAttribute = "BotVersion"
+)
+
+// Values returns all known values for BotVersionReplicaSortAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BotVersionReplicaSortAttribute) Values() []BotVersionReplicaSortAttribute {
+	return []BotVersionReplicaSortAttribute{
+		"BotVersion",
+	}
+}
+
+type BotVersionReplicationStatus string
+
+// Enum values for BotVersionReplicationStatus
+const (
+	BotVersionReplicationStatusCreating  BotVersionReplicationStatus = "Creating"
+	BotVersionReplicationStatusAvailable BotVersionReplicationStatus = "Available"
+	BotVersionReplicationStatusDeleting  BotVersionReplicationStatus = "Deleting"
+	BotVersionReplicationStatusFailed    BotVersionReplicationStatus = "Failed"
+)
+
+// Values returns all known values for BotVersionReplicationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BotVersionReplicationStatus) Values() []BotVersionReplicationStatus {
+	return []BotVersionReplicationStatus{
+		"Creating",
+		"Available",
+		"Deleting",
+		"Failed",
 	}
 }
 

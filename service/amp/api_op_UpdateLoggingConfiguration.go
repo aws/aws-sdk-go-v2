@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update logging configuration.
+// Updates the log group ARN or the workspace ID of the current logging
+// configuration.
 func (c *Client) UpdateLoggingConfiguration(ctx context.Context, params *UpdateLoggingConfigurationInput, optFns ...func(*Options)) (*UpdateLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateLoggingConfigurationInput{}
@@ -31,18 +32,19 @@ func (c *Client) UpdateLoggingConfiguration(ctx context.Context, params *UpdateL
 // Represents the input of an UpdateLoggingConfiguration operation.
 type UpdateLoggingConfigurationInput struct {
 
-	// The ARN of the CW log group to which the vended log data will be published.
+	// The ARN of the CloudWatch log group to which the vended log data will be
+	// published.
 	//
 	// This member is required.
 	LogGroupArn *string
 
-	// The ID of the workspace to vend logs to.
+	// The ID of the workspace to update the logging configuration for.
 	//
 	// This member is required.
 	WorkspaceId *string
 
-	// Optional, unique, case-sensitive, user-provided identifier to ensure the
-	// idempotency of the request.
+	// A unique identifier that you can provide to ensure the idempotency of the
+	// request. Case-sensitive.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -51,7 +53,7 @@ type UpdateLoggingConfigurationInput struct {
 // Represents the output of an UpdateLoggingConfiguration operation.
 type UpdateLoggingConfigurationOutput struct {
 
-	// The status of the logging configuration.
+	// A structure that contains the current status of the logging configuration.
 	//
 	// This member is required.
 	Status *types.LoggingConfigurationStatus

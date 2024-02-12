@@ -41,6 +41,10 @@ public class BackfillSigV4ATrait implements GoIntegration {
             return model;
         }
 
+        if (settings.getService(model).hasTrait(SigV4ATrait.class)) {
+            return model;
+        }
+
         var v4a = SigV4ATrait.builder()
                 .name(service.expectTrait(SigV4Trait.class).getName())
                 .build();

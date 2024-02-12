@@ -15,6 +15,7 @@
         "api_op_DeleteTable.go",
         "api_op_GetKeyspace.go",
         "api_op_GetTable.go",
+        "api_op_GetTableAutoScalingSettings.go",
         "api_op_ListKeyspaces.go",
         "api_op_ListTables.go",
         "api_op_ListTagsForResource.go",

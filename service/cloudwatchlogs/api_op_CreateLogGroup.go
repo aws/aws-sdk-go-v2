@@ -21,6 +21,7 @@ import (
 //   - Log group names consist of the following characters: a-z, A-Z, 0-9, '_'
 //     (underscore), '-' (hyphen), '/' (forward slash), '.' (period), and '#' (number
 //     sign)
+//   - Log group names can't start with the string aws/
 //
 // When you create a log group, by default the log events in the log group do not
 // expire. To set a retention policy so that events expire and are deleted after a
@@ -66,9 +67,9 @@ type CreateLogGroupInput struct {
 	//   - The Standard log class supports all CloudWatch Logs features.
 	//   - The Infrequent Access log class supports a subset of CloudWatch Logs
 	//   features and incurs lower costs.
-	// If you omit this parameter, the default of STANDARD is used. After a log group
-	// is created, its class can't be changed. For details about the features supported
-	// by each class, see Log classes (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)
+	// If you omit this parameter, the default of STANDARD is used. The value of
+	// logGroupClass can't be changed after a log group is created. For details about
+	// the features supported by each class, see Log classes (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)
 	LogGroupClass types.LogGroupClass
 
 	// The key-value pairs to use for the tags. You can grant users access to certain

@@ -13,8 +13,8 @@ import (
 )
 
 // Creates a configuration for running a SageMaker image as a KernelGateway app.
-// The configuration specifies the Amazon Elastic File System (EFS) storage volume
-// on the image, and a list of the kernels in the image.
+// The configuration specifies the Amazon Elastic File System storage volume on the
+// image, and a list of the kernels in the image.
 func (c *Client) CreateAppImageConfig(ctx context.Context, params *CreateAppImageConfigInput, optFns ...func(*Options)) (*CreateAppImageConfigOutput, error) {
 	if params == nil {
 		params = &CreateAppImageConfigInput{}
@@ -55,7 +55,7 @@ type CreateAppImageConfigInput struct {
 
 type CreateAppImageConfigOutput struct {
 
-	// The Amazon Resource Name (ARN) of the AppImageConfig.
+	// The ARN of the AppImageConfig.
 	AppImageConfigArn *string
 
 	// Metadata pertaining to the operation's result.

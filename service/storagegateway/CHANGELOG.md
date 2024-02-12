@@ -1,3 +1,7 @@
+# v1.25.0 (2024-01-24)
+
+* **Feature**: Add DeprecationDate and SoftwareVersion to response of ListGateways.
+
 # v1.24.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

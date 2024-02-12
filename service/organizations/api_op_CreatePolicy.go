@@ -37,7 +37,10 @@ func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, op
 type CreatePolicyInput struct {
 
 	// The policy text content to add to the new policy. The text that you supply must
-	// adhere to the rules of the policy type you specify in the Type parameter.
+	// adhere to the rules of the policy type you specify in the Type parameter. The
+	// maximum size of a policy document depends on the policy's type. For more
+	// information, see Maximum and minimum values (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html#min-max-values)
+	// in the Organizations User Guide.
 	//
 	// This member is required.
 	Content *string

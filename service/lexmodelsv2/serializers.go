@@ -806,6 +806,94 @@ func awsRestjson1_serializeOpDocumentCreateBotLocaleInput(v *CreateBotLocaleInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateBotReplica struct {
+}
+
+func (*awsRestjson1_serializeOpCreateBotReplica) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateBotReplica) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateBotReplicaInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/replicas")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateBotReplicaInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateBotReplicaInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateBotReplicaInput(v *CreateBotReplicaInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateBotReplicaInput(v *CreateBotReplicaInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ReplicaRegion != nil {
+		ok := object.Key("replicaRegion")
+		ok.String(*v.ReplicaRegion)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateBotVersion struct {
 }
 
@@ -2042,6 +2130,80 @@ func awsRestjson1_serializeOpHttpBindingsDeleteBotLocaleInput(v *DeleteBotLocale
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteBotReplica struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteBotReplica) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteBotReplica) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteBotReplicaInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/replicas/{replicaRegion}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteBotReplicaInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteBotReplicaInput(v *DeleteBotReplicaInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicaRegion == nil || len(*v.ReplicaRegion) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member replicaRegion must not be empty")}
+	}
+	if v.ReplicaRegion != nil {
+		if err := encoder.SetURI("replicaRegion").String(*v.ReplicaRegion); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteBotVersion struct {
 }
 
@@ -3214,6 +3376,80 @@ func awsRestjson1_serializeOpHttpBindingsDescribeBotRecommendationInput(v *Descr
 	}
 	if v.LocaleId != nil {
 		if err := encoder.SetURI("localeId").String(*v.LocaleId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeBotReplica struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeBotReplica) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeBotReplica) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeBotReplicaInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/replicas/{replicaRegion}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeBotReplicaInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeBotReplicaInput(v *DescribeBotReplicaInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicaRegion == nil || len(*v.ReplicaRegion) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member replicaRegion must not be empty")}
+	}
+	if v.ReplicaRegion != nil {
+		if err := encoder.SetURI("replicaRegion").String(*v.ReplicaRegion); err != nil {
 			return err
 		}
 	}
@@ -4603,6 +4839,108 @@ func awsRestjson1_serializeOpDocumentListBotAliasesInput(v *ListBotAliasesInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpListBotAliasReplicas struct {
+}
+
+func (*awsRestjson1_serializeOpListBotAliasReplicas) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListBotAliasReplicas) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListBotAliasReplicasInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/replicas/{replicaRegion}/botaliases")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListBotAliasReplicasInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListBotAliasReplicasInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListBotAliasReplicasInput(v *ListBotAliasReplicasInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicaRegion == nil || len(*v.ReplicaRegion) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member replicaRegion must not be empty")}
+	}
+	if v.ReplicaRegion != nil {
+		if err := encoder.SetURI("replicaRegion").String(*v.ReplicaRegion); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListBotAliasReplicasInput(v *ListBotAliasReplicasInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListBotLocales struct {
 }
 
@@ -4830,6 +5168,71 @@ func awsRestjson1_serializeOpDocumentListBotRecommendationsInput(v *ListBotRecom
 	return nil
 }
 
+type awsRestjson1_serializeOpListBotReplicas struct {
+}
+
+func (*awsRestjson1_serializeOpListBotReplicas) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListBotReplicas) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListBotReplicasInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/replicas")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListBotReplicasInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListBotReplicasInput(v *ListBotReplicasInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListBotResourceGenerations struct {
 }
 
@@ -5035,6 +5438,115 @@ func awsRestjson1_serializeOpDocumentListBotsInput(v *ListBotsInput, value smith
 	if v.SortBy != nil {
 		ok := object.Key("sortBy")
 		if err := awsRestjson1_serializeDocumentBotSortBy(v.SortBy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListBotVersionReplicas struct {
+}
+
+func (*awsRestjson1_serializeOpListBotVersionReplicas) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListBotVersionReplicas) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListBotVersionReplicasInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/replicas/{replicaRegion}/botversions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListBotVersionReplicasInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListBotVersionReplicasInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListBotVersionReplicasInput(v *ListBotVersionReplicasInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicaRegion == nil || len(*v.ReplicaRegion) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member replicaRegion must not be empty")}
+	}
+	if v.ReplicaRegion != nil {
+		if err := encoder.SetURI("replicaRegion").String(*v.ReplicaRegion); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListBotVersionReplicasInput(v *ListBotVersionReplicasInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.SortBy != nil {
+		ok := object.Key("sortBy")
+		if err := awsRestjson1_serializeDocumentBotVersionReplicaSortBy(v.SortBy, ok); err != nil {
 			return err
 		}
 	}
@@ -10746,6 +11258,23 @@ func awsRestjson1_serializeDocumentBotVersionLocaleSpecification(v map[string]ty
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBotVersionReplicaSortBy(v *types.BotVersionReplicaSortBy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Attribute) > 0 {
+		ok := object.Key("attribute")
+		ok.String(string(v.Attribute))
+	}
+
+	if len(v.Order) > 0 {
+		ok := object.Key("order")
+		ok.String(string(v.Order))
+	}
+
 	return nil
 }
 

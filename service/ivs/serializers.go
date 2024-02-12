@@ -332,6 +332,11 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.String(*v.Name)
 	}
 
+	if v.PlaybackRestrictionPolicyArn != nil {
+		ok := object.Key("playbackRestrictionPolicyArn")
+		ok.String(*v.PlaybackRestrictionPolicyArn)
+	}
+
 	if len(v.Preset) > 0 {
 		ok := object.Key("preset")
 		ok.String(string(v.Preset))
@@ -352,6 +357,107 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreatePlaybackRestrictionPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpCreatePlaybackRestrictionPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreatePlaybackRestrictionPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreatePlaybackRestrictionPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/CreatePlaybackRestrictionPolicy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreatePlaybackRestrictionPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreatePlaybackRestrictionPolicyInput(v *CreatePlaybackRestrictionPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreatePlaybackRestrictionPolicyInput(v *CreatePlaybackRestrictionPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedCountries != nil {
+		ok := object.Key("allowedCountries")
+		if err := awsRestjson1_serializeDocumentPlaybackRestrictionPolicyAllowedCountryList(v.AllowedCountries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedOrigins != nil {
+		ok := object.Key("allowedOrigins")
+		if err := awsRestjson1_serializeDocumentPlaybackRestrictionPolicyAllowedOriginList(v.AllowedOrigins, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnableStrictOriginEnforcement != nil {
+		ok := object.Key("enableStrictOriginEnforcement")
+		ok.Boolean(*v.EnableStrictOriginEnforcement)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -697,6 +803,81 @@ func awsRestjson1_serializeOpDocumentDeletePlaybackKeyPairInput(v *DeletePlaybac
 	return nil
 }
 
+type awsRestjson1_serializeOpDeletePlaybackRestrictionPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpDeletePlaybackRestrictionPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeletePlaybackRestrictionPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeletePlaybackRestrictionPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/DeletePlaybackRestrictionPolicy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDeletePlaybackRestrictionPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeletePlaybackRestrictionPolicyInput(v *DeletePlaybackRestrictionPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDeletePlaybackRestrictionPolicyInput(v *DeletePlaybackRestrictionPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteRecordingConfiguration struct {
 }
 
@@ -986,6 +1167,81 @@ func awsRestjson1_serializeOpHttpBindingsGetPlaybackKeyPairInput(v *GetPlaybackK
 }
 
 func awsRestjson1_serializeOpDocumentGetPlaybackKeyPairInput(v *GetPlaybackKeyPairInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetPlaybackRestrictionPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpGetPlaybackRestrictionPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetPlaybackRestrictionPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPlaybackRestrictionPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetPlaybackRestrictionPolicy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetPlaybackRestrictionPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetPlaybackRestrictionPolicyInput(v *GetPlaybackRestrictionPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetPlaybackRestrictionPolicyInput(v *GetPlaybackRestrictionPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1461,6 +1717,11 @@ func awsRestjson1_serializeOpDocumentListChannelsInput(v *ListChannelsInput, val
 		ok.String(*v.FilterByName)
 	}
 
+	if v.FilterByPlaybackRestrictionPolicyArn != nil {
+		ok := object.Key("filterByPlaybackRestrictionPolicyArn")
+		ok.String(*v.FilterByPlaybackRestrictionPolicyArn)
+	}
+
 	if v.FilterByRecordingConfigurationArn != nil {
 		ok := object.Key("filterByRecordingConfigurationArn")
 		ok.String(*v.FilterByRecordingConfigurationArn)
@@ -1543,6 +1804,86 @@ func awsRestjson1_serializeOpHttpBindingsListPlaybackKeyPairsInput(v *ListPlayba
 }
 
 func awsRestjson1_serializeOpDocumentListPlaybackKeyPairsInput(v *ListPlaybackKeyPairsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListPlaybackRestrictionPolicies struct {
+}
+
+func (*awsRestjson1_serializeOpListPlaybackRestrictionPolicies) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListPlaybackRestrictionPolicies) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListPlaybackRestrictionPoliciesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ListPlaybackRestrictionPolicies")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListPlaybackRestrictionPoliciesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListPlaybackRestrictionPoliciesInput(v *ListPlaybackRestrictionPoliciesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListPlaybackRestrictionPoliciesInput(v *ListPlaybackRestrictionPoliciesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2454,6 +2795,11 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		ok.String(*v.Name)
 	}
 
+	if v.PlaybackRestrictionPolicyArn != nil {
+		ok := object.Key("playbackRestrictionPolicyArn")
+		ok.String(*v.PlaybackRestrictionPolicyArn)
+	}
+
 	if len(v.Preset) > 0 {
 		ok := object.Key("preset")
 		ok.String(string(v.Preset))
@@ -2467,6 +2813,105 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdatePlaybackRestrictionPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpUpdatePlaybackRestrictionPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdatePlaybackRestrictionPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdatePlaybackRestrictionPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/UpdatePlaybackRestrictionPolicy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdatePlaybackRestrictionPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdatePlaybackRestrictionPolicyInput(v *UpdatePlaybackRestrictionPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdatePlaybackRestrictionPolicyInput(v *UpdatePlaybackRestrictionPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedCountries != nil {
+		ok := object.Key("allowedCountries")
+		if err := awsRestjson1_serializeDocumentPlaybackRestrictionPolicyAllowedCountryList(v.AllowedCountries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedOrigins != nil {
+		ok := object.Key("allowedOrigins")
+		if err := awsRestjson1_serializeDocumentPlaybackRestrictionPolicyAllowedOriginList(v.AllowedOrigins, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.EnableStrictOriginEnforcement != nil {
+		ok := object.Key("enableStrictOriginEnforcement")
+		ok.Boolean(*v.EnableStrictOriginEnforcement)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	return nil
@@ -2529,6 +2974,28 @@ func awsRestjson1_serializeDocumentDestinationConfiguration(v *types.Destination
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPlaybackRestrictionPolicyAllowedCountryList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPlaybackRestrictionPolicyAllowedOriginList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

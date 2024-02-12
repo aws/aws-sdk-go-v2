@@ -1,3 +1,7 @@
+# v1.4.0 (2024-01-30)
+
+* **Feature**: Add new skipDeletionCheck to DeleteDomain. Add new skipDeletionCheck to DeleteProject which also automatically deletes dependent objects
+
 # v1.3.7 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

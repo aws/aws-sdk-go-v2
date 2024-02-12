@@ -671,6 +671,26 @@ func validateCrlConfiguration(v *types.CrlConfiguration) error {
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
+	if v.CrlDistributionPointExtensionConfiguration != nil {
+		if err := validateCrlDistributionPointExtensionConfiguration(v.CrlDistributionPointExtensionConfiguration); err != nil {
+			invalidParams.AddNested("CrlDistributionPointExtensionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCrlDistributionPointExtensionConfiguration(v *types.CrlDistributionPointExtensionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CrlDistributionPointExtensionConfiguration"}
+	if v.OmitExtension == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OmitExtension"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

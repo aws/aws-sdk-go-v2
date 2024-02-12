@@ -3609,6 +3609,30 @@ func awsAwsjson11_serializeDocumentLocationFilters(v []types.LocationFilter, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentManifestConfig(v *types.ManifestConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("Action")
+		ok.String(string(v.Action))
+	}
+
+	if len(v.Format) > 0 {
+		ok := object.Key("Format")
+		ok.String(string(v.Format))
+	}
+
+	if v.Source != nil {
+		ok := object.Key("Source")
+		if err := awsAwsjson11_serializeDocumentSourceManifestConfig(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNfsMountOptions(v *types.NfsMountOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3878,6 +3902,33 @@ func awsAwsjson11_serializeDocumentS3Config(v *types.S3Config, value smithyjson.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentS3ManifestConfig(v *types.S3ManifestConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketAccessRoleArn != nil {
+		ok := object.Key("BucketAccessRoleArn")
+		ok.String(*v.BucketAccessRoleArn)
+	}
+
+	if v.ManifestObjectPath != nil {
+		ok := object.Key("ManifestObjectPath")
+		ok.String(*v.ManifestObjectPath)
+	}
+
+	if v.ManifestObjectVersionId != nil {
+		ok := object.Key("ManifestObjectVersionId")
+		ok.String(*v.ManifestObjectVersionId)
+	}
+
+	if v.S3BucketArn != nil {
+		ok := object.Key("S3BucketArn")
+		ok.String(*v.S3BucketArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSmbMountOptions(v *types.SmbMountOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3885,6 +3936,20 @@ func awsAwsjson11_serializeDocumentSmbMountOptions(v *types.SmbMountOptions, val
 	if len(v.Version) > 0 {
 		ok := object.Key("Version")
 		ok.String(string(v.Version))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSourceManifestConfig(v *types.SourceManifestConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3 != nil {
+		ok := object.Key("S3")
+		if err := awsAwsjson11_serializeDocumentS3ManifestConfig(v.S3, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4668,6 +4733,13 @@ func awsAwsjson11_serializeOpDocumentCreateTaskInput(v *CreateTaskInput, value s
 		}
 	}
 
+	if v.ManifestConfig != nil {
+		ok := object.Key("ManifestConfig")
+		if err := awsAwsjson11_serializeDocumentManifestConfig(v.ManifestConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -5251,6 +5323,13 @@ func awsAwsjson11_serializeOpDocumentStartTaskExecutionInput(v *StartTaskExecuti
 		}
 	}
 
+	if v.ManifestConfig != nil {
+		ok := object.Key("ManifestConfig")
+		if err := awsAwsjson11_serializeDocumentManifestConfig(v.ManifestConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OverrideOptions != nil {
 		ok := object.Key("OverrideOptions")
 		if err := awsAwsjson11_serializeDocumentOptions(v.OverrideOptions, ok); err != nil {
@@ -5695,6 +5774,13 @@ func awsAwsjson11_serializeOpDocumentUpdateTaskInput(v *UpdateTaskInput, value s
 	if v.Includes != nil {
 		ok := object.Key("Includes")
 		if err := awsAwsjson11_serializeDocumentFilterList(v.Includes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ManifestConfig != nil {
+		ok := object.Key("ManifestConfig")
+		if err := awsAwsjson11_serializeDocumentManifestConfig(v.ManifestConfig, ok); err != nil {
 			return err
 		}
 	}

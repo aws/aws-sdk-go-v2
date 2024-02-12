@@ -1826,8 +1826,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
-                    "max": 20
+                    "min": 1
                 }
             }
         },
@@ -4518,8 +4517,7 @@
                 "DeviceSerialNumber": {
                     "target": "com.amazonaws.outposts#DeviceSerialNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p> The serial number of the dongle. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The serial number of the dongle. </p>"
                     }
                 },
                 "AssetId": {

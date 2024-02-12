@@ -11964,6 +11964,15 @@ func awsAwsjson11_deserializeDocumentGatewayInfo(v **types.GatewayInfo, value in
 
 	for key, value := range shape {
 		switch key {
+		case "DeprecationDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeprecationDate to be of type string, got %T instead", value)
+				}
+				sv.DeprecationDate = ptr.String(jtv)
+			}
+
 		case "Ec2InstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12043,6 +12052,15 @@ func awsAwsjson11_deserializeDocumentGatewayInfo(v **types.GatewayInfo, value in
 					return fmt.Errorf("expected HostEnvironmentId to be of type string, got %T instead", value)
 				}
 				sv.HostEnvironmentId = ptr.String(jtv)
+			}
+
+		case "SoftwareVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SoftwareVersion to be of type string, got %T instead", value)
+				}
+				sv.SoftwareVersion = ptr.String(jtv)
 			}
 
 		default:

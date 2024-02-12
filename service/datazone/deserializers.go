@@ -4084,6 +4084,11 @@ func awsRestjson1_deserializeOpDocumentCreateProjectOutput(v **CreateProjectOutp
 				sv.DomainId = ptr.String(jtv)
 			}
 
+		case "failureReasons":
+			if err := awsRestjson1_deserializeDocumentFailureReasons(&sv.FailureReasons, value); err != nil {
+				return err
+			}
+
 		case "glossaryTerms":
 			if err := awsRestjson1_deserializeDocumentGlossaryTerms(&sv.GlossaryTerms, value); err != nil {
 				return err
@@ -4118,6 +4123,15 @@ func awsRestjson1_deserializeOpDocumentCreateProjectOutput(v **CreateProjectOutp
 					return fmt.Errorf("expected ProjectName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProjectStatus to be of type string, got %T instead", value)
+				}
+				sv.ProjectStatus = types.ProjectStatus(jtv)
 			}
 
 		default:
@@ -11517,6 +11531,11 @@ func awsRestjson1_deserializeOpDocumentGetProjectOutput(v **GetProjectOutput, va
 				sv.DomainId = ptr.String(jtv)
 			}
 
+		case "failureReasons":
+			if err := awsRestjson1_deserializeDocumentFailureReasons(&sv.FailureReasons, value); err != nil {
+				return err
+			}
+
 		case "glossaryTerms":
 			if err := awsRestjson1_deserializeDocumentGlossaryTerms(&sv.GlossaryTerms, value); err != nil {
 				return err
@@ -11551,6 +11570,15 @@ func awsRestjson1_deserializeOpDocumentGetProjectOutput(v **GetProjectOutput, va
 					return fmt.Errorf("expected ProjectName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProjectStatus to be of type string, got %T instead", value)
+				}
+				sv.ProjectStatus = types.ProjectStatus(jtv)
 			}
 
 		default:
@@ -20067,6 +20095,11 @@ func awsRestjson1_deserializeOpDocumentUpdateProjectOutput(v **UpdateProjectOutp
 				sv.DomainId = ptr.String(jtv)
 			}
 
+		case "failureReasons":
+			if err := awsRestjson1_deserializeDocumentFailureReasons(&sv.FailureReasons, value); err != nil {
+				return err
+			}
+
 		case "glossaryTerms":
 			if err := awsRestjson1_deserializeDocumentGlossaryTerms(&sv.GlossaryTerms, value); err != nil {
 				return err
@@ -20101,6 +20134,15 @@ func awsRestjson1_deserializeOpDocumentUpdateProjectOutput(v **UpdateProjectOutp
 					return fmt.Errorf("expected ProjectName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProjectStatus to be of type string, got %T instead", value)
+				}
+				sv.ProjectStatus = types.ProjectStatus(jtv)
 			}
 
 		default:
@@ -24776,6 +24818,40 @@ func awsRestjson1_deserializeDocumentFailureCause(v **types.FailureCause, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFailureReasons(v *[]types.ProjectDeletionError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ProjectDeletionError
+	if *v == nil {
+		cv = []types.ProjectDeletionError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ProjectDeletionError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentProjectDeletionError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFilterExpression(v **types.FilterExpression, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26399,6 +26475,55 @@ func awsRestjson1_deserializeDocumentPredictionConfiguration(v **types.Predictio
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentProjectDeletionError(v **types.ProjectDeletionError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProjectDeletionError
+	if *v == nil {
+		sv = &types.ProjectDeletionError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentProjectMember(v **types.ProjectMember, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26574,6 +26699,11 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 				sv.DomainId = ptr.String(jtv)
 			}
 
+		case "failureReasons":
+			if err := awsRestjson1_deserializeDocumentFailureReasons(&sv.FailureReasons, value); err != nil {
+				return err
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26590,6 +26720,15 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 					return fmt.Errorf("expected ProjectName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProjectStatus to be of type string, got %T instead", value)
+				}
+				sv.ProjectStatus = types.ProjectStatus(jtv)
 			}
 
 		case "updatedAt":

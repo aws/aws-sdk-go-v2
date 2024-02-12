@@ -15,7 +15,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "smithy.api#String"
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23,9 +26,82 @@
                     "code": "AccessDeniedException",
                     "httpResponseCode": 403
                 },
-                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action. </p>",
+                "smithy.api#documentation": "<p>You don't have sufficient access permissions to perform this action. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.keyspaces#AutoScalingPolicy": {
+            "type": "structure",
+            "members": {
+                "targetTrackingScalingPolicyConfiguration": {
+                    "target": "com.amazonaws.keyspaces#TargetTrackingScalingPolicyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Auto scaling scales up capacity automatically when traffic exceeds this target utilization rate, and then back down \n         when it falls below the target. A <code>double</code> between 20 and 90.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon Keyspaces supports the <code>target tracking</code> auto scaling policy. With this policy, Amazon Keyspaces auto scaling\n         ensures that the table's ratio of consumed to provisioned capacity stays at or near the target value that you specify. You \n         define the target value as a percentage between 20 and 90.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#AutoScalingSettings": {
+            "type": "structure",
+            "members": {
+                "autoScalingDisabled": {
+                    "target": "com.amazonaws.keyspaces#BooleanObject",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>This optional parameter enables auto scaling for the table if set to <code>false</code>.</p>"
+                    }
+                },
+                "minimumUnits": {
+                    "target": "com.amazonaws.keyspaces#CapacityUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum level of throughput the table should always be ready to support. The value must be between 1 \n         and the max throughput per second quota for your account (40,000 by default).</p>"
+                    }
+                },
+                "maximumUnits": {
+                    "target": "com.amazonaws.keyspaces#CapacityUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Manage costs by specifying the maximum amount of throughput to provision. The value must be between 1 \n         and the max throughput per second quota for your account (40,000 by default).</p>"
+                    }
+                },
+                "scalingPolicy": {
+                    "target": "com.amazonaws.keyspaces#AutoScalingPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Keyspaces supports the <code>target tracking</code> auto scaling policy. With this policy, Amazon Keyspaces auto scaling\n      ensures that the table's ratio of consumed to provisioned capacity stays at or near the target value that you specify. You \n      define the target value as a percentage between 20 and 90.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The optional auto scaling settings for a table with provisioned throughput capacity.</p>\n         <p>To turn on auto scaling for a table in <code>throughputMode:PROVISIONED</code>, \n         you must specify the following parameters. </p>\n         <p>Configure the minimum and maximum units for write and read capacity. The auto scaling policy ensures that capacity never goes below the \n         minimum or above the maximum range.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>minimumUnits</code>: The minimum level of throughput the table should always be ready to support. The value must be between 1 \n            and the max throughput per second quota for your account (40,000 by default).</p>\n            </li>\n            <li>\n               <p>\n                  <code>maximumUnits</code>: The maximum level of throughput the table should always be ready to\n               support. The value must be between 1 and the max throughput per second quota for your\n               account (40,000 by default).</p>\n            </li>\n            <li>\n               <p>\n                  <code>scalingPolicy</code>: Amazon Keyspaces supports the <code>target tracking</code> scaling policy. \n           The auto scaling target is the provisioned read and write capacity of the table. \n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>targetTrackingScalingPolicyConfiguration</code>: To define the target tracking policy, you must define the target value.\n               </p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>targetValue</code>: The target utilization rate of the table. Amazon Keyspaces auto scaling ensures that the ratio of\n                        consumed capacity to provisioned capacity stays at or near this value. You\n                        define <code>targetValue</code> as a percentage. A <code>double</code> between 20 and 90. (Required)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>disableScaleIn</code>: A <code>boolean</code> that specifies if <code>scale-in</code> is\n                           disabled or enabled for the table. This parameter is disabled by default.\n                           To turn on <code>scale-in</code>, set the <code>boolean</code> value to\n                              <code>FALSE</code>. This means that capacity for a table can be\n                           automatically scaled down on your behalf. (Optional) </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>scaleInCooldown</code>: A cooldown period in seconds between scaling activities that lets the table stabilize \n                        before another scale in activity starts. If no value is provided, the default is 0. (Optional) </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>scaleOutCooldown</code>: A cooldown period in seconds between scaling activities that lets the table stabilize \n                        before another scale out activity starts. If no value is provided, the default is 0. (Optional) </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#AutoScalingSpecification": {
+            "type": "structure",
+            "members": {
+                "writeCapacityAutoScaling": {
+                    "target": "com.amazonaws.keyspaces#AutoScalingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto scaling settings for the table's write capacity.</p>"
+                    }
+                },
+                "readCapacityAutoScaling": {
+                    "target": "com.amazonaws.keyspaces#AutoScalingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto scaling settings for the table's read capacity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The optional auto scaling settings for read and write capacity of a table in provisioned capacity mode.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#BooleanObject": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.keyspaces#CapacitySpecification": {
@@ -202,7 +278,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "smithy.api#String"
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                    }
                 }
             },
             "traits": {
@@ -210,7 +289,7 @@
                     "code": "ConflictException",
                     "httpResponseCode": 409
                 },
-                "smithy.api#documentation": "<p>Amazon Keyspaces could not complete the requested action. This error may occur if you try to \n         perform an action and the same or a different action is already\n         in progress, or if you try to create a resource that already exists. </p>",
+                "smithy.api#documentation": "<p>Amazon Keyspaces couldn't complete the requested action. This error may occur if you try to \n         perform an action and the same or a different action is already\n         in progress, or if you try to create a resource that already exists. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -383,6 +462,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         Enables client-side timestamps for the table. By default, the setting is disabled. You can enable \n            client-side timestamps with the following option:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status: \"enabled\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>Once client-side timestamps are enabled for a table, this setting cannot be disabled.</p>"
                     }
+                },
+                "autoScalingSpecification": {
+                    "target": "com.amazonaws.keyspaces#AutoScalingSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional auto scaling settings for a table in provisioned capacity mode. Specifies if the service can manage throughput capacity \n         automatically on your behalf.</p>\n         <p>Auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing \n         your table's read and write capacity automatically in response to application traffic. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>By default, auto scaling is disabled for a table. </p>"
+                    }
+                },
+                "replicaSpecifications": {
+                    "target": "com.amazonaws.keyspaces#ReplicaSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional Amazon Web Services Region specific settings of a multi-Region table.\n         These settings overwrite the general settings of the table for the specified Region. </p>\n         <p>For a multi-Region table in provisioned capacity mode, you can configure the table's read capacity differently for each Region's replica. The write capacity, however, \n         remains synchronized between all replicas to ensure that there's enough capacity to replicate writes across all Regions. To define the read capacity for a table \n         replica in a specific Region, you can do so by configuring the following parameters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>region</code>: The Region where these settings are applied. (Required)</p>\n            </li>\n            <li>\n               <p>\n                  <code>readCapacityUnits</code>: The provisioned read capacity units. (Optional)</p>\n            </li>\n            <li>\n               <p>\n                  <code>readCapacityAutoScaling</code>: The read capacity auto scaling settings for the table. (Optional) </p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -402,7 +493,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
+                    "min": 0,
                     "max": 630720000
                 }
             }
@@ -509,6 +600,12 @@
         "com.amazonaws.keyspaces#DeleteTableResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.keyspaces#DoubleObject": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.keyspaces#EncryptionSpecification": {
             "type": "structure",
@@ -651,6 +748,98 @@
                 "smithy.api#documentation": "<p>Returns information about the table, including the table's name and current status, the keyspace name, \n         configuration settings, and metadata.</p>\n         <p>To read table metadata using <code>GetTable</code>, <code>Select</code> action \n         permissions for the table and system tables are required to complete the operation.</p>"
             }
         },
+        "com.amazonaws.keyspaces#GetTableAutoScalingSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.keyspaces#GetTableAutoScalingSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.keyspaces#GetTableAutoScalingSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.keyspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns auto scaling related settings of the specified table in JSON format. If the table is a multi-Region table, the \n         Amazon Web Services Region specific auto scaling settings of the table are included.</p>\n         <p>Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing \n         your table's read and write capacity automatically in response to application traffic. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#GetTableAutoScalingSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspaces#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the keyspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tableName": {
+                    "target": "com.amazonaws.keyspaces#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.keyspaces#GetTableAutoScalingSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspaces#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the keyspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tableName": {
+                    "target": "com.amazonaws.keyspaces#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.keyspaces#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "autoScalingSpecification": {
+                    "target": "com.amazonaws.keyspaces#AutoScalingSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto scaling settings of the table.</p>"
+                    }
+                },
+                "replicaSpecifications": {
+                    "target": "com.amazonaws.keyspaces#ReplicaAutoScalingSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region specific settings of a multi-Region table. Returns the settings for all Regions the table is replicated in.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.keyspaces#GetTableRequest": {
             "type": "structure",
             "members": {
@@ -753,14 +942,29 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The client-side timestamps setting of the table.</p>"
                     }
+                },
+                "replicaSpecifications": {
+                    "target": "com.amazonaws.keyspaces#ReplicaSpecificationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the Amazon Web Services Region specific settings of all Regions a multi-Region table is replicated in.</p>"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.keyspaces#IntegerObject": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
             }
         },
         "com.amazonaws.keyspaces#InternalServerException": {
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "smithy.api#String"
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                    }
                 }
             },
             "traits": {
@@ -847,6 +1051,9 @@
                     "target": "com.amazonaws.keyspaces#GetTable"
                 },
                 {
+                    "target": "com.amazonaws.keyspaces#GetTableAutoScalingSettings"
+                },
+                {
                     "target": "com.amazonaws.keyspaces#ListKeyspaces"
                 },
                 {
@@ -924,7 +1131,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -967,7 +1173,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -980,7 +1187,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -994,7 +1200,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -1017,7 +1222,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1052,7 +1256,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1063,14 +1266,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1084,14 +1289,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -1100,18 +1303,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -1120,7 +1322,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -1140,14 +1343,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1161,7 +1366,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1181,7 +1385,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1192,14 +1395,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -1210,9 +1415,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2126,6 +2333,109 @@
                 }
             }
         },
+        "com.amazonaws.keyspaces#ReplicaAutoScalingSpecification": {
+            "type": "structure",
+            "members": {
+                "region": {
+                    "target": "com.amazonaws.keyspaces#region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>"
+                    }
+                },
+                "autoScalingSpecification": {
+                    "target": "com.amazonaws.keyspaces#AutoScalingSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto scaling settings for a multi-Region table in the specified Amazon Web Services Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The auto scaling settings of a multi-Region table in the specified Amazon Web Services Region.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#ReplicaAutoScalingSpecificationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspaces#ReplicaAutoScalingSpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.keyspaces#ReplicaSpecification": {
+            "type": "structure",
+            "members": {
+                "region": {
+                    "target": "com.amazonaws.keyspaces#region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "readCapacityUnits": {
+                    "target": "com.amazonaws.keyspaces#CapacityUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioned read capacity units for the multi-Region table in the specified Amazon Web Services Region.</p>"
+                    }
+                },
+                "readCapacityAutoScaling": {
+                    "target": "com.amazonaws.keyspaces#AutoScalingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The read capacity auto scaling settings for the multi-Region\n         table in the specified Amazon Web Services Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Web Services Region specific settings of a multi-Region table.</p>\n         <p>For a multi-Region table, you can configure the table's read capacity differently per Amazon Web Services Region. You can do this by configuring the following parameters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>region</code>: The Region where these settings are applied. (Required)</p>\n            </li>\n            <li>\n               <p>\n                  <code>readCapacityUnits</code>: The provisioned read capacity units. (Optional)</p>\n            </li>\n            <li>\n               <p>\n                  <code>readCapacityAutoScaling</code>: The read capacity auto scaling settings for the table. (Optional)</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.keyspaces#ReplicaSpecificationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspaces#ReplicaSpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.keyspaces#ReplicaSpecificationSummary": {
+            "type": "structure",
+            "members": {
+                "region": {
+                    "target": "com.amazonaws.keyspaces#region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.keyspaces#TableStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the multi-Region table in the specified Amazon Web Services Region.</p>"
+                    }
+                },
+                "capacitySpecification": {
+                    "target": "com.amazonaws.keyspaces#CapacitySpecificationSummary"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Region-specific settings of a multi-Region table in the specified Amazon Web Services Region.</p>\n         <p>If the multi-Region table is using provisioned capacity and has optional auto scaling policies configured, note that\n      the Region specific summary returns both read and write capacity settings. But only Region specific read capacity settings can be configured for a \n      multi-Region table. In a multi-Region table, your write capacity units will be synced across all Amazon Web Services Regions to ensure that there is enough \n      capacity to replicate write events across Regions.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#ReplicaSpecificationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspaces#ReplicaSpecificationSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.keyspaces#ReplicationSpecification": {
             "type": "structure",
             "members": {
@@ -2151,7 +2461,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "smithy.api#String"
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                    }
                 },
                 "resourceArn": {
                     "target": "com.amazonaws.keyspaces#ARN",
@@ -2199,7 +2512,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restores the specified table to the specified point in time within the\n         <code>earliest_restorable_timestamp</code> and the current time. For more information about restore points, see \n         <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_window\">\n            Time window for PITR continuous backups</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>\n         <p>Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.</p>\n         <p>When you restore using point in time recovery,\n         Amazon Keyspaces restores your source table's schema and data to the state \n         based on the selected timestamp <code>(day:hour:minute:second)</code> to a new table. The Time to Live (TTL) settings\n      are also restored to the state based on the selected timestamp.</p>\n         <p>In addition to the table's schema, data, and TTL settings,\n         <code>RestoreTable</code> restores the capacity mode, encryption, and\n         point-in-time recovery settings from the source table. \n         Unlike the table's schema data and TTL settings, which are restored based on the selected timestamp, \n         these settings are always restored based on the table's settings as of the current time or when the table was deleted.</p>\n         <p>You can also overwrite\n            these settings during restore:</p>\n         <ul>\n            <li>\n               <p>Read/write capacity mode</p>\n            </li>\n            <li>\n               <p>Provisioned throughput capacity settings</p>\n            </li>\n            <li>\n               <p>Point-in-time (PITR) settings</p>\n            </li>\n            <li>\n               <p>Tags</p>\n            </li>\n         </ul>\n         <p>For more \n               information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_settings\">PITR restore settings</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>Note that the following settings are not restored, and you must configure them manually for\n         the new table:</p>\n         <ul>\n            <li>\n               <p>Automatic scaling policies (for tables that use provisioned capacity\n            mode)</p>\n            </li>\n            <li>\n               <p>Identity and Access Management (IAM) policies</p>\n            </li>\n            <li>\n               <p>Amazon CloudWatch metrics and alarms</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Restores the table to the specified point in time within the\n         <code>earliest_restorable_timestamp</code> and the current time. For more information about restore points, see \n         <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_window\">\n            Time window for PITR continuous backups</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>\n         <p>Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.</p>\n         <p>When you restore using point in time recovery,\n         Amazon Keyspaces restores your source table's schema and data to the state \n         based on the selected timestamp <code>(day:hour:minute:second)</code> to a new table. The Time to Live (TTL) settings\n      are also restored to the state based on the selected timestamp.</p>\n         <p>In addition to the table's schema, data, and TTL settings,\n         <code>RestoreTable</code> restores the capacity mode, auto scaling settings, encryption settings, and\n         point-in-time recovery settings from the source table. \n         Unlike the table's schema data and TTL settings, which are restored based on the selected timestamp, \n         these settings are always restored based on the table's settings as of the current time or when the table was deleted.</p>\n         <p>You can also overwrite\n            these settings during restore:</p>\n         <ul>\n            <li>\n               <p>Read/write capacity mode</p>\n            </li>\n            <li>\n               <p>Provisioned throughput capacity units</p>\n            </li>\n            <li>\n               <p>Auto scaling settings</p>\n            </li>\n            <li>\n               <p>Point-in-time (PITR) settings</p>\n            </li>\n            <li>\n               <p>Tags</p>\n            </li>\n         </ul>\n         <p>For more \n               information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_settings\">PITR restore settings</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>Note that the following settings are not restored, and you must configure them manually for\n         the new table:</p>\n         <ul>\n            <li>\n               <p>Identity and Access Management (IAM) policies</p>\n            </li>\n            <li>\n               <p>Amazon CloudWatch metrics and alarms</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.keyspaces#RestoreTableRequest": {
@@ -2262,6 +2575,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pair tags to be\n         attached to the restored table. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
+                },
+                "autoScalingSpecification": {
+                    "target": "com.amazonaws.keyspaces#AutoScalingSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional auto scaling settings for the restored table in provisioned capacity mode. \n         Specifies if the service can manage throughput capacity of a provisioned table \n         automatically on your behalf.\n         Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing \n         your table's read and write capacity automatically in response to application traffic.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                    }
+                },
+                "replicaSpecifications": {
+                    "target": "com.amazonaws.keyspaces#ReplicaSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional Region specific settings of a multi-Regional table.</p>"
+                    }
                 }
             }
         },
@@ -2315,7 +2640,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "smithy.api#String"
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2548,6 +2876,43 @@
                 }
             }
         },
+        "com.amazonaws.keyspaces#TargetTrackingScalingPolicyConfiguration": {
+            "type": "structure",
+            "members": {
+                "disableScaleIn": {
+                    "target": "com.amazonaws.keyspaces#BooleanObject",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies if <code>scale-in</code> is enabled.</p>\n         <p>When auto scaling automatically decreases capacity for a table, \n         the table <i>scales in</i>. When scaling policies are set, they can't\n         scale in the table lower than its minimum capacity.</p>"
+                    }
+                },
+                "scaleInCooldown": {
+                    "target": "com.amazonaws.keyspaces#IntegerObject",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Specifies a <code>scale-in</code> cool down period.</p>\n         <p>A cooldown period in seconds between scaling activities that lets the table stabilize before another scaling activity starts. </p>"
+                    }
+                },
+                "scaleOutCooldown": {
+                    "target": "com.amazonaws.keyspaces#IntegerObject",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Specifies a scale out cool down period.</p>\n         <p>A cooldown period in seconds between scaling activities that lets the table stabilize before another scaling activity starts. </p>"
+                    }
+                },
+                "targetValue": {
+                    "target": "com.amazonaws.keyspaces#DoubleObject",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Specifies the target value for the target tracking auto scaling policy.</p>\n         <p>Amazon Keyspaces auto scaling scales up capacity automatically when traffic exceeds this target utilization \n         rate, and then back down when it falls below the target. This ensures that the ratio of\n         consumed capacity to provisioned capacity stays at or near this value. You\n         define <code>targetValue</code> as a percentage. A <code>double</code> between 20 and 90.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The auto scaling policy that scales a table based on the ratio of consumed to provisioned capacity.</p>"
+            }
+        },
         "com.amazonaws.keyspaces#ThroughputMode": {
             "type": "string",
             "traits": {
@@ -2676,7 +3041,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds new columns to the table or updates one of the table's settings, for example\n         capacity mode, encryption, point-in-time recovery, or ttl settings.\n      Note that you can only update one specific table setting per update operation.</p>"
+                "smithy.api#documentation": "<p>Adds new columns to the table or updates one of the table's settings, for example\n         capacity mode, auto scaling, encryption, point-in-time recovery, or ttl settings.\n      Note that you can only update one specific table setting per update operation.</p>"
             }
         },
         "com.amazonaws.keyspaces#UpdateTableRequest": {
@@ -2737,6 +3102,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enables client-side timestamps for the table. By default, the setting is disabled. You can enable \n            client-side timestamps with the following option:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status: \"enabled\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>Once client-side timestamps are enabled for a table, this setting cannot be disabled.</p>"
                     }
+                },
+                "autoScalingSpecification": {
+                    "target": "com.amazonaws.keyspaces#AutoScalingSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional auto scaling settings to update for a table in provisioned capacity mode. \n         Specifies if the service can manage throughput capacity of a provisioned table \n         automatically on your behalf.\n         Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing \n         your table's read and write capacity automatically in response to application traffic.</p>\n         <p>If auto scaling is already enabled for the table, you can use <code>UpdateTable</code> to update the minimum and maximum values or the \n      auto scaling policy settings independently.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html\">Managing throughput capacity automatically with Amazon Keyspaces auto scaling</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                    }
+                },
+                "replicaSpecifications": {
+                    "target": "com.amazonaws.keyspaces#ReplicaSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region specific settings of a multi-Regional table.</p>"
+                    }
                 }
             }
         },
@@ -2756,7 +3133,10 @@
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "smithy.api#String"
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                    }
                 }
             },
             "traits": {

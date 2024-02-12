@@ -3656,6 +3656,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The contribution analysis (anomaly configuration) setup of the visual.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4098,6 +4104,12 @@
                     "target": "com.amazonaws.quicksight#VisualPalette",
                     "traits": {
                         "smithy.api#documentation": "<p>The palette (chart color) display setup of the visual.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
                     }
                 }
             },
@@ -5720,6 +5732,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The palette (chart color) display setup of the visual.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6296,6 +6314,20 @@
                         "smithy.api#enumValue": "COLLECTIVE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#ContextMenuOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability status of the context menu options. If the value of this property is set to <code>ENABLED</code>, dashboard readers can interact with the context menu.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The context menu options for a visual's interactions.</p>"
             }
         },
         "com.amazonaws.quicksight#ContributionAnalysisDefault": {
@@ -9636,6 +9668,12 @@
                     "target": "com.amazonaws.quicksight#CustomContentImageScalingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The sizing options for the size of the custom content visual. This structure is required when the <code>ContentType</code> of the visual is <code>'IMAGE'</code>.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
                     }
                 }
             },
@@ -21523,6 +21561,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The map style options of the filled map visual.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23241,6 +23285,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The visual palette configuration of a <code>FunnelChartVisual</code>.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23526,6 +23576,12 @@
                     "target": "com.amazonaws.quicksight#VisualPalette",
                     "traits": {
                         "smithy.api#documentation": "<p>The visual palette configuration of a <code>GaugeChartVisual</code>.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
                     }
                 }
             },
@@ -24155,6 +24211,12 @@
                 },
                 "VisualPalette": {
                     "target": "com.amazonaws.quicksight#VisualPalette"
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -25146,6 +25208,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tooltip display setup of the visual.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -25401,6 +25469,12 @@
                     "target": "com.amazonaws.quicksight#VisualPalette",
                     "traits": {
                         "smithy.api#documentation": "<p>The visual palette configuration of a histogram.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
                     }
                 }
             },
@@ -26451,6 +26525,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The custom narrative of the insight visual.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -27049,6 +27129,12 @@
                     "target": "com.amazonaws.quicksight#KPIOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The options that determine the presentation of a KPI visual.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
                     }
                 }
             },
@@ -27713,6 +27799,12 @@
                     "target": "com.amazonaws.quicksight#VisualPalette",
                     "traits": {
                         "smithy.api#documentation": "<p>The visual palette configuration of a line chart.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
                     }
                 }
             },
@@ -34438,6 +34530,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The contribution analysis (anomaly configuration) setup of the visual.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -34766,6 +34864,12 @@
                     "target": "com.amazonaws.quicksight#PivotTablePaginatedReportOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The paginated report options for a pivot table visual.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
                     }
                 }
             },
@@ -37364,6 +37468,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The axis behavior options of a radar chart.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -39475,6 +39585,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The data label configuration of a sankey diagram.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -39659,6 +39775,12 @@
                     "target": "com.amazonaws.quicksight#VisualPalette",
                     "traits": {
                         "smithy.api#documentation": "<p>The palette (chart color) display setup of the visual.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
                     }
                 }
             },
@@ -43743,6 +43865,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of inline visualizations to display within a chart.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -47281,6 +47409,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tooltip display setup of the visual.</p>"
                     }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -49457,13 +49591,13 @@
                 "GrantPermissions": {
                     "target": "com.amazonaws.quicksight#ResourcePermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permissions that you want to grant on a resource.</p>"
+                        "smithy.api#documentation": "<p>The permissions that you want to grant on a resource. Namespace ARNs are not supported <code>Principal</code> values for folder permissions.</p>"
                     }
                 },
                 "RevokePermissions": {
                     "target": "com.amazonaws.quicksight#ResourcePermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permissions that you want to revoke from a resource.</p>"
+                        "smithy.api#documentation": "<p>The permissions that you want to revoke from a resource.  Namespace ARNs are not supported <code>Principal</code> values for folder permissions.</p>"
                     }
                 }
             },
@@ -52540,6 +52674,26 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#VisualInteractionOptions": {
+            "type": "structure",
+            "members": {
+                "VisualMenuOption": {
+                    "target": "com.amazonaws.quicksight#VisualMenuOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The on-visual menu options for a visual.</p>"
+                    }
+                },
+                "ContextMenuOption": {
+                    "target": "com.amazonaws.quicksight#ContextMenuOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context menu options for a visual.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The general visual interactions setup for visual publish options</p>"
+            }
+        },
         "com.amazonaws.quicksight#VisualList": {
             "type": "list",
             "member": {
@@ -52676,6 +52830,20 @@
                 "smithy.api#documentation": "<p>The field well configuration of a waterfall visual.</p>"
             }
         },
+        "com.amazonaws.quicksight#WaterfallChartColorConfiguration": {
+            "type": "structure",
+            "members": {
+                "GroupColorConfiguration": {
+                    "target": "com.amazonaws.quicksight#WaterfallChartGroupColorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color configuration for individual groups within a waterfall visual.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The color configuration of a waterfall visual.</p>"
+            }
+        },
         "com.amazonaws.quicksight#WaterfallChartConfiguration": {
             "type": "structure",
             "members": {
@@ -52738,6 +52906,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The visual palette configuration of a waterfall visual.</p>"
                     }
+                },
+                "ColorConfiguration": {
+                    "target": "com.amazonaws.quicksight#WaterfallChartColorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color configuration of a waterfall visual.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -52756,6 +52936,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The field well configuration of a waterfall visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#WaterfallChartGroupColorConfiguration": {
+            "type": "structure",
+            "members": {
+                "PositiveBarColor": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the color for the positive bars of a waterfall chart.</p>"
+                    }
+                },
+                "NegativeBarColor": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the color for the negative bars of a waterfall chart.</p>"
+                    }
+                },
+                "TotalBarColor": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the color for the total bars of a waterfall chart.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The color configuration for individual groups within a waterfall visual.</p>"
             }
         },
         "com.amazonaws.quicksight#WaterfallChartOptions": {
@@ -52952,6 +53158,12 @@
                     "target": "com.amazonaws.quicksight#WordCloudOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The options for a word cloud visual.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general visual interactions setup for a visual.</p>"
                     }
                 }
             },

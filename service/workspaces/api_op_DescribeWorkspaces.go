@@ -58,6 +58,9 @@ type DescribeWorkspacesInput struct {
 	// DescribeWorkspaces with this identifier, no information is returned.
 	WorkspaceIds []string
 
+	// The name of the user-decoupled WorkSpace.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
 }
 

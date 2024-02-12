@@ -1023,6 +1023,9 @@
                     "target": "com.amazonaws.braket#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.braket#DeviceOfflineException"
+                },
+                {
                     "target": "com.amazonaws.braket#DeviceRetiredException"
                 },
                 {
@@ -2285,7 +2288,7 @@
                     "service": "com.amazonaws.braket#Braket",
                     "resource": "com.amazonaws.braket#JobResource"
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:braket:[a-z0-9\\-]*:[0-9]{12}:job/.*$"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:braket:[a-z0-9\\-]+:[0-9]{12}:job/.*$"
             }
         },
         "com.amazonaws.braket#JobCheckpointConfig": {

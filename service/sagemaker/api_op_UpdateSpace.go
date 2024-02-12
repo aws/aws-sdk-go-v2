@@ -30,7 +30,7 @@ func (c *Client) UpdateSpace(ctx context.Context, params *UpdateSpaceInput, optF
 
 type UpdateSpaceInput struct {
 
-	// The ID of the associated Domain.
+	// The ID of the associated domain.
 	//
 	// This member is required.
 	DomainId *string

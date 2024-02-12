@@ -77,9 +77,9 @@ type GetRecommendationsInput struct {
 	// include in item recommendations. The map key is ITEMS and the value is a list
 	// of column names from your Items dataset. The maximum number of columns you can
 	// provide is 10. For information about enabling metadata for a campaign, see
-	// Enabling metadata in recommendations for a campaign (https://docs.aws.amazon.com/personalize/latest/dg/create-campaign-return-metadata.html)
+	// Enabling metadata in recommendations for a campaign (https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata)
 	// . For information about enabling metadata for a recommender, see Enabling
-	// metadata in recommendations for a recommender (https://docs.aws.amazon.com/personalize/latest/dg/create-recommender-return-metadata.html)
+	// metadata in recommendations for a recommender (https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata)
 	// .
 	MetadataColumns map[string][]string
 

@@ -1,3 +1,7 @@
+# v1.31.0 (2024-02-01)
+
+* **Feature**: This release introduces a new resource Playback Restriction Policy which can be used to geo-restrict or domain-restrict channel stream playback when associated with a channel.  New APIs to support this resource were introduced in the form of Create/Delete/Get/Update/List.
+
 # v1.30.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

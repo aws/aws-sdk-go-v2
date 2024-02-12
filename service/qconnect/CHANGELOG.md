@@ -1,3 +1,11 @@
+# v1.3.1 (2024-01-29)
+
+* No change notes available for this release.
+
+# v1.3.0 (2024-01-10)
+
+* **Feature**: QueryAssistant and GetRecommendations will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024 you will need to create a new Assistant in the Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.
+
 # v1.2.4 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

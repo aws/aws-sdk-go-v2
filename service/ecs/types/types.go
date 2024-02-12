@@ -12,7 +12,10 @@ type Attachment struct {
 
 	// Details of the attachment. For elastic network interfaces, this includes the
 	// network interface ID, the MAC address, the subnet ID, and the private IPv4
-	// address.
+	// address. For Service Connect services, this includes portName , clientAliases ,
+	// discoveryName , and ingressPortOverride . For elastic block storage, this
+	// includes roleArn , encrypted , filesystemType , iops , kmsKeyId , sizeInGiB ,
+	// snapshotId , tagSpecifications , throughput , and volumeType .
 	Details []KeyValuePair
 
 	// The unique identifier for the attachment.
@@ -22,7 +25,8 @@ type Attachment struct {
 	// , ATTACHED , DETACHING , DETACHED , DELETED , and FAILED .
 	Status *string
 
-	// The type of the attachment, such as ElasticNetworkInterface .
+	// The type of the attachment, such as ElasticNetworkInterface , Service Connect ,
+	// and AmazonElasticBlockStorage .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -85,8 +89,7 @@ type AutoScalingGroupProvider struct {
 
 	// The managed draining option for the Auto Scaling group capacity provider. When
 	// you enable this, Amazon ECS manages and gracefully drains the EC2 container
-	// instances that are in the Auto Scaling group capacity provider. The default is
-	// ENABLED .
+	// instances that are in the Auto Scaling group capacity provider.
 	ManagedDraining ManagedDraining
 
 	// The managed scaling settings for the Auto Scaling group capacity provider.
@@ -114,8 +117,7 @@ type AutoScalingGroupProviderUpdate struct {
 
 	// The managed draining option for the Auto Scaling group capacity provider. When
 	// you enable this, Amazon ECS manages and gracefully drains the EC2 container
-	// instances that are in the Auto Scaling group capacity provider. The default is
-	// ENABLED .
+	// instances that are in the Auto Scaling group capacity provider.
 	ManagedDraining ManagedDraining
 
 	// The managed scaling settings for the Auto Scaling group capacity provider.
@@ -138,7 +140,9 @@ type AutoScalingGroupProviderUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing the networking details for a task or service.
+// An object representing the networking details for a task or service. For
+// example
+// awsvpcConfiguration={subnets=["subnet-12344321"],securityGroups=["sg-12344321"]}
 type AwsVpcConfiguration struct {
 
 	// The IDs of the subnets associated with the task or service. There's a limit of
@@ -1010,16 +1014,7 @@ type ContainerDefinition struct {
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
 	// and the --sysctl option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
 	// . For example, you can configure net.ipv4.tcp_keepalive_time setting to
-	// maintain longer lived connections. We don't recommended that you specify
-	// network-related systemControls parameters for multiple containers in a single
-	// task that also uses either the awsvpc or host network modes. For tasks that use
-	// the awsvpc network mode, the container that's started last determines which
-	// systemControls parameters take effect. For tasks that use the host network
-	// mode, it changes the container instance's namespaced kernel parameters as well
-	// as the containers. This parameter is not supported for Windows containers. This
-	// parameter is only supported for tasks that are hosted on Fargate if the tasks
-	// are using platform version 1.4.0 or later (Linux). This isn't supported for
-	// Windows containers on Fargate.
+	// maintain longer lived connections.
 	SystemControls []SystemControl
 
 	// A list of ulimits to set in the container. If a ulimit value is specified in a
@@ -1032,7 +1027,7 @@ type ContainerDefinition struct {
 	// system with the exception of the nofile resource limit parameter which Fargate
 	// overrides. The nofile resource limit sets a restriction on the number of open
 	// files that a container can use. The default nofile soft limit is 1024 and the
-	// default hard limit is 4096 . This parameter requires version 1.18 of the Docker
+	// default hard limit is 65535 . This parameter requires version 1.18 of the Docker
 	// Remote API or greater on your container instance. To check the Docker Remote API
 	// version on your container instance, log in to your container instance and run
 	// the following command: sudo docker version --format '{{.Server.APIVersion}}'
@@ -1089,6 +1084,10 @@ type ContainerDefinition struct {
 // Fargate launch type, the task or service requires the following platforms:
 //   - Linux platform version 1.3.0 or later.
 //   - Windows platform version 1.0.0 or later.
+//
+// For more information about how to create a container dependency, see Container
+// dependency (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency)
+// in the Amazon Elastic Container Service Developer Guide.
 type ContainerDependency struct {
 
 	// The dependency condition of the container. The following are the available
@@ -1425,6 +1424,12 @@ type Deployment struct {
 	// The Unix timestamp for the time when the service deployment was last updated.
 	UpdatedAt *time.Time
 
+	// The details of the volume that was configuredAtLaunch . You can configure
+	// different settings like the size, throughput, volumeType, and ecryption in
+	// ServiceManagedEBSVolumeConfiguration (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html)
+	// . The name of the volume must match the name from the task definition.
+	VolumeConfigurations []ServiceVolumeConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1543,7 +1548,7 @@ type DeploymentConfiguration struct {
 	//   healthy when all essential containers within the task have passed their health
 	//   checks. The amount of time the service scheduler can wait for is determined by
 	//   the container health check settings.
-	// For services are that do use a load balancer, the following should be noted:
+	// For services that do use a load balancer, the following should be noted:
 	//   - If a task has no essential containers with a health check defined, the
 	//   service scheduler will wait for the load balancer target group health check to
 	//   return a healthy status before counting the task towards the minimum healthy
@@ -1653,6 +1658,27 @@ type DockerVolumeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The tag specifications of an Amazon EBS volume.
+type EBSTagSpecification struct {
+
+	// The type of volume resource.
+	//
+	// This member is required.
+	ResourceType EBSResourceType
+
+	// Determines whether to propagate the tags from the task definition to  the
+	// Amazon EBS volume. Tags can only propagate to a SERVICE specified in
+	// ServiceVolumeConfiguration . If no value is specified, the tags aren't
+	//  propagated.
+	PropagateTags PropagateTags
+
+	// The tags applied to this Amazon EBS volume. AmazonECSCreated and
+	// AmazonECSManaged are reserved tags that can't be used.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // The authorization configuration details for the Amazon EFS file system.
 type EFSAuthorizationConfig struct {
 
@@ -1752,10 +1778,10 @@ type EnvironmentFile struct {
 
 // The amount of ephemeral storage to allocate for the task. This parameter is
 // used to expand the total amount of ephemeral storage available, beyond the
-// default amount, for tasks hosted on Fargate. For more information, see Fargate
-// task storage (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
-// in the Amazon ECS User Guide for Fargate. For tasks using the Fargate launch
-// type, the task requires the following platforms:
+// default amount, for tasks hosted on Fargate. For more information, see Using
+// data volumes in tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html)
+// in the Amazon ECS Developer Guide;. For tasks using the Fargate launch type, the
+// task requires the following platforms:
 //   - Linux platform version 1.4.0 or later.
 //   - Windows platform version 1.0.0 or later.
 type EphemeralStorage struct {
@@ -2250,7 +2276,8 @@ type LinuxParameters struct {
 type LoadBalancer struct {
 
 	// The name of the container (as it appears in a container definition) to
-	// associate with the load balancer.
+	// associate with the load balancer. You need to specify the container name when
+	// configuring the target group for an Amazon ECS load balancer.
 	ContainerName *string
 
 	// The port on the container to associate with the load balancer. This port must
@@ -3237,6 +3264,14 @@ type ServiceConnectService struct {
 	// proxy.
 	IngressPortOverride *int32
 
+	// A reference to an object that represents the configured timeouts for Service
+	// Connect.
+	Timeout *TimeoutConfiguration
+
+	// A reference to an object that represents a Transport Layer Security (TLS)
+	// configuration.
+	Tls *ServiceConnectTlsConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -3267,6 +3302,34 @@ type ServiceConnectServiceResource struct {
 	noSmithyDocumentSerde
 }
 
+// An object that represents the Amazon Web Services Private Certificate Authority
+// certificate.
+type ServiceConnectTlsCertificateAuthority struct {
+
+	// The ARN of the Amazon Web Services Private Certificate Authority certificate.
+	AwsPcaAuthorityArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the configuration for Service Connect TLS.
+type ServiceConnectTlsConfiguration struct {
+
+	// The signer certificate authority.
+	//
+	// This member is required.
+	IssuerCertificateAuthority *ServiceConnectTlsCertificateAuthority
+
+	// The Amazon Web Services Key Management Service key.
+	KmsKey *string
+
+	// The Amazon Resource Name (ARN) of the IAM role that's associated with the
+	// Service Connect TLS.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The details for an event that's associated with a service.
 type ServiceEvent struct {
 
@@ -3278,6 +3341,108 @@ type ServiceEvent struct {
 
 	// The event message.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the Amazon EBS volume that Amazon ECS creates and manages
+// on your behalf. These settings are used to create each Amazon EBS volume, with
+// one volume created for each task in the service. Many of these parameters map
+// 1:1 with the Amazon EBS CreateVolume API request parameters.
+type ServiceManagedEBSVolumeConfiguration struct {
+
+	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS
+	// infrastructure IAM role that is used to manage your Amazon Web Services
+	// infrastructure. We recommend using the Amazon ECS-managed
+	// AmazonECSInfrastructureRolePolicyForVolumes IAM policy with this role. For more
+	// information, see Amazon ECS infrastructure IAM role (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html)
+	// in the Amazon ECS Developer Guide.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// Indicates whether the volume should be encrypted. If no value is specified,
+	// encryption is turned on by default. This parameter maps 1:1 with the Encrypted
+	// parameter of the CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference.
+	Encrypted *bool
+
+	// The Linux filesystem type for the volume. For volumes created from a snapshot,
+	// you must specify the same filesystem type that the volume was using when the
+	// snapshot was created. If there is a filesystem type mismatch, the task will fail
+	// to start. The available filesystem types are  ext3 , ext4 , and xfs . If no
+	// value is specified, the xfs filesystem type is used by default.
+	FilesystemType TaskFilesystemType
+
+	// The number of I/O operations per second (IOPS). For gp3 , io1 , and io2
+	// volumes, this represents the number of IOPS that are provisioned for the volume.
+	// For gp2 volumes, this represents the baseline performance of the volume and the
+	// rate at which the volume accumulates I/O credits for bursting. The following are
+	// the supported values for each volume type.
+	//   - gp3 : 3,000 - 16,000 IOPS
+	//   - io1 : 100 - 64,000 IOPS
+	//   - io2 : 100 - 256,000 IOPS
+	// This parameter is required for io1 and io2 volume types. The default for gp3
+	// volumes is 3,000 IOPS . This parameter is not supported for st1 , sc1 , or
+	// standard volume types. This parameter maps 1:1 with the Iops parameter of the
+	// CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference.
+	Iops *int32
+
+	// The Amazon Resource Name (ARN) identifier of the Amazon Web Services Key
+	// Management Service key to use for Amazon EBS encryption. When encryption is
+	// turned on and no Amazon Web Services Key Management Service key is specified,
+	// the default Amazon Web Services managed key for Amazon EBS volumes is used. This
+	// parameter maps 1:1 with the KmsKeyId parameter of the CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference. Amazon Web Services authenticates the Amazon
+	// Web Services Key Management Service key asynchronously. Therefore, if you
+	// specify an ID, alias, or ARN that is invalid, the action can appear to complete,
+	// but eventually fails.
+	KmsKeyId *string
+
+	// The size of the volume in GiB. You must specify either a volume size or a
+	// snapshot ID. If you specify a snapshot ID, the snapshot size is used for the
+	// volume size by default. You can optionally specify a volume size greater than or
+	// equal to the snapshot size. This parameter maps 1:1 with the Size parameter of
+	// the CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference. The following are the supported volume size
+	// values for each volume type.
+	//   - gp2 and gp3 : 1-16,384
+	//   - io1 and io2 : 4-16,384
+	//   - st1 and sc1 : 125-16,384
+	//   - standard : 1-1,024
+	SizeInGiB *int32
+
+	// The snapshot that Amazon ECS uses to create the volume. You must specify either
+	// a snapshot ID or a volume size. This parameter maps 1:1 with the SnapshotId
+	// parameter of the CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference.
+	SnapshotId *string
+
+	// The tags to apply to the volume. Amazon ECS applies service-managed tags by
+	// default. This parameter maps 1:1 with the TagSpecifications.N parameter of the
+	// CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference.
+	TagSpecifications []EBSTagSpecification
+
+	// The throughput to provision for a volume, in MiB/s, with a maximum of 1,000
+	// MiB/s. This parameter maps 1:1 with the Throughput parameter of the
+	// CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference. This parameter is only supported for the gp3
+	// volume type.
+	Throughput *int32
+
+	// The volume type. This parameter maps 1:1 with the VolumeType parameter of the
+	// CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference. For more information, see Amazon EBS volume
+	// types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)
+	// in the Amazon EC2 User Guide. The following are the supported volume types.
+	//   - General Purpose SSD: gp2 | gp3
+	//   - Provisioned IOPS SSD: io1 | io2
+	//   - Throughput Optimized HDD: st1
+	//   - Cold HDD: sc1
+	//   - Magnetic: standard The magnetic volume type is not supported on Fargate.
+	VolumeType *string
 
 	noSmithyDocumentSerde
 }
@@ -3316,6 +3481,26 @@ type ServiceRegistry struct {
 	// service registry is Cloud Map. For more information, see CreateService (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html)
 	// .
 	RegistryArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a volume specified in the task definition as a volume
+// that is configured at launch time. Currently, the only supported volume type is
+// an Amazon EBS volume.
+type ServiceVolumeConfiguration struct {
+
+	// The name of the volume. This value must match the volume name from the Volume
+	// object in the task definition.
+	//
+	// This member is required.
+	Name *string
+
+	// The configuration for the Amazon EBS volume that Amazon ECS creates and manages
+	// on your behalf. These settings are used to create each Amazon EBS volume, with
+	// one volume created for each task in the service. The Amazon EBS volumes are
+	// visible in your account in the Amazon EC2 console once they are created.
+	ManagedEBSVolume *ServiceManagedEBSVolumeConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -3363,16 +3548,31 @@ type Setting struct {
 // maps to Sysctls in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
 // section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
 // and the --sysctl option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
-// . We don't recommend that you specify network-related systemControls parameters
-// for multiple containers in a single task. This task also uses either the awsvpc
-// or host network mode. It does it for the following reasons.
-//   - For tasks that use the awsvpc network mode, if you set systemControls for
-//     any container, it applies to all containers in the task. If you set different
-//     systemControls for multiple containers in a single task, the container that's
-//     started last determines which systemControls take effect.
-//   - For tasks that use the host network mode, the systemControls parameter
-//     applies to the container instance's kernel parameter and that of all containers
-//     of any tasks running on that container instance.
+// . For example, you can configure net.ipv4.tcp_keepalive_time setting to
+// maintain longer lived connections. We don't recommend that you specify
+// network-related systemControls parameters for multiple containers in a single
+// task that also uses either the awsvpc or host network mode. Doing this has the
+// following disadvantages:
+//   - For tasks that use the awsvpc network mode including Fargate, if you set
+//     systemControls for any container, it applies to all containers in the task. If
+//     you set different systemControls for multiple containers in a single task, the
+//     container that's started last determines which systemControls take effect.
+//   - For tasks that use the host network mode, the network namespace
+//     systemControls aren't supported.
+//
+// If you're setting an IPC resource namespace to use for the containers in the
+// task, the following conditions apply to your system controls. For more
+// information, see IPC mode (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_ipcmode)
+// .
+//   - For tasks that use the host IPC mode, IPC namespace systemControls aren't
+//     supported.
+//   - For tasks that use the task IPC mode, IPC namespace systemControls values
+//     apply to all containers within a task.
+//
+// This parameter is not supported for Windows containers. This parameter is only
+// supported for tasks that are hosted on Fargate if the tasks are using platform
+// version 1.4.0 or later (Linux). This isn't supported for Windows containers on
+// Fargate.
 type SystemControl struct {
 
 	// The namespaced kernel parameter to set a value for.
@@ -3577,14 +3777,8 @@ type Task struct {
 
 	// The stop code indicating why a task was stopped. The stoppedReason might
 	// contain additional details. For more information about stop code, see Stopped
-	// tasks error codes (https://docs.aws.amazon.com/AmazonECS/latest/userguide/stopped-task-error-codes.html)
-	// in the Amazon ECS User Guide. The following are valid values:
-	//   - TaskFailedToStart
-	//   - EssentialContainerExited
-	//   - UserInitiated
-	//   - TerminationNotice
-	//   - ServiceSchedulerInitiated
-	//   - SpotInterruption
+	// tasks error codes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/stopped-task-error-codes.html)
+	// in the Amazon ECS Developer Guide.
 	StopCode TaskStopCode
 
 	// The Unix timestamp for the time when the task was stopped. More specifically,
@@ -3883,6 +4077,129 @@ type TaskDefinitionPlacementConstraint struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the Amazon EBS volume that Amazon ECS creates and manages
+// on your behalf. These settings are used to create each Amazon EBS volume, with
+// one volume created for each task.
+type TaskManagedEBSVolumeConfiguration struct {
+
+	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS
+	// infrastructure IAM role that is used to manage your Amazon Web Services
+	// infrastructure. We recommend using the Amazon ECS-managed
+	// AmazonECSInfrastructureRolePolicyForVolumes IAM policy with this role. For more
+	// information, see Amazon ECS infrastructure IAM role (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html)
+	// in the Amazon ECS Developer Guide.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// Indicates whether the volume should be encrypted. If no value is specified,
+	// encryption is turned on by default. This parameter maps 1:1 with the Encrypted
+	// parameter of the CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference.
+	Encrypted *bool
+
+	// The Linux filesystem type for the volume. For volumes created from a snapshot,
+	// you must specify the same filesystem type that the volume was using when the
+	// snapshot was created. If there is a filesystem type mismatch, the task will fail
+	// to start. The available filesystem types are  ext3 , ext4 , and xfs . If no
+	// value is specified, the xfs filesystem type is used by default.
+	FilesystemType TaskFilesystemType
+
+	// The number of I/O operations per second (IOPS). For gp3 , io1 , and io2
+	// volumes, this represents the number of IOPS that are provisioned for the volume.
+	// For gp2 volumes, this represents the baseline performance of the volume and the
+	// rate at which the volume accumulates I/O credits for bursting. The following are
+	// the supported values for each volume type.
+	//   - gp3 : 3,000 - 16,000 IOPS
+	//   - io1 : 100 - 64,000 IOPS
+	//   - io2 : 100 - 256,000 IOPS
+	// This parameter is required for io1 and io2 volume types. The default for gp3
+	// volumes is 3,000 IOPS . This parameter is not supported for st1 , sc1 , or
+	// standard volume types. This parameter maps 1:1 with the Iops parameter of the
+	// CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference.
+	Iops *int32
+
+	// The Amazon Resource Name (ARN) identifier of the Amazon Web Services Key
+	// Management Service key to use for Amazon EBS encryption. When encryption is
+	// turned on and no Amazon Web Services Key Management Service key is specified,
+	// the default Amazon Web Services managed key for Amazon EBS volumes is used. This
+	// parameter maps 1:1 with the KmsKeyId parameter of the CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference. Amazon Web Services authenticates the Amazon
+	// Web Services Key Management Service key asynchronously. Therefore, if you
+	// specify an ID, alias, or ARN that is invalid, the action can appear to complete,
+	// but eventually fails.
+	KmsKeyId *string
+
+	// The size of the volume in GiB. You must specify either a volume size or a
+	// snapshot ID. If you specify a snapshot ID, the snapshot size is used for the
+	// volume size by default. You can optionally specify a volume size greater than or
+	// equal to the snapshot size. This parameter maps 1:1 with the Size parameter of
+	// the CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference. The following are the supported volume size
+	// values for each volume type.
+	//   - gp2 and gp3 : 1-16,384
+	//   - io1 and io2 : 4-16,384
+	//   - st1 and sc1 : 125-16,384
+	//   - standard : 1-1,024
+	SizeInGiB *int32
+
+	// The snapshot that Amazon ECS uses to create the volume. You must specify either
+	// a snapshot ID or a volume size. This parameter maps 1:1 with the SnapshotId
+	// parameter of the CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference.
+	SnapshotId *string
+
+	// The tags to apply to the volume. Amazon ECS applies service-managed tags by
+	// default. This parameter maps 1:1 with the TagSpecifications.N parameter of the
+	// CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference.
+	TagSpecifications []EBSTagSpecification
+
+	// The termination policy for the volume when the task exits. This provides a way
+	// to control whether Amazon ECS terminates the Amazon EBS volume when the task
+	// stops.
+	TerminationPolicy *TaskManagedEBSVolumeTerminationPolicy
+
+	// The throughput to provision for a volume, in MiB/s, with a maximum of 1,000
+	// MiB/s. This parameter maps 1:1 with the Throughput parameter of the
+	// CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference. This parameter is only supported for the gp3
+	// volume type.
+	Throughput *int32
+
+	// The volume type. This parameter maps 1:1 with the VolumeType parameter of the
+	// CreateVolume API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html)
+	// in the Amazon EC2 API Reference. For more information, see Amazon EBS volume
+	// types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)
+	// in the Amazon EC2 User Guide. The following are the supported volume types.
+	//   - General Purpose SSD: gp2 | gp3
+	//   - Provisioned IOPS SSD: io1 | io2
+	//   - Throughput Optimized HDD: st1
+	//   - Cold HDD: sc1
+	//   - Magnetic: standard The magnetic volume type is not supported on Fargate.
+	VolumeType *string
+
+	noSmithyDocumentSerde
+}
+
+// The termination policy for the Amazon EBS volume when the task exits. For more
+// information, see Amazon ECS volume termination policy (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types)
+// .
+type TaskManagedEBSVolumeTerminationPolicy struct {
+
+	// Indicates whether the volume should be deleted on when the task stops. If a
+	// value of true is specified,  Amazon ECS deletes the Amazon EBS volume on your
+	// behalf when the task goes into the STOPPED state. If no value is specified, the
+	//  default value is true is used. When set to false , Amazon ECS leaves the volume
+	// in your  account.
+	//
+	// This member is required.
+	DeleteOnTermination *bool
+
+	noSmithyDocumentSerde
+}
+
 // The overrides that are associated with a task.
 type TaskOverride struct {
 
@@ -4051,6 +4368,45 @@ type TaskSet struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for the task volume that was configuredAtLaunch that
+// weren't set during RegisterTaskDef .
+type TaskVolumeConfiguration struct {
+
+	// The name of the volume. This value must match the volume name from the Volume
+	// object in the task definition.
+	//
+	// This member is required.
+	Name *string
+
+	// The configuration for the Amazon EBS volume that Amazon ECS creates and manages
+	// on your behalf. These settings are used to create each Amazon EBS volume, with
+	// one volume created for each task. The Amazon EBS volumes are visible in your
+	// account in the Amazon EC2 console once they are created.
+	ManagedEBSVolume *TaskManagedEBSVolumeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the timeout configurations for Service Connect. If
+// idleTimeout is set to a time that is less than perRequestTimeout , the
+// connection will close when the idleTimeout is reached and not the
+// perRequestTimeout .
+type TimeoutConfiguration struct {
+
+	// The amount of time in seconds a connection will stay active while idle. A value
+	// of 0 can be set to disable idleTimeout . The idleTimeout default for HTTP / HTTP2
+	// / GRPC is 5 minutes. The idleTimeout default for TCP is 1 hour.
+	IdleTimeoutSeconds *int32
+
+	// The amount of time waiting for the upstream to respond with a complete response
+	// per request. A value of 0 can be set to disable perRequestTimeout .
+	// perRequestTimeout can only be set if Service Connect appProtocol isn't TCP .
+	// Only idleTimeout is allowed for TCP appProtocol .
+	PerRequestTimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The container path, mount options, and size of the tmpfs mount.
 type Tmpfs struct {
 
@@ -4081,7 +4437,7 @@ type Tmpfs struct {
 // the exception of the nofile resource limit parameter which Fargate overrides.
 // The nofile resource limit sets a restriction on the number of open files that a
 // container can use. The default nofile soft limit is 1024 and the default hard
-// limit is 4096 . You can specify the ulimit settings for a container in a task
+// limit is 65535 . You can specify the ulimit settings for a container in a task
 // definition.
 type Ulimit struct {
 
@@ -4121,15 +4477,24 @@ type VersionInfo struct {
 	noSmithyDocumentSerde
 }
 
-// A data volume that's used in a task definition. For tasks that use the Amazon
-// Elastic File System (Amazon EFS), specify an efsVolumeConfiguration . For
-// Windows tasks that use Amazon FSx for Windows File Server file system, specify a
-// fsxWindowsFileServerVolumeConfiguration . For tasks that use a Docker volume,
-// specify a DockerVolumeConfiguration . For tasks that use a bind mount host
-// volume, specify a host and optional sourcePath . For more information, see
-// Using Data Volumes in Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html)
+// The data volume configuration for tasks launched using this task definition.
+// Specifying a volume configuration in a task definition is optional. The volume
+// configuration may contain multiple volumes but only one volume configured at
+// launch is supported. Each volume defined in the volume configuration may only
+// specify a name and one of either configuredAtLaunch , dockerVolumeConfiguration
+// , efsVolumeConfiguration , fsxWindowsFileServerVolumeConfiguration , or host .
+// If an empty volume configuration is specified, by default Amazon ECS uses a host
+// volume. For more information, see Using data volumes in tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html)
 // .
 type Volume struct {
+
+	// Indicates whether the volume should be configured at launch time. This is used
+	// to create Amazon EBS volumes for standalone tasks or tasks created as part of a
+	// service. Each task definition revision may only have one volume configured at
+	// launch in the volume configuration. To configure a volume at launch time, use
+	// this task definition revision and specify a volumeConfigurations object when
+	// calling the CreateService , UpdateService , RunTask or StartTask APIs.
+	ConfiguredAtLaunch *bool
 
 	// This parameter is specified when you use Docker volumes. Windows containers
 	// only support the use of the local driver. To use bind mounts, specify the host
@@ -4157,9 +4522,13 @@ type Volume struct {
 	Host *HostVolumeProperties
 
 	// The name of the volume. Up to 255 letters (uppercase and lowercase), numbers,
-	// underscores, and hyphens are allowed. This name is referenced in the
-	// sourceVolume parameter of container definition mountPoints . This is required
-	// wwhen you use an Amazon EFS volume.
+	// underscores, and hyphens are allowed. When using a volume configured at launch,
+	// the name is required and must also be specified as the volume name in the
+	// ServiceVolumeConfiguration or TaskVolumeConfiguration parameter when creating
+	// your service or standalone task. For all other types of volumes, this name is
+	// referenced in the sourceVolume parameter of the mountPoints object in the
+	// container definition. When a volume is using the efsVolumeConfiguration , the
+	// name is required.
 	Name *string
 
 	noSmithyDocumentSerde

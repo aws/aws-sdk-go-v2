@@ -160,14 +160,13 @@ type NetworkInterfaceFailureReason string
 
 // Enum values for NetworkInterfaceFailureReason
 const (
-	NetworkInterfaceFailureReasonDuplicateInterface                              NetworkInterfaceFailureReason = "DUPLICATE_NETWORK_INTERFACE"
-	NetworkInterfaceFailureReasonConflictingNetworkInterface                     NetworkInterfaceFailureReason = "CONFLICTING_NETWORK_INTERFACE"
-	NetworkInterfaceFailureReasonNetworkInterfaceToAddAlreadyExists              NetworkInterfaceFailureReason = "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS"
-	NetworkInterfaceFailureReasonCanNetworkInterfaceInfoIsNull                   NetworkInterfaceFailureReason = "CAN_NETWORK_INTERFACE_INFO_IS_NULL"
-	NetworkInterfaceFailureReasonObdNetworkInterfaceInfoIsNull                   NetworkInterfaceFailureReason = "OBD_NETWORK_INTERFACE_INFO_IS_NULL"
-	NetworkInterfaceFailureReasonNetworkInterfaceToRemoveAssociatedWithSignals   NetworkInterfaceFailureReason = "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS"
-	NetworkInterfaceFailureReasonVehicleMiddlewareNetworkInterfaceInfoIsNull     NetworkInterfaceFailureReason = "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL"
-	NetworkInterfaceFailureReasonCustomerDecodedSignalNetworkInterfaceInfoIsNull NetworkInterfaceFailureReason = "CUSTOMER_DECODED_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL"
+	NetworkInterfaceFailureReasonDuplicateInterface                            NetworkInterfaceFailureReason = "DUPLICATE_NETWORK_INTERFACE"
+	NetworkInterfaceFailureReasonConflictingNetworkInterface                   NetworkInterfaceFailureReason = "CONFLICTING_NETWORK_INTERFACE"
+	NetworkInterfaceFailureReasonNetworkInterfaceToAddAlreadyExists            NetworkInterfaceFailureReason = "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS"
+	NetworkInterfaceFailureReasonCanNetworkInterfaceInfoIsNull                 NetworkInterfaceFailureReason = "CAN_NETWORK_INTERFACE_INFO_IS_NULL"
+	NetworkInterfaceFailureReasonObdNetworkInterfaceInfoIsNull                 NetworkInterfaceFailureReason = "OBD_NETWORK_INTERFACE_INFO_IS_NULL"
+	NetworkInterfaceFailureReasonNetworkInterfaceToRemoveAssociatedWithSignals NetworkInterfaceFailureReason = "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS"
+	NetworkInterfaceFailureReasonVehicleMiddlewareNetworkInterfaceInfoIsNull   NetworkInterfaceFailureReason = "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL"
 )
 
 // Values returns all known values for NetworkInterfaceFailureReason. Note that
@@ -183,7 +182,6 @@ func (NetworkInterfaceFailureReason) Values() []NetworkInterfaceFailureReason {
 		"OBD_NETWORK_INTERFACE_INFO_IS_NULL",
 		"NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS",
 		"VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL",
-		"CUSTOMER_DECODED_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL",
 	}
 }
 
@@ -191,10 +189,9 @@ type NetworkInterfaceType string
 
 // Enum values for NetworkInterfaceType
 const (
-	NetworkInterfaceTypeCanInterface             NetworkInterfaceType = "CAN_INTERFACE"
-	NetworkInterfaceTypeObdInterface             NetworkInterfaceType = "OBD_INTERFACE"
-	NetworkInterfaceTypeVehicleMiddleware        NetworkInterfaceType = "VEHICLE_MIDDLEWARE"
-	NetworkInterfaceTypeCustomerDecodedInterface NetworkInterfaceType = "CUSTOMER_DECODED_INTERFACE"
+	NetworkInterfaceTypeCanInterface      NetworkInterfaceType = "CAN_INTERFACE"
+	NetworkInterfaceTypeObdInterface      NetworkInterfaceType = "OBD_INTERFACE"
+	NetworkInterfaceTypeVehicleMiddleware NetworkInterfaceType = "VEHICLE_MIDDLEWARE"
 )
 
 // Values returns all known values for NetworkInterfaceType. Note that this can be
@@ -205,7 +202,6 @@ func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 		"CAN_INTERFACE",
 		"OBD_INTERFACE",
 		"VEHICLE_MIDDLEWARE",
-		"CUSTOMER_DECODED_INTERFACE",
 	}
 }
 
@@ -382,7 +378,6 @@ const (
 	SignalDecoderFailureReasonNoSignalInCatalogForDecoderSignal                     SignalDecoderFailureReason = "NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL"
 	SignalDecoderFailureReasonSignalDecoderIncompatibleWithSignalCatalog            SignalDecoderFailureReason = "SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG"
 	SignalDecoderFailureReasonEmptyMessageSignal                                    SignalDecoderFailureReason = "EMPTY_MESSAGE_SIGNAL"
-	SignalDecoderFailureReasonCustomerDecodedSignalInfoIsNull                       SignalDecoderFailureReason = "CUSTOMER_DECODED_SIGNAL_INFO_IS_NULL"
 )
 
 // Values returns all known values for SignalDecoderFailureReason. Note that this
@@ -405,7 +400,6 @@ func (SignalDecoderFailureReason) Values() []SignalDecoderFailureReason {
 		"NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL",
 		"SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG",
 		"EMPTY_MESSAGE_SIGNAL",
-		"CUSTOMER_DECODED_SIGNAL_INFO_IS_NULL",
 	}
 }
 
@@ -413,10 +407,9 @@ type SignalDecoderType string
 
 // Enum values for SignalDecoderType
 const (
-	SignalDecoderTypeCanSignal             SignalDecoderType = "CAN_SIGNAL"
-	SignalDecoderTypeObdSignal             SignalDecoderType = "OBD_SIGNAL"
-	SignalDecoderTypeMessageSignal         SignalDecoderType = "MESSAGE_SIGNAL"
-	SignalDecoderTypeCustomerDecodedSignal SignalDecoderType = "CUSTOMER_DECODED_SIGNAL"
+	SignalDecoderTypeCanSignal     SignalDecoderType = "CAN_SIGNAL"
+	SignalDecoderTypeObdSignal     SignalDecoderType = "OBD_SIGNAL"
+	SignalDecoderTypeMessageSignal SignalDecoderType = "MESSAGE_SIGNAL"
 )
 
 // Values returns all known values for SignalDecoderType. Note that this can be
@@ -427,7 +420,32 @@ func (SignalDecoderType) Values() []SignalDecoderType {
 		"CAN_SIGNAL",
 		"OBD_SIGNAL",
 		"MESSAGE_SIGNAL",
-		"CUSTOMER_DECODED_SIGNAL",
+	}
+}
+
+type SignalNodeType string
+
+// Enum values for SignalNodeType
+const (
+	SignalNodeTypeSensor         SignalNodeType = "SENSOR"
+	SignalNodeTypeActuator       SignalNodeType = "ACTUATOR"
+	SignalNodeTypeAttribute      SignalNodeType = "ATTRIBUTE"
+	SignalNodeTypeBranch         SignalNodeType = "BRANCH"
+	SignalNodeTypeCustomStruct   SignalNodeType = "CUSTOM_STRUCT"
+	SignalNodeTypeCustomProperty SignalNodeType = "CUSTOM_PROPERTY"
+)
+
+// Values returns all known values for SignalNodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SignalNodeType) Values() []SignalNodeType {
+	return []SignalNodeType{
+		"SENSOR",
+		"ACTUATOR",
+		"ATTRIBUTE",
+		"BRANCH",
+		"CUSTOM_STRUCT",
+		"CUSTOM_PROPERTY",
 	}
 }
 

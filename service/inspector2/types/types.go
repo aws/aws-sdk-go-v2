@@ -162,7 +162,8 @@ type AggregationRequestMemberImageLayerAggregation struct {
 
 func (*AggregationRequestMemberImageLayerAggregation) isAggregationRequest() {}
 
-// Returns an object with findings aggregated by AWS Lambda function.
+// Returns an object with findings aggregated by Amazon Web Services Lambda
+// function.
 type AggregationRequestMemberLambdaFunctionAggregation struct {
 	Value LambdaFunctionAggregation
 
@@ -171,7 +172,7 @@ type AggregationRequestMemberLambdaFunctionAggregation struct {
 
 func (*AggregationRequestMemberLambdaFunctionAggregation) isAggregationRequest() {}
 
-// Returns an object with findings aggregated by AWS Lambda layer.
+// Returns an object with findings aggregated by Amazon Web Services Lambda layer.
 type AggregationRequestMemberLambdaLayerAggregation struct {
 	Value LambdaLayerAggregation
 
@@ -289,7 +290,7 @@ type AggregationResponseMemberImageLayerAggregation struct {
 
 func (*AggregationResponseMemberImageLayerAggregation) isAggregationResponse() {}
 
-// An aggregation of findings by AWS Lambda function.
+// An aggregation of findings by Amazon Web Services Lambda function.
 type AggregationResponseMemberLambdaFunctionAggregation struct {
 	Value LambdaFunctionAggregationResponse
 
@@ -298,7 +299,7 @@ type AggregationResponseMemberLambdaFunctionAggregation struct {
 
 func (*AggregationResponseMemberLambdaFunctionAggregation) isAggregationResponse() {}
 
-// An aggregation of findings by AWS Lambda layer.
+// An aggregation of findings by Amazon Web Services Lambda layer.
 type AggregationResponseMemberLambdaLayerAggregation struct {
 	Value LambdaLayerAggregationResponse
 
@@ -408,12 +409,12 @@ type AutoEnable struct {
 	// This member is required.
 	Ecr *bool
 
-	// Represents whether AWS Lambda standard scans are automatically enabled for new
-	// members of your Amazon Inspector organization.
+	// Represents whether Amazon Web Services Lambda standard scans are automatically
+	// enabled for new members of your Amazon Inspector organization.
 	Lambda *bool
 
-	// Represents whether AWS Lambda code scans are automatically enabled for new
-	// members of your Amazon Inspector organization.
+	// Represents whether Lambda code scans are automatically enabled for new members
+	// of your Amazon Inspector organization.
 	LambdaCode *bool
 
 	noSmithyDocumentSerde
@@ -547,43 +548,43 @@ type AwsEcrContainerImageDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of information about the AWS Lambda function.
+// A summary of information about the Amazon Web Services Lambda function.
 type AwsLambdaFunctionDetails struct {
 
-	// The SHA256 hash of the AWS Lambda function's deployment package.
+	// The SHA256 hash of the Amazon Web Services Lambda function's deployment package.
 	//
 	// This member is required.
 	CodeSha256 *string
 
-	// The AWS Lambda function's execution role.
+	// The Amazon Web Services Lambda function's execution role.
 	//
 	// This member is required.
 	ExecutionRoleArn *string
 
-	// The name of the AWS Lambda function.
+	// The name of the Amazon Web Services Lambda function.
 	//
 	// This member is required.
 	FunctionName *string
 
-	// The runtime environment for the AWS Lambda function.
+	// The runtime environment for the Amazon Web Services Lambda function.
 	//
 	// This member is required.
 	Runtime Runtime
 
-	// The version of the AWS Lambda function.
+	// The version of the Amazon Web Services Lambda function.
 	//
 	// This member is required.
 	Version *string
 
-	// The instruction set architecture that the AWS Lambda function supports.
-	// Architecture is a string array with one of the valid values. The default
-	// architecture value is x86_64 .
+	// The instruction set architecture that the Amazon Web Services Lambda function
+	// supports. Architecture is a string array with one of the valid values. The
+	// default architecture value is x86_64 .
 	Architectures []Architecture
 
 	// The date and time that a user last updated the configuration, in ISO 8601 format (https://www.iso.org/iso-8601-date-and-time-format.html)
 	LastModifiedAt *time.Time
 
-	// The AWS Lambda function's  layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+	// The Amazon Web Services Lambda function's  layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
 	// . A Lambda function can have up to five layers.
 	Layers []string
 
@@ -591,7 +592,7 @@ type AwsLambdaFunctionDetails struct {
 	// for .zip file archive.
 	PackageType PackageType
 
-	// The AWS Lambda function's networking configuration.
+	// The Amazon Web Services Lambda function's networking configuration.
 	VpcConfig *LambdaVpcConfig
 
 	noSmithyDocumentSerde
@@ -609,6 +610,433 @@ type CisaData struct {
 
 	// The date and time CISA expects a fix to have been provided vulnerability.
 	DateDue *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A CIS check.
+type CisCheckAggregation struct {
+
+	// The scan ARN for the CIS check scan ARN.
+	//
+	// This member is required.
+	ScanArn *string
+
+	// The account ID for the CIS check.
+	AccountId *string
+
+	// The description for the CIS check.
+	CheckDescription *string
+
+	// The check ID for the CIS check.
+	CheckId *string
+
+	// The CIS check level.
+	Level CisSecurityLevel
+
+	// The CIS check platform.
+	Platform *string
+
+	// The CIS check status counts.
+	StatusCounts *StatusCounts
+
+	// The CIS check title.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The CIS date filter.
+type CisDateFilter struct {
+
+	// The CIS date filter's earliest scan start time.
+	EarliestScanStartTime *time.Time
+
+	// The CIS date filter's latest scan start time.
+	LatestScanStartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The CIS finding status filter.
+type CisFindingStatusFilter struct {
+
+	// The comparison value of the CIS finding status filter.
+	//
+	// This member is required.
+	Comparison CisFindingStatusComparison
+
+	// The value of the CIS finding status filter.
+	//
+	// This member is required.
+	Value CisFindingStatus
+
+	noSmithyDocumentSerde
+}
+
+// The CIS number filter.
+type CisNumberFilter struct {
+
+	// The CIS number filter's lower inclusive.
+	LowerInclusive *int32
+
+	// The CIS number filter's upper inclusive.
+	UpperInclusive *int32
+
+	noSmithyDocumentSerde
+}
+
+// The CIS result status filter.
+type CisResultStatusFilter struct {
+
+	// The comparison value of the CIS result status filter.
+	//
+	// This member is required.
+	Comparison CisResultStatusComparison
+
+	// The value of the CIS result status filter.
+	//
+	// This member is required.
+	Value CisResultStatus
+
+	noSmithyDocumentSerde
+}
+
+// The CIS scan.
+type CisScan struct {
+
+	// The CIS scan's ARN.
+	//
+	// This member is required.
+	ScanArn *string
+
+	// The CIS scan's configuration ARN.
+	//
+	// This member is required.
+	ScanConfigurationArn *string
+
+	// The CIS scan's failed checks.
+	FailedChecks *int32
+
+	// The CIS scan's date.
+	ScanDate *time.Time
+
+	// The the name of the scan configuration that's associated with this scan.
+	ScanName *string
+
+	// The account or organization that schedules the CIS scan.
+	ScheduledBy *string
+
+	// The security level for the CIS scan. Security level refers to the Benchmark
+	// levels that CIS assigns to a profile.
+	SecurityLevel CisSecurityLevel
+
+	// The CIS scan's status.
+	Status CisScanStatus
+
+	// The CIS scan's targets.
+	Targets *CisTargets
+
+	// The CIS scan's total checks.
+	TotalChecks *int32
+
+	noSmithyDocumentSerde
+}
+
+// The CIS scan configuration.
+type CisScanConfiguration struct {
+
+	// The CIS scan configuration's scan configuration ARN.
+	//
+	// This member is required.
+	ScanConfigurationArn *string
+
+	// The CIS scan configuration's owner ID.
+	OwnerId *string
+
+	// The name of the CIS scan configuration.
+	ScanName *string
+
+	// The CIS scan configuration's schedule.
+	Schedule Schedule
+
+	// The CIS scan configuration's security level.
+	SecurityLevel CisSecurityLevel
+
+	// The CIS scan configuration's tags.
+	Tags map[string]string
+
+	// The CIS scan configuration's targets.
+	Targets *CisTargets
+
+	noSmithyDocumentSerde
+}
+
+// The CIS scan result details.
+type CisScanResultDetails struct {
+
+	// The CIS scan result details' scan ARN.
+	//
+	// This member is required.
+	ScanArn *string
+
+	// The CIS scan result details' account ID.
+	AccountId *string
+
+	// The account ID that's associated with the CIS scan result details.
+	CheckDescription *string
+
+	// The CIS scan result details' check ID.
+	CheckId *string
+
+	// The CIS scan result details' finding ARN.
+	FindingArn *string
+
+	// The CIS scan result details' level.
+	Level CisSecurityLevel
+
+	// The CIS scan result details' platform.
+	Platform *string
+
+	// The CIS scan result details' remediation.
+	Remediation *string
+
+	// The CIS scan result details' status.
+	Status CisFindingStatus
+
+	// The CIS scan result details' status reason.
+	StatusReason *string
+
+	// The CIS scan result details' target resource ID.
+	TargetResourceId *string
+
+	// The CIS scan result details' title.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The CIS scan result details filter criteria.
+type CisScanResultDetailsFilterCriteria struct {
+
+	// The criteria's check ID filters.
+	CheckIdFilters []CisStringFilter
+
+	// The criteria's finding ARN filters.
+	FindingArnFilters []CisStringFilter
+
+	// The criteria's finding status filters.
+	FindingStatusFilters []CisFindingStatusFilter
+
+	// The criteria's security level filters. . Security level refers to the Benchmark
+	// levels that CIS assigns to a profile.
+	SecurityLevelFilters []CisSecurityLevelFilter
+
+	// The criteria's title filters.
+	TitleFilters []CisStringFilter
+
+	noSmithyDocumentSerde
+}
+
+// The scan results aggregated by checks filter criteria.
+type CisScanResultsAggregatedByChecksFilterCriteria struct {
+
+	// The criteria's account ID filters.
+	AccountIdFilters []CisStringFilter
+
+	// The criteria's check ID filters.
+	CheckIdFilters []CisStringFilter
+
+	// The criteria's failed resources filters.
+	FailedResourcesFilters []CisNumberFilter
+
+	// The criteria's platform filters.
+	PlatformFilters []CisStringFilter
+
+	// The criteria's security level filters.
+	SecurityLevelFilters []CisSecurityLevelFilter
+
+	// The criteria's title filters.
+	TitleFilters []CisStringFilter
+
+	noSmithyDocumentSerde
+}
+
+// The scan results aggregated by target resource filter criteria.
+type CisScanResultsAggregatedByTargetResourceFilterCriteria struct {
+
+	// The criteria's account ID filters.
+	AccountIdFilters []CisStringFilter
+
+	// The criteria's check ID filters.
+	CheckIdFilters []CisStringFilter
+
+	// The criteria's failed checks filters.
+	FailedChecksFilters []CisNumberFilter
+
+	// The criteria's platform filters.
+	PlatformFilters []CisStringFilter
+
+	// The criteria's status filter.
+	StatusFilters []CisResultStatusFilter
+
+	// The criteria's target resource ID filters.
+	TargetResourceIdFilters []CisStringFilter
+
+	// The criteria's target resource tag filters.
+	TargetResourceTagFilters []TagFilter
+
+	// The criteria's target status filters.
+	TargetStatusFilters []CisTargetStatusFilter
+
+	// The criteria's target status reason filters.
+	TargetStatusReasonFilters []CisTargetStatusReasonFilter
+
+	noSmithyDocumentSerde
+}
+
+// The CIS scan status filter.
+type CisScanStatusFilter struct {
+
+	// The filter comparison value.
+	//
+	// This member is required.
+	Comparison CisScanStatusComparison
+
+	// The filter value.
+	//
+	// This member is required.
+	Value CisScanStatus
+
+	noSmithyDocumentSerde
+}
+
+// The CIS security level filter. Security level refers to the Benchmark levels
+// that CIS assigns to a profile.
+type CisSecurityLevelFilter struct {
+
+	// The CIS security filter comparison value.
+	//
+	// This member is required.
+	Comparison CisSecurityLevelComparison
+
+	// The CIS security filter value.
+	//
+	// This member is required.
+	Value CisSecurityLevel
+
+	noSmithyDocumentSerde
+}
+
+// The CIS session message.
+type CisSessionMessage struct {
+
+	// The CIS rule details for the CIS session message.
+	//
+	// This member is required.
+	CisRuleDetails []byte
+
+	// The rule ID for the CIS session message.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The status of the CIS session message.
+	//
+	// This member is required.
+	Status CisRuleStatus
+
+	noSmithyDocumentSerde
+}
+
+// The CIS string filter.
+type CisStringFilter struct {
+
+	// The comparison value of the CIS string filter.
+	//
+	// This member is required.
+	Comparison CisStringComparison
+
+	// The value of the CIS string filter.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The CIS target resource aggregation.
+type CisTargetResourceAggregation struct {
+
+	// The scan ARN for the CIS target resource.
+	//
+	// This member is required.
+	ScanArn *string
+
+	// The account ID for the CIS target resource.
+	AccountId *string
+
+	// The platform for the CIS target resource.
+	Platform *string
+
+	// The target resource status counts.
+	StatusCounts *StatusCounts
+
+	// The ID of the target resource.
+	TargetResourceId *string
+
+	// The tag for the target resource.
+	TargetResourceTags map[string][]string
+
+	// The status of the target resource.
+	TargetStatus CisTargetStatus
+
+	// The reason for the target resource.
+	TargetStatusReason CisTargetStatusReason
+
+	noSmithyDocumentSerde
+}
+
+// The CIS targets.
+type CisTargets struct {
+
+	// The CIS target account ids.
+	AccountIds []string
+
+	// The CIS target resource tags.
+	TargetResourceTags map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+// The CIS target status filter.
+type CisTargetStatusFilter struct {
+
+	// The comparison value of the CIS target status filter.
+	//
+	// This member is required.
+	Comparison CisTargetStatusComparison
+
+	// The value of the CIS target status filter.
+	//
+	// This member is required.
+	Value CisTargetStatus
+
+	noSmithyDocumentSerde
+}
+
+// The CIS target status reason filter.
+type CisTargetStatusReasonFilter struct {
+
+	// The comparison value of the CIS target status reason filter.
+	//
+	// This member is required.
+	Comparison CisTargetStatusComparison
+
+	// The value of the CIS target status reason filter.
+	//
+	// This member is required.
+	Value CisTargetStatusReason
 
 	noSmithyDocumentSerde
 }
@@ -750,6 +1178,21 @@ type CodeVulnerabilityDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A compute platform.
+type ComputePlatform struct {
+
+	// The compute platform product.
+	Product *string
+
+	// The compute platform vendor.
+	Vendor *string
+
+	// The compute platform version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // a structure that contains information on the count of resources within a group.
 type Counts struct {
 
@@ -789,13 +1232,19 @@ type CoverageFilterCriteria struct {
 	// The Amazon ECR repository name to filter on.
 	EcrRepositoryName []CoverageStringFilter
 
-	// Returns coverage statistics for AWS Lambda functions filtered by function names.
+	// The date an image was last pulled at.
+	ImagePulledAt []CoverageDateFilter
+
+	// Returns coverage statistics for Amazon Web Services Lambda functions filtered
+	// by function names.
 	LambdaFunctionName []CoverageStringFilter
 
-	// Returns coverage statistics for AWS Lambda functions filtered by runtime.
+	// Returns coverage statistics for Amazon Web Services Lambda functions filtered
+	// by runtime.
 	LambdaFunctionRuntime []CoverageStringFilter
 
-	// Returns coverage statistics for AWS Lambda functions filtered by tag.
+	// Returns coverage statistics for Amazon Web Services Lambda functions filtered
+	// by tag.
 	LambdaFunctionTags []CoverageMapFilter
 
 	// Filters Amazon Web Services resources based on whether Amazon Inspector has
@@ -806,8 +1255,8 @@ type CoverageFilterCriteria struct {
 	ResourceId []CoverageStringFilter
 
 	// An array of Amazon Web Services resource types to return coverage statistics
-	// for. The values can be AWS_EC2_INSTANCE , AWS_LAMBDA_FUNCTION or
-	// AWS_ECR_REPOSITORY .
+	// for. The values can be AWS_EC2_INSTANCE , AWS_LAMBDA_FUNCTION ,
+	// AWS_ECR_CONTAINER_IMAGE , AWS_ECR_REPOSITORY or AWS_ACCOUNT .
 	ResourceType []CoverageStringFilter
 
 	// The scan status code to filter on. Valid values are: ValidationException ,
@@ -890,6 +1339,22 @@ type CoveredResource struct {
 
 	// The status of the scan covering the resource.
 	ScanStatus *ScanStatus
+
+	noSmithyDocumentSerde
+}
+
+// Creates CIS targets.
+type CreateCisTargets struct {
+
+	// The CIS target account ids.
+	//
+	// This member is required.
+	AccountIds []string
+
+	// The CIS target resource tags.
+	//
+	// This member is required.
+	TargetResourceTags map[string][]string
 
 	noSmithyDocumentSerde
 }
@@ -991,6 +1456,17 @@ type CvssScoreDetails struct {
 
 	// The source of the CVSS data.
 	CvssSource *string
+
+	noSmithyDocumentSerde
+}
+
+// A daily schedule.
+type DailySchedule struct {
+
+	// The schedule start time.
+	//
+	// This member is required.
+	StartTime *Time
 
 	noSmithyDocumentSerde
 }
@@ -1126,13 +1602,13 @@ type Ec2Metadata struct {
 // Details about the ECR automated re-scan duration setting for your environment.
 type EcrConfiguration struct {
 
-	// The ECR automated re-scan duration defines how long an ECR image will be
-	// actively scanned by Amazon Inspector. When the number of days since an image was
-	// last pushed exceeds the automated re-scan duration the monitoring state of that
-	// image becomes inactive and all associated findings are scheduled for closure.
+	// The rescan duration configured for image push date.
 	//
 	// This member is required.
 	RescanDuration EcrRescanDuration
+
+	// The rescan duration configured for image pull date.
+	PullDateRescanDuration EcrPullDateRescanDuration
 
 	noSmithyDocumentSerde
 }
@@ -1140,8 +1616,7 @@ type EcrConfiguration struct {
 // Details about the state of the ECR scans for your environment.
 type EcrConfigurationState struct {
 
-	// An object that contains details about the state of the ECR automated re-scan
-	// setting.
+	// An object that contains details about the state of the ECR re-scan settings.
 	RescanDurationState *EcrRescanDurationState
 
 	noSmithyDocumentSerde
@@ -1149,6 +1624,9 @@ type EcrConfigurationState struct {
 
 // Information on the Amazon ECR image metadata associated with a finding.
 type EcrContainerImageMetadata struct {
+
+	// The date an image was last pulled at.
+	ImagePulledAt *time.Time
 
 	// Tags associated with the Amazon ECR image metadata.
 	Tags []string
@@ -1168,14 +1646,18 @@ type EcrRepositoryMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the state of any changes to the ECR automated re-scan duration
-// setting.
+// Details about the state of your ECR re-scan duration settings. The ECR re-scan
+// duration defines how long an ECR image will be actively scanned by Amazon
+// Inspector. When the number of days since an image was last pushed exceeds the
+// duration configured for image pull date, and the duration configured for image
+// pull date, the monitoring state of that image becomes inactive and all
+// associated findings are scheduled for closure.
 type EcrRescanDurationState struct {
 
-	// The ECR automated re-scan duration defines how long an ECR image will be
-	// actively scanned by Amazon Inspector. When the number of days since an image was
-	// last pushed exceeds the automated re-scan duration the monitoring state of that
-	// image becomes inactive and all associated findings are scheduled for closure.
+	// The rescan duration configured for image pull date.
+	PullDateRescanDuration EcrPullDateRescanDuration
+
+	// The rescan duration configured for image push date.
 	RescanDuration EcrRescanDuration
 
 	// The status of changes to the ECR automated re-scan duration.
@@ -1400,7 +1882,8 @@ type FilterCriteria struct {
 	// The EPSS score used to filter findings.
 	EpssScore []NumberFilter
 
-	// Filters the list of AWS Lambda findings by the availability of exploits.
+	// Filters the list of Amazon Web Services Lambda findings by the availability of
+	// exploits.
 	ExploitAvailable []StringFilter
 
 	// Details on the finding ARNs used to filter findings.
@@ -1424,22 +1907,24 @@ type FilterCriteria struct {
 	// The Amazon Inspector score to filter on.
 	InspectorScore []NumberFilter
 
-	// Filters the list of AWS Lambda functions by execution role.
+	// Filters the list of Amazon Web Services Lambda functions by execution role.
 	LambdaFunctionExecutionRoleArn []StringFilter
 
-	// Filters the list of AWS Lambda functions by the date and time that a user last
-	// updated the configuration, in ISO 8601 format (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// Filters the list of Amazon Web Services Lambda functions by the date and time
+	// that a user last updated the configuration, in ISO 8601 format (https://www.iso.org/iso-8601-date-and-time-format.html)
 	LambdaFunctionLastModifiedAt []DateFilter
 
-	// Filters the list of AWS Lambda functions by the function's  layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+	// Filters the list of Amazon Web Services Lambda functions by the function's
+	// layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
 	// . A Lambda function can have up to five layers.
 	LambdaFunctionLayers []StringFilter
 
-	// Filters the list of AWS Lambda functions by the name of the function.
+	// Filters the list of Amazon Web Services Lambda functions by the name of the
+	// function.
 	LambdaFunctionName []StringFilter
 
-	// Filters the list of AWS Lambda functions by the runtime environment for the
-	// Lambda function.
+	// Filters the list of Amazon Web Services Lambda functions by the runtime
+	// environment for the Lambda function.
 	LambdaFunctionRuntime []StringFilter
 
 	// Details on the date and time a finding was last seen used to filter findings.
@@ -1806,10 +2291,12 @@ type InspectorScoreDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The details that define a findings aggregation based on AWS Lambda functions.
+// The details that define a findings aggregation based on Amazon Web Services
+// Lambda functions.
 type LambdaFunctionAggregation struct {
 
-	// The AWS Lambda function names to include in the aggregation results.
+	// The Amazon Web Services Lambda function names to include in the aggregation
+	// results.
 	FunctionNames []StringFilter
 
 	// The tags to include in the aggregation results.
@@ -1818,7 +2305,8 @@ type LambdaFunctionAggregation struct {
 	// The resource IDs to include in the aggregation results.
 	ResourceIds []StringFilter
 
-	// Returns findings aggregated by AWS Lambda function runtime environments.
+	// Returns findings aggregated by Amazon Web Services Lambda function runtime
+	// environments.
 	Runtimes []StringFilter
 
 	// The finding severity to use for sorting the results.
@@ -1830,8 +2318,8 @@ type LambdaFunctionAggregation struct {
 	noSmithyDocumentSerde
 }
 
-// A response that contains the results of an AWS Lambda function finding
-// aggregation.
+// A response that contains the results of an Amazon Web Services Lambda function
+// finding aggregation.
 type LambdaFunctionAggregationResponse struct {
 
 	// The resource IDs included in the aggregation results.
@@ -1839,17 +2327,19 @@ type LambdaFunctionAggregationResponse struct {
 	// This member is required.
 	ResourceId *string
 
-	// The ID of the AWS account that owns the AWS Lambda function.
+	// The ID of the Amazon Web Services account that owns the Amazon Web Services
+	// Lambda function.
 	AccountId *string
 
-	// The AWS Lambda function names included in the aggregation results.
+	// The Amazon Web Services Lambda function names included in the aggregation
+	// results.
 	FunctionName *string
 
 	// The tags included in the aggregation results.
 	LambdaTags map[string]string
 
-	// The date that the AWS Lambda function included in the aggregation results was
-	// last changed.
+	// The date that the Amazon Web Services Lambda function included in the
+	// aggregation results was last changed.
 	LastModifiedAt *time.Time
 
 	// The runtimes included in the aggregation results.
@@ -1861,36 +2351,37 @@ type LambdaFunctionAggregationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// The AWS Lambda function metadata.
+// The Amazon Web Services Lambda function metadata.
 type LambdaFunctionMetadata struct {
 
 	// The name of a function.
 	FunctionName *string
 
-	// The resource tags on an AWS Lambda function.
+	// The resource tags on an Amazon Web Services Lambda function.
 	FunctionTags map[string]string
 
-	// The layers for an AWS Lambda function. A Lambda function can have up to five
-	// layers.
+	// The layers for an Amazon Web Services Lambda function. A Lambda function can
+	// have up to five layers.
 	Layers []string
 
-	// An AWS Lambda function's runtime.
+	// An Amazon Web Services Lambda function's runtime.
 	Runtime Runtime
 
 	noSmithyDocumentSerde
 }
 
-// The details that define a findings aggregation based on an AWS Lambda
-// function's layers.
+// The details that define a findings aggregation based on an Amazon Web Services
+// Lambda function's layers.
 type LambdaLayerAggregation struct {
 
-	// The names of the AWS Lambda functions associated with the layers.
+	// The names of the Amazon Web Services Lambda functions associated with the
+	// layers.
 	FunctionNames []StringFilter
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Lambda function layer.
 	LayerArns []StringFilter
 
-	// The resource IDs for the AWS Lambda function layers.
+	// The resource IDs for the Amazon Web Services Lambda function layers.
 	ResourceIds []StringFilter
 
 	// The finding severity to use for sorting the results.
@@ -1902,26 +2393,27 @@ type LambdaLayerAggregation struct {
 	noSmithyDocumentSerde
 }
 
-// A response that contains the results of an AWS Lambda function layer finding
-// aggregation.
+// A response that contains the results of an Amazon Web Services Lambda function
+// layer finding aggregation.
 type LambdaLayerAggregationResponse struct {
 
-	// The account ID of the AWS Lambda function layer.
+	// The account ID of the Amazon Web Services Lambda function layer.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The names of the AWS Lambda functions associated with the layers.
+	// The names of the Amazon Web Services Lambda functions associated with the
+	// layers.
 	//
 	// This member is required.
 	FunctionName *string
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Lambda function layer.
 	//
 	// This member is required.
 	LayerArn *string
 
-	// The Resource ID of the AWS Lambda function layer.
+	// The Resource ID of the Amazon Web Services Lambda function layer.
 	//
 	// This member is required.
 	ResourceId *string
@@ -1932,13 +2424,13 @@ type LambdaLayerAggregationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// The VPC security groups and subnets that are attached to an AWS Lambda
-// function. For more information, see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
+// The VPC security groups and subnets that are attached to an Amazon Web Services
+// Lambda function. For more information, see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
 // .
 type LambdaVpcConfig struct {
 
-	// The VPC security groups and subnets that are attached to an AWS Lambda
-	// function. For more information, see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
+	// The VPC security groups and subnets that are attached to an Amazon Web Services
+	// Lambda function. For more information, see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)
 	// .
 	SecurityGroupIds []string
 
@@ -1947,6 +2439,57 @@ type LambdaVpcConfig struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of CIS scan configurations filter criteria.
+type ListCisScanConfigurationsFilterCriteria struct {
+
+	// The list of scan configuration ARN filters.
+	ScanConfigurationArnFilters []CisStringFilter
+
+	// The list of scan name filters.
+	ScanNameFilters []CisStringFilter
+
+	// The list of target resource tag filters.
+	TargetResourceTagFilters []TagFilter
+
+	noSmithyDocumentSerde
+}
+
+// A list of CIS scans filter criteria.
+type ListCisScansFilterCriteria struct {
+
+	// The list of failed checks filters.
+	FailedChecksFilters []CisNumberFilter
+
+	// The list of scan ARN filters.
+	ScanArnFilters []CisStringFilter
+
+	// The list of scan at filters.
+	ScanAtFilters []CisDateFilter
+
+	// The list of scan configuration ARN filters.
+	ScanConfigurationArnFilters []CisStringFilter
+
+	// The list of scan name filters.
+	ScanNameFilters []CisStringFilter
+
+	// The list of scan status filters.
+	ScanStatusFilters []CisScanStatusFilter
+
+	// The list of scheduled by filters.
+	ScheduledByFilters []CisStringFilter
+
+	// The list of target account ID filters.
+	TargetAccountIdFilters []CisStringFilter
+
+	// The list of target resource ID filters.
+	TargetResourceIdFilters []CisStringFilter
+
+	// The list of target resource tag filters.
+	TargetResourceTagFilters []TagFilter
 
 	noSmithyDocumentSerde
 }
@@ -2028,6 +2571,22 @@ type MemberAccountEc2DeepInspectionStatusState struct {
 	noSmithyDocumentSerde
 }
 
+// A monthly schedule.
+type MonthlySchedule struct {
+
+	// The monthly schedule's day.
+	//
+	// This member is required.
+	Day Day
+
+	// The monthly schedule's start time.
+	//
+	// This member is required.
+	StartTime *Time
+
+	noSmithyDocumentSerde
+}
+
 // Information on the network path associated with a finding.
 type NetworkPath struct {
 
@@ -2068,6 +2627,11 @@ type NumberFilter struct {
 	// The highest number to be included in the filter.
 	UpperInclusive *float64
 
+	noSmithyDocumentSerde
+}
+
+// A one time schedule.
+type OneTimeSchedule struct {
 	noSmithyDocumentSerde
 }
 
@@ -2313,7 +2877,8 @@ type ResourceDetails struct {
 	// in the finding.
 	AwsEcrContainerImage *AwsEcrContainerImageDetails
 
-	// A summary of the information about an AWS Lambda function affected by a finding.
+	// A summary of the information about an Amazon Web Services Lambda function
+	// affected by a finding.
 	AwsLambdaFunction *AwsLambdaFunctionDetails
 
 	noSmithyDocumentSerde
@@ -2334,10 +2899,10 @@ type ResourceFilterCriteria struct {
 	// The ECR repository names used as resource filter criteria.
 	EcrRepositoryName []ResourceStringFilter
 
-	// The AWS Lambda function name used as resource filter criteria.
+	// The Amazon Web Services Lambda function name used as resource filter criteria.
 	LambdaFunctionName []ResourceStringFilter
 
-	// The AWS Lambda function tags used as resource filter criteria.
+	// The Amazon Web Services Lambda function tags used as resource filter criteria.
 	LambdaFunctionTags []ResourceMapFilter
 
 	// The resource IDs used as resource filter criteria.
@@ -2382,7 +2947,8 @@ type ResourceScanMetadata struct {
 	// resides in.
 	EcrRepository *EcrRepositoryMetadata
 
-	// An object that contains metadata details for an AWS Lambda function.
+	// An object that contains metadata details for an Amazon Web Services Lambda
+	// function.
 	LambdaFunction *LambdaFunctionMetadata
 
 	noSmithyDocumentSerde
@@ -2427,7 +2993,7 @@ type ResourceStatus struct {
 	// This member is required.
 	Ecr Status
 
-	// The status of Amazon Inspector scanning for AWS Lambda function.
+	// The status of Amazon Inspector scanning for Amazon Web Services Lambda function.
 	Lambda Status
 
 	// The status of Amazon Inspector scanning for custom application code for Amazon
@@ -2525,6 +3091,54 @@ type ScanStatus struct {
 	noSmithyDocumentSerde
 }
 
+// A schedule.
+//
+// The following types satisfy this interface:
+//
+//	ScheduleMemberDaily
+//	ScheduleMemberMonthly
+//	ScheduleMemberOneTime
+//	ScheduleMemberWeekly
+type Schedule interface {
+	isSchedule()
+}
+
+// The schedule's daily.
+type ScheduleMemberDaily struct {
+	Value DailySchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleMemberDaily) isSchedule() {}
+
+// The schedule's monthly.
+type ScheduleMemberMonthly struct {
+	Value MonthlySchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleMemberMonthly) isSchedule() {}
+
+// The schedule's one time.
+type ScheduleMemberOneTime struct {
+	Value OneTimeSchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleMemberOneTime) isSchedule() {}
+
+// The schedule's weekly.
+type ScheduleMemberWeekly struct {
+	Value WeeklySchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleMemberWeekly) isSchedule() {}
+
 // Details on the criteria used to define the filter for a vulnerability search.
 type SearchVulnerabilitiesFilterCriteria struct {
 
@@ -2570,6 +3184,17 @@ type SortCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// The start CIS session message.
+type StartCisSessionMessage struct {
+
+	// The unique token that identifies the CIS session.
+	//
+	// This member is required.
+	SessionToken *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that described the state of Amazon Inspector scans for an account.
 type State struct {
 
@@ -2591,6 +3216,21 @@ type State struct {
 	noSmithyDocumentSerde
 }
 
+// The status counts.
+type StatusCounts struct {
+
+	// The number of checks that failed.
+	Failed *int32
+
+	// The number of checks that passed.
+	Passed *int32
+
+	// The number of checks that were skipped.
+	Skipped *int32
+
+	noSmithyDocumentSerde
+}
+
 // Details about the step associated with a finding.
 type Step struct {
 
@@ -2603,6 +3243,64 @@ type Step struct {
 	//
 	// This member is required.
 	ComponentType *string
+
+	noSmithyDocumentSerde
+}
+
+// The stop CIS message progress.
+type StopCisMessageProgress struct {
+
+	// The progress' error checks.
+	ErrorChecks int32
+
+	// The progress' failed checks.
+	FailedChecks int32
+
+	// The progress' informational checks.
+	InformationalChecks int32
+
+	// The progress' not applicable checks.
+	NotApplicableChecks int32
+
+	// The progress' not evaluated checks.
+	NotEvaluatedChecks int32
+
+	// The progress' successful checks.
+	SuccessfulChecks int32
+
+	// The progress' total checks.
+	TotalChecks int32
+
+	// The progress' unknown checks.
+	UnknownChecks int32
+
+	noSmithyDocumentSerde
+}
+
+// The stop CIS session message.
+type StopCisSessionMessage struct {
+
+	// The progress of the message.
+	//
+	// This member is required.
+	Progress *StopCisMessageProgress
+
+	// The status of the message.
+	//
+	// This member is required.
+	Status StopCisSessionStatus
+
+	// The message benchmark profile.
+	BenchmarkProfile *string
+
+	// The message benchmark version.
+	BenchmarkVersion *string
+
+	// The message compute platform.
+	ComputePlatform *ComputePlatform
+
+	// The reason for the message.
+	Reason *string
 
 	noSmithyDocumentSerde
 }
@@ -2631,6 +3329,43 @@ type SuggestedFix struct {
 
 	// The fix's description.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// The tag filter.
+type TagFilter struct {
+
+	// The tag filter comparison value.
+	//
+	// This member is required.
+	Comparison TagComparison
+
+	// The tag filter key.
+	//
+	// This member is required.
+	Key *string
+
+	// The tag filter value.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The time.
+type Time struct {
+
+	// The time of day in 24-hour format (00:00).
+	//
+	// This member is required.
+	TimeOfDay *string
+
+	// The timezone.
+	//
+	// This member is required.
+	Timezone *string
 
 	noSmithyDocumentSerde
 }
@@ -2676,6 +3411,18 @@ type TitleAggregationResponse struct {
 
 	// The vulnerability ID of the finding.
 	VulnerabilityId *string
+
+	noSmithyDocumentSerde
+}
+
+// Updates CIS targets.
+type UpdateCisTargets struct {
+
+	// The target account ids.
+	AccountIds []string
+
+	// The target resource tags.
+	TargetResourceTags map[string][]string
 
 	noSmithyDocumentSerde
 }
@@ -2825,12 +3572,28 @@ type VulnerablePackage struct {
 	// The code to run in your environment to update packages with a fix available.
 	Remediation *string
 
-	// The Amazon Resource Number (ARN) of the AWS Lambda function affected by a
-	// finding.
+	// The Amazon Resource Number (ARN) of the Amazon Web Services Lambda function
+	// affected by a finding.
 	SourceLambdaLayerArn *string
 
 	// The source layer hash of the vulnerable package.
 	SourceLayerHash *string
+
+	noSmithyDocumentSerde
+}
+
+// A weekly schedule.
+type WeeklySchedule struct {
+
+	// The weekly schedule's days.
+	//
+	// This member is required.
+	Days []Day
+
+	// The weekly schedule's start time.
+	//
+	// This member is required.
+	StartTime *Time
 
 	noSmithyDocumentSerde
 }
@@ -2848,3 +3611,4 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAggregationRequest()  {}
 func (*UnknownUnionMember) isAggregationResponse() {}
+func (*UnknownUnionMember) isSchedule()            {}

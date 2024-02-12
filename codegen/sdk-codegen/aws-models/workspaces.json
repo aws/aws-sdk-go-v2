@@ -2089,7 +2089,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates one or more WorkSpaces.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces are created.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>The <code>MANUAL</code> running mode value is only supported by Amazon WorkSpaces\n               Core. Contact your account team to be allow-listed to use this value. For more\n               information, see <a href=\"http://aws.amazon.com/workspaces/core/\">Amazon WorkSpaces\n                  Core</a>.</p>\n               </li>\n               <li>\n                  <p>You don't need to specify the <code>PCOIP</code> protocol for Linux bundles\n                  because <code>WSP</code> is the default protocol for those bundles.</p>\n               </li>\n               <li>\n                  <p>Ensure you review your running mode to ensure you are using a running mode that is optimal for your needs and budget.\n                  For more information on switching running modes, see \n                  <a href=\"https://aws.amazon.com/workspaces/faqs/#:~:text=Q%3A%20Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%3F\">\n                     Can I switch between hourly and monthly billing?</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Creates one or more WorkSpaces.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces are created.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>The <code>MANUAL</code> running mode value is only supported by Amazon WorkSpaces\n               Core. Contact your account team to be allow-listed to use this value. For more\n               information, see <a href=\"http://aws.amazon.com/workspaces/core/\">Amazon WorkSpaces\n                  Core</a>.</p>\n               </li>\n               <li>\n                  <p>You don't need to specify the <code>PCOIP</code> protocol for Linux bundles\n                  because <code>WSP</code> is the default protocol for those bundles.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#CreateWorkspacesRequest": {
@@ -4260,6 +4260,12 @@
                     "target": "com.amazonaws.workspaces#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated,\n         provide this token to receive the next set of results.</p>"
+                    }
+                },
+                "WorkspaceName": {
+                    "target": "com.amazonaws.workspaces#WorkspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-decoupled WorkSpace.</p>"
                     }
                 }
             },
@@ -7960,6 +7966,12 @@
                         "smithy.api#documentation": "<p>Indicates whether the data stored on the root volume is encrypted.</p>"
                     }
                 },
+                "WorkspaceName": {
+                    "target": "com.amazonaws.workspaces#WorkspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-decoupled WorkSpace.</p>"
+                    }
+                },
                 "WorkspaceProperties": {
                     "target": "com.amazonaws.workspaces#WorkspaceProperties",
                     "traits": {
@@ -8826,13 +8838,19 @@
                 "target": "com.amazonaws.workspaces#Workspace"
             }
         },
+        "com.amazonaws.workspaces#WorkspaceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_()][a-zA-Z0-9_.()-]{1,63}$"
+            }
+        },
         "com.amazonaws.workspaces#WorkspaceProperties": {
             "type": "structure",
             "members": {
                 "RunningMode": {
                     "target": "com.amazonaws.workspaces#RunningMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The running mode. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html\">Manage the WorkSpace Running\n         Mode</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>The <code>MANUAL</code> value is only supported by Amazon WorkSpaces Core. Contact\n                  your account team to be allow-listed to use this value. For more information, see\n                  <a href=\"http://aws.amazon.com/workspaces/core/\">Amazon WorkSpaces Core</a>.</p>\n               </li>\n               <li>\n                  <p>Ensure you review your running mode to ensure you are using a running mode that is optimal for your needs and budget.\n                  For more information on switching running modes, see \n                  <a href=\"https://aws.amazon.com/workspaces/faqs/#:~:text=Q%3A%20Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%3F\">\n                     Can I switch between hourly and monthly billing?</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The running mode. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html\">Manage the WorkSpace Running\n         Mode</a>.</p>\n         <note>\n            <p>The <code>MANUAL</code> value is only supported by Amazon WorkSpaces Core. Contact\n            your account team to be allow-listed to use this value. For more information, see\n            <a href=\"http://aws.amazon.com/workspaces/core/\">Amazon WorkSpaces Core</a>.</p>\n         </note>"
                     }
                 },
                 "RunningModeAutoStopTimeoutInMinutes": {
@@ -8889,7 +8907,7 @@
                 "UserName": {
                     "target": "com.amazonaws.workspaces#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user name of the user for the WorkSpace. This user name must exist in the Directory Service directory for the WorkSpace.</p>",
+                        "smithy.api#documentation": "<p>The user name of the user for the WorkSpace. This user name must exist in the Directory Service directory for the WorkSpace.</p>\n         <p>The reserved keyword, <code>[UNDEFINED]</code>, is used when creating user-decoupled WorkSpaces.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8928,6 +8946,12 @@
                     "target": "com.amazonaws.workspaces#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags for the WorkSpace.</p>"
+                    }
+                },
+                "WorkspaceName": {
+                    "target": "com.amazonaws.workspaces#WorkspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-decoupled WorkSpace.</p>"
                     }
                 }
             },

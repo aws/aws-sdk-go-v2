@@ -633,6 +633,74 @@ type ResourceChangeDetail struct {
 	noSmithyDocumentSerde
 }
 
+// A resource included in a generated template. This data type is used with the
+// CreateGeneratedTemplate and UpdateGeneratedTemplate API actions.
+type ResourceDefinition struct {
+
+	// A list of up to 256 key-value pairs that identifies the scanned resource. The
+	// key is the name of one of the primary identifiers for the resource. (Primary
+	// identifiers are specified in the primaryIdentifier list in the resource
+	// schema.) The value is the value of that primary identifier. For example, for a
+	// AWS::DynamoDB::Table resource, the primary identifiers is TableName so the
+	// key-value pair could be "TableName": "MyDDBTable" . For more information, see
+	// primaryIdentifier (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier)
+	// in the CloudFormation Command Line Interface User guide for extension
+	// development.
+	//
+	// This member is required.
+	ResourceIdentifier map[string]string
+
+	// The type of the resource, such as AWS::DynamoDB::Table . For the list of
+	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html)
+	// in the CloudFormation User Guide
+	//
+	// This member is required.
+	ResourceType *string
+
+	// The logical resource id for this resource in the generated template.
+	LogicalResourceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a resource in a generated template
+type ResourceDetail struct {
+
+	// The logical id for this resource in the final generated template.
+	LogicalResourceId *string
+
+	// A list of up to 256 key-value pairs that identifies the resource in the
+	// generated template. The key is the name of one of the primary identifiers for
+	// the resource. (Primary identifiers are specified in the primaryIdentifier list
+	// in the resource schema.) The value is the value of that primary identifier. For
+	// example, for a AWS::DynamoDB::Table resource, the primary identifiers is
+	// TableName so the key-value pair could be "TableName": "MyDDBTable" . For more
+	// information, see primaryIdentifier (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier)
+	// in the CloudFormation Command Line Interface User guide for extension
+	// development.
+	ResourceIdentifier map[string]string
+
+	// Status of the processing of a resource in a generated template. InProgress The
+	// resource processing is still in progress. Complete The resource processing is
+	// complete. Pending The resource processing is pending. Failed The resource
+	// processing has failed.
+	ResourceStatus GeneratedTemplateResourceStatus
+
+	// The reason for the resource detail, providing more information if a failure
+	// happened.
+	ResourceStatusReason *string
+
+	// The type of the resource, such as AWS::DynamoDB::Table . For the list of
+	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html)
+	// In the CloudFormation User Guide
+	ResourceType *string
+
+	// The warnings generated for this resource.
+	Warnings []WarningDetail
+
+	noSmithyDocumentSerde
+}
+
 // Describes the target resources of a specific type in your import template (for
 // example, all AWS::S3::Bucket resources) and the properties you can provide
 // during the import to identify resources of that type.
@@ -649,6 +717,34 @@ type ResourceIdentifierSummary struct {
 
 	// The template resource type of the target resources, such as AWS::S3::Bucket .
 	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the resource scan. This is returned by the ListResourceScan API
+// action.
+type ResourceScanSummary struct {
+
+	// The time that the resource scan was finished.
+	EndTime *time.Time
+
+	// The percentage of the resource scan that has been completed.
+	PercentageCompleted *float64
+
+	// The Amazon Resource Name (ARN) of the resource scan.
+	ResourceScanId *string
+
+	// The time that the resource scan was started.
+	StartTime *time.Time
+
+	// Status of the resource scan. INPROGRESS The resource scan is still in progress.
+	// COMPLETE The resource scan is complete. EXPIRED The resource scan has expired.
+	// FAILED The resource scan has failed.
+	Status ResourceScanStatus
+
+	// The reason for the resource scan status, providing more information if a
+	// failure happened.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }
@@ -764,6 +860,59 @@ type RollbackTrigger struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A scanned resource returned by ListResourceScanResources or
+// ListResourceScanRelatedResources .
+type ScannedResource struct {
+
+	// If true , the resource is managed by a CloudFormation stack.
+	ManagedByStack *bool
+
+	// A list of up to 256 key-value pairs that identifies for the scanned resource.
+	// The key is the name of one of the primary identifiers for the resource. (Primary
+	// identifiers are specified in the primaryIdentifier list in the resource
+	// schema.) The value is the value of that primary identifier. For example, for a
+	// AWS::DynamoDB::Table resource, the primary identifiers is TableName so the
+	// key-value pair could be "TableName": "MyDDBTable" . For more information, see
+	// primaryIdentifier (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier)
+	// in the CloudFormation Command Line Interface User guide for extension
+	// development.
+	ResourceIdentifier map[string]string
+
+	// The type of the resource, such as AWS::DynamoDB::Table . For the list of
+	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html)
+	// In the CloudFormation User Guide
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Identifies a scanned resource. This is used with the
+// ListResourceScanRelatedResources API action.
+type ScannedResourceIdentifier struct {
+
+	// A list of up to 256 key-value pairs that identifies the scanned resource. The
+	// key is the name of one of the primary identifiers for the resource. (Primary
+	// identifiers are specified in the primaryIdentifier list in the resource
+	// schema.) The value is the value of that primary identifier. For example, for a
+	// AWS::DynamoDB::Table resource, the primary identifiers is TableName so the
+	// key-value pair could be "TableName": "MyDDBTable" . For more information, see
+	// primaryIdentifier (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier)
+	// in the CloudFormation Command Line Interface User guide for extension
+	// development.
+	//
+	// This member is required.
+	ResourceIdentifier map[string]string
+
+	// The type of the resource, such as AWS::DynamoDB::Table . For the list of
+	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html)
+	// In the CloudFormation User Guide
+	//
+	// This member is required.
+	ResourceType *string
 
 	noSmithyDocumentSerde
 }
@@ -1857,6 +2006,7 @@ type StackSetOperationPreferences struct {
 	RegionConcurrencyType RegionConcurrencyType
 
 	// The order of the Regions where you want to perform the stack operation.
+	// RegionOrder isn't followed if AutoDeployment is enabled.
 	RegionOrder []string
 
 	noSmithyDocumentSerde
@@ -2105,6 +2255,30 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration details of a generated template.
+type TemplateConfiguration struct {
+
+	// The DeletionPolicy assigned to resources in the generated template. Supported
+	// values are:
+	//   - DELETE - delete all resources when the stack is deleted.
+	//   - RETAIN - retain all resources when the stack is deleted.
+	// For more information, see DeletionPolicy attribute (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html)
+	// in the CloudFormation User Guide.
+	DeletionPolicy GeneratedTemplateDeletionPolicy
+
+	// The UpdateReplacePolicy assigned to resources in the generated template.
+	// Supported values are:
+	//   - DELETE - delete all resources when the resource is replaced during an update
+	//   operation.
+	//   - RETAIN - retain all resources when the resource is replaced during an update
+	//   operation.
+	// For more information, see UpdateReplacePolicy attribute (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html)
+	// in the CloudFormation User Guide.
+	UpdateReplacePolicy GeneratedTemplateUpdateReplacePolicy
+
+	noSmithyDocumentSerde
+}
+
 // The TemplateParameter data type.
 type TemplateParameter struct {
 
@@ -2120,6 +2294,65 @@ type TemplateParameter struct {
 
 	// The name associated with the parameter.
 	ParameterKey *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the progress of the template generation.
+type TemplateProgress struct {
+
+	// The number of resources that failed the template generation.
+	ResourcesFailed *int32
+
+	// The number of resources that are still pending the template generation.
+	ResourcesPending *int32
+
+	// The number of resources that are in-process for the template generation.
+	ResourcesProcessing *int32
+
+	// The number of resources that succeeded the template generation.
+	ResourcesSucceeded *int32
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a generated template.
+type TemplateSummary struct {
+
+	// The time the generated template was created.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the generated template. The format is
+	// arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id} .
+	// For example,
+	// arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
+	// .
+	GeneratedTemplateId *string
+
+	// The name of the generated template.
+	GeneratedTemplateName *string
+
+	// The time the generated template was last updated.
+	LastUpdatedTime *time.Time
+
+	// The number of resources in the generated template. This is a total of resources
+	// in pending, in-progress, completed, and failed states.
+	NumberOfResources *int32
+
+	// The status of the template generation. Supported values are:
+	//   - CreatePending - the creation of the template is pending.
+	//   - CreateInProgress - the creation of the template is in progress.
+	//   - DeletePending - the deletion of the template is pending.
+	//   - DeleteInProgress - the deletion of the template is in progress.
+	//   - UpdatePending - the update of the template is pending.
+	//   - UpdateInProgress - the update of the template is in progress.
+	//   - Failed - the template operation failed.
+	//   - Complete - the template operation is complete.
+	Status GeneratedTemplateStatus
+
+	// The reason for the current template generation status. This will provide more
+	// details if a failure happened.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }
@@ -2354,6 +2587,51 @@ type TypeVersionSummary struct {
 	// the end of the Amazon Resource Name (ARN) assigned to the extension version when
 	// it's registered.
 	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The warnings generated for a specific resource for this generated template.
+type WarningDetail struct {
+
+	// The properties of the resource that are impacted by this warning.
+	Properties []WarningProperty
+
+	// The type of this warning. For more information, see IaC generator and
+	// write-only properties (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-write-only-properties.html)
+	// in the CloudFormation User Guide.
+	//   - MUTUALLY_EXCLUSIVE_PROPERTIES - The resource requires mutually-exclusive
+	//   write-only properties. The IaC generator selects one set of mutually exclusive
+	//   properties and converts the included properties into parameters. The parameter
+	//   names have a suffix OneOf and the parameter descriptions indicate that the
+	//   corresponding property can be replaced with other exclusive properties.
+	//   - UNSUPPORTED_PROPERTIES - Unsupported properties are present in the resource.
+	//   One example of unsupported properties would be a required write-only property
+	//   that is an array, because a parameter cannot be an array. Another example is an
+	//   optional write-only property.
+	//   - MUTUALLY_EXCLUSIVE_TYPES - One or more required write-only properties are
+	//   found in the resource, and the type of that property can be any of several
+	//   types.
+	// Currently the resource and property reference documentation does not indicate
+	// if a property uses a type of oneOf or anyOf . You need to look at the resource
+	// provider schema.
+	Type WarningType
+
+	noSmithyDocumentSerde
+}
+
+// A specific property that is impacted by a warning.
+type WarningProperty struct {
+
+	// The description of the property from the resource provider schema.
+	Description *string
+
+	// The path of the property. For example, if this is for the S3Bucket member of
+	// the Code property, the property path would be Code/S3Bucket .
+	PropertyPath *string
+
+	// If true , the specified property is required.
+	Required *bool
 
 	noSmithyDocumentSerde
 }

@@ -1650,6 +1650,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Virtual computer blueprints that are supported by a Lightsail for Research bundle.</p>\n         <important>\n            <p>This parameter only applies to Lightsail for Research resources.</p>\n         </important>"
                     }
+                },
+                "publicIpv4AddressCount": {
+                    "target": "com.amazonaws.lightsail#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer that indicates the public ipv4 address count included in the bundle, the value is either 0 or 1.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14115,6 +14121,12 @@
                     "target": "com.amazonaws.lightsail#IpAddress",
                     "traits": {
                         "smithy.api#documentation": "<p>The public IP address of the Amazon Lightsail instance.</p>"
+                    }
+                },
+                "ipv6Addresses": {
+                    "target": "com.amazonaws.lightsail#Ipv6AddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address of the Amazon Lightsail instance.</p>"
                     }
                 },
                 "password": {

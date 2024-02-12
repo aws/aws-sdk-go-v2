@@ -1,3 +1,7 @@
+# v1.44.0 (2024-02-06)
+
+* **Feature**: You can now delete an API key that you've created for use with your CAPTCHA JavaScript integration API.
+
 # v1.43.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

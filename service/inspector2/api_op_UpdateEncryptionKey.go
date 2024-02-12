@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an encryption key. A ResourceNotFoundException means that an AWS owned
-// key is being used for encryption.
+// Updates an encryption key. A ResourceNotFoundException means that an Amazon Web
+// Services owned key is being used for encryption.
 func (c *Client) UpdateEncryptionKey(ctx context.Context, params *UpdateEncryptionKeyInput, optFns ...func(*Options)) (*UpdateEncryptionKeyOutput, error) {
 	if params == nil {
 		params = &UpdateEncryptionKeyInput{}

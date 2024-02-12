@@ -150,6 +150,26 @@ func (m *validateOpCreateWebACL) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAPIKey struct {
+}
+
+func (*validateOpDeleteAPIKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAPIKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAPIKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAPIKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFirewallManagerRuleGroups struct {
 }
 
@@ -1076,6 +1096,10 @@ func addOpCreateRuleGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateWebACLValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWebACL{}, middleware.After)
+}
+
+func addOpDeleteAPIKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAPIKey{}, middleware.After)
 }
 
 func addOpDeleteFirewallManagerRuleGroupsValidationMiddleware(stack *middleware.Stack) error {
@@ -3569,6 +3593,24 @@ func validateOpCreateWebACLInput(v *CreateWebACLInput) error {
 		if err := validateAssociationConfig(v.AssociationConfig); err != nil {
 			invalidParams.AddNested("AssociationConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAPIKeyInput(v *DeleteAPIKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAPIKeyInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.APIKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("APIKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

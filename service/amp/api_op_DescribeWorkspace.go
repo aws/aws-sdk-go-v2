@@ -17,7 +17,7 @@ import (
 	"time"
 )
 
-// Describes an existing AMP workspace.
+// Returns information about an existing workspace.
 func (c *Client) DescribeWorkspace(ctx context.Context, params *DescribeWorkspaceInput, optFns ...func(*Options)) (*DescribeWorkspaceOutput, error) {
 	if params == nil {
 		params = &DescribeWorkspaceInput{}
@@ -47,7 +47,7 @@ type DescribeWorkspaceInput struct {
 // Represents the output of a DescribeWorkspace operation.
 type DescribeWorkspaceOutput struct {
 
-	// The properties of the selected workspace.
+	// A structure that contains details about the workspace.
 	//
 	// This member is required.
 	Workspace *types.WorkspaceDescription

@@ -1,3 +1,11 @@
+# v1.35.1 (2024-01-12)
+
+* **Documentation**: Location SDK documentation update. Added missing fonts to the MapConfiguration data type. Updated note for the SubMunicipality property in the place data type.
+
+# v1.35.0 (2024-01-10)
+
+* **Feature**: This release adds API support for custom layers for the maps service APIs: CreateMap, UpdateMap, DescribeMap.
+
 # v1.34.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.22.2 (2024-02-09)
+
+* **Documentation**: Overall documentation updates.
+
 # v1.22.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

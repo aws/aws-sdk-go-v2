@@ -1,3 +1,7 @@
+# v1.7.0 (2024-01-16)
+
+* **Feature**: Provide an additional option for key exchange using RSA wrap/unwrap in addition to tr-34/tr-31 in ImportKey and ExportKey operations. Added new key usage (type) TR31_M1_ISO_9797_1_MAC_KEY, for use with Generate/VerifyMac dataplane operations  with ISO9797 Algorithm 1 MAC calculations.
+
 # v1.6.3 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

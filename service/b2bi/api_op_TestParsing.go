@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Parses the input EDI (electronic data interchange) file.
+// Parses the input EDI (electronic data interchange) file. The input file has a
+// file size limit of 250 KB.
 func (c *Client) TestParsing(ctx context.Context, params *TestParsingInput, optFns ...func(*Options)) (*TestParsingOutput, error) {
 	if params == nil {
 		params = &TestParsingInput{}

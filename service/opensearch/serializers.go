@@ -424,6 +424,94 @@ func awsRestjson1_serializeOpDocumentAuthorizeVpcEndpointAccessInput(v *Authoriz
 	return nil
 }
 
+type awsRestjson1_serializeOpCancelDomainConfigChange struct {
+}
+
+func (*awsRestjson1_serializeOpCancelDomainConfigChange) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCancelDomainConfigChange) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CancelDomainConfigChangeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2021-01-01/opensearch/domain/{DomainName}/config/cancel")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCancelDomainConfigChangeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCancelDomainConfigChangeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCancelDomainConfigChangeInput(v *CancelDomainConfigChangeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCancelDomainConfigChangeInput(v *CancelDomainConfigChangeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DryRun != nil {
+		ok := object.Key("DryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCancelServiceSoftwareUpdate struct {
 }
 

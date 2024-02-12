@@ -5608,7 +5608,7 @@
                     "min": 1,
                     "max": 50
                 },
-                "smithy.api#pattern": "^(?![Aa][Ww][Ss])(s|([a-zA-Z][a-zA-Z0-9_]+))$"
+                "smithy.api#pattern": "^(?![Aa][Ww][Ss])(s|([a-zA-Z][a-zA-Z0-9_]+))|(AWS_ZIP_DEFAULT)$"
             }
         },
         "com.amazonaws.finspace#KxCommandLineArgumentValue": {
@@ -5618,7 +5618,7 @@
                     "min": 1,
                     "max": 50
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_:./]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_:./,]+$"
             }
         },
         "com.amazonaws.finspace#KxCommandLineArguments": {

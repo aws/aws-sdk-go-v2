@@ -44,7 +44,7 @@ type UpdateProvisioningTemplateInput struct {
 	Description *string
 
 	// True to enable the provisioning template, otherwise false.
-	Enabled bool
+	Enabled *bool
 
 	// Updates the pre-provisioning hook template. Only supports template of type
 	// FLEET_PROVISIONING . For more information about provisioning template types, see

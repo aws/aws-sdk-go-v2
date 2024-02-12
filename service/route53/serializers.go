@@ -6073,6 +6073,33 @@ func awsRestxml_serializeDocumentCidrRoutingConfig(v *types.CidrRoutingConfig, v
 	return nil
 }
 
+func awsRestxml_serializeDocumentCoordinates(v *types.Coordinates, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Latitude != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Latitude",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Latitude)
+	}
+	if v.Longitude != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Longitude",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Longitude)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentGeoLocation(v *types.GeoLocation, value smithyxml.Value) error {
 	defer value.Close()
 	if v.ContinentCode != nil {
@@ -6107,6 +6134,57 @@ func awsRestxml_serializeDocumentGeoLocation(v *types.GeoLocation, value smithyx
 		}
 		el := value.MemberElement(root)
 		el.String(*v.SubdivisionCode)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentGeoProximityLocation(v *types.GeoProximityLocation, value smithyxml.Value) error {
+	defer value.Close()
+	if v.AWSRegion != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AWSRegion",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.AWSRegion)
+	}
+	if v.Bias != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bias",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.Bias)
+	}
+	if v.Coordinates != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Coordinates",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentCoordinates(v.Coordinates, el); err != nil {
+			return err
+		}
+	}
+	if v.LocalZoneGroup != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "LocalZoneGroup",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.LocalZoneGroup)
 	}
 	return nil
 }
@@ -6474,6 +6552,19 @@ func awsRestxml_serializeDocumentResourceRecordSet(v *types.ResourceRecordSet, v
 		}
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentGeoLocation(v.GeoLocation, el); err != nil {
+			return err
+		}
+	}
+	if v.GeoProximityLocation != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "GeoProximityLocation",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentGeoProximityLocation(v.GeoProximityLocation, el); err != nil {
 			return err
 		}
 	}

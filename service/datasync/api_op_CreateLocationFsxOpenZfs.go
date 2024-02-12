@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon FSx for OpenZFS file system that DataSync can
-// access for a transfer. For more information, see Creating a location for FSx
-// for OpenZFS (https://docs.aws.amazon.com/datasync/latest/userguide/create-openzfs-location.html)
+// Creates a transfer location for an Amazon FSx for OpenZFS file system. DataSync
+// can use this location as a source or destination for transferring data. Before
+// you begin, make sure that you understand how DataSync accesses FSx for OpenZFS
+// file systems (https://docs.aws.amazon.com/datasync/latest/userguide/create-openzfs-location.html#create-openzfs-access)
 // . Request parameters related to SMB aren't supported with the
 // CreateLocationFsxOpenZfs operation.
 func (c *Client) CreateLocationFsxOpenZfs(ctx context.Context, params *CreateLocationFsxOpenZfsInput, optFns ...func(*Options)) (*CreateLocationFsxOpenZfsOutput, error) {

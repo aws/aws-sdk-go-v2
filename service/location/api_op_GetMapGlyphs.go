@@ -39,7 +39,8 @@ type GetMapGlyphsInput struct {
 	//   - VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans
 	//   Bold | Noto Serif Regular | Roboto Condensed Light Italic
 	//   - VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold
-	//   - VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold
+	//   - VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold | Arial
+	//   Unicode MS Bold | Arial Unicode MS Regular
 	// Valid font stacks for HERE Technologies (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)
 	// styles:
 	//   - VectorHereContrast – Fira GO Regular | Fira GO Bold

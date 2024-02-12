@@ -48,6 +48,9 @@ type CreateDomainConfigurationInput struct {
 	// required for Amazon Web Services-managed domains.
 	ServerCertificateArns []string
 
+	// The server certificate configuration.
+	ServerCertificateConfig *types.ServerCertificateConfig
+
 	// The type of service delivered by the endpoint. Amazon Web Services IoT Core
 	// currently supports only the DATA service type.
 	ServiceType types.ServiceType

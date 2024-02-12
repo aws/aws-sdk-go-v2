@@ -81,9 +81,9 @@ type AssociateFacesInput struct {
 
 type AssociateFacesOutput struct {
 
-	// An array of AssociatedFace objects containing FaceIDs that are successfully
-	// associated with the UserID is returned. Returned if the AssociateFaces action is
-	// successful.
+	// An array of AssociatedFace objects containing FaceIDs that have been
+	// successfully associated with the UserID. Returned if the AssociateFaces action
+	// is successful.
 	AssociatedFaces []types.AssociatedFace
 
 	// An array of UnsuccessfulAssociation objects containing FaceIDs that are not

@@ -46,7 +46,7 @@ type UpdateAppImageConfigInput struct {
 
 type UpdateAppImageConfigOutput struct {
 
-	// The Amazon Resource Name (ARN) for the AppImageConfig.
+	// The ARN for the AppImageConfig.
 	AppImageConfigArn *string
 
 	// Metadata pertaining to the operation's result.

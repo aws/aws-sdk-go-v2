@@ -289,6 +289,22 @@ type AutoTuneStatus struct {
 	noSmithyDocumentSerde
 }
 
+// A property change that was cancelled for an Amazon OpenSearch Service domain.
+type CancelledChangeProperty struct {
+
+	// The current value of the property, after the change was cancelled.
+	ActiveValue *string
+
+	// The pending value of the property that was cancelled. This would have been the
+	// eventual value of the property if the chance had not been cancelled.
+	CancelledValue *string
+
+	// The name of the property whose change was cancelled.
+	PropertyName *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies change details of the domain configuration change.
 type ChangeProgressDetails struct {
 
@@ -296,8 +312,21 @@ type ChangeProgressDetails struct {
 	// change.
 	ChangeId *string
 
+	// The current status of the configuration change.
+	ConfigChangeStatus ConfigChangeStatus
+
+	// The IAM principal who initiated the configuration change.
+	InitiatedBy InitiatedBy
+
+	// The last time that the configuration change was updated.
+	LastUpdatedTime *time.Time
+
 	// Contains an optional message associated with the domain configuration change.
 	Message *string
+
+	// The time that the configuration change was initiated, in Universal Coordinated
+	// Time (UTC).
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -334,6 +363,15 @@ type ChangeProgressStatusDetails struct {
 	// The list of properties involved in the domain configuration change that are
 	// completed.
 	CompletedProperties []string
+
+	// The current status of the configuration change.
+	ConfigChangeStatus ConfigChangeStatus
+
+	// The IAM principal who initiated the configuration change.
+	InitiatedBy InitiatedBy
+
+	// The last time that the status of the configuration change was updated.
+	LastUpdatedTime *time.Time
 
 	// The list of properties involved in the domain configuration change that are
 	// still in pending.
@@ -715,6 +753,9 @@ type ElasticsearchDomainConfig struct {
 	// Log publishing options for the given domain.
 	LogPublishingOptions *LogPublishingOptionsStatus
 
+	// Information about the domain properties that are currently being modified.
+	ModifyingProperties []ModifyingProperties
+
 	// Specifies the NodeToNodeEncryptionOptions for the Elasticsearch domain.
 	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptionsStatus
 
@@ -790,6 +831,9 @@ type ElasticsearchDomainStatus struct {
 	// The current status of the Elasticsearch domain's endpoint options.
 	DomainEndpointOptions *DomainEndpointOptions
 
+	// The status of any changes that are currently in progress for the domain.
+	DomainProcessingStatus DomainProcessingStatusType
+
 	// The EBSOptions for the specified domain. See Configuring EBS-based Storage (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs)
 	// for more information.
 	EBSOptions *EBSOptions
@@ -810,6 +854,9 @@ type ElasticsearchDomainStatus struct {
 
 	// Log publishing options for the given domain.
 	LogPublishingOptions map[string]LogPublishingOption
+
+	// Information about the domain properties that are currently being modified.
+	ModifyingProperties []ModifyingProperties
 
 	// Specifies the status of the NodeToNodeEncryptionOptions .
 	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptions
@@ -1034,6 +1081,29 @@ type MasterUserOptions struct {
 	// The master user's password, which is stored in the Amazon Elasticsearch Service
 	// domain's internal database.
 	MasterUserPassword *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the domain properties that are currently being modified.
+type ModifyingProperties struct {
+
+	// The current value of the domain property that is being modified.
+	ActiveValue *string
+
+	// The name of the property that is currently being modified.
+	Name *string
+
+	// The value that the property that is currently being modified will eventually
+	// have.
+	PendingValue *string
+
+	// The type of value that is currently being modified. Properties can have two
+	// types:
+	//   - PLAIN_TEXT: Contain direct values such as "1", "True", or "c5.large.search".
+	//   - STRINGIFIED_JSON: Contain content in JSON format, such as
+	//   {"Enabled":"True"}".
+	ValueType PropertyValueType
 
 	noSmithyDocumentSerde
 }

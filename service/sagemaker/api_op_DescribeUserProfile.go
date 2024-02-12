@@ -55,7 +55,7 @@ type DescribeUserProfileOutput struct {
 	// The failure reason.
 	FailureReason *string
 
-	// The ID of the user's profile in the Amazon Elastic File System (EFS) volume.
+	// The ID of the user's profile in the Amazon Elastic File System volume.
 	HomeEfsFileSystemUid *string
 
 	// The last modified time.

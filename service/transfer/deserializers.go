@@ -8250,6 +8250,11 @@ func awsAwsjson11_deserializeDocumentDescribedConnector(v **types.DescribedConne
 				sv.LoggingRole = ptr.String(jtv)
 			}
 
+		case "ServiceManagedEgressIpAddresses":
+			if err := awsAwsjson11_deserializeDocumentServiceManagedEgressIpAddresses(&sv.ServiceManagedEgressIpAddresses, value); err != nil {
+				return err
+			}
+
 		case "SftpConfig":
 			if err := awsAwsjson11_deserializeDocumentSftpConnectorConfig(&sv.SftpConfig, value); err != nil {
 				return err
@@ -8633,6 +8638,11 @@ func awsAwsjson11_deserializeDocumentDescribedServer(v **types.DescribedServer, 
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "As2ServiceManagedEgressIpAddresses":
+			if err := awsAwsjson11_deserializeDocumentServiceManagedEgressIpAddresses(&sv.As2ServiceManagedEgressIpAddresses, value); err != nil {
+				return err
 			}
 
 		case "Certificate":
@@ -11554,6 +11564,42 @@ func awsAwsjson11_deserializeDocumentSecurityPolicyOptions(v *[]string, value in
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected SecurityPolicyOption to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceManagedEgressIpAddresses(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ServiceManagedEgressIpAddress to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}

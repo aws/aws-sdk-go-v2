@@ -11,7 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates tags for the specified resource.
+// The TagResource operation associates tags with an Amazon Managed Service for
+// Prometheus resource. The only resources that can be tagged are workspaces and
+// rule groups namespaces. If you specify a new tag key for the resource, this tag
+// is appended to the list of tags associated with the resource. If you specify a
+// tag key that is already associated with the resource, the new tag value that you
+// specify replaces the previous value for that tag.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -29,12 +34,13 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The ARN of the resource.
+	// The ARN of the workspace or rule groups namespace to apply tags to.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The list of tags assigned to the resource.
+	// The list of tag keys and values to associate with the resource. Keys may not
+	// begin with aws: .
 	//
 	// This member is required.
 	Tags map[string]string

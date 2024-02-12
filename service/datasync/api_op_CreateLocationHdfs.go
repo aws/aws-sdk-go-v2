@@ -12,7 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for a Hadoop Distributed File System (HDFS).
+// Creates a transfer location for a Hadoop Distributed File System (HDFS).
+// DataSync can use this location as a source or destination for transferring data.
+// Before you begin, make sure that you understand how DataSync accesses HDFS
+// clusters (https://docs.aws.amazon.com/datasync/latest/userguide/create-hdfs-location.html#accessing-hdfs)
+// .
 func (c *Client) CreateLocationHdfs(ctx context.Context, params *CreateLocationHdfsInput, optFns ...func(*Options)) (*CreateLocationHdfsOutput, error) {
 	if params == nil {
 		params = &CreateLocationHdfsInput{}

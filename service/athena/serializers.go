@@ -4937,6 +4937,11 @@ func awsAwsjson11_serializeOpDocumentImportNotebookInput(v *ImportNotebookInput,
 		ok.String(*v.Name)
 	}
 
+	if v.NotebookS3LocationUri != nil {
+		ok := object.Key("NotebookS3LocationUri")
+		ok.String(*v.NotebookS3LocationUri)
+	}
+
 	if v.Payload != nil {
 		ok := object.Key("Payload")
 		ok.String(*v.Payload)

@@ -42,7 +42,10 @@ import (
 //
 // You can end a session before it times out by closing the session stream or by
 // closing the client that is receiving the stream. The session also ends if the
-// established connection between the client and the server breaks.
+// established connection between the client and the server breaks. For examples of
+// using an SDK to start a Live Tail session, see Start a Live Tail session using
+// an Amazon Web Services SDK (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/example_cloudwatch-logs_StartLiveTail_section.html)
+// .
 func (c *Client) StartLiveTail(ctx context.Context, params *StartLiveTailInput, optFns ...func(*Options)) (*StartLiveTailOutput, error) {
 	if params == nil {
 		params = &StartLiveTailInput{}
@@ -77,12 +80,14 @@ type StartLiveTailInput struct {
 
 	// If you specify this parameter, then only log events in the log streams that
 	// have names that start with the prefixes that you specify here are included in
-	// the Live Tail session. You can specify this parameter only if you specify only
+	// the Live Tail session. If you specify this field, you can't also specify the
+	// logStreamNames field. You can specify this parameter only if you specify only
 	// one log group in logGroupIdentifiers .
 	LogStreamNamePrefixes []string
 
 	// If you specify this parameter, then only log events in the log streams that you
-	// specify here are included in the Live Tail session. You can specify this
+	// specify here are included in the Live Tail session. If you specify this field,
+	// you can't also specify the logStreamNamePrefixes field. You can specify this
 	// parameter only if you specify only one log group in logGroupIdentifiers .
 	LogStreamNames []string
 

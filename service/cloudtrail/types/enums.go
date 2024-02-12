@@ -178,6 +178,24 @@ func (ImportStatus) Values() []ImportStatus {
 	}
 }
 
+type InsightsMetricDataType string
+
+// Enum values for InsightsMetricDataType
+const (
+	InsightsMetricDataTypeFillWithZeros InsightsMetricDataType = "FillWithZeros"
+	InsightsMetricDataTypeNonZeroData   InsightsMetricDataType = "NonZeroData"
+)
+
+// Values returns all known values for InsightsMetricDataType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InsightsMetricDataType) Values() []InsightsMetricDataType {
+	return []InsightsMetricDataType{
+		"FillWithZeros",
+		"NonZeroData",
+	}
+}
+
 type InsightType string
 
 // Enum values for InsightType

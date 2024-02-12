@@ -18,6 +18,24 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	}
 }
 
+type ExplainMode string
+
+// Enum values for ExplainMode
+const (
+	ExplainModeStatic  ExplainMode = "STATIC"
+	ExplainModeDetails ExplainMode = "DETAILS"
+)
+
+// Values returns all known values for ExplainMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ExplainMode) Values() []ExplainMode {
+	return []ExplainMode{
+		"STATIC",
+		"DETAILS",
+	}
+}
+
 type Format string
 
 // Enum values for Format
@@ -64,6 +82,24 @@ func (GraphStatus) Values() []GraphStatus {
 	}
 }
 
+type GraphSummaryMode string
+
+// Enum values for GraphSummaryMode
+const (
+	GraphSummaryModeBasic    GraphSummaryMode = "BASIC"
+	GraphSummaryModeDetailed GraphSummaryMode = "DETAILED"
+)
+
+// Values returns all known values for GraphSummaryMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GraphSummaryMode) Values() []GraphSummaryMode {
+	return []GraphSummaryMode{
+		"BASIC",
+		"DETAILED",
+	}
+}
+
 type ImportTaskStatus string
 
 // Enum values for ImportTaskStatus
@@ -98,6 +134,26 @@ func (ImportTaskStatus) Values() []ImportTaskStatus {
 	}
 }
 
+type PlanCacheType string
+
+// Enum values for PlanCacheType
+const (
+	PlanCacheTypeEnabled  PlanCacheType = "ENABLED"
+	PlanCacheTypeDisabled PlanCacheType = "DISABLED"
+	PlanCacheTypeAuto     PlanCacheType = "AUTO"
+)
+
+// Values returns all known values for PlanCacheType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PlanCacheType) Values() []PlanCacheType {
+	return []PlanCacheType{
+		"ENABLED",
+		"DISABLED",
+		"AUTO",
+	}
+}
+
 type PrivateGraphEndpointStatus string
 
 // Enum values for PrivateGraphEndpointStatus
@@ -120,6 +176,64 @@ func (PrivateGraphEndpointStatus) Values() []PrivateGraphEndpointStatus {
 	}
 }
 
+type QueryLanguage string
+
+// Enum values for QueryLanguage
+const (
+	QueryLanguageOpenCypher QueryLanguage = "OPEN_CYPHER"
+)
+
+// Values returns all known values for QueryLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueryLanguage) Values() []QueryLanguage {
+	return []QueryLanguage{
+		"OPEN_CYPHER",
+	}
+}
+
+type QueryState string
+
+// Enum values for QueryState
+const (
+	QueryStateRunning    QueryState = "RUNNING"
+	QueryStateWaiting    QueryState = "WAITING"
+	QueryStateCancelling QueryState = "CANCELLING"
+)
+
+// Values returns all known values for QueryState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (QueryState) Values() []QueryState {
+	return []QueryState{
+		"RUNNING",
+		"WAITING",
+		"CANCELLING",
+	}
+}
+
+type QueryStateInput string
+
+// Enum values for QueryStateInput
+const (
+	QueryStateInputAll        QueryStateInput = "ALL"
+	QueryStateInputRunning    QueryStateInput = "RUNNING"
+	QueryStateInputWaiting    QueryStateInput = "WAITING"
+	QueryStateInputCancelling QueryStateInput = "CANCELLING"
+)
+
+// Values returns all known values for QueryStateInput. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueryStateInput) Values() []QueryStateInput {
+	return []QueryStateInput{
+		"ALL",
+		"RUNNING",
+		"WAITING",
+		"CANCELLING",
+	}
+}
+
 type SnapshotStatus string
 
 // Enum values for SnapshotStatus
@@ -139,6 +253,31 @@ func (SnapshotStatus) Values() []SnapshotStatus {
 		"AVAILABLE",
 		"DELETING",
 		"FAILED",
+	}
+}
+
+type UnprocessableExceptionReason string
+
+// Enum values for UnprocessableExceptionReason
+const (
+	UnprocessableExceptionReasonQueryTimeout          UnprocessableExceptionReason = "QUERY_TIMEOUT"
+	UnprocessableExceptionReasonInternalLimitExceeded UnprocessableExceptionReason = "INTERNAL_LIMIT_EXCEEDED"
+	UnprocessableExceptionReasonMemoryLimitExceeded   UnprocessableExceptionReason = "MEMORY_LIMIT_EXCEEDED"
+	UnprocessableExceptionReasonStorageLimitExceeded  UnprocessableExceptionReason = "STORAGE_LIMIT_EXCEEDED"
+	UnprocessableExceptionReasonPartitionFull         UnprocessableExceptionReason = "PARTITION_FULL"
+)
+
+// Values returns all known values for UnprocessableExceptionReason. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (UnprocessableExceptionReason) Values() []UnprocessableExceptionReason {
+	return []UnprocessableExceptionReason{
+		"QUERY_TIMEOUT",
+		"INTERNAL_LIMIT_EXCEEDED",
+		"MEMORY_LIMIT_EXCEEDED",
+		"STORAGE_LIMIT_EXCEEDED",
+		"PARTITION_FULL",
 	}
 }
 

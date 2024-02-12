@@ -51,7 +51,7 @@ type DescribeLocationNfsOutput struct {
 	// The ARN of the NFS location.
 	LocationArn *string
 
-	// The URL of the NFS location.
+	// The URI of the NFS location.
 	LocationUri *string
 
 	// The mount options that DataSync uses to mount your NFS file server.

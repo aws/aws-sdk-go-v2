@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a space used for real time collaboration in a Domain.
+// Creates a space used for real time collaboration in a domain.
 func (c *Client) CreateSpace(ctx context.Context, params *CreateSpaceInput, optFns ...func(*Options)) (*CreateSpaceOutput, error) {
 	if params == nil {
 		params = &CreateSpaceInput{}
@@ -30,7 +30,7 @@ func (c *Client) CreateSpace(ctx context.Context, params *CreateSpaceInput, optF
 
 type CreateSpaceInput struct {
 
-	// The ID of the associated Domain.
+	// The ID of the associated domain.
 	//
 	// This member is required.
 	DomainId *string

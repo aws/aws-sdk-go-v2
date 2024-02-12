@@ -3,40 +3,29 @@ package software.amazon.smithy.aws.go.codegen.customization;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import software.amazon.smithy.aws.go.codegen.AddAwsConfigFields;
 import software.amazon.smithy.aws.go.codegen.AwsEndpointGenerator;
-import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4;
-import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4aUtils;
-import software.amazon.smithy.aws.go.codegen.EndpointGenerator;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.CodegenException;
-import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
-import software.amazon.smithy.go.codegen.integration.ConfigField;
-import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.OperationIndex;
 import software.amazon.smithy.model.knowledge.TopDownIndex;
-import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.ShapeType;
-import software.amazon.smithy.model.shapes.StructureShape;
-import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
 
 /**
- * This integration configures the EventBridge client for Signature Version 4a
+ * This integration configures legacy (pre-EndpointResolverV2) endpoint customizations for EventBridge.
  */
 public class EventBridgeMultiRegionEndpoint implements GoIntegration {
     private static Map<ShapeId, String> SUPPORTED_OPERATIONS = MapUtils.of(
@@ -56,9 +45,6 @@ public class EventBridgeMultiRegionEndpoint implements GoIntegration {
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
-        var resolver = SymbolUtils.createValueSymbolBuilder(
-                AwsSignatureVersion4aUtils.RESOLVE_CREDENTIAL_PROVIDER).build();
-
         List<RuntimeClientPlugin> plugins = new ArrayList<>();
 
         for (var operationId : SUPPORTED_OPERATIONS.keySet()) {
@@ -77,46 +63,6 @@ public class EventBridgeMultiRegionEndpoint implements GoIntegration {
                             .build())
                     .build());
         }
-
-        plugins.addAll(ListUtils.of(RuntimeClientPlugin.builder()
-                        .addConfigFieldResolver(ConfigFieldResolver.builder()
-                                .location(ConfigFieldResolver.Location.CLIENT)
-                                .target(ConfigFieldResolver.Target.FINALIZATION)
-                                .resolver(resolver)
-                                .build())
-                        .addConfigFieldResolver(ConfigFieldResolver.builder()
-                                .location(ConfigFieldResolver.Location.OPERATION)
-                                .target(ConfigFieldResolver.Target.FINALIZATION)
-                                .resolver(resolver)
-                                .build())
-                        .servicePredicate((model, serviceShape) -> {
-                            if (!EventBridgeMultiRegionEndpoint.isEventBridgeService(model, serviceShape)) {
-                                return false;
-                            }
-                            return AwsSignatureVersion4.isSupportedAuthentication(model, serviceShape);
-                        })
-                        .build(),
-                RuntimeClientPlugin.builder()
-                        .servicePredicate(EventBridgeMultiRegionEndpoint::isEventBridgeService)
-                        .addConfigField(ConfigField.builder()
-                                .name(AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
-                                .type(SymbolUtils.createValueSymbolBuilder(
-                                                AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
-                                        .build())
-                                .documentation("Signature Version 4a (SigV4a) Signer")
-                                .build())
-                        .build(),
-                RuntimeClientPlugin.builder()
-                        .servicePredicate(EventBridgeMultiRegionEndpoint::isEventBridgeService)
-                        .addConfigFieldResolver(
-                                ConfigFieldResolver.builder()
-                                        .location(ConfigFieldResolver.Location.CLIENT)
-                                        .target(ConfigFieldResolver.Target.INITIALIZATION)
-                                        .resolver(SymbolUtils.createValueSymbolBuilder(
-                                                AwsSignatureVersion4aUtils.SIGNER_RESOLVER).build())
-                                        .build())
-                        .build()
-        ));
 
         return plugins;
     }
@@ -137,14 +83,6 @@ public class EventBridgeMultiRegionEndpoint implements GoIntegration {
         }
 
         var serviceShape = settings.getService(model);
-        goDelegator.useShapeWriter(serviceShape, writer -> {
-            writeCredentialProviderResolver(writer);
-            writeSigningMiddlewareRegister(model, writer, serviceShape);
-            writerSignerInterface(writer);
-            writerSignerConfigFieldResolver(writer, serviceShape);
-            writeNewV4ASignerFunc(writer, serviceShape);
-        });
-
         for (var operationShape : TopDownIndex.of(model).getContainedOperations(serviceShape)) {
             if (!SUPPORTED_OPERATIONS.containsKey(operationShape.toShapeId())) {
                 continue;
@@ -154,27 +92,6 @@ public class EventBridgeMultiRegionEndpoint implements GoIntegration {
                 writeEndpointMiddlewareHelper(writer, model, symbolProvider, operationShape);
             });
         }
-    }
-
-    private void writeCredentialProviderResolver(GoWriter writer) {
-        AwsSignatureVersion4aUtils.writeCredentialProviderResolver(writer);
-    }
-
-    private void writerSignerInterface(GoWriter writer) {
-        AwsSignatureVersion4aUtils.writerSignerInterface(writer);
-    }
-
-    private void writerSignerConfigFieldResolver(GoWriter writer, ServiceShape serviceShape) {
-        AwsSignatureVersion4aUtils.writerConfigFieldResolver(writer, serviceShape);
-    }
-
-    private void writeNewV4ASignerFunc(GoWriter writer, ServiceShape serviceShape) {
-        AwsSignatureVersion4aUtils.writeNewV4ASignerFunc(writer, serviceShape);
-    }
-
-    private void writeSigningMiddlewareRegister(Model model, GoWriter writer, ServiceShape serviceShape) {
-        AwsSignatureVersion4aUtils.writeMiddlewareRegister(model, writer, serviceShape,
-                AwsCustomGoDependency.EVENTBRIDGE_CUSTOMIZATION);
     }
 
     // retrieves function name for get bucket accessor function

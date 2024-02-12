@@ -601,6 +601,11 @@ func validateContainerProperties(v *types.ContainerProperties) error {
 			invalidParams.AddNested("EphemeralStorage", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RepositoryCredentials != nil {
+		if err := validateRepositoryCredentials(v.RepositoryCredentials); err != nil {
+			invalidParams.AddNested("RepositoryCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1147,6 +1152,21 @@ func validateNodeRangeProperty(v *types.NodeRangeProperty) error {
 		if err := validateContainerProperties(v.Container); err != nil {
 			invalidParams.AddNested("Container", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRepositoryCredentials(v *types.RepositoryCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RepositoryCredentials"}
+	if v.CredentialsParameter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialsParameter"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

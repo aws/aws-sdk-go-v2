@@ -1,3 +1,7 @@
+# v1.29.7 (2024-01-29)
+
+* **Documentation**: Comprehend PII analysis now supports Spanish input documents.
+
 # v1.29.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

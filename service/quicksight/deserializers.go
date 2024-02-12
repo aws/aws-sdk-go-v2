@@ -41254,6 +41254,11 @@ func awsRestjson1_deserializeDocumentBarChartConfiguration(v **types.BarChartCon
 				return err
 			}
 
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
 		case "Legend":
 			if err := awsRestjson1_deserializeDocumentLegendOptions(&sv.Legend, value); err != nil {
 				return err
@@ -41890,6 +41895,11 @@ func awsRestjson1_deserializeDocumentBoxPlotChartConfiguration(v **types.BoxPlot
 
 		case "FieldWells":
 			if err := awsRestjson1_deserializeDocumentBoxPlotFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -44395,6 +44405,11 @@ func awsRestjson1_deserializeDocumentComboChartConfiguration(v **types.ComboChar
 				return err
 			}
 
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
 		case "Legend":
 			if err := awsRestjson1_deserializeDocumentLegendOptions(&sv.Legend, value); err != nil {
 				return err
@@ -45337,6 +45352,46 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentContextMenuOption(v **types.ContextMenuOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContextMenuOption
+	if *v == nil {
+		sv = &types.ContextMenuOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentContributionAnalysisDefault(v **types.ContributionAnalysisDefault, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45908,6 +45963,11 @@ func awsRestjson1_deserializeDocumentCustomContentConfiguration(v **types.Custom
 					return fmt.Errorf("expected CustomContentImageScalingConfiguration to be of type string, got %T instead", value)
 				}
 				sv.ImageScaling = types.CustomContentImageScalingConfiguration(jtv)
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
 			}
 
 		default:
@@ -52988,6 +53048,11 @@ func awsRestjson1_deserializeDocumentFilledMapConfiguration(v **types.FilledMapC
 				return err
 			}
 
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
 		case "Legend":
 			if err := awsRestjson1_deserializeDocumentLegendOptions(&sv.Legend, value); err != nil {
 				return err
@@ -55917,6 +55982,11 @@ func awsRestjson1_deserializeDocumentFunnelChartConfiguration(v **types.FunnelCh
 				return err
 			}
 
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
 		case "SortConfiguration":
 			if err := awsRestjson1_deserializeDocumentFunnelChartSortConfiguration(&sv.SortConfiguration, value); err != nil {
 				return err
@@ -56427,6 +56497,11 @@ func awsRestjson1_deserializeDocumentGaugeChartConfiguration(v **types.GaugeChar
 
 		case "GaugeChartOptions":
 			if err := awsRestjson1_deserializeDocumentGaugeChartOptions(&sv.GaugeChartOptions, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -57093,6 +57168,11 @@ func awsRestjson1_deserializeDocumentGeospatialMapConfiguration(v **types.Geospa
 		switch key {
 		case "FieldWells":
 			if err := awsRestjson1_deserializeDocumentGeospatialMapFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -58355,6 +58435,11 @@ func awsRestjson1_deserializeDocumentHeatMapConfiguration(v **types.HeatMapConfi
 				return err
 			}
 
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
 		case "Legend":
 			if err := awsRestjson1_deserializeDocumentLegendOptions(&sv.Legend, value); err != nil {
 				return err
@@ -58758,6 +58843,11 @@ func awsRestjson1_deserializeDocumentHistogramConfiguration(v **types.HistogramC
 
 		case "FieldWells":
 			if err := awsRestjson1_deserializeDocumentHistogramFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -59572,6 +59662,11 @@ func awsRestjson1_deserializeDocumentInsightConfiguration(v **types.InsightConfi
 
 		case "CustomNarrative":
 			if err := awsRestjson1_deserializeDocumentCustomNarrativeOptions(&sv.CustomNarrative, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -60741,6 +60836,11 @@ func awsRestjson1_deserializeDocumentKPIConfiguration(v **types.KPIConfiguration
 				return err
 			}
 
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
 		case "KPIOptions":
 			if err := awsRestjson1_deserializeDocumentKPIOptions(&sv.KPIOptions, value); err != nil {
 				return err
@@ -61607,6 +61707,11 @@ func awsRestjson1_deserializeDocumentLineChartConfiguration(v **types.LineChartC
 
 		case "ForecastConfigurations":
 			if err := awsRestjson1_deserializeDocumentForecastConfigurationList(&sv.ForecastConfigurations, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -66594,6 +66699,11 @@ func awsRestjson1_deserializeDocumentPieChartConfiguration(v **types.PieChartCon
 				return err
 			}
 
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
 		case "Legend":
 			if err := awsRestjson1_deserializeDocumentLegendOptions(&sv.Legend, value); err != nil {
 				return err
@@ -67208,6 +67318,11 @@ func awsRestjson1_deserializeDocumentPivotTableConfiguration(v **types.PivotTabl
 
 		case "FieldWells":
 			if err := awsRestjson1_deserializeDocumentPivotTableFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -68974,6 +69089,11 @@ func awsRestjson1_deserializeDocumentRadarChartConfiguration(v **types.RadarChar
 
 		case "FieldWells":
 			if err := awsRestjson1_deserializeDocumentRadarChartFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -71577,6 +71697,11 @@ func awsRestjson1_deserializeDocumentSankeyDiagramChartConfiguration(v **types.S
 				return err
 			}
 
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
 		case "SortConfiguration":
 			if err := awsRestjson1_deserializeDocumentSankeyDiagramSortConfiguration(&sv.SortConfiguration, value); err != nil {
 				return err
@@ -71818,6 +71943,11 @@ func awsRestjson1_deserializeDocumentScatterPlotConfiguration(v **types.ScatterP
 
 		case "FieldWells":
 			if err := awsRestjson1_deserializeDocumentScatterPlotFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -76688,6 +76818,11 @@ func awsRestjson1_deserializeDocumentTableConfiguration(v **types.TableConfigura
 
 		case "FieldWells":
 			if err := awsRestjson1_deserializeDocumentTableFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -82495,6 +82630,11 @@ func awsRestjson1_deserializeDocumentTreeMapConfiguration(v **types.TreeMapConfi
 				return err
 			}
 
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
 		case "Legend":
 			if err := awsRestjson1_deserializeDocumentLegendOptions(&sv.Legend, value); err != nil {
 				return err
@@ -84074,6 +84214,47 @@ func awsRestjson1_deserializeDocumentVisualCustomActionOperationList(v *[]types.
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentVisualInteractionOptions(v **types.VisualInteractionOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VisualInteractionOptions
+	if *v == nil {
+		sv = &types.VisualInteractionOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContextMenuOption":
+			if err := awsRestjson1_deserializeDocumentContextMenuOption(&sv.ContextMenuOption, value); err != nil {
+				return err
+			}
+
+		case "VisualMenuOption":
+			if err := awsRestjson1_deserializeDocumentVisualMenuOption(&sv.VisualMenuOption, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentVisualList(v *[]types.Visual, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -84685,6 +84866,42 @@ func awsRestjson1_deserializeDocumentWaterfallChartAggregatedFieldWells(v **type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentWaterfallChartColorConfiguration(v **types.WaterfallChartColorConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WaterfallChartColorConfiguration
+	if *v == nil {
+		sv = &types.WaterfallChartColorConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GroupColorConfiguration":
+			if err := awsRestjson1_deserializeDocumentWaterfallChartGroupColorConfiguration(&sv.GroupColorConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentWaterfallChartConfiguration(v **types.WaterfallChartConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -84717,6 +84934,11 @@ func awsRestjson1_deserializeDocumentWaterfallChartConfiguration(v **types.Water
 				return err
 			}
 
+		case "ColorConfiguration":
+			if err := awsRestjson1_deserializeDocumentWaterfallChartColorConfiguration(&sv.ColorConfiguration, value); err != nil {
+				return err
+			}
+
 		case "DataLabels":
 			if err := awsRestjson1_deserializeDocumentDataLabelOptions(&sv.DataLabels, value); err != nil {
 				return err
@@ -84724,6 +84946,11 @@ func awsRestjson1_deserializeDocumentWaterfallChartConfiguration(v **types.Water
 
 		case "FieldWells":
 			if err := awsRestjson1_deserializeDocumentWaterfallChartFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 
@@ -84791,6 +85018,64 @@ func awsRestjson1_deserializeDocumentWaterfallChartFieldWells(v **types.Waterfal
 		case "WaterfallChartAggregatedFieldWells":
 			if err := awsRestjson1_deserializeDocumentWaterfallChartAggregatedFieldWells(&sv.WaterfallChartAggregatedFieldWells, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWaterfallChartGroupColorConfiguration(v **types.WaterfallChartGroupColorConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WaterfallChartGroupColorConfiguration
+	if *v == nil {
+		sv = &types.WaterfallChartGroupColorConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NegativeBarColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.NegativeBarColor = ptr.String(jtv)
+			}
+
+		case "PositiveBarColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.PositiveBarColor = ptr.String(jtv)
+			}
+
+		case "TotalBarColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.TotalBarColor = ptr.String(jtv)
 			}
 
 		default:
@@ -85196,6 +85481,11 @@ func awsRestjson1_deserializeDocumentWordCloudChartConfiguration(v **types.WordC
 
 		case "FieldWells":
 			if err := awsRestjson1_deserializeDocumentWordCloudFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
 				return err
 			}
 

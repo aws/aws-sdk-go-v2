@@ -1670,6 +1670,26 @@ func (m *validateOpDeleteHumanTaskUi) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteHyperParameterTuningJob struct {
+}
+
+func (*validateOpDeleteHyperParameterTuningJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteHyperParameterTuningJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteHyperParameterTuningJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteHyperParameterTuningJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteImage struct {
 }
 
@@ -5460,6 +5480,10 @@ func addOpDeleteHubValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteHumanTaskUiValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteHumanTaskUi{}, middleware.After)
+}
+
+func addOpDeleteHyperParameterTuningJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteHyperParameterTuningJob{}, middleware.After)
 }
 
 func addOpDeleteImageValidationMiddleware(stack *middleware.Stack) error {
@@ -14625,6 +14649,21 @@ func validateOpDeleteHumanTaskUiInput(v *DeleteHumanTaskUiInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteHumanTaskUiInput"}
 	if v.HumanTaskUiName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HumanTaskUiName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteHyperParameterTuningJobInput(v *DeleteHyperParameterTuningJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteHyperParameterTuningJobInput"}
+	if v.HyperParameterTuningJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HyperParameterTuningJobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

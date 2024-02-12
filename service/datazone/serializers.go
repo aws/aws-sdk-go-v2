@@ -2666,6 +2666,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDomainInput(v *DeleteDomainInput,
 		}
 	}
 
+	if v.SkipDeletionCheck != nil {
+		encoder.SetQuery("skipDeletionCheck").Boolean(*v.SkipDeletionCheck)
+	}
+
 	return nil
 }
 
@@ -3256,6 +3260,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteProjectInput(v *DeleteProjectInpu
 		if err := encoder.SetURI("identifier").String(*v.Identifier); err != nil {
 			return err
 		}
+	}
+
+	if v.SkipDeletionCheck != nil {
+		encoder.SetQuery("skipDeletionCheck").Boolean(*v.SkipDeletionCheck)
 	}
 
 	return nil

@@ -15185,6 +15185,68 @@ func awsRestxml_deserializeDocumentConflictingTypes(v **types.ConflictingTypes, 
 	return nil
 }
 
+func awsRestxml_deserializeDocumentCoordinates(v **types.Coordinates, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.Coordinates
+	if *v == nil {
+		sv = &types.Coordinates{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Latitude", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Latitude = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Longitude", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Longitude = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentDelegationSet(v **types.DelegationSet, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16224,6 +16286,91 @@ func awsRestxml_deserializeDocumentGeoLocationDetailsListUnwrapped(v *[]types.Ge
 	*v = sv
 	return nil
 }
+func awsRestxml_deserializeDocumentGeoProximityLocation(v **types.GeoProximityLocation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.GeoProximityLocation
+	if *v == nil {
+		sv = &types.GeoProximityLocation{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("AWSRegion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AWSRegion = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Bias", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Bias = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("Coordinates", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentCoordinates(&sv.Coordinates, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("LocalZoneGroup", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LocalZoneGroup = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentHealthCheck(v **types.HealthCheck, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20401,6 +20548,12 @@ func awsRestxml_deserializeDocumentResourceRecordSet(v **types.ResourceRecordSet
 		case strings.EqualFold("GeoLocation", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentGeoLocation(&sv.GeoLocation, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("GeoProximityLocation", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentGeoProximityLocation(&sv.GeoProximityLocation, nodeDecoder); err != nil {
 				return err
 			}
 

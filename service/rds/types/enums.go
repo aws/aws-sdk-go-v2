@@ -377,6 +377,36 @@ func (IntegrationStatus) Values() []IntegrationStatus {
 	}
 }
 
+type LimitlessDatabaseStatus string
+
+// Enum values for LimitlessDatabaseStatus
+const (
+	LimitlessDatabaseStatusActive               LimitlessDatabaseStatus = "active"
+	LimitlessDatabaseStatusNotInUse             LimitlessDatabaseStatus = "not-in-use"
+	LimitlessDatabaseStatusEnabled              LimitlessDatabaseStatus = "enabled"
+	LimitlessDatabaseStatusDisabled             LimitlessDatabaseStatus = "disabled"
+	LimitlessDatabaseStatusEnabling             LimitlessDatabaseStatus = "enabling"
+	LimitlessDatabaseStatusDisabling            LimitlessDatabaseStatus = "disabling"
+	LimitlessDatabaseStatusModifyingMaxCapacity LimitlessDatabaseStatus = "modifying-max-capacity"
+	LimitlessDatabaseStatusError                LimitlessDatabaseStatus = "error"
+)
+
+// Values returns all known values for LimitlessDatabaseStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LimitlessDatabaseStatus) Values() []LimitlessDatabaseStatus {
+	return []LimitlessDatabaseStatus{
+		"active",
+		"not-in-use",
+		"enabled",
+		"disabled",
+		"enabling",
+		"disabling",
+		"modifying-max-capacity",
+		"error",
+	}
+}
+
 type LocalWriteForwardingStatus string
 
 // Enum values for LocalWriteForwardingStatus

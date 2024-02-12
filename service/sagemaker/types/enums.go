@@ -33,6 +33,7 @@ type AdditionalS3DataSourceDataType string
 // Enum values for AdditionalS3DataSourceDataType
 const (
 	AdditionalS3DataSourceDataTypeS3object AdditionalS3DataSourceDataType = "S3Object"
+	AdditionalS3DataSourceDataTypeS3prefix AdditionalS3DataSourceDataType = "S3Prefix"
 )
 
 // Values returns all known values for AdditionalS3DataSourceDataType. Note that
@@ -42,6 +43,7 @@ const (
 func (AdditionalS3DataSourceDataType) Values() []AdditionalS3DataSourceDataType {
 	return []AdditionalS3DataSourceDataType{
 		"S3Object",
+		"S3Prefix",
 	}
 }
 
@@ -356,17 +358,11 @@ const (
 	AppTypeKernelGateway    AppType = "KernelGateway"
 	AppTypeDetailedProfiler AppType = "DetailedProfiler"
 	AppTypeTensorBoard      AppType = "TensorBoard"
-	AppTypeVSCode           AppType = "VSCode"
-	AppTypeSavitur          AppType = "Savitur"
 	AppTypeCodeEditor       AppType = "CodeEditor"
 	AppTypeJupyterLab       AppType = "JupyterLab"
 	AppTypeRStudioServerPro AppType = "RStudioServerPro"
-	AppTypeRSession         AppType = "RSession"
 	AppTypeRSessionGateway  AppType = "RSessionGateway"
 	AppTypeCanvas           AppType = "Canvas"
-	AppTypeDatasetManager   AppType = "DatasetManager"
-	AppTypeSageMakerLite    AppType = "SageMakerLite"
-	AppTypeLocal            AppType = "Local"
 )
 
 // Values returns all known values for AppType. Note that this can be expanded in
@@ -378,17 +374,11 @@ func (AppType) Values() []AppType {
 		"KernelGateway",
 		"DetailedProfiler",
 		"TensorBoard",
-		"VSCode",
-		"Savitur",
 		"CodeEditor",
 		"JupyterLab",
 		"RStudioServerPro",
-		"RSession",
 		"RSessionGateway",
 		"Canvas",
-		"DatasetManager",
-		"SageMakerLite",
-		"Local",
 	}
 }
 
@@ -5904,8 +5894,6 @@ type StudioLifecycleConfigAppType string
 const (
 	StudioLifecycleConfigAppTypeJupyterServer StudioLifecycleConfigAppType = "JupyterServer"
 	StudioLifecycleConfigAppTypeKernelGateway StudioLifecycleConfigAppType = "KernelGateway"
-	StudioLifecycleConfigAppTypeVSCode        StudioLifecycleConfigAppType = "VSCode"
-	StudioLifecycleConfigAppTypeSavitur       StudioLifecycleConfigAppType = "Savitur"
 	StudioLifecycleConfigAppTypeCodeEditor    StudioLifecycleConfigAppType = "CodeEditor"
 	StudioLifecycleConfigAppTypeJupyterLab    StudioLifecycleConfigAppType = "JupyterLab"
 )
@@ -5918,8 +5906,6 @@ func (StudioLifecycleConfigAppType) Values() []StudioLifecycleConfigAppType {
 	return []StudioLifecycleConfigAppType{
 		"JupyterServer",
 		"KernelGateway",
-		"VSCode",
-		"Savitur",
 		"CodeEditor",
 		"JupyterLab",
 	}

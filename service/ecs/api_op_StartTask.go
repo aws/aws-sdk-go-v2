@@ -22,6 +22,9 @@ import (
 // 30-day period are considered current customers and will be able to continue
 // using the service. Alternatively, you can use RunTask to place tasks for you.
 // For more information, see Scheduling Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
+// in the Amazon Elastic Container Service Developer Guide. You can attach Amazon
+// EBS volumes to Amazon ECS tasks by configuring the volume when creating or
+// updating a service. For more infomation, see Amazon EBS volumes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) StartTask(ctx context.Context, params *StartTaskInput, optFns ...func(*Options)) (*StartTaskOutput, error) {
 	if params == nil {
@@ -120,6 +123,12 @@ type StartTaskInput struct {
 	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
 	//   prefix do not count against your tags per resource limit.
 	Tags []types.Tag
+
+	// The details of the volume that was configuredAtLaunch . You can configure the
+	// size, volumeType, IOPS, throughput, snapshot and encryption in
+	// TaskManagedEBSVolumeConfiguration (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TaskManagedEBSVolumeConfiguration.html)
+	// . The name of the volume must match the name from the task definition.
+	VolumeConfigurations []types.TaskVolumeConfiguration
 
 	noSmithyDocumentSerde
 }

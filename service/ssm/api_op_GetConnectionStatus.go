@@ -41,8 +41,7 @@ type GetConnectionStatusInput struct {
 
 type GetConnectionStatusOutput struct {
 
-	// The status of the connection to the managed node. For example, 'Connected' or
-	// 'Not Connected'.
+	// The status of the connection to the managed node.
 	Status types.ConnectionStatus
 
 	// The ID of the managed node to check connection status.

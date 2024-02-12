@@ -377,6 +377,19 @@ type ContentModerationDetection struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information regarding the confidence and name of a detected content
+// type.
+type ContentType struct {
+
+	// The confidence level of the label given
+	Confidence *float32
+
+	// The name of the label
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an item of Personal Protective Equipment covering a
 // corresponding body part. For more information, see DetectProtectiveEquipment .
 type CoversBodyPart struct {
@@ -1583,6 +1596,16 @@ type MediaAnalysisManifestSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Object containing information about the model versions of selected features in
+// a given job.
+type MediaAnalysisModelVersions struct {
+
+	// The Moderation base model version.
+	Moderation *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration options for a media analysis job. Configuration is
 // operation-specific.
 type MediaAnalysisOperationsConfig struct {
@@ -1612,6 +1635,9 @@ type MediaAnalysisOutputConfig struct {
 // StartMediaAnalysisJob.
 type MediaAnalysisResults struct {
 
+	// Information about the model versions for the features selected in a given job.
+	ModelVersions *MediaAnalysisModelVersions
+
 	// Provides the S3 bucket name and object name. The region for the S3 bucket
 	// containing the S3 object must match the region you use for Amazon Rekognition
 	// operations. For Amazon Rekognition to process an S3 object, the user must have
@@ -1640,6 +1666,9 @@ type ModerationLabel struct {
 	// The name for the parent label. Labels at the top level of the hierarchy have
 	// the parent label "" .
 	ParentName *string
+
+	// The level of the moderation label with regard to its taxonomy, from 1 to 3.
+	TaxonomyLevel *int32
 
 	noSmithyDocumentSerde
 }

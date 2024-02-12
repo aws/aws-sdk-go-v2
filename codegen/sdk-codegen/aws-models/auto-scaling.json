@@ -387,7 +387,7 @@
                 "Alarms": {
                     "target": "com.amazonaws.autoscaling#AlarmList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of one or more CloudWatch alarms to monitor for the instance refresh. You can specify up to 10 alarms.</p>"
+                        "smithy.api#documentation": "<p>The names of one or more CloudWatch alarms to monitor for the instance refresh. You can\n            specify up to 10 alarms.</p>"
                     }
                 }
             },
@@ -2817,6 +2817,104 @@
                             "DefaultInstanceWarmup": 120,
                             "VPCZoneIdentifier": "subnet-057fa0918fEXAMPLE"
                         }
+                    },
+                    {
+                        "title": "To create an Auto Scaling group with an attached target group",
+                        "documentation": "This example creates an Auto Scaling group and attaches the specified target group.",
+                        "input": {
+                            "AutoScalingGroupName": "my-auto-scaling-group",
+                            "LaunchTemplate": {
+                                "LaunchTemplateName": "my-template-for-auto-scaling",
+                                "Version": "$Default"
+                            },
+                            "MinSize": 1,
+                            "MaxSize": 3,
+                            "TargetGroupARNs": [
+                                "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"
+                            ],
+                            "HealthCheckType": "ELB",
+                            "HealthCheckGracePeriod": 300,
+                            "VPCZoneIdentifier": "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE"
+                        }
+                    },
+                    {
+                        "title": "To create an Auto Scaling group with a mixed instances policy",
+                        "documentation": "This example creates an Auto Scaling group with a mixed instances policy. It specifies the c5.large, c5a.large, and c6g.large instance types and defines a different launch template for the c6g.large instance type.",
+                        "input": {
+                            "AutoScalingGroupName": "my-asg",
+                            "MixedInstancesPolicy": {
+                                "LaunchTemplate": {
+                                    "LaunchTemplateSpecification": {
+                                        "LaunchTemplateName": "my-launch-template-for-x86",
+                                        "Version": "$Default"
+                                    },
+                                    "Overrides": [
+                                        {
+                                            "InstanceType": "c6g.large",
+                                            "LaunchTemplateSpecification": {
+                                                "LaunchTemplateName": "my-launch-template-for-arm",
+                                                "Version": "$Default"
+                                            }
+                                        },
+                                        {
+                                            "InstanceType": "c5.large"
+                                        },
+                                        {
+                                            "InstanceType": "c5a.large"
+                                        }
+                                    ]
+                                },
+                                "InstancesDistribution": {
+                                    "OnDemandBaseCapacity": 1,
+                                    "OnDemandPercentageAboveBaseCapacity": 50,
+                                    "SpotAllocationStrategy": "price-capacity-optimized"
+                                }
+                            },
+                            "MinSize": 1,
+                            "MaxSize": 5,
+                            "DesiredCapacity": 3,
+                            "VPCZoneIdentifier": "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE"
+                        }
+                    },
+                    {
+                        "title": "To create an Auto Scaling group using attribute-based instance type selection",
+                        "documentation": "This example creates an Auto Scaling group using attribute-based instance type selection. It requires the instance types to have a minimum of four vCPUs and a maximum of eight vCPUs, a minimum of 16,384 MiB of memory, and an Intel manufactured CPU.",
+                        "input": {
+                            "AutoScalingGroupName": "my-asg",
+                            "MixedInstancesPolicy": {
+                                "LaunchTemplate": {
+                                    "LaunchTemplateSpecification": {
+                                        "LaunchTemplateName": "my-template-for-auto-scaling",
+                                        "Version": "$Default"
+                                    },
+                                    "Overrides": [
+                                        {
+                                            "InstanceRequirements": {
+                                                "VCpuCount": {
+                                                    "Min": 4,
+                                                    "Max": 8
+                                                },
+                                                "MemoryMiB": {
+                                                    "Min": 16384
+                                                },
+                                                "CpuManufacturers": [
+                                                    "intel"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "InstancesDistribution": {
+                                    "OnDemandPercentageAboveBaseCapacity": 50,
+                                    "SpotAllocationStrategy": "price-capacity-optimized"
+                                }
+                            },
+                            "MinSize": 0,
+                            "MaxSize": 100,
+                            "DesiredCapacity": 4,
+                            "DesiredCapacityType": "units",
+                            "VPCZoneIdentifier": "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE"
+                        }
                     }
                 ]
             }
@@ -3296,6 +3394,14 @@
                         "documentation": "This example deletes the specified Auto Scaling group.",
                         "input": {
                             "AutoScalingGroupName": "my-auto-scaling-group"
+                        }
+                    },
+                    {
+                        "title": "To delete an Auto Scaling group and all its instances",
+                        "documentation": "This example deletes the specified Auto Scaling group and all its instances.",
+                        "input": {
+                            "AutoScalingGroupName": "my-auto-scaling-group",
+                            "ForceDelete": true
                         }
                     }
                 ]
@@ -4050,7 +4156,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about the instance refreshes for the specified Auto Scaling group.</p>\n         <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh\n                feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group\n            after you make configuration changes.</p>\n         <p>To help you determine the status of an instance refresh, Amazon EC2 Auto Scaling returns information\n            about the instance refreshes you previously initiated, including their status, start\n            time, end time, the percentage of the instance refresh that is complete, and the number\n            of instances remaining to update before the instance refresh is complete. If a rollback\n            is initiated while an instance refresh is in progress, Amazon EC2 Auto Scaling also returns information\n            about the rollback of the instance refresh.</p>",
+                "smithy.api#documentation": "<p>Gets information about the instance refreshes for the specified Auto Scaling group from the\n            previous six weeks.</p>\n         <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh\n                feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group\n            after you make configuration changes.</p>\n         <p>To help you determine the status of an instance refresh, Amazon EC2 Auto Scaling returns information\n            about the instance refreshes you previously initiated, including their status, start\n            time, end time, the percentage of the instance refresh that is complete, and the number\n            of instances remaining to update before the instance refresh is complete. If a rollback\n            is initiated while an instance refresh is in progress, Amazon EC2 Auto Scaling also returns information\n            about the rollback of the instance refresh.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -6211,13 +6317,13 @@
                 "MinHealthyPercentage": {
                     "target": "com.amazonaws.autoscaling#IntPercentResettable",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the lower threshold as a percentage of the desired capacity of the Auto Scaling\n            group. It represents the minimum percentage of the group to keep in service, healthy,\n            and ready to use to support your workload when replacing instances. Value range is 0 to\n            100. After it's set, a value of <code>-1</code> will clear the previously set\n            value.</p>"
+                        "smithy.api#documentation": "<p>Specifies the lower threshold as a percentage of the desired capacity of the Auto Scaling\n            group. It represents the minimum percentage of the group to keep in service, healthy,\n            and ready to use to support your workload when replacing instances. Value range is 0 to\n            100. To clear a previously set value, specify a value of <code>-1</code>.</p>"
                     }
                 },
                 "MaxHealthyPercentage": {
                     "target": "com.amazonaws.autoscaling#IntPercent100To200Resettable",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the upper threshold as a percentage of the desired capacity of the Auto Scaling\n            group. It represents the maximum percentage of the group that can be in service and\n            healthy, or pending, to support your workload when replacing instances. Value range is\n            100 to 200. After it's set, a value of <code>-1</code> will clear the previously set\n            value. </p>\n         <p>Both <code>MinHealthyPercentage</code> and <code>MaxHealthyPercentage</code> must be\n            specified, and the difference between them cannot be greater than 100. A large range\n            increases the number of instances that can be replaced at the same time.</p>"
+                        "smithy.api#documentation": "<p>Specifies the upper threshold as a percentage of the desired capacity of the Auto Scaling\n            group. It represents the maximum percentage of the group that can be in service and\n            healthy, or pending, to support your workload when replacing instances. Value range is\n            100 to 200. To clear a previously set value, specify a value of <code>-1</code>.</p>\n         <p>Both <code>MinHealthyPercentage</code> and <code>MaxHealthyPercentage</code> must be\n            specified, and the difference between them cannot be greater than 100. A large range\n            increases the number of instances that can be replaced at the same time.</p>"
                     }
                 }
             },
@@ -6585,13 +6691,19 @@
                 "SpotMaxPricePercentageOverLowestPrice": {
                     "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The price protection threshold for Spot Instances. This is the maximum you’ll pay for\n            a Spot Instance, expressed as a percentage higher than the least expensive current\n            generation M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling\n            selects instance types with your attributes, we will exclude instance types whose price\n            is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling\n            interprets as a percentage. To turn off price protection, specify a high value, such as\n                <code>999999</code>. </p>\n         <p>If you set <code>DesiredCapacityType</code> to <code>vcpu</code> or\n                <code>memory-mib</code>, the price protection threshold is applied based on the per\n            vCPU or per memory price instead of the per instance price. </p>\n         <p>Default: <code>100</code>\n         </p>"
+                        "smithy.api#documentation": "<p>[Price protection] The price protection threshold for Spot Instances, as a percentage\n            higher than an identified Spot price. The identified Spot price is the price of the\n            lowest priced current generation C, M, or R instance type with your specified\n            attributes. If no current generation C, M, or R instance type matches your attributes,\n            then the identified price is from either the lowest priced current generation instance\n            types or, failing that, the lowest priced previous generation instance types that match\n            your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will\n            exclude instance types whose price exceeds your specified threshold.</p>\n         <p>The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.</p>\n         <p>To turn off price protection, specify a high value, such as <code>999999</code>. </p>\n         <p>If you set <code>DesiredCapacityType</code> to <code>vcpu</code> or\n                <code>memory-mib</code>, the price protection threshold is based on the per-vCPU or\n            per-memory price instead of the per instance price. </p>\n         <note>\n            <p>Only one of <code>SpotMaxPricePercentageOverLowestPrice</code> or\n                    <code>MaxSpotPriceAsPercentageOfOptimalOnDemandPrice</code> can be\n                specified.</p>\n         </note>\n         <p>Default: <code>100</code>\n         </p>"
+                    }
+                },
+                "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Price protection] The price protection threshold for Spot Instances, as a percentage\n            of an identified On-Demand price. The identified On-Demand price is the price of the\n            lowest priced current generation C, M, or R instance type with your specified\n            attributes. If no current generation C, M, or R instance type matches your attributes,\n            then the identified price is from either the lowest priced current generation instance\n            types or, failing that, the lowest priced previous generation instance types that match\n            your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will\n            exclude instance types whose price exceeds your specified threshold.</p>\n         <p>The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.</p>\n         <p>To indicate no price protection threshold, specify a high value, such as\n                <code>999999</code>. </p>\n         <p>If you set <code>DesiredCapacityType</code> to <code>vcpu</code> or\n                <code>memory-mib</code>, the price protection threshold is based on the per-vCPU or\n            per-memory price instead of the per instance price. </p>\n         <note>\n            <p>Only one of <code>SpotMaxPricePercentageOverLowestPrice</code> or\n                    <code>MaxSpotPriceAsPercentageOfOptimalOnDemandPrice</code> can be specified. If\n                you don't specify either, then <code>SpotMaxPricePercentageOverLowestPrice</code> is\n                used and the value for that parameter defaults to <code>100</code>.</p>\n         </note>"
                     }
                 },
                 "OnDemandMaxPricePercentageOverLowestPrice": {
                     "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The price protection threshold for On-Demand Instances. This is the maximum you’ll pay\n            for an On-Demand Instance, expressed as a percentage higher than the least expensive\n            current generation M, C, or R instance type with your specified attributes. When\n            Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types\n            whose price is higher than your threshold. The parameter accepts an integer, which\n            Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value,\n            such as <code>999999</code>. </p>\n         <p>If you set <code>DesiredCapacityType</code> to <code>vcpu</code> or\n                <code>memory-mib</code>, the price protection threshold is applied based on the per\n            vCPU or per memory price instead of the per instance price. </p>\n         <p>Default: <code>20</code>\n         </p>"
+                        "smithy.api#documentation": "<p>[Price protection] The price protection threshold for On-Demand Instances, as a\n            percentage higher than an identified On-Demand price. The identified On-Demand price is\n            the price of the lowest priced current generation C, M, or R instance type with your\n            specified attributes. If no current generation C, M, or R instance type matches your\n            attributes, then the identified price is from either the lowest priced current\n            generation instance types or, failing that, the lowest priced previous generation\n            instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with\n            your attributes, we will exclude instance types whose price exceeds your specified\n            threshold. </p>\n         <p>The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.</p>\n         <p>To turn off price protection, specify a high value, such as <code>999999</code>. </p>\n         <p>If you set <code>DesiredCapacityType</code> to <code>vcpu</code> or\n                <code>memory-mib</code>, the price protection threshold is applied based on the\n            per-vCPU or per-memory price instead of the per instance price. </p>\n         <p>Default: <code>20</code>\n         </p>"
                     }
                 },
                 "BareMetal": {
@@ -7835,7 +7947,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure defines the CloudWatch metric to return, along with the statistic, period,\n            and unit.</p>\n         <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n                concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>This structure defines the CloudWatch metric to return, along with the statistic and\n            unit.</p>\n         <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n                concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#MetricStatistic": {
@@ -9971,6 +10083,17 @@
                             ],
                             "AutoScalingGroupName": "my-auto-scaling-group",
                             "ProtectedFromScaleIn": true
+                        }
+                    },
+                    {
+                        "title": "To disable instance protection for an instance",
+                        "documentation": "This example disables instance protection for the specified instance.",
+                        "input": {
+                            "InstanceIds": [
+                                "i-93633f9b"
+                            ],
+                            "AutoScalingGroupName": "my-auto-scaling-group",
+                            "ProtectedFromScaleIn": false
                         }
                     }
                 ]

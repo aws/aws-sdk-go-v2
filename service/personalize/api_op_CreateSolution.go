@@ -82,8 +82,8 @@ type CreateSolutionInput struct {
 
 	// We don't recommend enabling automated machine learning. Instead, match your use
 	// case to the available Amazon Personalize recipes. For more information, see
-	// Determining your use case. (https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html)
-	// Whether to perform automated machine learning (AutoML). The default is false .
+	// Choosing a recipe (https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html)
+	// . Whether to perform automated machine learning (AutoML). The default is false .
 	// For this case, you must specify recipeArn . When set to true , Amazon
 	// Personalize analyzes your training data and selects the optimal
 	// USER_PERSONALIZATION recipe and hyperparameters. In this case, you must omit
@@ -97,8 +97,10 @@ type CreateSolutionInput struct {
 	// is always true and you should not set it to false .
 	PerformHPO *bool
 
-	// The ARN of the recipe to use for model training. This is required when
-	// performAutoML is false.
+	// The Amazon Resource Name (ARN) of the recipe to use for model training. This is
+	// required when performAutoML is false. For information about different Amazon
+	// Personalize recipes and their ARNs, see Choosing a recipe (https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html)
+	// .
 	RecipeArn *string
 
 	// The configuration to use with the solution. When performAutoML is set to true,

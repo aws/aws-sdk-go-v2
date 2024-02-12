@@ -46,15 +46,13 @@ type StartConnectionInput struct {
 	// This member is required.
 	ClientPublicKey *string
 
-	// The serial number of the dongle.
-	//
-	// This member is required.
-	DeviceSerialNumber *string
-
 	// The device index of the network interface on the Outpost server.
 	//
 	// This member is required.
 	NetworkInterfaceDeviceIndex int32
+
+	// The serial number of the dongle.
+	DeviceSerialNumber *string
 
 	noSmithyDocumentSerde
 }

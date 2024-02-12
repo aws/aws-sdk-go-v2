@@ -12,12 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deploys the new EndpointConfig specified in the request, switches to using
-// newly created endpoint, and then deletes resources provisioned for the endpoint
-// using the previous EndpointConfig (there is no availability loss). When
-// SageMaker receives the request, it sets the endpoint status to Updating . After
-// updating the endpoint, it sets the status to InService . To check the status of
-// an endpoint, use the DescribeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html)
+// Deploys the EndpointConfig specified in the request to a new fleet of
+// instances. SageMaker shifts endpoint traffic to the new instances with the
+// updated endpoint configuration and then deletes the old instances using the
+// previous EndpointConfig (there is no availability loss). For more information
+// about how to control the update and traffic shifting process, see Update models
+// in production (https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails.html)
+// . When SageMaker receives the request, it sets the endpoint status to Updating .
+// After updating the endpoint, it sets the status to InService . To check the
+// status of an endpoint, use the DescribeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html)
 // API. You must not delete an EndpointConfig in use by an endpoint that is live
 // or while the UpdateEndpoint or CreateEndpoint operations are being performed on
 // the endpoint. To update an endpoint, you must create a new EndpointConfig . If

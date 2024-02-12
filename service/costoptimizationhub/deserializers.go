@@ -5473,6 +5473,15 @@ func awsAwsjson10_deserializeOpDocumentListEnrollmentStatusesOutput(v **ListEnro
 
 	for key, value := range shape {
 		switch key {
+		case "includeMemberAccounts":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeMemberAccounts = ptr.Bool(jtv)
+			}
+
 		case "items":
 			if err := awsAwsjson10_deserializeDocumentAccountEnrollmentStatuses(&sv.Items, value); err != nil {
 				return err

@@ -12130,6 +12130,11 @@ func awsAwsjson10_deserializeDocumentVehicleSummary(v **types.VehicleSummary, va
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "attributes":
+			if err := awsAwsjson10_deserializeDocumentAttributesMap(&sv.Attributes, value); err != nil {
+				return err
+			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {

@@ -13,7 +13,8 @@ import (
 )
 
 // Gets information about the instance refreshes for the specified Auto Scaling
-// group. This operation is part of the instance refresh feature (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
+// group from the previous six weeks. This operation is part of the instance
+// refresh feature (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
 // in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
 // Scaling group after you make configuration changes. To help you determine the
 // status of an instance refresh, Amazon EC2 Auto Scaling returns information about

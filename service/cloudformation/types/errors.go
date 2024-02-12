@@ -86,6 +86,36 @@ func (e *ChangeSetNotFoundException) ErrorCode() string {
 }
 func (e *ChangeSetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// No more than 5 generated templates can be in an InProgress or Pending status at
+// one time. This error is also returned if a generated template that is in an
+// InProgress or Pending status is attempted to be updated or deleted.
+type ConcurrentResourcesLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConcurrentResourcesLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConcurrentResourcesLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConcurrentResourcesLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConcurrentResourcesLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConcurrentResourcesLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The specified resource exists, but has been changed.
 type CreatedButModifiedException struct {
 	Message *string
@@ -111,6 +141,34 @@ func (e *CreatedButModifiedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CreatedButModifiedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The generated template was not found.
+type GeneratedTemplateNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *GeneratedTemplateNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *GeneratedTemplateNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *GeneratedTemplateNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "GeneratedTemplateNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *GeneratedTemplateNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // The template contains resources with capabilities that weren't specified in the
 // Capabilities parameter.
@@ -381,6 +439,92 @@ func (e *OperationStatusCheckFailedException) ErrorCode() string {
 func (e *OperationStatusCheckFailedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// A resource scan is currently in progress. Only one can be run at a time for an
+// account in a Region.
+type ResourceScanInProgressException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceScanInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceScanInProgressException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceScanInProgressException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceScanInProgress"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceScanInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The limit on resource scans has been exceeded. Reasons include:
+//   - Exceeded the daily quota for resource scans.
+//   - A resource scan recently failed. You must wait 10 minutes before starting a
+//     new resource scan.
+//   - The last resource scan failed after exceeding 100,000 resources. When this
+//     happens, you must wait 24 hours before starting a new resource scan.
+type ResourceScanLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceScanLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceScanLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceScanLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceScanLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceScanLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The resource scan was not found.
+type ResourceScanNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceScanNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceScanNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceScanNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceScanNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceScanNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified stack instance doesn't exist.
 type StackInstanceNotFoundException struct {

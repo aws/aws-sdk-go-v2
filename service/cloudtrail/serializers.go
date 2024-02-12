@@ -1501,6 +1501,61 @@ func (m *awsAwsjson11_serializeOpListImports) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListInsightsMetricData struct {
+}
+
+func (*awsAwsjson11_serializeOpListInsightsMetricData) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListInsightsMetricData) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListInsightsMetricDataInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.ListInsightsMetricData")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListInsightsMetricDataInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListPublicKeys struct {
 }
 
@@ -3591,6 +3646,63 @@ func awsAwsjson11_serializeOpDocumentListImportsInput(v *ListImportsInput, value
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListInsightsMetricDataInput(v *ListInsightsMetricDataInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataType) > 0 {
+		ok := object.Key("DataType")
+		ok.String(string(v.DataType))
+	}
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if v.ErrorCode != nil {
+		ok := object.Key("ErrorCode")
+		ok.String(*v.ErrorCode)
+	}
+
+	if v.EventName != nil {
+		ok := object.Key("EventName")
+		ok.String(*v.EventName)
+	}
+
+	if v.EventSource != nil {
+		ok := object.Key("EventSource")
+		ok.String(*v.EventSource)
+	}
+
+	if len(v.InsightType) > 0 {
+		ok := object.Key("InsightType")
+		ok.String(string(v.InsightType))
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.Period != nil {
+		ok := object.Key("Period")
+		ok.Integer(*v.Period)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
 	}
 
 	return nil

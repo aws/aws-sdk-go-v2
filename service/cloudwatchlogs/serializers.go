@@ -5415,6 +5415,11 @@ func awsAwsjson11_serializeOpDocumentPutAccountPolicyInput(v *PutAccountPolicyIn
 		ok.String(string(v.Scope))
 	}
 
+	if v.SelectionCriteria != nil {
+		ok := object.Key("selectionCriteria")
+		ok.String(*v.SelectionCriteria)
+	}
+
 	return nil
 }
 

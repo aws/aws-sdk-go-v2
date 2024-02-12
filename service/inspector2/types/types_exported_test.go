@@ -122,3 +122,33 @@ var _ *types.FindingTypeAggregationResponse
 var _ *types.LambdaFunctionAggregationResponse
 var _ *types.AwsEcrContainerAggregationResponse
 var _ *types.Ec2InstanceAggregationResponse
+
+func ExampleSchedule_outputUsage() {
+	var union types.Schedule
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ScheduleMemberDaily:
+		_ = v.Value // Value is types.DailySchedule
+
+	case *types.ScheduleMemberMonthly:
+		_ = v.Value // Value is types.MonthlySchedule
+
+	case *types.ScheduleMemberOneTime:
+		_ = v.Value // Value is types.OneTimeSchedule
+
+	case *types.ScheduleMemberWeekly:
+		_ = v.Value // Value is types.WeeklySchedule
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DailySchedule
+var _ *types.WeeklySchedule
+var _ *types.OneTimeSchedule
+var _ *types.MonthlySchedule

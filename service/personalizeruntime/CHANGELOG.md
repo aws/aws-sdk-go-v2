@@ -1,3 +1,7 @@
+# v1.20.7 (2024-01-16)
+
+* **Documentation**: Documentation updates for Amazon Personalize
+
 # v1.20.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

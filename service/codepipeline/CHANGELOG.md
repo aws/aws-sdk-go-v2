@@ -1,3 +1,7 @@
+# v1.23.0 (2024-02-08)
+
+* **Feature**: Add ability to execute pipelines with new parallel & queued execution modes and add support for triggers with filtering on branches and file paths.
+
 # v1.22.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

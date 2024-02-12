@@ -64,6 +64,9 @@ type DescribeDomainConfigurationOutput struct {
 	// The date and time the domain configuration's status was last changed.
 	LastStatusChangeDate *time.Time
 
+	// The server certificate configuration.
+	ServerCertificateConfig *types.ServerCertificateConfig
+
 	// A list containing summary information about the server certificate included in
 	// the domain configuration.
 	ServerCertificates []types.ServerCertificateSummary

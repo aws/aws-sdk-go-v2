@@ -64,8 +64,7 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// This member is required.
 	HyperParameterTuningJobName *string
 
-	// The status of the tuning job: InProgress, Completed, Failed, Stopping, or
-	// Stopped.
+	// The status of the tuning job.
 	//
 	// This member is required.
 	HyperParameterTuningJobStatus types.HyperParameterTuningJobStatus

@@ -4996,6 +4996,9 @@ func awsAwsjson11_deserializeOpErrorStartTask(response *smithyhttp.Response, met
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedFeatureException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedFeatureException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6465,6 +6468,9 @@ func awsAwsjson11_deserializeOpErrorUpdateService(response *smithyhttp.Response,
 
 	case strings.EqualFold("ServiceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedFeatureException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedFeatureException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -10335,6 +10341,11 @@ func awsAwsjson11_deserializeDocumentDeployment(v **types.Deployment, value inte
 				}
 			}
 
+		case "volumeConfigurations":
+			if err := awsAwsjson11_deserializeDocumentServiceVolumeConfigurations(&sv.VolumeConfigurations, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -10813,6 +10824,94 @@ func awsAwsjson11_deserializeDocumentDockerVolumeConfiguration(v **types.DockerV
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEBSTagSpecification(v **types.EBSTagSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EBSTagSpecification
+	if *v == nil {
+		sv = &types.EBSTagSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "propagateTags":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PropagateTags to be of type string, got %T instead", value)
+				}
+				sv.PropagateTags = types.PropagateTags(jtv)
+			}
+
+		case "resourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EBSResourceType to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = types.EBSResourceType(jtv)
+			}
+
+		case "tags":
+			if err := awsAwsjson11_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEBSTagSpecifications(v *[]types.EBSTagSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EBSTagSpecification
+	if *v == nil {
+		cv = []types.EBSTagSpecification{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EBSTagSpecification
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEBSTagSpecification(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -14874,6 +14973,16 @@ func awsAwsjson11_deserializeDocumentServiceConnectService(v **types.ServiceConn
 				sv.PortName = ptr.String(jtv)
 			}
 
+		case "timeout":
+			if err := awsAwsjson11_deserializeDocumentTimeoutConfiguration(&sv.Timeout, value); err != nil {
+				return err
+			}
+
+		case "tls":
+			if err := awsAwsjson11_deserializeDocumentServiceConnectTlsConfiguration(&sv.Tls, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15000,6 +15109,100 @@ func awsAwsjson11_deserializeDocumentServiceConnectServiceResourceList(v *[]type
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentServiceConnectTlsCertificateAuthority(v **types.ServiceConnectTlsCertificateAuthority, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceConnectTlsCertificateAuthority
+	if *v == nil {
+		sv = &types.ServiceConnectTlsCertificateAuthority{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "awsPcaAuthorityArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AwsPcaAuthorityArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceConnectTlsConfiguration(v **types.ServiceConnectTlsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceConnectTlsConfiguration
+	if *v == nil {
+		sv = &types.ServiceConnectTlsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "issuerCertificateAuthority":
+			if err := awsAwsjson11_deserializeDocumentServiceConnectTlsCertificateAuthority(&sv.IssuerCertificateAuthority, value); err != nil {
+				return err
+			}
+
+		case "kmsKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKey = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentServiceEvent(v **types.ServiceEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15096,6 +15299,135 @@ func awsAwsjson11_deserializeDocumentServiceEvents(v *[]types.ServiceEvent, valu
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceManagedEBSVolumeConfiguration(v **types.ServiceManagedEBSVolumeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceManagedEBSVolumeConfiguration
+	if *v == nil {
+		sv = &types.ServiceManagedEBSVolumeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "encrypted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Encrypted = ptr.Bool(jtv)
+			}
+
+		case "filesystemType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaskFilesystemType to be of type string, got %T instead", value)
+				}
+				sv.FilesystemType = types.TaskFilesystemType(jtv)
+			}
+
+		case "iops":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Iops = ptr.Int32(int32(i64))
+			}
+
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EBSKMSKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "sizeInGiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeInGiB = ptr.Int32(int32(i64))
+			}
+
+		case "snapshotId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EBSSnapshotId to be of type string, got %T instead", value)
+				}
+				sv.SnapshotId = ptr.String(jtv)
+			}
+
+		case "tagSpecifications":
+			if err := awsAwsjson11_deserializeDocumentEBSTagSpecifications(&sv.TagSpecifications, value); err != nil {
+				return err
+			}
+
+		case "throughput":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Throughput = ptr.Int32(int32(i64))
+			}
+
+		case "volumeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EBSVolumeType to be of type string, got %T instead", value)
+				}
+				sv.VolumeType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -15312,6 +15644,85 @@ func awsAwsjson11_deserializeDocumentServices(v *[]types.Service, value interfac
 		var col types.Service
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentService(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceVolumeConfiguration(v **types.ServiceVolumeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceVolumeConfiguration
+	if *v == nil {
+		sv = &types.ServiceVolumeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "managedEBSVolume":
+			if err := awsAwsjson11_deserializeDocumentServiceManagedEBSVolumeConfiguration(&sv.ManagedEBSVolume, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ECSVolumeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceVolumeConfigurations(v *[]types.ServiceVolumeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ServiceVolumeConfiguration
+	if *v == nil {
+		cv = []types.ServiceVolumeConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ServiceVolumeConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServiceVolumeConfiguration(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -17008,6 +17419,63 @@ func awsAwsjson11_deserializeDocumentTaskSets(v *[]types.TaskSet, value interfac
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTimeoutConfiguration(v **types.TimeoutConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeoutConfiguration
+	if *v == nil {
+		sv = &types.TimeoutConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "idleTimeoutSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IdleTimeoutSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "perRequestTimeoutSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Duration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PerRequestTimeoutSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTmpfs(v **types.Tmpfs, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17360,6 +17828,15 @@ func awsAwsjson11_deserializeDocumentVolume(v **types.Volume, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "configuredAtLaunch":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.ConfiguredAtLaunch = ptr.Bool(jtv)
+			}
+
 		case "dockerVolumeConfiguration":
 			if err := awsAwsjson11_deserializeDocumentDockerVolumeConfiguration(&sv.DockerVolumeConfiguration, value); err != nil {
 				return err

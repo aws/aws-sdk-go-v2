@@ -87,7 +87,7 @@ type CreateAutoMLJobInput struct {
 	ModelDeployConfig *types.ModelDeployConfig
 
 	// Defines the type of supervised learning problem available for the candidates.
-	// For more information, see Amazon SageMaker Autopilot problem types (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types)
+	// For more information, see SageMaker Autopilot problem types (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types)
 	// .
 	ProblemType types.ProblemType
 

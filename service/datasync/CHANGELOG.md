@@ -1,3 +1,11 @@
+# v1.34.0 (2024-02-07)
+
+* **Feature**: AWS DataSync now supports manifests for specifying files or objects to transfer.
+
+# v1.33.8 (2024-01-29)
+
+* No change notes available for this release.
+
 # v1.33.7 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.36.0 (2024-01-18)
+
+* **Feature**: This release adds a new API ListInsightsMetricData to retrieve metric data from CloudTrail Insights.
+
 # v1.35.7 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

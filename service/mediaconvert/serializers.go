@@ -2484,6 +2484,19 @@ func awsRestjson1_serializeDocument__listOfCmafAdditionalManifest(v []types.Cmaf
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfColorConversion3DLUTSetting(v []types.ColorConversion3DLUTSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentColorConversion3DLUTSetting(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfDashAdditionalManifest(v []types.DashAdditionalManifest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4383,19 +4396,6 @@ func awsRestjson1_serializeDocumentColorConversion3DLUTSetting(v *types.ColorCon
 		ok.Integer(*v.OutputMasteringLuminance)
 	}
 
-	return nil
-}
-
-func awsRestjson1_serializeDocumentColorConversion3DLUTSettings(v []types.ColorConversion3DLUTSetting, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		if err := awsRestjson1_serializeDocumentColorConversion3DLUTSetting(&v[i], av); err != nil {
-			return err
-		}
-	}
 	return nil
 }
 
@@ -7137,7 +7137,7 @@ func awsRestjson1_serializeDocumentJobSettings(v *types.JobSettings, value smith
 
 	if v.ColorConversion3DLUTSettings != nil {
 		ok := object.Key("colorConversion3DLUTSettings")
-		if err := awsRestjson1_serializeDocumentColorConversion3DLUTSettings(v.ColorConversion3DLUTSettings, ok); err != nil {
+		if err := awsRestjson1_serializeDocument__listOfColorConversion3DLUTSetting(v.ColorConversion3DLUTSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -7238,7 +7238,7 @@ func awsRestjson1_serializeDocumentJobTemplateSettings(v *types.JobTemplateSetti
 
 	if v.ColorConversion3DLUTSettings != nil {
 		ok := object.Key("colorConversion3DLUTSettings")
-		if err := awsRestjson1_serializeDocumentColorConversion3DLUTSettings(v.ColorConversion3DLUTSettings, ok); err != nil {
+		if err := awsRestjson1_serializeDocument__listOfColorConversion3DLUTSetting(v.ColorConversion3DLUTSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -8978,6 +8978,16 @@ func awsRestjson1_serializeDocumentRectangle(v *types.Rectangle, value smithyjso
 func awsRestjson1_serializeDocumentRemixSettings(v *types.RemixSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AudioDescriptionAudioChannel != nil {
+		ok := object.Key("audioDescriptionAudioChannel")
+		ok.Integer(*v.AudioDescriptionAudioChannel)
+	}
+
+	if v.AudioDescriptionDataChannel != nil {
+		ok := object.Key("audioDescriptionDataChannel")
+		ok.Integer(*v.AudioDescriptionDataChannel)
+	}
 
 	if v.ChannelMapping != nil {
 		ok := object.Key("channelMapping")

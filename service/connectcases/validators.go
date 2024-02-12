@@ -190,6 +190,26 @@ func (m *validateOpDeleteDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCaseAuditEvents struct {
+}
+
+func (*validateOpGetCaseAuditEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCaseAuditEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCaseAuditEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCaseAuditEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCaseEventConfiguration struct {
 }
 
@@ -624,6 +644,10 @@ func addOpCreateTemplateValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDomain{}, middleware.After)
+}
+
+func addOpGetCaseAuditEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCaseAuditEvents{}, middleware.After)
 }
 
 func addOpGetCaseEventConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1457,6 +1481,24 @@ func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCaseAuditEventsInput(v *GetCaseAuditEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCaseAuditEventsInput"}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
 	if v.DomainId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
 	}

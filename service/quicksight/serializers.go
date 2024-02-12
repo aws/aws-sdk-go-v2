@@ -18183,6 +18183,13 @@ func awsRestjson1_serializeDocumentBarChartConfiguration(v *types.BarChartConfig
 		}
 	}
 
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Legend != nil {
 		ok := object.Key("Legend")
 		if err := awsRestjson1_serializeDocumentLegendOptions(v.Legend, ok); err != nil {
@@ -18549,6 +18556,13 @@ func awsRestjson1_serializeDocumentBoxPlotChartConfiguration(v *types.BoxPlotCha
 	if v.FieldWells != nil {
 		ok := object.Key("FieldWells")
 		if err := awsRestjson1_serializeDocumentBoxPlotFieldWells(v.FieldWells, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -19689,6 +19703,13 @@ func awsRestjson1_serializeDocumentComboChartConfiguration(v *types.ComboChartCo
 		}
 	}
 
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Legend != nil {
 		ok := object.Key("Legend")
 		if err := awsRestjson1_serializeDocumentLegendOptions(v.Legend, ok); err != nil {
@@ -20174,6 +20195,18 @@ func awsRestjson1_serializeDocumentConditionalFormattingSolidColor(v *types.Cond
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContextMenuOption(v *types.ContextMenuOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AvailabilityStatus) > 0 {
+		ok := object.Key("AvailabilityStatus")
+		ok.String(string(v.AvailabilityStatus))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContributionAnalysisDefault(v *types.ContributionAnalysisDefault, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20443,6 +20476,13 @@ func awsRestjson1_serializeDocumentCustomContentConfiguration(v *types.CustomCon
 	if len(v.ImageScaling) > 0 {
 		ok := object.Key("ImageScaling")
 		ok.String(string(v.ImageScaling))
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -23237,6 +23277,13 @@ func awsRestjson1_serializeDocumentFilledMapConfiguration(v *types.FilledMapConf
 		}
 	}
 
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Legend != nil {
 		ok := object.Key("Legend")
 		if err := awsRestjson1_serializeDocumentLegendOptions(v.Legend, ok); err != nil {
@@ -24574,6 +24621,13 @@ func awsRestjson1_serializeDocumentFunnelChartConfiguration(v *types.FunnelChart
 		}
 	}
 
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SortConfiguration != nil {
 		ok := object.Key("SortConfiguration")
 		if err := awsRestjson1_serializeDocumentFunnelChartSortConfiguration(v.SortConfiguration, ok); err != nil {
@@ -24840,6 +24894,13 @@ func awsRestjson1_serializeDocumentGaugeChartConfiguration(v *types.GaugeChartCo
 	if v.GaugeChartOptions != nil {
 		ok := object.Key("GaugeChartOptions")
 		if err := awsRestjson1_serializeDocumentGaugeChartOptions(v.GaugeChartOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -25181,6 +25242,13 @@ func awsRestjson1_serializeDocumentGeospatialMapConfiguration(v *types.Geospatia
 	if v.FieldWells != nil {
 		ok := object.Key("FieldWells")
 		if err := awsRestjson1_serializeDocumentGeospatialMapFieldWells(v.FieldWells, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -25739,6 +25807,13 @@ func awsRestjson1_serializeDocumentHeatMapConfiguration(v *types.HeatMapConfigur
 		}
 	}
 
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Legend != nil {
 		ok := object.Key("Legend")
 		if err := awsRestjson1_serializeDocumentLegendOptions(v.Legend, ok); err != nil {
@@ -25975,6 +26050,13 @@ func awsRestjson1_serializeDocumentHistogramConfiguration(v *types.HistogramConf
 		}
 	}
 
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tooltip != nil {
 		ok := object.Key("Tooltip")
 		if err := awsRestjson1_serializeDocumentTooltipOptions(v.Tooltip, ok); err != nil {
@@ -26182,6 +26264,13 @@ func awsRestjson1_serializeDocumentInsightConfiguration(v *types.InsightConfigur
 	if v.CustomNarrative != nil {
 		ok := object.Key("CustomNarrative")
 		if err := awsRestjson1_serializeDocumentCustomNarrativeOptions(v.CustomNarrative, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -26611,6 +26700,13 @@ func awsRestjson1_serializeDocumentKPIConfiguration(v *types.KPIConfiguration, v
 	if v.FieldWells != nil {
 		ok := object.Key("FieldWells")
 		if err := awsRestjson1_serializeDocumentKPIFieldWells(v.FieldWells, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -27067,6 +27163,13 @@ func awsRestjson1_serializeDocumentLineChartConfiguration(v *types.LineChartConf
 	if v.ForecastConfigurations != nil {
 		ok := object.Key("ForecastConfigurations")
 		if err := awsRestjson1_serializeDocumentForecastConfigurationList(v.ForecastConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -29312,6 +29415,13 @@ func awsRestjson1_serializeDocumentPieChartConfiguration(v *types.PieChartConfig
 		}
 	}
 
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Legend != nil {
 		ok := object.Key("Legend")
 		if err := awsRestjson1_serializeDocumentLegendOptions(v.Legend, ok); err != nil {
@@ -29639,6 +29749,13 @@ func awsRestjson1_serializeDocumentPivotTableConfiguration(v *types.PivotTableCo
 	if v.FieldWells != nil {
 		ok := object.Key("FieldWells")
 		if err := awsRestjson1_serializeDocumentPivotTableFieldWells(v.FieldWells, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -30428,6 +30545,13 @@ func awsRestjson1_serializeDocumentRadarChartConfiguration(v *types.RadarChartCo
 	if v.FieldWells != nil {
 		ok := object.Key("FieldWells")
 		if err := awsRestjson1_serializeDocumentRadarChartFieldWells(v.FieldWells, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -31644,6 +31768,13 @@ func awsRestjson1_serializeDocumentSankeyDiagramChartConfiguration(v *types.Sank
 		}
 	}
 
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SortConfiguration != nil {
 		ok := object.Key("SortConfiguration")
 		if err := awsRestjson1_serializeDocumentSankeyDiagramSortConfiguration(v.SortConfiguration, ok); err != nil {
@@ -31792,6 +31923,13 @@ func awsRestjson1_serializeDocumentScatterPlotConfiguration(v *types.ScatterPlot
 	if v.FieldWells != nil {
 		ok := object.Key("FieldWells")
 		if err := awsRestjson1_serializeDocumentScatterPlotFieldWells(v.FieldWells, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -33706,6 +33844,13 @@ func awsRestjson1_serializeDocumentTableConfiguration(v *types.TableConfiguratio
 	if v.FieldWells != nil {
 		ok := object.Key("FieldWells")
 		if err := awsRestjson1_serializeDocumentTableFieldWells(v.FieldWells, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -35888,6 +36033,13 @@ func awsRestjson1_serializeDocumentTreeMapConfiguration(v *types.TreeMapConfigur
 		}
 	}
 
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Legend != nil {
 		ok := object.Key("Legend")
 		if err := awsRestjson1_serializeDocumentLegendOptions(v.Legend, ok); err != nil {
@@ -36631,6 +36783,27 @@ func awsRestjson1_serializeDocumentVisualCustomActionOperationList(v []types.Vis
 	return nil
 }
 
+func awsRestjson1_serializeDocumentVisualInteractionOptions(v *types.VisualInteractionOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContextMenuOption != nil {
+		ok := object.Key("ContextMenuOption")
+		if err := awsRestjson1_serializeDocumentContextMenuOption(v.ContextMenuOption, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VisualMenuOption != nil {
+		ok := object.Key("VisualMenuOption")
+		if err := awsRestjson1_serializeDocumentVisualMenuOption(v.VisualMenuOption, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVisualList(v []types.Visual, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -36753,6 +36926,20 @@ func awsRestjson1_serializeDocumentWaterfallChartAggregatedFieldWells(v *types.W
 	return nil
 }
 
+func awsRestjson1_serializeDocumentWaterfallChartColorConfiguration(v *types.WaterfallChartColorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupColorConfiguration != nil {
+		ok := object.Key("GroupColorConfiguration")
+		if err := awsRestjson1_serializeDocumentWaterfallChartGroupColorConfiguration(v.GroupColorConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentWaterfallChartConfiguration(v *types.WaterfallChartConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -36771,6 +36958,13 @@ func awsRestjson1_serializeDocumentWaterfallChartConfiguration(v *types.Waterfal
 		}
 	}
 
+	if v.ColorConfiguration != nil {
+		ok := object.Key("ColorConfiguration")
+		if err := awsRestjson1_serializeDocumentWaterfallChartColorConfiguration(v.ColorConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DataLabels != nil {
 		ok := object.Key("DataLabels")
 		if err := awsRestjson1_serializeDocumentDataLabelOptions(v.DataLabels, ok); err != nil {
@@ -36781,6 +36975,13 @@ func awsRestjson1_serializeDocumentWaterfallChartConfiguration(v *types.Waterfal
 	if v.FieldWells != nil {
 		ok := object.Key("FieldWells")
 		if err := awsRestjson1_serializeDocumentWaterfallChartFieldWells(v.FieldWells, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}
@@ -36839,6 +37040,28 @@ func awsRestjson1_serializeDocumentWaterfallChartFieldWells(v *types.WaterfallCh
 		if err := awsRestjson1_serializeDocumentWaterfallChartAggregatedFieldWells(v.WaterfallChartAggregatedFieldWells, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWaterfallChartGroupColorConfiguration(v *types.WaterfallChartGroupColorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NegativeBarColor != nil {
+		ok := object.Key("NegativeBarColor")
+		ok.String(*v.NegativeBarColor)
+	}
+
+	if v.PositiveBarColor != nil {
+		ok := object.Key("PositiveBarColor")
+		ok.String(*v.PositiveBarColor)
+	}
+
+	if v.TotalBarColor != nil {
+		ok := object.Key("TotalBarColor")
+		ok.String(*v.TotalBarColor)
 	}
 
 	return nil
@@ -37024,6 +37247,13 @@ func awsRestjson1_serializeDocumentWordCloudChartConfiguration(v *types.WordClou
 	if v.FieldWells != nil {
 		ok := object.Key("FieldWells")
 		if err := awsRestjson1_serializeDocumentWordCloudFieldWells(v.FieldWells, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentVisualInteractionOptions(v.Interactions, ok); err != nil {
 			return err
 		}
 	}

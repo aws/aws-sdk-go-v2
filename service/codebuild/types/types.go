@@ -734,6 +734,119 @@ type ExportedEnvironmentVariable struct {
 	noSmithyDocumentSerde
 }
 
+// A set of dedicated instances for your build environment.
+type Fleet struct {
+
+	// The ARN of the compute fleet.
+	Arn *string
+
+	// The initial number of machines allocated to the compute ﬂeet, which deﬁnes the
+	// number of builds that can run in parallel.
+	BaseCapacity *int32
+
+	// Information about the compute resources the compute fleet uses. Available
+	// values include:
+	//   - BUILD_GENERAL1_SMALL : Use up to 3 GB memory and 2 vCPUs for builds.
+	//   - BUILD_GENERAL1_MEDIUM : Use up to 7 GB memory and 4 vCPUs for builds.
+	//   - BUILD_GENERAL1_LARGE : Use up to 16 GB memory and 8 vCPUs for builds,
+	//   depending on your environment type.
+	//   - BUILD_GENERAL1_XLARGE : Use up to 70 GB memory and 36 vCPUs for builds,
+	//   depending on your environment type.
+	//   - BUILD_GENERAL1_2XLARGE : Use up to 145 GB memory, 72 vCPUs, and 824 GB of
+	//   SSD storage for builds. This compute type supports Docker images up to 100 GB
+	//   uncompressed.
+	// If you use BUILD_GENERAL1_SMALL :
+	//   - For environment type LINUX_CONTAINER , you can use up to 3 GB memory and 2
+	//   vCPUs for builds.
+	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 16 GB memory, 4
+	//   vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+	//   - For environment type ARM_CONTAINER , you can use up to 4 GB memory and 2
+	//   vCPUs on ARM-based processors for builds.
+	// If you use BUILD_GENERAL1_LARGE :
+	//   - For environment type LINUX_CONTAINER , you can use up to 15 GB memory and 8
+	//   vCPUs for builds.
+	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 255 GB memory,
+	//   32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+	//   - For environment type ARM_CONTAINER , you can use up to 16 GB memory and 8
+	//   vCPUs on ARM-based processors for builds.
+	// For more information, see Build environment compute types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
+	// in the CodeBuild User Guide.
+	ComputeType ComputeType
+
+	// The time at which the compute fleet was created.
+	Created *time.Time
+
+	// The environment type of the compute fleet.
+	//   - The environment type ARM_CONTAINER is available only in regions US East (N.
+	//   Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific
+	//   (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney),
+	//   EU (Frankfurt), and South America (São Paulo).
+	//   - The environment type LINUX_CONTAINER is available only in regions US East
+	//   (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt),
+	//   Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), South
+	//   America (São Paulo), and Asia Pacific (Mumbai).
+	//   - The environment type LINUX_GPU_CONTAINER is available only in regions US
+	//   East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU
+	//   (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).
+	//   - The environment type WINDOWS_SERVER_2019_CONTAINER is available only in
+	//   regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific
+	//   (Sydney), Asia Pacific (Tokyo), Asia Pacific (Mumbai) and EU (Ireland).
+	//   - The environment type WINDOWS_SERVER_2022_CONTAINER is available only in
+	//   regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
+	//   EU (Frankfurt), Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific
+	//   (Tokyo), South America (São Paulo) and Asia Pacific (Mumbai).
+	// For more information, see Build environment compute types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
+	// in the CodeBuild user guide.
+	EnvironmentType EnvironmentType
+
+	// The ID of the compute fleet.
+	Id *string
+
+	// The time at which the compute fleet was last modified.
+	LastModified *time.Time
+
+	// The name of the compute fleet.
+	Name *string
+
+	// The scaling configuration of the compute fleet.
+	ScalingConfiguration *ScalingConfigurationOutput
+
+	// The status of the compute fleet.
+	Status *FleetStatus
+
+	// A list of tag key and value pairs associated with this compute fleet. These
+	// tags are available for use by Amazon Web Services services that support
+	// CodeBuild build project tags.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// The status of the compute fleet.
+type FleetStatus struct {
+
+	// Additional information about a compute fleet. Valid values include:
+	//   - CREATE_FAILED : The compute fleet has failed to create.
+	//   - UPDATE_FAILED : The compute fleet has failed to update.
+	Context FleetContextCode
+
+	// A message associated with the status of a compute fleet.
+	Message *string
+
+	// The status code of the compute fleet. Valid values include:
+	//   - CREATING : The compute fleet is being created.
+	//   - UPDATING : The compute fleet is being updated.
+	//   - ROTATING : The compute fleet is being rotated.
+	//   - DELETING : The compute fleet is being deleted.
+	//   - CREATE_FAILED : The compute fleet has failed to create.
+	//   - UPDATE_ROLLBACK_FAILED : The compute fleet has failed to update and could
+	//   not rollback to previous state.
+	//   - ACTIVE : The compute fleet has succeeded and is active.
+	StatusCode FleetStatusCode
+
+	noSmithyDocumentSerde
+}
+
 // Information about the Git submodules configuration for an CodeBuild build
 // project.
 type GitSubmodulesConfig struct {
@@ -1209,7 +1322,8 @@ type ProjectEnvironment struct {
 	//   32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
 	//   - For environment type ARM_CONTAINER , you can use up to 16 GB memory and 8
 	//   vCPUs on ARM-based processors for builds.
-	// For more information, see Build Environment Compute Types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
+	// If you're using compute fleets during project creation, computeType will be
+	// ignored. For more information, see Build Environment Compute Types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
 	// in the CodeBuild User Guide.
 	//
 	// This member is required.
@@ -1232,11 +1346,11 @@ type ProjectEnvironment struct {
 	//   - The environment type ARM_CONTAINER is available only in regions US East (N.
 	//   Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific
 	//   (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).
-	//   - The environment type LINUX_CONTAINER with compute type
-	//   build.general1.2xlarge is available only in regions US East (N. Virginia), US
-	//   East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU
-	//   (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific
-	//   (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).
+	//   - The environment type LINUX_CONTAINER is available only in regions US East
+	//   (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland),
+	//   EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia
+	//   Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China
+	//   (Ningxia).
 	//   - The environment type LINUX_GPU_CONTAINER is available only in regions US
 	//   East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU
 	//   (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
@@ -1252,6 +1366,7 @@ type ProjectEnvironment struct {
 	//   - The environment types WINDOWS_CONTAINER and WINDOWS_SERVER_2019_CONTAINER
 	//   are available only in regions US East (N. Virginia), US East (Ohio), US West
 	//   (Oregon), and EU (Ireland).
+	// If you're using compute fleets during project creation, type will be ignored.
 	// For more information, see Build environment compute types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
 	// in the CodeBuild user guide.
 	//
@@ -1267,6 +1382,9 @@ type ProjectEnvironment struct {
 	// A set of environment variables to make available to builds for this build
 	// project.
 	EnvironmentVariables []EnvironmentVariable
+
+	// A ProjectFleet object to use for this build project.
+	Fleet *ProjectFleet
 
 	// The type of credentials CodeBuild uses to pull images in your build. There are
 	// two valid values:
@@ -1336,6 +1454,17 @@ type ProjectFileSystemLocation struct {
 
 	// The type of the file system. The one supported type is EFS .
 	Type FileSystemType
+
+	noSmithyDocumentSerde
+}
+
+// Information about the compute fleet of the build project. For more information,
+// see Working with reserved capacity in CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/fleets.html)
+// .
+type ProjectFleet struct {
+
+	// Specifies the compute fleet ARN for the build project.
+	FleetArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1739,6 +1868,39 @@ type S3ReportExportConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The scaling configuration input of a compute fleet.
+type ScalingConfigurationInput struct {
+
+	// The maximum number of instances in the ﬂeet when auto-scaling.
+	MaxCapacity *int32
+
+	// The scaling type for a compute fleet.
+	ScalingType FleetScalingType
+
+	// A list of TargetTrackingScalingConfiguration objects.
+	TargetTrackingScalingConfigs []TargetTrackingScalingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The scaling configuration output of a compute fleet.
+type ScalingConfigurationOutput struct {
+
+	// The desired number of instances in the ﬂeet when auto-scaling.
+	DesiredCapacity *int32
+
+	// The maximum number of instances in the ﬂeet when auto-scaling.
+	MaxCapacity *int32
+
+	// The scaling type for a compute fleet.
+	ScalingType FleetScalingType
+
+	// A list of TargetTrackingScalingConfiguration objects.
+	TargetTrackingScalingConfigs []TargetTrackingScalingConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Information about the authorization settings for CodeBuild to access the source
 // code to be built. This information is for the CodeBuild console's use only. Your
 // code should not get or set this information directly.
@@ -1784,6 +1946,18 @@ type Tag struct {
 
 	// The tag's value.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines when a new instance is auto-scaled into the compute fleet.
+type TargetTrackingScalingConfiguration struct {
+
+	// The metric type to determine auto-scaling.
+	MetricType FleetScalingMetricType
+
+	// The value of metricType when to start scaling.
+	TargetValue *float64
 
 	noSmithyDocumentSerde
 }

@@ -111,6 +111,11 @@ type DescribeTaskExecutionOutput struct {
 	// .
 	Includes []types.FilterRule
 
+	// The configuration of the manifest that lists the files or objects to transfer.
+	// For more information, see Specifying what DataSync transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
+	// .
+	ManifestConfig *types.ManifestConfig
+
 	// Indicates how your transfer task is configured. These options include how
 	// DataSync handles files, objects, and their associated metadata during your
 	// transfer. You also can specify how to verify data integrity, set bandwidth
@@ -141,7 +146,9 @@ type DescribeTaskExecutionOutput struct {
 	TaskExecutionArn *string
 
 	// The configuration of your task report, which provides detailed information
-	// about for your DataSync transfer.
+	// about for your DataSync transfer. For more information, see Creating a task
+	// report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
+	// .
 	TaskReportConfig *types.TaskReportConfig
 
 	// Metadata pertaining to the operation's result.

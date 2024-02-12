@@ -13547,6 +13547,11 @@ func awsRestjson1_deserializeOpDocumentDescribeDomainConfigurationOutput(v **Des
 				}
 			}
 
+		case "serverCertificateConfig":
+			if err := awsRestjson1_deserializeDocumentServerCertificateConfig(&sv.ServerCertificateConfig, value); err != nil {
+				return err
+			}
+
 		case "serverCertificates":
 			if err := awsRestjson1_deserializeDocumentServerCertificates(&sv.ServerCertificates, value); err != nil {
 				return err
@@ -15587,9 +15592,9 @@ func awsRestjson1_deserializeOpDocumentDescribeProvisioningTemplateOutput(v **De
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected Enabled2 to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "lastModifiedDate":
@@ -37341,6 +37346,9 @@ func awsRestjson1_deserializeOpErrorUpdatePackage(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -37433,6 +37441,9 @@ func awsRestjson1_deserializeOpErrorUpdatePackageConfiguration(response *smithyh
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -37522,6 +37533,9 @@ func awsRestjson1_deserializeOpErrorUpdatePackageVersion(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -52813,9 +52827,9 @@ func awsRestjson1_deserializeDocumentProvisioningTemplateSummary(v **types.Provi
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected Enabled2 to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = jtv
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		case "lastModifiedDate":
@@ -54981,6 +54995,46 @@ func awsRestjson1_deserializeDocumentSecurityProfileTargets(v *[]types.SecurityP
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentServerCertificateConfig(v **types.ServerCertificateConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServerCertificateConfig
+	if *v == nil {
+		sv = &types.ServerCertificateConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enableOCSPCheck":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableOCSPCheck to be of type *bool, got %T instead", value)
+				}
+				sv.EnableOCSPCheck = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServerCertificates(v *[]types.ServerCertificateSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -56944,7 +56998,7 @@ func awsRestjson1_deserializeDocumentThingConnectivity(v **types.ThingConnectivi
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Connected = jtv
+				sv.Connected = ptr.Bool(jtv)
 			}
 
 		case "disconnectReason":
@@ -57720,7 +57774,7 @@ func awsRestjson1_deserializeDocumentThingTypeMetadata(v **types.ThingTypeMetada
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected Boolean2 to be of type *bool, got %T instead", value)
 				}
 				sv.Deprecated = jtv
 			}

@@ -1,10 +1,42 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.neptunegraph#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Raised in case of an authentication or authorization failure.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
         "com.amazonaws.neptunegraph#AmazonNeptuneGraph": {
             "type": "service",
             "version": "2023-11-29",
             "operations": [
+                {
+                    "target": "com.amazonaws.neptunegraph#CancelQuery"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ExecuteQuery"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#GetGraphSummary"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#GetQuery"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ListQueries"
+                },
                 {
                     "target": "com.amazonaws.neptunegraph#ListTagsForResource"
                 },
@@ -39,7 +71,31 @@
                     "name": "neptune-graph"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Neptune Analytics is a serverless in-memory graph database service for analytics\n        that delivers high-performance analytics and real-time queries for any graph type. It\n        complements the Amazon Neptune Database, an industry-leading managed graph database.</p>",
+                "smithy.api#cors": {
+                    "maxAge": 86400,
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "Authorization",
+                        "Date",
+                        "X-Amz-Date",
+                        "X-Amz-Security-Token",
+                        "X-Amz-Target",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-errormessage",
+                        "x-amzn-trace-id",
+                        "x-amz-apigw-id",
+                        "date"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Neptune Analytics is a new analytics database engine for Amazon Neptune that helps customers get to \n    insights faster by quickly processing large amounts of graph data, invoking popular graph analytic \n    algorithms in low-latency queries, and getting analytics results in seconds.</p>",
                 "smithy.api#title": "Amazon Neptune Graph",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1505,7 +1561,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Deletes the specified import task</p>",
+                "smithy.api#documentation": "<p>Deletes the specified import task.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -1553,7 +1609,7 @@
                 "source": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path,\n      or can point to a Neptune database endpoint or snapshot</p>",
+                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path,\n      or can point to a Neptune database endpoint or snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1580,6 +1636,75 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#CancelQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#CancelQueryInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Cancels a specified query.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{graphIdentifier}."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/queries/{queryId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {},
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "DataPlane"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#CancelQueryInput": {
+            "type": "structure",
+            "members": {
+                "graphIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#GraphIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Neptune Analytics graph.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "graphIdentifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the query to cancel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.neptunegraph#ConflictException": {
@@ -1693,7 +1818,7 @@
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas in other AZs. Min =0, Max = 2, Default =1</p>"
+                        "smithy.api#documentation": "<p>The number of replicas in other AZs. Min =0, Max = 2, Default = 1.</p>"
                     }
                 },
                 "deletionProtection": {
@@ -1998,7 +2123,7 @@
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs IAM authenticated.\n       (<code>true</code> to enable, or <code>false</code> to disable.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs IAM authenticated.\n       (<code>true</code> to enable, or <code>false</code> to disable).</p>"
                     }
                 },
                 "kmsKeyIdentifier": {
@@ -2610,6 +2735,174 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.neptunegraph#EdgeLabels": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.neptunegraph#EdgeProperties": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.neptunegraph#EdgeStructure": {
+            "type": "structure",
+            "members": {
+                "count": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances of the edge in the graph.</p>"
+                    }
+                },
+                "edgeProperties": {
+                    "target": "com.amazonaws.neptunegraph#EdgeProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the properties associated with the edge.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an edge in a Neptune Analytics graph.</p>"
+            }
+        },
+        "com.amazonaws.neptunegraph#EdgeStructures": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.neptunegraph#EdgeStructure"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExecuteQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#ExecuteQueryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunegraph#ExecuteQueryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#UnprocessableException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Execute an openCypher query. Currently, the SDK does not support parameterized queries. If you want to make a \n      parameterized query call, you can use an HTTP request. </p>\n         <note>\n            <p>\n        Non-parametrized queries are not considered for plan caching. You can force plan caching with \n        <code>planCache=enabled</code>. The plan cache will be reused only for the same exact query. Slight variations \n        in the query will not be able to reuse the query plan cache.\n      </p>\n         </note>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{graphIdentifier}."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/queries",
+                    "code": 200
+                },
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "DataPlane"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#ExecuteQueryInput": {
+            "type": "structure",
+            "members": {
+                "graphIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#GraphIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Neptune Analytics graph.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "graphIdentifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queryString": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query string to be executed.</p>",
+                        "smithy.api#jsonName": "query",
+                        "smithy.api#required": {}
+                    }
+                },
+                "language": {
+                    "target": "com.amazonaws.neptunegraph#QueryLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query language the query is written in. Currently only openCypher is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "planCache": {
+                    "target": "com.amazonaws.neptunegraph#PlanCacheType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Query plan cache is a feature that saves the query plan and reuses it on successive executions of the same query. \n      This reduces query latency, and works for both <code>READ</code> and <code>UPDATE</code> queries. The plan cache is an \n      LRU cache with a 5 minute TTL and a capacity of 1000.</p>"
+                    }
+                },
+                "explainMode": {
+                    "target": "com.amazonaws.neptunegraph#ExplainMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The explain mode parameter returns a query explain instead of the actual query results. A query explain can \n      be used to gather insights about the query execution such as planning decisions, time spent on each operator, solutions \n      flowing etc.</p>",
+                        "smithy.api#jsonName": "explain"
+                    }
+                },
+                "queryTimeoutMilliseconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the query timeout duration, in milliseconds. (optional)</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#ExecuteQueryOutput": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "com.amazonaws.neptunegraph#QueryResponseBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query results.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#ExplainMode": {
+            "type": "enum",
+            "members": {
+                "STATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATIC"
+                    }
+                },
+                "DETAILS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETAILS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.neptunegraph#Format": {
             "type": "enum",
             "members": {
@@ -3010,6 +3303,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.neptunegraph#GetGraphSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#GetGraphSummaryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunegraph#GetGraphSummaryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Gets a graph summary for a property graph.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{graphIdentifier}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/summary",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "DataPlane"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#GetGraphSummaryInput": {
+            "type": "structure",
+            "members": {
+                "graphIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#GraphIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Neptune Analytics graph.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "graphIdentifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mode": {
+                    "target": "com.amazonaws.neptunegraph#GraphSummaryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary mode can take one of two values: <code>basic</code> (the default), and\n   <code>detailed</code>.</p>",
+                        "smithy.api#httpQuery": "mode"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#GetGraphSummaryOutput": {
+            "type": "structure",
+            "members": {
+                "version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Display the version of this tool.</p>"
+                    }
+                },
+                "lastStatisticsComputationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, in ISO 8601 format, of the time at which Neptune Analytics last computed statistics.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "graphSummary": {
+                    "target": "com.amazonaws.neptunegraph#GraphDataSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The graph summary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.neptunegraph#GetImportTask": {
             "type": "operation",
             "input": {
@@ -3381,6 +3769,205 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.neptunegraph#GetQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#GetQueryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunegraph#GetQueryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Retrieves the status of a specified query.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{graphIdentifier}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/queries/{queryId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "DataPlane"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#GetQueryInput": {
+            "type": "structure",
+            "members": {
+                "graphIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#GraphIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Neptune Analytics graph.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "graphIdentifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the query in question.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#GetQueryOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the query in question.</p>"
+                    }
+                },
+                "queryString": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query in question.</p>"
+                    }
+                },
+                "waited": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how long the query waited, in milliseconds.</p>"
+                    }
+                },
+                "elapsed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of milliseconds the query has been running.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.neptunegraph#QueryState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#GraphDataSummary": {
+            "type": "structure",
+            "members": {
+                "numNodes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of nodes in the graph.</p>"
+                    }
+                },
+                "numEdges": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of edges in the graph.</p>"
+                    }
+                },
+                "numNodeLabels": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of distinct node labels in the graph.</p>"
+                    }
+                },
+                "numEdgeLabels": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of unique edge labels in the graph.</p>"
+                    }
+                },
+                "nodeLabels": {
+                    "target": "com.amazonaws.neptunegraph#NodeLabels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of distinct node labels in the graph.</p>"
+                    }
+                },
+                "edgeLabels": {
+                    "target": "com.amazonaws.neptunegraph#EdgeLabels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the edge labels in the graph.</p>"
+                    }
+                },
+                "numNodeProperties": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of distinct node properties in the graph.</p>"
+                    }
+                },
+                "numEdgeProperties": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of edge properties in the graph.</p>"
+                    }
+                },
+                "nodeProperties": {
+                    "target": "com.amazonaws.neptunegraph#LongValuedMapList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the distinct node properties in the graph, along with the count of nodes where each property is used.</p>"
+                    }
+                },
+                "edgeProperties": {
+                    "target": "com.amazonaws.neptunegraph#LongValuedMapList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the distinct edge properties in the graph, along with the count of edges\n      where each property is used.</p>"
+                    }
+                },
+                "totalNodePropertyValues": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of usages of all node properties.</p>"
+                    }
+                },
+                "totalEdgePropertyValues": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of usages of all edge properties.</p>"
+                    }
+                },
+                "nodeStructures": {
+                    "target": "com.amazonaws.neptunegraph#NodeStructures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field is only present when the requested mode is DETAILED. It contains a list of node structures.</p>"
+                    }
+                },
+                "edgeStructures": {
+                    "target": "com.amazonaws.neptunegraph#EdgeStructures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field is only present when the requested mode is DETAILED. It contains a list of edge structures.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about the graph.</p>"
+            }
+        },
         "com.amazonaws.neptunegraph#GraphId": {
             "type": "string",
             "traits": {
@@ -3610,6 +4197,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.neptunegraph#GraphSummary"
+            }
+        },
+        "com.amazonaws.neptunegraph#GraphSummaryMode": {
+            "type": "enum",
+            "members": {
+                "BASIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
+                    }
+                },
+                "DETAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.neptunegraph#ImportOptions": {
@@ -4196,6 +4800,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.neptunegraph#ListQueries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#ListQueriesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunegraph#ListQueriesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Lists active openCypher queries.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{graphIdentifier}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/queries",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "DataPlane"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#ListQueriesInput": {
+            "type": "structure",
+            "members": {
+                "graphIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#GraphIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Neptune Analytics graph.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "graphIdentifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be fetched by the API.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.neptunegraph#QueryStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filtered list of queries based on state.</p>",
+                        "smithy.api#httpQuery": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#ListQueriesOutput": {
+            "type": "structure",
+            "members": {
+                "queries": {
+                    "target": "com.amazonaws.neptunegraph#QuerySummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of current openCypher queries.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.neptunegraph#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -4263,6 +4955,21 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.neptunegraph#LongValuedMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#Long"
+            }
+        },
+        "com.amazonaws.neptunegraph#LongValuedMapList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.neptunegraph#LongValuedMap"
+            }
+        },
         "com.amazonaws.neptunegraph#MaxResults": {
             "type": "integer",
             "traits": {
@@ -4306,12 +5013,62 @@
                 "preserveEdgeIds": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Neptune Analytics currently does not support user defined edge ids. The edge ids are not imported by\n          default. They are imported if <i>preserveEdgeIds</i> is set to true, and ids are stored as\n          properties on the relationships with the property name neptuneEdgeId.</p>"
+                        "smithy.api#documentation": "<p>Neptune Analytics currently does not support user defined edge ids. The edge ids are not imported by\n          default. They are imported if <i>preserveEdgeIds</i> is set to true, and ids are stored as\n          properties on the relationships with the property name <i>neptuneEdgeId</i>.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Options for how to import Neptune data.</p>"
+            }
+        },
+        "com.amazonaws.neptunegraph#NodeLabels": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.neptunegraph#NodeProperties": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.neptunegraph#NodeStructure": {
+            "type": "structure",
+            "members": {
+                "count": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances of this node.</p>"
+                    }
+                },
+                "nodeProperties": {
+                    "target": "com.amazonaws.neptunegraph#NodeProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties associated with this node.</p>"
+                    }
+                },
+                "distinctOutgoingEdgeLabels": {
+                    "target": "com.amazonaws.neptunegraph#OutgoingEdgeLabels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The outgoing edge labels associated with this node.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a node.</p>"
+            }
+        },
+        "com.amazonaws.neptunegraph#NodeStructures": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.neptunegraph#NodeStructure"
+            }
+        },
+        "com.amazonaws.neptunegraph#OutgoingEdgeLabels": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
             }
         },
         "com.amazonaws.neptunegraph#PaginationToken": {
@@ -4320,6 +5077,29 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 8192
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#PlanCacheType": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
                 }
             }
         },
@@ -4417,6 +5197,119 @@
                     "min": 128,
                     "max": 24576
                 }
+            }
+        },
+        "com.amazonaws.neptunegraph#QueryLanguage": {
+            "type": "enum",
+            "members": {
+                "OPEN_CYPHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPEN_CYPHER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#QueryResponseBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#QueryState": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "WAITING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAITING"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#QueryStateInput": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "WAITING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAITING"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#QuerySummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string representation of the id of the query.</p>"
+                    }
+                },
+                "queryString": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actual query text. The <code>queryString</code> may be truncated if the actual query string is too long.</p>"
+                    }
+                },
+                "waited": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in milliseconds, the query has waited in the queue before being picked up by a worker thread.</p>"
+                    }
+                },
+                "elapsed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The running time of the query, in milliseconds.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.neptunegraph#QueryState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the query listed.</p>"
+            }
+        },
+        "com.amazonaws.neptunegraph#QuerySummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.neptunegraph#QuerySummary"
             }
         },
         "com.amazonaws.neptunegraph#ReplicaCount": {
@@ -5108,6 +6001,64 @@
                 }
             }
         },
+        "com.amazonaws.neptunegraph#UnprocessableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.neptunegraph#UnprocessableExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the unprocessable exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request cannot be processed due to known reasons. Eg. partition full.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 422
+            }
+        },
+        "com.amazonaws.neptunegraph#UnprocessableExceptionReason": {
+            "type": "enum",
+            "members": {
+                "QUERY_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_TIMEOUT"
+                    }
+                },
+                "INTERNAL_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_LIMIT_EXCEEDED"
+                    }
+                },
+                "MEMORY_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEMORY_LIMIT_EXCEEDED"
+                    }
+                },
+                "STORAGE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORAGE_LIMIT_EXCEEDED"
+                    }
+                },
+                "PARTITION_FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTITION_FULL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.neptunegraph#UntagResource": {
             "type": "operation",
             "input": {
@@ -5366,7 +6317,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A resource could not be validated</p>",
+                "smithy.api#documentation": "<p>A resource could not be validated.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

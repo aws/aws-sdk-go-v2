@@ -65,8 +65,8 @@ type UpdateDocumentInput struct {
 	TargetType *string
 
 	// An optional field specifying the version of the artifact you are updating with
-	// the document. For example, "Release 12, Update 6". This value is unique across
-	// all versions of a document, and can't be changed.
+	// the document. For example, 12.6. This value is unique across all versions of a
+	// document, and can't be changed.
 	VersionName *string
 
 	noSmithyDocumentSerde

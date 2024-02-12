@@ -63,7 +63,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add streaming events payload middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (!AwsSignatureVersion4.hasSigV4AuthScheme(
+                            if (!AwsSignatureVersion4.hasSigV4X(
                                     model, service, operation)) {
                                 return false;
                             }
@@ -79,7 +79,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add unsigned payload middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (!AwsSignatureVersion4.hasSigV4AuthScheme(
+                            if (!AwsSignatureVersion4.hasSigV4X(
                                     model, service, operation)) {
                                 return false;
                             }
@@ -96,7 +96,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add signed payload middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (!AwsSignatureVersion4.hasSigV4AuthScheme(
+                            if (!AwsSignatureVersion4.hasSigV4X(
                                     model, service, operation)) {
                                 return false;
                             }
@@ -113,7 +113,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add content-sha256 payload header middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (!AwsSignatureVersion4.hasSigV4AuthScheme(
+                            if (!AwsSignatureVersion4.hasSigV4X(
                                     model, service, operation)) {
                                 return false;
                             }

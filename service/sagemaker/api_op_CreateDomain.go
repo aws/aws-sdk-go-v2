@@ -13,18 +13,18 @@ import (
 )
 
 // Creates a Domain . A domain consists of an associated Amazon Elastic File System
-// (EFS) volume, a list of authorized users, and a variety of security,
-// application, policy, and Amazon Virtual Private Cloud (VPC) configurations.
-// Users within a domain can share notebook files and other artifacts with each
-// other. EFS storage When a domain is created, an EFS volume is created for use by
-// all of the users within the domain. Each user receives a private home directory
-// within the EFS volume for notebooks, Git repositories, and data files. SageMaker
-// uses the Amazon Web Services Key Management Service (Amazon Web Services KMS) to
-// encrypt the EFS volume attached to the domain with an Amazon Web Services
-// managed key by default. For more control, you can specify a customer managed
-// key. For more information, see Protect Data at Rest Using Encryption (https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html)
-// . VPC configuration All traffic between the domain and the EFS volume is through
-// the specified VPC and subnets. For other traffic, you can specify the
+// volume, a list of authorized users, and a variety of security, application,
+// policy, and Amazon Virtual Private Cloud (VPC) configurations. Users within a
+// domain can share notebook files and other artifacts with each other. EFS storage
+// When a domain is created, an EFS volume is created for use by all of the users
+// within the domain. Each user receives a private home directory within the EFS
+// volume for notebooks, Git repositories, and data files. SageMaker uses the
+// Amazon Web Services Key Management Service (Amazon Web Services KMS) to encrypt
+// the EFS volume attached to the domain with an Amazon Web Services managed key by
+// default. For more control, you can specify a customer managed key. For more
+// information, see Protect Data at Rest Using Encryption (https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html)
+// . VPC configuration All traffic between the domain and the Amazon EFS volume is
+// through the specified VPC and subnets. For other traffic, you can specify the
 // AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network
 // access type that you choose when you onboard to the domain. The following
 // options are available:

@@ -3967,6 +3967,11 @@ func awsAwsjson11_deserializeDocumentCrlConfiguration(v **types.CrlConfiguration
 
 	for key, value := range shape {
 		switch key {
+		case "CrlDistributionPointExtensionConfiguration":
+			if err := awsAwsjson11_deserializeDocumentCrlDistributionPointExtensionConfiguration(&sv.CrlDistributionPointExtensionConfiguration, value); err != nil {
+				return err
+			}
+
 		case "CustomCname":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4014,6 +4019,46 @@ func awsAwsjson11_deserializeDocumentCrlConfiguration(v **types.CrlConfiguration
 					return fmt.Errorf("expected S3ObjectAcl to be of type string, got %T instead", value)
 				}
 				sv.S3ObjectAcl = types.S3ObjectAcl(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCrlDistributionPointExtensionConfiguration(v **types.CrlDistributionPointExtensionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CrlDistributionPointExtensionConfiguration
+	if *v == nil {
+		sv = &types.CrlDistributionPointExtensionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OmitExtension":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.OmitExtension = ptr.Bool(jtv)
 			}
 
 		default:

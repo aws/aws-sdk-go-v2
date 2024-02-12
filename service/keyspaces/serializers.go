@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"path"
 )
 
@@ -331,6 +332,61 @@ func (m *awsAwsjson10_serializeOpGetTable) HandleSerialize(ctx context.Context, 
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentGetTableInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpGetTableAutoScalingSettings struct {
+}
+
+func (*awsAwsjson10_serializeOpGetTableAutoScalingSettings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetTableAutoScalingSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTableAutoScalingSettingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("KeyspacesService.GetTableAutoScalingSettings")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetTableAutoScalingSettingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -730,6 +786,70 @@ func (m *awsAwsjson10_serializeOpUpdateTable) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentAutoScalingPolicy(v *types.AutoScalingPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TargetTrackingScalingPolicyConfiguration != nil {
+		ok := object.Key("targetTrackingScalingPolicyConfiguration")
+		if err := awsAwsjson10_serializeDocumentTargetTrackingScalingPolicyConfiguration(v.TargetTrackingScalingPolicyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentAutoScalingSettings(v *types.AutoScalingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoScalingDisabled {
+		ok := object.Key("autoScalingDisabled")
+		ok.Boolean(v.AutoScalingDisabled)
+	}
+
+	if v.MaximumUnits != nil {
+		ok := object.Key("maximumUnits")
+		ok.Long(*v.MaximumUnits)
+	}
+
+	if v.MinimumUnits != nil {
+		ok := object.Key("minimumUnits")
+		ok.Long(*v.MinimumUnits)
+	}
+
+	if v.ScalingPolicy != nil {
+		ok := object.Key("scalingPolicy")
+		if err := awsAwsjson10_serializeDocumentAutoScalingPolicy(v.ScalingPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentAutoScalingSpecification(v *types.AutoScalingSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ReadCapacityAutoScaling != nil {
+		ok := object.Key("readCapacityAutoScaling")
+		if err := awsAwsjson10_serializeDocumentAutoScalingSettings(v.ReadCapacityAutoScaling, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WriteCapacityAutoScaling != nil {
+		ok := object.Key("writeCapacityAutoScaling")
+		if err := awsAwsjson10_serializeDocumentAutoScalingSettings(v.WriteCapacityAutoScaling, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentCapacitySpecification(v *types.CapacitySpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -901,6 +1021,43 @@ func awsAwsjson10_serializeDocumentRegionList(v []string, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentReplicaSpecification(v *types.ReplicaSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ReadCapacityAutoScaling != nil {
+		ok := object.Key("readCapacityAutoScaling")
+		if err := awsAwsjson10_serializeDocumentAutoScalingSettings(v.ReadCapacityAutoScaling, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReadCapacityUnits != nil {
+		ok := object.Key("readCapacityUnits")
+		ok.Long(*v.ReadCapacityUnits)
+	}
+
+	if v.Region != nil {
+		ok := object.Key("region")
+		ok.String(*v.Region)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentReplicaSpecificationList(v []types.ReplicaSpecification, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentReplicaSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentReplicationSpecification(v *types.ReplicationSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1010,6 +1167,46 @@ func awsAwsjson10_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentTargetTrackingScalingPolicyConfiguration(v *types.TargetTrackingScalingPolicyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisableScaleIn {
+		ok := object.Key("disableScaleIn")
+		ok.Boolean(v.DisableScaleIn)
+	}
+
+	if v.ScaleInCooldown != 0 {
+		ok := object.Key("scaleInCooldown")
+		ok.Integer(v.ScaleInCooldown)
+	}
+
+	if v.ScaleOutCooldown != 0 {
+		ok := object.Key("scaleOutCooldown")
+		ok.Integer(v.ScaleOutCooldown)
+	}
+
+	{
+		ok := object.Key("targetValue")
+		switch {
+		case math.IsNaN(v.TargetValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.TargetValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.TargetValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.TargetValue)
+
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentTimeToLive(v *types.TimeToLive, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1052,6 +1249,13 @@ func awsAwsjson10_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoScalingSpecification != nil {
+		ok := object.Key("autoScalingSpecification")
+		if err := awsAwsjson10_serializeDocumentAutoScalingSpecification(v.AutoScalingSpecification, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CapacitySpecification != nil {
 		ok := object.Key("capacitySpecification")
 		if err := awsAwsjson10_serializeDocumentCapacitySpecification(v.CapacitySpecification, ok); err != nil {
@@ -1093,6 +1297,13 @@ func awsAwsjson10_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 	if v.PointInTimeRecovery != nil {
 		ok := object.Key("pointInTimeRecovery")
 		if err := awsAwsjson10_serializeDocumentPointInTimeRecovery(v.PointInTimeRecovery, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicaSpecifications != nil {
+		ok := object.Key("replicaSpecifications")
+		if err := awsAwsjson10_serializeDocumentReplicaSpecificationList(v.ReplicaSpecifications, ok); err != nil {
 			return err
 		}
 	}
@@ -1162,6 +1373,23 @@ func awsAwsjson10_serializeOpDocumentGetKeyspaceInput(v *GetKeyspaceInput, value
 	if v.KeyspaceName != nil {
 		ok := object.Key("keyspaceName")
 		ok.String(*v.KeyspaceName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetTableAutoScalingSettingsInput(v *GetTableAutoScalingSettingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyspaceName != nil {
+		ok := object.Key("keyspaceName")
+		ok.String(*v.KeyspaceName)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("tableName")
+		ok.String(*v.TableName)
 	}
 
 	return nil
@@ -1249,6 +1477,13 @@ func awsAwsjson10_serializeOpDocumentRestoreTableInput(v *RestoreTableInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoScalingSpecification != nil {
+		ok := object.Key("autoScalingSpecification")
+		if err := awsAwsjson10_serializeDocumentAutoScalingSpecification(v.AutoScalingSpecification, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CapacitySpecificationOverride != nil {
 		ok := object.Key("capacitySpecificationOverride")
 		if err := awsAwsjson10_serializeDocumentCapacitySpecification(v.CapacitySpecificationOverride, ok); err != nil {
@@ -1266,6 +1501,13 @@ func awsAwsjson10_serializeOpDocumentRestoreTableInput(v *RestoreTableInput, val
 	if v.PointInTimeRecoveryOverride != nil {
 		ok := object.Key("pointInTimeRecoveryOverride")
 		if err := awsAwsjson10_serializeDocumentPointInTimeRecovery(v.PointInTimeRecoveryOverride, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicaSpecifications != nil {
+		ok := object.Key("replicaSpecifications")
+		if err := awsAwsjson10_serializeDocumentReplicaSpecificationList(v.ReplicaSpecifications, ok); err != nil {
 			return err
 		}
 	}
@@ -1354,6 +1596,13 @@ func awsAwsjson10_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 		}
 	}
 
+	if v.AutoScalingSpecification != nil {
+		ok := object.Key("autoScalingSpecification")
+		if err := awsAwsjson10_serializeDocumentAutoScalingSpecification(v.AutoScalingSpecification, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CapacitySpecification != nil {
 		ok := object.Key("capacitySpecification")
 		if err := awsAwsjson10_serializeDocumentCapacitySpecification(v.CapacitySpecification, ok); err != nil {
@@ -1388,6 +1637,13 @@ func awsAwsjson10_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 	if v.PointInTimeRecovery != nil {
 		ok := object.Key("pointInTimeRecovery")
 		if err := awsAwsjson10_serializeDocumentPointInTimeRecovery(v.PointInTimeRecovery, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicaSpecifications != nil {
+		ok := object.Key("replicaSpecifications")
+		if err := awsAwsjson10_serializeDocumentReplicaSpecificationList(v.ReplicaSpecifications, ok); err != nil {
 			return err
 		}
 	}

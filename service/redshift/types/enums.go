@@ -148,6 +148,26 @@ func (DataShareStatusForProducer) Values() []DataShareStatusForProducer {
 	}
 }
 
+type ImpactRankingType string
+
+// Enum values for ImpactRankingType
+const (
+	ImpactRankingTypeHigh   ImpactRankingType = "HIGH"
+	ImpactRankingTypeMedium ImpactRankingType = "MEDIUM"
+	ImpactRankingTypeLow    ImpactRankingType = "LOW"
+)
+
+// Values returns all known values for ImpactRankingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImpactRankingType) Values() []ImpactRankingType {
+	return []ImpactRankingType{
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
 type LogDestinationType string
 
 // Enum values for LogDestinationType
@@ -272,6 +292,24 @@ func (PartnerIntegrationStatus) Values() []PartnerIntegrationStatus {
 		"Inactive",
 		"RuntimeFailure",
 		"ConnectionFailure",
+	}
+}
+
+type RecommendedActionType string
+
+// Enum values for RecommendedActionType
+const (
+	RecommendedActionTypeSql RecommendedActionType = "SQL"
+	RecommendedActionTypeCli RecommendedActionType = "CLI"
+)
+
+// Values returns all known values for RecommendedActionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendedActionType) Values() []RecommendedActionType {
+	return []RecommendedActionType{
+		"SQL",
+		"CLI",
 	}
 }
 

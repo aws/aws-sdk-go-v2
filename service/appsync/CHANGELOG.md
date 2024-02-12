@@ -1,3 +1,11 @@
+# v1.28.0 (2024-02-06)
+
+* **Feature**: Support for environment variables in AppSync GraphQL APIs
+
+# v1.27.2 (2024-01-19)
+
+* No change notes available for this release.
+
 # v1.27.1 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

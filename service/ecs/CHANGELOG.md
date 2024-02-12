@@ -1,3 +1,23 @@
+# v1.38.3 (2024-02-09)
+
+* **Documentation**: Documentation only update for Amazon ECS.
+
+# v1.38.2 (2024-02-06)
+
+* **Documentation**: This release is a documentation only update to address customer issues.
+
+# v1.38.1 (2024-01-24)
+
+* **Documentation**: Documentation updates for Amazon ECS.
+
+# v1.38.0 (2024-01-22)
+
+* **Feature**: This release adds support for Transport Layer Security (TLS) and Configurable Timeout to ECS Service Connect. TLS facilitates privacy and data security for inter-service communications, while Configurable Timeout allows customized per-request timeout and idle timeout for Service Connect services.
+
+# v1.37.0 (2024-01-11)
+
+* **Feature**: This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.
+
 # v1.36.0 (2024-01-04)
 
 * **Feature**: This release adds support for managed instance draining which facilitates graceful termination of Amazon ECS instances.

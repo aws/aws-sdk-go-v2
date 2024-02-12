@@ -431,26 +431,32 @@
             }
         },
         "com.amazonaws.iotfleetwise#CampaignStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "WAITING_FOR_APPROVAL",
-                        "name": "WAITING_FOR_APPROVAL"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "SUSPENDED",
-                        "name": "SUSPENDED"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "WAITING_FOR_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAITING_FOR_APPROVAL"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#CampaignSummary": {
@@ -704,18 +710,20 @@
             }
         },
         "com.amazonaws.iotfleetwise#Compression": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OFF",
-                        "name": "OFF"
-                    },
-                    {
-                        "value": "SNAPPY",
-                        "name": "SNAPPY"
+            "type": "enum",
+            "members": {
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
                     }
-                ]
+                },
+                "SNAPPY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNAPPY"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#ConditionBasedCollectionScheme": {
@@ -724,7 +732,7 @@
                 "expression": {
                     "target": "com.amazonaws.iotfleetwise#eventExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logical expression used to recognize what data to collect. For example,\n                <code>$variable.Vehicle.OutsideAirTemperature &gt;= 105.0</code>.</p>",
+                        "smithy.api#documentation": "<p>The logical expression used to recognize what data to collect. For example,\n            <code>$variable.`Vehicle.OutsideAirTemperature` &gt;= 105.0</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1666,18 +1674,20 @@
             }
         },
         "com.amazonaws.iotfleetwise#DataFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "PARQUET",
-                        "name": "PARQUET"
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
                     }
-                ]
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#DecoderManifestResource": {
@@ -2193,18 +2203,20 @@
             }
         },
         "com.amazonaws.iotfleetwise#DiagnosticsMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OFF",
-                        "name": "OFF"
-                    },
-                    {
-                        "value": "SEND_ACTIVE_DTCS",
-                        "name": "SEND_ACTIVE_DTCS"
+            "type": "enum",
+            "members": {
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
                     }
-                ]
+                },
+                "SEND_ACTIVE_DTCS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEND_ACTIVE_DTCS"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#DisassociateVehicleFleet": {
@@ -2266,37 +2278,43 @@
             "members": {}
         },
         "com.amazonaws.iotfleetwise#EncryptionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILURE",
-                        "name": "FAILURE"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILURE"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#EncryptionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "KMS_BASED_ENCRYPTION",
-                        "name": "KMS_BASED_ENCRYPTION"
-                    },
-                    {
-                        "value": "FLEETWISE_DEFAULT_ENCRYPTION",
-                        "name": "FLEETWISE_DEFAULT_ENCRYPTION"
+            "type": "enum",
+            "members": {
+                "KMS_BASED_ENCRYPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KMS_BASED_ENCRYPTION"
                     }
-                ]
+                },
+                "FLEETWISE_DEFAULT_ENCRYPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLEETWISE_DEFAULT_ENCRYPTION"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#FleetAssociationResource": {
@@ -5249,6 +5267,13 @@
                         "smithy.api#documentation": "<p> The maximum number of items to return, between 1 and 100, inclusive. </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "signalNodeType": {
+                    "target": "com.amazonaws.iotfleetwise#SignalNodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of node in the signal catalog.</p>",
+                        "smithy.api#httpQuery": "signalNodeType"
+                    }
                 }
             }
         },
@@ -5569,41 +5594,49 @@
             }
         },
         "com.amazonaws.iotfleetwise#LogType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OFF",
-                        "name": "OFF"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
                     }
-                ]
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#ManifestStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DRAFT",
-                        "name": "DRAFT"
-                    },
-                    {
-                        "value": "INVALID",
-                        "name": "INVALID"
-                    },
-                    {
-                        "value": "VALIDATING",
-                        "name": "VALIDATING"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFT"
+                    }
+                },
+                "INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID"
+                    }
+                },
+                "VALIDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATING"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#MessageSignal": {
@@ -5804,65 +5837,73 @@
             }
         },
         "com.amazonaws.iotfleetwise#NetworkInterfaceFailureReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DUPLICATE_NETWORK_INTERFACE",
-                        "name": "DUPLICATE_INTERFACE"
-                    },
-                    {
-                        "value": "CONFLICTING_NETWORK_INTERFACE",
-                        "name": "CONFLICTING_NETWORK_INTERFACE"
-                    },
-                    {
-                        "value": "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS",
-                        "name": "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS"
-                    },
-                    {
-                        "value": "CAN_NETWORK_INTERFACE_INFO_IS_NULL",
-                        "name": "CAN_NETWORK_INTERFACE_INFO_IS_NULL"
-                    },
-                    {
-                        "value": "OBD_NETWORK_INTERFACE_INFO_IS_NULL",
-                        "name": "OBD_NETWORK_INTERFACE_INFO_IS_NULL"
-                    },
-                    {
-                        "value": "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS",
-                        "name": "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS"
-                    },
-                    {
-                        "value": "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL",
-                        "name": "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL"
-                    },
-                    {
-                        "value": "CUSTOMER_DECODED_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL",
-                        "name": "CUSTOMER_DECODED_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL"
+            "type": "enum",
+            "members": {
+                "DUPLICATE_INTERFACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE_NETWORK_INTERFACE"
                     }
-                ]
+                },
+                "CONFLICTING_NETWORK_INTERFACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFLICTING_NETWORK_INTERFACE"
+                    }
+                },
+                "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS"
+                    }
+                },
+                "CAN_NETWORK_INTERFACE_INFO_IS_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAN_NETWORK_INTERFACE_INFO_IS_NULL"
+                    }
+                },
+                "OBD_NETWORK_INTERFACE_INFO_IS_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OBD_NETWORK_INTERFACE_INFO_IS_NULL"
+                    }
+                },
+                "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS"
+                    }
+                },
+                "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#NetworkInterfaceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CAN_INTERFACE",
-                        "name": "CAN_INTERFACE"
-                    },
-                    {
-                        "value": "OBD_INTERFACE",
-                        "name": "OBD_INTERFACE"
-                    },
-                    {
-                        "value": "VEHICLE_MIDDLEWARE",
-                        "name": "VEHICLE_MIDDLEWARE"
-                    },
-                    {
-                        "value": "CUSTOMER_DECODED_INTERFACE",
-                        "name": "CUSTOMER_DECODED_INTERFACE"
+            "type": "enum",
+            "members": {
+                "CAN_INTERFACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAN_INTERFACE"
                     }
-                ]
+                },
+                "OBD_INTERFACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OBD_INTERFACE"
+                    }
+                },
+                "VEHICLE_MIDDLEWARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VEHICLE_MIDDLEWARE"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#NetworkInterfaces": {
@@ -5976,141 +6017,199 @@
             }
         },
         "com.amazonaws.iotfleetwise#NodeDataEncoding": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BINARY",
-                        "name": "BINARY"
-                    },
-                    {
-                        "value": "TYPED",
-                        "name": "TYPED"
+            "type": "enum",
+            "members": {
+                "BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BINARY"
                     }
-                ]
+                },
+                "TYPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TYPED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#NodeDataType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INT8",
-                        "name": "INT8"
-                    },
-                    {
-                        "value": "UINT8",
-                        "name": "UINT8"
-                    },
-                    {
-                        "value": "INT16",
-                        "name": "INT16"
-                    },
-                    {
-                        "value": "UINT16",
-                        "name": "UINT16"
-                    },
-                    {
-                        "value": "INT32",
-                        "name": "INT32"
-                    },
-                    {
-                        "value": "UINT32",
-                        "name": "UINT32"
-                    },
-                    {
-                        "value": "INT64",
-                        "name": "INT64"
-                    },
-                    {
-                        "value": "UINT64",
-                        "name": "UINT64"
-                    },
-                    {
-                        "value": "BOOLEAN",
-                        "name": "BOOLEAN"
-                    },
-                    {
-                        "value": "FLOAT",
-                        "name": "FLOAT"
-                    },
-                    {
-                        "value": "DOUBLE",
-                        "name": "DOUBLE"
-                    },
-                    {
-                        "value": "STRING",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "UNIX_TIMESTAMP",
-                        "name": "UNIX_TIMESTAMP"
-                    },
-                    {
-                        "value": "INT8_ARRAY",
-                        "name": "INT8_ARRAY"
-                    },
-                    {
-                        "value": "UINT8_ARRAY",
-                        "name": "UINT8_ARRAY"
-                    },
-                    {
-                        "value": "INT16_ARRAY",
-                        "name": "INT16_ARRAY"
-                    },
-                    {
-                        "value": "UINT16_ARRAY",
-                        "name": "UINT16_ARRAY"
-                    },
-                    {
-                        "value": "INT32_ARRAY",
-                        "name": "INT32_ARRAY"
-                    },
-                    {
-                        "value": "UINT32_ARRAY",
-                        "name": "UINT32_ARRAY"
-                    },
-                    {
-                        "value": "INT64_ARRAY",
-                        "name": "INT64_ARRAY"
-                    },
-                    {
-                        "value": "UINT64_ARRAY",
-                        "name": "UINT64_ARRAY"
-                    },
-                    {
-                        "value": "BOOLEAN_ARRAY",
-                        "name": "BOOLEAN_ARRAY"
-                    },
-                    {
-                        "value": "FLOAT_ARRAY",
-                        "name": "FLOAT_ARRAY"
-                    },
-                    {
-                        "value": "DOUBLE_ARRAY",
-                        "name": "DOUBLE_ARRAY"
-                    },
-                    {
-                        "value": "STRING_ARRAY",
-                        "name": "STRING_ARRAY"
-                    },
-                    {
-                        "value": "UNIX_TIMESTAMP_ARRAY",
-                        "name": "UNIX_TIMESTAMP_ARRAY"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
-                    },
-                    {
-                        "value": "STRUCT",
-                        "name": "STRUCT"
-                    },
-                    {
-                        "value": "STRUCT_ARRAY",
-                        "name": "STRUCT_ARRAY"
+            "type": "enum",
+            "members": {
+                "INT8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT8"
                     }
-                ]
+                },
+                "UINT8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT8"
+                    }
+                },
+                "INT16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT16"
+                    }
+                },
+                "UINT16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT16"
+                    }
+                },
+                "INT32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT32"
+                    }
+                },
+                "UINT32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT32"
+                    }
+                },
+                "INT64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT64"
+                    }
+                },
+                "UINT64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT64"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN"
+                    }
+                },
+                "FLOAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOAT"
+                    }
+                },
+                "DOUBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOUBLE"
+                    }
+                },
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
+                    }
+                },
+                "UNIX_TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNIX_TIMESTAMP"
+                    }
+                },
+                "INT8_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT8_ARRAY"
+                    }
+                },
+                "UINT8_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT8_ARRAY"
+                    }
+                },
+                "INT16_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT16_ARRAY"
+                    }
+                },
+                "UINT16_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT16_ARRAY"
+                    }
+                },
+                "INT32_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT32_ARRAY"
+                    }
+                },
+                "UINT32_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT32_ARRAY"
+                    }
+                },
+                "INT64_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT64_ARRAY"
+                    }
+                },
+                "UINT64_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT64_ARRAY"
+                    }
+                },
+                "BOOLEAN_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN_ARRAY"
+                    }
+                },
+                "FLOAT_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOAT_ARRAY"
+                    }
+                },
+                "DOUBLE_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOUBLE_ARRAY"
+                    }
+                },
+                "STRING_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_ARRAY"
+                    }
+                },
+                "UNIX_TIMESTAMP_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNIX_TIMESTAMP_ARRAY"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                },
+                "STRUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRUCT"
+                    }
+                },
+                "STRUCT_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRUCT_ARRAY"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#NodePath": {
@@ -6534,70 +6633,98 @@
             }
         },
         "com.amazonaws.iotfleetwise#ROS2PrimitiveType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BOOL",
-                        "name": "BOOL"
-                    },
-                    {
-                        "value": "BYTE",
-                        "name": "BYTE"
-                    },
-                    {
-                        "value": "CHAR",
-                        "name": "CHAR"
-                    },
-                    {
-                        "value": "FLOAT32",
-                        "name": "FLOAT32"
-                    },
-                    {
-                        "value": "FLOAT64",
-                        "name": "FLOAT64"
-                    },
-                    {
-                        "value": "INT8",
-                        "name": "INT8"
-                    },
-                    {
-                        "value": "UINT8",
-                        "name": "UINT8"
-                    },
-                    {
-                        "value": "INT16",
-                        "name": "INT16"
-                    },
-                    {
-                        "value": "UINT16",
-                        "name": "UINT16"
-                    },
-                    {
-                        "value": "INT32",
-                        "name": "INT32"
-                    },
-                    {
-                        "value": "UINT32",
-                        "name": "UINT32"
-                    },
-                    {
-                        "value": "INT64",
-                        "name": "INT64"
-                    },
-                    {
-                        "value": "UINT64",
-                        "name": "UINT64"
-                    },
-                    {
-                        "value": "STRING",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "WSTRING",
-                        "name": "WSTRING"
+            "type": "enum",
+            "members": {
+                "BOOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOL"
                     }
-                ]
+                },
+                "BYTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYTE"
+                    }
+                },
+                "CHAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHAR"
+                    }
+                },
+                "FLOAT32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOAT32"
+                    }
+                },
+                "FLOAT64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOAT64"
+                    }
+                },
+                "INT8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT8"
+                    }
+                },
+                "UINT8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT8"
+                    }
+                },
+                "INT16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT16"
+                    }
+                },
+                "UINT16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT16"
+                    }
+                },
+                "INT32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT32"
+                    }
+                },
+                "UINT32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT32"
+                    }
+                },
+                "INT64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT64"
+                    }
+                },
+                "UINT64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UINT64"
+                    }
+                },
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
+                    }
+                },
+                "WSTRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WSTRING"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#RegisterAccount": {
@@ -6696,22 +6823,26 @@
             }
         },
         "com.amazonaws.iotfleetwise#RegistrationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "REGISTRATION_PENDING",
-                        "name": "REGISTRATION_PENDING"
-                    },
-                    {
-                        "value": "REGISTRATION_SUCCESS",
-                        "name": "REGISTRATION_SUCCESS"
-                    },
-                    {
-                        "value": "REGISTRATION_FAILURE",
-                        "name": "REGISTRATION_FAILURE"
+            "type": "enum",
+            "members": {
+                "REGISTRATION_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTRATION_PENDING"
                     }
-                ]
+                },
+                "REGISTRATION_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTRATION_SUCCESS"
+                    }
+                },
+                "REGISTRATION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTRATION_FAILURE"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#ResourceNotFoundException": {
@@ -6983,97 +7114,121 @@
             }
         },
         "com.amazonaws.iotfleetwise#SignalDecoderFailureReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DUPLICATE_SIGNAL",
-                        "name": "DUPLICATE_SIGNAL"
-                    },
-                    {
-                        "value": "CONFLICTING_SIGNAL",
-                        "name": "CONFLICTING_SIGNAL"
-                    },
-                    {
-                        "value": "SIGNAL_TO_ADD_ALREADY_EXISTS",
-                        "name": "SIGNAL_TO_ADD_ALREADY_EXISTS"
-                    },
-                    {
-                        "value": "SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE",
-                        "name": "SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE"
-                    },
-                    {
-                        "value": "NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE",
-                        "name": "NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE"
-                    },
-                    {
-                        "value": "SIGNAL_NOT_IN_MODEL",
-                        "name": "SIGNAL_NOT_IN_MODEL"
-                    },
-                    {
-                        "value": "CAN_SIGNAL_INFO_IS_NULL",
-                        "name": "CAN_SIGNAL_INFO_IS_NULL"
-                    },
-                    {
-                        "value": "OBD_SIGNAL_INFO_IS_NULL",
-                        "name": "OBD_SIGNAL_INFO_IS_NULL"
-                    },
-                    {
-                        "value": "NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL",
-                        "name": "NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL"
-                    },
-                    {
-                        "value": "MESSAGE_SIGNAL_INFO_IS_NULL",
-                        "name": "MESSAGE_SIGNAL_INFO_IS_NULL"
-                    },
-                    {
-                        "value": "SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE",
-                        "name": "SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE"
-                    },
-                    {
-                        "value": "STRUCT_SIZE_MISMATCH",
-                        "name": "STRUCT_SIZE_MISMATCH"
-                    },
-                    {
-                        "value": "NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL",
-                        "name": "NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL"
-                    },
-                    {
-                        "value": "SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG",
-                        "name": "SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG"
-                    },
-                    {
-                        "value": "EMPTY_MESSAGE_SIGNAL",
-                        "name": "EMPTY_MESSAGE_SIGNAL"
-                    },
-                    {
-                        "value": "CUSTOMER_DECODED_SIGNAL_INFO_IS_NULL",
-                        "name": "CUSTOMER_DECODED_SIGNAL_INFO_IS_NULL"
+            "type": "enum",
+            "members": {
+                "DUPLICATE_SIGNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE_SIGNAL"
                     }
-                ]
+                },
+                "CONFLICTING_SIGNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFLICTING_SIGNAL"
+                    }
+                },
+                "SIGNAL_TO_ADD_ALREADY_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIGNAL_TO_ADD_ALREADY_EXISTS"
+                    }
+                },
+                "SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE"
+                    }
+                },
+                "NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE"
+                    }
+                },
+                "SIGNAL_NOT_IN_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIGNAL_NOT_IN_MODEL"
+                    }
+                },
+                "CAN_SIGNAL_INFO_IS_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAN_SIGNAL_INFO_IS_NULL"
+                    }
+                },
+                "OBD_SIGNAL_INFO_IS_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OBD_SIGNAL_INFO_IS_NULL"
+                    }
+                },
+                "NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL"
+                    }
+                },
+                "MESSAGE_SIGNAL_INFO_IS_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MESSAGE_SIGNAL_INFO_IS_NULL"
+                    }
+                },
+                "SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE"
+                    }
+                },
+                "STRUCT_SIZE_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRUCT_SIZE_MISMATCH"
+                    }
+                },
+                "NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL"
+                    }
+                },
+                "SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG"
+                    }
+                },
+                "EMPTY_MESSAGE_SIGNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMPTY_MESSAGE_SIGNAL"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#SignalDecoderType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CAN_SIGNAL",
-                        "name": "CAN_SIGNAL"
-                    },
-                    {
-                        "value": "OBD_SIGNAL",
-                        "name": "OBD_SIGNAL"
-                    },
-                    {
-                        "value": "MESSAGE_SIGNAL",
-                        "name": "MESSAGE_SIGNAL"
-                    },
-                    {
-                        "value": "CUSTOMER_DECODED_SIGNAL",
-                        "name": "CUSTOMER_DECODED_SIGNAL"
+            "type": "enum",
+            "members": {
+                "CAN_SIGNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAN_SIGNAL"
                     }
-                ]
+                },
+                "OBD_SIGNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OBD_SIGNAL"
+                    }
+                },
+                "MESSAGE_SIGNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MESSAGE_SIGNAL"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#SignalDecoders": {
@@ -7127,34 +7282,79 @@
                 }
             }
         },
-        "com.amazonaws.iotfleetwise#SpoolingMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OFF",
-                        "name": "OFF"
-                    },
-                    {
-                        "value": "TO_DISK",
-                        "name": "TO_DISK"
+        "com.amazonaws.iotfleetwise#SignalNodeType": {
+            "type": "enum",
+            "members": {
+                "SENSOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SENSOR"
                     }
-                ]
+                },
+                "ACTUATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTUATOR"
+                    }
+                },
+                "ATTRIBUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTRIBUTE"
+                    }
+                },
+                "BRANCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BRANCH"
+                    }
+                },
+                "CUSTOM_STRUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_STRUCT"
+                    }
+                },
+                "CUSTOM_PROPERTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_PROPERTY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleetwise#SpoolingMode": {
+            "type": "enum",
+            "members": {
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
+                    }
+                },
+                "TO_DISK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TO_DISK"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#StorageCompressionFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "GZIP",
-                        "name": "GZIP"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "GZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GZIP"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#StructureMessageName": {
@@ -7263,22 +7463,26 @@
             }
         },
         "com.amazonaws.iotfleetwise#StructuredMessageListType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FIXED_CAPACITY",
-                        "name": "FIXED_CAPACITY"
-                    },
-                    {
-                        "value": "DYNAMIC_UNBOUNDED_CAPACITY",
-                        "name": "DYNAMIC_UNBOUNDED_CAPACITY"
-                    },
-                    {
-                        "value": "DYNAMIC_BOUNDED_CAPACITY",
-                        "name": "DYNAMIC_BOUNDED_CAPACITY"
+            "type": "enum",
+            "members": {
+                "FIXED_CAPACITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIXED_CAPACITY"
                     }
-                ]
+                },
+                "DYNAMIC_UNBOUNDED_CAPACITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DYNAMIC_UNBOUNDED_CAPACITY"
+                    }
+                },
+                "DYNAMIC_BOUNDED_CAPACITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DYNAMIC_BOUNDED_CAPACITY"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#Tag": {
@@ -7590,18 +7794,20 @@
             }
         },
         "com.amazonaws.iotfleetwise#TriggerMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALWAYS",
-                        "name": "ALWAYS"
-                    },
-                    {
-                        "value": "RISING_EDGE",
-                        "name": "RISING_EDGE"
+            "type": "enum",
+            "members": {
+                "ALWAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALWAYS"
                     }
-                ]
+                },
+                "RISING_EDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RISING_EDGE"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#UntagResource": {
@@ -7699,26 +7905,32 @@
             }
         },
         "com.amazonaws.iotfleetwise#UpdateCampaignAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "APPROVE",
-                        "name": "APPROVE"
-                    },
-                    {
-                        "value": "SUSPEND",
-                        "name": "SUSPEND"
-                    },
-                    {
-                        "value": "RESUME",
-                        "name": "RESUME"
-                    },
-                    {
-                        "value": "UPDATE",
-                        "name": "UPDATE"
+            "type": "enum",
+            "members": {
+                "APPROVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVE"
                     }
-                ]
+                },
+                "SUSPEND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPEND"
+                    }
+                },
+                "RESUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESUME"
+                    }
+                },
+                "UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#UpdateCampaignRequest": {
@@ -7971,18 +8183,20 @@
             }
         },
         "com.amazonaws.iotfleetwise#UpdateMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Overwrite",
-                        "name": "OVERWRITE"
-                    },
-                    {
-                        "value": "Merge",
-                        "name": "MERGE"
+            "type": "enum",
+            "members": {
+                "OVERWRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Overwrite"
                     }
-                ]
+                },
+                "MERGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Merge"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#UpdateModelManifest": {
@@ -8419,41 +8633,49 @@
             }
         },
         "com.amazonaws.iotfleetwise#ValidationExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "unknownOperation",
-                        "name": "UNKNOWN_OPERATION"
-                    },
-                    {
-                        "value": "cannotParse",
-                        "name": "CANNOT_PARSE"
-                    },
-                    {
-                        "value": "fieldValidationFailed",
-                        "name": "FIELD_VALIDATION_FAILED"
-                    },
-                    {
-                        "value": "other",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknownOperation"
                     }
-                ]
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cannotParse"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "other"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#VehicleAssociationBehavior": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CreateIotThing",
-                        "name": "CREATE_IOT_THING"
-                    },
-                    {
-                        "value": "ValidateIotThingExists",
-                        "name": "VALIDATE_IOT_THING_EXISTS"
+            "type": "enum",
+            "members": {
+                "CREATE_IOT_THING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreateIotThing"
                     }
-                ]
+                },
+                "VALIDATE_IOT_THING_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ValidateIotThingExists"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#VehicleAssociationResource": {
@@ -8502,14 +8724,14 @@
             }
         },
         "com.amazonaws.iotfleetwise#VehicleMiddlewareProtocol": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ROS_2",
-                        "name": "ROS_2"
+            "type": "enum",
+            "members": {
+                "ROS_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROS_2"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.iotfleetwise#VehicleResource": {
@@ -8555,30 +8777,38 @@
             }
         },
         "com.amazonaws.iotfleetwise#VehicleState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATED",
-                        "name": "CREATED"
-                    },
-                    {
-                        "value": "READY",
-                        "name": "READY"
-                    },
-                    {
-                        "value": "HEALTHY",
-                        "name": "HEALTHY"
-                    },
-                    {
-                        "value": "SUSPENDED",
-                        "name": "SUSPENDED"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
                     }
-                ]
+                },
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
+                    }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.iotfleetwise#VehicleStatus": {
@@ -8656,6 +8886,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time the vehicle was last updated in seconds since epoch (January 1, 1970 at midnight UTC time). </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.iotfleetwise#attributesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:</p>\n         <p>\n            <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>"
                     }
                 }
             },

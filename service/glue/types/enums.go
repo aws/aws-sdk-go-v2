@@ -136,8 +136,9 @@ type CatalogEncryptionMode string
 
 // Enum values for CatalogEncryptionMode
 const (
-	CatalogEncryptionModeDisabled CatalogEncryptionMode = "DISABLED"
-	CatalogEncryptionModeSsekms   CatalogEncryptionMode = "SSE-KMS"
+	CatalogEncryptionModeDisabled              CatalogEncryptionMode = "DISABLED"
+	CatalogEncryptionModeSsekms                CatalogEncryptionMode = "SSE-KMS"
+	CatalogEncryptionModeSsekmswithservicerole CatalogEncryptionMode = "SSE-KMS-WITH-SERVICE-ROLE"
 )
 
 // Values returns all known values for CatalogEncryptionMode. Note that this can
@@ -147,6 +148,7 @@ func (CatalogEncryptionMode) Values() []CatalogEncryptionMode {
 	return []CatalogEncryptionMode{
 		"DISABLED",
 		"SSE-KMS",
+		"SSE-KMS-WITH-SERVICE-ROLE",
 	}
 }
 
@@ -327,6 +329,9 @@ const (
 	ConnectionPropertyKeyConnectorType                        ConnectionPropertyKey = "CONNECTOR_TYPE"
 	ConnectionPropertyKeyConnectorClassName                   ConnectionPropertyKey = "CONNECTOR_CLASS_NAME"
 	ConnectionPropertyKeyKafkaSaslMechanism                   ConnectionPropertyKey = "KAFKA_SASL_MECHANISM"
+	ConnectionPropertyKeyKafkaSaslPlainUsername               ConnectionPropertyKey = "KAFKA_SASL_PLAIN_USERNAME"
+	ConnectionPropertyKeyKafkaSaslPlainPassword               ConnectionPropertyKey = "KAFKA_SASL_PLAIN_PASSWORD"
+	ConnectionPropertyKeyEncryptedKafkaSaslPlainPassword      ConnectionPropertyKey = "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD"
 	ConnectionPropertyKeyKafkaSaslScramUsername               ConnectionPropertyKey = "KAFKA_SASL_SCRAM_USERNAME"
 	ConnectionPropertyKeyKafkaSaslScramPassword               ConnectionPropertyKey = "KAFKA_SASL_SCRAM_PASSWORD"
 	ConnectionPropertyKeyKafkaSaslScramSecretsArn             ConnectionPropertyKey = "KAFKA_SASL_SCRAM_SECRETS_ARN"
@@ -373,6 +378,9 @@ func (ConnectionPropertyKey) Values() []ConnectionPropertyKey {
 		"CONNECTOR_TYPE",
 		"CONNECTOR_CLASS_NAME",
 		"KAFKA_SASL_MECHANISM",
+		"KAFKA_SASL_PLAIN_USERNAME",
+		"KAFKA_SASL_PLAIN_PASSWORD",
+		"ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD",
 		"KAFKA_SASL_SCRAM_USERNAME",
 		"KAFKA_SASL_SCRAM_PASSWORD",
 		"KAFKA_SASL_SCRAM_SECRETS_ARN",

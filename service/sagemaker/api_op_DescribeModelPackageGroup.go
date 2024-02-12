@@ -31,7 +31,7 @@ func (c *Client) DescribeModelPackageGroup(ctx context.Context, params *Describe
 
 type DescribeModelPackageGroupInput struct {
 
-	// The name of gthe model group to describe.
+	// The name of the model group to describe.
 	//
 	// This member is required.
 	ModelPackageGroupName *string

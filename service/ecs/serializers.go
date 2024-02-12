@@ -3982,6 +3982,43 @@ func awsAwsjson11_serializeDocumentDockerVolumeConfiguration(v *types.DockerVolu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEBSTagSpecification(v *types.EBSTagSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PropagateTags) > 0 {
+		ok := object.Key("propagateTags")
+		ok.String(string(v.PropagateTags))
+	}
+
+	if len(v.ResourceType) > 0 {
+		ok := object.Key("resourceType")
+		ok.String(string(v.ResourceType))
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEBSTagSpecifications(v []types.EBSTagSpecification, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentEBSTagSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEFSAuthorizationConfig(v *types.EFSAuthorizationConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5133,6 +5170,20 @@ func awsAwsjson11_serializeDocumentServiceConnectService(v *types.ServiceConnect
 		ok.String(*v.PortName)
 	}
 
+	if v.Timeout != nil {
+		ok := object.Key("timeout")
+		if err := awsAwsjson11_serializeDocumentTimeoutConfiguration(v.Timeout, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tls != nil {
+		ok := object.Key("tls")
+		if err := awsAwsjson11_serializeDocumentServiceConnectTlsConfiguration(v.Tls, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5149,6 +5200,42 @@ func awsAwsjson11_serializeDocumentServiceConnectServiceList(v []types.ServiceCo
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentServiceConnectTlsCertificateAuthority(v *types.ServiceConnectTlsCertificateAuthority, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwsPcaAuthorityArn != nil {
+		ok := object.Key("awsPcaAuthorityArn")
+		ok.String(*v.AwsPcaAuthorityArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectTlsConfiguration(v *types.ServiceConnectTlsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IssuerCertificateAuthority != nil {
+		ok := object.Key("issuerCertificateAuthority")
+		if err := awsAwsjson11_serializeDocumentServiceConnectTlsCertificateAuthority(v.IssuerCertificateAuthority, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KmsKey != nil {
+		ok := object.Key("kmsKey")
+		ok.String(*v.KmsKey)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentServiceFieldList(v []types.ServiceField, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5157,6 +5244,65 @@ func awsAwsjson11_serializeDocumentServiceFieldList(v []types.ServiceField, valu
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceManagedEBSVolumeConfiguration(v *types.ServiceManagedEBSVolumeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Encrypted != nil {
+		ok := object.Key("encrypted")
+		ok.Boolean(*v.Encrypted)
+	}
+
+	if len(v.FilesystemType) > 0 {
+		ok := object.Key("filesystemType")
+		ok.String(string(v.FilesystemType))
+	}
+
+	if v.Iops != nil {
+		ok := object.Key("iops")
+		ok.Integer(*v.Iops)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.SizeInGiB != nil {
+		ok := object.Key("sizeInGiB")
+		ok.Integer(*v.SizeInGiB)
+	}
+
+	if v.SnapshotId != nil {
+		ok := object.Key("snapshotId")
+		ok.String(*v.SnapshotId)
+	}
+
+	if v.TagSpecifications != nil {
+		ok := object.Key("tagSpecifications")
+		if err := awsAwsjson11_serializeDocumentEBSTagSpecifications(v.TagSpecifications, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Throughput != nil {
+		ok := object.Key("throughput")
+		ok.Integer(*v.Throughput)
+	}
+
+	if v.VolumeType != nil {
+		ok := object.Key("volumeType")
+		ok.String(*v.VolumeType)
+	}
+
 	return nil
 }
 
@@ -5197,6 +5343,38 @@ func awsAwsjson11_serializeDocumentServiceRegistry(v *types.ServiceRegistry, val
 		ok.String(*v.RegistryArn)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceVolumeConfiguration(v *types.ServiceVolumeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ManagedEBSVolume != nil {
+		ok := object.Key("managedEBSVolume")
+		if err := awsAwsjson11_serializeDocumentServiceManagedEBSVolumeConfiguration(v.ManagedEBSVolume, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceVolumeConfigurations(v []types.ServiceVolumeConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentServiceVolumeConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -5345,6 +5523,84 @@ func awsAwsjson11_serializeDocumentTaskFieldList(v []types.TaskField, value smit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTaskManagedEBSVolumeConfiguration(v *types.TaskManagedEBSVolumeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Encrypted != nil {
+		ok := object.Key("encrypted")
+		ok.Boolean(*v.Encrypted)
+	}
+
+	if len(v.FilesystemType) > 0 {
+		ok := object.Key("filesystemType")
+		ok.String(string(v.FilesystemType))
+	}
+
+	if v.Iops != nil {
+		ok := object.Key("iops")
+		ok.Integer(*v.Iops)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.SizeInGiB != nil {
+		ok := object.Key("sizeInGiB")
+		ok.Integer(*v.SizeInGiB)
+	}
+
+	if v.SnapshotId != nil {
+		ok := object.Key("snapshotId")
+		ok.String(*v.SnapshotId)
+	}
+
+	if v.TagSpecifications != nil {
+		ok := object.Key("tagSpecifications")
+		if err := awsAwsjson11_serializeDocumentEBSTagSpecifications(v.TagSpecifications, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TerminationPolicy != nil {
+		ok := object.Key("terminationPolicy")
+		if err := awsAwsjson11_serializeDocumentTaskManagedEBSVolumeTerminationPolicy(v.TerminationPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Throughput != nil {
+		ok := object.Key("throughput")
+		ok.Integer(*v.Throughput)
+	}
+
+	if v.VolumeType != nil {
+		ok := object.Key("volumeType")
+		ok.String(*v.VolumeType)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTaskManagedEBSVolumeTerminationPolicy(v *types.TaskManagedEBSVolumeTerminationPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeleteOnTermination != nil {
+		ok := object.Key("deleteOnTermination")
+		ok.Boolean(*v.DeleteOnTermination)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTaskOverride(v *types.TaskOverride, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5401,6 +5657,55 @@ func awsAwsjson11_serializeDocumentTaskSetFieldList(v []types.TaskSetField, valu
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTaskVolumeConfiguration(v *types.TaskVolumeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ManagedEBSVolume != nil {
+		ok := object.Key("managedEBSVolume")
+		if err := awsAwsjson11_serializeDocumentTaskManagedEBSVolumeConfiguration(v.ManagedEBSVolume, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTaskVolumeConfigurations(v []types.TaskVolumeConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentTaskVolumeConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTimeoutConfiguration(v *types.TimeoutConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdleTimeoutSeconds != nil {
+		ok := object.Key("idleTimeoutSeconds")
+		ok.Integer(*v.IdleTimeoutSeconds)
+	}
+
+	if v.PerRequestTimeoutSeconds != nil {
+		ok := object.Key("perRequestTimeoutSeconds")
+		ok.Integer(*v.PerRequestTimeoutSeconds)
+	}
+
 	return nil
 }
 
@@ -5501,6 +5806,11 @@ func awsAwsjson11_serializeDocumentVersionInfo(v *types.VersionInfo, value smith
 func awsAwsjson11_serializeDocumentVolume(v *types.Volume, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ConfiguredAtLaunch != nil {
+		ok := object.Key("configuredAtLaunch")
+		ok.Boolean(*v.ConfiguredAtLaunch)
+	}
 
 	if v.DockerVolumeConfiguration != nil {
 		ok := object.Key("dockerVolumeConfiguration")
@@ -5798,6 +6108,13 @@ func awsAwsjson11_serializeOpDocumentCreateServiceInput(v *CreateServiceInput, v
 	if v.TaskDefinition != nil {
 		ok := object.Key("taskDefinition")
 		ok.String(*v.TaskDefinition)
+	}
+
+	if v.VolumeConfigurations != nil {
+		ok := object.Key("volumeConfigurations")
+		if err := awsAwsjson11_serializeDocumentServiceVolumeConfigurations(v.VolumeConfigurations, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -6954,6 +7271,13 @@ func awsAwsjson11_serializeOpDocumentRunTaskInput(v *RunTaskInput, value smithyj
 		ok.String(*v.TaskDefinition)
 	}
 
+	if v.VolumeConfigurations != nil {
+		ok := object.Key("volumeConfigurations")
+		if err := awsAwsjson11_serializeDocumentTaskVolumeConfigurations(v.VolumeConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7027,6 +7351,13 @@ func awsAwsjson11_serializeOpDocumentStartTaskInput(v *StartTaskInput, value smi
 	if v.TaskDefinition != nil {
 		ok := object.Key("taskDefinition")
 		ok.String(*v.TaskDefinition)
+	}
+
+	if v.VolumeConfigurations != nil {
+		ok := object.Key("volumeConfigurations")
+		if err := awsAwsjson11_serializeDocumentTaskVolumeConfigurations(v.VolumeConfigurations, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -7443,6 +7774,13 @@ func awsAwsjson11_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, v
 	if v.TaskDefinition != nil {
 		ok := object.Key("taskDefinition")
 		ok.String(*v.TaskDefinition)
+	}
+
+	if v.VolumeConfigurations != nil {
+		ok := object.Key("volumeConfigurations")
+		if err := awsAwsjson11_serializeDocumentServiceVolumeConfigurations(v.VolumeConfigurations, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

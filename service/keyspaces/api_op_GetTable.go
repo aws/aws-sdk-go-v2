@@ -87,6 +87,10 @@ type GetTableOutput struct {
 	// The point-in-time recovery status of the specified table.
 	PointInTimeRecovery *types.PointInTimeRecoverySummary
 
+	// Returns the Amazon Web Services Region specific settings of all Regions a
+	// multi-Region table is replicated in.
+	ReplicaSpecifications []types.ReplicaSpecificationSummary
+
 	// The schema definition of the specified table.
 	SchemaDefinition *types.SchemaDefinition
 

@@ -3095,6 +3095,18 @@ func (m *awsAwsjson11_serializeOpUpdateEndpoint) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAppSyncParameters(v *types.AppSyncParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GraphQLOperation != nil {
+		ok := object.Key("GraphQLOperation")
+		ok.String(*v.GraphQLOperation)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAwsVpcConfiguration(v *types.AwsVpcConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4229,6 +4241,13 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 func awsAwsjson11_serializeDocumentTarget(v *types.Target, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AppSyncParameters != nil {
+		ok := object.Key("AppSyncParameters")
+		if err := awsAwsjson11_serializeDocumentAppSyncParameters(v.AppSyncParameters, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Arn != nil {
 		ok := object.Key("Arn")

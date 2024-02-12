@@ -198,7 +198,7 @@ type CreateStackInput struct {
 	// TemplateBody or the TemplateURL parameter, but not both.
 	TemplateURL *string
 
-	// The amount of time that can pass before the stack status becomes CREATE_FAILED;
+	// The amount of time that can pass before the stack status becomes CREATE_FAILED ;
 	// if DisableRollback is not set or is set to false , the stack will be rolled back.
 	TimeoutInMinutes *int32
 

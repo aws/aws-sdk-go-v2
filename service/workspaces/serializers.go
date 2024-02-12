@@ -4902,6 +4902,11 @@ func awsAwsjson11_serializeDocumentWorkspaceRequest(v *types.WorkspaceRequest, v
 		ok.String(*v.VolumeEncryptionKey)
 	}
 
+	if v.WorkspaceName != nil {
+		ok := object.Key("WorkspaceName")
+		ok.String(*v.WorkspaceName)
+	}
+
 	if v.WorkspaceProperties != nil {
 		ok := object.Key("WorkspaceProperties")
 		if err := awsAwsjson11_serializeDocumentWorkspaceProperties(v.WorkspaceProperties, ok); err != nil {
@@ -5835,6 +5840,11 @@ func awsAwsjson11_serializeOpDocumentDescribeWorkspacesInput(v *DescribeWorkspac
 		if err := awsAwsjson11_serializeDocumentWorkspaceIdList(v.WorkspaceIds, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.WorkspaceName != nil {
+		ok := object.Key("WorkspaceName")
+		ok.String(*v.WorkspaceName)
 	}
 
 	return nil

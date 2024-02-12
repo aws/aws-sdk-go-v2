@@ -18,7 +18,7 @@ import (
 // onboards to a domain. If an administrator invites a person by email or imports
 // them from IAM Identity Center, a user profile is automatically created. A user
 // profile is the primary holder of settings for an individual user and has a
-// reference to the user's private Amazon Elastic File System (EFS) home directory.
+// reference to the user's private Amazon Elastic File System home directory.
 func (c *Client) CreateUserProfile(ctx context.Context, params *CreateUserProfileInput, optFns ...func(*Options)) (*CreateUserProfileOutput, error) {
 	if params == nil {
 		params = &CreateUserProfileInput{}

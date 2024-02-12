@@ -2602,6 +2602,13 @@ func awsRestjson1_serializeDocumentContainerProperties(v *types.ContainerPropert
 		ok.Boolean(*v.ReadonlyRootFilesystem)
 	}
 
+	if v.RepositoryCredentials != nil {
+		ok := object.Key("repositoryCredentials")
+		if err := awsRestjson1_serializeDocumentRepositoryCredentials(v.RepositoryCredentials, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourceRequirements != nil {
 		ok := object.Key("resourceRequirements")
 		if err := awsRestjson1_serializeDocumentResourceRequirements(v.ResourceRequirements, ok); err != nil {
@@ -3757,6 +3764,18 @@ func awsRestjson1_serializeDocumentPlatformCapabilityList(v []types.PlatformCapa
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRepositoryCredentials(v *types.RepositoryCredentials, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CredentialsParameter != nil {
+		ok := object.Key("credentialsParameter")
+		ok.String(*v.CredentialsParameter)
+	}
+
 	return nil
 }
 

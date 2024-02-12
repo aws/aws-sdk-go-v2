@@ -378,8 +378,10 @@ type CampaignConfig struct {
 	// Whether metadata with recommendations is enabled for the campaign. If enabled,
 	// you can specify the columns from your Items dataset in your request for
 	// recommendations. Amazon Personalize returns this data for each item in the
-	// recommendation response. If you enable metadata in recommendations, you will
-	// incur additional costs. For more information, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
+	// recommendation response. For information about enabling metadata for a campaign,
+	// see Enabling metadata in recommendations for a campaign (https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata)
+	// . If you enable metadata in recommendations, you will incur additional costs.
+	// For more information, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
 	// .
 	EnableMetadataWithRecommendations *bool
 
@@ -1442,8 +1444,10 @@ type RecommenderConfig struct {
 	// Whether metadata with recommendations is enabled for the recommender. If
 	// enabled, you can specify the columns from your Items dataset in your request for
 	// recommendations. Amazon Personalize returns this data for each item in the
-	// recommendation response. If you enable metadata in recommendations, you will
-	// incur additional costs. For more information, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
+	// recommendation response. For information about enabling metadata for a
+	// recommender, see Enabling metadata in recommendations for a recommender (https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata)
+	// . If you enable metadata in recommendations, you will incur additional costs.
+	// For more information, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
 	// .
 	EnableMetadataWithRecommendations *bool
 

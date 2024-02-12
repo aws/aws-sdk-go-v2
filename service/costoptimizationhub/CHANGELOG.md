@@ -1,3 +1,7 @@
+# v1.2.0 (2024-02-09)
+
+* **Feature**: Adding includeMemberAccounts field to the response of ListEnrollmentStatuses API.
+
 # v1.1.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

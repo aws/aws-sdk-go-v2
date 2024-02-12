@@ -222,6 +222,9 @@
                     "target": "com.amazonaws.wafv2#CreateWebACL"
                 },
                 {
+                    "target": "com.amazonaws.wafv2#DeleteAPIKey"
+                },
+                {
                     "target": "com.amazonaws.wafv2#DeleteFirewallManagerRuleGroups"
                 },
                 {
@@ -3818,7 +3821,7 @@
                 "TokenDomains": {
                     "target": "com.amazonaws.wafv2#APIKeyTokenDomains",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client application domains that you want to use this API key for.  </p>\n         <p>Example JSON: <code>\"TokenDomains\": [\"abc.com\", \"store.abc.com\"]</code>\n         </p>\n         <p>Public suffixes aren't allowed. For example, you can't use <code>usa.gov</code> or <code>co.uk</code> as token domains.</p>",
+                        "smithy.api#documentation": "<p>The client application domains that you want to use this API key for.  </p>\n         <p>Example JSON: <code>\"TokenDomains\": [\"abc.com\", \"store.abc.com\"]</code>\n         </p>\n         <p>Public suffixes aren't allowed. For example, you can't use <code>gov.au</code> or <code>co.uk</code> as token domains.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4281,7 +4284,7 @@
                 "TokenDomains": {
                     "target": "com.amazonaws.wafv2#TokenDomains",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.</p>\n         <p>Example JSON: <code>\"TokenDomains\": { \"mywebsite.com\", \"myotherwebsite.com\" }</code>\n         </p>\n         <p>Public suffixes aren't allowed. For example, you can't use <code>usa.gov</code> or <code>co.uk</code> as token domains.</p>"
+                        "smithy.api#documentation": "<p>Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.</p>\n         <p>Example JSON: <code>\"TokenDomains\": { \"mywebsite.com\", \"myotherwebsite.com\" }</code>\n         </p>\n         <p>Public suffixes aren't allowed. For example, you can't use <code>gov.au</code> or <code>co.uk</code> as token domains.</p>"
                     }
                 },
                 "AssociationConfig": {
@@ -4468,6 +4471,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>In a <a>WebACL</a>, this is the action that you want WAF to perform\n         when a web request doesn't match any of the rules in the <code>WebACL</code>. The default\n         action must be a terminating action.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#DeleteAPIKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wafv2#DeleteAPIKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wafv2#DeleteAPIKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFNonexistentItemException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFOptimisticLockException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified API key. </p>\n         <p>After you delete a key, it can take up to 24 hours for WAF to disallow use of the key in all regions. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#DeleteAPIKeyRequest": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.wafv2#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "APIKey": {
+                    "target": "com.amazonaws.wafv2#APIKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encrypted API key that you want to delete. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wafv2#DeleteAPIKeyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.wafv2#DeleteFirewallManagerRuleGroups": {
@@ -12301,7 +12362,7 @@
                 "TokenDomains": {
                     "target": "com.amazonaws.wafv2#TokenDomains",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.</p>\n         <p>Example JSON: <code>\"TokenDomains\": { \"mywebsite.com\", \"myotherwebsite.com\" }</code>\n         </p>\n         <p>Public suffixes aren't allowed. For example, you can't use <code>usa.gov</code> or <code>co.uk</code> as token domains.</p>"
+                        "smithy.api#documentation": "<p>Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.</p>\n         <p>Example JSON: <code>\"TokenDomains\": { \"mywebsite.com\", \"myotherwebsite.com\" }</code>\n         </p>\n         <p>Public suffixes aren't allowed. For example, you can't use <code>gov.au</code> or <code>co.uk</code> as token domains.</p>"
                     }
                 },
                 "AssociationConfig": {

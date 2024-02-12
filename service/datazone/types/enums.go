@@ -553,6 +553,26 @@ func (NotificationType) Values() []NotificationType {
 	}
 }
 
+type ProjectStatus string
+
+// Enum values for ProjectStatus
+const (
+	ProjectStatusActive       ProjectStatus = "ACTIVE"
+	ProjectStatusDeleting     ProjectStatus = "DELETING"
+	ProjectStatusDeleteFailed ProjectStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for ProjectStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectStatus) Values() []ProjectStatus {
+	return []ProjectStatus{
+		"ACTIVE",
+		"DELETING",
+		"DELETE_FAILED",
+	}
+}
+
 type RejectRuleBehavior string
 
 // Enum values for RejectRuleBehavior

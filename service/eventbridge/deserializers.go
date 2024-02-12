@@ -6944,6 +6944,46 @@ func awsAwsjson11_deserializeDocumentApiDestinationResponseList(v *[]types.ApiDe
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAppSyncParameters(v **types.AppSyncParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AppSyncParameters
+	if *v == nil {
+		sv = &types.AppSyncParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GraphQLOperation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GraphQLOperation to be of type string, got %T instead", value)
+				}
+				sv.GraphQLOperation = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentArchive(v **types.Archive, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11493,6 +11533,11 @@ func awsAwsjson11_deserializeDocumentTarget(v **types.Target, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "AppSyncParameters":
+			if err := awsAwsjson11_deserializeDocumentAppSyncParameters(&sv.AppSyncParameters, value); err != nil {
+				return err
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)

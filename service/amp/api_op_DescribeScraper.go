@@ -17,7 +17,7 @@ import (
 	"time"
 )
 
-// Describe an existing scraper.
+// The DescribeScraper operation displays information about an existing scraper.
 func (c *Client) DescribeScraper(ctx context.Context, params *DescribeScraperInput, optFns ...func(*Options)) (*DescribeScraperOutput, error) {
 	if params == nil {
 		params = &DescribeScraperInput{}
@@ -36,7 +36,7 @@ func (c *Client) DescribeScraper(ctx context.Context, params *DescribeScraperInp
 // Represents the input of a DescribeScraper operation.
 type DescribeScraperInput struct {
 
-	// The IDs of the scraper to describe.
+	// The ID of the scraper to describe.
 	//
 	// This member is required.
 	ScraperId *string
@@ -47,7 +47,7 @@ type DescribeScraperInput struct {
 // Represents the output of a DescribeScraper operation.
 type DescribeScraperOutput struct {
 
-	// The properties of the selected scrapers.
+	// Contains details about the scraper.
 	//
 	// This member is required.
 	Scraper *types.ScraperDescription

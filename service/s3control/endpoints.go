@@ -452,10 +452,14 @@ func (r *resolver) ResolveEndpoint(
 				if !(rulesfn.IsValidHostLabel(_OutpostId, false)) {
 					return endpoint, fmt.Errorf("endpoint rule error, %s", "OutpostId must only contain a-z, A-Z, 0-9 and `-`.")
 				}
-				if rulesfn.IsValidHostLabel(_Region, true) {
+				if exprVal := params.Endpoint; exprVal != nil {
+					_Endpoint := *exprVal
+					_ = _Endpoint
 					if _UseDualStack == true {
-						return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid configuration: Outposts do not support dual-stack")
+						return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: DualStack and custom endpoint are not supported")
 					}
+				}
+				if rulesfn.IsValidHostLabel(_Region, true) {
 					if exprVal := params.Endpoint; exprVal != nil {
 						_Endpoint := *exprVal
 						_ = _Endpoint
@@ -502,12 +506,92 @@ func (r *resolver) ResolveEndpoint(
 						}
 					}
 					if _UseFIPS == true {
+						if _UseDualStack == true {
+							uriString := func() string {
+								var out strings.Builder
+								out.WriteString("https://s3-outposts-fips.")
+								out.WriteString(_Region)
+								out.WriteString(".")
+								out.WriteString(_partitionResult.DualStackDnsSuffix)
+								return out.String()
+							}()
+
+							uri, err := url.Parse(uriString)
+							if err != nil {
+								return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+							}
+
+							return smithyendpoints.Endpoint{
+								URI:     *uri,
+								Headers: http.Header{},
+								Properties: func() smithy.Properties {
+									var out smithy.Properties
+									smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+										{
+											SchemeID: "aws.auth#sigv4",
+											SignerProperties: func() smithy.Properties {
+												var sp smithy.Properties
+												smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+												smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+												smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+												smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+												return sp
+											}(),
+										},
+									})
+									return out
+								}(),
+							}, nil
+						}
+					}
+					if _UseFIPS == true {
 						uriString := func() string {
 							var out strings.Builder
 							out.WriteString("https://s3-outposts-fips.")
 							out.WriteString(_Region)
 							out.WriteString(".")
 							out.WriteString(_partitionResult.DnsSuffix)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+									{
+										SchemeID: "aws.auth#sigv4",
+										SignerProperties: func() smithy.Properties {
+											var sp smithy.Properties
+											smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+											smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+											smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+											smithyhttp.SetSigV4SigningRegion(&sp, _Region)
+											return sp
+										}(),
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+					if _UseDualStack == true {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://s3-outposts.")
+							out.WriteString(_Region)
+							out.WriteString(".")
+							out.WriteString(_partitionResult.DualStackDnsSuffix)
 							return out.String()
 						}()
 
@@ -593,13 +677,17 @@ func (r *resolver) ResolveEndpoint(
 					_ = _arnType
 					if !(_arnType == "") {
 						if _accessPointArn.Service == "s3-outposts" {
-							if _UseDualStack == true {
-								return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid configuration: Outpost Access Points do not support dual-stack")
-							}
 							if exprVal := _accessPointArn.ResourceId.Get(1); exprVal != nil {
 								_outpostId := *exprVal
 								_ = _outpostId
 								if rulesfn.IsValidHostLabel(_outpostId, false) {
+									if exprVal := params.Endpoint; exprVal != nil {
+										_Endpoint := *exprVal
+										_ = _Endpoint
+										if _UseDualStack == true {
+											return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: DualStack and custom endpoint are not supported")
+										}
+									}
 									if exprVal := params.UseArnRegion; exprVal != nil {
 										_UseArnRegion := *exprVal
 										_ = _UseArnRegion
@@ -650,12 +738,102 @@ func (r *resolver) ResolveEndpoint(
 																	_ = _accessPointName
 																	if _outpostType == "accesspoint" {
 																		if _UseFIPS == true {
+																			if _UseDualStack == true {
+																				uriString := func() string {
+																					var out strings.Builder
+																					out.WriteString("https://s3-outposts-fips.")
+																					out.WriteString(_accessPointArn.Region)
+																					out.WriteString(".")
+																					out.WriteString(_arnPartition.DualStackDnsSuffix)
+																					return out.String()
+																				}()
+
+																				uri, err := url.Parse(uriString)
+																				if err != nil {
+																					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+																				}
+
+																				return smithyendpoints.Endpoint{
+																					URI: *uri,
+																					Headers: func() http.Header {
+																						headers := http.Header{}
+																						headers.Set("x-amz-account-id", _accessPointArn.AccountId)
+																						headers.Set("x-amz-outpost-id", _outpostId)
+																						return headers
+																					}(),
+																					Properties: func() smithy.Properties {
+																						var out smithy.Properties
+																						smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+																							{
+																								SchemeID: "aws.auth#sigv4",
+																								SignerProperties: func() smithy.Properties {
+																									var sp smithy.Properties
+																									smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+																									smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+																									smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+																									smithyhttp.SetSigV4SigningRegion(&sp, _accessPointArn.Region)
+																									return sp
+																								}(),
+																							},
+																						})
+																						return out
+																					}(),
+																				}, nil
+																			}
+																		}
+																		if _UseFIPS == true {
 																			uriString := func() string {
 																				var out strings.Builder
 																				out.WriteString("https://s3-outposts-fips.")
 																				out.WriteString(_accessPointArn.Region)
 																				out.WriteString(".")
 																				out.WriteString(_arnPartition.DnsSuffix)
+																				return out.String()
+																			}()
+
+																			uri, err := url.Parse(uriString)
+																			if err != nil {
+																				return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+																			}
+
+																			return smithyendpoints.Endpoint{
+																				URI: *uri,
+																				Headers: func() http.Header {
+																					headers := http.Header{}
+																					headers.Set("x-amz-account-id", _accessPointArn.AccountId)
+																					headers.Set("x-amz-outpost-id", _outpostId)
+																					return headers
+																				}(),
+																				Properties: func() smithy.Properties {
+																					var out smithy.Properties
+																					smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+																						{
+																							SchemeID: "aws.auth#sigv4",
+																							SignerProperties: func() smithy.Properties {
+																								var sp smithy.Properties
+																								smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+																								smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+																								smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+																								smithyhttp.SetSigV4SigningRegion(&sp, _accessPointArn.Region)
+																								return sp
+																							}(),
+																						},
+																					})
+																					return out
+																				}(),
+																			}, nil
+																		}
+																		if _UseDualStack == true {
+																			uriString := func() string {
+																				var out strings.Builder
+																				out.WriteString("https://s3-outposts.")
+																				out.WriteString(_accessPointArn.Region)
+																				out.WriteString(".")
+																				out.WriteString(_arnPartition.DualStackDnsSuffix)
 																				return out.String()
 																			}()
 
@@ -857,13 +1035,17 @@ func (r *resolver) ResolveEndpoint(
 					_ = _arnType
 					if !(_arnType == "") {
 						if _bucketArn.Service == "s3-outposts" {
-							if _UseDualStack == true {
-								return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid configuration: Outpost buckets do not support dual-stack")
-							}
 							if exprVal := _bucketArn.ResourceId.Get(1); exprVal != nil {
 								_outpostId := *exprVal
 								_ = _outpostId
 								if rulesfn.IsValidHostLabel(_outpostId, false) {
+									if exprVal := params.Endpoint; exprVal != nil {
+										_Endpoint := *exprVal
+										_ = _Endpoint
+										if _UseDualStack == true {
+											return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: DualStack and custom endpoint are not supported")
+										}
+									}
 									if exprVal := params.UseArnRegion; exprVal != nil {
 										_UseArnRegion := *exprVal
 										_ = _UseArnRegion
@@ -914,12 +1096,102 @@ func (r *resolver) ResolveEndpoint(
 																	_ = _bucketName
 																	if _outpostType == "bucket" {
 																		if _UseFIPS == true {
+																			if _UseDualStack == true {
+																				uriString := func() string {
+																					var out strings.Builder
+																					out.WriteString("https://s3-outposts-fips.")
+																					out.WriteString(_bucketArn.Region)
+																					out.WriteString(".")
+																					out.WriteString(_arnPartition.DualStackDnsSuffix)
+																					return out.String()
+																				}()
+
+																				uri, err := url.Parse(uriString)
+																				if err != nil {
+																					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+																				}
+
+																				return smithyendpoints.Endpoint{
+																					URI: *uri,
+																					Headers: func() http.Header {
+																						headers := http.Header{}
+																						headers.Set("x-amz-account-id", _bucketArn.AccountId)
+																						headers.Set("x-amz-outpost-id", _outpostId)
+																						return headers
+																					}(),
+																					Properties: func() smithy.Properties {
+																						var out smithy.Properties
+																						smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+																							{
+																								SchemeID: "aws.auth#sigv4",
+																								SignerProperties: func() smithy.Properties {
+																									var sp smithy.Properties
+																									smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+																									smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+																									smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+																									smithyhttp.SetSigV4SigningRegion(&sp, _bucketArn.Region)
+																									return sp
+																								}(),
+																							},
+																						})
+																						return out
+																					}(),
+																				}, nil
+																			}
+																		}
+																		if _UseFIPS == true {
 																			uriString := func() string {
 																				var out strings.Builder
 																				out.WriteString("https://s3-outposts-fips.")
 																				out.WriteString(_bucketArn.Region)
 																				out.WriteString(".")
 																				out.WriteString(_arnPartition.DnsSuffix)
+																				return out.String()
+																			}()
+
+																			uri, err := url.Parse(uriString)
+																			if err != nil {
+																				return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+																			}
+
+																			return smithyendpoints.Endpoint{
+																				URI: *uri,
+																				Headers: func() http.Header {
+																					headers := http.Header{}
+																					headers.Set("x-amz-account-id", _bucketArn.AccountId)
+																					headers.Set("x-amz-outpost-id", _outpostId)
+																					return headers
+																				}(),
+																				Properties: func() smithy.Properties {
+																					var out smithy.Properties
+																					smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+																						{
+																							SchemeID: "aws.auth#sigv4",
+																							SignerProperties: func() smithy.Properties {
+																								var sp smithy.Properties
+																								smithyhttp.SetDisableDoubleEncoding(&sp, true)
+
+																								smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
+																								smithyhttp.SetSigV4ASigningName(&sp, "s3-outposts")
+
+																								smithyhttp.SetSigV4SigningRegion(&sp, _bucketArn.Region)
+																								return sp
+																							}(),
+																						},
+																					})
+																					return out
+																				}(),
+																			}, nil
+																		}
+																		if _UseDualStack == true {
+																			uriString := func() string {
+																				var out strings.Builder
+																				out.WriteString("https://s3-outposts.")
+																				out.WriteString(_bucketArn.Region)
+																				out.WriteString(".")
+																				out.WriteString(_arnPartition.DualStackDnsSuffix)
 																				return out.String()
 																			}()
 

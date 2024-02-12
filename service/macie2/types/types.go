@@ -307,9 +307,9 @@ type BucketCountByEffectivePermission struct {
 type BucketCountByEncryptionType struct {
 
 	// The total number of buckets whose default encryption settings are configured to
-	// encrypt new objects with an Amazon Web Services managed KMS key or a customer
-	// managed KMS key. By default, these buckets encrypt new objects automatically
-	// using SSE-KMS encryption.
+	// encrypt new objects with an KMS key, either an Amazon Web Services managed key
+	// or a customer managed key. By default, these buckets encrypt new objects
+	// automatically using DSSE-KMS or SSE-KMS encryption.
 	KmsManaged *int64
 
 	// The total number of buckets whose default encryption settings are configured to
@@ -660,11 +660,14 @@ type BucketServerSideEncryption struct {
 
 	// The server-side encryption algorithm that's used by default to encrypt objects
 	// that are added to the bucket. Possible values are:
-	//   - AES256 - New objects are encrypted with an Amazon S3 managed key. They use
-	//   SSE-S3 encryption.
-	//   - aws:kms - New objects are encrypted with an KMS key (kmsMasterKeyId),
-	//   either an Amazon Web Services managed key or a customer managed key. They use
-	//   SSE-KMS encryption.
+	//   - AES256 - New objects use SSE-S3 encryption. They're encrypted with an
+	//   Amazon S3 managed key.
+	//   - aws:kms - New objects use SSE-KMS encryption. They're encrypted with an KMS
+	//   key (kmsMasterKeyId), either an Amazon Web Services managed key or a customer
+	//   managed key.
+	//   - aws:kms:dsse - New objects use DSSE-KMS encryption. They're encrypted with
+	//   an KMS key (kmsMasterKeyId), either an Amazon Web Services managed key or a
+	//   customer managed key.
 	//   - NONE - The bucket's default encryption settings don't specify server-side
 	//   encryption behavior for new objects.
 	Type Type
@@ -1863,17 +1866,18 @@ type MonthlySchedule struct {
 // aren't encrypted.
 type ObjectCountByEncryptionType struct {
 
-	// The total number of objects that are encrypted with a customer-provided key.
-	// The objects use customer-provided server-side encryption (SSE-C).
+	// The total number of objects that are encrypted with customer-provided keys. The
+	// objects use server-side encryption with customer-provided keys (SSE-C).
 	CustomerManaged *int64
 
-	// The total number of objects that are encrypted with an KMS key, either an
-	// Amazon Web Services managed key or a customer managed key. The objects use KMS
-	// encryption (SSE-KMS).
+	// The total number of objects that are encrypted with KMS keys, either Amazon Web
+	// Services managed keys or customer managed keys. The objects use dual-layer
+	// server-side encryption or server-side encryption with KMS keys (DSSE-KMS or
+	// SSE-KMS).
 	KmsManaged *int64
 
-	// The total number of objects that are encrypted with an Amazon S3 managed key.
-	// The objects use Amazon S3 managed encryption (SSE-S3).
+	// The total number of objects that are encrypted with Amazon S3 managed keys. The
+	// objects use server-side encryption with Amazon S3 managed keys (SSE-S3).
 	S3Managed *int64
 
 	// The total number of objects that use client-side encryption or aren't encrypted.
@@ -2150,7 +2154,7 @@ type ResourceStatistics struct {
 // retrieve occurrences of sensitive data reported by findings.
 type RetrievalConfiguration struct {
 
-	// The access method that's used when retrieving sensitive data from affected S3
+	// The access method that's used to retrieve sensitive data from affected S3
 	// objects. Valid values are: ASSUME_ROLE, assume an IAM role that is in the
 	// affected Amazon Web Services account and delegates access to Amazon Macie
 	// (roleName); and, CALLER_CREDENTIALS, use the credentials of the IAM user who
@@ -2160,11 +2164,13 @@ type RetrievalConfiguration struct {
 	RetrievalMode RetrievalMode
 
 	// The external ID to specify in the trust policy for the IAM role to assume when
-	// retrieving sensitive data from affected S3 objects (roleName). The trust policy
-	// must include an sts:ExternalId condition that requires this ID. This ID is a
-	// unique alphanumeric string that Amazon Macie generates automatically after you
-	// configure it to assume a role. This value is null if the value for retrievalMode
-	// is CALLER_CREDENTIALS.
+	// retrieving sensitive data from affected S3 objects (roleName). This value is
+	// null if the value for retrievalMode is CALLER_CREDENTIALS. This ID is a unique
+	// alphanumeric string that Amazon Macie generates automatically after you
+	// configure it to assume an IAM role. For a Macie administrator to retrieve
+	// sensitive data from an affected S3 object for a member account, the trust policy
+	// for the role in the member account must include an sts:ExternalId condition that
+	// requires this ID.
 	ExternalId *string
 
 	// The name of the IAM role that is in the affected Amazon Web Services account
@@ -2183,11 +2189,16 @@ type RetrievalConfiguration struct {
 // key. Otherwise, an error occurs.
 type RevealConfiguration struct {
 
-	// The status of the configuration for the Amazon Macie account. In a request,
-	// valid values are: ENABLED, enable the configuration for the account; and,
-	// DISABLED, disable the configuration for the account. In a response, possible
-	// values are: ENABLED, the configuration is currently enabled for the account;
-	// and, DISABLED, the configuration is currently disabled for the account.
+	// The status of the configuration for the Amazon Macie account. In a response,
+	// possible values are: ENABLED, the configuration is currently enabled for the
+	// account; and, DISABLED, the configuration is currently disabled for the account.
+	// In a request, valid values are: ENABLED, enable the configuration for the
+	// account; and, DISABLED, disable the configuration for the account. If you
+	// disable the configuration, you also permanently delete current settings that
+	// specify how to access affected S3 objects. If your current access method is
+	// ASSUME_ROLE, Macie also deletes the external ID and role name currently
+	// specified for the configuration. These settings can't be recovered after they're
+	// deleted.
 	//
 	// This member is required.
 	Status RevealStatus
@@ -3079,11 +3090,10 @@ type UnprocessedAccount struct {
 
 // Specifies the access method and settings to use when retrieving occurrences of
 // sensitive data reported by findings. If your request specifies an Identity and
-// Access Management (IAM) role to assume when retrieving the sensitive data,
-// Amazon Macie verifies that the role exists and the attached policies are
-// configured correctly. If there's an issue, Macie returns an error. For
-// information about addressing the issue, see Retrieving sensitive data samples
-// with findings (https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd.html)
+// Access Management (IAM) role to assume, Amazon Macie verifies that the role
+// exists and the attached policies are configured correctly. If there's an issue,
+// Macie returns an error. For information about addressing the issue, see
+// Configuration options and requirements for retrieving sensitive data samples (https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd-options.html)
 // in the Amazon Macie User Guide.
 type UpdateRetrievalConfiguration struct {
 

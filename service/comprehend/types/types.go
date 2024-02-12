@@ -2253,7 +2253,7 @@ type PiiEntitiesDetectionJobProperties struct {
 	// the Message field shows the reason for the failure.
 	JobStatus JobStatus
 
-	// The language code of the input documents
+	// The language code of the input documents.
 	LanguageCode LanguageCode
 
 	// A description of the status of a job.

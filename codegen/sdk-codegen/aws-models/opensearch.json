@@ -582,6 +582,9 @@
                     "target": "com.amazonaws.opensearch#AuthorizeVpcEndpointAccess"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#CancelDomainConfigChange"
+                },
+                {
                     "target": "com.amazonaws.opensearch#CancelServiceSoftwareUpdate"
                 },
                 {
@@ -2441,6 +2444,87 @@
         "com.amazonaws.opensearch#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.opensearch#CancelDomainConfigChange": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#CancelDomainConfigChangeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#CancelDomainConfigChangeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels a pending configuration change on an Amazon OpenSearch Service domain.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-01-01/opensearch/domain/{DomainName}/config/cancel",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#CancelDomainConfigChangeRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.opensearch#DomainName",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.opensearch#DryRun",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When set to <code>True</code>, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#CancelDomainConfigChangeResponse": {
+            "type": "structure",
+            "members": {
+                "CancelledChangeIds": {
+                    "target": "com.amazonaws.opensearch#GUIDList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifiers of the changes that were cancelled.</p>"
+                    }
+                },
+                "CancelledChangeProperties": {
+                    "target": "com.amazonaws.opensearch#CancelledChangePropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain change properties that were cancelled.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.opensearch#DryRun",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether or not the request was a dry run. If <code>True</code>, the changes were not actually cancelled. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearch#CancelServiceSoftwareUpdate": {
             "type": "operation",
             "input": {
@@ -2503,6 +2587,38 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.opensearch#CancelledChangeProperty": {
+            "type": "structure",
+            "members": {
+                "PropertyName": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the property whose change was cancelled.</p>"
+                    }
+                },
+                "CancelledValue": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pending value of the property that was cancelled. This would have been the eventual value of the property if the chance had not been cancelled.</p>"
+                    }
+                },
+                "ActiveValue": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current value of the property, after the change was cancelled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A property change that was cancelled for an Amazon OpenSearch Service domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#CancelledChangePropertyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#CancelledChangeProperty"
+            }
+        },
         "com.amazonaws.opensearch#ChangeProgressDetails": {
             "type": "structure",
             "members": {
@@ -2516,6 +2632,30 @@
                     "target": "com.amazonaws.opensearch#Message",
                     "traits": {
                         "smithy.api#documentation": "<p>A message corresponding to the status of the configuration change.</p>"
+                    }
+                },
+                "ConfigChangeStatus": {
+                    "target": "com.amazonaws.opensearch#ConfigChangeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the configuration change.</p>"
+                    }
+                },
+                "InitiatedBy": {
+                    "target": "com.amazonaws.opensearch#InitiatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM principal who initiated the configuration change.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.opensearch#UpdateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the configuration change was initiated, in Universal Coordinated Time (UTC).</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.opensearch#UpdateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the configuration change was updated.</p>"
                     }
                 }
             },
@@ -2626,6 +2766,24 @@
                     "target": "com.amazonaws.opensearch#ChangeProgressStageList",
                     "traits": {
                         "smithy.api#documentation": "<p>The specific stages that the domain is going through to perform the configuration change.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.opensearch#UpdateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the status of the configuration change was updated.</p>"
+                    }
+                },
+                "ConfigChangeStatus": {
+                    "target": "com.amazonaws.opensearch#ConfigChangeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the configuration change.</p>"
+                    }
+                },
+                "InitiatedBy": {
+                    "target": "com.amazonaws.opensearch#InitiatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM principal who initiated the configuration change.</p>"
                     }
                 }
             },
@@ -2857,6 +3015,59 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A map of OpenSearch or Elasticsearch versions and the versions you can upgrade them\n   to.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#ConfigChangeStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Initializing"
+                    }
+                },
+                "VALIDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Validating"
+                    }
+                },
+                "VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ValidationFailed"
+                    }
+                },
+                "APPLYING_CHANGES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ApplyingChanges"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "PENDING_USER_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PendingUserInput"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cancelled"
+                    }
+                }
             }
         },
         "com.amazonaws.opensearch#ConflictException": {
@@ -5458,6 +5669,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Software update options for the domain.</p>"
                     }
+                },
+                "ModifyingProperties": {
+                    "target": "com.amazonaws.opensearch#ModifyingPropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the domain properties that are currently being modified.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5866,6 +6083,53 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#DomainProcessingStatusType": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "MODIFYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Modifying"
+                    }
+                },
+                "UPGRADING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpgradingEngineVersion"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdatingServiceSoftware"
+                    }
+                },
+                "ISOLATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Isolated"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                }
+            }
+        },
         "com.amazonaws.opensearch#DomainState": {
             "type": "enum",
             "members": {
@@ -6068,6 +6332,18 @@
                     "target": "com.amazonaws.opensearch#SoftwareUpdateOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Service software update options for the domain.</p>"
+                    }
+                },
+                "DomainProcessingStatus": {
+                    "target": "com.amazonaws.opensearch#DomainProcessingStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of any changes that are currently in progress for the domain.</p>"
+                    }
+                },
+                "ModifyingProperties": {
+                    "target": "com.amazonaws.opensearch#ModifyingPropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the domain properties that are currently being modified.</p>"
                     }
                 }
             },
@@ -6276,7 +6552,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether the domain should encrypt data at rest, and if so, the Key Management\n   Service (KMS) key to use. Can be used only to create a new domain, not update an existing\n   one.</p>"
+                "smithy.api#documentation": "<p>Specifies whether the domain should encrypt data at rest, and if so, the Key Management\n   Service (KMS) key to use. Can only be used when creating a new domain or enabling encryption at rest\n   for the first time on an existing domain. You can't modify this parameter after it's already been\n   specified.</p>"
             }
         },
         "com.amazonaws.opensearch#EncryptionAtRestOptionsStatus": {
@@ -6419,6 +6695,12 @@
                     "max": 36
                 },
                 "smithy.api#pattern": "^\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}$"
+            }
+        },
+        "com.amazonaws.opensearch#GUIDList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#GUID"
             }
         },
         "com.amazonaws.opensearch#GetCompatibleVersions": {
@@ -7110,6 +7392,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.opensearch#InboundConnection"
+            }
+        },
+        "com.amazonaws.opensearch#InitiatedBy": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                }
             }
         },
         "com.amazonaws.opensearch#InstanceCount": {
@@ -8585,6 +8884,44 @@
                 "smithy.api#documentation": "<p> Minimum number of instances that can be instantiated for a given instance type.</p>"
             }
         },
+        "com.amazonaws.opensearch#ModifyingProperties": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the property that is currently being modified.</p>"
+                    }
+                },
+                "ActiveValue": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current value of the domain property that is being modified.</p>"
+                    }
+                },
+                "PendingValue": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that the property that is currently being modified will eventually have.</p>"
+                    }
+                },
+                "ValueType": {
+                    "target": "com.amazonaws.opensearch#PropertyValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of value that is currently being modified. Properties can have two types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PLAIN_TEXT</code>: Contain direct values such as \"1\", \"True\", or \"c5.large.search\".</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRINGIFIED_JSON</code>: Contain content in JSON format, such as {\"Enabled\":\"True\"}\".</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the domain properties that are currently being modified.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#ModifyingPropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#ModifyingProperties"
+            }
+        },
         "com.amazonaws.opensearch#NextToken": {
             "type": "string",
             "traits": {
@@ -9958,6 +10295,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS_SERVICE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.opensearch#PropertyValueType": {
+            "type": "enum",
+            "members": {
+                "PLAIN_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLAIN_TEXT"
+                    }
+                },
+                "STRINGIFIED_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRINGIFIED_JSON"
                     }
                 }
             }

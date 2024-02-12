@@ -30,6 +30,26 @@ func (m *validateOpCancelImportTask) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelQuery struct {
+}
+
+func (*validateOpCancelQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGraph struct {
 }
 
@@ -170,6 +190,26 @@ func (m *validateOpDeletePrivateGraphEndpoint) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExecuteQuery struct {
+}
+
+func (*validateOpExecuteQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExecuteQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExecuteQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExecuteQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetGraph struct {
 }
 
@@ -205,6 +245,26 @@ func (m *validateOpGetGraphSnapshot) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetGraphSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetGraphSummary struct {
+}
+
+func (*validateOpGetGraphSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetGraphSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetGraphSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetGraphSummaryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +310,26 @@ func (m *validateOpGetPrivateGraphEndpoint) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetQuery struct {
+}
+
+func (*validateOpGetQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPrivateGraphEndpoints struct {
 }
 
@@ -265,6 +345,26 @@ func (m *validateOpListPrivateGraphEndpoints) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPrivateGraphEndpointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListQueries struct {
+}
+
+func (*validateOpListQueries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQueries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQueriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQueriesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -394,6 +494,10 @@ func addOpCancelImportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelImportTask{}, middleware.After)
 }
 
+func addOpCancelQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelQuery{}, middleware.After)
+}
+
 func addOpCreateGraphValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGraph{}, middleware.After)
 }
@@ -422,12 +526,20 @@ func addOpDeletePrivateGraphEndpointValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDeletePrivateGraphEndpoint{}, middleware.After)
 }
 
+func addOpExecuteQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExecuteQuery{}, middleware.After)
+}
+
 func addOpGetGraphValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGraph{}, middleware.After)
 }
 
 func addOpGetGraphSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGraphSnapshot{}, middleware.After)
+}
+
+func addOpGetGraphSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetGraphSummary{}, middleware.After)
 }
 
 func addOpGetImportTaskValidationMiddleware(stack *middleware.Stack) error {
@@ -438,8 +550,16 @@ func addOpGetPrivateGraphEndpointValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpGetPrivateGraphEndpoint{}, middleware.After)
 }
 
+func addOpGetQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQuery{}, middleware.After)
+}
+
 func addOpListPrivateGraphEndpointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPrivateGraphEndpoints{}, middleware.After)
+}
+
+func addOpListQueriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQueries{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -525,6 +645,24 @@ func validateOpCancelImportTaskInput(v *CancelImportTaskInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CancelImportTaskInput"}
 	if v.TaskIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelQueryInput(v *CancelQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelQueryInput"}
+	if v.GraphIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -671,6 +809,27 @@ func validateOpDeletePrivateGraphEndpointInput(v *DeletePrivateGraphEndpointInpu
 	}
 }
 
+func validateOpExecuteQueryInput(v *ExecuteQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecuteQueryInput"}
+	if v.GraphIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
+	}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetGraphInput(v *GetGraphInput) error {
 	if v == nil {
 		return nil
@@ -693,6 +852,21 @@ func validateOpGetGraphSnapshotInput(v *GetGraphSnapshotInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetGraphSnapshotInput"}
 	if v.SnapshotIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetGraphSummaryInput(v *GetGraphSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetGraphSummaryInput"}
+	if v.GraphIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -734,6 +908,24 @@ func validateOpGetPrivateGraphEndpointInput(v *GetPrivateGraphEndpointInput) err
 	}
 }
 
+func validateOpGetQueryInput(v *GetQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQueryInput"}
+	if v.GraphIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPrivateGraphEndpointsInput(v *ListPrivateGraphEndpointsInput) error {
 	if v == nil {
 		return nil
@@ -741,6 +933,24 @@ func validateOpListPrivateGraphEndpointsInput(v *ListPrivateGraphEndpointsInput)
 	invalidParams := smithy.InvalidParamsError{Context: "ListPrivateGraphEndpointsInput"}
 	if v.GraphIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQueriesInput(v *ListQueriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQueriesInput"}
+	if v.GraphIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
+	}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

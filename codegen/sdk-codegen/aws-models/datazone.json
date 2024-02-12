@@ -3685,6 +3685,18 @@
                         "smithy.api#documentation": "<p>The description of the project.</p>"
                     }
                 },
+                "projectStatus": {
+                    "target": "com.amazonaws.datazone#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Status of the project"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.datazone#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "Reasons for failed project deletion"
+                    }
+                },
                 "createdBy": {
                     "target": "com.amazonaws.datazone#CreatedBy",
                     "traits": {
@@ -5621,7 +5633,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -5649,7 +5660,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -5662,7 +5674,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -5676,7 +5687,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -5696,7 +5706,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -5710,14 +5719,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -5726,11 +5733,11 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
@@ -5741,14 +5748,16 @@
                                                                     },
                                                                     "type": "endpoint"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
@@ -5759,7 +5768,8 @@
                                                     },
                                                     "type": "endpoint"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -5773,14 +5783,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -5789,11 +5797,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -5804,14 +5812,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -5822,9 +5832,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -6364,6 +6376,14 @@
                         "smithy.api#httpQuery": "clientToken",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "skipDeletionCheck": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Optional flag to delete all child entities within the domain",
+                        "smithy.api#httpQuery": "skipDeletionCheck",
+                        "smithy.api#notProperty": {}
+                    }
                 }
             },
             "traits": {
@@ -6893,6 +6913,14 @@
                         "smithy.api#documentation": "<p>The identifier of the project that is to be deleted.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "skipDeletionCheck": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Optional flag to asynchronously delete child entities within the project",
+                        "smithy.api#httpQuery": "skipDeletionCheck",
+                        "smithy.api#notProperty": {}
                     }
                 }
             },
@@ -8235,6 +8263,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the error message that is returned if the operation cannot be successfully\n         completed.</p>"
+            }
+        },
+        "com.amazonaws.datazone#FailureReasons": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#ProjectDeletionError"
             }
         },
         "com.amazonaws.datazone#Filter": {
@@ -10985,6 +11019,18 @@
                     "target": "com.amazonaws.datazone#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the project.</p>"
+                    }
+                },
+                "projectStatus": {
+                    "target": "com.amazonaws.datazone#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Status of the project"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.datazone#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "Reasons for failed project deletion"
                     }
                 },
                 "createdBy": {
@@ -14840,6 +14886,26 @@
                 "smithy.api#documentation": "<p>The configuration of the prediction.</p>"
             }
         },
+        "com.amazonaws.datazone#ProjectDeletionError": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Project Deletion Error Code"
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Project Deletion Error Message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Error that occurred during project deletion"
+            }
+        },
         "com.amazonaws.datazone#ProjectId": {
             "type": "string",
             "traits": {
@@ -14885,6 +14951,29 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.datazone#ProjectStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datazone#ProjectSummaries": {
             "type": "list",
             "member": {
@@ -14919,6 +15008,18 @@
                     "target": "com.amazonaws.datazone#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of a project.</p>"
+                    }
+                },
+                "projectStatus": {
+                    "target": "com.amazonaws.datazone#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Status of the project"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.datazone#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "Reasons for failed project deletion"
                     }
                 },
                 "createdBy": {
@@ -19886,6 +19987,18 @@
                     "target": "com.amazonaws.datazone#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the project that is to be updated.</p>"
+                    }
+                },
+                "projectStatus": {
+                    "target": "com.amazonaws.datazone#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Status of the project"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.datazone#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "Reasons for failed project deletion"
                     }
                 },
                 "createdBy": {

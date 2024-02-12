@@ -53,7 +53,11 @@ type GetCurrentMetricDataInput struct {
 	// SECONDS but the Value is returned in MILLISECONDS. For example, if you get a
 	// response like this: { "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit":
 	// "SECONDS" }, "Value": 24113.0 } The actual OLDEST_CONTACT_AGE is 24 seconds.
-	// Name in real-time metrics report: Oldest (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time)
+	// When the filter RoutingStepExpression is used, this metric is still calculated
+	// from enqueue time. For example, if a contact that has been queued under for 10
+	// seconds has expired and becomes active, then OLDEST_CONTACT_AGE for this queue
+	// will be counted starting from 10, not 0. Name in real-time metrics report:
+	// Oldest (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time)
 	// SLOTS_ACTIVE Unit: COUNT Name in real-time metrics report: Active (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time)
 	// SLOTS_AVAILABLE Unit: COUNT Name in real-time metrics report: Availability (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time)
 	//
@@ -65,11 +69,15 @@ type GetCurrentMetricDataInput struct {
 	//   - Queues: 100
 	//   - Routing profiles: 100
 	//   - Channels: 3 (VOICE, CHAT, and TASK channels are supported.)
+	//   - RoutingStepExpressions: 50
 	// Metric data is retrieved only for the resources associated with the queues or
 	// routing profiles, and by any channels included in the filter. (You cannot filter
 	// by both queue AND routing profile.) You can include both resource IDs and
-	// resource ARNs in the same request. Currently tagging is only supported on the
-	// resources that are passed in the filter.
+	// resource ARNs in the same request. When using the RoutingStepExpression filter,
+	// you need to pass exactly one QueueId . The filter is also case sensitive so when
+	// using the RoutingStepExpression filter, grouping by ROUTING_STEP_EXPRESSION is
+	// required. Currently tagging is only supported on the resources that are passed
+	// in the filter.
 	//
 	// This member is required.
 	Filters *types.Filters
@@ -89,6 +97,8 @@ type GetCurrentMetricDataInput struct {
 	//   profile filter. In addition, a routing profile filter is required for metrics
 	//   CONTACTS_SCHEDULED , CONTACTS_IN_QUEUE , and OLDEST_CONTACT_AGE .
 	//   - If no Grouping is included in the request, a summary of metrics is returned.
+	//   - When using the RoutingStepExpression filter, group by
+	//   ROUTING_STEP_EXPRESSION is required.
 	Groupings []types.Grouping
 
 	// The maximum number of results to return per page.

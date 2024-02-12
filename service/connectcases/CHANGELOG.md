@@ -1,3 +1,7 @@
+# v1.13.0 (2024-01-22)
+
+* **Feature**: This release adds the ability to view audit history on a case and introduces a new parameter, performedBy, for CreateCase and UpdateCase API's.
+
 # v1.12.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

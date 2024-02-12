@@ -1,3 +1,7 @@
+# v1.29.0 (2024-02-06)
+
+* **Feature**: This release adds clear visibility to the customers on the changes that they make on the domain.
+
 # v1.28.0 (2024-01-04)
 
 * **Feature**: This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints.

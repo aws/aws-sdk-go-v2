@@ -1039,6 +1039,93 @@ func validateS3DestinationUpdate(v *types.S3DestinationUpdate) error {
 	}
 }
 
+func validateSnowflakeDestinationConfiguration(v *types.SnowflakeDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeDestinationConfiguration"}
+	if v.AccountUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountUrl"))
+	}
+	if v.PrivateKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateKey"))
+	}
+	if v.User == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("User"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.SnowflakeVpcConfiguration != nil {
+		if err := validateSnowflakeVpcConfiguration(v.SnowflakeVpcConfiguration); err != nil {
+			invalidParams.AddNested("SnowflakeVpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProcessingConfiguration != nil {
+		if err := validateProcessingConfiguration(v.ProcessingConfiguration); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
+	}
+	if v.S3Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Configuration"))
+	} else if v.S3Configuration != nil {
+		if err := validateS3DestinationConfiguration(v.S3Configuration); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakeDestinationUpdate(v *types.SnowflakeDestinationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeDestinationUpdate"}
+	if v.ProcessingConfiguration != nil {
+		if err := validateProcessingConfiguration(v.ProcessingConfiguration); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3Update != nil {
+		if err := validateS3DestinationUpdate(v.S3Update); err != nil {
+			invalidParams.AddNested("S3Update", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakeVpcConfiguration(v *types.SnowflakeVpcConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeVpcConfiguration"}
+	if v.PrivateLinkVpceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateLinkVpceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSplunkDestinationConfiguration(v *types.SplunkDestinationConfiguration) error {
 	if v == nil {
 		return nil
@@ -1213,6 +1300,11 @@ func validateOpCreateDeliveryStreamInput(v *CreateDeliveryStreamInput) error {
 	if v.MSKSourceConfiguration != nil {
 		if err := validateMSKSourceConfiguration(v.MSKSourceConfiguration); err != nil {
 			invalidParams.AddNested("MSKSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SnowflakeDestinationConfiguration != nil {
+		if err := validateSnowflakeDestinationConfiguration(v.SnowflakeDestinationConfiguration); err != nil {
+			invalidParams.AddNested("SnowflakeDestinationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1438,6 +1530,11 @@ func validateOpUpdateDestinationInput(v *UpdateDestinationInput) error {
 	if v.AmazonOpenSearchServerlessDestinationUpdate != nil {
 		if err := validateAmazonOpenSearchServerlessDestinationUpdate(v.AmazonOpenSearchServerlessDestinationUpdate); err != nil {
 			invalidParams.AddNested("AmazonOpenSearchServerlessDestinationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SnowflakeDestinationUpdate != nil {
+		if err := validateSnowflakeDestinationUpdate(v.SnowflakeDestinationUpdate); err != nil {
+			invalidParams.AddNested("SnowflakeDestinationUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

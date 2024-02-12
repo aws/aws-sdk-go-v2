@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create logging configuration.
+// The CreateLoggingConfiguration operation creates a logging configuration for
+// the workspace. Use this operation to set the CloudWatch log group to which the
+// logs will be published to.
 func (c *Client) CreateLoggingConfiguration(ctx context.Context, params *CreateLoggingConfigurationInput, optFns ...func(*Options)) (*CreateLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateLoggingConfigurationInput{}
@@ -31,18 +33,19 @@ func (c *Client) CreateLoggingConfiguration(ctx context.Context, params *CreateL
 // Represents the input of a CreateLoggingConfiguration operation.
 type CreateLoggingConfigurationInput struct {
 
-	// The ARN of the CW log group to which the vended log data will be published.
+	// The ARN of the CloudWatch log group to which the vended log data will be
+	// published. This log group must exist prior to calling this API.
 	//
 	// This member is required.
 	LogGroupArn *string
 
-	// The ID of the workspace to vend logs to.
+	// The ID of the workspace to create the logging configuration for.
 	//
 	// This member is required.
 	WorkspaceId *string
 
-	// Optional, unique, case-sensitive, user-provided identifier to ensure the
-	// idempotency of the request.
+	// A unique identifier that you can provide to ensure the idempotency of the
+	// request. Case-sensitive.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -51,7 +54,7 @@ type CreateLoggingConfigurationInput struct {
 // Represents the output of a CreateLoggingConfiguration operation.
 type CreateLoggingConfigurationOutput struct {
 
-	// The status of the logging configuration.
+	// A structure that displays the current status of the logging configuration.
 	//
 	// This member is required.
 	Status *types.LoggingConfigurationStatus

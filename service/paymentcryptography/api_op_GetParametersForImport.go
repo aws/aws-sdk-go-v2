@@ -14,12 +14,13 @@ import (
 )
 
 // Gets the import token and the wrapping key certificate in PEM format (base64
-// encoded) to initiate a TR-34 WrappedKeyBlock. The wrapping key certificate wraps
-// the key under import. The import token and wrapping key certificate must be in
-// place and operational before calling ImportKey . The import token expires in 7
-// days. You can use the same import token to import multiple keys into your
-// service account. Cross-account use: This operation can't be used across
-// different Amazon Web Services accounts. Related operations:
+// encoded) to initiate a TR-34 WrappedKeyBlock or a RSA WrappedKeyCryptogram
+// import into Amazon Web Services Payment Cryptography. The wrapping key
+// certificate wraps the key under import. The import token and wrapping key
+// certificate must be in place and operational before calling ImportKey . The
+// import token expires in 7 days. You can use the same import token to import
+// multiple keys into your service account. Cross-account use: This operation can't
+// be used across different Amazon Web Services accounts. Related operations:
 //   - GetParametersForExport
 //   - ImportKey
 func (c *Client) GetParametersForImport(ctx context.Context, params *GetParametersForImportInput, optFns ...func(*Options)) (*GetParametersForImportOutput, error) {
@@ -40,15 +41,17 @@ func (c *Client) GetParametersForImport(ctx context.Context, params *GetParamete
 type GetParametersForImportInput struct {
 
 	// The method to use for key material import. Import token is only required for
-	// TR-34 WrappedKeyBlock ( TR34_KEY_BLOCK ). Import token is not required for
-	// TR-31, root public key cerificate or trusted public key certificate.
+	// TR-34 WrappedKeyBlock ( TR34_KEY_BLOCK ) and RSA WrappedKeyCryptogram (
+	// KEY_CRYPTOGRAM ). Import token is not required for TR-31, root public key
+	// cerificate or trusted public key certificate.
 	//
 	// This member is required.
 	KeyMaterialType types.KeyMaterialType
 
 	// The wrapping key algorithm to generate a wrapping key certificate. This
-	// certificate wraps the key under import. At this time, RSA_2048 , RSA_3072 ,
-	// RSA_4096 are the only allowed algorithms for TR-34 WrappedKeyBlock import.
+	// certificate wraps the key under import. At this time, RSA_2048 is the allowed
+	// algorithm for TR-34 WrappedKeyBlock import. Additionally, RSA_2048 , RSA_3072 ,
+	// RSA_4096 are the allowed algorithms for RSA WrappedKeyCryptogram import.
 	//
 	// This member is required.
 	WrappingKeyAlgorithm types.KeyAlgorithm
@@ -70,7 +73,8 @@ type GetParametersForImportOutput struct {
 	// This member is required.
 	ParametersValidUntilTimestamp *time.Time
 
-	// The algorithm of the wrapping key for use within TR-34 WrappedKeyBlock.
+	// The algorithm of the wrapping key for use within TR-34 WrappedKeyBlock or RSA
+	// WrappedKeyCryptogram.
 	//
 	// This member is required.
 	WrappingKeyAlgorithm types.KeyAlgorithm

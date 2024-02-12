@@ -1897,7 +1897,7 @@
                 "accountId": {
                     "target": "com.amazonaws.costoptimizationhub#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The enrollment status of a specific account ID in the organization.</p>"
+                        "smithy.api#documentation": "<p>The account ID of a member account in the organization.</p>"
                     }
                 },
                 "nextToken": {
@@ -1923,7 +1923,13 @@
                 "items": {
                     "target": "com.amazonaws.costoptimizationhub#AccountEnrollmentStatuses",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account enrollment statuses.</p>"
+                        "smithy.api#documentation": "<p>The enrollment status of a specific account ID, including creation and last updated\n      timestamps.</p>"
+                    }
+                },
+                "includeMemberAccounts": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrollment status of all member accounts in the organization if the account is the\n      management account.</p>"
                     }
                 },
                 "nextToken": {

@@ -1,3 +1,7 @@
+# v1.35.0 (2024-01-16)
+
+* **Feature**: This release adds support for analyzing Amazon S3 objects that are encrypted using dual-layer server-side encryption with AWS KMS keys (DSSE-KMS). It also adds support for reporting DSSE-KMS details in statistics and metadata about encryption settings for S3 buckets and objects.
+
 # v1.34.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -4287,6 +4287,11 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 				sv.Reason = ptr.String(jtv)
 			}
 
+		case "repositoryCredentials":
+			if err := awsRestjson1_deserializeDocumentRepositoryCredentials(&sv.RepositoryCredentials, value); err != nil {
+				return err
+			}
+
 		case "resourceRequirements":
 			if err := awsRestjson1_deserializeDocumentResourceRequirements(&sv.ResourceRequirements, value); err != nil {
 				return err
@@ -4479,6 +4484,11 @@ func awsRestjson1_deserializeDocumentContainerProperties(v **types.ContainerProp
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.ReadonlyRootFilesystem = ptr.Bool(jtv)
+			}
+
+		case "repositoryCredentials":
+			if err := awsRestjson1_deserializeDocumentRepositoryCredentials(&sv.RepositoryCredentials, value); err != nil {
+				return err
 			}
 
 		case "resourceRequirements":
@@ -8427,6 +8437,46 @@ func awsRestjson1_deserializeDocumentPlatformCapabilityList(v *[]types.PlatformC
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRepositoryCredentials(v **types.RepositoryCredentials, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RepositoryCredentials
+	if *v == nil {
+		sv = &types.RepositoryCredentials{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "credentialsParameter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CredentialsParameter = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

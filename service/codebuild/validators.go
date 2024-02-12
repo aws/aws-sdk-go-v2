@@ -70,6 +70,26 @@ func (m *validateOpBatchGetBuilds) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetFleets struct {
+}
+
+func (*validateOpBatchGetFleets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetFleets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetFleetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetFleetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetProjects struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpBatchGetReports) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchGetReportsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFleet struct {
+}
+
+func (*validateOpCreateFleet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFleetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFleetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -205,6 +245,26 @@ func (m *validateOpDeleteBuildBatch) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteBuildBatchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFleet struct {
+}
+
+func (*validateOpDeleteFleet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFleetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFleetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +650,26 @@ func (m *validateOpStopBuild) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFleet struct {
+}
+
+func (*validateOpUpdateFleet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFleetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFleetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateProject struct {
 }
 
@@ -682,6 +762,10 @@ func addOpBatchGetBuildsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetBuilds{}, middleware.After)
 }
 
+func addOpBatchGetFleetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetFleets{}, middleware.After)
+}
+
 func addOpBatchGetProjectsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetProjects{}, middleware.After)
 }
@@ -692,6 +776,10 @@ func addOpBatchGetReportGroupsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpBatchGetReportsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetReports{}, middleware.After)
+}
+
+func addOpCreateFleetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFleet{}, middleware.After)
 }
 
 func addOpCreateProjectValidationMiddleware(stack *middleware.Stack) error {
@@ -708,6 +796,10 @@ func addOpCreateWebhookValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteBuildBatchValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBuildBatch{}, middleware.After)
+}
+
+func addOpDeleteFleetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFleet{}, middleware.After)
 }
 
 func addOpDeleteProjectValidationMiddleware(stack *middleware.Stack) error {
@@ -784,6 +876,10 @@ func addOpStopBuildBatchValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopBuildValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopBuild{}, middleware.After)
+}
+
+func addOpUpdateFleetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFleet{}, middleware.After)
 }
 
 func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
@@ -1189,6 +1285,21 @@ func validateOpBatchGetBuildsInput(v *BatchGetBuildsInput) error {
 	}
 }
 
+func validateOpBatchGetFleetsInput(v *BatchGetFleetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetFleetsInput"}
+	if v.Names == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Names"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetProjectsInput(v *BatchGetProjectsInput) error {
 	if v == nil {
 		return nil
@@ -1226,6 +1337,30 @@ func validateOpBatchGetReportsInput(v *BatchGetReportsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetReportsInput"}
 	if v.ReportArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFleetInput(v *CreateFleetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFleetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.BaseCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseCapacity"))
+	}
+	if len(v.EnvironmentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentType"))
+	}
+	if len(v.ComputeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1346,6 +1481,21 @@ func validateOpDeleteBuildBatchInput(v *DeleteBuildBatchInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBuildBatchInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFleetInput(v *DeleteFleetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFleetInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1743,6 +1893,21 @@ func validateOpStopBuildInput(v *StopBuildInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopBuildInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFleetInput(v *UpdateFleetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFleetInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

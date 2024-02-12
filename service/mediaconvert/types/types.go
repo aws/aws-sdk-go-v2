@@ -34,12 +34,7 @@ type AacSettings struct {
 	// on Bitrate control mode and Profile.
 	Bitrate *int32
 
-	// Specify the AAC profile. For the widest player compatibility and where higher
-	// bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved
-	// audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds
-	// spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE
-	// v2) adds parametric stereo, which optimizes for encoding stereo audio at very
-	// low bitrates.
+	// AAC Profile.
 	CodecProfile AacCodecProfile
 
 	// The Coding mode that you specify determines the number of audio channels and
@@ -52,29 +47,28 @@ type AacSettings struct {
 	// channels, C, L, R, Ls, Rs, LFE.
 	CodingMode AacCodingMode
 
-	// Specify the AAC rate control mode. For a constant bitrate: Choose CBR. Your AAC
-	// output bitrate will be equal to the value that you choose for Bitrate. For a
-	// variable bitrate: Choose VBR. Your AAC output bitrate will vary according to
-	// your audio content and the value that you choose for Bitrate quality.
+	// Rate Control Mode.
 	RateControlMode AacRateControlMode
 
 	// Enables LATM/LOAS AAC output. Note that if you use LATM/LOAS AAC in an output,
 	// you must choose "No container" for the output container.
 	RawFormat AacRawFormat
 
-	// Specify the AAC sample rate in samples per second (Hz). Valid sample rates
-	// depend on the AAC profile and Coding mode that you select. For a list of
-	// supported sample rates, see:
-	// https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html
+	// Specify the Sample rate in Hz. Valid sample rates depend on the Profile and
+	// Coding mode that you select. The following list shows valid sample rates for
+	// each Profile and Coding mode. * LC Profile, Coding mode 1.0, 2.0, and Receiver
+	// Mix: 8000, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 88200, 96000. * LC
+	// Profile, Coding mode 5.1: 32000, 44100, 48000, 96000. * HEV1 Profile, Coding
+	// mode 1.0 and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1 Profile,
+	// Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. * HEV2 Profile, Coding mode
+	// 2.0: 22050, 24000, 32000, 44100, 48000.
 	SampleRate *int32
 
 	// Use MPEG-2 AAC instead of MPEG-4 AAC audio for raw or MPEG-2 Transport Stream
 	// containers.
 	Specification AacSpecification
 
-	// Specify the quality of your variable bitrate (VBR) AAC audio. For a list of
-	// approximate VBR bitrates, see:
-	// https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac_vbr
+	// VBR Quality Level - Only used if rate_control_mode is VBR.
 	VbrQuality AacVbrQuality
 
 	noSmithyDocumentSerde
@@ -7100,6 +7094,22 @@ type Rectangle struct {
 // output of your job. With audio remixing, you can output more or fewer audio
 // channels than your input audio source provides.
 type RemixSettings struct {
+
+	// Optionally specify the channel in your input that contains your audio
+	// description audio signal. MediaConvert mixes your audio signal across all output
+	// channels, while reducing their volume according to your data stream. When you
+	// specify an audio description audio channel, you must also specify an audio
+	// description data channel. For more information about audio description signals,
+	// see the BBC WHP 198 and 051 white papers.
+	AudioDescriptionAudioChannel *int32
+
+	// Optionally specify the channel in your input that contains your audio
+	// description data stream. MediaConvert mixes your audio signal across all output
+	// channels, while reducing their volume according to your data stream. When you
+	// specify an audio description data channel, you must also specify an audio
+	// description audio channel. For more information about audio description signals,
+	// see the BBC WHP 198 and 051 white papers.
+	AudioDescriptionDataChannel *int32
 
 	// Channel mapping contains the group of fields that hold the remixing value for
 	// each channel, in dB. Specify remix values to indicate how much of the content

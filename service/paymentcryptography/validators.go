@@ -474,12 +474,35 @@ func validateExportDukptInitialKey(v *types.ExportDukptInitialKey) error {
 	}
 }
 
+func validateExportKeyCryptogram(v *types.ExportKeyCryptogram) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportKeyCryptogram"}
+	if v.CertificateAuthorityPublicKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityPublicKeyIdentifier"))
+	}
+	if v.WrappingKeyCertificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WrappingKeyCertificate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExportKeyMaterial(v types.ExportKeyMaterial) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportKeyMaterial"}
 	switch uv := v.(type) {
+	case *types.ExportKeyMaterialMemberKeyCryptogram:
+		if err := validateExportKeyCryptogram(&uv.Value); err != nil {
+			invalidParams.AddNested("[KeyCryptogram]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ExportKeyMaterialMemberTr31KeyBlock:
 		if err := validateExportTr31KeyBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[Tr31KeyBlock]", err.(smithy.InvalidParamsError))
@@ -537,12 +560,45 @@ func validateExportTr34KeyBlock(v *types.ExportTr34KeyBlock) error {
 	}
 }
 
+func validateImportKeyCryptogram(v *types.ImportKeyCryptogram) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportKeyCryptogram"}
+	if v.KeyAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyAttributes"))
+	} else if v.KeyAttributes != nil {
+		if err := validateKeyAttributes(v.KeyAttributes); err != nil {
+			invalidParams.AddNested("KeyAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Exportable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Exportable"))
+	}
+	if v.WrappedKeyCryptogram == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WrappedKeyCryptogram"))
+	}
+	if v.ImportToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImportKeyMaterial(v types.ImportKeyMaterial) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportKeyMaterial"}
 	switch uv := v.(type) {
+	case *types.ImportKeyMaterialMemberKeyCryptogram:
+		if err := validateImportKeyCryptogram(&uv.Value); err != nil {
+			invalidParams.AddNested("[KeyCryptogram]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ImportKeyMaterialMemberRootCertificatePublicKey:
 		if err := validateRootCertificatePublicKey(&uv.Value); err != nil {
 			invalidParams.AddNested("[RootCertificatePublicKey]", err.(smithy.InvalidParamsError))

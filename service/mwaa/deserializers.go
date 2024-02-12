@@ -475,6 +475,24 @@ func awsRestjson1_deserializeOpDocumentCreateWebLoginTokenOutput(v **CreateWebLo
 
 	for key, value := range shape {
 		switch key {
+		case "AirflowIdentity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AirflowIdentity to be of type string, got %T instead", value)
+				}
+				sv.AirflowIdentity = ptr.String(jtv)
+			}
+
+		case "IamIdentity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamIdentity to be of type string, got %T instead", value)
+				}
+				sv.IamIdentity = ptr.String(jtv)
+			}
+
 		case "WebServerHostname":
 			if value != nil {
 				jtv, ok := value.(string)

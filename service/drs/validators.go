@@ -1019,6 +1019,12 @@ func validatePITPolicyRule(v *types.PITPolicyRule) error {
 	if len(v.Units) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Units"))
 	}
+	if v.Interval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
+	}
+	if v.RetentionDuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetentionDuration"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1476,6 +1482,9 @@ func validateOpPutLaunchActionInput(v *PutLaunchActionInput) error {
 	}
 	if v.ActionCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionCode"))
+	}
+	if v.Order == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
 	}
 	if v.ActionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionId"))

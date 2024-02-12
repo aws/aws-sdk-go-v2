@@ -114,6 +114,11 @@ type Channel struct {
 	// Channel name.
 	Name *string
 
+	// Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN
+	// and enables playback restriction. Default: "" (empty string, no playback
+	// restriction policy is applied).
+	PlaybackRestrictionPolicyArn *string
+
 	// Channel playback URL.
 	PlaybackUrl *string
 
@@ -123,8 +128,8 @@ type Channel struct {
 	// STANDARD ), preset is the empty string ( "" ).
 	Preset TranscodePreset
 
-	// Recording-configuration ARN. A value other than an empty string indicates that
-	// recording is enabled. Default: "" (empty string, recording is disabled).
+	// Recording-configuration ARN. A valid ARN value here both specifies the ARN and
+	// enables recording. Default: "" (empty string, recording is disabled).
 	RecordingConfigurationArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
@@ -165,14 +170,19 @@ type ChannelSummary struct {
 	// Channel name.
 	Name *string
 
+	// Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN
+	// and enables playback restriction. Default: "" (empty string, no playback
+	// restriction policy is applied).
+	PlaybackRestrictionPolicyArn *string
+
 	// Optional transcode preset for the channel. This is selectable only for
 	// ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default
 	// preset is HIGHER_BANDWIDTH_DELIVERY . For other channel types ( BASIC and
 	// STANDARD ), preset is the empty string ( "" ).
 	Preset TranscodePreset
 
-	// Recording-configuration ARN. A value other than an empty string indicates that
-	// recording is enabled. Default: "" (empty string, recording is disabled).
+	// Recording-configuration ARN. A valid ARN value here both specifies the ARN and
+	// enables recording. Default: "" (empty string, recording is disabled).
 	RecordingConfigurationArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
@@ -244,6 +254,85 @@ type PlaybackKeyPairSummary struct {
 	Arn *string
 
 	// Playback-key-pair name. The value does not need to be unique.
+	Name *string
+
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing a policy to constrain playback by country and/or origin
+// sites.
+type PlaybackRestrictionPolicy struct {
+
+	// A list of country codes that control geoblocking restriction. Allowed values
+	// are the officially assigned ISO 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+	// codes. Default: All countries (an empty array).
+	//
+	// This member is required.
+	AllowedCountries []string
+
+	// A list of origin sites that control CORS restriction. Allowed values are the
+	// same as valid values of the Origin header defined at
+	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin)
+	// . Default: All origins (an empty array).
+	//
+	// This member is required.
+	AllowedOrigins []string
+
+	// Playback-restriction-policy ARN
+	//
+	// This member is required.
+	Arn *string
+
+	// Whether channel playback is constrained by origin site. Default: false .
+	EnableStrictOriginEnforcement *bool
+
+	// Playback-restriction-policy name. The value does not need to be unique.
+	Name *string
+
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// for more information, including restrictions that apply to tags and "Tag naming
+	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
+	// what is documented there.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a PlaybackRestrictionPolicy.
+type PlaybackRestrictionPolicySummary struct {
+
+	// A list of country codes that control geoblocking restriction. Allowed values
+	// are the officially assigned ISO 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+	// codes. Default: All countries (an empty array).
+	//
+	// This member is required.
+	AllowedCountries []string
+
+	// A list of origin sites that control CORS restriction. Allowed values are the
+	// same as valid values of the Origin header defined at
+	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin)
+	// . Default: All origins (an empty array).
+	//
+	// This member is required.
+	AllowedOrigins []string
+
+	// Playback-restriction-policy ARN
+	//
+	// This member is required.
+	Arn *string
+
+	// Whether channel playback is constrained by origin site. Default: false .
+	EnableStrictOriginEnforcement *bool
+
+	// Playback-restriction-policy name. The value does not need to be unique.
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form

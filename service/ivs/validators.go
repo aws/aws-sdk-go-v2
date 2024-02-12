@@ -150,6 +150,26 @@ func (m *validateOpDeletePlaybackKeyPair) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePlaybackRestrictionPolicy struct {
+}
+
+func (*validateOpDeletePlaybackRestrictionPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePlaybackRestrictionPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePlaybackRestrictionPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePlaybackRestrictionPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRecordingConfiguration struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpGetPlaybackKeyPair) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetPlaybackKeyPairInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPlaybackRestrictionPolicy struct {
+}
+
+func (*validateOpGetPlaybackRestrictionPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPlaybackRestrictionPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPlaybackRestrictionPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPlaybackRestrictionPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +550,26 @@ func (m *validateOpUpdateChannel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePlaybackRestrictionPolicy struct {
+}
+
+func (*validateOpUpdatePlaybackRestrictionPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePlaybackRestrictionPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePlaybackRestrictionPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePlaybackRestrictionPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpBatchGetChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetChannel{}, middleware.After)
 }
@@ -538,6 +598,10 @@ func addOpDeletePlaybackKeyPairValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeletePlaybackKeyPair{}, middleware.After)
 }
 
+func addOpDeletePlaybackRestrictionPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePlaybackRestrictionPolicy{}, middleware.After)
+}
+
 func addOpDeleteRecordingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRecordingConfiguration{}, middleware.After)
 }
@@ -552,6 +616,10 @@ func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetPlaybackKeyPairValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPlaybackKeyPair{}, middleware.After)
+}
+
+func addOpGetPlaybackRestrictionPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPlaybackRestrictionPolicy{}, middleware.After)
 }
 
 func addOpGetRecordingConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -608,6 +676,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
+}
+
+func addOpUpdatePlaybackRestrictionPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePlaybackRestrictionPolicy{}, middleware.After)
 }
 
 func validateBatchStartViewerSessionRevocationViewerSession(v *types.BatchStartViewerSessionRevocationViewerSession) error {
@@ -790,6 +862,21 @@ func validateOpDeletePlaybackKeyPairInput(v *DeletePlaybackKeyPairInput) error {
 	}
 }
 
+func validateOpDeletePlaybackRestrictionPolicyInput(v *DeletePlaybackRestrictionPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePlaybackRestrictionPolicyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteRecordingConfigurationInput(v *DeleteRecordingConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -840,6 +927,21 @@ func validateOpGetPlaybackKeyPairInput(v *GetPlaybackKeyPairInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPlaybackKeyPairInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPlaybackRestrictionPolicyInput(v *GetPlaybackRestrictionPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPlaybackRestrictionPolicyInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
@@ -1062,6 +1164,21 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePlaybackRestrictionPolicyInput(v *UpdatePlaybackRestrictionPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePlaybackRestrictionPolicyInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}

@@ -1,3 +1,7 @@
+# v1.22.7 (2024-01-22)
+
+* **Documentation**: Doc-only update around removing AL1 from list of available AMIs for Cloud9
+
 # v1.22.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -25,12 +25,16 @@ import (
 // instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon
 // EC2. However, customers who have used Amazon EI at least once during the past
 // 30-day period are considered current customers and will be able to continue
-// using the service. The Amazon ECS API follows an eventual consistency model.
-// This is because of the distributed nature of the system supporting the API. This
-// means that the result of an API command you run that affects your Amazon ECS
-// resources might not be immediately visible to all subsequent commands you run.
-// Keep this in mind when you carry out an API command that immediately follows a
-// previous API command. To manage eventual consistency, you can do the following:
+// using the service. You can attach Amazon EBS volumes to Amazon ECS tasks by
+// configuring the volume when creating or updating a service. For more infomation,
+// see Amazon EBS volumes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types)
+// in the Amazon Elastic Container Service Developer Guide. The Amazon ECS API
+// follows an eventual consistency model. This is because of the distributed nature
+// of the system supporting the API. This means that the result of an API command
+// you run that affects your Amazon ECS resources might not be immediately visible
+// to all subsequent commands you run. Keep this in mind when you carry out an API
+// command that immediately follows a previous API command. To manage eventual
+// consistency, you can do the following:
 //   - Confirm the state of the resource before you run a command to modify it.
 //     Run the DescribeTasks command using an exponential backoff algorithm to ensure
 //     that you allow enough time for the previous command to propagate through the
@@ -122,10 +126,10 @@ type RunTaskInput struct {
 	// in the Amazon Elastic Container Service Developer Guide. The FARGATE launch
 	// type runs your tasks on Fargate On-Demand infrastructure. Fargate Spot
 	// infrastructure is available for use but a capacity provider strategy must be
-	// used. For more information, see Fargate capacity providers (https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html)
-	// in the Amazon ECS User Guide for Fargate. The EC2 launch type runs your tasks
-	// on Amazon EC2 instances registered to your cluster. The EXTERNAL launch type
-	// runs your tasks on your on-premises server or virtual machine (VM) capacity
+	// used. For more information, see Fargate capacity providers (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html)
+	// in the Amazon ECS Developer Guide. The EC2 launch type runs your tasks on
+	// Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs
+	// your tasks on your on-premises server or virtual machine (VM) capacity
 	// registered to your cluster. A task can use either a launch type or a capacity
 	// provider strategy. If a launchType is specified, the capacityProviderStrategy
 	// parameter must be omitted. When you use cluster auto scaling, you must specify
@@ -204,12 +208,21 @@ type RunTaskInput struct {
 	//   prefix do not count against your tags per resource limit.
 	Tags []types.Tag
 
+	// The details of the volume that was configuredAtLaunch . You can configure the
+	// size, volumeType, IOPS, throughput, snapshot and encryption in in
+	// TaskManagedEBSVolumeConfiguration (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TaskManagedEBSVolumeConfiguration.html)
+	// . The name of the volume must match the name from the task definition.
+	VolumeConfigurations []types.TaskVolumeConfiguration
+
 	noSmithyDocumentSerde
 }
 
 type RunTaskOutput struct {
 
-	// Any failures associated with the call.
+	// Any failures associated with the call. For information about how to address
+	// failures, see Service event messages (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages.html#service-event-messages-list)
+	// and API failure reasons (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	Failures []types.Failure
 
 	// A full description of the tasks that were run. The tasks that were successfully

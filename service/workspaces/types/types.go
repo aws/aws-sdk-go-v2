@@ -931,6 +931,9 @@ type Workspace struct {
 	// The identifier of the WorkSpace.
 	WorkspaceId *string
 
+	// The name of the user-decoupled WorkSpace.
+	WorkspaceName *string
+
 	// The properties of the WorkSpace.
 	WorkspaceProperties *WorkspaceProperties
 
@@ -1269,13 +1272,9 @@ type WorkspaceProperties struct {
 	RootVolumeSizeGib *int32
 
 	// The running mode. For more information, see Manage the WorkSpace Running Mode (https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html)
-	// .
-	//   - The MANUAL value is only supported by Amazon WorkSpaces Core. Contact your
-	//   account team to be allow-listed to use this value. For more information, see
-	//   Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/) .
-	//   - Ensure you review your running mode to ensure you are using a running mode
-	//   that is optimal for your needs and budget. For more information on switching
-	//   running modes, see Can I switch between hourly and monthly billing? (https://aws.amazon.com/workspaces/faqs/#:~:text=Q%3A%20Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%3F)
+	// . The MANUAL value is only supported by Amazon WorkSpaces Core. Contact your
+	// account team to be allow-listed to use this value. For more information, see
+	// Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/) .
 	RunningMode RunningMode
 
 	// The time after a user logs off when WorkSpaces are automatically stopped.
@@ -1306,7 +1305,8 @@ type WorkspaceRequest struct {
 	DirectoryId *string
 
 	// The user name of the user for the WorkSpace. This user name must exist in the
-	// Directory Service directory for the WorkSpace.
+	// Directory Service directory for the WorkSpace. The reserved keyword, [UNDEFINED]
+	// , is used when creating user-decoupled WorkSpaces.
 	//
 	// This member is required.
 	UserName *string
@@ -1323,6 +1323,9 @@ type WorkspaceRequest struct {
 	// The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace.
 	// Amazon WorkSpaces does not support asymmetric KMS keys.
 	VolumeEncryptionKey *string
+
+	// The name of the user-decoupled WorkSpace.
+	WorkspaceName *string
 
 	// The WorkSpace properties.
 	WorkspaceProperties *WorkspaceProperties

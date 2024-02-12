@@ -1622,6 +1622,18 @@ type PredictionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Error that occurred during project deletion
+type ProjectDeletionError struct {
+
+	// Project Deletion Error Code
+	Code *string
+
+	// Project Deletion Error Message
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of a project member.
 type ProjectMember struct {
 
@@ -1666,6 +1678,12 @@ type ProjectSummary struct {
 
 	// The description of a project.
 	Description *string
+
+	// Reasons for failed project deletion
+	FailureReasons []ProjectDeletionError
+
+	// Status of the project
+	ProjectStatus ProjectStatus
 
 	// The timestamp of when the project was updated.
 	UpdatedAt *time.Time

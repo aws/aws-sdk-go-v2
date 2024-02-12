@@ -769,6 +769,7 @@ const (
 	InstanceAttributeTypeMultiPartyConference      InstanceAttributeType = "MULTI_PARTY_CONFERENCE"
 	InstanceAttributeTypeHighVolumeOutbound        InstanceAttributeType = "HIGH_VOLUME_OUTBOUND"
 	InstanceAttributeTypeEnhancedContactMonitoring InstanceAttributeType = "ENHANCED_CONTACT_MONITORING"
+	InstanceAttributeTypeEnhancedChatMonitoring    InstanceAttributeType = "ENHANCED_CHAT_MONITORING"
 )
 
 // Values returns all known values for InstanceAttributeType. Note that this can
@@ -786,6 +787,7 @@ func (InstanceAttributeType) Values() []InstanceAttributeType {
 		"MULTI_PARTY_CONFERENCE",
 		"HIGH_VOLUME_OUTBOUND",
 		"ENHANCED_CONTACT_MONITORING",
+		"ENHANCED_CHAT_MONITORING",
 	}
 }
 
@@ -1039,10 +1041,11 @@ type ParticipantRole string
 
 // Enum values for ParticipantRole
 const (
-	ParticipantRoleAgent     ParticipantRole = "AGENT"
-	ParticipantRoleCustomer  ParticipantRole = "CUSTOMER"
-	ParticipantRoleSystem    ParticipantRole = "SYSTEM"
-	ParticipantRoleCustomBot ParticipantRole = "CUSTOM_BOT"
+	ParticipantRoleAgent      ParticipantRole = "AGENT"
+	ParticipantRoleCustomer   ParticipantRole = "CUSTOMER"
+	ParticipantRoleSystem     ParticipantRole = "SYSTEM"
+	ParticipantRoleCustomBot  ParticipantRole = "CUSTOM_BOT"
+	ParticipantRoleSupervisor ParticipantRole = "SUPERVISOR"
 )
 
 // Values returns all known values for ParticipantRole. Note that this can be
@@ -1054,6 +1057,7 @@ func (ParticipantRole) Values() []ParticipantRole {
 		"CUSTOMER",
 		"SYSTEM",
 		"CUSTOM_BOT",
+		"SUPERVISOR",
 	}
 }
 

@@ -683,6 +683,13 @@ func awsRestjson1_serializeOpDocumentListTransactionsInput(v *ListTransactionsIn
 		ok.String(*v.Address)
 	}
 
+	if v.ConfirmationStatusFilter != nil {
+		ok := object.Key("confirmationStatusFilter")
+		if err := awsRestjson1_serializeDocumentConfirmationStatusFilter(v.ConfirmationStatusFilter, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FromBlockchainInstant != nil {
 		ok := object.Key("fromBlockchainInstant")
 		if err := awsRestjson1_serializeDocumentBlockchainInstant(v.FromBlockchainInstant, ok); err != nil {
@@ -759,6 +766,31 @@ func awsRestjson1_serializeDocumentBlockchainInstant(v *types.BlockchainInstant,
 		ok.Double(smithytime.FormatEpochSeconds(*v.Time))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfirmationStatusFilter(v *types.ConfirmationStatusFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Include != nil {
+		ok := object.Key("include")
+		if err := awsRestjson1_serializeDocumentConfirmationStatusIncludeList(v.Include, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfirmationStatusIncludeList(v []types.ConfirmationStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

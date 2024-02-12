@@ -15,6 +15,7 @@
 
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
+import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4aUtils;
 import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.aws.traits.auth.SigV4ATrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -23,10 +24,13 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
+import software.amazon.smithy.go.codegen.integration.ConfigField;
+import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.integration.auth.SigV4ADefinition;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
 
@@ -34,16 +38,36 @@ import java.util.List;
 
 import static software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator.generateFinalizeMiddlewareFunc;
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
+import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
 
 /**
  * Adds auth scheme codegen support for aws.auth#sigv4a.
  */
 public class AwsSigV4aAuthScheme implements GoIntegration {
+    private static final ConfigField Signer = ConfigField.builder()
+            .name(AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME)
+            .type(buildPackageSymbol(AwsSignatureVersion4aUtils.V4A_SIGNER_INTERFACE_NAME))
+            .documentation("Signature Version 4a (SigV4a) Signer")
+            .build();
+
+    private static final ConfigFieldResolver SignerResolver = ConfigFieldResolver.builder()
+            .location(ConfigFieldResolver.Location.CLIENT)
+            .target(ConfigFieldResolver.Target.INITIALIZATION)
+            .resolver(buildPackageSymbol(AwsSignatureVersion4aUtils.SIGNER_RESOLVER))
+            .build();
+
+    private static boolean isSigV4A(Model model, ServiceShape service) {
+        return service.hasTrait(SigV4ATrait.class);
+    }
+
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
+                        .servicePredicate(AwsSigV4aAuthScheme::isSigV4A)
                         .addAuthSchemeDefinition(SigV4ATrait.ID, new AwsSigV4A())
+                        .addConfigField(Signer)
+                        .addConfigFieldResolver(SignerResolver)
                         .build()
         );
     }
@@ -52,9 +76,17 @@ public class AwsSigV4aAuthScheme implements GoIntegration {
     public void writeAdditionalFiles(
             GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator
     ) {
-        if (settings.getService(model).hasTrait(SigV4ATrait.class)) {
-            goDelegator.useFileWriter("options.go", settings.getModuleName(), generateAdditionalSource());
+        var service = settings.getService(model);
+        if (!isSigV4A(model, service)) {
+            return;
         }
+
+        goDelegator.useFileWriter("options.go", settings.getModuleName(), generateAdditionalSource());
+        goDelegator.useShapeWriter(service, writer -> {
+            AwsSignatureVersion4aUtils.writerSignerInterface(writer);
+            AwsSignatureVersion4aUtils.writerConfigFieldResolver(writer, service);
+            AwsSignatureVersion4aUtils.writeNewV4ASignerFunc(writer, service);
+        });
     }
 
     public static class AwsSigV4A extends SigV4ADefinition {

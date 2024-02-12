@@ -7,6 +7,32 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// Raised in case of an authentication or authorization failure.
+type AccessDeniedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Raised when a conflict is encountered.
 type ConflictException struct {
 	Message *string
@@ -144,7 +170,35 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A resource could not be validated
+// Request cannot be processed due to known reasons. Eg. partition full.
+type UnprocessableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Reason UnprocessableExceptionReason
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnprocessableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnprocessableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnprocessableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnprocessableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnprocessableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A resource could not be validated.
 type ValidationException struct {
 	Message *string
 

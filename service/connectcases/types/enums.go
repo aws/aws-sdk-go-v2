@@ -2,6 +2,26 @@
 
 package types
 
+type AuditEventType string
+
+// Enum values for AuditEventType
+const (
+	AuditEventTypeCaseCreated        AuditEventType = "Case.Created"
+	AuditEventTypeCaseUpdated        AuditEventType = "Case.Updated"
+	AuditEventTypeRelatedItemCreated AuditEventType = "RelatedItem.Created"
+)
+
+// Values returns all known values for AuditEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuditEventType) Values() []AuditEventType {
+	return []AuditEventType{
+		"Case.Created",
+		"Case.Updated",
+		"RelatedItem.Created",
+	}
+}
+
 type CommentBodyTextType string
 
 // Enum values for CommentBodyTextType
@@ -66,6 +86,7 @@ const (
 	FieldTypeDateTime     FieldType = "DateTime"
 	FieldTypeSingleSelect FieldType = "SingleSelect"
 	FieldTypeUrl          FieldType = "Url"
+	FieldTypeUser         FieldType = "User"
 )
 
 // Values returns all known values for FieldType. Note that this can be expanded
@@ -79,6 +100,7 @@ func (FieldType) Values() []FieldType {
 		"DateTime",
 		"SingleSelect",
 		"Url",
+		"User",
 	}
 }
 

@@ -1,3 +1,7 @@
+# v1.23.0 (2024-01-18)
+
+* **Feature**: Increase BatchGetRecord limits from 10 items to 100 items
+
 # v1.22.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

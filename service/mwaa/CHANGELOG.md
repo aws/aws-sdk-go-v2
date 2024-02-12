@@ -1,3 +1,11 @@
+# v1.24.0 (2024-01-29)
+
+* **Feature**: This release adds MAINTENANCE environment status for Amazon MWAA environments.
+
+# v1.23.0 (2024-01-12)
+
+* **Feature**: This Amazon MWAA feature release includes new fields in CreateWebLoginToken response model. The new fields IamIdentity and AirflowIdentity will let you match identifications, as the Airflow identity length is currently hashed to 64 characters.
+
 # v1.22.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions
