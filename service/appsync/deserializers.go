@@ -1233,6 +1233,9 @@ func awsRestjson1_deserializeOpErrorCreateFunction(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsRestjson1_deserializeErrorConcurrentModificationException(response, errorBody)
 
@@ -2218,6 +2221,9 @@ func awsRestjson1_deserializeOpErrorDeleteFunction(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsRestjson1_deserializeErrorConcurrentModificationException(response, errorBody)
 
@@ -8826,6 +8832,9 @@ func awsRestjson1_deserializeOpErrorUpdateFunction(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsRestjson1_deserializeErrorConcurrentModificationException(response, errorBody)
 
@@ -10155,6 +10164,15 @@ func awsRestjson1_deserializeDocumentApiCache(v **types.ApiCache, value interfac
 				sv.AtRestEncryptionEnabled = jtv
 			}
 
+		case "healthMetricsConfig":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CacheHealthMetricsConfig to be of type string, got %T instead", value)
+				}
+				sv.HealthMetricsConfig = types.CacheHealthMetricsConfig(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11072,6 +11090,15 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 				return err
 			}
 
+		case "metricsConfig":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceLevelMetricsConfig to be of type string, got %T instead", value)
+				}
+				sv.MetricsConfig = types.DataSourceLevelMetricsConfig(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11894,6 +11921,64 @@ func awsRestjson1_deserializeDocumentElasticsearchDataSourceConfig(v **types.Ela
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEnhancedMetricsConfig(v **types.EnhancedMetricsConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EnhancedMetricsConfig
+	if *v == nil {
+		sv = &types.EnhancedMetricsConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dataSourceLevelMetricsBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceLevelMetricsBehavior to be of type string, got %T instead", value)
+				}
+				sv.DataSourceLevelMetricsBehavior = types.DataSourceLevelMetricsBehavior(jtv)
+			}
+
+		case "operationLevelMetricsConfig":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OperationLevelMetricsConfig to be of type string, got %T instead", value)
+				}
+				sv.OperationLevelMetricsConfig = types.OperationLevelMetricsConfig(jtv)
+			}
+
+		case "resolverLevelMetricsBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResolverLevelMetricsBehavior to be of type string, got %T instead", value)
+				}
+				sv.ResolverLevelMetricsBehavior = types.ResolverLevelMetricsBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEnvironmentVariableMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12325,6 +12410,11 @@ func awsRestjson1_deserializeDocumentGraphqlApi(v **types.GraphqlApi, value inte
 
 		case "dns":
 			if err := awsRestjson1_deserializeDocumentMapOfStringToString(&sv.Dns, value); err != nil {
+				return err
+			}
+
+		case "enhancedMetricsConfig":
+			if err := awsRestjson1_deserializeDocumentEnhancedMetricsConfig(&sv.EnhancedMetricsConfig, value); err != nil {
 				return err
 			}
 
@@ -13331,6 +13421,15 @@ func awsRestjson1_deserializeDocumentResolver(v **types.Resolver, value interfac
 					return err
 				}
 				sv.MaxBatchSize = int32(i64)
+			}
+
+		case "metricsConfig":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResolverLevelMetricsConfig to be of type string, got %T instead", value)
+				}
+				sv.MetricsConfig = types.ResolverLevelMetricsConfig(jtv)
 			}
 
 		case "pipelineConfig":

@@ -66,6 +66,14 @@ type UpdateDataSourceInput struct {
 	// The new Lambda configuration.
 	LambdaConfig *types.LambdaDataSourceConfig
 
+	// Enables or disables enhanced data source metrics for specified data sources.
+	// Note that metricsConfig won't be used unless the dataSourceLevelMetricsBehavior
+	// value is set to PER_DATA_SOURCE_METRICS . If the dataSourceLevelMetricsBehavior
+	// is set to FULL_REQUEST_DATA_SOURCE_METRICS instead, metricsConfig will be
+	// ignored. However, you can still set its value. metricsConfig can be ENABLED or
+	// DISABLED .
+	MetricsConfig types.DataSourceLevelMetricsConfig
+
 	// The new OpenSearch configuration.
 	OpenSearchServiceConfig *types.OpenSearchServiceDataSourceConfig
 

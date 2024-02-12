@@ -2598,6 +2598,13 @@ func awsAwsjson11_serializeOpDocumentRegisterDomainInput(v *RegisterDomainInput,
 		ok.Boolean(*v.AutoRenew)
 	}
 
+	if v.BillingContact != nil {
+		ok := object.Key("BillingContact")
+		if err := awsAwsjson11_serializeDocumentContactDetail(v.BillingContact, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DomainName != nil {
 		ok := object.Key("DomainName")
 		ok.String(*v.DomainName)
@@ -2616,6 +2623,11 @@ func awsAwsjson11_serializeOpDocumentRegisterDomainInput(v *RegisterDomainInput,
 	if v.PrivacyProtectAdminContact != nil {
 		ok := object.Key("PrivacyProtectAdminContact")
 		ok.Boolean(*v.PrivacyProtectAdminContact)
+	}
+
+	if v.PrivacyProtectBillingContact != nil {
+		ok := object.Key("PrivacyProtectBillingContact")
+		ok.Boolean(*v.PrivacyProtectBillingContact)
 	}
 
 	if v.PrivacyProtectRegistrantContact != nil {
@@ -2736,6 +2748,13 @@ func awsAwsjson11_serializeOpDocumentTransferDomainInput(v *TransferDomainInput,
 		ok.Boolean(*v.AutoRenew)
 	}
 
+	if v.BillingContact != nil {
+		ok := object.Key("BillingContact")
+		if err := awsAwsjson11_serializeDocumentContactDetail(v.BillingContact, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DomainName != nil {
 		ok := object.Key("DomainName")
 		ok.String(*v.DomainName)
@@ -2761,6 +2780,11 @@ func awsAwsjson11_serializeOpDocumentTransferDomainInput(v *TransferDomainInput,
 	if v.PrivacyProtectAdminContact != nil {
 		ok := object.Key("PrivacyProtectAdminContact")
 		ok.Boolean(*v.PrivacyProtectAdminContact)
+	}
+
+	if v.PrivacyProtectBillingContact != nil {
+		ok := object.Key("PrivacyProtectBillingContact")
+		ok.Boolean(*v.PrivacyProtectBillingContact)
 	}
 
 	if v.PrivacyProtectRegistrantContact != nil {
@@ -2818,6 +2842,13 @@ func awsAwsjson11_serializeOpDocumentUpdateDomainContactInput(v *UpdateDomainCon
 		}
 	}
 
+	if v.BillingContact != nil {
+		ok := object.Key("BillingContact")
+		if err := awsAwsjson11_serializeDocumentContactDetail(v.BillingContact, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Consent != nil {
 		ok := object.Key("Consent")
 		if err := awsAwsjson11_serializeDocumentConsent(v.Consent, ok); err != nil {
@@ -2854,6 +2885,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDomainContactPrivacyInput(v *UpdateDo
 	if v.AdminPrivacy != nil {
 		ok := object.Key("AdminPrivacy")
 		ok.Boolean(*v.AdminPrivacy)
+	}
+
+	if v.BillingPrivacy != nil {
+		ok := object.Key("BillingPrivacy")
+		ok.Boolean(*v.BillingPrivacy)
 	}
 
 	if v.DomainName != nil {

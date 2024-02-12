@@ -62,6 +62,18 @@ type ApiCache struct {
 	// creation.
 	AtRestEncryptionEnabled bool
 
+	// Controls how cache health metrics will be emitted to CloudWatch. Cache health
+	// metrics include:
+	//   - NetworkBandwidthOutAllowanceExceeded: The network packets dropped because
+	//   the throughput exceeded the aggregated bandwidth limit. This is useful for
+	//   diagnosing bottlenecks in a cache configuration.
+	//   - EngineCPUUtilization: The CPU utilization (percentage) allocated to the
+	//   Redis process. This is useful for diagnosing bottlenecks in a cache
+	//   configuration.
+	// Metrics will be recorded by API ID. You can set the value to ENABLED or DISABLED
+	// .
+	HealthMetricsConfig CacheHealthMetricsConfig
+
 	// The cache instance status.
 	//   - AVAILABLE: The instance is available for use.
 	//   - CREATING: The instance is currently creating.
@@ -299,6 +311,14 @@ type DataSource struct {
 	// Lambda settings.
 	LambdaConfig *LambdaDataSourceConfig
 
+	// Enables or disables enhanced data source metrics for specified data sources.
+	// Note that metricsConfig won't be used unless the dataSourceLevelMetricsBehavior
+	// value is set to PER_DATA_SOURCE_METRICS . If the dataSourceLevelMetricsBehavior
+	// is set to FULL_REQUEST_DATA_SOURCE_METRICS instead, metricsConfig will be
+	// ignored. However, you can still set its value. metricsConfig can be ENABLED or
+	// DISABLED .
+	MetricsConfig DataSourceLevelMetricsConfig
+
 	// The name of the data source.
 	Name *string
 
@@ -511,6 +531,95 @@ type ElasticsearchDataSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Enables and controls the enhanced metrics feature. Enhanced metrics emit
+// granular data on API usage and performance such as AppSync request and error
+// counts, latency, and cache hits/misses. All enhanced metric data is sent to your
+// CloudWatch account, and you can configure the types of data that will be sent.
+// Enhanced metrics can be configured at the resolver, data source, and operation
+// levels. EnhancedMetricsConfig contains three required parameters, each
+// controlling one of these categories:
+//   - resolverLevelMetricsBehavior : Controls how resolver metrics will be emitted
+//     to CloudWatch. Resolver metrics include:
+//   - GraphQL errors: The number of GraphQL errors that occurred.
+//   - Requests: The number of invocations that occurred during a request.
+//   - Latency: The time to complete a resolver invocation.
+//   - Cache hits: The number of cache hits during a request.
+//   - Cache misses: The number of cache misses during a request. These metrics
+//     can be emitted to CloudWatch per resolver or for all resolvers in the request.
+//     Metrics will be recorded by API ID and resolver name.
+//     resolverLevelMetricsBehavior accepts one of these values at a time:
+//   - FULL_REQUEST_RESOLVER_METRICS : Records and emits metric data for all
+//     resolvers in the request.
+//   - PER_RESOLVER_METRICS : Records and emits metric data for resolvers that have
+//     the metricConfig value set to ENABLED .
+//   - dataSourceLevelMetricsBehavior : Controls how data source metrics will be
+//     emitted to CloudWatch. Data source metrics include:
+//   - Requests: The number of invocations that occured during a request.
+//   - Latency: The time to complete a data source invocation.
+//   - Errors: The number of errors that occurred during a data source invocation.
+//     These metrics can be emitted to CloudWatch per data source or for all data
+//     sources in the request. Metrics will be recorded by API ID and data source name.
+//     dataSourceLevelMetricsBehavior accepts one of these values at a time:
+//   - FULL_REQUEST_DATA_SOURCE_METRICS : Records and emits metric data for all
+//     data sources in the request.
+//   - PER_DATA_SOURCE_METRICS : Records and emits metric data for data sources
+//     that have the metricConfig value set to ENABLED .
+//   - operationLevelMetricsConfig : Controls how operation metrics will be emitted
+//     to CloudWatch. Operation metrics include:
+//   - Requests: The number of times a specified GraphQL operation was called.
+//   - GraphQL errors: The number of GraphQL errors that occurred during a
+//     specified GraphQL operation. Metrics will be recorded by API ID and operation
+//     name. You can set the value to ENABLED or DISABLED .
+type EnhancedMetricsConfig struct {
+
+	// Controls how data source metrics will be emitted to CloudWatch. Data source
+	// metrics include:
+	//   - Requests: The number of invocations that occured during a request.
+	//   - Latency: The time to complete a data source invocation.
+	//   - Errors: The number of errors that occurred during a data source invocation.
+	// These metrics can be emitted to CloudWatch per data source or for all data
+	// sources in the request. Metrics will be recorded by API ID and data source name.
+	// dataSourceLevelMetricsBehavior accepts one of these values at a time:
+	//   - FULL_REQUEST_DATA_SOURCE_METRICS : Records and emits metric data for all
+	//   data sources in the request.
+	//   - PER_DATA_SOURCE_METRICS : Records and emits metric data for data sources
+	//   that have the metricConfig value set to ENABLED .
+	//
+	// This member is required.
+	DataSourceLevelMetricsBehavior DataSourceLevelMetricsBehavior
+
+	// Controls how operation metrics will be emitted to CloudWatch. Operation metrics
+	// include:
+	//   - Requests: The number of times a specified GraphQL operation was called.
+	//   - GraphQL errors: The number of GraphQL errors that occurred during a
+	//   specified GraphQL operation.
+	// Metrics will be recorded by API ID and operation name. You can set the value to
+	// ENABLED or DISABLED .
+	//
+	// This member is required.
+	OperationLevelMetricsConfig OperationLevelMetricsConfig
+
+	// Controls how resolver metrics will be emitted to CloudWatch. Resolver metrics
+	// include:
+	//   - GraphQL errors: The number of GraphQL errors that occurred.
+	//   - Requests: The number of invocations that occurred during a request.
+	//   - Latency: The time to complete a resolver invocation.
+	//   - Cache hits: The number of cache hits during a request.
+	//   - Cache misses: The number of cache misses during a request.
+	// These metrics can be emitted to CloudWatch per resolver or for all resolvers in
+	// the request. Metrics will be recorded by API ID and resolver name.
+	// resolverLevelMetricsBehavior accepts one of these values at a time:
+	//   - FULL_REQUEST_RESOLVER_METRICS : Records and emits metric data for all
+	//   resolvers in the request.
+	//   - PER_RESOLVER_METRICS : Records and emits metric data for resolvers that have
+	//   the metricConfig value set to ENABLED .
+	//
+	// This member is required.
+	ResolverLevelMetricsBehavior ResolverLevelMetricsBehavior
+
+	noSmithyDocumentSerde
+}
+
 // Contains the list of errors generated. When using JavaScript, this will apply
 // to the request or response function evaluation.
 type ErrorDetail struct {
@@ -617,6 +726,9 @@ type GraphqlApi struct {
 
 	// The DNS records for the API.
 	Dns map[string]string
+
+	// The enhancedMetricsConfig object.
+	EnhancedMetricsConfig *EnhancedMetricsConfig
 
 	// Sets the value of the GraphQL API to enable ( ENABLED ) or disable ( DISABLED )
 	// introspection. If no value is provided, the introspection configuration will be
@@ -927,6 +1039,13 @@ type Resolver struct {
 
 	// The maximum batching size for a resolver.
 	MaxBatchSize int32
+
+	// Enables or disables enhanced resolver metrics for specified resolvers. Note
+	// that metricsConfig won't be used unless the resolverLevelMetricsBehavior value
+	// is set to PER_RESOLVER_METRICS . If the resolverLevelMetricsBehavior is set to
+	// FULL_REQUEST_RESOLVER_METRICS instead, metricsConfig will be ignored. However,
+	// you can still set its value. metricsConfig can be ENABLED or DISABLED .
+	MetricsConfig ResolverLevelMetricsConfig
 
 	// The PipelineConfig .
 	PipelineConfig *PipelineConfig

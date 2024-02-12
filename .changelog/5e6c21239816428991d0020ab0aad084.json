@@ -1,0 +1,8 @@
+{
+    "id": "5e6c2123-9816-4289-91d0-020ab0aad084",
+    "type": "feature",
+    "description": "This release adds bill contact support for RegisterDomain, TransferDomain, UpdateDomainContact and GetDomainDetail API.",
+    "modules": [
+        "service/route53domains"
+    ]
+}

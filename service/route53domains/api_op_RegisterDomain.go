@@ -105,34 +105,44 @@ type RegisterDomainInput struct {
 	// true
 	AutoRenew *bool
 
+	// Provides detailed contact information. For information about the values that
+	// you specify for each element, see ContactDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html)
+	// .
+	BillingContact *types.ContactDetail
+
 	// Reserved for future use.
 	IdnLangCode *string
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true , WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
-	// return the information that you entered for the admin contact. You must specify
-	// the same privacy setting for the administrative, registrant, and technical
-	// contacts. Default: true
+	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
+	// WHOIS queries return the information that you entered for the admin contact. You
+	// must specify the same privacy setting for the administrative, billing,
+	// registrant, and technical contacts. Default: true
 	PrivacyProtectAdminContact *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true , WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
-	// return the information that you entered for the registrant contact (the domain
-	// owner). You must specify the same privacy setting for the administrative,
-	// registrant, and technical contacts. Default: true
+	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
+	// WHOIS queries return the information that you entered for the billing contact.
+	// You must specify the same privacy setting for the administrative, billing,
+	// registrant, and technical contacts.
+	PrivacyProtectBillingContact *bool
+
+	// Whether you want to conceal contact information from WHOIS queries. If you
+	// specify true , WHOIS ("who is") queries return contact information either for
+	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
+	// WHOIS queries return the information that you entered for the registrant contact
+	// (the domain owner). You must specify the same privacy setting for the
+	// administrative, billing, registrant, and technical contacts. Default: true
 	PrivacyProtectRegistrantContact *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true , WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
-	// return the information that you entered for the technical contact. You must
-	// specify the same privacy setting for the administrative, registrant, and
-	// technical contacts. Default: true
+	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
+	// WHOIS queries return the information that you entered for the technical contact.
+	// You must specify the same privacy setting for the administrative, billing,
+	// registrant, and technical contacts. Default: true
 	PrivacyProtectTechContact *bool
 
 	noSmithyDocumentSerde

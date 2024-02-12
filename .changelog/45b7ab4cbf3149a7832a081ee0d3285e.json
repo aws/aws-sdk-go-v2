@@ -1,0 +1,8 @@
+{
+    "id": "45b7ab4c-bf31-49a7-832a-081ee0d3285e",
+    "type": "feature",
+    "description": "Adding a new option \"parameters\" for data plane api ExecuteQuery to support running parameterized query via SDK.",
+    "modules": [
+        "service/neptunegraph"
+    ]
+}

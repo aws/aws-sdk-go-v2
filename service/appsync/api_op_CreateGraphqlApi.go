@@ -48,6 +48,9 @@ type CreateGraphqlApiInput struct {
 	// or merged API ( MERGED ).
 	ApiType types.GraphQLApiType
 
+	// The enhancedMetricsConfig object.
+	EnhancedMetricsConfig *types.EnhancedMetricsConfig
+
 	// Sets the value of the GraphQL API to enable ( ENABLED ) or disable ( DISABLED )
 	// introspection. If no value is provided, the introspection configuration will be
 	// set to ENABLED by default. This field will produce an error if the operation

@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/neptunegraph/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -890,6 +892,13 @@ func awsRestjson1_serializeOpDocumentExecuteQueryInput(v *ExecuteQueryInput, val
 	if len(v.Language) > 0 {
 		ok := object.Key("language")
 		ok.String(string(v.Language))
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentDocumentValuedMap(v.Parameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.PlanCache) > 0 {
@@ -2179,6 +2188,22 @@ func awsRestjson1_serializeOpDocumentUpdateGraphInput(v *UpdateGraphInput, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDocumentValuedMap(v map[string]document.Interface, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentDocument(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentImportOptions(v types.ImportOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2266,5 +2291,20 @@ func awsRestjson1_serializeDocumentVectorSearchConfiguration(v *types.VectorSear
 		ok.Integer(*v.Dimension)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocument(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }

@@ -392,6 +392,11 @@ func awsRestjson1_serializeOpDocumentCreateApiCacheInput(v *CreateApiCacheInput,
 		ok.Boolean(v.AtRestEncryptionEnabled)
 	}
 
+	if len(v.HealthMetricsConfig) > 0 {
+		ok := object.Key("healthMetricsConfig")
+		ok.String(string(v.HealthMetricsConfig))
+	}
+
 	if v.TransitEncryptionEnabled {
 		ok := object.Key("transitEncryptionEnabled")
 		ok.Boolean(v.TransitEncryptionEnabled)
@@ -621,6 +626,11 @@ func awsRestjson1_serializeOpDocumentCreateDataSourceInput(v *CreateDataSourceIn
 		if err := awsRestjson1_serializeDocumentLambdaDataSourceConfig(v.LambdaConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.MetricsConfig) > 0 {
+		ok := object.Key("metricsConfig")
+		ok.String(string(v.MetricsConfig))
 	}
 
 	if v.Name != nil {
@@ -961,6 +971,13 @@ func awsRestjson1_serializeOpDocumentCreateGraphqlApiInput(v *CreateGraphqlApiIn
 		ok.String(string(v.AuthenticationType))
 	}
 
+	if v.EnhancedMetricsConfig != nil {
+		ok := object.Key("enhancedMetricsConfig")
+		if err := awsRestjson1_serializeDocumentEnhancedMetricsConfig(v.EnhancedMetricsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.IntrospectionConfig) > 0 {
 		ok := object.Key("introspectionConfig")
 		ok.String(string(v.IntrospectionConfig))
@@ -1158,6 +1175,11 @@ func awsRestjson1_serializeOpDocumentCreateResolverInput(v *CreateResolverInput,
 	if v.MaxBatchSize != 0 {
 		ok := object.Key("maxBatchSize")
 		ok.Integer(v.MaxBatchSize)
+	}
+
+	if len(v.MetricsConfig) > 0 {
+		ok := object.Key("metricsConfig")
+		ok.String(string(v.MetricsConfig))
 	}
 
 	if v.PipelineConfig != nil {
@@ -4629,6 +4651,11 @@ func awsRestjson1_serializeOpDocumentUpdateApiCacheInput(v *UpdateApiCacheInput,
 		ok.String(string(v.ApiCachingBehavior))
 	}
 
+	if len(v.HealthMetricsConfig) > 0 {
+		ok := object.Key("healthMetricsConfig")
+		ok.String(string(v.HealthMetricsConfig))
+	}
+
 	{
 		ok := object.Key("ttl")
 		ok.Long(v.Ttl)
@@ -4871,6 +4898,11 @@ func awsRestjson1_serializeOpDocumentUpdateDataSourceInput(v *UpdateDataSourceIn
 		if err := awsRestjson1_serializeDocumentLambdaDataSourceConfig(v.LambdaConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.MetricsConfig) > 0 {
+		ok := object.Key("metricsConfig")
+		ok.String(string(v.MetricsConfig))
 	}
 
 	if v.OpenSearchServiceConfig != nil {
@@ -5226,6 +5258,13 @@ func awsRestjson1_serializeOpDocumentUpdateGraphqlApiInput(v *UpdateGraphqlApiIn
 		ok.String(string(v.AuthenticationType))
 	}
 
+	if v.EnhancedMetricsConfig != nil {
+		ok := object.Key("enhancedMetricsConfig")
+		if err := awsRestjson1_serializeDocumentEnhancedMetricsConfig(v.EnhancedMetricsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.IntrospectionConfig) > 0 {
 		ok := object.Key("introspectionConfig")
 		ok.String(string(v.IntrospectionConfig))
@@ -5415,6 +5454,11 @@ func awsRestjson1_serializeOpDocumentUpdateResolverInput(v *UpdateResolverInput,
 	if v.MaxBatchSize != 0 {
 		ok := object.Key("maxBatchSize")
 		ok.Integer(v.MaxBatchSize)
+	}
+
+	if len(v.MetricsConfig) > 0 {
+		ok := object.Key("metricsConfig")
+		ok.String(string(v.MetricsConfig))
 	}
 
 	if v.PipelineConfig != nil {
@@ -5876,6 +5920,28 @@ func awsRestjson1_serializeDocumentElasticsearchDataSourceConfig(v *types.Elasti
 	if v.Endpoint != nil {
 		ok := object.Key("endpoint")
 		ok.String(*v.Endpoint)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEnhancedMetricsConfig(v *types.EnhancedMetricsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataSourceLevelMetricsBehavior) > 0 {
+		ok := object.Key("dataSourceLevelMetricsBehavior")
+		ok.String(string(v.DataSourceLevelMetricsBehavior))
+	}
+
+	if len(v.OperationLevelMetricsConfig) > 0 {
+		ok := object.Key("operationLevelMetricsConfig")
+		ok.String(string(v.OperationLevelMetricsConfig))
+	}
+
+	if len(v.ResolverLevelMetricsBehavior) > 0 {
+		ok := object.Key("resolverLevelMetricsBehavior")
+		ok.String(string(v.ResolverLevelMetricsBehavior))
 	}
 
 	return nil

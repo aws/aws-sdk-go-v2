@@ -54,7 +54,7 @@ type RestoreGraphFromSnapshotInput struct {
 	ProvisionedMemory *int32
 
 	// Specifies whether or not the graph can be reachable over the internet. All
-	// access to graphs IAM authenticated. ( true to enable, or false to disable).
+	// access to graphs is IAM authenticated. ( true to enable, or false to disable).
 	PublicConnectivity *bool
 
 	// The number of replicas in other AZs. Min =0, Max = 2, Default =1
