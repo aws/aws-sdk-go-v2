@@ -508,6 +508,22 @@ func TestNewEnvConfig(t *testing.T) {
 			},
 			WantErr: true,
 		},
+		46: {
+			Env: map[string]string{
+				"AWS_ACCOUNT_ID_ENDPOINT_MODE": "required",
+			},
+			Config: EnvConfig{
+				AccountIDEndpointMode: aws.AccountIDEndpointModeRequired,
+			},
+			WantErr: false,
+		},
+		47: {
+			Env: map[string]string{
+				"AWS_ACCOUNT_ID_ENDPOINT_MODE": "blabla",
+			},
+			Config:  EnvConfig{},
+			WantErr: true,
+		},
 	}
 
 	for i, c := range cases {

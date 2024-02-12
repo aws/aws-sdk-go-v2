@@ -230,6 +230,46 @@ func TestResolveDisableRequestCompression(t *testing.T) {
 	}
 }
 
+func TestResolveAccountIDEndpointMode(t *testing.T) {
+	cases := map[string]struct {
+		AccountIDEndpointMode aws.AccountIDEndpointMode
+		ExpectMode            aws.AccountIDEndpointMode
+	}{
+		"accountID required for endpoint routing": {
+			AccountIDEndpointMode: aws.AccountIDEndpointModeRequired,
+			ExpectMode:            aws.AccountIDEndpointModeRequired,
+		},
+		"accountID unset": {
+			ExpectMode: aws.AccountIDEndpointModePreferred,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			var options LoadOptions
+			optFns := []func(options *LoadOptions) error{
+				WithAccountIDEndpointMode(c.AccountIDEndpointMode),
+			}
+
+			for _, optFn := range optFns {
+				optFn(&options)
+			}
+
+			configs := configs{options}
+
+			var cfg aws.Config
+
+			if err := resolveAccountIDEndpointMode(context.Background(), &cfg, configs); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := c.ExpectMode, cfg.AccountIDEndpointMode; e != a {
+				t.Errorf("expect AccountIDEndpointMode to be %v , got %v", e, a)
+			}
+		})
+	}
+}
+
 func TestResolveCredentialsProvider(t *testing.T) {
 	var options LoadOptions
 	optFns := []func(options *LoadOptions) error{

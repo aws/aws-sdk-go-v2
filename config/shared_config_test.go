@@ -743,6 +743,22 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
+		"profile with account ID endpoint mode": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "account_id_endpoint_mode",
+			Expected: SharedConfig{
+				Profile:               "account_id_endpoint_mode",
+				AccountIDEndpointMode: aws.AccountIDEndpointModeDisabled,
+			},
+		},
+		"profile with invalid account ID endpoint mode": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "account_id_endpoint_mode_error",
+			Expected: SharedConfig{
+				Profile: "account_id_endpoint_mode_error",
+			},
+			Err: fmt.Errorf("invalid value for shared config profile field, account_id_endpoint_mode=blabla, must be preferred/required/disabled"),
+		},
 	}
 
 	for name, c := range cases {

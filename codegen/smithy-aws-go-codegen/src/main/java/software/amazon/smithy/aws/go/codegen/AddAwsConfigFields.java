@@ -81,6 +81,8 @@ public class AddAwsConfigFields implements GoIntegration {
 
     private static final String REQUEST_MIN_COMPRESSION_SIZE_BYTES = "RequestMinCompressSizeBytes";
 
+    private static final String SDK_ACCOUNTID_ENDPOINT_MODE = "AccountIDEndpointMode";
+
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
                     .name(REGION_CONFIG_NAME)
@@ -235,6 +237,11 @@ public class AddAwsConfigFields implements GoIntegration {
                     .documentation("The inclusive min request body size to be compressed.")
                     .servicePredicate(RequestCompression::isRequestCompressionService)
                     .generatedOnClient(false)
+                    .build(),
+            AwsConfigField.builder()
+                    .name(SDK_ACCOUNTID_ENDPOINT_MODE)
+                    .type(SdkGoTypes.Aws.AccountIDEndpointMode)
+                    .documentation("Indicates how aws account ID is applied in endpoint2.0 routing")
                     .build()
     );
 

@@ -322,3 +322,9 @@ ec2 =
 aws_access_key_id = account_id_akid
 aws_secret_access_key = account_id_secret
 aws_account_id = 012345678901
+
+[profile account_id_endpoint_mode]
+account_id_endpoint_mode = disabled
+
+[profile account_id_endpoint_mode_error]
+account_id_endpoint_mode = blabla
