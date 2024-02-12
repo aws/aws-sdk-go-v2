@@ -1800,7 +1800,7 @@
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs IAM authenticated.\n       (<code>true</code> to enable, or <code>false</code> to disable.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.\n       (<code>true</code> to enable, or <code>false</code> to disable.</p>"
                     }
                 },
                 "kmsKeyIdentifier": {
@@ -1896,7 +1896,7 @@
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs IAM authenticated.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.</p>"
                     }
                 },
                 "vectorSearchConfiguration": {
@@ -2123,7 +2123,7 @@
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs IAM authenticated.\n       (<code>true</code> to enable, or <code>false</code> to disable).</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.\n       (<code>true</code> to enable, or <code>false</code> to disable).</p>"
                     }
                 },
                 "kmsKeyIdentifier": {
@@ -2735,6 +2735,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.neptunegraph#DocumentValuedMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#Document"
+            }
+        },
         "com.amazonaws.neptunegraph#EdgeLabels": {
             "type": "list",
             "member": {
@@ -2803,7 +2812,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>Execute an openCypher query. Currently, the SDK does not support parameterized queries. If you want to make a \n      parameterized query call, you can use an HTTP request. </p>\n         <note>\n            <p>\n        Non-parametrized queries are not considered for plan caching. You can force plan caching with \n        <code>planCache=enabled</code>. The plan cache will be reused only for the same exact query. Slight variations \n        in the query will not be able to reuse the query plan cache.\n      </p>\n         </note>",
+                "smithy.api#documentation": "<p>Execute an openCypher query. Currently, the SDK does not support parameterized queries. If you want to make a \n      parameterized query call, you can use an HTTP request. </p>\n         <p>\n      When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have a policy attached \n      that allows one of the following IAM actions in that cluster, depending on the query:\n    </p>\n         <ul>\n            <li>\n               <p>neptune-graph:ReadDataViaQuery</p>\n            </li>\n            <li>\n               <p>neptune-graph:WriteDataViaQuery</p>\n            </li>\n            <li>\n               <p>neptune-graph:DeleteDataViaQuery</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n        Non-parametrized queries are not considered for plan caching. You can force plan caching with \n        <code>planCache=enabled</code>. The plan cache will be reused only for the same exact query. Slight variations \n        in the query will not be able to reuse the query plan cache.\n      </p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{graphIdentifier}."
                 },
@@ -2844,6 +2853,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The query language the query is written in. Currently only openCypher is supported.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.neptunegraph#DocumentValuedMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data parameters the query can use in JSON format. For example: {\"name\": \"john\", \"age\": 20}. (optional) </p>"
                     }
                 },
                 "planCache": {
@@ -3796,7 +3811,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>Retrieves the status of a specified query.</p>",
+                "smithy.api#documentation": "<p>Retrieves the status of a specified query.</p>\n         <note>\n            <p>\n        When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have the \n        <code>neptune-graph:GetQueryStatus</code> IAM action attached.\n      </p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{graphIdentifier}."
                 },
@@ -5587,7 +5602,7 @@
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs IAM authenticated.\n      (<code>true</code> to enable, or <code>false</code> to disable).</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.\n      (<code>true</code> to enable, or <code>false</code> to disable).</p>"
                     }
                 }
             },
@@ -6181,7 +6196,7 @@
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs IAM authenticated.\n      (<code>true</code> to enable, or <code>false</code> to disable.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.\n      (<code>true</code> to enable, or <code>false</code> to disable.</p>"
                     }
                 },
                 "provisionedMemory": {
