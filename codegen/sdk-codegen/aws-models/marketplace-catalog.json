@@ -805,7 +805,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object containing all the filter fields for AMI products. Client can add a maximum of 8\n            filters in a single <code>ListEntities</code> request.</p>"
+                "smithy.api#documentation": "<p>Object containing all the filter fields for AMI products. Client can add only one wildcard filter and a maximum of 8\n            filters in a single <code>ListEntities</code> request.</p>"
             }
         },
         "com.amazonaws.marketplacecatalog#AmiProductLastModifiedDateFilter": {
@@ -1031,7 +1031,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata and content for multiple entities.</p>",
+                "smithy.api#documentation": "<p>Returns metadata and content for multiple entities. This is the Batch version of the <code>DescribeEntity</code> API and uses the same IAM permission action as <code>DescribeEntity</code> API.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/BatchDescribeEntities",
@@ -1503,7 +1503,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object containing all the filter fields for container products. Client can add a maximum of 8 filters in a single <code>ListEntities</code> request.</p>"
+                "smithy.api#documentation": "<p>Object containing all the filter fields for container products. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>"
             }
         },
         "com.amazonaws.marketplacecatalog#ContainerProductLastModifiedDateFilter": {
@@ -1771,7 +1771,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object containing all the filter fields for data products. Client can add a maximum of 8 filters in a single <code>ListEntities</code> request.</p>"
+                "smithy.api#documentation": "<p>Object containing all the filter fields for data products. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>"
             }
         },
         "com.amazonaws.marketplacecatalog#DataProductLastModifiedDateFilter": {
@@ -2124,6 +2124,12 @@
                     "target": "com.amazonaws.marketplacecatalog#ChangeSetName",
                     "traits": {
                         "smithy.api#documentation": "<p>The optional name provided in the <code>StartChangeSet</code> request. If you do not\n            provide a name, one is set by default.</p>"
+                    }
+                },
+                "Intent": {
+                    "target": "com.amazonaws.marketplacecatalog#Intent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional intent provided in the <code>StartChangeSet</code> request. If you do not\n            provide an intent, <code>APPLY</code> is set by default.</p>"
                     }
                 },
                 "StartTime": {
@@ -2776,6 +2782,23 @@
                 "smithy.api#pattern": "^[\\w\\-@]+$"
             }
         },
+        "com.amazonaws.marketplacecatalog#Intent": {
+            "type": "enum",
+            "members": {
+                "VALIDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE"
+                    }
+                },
+                "APPLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#InternalServiceException": {
             "type": "structure",
             "members": {
@@ -3294,7 +3317,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter for offers entity.</p>"
+                "smithy.api#documentation": "<p>Object containing all the filter fields for offers entity. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>"
             }
         },
         "com.amazonaws.marketplacecatalog#OfferLastModifiedDateFilter": {
@@ -3997,7 +4020,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter for ResaleAuthorization entity.</p>"
+                "smithy.api#documentation": "<p>Object containing all the filter fields for resale authorization entity. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>"
             }
         },
         "com.amazonaws.marketplacecatalog#ResaleAuthorizationLastModifiedDateFilter": {
@@ -4800,7 +4823,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object containing all the filter fields for SaaS products. Client can add a maximum of\n            8 filters in a single <code>ListEntities</code> request.</p>"
+                "smithy.api#documentation": "<p>Object containing all the filter fields for SaaS products. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>"
             }
         },
         "com.amazonaws.marketplacecatalog#SaaSProductLastModifiedDateFilter": {
@@ -5137,6 +5160,12 @@
                     "target": "com.amazonaws.marketplacecatalog#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of objects specifying each key name and value for the\n                <code>ChangeSetTags</code> property.</p>"
+                    }
+                },
+                "Intent": {
+                    "target": "com.amazonaws.marketplacecatalog#Intent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The intent related to the request. The default is <code>APPLY</code>.\n            To test your request before applying changes to your entities, use <code>VALIDATE</code>.\n            This feature is currently available for adding versions to single-AMI products. For more information, see\n            <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#ami-add-version\">Add a new version</a>.</p>"
                     }
                 }
             },

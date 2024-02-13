@@ -1279,7 +1279,7 @@
                 "regions": {
                     "target": "com.amazonaws.securitylake#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Replication enables automatic, asynchronous copying of objects across Amazon S3\n         buckets. Amazon S3 buckets that are configured for object replication can be owned\n         by the same Amazon Web Services account or by different accounts. You can replicate objects\n         to a single destination bucket or to multiple destination buckets. The destination buckets\n         can be in different Amazon Web Services Regions or within the same Region as the source\n         bucket.</p>\n         <p>Set up one or more rollup Regions by providing the Region or Regions that should\n         contribute to the central rollup Region.</p>"
+                        "smithy.api#documentation": "<p>Specifies one or more centralized rollup Regions. The Amazon Web Services Region specified in the <code>region</code> \n          parameter of the <a href=\"https://docs.aws.amazon.com/security-lake/latest/APIReference/API_CreateDataLake.html\">\n               <code>CreateDataLake</code>\n            </a> \n          or <a href=\"https://docs.aws.amazon.com/security-lake/latest/APIReference/API_UpdateDataLake.html\">\n               <code>UpdateDataLake</code>\n            </a> operations contributes data to the rollup Region or \n        Regions specified in this parameter.</p>\n         <p>Replication enables automatic, asynchronous copying of objects across Amazon S3\n           buckets. S3 buckets that are configured for object replication can be owned\n           by the same Amazon Web Services account or by different accounts. You can replicate objects\n           to a single destination bucket or to multiple destination buckets. The destination buckets\n           can be in different Regions or within the same Region as the source bucket.</p>"
                     }
                 },
                 "roleArn": {
@@ -1290,7 +1290,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides replication details of Amazon Security Lake object.</p>"
+                "smithy.api#documentation": "<p>Provides replication details for objects stored in the Amazon Security Lake data lake.</p>"
             }
         },
         "com.amazonaws.securitylake#DataLakeResource": {
@@ -2472,7 +2472,7 @@
                 "regions": {
                     "target": "com.amazonaws.securitylake#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List the Amazon Web Services Regions from which exceptions are retrieved.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions from which exceptions are retrieved.</p>"
                     }
                 },
                 "maxResults": {
@@ -2558,7 +2558,7 @@
                 "regions": {
                     "target": "com.amazonaws.securitylake#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of regions where Security Lake is enabled.</p>",
+                        "smithy.api#documentation": "<p>The list of Regions where Security Lake is enabled.</p>",
                         "smithy.api#httpQuery": "regions"
                     }
                 }
@@ -2638,7 +2638,7 @@
                 "regions": {
                     "target": "com.amazonaws.securitylake#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of regions for which log sources are displayed.</p>"
+                        "smithy.api#documentation": "<p>The list of Regions for which log sources are displayed.</p>"
                     }
                 },
                 "sources": {
@@ -3237,7 +3237,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3256,7 +3255,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3284,13 +3282,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3303,7 +3302,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3317,7 +3315,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3340,7 +3337,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -3375,11 +3371,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -3390,16 +3384,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -3413,14 +3410,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -3429,15 +3424,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -3448,16 +3442,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -3471,7 +3468,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -3491,11 +3487,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -3506,20 +3500,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3530,18 +3526,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
