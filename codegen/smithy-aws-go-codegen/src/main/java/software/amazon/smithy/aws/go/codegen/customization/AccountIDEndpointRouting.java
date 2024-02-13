@@ -2,8 +2,12 @@ package software.amazon.smithy.aws.go.codegen.customization;
 
 import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.codegen.core.SymbolProvider;
-import software.amazon.smithy.go.codegen.*;
+import software.amazon.smithy.go.codegen.GoDelegator;
+import software.amazon.smithy.go.codegen.GoSettings;
+import software.amazon.smithy.go.codegen.GoStdlibTypes;
+import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
+import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.rulesengine.traits.EndpointRuleSetTrait;
 import software.amazon.smithy.utils.MapUtils;
