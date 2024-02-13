@@ -6,4 +6,4 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0
 )
 
-go 1.19
+go 1.20

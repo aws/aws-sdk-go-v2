@@ -108,7 +108,7 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 
-go 1.19
+go 1.20
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 
