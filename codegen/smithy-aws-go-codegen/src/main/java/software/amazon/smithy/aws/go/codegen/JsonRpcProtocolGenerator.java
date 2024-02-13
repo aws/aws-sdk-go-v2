@@ -17,7 +17,6 @@ package software.amazon.smithy.aws.go.codegen;
 
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecodeError;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.initializeJsonDecoder;
-import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeJsonErrorMessageCodeDeserializer;
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 
 import java.util.HashSet;
