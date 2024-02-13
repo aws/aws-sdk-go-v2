@@ -1,3 +1,8 @@
+# v1.76.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.75.0 (2024-02-05)
 
 * **Feature**: Introduce Catalog Encryption Role within Glue Data Catalog Settings. Introduce SASL/PLAIN as an authentication method for Glue Kafka connections

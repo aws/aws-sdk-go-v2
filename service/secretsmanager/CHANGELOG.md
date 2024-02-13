@@ -1,3 +1,8 @@
+# v1.27.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.2 (2024-01-11)
 
 * **Documentation**: Doc only update for Secrets Manager

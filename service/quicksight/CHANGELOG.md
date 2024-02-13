@@ -1,3 +1,8 @@
+# v1.57.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2024-02-08)
 
 * **Feature**: General Interactions for Visuals; Waterfall Chart Color Configuration; Documentation Update

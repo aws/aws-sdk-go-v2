@@ -1,3 +1,8 @@
+# v1.28.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.1 (2024-02-02)
 
 * **Documentation**: Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.

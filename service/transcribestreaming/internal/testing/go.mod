@@ -3,18 +3,18 @@ module github.com/aws/aws-sdk-go-v2/service/transcribestreaming/internal/testing
 go 1.20
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.24.1
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.5.4
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.2.19
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.15.6
+	github.com/aws/aws-sdk-go-v2 v1.25.0
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.0
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.3.0
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.16.0
 	github.com/aws/smithy-go v1.20.0
 	github.com/google/go-cmp v0.5.8
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/credentials v1.16.16 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.10 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.10 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.0 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.0 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 )

@@ -1,3 +1,8 @@
+# v1.18.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2024-01-18)
 
 * **Feature**: **BREAKFIX**: Correct nullability of GetExperimentResultsInput's Period field. The type of this value has changed from int64 to *int64. Due to the nature of default value serialization, the former type could cause unexpected/incorrect behavior when set to its zero value. Calling code will need to be updated accordingly.

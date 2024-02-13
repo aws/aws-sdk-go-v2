@@ -1,3 +1,8 @@
+# v1.25.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2024-01-18)
 
 * **Feature**: Allow support for Snowflake as a Kinesis Data Firehose delivery destination.

@@ -1,3 +1,8 @@
+# v1.41.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2024-02-07)
 
 * **Feature**: LisRecommendations API to fetch Amazon Redshift Advisor recommendations.

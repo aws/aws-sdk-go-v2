@@ -1,3 +1,8 @@
+# v1.24.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2024-02-08)
 
 * **Feature**: Add ability to execute pipelines with new parallel & queued execution modes and add support for triggers with filtering on branches and file paths.

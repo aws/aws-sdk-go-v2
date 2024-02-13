@@ -1,3 +1,8 @@
+# v1.4.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.0 (2024-02-12)
 
 * **Feature**: Adding a new option "parameters" for data plane api ExecuteQuery to support running parameterized query via SDK.

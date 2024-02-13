@@ -1,3 +1,8 @@
+# v1.32.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2024-02-09)
 
 * **Feature**: This feature allows Batch to support configuration of repository credentials for jobs running on ECS

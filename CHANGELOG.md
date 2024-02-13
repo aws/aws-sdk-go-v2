@@ -1,3 +1,19 @@
+# Release (2024-02-13)
+
+## General Highlights
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.35.0](service/lightsail/CHANGELOG.md#v1350-2024-02-13)
+  * **Feature**: This release adds support to upgrade the major version of a database.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.24.0](service/marketplacecatalog/CHANGELOG.md#v1240-2024-02-13)
+  * **Feature**: AWS Marketplace Catalog API now supports setting intent on requests
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.9.0](service/resourceexplorer2/CHANGELOG.md#v190-2024-02-13)
+  * **Feature**: Resource Explorer now uses newly supported IPv4 'amazonaws.com' endpoints by default.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.11.0](service/securitylake/CHANGELOG.md#v1110-2024-02-13)
+  * **Documentation**: Documentation updates for Security Lake
+
 # Release (2024-02-12)
 
 ## Module Highlights

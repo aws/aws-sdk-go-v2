@@ -1,3 +1,9 @@
+# v1.9.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Feature**: Resource Explorer now uses newly supported IPv4 'amazonaws.com' endpoints by default.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.7 (2024-02-07)
 
 * No change notes available for this release.

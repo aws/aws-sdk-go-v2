@@ -1,3 +1,8 @@
+# v1.39.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.3 (2024-02-09)
 
 * **Documentation**: Documentation only update for Amazon ECS.

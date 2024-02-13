@@ -1,3 +1,9 @@
+# v1.35.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Feature**: This release adds support to upgrade the major version of a database.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2024-01-25)
 
 * **Feature**: This release adds support for IPv6-only instance plans.

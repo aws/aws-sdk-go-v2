@@ -1,3 +1,8 @@
+# v1.43.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2024-01-12)
 
 * **Feature**: S3 On Outposts team adds dualstack endpoints support for S3Control and S3Outposts API calls.
