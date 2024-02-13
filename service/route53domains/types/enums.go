@@ -554,6 +554,8 @@ const (
 	DomainAvailabilityUnavailableRestricted DomainAvailability = "UNAVAILABLE_RESTRICTED"
 	DomainAvailabilityReserved              DomainAvailability = "RESERVED"
 	DomainAvailabilityDontKnow              DomainAvailability = "DONT_KNOW"
+	DomainAvailabilityInvalidNameForTld     DomainAvailability = "INVALID_NAME_FOR_TLD"
+	DomainAvailabilityPending               DomainAvailability = "PENDING"
 )
 
 // Values returns all known values for DomainAvailability. Note that this can be
@@ -569,6 +571,8 @@ func (DomainAvailability) Values() []DomainAvailability {
 		"UNAVAILABLE_RESTRICTED",
 		"RESERVED",
 		"DONT_KNOW",
+		"INVALID_NAME_FOR_TLD",
+		"PENDING",
 	}
 }
 
@@ -729,6 +733,8 @@ const (
 	OperationTypePushDomain                OperationType = "PUSH_DOMAIN"
 	OperationTypeInternalTransferOutDomain OperationType = "INTERNAL_TRANSFER_OUT_DOMAIN"
 	OperationTypeInternalTransferInDomain  OperationType = "INTERNAL_TRANSFER_IN_DOMAIN"
+	OperationTypeReleaseToGandi            OperationType = "RELEASE_TO_GANDI"
+	OperationTypeTransferOnRenew           OperationType = "TRANSFER_ON_RENEW"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -754,6 +760,8 @@ func (OperationType) Values() []OperationType {
 		"PUSH_DOMAIN",
 		"INTERNAL_TRANSFER_OUT_DOMAIN",
 		"INTERNAL_TRANSFER_IN_DOMAIN",
+		"RELEASE_TO_GANDI",
+		"TRANSFER_ON_RENEW",
 	}
 }
 

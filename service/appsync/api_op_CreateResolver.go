@@ -69,6 +69,13 @@ type CreateResolverInput struct {
 	// The maximum batching size for a resolver.
 	MaxBatchSize int32
 
+	// Enables or disables enhanced resolver metrics for specified resolvers. Note
+	// that metricsConfig won't be used unless the resolverLevelMetricsBehavior value
+	// is set to PER_RESOLVER_METRICS . If the resolverLevelMetricsBehavior is set to
+	// FULL_REQUEST_RESOLVER_METRICS instead, metricsConfig will be ignored. However,
+	// you can still set its value. metricsConfig can be ENABLED or DISABLED .
+	MetricsConfig types.ResolverLevelMetricsConfig
+
 	// The PipelineConfig .
 	PipelineConfig *types.PipelineConfig
 

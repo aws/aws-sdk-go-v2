@@ -75,6 +75,16 @@ type CreateApiCacheInput struct {
 	// creation.
 	AtRestEncryptionEnabled bool
 
+	// Controls how cache health metrics will be emitted to CloudWatch. Cache health
+	// metrics include:
+	//   - NetworkBandwidthOutAllowanceExceeded: The number of times a specified
+	//   GraphQL operation was called.
+	//   - EngineCPUUtilization: The number of GraphQL errors that occurred during a
+	//   specified GraphQL operation.
+	// Metrics will be recorded by API ID. You can set the value to ENABLED or DISABLED
+	// .
+	HealthMetricsConfig types.CacheHealthMetricsConfig
+
 	// Transit encryption flag when connecting to cache. You cannot update this
 	// setting after creation.
 	TransitEncryptionEnabled bool

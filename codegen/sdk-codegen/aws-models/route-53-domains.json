@@ -331,7 +331,7 @@
                 "Availability": {
                     "target": "com.amazonaws.route53domains#DomainAvailability",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the domain name is available for registering.</p>\n         <note>\n            <p>You can register only domains designated as <code>AVAILABLE</code>.</p>\n         </note>\n         <p>Valid values:</p>\n         <dl>\n            <dt>AVAILABLE</dt>\n            <dd>\n               <p>The domain name is available.</p>\n            </dd>\n            <dt>AVAILABLE_RESERVED</dt>\n            <dd>\n               <p>The domain name is reserved under specific conditions.</p>\n            </dd>\n            <dt>AVAILABLE_PREORDER</dt>\n            <dd>\n               <p>The domain name is available and can be preordered.</p>\n            </dd>\n            <dt>DONT_KNOW</dt>\n            <dd>\n               <p>The TLD registry didn't reply with a definitive answer about whether the\n\t\t\t\t\t\tdomain name is available. Route 53 can return this response for a variety of\n\t\t\t\t\t\treasons, for example, the registry is performing maintenance. Try again\n\t\t\t\t\t\tlater.</p>\n            </dd>\n            <dt>PENDING</dt>\n            <dd>\n               <p>The TLD registry didn't return a response in the expected amount of time.\n\t\t\t\t\t\tWhen the response is delayed, it usually takes just a few extra seconds. You\n\t\t\t\t\t\tcan resubmit the request immediately.</p>\n            </dd>\n            <dt>RESERVED</dt>\n            <dd>\n               <p>The domain name has been reserved for another person or\n\t\t\t\t\t\torganization.</p>\n            </dd>\n            <dt>UNAVAILABLE</dt>\n            <dd>\n               <p>The domain name is not available.</p>\n            </dd>\n            <dt>UNAVAILABLE_PREMIUM</dt>\n            <dd>\n               <p>The domain name is not available.</p>\n            </dd>\n            <dt>UNAVAILABLE_RESTRICTED</dt>\n            <dd>\n               <p>The domain name is forbidden.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>Whether the domain name is available for registering.</p>\n         <note>\n            <p>You can register only domains designated as <code>AVAILABLE</code>.</p>\n         </note>\n         <p>Valid values:</p>\n         <dl>\n            <dt>AVAILABLE</dt>\n            <dd>\n               <p>The domain name is available.</p>\n            </dd>\n            <dt>AVAILABLE_RESERVED</dt>\n            <dd>\n               <p>The domain name is reserved under specific conditions.</p>\n            </dd>\n            <dt>AVAILABLE_PREORDER</dt>\n            <dd>\n               <p>The domain name is available and can be preordered.</p>\n            </dd>\n            <dt>DONT_KNOW</dt>\n            <dd>\n               <p>The TLD registry didn't reply with a definitive answer about whether the\n\t\t\t\t\t\tdomain name is available. Route 53 can return this response for a variety of\n\t\t\t\t\t\treasons, for example, the registry is performing maintenance. Try again\n\t\t\t\t\t\tlater.</p>\n            </dd>\n            <dt>INVALID_NAME_FOR_TLD</dt>\n            <dd>\n               <p>The TLD isn't valid. For example, it can contain characters that aren't allowed.</p>\n            </dd>\n            <dt>PENDING</dt>\n            <dd>\n               <p>The TLD registry didn't return a response in the expected amount of time.\n\t\t\t\t\t\tWhen the response is delayed, it usually takes just a few extra seconds. You\n\t\t\t\t\t\tcan resubmit the request immediately.</p>\n            </dd>\n            <dt>RESERVED</dt>\n            <dd>\n               <p>The domain name has been reserved for another person or\n\t\t\t\t\t\torganization.</p>\n            </dd>\n            <dt>UNAVAILABLE</dt>\n            <dd>\n               <p>The domain name is not available.</p>\n            </dd>\n            <dt>UNAVAILABLE_PREMIUM</dt>\n            <dd>\n               <p>The domain name is not available.</p>\n            </dd>\n            <dt>UNAVAILABLE_RESTRICTED</dt>\n            <dd>\n               <p>The domain name is forbidden.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -2555,6 +2555,18 @@
                     "traits": {
                         "smithy.api#enumValue": "DONT_KNOW"
                     }
+                },
+                "INVALID_NAME_FOR_TLD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NAME_FOR_TLD"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
                 }
             }
         },
@@ -3284,25 +3296,25 @@
                 "AdminPrivacy": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If the value is <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the admin contact.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If the value is <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the admin contact.</p>"
                     }
                 },
                 "RegistrantPrivacy": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If the value is <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the registrant contact (domain owner).</p>"
+                        "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If the value is <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the registrant contact (domain owner).</p>"
                     }
                 },
                 "TechPrivacy": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If the value is <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the technical contact.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If the value is <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the technical contact.</p>"
                     }
                 },
                 "RegistrarName": {
                     "target": "com.amazonaws.route53domains#RegistrarName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the registrar of the domain as identified in the registry. Domains with a\n\t\t\t.com, .net, or .org TLD are registered by Amazon Registrar. All other domains are\n\t\t\tregistered by our registrar associate, Gandi. The value for domains that are registered\n\t\t\tby Gandi is <code>\"GANDI SAS\"</code>. </p>"
+                        "smithy.api#documentation": "<p>Name of the registrar of the domain as identified in the registry. </p>"
                     }
                 },
                 "WhoIsServer": {
@@ -3375,6 +3387,18 @@
                     "target": "com.amazonaws.route53domains#DnssecKeyList",
                     "traits": {
                         "smithy.api#documentation": "<p>A complex type that contains information about the DNSSEC configuration.</p>"
+                    }
+                },
+                "BillingContact": {
+                    "target": "com.amazonaws.route53domains#ContactDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about the domain billing contact.</p>"
+                    }
+                },
+                "BillingPrivacy": {
+                    "target": "com.amazonaws.route53domains#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether contact information is concealed from WHOIS queries. If the value is\n\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\tAmazon Registrar or for our registrar associate,\n\t\tGandi. If the value is <code>false</code>, WHOIS queries return the\n\t\tinformation that you entered for the billing contact.</p>"
                     }
                 }
             },
@@ -4216,6 +4240,18 @@
                     "traits": {
                         "smithy.api#enumValue": "INTERNAL_TRANSFER_IN_DOMAIN"
                     }
+                },
+                "RELEASE_TO_GANDI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RELEASE_TO_GANDI"
+                    }
+                },
+                "TRANSFER_ON_RENEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSFER_ON_RENEW"
+                    }
                 }
             }
         },
@@ -4227,7 +4263,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 18
+                    "max": 20
                 }
             }
         },
@@ -4459,19 +4495,31 @@
                 "PrivacyProtectAdminContact": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the admin contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the admin contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 },
                 "PrivacyProtectRegistrantContact": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the registrant contact (the domain owner).</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the registrant contact (the domain owner).</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 },
                 "PrivacyProtectTechContact": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the technical contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the technical contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
+                    }
+                },
+                "BillingContact": {
+                    "target": "com.amazonaws.route53domains#ContactDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides detailed contact information. For information about the values that you\n\t\t\tspecify for each element, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html\">ContactDetail</a>.</p>"
+                    }
+                },
+                "PrivacyProtectBillingContact": {
+                    "target": "com.amazonaws.route53domains#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the billing contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
                     }
                 }
             },
@@ -4953,7 +5001,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4996,7 +5043,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -5009,7 +5057,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -5023,7 +5070,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -5046,7 +5092,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -5081,7 +5126,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -5092,14 +5136,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -5113,14 +5159,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -5129,11 +5173,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -5144,14 +5188,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -5165,7 +5211,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -5185,7 +5230,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -5196,14 +5240,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -5214,9 +5260,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -5735,7 +5783,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Transfers a domain from another registrar to Amazon Route 53. </p>\n         <p>For more information about transferring domains, see the following topics:</p>\n         <ul>\n            <li>\n               <p>For transfer requirements, a detailed procedure, and information about viewing\n\t\t\t\t\tthe status of a domain that you're transferring to Route 53, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html\">Transferring Registration for a Domain to Amazon Route 53</a> in the\n\t\t\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>For information about how to transfer a domain from one Amazon Web Services account to another, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html\">TransferDomainToAnotherAwsAccount</a>. </p>\n            </li>\n            <li>\n               <p>For information about how to transfer a domain to another domain registrar,\n\t\t\t\t\tsee <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html\">Transferring a Domain from Amazon Route 53 to Another Registrar</a> in\n\t\t\t\t\tthe <i>Amazon Route 53 Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the registrar for your domain is also the DNS service provider for the domain, we\n\t\t\thighly recommend that you transfer your DNS service to Route 53 or to another DNS\n\t\t\tservice provider before you transfer your registration. Some registrars provide free DNS\n\t\t\tservice when you purchase a domain registration. When you transfer the registration, the\n\t\t\tprevious registrar will not renew your domain registration and could end your DNS\n\t\t\tservice at any time.</p>\n         <important>\n            <p>If the registrar for your domain is also the DNS service provider for the domain\n\t\t\t\tand you don't transfer DNS service to another provider, your website, email, and the\n\t\t\t\tweb applications associated with the domain might become unavailable.</p>\n         </important>\n         <p>If the transfer is successful, this method returns an operation ID that you can use to\n\t\t\ttrack the progress and completion of the action. If the transfer doesn't complete\n\t\t\tsuccessfully, the domain registrant will be notified by email.</p>"
+                "smithy.api#documentation": "<p>Transfers a domain from another registrar to Amazon Route 53. </p>\n         <p>For more information about transferring domains, see the following topics:</p>\n         <ul>\n            <li>\n               <p>For transfer requirements, a detailed procedure, and information about viewing\n\t\t\t\t\tthe status of a domain that you're transferring to Route 53, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html\">Transferring Registration for a Domain to Amazon Route 53</a> in the\n\t\t\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>For information about how to transfer a domain from one Amazon Web Services account to another, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html\">TransferDomainToAnotherAwsAccount</a>. </p>\n            </li>\n            <li>\n               <p>For information about how to transfer a domain to another domain registrar,\n\t\t\t\t\tsee <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html\">Transferring a Domain from Amazon Route 53 to Another Registrar</a> in\n\t\t\t\t\tthe <i>Amazon Route 53 Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <important>\n            <p>During the transfer of any country code top-level domains (ccTLDs) to Route 53, except for .cc and .tv, \n\t\t\tupdates to the owner contact are ignored and the owner contact data from the registry is used. \n\t\t\tYou can\n\t\t\tupdate the owner contact after the transfer is complete. For more information, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_UpdateDomainContact.html\">UpdateDomainContact</a>.</p>\n         </important>\n         <p>If the registrar for your domain is also the DNS service provider for the domain, we\n\t\t\thighly recommend that you transfer your DNS service to Route 53 or to another DNS\n\t\t\tservice provider before you transfer your registration. Some registrars provide free DNS\n\t\t\tservice when you purchase a domain registration. When you transfer the registration, the\n\t\t\tprevious registrar will not renew your domain registration and could end your DNS\n\t\t\tservice at any time.</p>\n         <important>\n            <p>If the registrar for your domain is also the DNS service provider for the domain\n\t\t\t\tand you don't transfer DNS service to another provider, your website, email, and the\n\t\t\t\tweb applications associated with the domain might become unavailable.</p>\n         </important>\n         <p>If the transfer is successful, this method returns an operation ID that you can use to\n\t\t\ttrack the progress and completion of the action. If the transfer doesn't complete\n\t\t\tsuccessfully, the domain registrant will be notified by email.</p>"
             }
         },
         "com.amazonaws.route53domains#TransferDomainRequest": {
@@ -5809,13 +5857,25 @@
                 "PrivacyProtectRegistrantContact": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the registrant contact (domain owner).</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the registrant contact (domain owner).</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 },
                 "PrivacyProtectTechContact": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the technical contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the technical contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
+                    }
+                },
+                "BillingContact": {
+                    "target": "com.amazonaws.route53domains#ContactDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides detailed contact information.</p>"
+                    }
+                },
+                "PrivacyProtectBillingContact": {
+                    "target": "com.amazonaws.route53domains#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tWhether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the billing contact.\n\t\t</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
                     }
                 }
             },
@@ -5950,7 +6010,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Whether the domain name can be transferred to Route 53.</p>\n         <note>\n            <p>You can transfer only domains that have a value of <code>TRANSFERABLE</code> or\n\t\t\t\t\t<code>Transferable</code>.</p>\n         </note>\n         <p>Valid values:</p>\n         <dl>\n            <dt>TRANSFERABLE</dt>\n            <dd>\n               <p>The domain name can be transferred to Route 53.</p>\n            </dd>\n            <dt>UNTRANSFERRABLE</dt>\n            <dd>\n               <p>The domain name can't be transferred to Route 53.</p>\n            </dd>\n            <dt>DONT_KNOW</dt>\n            <dd>\n               <p>Reserved for future use.</p>\n            </dd>\n            <dt>DOMAIN_IN_OWN_ACCOUNT</dt>\n            <dd>\n               <p>The domain already exists in the current Amazon Web Services account.</p>\n            </dd>\n            <dt>DOMAIN_IN_ANOTHER_ACCOUNT</dt>\n            <dd>\n               <p> the domain exists in another Amazon Web Services account.</p>\n            </dd>\n            <dt>PREMIUM_DOMAIN</dt>\n            <dd>\n               <p>Premium domain transfer is not supported.</p>\n            </dd>\n         </dl>"
+                "smithy.api#documentation": "<p>Whether the domain name can be transferred to Route 53.</p>\n         <note>\n            <p>You can transfer only domains that have a value of <code>TRANSFERABLE</code> or\n\t\t\t\t\t<code>Transferable</code>.</p>\n         </note>\n         <p>Valid values:</p>\n         <dl>\n            <dt>TRANSFERABLE</dt>\n            <dd>\n               <p>The domain name can be transferred to Route 53.</p>\n            </dd>\n            <dt>UNTRANSFERRABLE</dt>\n            <dd>\n               <p>The domain name can't be transferred to Route 53.</p>\n            </dd>\n            <dt>DONT_KNOW</dt>\n            <dd>\n               <p>Reserved for future use.</p>\n            </dd>\n            <dt>DOMAIN_IN_OWN_ACCOUNT</dt>\n            <dd>\n               <p>The domain already exists in the current Amazon Web Services account.</p>\n            </dd>\n            <dt>DOMAIN_IN_ANOTHER_ACCOUNT</dt>\n            <dd>\n               <p> The domain exists in another Amazon Web Services account.</p>\n            </dd>\n            <dt>PREMIUM_DOMAIN</dt>\n            <dd>\n               <p>Premium domain transfer is not supported.</p>\n            </dd>\n         </dl>"
             }
         },
         "com.amazonaws.route53domains#UnsupportedTLD": {
@@ -6040,19 +6100,25 @@
                 "AdminPrivacy": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the admin contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the admin contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
                     }
                 },
                 "RegistrantPrivacy": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the registrant contact (domain owner).</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the registrant contact (domain owner).</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
                     }
                 },
                 "TechPrivacy": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the technical contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the technical contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
+                    }
+                },
+                "BillingPrivacy": {
+                    "target": "com.amazonaws.route53domains#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tWhether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the billing contact.\n\t\t</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
                     }
                 }
             },
@@ -6108,6 +6174,12 @@
                     "target": "com.amazonaws.route53domains#Consent",
                     "traits": {
                         "smithy.api#documentation": "<p> Customer's consent for the owner change request. Required if the domain is not free (consent price is more than $0.00).</p>"
+                    }
+                },
+                "BillingContact": {
+                    "target": "com.amazonaws.route53domains#ContactDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides detailed contact information.</p>"
                     }
                 }
             },

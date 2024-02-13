@@ -58,13 +58,21 @@ type GetDomainDetailOutput struct {
 
 	// Specifies whether contact information is concealed from WHOIS queries. If the
 	// value is true , WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If the value is false , WHOIS queries
-	// return the information that you entered for the admin contact.
+	// Amazon Registrar or for our registrar associate, Gandi. If the value is false ,
+	// WHOIS queries return the information that you entered for the admin contact.
 	AdminPrivacy *bool
 
 	// Specifies whether the domain registration is set to renew automatically.
 	AutoRenew *bool
+
+	// Provides details about the domain billing contact.
+	BillingContact *types.ContactDetail
+
+	// Specifies whether contact information is concealed from WHOIS queries. If the
+	// value is true , WHOIS ("who is") queries return contact information either for
+	// Amazon Registrar or for our registrar associate, Gandi. If the value is false ,
+	// WHOIS queries return the information that you entered for the billing contact.
+	BillingPrivacy *bool
 
 	// The date when the domain was created as found in the response to a WHOIS query.
 	// The date and time is in Unix time format and Coordinated Universal time (UTC).
@@ -91,16 +99,12 @@ type GetDomainDetailOutput struct {
 
 	// Specifies whether contact information is concealed from WHOIS queries. If the
 	// value is true , WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If the value is false , WHOIS queries
-	// return the information that you entered for the registrant contact (domain
-	// owner).
+	// Amazon Registrar or for our registrar associate, Gandi. If the value is false ,
+	// WHOIS queries return the information that you entered for the registrant contact
+	// (domain owner).
 	RegistrantPrivacy *bool
 
-	// Name of the registrar of the domain as identified in the registry. Domains with
-	// a .com, .net, or .org TLD are registered by Amazon Registrar. All other domains
-	// are registered by our registrar associate, Gandi. The value for domains that are
-	// registered by Gandi is "GANDI SAS" .
+	// Name of the registrar of the domain as identified in the registry.
 	RegistrarName *string
 
 	// Web address of the registrar.
@@ -130,9 +134,8 @@ type GetDomainDetailOutput struct {
 
 	// Specifies whether contact information is concealed from WHOIS queries. If the
 	// value is true , WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If the value is false , WHOIS queries
-	// return the information that you entered for the technical contact.
+	// Amazon Registrar or for our registrar associate, Gandi. If the value is false ,
+	// WHOIS queries return the information that you entered for the technical contact.
 	TechPrivacy *bool
 
 	// The last updated date of the domain as found in the response to a WHOIS query.

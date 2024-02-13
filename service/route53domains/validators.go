@@ -1188,6 +1188,11 @@ func validateOpRegisterDomainInput(v *RegisterDomainInput) error {
 			invalidParams.AddNested("TechContact", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.BillingContact != nil {
+		if err := validateContactDetail(v.BillingContact); err != nil {
+			invalidParams.AddNested("BillingContact", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1292,6 +1297,11 @@ func validateOpTransferDomainInput(v *TransferDomainInput) error {
 			invalidParams.AddNested("TechContact", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.BillingContact != nil {
+		if err := validateContactDetail(v.BillingContact); err != nil {
+			invalidParams.AddNested("BillingContact", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1343,6 +1353,11 @@ func validateOpUpdateDomainContactInput(v *UpdateDomainContactInput) error {
 	if v.Consent != nil {
 		if err := validateConsent(v.Consent); err != nil {
 			invalidParams.AddNested("Consent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BillingContact != nil {
+		if err := validateContactDetail(v.BillingContact); err != nil {
+			invalidParams.AddNested("BillingContact", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

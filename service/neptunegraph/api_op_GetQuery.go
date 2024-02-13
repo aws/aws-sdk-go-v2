@@ -15,7 +15,9 @@ import (
 	"strings"
 )
 
-// Retrieves the status of a specified query.
+// Retrieves the status of a specified query. When invoking this operation in a
+// Neptune Analytics cluster, the IAM user or role making the request must have the
+// neptune-graph:GetQueryStatus IAM action attached.
 func (c *Client) GetQuery(ctx context.Context, params *GetQueryInput, optFns ...func(*Options)) (*GetQueryOutput, error) {
 	if params == nil {
 		params = &GetQueryInput{}

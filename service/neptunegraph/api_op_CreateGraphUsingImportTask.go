@@ -90,7 +90,7 @@ type CreateGraphUsingImportTaskInput struct {
 	MinProvisionedMemory *int32
 
 	// Specifies whether or not the graph can be reachable over the internet. All
-	// access to graphs IAM authenticated. ( true to enable, or false to disable).
+	// access to graphs is IAM authenticated. ( true to enable, or false to disable).
 	PublicConnectivity *bool
 
 	// The number of replicas in other AZs to provision on the new graph after import.

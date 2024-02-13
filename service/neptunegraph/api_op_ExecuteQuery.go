@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/document"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -18,10 +19,17 @@ import (
 
 // Execute an openCypher query. Currently, the SDK does not support parameterized
 // queries. If you want to make a parameterized query call, you can use an HTTP
-// request. Non-parametrized queries are not considered for plan caching. You can
-// force plan caching with planCache=enabled . The plan cache will be reused only
-// for the same exact query. Slight variations in the query will not be able to
-// reuse the query plan cache.
+// request. When invoking this operation in a Neptune Analytics cluster, the IAM
+// user or role making the request must have a policy attached that allows one of
+// the following IAM actions in that cluster, depending on the query:
+//   - neptune-graph:ReadDataViaQuery
+//   - neptune-graph:WriteDataViaQuery
+//   - neptune-graph:DeleteDataViaQuery
+//
+// Non-parametrized queries are not considered for plan caching. You can force
+// plan caching with planCache=enabled . The plan cache will be reused only for the
+// same exact query. Slight variations in the query will not be able to reuse the
+// query plan cache.
 func (c *Client) ExecuteQuery(ctx context.Context, params *ExecuteQueryInput, optFns ...func(*Options)) (*ExecuteQueryOutput, error) {
 	if params == nil {
 		params = &ExecuteQueryInput{}
@@ -60,6 +68,10 @@ type ExecuteQueryInput struct {
 	// execution such as planning decisions, time spent on each operator, solutions
 	// flowing etc.
 	ExplainMode types.ExplainMode
+
+	// The data parameters the query can use in JSON format. For example: {"name":
+	// "john", "age": 20}. (optional)
+	Parameters map[string]document.Interface
 
 	// Query plan cache is a feature that saves the query plan and reuses it on
 	// successive executions of the same query. This reduces query latency, and works

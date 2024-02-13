@@ -68,12 +68,14 @@ type CheckDomainAvailabilityOutput struct {
 	// preordered. DONT_KNOW The TLD registry didn't reply with a definitive answer
 	// about whether the domain name is available. Route 53 can return this response
 	// for a variety of reasons, for example, the registry is performing maintenance.
-	// Try again later. PENDING The TLD registry didn't return a response in the
-	// expected amount of time. When the response is delayed, it usually takes just a
-	// few extra seconds. You can resubmit the request immediately. RESERVED The domain
-	// name has been reserved for another person or organization. UNAVAILABLE The
-	// domain name is not available. UNAVAILABLE_PREMIUM The domain name is not
-	// available. UNAVAILABLE_RESTRICTED The domain name is forbidden.
+	// Try again later. INVALID_NAME_FOR_TLD The TLD isn't valid. For example, it can
+	// contain characters that aren't allowed. PENDING The TLD registry didn't return a
+	// response in the expected amount of time. When the response is delayed, it
+	// usually takes just a few extra seconds. You can resubmit the request
+	// immediately. RESERVED The domain name has been reserved for another person or
+	// organization. UNAVAILABLE The domain name is not available. UNAVAILABLE_PREMIUM
+	// The domain name is not available. UNAVAILABLE_RESTRICTED The domain name is
+	// forbidden.
 	Availability types.DomainAvailability
 
 	// Metadata pertaining to the operation's result.

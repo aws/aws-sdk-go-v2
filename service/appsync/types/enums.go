@@ -164,6 +164,24 @@ func (BadRequestReason) Values() []BadRequestReason {
 	}
 }
 
+type CacheHealthMetricsConfig string
+
+// Enum values for CacheHealthMetricsConfig
+const (
+	CacheHealthMetricsConfigEnabled  CacheHealthMetricsConfig = "ENABLED"
+	CacheHealthMetricsConfigDisabled CacheHealthMetricsConfig = "DISABLED"
+)
+
+// Values returns all known values for CacheHealthMetricsConfig. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CacheHealthMetricsConfig) Values() []CacheHealthMetricsConfig {
+	return []CacheHealthMetricsConfig{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ConflictDetectionType string
 
 // Enum values for ConflictDetectionType
@@ -222,6 +240,44 @@ func (DataSourceIntrospectionStatus) Values() []DataSourceIntrospectionStatus {
 		"PROCESSING",
 		"FAILED",
 		"SUCCESS",
+	}
+}
+
+type DataSourceLevelMetricsBehavior string
+
+// Enum values for DataSourceLevelMetricsBehavior
+const (
+	DataSourceLevelMetricsBehaviorFullRequestDataSourceMetrics DataSourceLevelMetricsBehavior = "FULL_REQUEST_DATA_SOURCE_METRICS"
+	DataSourceLevelMetricsBehaviorPerDataSourceMetrics         DataSourceLevelMetricsBehavior = "PER_DATA_SOURCE_METRICS"
+)
+
+// Values returns all known values for DataSourceLevelMetricsBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DataSourceLevelMetricsBehavior) Values() []DataSourceLevelMetricsBehavior {
+	return []DataSourceLevelMetricsBehavior{
+		"FULL_REQUEST_DATA_SOURCE_METRICS",
+		"PER_DATA_SOURCE_METRICS",
+	}
+}
+
+type DataSourceLevelMetricsConfig string
+
+// Enum values for DataSourceLevelMetricsConfig
+const (
+	DataSourceLevelMetricsConfigEnabled  DataSourceLevelMetricsConfig = "ENABLED"
+	DataSourceLevelMetricsConfigDisabled DataSourceLevelMetricsConfig = "DISABLED"
+)
+
+// Values returns all known values for DataSourceLevelMetricsConfig. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DataSourceLevelMetricsConfig) Values() []DataSourceLevelMetricsConfig {
+	return []DataSourceLevelMetricsConfig{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -366,6 +422,24 @@ func (MergeType) Values() []MergeType {
 	}
 }
 
+type OperationLevelMetricsConfig string
+
+// Enum values for OperationLevelMetricsConfig
+const (
+	OperationLevelMetricsConfigEnabled  OperationLevelMetricsConfig = "ENABLED"
+	OperationLevelMetricsConfigDisabled OperationLevelMetricsConfig = "DISABLED"
+)
+
+// Values returns all known values for OperationLevelMetricsConfig. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationLevelMetricsConfig) Values() []OperationLevelMetricsConfig {
+	return []OperationLevelMetricsConfig{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type OutputType string
 
 // Enum values for OutputType
@@ -434,6 +508,43 @@ func (ResolverKind) Values() []ResolverKind {
 	return []ResolverKind{
 		"UNIT",
 		"PIPELINE",
+	}
+}
+
+type ResolverLevelMetricsBehavior string
+
+// Enum values for ResolverLevelMetricsBehavior
+const (
+	ResolverLevelMetricsBehaviorFullRequestResolverMetrics ResolverLevelMetricsBehavior = "FULL_REQUEST_RESOLVER_METRICS"
+	ResolverLevelMetricsBehaviorPerResolverMetrics         ResolverLevelMetricsBehavior = "PER_RESOLVER_METRICS"
+)
+
+// Values returns all known values for ResolverLevelMetricsBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ResolverLevelMetricsBehavior) Values() []ResolverLevelMetricsBehavior {
+	return []ResolverLevelMetricsBehavior{
+		"FULL_REQUEST_RESOLVER_METRICS",
+		"PER_RESOLVER_METRICS",
+	}
+}
+
+type ResolverLevelMetricsConfig string
+
+// Enum values for ResolverLevelMetricsConfig
+const (
+	ResolverLevelMetricsConfigEnabled  ResolverLevelMetricsConfig = "ENABLED"
+	ResolverLevelMetricsConfigDisabled ResolverLevelMetricsConfig = "DISABLED"
+)
+
+// Values returns all known values for ResolverLevelMetricsConfig. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResolverLevelMetricsConfig) Values() []ResolverLevelMetricsConfig {
+	return []ResolverLevelMetricsConfig{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

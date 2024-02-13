@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 	"github.com/aws/smithy-go/middleware"
+	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -142,6 +143,9 @@ func (c *Client) addOperationPutMetricDataMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOperationPutMetricDataRequestCompressionMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,6 +168,13 @@ func (c *Client) addOperationPutMetricDataMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+func addOperationPutMetricDataRequestCompressionMiddleware(stack *middleware.Stack, options Options) error {
+	return smithyrequestcompression.AddRequestCompression(stack, options.DisableRequestCompression, options.RequestMinCompressSizeBytes,
+		[]string{
+			"gzip",
+		})
 }
 
 func newServiceMetadataMiddleware_opPutMetricData(region string) *awsmiddleware.RegisterServiceMetadata {

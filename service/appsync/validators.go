@@ -1641,6 +1641,27 @@ func validateElasticsearchDataSourceConfig(v *types.ElasticsearchDataSourceConfi
 	}
 }
 
+func validateEnhancedMetricsConfig(v *types.EnhancedMetricsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnhancedMetricsConfig"}
+	if len(v.ResolverLevelMetricsBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverLevelMetricsBehavior"))
+	}
+	if len(v.DataSourceLevelMetricsBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceLevelMetricsBehavior"))
+	}
+	if len(v.OperationLevelMetricsConfig) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationLevelMetricsConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEventBridgeDataSourceConfig(v *types.EventBridgeDataSourceConfig) error {
 	if v == nil {
 		return nil
@@ -2015,6 +2036,11 @@ func validateOpCreateGraphqlApiInput(v *CreateGraphqlApiInput) error {
 	if v.LambdaAuthorizerConfig != nil {
 		if err := validateLambdaAuthorizerConfig(v.LambdaAuthorizerConfig); err != nil {
 			invalidParams.AddNested("LambdaAuthorizerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnhancedMetricsConfig != nil {
+		if err := validateEnhancedMetricsConfig(v.EnhancedMetricsConfig); err != nil {
+			invalidParams.AddNested("EnhancedMetricsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2967,6 +2993,11 @@ func validateOpUpdateGraphqlApiInput(v *UpdateGraphqlApiInput) error {
 	if v.LambdaAuthorizerConfig != nil {
 		if err := validateLambdaAuthorizerConfig(v.LambdaAuthorizerConfig); err != nil {
 			invalidParams.AddNested("LambdaAuthorizerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnhancedMetricsConfig != nil {
+		if err := validateEnhancedMetricsConfig(v.EnhancedMetricsConfig); err != nil {
+			invalidParams.AddNested("EnhancedMetricsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

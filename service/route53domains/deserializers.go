@@ -6397,6 +6397,20 @@ func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetail
 				sv.AutoRenew = ptr.Bool(jtv)
 			}
 
+		case "BillingContact":
+			if err := awsAwsjson11_deserializeDocumentContactDetail(&sv.BillingContact, value); err != nil {
+				return err
+			}
+
+		case "BillingPrivacy":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.BillingPrivacy = ptr.Bool(jtv)
+			}
+
 		case "CreationDate":
 			if value != nil {
 				switch jtv := value.(type) {
