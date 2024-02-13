@@ -16,8 +16,8 @@ type AmiProductEntityIdFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Object containing all the filter fields for AMI products. Client can add a
-// maximum of 8 filters in a single ListEntities request.
+// Object containing all the filter fields for AMI products. Client can add only
+// one wildcard filter and a maximum of 8 filters in a single ListEntities request.
 type AmiProductFilters struct {
 
 	// Unique identifier for the AMI product.
@@ -234,7 +234,8 @@ type ContainerProductEntityIdFilter struct {
 }
 
 // Object containing all the filter fields for container products. Client can add
-// a maximum of 8 filters in a single ListEntities request.
+// only one wildcard filter and a maximum of 8 filters in a single ListEntities
+// request.
 type ContainerProductFilters struct {
 
 	// Unique identifier for the container product.
@@ -333,8 +334,8 @@ type DataProductEntityIdFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Object containing all the filter fields for data products. Client can add a
-// maximum of 8 filters in a single ListEntities request.
+// Object containing all the filter fields for data products. Client can add only
+// one wildcard filter and a maximum of 8 filters in a single ListEntities request.
 type DataProductFilters struct {
 
 	// Unique identifier for the data product.
@@ -742,7 +743,8 @@ type OfferEntityIdFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A filter for offers entity.
+// Object containing all the filter fields for offers entity. Client can add only
+// one wildcard filter and a maximum of 8 filters in a single ListEntities request.
 type OfferFilters struct {
 
 	// Allows filtering on the AvailabilityEndDate of an offer.
@@ -958,7 +960,9 @@ type ResaleAuthorizationEntityIdFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A filter for ResaleAuthorization entity.
+// Object containing all the filter fields for resale authorization entity. Client
+// can add only one wildcard filter and a maximum of 8 filters in a single
+// ListEntities request.
 type ResaleAuthorizationFilters struct {
 
 	// Allows filtering on the AvailabilityEndDate of a ResaleAuthorization.
@@ -1198,8 +1202,8 @@ type SaaSProductEntityIdFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Object containing all the filter fields for SaaS products. Client can add a
-// maximum of 8 filters in a single ListEntities request.
+// Object containing all the filter fields for SaaS products. Client can add only
+// one wildcard filter and a maximum of 8 filters in a single ListEntities request.
 type SaaSProductFilters struct {
 
 	// Unique identifier for the SaaS product.

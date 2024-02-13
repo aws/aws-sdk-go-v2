@@ -1,0 +1,8 @@
+{
+    "id": "998ad321-a8d8-4c09-bd98-64bb3310a10a",
+    "type": "feature",
+    "description": "Resource Explorer now uses newly supported IPv4 'amazonaws.com' endpoints by default.",
+    "modules": [
+        "service/resourceexplorer2"
+    ]
+}

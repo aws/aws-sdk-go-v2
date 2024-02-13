@@ -878,6 +878,11 @@ func awsRestjson1_serializeOpDocumentStartChangeSetInput(v *StartChangeSetInput,
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if len(v.Intent) > 0 {
+		ok := object.Key("Intent")
+		ok.String(string(v.Intent))
+	}
+
 	return nil
 }
 

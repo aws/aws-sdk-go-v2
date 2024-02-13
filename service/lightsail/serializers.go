@@ -13056,6 +13056,11 @@ func awsAwsjson11_serializeOpDocumentUpdateRelationalDatabaseInput(v *UpdateRela
 		ok.Boolean(*v.PubliclyAccessible)
 	}
 
+	if v.RelationalDatabaseBlueprintId != nil {
+		ok := object.Key("relationalDatabaseBlueprintId")
+		ok.String(*v.RelationalDatabaseBlueprintId)
+	}
+
 	if v.RelationalDatabaseName != nil {
 		ok := object.Key("relationalDatabaseName")
 		ok.String(*v.RelationalDatabaseName)

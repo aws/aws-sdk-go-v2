@@ -179,6 +179,24 @@ func (FailureCode) Values() []FailureCode {
 	}
 }
 
+type Intent string
+
+// Enum values for Intent
+const (
+	IntentValidate Intent = "VALIDATE"
+	IntentApply    Intent = "APPLY"
+)
+
+// Values returns all known values for Intent. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Intent) Values() []Intent {
+	return []Intent{
+		"VALIDATE",
+		"APPLY",
+	}
+}
+
 type OfferSortBy string
 
 // Enum values for OfferSortBy

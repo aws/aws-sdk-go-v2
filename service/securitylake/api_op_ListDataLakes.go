@@ -32,7 +32,7 @@ func (c *Client) ListDataLakes(ctx context.Context, params *ListDataLakesInput, 
 
 type ListDataLakesInput struct {
 
-	// The list of regions where Security Lake is enabled.
+	// The list of Regions where Security Lake is enabled.
 	Regions []string
 
 	noSmithyDocumentSerde

@@ -40,7 +40,7 @@ type ListLogSourcesInput struct {
 	// call using the returned token to retrieve the next page.
 	NextToken *string
 
-	// The list of regions for which log sources are displayed.
+	// The list of Regions for which log sources are displayed.
 	Regions []string
 
 	// The list of sources for which log sources are displayed.

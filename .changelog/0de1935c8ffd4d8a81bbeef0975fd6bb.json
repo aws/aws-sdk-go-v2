@@ -1,0 +1,8 @@
+{
+    "id": "0de1935c-8ffd-4d8a-81bb-eef0975fd6bb",
+    "type": "feature",
+    "description": "This release adds support to upgrade the major version of a database.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

@@ -655,6 +655,15 @@ func awsRestjson1_deserializeOpDocumentDescribeChangeSetOutput(v **DescribeChang
 				sv.FailureDescription = ptr.String(jtv)
 			}
 
+		case "Intent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Intent to be of type string, got %T instead", value)
+				}
+				sv.Intent = types.Intent(jtv)
+			}
+
 		case "StartTime":
 			if value != nil {
 				jtv, ok := value.(string)

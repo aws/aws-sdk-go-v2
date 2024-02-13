@@ -41,7 +41,7 @@ type ListDataLakeExceptionsInput struct {
 	// HTTP 400 InvalidToken error.
 	NextToken *string
 
-	// List the Amazon Web Services Regions from which exceptions are retrieved.
+	// The Amazon Web Services Regions from which exceptions are retrieved.
 	Regions []string
 
 	noSmithyDocumentSerde

@@ -75,6 +75,10 @@ type DescribeChangeSetOutput struct {
 	// related to any of the changes in the request.
 	FailureDescription *string
 
+	// The optional intent provided in the StartChangeSet request. If you do not
+	// provide an intent, APPLY is set by default.
+	Intent types.Intent
+
 	// The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request
 	// started.
 	StartTime *string

@@ -66,6 +66,13 @@ type StartChangeSetInput struct {
 	// A unique token to identify the request to ensure idempotency.
 	ClientRequestToken *string
 
+	// The intent related to the request. The default is APPLY . To test your request
+	// before applying changes to your entities, use VALIDATE . This feature is
+	// currently available for adding versions to single-AMI products. For more
+	// information, see Add a new version (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#ami-add-version)
+	// .
+	Intent types.Intent
+
 	noSmithyDocumentSerde
 }
 
