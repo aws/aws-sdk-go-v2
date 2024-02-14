@@ -1,0 +1,8 @@
+{
+    "id": "7cc9a41d-f994-472c-b974-5caf5f8b4409",
+    "type": "feature",
+    "description": "This release adds the metadata-boosting feature, which allows customers to easily fine-tune the underlying ranking of retrieved RAG passages in order to optimize Q\u0026A answer relevance. It also adds new feedback reasons for the PutFeedback API.",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

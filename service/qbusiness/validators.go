@@ -1584,6 +1584,21 @@ func validateDataSourceVpcConfiguration(v *types.DataSourceVpcConfiguration) err
 	}
 }
 
+func validateDateAttributeBoostingConfiguration(v *types.DateAttributeBoostingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DateAttributeBoostingConfiguration"}
+	if len(v.BoostingLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BoostingLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeleteDocument(v *types.DeleteDocument) error {
 	if v == nil {
 		return nil
@@ -1661,6 +1676,57 @@ func validateDocumentAttribute(v *types.DocumentAttribute) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentAttributeBoostingConfiguration(v types.DocumentAttributeBoostingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentAttributeBoostingConfiguration"}
+	switch uv := v.(type) {
+	case *types.DocumentAttributeBoostingConfigurationMemberDateConfiguration:
+		if err := validateDateAttributeBoostingConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[dateConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DocumentAttributeBoostingConfigurationMemberNumberConfiguration:
+		if err := validateNumberAttributeBoostingConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[numberConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DocumentAttributeBoostingConfigurationMemberStringConfiguration:
+		if err := validateStringAttributeBoostingConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[stringConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DocumentAttributeBoostingConfigurationMemberStringListConfiguration:
+		if err := validateStringListAttributeBoostingConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[stringListConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentAttributeBoostingOverrideMap(v map[string]types.DocumentAttributeBoostingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentAttributeBoostingOverrideMap"}
+	for key := range v {
+		if err := validateDocumentAttributeBoostingConfiguration(v[key]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1965,6 +2031,26 @@ func validateNativeIndexConfiguration(v *types.NativeIndexConfiguration) error {
 	if v.IndexId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
+	if v.BoostingOverride != nil {
+		if err := validateDocumentAttributeBoostingOverrideMap(v.BoostingOverride); err != nil {
+			invalidParams.AddNested("BoostingOverride", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNumberAttributeBoostingConfiguration(v *types.NumberAttributeBoostingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NumberAttributeBoostingConfiguration"}
+	if len(v.BoostingLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BoostingLevel"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2172,6 +2258,36 @@ func validateSamlConfiguration(v *types.SamlConfiguration) error {
 	}
 	if v.UserIdAttribute == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserIdAttribute"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStringAttributeBoostingConfiguration(v *types.StringAttributeBoostingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StringAttributeBoostingConfiguration"}
+	if len(v.BoostingLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BoostingLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStringListAttributeBoostingConfiguration(v *types.StringListAttributeBoostingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StringListAttributeBoostingConfiguration"}
+	if len(v.BoostingLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BoostingLevel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -8,6 +8,36 @@ import (
 	"time"
 )
 
+func ExampleDocumentAttributeBoostingConfiguration_outputUsage() {
+	var union types.DocumentAttributeBoostingConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DocumentAttributeBoostingConfigurationMemberDateConfiguration:
+		_ = v.Value // Value is types.DateAttributeBoostingConfiguration
+
+	case *types.DocumentAttributeBoostingConfigurationMemberNumberConfiguration:
+		_ = v.Value // Value is types.NumberAttributeBoostingConfiguration
+
+	case *types.DocumentAttributeBoostingConfigurationMemberStringConfiguration:
+		_ = v.Value // Value is types.StringAttributeBoostingConfiguration
+
+	case *types.DocumentAttributeBoostingConfigurationMemberStringListConfiguration:
+		_ = v.Value // Value is types.StringListAttributeBoostingConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StringListAttributeBoostingConfiguration
+var _ *types.DateAttributeBoostingConfiguration
+var _ *types.StringAttributeBoostingConfiguration
+var _ *types.NumberAttributeBoostingConfiguration
+
 func ExampleDocumentAttributeValue_outputUsage() {
 	var union types.DocumentAttributeValue
 	// type switches can be used to check the union value

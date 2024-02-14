@@ -1,0 +1,8 @@
+{
+    "id": "e62f2b39-b7f3-48b9-8ae9-34412c84987b",
+    "type": "feature",
+    "description": "This feature allows customers to see pointwise model diagnostics results for their models.",
+    "modules": [
+        "service/lookoutequipment"
+    ]
+}

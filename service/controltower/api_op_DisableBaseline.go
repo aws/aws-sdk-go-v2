@@ -7,59 +7,43 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/controltower/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new landing zone. This API call starts an asynchronous operation that
-// creates and configures a landing zone, based on the parameters specified in the
-// manifest JSON file.
-func (c *Client) CreateLandingZone(ctx context.Context, params *CreateLandingZoneInput, optFns ...func(*Options)) (*CreateLandingZoneOutput, error) {
+// Disable an EnabledBaseline resource on the specified Target. This API starts an
+// asynchronous operation to remove all resources deployed as part of the baseline
+// enablement. The resource will vary depending on the enabled baseline.
+func (c *Client) DisableBaseline(ctx context.Context, params *DisableBaselineInput, optFns ...func(*Options)) (*DisableBaselineOutput, error) {
 	if params == nil {
-		params = &CreateLandingZoneInput{}
+		params = &DisableBaselineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLandingZone", params, optFns, c.addOperationCreateLandingZoneMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableBaseline", params, optFns, c.addOperationDisableBaselineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateLandingZoneOutput)
+	out := result.(*DisableBaselineOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateLandingZoneInput struct {
+type DisableBaselineInput struct {
 
-	// The manifest.yaml file is a text file that describes your Amazon Web Services
-	// resources. For examples, review The manifest file (https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file)
-	// .
+	// Identifier of the EnabledBaseline resource to be deactivated, in ARN format.
 	//
 	// This member is required.
-	Manifest document.Interface
-
-	// The landing zone version, for example, 3.0.
-	//
-	// This member is required.
-	Version *string
-
-	// Tags to be applied to the landing zone.
-	Tags map[string]string
+	EnabledBaselineIdentifier *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateLandingZoneOutput struct {
+type DisableBaselineOutput struct {
 
-	// The ARN of the landing zone resource.
-	//
-	// This member is required.
-	Arn *string
-
-	// A unique identifier assigned to a CreateLandingZone operation. You can use this
-	// identifier as an input of GetLandingZoneOperation to check the operation's
-	// status.
+	// The ID (in UUID format) of the asynchronous DisableBaseline operation. This
+	// operationIdentifier is used to track status through calls to the
+	// GetBaselineOperation API.
 	//
 	// This member is required.
 	OperationIdentifier *string
@@ -70,19 +54,19 @@ type CreateLandingZoneOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateLandingZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLandingZone{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableBaseline{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLandingZone{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableBaseline{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLandingZone"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableBaseline"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -125,10 +109,10 @@ func (c *Client) addOperationCreateLandingZoneMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateLandingZoneValidationMiddleware(stack); err != nil {
+	if err = addOpDisableBaselineValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLandingZone(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableBaseline(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -149,10 +133,10 @@ func (c *Client) addOperationCreateLandingZoneMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateLandingZone(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDisableBaseline(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateLandingZone",
+		OperationName: "DisableBaseline",
 	}
 }

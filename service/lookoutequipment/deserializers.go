@@ -8328,6 +8328,100 @@ func awsAwsjson10_deserializeDocumentMissingSensorData(v **types.MissingSensorDa
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentModelDiagnosticsOutputConfiguration(v **types.ModelDiagnosticsOutputConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelDiagnosticsOutputConfiguration
+	if *v == nil {
+		sv = &types.ModelDiagnosticsOutputConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameOrArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		case "S3OutputConfiguration":
+			if err := awsAwsjson10_deserializeDocumentModelDiagnosticsS3OutputConfiguration(&sv.S3OutputConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentModelDiagnosticsS3OutputConfiguration(v **types.ModelDiagnosticsS3OutputConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelDiagnosticsS3OutputConfiguration
+	if *v == nil {
+		sv = &types.ModelDiagnosticsS3OutputConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Bucket to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "Prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Prefix to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentModelSummaries(v *[]types.ModelSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8485,6 +8579,11 @@ func awsAwsjson10_deserializeDocumentModelSummary(v **types.ModelSummary, value 
 					return fmt.Errorf("expected ModelArn to be of type string, got %T instead", value)
 				}
 				sv.ModelArn = ptr.String(jtv)
+			}
+
+		case "ModelDiagnosticsOutputConfiguration":
+			if err := awsAwsjson10_deserializeDocumentModelDiagnosticsOutputConfiguration(&sv.ModelDiagnosticsOutputConfiguration, value); err != nil {
+				return err
 			}
 
 		case "ModelName":
@@ -10765,6 +10864,11 @@ func awsAwsjson10_deserializeOpDocumentDescribeModelOutput(v **DescribeModelOutp
 				sv.ModelArn = ptr.String(jtv)
 			}
 
+		case "ModelDiagnosticsOutputConfiguration":
+			if err := awsAwsjson10_deserializeDocumentModelDiagnosticsOutputConfiguration(&sv.ModelDiagnosticsOutputConfiguration, value); err != nil {
+				return err
+			}
+
 		case "ModelMetrics":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11191,6 +11295,16 @@ func awsAwsjson10_deserializeOpDocumentDescribeModelVersionOutput(v **DescribeMo
 					return fmt.Errorf("expected ModelArn to be of type string, got %T instead", value)
 				}
 				sv.ModelArn = ptr.String(jtv)
+			}
+
+		case "ModelDiagnosticsOutputConfiguration":
+			if err := awsAwsjson10_deserializeDocumentModelDiagnosticsOutputConfiguration(&sv.ModelDiagnosticsOutputConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ModelDiagnosticsResultsObject":
+			if err := awsAwsjson10_deserializeDocumentS3Object(&sv.ModelDiagnosticsResultsObject, value); err != nil {
+				return err
 			}
 
 		case "ModelMetrics":

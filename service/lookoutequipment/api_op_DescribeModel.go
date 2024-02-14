@@ -125,6 +125,9 @@ type DescribeModelOutput struct {
 	// The Amazon Resource Name (ARN) of the machine learning model being described.
 	ModelArn *string
 
+	// Configuration information for the model's pointwise model diagnostics.
+	ModelDiagnosticsOutputConfiguration *types.ModelDiagnosticsOutputConfiguration
+
 	// The Model Metrics show an aggregated summary of the model's performance within
 	// the evaluation time range. This is the JSON content of the metrics created when
 	// evaluating the model.

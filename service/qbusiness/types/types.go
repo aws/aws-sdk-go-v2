@@ -210,8 +210,7 @@ type AttachmentsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Enables filtering of Amazon Q web experience responses based on document
-// attributes or metadata fields.
+// Enables filtering of responses based on document attributes or metadata fields.
 type AttributeFilter struct {
 
 	// Performs a logical AND operation on all supplied filters.
@@ -444,6 +443,24 @@ type DataSourceVpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information on boosting DATE type document attributes. For more
+// information on how boosting document attributes work in Amazon Q, see Boosting
+// using document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html)
+// .
+type DateAttributeBoostingConfiguration struct {
+
+	// Specifies how much a document attribute is boosted.
+	//
+	// This member is required.
+	BoostingLevel DocumentAttributeBoostingLevel
+
+	// Specifies the duration, in seconds, of a boost applies to a DATE type document
+	// attribute.
+	BoostingDurationInSeconds *int64
+
+	noSmithyDocumentSerde
+}
+
 // A document deleted from an Amazon Q data source connector.
 type DeleteDocument struct {
 
@@ -504,8 +521,71 @@ type DocumentAttribute struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information on boosting supported Amazon Q document attribute types.
+// When an end user chat query matches document attributes that have been boosted,
+// Amazon Q prioritizes generating responses from content that matches the boosted
+// document attributes. For STRING and STRING_LIST type document attributes to be
+// used for boosting on the console and the API, they must be enabled for search
+// using the DocumentAttributeConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html)
+// object of the UpdateIndex (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html)
+// API. If you haven't enabled searching on these attributes, you can't boost
+// attributes of these data types on either the console or the API. For more
+// information on how boosting document attributes work in Amazon Q, see Boosting
+// using document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html)
+// .
+//
+// The following types satisfy this interface:
+//
+//	DocumentAttributeBoostingConfigurationMemberDateConfiguration
+//	DocumentAttributeBoostingConfigurationMemberNumberConfiguration
+//	DocumentAttributeBoostingConfigurationMemberStringConfiguration
+//	DocumentAttributeBoostingConfigurationMemberStringListConfiguration
+type DocumentAttributeBoostingConfiguration interface {
+	isDocumentAttributeBoostingConfiguration()
+}
+
+// Provides information on boosting DATE type document attributes.
+type DocumentAttributeBoostingConfigurationMemberDateConfiguration struct {
+	Value DateAttributeBoostingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeBoostingConfigurationMemberDateConfiguration) isDocumentAttributeBoostingConfiguration() {
+}
+
+// Provides information on boosting NUMBER type document attributes.
+type DocumentAttributeBoostingConfigurationMemberNumberConfiguration struct {
+	Value NumberAttributeBoostingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeBoostingConfigurationMemberNumberConfiguration) isDocumentAttributeBoostingConfiguration() {
+}
+
+// Provides information on boosting STRING type document attributes.
+type DocumentAttributeBoostingConfigurationMemberStringConfiguration struct {
+	Value StringAttributeBoostingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeBoostingConfigurationMemberStringConfiguration) isDocumentAttributeBoostingConfiguration() {
+}
+
+// Provides information on boosting STRING_LIST type document attributes.
+type DocumentAttributeBoostingConfigurationMemberStringListConfiguration struct {
+	Value StringListAttributeBoostingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeBoostingConfigurationMemberStringListConfiguration) isDocumentAttributeBoostingConfiguration() {
+}
+
 // The condition used for the target document attribute or metadata field when
-// ingesting documents into Amazon Q. You use this with DocumentAttributeTarget (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html)
+// ingesting documents into Amazon Q. You use this with DocumentAttributeTarget (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html)
 // to apply the condition. For example, you can create the 'Department' target
 // field and have it prefill department names associated with the documents based
 // on information in the 'Source_URI' field. Set the condition that if the
@@ -568,9 +648,9 @@ type DocumentAttributeConfiguration struct {
 // 'Customer_ID'. This would scrub personally identifiable information from each
 // document's metadata. Amazon Q can't create a target field if it has not already
 // been created as an index field. After you create your index field, you can
-// create a document metadata field using DocumentAttributeTarget (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html)
+// create a document metadata field using DocumentAttributeTarget (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html)
 // . Amazon Q will then map your newly created document attribute to your index
-// field. You can also use this with DocumentAttributeCondition (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeCondition.html)
+// field. You can also use this with DocumentAttributeCondition (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html)
 // .
 type DocumentAttributeTarget struct {
 
@@ -709,10 +789,10 @@ type DocumentEnrichmentConfiguration struct {
 
 	// Provides the configuration information for invoking a Lambda function in Lambda
 	// to alter document metadata and content when ingesting documents into Amazon Q.
-	// You can configure your Lambda function using PreExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
+	// You can configure your Lambda function using PreExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
 	// if you want to apply advanced alterations on the original or raw documents. If
 	// you want to apply advanced alterations on the Amazon Q structured documents, you
-	// must configure your Lambda function using PostExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
+	// must configure your Lambda function using PostExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
 	// . You can only invoke one Lambda function. However, this function can invoke
 	// other functions it requires. For more information, see Custom document
 	// enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
@@ -721,10 +801,10 @@ type DocumentEnrichmentConfiguration struct {
 
 	// Provides the configuration information for invoking a Lambda function in Lambda
 	// to alter document metadata and content when ingesting documents into Amazon Q.
-	// You can configure your Lambda function using PreExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
+	// You can configure your Lambda function using PreExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
 	// if you want to apply advanced alterations on the original or raw documents. If
 	// you want to apply advanced alterations on the Amazon Q structured documents, you
-	// must configure your Lambda function using PostExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
+	// must configure your Lambda function using PostExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
 	// . You can only invoke one Lambda function. However, this function can invoke
 	// other functions it requires. For more information, see Custom document
 	// enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
@@ -828,10 +908,10 @@ type GroupSummary struct {
 
 // Provides the configuration information for invoking a Lambda function in Lambda
 // to alter document metadata and content when ingesting documents into Amazon Q.
-// You can configure your Lambda function using PreExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
+// You can configure your Lambda function using PreExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
 // if you want to apply advanced alterations on the original or raw documents. If
 // you want to apply advanced alterations on the Amazon Q structured documents, you
-// must configure your Lambda function using PostExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
+// must configure your Lambda function using PostExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
 // . You can only invoke one Lambda function. However, this function can invoke
 // other functions it requires. For more information, see Custom document
 // enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
@@ -905,13 +985,13 @@ type IndexStatistics struct {
 // Provides the configuration information for applying basic logic to alter
 // document metadata and content when ingesting documents into Amazon Q. To apply
 // advanced logic, to go beyond what you can do with basic logic, see
-// HookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_HookConfiguration.html)
+// HookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_HookConfiguration.html)
 // . For more information, see Custom document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
 // .
 type InlineDocumentEnrichmentConfiguration struct {
 
 	// The condition used for the target document attribute or metadata field when
-	// ingesting documents into Amazon Q. You use this with DocumentAttributeTarget (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html)
+	// ingesting documents into Amazon Q. You use this with DocumentAttributeTarget (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html)
 	// to apply the condition. For example, you can create the 'Department' target
 	// field and have it prefill department names associated with the documents based
 	// on information in the 'Source_URI' field. Set the condition that if the
@@ -934,9 +1014,9 @@ type InlineDocumentEnrichmentConfiguration struct {
 	// 'Customer_ID'. This would scrub personally identifiable information from each
 	// document's metadata. Amazon Q can't create a target field if it has not already
 	// been created as an index field. After you create your index field, you can
-	// create a document metadata field using DocumentAttributeTarget (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html)
+	// create a document metadata field using DocumentAttributeTarget (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html)
 	// . Amazon Q will then map your newly created document attribute to your index
-	// field. You can also use this with DocumentAttributeCondition (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeCondition.html)
+	// field. You can also use this with DocumentAttributeCondition (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html)
 	// .
 	Target *DocumentAttributeTarget
 
@@ -1045,6 +1125,28 @@ type NativeIndexConfiguration struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	// Overrides the default boosts applied by Amazon Q to supported document
+	// attribute data types.
+	BoostingOverride map[string]DocumentAttributeBoostingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Provides information on boosting NUMBER type document attributes. For more
+// information on how boosting document attributes work in Amazon Q, see Boosting
+// using document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html)
+// .
+type NumberAttributeBoostingConfiguration struct {
+
+	// Specifies the duration, in seconds, of a boost applies to a NUMBER type
+	// document attribute.
+	//
+	// This member is required.
+	BoostingLevel DocumentAttributeBoostingLevel
+
+	// Specifies how much a document attribute is boosted.
+	BoostingType NumberAttributeBoostingType
 
 	noSmithyDocumentSerde
 }
@@ -1245,7 +1347,7 @@ func (*RetrieverConfigurationMemberNativeIndexConfiguration) isRetrieverConfigur
 // a time.
 type Rule struct {
 
-	// The type fo rule.
+	// The type of rule.
 	//
 	// This member is required.
 	RuleType RuleType
@@ -1361,6 +1463,49 @@ type SourceAttribution struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information on boosting STRING type document attributes. For STRING
+// and STRING_LIST type document attributes to be used for boosting on the console
+// and the API, they must be enabled for search using the
+// DocumentAttributeConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html)
+// object of the UpdateIndex (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html)
+// API. If you haven't enabled searching on these attributes, you can't boost
+// attributes of these data types on either the console or the API. For more
+// information on how boosting document attributes work in Amazon Q, see Boosting
+// using document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html)
+// .
+type StringAttributeBoostingConfiguration struct {
+
+	// Specifies how much a document attribute is boosted.
+	//
+	// This member is required.
+	BoostingLevel DocumentAttributeBoostingLevel
+
+	// Specifies specific values of a STRING type document attribute being boosted.
+	AttributeValueBoosting map[string]StringAttributeValueBoostingLevel
+
+	noSmithyDocumentSerde
+}
+
+// Provides information on boosting STRING_LIST type document attributes. For
+// STRING and STRING_LIST type document attributes to be used for boosting on the
+// console and the API, they must be enabled for search using the
+// DocumentAttributeConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html)
+// object of the UpdateIndex (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html)
+// API. If you haven't enabled searching on these attributes, you can't boost
+// attributes of these data types on either the console or the API. For more
+// information on how boosting document attributes work in Amazon Q, see Boosting
+// using document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html)
+// .
+type StringListAttributeBoostingConfiguration struct {
+
+	// Specifies how much a document attribute is boosted.
+	//
+	// This member is required.
+	BoostingLevel DocumentAttributeBoostingLevel
+
+	noSmithyDocumentSerde
+}
+
 // A list of key/value pairs that identify an index, FAQ, or data source. Tag keys
 // and values can consist of Unicode letters, digits, white space, and any of the
 // following symbols: _ . : / = + - @.
@@ -1421,7 +1566,7 @@ type TopicConfiguration struct {
 	// This member is required.
 	Rules []Rule
 
-	// A description for your topic control configuration. Use this outline how the
+	// A description for your topic control configuration. Use this to outline how the
 	// large language model (LLM) should use this topic control configuration.
 	Description *string
 
@@ -1532,10 +1677,11 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isDocumentAttributeValue()         {}
-func (*UnknownUnionMember) isDocumentContent()                {}
-func (*UnknownUnionMember) isPluginAuthConfiguration()        {}
-func (*UnknownUnionMember) isPrincipal()                      {}
-func (*UnknownUnionMember) isRetrieverConfiguration()         {}
-func (*UnknownUnionMember) isRuleConfiguration()              {}
-func (*UnknownUnionMember) isWebExperienceAuthConfiguration() {}
+func (*UnknownUnionMember) isDocumentAttributeBoostingConfiguration() {}
+func (*UnknownUnionMember) isDocumentAttributeValue()                 {}
+func (*UnknownUnionMember) isDocumentContent()                        {}
+func (*UnknownUnionMember) isPluginAuthConfiguration()                {}
+func (*UnknownUnionMember) isPrincipal()                              {}
+func (*UnknownUnionMember) isRetrieverConfiguration()                 {}
+func (*UnknownUnionMember) isRuleConfiguration()                      {}
+func (*UnknownUnionMember) isWebExperienceAuthConfiguration()         {}

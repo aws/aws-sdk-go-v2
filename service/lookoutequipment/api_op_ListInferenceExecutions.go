@@ -62,7 +62,10 @@ type ListInferenceExecutionsOutput struct {
 
 	// Provides an array of information about the individual inference executions
 	// returned from the ListInferenceExecutions operation, including model used,
-	// inference scheduler, data configuration, and so on.
+	// inference scheduler, data configuration, and so on. If you don't supply the
+	// InferenceSchedulerName request parameter, or if you supply the name of an
+	// inference scheduler that doesn't exist, ListInferenceExecutions returns an
+	// empty array in InferenceExecutionSummaries .
 	InferenceExecutionSummaries []types.InferenceExecutionSummary
 
 	// An opaque pagination token indicating where to continue the listing of

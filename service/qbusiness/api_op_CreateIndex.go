@@ -15,8 +15,8 @@ import (
 // Creates an Amazon Q index. To determine if index creation has completed, check
 // the Status field returned from a call to DescribeIndex . The Status field is
 // set to ACTIVE when the index is ready to use. Once the index is active, you can
-// index your documents using the BatchPutDocument (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_BatchPutDocument.html)
-// API or the CreateDataSource (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CreateDataSource.html)
+// index your documents using the BatchPutDocument (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_BatchPutDocument.html)
+// API or the CreateDataSource (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_CreateDataSource.html)
 // API.
 func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optFns ...func(*Options)) (*CreateIndexOutput, error) {
 	if params == nil {

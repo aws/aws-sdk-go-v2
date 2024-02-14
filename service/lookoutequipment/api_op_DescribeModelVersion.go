@@ -113,6 +113,14 @@ type DescribeModelVersionOutput struct {
 	// version belong to.
 	ModelArn *string
 
+	// The Amazon S3 location where Amazon Lookout for Equipment saves the pointwise
+	// model diagnostics for the model version.
+	ModelDiagnosticsOutputConfiguration *types.ModelDiagnosticsOutputConfiguration
+
+	// The Amazon S3 output prefix for where Lookout for Equipment saves the pointwise
+	// model diagnostics for the model version.
+	ModelDiagnosticsResultsObject *types.S3Object
+
 	// Shows an aggregated summary, in JSON format, of the model's performance within
 	// the evaluation time range. These metrics are created when evaluating the model.
 	ModelMetrics *string

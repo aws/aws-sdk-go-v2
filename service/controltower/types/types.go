@@ -8,6 +8,53 @@ import (
 	"time"
 )
 
+// An object of shape BaselineOperation , returning details about the specified
+// Baseline operation ID.
+type BaselineOperation struct {
+
+	// The end time of the operation (if applicable), in ISO 8601 format.
+	EndTime *time.Time
+
+	// The identifier of the specified operation.
+	OperationIdentifier *string
+
+	// An enumerated type ( enum ) with possible values of ENABLE_BASELINE ,
+	// DISABLE_BASELINE , UPDATE_ENABLED_BASELINE , or RESET_ENABLED_BASELINE .
+	OperationType BaselineOperationType
+
+	// The start time of the operation, in ISO 8601 format.
+	StartTime *time.Time
+
+	// An enumerated type ( enum ) with possible values of SUCCEEDED , FAILED , or
+	// IN_PROGRESS .
+	Status BaselineOperationStatus
+
+	// A status message that gives more information about the operation's status, if
+	// applicable.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Returns a summary of information about a Baseline object.
+type BaselineSummary struct {
+
+	// The full ARN of a Baseline.
+	//
+	// This member is required.
+	Arn *string
+
+	// The human-readable name of a Baseline.
+	//
+	// This member is required.
+	Name *string
+
+	// A summary description of a Baseline.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // An operation performed by the control.
 type ControlOperation struct {
 
@@ -51,6 +98,113 @@ type DriftStatusSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Details of the EnabledBaseline resource.
+type EnabledBaselineDetails struct {
+
+	// The ARN of the EnabledBaseline resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// The specific Baseline enabled as part of the EnabledBaseline resource.
+	//
+	// This member is required.
+	BaselineIdentifier *string
+
+	// The deployment summary of the enabled control.
+	//
+	// This member is required.
+	StatusSummary *EnablementStatusSummary
+
+	// The target on which to enable the Baseline .
+	//
+	// This member is required.
+	TargetIdentifier *string
+
+	// The enabled version of the Baseline .
+	BaselineVersion *string
+
+	// Shows the parameters that are applied when enabling this Baseline .
+	Parameters []EnabledBaselineParameterSummary
+
+	noSmithyDocumentSerde
+}
+
+// A filter applied on the ListEnabledBaseline operation. Allowed filters are
+// baselineIdentifiers and targetIdentifiers . The filter can be applied for
+// either, or both.
+type EnabledBaselineFilter struct {
+
+	// Identifiers for the Baseline objects returned as part of the filter operation.
+	BaselineIdentifiers []string
+
+	// Identifiers for the targets of the Baseline filter operation.
+	TargetIdentifiers []string
+
+	noSmithyDocumentSerde
+}
+
+// A key-value parameter to an EnabledBaseline resource.
+type EnabledBaselineParameter struct {
+
+	// A string denoting the parameter key.
+	//
+	// This member is required.
+	Key *string
+
+	// A low-level Document object of any type (for example, a Java Object).
+	//
+	// This member is required.
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Summary of an applied parameter to an EnabledBaseline resource.
+type EnabledBaselineParameterSummary struct {
+
+	// A string denoting the parameter key.
+	//
+	// This member is required.
+	Key *string
+
+	// A low-level document object of any type (for example, a Java Object).
+	//
+	// This member is required.
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Returns a summary of information about an EnabledBaseline object.
+type EnabledBaselineSummary struct {
+
+	// The ARN of the EnabledBaseline resource
+	//
+	// This member is required.
+	Arn *string
+
+	// The specific baseline that is enabled as part of the EnabledBaseline resource.
+	//
+	// This member is required.
+	BaselineIdentifier *string
+
+	// The deployment summary of the enabled control.
+	//
+	// This member is required.
+	StatusSummary *EnablementStatusSummary
+
+	// The target upon which the baseline is enabled.
+	//
+	// This member is required.
+	TargetIdentifier *string
+
+	// The enabled version of the baseline.
+	BaselineVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the enabled control.
 type EnabledControlDetails struct {
 
@@ -82,17 +236,15 @@ type EnabledControlDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A set of parameters that configure the behavior of the enabled control. A
-// key/value pair, where Key is of type String and Value is of type Document .
+// A key/value pair, where Key is of type String and Value is of type Document .
 type EnabledControlParameter struct {
 
-	// The key of a key/value pair. It is of type string .
+	// The key of a key/value pair.
 	//
 	// This member is required.
 	Key *string
 
-	// The value of a key/value pair. It can be of type array string , number , object
-	// , or boolean .
+	// The value of a key/value pair.
 	//
 	// This member is required.
 	Value document.Interface
@@ -155,7 +307,7 @@ type EnablementStatusSummary struct {
 // Information about the landing zone.
 type LandingZoneDetail struct {
 
-	// The landing zone manifest JSON text file that specifies the landing zone
+	// The landing zone manifest.yaml text file that specifies the landing zone
 	// configurations.
 	//
 	// This member is required.
@@ -175,7 +327,7 @@ type LandingZoneDetail struct {
 	// The latest available version of the landing zone.
 	LatestAvailableVersion *string
 
-	// The landing zone deployment status.
+	// The landing zone deployment status. One of ACTIVE , PROCESSING , FAILED .
 	Status LandingZoneStatus
 
 	noSmithyDocumentSerde

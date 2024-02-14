@@ -80,6 +80,11 @@ type CreateModelInput struct {
 	// model that's being created.
 	LabelsInputConfiguration *types.LabelsInputConfiguration
 
+	// The Amazon S3 location where you want Amazon Lookout for Equipment to save the
+	// pointwise model diagnostics. You must also specify the RoleArn request
+	// parameter.
+	ModelDiagnosticsOutputConfiguration *types.ModelDiagnosticsOutputConfiguration
+
 	// Indicates that the asset associated with this sensor has been shut off. As long
 	// as this condition is met, Lookout for Equipment will not use data from this
 	// asset for training, evaluation, or inference.

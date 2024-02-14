@@ -12,64 +12,49 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API call activates a control. It starts an asynchronous operation that
-// creates Amazon Web Services resources on the specified organizational unit and
-// the accounts it contains. The resources created will vary according to the
-// control that you specify. For usage examples, see the Amazon Web Services
-// Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
-// .
-func (c *Client) EnableControl(ctx context.Context, params *EnableControlInput, optFns ...func(*Options)) (*EnableControlOutput, error) {
+// Updates an EnabledBaseline resource's applied parameters or version.
+func (c *Client) UpdateEnabledBaseline(ctx context.Context, params *UpdateEnabledBaselineInput, optFns ...func(*Options)) (*UpdateEnabledBaselineOutput, error) {
 	if params == nil {
-		params = &EnableControlInput{}
+		params = &UpdateEnabledBaselineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableControl", params, optFns, c.addOperationEnableControlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEnabledBaseline", params, optFns, c.addOperationUpdateEnabledBaselineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*EnableControlOutput)
+	out := result.(*UpdateEnabledBaselineOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type EnableControlInput struct {
+type UpdateEnabledBaselineInput struct {
 
-	// The ARN of the control. Only Strongly recommended and Elective controls are
-	// permitted, with the exception of the Region deny control. For information on how
-	// to find the controlIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
-	// .
+	// Specifies the new Baseline version, to which the EnabledBaseline should be
+	// updated.
 	//
 	// This member is required.
-	ControlIdentifier *string
+	BaselineVersion *string
 
-	// The ARN of the organizational unit. For information on how to find the
-	// targetIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
-	// .
+	// Specifies the EnabledBaseline resource to be updated.
 	//
 	// This member is required.
-	TargetIdentifier *string
+	EnabledBaselineIdentifier *string
 
-	// A list of input parameter values, which are specified to configure the control
-	// when you enable it.
-	Parameters []types.EnabledControlParameter
-
-	// Tags to be applied to the EnabledControl resource.
-	Tags map[string]string
+	// Parameters to apply when making an update.
+	Parameters []types.EnabledBaselineParameter
 
 	noSmithyDocumentSerde
 }
 
-type EnableControlOutput struct {
+type UpdateEnabledBaselineOutput struct {
 
-	// The ID of the asynchronous operation, which is used to track status. The
-	// operation is available for 90 days.
+	// The ID (in UUID format) of the asynchronous UpdateEnabledBaseline operation.
+	// This operationIdentifier is used to track status through calls to the
+	// GetBaselineOperation API.
 	//
 	// This member is required.
 	OperationIdentifier *string
-
-	// The ARN of the EnabledControl resource.
-	Arn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,19 +62,19 @@ type EnableControlOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationEnableControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEnabledBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableControl{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEnabledBaseline{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableControl{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEnabledBaseline{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableControl"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEnabledBaseline"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -132,10 +117,10 @@ func (c *Client) addOperationEnableControlMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpEnableControlValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateEnabledBaselineValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableControl(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEnabledBaseline(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -156,10 +141,10 @@ func (c *Client) addOperationEnableControlMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opEnableControl(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateEnabledBaseline(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "EnableControl",
+		OperationName: "UpdateEnabledBaseline",
 	}
 }

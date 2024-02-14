@@ -39,6 +39,11 @@ type UpdateModelInput struct {
 	// label data.
 	LabelsInputConfiguration *types.LabelsInputConfiguration
 
+	// The Amazon S3 location where you want Amazon Lookout for Equipment to save the
+	// pointwise model diagnostics for the model. You must also specify the RoleArn
+	// request parameter.
+	ModelDiagnosticsOutputConfiguration *types.ModelDiagnosticsOutputConfiguration
+
 	// The ARN of the model to update.
 	RoleArn *string
 

@@ -440,7 +440,7 @@ type InsufficientSensorData struct {
 	MissingCompleteSensorData *MissingCompleteSensorData
 
 	// Parameter that describes the total number of sensors that have a short date
-	// range of less than 90 days of data overall.
+	// range of less than 14 days of data overall.
 	//
 	// This member is required.
 	SensorsWithShortDateRange *SensorsWithShortDateRange
@@ -593,6 +593,45 @@ type MissingSensorData struct {
 	noSmithyDocumentSerde
 }
 
+// Output configuration information for the pointwise model diagnostics for an
+// Amazon Lookout for Equipment model.
+type ModelDiagnosticsOutputConfiguration struct {
+
+	// The Amazon S3 location for the pointwise model diagnostics.
+	//
+	// This member is required.
+	S3OutputConfiguration *ModelDiagnosticsS3OutputConfiguration
+
+	// The Amazon Web Services Key Management Service (KMS) key identifier to encrypt
+	// the pointwise model diagnostics files.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 location for the pointwise model diagnostics for an Amazon
+// Lookout for Equipment model.
+type ModelDiagnosticsS3OutputConfiguration struct {
+
+	// The name of the Amazon S3 bucket where the pointwise model diagnostics are
+	// located. You must be the owner of the Amazon S3 bucket.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The Amazon S3 prefix for the location of the pointwise model diagnostics. The
+	// prefix specifies the folder and evaluation result file name. ( bucket ). When
+	// you call CreateModel or UpdateModel , specify the path within the bucket that
+	// you want Lookout for Equipment to save the model to. During training, Lookout
+	// for Equipment creates the model evaluation model as a compressed JSON file with
+	// the name model_diagnostics_results.json.gz . When you call DescribeModel or
+	// DescribeModelVersion , prefix contains the file path and filename of the model
+	// evaluation file.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about the specified machine learning model, including
 // dataset and model names and ARNs, as well as status.
 type ModelSummary struct {
@@ -626,6 +665,10 @@ type ModelSummary struct {
 
 	// The Amazon Resource Name (ARN) of the machine learning model.
 	ModelArn *string
+
+	// Output configuration information for the pointwise model diagnostics for an
+	// Amazon Lookout for Equipment model.
+	ModelDiagnosticsOutputConfiguration *ModelDiagnosticsOutputConfiguration
 
 	// The name of the machine learning model.
 	ModelName *string
@@ -804,7 +847,7 @@ type SensorStatisticsSummary struct {
 // Entity that comprises information on sensors that have shorter date range.
 type SensorsWithShortDateRange struct {
 
-	// Indicates the number of sensors that have less than 90 days of data.
+	// Indicates the number of sensors that have less than 14 days of data.
 	//
 	// This member is required.
 	AffectedSensorCount *int32

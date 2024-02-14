@@ -5403,6 +5403,23 @@ func awsRestjson1_serializeDocumentDataSourceVpcConfiguration(v *types.DataSourc
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDateAttributeBoostingConfiguration(v *types.DateAttributeBoostingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BoostingDurationInSeconds != nil {
+		ok := object.Key("boostingDurationInSeconds")
+		ok.Long(*v.BoostingDurationInSeconds)
+	}
+
+	if len(v.BoostingLevel) > 0 {
+		ok := object.Key("boostingLevel")
+		ok.String(string(v.BoostingLevel))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDeleteDocument(v *types.DeleteDocument, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5494,6 +5511,58 @@ func awsRestjson1_serializeDocumentDocumentAttribute(v *types.DocumentAttribute,
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocumentAttributeBoostingConfiguration(v types.DocumentAttributeBoostingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.DocumentAttributeBoostingConfigurationMemberDateConfiguration:
+		av := object.Key("dateConfiguration")
+		if err := awsRestjson1_serializeDocumentDateAttributeBoostingConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DocumentAttributeBoostingConfigurationMemberNumberConfiguration:
+		av := object.Key("numberConfiguration")
+		if err := awsRestjson1_serializeDocumentNumberAttributeBoostingConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DocumentAttributeBoostingConfigurationMemberStringConfiguration:
+		av := object.Key("stringConfiguration")
+		if err := awsRestjson1_serializeDocumentStringAttributeBoostingConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DocumentAttributeBoostingConfigurationMemberStringListConfiguration:
+		av := object.Key("stringListConfiguration")
+		if err := awsRestjson1_serializeDocumentStringListAttributeBoostingConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocumentAttributeBoostingOverrideMap(v map[string]types.DocumentAttributeBoostingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentDocumentAttributeBoostingConfiguration(v[key], om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -5954,9 +6023,33 @@ func awsRestjson1_serializeDocumentNativeIndexConfiguration(v *types.NativeIndex
 	object := value.Object()
 	defer object.Close()
 
+	if v.BoostingOverride != nil {
+		ok := object.Key("boostingOverride")
+		if err := awsRestjson1_serializeDocumentDocumentAttributeBoostingOverrideMap(v.BoostingOverride, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IndexId != nil {
 		ok := object.Key("indexId")
 		ok.String(*v.IndexId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNumberAttributeBoostingConfiguration(v *types.NumberAttributeBoostingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BoostingLevel) > 0 {
+		ok := object.Key("boostingLevel")
+		ok.String(string(v.BoostingLevel))
+	}
+
+	if len(v.BoostingType) > 0 {
+		ok := object.Key("boostingType")
+		ok.String(string(v.BoostingType))
 	}
 
 	return nil
@@ -6233,6 +6326,48 @@ func awsRestjson1_serializeDocumentSecurityGroupIds(v []string, value smithyjson
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringAttributeBoostingConfiguration(v *types.StringAttributeBoostingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributeValueBoosting != nil {
+		ok := object.Key("attributeValueBoosting")
+		if err := awsRestjson1_serializeDocumentStringAttributeValueBoosting(v.AttributeValueBoosting, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.BoostingLevel) > 0 {
+		ok := object.Key("boostingLevel")
+		ok.String(string(v.BoostingLevel))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringAttributeValueBoosting(v map[string]types.StringAttributeValueBoostingLevel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(string(v[key]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringListAttributeBoostingConfiguration(v *types.StringListAttributeBoostingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BoostingLevel) > 0 {
+		ok := object.Key("boostingLevel")
+		ok.String(string(v.BoostingLevel))
+	}
+
 	return nil
 }
 

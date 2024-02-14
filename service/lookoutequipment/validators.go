@@ -1174,6 +1174,40 @@ func validateLabelsS3InputConfiguration(v *types.LabelsS3InputConfiguration) err
 	}
 }
 
+func validateModelDiagnosticsOutputConfiguration(v *types.ModelDiagnosticsOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelDiagnosticsOutputConfiguration"}
+	if v.S3OutputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputConfiguration"))
+	} else if v.S3OutputConfiguration != nil {
+		if err := validateModelDiagnosticsS3OutputConfiguration(v.S3OutputConfiguration); err != nil {
+			invalidParams.AddNested("S3OutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelDiagnosticsS3OutputConfiguration(v *types.ModelDiagnosticsS3OutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelDiagnosticsS3OutputConfiguration"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -1350,6 +1384,11 @@ func validateOpCreateModelInput(v *CreateModelInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelDiagnosticsOutputConfiguration != nil {
+		if err := validateModelDiagnosticsOutputConfiguration(v.ModelDiagnosticsOutputConfiguration); err != nil {
+			invalidParams.AddNested("ModelDiagnosticsOutputConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2000,6 +2039,11 @@ func validateOpUpdateModelInput(v *UpdateModelInput) error {
 	if v.LabelsInputConfiguration != nil {
 		if err := validateLabelsInputConfiguration(v.LabelsInputConfiguration); err != nil {
 			invalidParams.AddNested("LabelsInputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelDiagnosticsOutputConfiguration != nil {
+		if err := validateModelDiagnosticsOutputConfiguration(v.ModelDiagnosticsOutputConfiguration); err != nil {
+			invalidParams.AddNested("ModelDiagnosticsOutputConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

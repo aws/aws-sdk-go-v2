@@ -214,6 +214,31 @@ func (DataSourceSyncJobStatus) Values() []DataSourceSyncJobStatus {
 	}
 }
 
+type DocumentAttributeBoostingLevel string
+
+// Enum values for DocumentAttributeBoostingLevel
+const (
+	DocumentAttributeBoostingLevelNone     DocumentAttributeBoostingLevel = "NONE"
+	DocumentAttributeBoostingLevelLow      DocumentAttributeBoostingLevel = "LOW"
+	DocumentAttributeBoostingLevelMedium   DocumentAttributeBoostingLevel = "MEDIUM"
+	DocumentAttributeBoostingLevelHigh     DocumentAttributeBoostingLevel = "HIGH"
+	DocumentAttributeBoostingLevelVeryHigh DocumentAttributeBoostingLevel = "VERY_HIGH"
+)
+
+// Values returns all known values for DocumentAttributeBoostingLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DocumentAttributeBoostingLevel) Values() []DocumentAttributeBoostingLevel {
+	return []DocumentAttributeBoostingLevel{
+		"NONE",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"VERY_HIGH",
+	}
+}
+
 type DocumentContentOperator string
 
 // Enum values for DocumentContentOperator
@@ -451,6 +476,10 @@ const (
 	MessageUsefulnessReasonComplete                  MessageUsefulnessReason = "COMPLETE"
 	MessageUsefulnessReasonRelevantSources           MessageUsefulnessReason = "RELEVANT_SOURCES"
 	MessageUsefulnessReasonHelpful                   MessageUsefulnessReason = "HELPFUL"
+	MessageUsefulnessReasonNotBasedOnDocuments       MessageUsefulnessReason = "NOT_BASED_ON_DOCUMENTS"
+	MessageUsefulnessReasonNotComplete               MessageUsefulnessReason = "NOT_COMPLETE"
+	MessageUsefulnessReasonNotConcise                MessageUsefulnessReason = "NOT_CONCISE"
+	MessageUsefulnessReasonOther                     MessageUsefulnessReason = "OTHER"
 )
 
 // Values returns all known values for MessageUsefulnessReason. Note that this can
@@ -466,6 +495,28 @@ func (MessageUsefulnessReason) Values() []MessageUsefulnessReason {
 		"COMPLETE",
 		"RELEVANT_SOURCES",
 		"HELPFUL",
+		"NOT_BASED_ON_DOCUMENTS",
+		"NOT_COMPLETE",
+		"NOT_CONCISE",
+		"OTHER",
+	}
+}
+
+type NumberAttributeBoostingType string
+
+// Enum values for NumberAttributeBoostingType
+const (
+	NumberAttributeBoostingTypePrioritizeLargerValues  NumberAttributeBoostingType = "PRIORITIZE_LARGER_VALUES"
+	NumberAttributeBoostingTypePrioritizeSmallerValues NumberAttributeBoostingType = "PRIORITIZE_SMALLER_VALUES"
+)
+
+// Values returns all known values for NumberAttributeBoostingType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NumberAttributeBoostingType) Values() []NumberAttributeBoostingType {
+	return []NumberAttributeBoostingType{
+		"PRIORITIZE_LARGER_VALUES",
+		"PRIORITIZE_SMALLER_VALUES",
 	}
 }
 
@@ -616,6 +667,29 @@ func (Status) Values() []Status {
 	return []Status{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type StringAttributeValueBoostingLevel string
+
+// Enum values for StringAttributeValueBoostingLevel
+const (
+	StringAttributeValueBoostingLevelLow      StringAttributeValueBoostingLevel = "LOW"
+	StringAttributeValueBoostingLevelMedium   StringAttributeValueBoostingLevel = "MEDIUM"
+	StringAttributeValueBoostingLevelHigh     StringAttributeValueBoostingLevel = "HIGH"
+	StringAttributeValueBoostingLevelVeryHigh StringAttributeValueBoostingLevel = "VERY_HIGH"
+)
+
+// Values returns all known values for StringAttributeValueBoostingLevel. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (StringAttributeValueBoostingLevel) Values() []StringAttributeValueBoostingLevel {
+	return []StringAttributeValueBoostingLevel{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"VERY_HIGH",
 	}
 }
 

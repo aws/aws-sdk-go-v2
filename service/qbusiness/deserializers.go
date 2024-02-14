@@ -10078,6 +10078,163 @@ func awsRestjson1_deserializeDocumentDataSourceVpcConfiguration(v **types.DataSo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDateAttributeBoostingConfiguration(v **types.DateAttributeBoostingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DateAttributeBoostingConfiguration
+	if *v == nil {
+		sv = &types.DateAttributeBoostingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "boostingDurationInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoostingDurationInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BoostingDurationInSeconds = ptr.Int64(i64)
+			}
+
+		case "boostingLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentAttributeBoostingLevel to be of type string, got %T instead", value)
+				}
+				sv.BoostingLevel = types.DocumentAttributeBoostingLevel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDocumentAttributeBoostingConfiguration(v *types.DocumentAttributeBoostingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.DocumentAttributeBoostingConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "dateConfiguration":
+			var mv types.DateAttributeBoostingConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDateAttributeBoostingConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DocumentAttributeBoostingConfigurationMemberDateConfiguration{Value: mv}
+			break loop
+
+		case "numberConfiguration":
+			var mv types.NumberAttributeBoostingConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentNumberAttributeBoostingConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DocumentAttributeBoostingConfigurationMemberNumberConfiguration{Value: mv}
+			break loop
+
+		case "stringConfiguration":
+			var mv types.StringAttributeBoostingConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentStringAttributeBoostingConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DocumentAttributeBoostingConfigurationMemberStringConfiguration{Value: mv}
+			break loop
+
+		case "stringListConfiguration":
+			var mv types.StringListAttributeBoostingConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentStringListAttributeBoostingConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DocumentAttributeBoostingConfigurationMemberStringListConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDocumentAttributeBoostingOverrideMap(v *map[string]types.DocumentAttributeBoostingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.DocumentAttributeBoostingConfiguration
+	if *v == nil {
+		mv = map[string]types.DocumentAttributeBoostingConfiguration{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.DocumentAttributeBoostingConfiguration
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentDocumentAttributeBoostingConfiguration(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDocumentAttributeCondition(v **types.DocumentAttributeCondition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11651,6 +11808,11 @@ func awsRestjson1_deserializeDocumentNativeIndexConfiguration(v **types.NativeIn
 
 	for key, value := range shape {
 		switch key {
+		case "boostingOverride":
+			if err := awsRestjson1_deserializeDocumentDocumentAttributeBoostingOverrideMap(&sv.BoostingOverride, value); err != nil {
+				return err
+			}
+
 		case "indexId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11658,6 +11820,55 @@ func awsRestjson1_deserializeDocumentNativeIndexConfiguration(v **types.NativeIn
 					return fmt.Errorf("expected IndexId to be of type string, got %T instead", value)
 				}
 				sv.IndexId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNumberAttributeBoostingConfiguration(v **types.NumberAttributeBoostingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NumberAttributeBoostingConfiguration
+	if *v == nil {
+		sv = &types.NumberAttributeBoostingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "boostingLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentAttributeBoostingLevel to be of type string, got %T instead", value)
+				}
+				sv.BoostingLevel = types.DocumentAttributeBoostingLevel(jtv)
+			}
+
+		case "boostingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NumberAttributeBoostingType to be of type string, got %T instead", value)
+				}
+				sv.BoostingType = types.NumberAttributeBoostingType(jtv)
 			}
 
 		default:
@@ -12549,6 +12760,127 @@ func awsRestjson1_deserializeDocumentSourceAttributions(v *[]*types.SourceAttrib
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStringAttributeBoostingConfiguration(v **types.StringAttributeBoostingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StringAttributeBoostingConfiguration
+	if *v == nil {
+		sv = &types.StringAttributeBoostingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "attributeValueBoosting":
+			if err := awsRestjson1_deserializeDocumentStringAttributeValueBoosting(&sv.AttributeValueBoosting, value); err != nil {
+				return err
+			}
+
+		case "boostingLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentAttributeBoostingLevel to be of type string, got %T instead", value)
+				}
+				sv.BoostingLevel = types.DocumentAttributeBoostingLevel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStringAttributeValueBoosting(v *map[string]types.StringAttributeValueBoostingLevel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.StringAttributeValueBoostingLevel
+	if *v == nil {
+		mv = map[string]types.StringAttributeValueBoostingLevel{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.StringAttributeValueBoostingLevel
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StringAttributeValueBoostingLevel to be of type string, got %T instead", value)
+			}
+			parsedVal = types.StringAttributeValueBoostingLevel(jtv)
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStringListAttributeBoostingConfiguration(v **types.StringListAttributeBoostingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StringListAttributeBoostingConfiguration
+	if *v == nil {
+		sv = &types.StringListAttributeBoostingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "boostingLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentAttributeBoostingLevel to be of type string, got %T instead", value)
+				}
+				sv.BoostingLevel = types.DocumentAttributeBoostingLevel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

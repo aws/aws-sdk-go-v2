@@ -2,6 +2,48 @@
 
 package types
 
+type BaselineOperationStatus string
+
+// Enum values for BaselineOperationStatus
+const (
+	BaselineOperationStatusSucceeded  BaselineOperationStatus = "SUCCEEDED"
+	BaselineOperationStatusFailed     BaselineOperationStatus = "FAILED"
+	BaselineOperationStatusInProgress BaselineOperationStatus = "IN_PROGRESS"
+)
+
+// Values returns all known values for BaselineOperationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BaselineOperationStatus) Values() []BaselineOperationStatus {
+	return []BaselineOperationStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"IN_PROGRESS",
+	}
+}
+
+type BaselineOperationType string
+
+// Enum values for BaselineOperationType
+const (
+	BaselineOperationTypeEnableBaseline        BaselineOperationType = "ENABLE_BASELINE"
+	BaselineOperationTypeDisableBaseline       BaselineOperationType = "DISABLE_BASELINE"
+	BaselineOperationTypeUpdateEnabledBaseline BaselineOperationType = "UPDATE_ENABLED_BASELINE"
+	BaselineOperationTypeResetEnabledBaseline  BaselineOperationType = "RESET_ENABLED_BASELINE"
+)
+
+// Values returns all known values for BaselineOperationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BaselineOperationType) Values() []BaselineOperationType {
+	return []BaselineOperationType{
+		"ENABLE_BASELINE",
+		"DISABLE_BASELINE",
+		"UPDATE_ENABLED_BASELINE",
+		"RESET_ENABLED_BASELINE",
+	}
+}
+
 type ControlOperationStatus string
 
 // Enum values for ControlOperationStatus
