@@ -1,3 +1,7 @@
+# v1.24.0 (2024-02-14)
+
+* **Feature**: This feature allows customers to see pointwise model diagnostics results for their models.
+
 # v1.23.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.

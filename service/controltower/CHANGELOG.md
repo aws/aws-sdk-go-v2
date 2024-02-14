@@ -1,3 +1,7 @@
+# v1.12.0 (2024-02-14)
+
+* **Feature**: Adds support for new Baseline and EnabledBaseline APIs for automating multi-account governance.
+
 # v1.11.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.

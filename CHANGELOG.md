@@ -1,3 +1,13 @@
+# Release (2024-02-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.12.0](service/controltower/CHANGELOG.md#v1120-2024-02-14)
+  * **Feature**: Adds support for new Baseline and EnabledBaseline APIs for automating multi-account governance.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.24.0](service/lookoutequipment/CHANGELOG.md#v1240-2024-02-14)
+  * **Feature**: This feature allows customers to see pointwise model diagnostics results for their models.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.3.0](service/qbusiness/CHANGELOG.md#v130-2024-02-14)
+  * **Feature**: This release adds the metadata-boosting feature, which allows customers to easily fine-tune the underlying ranking of retrieved RAG passages in order to optimize Q&A answer relevance. It also adds new feedback reasons for the PutFeedback API.
+
 # Release (2024-02-13)
 
 ## General Highlights

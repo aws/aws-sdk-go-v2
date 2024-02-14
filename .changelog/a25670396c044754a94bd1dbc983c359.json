@@ -1,8 +1,0 @@
-{
-    "id": "a2567039-6c04-4754-a94b-d1dbc983c359",
-    "type": "feature",
-    "description": "Adds support for new Baseline and EnabledBaseline APIs for automating multi-account governance.",
-    "modules": [
-        "service/controltower"
-    ]
-}

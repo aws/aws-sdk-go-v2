@@ -1,3 +1,7 @@
+# v1.3.0 (2024-02-14)
+
+* **Feature**: This release adds the metadata-boosting feature, which allows customers to easily fine-tune the underlying ranking of retrieved RAG passages in order to optimize Q&A answer relevance. It also adds new feedback reasons for the PutFeedback API.
+
 # v1.2.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.
