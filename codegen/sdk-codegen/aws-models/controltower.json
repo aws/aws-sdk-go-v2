@@ -35,6 +35,12 @@
             ],
             "resources": [
                 {
+                    "target": "com.amazonaws.controltower#BaselineResource"
+                },
+                {
+                    "target": "com.amazonaws.controltower#EnabledBaselineResource"
+                },
+                {
                     "target": "com.amazonaws.controltower#LandingZoneResource"
                 }
             ],
@@ -70,7 +76,7 @@
                         "x-amzn-trace-id"
                     ]
                 },
-                "smithy.api#documentation": "<p>These interfaces allow you to apply the  Amazon Web Services library of pre-defined\n         <i>controls</i> to your organizational units, programmatically. In  Amazon Web Services Control Tower, the terms \"control\" and \"guardrail\" are synonyms.</p>\n         <p>To call these APIs, you'll need to know:</p>\n         <ul>\n            <li>\n               <p>the <code>controlIdentifier</code> for the control--or guardrail--you are targeting.</p>\n            </li>\n            <li>\n               <p>the ARN associated with the target organizational unit (OU), which we call the <code>targetIdentifier</code>.</p>\n            </li>\n            <li>\n               <p>the ARN associated with a resource that you wish to tag or untag.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To get the <code>controlIdentifier</code> for your Amazon Web Services Control Tower\n         control:</b>\n         </p>\n         <p>The <code>controlIdentifier</code> is an ARN that is specified for each\n         control. You can view the <code>controlIdentifier</code> in the console on the <b>Control details</b> page, as well as in the documentation.</p>\n         <p>The <code>controlIdentifier</code> is unique in each Amazon Web Services Region for each control. You can\n         find the <code>controlIdentifier</code> for each Region and control in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html\">Tables of control metadata</a> in the <i>Amazon Web Services Control Tower User Guide.</i>\n         </p>\n         <p>A quick-reference list of control identifers for the Amazon Web Services Control Tower legacy <i>Strongly recommended</i> and\n         <i>Elective</i> controls is given in <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html.html\">Resource identifiers for\n            APIs and controls</a> in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">Controls reference guide section</a>\n         of the <i>Amazon Web Services Control Tower User Guide</i>. Remember that <i>Mandatory</i> controls\n         cannot be added or removed.</p>\n         <note>\n            <p>\n               <b>ARN format:</b>\n               <code>arn:aws:controltower:{REGION}::control/{CONTROL_NAME}</code>\n            </p>\n            <p>\n               <b>Example:</b>\n            </p>\n            <p>\n               <code>arn:aws:controltower:us-west-2::control/AWS-GR_AUTOSCALING_LAUNCH_CONFIG_PUBLIC_IP_DISABLED</code>\n            </p>\n         </note>\n         <p>\n            <b>To get the <code>targetIdentifier</code>:</b>\n         </p>\n         <p>The <code>targetIdentifier</code> is the ARN for an OU.</p>\n         <p>In the Amazon Web Services Organizations console, you can find the ARN for the OU on the <b>Organizational unit details</b> page associated with that OU.</p>\n         <note>\n            <p>\n               <b>OU ARN format:</b>\n            </p>\n            <p>\n               <code>arn:${Partition}:organizations::${MasterAccountId}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}</code>\n            </p>\n         </note>\n         <p class=\"title\">\n            <b>Details and examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">Control API input and output examples with CLI</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/enable-controls.html\">Enable controls with CloudFormation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html\">Control metadata tables</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">List of identifiers for legacy controls</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls.html\">Controls reference guide</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls-reference.html\">Controls library groupings</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html\">Creating Amazon Web Services Control Tower resources with Amazon Web Services CloudFormation</a>\n               </p>\n            </li>\n         </ul>\n         <p>To view the open source resource repository on GitHub, see <a href=\"https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-controltower\">aws-cloudformation/aws-cloudformation-resource-providers-controltower</a>\n         </p>\n         <p>\n            <b>Recording API Requests</b>\n         </p>\n         <p>Amazon Web Services Control Tower supports Amazon Web Services CloudTrail, a service that records Amazon Web Services API calls for your\n         Amazon Web Services account and delivers log files to an Amazon S3 bucket. By using information collected by\n         CloudTrail, you can determine which requests the Amazon Web Services Control Tower service received, who made\n         the request and when, and so on. For more about Amazon Web Services Control Tower and its support for\n         CloudTrail, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/logging-using-cloudtrail.html\">Logging Amazon Web Services Control Tower\n            Actions with Amazon Web Services CloudTrail</a> in the Amazon Web Services Control Tower User Guide. To learn more about\n         CloudTrail, including how to turn it on and find your log files, see the Amazon Web Services CloudTrail User\n         Guide.</p>",
+                "smithy.api#documentation": "<p>These interfaces allow you to apply the Amazon Web Services library of pre-defined\n         <i>controls</i> to your organizational units, programmatically. In Amazon Web Services Control Tower, the terms \"control\" and \"guardrail\" are synonyms.</p>\n         <p>To call these APIs, you'll need to know:</p>\n         <ul>\n            <li>\n               <p>the <code>controlIdentifier</code> for the control--or guardrail--you are targeting.</p>\n            </li>\n            <li>\n               <p>the ARN associated with the target organizational unit (OU), which we call the <code>targetIdentifier</code>.</p>\n            </li>\n            <li>\n               <p>the ARN associated with a resource that you wish to tag or untag.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To get the <code>controlIdentifier</code> for your Amazon Web Services Control Tower\n         control:</b>\n         </p>\n         <p>The <code>controlIdentifier</code> is an ARN that is specified for each\n         control. You can view the <code>controlIdentifier</code> in the console on the <b>Control details</b> page, as well as in the documentation.</p>\n         <p>The <code>controlIdentifier</code> is unique in each Amazon Web Services Region for each control. You can\n         find the <code>controlIdentifier</code> for each Region and control in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html\">Tables of control metadata</a> in the <i>Amazon Web Services Control Tower User Guide.</i>\n         </p>\n         <p>A quick-reference list of control identifers for the Amazon Web Services Control Tower legacy <i>Strongly recommended</i> and\n         <i>Elective</i> controls is given in <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html.html\">Resource identifiers for\n            APIs and controls</a> in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">Controls reference guide section</a>\n         of the <i>Amazon Web Services Control Tower User Guide</i>. Remember that <i>Mandatory</i> controls\n         cannot be added or removed.</p>\n         <note>\n            <p>\n               <b>ARN format:</b>\n               <code>arn:aws:controltower:{REGION}::control/{CONTROL_NAME}</code>\n            </p>\n            <p>\n               <b>Example:</b>\n            </p>\n            <p>\n               <code>arn:aws:controltower:us-west-2::control/AWS-GR_AUTOSCALING_LAUNCH_CONFIG_PUBLIC_IP_DISABLED</code>\n            </p>\n         </note>\n         <p>\n            <b>To get the <code>targetIdentifier</code>:</b>\n         </p>\n         <p>The <code>targetIdentifier</code> is the ARN for an OU.</p>\n         <p>In the Amazon Web Services Organizations console, you can find the ARN for the OU on the <b>Organizational unit details</b> page associated with that OU.</p>\n         <note>\n            <p>\n               <b>OU ARN format:</b>\n            </p>\n            <p>\n               <code>arn:${Partition}:organizations::${MasterAccountId}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}</code>\n            </p>\n         </note>\n         <p class=\"title\">\n            <b>Details and examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">Control API input and output examples with CLI</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/enable-controls.html\">Enable controls with CloudFormation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html\">Control metadata tables</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">List of identifiers for legacy controls</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls.html\">Controls reference guide</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls-reference.html\">Controls library groupings</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html\">Creating Amazon Web Services Control Tower resources with Amazon Web Services CloudFormation</a>\n               </p>\n            </li>\n         </ul>\n         <p>To view the open source resource repository on GitHub, see <a href=\"https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-controltower\">aws-cloudformation/aws-cloudformation-resource-providers-controltower</a>\n         </p>\n         <p>\n            <b>Recording API Requests</b>\n         </p>\n         <p>Amazon Web Services Control Tower supports Amazon Web Services CloudTrail, a service that records Amazon Web Services API calls for your\n         Amazon Web Services account and delivers log files to an Amazon S3 bucket. By using information collected by\n         CloudTrail, you can determine which requests the Amazon Web Services Control Tower service received, who made\n         the request and when, and so on. For more about Amazon Web Services Control Tower and its support for\n         CloudTrail, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/logging-using-cloudtrail.html\">Logging Amazon Web Services Control Tower\n            Actions with Amazon Web Services CloudTrail</a> in the Amazon Web Services Control Tower User Guide. To learn more about\n         CloudTrail, including how to turn it on and find your log files, see the Amazon Web Services CloudTrail User\n         Guide.</p>",
                 "smithy.api#title": "AWS Control Tower",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -949,6 +955,166 @@
                 "smithy.api#pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$"
             }
         },
+        "com.amazonaws.controltower#BaselineArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[a-z-]+:controltower:[a-z0-9-]*:[0-9]{0,12}:baseline/[A-Z0-9]{16}$"
+            }
+        },
+        "com.amazonaws.controltower#BaselineOperation": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the specified operation.</p>"
+                    }
+                },
+                "operationType": {
+                    "target": "com.amazonaws.controltower#BaselineOperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enumerated type (<code>enum</code>) with possible values of <code>ENABLE_BASELINE</code>, <code>DISABLE_BASELINE</code>, <code>UPDATE_ENABLED_BASELINE</code>, or <code>RESET_ENABLED_BASELINE</code>.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.controltower#BaselineOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enumerated type (<code>enum</code>) with possible values of <code>SUCCEEDED</code>, <code>FAILED</code>, or <code>IN_PROGRESS</code>.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.controltower#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the operation, in ISO 8601 format.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.controltower#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of the operation (if applicable), in ISO 8601 format.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status message that gives more information about the operation's status, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object of shape <code>BaselineOperation</code>, returning details about the specified <code>Baseline</code> operation ID.</p>"
+            }
+        },
+        "com.amazonaws.controltower#BaselineOperationStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#BaselineOperationType": {
+            "type": "enum",
+            "members": {
+                "ENABLE_BASELINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLE_BASELINE"
+                    }
+                },
+                "DISABLE_BASELINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE_BASELINE"
+                    }
+                },
+                "UPDATE_ENABLED_BASELINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_ENABLED_BASELINE"
+                    }
+                },
+                "RESET_ENABLED_BASELINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESET_ENABLED_BASELINE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#BaselineResource": {
+            "type": "resource",
+            "identifiers": {
+                "baselineIdentifier": {
+                    "target": "com.amazonaws.controltower#BaselineArn"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.controltower#GetBaseline"
+            },
+            "list": {
+                "target": "com.amazonaws.controltower#ListBaselines"
+            }
+        },
+        "com.amazonaws.controltower#BaselineSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN of a Baseline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable name of a Baseline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary description of a Baseline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a summary of information about a <code>Baseline</code> object.</p>"
+            }
+        },
+        "com.amazonaws.controltower#BaselineVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^\\d+(?:\\.\\d+){0,2}$"
+            }
+        },
+        "com.amazonaws.controltower#Baselines": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#BaselineSummary"
+            }
+        },
         "com.amazonaws.controltower#ConflictException": {
             "type": "structure",
             "members": {
@@ -1100,7 +1266,7 @@
                 "manifest": {
                     "target": "com.amazonaws.controltower#Manifest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review \n         <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch\">Launch your landing zone</a>. </p>",
+                        "smithy.api#documentation": "<p>The manifest.yaml file is a text file that describes your Amazon Web Services resources. For examples, review \n         <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file\">The manifest file</a>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1206,6 +1372,77 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.controltower#DisableBaseline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#DisableBaselineInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#DisableBaselineOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disable an <code>EnabledBaseline</code> resource on the specified Target. This API starts an asynchronous operation to remove all resources deployed as part of the baseline enablement. The resource will vary depending on the enabled baseline.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/disable-baseline"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.controltower#DisableBaselineInput": {
+            "type": "structure",
+            "members": {
+                "enabledBaselineIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the <code>EnabledBaseline</code> resource to be deactivated, in ARN format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#DisableBaselineOutput": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID (in UUID format) of the asynchronous <code>DisableBaseline</code> operation. This <code>operationIdentifier</code> is used to track status through calls to the <code>GetBaselineOperation</code> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.controltower#DisableControl": {
             "type": "operation",
             "input": {
@@ -1238,7 +1475,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API call turns off a control. It starts an asynchronous operation that deletes Amazon Web Services\n         resources on the specified organizational unit and the accounts it contains. The resources\n         will vary according to the control that you specify. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>",
+                "smithy.api#documentation": "<p>This API call turns off a control. It starts an asynchronous operation that deletes AWS\n         resources on the specified organizational unit and the accounts it contains. The resources\n         will vary according to the control that you specify. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1252,7 +1489,7 @@
                 "controlIdentifier": {
                     "target": "com.amazonaws.controltower#ControlIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and\n         <b>Elective</b> controls are permitted, with the exception of the\n         <b>landing zone Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and\n         <b>Elective</b> controls are permitted, with the exception of the\n         <b>Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1320,6 +1557,109 @@
                 "smithy.api#documentation": "<p>The drift summary of the enabled control.</p>\n         <p>Amazon Web Services Control Tower expects the enabled control\n         configuration to include all supported and governed Regions. If the enabled control differs\n         from the expected configuration, it is defined to be in a state of drift. You can repair this drift by resetting the enabled control.</p>"
             }
         },
+        "com.amazonaws.controltower#EnableBaseline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#EnableBaselineInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#EnableBaselineOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enable (apply) a <code>Baseline</code> to a Target. This API starts an asynchronous operation to deploy resources specified by the <code>Baseline</code> to the specified Target.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/enable-baseline"
+                }
+            }
+        },
+        "com.amazonaws.controltower#EnableBaselineInput": {
+            "type": "structure",
+            "members": {
+                "baselineVersion": {
+                    "target": "com.amazonaws.controltower#BaselineVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific version to be enabled of the specified baseline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.controltower#EnabledBaselineParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>key-value</code> objects that specify enablement parameters, where <code>key</code> is a string and <code>value</code> is a document of any type.</p>"
+                    }
+                },
+                "baselineIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the baseline to be enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the target on which the baseline will be enabled. Only OUs are supported as targets.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.controltower#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags associated with input to <code>EnableBaseline</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#EnableBaselineOutput": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID (in UUID format) of the asynchronous <code>EnableBaseline</code> operation. This <code>operationIdentifier</code> is used to track status through calls to the <code>GetBaselineOperation</code> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>EnabledBaseline</code> resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.controltower#EnableControl": {
             "type": "operation",
             "input": {
@@ -1366,7 +1706,7 @@
                 "controlIdentifier": {
                     "target": "com.amazonaws.controltower#ControlIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and\n         <b>Elective</b> controls are permitted, with the exception of the\n         <b>landing zone Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and\n         <b>Elective</b> controls are permitted, with the exception of the\n         <b>Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1386,7 +1726,7 @@
                 "parameters": {
                     "target": "com.amazonaws.controltower#EnabledControlParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>EnabledControlParameter</code> objects</p>"
+                        "smithy.api#documentation": "<p>A list of input parameter values, which are specified to configure the control when you enable it.</p>"
                     }
                 }
             }
@@ -1407,6 +1747,241 @@
                         "smithy.api#documentation": "<p>The ARN of the <code>EnabledControl</code> resource.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselineBaselineIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselineDetails": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>EnabledBaseline</code> resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "baselineIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific <code>Baseline</code> enabled as part of the <code>EnabledBaseline</code> resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "baselineVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enabled version of the <code>Baseline</code>.</p>"
+                    }
+                },
+                "targetIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target on which to enable the <code>Baseline</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusSummary": {
+                    "target": "com.amazonaws.controltower#EnablementStatusSummary",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.controltower#EnabledBaselineParameterSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the parameters that are applied when enabling this <code>Baseline</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the <code>EnabledBaseline</code> resource.</p>"
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselineFilter": {
+            "type": "structure",
+            "members": {
+                "targetIdentifiers": {
+                    "target": "com.amazonaws.controltower#EnabledBaselineTargetIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifiers for the targets of the <code>Baseline</code> filter operation.</p>"
+                    }
+                },
+                "baselineIdentifiers": {
+                    "target": "com.amazonaws.controltower#EnabledBaselineBaselineIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifiers for the <code>Baseline</code> objects returned as part of the filter operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter applied on the <code>ListEnabledBaseline</code> operation. Allowed filters are <code>baselineIdentifiers</code> and <code>targetIdentifiers</code>. The filter can be applied for either, or both.</p>"
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselineParameter": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string denoting the parameter key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.controltower#EnabledBaselineParameterDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A low-level <code>Document</code> object of any type (for example, a Java Object).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key-value parameter to an <code>EnabledBaseline</code> resource.</p>"
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselineParameterDocument": {
+            "type": "document"
+        },
+        "com.amazonaws.controltower#EnabledBaselineParameterSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#EnabledBaselineParameterSummary"
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselineParameterSummary": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string denoting the parameter key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.controltower#EnabledBaselineParameterDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A low-level document object of any type (for example, a Java Object).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of an applied parameter to an <code>EnabledBaseline</code> resource. </p>"
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselineParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#EnabledBaselineParameter"
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselineResource": {
+            "type": "resource",
+            "identifiers": {
+                "enabledBaselineIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.controltower#EnableBaseline"
+            },
+            "read": {
+                "target": "com.amazonaws.controltower#GetEnabledBaseline"
+            },
+            "update": {
+                "target": "com.amazonaws.controltower#UpdateEnabledBaseline"
+            },
+            "delete": {
+                "target": "com.amazonaws.controltower#DisableBaseline"
+            },
+            "list": {
+                "target": "com.amazonaws.controltower#ListEnabledBaselines"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.controltower#ResetEnabledBaseline"
+                }
+            ],
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.controltower#GetBaselineOperation"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "enabledbaseline/{enabledBaselineIdentifier}"
+                }
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselineSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>EnabledBaseline</code> resource</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "baselineIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific baseline that is enabled as part of the <code>EnabledBaseline</code> resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "baselineVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enabled version of the baseline.</p>"
+                    }
+                },
+                "targetIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target upon which the baseline is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusSummary": {
+                    "target": "com.amazonaws.controltower#EnablementStatusSummary",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a summary of information about an <code>EnabledBaseline</code> object.</p>"
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselineTargetIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.controltower#EnabledBaselines": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#EnabledBaselineSummary"
             }
         },
         "com.amazonaws.controltower#EnabledControlDetails": {
@@ -1465,20 +2040,20 @@
                 "key": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key of a key/value pair. It is of type <code>string</code>.</p>",
+                        "smithy.api#documentation": "<p>The key of a key/value pair.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "value": {
                     "target": "smithy.api#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of a key/value pair. It can be of type <code>array</code>\n            <code>string</code>, <code>number</code>, <code>object</code>, or <code>boolean</code>. </p>",
+                        "smithy.api#documentation": "<p>The value of a key/value pair.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A set of parameters that configure the behavior of the enabled control. A key/value pair, where <code>Key</code> is of type <code>String</code> and <code>Value</code> is of type <code>Document</code>.</p>"
+                "smithy.api#documentation": "<p>A key/value pair, where <code>Key</code> is of type <code>String</code> and <code>Value</code> is of type <code>Document</code>.</p>"
             }
         },
         "com.amazonaws.controltower#EnabledControlParameterSummaries": {
@@ -1602,6 +2177,148 @@
                 "smithy.api#documentation": "<p>The deployment summary of the enabled control.</p>"
             }
         },
+        "com.amazonaws.controltower#GetBaseline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#GetBaselineInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#GetBaselineOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve details about an existing <code>Baseline</code> resource by specifying its identifier.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-baseline"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controltower#GetBaselineInput": {
+            "type": "structure",
+            "members": {
+                "baselineIdentifier": {
+                    "target": "com.amazonaws.controltower#BaselineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>Baseline</code> resource to be retrieved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#GetBaselineOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#GetBaselineOperationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#GetBaselineOperationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of an asynchronous baseline operation, as initiated by any of these APIs: <code>EnableBaseline</code>, <code>DisableBaseline</code>, <code>UpdateEnabledBaseline</code>, <code>ResetEnabledBaseline</code>. A status message is displayed in case of operation failure.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-baseline-operation"
+                }
+            }
+        },
+        "com.amazonaws.controltower#GetBaselineOperationInput": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation ID returned from mutating asynchronous APIs (Enable, Disable, Update, Reset).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#GetBaselineOperationOutput": {
+            "type": "structure",
+            "members": {
+                "baselineOperation": {
+                    "target": "com.amazonaws.controltower#BaselineOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>baselineOperation</code> object that shows information about the specified operation ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controltower#GetBaselineOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.controltower#BaselineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The baseline ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-friendly name for the baseline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the baseline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.controltower#GetControlOperation": {
             "type": "operation",
             "input": {
@@ -1659,6 +2376,70 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.controltower#GetEnabledBaseline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#GetEnabledBaselineInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#GetEnabledBaselineOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve details of an <code>EnabledBaseline</code> resource by specifying its identifier.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-enabled-baseline"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controltower#GetEnabledBaselineInput": {
+            "type": "structure",
+            "members": {
+                "enabledBaselineIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the <code>EnabledBaseline</code> resource to be retrieved, in ARN format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#GetEnabledBaselineOutput": {
+            "type": "structure",
+            "members": {
+                "enabledBaselineDetails": {
+                    "target": "com.amazonaws.controltower#EnabledBaselineDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the <code>EnabledBaseline</code> resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.controltower#GetEnabledControl": {
@@ -1886,7 +2667,7 @@
                 "manifest": {
                     "target": "com.amazonaws.controltower#Manifest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone manifest JSON text file that specifies the landing zone configurations. </p>",
+                        "smithy.api#documentation": "<p>The landing zone <code>manifest.yaml</code> text file that specifies the landing zone configurations. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1899,7 +2680,7 @@
                 "status": {
                     "target": "com.amazonaws.controltower#LandingZoneStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing zone deployment status.</p>"
+                        "smithy.api#documentation": "<p>The landing zone deployment status. One of <code>ACTIVE</code>, <code>PROCESSING</code>, <code>FAILED</code>.</p>"
                     }
                 },
                 "latestAvailableVersion": {
@@ -2129,6 +2910,194 @@
                     "max": 10
                 },
                 "smithy.api#pattern": "^\\d+.\\d+$"
+            }
+        },
+        "com.amazonaws.controltower#ListBaselines": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#ListBaselinesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#ListBaselinesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a summary list of all available baselines.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-baselines"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "baselines"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controltower#ListBaselinesInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.controltower#ListBaselinesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be shown.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#ListBaselinesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 4,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.controltower#ListBaselinesOutput": {
+            "type": "structure",
+            "members": {
+                "baselines": {
+                    "target": "com.amazonaws.controltower#Baselines",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A  list of <code>Baseline</code> object details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controltower#ListEnabledBaselines": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#ListEnabledBaselinesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#ListEnabledBaselinesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of summaries describing <code>EnabledBaseline</code> resources. You can filter the list by the corresponding <code>Baseline</code> or <code>Target</code> of the <code>EnabledBaseline</code> resources.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-enabled-baselines"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "enabledBaselines"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controltower#ListEnabledBaselinesInput": {
+            "type": "structure",
+            "members": {
+                "filter": {
+                    "target": "com.amazonaws.controltower#EnabledBaselineFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter applied on the <code>ListEnabledBaseline</code> operation. Allowed filters are <code>baselineIdentifiers</code> and <code>targetIdentifiers</code>. The filter can be applied for either, or both.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.controltower#ListEnabledBaselinesNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.controltower#ListEnabledBaselinesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be shown.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#ListEnabledBaselinesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.controltower#ListEnabledBaselinesNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "\\S+"
+            }
+        },
+        "com.amazonaws.controltower#ListEnabledBaselinesOutput": {
+            "type": "structure",
+            "members": {
+                "enabledBaselines": {
+                    "target": "com.amazonaws.controltower#EnabledBaselines",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retuens a list of summaries of <code>EnabledBaseline</code> resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.controltower#ListEnabledBaselinesNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.controltower#ListEnabledControls": {
@@ -2399,7 +3368,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An  Amazon Web Services Region in which  Amazon Web Services Control Tower expects to find the control deployed. </p>\n         <p>The expected Regions are based on the Regions that are governed by the landing zone. In\n            certain cases, a control is not actually enabled in the Region as expected, such as during\n            drift, or <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html#mixed-governance\">mixed governance</a>.</p>"
+                "smithy.api#documentation": "<p>An Amazon Web Services Region in which Amazon Web Services Control Tower expects to find the control deployed. </p>\n         <p>The expected Regions are based on the Regions that are governed by the landing zone. In\n            certain cases, a control is not actually enabled in the Region as expected, such as during\n            drift, or <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html#mixed-governance\">mixed governance</a>.</p>"
             }
         },
         "com.amazonaws.controltower#RegionName": {
@@ -2409,6 +3378,76 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.controltower#ResetEnabledBaseline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#ResetEnabledBaselineInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#ResetEnabledBaselineOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Re-enables an <code>EnabledBaseline</code> resource. For example, this API can re-apply the existing <code>Baseline</code> after a new member account is moved to the target OU.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/reset-enabled-baseline"
+                }
+            }
+        },
+        "com.amazonaws.controltower#ResetEnabledBaselineInput": {
+            "type": "structure",
+            "members": {
+                "enabledBaselineIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ID of the <code>EnabledBaseline</code> resource to be re-enabled, in ARN format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#ResetEnabledBaselineOutput": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID (in UUID format) of the asynchronous <code>ResetEnabledBaseline</code> operation. This <code>operationIdentifier</code> is used to track status through calls to the <code>GetBaselineOperation</code> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.controltower#ResetLandingZone": {
@@ -2641,7 +3680,7 @@
                 "serviceCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the service that is associated with the error.\n      </p>"
+                        "smithy.api#documentation": "<p>The ID of the service that is associated with the error.</p>"
                     }
                 },
                 "quotaCode": {
@@ -2653,7 +3692,7 @@
                 "retryAfterSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying.</p>",
+                        "smithy.api#documentation": "<p>The number of seconds the caller should wait before retrying.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
                 }
@@ -2728,6 +3767,89 @@
         "com.amazonaws.controltower#UntagResourceOutput": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controltower#UpdateEnabledBaseline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#UpdateEnabledBaselineInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#UpdateEnabledBaselineOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an <code>EnabledBaseline</code> resource's applied parameters or version.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/update-enabled-baseline"
+                }
+            }
+        },
+        "com.amazonaws.controltower#UpdateEnabledBaselineInput": {
+            "type": "structure",
+            "members": {
+                "baselineVersion": {
+                    "target": "com.amazonaws.controltower#BaselineVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the new <code>Baseline</code> version, to which the <code>EnabledBaseline</code> should be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.controltower#EnabledBaselineParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters to apply when making an update.</p>"
+                    }
+                },
+                "enabledBaselineIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the <code>EnabledBaseline</code> resource to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#UpdateEnabledBaselineOutput": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID (in UUID format) of the asynchronous <code>UpdateEnabledBaseline</code> operation. This <code>operationIdentifier</code> is used to track status through calls to the <code>GetBaselineOperation</code> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -2859,7 +3981,7 @@
                 "manifest": {
                     "target": "com.amazonaws.controltower#Manifest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review \n         <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch\">Launch your landing zone</a>.</p>",
+                        "smithy.api#documentation": "<p>The <code>manifest.yaml</code> file is a text file that describes your Amazon Web Services resources. For examples, review \n         <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file\">The manifest file</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2901,7 +4023,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input does not satisfy the constraints specified by an  Amazon Web Services service.</p>",
+                "smithy.api#documentation": "<p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
