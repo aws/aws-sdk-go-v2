@@ -1,8 +1,0 @@
-{
-    "id": "e07a710d-4709-44f6-9963-52b512835f24",
-    "type": "documentation",
-    "description": "Doc only update for Secrets Manager",
-    "modules": [
-        "service/secretsmanager"
-    ]
-}

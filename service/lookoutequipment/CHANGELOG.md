@@ -1,3 +1,7 @@
+# v1.24.1 (2024-02-15)
+
+* **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.
+
 # v1.24.0 (2024-02-14)
 
 * **Feature**: This feature allows customers to see pointwise model diagnostics results for their models.

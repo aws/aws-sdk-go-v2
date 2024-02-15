@@ -1,8 +1,0 @@
-{
-    "id": "24db6340-a329-4fcd-9432-6fb345df772b",
-    "type": "feature",
-    "description": "This is the initial SDK release for AWS Artifact. AWS Artifact provides on-demand access to compliance and third-party compliance reports. This release includes access to List and Get reports, along with their metadata. This release also includes access to AWS Artifact notifications settings.",
-    "modules": [
-        "service/artifact"
-    ]
-}

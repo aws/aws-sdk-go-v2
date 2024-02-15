@@ -1,0 +1,5 @@
+# v1.0.0 (2024-02-15)
+
+* **Release**: New AWS service client module
+* **Feature**: This is the initial SDK release for AWS Artifact. AWS Artifact provides on-demand access to compliance and third-party compliance reports. This release includes access to List and Get reports, along with their metadata. This release also includes access to AWS Artifact notifications settings.
+

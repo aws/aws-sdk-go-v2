@@ -1,3 +1,8 @@
+# v1.22.0 (2024-02-15)
+
+* **Feature**: This release adds a new response parameter, JobProgressReport, to the DescribeFHIRImportJob and ListFHIRImportJobs API operation. JobProgressReport provides details on the progress of the import job on the server.
+* **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.
+
 # v1.21.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.

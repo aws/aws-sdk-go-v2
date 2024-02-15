@@ -1,8 +1,0 @@
-{
-    "id": "d657b2ac-42f7-407d-89fe-714e2c2cbb22",
-    "type": "feature",
-    "description": "Marked fields IpAddressV4, PrivateIpAddress, Email as Sensitive.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

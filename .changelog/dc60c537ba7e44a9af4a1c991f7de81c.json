@@ -1,8 +1,0 @@
-{
-    "id": "dc60c537-ba7e-44a9-af4a-1c991f7de81c",
-    "type": "feature",
-    "description": "Adds additional supported instance types.",
-    "modules": [
-        "service/opensearch"
-    ]
-}

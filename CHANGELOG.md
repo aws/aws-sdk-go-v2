@@ -1,3 +1,30 @@
+# Release (2024-02-15)
+
+## General Highlights
+* **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.0.0](service/artifact/CHANGELOG.md#v100-2024-02-15)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for AWS Artifact. AWS Artifact provides on-demand access to compliance and third-party compliance reports. This release includes access to List and Get reports, along with their metadata. This release also includes access to AWS Artifact notifications settings.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.25.0](service/codepipeline/CHANGELOG.md#v1250-2024-02-15)
+  * **Feature**: Add ability to override timeout on action level.
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.26.1](service/detective/CHANGELOG.md#v1261-2024-02-15)
+  * **Documentation**: Doc only updates for content enhancement
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.38.0](service/guardduty/CHANGELOG.md#v1380-2024-02-15)
+  * **Feature**: Marked fields IpAddressV4, PrivateIpAddress, Email as Sensitive.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.22.0](service/healthlake/CHANGELOG.md#v1220-2024-02-15)
+  * **Feature**: This release adds a new response parameter, JobProgressReport, to the DescribeFHIRImportJob and ListFHIRImportJobs API operation. JobProgressReport provides details on the progress of the import job on the server.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.31.0](service/opensearch/CHANGELOG.md#v1310-2024-02-15)
+  * **Feature**: Adds additional supported instance types.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.38.0](service/polly/CHANGELOG.md#v1380-2024-02-15)
+  * **Feature**: Amazon Polly adds 1 new voice - Burcu (tr-TR)
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.129.0](service/sagemaker/CHANGELOG.md#v11290-2024-02-15)
+  * **Feature**: This release adds a new API UpdateClusterSoftware for SageMaker HyperPod. This API allows users to patch HyperPod clusters with latest platform softwares.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.27.1](service/secretsmanager/CHANGELOG.md#v1271-2024-02-15)
+  * **Documentation**: Doc only update for Secrets Manager
+
 # Release (2024-02-14)
 
 ## Module Highlights

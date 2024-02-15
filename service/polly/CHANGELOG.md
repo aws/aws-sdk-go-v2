@@ -1,3 +1,7 @@
+# v1.38.0 (2024-02-15)
+
+* **Feature**: Amazon Polly adds 1 new voice - Burcu (tr-TR)
+
 # v1.37.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.
