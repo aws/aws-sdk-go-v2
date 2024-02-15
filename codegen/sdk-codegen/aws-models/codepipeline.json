@@ -475,6 +475,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The variable namespace associated with the action. All variables produced as output by\n            this action fall under this namespace.</p>"
                     }
+                },
+                "timeoutInMinutes": {
+                    "target": "com.amazonaws.codepipeline#ActionTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timeout duration in minutes that can be applied against the ActionType’s default\n            timeout value specified in <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/limits.html\">Quotas for CodePipeline\n            </a>. This attribute is available only to the manual approval ActionType.</p>"
+                    }
                 }
             },
             "traits": {
@@ -934,6 +940,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.codepipeline#ActionState"
+            }
+        },
+        "com.amazonaws.codepipeline#ActionTimeout": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 86400
+                }
             }
         },
         "com.amazonaws.codepipeline#ActionType": {
@@ -4074,18 +4089,18 @@
                 "includes": {
                     "target": "com.amazonaws.codepipeline#GitBranchPatternList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of patterns of Git branches that, when a commit is pushed, are to be included as criteria that starts the pipeline.</p>"
+                        "smithy.api#documentation": "<p>The list of patterns of Git branches that, when a commit is pushed, are to be\n            included as criteria that starts the pipeline.</p>"
                     }
                 },
                 "excludes": {
                     "target": "com.amazonaws.codepipeline#GitBranchPatternList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of patterns of Git branches that, when a commit is pushed, are to be excluded from starting the pipeline.</p>"
+                        "smithy.api#documentation": "<p>The list of patterns of Git branches that, when a commit is pushed, are to be\n            excluded from starting the pipeline.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Git repository branches specified as filter criteria to start the pipeline.</p>"
+                "smithy.api#documentation": "<p>The Git repository branches specified as filter criteria to start the\n            pipeline.</p>"
             }
         },
         "com.amazonaws.codepipeline#GitBranchNamePattern": {
@@ -4129,7 +4144,7 @@
                 "pullRequest": {
                     "target": "com.amazonaws.codepipeline#GitPullRequestFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field where the repository event that will start the pipeline is specified as pull requests.</p>"
+                        "smithy.api#documentation": "<p>The field where the repository event that will start the pipeline is specified as\n            pull requests.</p>"
                     }
                 }
             },
@@ -4143,18 +4158,18 @@
                 "includes": {
                     "target": "com.amazonaws.codepipeline#GitFilePathPatternList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of patterns of Git repository file paths that, when a commit is pushed, are to be included as criteria that starts the pipeline.</p>"
+                        "smithy.api#documentation": "<p>The list of patterns of Git repository file paths that, when a commit is pushed,\n            are to be included as criteria that starts the pipeline.</p>"
                     }
                 },
                 "excludes": {
                     "target": "com.amazonaws.codepipeline#GitFilePathPatternList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of patterns of Git repository file paths that, when a commit is pushed, are to be excluded from starting the pipeline.</p>"
+                        "smithy.api#documentation": "<p>The list of patterns of Git repository file paths that, when a commit is pushed,\n            are to be excluded from starting the pipeline.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Git repository file paths specified as filter criteria to start the pipeline.</p>"
+                "smithy.api#documentation": "<p>The Git repository file paths specified as filter criteria to start the\n            pipeline.</p>"
             }
         },
         "com.amazonaws.codepipeline#GitFilePathPattern": {
@@ -4220,24 +4235,24 @@
                 "events": {
                     "target": "com.amazonaws.codepipeline#GitPullRequestEventTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field that specifies which pull request events to filter on (opened, updated, closed) for the trigger configuration.</p>"
+                        "smithy.api#documentation": "<p>The field that specifies which pull request events to filter on (opened, updated,\n            closed) for the trigger configuration.</p>"
                     }
                 },
                 "branches": {
                     "target": "com.amazonaws.codepipeline#GitBranchFilterCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field that specifies to filter on branches for the pull request trigger configuration.</p>"
+                        "smithy.api#documentation": "<p>The field that specifies to filter on branches for the pull request trigger\n            configuration.</p>"
                     }
                 },
                 "filePaths": {
                     "target": "com.amazonaws.codepipeline#GitFilePathFilterCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field that specifies to filter on file paths for the pull request trigger configuration.</p>"
+                        "smithy.api#documentation": "<p>The field that specifies to filter on file paths for the pull request trigger\n            configuration.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The event criteria for the pull request trigger configuration, such as the lists of branches or file paths to include and exclude.</p>"
+                "smithy.api#documentation": "<p>The event criteria for the pull request trigger configuration, such as the lists of\n            branches or file paths to include and exclude.</p>"
             }
         },
         "com.amazonaws.codepipeline#GitPullRequestFilterList": {
@@ -4264,18 +4279,18 @@
                 "branches": {
                     "target": "com.amazonaws.codepipeline#GitBranchFilterCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field that specifies to filter on branches for the push trigger configuration.</p>"
+                        "smithy.api#documentation": "<p>The field that specifies to filter on branches for the push trigger\n            configuration.</p>"
                     }
                 },
                 "filePaths": {
                     "target": "com.amazonaws.codepipeline#GitFilePathFilterCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field that specifies to filter on file paths for the push trigger configuration.</p>"
+                        "smithy.api#documentation": "<p>The field that specifies to filter on file paths for the push trigger\n            configuration.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The event criteria that specify when a specified repository event will start the pipeline for the specified trigger configuration, such as the lists of Git tags to include and exclude.</p>"
+                "smithy.api#documentation": "<p>The event criteria that specify when a specified repository event will start the\n            pipeline for the specified trigger configuration, such as the lists of Git tags to\n            include and exclude.</p>"
             }
         },
         "com.amazonaws.codepipeline#GitPushFilterList": {
@@ -4835,7 +4850,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The field that specifies to filter on the latest execution in the pipeline.</p>\n         <note>\n            <p>Filtering on the latest execution is available for executions run on or after\n                February 08, 2024.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The field that specifies to filter on the latest execution in the\n            pipeline.</p>\n         <note>\n            <p>Filtering on the latest execution is available for executions run on or after\n                February 08, 2024.</p>\n         </note>"
             }
         },
         "com.amazonaws.codepipeline#LimitExceededException": {
@@ -5621,13 +5636,13 @@
                 "executionMode": {
                     "target": "com.amazonaws.codepipeline#ExecutionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.</p>"
+                        "smithy.api#documentation": "<p>The method that the pipeline will use to handle multiple executions. The default\n            mode is SUPERSEDED.</p>"
                     }
                 },
                 "pipelineType": {
                     "target": "com.amazonaws.codepipeline#PipelineType",
                     "traits": {
-                        "smithy.api#documentation": "<p>CodePipeline provides the following pipeline types, which differ in characteristics and\n            price, so that you can tailor your pipeline features and cost to the needs of your\n            applications.</p>\n         <ul>\n            <li>\n               <p>V1 type pipelines have a JSON structure that contains standard pipeline,\n                    stage, and action-level parameters.</p>\n            </li>\n            <li>\n               <p>V2 type pipelines have the same structure as a V1 type, along with additional\n                    parameters for release safety and trigger configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when\n                creating or updating a pipeline will result in the pipeline having the V2 type of\n                pipeline and the associated costs.</p>\n         </important>\n         <p>For information about pricing for CodePipeline, see <a href=\"http://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p>\n         <p>\n            For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of pipeline is right for me?</a>.</p>"
+                        "smithy.api#documentation": "<p>CodePipeline provides the following pipeline types, which differ in\n            characteristics and price, so that you can tailor your pipeline features and cost to the\n            needs of your applications.</p>\n         <ul>\n            <li>\n               <p>V1 type pipelines have a JSON structure that contains standard pipeline,\n                    stage, and action-level parameters.</p>\n            </li>\n            <li>\n               <p>V2 type pipelines have the same structure as a V1 type, along with additional\n                    parameters for release safety and trigger configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when\n                creating or updating a pipeline will result in the pipeline having the V2 type of\n                pipeline and the associated costs.</p>\n         </important>\n         <p>For information about pricing for CodePipeline, see <a href=\"http://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p>\n         <p> For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of\n                pipeline is right for me?</a>.</p>"
                     }
                 },
                 "variables": {
@@ -5639,7 +5654,7 @@
                 "triggers": {
                     "target": "com.amazonaws.codepipeline#PipelineTriggerDeclarationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The trigger configuration specifying a type of event, such as Git tags, that starts the pipeline.</p>\n         <note>\n            <p>When a trigger configuration is specified, default change detection for\n                repository and branch commits is disabled.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The trigger configuration specifying a type of event, such as Git tags, that starts\n            the pipeline.</p>\n         <note>\n            <p>When a trigger configuration is specified, default change detection for\n                repository and branch commits is disabled.</p>\n         </note>"
                     }
                 }
             },
@@ -5698,7 +5713,7 @@
                 "executionMode": {
                     "target": "com.amazonaws.codepipeline#ExecutionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.</p>"
+                        "smithy.api#documentation": "<p>The method that the pipeline will use to handle multiple executions. The default\n            mode is SUPERSEDED.</p>"
                     }
                 }
             },
@@ -5837,7 +5852,7 @@
                 "executionMode": {
                     "target": "com.amazonaws.codepipeline#ExecutionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.</p>"
+                        "smithy.api#documentation": "<p>The method that the pipeline will use to handle multiple executions. The default\n            mode is SUPERSEDED.</p>"
                     }
                 }
             },
@@ -5953,13 +5968,13 @@
                 "pipelineType": {
                     "target": "com.amazonaws.codepipeline#PipelineType",
                     "traits": {
-                        "smithy.api#documentation": "<p>CodePipeline provides the following pipeline types, which differ in characteristics and\n            price, so that you can tailor your pipeline features and cost to the needs of your\n            applications.</p>\n         <ul>\n            <li>\n               <p>V1 type pipelines have a JSON structure that contains standard pipeline,\n                    stage, and action-level parameters.</p>\n            </li>\n            <li>\n               <p>V2 type pipelines have the same structure as a V1 type, along with additional\n                    parameters for release safety and trigger configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when\n                creating or updating a pipeline will result in the pipeline having the V2 type of\n                pipeline and the associated costs.</p>\n         </important>\n         <p>For information about pricing for CodePipeline, see <a href=\"http://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p>\n         <p>\n            For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of pipeline is right for me?</a>.</p>"
+                        "smithy.api#documentation": "<p>CodePipeline provides the following pipeline types, which differ in\n            characteristics and price, so that you can tailor your pipeline features and cost to the\n            needs of your applications.</p>\n         <ul>\n            <li>\n               <p>V1 type pipelines have a JSON structure that contains standard pipeline,\n                    stage, and action-level parameters.</p>\n            </li>\n            <li>\n               <p>V2 type pipelines have the same structure as a V1 type, along with additional\n                    parameters for release safety and trigger configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when\n                creating or updating a pipeline will result in the pipeline having the V2 type of\n                pipeline and the associated costs.</p>\n         </important>\n         <p>For information about pricing for CodePipeline, see <a href=\"http://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p>\n         <p> For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of\n                pipeline is right for me?</a>.</p>"
                     }
                 },
                 "executionMode": {
                     "target": "com.amazonaws.codepipeline#ExecutionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.</p>"
+                        "smithy.api#documentation": "<p>The method that the pipeline will use to handle multiple executions. The default\n            mode is SUPERSEDED.</p>"
                     }
                 },
                 "created": {
@@ -6082,7 +6097,7 @@
                 "description": {
                     "target": "com.amazonaws.codepipeline#PipelineVariableDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of a pipeline-level variable. It's used to add additional context about the variable, and not being used at time when pipeline executes.</p>"
+                        "smithy.api#documentation": "<p>The description of a pipeline-level variable. It's used to add additional context\n            about the variable, and not being used at time when pipeline executes.</p>"
                     }
                 }
             },
@@ -6966,7 +6981,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>You can retry a stage that has failed without having to run a pipeline again from the beginning. You do\n            this by either retrying the failed actions in a stage or by retrying all actions in the stage starting from the first action in the stage. When you retry the failed actions in a stage,\n            all actions that are still in progress continue working, and failed actions are\n            triggered again. When you retry a failed stage from the first action in the stage, the stage cannot have any actions in progress. Before a stage can be retried, it must either have all actions failed or some actions failed and some succeeded.</p>"
+                "smithy.api#documentation": "<p>You can retry a stage that has failed without having to run a pipeline again from\n            the beginning. You do this by either retrying the failed actions in a stage or by\n            retrying all actions in the stage starting from the first action in the stage. When you\n            retry the failed actions in a stage, all actions that are still in progress continue\n            working, and failed actions are triggered again. When you retry a failed stage from the\n            first action in the stage, the stage cannot have any actions in progress. Before a stage\n            can be retried, it must either have all actions failed or some actions failed and some\n            succeeded.</p>"
             }
         },
         "com.amazonaws.codepipeline#RetryStageExecutionInput": {
@@ -7531,7 +7546,7 @@
                 "variables": {
                     "target": "com.amazonaws.codepipeline#PipelineVariableList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list that overrides pipeline variables for a pipeline execution that's being started. Variable names must match <code>[A-Za-z0-9@\\-_]+</code>, \n            and the values can be anything except an empty string.</p>"
+                        "smithy.api#documentation": "<p>A list that overrides pipeline variables for a pipeline execution that's being\n            started. Variable names must match <code>[A-Za-z0-9@\\-_]+</code>, and the values can be\n            anything except an empty string.</p>"
                     }
                 },
                 "clientRequestToken": {
@@ -7544,7 +7559,7 @@
                 "sourceRevisions": {
                     "target": "com.amazonaws.codepipeline#SourceRevisionOverrideList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list that allows you to specify, or override, the source revision for a pipeline execution that's being started. A source revision is the version with all the changes to your application code, or source artifact, for the pipeline execution.</p>"
+                        "smithy.api#documentation": "<p>A list that allows you to specify, or override, the source revision for a pipeline\n            execution that's being started. A source revision is the version with all the changes to\n            your application code, or source artifact, for the pipeline execution.</p>"
                     }
                 }
             },

@@ -664,7 +664,7 @@
                 "ImportJobProperties": {
                     "target": "com.amazonaws.healthlake#ImportJobProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The properties of the Import job request, including the ID, ARN, name, and the status of the job.</p>",
+                        "smithy.api#documentation": "<p>The properties of the Import job request, including the ID, ARN, name, status of the job, and the progress report of the job.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -767,6 +767,12 @@
                 }
             }
         },
+        "com.amazonaws.healthlake#GenericDouble": {
+            "type": "double"
+        },
+        "com.amazonaws.healthlake#GenericLong": {
+            "type": "long"
+        },
         "com.amazonaws.healthlake#HealthLake": {
             "type": "service",
             "version": "2017-07-01",
@@ -867,7 +873,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -910,7 +915,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -923,7 +929,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -937,7 +942,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -960,7 +964,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -995,7 +998,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1006,14 +1008,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1027,14 +1031,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -1043,11 +1045,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1058,14 +1060,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1079,7 +1083,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1099,7 +1102,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1110,14 +1112,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -1128,9 +1132,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1578,6 +1584,12 @@
                 "JobOutputDataConfig": {
                     "target": "com.amazonaws.healthlake#OutputDataConfig"
                 },
+                "JobProgressReport": {
+                    "target": "com.amazonaws.healthlake#JobProgressReport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays the progress of the import job, including total resources scanned, total resources ingested, and total size of data ingested.</p>"
+                    }
+                },
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.healthlake#IamRoleArn",
                     "traits": {
@@ -1592,7 +1604,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Displays the properties of the import job, including the ID, Arn, Name, and the status of the data store.</p>"
+                "smithy.api#documentation": "<p>Displays the properties of the import job, including the ID, Arn, Name, the status of the job, and the progress report of the job.</p>"
             }
         },
         "com.amazonaws.healthlake#ImportJobPropertiesList": {
@@ -1646,6 +1658,62 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+            }
+        },
+        "com.amazonaws.healthlake#JobProgressReport": {
+            "type": "structure",
+            "members": {
+                "TotalNumberOfScannedFiles": {
+                    "target": "com.amazonaws.healthlake#GenericLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of files scanned from input S3 bucket.</p>"
+                    }
+                },
+                "TotalSizeOfScannedFilesInMB": {
+                    "target": "com.amazonaws.healthlake#GenericDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size (in MB) of the files scanned from the input S3 bucket.</p>"
+                    }
+                },
+                "TotalNumberOfImportedFiles": {
+                    "target": "com.amazonaws.healthlake#GenericLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of files imported so far.</p>"
+                    }
+                },
+                "TotalNumberOfResourcesScanned": {
+                    "target": "com.amazonaws.healthlake#GenericLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources scanned from the input S3 bucket.</p>"
+                    }
+                },
+                "TotalNumberOfResourcesImported": {
+                    "target": "com.amazonaws.healthlake#GenericLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources imported so far.</p>"
+                    }
+                },
+                "TotalNumberOfResourcesWithCustomerError": {
+                    "target": "com.amazonaws.healthlake#GenericLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resources that failed due to customer error.</p>"
+                    }
+                },
+                "TotalNumberOfFilesReadWithCustomerError": {
+                    "target": "com.amazonaws.healthlake#GenericLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of files that failed to be read from the input S3 bucket due to customer error.</p>"
+                    }
+                },
+                "Throughput": {
+                    "target": "com.amazonaws.healthlake#GenericDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The throughput (in MB/sec) of the import job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The progress report of an import job.</p>"
             }
         },
         "com.amazonaws.healthlake#JobStatus": {
@@ -2010,7 +2078,7 @@
                 "ImportJobPropertiesList": {
                     "target": "com.amazonaws.healthlake#ImportJobPropertiesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The properties of a listed FHIR import jobs, including the ID, ARN, name, and the status of the job.\n         </p>",
+                        "smithy.api#documentation": "<p>\n            The properties of a listed FHIR import jobs, including the ID, ARN, name, the status of the job, and the progress report of the job.\n         </p>",
                         "smithy.api#required": {}
                     }
                 },

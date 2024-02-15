@@ -4492,7 +4492,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 64
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.guardduty#EnableOrganizationAdminAccount": {
@@ -5639,7 +5640,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists Amazon GuardDuty findings statistics for the specified detector ID.</p>",
+                "smithy.api#documentation": "<p>Lists Amazon GuardDuty findings statistics for the specified detector ID.</p>\n         <p>There might be regional differences because some flags might not be available in all the Regions where GuardDuty\n      is currently supported. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/findings/statistics",
@@ -9036,7 +9037,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists Amazon GuardDuty findings for the specified detector ID.</p>",
+                "smithy.api#documentation": "<p>Lists GuardDuty findings for the specified detector ID.</p>\n         <p>There might be regional differences because some flags might not be available in all the Regions where GuardDuty\n      is currently supported. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/findings",
@@ -9694,7 +9695,7 @@
             "type": "structure",
             "members": {
                 "IpAddressV4": {
-                    "target": "com.amazonaws.guardduty#String",
+                    "target": "com.amazonaws.guardduty#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The IPv4 local address of the connection.</p>",
                         "smithy.api#jsonName": "ipAddressV4"
@@ -10285,7 +10286,7 @@
                     }
                 },
                 "PrivateIpAddress": {
-                    "target": "com.amazonaws.guardduty#String",
+                    "target": "com.amazonaws.guardduty#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The private IP address of the EC2 instance.</p>",
                         "smithy.api#jsonName": "privateIpAddress"
@@ -11139,7 +11140,7 @@
                     }
                 },
                 "PrivateIpAddress": {
-                    "target": "com.amazonaws.guardduty#String",
+                    "target": "com.amazonaws.guardduty#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The private IP address of the EC2 instance.</p>",
                         "smithy.api#jsonName": "privateIpAddress"
@@ -11540,7 +11541,7 @@
                     }
                 },
                 "IpAddressV4": {
-                    "target": "com.amazonaws.guardduty#String",
+                    "target": "com.amazonaws.guardduty#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The IPv4 remote address of the connection.</p>",
                         "smithy.api#jsonName": "ipAddressV4"
@@ -12504,6 +12505,12 @@
                 "target": "com.amazonaws.guardduty#SecurityGroup"
             }
         },
+        "com.amazonaws.guardduty#SensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.guardduty#Service": {
             "type": "structure",
             "members": {
@@ -13452,7 +13459,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the Amazon GuardDuty detector specified by the detectorId.</p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
+                "smithy.api#documentation": "<p>Updates the GuardDuty detector specified by the detectorId.</p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}",

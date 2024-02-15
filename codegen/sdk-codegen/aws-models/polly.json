@@ -3498,6 +3498,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Gregory"
                     }
+                },
+                "Burcu": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Burcu"
+                    }
                 }
             }
         },
