@@ -1,0 +1,8 @@
+{
+    "id": "4475923b-3b16-442c-86ca-1c3610336f04",
+    "type": "documentation",
+    "description": "Doc only updates for content enhancement",
+    "modules": [
+        "service/detective"
+    ]
+}

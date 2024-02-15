@@ -12,7 +12,11 @@ import (
 	"time"
 )
 
-// initiate an investigation on an entity in a graph
+// Detective investigations lets you investigate IAM users and IAM roles using
+// indicators of compromise. An indicator of compromise (IOC) is an artifact
+// observed in or on a network, system, or environment that can (with a high level
+// of confidence) identify malicious activity or a security incident.
+// StartInvestigation initiates an investigation on an entity in a behavior graph.
 func (c *Client) StartInvestigation(ctx context.Context, params *StartInvestigationInput, optFns ...func(*Options)) (*StartInvestigationOutput, error) {
 	if params == nil {
 		params = &StartInvestigationInput{}
@@ -35,12 +39,12 @@ type StartInvestigationInput struct {
 	// This member is required.
 	EntityArn *string
 
-	// The ARN of the behavior graph.
+	// The Amazon Resource Name (ARN) of the behavior graph.
 	//
 	// This member is required.
 	GraphArn *string
 
-	// The data and time when the investigation began. The value is an UTC ISO8601
+	// The data and time when the investigation ended. The value is an UTC ISO8601
 	// formatted string. For example, 2021-08-18T16:35:56.284Z .
 	//
 	// This member is required.

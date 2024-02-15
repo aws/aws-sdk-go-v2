@@ -13,7 +13,12 @@ import (
 	"time"
 )
 
-// Returns the investigation results of an investigation for a behavior graph.
+// Detective investigations lets you investigate IAM users and IAM roles using
+// indicators of compromise. An indicator of compromise (IOC) is an artifact
+// observed in or on a network, system, or environment that can (with a high level
+// of confidence) identify malicious activity or a security incident.
+// GetInvestigation returns the investigation results of an investigation for a
+// behavior graph.
 func (c *Client) GetInvestigation(ctx context.Context, params *GetInvestigationInput, optFns ...func(*Options)) (*GetInvestigationOutput, error) {
 	if params == nil {
 		params = &GetInvestigationInput{}
@@ -31,7 +36,7 @@ func (c *Client) GetInvestigation(ctx context.Context, params *GetInvestigationI
 
 type GetInvestigationInput struct {
 
-	// The ARN of the behavior graph.
+	// The Amazon Resource Name (ARN) of the behavior graph.
 	//
 	// This member is required.
 	GraphArn *string
@@ -46,39 +51,41 @@ type GetInvestigationInput struct {
 
 type GetInvestigationOutput struct {
 
-	// The UTC time stamp of the creation time of the investigation report.
+	// The creation time of the investigation report in UTC time stamp format.
 	CreatedTime *time.Time
 
-	// The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
+	// The unique Amazon Resource Name (ARN). Detective supports IAM user ARNs and IAM
+	// role ARNs.
 	EntityArn *string
 
-	// Type of entity. For example, Amazon Web Services accounts, such as IAM user and
-	// role.
+	// Type of entity. For example, Amazon Web Services accounts, such as an IAM user
+	// and/or IAM role.
 	EntityType types.EntityType
 
-	// The ARN of the behavior graph.
+	// The Amazon Resource Name (ARN) of the behavior graph.
 	GraphArn *string
 
 	// The investigation ID of the investigation report.
 	InvestigationId *string
 
 	// The data and time when the investigation began. The value is an UTC ISO8601
-	// formatted string. For example, 2021-08-18T16:35:56.284Z.
+	// formatted string. For example, 2021-08-18T16:35:56.284Z .
 	ScopeEndTime *time.Time
 
-	// The start date and time for the scope time set to generate the investigation
-	// report.
+	// The start date and time used to set the scope time within which you want to
+	// generate the investigation report. The value is an UTC ISO8601 formatted string.
+	// For example, 2021-08-18T16:35:56.284Z .
 	ScopeStartTime *time.Time
 
-	// Severity based on the likelihood and impact of the indicators of compromise
-	// discovered in the investigation.
+	// The severity assigned is based on the likelihood and impact of the indicators
+	// of compromise discovered in the investigation.
 	Severity types.Severity
 
-	// The current state of the investigation. An archived investigation indicates you
-	// have completed reviewing the investigation.
+	// The current state of the investigation. An archived investigation indicates
+	// that you have completed reviewing the investigation.
 	State types.State
 
-	// Status based on the completion status of the investigation.
+	// The status based on the completion status of the investigation.
 	Status types.Status
 
 	// Metadata pertaining to the operation's result.

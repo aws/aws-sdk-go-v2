@@ -56,8 +56,8 @@ type DescribeOutboundConnectionsOutput struct {
 	Connections []types.OutboundConnection
 
 	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
-	// the returned token to retrieve the next page.
+	// nextToken is a unique pagination token for each page. Send the request again
+	// using the returned token to retrieve the next page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

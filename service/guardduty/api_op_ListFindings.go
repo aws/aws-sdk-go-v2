@@ -12,7 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists Amazon GuardDuty findings for the specified detector ID.
+// Lists GuardDuty findings for the specified detector ID. There might be regional
+// differences because some flags might not be available in all the Regions where
+// GuardDuty is currently supported. For more information, see Regions and
+// endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
+// .
 func (c *Client) ListFindings(ctx context.Context, params *ListFindingsInput, optFns ...func(*Options)) (*ListFindingsOutput, error) {
 	if params == nil {
 		params = &ListFindingsInput{}

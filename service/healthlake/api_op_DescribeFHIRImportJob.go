@@ -46,8 +46,8 @@ type DescribeFHIRImportJobInput struct {
 
 type DescribeFHIRImportJobOutput struct {
 
-	// The properties of the Import job request, including the ID, ARN, name, and the
-	// status of the job.
+	// The properties of the Import job request, including the ID, ARN, name, status
+	// of the job, and the progress report of the job.
 	//
 	// This member is required.
 	ImportJobProperties *types.ImportJobProperties

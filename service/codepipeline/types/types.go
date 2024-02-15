@@ -120,6 +120,11 @@ type ActionDeclaration struct {
 	// The order in which actions are run.
 	RunOrder *int32
 
+	// A timeout duration in minutes that can be applied against the ActionType’s
+	// default timeout value specified in Quotas for CodePipeline  (https://docs.aws.amazon.com/codepipeline/latest/userguide/limits.html)
+	// . This attribute is available only to the manual approval ActionType.
+	TimeoutInMinutes *int32
+
 	noSmithyDocumentSerde
 }
 

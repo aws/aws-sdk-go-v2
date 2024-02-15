@@ -1,0 +1,8 @@
+{
+    "id": "7d1257ea-5608-450a-99d9-d500ead99cbf",
+    "type": "feature",
+    "description": "Add ability to override timeout on action level.",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "8caec593-5205-4d72-a9db-477e012e8a0e",
+    "type": "feature",
+    "description": "This release adds a new API UpdateClusterSoftware for SageMaker HyperPod. This API allows users to patch HyperPod clusters with latest platform softwares.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

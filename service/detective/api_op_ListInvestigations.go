@@ -12,7 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all Investigations.
+// Detective investigations lets you investigate IAM users and IAM roles using
+// indicators of compromise. An indicator of compromise (IOC) is an artifact
+// observed in or on a network, system, or environment that can (with a high level
+// of confidence) identify malicious activity or a security incident.
+// ListInvestigations lists all active Detective investigations.
 func (c *Client) ListInvestigations(ctx context.Context, params *ListInvestigationsInput, optFns ...func(*Options)) (*ListInvestigationsOutput, error) {
 	if params == nil {
 		params = &ListInvestigationsInput{}
@@ -30,18 +34,18 @@ func (c *Client) ListInvestigations(ctx context.Context, params *ListInvestigati
 
 type ListInvestigationsInput struct {
 
-	// The ARN of the behavior graph.
+	// The Amazon Resource Name (ARN) of the behavior graph.
 	//
 	// This member is required.
 	GraphArn *string
 
-	// Filter the investigation results based on a criteria.
+	// Filters the investigation results based on a criteria.
 	FilterCriteria *types.FilterCriteria
 
-	// List the maximum number of investigations in a page.
+	// Lists the maximum number of investigations in a page.
 	MaxResults *int32
 
-	// List if there are more results available. The value of nextToken is a unique
+	// Lists if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
 	// retrieve the next page. Keep all other arguments unchanged. Each pagination
 	// token expires after 24 hours. Using an expired pagination token will return a
@@ -56,15 +60,14 @@ type ListInvestigationsInput struct {
 
 type ListInvestigationsOutput struct {
 
-	// Investigations details lists the summary of uncommon behavior or malicious
-	// activity which indicates a compromise.
+	// Lists the summary of uncommon behavior or malicious activity which indicates a
+	// compromise.
 	InvestigationDetails []types.InvestigationDetail
 
-	// List if there are more results available. The value of nextToken is a unique
+	// Lists if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
 	// retrieve the next page. Keep all other arguments unchanged. Each pagination
-	// token expires after 24 hours. Using an expired pagination token will return an
-	// HTTP 400 InvalidToken error.
+	// token expires after 24 hours.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

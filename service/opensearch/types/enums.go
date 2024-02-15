@@ -588,6 +588,14 @@ const (
 	OpenSearchPartitionInstanceTypeT3LargeSearch          OpenSearchPartitionInstanceType = "t3.large.search"
 	OpenSearchPartitionInstanceTypeT3XlargeSearch         OpenSearchPartitionInstanceType = "t3.xlarge.search"
 	OpenSearchPartitionInstanceTypeT32xlargeSearch        OpenSearchPartitionInstanceType = "t3.2xlarge.search"
+	OpenSearchPartitionInstanceTypeOr1MediumSearch        OpenSearchPartitionInstanceType = "or1.medium.search"
+	OpenSearchPartitionInstanceTypeOr1LargeSearch         OpenSearchPartitionInstanceType = "or1.large.search"
+	OpenSearchPartitionInstanceTypeOr1XlargeSearch        OpenSearchPartitionInstanceType = "or1.xlarge.search"
+	OpenSearchPartitionInstanceTypeOr12xlargeSearch       OpenSearchPartitionInstanceType = "or1.2xlarge.search"
+	OpenSearchPartitionInstanceTypeOr14xlargeSearch       OpenSearchPartitionInstanceType = "or1.4xlarge.search"
+	OpenSearchPartitionInstanceTypeOr18xlargeSearch       OpenSearchPartitionInstanceType = "or1.8xlarge.search"
+	OpenSearchPartitionInstanceTypeOr112xlargeSearch      OpenSearchPartitionInstanceType = "or1.12xlarge.search"
+	OpenSearchPartitionInstanceTypeOr116xlargeSearch      OpenSearchPartitionInstanceType = "or1.16xlarge.search"
 	OpenSearchPartitionInstanceTypeUltrawarm1MediumSearch OpenSearchPartitionInstanceType = "ultrawarm1.medium.search"
 	OpenSearchPartitionInstanceTypeUltrawarm1LargeSearch  OpenSearchPartitionInstanceType = "ultrawarm1.large.search"
 	OpenSearchPartitionInstanceTypeUltrawarm1XlargeSearch OpenSearchPartitionInstanceType = "ultrawarm1.xlarge.search"
@@ -691,6 +699,14 @@ func (OpenSearchPartitionInstanceType) Values() []OpenSearchPartitionInstanceTyp
 		"t3.large.search",
 		"t3.xlarge.search",
 		"t3.2xlarge.search",
+		"or1.medium.search",
+		"or1.large.search",
+		"or1.xlarge.search",
+		"or1.2xlarge.search",
+		"or1.4xlarge.search",
+		"or1.8xlarge.search",
+		"or1.12xlarge.search",
+		"or1.16xlarge.search",
 		"ultrawarm1.medium.search",
 		"ultrawarm1.large.search",
 		"ultrawarm1.xlarge.search",

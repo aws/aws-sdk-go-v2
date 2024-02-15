@@ -1,0 +1,8 @@
+{
+    "id": "f70848ab-2ef4-447b-b787-b5e29f35937f",
+    "type": "feature",
+    "description": "Amazon Polly adds 1 new voice - Burcu (tr-TR)",
+    "modules": [
+        "service/polly"
+    ]
+}

@@ -66,8 +66,8 @@ type ListFHIRImportJobsInput struct {
 
 type ListFHIRImportJobsOutput struct {
 
-	// The properties of a listed FHIR import jobs, including the ID, ARN, name, and
-	// the status of the job.
+	// The properties of a listed FHIR import jobs, including the ID, ARN, name, the
+	// status of the job, and the progress report of the job.
 	//
 	// This member is required.
 	ImportJobPropertiesList []types.ImportJobProperties

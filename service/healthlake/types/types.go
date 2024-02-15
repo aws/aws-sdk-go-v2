@@ -157,8 +157,8 @@ type IdentityProviderConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Displays the properties of the import job, including the ID, Arn, Name, and the
-// status of the data store.
+// Displays the properties of the import job, including the ID, Arn, Name, the
+// status of the job, and the progress report of the job.
 type ImportJobProperties struct {
 
 	// The datastore id used when the Import job was created.
@@ -200,6 +200,10 @@ type ImportJobProperties struct {
 	// The output data configuration that was supplied when the export job was created.
 	JobOutputDataConfig OutputDataConfig
 
+	// Displays the progress of the import job, including total resources scanned,
+	// total resources ingested, and total size of data ingested.
+	JobProgressReport *JobProgressReport
+
 	// An explanation of any errors that may have occurred during the FHIR import job.
 	Message *string
 
@@ -224,6 +228,37 @@ type InputDataConfigMemberS3Uri struct {
 }
 
 func (*InputDataConfigMemberS3Uri) isInputDataConfig() {}
+
+// The progress report of an import job.
+type JobProgressReport struct {
+
+	// The throughput (in MB/sec) of the import job.
+	Throughput *float64
+
+	// The number of files that failed to be read from the input S3 bucket due to
+	// customer error.
+	TotalNumberOfFilesReadWithCustomerError *int64
+
+	// The number of files imported so far.
+	TotalNumberOfImportedFiles *int64
+
+	// The number of resources imported so far.
+	TotalNumberOfResourcesImported *int64
+
+	// The number of resources scanned from the input S3 bucket.
+	TotalNumberOfResourcesScanned *int64
+
+	// The number of resources that failed due to customer error.
+	TotalNumberOfResourcesWithCustomerError *int64
+
+	// The number of files scanned from input S3 bucket.
+	TotalNumberOfScannedFiles *int64
+
+	// The size (in MB) of the files scanned from the input S3 bucket.
+	TotalSizeOfScannedFilesInMB *float64
+
+	noSmithyDocumentSerde
+}
 
 // The customer-managed-key(CMK) used when creating a data store. If a customer
 // owned key is not specified, an AWS owned key will be used for encryption.

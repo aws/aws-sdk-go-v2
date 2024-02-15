@@ -2283,6 +2283,11 @@ func awsAwsjson11_serializeDocumentActionDeclaration(v *types.ActionDeclaration,
 		ok.Integer(*v.RunOrder)
 	}
 
+	if v.TimeoutInMinutes != nil {
+		ok := object.Key("timeoutInMinutes")
+		ok.Integer(*v.TimeoutInMinutes)
+	}
+
 	return nil
 }
 

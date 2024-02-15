@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the state of an investigation.
+// Updates the state of an investigation.
 func (c *Client) UpdateInvestigationState(ctx context.Context, params *UpdateInvestigationStateInput, optFns ...func(*Options)) (*UpdateInvestigationStateOutput, error) {
 	if params == nil {
 		params = &UpdateInvestigationStateInput{}
@@ -30,7 +30,7 @@ func (c *Client) UpdateInvestigationState(ctx context.Context, params *UpdateInv
 
 type UpdateInvestigationStateInput struct {
 
-	// The ARN of the behavior graph.
+	// The Amazon Resource Name (ARN) of the behavior graph.
 	//
 	// This member is required.
 	GraphArn *string

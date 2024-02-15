@@ -5942,6 +5942,19 @@ func awsAwsjson11_deserializeDocumentActionDeclaration(v **types.ActionDeclarati
 				sv.RunOrder = ptr.Int32(int32(i64))
 			}
 
+		case "timeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ActionTimeout to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutInMinutes = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 

@@ -48,8 +48,8 @@ type ListVersionsInput struct {
 type ListVersionsOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
-	// the returned token to retrieve the next page.
+	// nextToken is a unique pagination token for each page. Send the request again
+	// using the returned token to retrieve the next page.
 	NextToken *string
 
 	// A list of all versions of OpenSearch and Elasticsearch that Amazon OpenSearch

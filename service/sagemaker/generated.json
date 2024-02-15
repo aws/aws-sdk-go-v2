@@ -297,6 +297,7 @@
         "api_op_UpdateAppImageConfig.go",
         "api_op_UpdateArtifact.go",
         "api_op_UpdateCluster.go",
+        "api_op_UpdateClusterSoftware.go",
         "api_op_UpdateCodeRepository.go",
         "api_op_UpdateContext.go",
         "api_op_UpdateDeviceFleet.go",
