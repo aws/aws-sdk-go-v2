@@ -1,3 +1,8 @@
+# v1.51.0 (2024-02-16)
+
+* **Feature**: Add new ClientOptions field to waiter config which allows you to extend the config for operation calls made by waiters.
+* **Documentation**: Documentation-only updates for Lambda to clarify a number of existing actions and properties.
+
 # v1.50.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.

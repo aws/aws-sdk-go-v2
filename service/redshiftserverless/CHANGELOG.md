@@ -1,3 +1,7 @@
+# v1.16.2 (2024-02-16)
+
+* No change notes available for this release.
+
 # v1.16.1 (2024-02-15)
 
 * **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.

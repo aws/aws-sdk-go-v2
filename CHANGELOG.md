@@ -1,3 +1,23 @@
+# Release (2024-02-16)
+
+## General Highlights
+* **Feature**: Add new ClientOptions field to waiter config which allows you to extend the config for operation calls made by waiters.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.22.1](service/connectparticipant/CHANGELOG.md#v1221-2024-02-16)
+  * **Documentation**: Doc only update to GetTranscript API reference guide to inform users about presence of events in the chat transcript.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.38.0](service/emr/CHANGELOG.md#v1380-2024-02-16)
+  * **Feature**: adds fine grained control over Unhealthy Node Replacement to Amazon ElasticMapReduce
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.26.0](service/firehose/CHANGELOG.md#v1260-2024-02-16)
+  * **Feature**: This release adds support for Data Message Extraction for decompressed CloudWatch logs, and to use a custom file extension or time zone for S3 destinations.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.51.0](service/lambda/CHANGELOG.md#v1510-2024-02-16)
+  * **Documentation**: Documentation-only updates for Lambda to clarify a number of existing actions and properties.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.71.0](service/rds/CHANGELOG.md#v1710-2024-02-16)
+  * **Documentation**: Doc only update for a valid option in DB parameter group
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.28.0](service/sns/CHANGELOG.md#v1280-2024-02-16)
+  * **Feature**: This release marks phone numbers as sensitive inputs.
+
 # Release (2024-02-15)
 
 ## General Highlights

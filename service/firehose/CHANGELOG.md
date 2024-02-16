@@ -1,3 +1,7 @@
+# v1.26.0 (2024-02-16)
+
+* **Feature**: This release adds support for Data Message Extraction for decompressed CloudWatch logs, and to use a custom file extension or time zone for S3 destinations.
+
 # v1.25.1 (2024-02-15)
 
 * **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.

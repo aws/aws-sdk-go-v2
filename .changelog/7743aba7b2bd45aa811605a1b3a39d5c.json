@@ -1,8 +1,0 @@
-{
-    "id": "7743aba7-b2bd-45aa-8116-05a1b3a39d5c",
-    "type": "feature",
-    "description": "This release adds support for Data Message Extraction for decompressed CloudWatch logs, and to use a custom file extension or time zone for S3 destinations.",
-    "modules": [
-        "service/firehose"
-    ]
-}

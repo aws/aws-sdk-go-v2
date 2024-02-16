@@ -1,3 +1,7 @@
+# v1.46.0 (2024-02-16)
+
+* **Feature**: Add new ClientOptions field to waiter config which allows you to extend the config for operation calls made by waiters.
+
 # v1.45.1 (2024-02-14)
 
 * No change notes available for this release.

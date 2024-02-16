@@ -1,3 +1,8 @@
+# v1.71.0 (2024-02-16)
+
+* **Feature**: Add new ClientOptions field to waiter config which allows you to extend the config for operation calls made by waiters.
+* **Documentation**: Doc only update for a valid option in DB parameter group
+
 # v1.70.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.

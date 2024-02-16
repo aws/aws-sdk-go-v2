@@ -1,8 +1,0 @@
-{
-    "id": "4ed09e1f-bf5b-4576-8a77-77c1aa4787d9",
-    "type": "documentation",
-    "description": "Documentation-only updates for Lambda to clarify a number of existing actions and properties.",
-    "modules": [
-        "service/lambda"
-    ]
-}

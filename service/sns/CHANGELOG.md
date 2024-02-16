@@ -1,3 +1,7 @@
+# v1.28.0 (2024-02-16)
+
+* **Feature**: This release marks phone numbers as sensitive inputs.
+
 # v1.27.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.

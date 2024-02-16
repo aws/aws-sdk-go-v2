@@ -1,8 +1,0 @@
-{
-    "id": "67228f2b-c989-44a7-bae5-fa2de18ec0fd",
-    "type": "feature",
-    "description": "adds fine grained control over Unhealthy Node Replacement to Amazon ElasticMapReduce",
-    "modules": [
-        "service/emr"
-    ]
-}

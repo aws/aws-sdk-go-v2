@@ -1,3 +1,7 @@
+# v1.22.1 (2024-02-16)
+
+* **Documentation**: Doc only update to GetTranscript API reference guide to inform users about presence of events in the chat transcript.
+
 # v1.22.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.
