@@ -2529,7 +2529,7 @@
                 "EventSourceArn": {
                     "target": "com.amazonaws.lambda#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – The ARN of the data stream or a stream consumer.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – The ARN of the stream.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – The ARN of the queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – The ARN of the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ</b> – The ARN of the broker.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DocumentDB</b> – The ARN of the DocumentDB change stream.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – The ARN of the data stream or a stream consumer.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – The ARN of the stream.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – The ARN of the queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – The ARN of the cluster or the ARN of the VPC connection (for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc\">cross-account event source mappings</a>).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ</b> – The ARN of the broker.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DocumentDB</b> – The ARN of the DocumentDB change stream.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "FunctionName": {
@@ -2584,7 +2584,7 @@
                 "DestinationConfig": {
                     "target": "com.amazonaws.lambda#DestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or standard Amazon SNS topic destination for discarded records.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only) A configuration object that specifies the destination of an event after Lambda processes it.</p>"
                     }
                 },
                 "MaximumRecordAgeInSeconds": {
@@ -2852,7 +2852,7 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB.</p>"
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
                     }
                 },
                 "SnapStart": {
@@ -3902,7 +3902,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but it can be any\n      whole number between 512 and 10,240 MB.</p>"
+                "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n  number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
             }
         },
         "com.amazonaws.lambda#EphemeralStorageSize": {
@@ -4499,7 +4499,7 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function’s <code>/tmp</code> directory in MB. The default value is 512, but it can be any\n      whole number between 512 and 10,240 MB.</p>"
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n  number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
                     }
                 },
                 "SnapStart": {
@@ -6317,7 +6317,7 @@
                 "ClientContext": {
                     "target": "com.amazonaws.lambda#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context\n      object.</p>",
+                        "smithy.api#documentation": "<p>Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context\n      object. Lambda passes the <code>ClientContext</code> object to your function for\n      synchronous invocations only.</p>",
                         "smithy.api#httpHeader": "X-Amz-Client-Context"
                     }
                 },
@@ -6543,7 +6543,7 @@
             ],
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<important>\n            <p>For asynchronous function invocation, use <a>Invoke</a>.</p>\n         </important>\n         <p>Invokes a function asynchronously.</p>",
+                "smithy.api#documentation": "<important>\n            <p>For asynchronous function invocation, use <a>Invoke</a>.</p>\n         </important>\n         <p>Invokes a function asynchronously.</p>\n         <note>\n            <p>If you do use the InvokeAsync action, note that it doesn't support the use of X-Ray active tracing. Trace ID is not \n        propagated to the function, even if X-Ray active tracing is turned on.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2014-11-13/functions/{FunctionName}/invoke-async",
@@ -7573,7 +7573,7 @@
                 "EventSourceArn": {
                     "target": "com.amazonaws.lambda#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – The ARN of the data stream or a stream consumer.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – The ARN of the stream.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – The ARN of the queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – The ARN of the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ</b> – The ARN of the broker.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DocumentDB</b> – The ARN of the DocumentDB change stream.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> – The ARN of the data stream or a stream consumer.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> – The ARN of the stream.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> – The ARN of the queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> – The ARN of the cluster or the ARN of the VPC connection (for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc\">cross-account event source mappings</a>).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ</b> – The ARN of the broker.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DocumentDB</b> – The ARN of the DocumentDB change stream.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "EventSourceArn"
                     }
                 },
@@ -8016,7 +8016,7 @@
                 "CompatibleRuntime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A runtime identifier. For example, <code>go1.x</code>.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>",
+                        "smithy.api#documentation": "<p>A runtime identifier. For example, <code>java21</code>.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>",
                         "smithy.api#httpQuery": "CompatibleRuntime"
                     }
                 },
@@ -8114,7 +8114,7 @@
                 "CompatibleRuntime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A runtime identifier. For example, <code>go1.x</code>.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>",
+                        "smithy.api#documentation": "<p>A runtime identifier. For example, <code>java21</code>.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>",
                         "smithy.api#httpQuery": "CompatibleRuntime"
                     }
                 },
@@ -8465,13 +8465,13 @@
                 "ApplicationLogLevel": {
                     "target": "com.amazonaws.lambda#ApplicationLogLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this property to filter the application logs for your function that Lambda sends to CloudWatch. Lambda only sends application logs at the \n    selected level and lower.</p>"
+                        "smithy.api#documentation": "<p>Set this property to filter the application logs for your function that Lambda sends to CloudWatch. Lambda only sends application logs at the \n    selected level of detail and lower, where <code>TRACE</code> is the highest level and <code>FATAL</code> is the lowest.</p>"
                     }
                 },
                 "SystemLogLevel": {
                     "target": "com.amazonaws.lambda#SystemLogLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the \n      selected level and lower.</p>"
+                        "smithy.api#documentation": "<p>Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the \n      selected level of detail and lower, where <code>DEBUG</code> is the highest level and <code>WARN</code> is the lowest.</p>"
                     }
                 },
                 "LogGroup": {
@@ -8667,7 +8667,7 @@
                 "Destination": {
                     "target": "com.amazonaws.lambda#DestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination resource.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination resource.</p>\n         <p>To retain records of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations\">asynchronous invocations</a>,\n      you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function,\n      or Amazon EventBridge event bus as the destination.</p>\n         <p>To retain records of failed invocations from <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#event-source-mapping-destinations\">Kinesis and\n      DynamoDB event sources</a>, you can configure an Amazon SNS topic or\n      Amazon SQS queue as the destination.</p>\n         <p>To retain records of failed invocations from <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination\">self-managed Kafka</a> or\n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination\">Amazon MSK</a>,\n      you can configure an Amazon SNS topic or Amazon SQS queue as the destination.</p>"
                     }
                 }
             },
@@ -11298,7 +11298,7 @@
                 "DestinationConfig": {
                     "target": "com.amazonaws.lambda#DestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or standard Amazon SNS topic destination for discarded records.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only) A configuration object that specifies the destination of an event after Lambda processes it.</p>"
                     }
                 },
                 "MaximumRecordAgeInSeconds": {
@@ -11631,7 +11631,7 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB.</p>"
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole\n      number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>"
                     }
                 },
                 "SnapStart": {

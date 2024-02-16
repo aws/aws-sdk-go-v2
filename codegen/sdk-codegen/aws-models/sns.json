@@ -1571,7 +1571,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a platform application object for one of the supported push notification\n            services, such as APNS and GCM (Firebase Cloud Messaging), to which devices and mobile\n            apps may register. You must specify <code>PlatformPrincipal</code> and\n                <code>PlatformCredential</code> attributes when using the\n                <code>CreatePlatformApplication</code> action.</p>\n         <p>\n            <code>PlatformPrincipal</code> and <code>PlatformCredential</code> are received from\n            the notification service.</p>\n         <ul>\n            <li>\n               <p>For <code>ADM</code>, <code>PlatformPrincipal</code> is <code>client id</code>\n                    and <code>PlatformCredential</code> is <code>client secret</code>.</p>\n            </li>\n            <li>\n               <p>For <code>Baidu</code>, <code>PlatformPrincipal</code> is <code>API key</code>\n                    and <code>PlatformCredential</code> is <code>secret key</code>.</p>\n            </li>\n            <li>\n               <p>For <code>APNS</code> and <code>APNS_SANDBOX</code> using certificate\n                    credentials, <code>PlatformPrincipal</code> is <code>SSL certificate</code> and\n                        <code>PlatformCredential</code> is <code>private key</code>.</p>\n            </li>\n            <li>\n               <p>For <code>APNS</code> and <code>APNS_SANDBOX</code> using token credentials,\n                        <code>PlatformPrincipal</code> is <code>signing key ID</code> and\n                        <code>PlatformCredential</code> is <code>signing key</code>.</p>\n            </li>\n            <li>\n               <p>For <code>GCM</code> (Firebase Cloud Messaging), there is no\n                        <code>PlatformPrincipal</code> and the <code>PlatformCredential</code> is\n                        <code>API key</code>.</p>\n            </li>\n            <li>\n               <p>For <code>MPNS</code>, <code>PlatformPrincipal</code> is <code>TLS\n                        certificate</code> and <code>PlatformCredential</code> is <code>private\n                        key</code>.</p>\n            </li>\n            <li>\n               <p>For <code>WNS</code>, <code>PlatformPrincipal</code> is <code>Package Security\n                        Identifier</code> and <code>PlatformCredential</code> is <code>secret\n                        key</code>.</p>\n            </li>\n         </ul>\n         <p>You can use the returned <code>PlatformApplicationArn</code> as an attribute for the\n                <code>CreatePlatformEndpoint</code> action.</p>"
+                "smithy.api#documentation": "<p>Creates a platform application object for one of the supported push notification\n            services, such as APNS and GCM (Firebase Cloud Messaging), to which devices and mobile\n            apps may register. You must specify <code>PlatformPrincipal</code> and\n                <code>PlatformCredential</code> attributes when using the\n                <code>CreatePlatformApplication</code> action.</p>\n         <p>\n            <code>PlatformPrincipal</code> and <code>PlatformCredential</code> are received from\n            the notification service.</p>\n         <ul>\n            <li>\n               <p>For <code>ADM</code>, <code>PlatformPrincipal</code> is <code>client id</code>\n                    and <code>PlatformCredential</code> is <code>client secret</code>.</p>\n            </li>\n            <li>\n               <p>For <code>Baidu</code>, <code>PlatformPrincipal</code> is <code>API key</code>\n                    and <code>PlatformCredential</code> is <code>secret key</code>.</p>\n            </li>\n            <li>\n               <p>For <code>APNS</code> and <code>APNS_SANDBOX</code> using certificate\n                    credentials, <code>PlatformPrincipal</code> is <code>SSL certificate</code> and\n                        <code>PlatformCredential</code> is <code>private key</code>.</p>\n            </li>\n            <li>\n               <p>For <code>APNS</code> and <code>APNS_SANDBOX</code> using token credentials,\n                        <code>PlatformPrincipal</code> is <code>signing key ID</code> and\n                        <code>PlatformCredential</code> is <code>signing key</code>.</p>\n            </li>\n            <li>\n               <p>For GCM (Firebase Cloud Messaging) using key credentials, there is no\n                        <code>PlatformPrincipal</code>. The <code>PlatformCredential</code> is\n                        <code>API key</code>.</p>\n            </li>\n            <li>\n               <p>For GCM (Firebase Cloud Messaging) using token credentials, there is no\n                        <code>PlatformPrincipal</code>. The <code>PlatformCredential</code> is a\n                    JSON formatted private key file. When using the Amazon Web Services CLI, the file must be in\n                    string format and special characters must be ignored. To format the file\n                    correctly, Amazon SNS recommends using the following command: <code>SERVICE_JSON=`jq\n                        @json <<< cat service.json`</code>.</p>\n            </li>\n            <li>\n               <p>For <code>MPNS</code>, <code>PlatformPrincipal</code> is <code>TLS\n                        certificate</code> and <code>PlatformCredential</code> is <code>private\n                        key</code>.</p>\n            </li>\n            <li>\n               <p>For <code>WNS</code>, <code>PlatformPrincipal</code> is <code>Package Security\n                        Identifier</code> and <code>PlatformCredential</code> is <code>secret\n                        key</code>.</p>\n            </li>\n         </ul>\n         <p>You can use the returned <code>PlatformApplicationArn</code> as an attribute for the\n                <code>CreatePlatformEndpoint</code> action.</p>"
             }
         },
         "com.amazonaws.sns#CreatePlatformApplicationInput": {
@@ -1594,7 +1594,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.sns#MapStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>For a list of attributes, see <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html\">SetPlatformApplicationAttributes</a>.</p>",
+                        "smithy.api#documentation": "<p>For a list of attributes, see <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html\">\n               <code>SetPlatformApplicationAttributes</code>\n            </a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1610,7 +1610,7 @@
                 "PlatformApplicationArn": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>PlatformApplicationArn is returned.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>PlatformApplicationArn</code> is returned.</p>"
                     }
                 }
             },
@@ -1651,7 +1651,7 @@
                 "PlatformApplicationArn": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>PlatformApplicationArn returned from CreatePlatformApplication is used to create a an\n            endpoint.</p>",
+                        "smithy.api#documentation": "<p>\n            <code>PlatformApplicationArn</code> returned from CreatePlatformApplication is used to\n            create a an endpoint.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1671,7 +1671,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.sns#MapStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>For a list of attributes, see <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html\">SetEndpointAttributes</a>.</p>"
+                        "smithy.api#documentation": "<p>For a list of attributes, see <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html\">\n               <code>SetEndpointAttributes</code>\n            </a>.</p>"
                     }
                 }
             },
@@ -1865,13 +1865,13 @@
                 "EndpointArn": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>EndpointArn of endpoint to delete.</p>",
+                        "smithy.api#documentation": "<p>\n            <code>EndpointArn</code> of endpoint to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for DeleteEndpoint action.</p>",
+                "smithy.api#documentation": "<p>Input for <code>DeleteEndpoint</code> action.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -1904,13 +1904,13 @@
                 "PlatformApplicationArn": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>PlatformApplicationArn of platform application object to delete.</p>",
+                        "smithy.api#documentation": "<p>\n            <code>PlatformApplicationArn</code> of platform application object to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for DeletePlatformApplication action.</p>",
+                "smithy.api#documentation": "<p>Input for <code>DeletePlatformApplication</code> action.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -2188,13 +2188,13 @@
                 "EndpointArn": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>EndpointArn for GetEndpointAttributes input.</p>",
+                        "smithy.api#documentation": "<p>\n            <code>EndpointArn</code> for <code>GetEndpointAttributes</code> input.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for GetEndpointAttributes action.</p>",
+                "smithy.api#documentation": "<p>Input for <code>GetEndpointAttributes</code> action.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -2209,7 +2209,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Response from GetEndpointAttributes of the EndpointArn.</p>",
+                "smithy.api#documentation": "<p>Response from <code>GetEndpointAttributes</code> of the\n            <code>EndpointArn</code>.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -2245,13 +2245,13 @@
                 "PlatformApplicationArn": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>PlatformApplicationArn for GetPlatformApplicationAttributesInput.</p>",
+                        "smithy.api#documentation": "<p>\n            <code>PlatformApplicationArn</code> for GetPlatformApplicationAttributesInput.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for GetPlatformApplicationAttributes action.</p>",
+                "smithy.api#documentation": "<p>Input for <code>GetPlatformApplicationAttributes</code> action.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -2261,12 +2261,12 @@
                 "Attributes": {
                     "target": "com.amazonaws.sns#MapStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Attributes include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AppleCertificateExpiryDate</code> – The expiry date of the SSL\n                    certificate used to configure certificate-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApplePlatformTeamID</code> – The Apple developer account ID used to\n                    configure token-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApplePlatformBundleID</code> – The app identifier used to configure\n                    token-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventEndpointCreated</code> – Topic ARN to which EndpointCreated\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventEndpointDeleted</code> – Topic ARN to which EndpointDeleted\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventEndpointUpdated</code> – Topic ARN to which EndpointUpdate\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventDeliveryFailure</code> – Topic ARN to which DeliveryFailure\n                    event notifications should be sent upon Direct Publish delivery failure\n                    (permanent) to one of the application's endpoints.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Attributes include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AppleCertificateExpiryDate</code> – The expiry date of the SSL\n                    certificate used to configure certificate-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApplePlatformTeamID</code> – The Apple developer account ID used to\n                    configure token-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApplePlatformBundleID</code> – The app identifier used to configure\n                    token-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AuthenticationMethod</code> – Returns the credential type used when\n                    sending push notifications from application to APNS/APNS_Sandbox, or application\n                    to GCM.</p>\n               <ul>\n                  <li>\n                     <p>APNS – Returns the token or certificate.</p>\n                  </li>\n                  <li>\n                     <p>GCM – Returns the token or key.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>EventEndpointCreated</code> – Topic ARN to which EndpointCreated\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventEndpointDeleted</code> – Topic ARN to which EndpointDeleted\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventEndpointUpdated</code> – Topic ARN to which EndpointUpdate\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventDeliveryFailure</code> – Topic ARN to which DeliveryFailure\n                    event notifications should be sent upon Direct Publish delivery failure\n                    (permanent) to one of the application's endpoints.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Response for GetPlatformApplicationAttributes action.</p>",
+                "smithy.api#documentation": "<p>Response for <code>GetPlatformApplicationAttributes</code> action.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -2830,19 +2830,19 @@
                 "PlatformApplicationArn": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>PlatformApplicationArn for ListEndpointsByPlatformApplicationInput action.</p>",
+                        "smithy.api#documentation": "<p>\n            <code>PlatformApplicationArn</code> for\n                <code>ListEndpointsByPlatformApplicationInput</code> action.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>NextToken string is used when calling ListEndpointsByPlatformApplication action to\n            retrieve additional records that are available after the first page results.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>NextToken</code> string is used when calling\n                <code>ListEndpointsByPlatformApplication</code> action to retrieve additional\n            records that are available after the first page results.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for ListEndpointsByPlatformApplication action.</p>",
+                "smithy.api#documentation": "<p>Input for <code>ListEndpointsByPlatformApplication</code> action.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -2852,18 +2852,18 @@
                 "Endpoints": {
                     "target": "com.amazonaws.sns#ListOfEndpoints",
                     "traits": {
-                        "smithy.api#documentation": "<p>Endpoints returned for ListEndpointsByPlatformApplication action.</p>"
+                        "smithy.api#documentation": "<p>Endpoints returned for <code>ListEndpointsByPlatformApplication</code> action.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>NextToken string is returned when calling ListEndpointsByPlatformApplication action if\n            additional records are available after the first page results.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>NextToken</code> string is returned when calling\n                <code>ListEndpointsByPlatformApplication</code> action if additional records are\n            available after the first page results.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Response for ListEndpointsByPlatformApplication action.</p>",
+                "smithy.api#documentation": "<p>Response for <code>ListEndpointsByPlatformApplication</code> action.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3055,12 +3055,12 @@
                 "NextToken": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>NextToken string is used when calling ListPlatformApplications action to retrieve\n            additional records that are available after the first page results.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>NextToken</code> string is used when calling\n                <code>ListPlatformApplications</code> action to retrieve additional records that are\n            available after the first page results.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for ListPlatformApplications action.</p>",
+                "smithy.api#documentation": "<p>Input for <code>ListPlatformApplications</code> action.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -3070,18 +3070,18 @@
                 "PlatformApplications": {
                     "target": "com.amazonaws.sns#ListOfPlatformApplications",
                     "traits": {
-                        "smithy.api#documentation": "<p>Platform applications returned when calling ListPlatformApplications action.</p>"
+                        "smithy.api#documentation": "<p>Platform applications returned when calling <code>ListPlatformApplications</code>\n            action.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>NextToken string is returned when calling ListPlatformApplications action if\n            additional records are available after the first page results.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>NextToken</code> string is returned when calling\n                <code>ListPlatformApplications</code> action if additional records are available\n            after the first page results.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Response for ListPlatformApplications action.</p>",
+                "smithy.api#documentation": "<p>Response for <code>ListPlatformApplications</code> action.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3626,7 +3626,10 @@
             }
         },
         "com.amazonaws.sns#PhoneNumber": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.sns#PhoneNumberInformation": {
             "type": "structure",
@@ -3638,7 +3641,7 @@
                     }
                 },
                 "PhoneNumber": {
-                    "target": "com.amazonaws.sns#String",
+                    "target": "com.amazonaws.sns#PhoneNumber",
                     "traits": {
                         "smithy.api#documentation": "<p>The phone number.</p>"
                     }
@@ -3694,7 +3697,8 @@
                     "min": 0,
                     "max": 20
                 },
-                "smithy.api#pattern": "^(\\+[0-9]{8,}|[0-9]{0,9})$"
+                "smithy.api#pattern": "^(\\+[0-9]{8,}|[0-9]{0,9})$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.sns#PlatformApplication": {
@@ -4018,7 +4022,7 @@
                     }
                 },
                 "PhoneNumber": {
-                    "target": "com.amazonaws.sns#String",
+                    "target": "com.amazonaws.sns#PhoneNumber",
                     "traits": {
                         "smithy.api#documentation": "<p>The phone number to which you want to deliver an SMS message. Use E.164 format.</p>\n         <p>If you don't specify a value for the <code>PhoneNumber</code> parameter, you must\n            specify a value for the <code>TargetArn</code> or <code>TopicArn</code>\n            parameters.</p>"
                     }
@@ -4325,7 +4329,7 @@
                 "EndpointArn": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>EndpointArn used for SetEndpointAttributes action.</p>",
+                        "smithy.api#documentation": "<p>EndpointArn used for <code>SetEndpointAttributes</code> action.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4338,7 +4342,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for SetEndpointAttributes action.</p>",
+                "smithy.api#documentation": "<p>Input for <code>SetEndpointAttributes</code> action.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -4374,20 +4378,20 @@
                 "PlatformApplicationArn": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>PlatformApplicationArn for SetPlatformApplicationAttributes action.</p>",
+                        "smithy.api#documentation": "<p>\n            <code>PlatformApplicationArn</code> for <code>SetPlatformApplicationAttributes</code>\n            action.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Attributes": {
                     "target": "com.amazonaws.sns#MapStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of the platform application attributes. Attributes in this map include the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PlatformCredential</code> – The credential received from the\n                    notification service.</p>\n               <ul>\n                  <li>\n                     <p>For ADM, <code>PlatformCredential</code>is client secret.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using certificate credentials,\n                                <code>PlatformCredential</code> is private key.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using token credentials,\n                                <code>PlatformCredential</code> is signing key.</p>\n                  </li>\n                  <li>\n                     <p>For GCM (Firebase Cloud Messaging), <code>PlatformCredential</code> is\n                            API key. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>PlatformPrincipal</code> – The principal received from the\n                    notification service.</p>\n               <ul>\n                  <li>\n                     <p>For ADM, <code>PlatformPrincipal</code>is client id.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using certificate credentials,\n                                <code>PlatformPrincipal</code> is SSL certificate.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using token credentials,\n                                <code>PlatformPrincipal</code> is signing key ID.</p>\n                  </li>\n                  <li>\n                     <p>For GCM (Firebase Cloud Messaging), there is no\n                                <code>PlatformPrincipal</code>. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>EventEndpointCreated</code> – Topic ARN to which\n                        <code>EndpointCreated</code> event notifications are sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventEndpointDeleted</code> – Topic ARN to which\n                        <code>EndpointDeleted</code> event notifications are sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventEndpointUpdated</code> – Topic ARN to which\n                        <code>EndpointUpdate</code> event notifications are sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventDeliveryFailure</code> – Topic ARN to which\n                        <code>DeliveryFailure</code> event notifications are sent upon Direct\n                    Publish delivery failure (permanent) to one of the application's\n                    endpoints.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SuccessFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS\n                    write access to use CloudWatch Logs on your behalf.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FailureFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS\n                    write access to use CloudWatch Logs on your behalf.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SuccessFeedbackSampleRate</code> – Sample rate percentage (0-100)\n                    of successfully delivered messages.</p>\n            </li>\n         </ul>\n         <p>The following attributes only apply to <code>APNs</code> token-based\n            authentication:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ApplePlatformTeamID</code> – The identifier that's assigned to your\n                    Apple developer account team.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApplePlatformBundleID</code> – The bundle identifier that's assigned to\n                    your iOS app.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A map of the platform application attributes. Attributes in this map include the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PlatformCredential</code> – The credential received from the\n                    notification service.</p>\n               <ul>\n                  <li>\n                     <p>For ADM, <code>PlatformCredential</code>is client secret.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using certificate credentials,\n                                <code>PlatformCredential</code> is private key.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using token credentials,\n                                <code>PlatformCredential</code> is signing key.</p>\n                  </li>\n                  <li>\n                     <p>For GCM (Firebase Cloud Messaging) using key credentials, there is no\n                                <code>PlatformPrincipal</code>. The <code>PlatformCredential</code>\n                            is <code>API key</code>.</p>\n                  </li>\n                  <li>\n                     <p>For GCM (Firebase Cloud Messaging) using token credentials, there is\n                            no <code>PlatformPrincipal</code>. The <code>PlatformCredential</code>\n                            is a JSON formatted private key file. When using the Amazon Web Services CLI, the file\n                            must be in string format and special characters must be ignored. To\n                            format the file correctly, Amazon SNS recommends using the following command:\n                                <code>SERVICE_JSON=`jq @json <<< cat\n                            service.json`</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>PlatformPrincipal</code> – The principal received from the\n                    notification service.</p>\n               <ul>\n                  <li>\n                     <p>For ADM, <code>PlatformPrincipal</code>is client id.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using certificate credentials,\n                                <code>PlatformPrincipal</code> is SSL certificate.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using token credentials,\n                                <code>PlatformPrincipal</code> is signing key ID.</p>\n                  </li>\n                  <li>\n                     <p>For GCM (Firebase Cloud Messaging), there is no\n                                <code>PlatformPrincipal</code>. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>EventEndpointCreated</code> – Topic ARN to which\n                        <code>EndpointCreated</code> event notifications are sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventEndpointDeleted</code> – Topic ARN to which\n                        <code>EndpointDeleted</code> event notifications are sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventEndpointUpdated</code> – Topic ARN to which\n                        <code>EndpointUpdate</code> event notifications are sent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EventDeliveryFailure</code> – Topic ARN to which\n                        <code>DeliveryFailure</code> event notifications are sent upon Direct\n                    Publish delivery failure (permanent) to one of the application's\n                    endpoints.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SuccessFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS\n                    write access to use CloudWatch Logs on your behalf.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FailureFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS\n                    write access to use CloudWatch Logs on your behalf.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SuccessFeedbackSampleRate</code> – Sample rate percentage (0-100)\n                    of successfully delivered messages.</p>\n            </li>\n         </ul>\n         <p>The following attributes only apply to <code>APNs</code> token-based\n            authentication:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ApplePlatformTeamID</code> – The identifier that's assigned to your\n                    Apple developer account team.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApplePlatformBundleID</code> – The bundle identifier that's assigned to\n                    your iOS app.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input for SetPlatformApplicationAttributes action.</p>",
+                "smithy.api#documentation": "<p>Input for <code>SetPlatformApplicationAttributes</code> action.</p>",
                 "smithy.api#input": {}
             }
         },
