@@ -99,8 +99,9 @@ type CreateEventSourceMappingInput struct {
 	// batch in two and retry.
 	BisectBatchOnFunctionError *bool
 
-	// (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or standard
-	// Amazon SNS topic destination for discarded records.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only) A
+	// configuration object that specifies the destination of an event after Lambda
+	// processes it.
 	DestinationConfig *types.DestinationConfig
 
 	// Specific configuration settings for a DocumentDB event source.
@@ -114,7 +115,9 @@ type CreateEventSourceMappingInput struct {
 	//   - Amazon Kinesis – The ARN of the data stream or a stream consumer.
 	//   - Amazon DynamoDB Streams – The ARN of the stream.
 	//   - Amazon Simple Queue Service – The ARN of the queue.
-	//   - Amazon Managed Streaming for Apache Kafka – The ARN of the cluster.
+	//   - Amazon Managed Streaming for Apache Kafka – The ARN of the cluster or the
+	//   ARN of the VPC connection (for cross-account event source mappings (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)
+	//   ).
 	//   - Amazon MQ – The ARN of the broker.
 	//   - Amazon DocumentDB – The ARN of the DocumentDB change stream.
 	EventSourceArn *string

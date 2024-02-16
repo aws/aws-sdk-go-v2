@@ -1,0 +1,8 @@
+{
+    "id": "359ed06a-8808-4e41-b660-34d577e49a80",
+    "type": "documentation",
+    "description": "Doc only update to GetTranscript API reference guide to inform users about presence of events in the chat transcript.",
+    "modules": [
+        "service/connectparticipant"
+    ]
+}

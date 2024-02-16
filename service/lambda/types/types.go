@@ -287,7 +287,9 @@ type EnvironmentResponse struct {
 }
 
 // The size of the function's /tmp directory in MB. The default value is 512, but
-// it can be any whole number between 512 and 10,240 MB.
+// can be any whole number between 512 and 10,240 MB. For more information, see
+// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
+// .
 type EphemeralStorage struct {
 
 	// The size of the function's /tmp directory.
@@ -537,8 +539,10 @@ type FunctionConfiguration struct {
 	// . Omitted from CloudTrail logs.
 	Environment *EnvironmentResponse
 
-	// The size of the function’s /tmp directory in MB. The default value is 512, but
-	// it can be any whole number between 512 and 10,240 MB.
+	// The size of the function's /tmp directory in MB. The default value is 512, but
+	// can be any whole number between 512 and 10,240 MB. For more information, see
+	// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
+	// .
 	EphemeralStorage *EphemeralStorage
 
 	// Connection settings for an Amazon EFS file system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
@@ -938,8 +942,8 @@ type LayerVersionsListItem struct {
 type LoggingConfig struct {
 
 	// Set this property to filter the application logs for your function that Lambda
-	// sends to CloudWatch. Lambda only sends application logs at the selected level
-	// and lower.
+	// sends to CloudWatch. Lambda only sends application logs at the selected level of
+	// detail and lower, where TRACE is the highest level and FATAL is the lowest.
 	ApplicationLogLevel ApplicationLogLevel
 
 	// The format in which Lambda sends your function's application and system logs to
@@ -953,7 +957,8 @@ type LoggingConfig struct {
 	LogGroup *string
 
 	// Set this property to filter the system logs for your function that Lambda sends
-	// to CloudWatch. Lambda only sends system logs at the selected level and lower.
+	// to CloudWatch. Lambda only sends system logs at the selected level of detail and
+	// lower, where DEBUG is the highest level and WARN is the lowest.
 	SystemLogLevel SystemLogLevel
 
 	noSmithyDocumentSerde
@@ -962,7 +967,15 @@ type LoggingConfig struct {
 // A destination for events that failed processing.
 type OnFailure struct {
 
-	// The Amazon Resource Name (ARN) of the destination resource.
+	// The Amazon Resource Name (ARN) of the destination resource. To retain records
+	// of asynchronous invocations (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations)
+	// , you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function, or
+	// Amazon EventBridge event bus as the destination. To retain records of failed
+	// invocations from Kinesis and DynamoDB event sources (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#event-source-mapping-destinations)
+	// , you can configure an Amazon SNS topic or Amazon SQS queue as the destination.
+	// To retain records of failed invocations from self-managed Kafka (https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination)
+	// or Amazon MSK (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination)
+	// , you can configure an Amazon SNS topic or Amazon SQS queue as the destination.
 	Destination *string
 
 	noSmithyDocumentSerde

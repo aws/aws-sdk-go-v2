@@ -2712,6 +2712,61 @@ func (m *awsAwsjson11_serializeOpSetTerminationProtection) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpSetUnhealthyNodeReplacement struct {
+}
+
+func (*awsAwsjson11_serializeOpSetUnhealthyNodeReplacement) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpSetUnhealthyNodeReplacement) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SetUnhealthyNodeReplacementInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.SetUnhealthyNodeReplacement")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentSetUnhealthyNodeReplacementInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpSetVisibleToAllUsers struct {
 }
 
@@ -3973,6 +4028,11 @@ func awsAwsjson11_serializeDocumentJobFlowInstancesConfig(v *types.JobFlowInstan
 	if v.TerminationProtected != nil {
 		ok := object.Key("TerminationProtected")
 		ok.Boolean(*v.TerminationProtected)
+	}
+
+	if v.UnhealthyNodeReplacement != nil {
+		ok := object.Key("UnhealthyNodeReplacement")
+		ok.Boolean(*v.UnhealthyNodeReplacement)
 	}
 
 	return nil
@@ -5870,6 +5930,25 @@ func awsAwsjson11_serializeOpDocumentSetTerminationProtectionInput(v *SetTermina
 	if v.TerminationProtected != nil {
 		ok := object.Key("TerminationProtected")
 		ok.Boolean(*v.TerminationProtected)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentSetUnhealthyNodeReplacementInput(v *SetUnhealthyNodeReplacementInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobFlowIds != nil {
+		ok := object.Key("JobFlowIds")
+		if err := awsAwsjson11_serializeDocumentXmlStringList(v.JobFlowIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UnhealthyNodeReplacement != nil {
+		ok := object.Key("UnhealthyNodeReplacement")
+		ok.Boolean(*v.UnhealthyNodeReplacement)
 	}
 
 	return nil

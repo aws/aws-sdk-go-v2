@@ -417,6 +417,10 @@ type Cluster struct {
 	// event of a cluster error.
 	TerminationProtected *bool
 
+	// Indicates whether Amazon EMR should gracefully replace Amazon EC2 core
+	// instances that have degraded within the cluster.
+	UnhealthyNodeReplacement *bool
+
 	// Indicates whether the cluster is visible to IAM principals in the Amazon Web
 	// Services account associated with the cluster. When true , IAM principals in the
 	// Amazon Web Services account can perform Amazon EMR cluster actions on the
@@ -1756,6 +1760,10 @@ type JobFlowInstancesConfig struct {
 	// error.
 	TerminationProtected *bool
 
+	// Indicates whether Amazon EMR should gracefully replace core nodes that have
+	// degraded within the cluster.
+	UnhealthyNodeReplacement *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1820,6 +1828,10 @@ type JobFlowInstancesDetail struct {
 	// termination by API calls, user intervention, or in the event of a job-flow
 	// error.
 	TerminationProtected *bool
+
+	// Indicates whether Amazon EMR should gracefully replace core nodes that have
+	// degraded within the cluster.
+	UnhealthyNodeReplacement *bool
 
 	noSmithyDocumentSerde
 }

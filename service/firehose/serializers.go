@@ -1466,6 +1466,11 @@ func awsAwsjson11_serializeDocumentExtendedS3DestinationConfiguration(v *types.E
 		ok.String(string(v.CompressionFormat))
 	}
 
+	if v.CustomTimeZone != nil {
+		ok := object.Key("CustomTimeZone")
+		ok.String(*v.CustomTimeZone)
+	}
+
 	if v.DataFormatConversionConfiguration != nil {
 		ok := object.Key("DataFormatConversionConfiguration")
 		if err := awsAwsjson11_serializeDocumentDataFormatConversionConfiguration(v.DataFormatConversionConfiguration, ok); err != nil {
@@ -1490,6 +1495,11 @@ func awsAwsjson11_serializeDocumentExtendedS3DestinationConfiguration(v *types.E
 	if v.ErrorOutputPrefix != nil {
 		ok := object.Key("ErrorOutputPrefix")
 		ok.String(*v.ErrorOutputPrefix)
+	}
+
+	if v.FileExtension != nil {
+		ok := object.Key("FileExtension")
+		ok.String(*v.FileExtension)
 	}
 
 	if v.Prefix != nil {
@@ -1552,6 +1562,11 @@ func awsAwsjson11_serializeDocumentExtendedS3DestinationUpdate(v *types.Extended
 		ok.String(string(v.CompressionFormat))
 	}
 
+	if v.CustomTimeZone != nil {
+		ok := object.Key("CustomTimeZone")
+		ok.String(*v.CustomTimeZone)
+	}
+
 	if v.DataFormatConversionConfiguration != nil {
 		ok := object.Key("DataFormatConversionConfiguration")
 		if err := awsAwsjson11_serializeDocumentDataFormatConversionConfiguration(v.DataFormatConversionConfiguration, ok); err != nil {
@@ -1576,6 +1591,11 @@ func awsAwsjson11_serializeDocumentExtendedS3DestinationUpdate(v *types.Extended
 	if v.ErrorOutputPrefix != nil {
 		ok := object.Key("ErrorOutputPrefix")
 		ok.String(*v.ErrorOutputPrefix)
+	}
+
+	if v.FileExtension != nil {
+		ok := object.Key("FileExtension")
+		ok.String(*v.FileExtension)
 	}
 
 	if v.Prefix != nil {

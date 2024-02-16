@@ -40,7 +40,7 @@ type ListLayersInput struct {
 	// .
 	CompatibleArchitecture types.Architecture
 
-	// A runtime identifier. For example, go1.x . The following list includes
+	// A runtime identifier. For example, java21 . The following list includes
 	// deprecated runtimes. For more information, see Runtime deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
 	// .
 	CompatibleRuntime types.Runtime

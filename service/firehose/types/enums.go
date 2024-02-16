@@ -461,6 +461,7 @@ const (
 	ProcessorParameterNameSubRecordType           ProcessorParameterName = "SubRecordType"
 	ProcessorParameterNameDelimiter               ProcessorParameterName = "Delimiter"
 	ProcessorParameterNameCompressionFormat       ProcessorParameterName = "CompressionFormat"
+	ProcessorParameterNameDataMessageExtraction   ProcessorParameterName = "DataMessageExtraction"
 )
 
 // Values returns all known values for ProcessorParameterName. Note that this can
@@ -478,6 +479,7 @@ func (ProcessorParameterName) Values() []ProcessorParameterName {
 		"SubRecordType",
 		"Delimiter",
 		"CompressionFormat",
+		"DataMessageExtraction",
 	}
 }
 
@@ -487,6 +489,7 @@ type ProcessorType string
 const (
 	ProcessorTypeRecordDeAggregation     ProcessorType = "RecordDeAggregation"
 	ProcessorTypeDecompression           ProcessorType = "Decompression"
+	ProcessorTypeCloudWatchLogProcessing ProcessorType = "CloudWatchLogProcessing"
 	ProcessorTypeLambda                  ProcessorType = "Lambda"
 	ProcessorTypeMetadataExtraction      ProcessorType = "MetadataExtraction"
 	ProcessorTypeAppendDelimiterToRecord ProcessorType = "AppendDelimiterToRecord"
@@ -499,6 +502,7 @@ func (ProcessorType) Values() []ProcessorType {
 	return []ProcessorType{
 		"RecordDeAggregation",
 		"Decompression",
+		"CloudWatchLogProcessing",
 		"Lambda",
 		"MetadataExtraction",
 		"AppendDelimiterToRecord",

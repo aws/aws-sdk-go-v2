@@ -11,9 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends an event. ConnectionToken is used for invoking this API instead of
-// ParticipantToken . The Amazon Connect Participant Service APIs do not use
-// Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
+// The application/vnd.amazonaws.connect.event.connection.acknowledged ContentType
+// will no longer be supported starting December 31, 2024. This event has been
+// migrated to the CreateParticipantConnection (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
+// API using the ConnectParticipant field. Sends an event. Message receipts are
+// not supported when there are more than two active participants in the chat.
+// Using the SendEvent API for message receipts when a supervisor is barged-in will
+// result in a conflict exception. ConnectionToken is used for invoking this API
+// instead of ParticipantToken . The Amazon Connect Participant Service APIs do not
+// use Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
 // .
 func (c *Client) SendEvent(ctx context.Context, params *SendEventInput, optFns ...func(*Options)) (*SendEventOutput, error) {
 	if params == nil {
@@ -39,7 +45,8 @@ type SendEventInput struct {
 
 	// The content type of the request. Supported types are:
 	//   - application/vnd.amazonaws.connect.event.typing
-	//   - application/vnd.amazonaws.connect.event.connection.acknowledged
+	//   - application/vnd.amazonaws.connect.event.connection.acknowledged (will be
+	//   deprecated on December 31, 2024)
 	//   - application/vnd.amazonaws.connect.event.message.delivered
 	//   - application/vnd.amazonaws.connect.event.message.read
 	//

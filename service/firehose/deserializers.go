@@ -3258,6 +3258,15 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 				sv.CompressionFormat = types.CompressionFormat(jtv)
 			}
 
+		case "CustomTimeZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomTimeZone to be of type string, got %T instead", value)
+				}
+				sv.CustomTimeZone = ptr.String(jtv)
+			}
+
 		case "DataFormatConversionConfiguration":
 			if err := awsAwsjson11_deserializeDocumentDataFormatConversionConfiguration(&sv.DataFormatConversionConfiguration, value); err != nil {
 				return err
@@ -3280,6 +3289,15 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 					return fmt.Errorf("expected ErrorOutputPrefix to be of type string, got %T instead", value)
 				}
 				sv.ErrorOutputPrefix = ptr.String(jtv)
+			}
+
+		case "FileExtension":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileExtension to be of type string, got %T instead", value)
+				}
+				sv.FileExtension = ptr.String(jtv)
 			}
 
 		case "Prefix":

@@ -43,7 +43,14 @@ type SetPlatformApplicationAttributesInput struct {
 	//   private key.
 	//   - For Apple Services using token credentials, PlatformCredential is signing
 	//   key.
-	//   - For GCM (Firebase Cloud Messaging), PlatformCredential is API key.
+	//   - For GCM (Firebase Cloud Messaging) using key credentials, there is no
+	//   PlatformPrincipal . The PlatformCredential is API key .
+	//   - For GCM (Firebase Cloud Messaging) using token credentials, there is no
+	//   PlatformPrincipal . The PlatformCredential is a JSON formatted private key
+	//   file. When using the Amazon Web Services CLI, the file must be in string format
+	//   and special characters must be ignored. To format the file correctly, Amazon SNS
+	//   recommends using the following command: SERVICE_JSON=`jq @json <<< cat
+	//   service.json` .
 	//
 	//   - PlatformPrincipal – The principal received from the notification service.
 	//   - For ADM, PlatformPrincipal is client id.

@@ -1,0 +1,8 @@
+{
+    "id": "8c1afd50-68bc-4128-b30a-a12a58cbbf17",
+    "type": "feature",
+    "description": "This release marks phone numbers as sensitive inputs.",
+    "modules": [
+        "service/sns"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "69102469-9e85-4bed-9dd3-425df53e5038",
+    "type": "documentation",
+    "description": "Doc only update for a valid option in DB parameter group",
+    "modules": [
+        "service/rds"
+    ]
+}

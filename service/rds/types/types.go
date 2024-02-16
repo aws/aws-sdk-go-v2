@@ -2943,6 +2943,7 @@ type FailoverState struct {
 //   - DescribeDBClusters
 //   - DescribeDBInstances
 //   - DescribeDBRecommendations
+//   - DescribeDBShardGroups
 //   - DescribePendingMaintenanceActions
 type Filter struct {
 

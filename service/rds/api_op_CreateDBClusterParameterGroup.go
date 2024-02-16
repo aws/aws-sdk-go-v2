@@ -68,7 +68,7 @@ type CreateDBClusterParameterGroupInput struct {
 	// applied only to a DB cluster running a database engine and engine version
 	// compatible with that DB cluster parameter group family. Aurora MySQL Example:
 	// aurora-mysql5.7 , aurora-mysql8.0 Aurora PostgreSQL Example: aurora-postgresql14
-	// RDS for MySQL Example: mysql8.0 RDS for PostgreSQL Example: postgres12 To list
+	// RDS for MySQL Example: mysql8.0 RDS for PostgreSQL Example: postgres13 To list
 	// all of the available parameter group families for a DB engine, use the following
 	// command: aws rds describe-db-engine-versions --query
 	// "DBEngineVersions[].DBParameterGroupFamily" --engine For example, to list all

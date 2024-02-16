@@ -77,7 +77,8 @@ type InvokeInput struct {
 	FunctionName *string
 
 	// Up to 3,583 bytes of base64-encoded data about the invoking client to pass to
-	// the function in the context object.
+	// the function in the context object. Lambda passes the ClientContext object to
+	// your function for synchronous invocations only.
 	ClientContext *string
 
 	// Choose from the following options.

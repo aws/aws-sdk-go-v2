@@ -47,7 +47,8 @@ type CreateDBClusterInput struct {
 	// The identifier for this DB cluster. This parameter is stored as a lowercase
 	// string. Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	// Constraints:
-	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - Must contain from 1 to 63 (for Aurora DB clusters) or 1 to 52 (for Multi-AZ
+	//   DB clusters) letters, numbers, or hyphens.
 	//   - First character must be a letter.
 	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	// Example: my-cluster1

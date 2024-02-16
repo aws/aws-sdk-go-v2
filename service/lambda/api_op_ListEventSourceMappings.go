@@ -35,7 +35,9 @@ type ListEventSourceMappingsInput struct {
 	//   - Amazon Kinesis – The ARN of the data stream or a stream consumer.
 	//   - Amazon DynamoDB Streams – The ARN of the stream.
 	//   - Amazon Simple Queue Service – The ARN of the queue.
-	//   - Amazon Managed Streaming for Apache Kafka – The ARN of the cluster.
+	//   - Amazon Managed Streaming for Apache Kafka – The ARN of the cluster or the
+	//   ARN of the VPC connection (for cross-account event source mappings (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)
+	//   ).
 	//   - Amazon MQ – The ARN of the broker.
 	//   - Amazon DocumentDB – The ARN of the DocumentDB change stream.
 	EventSourceArn *string

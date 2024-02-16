@@ -51,6 +51,10 @@ type GetPlatformApplicationAttributesOutput struct {
 	//   token-based authentication.
 	//   - ApplePlatformBundleID – The app identifier used to configure token-based
 	//   authentication.
+	//   - AuthenticationMethod – Returns the credential type used when sending push
+	//   notifications from application to APNS/APNS_Sandbox, or application to GCM.
+	//   - APNS – Returns the token or certificate.
+	//   - GCM – Returns the token or key.
 	//   - EventEndpointCreated – Topic ARN to which EndpointCreated event
 	//   notifications should be sent.
 	//   - EventEndpointDeleted – Topic ARN to which EndpointDeleted event

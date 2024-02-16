@@ -43,7 +43,7 @@ type DescribeDeliveryStreamInput struct {
 	DeliveryStreamName *string
 
 	// The ID of the destination to start returning the destination information.
-	// Kinesis Data Firehose supports one destination per delivery stream.
+	// Firehose supports one destination per delivery stream.
 	ExclusiveStartDestinationId *string
 
 	// The limit on the number of destinations to return. You can have one destination

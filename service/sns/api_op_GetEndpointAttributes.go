@@ -41,7 +41,7 @@ type GetEndpointAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response from GetEndpointAttributes of the EndpointArn.
+// Response from GetEndpointAttributes of the EndpointArn .
 type GetEndpointAttributesOutput struct {
 
 	// Attributes include the following:
