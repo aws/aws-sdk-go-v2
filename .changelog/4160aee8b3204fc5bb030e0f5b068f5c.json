@@ -1,0 +1,8 @@
+{
+    "id": "4160aee8-b320-4fc5-bb03-0e0f5b068f5c",
+    "type": "bugfix",
+    "description": "Prevent potential panic caused by invalid comparison of credentials.",
+    "modules": [
+        "service/s3"
+    ]
+}
