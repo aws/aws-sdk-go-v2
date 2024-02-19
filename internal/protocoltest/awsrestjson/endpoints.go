@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/internal/endpoints"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -209,6 +210,13 @@ func resolveBaseEndpoint(cfg aws.Config, o *Options) {
 	if found && err == nil {
 		o.BaseEndpoint = &value
 	}
+}
+
+func bindRegion(region string) *string {
+	if region == "" {
+		return nil
+	}
+	return aws.String(endpoints.MapFIPSRegion(region))
 }
 
 // EndpointParameters provides the parameters that influence how endpoints are
