@@ -3757,7 +3757,7 @@ func awsRestjson1_serializeDocumentAdBreak(v *types.AdBreak, value smithyjson.Va
 		ok.String(string(v.MessageType))
 	}
 
-	if v.OffsetMillis != 0 {
+	{
 		ok := object.Key("OffsetMillis")
 		ok.Long(v.OffsetMillis)
 	}

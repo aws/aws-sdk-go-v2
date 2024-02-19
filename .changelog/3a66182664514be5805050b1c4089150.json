@@ -1,0 +1,8 @@
+{
+    "id": "3a661826-6451-4be5-8050-50b1c4089150",
+    "type": "feature",
+    "description": "MediaTailor: marking #AdBreak.OffsetMillis as required.",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

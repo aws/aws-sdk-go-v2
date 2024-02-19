@@ -19,7 +19,12 @@ import (
 // increasing and decreasing your table's read and write capacity automatically in
 // response to application traffic. For more information, see Managing throughput
 // capacity automatically with Amazon Keyspaces auto scaling (https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html)
-// in the Amazon Keyspaces Developer Guide.
+// in the Amazon Keyspaces Developer Guide. GetTableAutoScalingSettings can't be
+// used as an action in an IAM policy. To define permissions for
+// GetTableAutoScalingSettings , you must allow the following two actions in the
+// IAM policy statement's Action element:
+//   - application-autoscaling:DescribeScalableTargets
+//   - application-autoscaling:DescribeScalingPolicies
 func (c *Client) GetTableAutoScalingSettings(ctx context.Context, params *GetTableAutoScalingSettingsInput, optFns ...func(*Options)) (*GetTableAutoScalingSettingsOutput, error) {
 	if params == nil {
 		params = &GetTableAutoScalingSettingsInput{}

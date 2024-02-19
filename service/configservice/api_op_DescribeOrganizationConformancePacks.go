@@ -16,7 +16,7 @@ import (
 // and the next token, you receive a paginated response. Limit and next token are
 // not applicable if you specify organization conformance packs names. They are
 // only applicable, when you request all the organization conformance packs. For
-// accounts within an organzation If you deploy an organizational rule or
+// accounts within an organization If you deploy an organizational rule or
 // conformance pack in an organization administrator account, and then establish a
 // delegated administrator and deploy an organizational rule or conformance pack in
 // the delegated administrator account, you won't be able to see the organizational

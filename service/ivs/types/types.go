@@ -106,9 +106,7 @@ type Channel struct {
 	InsecureIngest bool
 
 	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
-	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW . (Note:
-	// In the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard,
-	// respectively.)
+	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW .
 	LatencyMode ChannelLatencyMode
 
 	// Channel name.
@@ -162,9 +160,7 @@ type ChannelSummary struct {
 	InsecureIngest bool
 
 	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
-	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW . (Note:
-	// In the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard,
-	// respectively.)
+	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW .
 	LatencyMode ChannelLatencyMode
 
 	// Channel name.

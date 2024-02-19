@@ -1,0 +1,8 @@
+{
+    "id": "8817933c-8f12-4f88-a687-c69a41462dee",
+    "type": "documentation",
+    "description": "Changed description for latencyMode in Create/UpdateChannel and Channel/ChannelSummary.",
+    "modules": [
+        "service/ivs"
+    ]
+}

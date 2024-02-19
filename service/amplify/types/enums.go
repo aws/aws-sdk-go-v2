@@ -2,18 +2,38 @@
 
 package types
 
+type CertificateType string
+
+// Enum values for CertificateType
+const (
+	CertificateTypeAmplifyManaged CertificateType = "AMPLIFY_MANAGED"
+	CertificateTypeCustom         CertificateType = "CUSTOM"
+)
+
+// Values returns all known values for CertificateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateType) Values() []CertificateType {
+	return []CertificateType{
+		"AMPLIFY_MANAGED",
+		"CUSTOM",
+	}
+}
+
 type DomainStatus string
 
 // Enum values for DomainStatus
 const (
-	DomainStatusPendingVerification   DomainStatus = "PENDING_VERIFICATION"
-	DomainStatusInProgress            DomainStatus = "IN_PROGRESS"
-	DomainStatusAvailable             DomainStatus = "AVAILABLE"
-	DomainStatusPendingDeployment     DomainStatus = "PENDING_DEPLOYMENT"
-	DomainStatusFailed                DomainStatus = "FAILED"
-	DomainStatusCreating              DomainStatus = "CREATING"
-	DomainStatusRequestingCertificate DomainStatus = "REQUESTING_CERTIFICATE"
-	DomainStatusUpdating              DomainStatus = "UPDATING"
+	DomainStatusPendingVerification        DomainStatus = "PENDING_VERIFICATION"
+	DomainStatusInProgress                 DomainStatus = "IN_PROGRESS"
+	DomainStatusAvailable                  DomainStatus = "AVAILABLE"
+	DomainStatusImportingCustomCertificate DomainStatus = "IMPORTING_CUSTOM_CERTIFICATE"
+	DomainStatusPendingDeployment          DomainStatus = "PENDING_DEPLOYMENT"
+	DomainStatusAwaitingAppCname           DomainStatus = "AWAITING_APP_CNAME"
+	DomainStatusFailed                     DomainStatus = "FAILED"
+	DomainStatusCreating                   DomainStatus = "CREATING"
+	DomainStatusRequestingCertificate      DomainStatus = "REQUESTING_CERTIFICATE"
+	DomainStatusUpdating                   DomainStatus = "UPDATING"
 )
 
 // Values returns all known values for DomainStatus. Note that this can be
@@ -24,7 +44,9 @@ func (DomainStatus) Values() []DomainStatus {
 		"PENDING_VERIFICATION",
 		"IN_PROGRESS",
 		"AVAILABLE",
+		"IMPORTING_CUSTOM_CERTIFICATE",
 		"PENDING_DEPLOYMENT",
+		"AWAITING_APP_CNAME",
 		"FAILED",
 		"CREATING",
 		"REQUESTING_CERTIFICATE",
@@ -143,5 +165,33 @@ func (Stage) Values() []Stage {
 		"DEVELOPMENT",
 		"EXPERIMENTAL",
 		"PULL_REQUEST",
+	}
+}
+
+type UpdateStatus string
+
+// Enum values for UpdateStatus
+const (
+	UpdateStatusRequestingCertificate      UpdateStatus = "REQUESTING_CERTIFICATE"
+	UpdateStatusPendingVerification        UpdateStatus = "PENDING_VERIFICATION"
+	UpdateStatusImportingCustomCertificate UpdateStatus = "IMPORTING_CUSTOM_CERTIFICATE"
+	UpdateStatusPendingDeployment          UpdateStatus = "PENDING_DEPLOYMENT"
+	UpdateStatusAwaitingAppCname           UpdateStatus = "AWAITING_APP_CNAME"
+	UpdateStatusUpdateComplete             UpdateStatus = "UPDATE_COMPLETE"
+	UpdateStatusUpdateFailed               UpdateStatus = "UPDATE_FAILED"
+)
+
+// Values returns all known values for UpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateStatus) Values() []UpdateStatus {
+	return []UpdateStatus{
+		"REQUESTING_CERTIFICATE",
+		"PENDING_VERIFICATION",
+		"IMPORTING_CUSTOM_CERTIFICATE",
+		"PENDING_DEPLOYMENT",
+		"AWAITING_APP_CNAME",
+		"UPDATE_COMPLETE",
+		"UPDATE_FAILED",
 	}
 }

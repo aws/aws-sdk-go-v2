@@ -874,6 +874,21 @@ func addOpUpdateWebhookValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWebhook{}, middleware.After)
 }
 
+func validateCertificateSettings(v *types.CertificateSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CertificateSettings"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomRule(v *types.CustomRule) error {
 	if v == nil {
 		return nil
@@ -1034,6 +1049,11 @@ func validateOpCreateDomainAssociationInput(v *CreateDomainAssociationInput) err
 	} else if v.SubDomainSettings != nil {
 		if err := validateSubDomainSettings(v.SubDomainSettings); err != nil {
 			invalidParams.AddNested("SubDomainSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CertificateSettings != nil {
+		if err := validateCertificateSettings(v.CertificateSettings); err != nil {
+			invalidParams.AddNested("CertificateSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1566,6 +1586,11 @@ func validateOpUpdateDomainAssociationInput(v *UpdateDomainAssociationInput) err
 	if v.SubDomainSettings != nil {
 		if err := validateSubDomainSettings(v.SubDomainSettings); err != nil {
 			invalidParams.AddNested("SubDomainSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CertificateSettings != nil {
+		if err := validateCertificateSettings(v.CertificateSettings); err != nil {
+			invalidParams.AddNested("CertificateSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

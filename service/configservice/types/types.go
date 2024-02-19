@@ -1439,6 +1439,7 @@ type EvaluationStatus struct {
 // includes the following Regions:
 //   - Asia Pacific (Hyderabad)
 //   - Asia Pacific (Melbourne)
+//   - Canada West (Calgary)
 //   - Europe (Spain)
 //   - Europe (Zurich)
 //   - Israel (Tel Aviv)
@@ -2203,6 +2204,7 @@ type RecordingGroup struct {
 	// cannot record the global IAM resource types includes the following Regions:
 	//   - Asia Pacific (Hyderabad)
 	//   - Asia Pacific (Melbourne)
+	//   - Canada West (Calgary)
 	//   - Europe (Spain)
 	//   - Europe (Zurich)
 	//   - Israel (Tel Aviv)
@@ -2210,16 +2212,29 @@ type RecordingGroup struct {
 	// Aurora global clusters are recorded in all enabled Regions The
 	// AWS::RDS::GlobalCluster resource type will be recorded in all supported Config
 	// Regions where the configuration recorder is enabled, even if
-	// includeGlobalResourceTypes is not set to true . The includeGlobalResourceTypes
-	// option is a bundle which only applies to IAM users, groups, roles, and customer
-	// managed policies. If you do not want to record AWS::RDS::GlobalCluster in all
-	// enabled Regions, use one of the following recording strategies:
+	// includeGlobalResourceTypes is set false . The includeGlobalResourceTypes option
+	// is a bundle which only applies to IAM users, groups, roles, and customer managed
+	// policies. If you do not want to record AWS::RDS::GlobalCluster in all enabled
+	// Regions, use one of the following recording strategies:
 	//   - Record all current and future resource types with exclusions (
 	//   EXCLUSION_BY_RESOURCE_TYPES ), or
 	//   - Record specific resource types ( INCLUSION_BY_RESOURCE_TYPES ).
 	// For more information, see Selecting Which Resources are Recorded (https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all)
-	// in the Config developer guide. Before you set this field to true , set the
-	// allSupported field of RecordingGroup (https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html)
+	// in the Config developer guide. includeGlobalResourceTypes and the exclusion
+	// recording strategy The includeGlobalResourceTypes field has no impact on the
+	// EXCLUSION_BY_RESOURCE_TYPES recording strategy. This means that the global IAM
+	// resource types (IAM users, groups, roles, and customer managed policies) will
+	// not be automatically added as exclusions for exclusionByResourceTypes when
+	// includeGlobalResourceTypes is set to false . The includeGlobalResourceTypes
+	// field should only be used to modify the AllSupported field, as the default for
+	// the AllSupported field is to record configuration changes for all supported
+	// resource types excluding the global IAM resource types. To include the global
+	// IAM resource types when AllSupported is set to true , make sure to set
+	// includeGlobalResourceTypes to true . To exclude the global IAM resource types
+	// for the EXCLUSION_BY_RESOURCE_TYPES recording strategy, you need to manually
+	// add them to the resourceTypes field of exclusionByResourceTypes . Required and
+	// optional fields Before you set this field to true , set the allSupported field
+	// of RecordingGroup (https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html)
 	// to true . Optionally, you can set the useOnly field of RecordingStrategy (https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html)
 	// to ALL_SUPPORTED_RESOURCE_TYPES . Overriding fields If you set this field to
 	// false but list global IAM resource types in the resourceTypes field of
@@ -2274,6 +2289,7 @@ type RecordingGroup struct {
 	// global IAM resource types includes the following Regions:
 	//   - Asia Pacific (Hyderabad)
 	//   - Asia Pacific (Melbourne)
+	//   - Canada West (Calgary)
 	//   - Europe (Spain)
 	//   - Europe (Zurich)
 	//   - Israel (Tel Aviv)
@@ -2417,6 +2433,7 @@ type RecordingStrategy struct {
 	// global IAM resource types includes the following Regions:
 	//   - Asia Pacific (Hyderabad)
 	//   - Asia Pacific (Melbourne)
+	//   - Canada West (Calgary)
 	//   - Europe (Spain)
 	//   - Europe (Zurich)
 	//   - Israel (Tel Aviv)
@@ -3030,8 +3047,7 @@ type TemplateSSMDocumentDetails struct {
 
 	// The name or Amazon Resource Name (ARN) of the SSM document to use to create a
 	// conformance pack. If you use the document name, Config checks only your account
-	// and Amazon Web Services Region for the SSM document. If you want to use an SSM
-	// document from another Region or account, you must provide the ARN.
+	// and Amazon Web Services Region for the SSM document.
 	//
 	// This member is required.
 	DocumentName *string

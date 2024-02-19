@@ -355,6 +355,56 @@ type Branch struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the current SSL/TLS certificate that is in use for the domain. If you
+// are using CreateDomainAssociation to create a new domain association,
+// Certificate describes the new certificate that you are creating.
+type Certificate struct {
+
+	// The type of SSL/TLS certificate that you want to use. Specify AMPLIFY_MANAGED
+	// to use the default certificate that Amplify provisions for you. Specify CUSTOM
+	// to use your own certificate that you have already added to Certificate Manager
+	// in your Amazon Web Services account. Make sure you request (or import) the
+	// certificate in the US East (N. Virginia) Region (us-east-1). For more
+	// information about using ACM, see Importing certificates into Certificate Manager (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
+	// in the ACM User guide .
+	//
+	// This member is required.
+	Type CertificateType
+
+	// The DNS record for certificate verification.
+	CertificateVerificationDNSRecord *string
+
+	// The Amazon resource name (ARN) for a custom certificate that you have already
+	// added to Certificate Manager in your Amazon Web Services account. This field is
+	// required only when the certificate type is CUSTOM .
+	CustomCertificateArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The type of SSL/TLS certificate to use for your custom domain. If a certificate
+// type isn't specified, Amplify uses the default AMPLIFY_MANAGED certificate.
+type CertificateSettings struct {
+
+	// The certificate type. Specify AMPLIFY_MANAGED to use the default certificate
+	// that Amplify provisions for you. Specify CUSTOM to use your own certificate
+	// that you have already added to Certificate Manager in your Amazon Web Services
+	// account. Make sure you request (or import) the certificate in the US East (N.
+	// Virginia) Region (us-east-1). For more information about using ACM, see
+	// Importing certificates into Certificate Manager (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
+	// in the ACM User guide.
+	//
+	// This member is required.
+	Type CertificateType
+
+	// The Amazon resource name (ARN) for the custom certificate that you have already
+	// added to Certificate Manager in your Amazon Web Services account. This field is
+	// required only when the certificate type is CUSTOM .
+	CustomCertificateArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a custom rewrite or redirect rule.
 type CustomRule struct {
 
@@ -372,7 +422,7 @@ type CustomRule struct {
 	Condition *string
 
 	// The status code for a URL rewrite or redirect rule. 200 Represents a 200
-	// rewrite rule. 301 Represents a 301 (moved pemanently) redirect rule. This and
+	// rewrite rule. 301 Represents a 301 (moved permanently) redirect rule. This and
 	// all future requests should be directed to the target URL. 302 Represents a 302
 	// temporary redirect rule. 404 Represents a 404 redirect rule. 404-200 Represents
 	// a 404 rewrite rule.
@@ -381,8 +431,7 @@ type CustomRule struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a domain association that associates a custom domain with an Amplify
-// app.
+// Describes the association between a custom domain and an Amplify app.
 type DomainAssociation struct {
 
 	// The Amazon Resource Name (ARN) for the domain association.
@@ -405,7 +454,8 @@ type DomainAssociation struct {
 	// This member is required.
 	EnableAutoSubDomain *bool
 
-	// The reason for the current status of the domain association.
+	// Additional information that describes why the domain association is in the
+	// current state.
 	//
 	// This member is required.
 	StatusReason *string
@@ -422,8 +472,35 @@ type DomainAssociation struct {
 	// Amazon Resource Name (ARN) for automatically creating subdomains.
 	AutoSubDomainIAMRole *string
 
+	// Describes the SSL/TLS certificate for the domain association. This can be your
+	// own custom certificate or the default certificate that Amplify provisions for
+	// you. If you are updating your domain to use a different certificate, certificate
+	// points to the new certificate that is being created instead of the current
+	// active certificate. Otherwise, certificate points to the current active
+	// certificate.
+	Certificate *Certificate
+
 	// The DNS record for certificate verification.
 	CertificateVerificationDNSRecord *string
+
+	// The status of the domain update operation that is currently in progress. The
+	// following list describes the valid update states. REQUESTING_CERTIFICATE The
+	// certificate is in the process of being updated. PENDING_VERIFICATION Indicates
+	// that an Amplify managed certificate is in the process of being verified. This
+	// occurs during the creation of a custom domain or when a custom domain is updated
+	// to use a managed certificate. IMPORTING_CUSTOM_CERTIFICATE Indicates that an
+	// Amplify custom certificate is in the process of being imported. This occurs
+	// during the creation of a custom domain or when a custom domain is updated to use
+	// a custom certificate. PENDING_DEPLOYMENT Indicates that the subdomain or
+	// certificate changes are being propagated. AWAITING_APP_CNAME Amplify is waiting
+	// for CNAME records corresponding to subdomains to be propagated. If your custom
+	// domain is on Route 53, Amplify handles this for you automatically. For more
+	// information about custom domains, see Setting up custom domains (https://docs.aws.amazon.com/amplify/latest/userguide/custom-domains.html)
+	// in the Amplify Hosting User Guide. UPDATE_COMPLETE The certificate has been
+	// associated with a domain. UPDATE_FAILED The certificate has failed to be
+	// provisioned or associated, and there is no existing active certificate to roll
+	// back to.
+	UpdateStatus UpdateStatus
 
 	noSmithyDocumentSerde
 }

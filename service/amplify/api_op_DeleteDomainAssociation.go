@@ -46,8 +46,7 @@ type DeleteDomainAssociationInput struct {
 
 type DeleteDomainAssociationOutput struct {
 
-	// Describes a domain association that associates a custom domain with an Amplify
-	// app.
+	// Describes the association between a custom domain and an Amplify app.
 	//
 	// This member is required.
 	DomainAssociation *types.DomainAssociation

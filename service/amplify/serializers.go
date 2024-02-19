@@ -658,6 +658,13 @@ func awsRestjson1_serializeOpDocumentCreateDomainAssociationInput(v *CreateDomai
 		ok.String(*v.AutoSubDomainIAMRole)
 	}
 
+	if v.CertificateSettings != nil {
+		ok := object.Key("certificateSettings")
+		if err := awsRestjson1_serializeDocumentCertificateSettings(v.CertificateSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DomainName != nil {
 		ok := object.Key("domainName")
 		ok.String(*v.DomainName)
@@ -3328,6 +3335,13 @@ func awsRestjson1_serializeOpDocumentUpdateDomainAssociationInput(v *UpdateDomai
 		ok.String(*v.AutoSubDomainIAMRole)
 	}
 
+	if v.CertificateSettings != nil {
+		ok := object.Key("certificateSettings")
+		if err := awsRestjson1_serializeDocumentCertificateSettings(v.CertificateSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EnableAutoSubDomain != nil {
 		ok := object.Key("enableAutoSubDomain")
 		ok.Boolean(*v.EnableAutoSubDomain)
@@ -3524,6 +3538,23 @@ func awsRestjson1_serializeDocumentBackend(v *types.Backend, value smithyjson.Va
 	if v.StackArn != nil {
 		ok := object.Key("stackArn")
 		ok.String(*v.StackArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCertificateSettings(v *types.CertificateSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomCertificateArn != nil {
+		ok := object.Key("customCertificateArn")
+		ok.String(*v.CustomCertificateArn)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

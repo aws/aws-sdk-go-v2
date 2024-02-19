@@ -54,6 +54,11 @@ type CreateDomainAssociationInput struct {
 	// Amazon Resource Name (ARN) for automatically creating subdomains.
 	AutoSubDomainIAMRole *string
 
+	// The type of SSL/TLS certificate to use for your custom domain. If you don't
+	// specify a certificate type, Amplify uses the default certificate that it
+	// provisions and manages for you.
+	CertificateSettings *types.CertificateSettings
+
 	// Enables the automated creation of subdomains for branches.
 	EnableAutoSubDomain *bool
 

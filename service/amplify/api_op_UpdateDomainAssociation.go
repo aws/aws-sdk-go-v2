@@ -48,6 +48,9 @@ type UpdateDomainAssociationInput struct {
 	// Amazon Resource Name (ARN) for automatically creating subdomains.
 	AutoSubDomainIAMRole *string
 
+	// The type of SSL/TLS certificate to use for your custom domain.
+	CertificateSettings *types.CertificateSettings
+
 	// Enables the automated creation of subdomains for branches.
 	EnableAutoSubDomain *bool
 
