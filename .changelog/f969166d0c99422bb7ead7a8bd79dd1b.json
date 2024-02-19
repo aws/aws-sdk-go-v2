@@ -2,7 +2,7 @@
     "id": "f969166d-0c99-422b-b7ea-d7a8bd79dd1b",
     "type": "bugfix",
     "collapse": true,
-    "description": "Lack of a configured region will now provide an explicit error when calling an operation instead of an obscure hostname lookup failure.",
+    "description": "When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.",
     "modules": [
         "internal/protocoltest/awsrestjson",
         "internal/protocoltest/ec2query",
