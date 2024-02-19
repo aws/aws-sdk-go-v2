@@ -57,7 +57,8 @@
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>How long (in milliseconds) after the beginning of the program that an ad starts. This value must fall within 100ms of a segment boundary, otherwise the ad break will be skipped.</p>"
+                        "smithy.api#documentation": "<p>How long (in milliseconds) after the beginning of the program that an ad starts. This value must fall within 100ms of a segment boundary, otherwise the ad break will be skipped.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Slate": {

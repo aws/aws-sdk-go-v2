@@ -1185,7 +1185,7 @@
                 "latencyMode": {
                     "target": "com.amazonaws.ivs#ChannelLatencyMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to\n      Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default:\n        <code>LOW</code>. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code>\n      correspond to Ultra-low and Standard, respectively.)</p>"
+                        "smithy.api#documentation": "<p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to\n      Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default:\n        <code>LOW</code>.</p>"
                     }
                 },
                 "type": {
@@ -1356,7 +1356,7 @@
                 "latencyMode": {
                     "target": "com.amazonaws.ivs#ChannelLatencyMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to\n      Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default:\n        <code>LOW</code>. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code>\n      correspond to Ultra-low and Standard, respectively.)</p>"
+                        "smithy.api#documentation": "<p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to\n      Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default:\n        <code>LOW</code>.</p>"
                     }
                 },
                 "authorized": {
@@ -1504,7 +1504,7 @@
                 "latencyMode": {
                     "target": "com.amazonaws.ivs#ChannelLatencyMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to\n      Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. (Note: In the\n      Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and\n      Standard, respectively.) Default: <code>LOW</code>.</p>"
+                        "smithy.api#documentation": "<p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to\n      Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>.</p>"
                     }
                 },
                 "type": {
@@ -4673,7 +4673,7 @@
                 "latencyMode": {
                     "target": "com.amazonaws.ivs#ChannelLatencyMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to\n      Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. (Note: In the\n      Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and\n      Standard, respectively.)</p>"
+                        "smithy.api#documentation": "<p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to\n      Full HD. Use <code>LOW</code> for near-real-time interaction with viewers.</p>"
                     }
                 },
                 "type": {
