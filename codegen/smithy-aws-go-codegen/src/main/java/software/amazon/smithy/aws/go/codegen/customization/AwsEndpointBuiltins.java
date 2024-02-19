@@ -1,9 +1,13 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
 import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
+import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.go.codegen.GoDelegator;
+import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.ListUtils;
 
 import java.util.List;
@@ -18,7 +22,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
             goTemplate("options.BaseEndpoint");
 
     private static final GoWriter.Writable BindAwsRegion =
-            goTemplate("$T($T(options.Region))", SdkGoTypes.Aws.String, SdkGoTypes.Internal.Endpoints.MapFIPSRegion);
+            goTemplate("bindRegion(options.Region)");
     private static final GoWriter.Writable BindAwsUseFips =
             goTemplate("$T(options.EndpointOptions.UseFIPSEndpoint == $T)", SdkGoTypes.Aws.Bool, SdkGoTypes.Aws.FIPSEndpointStateEnabled);
     private static final GoWriter.Writable BindAwsUseDualStack =
@@ -46,5 +50,21 @@ public class AwsEndpointBuiltins implements GoIntegration {
                 .addEndpointBuiltinBinding("AWS::S3::DisableMultiRegionAccessPoints", BindAwsS3DisableMultiRegionAccessPoints)
                 .addEndpointBuiltinBinding("AWS::S3Control::UseArnRegion", BindAwsS3UseArnRegion)
                 .build());
+    }
+
+    @Override
+    public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
+        goDelegator.useFileWriter("endpoints.go", settings.getModuleName(), builtinBindingSource());
+    }
+
+    private GoWriter.Writable builtinBindingSource() {
+        return goTemplate("""
+                func bindRegion(region string) *string {
+                    if region == "" {
+                        return nil
+                    }
+                    return $T($T(region))
+                }
+                """, SdkGoTypes.Aws.String, SdkGoTypes.Internal.Endpoints.MapFIPSRegion);
     }
 }
