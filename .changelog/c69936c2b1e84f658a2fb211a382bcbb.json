@@ -1,8 +1,0 @@
-{
-    "id": "c69936c2-b1e8-4f65-8a2f-b211a382bcbb",
-    "type": "documentation",
-    "description": "Documentation updates for the AWS Config CLI",
-    "modules": [
-        "service/configservice"
-    ]
-}

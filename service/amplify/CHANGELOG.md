@@ -1,3 +1,7 @@
+# v1.20.0 (2024-02-19)
+
+* **Feature**: This release contains API changes that enable users to configure their Amplify domains with their own custom SSL/TLS certificate.
+
 # v1.19.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.

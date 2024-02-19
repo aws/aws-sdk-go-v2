@@ -1,3 +1,25 @@
+# Release (2024-02-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.20.0](service/amplify/CHANGELOG.md#v1200-2024-02-19)
+  * **Feature**: This release contains API changes that enable users to configure their Amplify domains with their own custom SSL/TLS certificate.
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.0.0](service/chatbot/CHANGELOG.md#v100-2024-02-19)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds support for AWS Chatbot. You can now monitor, operate, and troubleshoot your AWS resources with interactive ChatOps using the AWS SDK.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.45.2](service/configservice/CHANGELOG.md#v1452-2024-02-19)
+  * **Documentation**: Documentation updates for the AWS Config CLI
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.32.1](service/ivs/CHANGELOG.md#v1321-2024-02-19)
+  * **Documentation**: Changed description for latencyMode in Create/UpdateChannel and Channel/ChannelSummary.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.9.2](service/keyspaces/CHANGELOG.md#v192-2024-02-19)
+  * **Documentation**: Documentation updates for Amazon Keyspaces
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.35.0](service/mediatailor/CHANGELOG.md#v1350-2024-02-19)
+  * **Feature**: MediaTailor: marking #AdBreak.OffsetMillis as required.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.50.1](service/s3/CHANGELOG.md#v1501-2024-02-19)
+  * **Bug Fix**: Prevent potential panic caused by invalid comparison of credentials.
+
 # Release (2024-02-16)
 
 ## General Highlights

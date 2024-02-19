@@ -1,3 +1,7 @@
+# v1.32.1 (2024-02-19)
+
+* **Documentation**: Changed description for latencyMode in Create/UpdateChannel and Channel/ChannelSummary.
+
 # v1.32.0 (2024-02-13)
 
 * **Feature**: Bump minimum Go version to 1.20 per our language support policy.

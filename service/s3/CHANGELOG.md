@@ -1,3 +1,7 @@
+# v1.50.1 (2024-02-19)
+
+* **Bug Fix**: Prevent potential panic caused by invalid comparison of credentials.
+
 # v1.50.0 (2024-02-16)
 
 * **Feature**: Add new ClientOptions field to waiter config which allows you to extend the config for operation calls made by waiters.

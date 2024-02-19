@@ -1,3 +1,7 @@
+# v1.45.2 (2024-02-19)
+
+* **Documentation**: Documentation updates for the AWS Config CLI
+
 # v1.45.1 (2024-02-15)
 
 * **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.

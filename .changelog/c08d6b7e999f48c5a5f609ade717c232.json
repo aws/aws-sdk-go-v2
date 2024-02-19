@@ -1,8 +1,0 @@
-{
-    "id": "c08d6b7e-999f-48c5-a5f6-09ade717c232",
-    "type": "feature",
-    "description": "This release contains API changes that enable users to configure their Amplify domains with their own custom SSL/TLS certificate.",
-    "modules": [
-        "service/amplify"
-    ]
-}

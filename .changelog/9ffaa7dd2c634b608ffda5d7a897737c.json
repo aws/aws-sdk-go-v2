@@ -1,8 +1,0 @@
-{
-    "id": "9ffaa7dd-2c63-4b60-8ffd-a5d7a897737c",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon Keyspaces",
-    "modules": [
-        "service/keyspaces"
-    ]
-}
