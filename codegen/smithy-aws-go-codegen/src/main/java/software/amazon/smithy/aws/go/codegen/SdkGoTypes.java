@@ -33,6 +33,11 @@ public final class SdkGoTypes {
 
         public static final Symbol IsCredentialsProvider = AwsGoDependency.AWS_CORE.valueSymbol("IsCredentialsProvider");
         public static final Symbol AnonymousCredentials = AwsGoDependency.AWS_CORE.pointableSymbol("AnonymousCredentials");
+        public static final Symbol AccountIDEndpointMode = AwsGoDependency.AWS_CORE.valueSymbol("AccountIDEndpointMode");
+        public static final Symbol AccountIDEndpointModeUnset = AwsGoDependency.AWS_CORE.valueSymbol("AccountIDEndpointModeUnset");
+        public static final Symbol AccountIDEndpointModePreferred = AwsGoDependency.AWS_CORE.valueSymbol("AccountIDEndpointModePreferred");
+        public static final Symbol AccountIDEndpointModeRequired = AwsGoDependency.AWS_CORE.valueSymbol("AccountIDEndpointModeRequired");
+        public static final Symbol AccountIDEndpointModeDisabled = AwsGoDependency.AWS_CORE.valueSymbol("AccountIDEndpointModeDisabled");
 
 
         public static final class Middleware {

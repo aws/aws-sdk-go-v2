@@ -79,7 +79,8 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 				StatusCode: 200,
 				Body: ioutil.NopCloser(bytes.NewReader([]byte(`{
   "AccessKeyID": "AKID",
-  "SecretAccessKey": "SECRET"
+  "SecretAccessKey": "SECRET",
+  "AccountID": "012345678901"
 }`))),
 			}, nil
 		})
@@ -95,6 +96,9 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 	}
 	if e, a := "SECRET", creds.SecretAccessKey; e != a {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "012345678901", creds.AccountID; e != a {
+		t.Errorf("expect account ID to be %v, got %v", e, a)
 	}
 	if v := creds.SessionToken; len(v) != 0 {
 		t.Errorf("expect empty, got %v", v)

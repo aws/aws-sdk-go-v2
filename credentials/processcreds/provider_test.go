@@ -142,6 +142,7 @@ type credentialTest struct {
 	AccessKeyID     string `json:"AccessKeyId"`
 	SecretAccessKey string
 	Expiration      string
+	AccountID       string `json:"AccountId"`
 }
 
 func TestProviderStatic(t *testing.T) {
@@ -327,6 +328,23 @@ func BenchmarkProcessProvider(b *testing.B) {
 			b.Fatal(err)
 		}
 		b.StopTimer()
+	}
+}
+
+func TestProviderWithAccountID(t *testing.T) {
+	provider := NewProvider(
+		fmt.Sprintf(
+			"%s %s",
+			getOSCat(),
+			filepath.Join("testdata", "accountid.json"),
+		))
+	v, err := provider.Retrieve(context.Background())
+	if err != nil {
+		t.Errorf("expected %v, got %v", "no error", err)
+	}
+
+	if e, a := "012345678901", v.AccountID; e != a {
+		t.Errorf("expect retrieved accountID to be %v, got %v", e, a)
 	}
 }
 
