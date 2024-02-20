@@ -3,4 +3,4 @@
 package s3outposts
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.23.0"
+const goModuleVersion = "1.23.1"

@@ -1,3 +1,8 @@
+# v1.27.0 (2024-02-20)
+
+* **Feature**: This release updates a few Firehose related APIs.
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
 # v1.26.0 (2024-02-16)
 
 * **Feature**: This release adds support for Data Message Extraction for decompressed CloudWatch logs, and to use a custom file extension or time zone for S3 destinations.

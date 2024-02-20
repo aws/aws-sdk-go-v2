@@ -4,12 +4,12 @@ go 1.20
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.25.0
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.0
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.1
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.15.0
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.0
-	github.com/aws/aws-sdk-go-v2/service/sso v1.19.0
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.22.0
-	github.com/aws/aws-sdk-go-v2/service/sts v1.27.0
+	github.com/aws/aws-sdk-go-v2/service/sso v1.19.1
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.22.1
+	github.com/aws/aws-sdk-go-v2/service/sts v1.27.1
 	github.com/aws/smithy-go v1.20.0
 	github.com/google/go-cmp v0.5.8
 )

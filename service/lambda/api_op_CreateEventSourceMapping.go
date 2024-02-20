@@ -218,8 +218,9 @@ type CreateEventSourceMappingOutput struct {
 	// batch in two and retry. The default value is false.
 	BisectBatchOnFunctionError *bool
 
-	// (Kinesis and DynamoDB Streams only) An Amazon SQS queue or Amazon SNS topic
-	// destination for discarded records.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka event
+	// sources only) A configuration object that specifies the destination of an event
+	// after Lambda processes it.
 	DestinationConfig *types.DestinationConfig
 
 	// Specific configuration settings for a DocumentDB event source.
