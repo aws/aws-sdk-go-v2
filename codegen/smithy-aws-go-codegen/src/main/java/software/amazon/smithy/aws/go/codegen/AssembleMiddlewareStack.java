@@ -1,16 +1,39 @@
+/*
+ * Copyright 2024 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package software.amazon.smithy.aws.go.codegen;
+
+import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
+import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
 
 import java.util.List;
 import software.amazon.smithy.aws.go.codegen.customization.AdjustAwsRestJsonContentType;
 import software.amazon.smithy.aws.traits.auth.UnsignedPayloadTrait;
+import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.go.codegen.GoDelegator;
+import software.amazon.smithy.go.codegen.GoSettings;
+import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
-import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.EventStreamIndex;
 import software.amazon.smithy.utils.ListUtils;
+import software.amazon.smithy.utils.MapUtils;
 
 public class AssembleMiddlewareStack implements GoIntegration {
 
@@ -30,26 +53,21 @@ public class AssembleMiddlewareStack implements GoIntegration {
         return ListUtils.of(
                 // Add RequestInvocationIDMiddleware to operation stack
                 RuntimeClientPlugin.builder()
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                                "AddClientRequestIDMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
-                                        .build())
-                                .build()
-                        )
-                        .build(),
+                        .registerMiddleware(
+                                MiddlewareRegistrar.builder()
+                                        .resolvedFunction(buildPackageSymbol("addClientRequestID"))
+                                        .build()
+                        ).build(),
 
                 // Add ContentLengthMiddleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) ->
                                 EventStreamIndex.of(model).getInputInfo(operation).isEmpty())
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                                "AddComputeContentLengthMiddleware",
-                                                SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
-                                        .build())
-                                .build()
-                        )
-                        .build(),
+                        .registerMiddleware(
+                                MiddlewareRegistrar.builder()
+                                        .resolvedFunction(buildPackageSymbol("addComputeContentLength"))
+                                        .build()
+                        ).build(),
 
                 // Add endpoint serialize middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -69,12 +87,11 @@ public class AssembleMiddlewareStack implements GoIntegration {
                             }
                             return EventStreamIndex.of(model).getInputInfo(operation).isPresent();
                         })
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                                "AddStreamingEventsPayload", AwsGoDependency.AWS_SIGNER_V4)
-                                        .build())
-                                .build())
-                        .build(),
+                        .registerMiddleware(
+                                MiddlewareRegistrar.builder()
+                                        .resolvedFunction(buildPackageSymbol("addStreamingEventsPayload"))
+                                        .build()
+                        ).build(),
 
                 // Add unsigned payload middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -86,12 +103,11 @@ public class AssembleMiddlewareStack implements GoIntegration {
                             var noEventStream = EventStreamIndex.of(model).getInputInfo(operation).isEmpty();
                             return operation.hasTrait(UnsignedPayloadTrait.class) && noEventStream;
                         })
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                                "AddUnsignedPayloadMiddleware", AwsGoDependency.AWS_SIGNER_V4)
-                                        .build())
-                                .build())
-                        .build(),
+                        .registerMiddleware(
+                                MiddlewareRegistrar.builder()
+                                        .resolvedFunction(buildPackageSymbol("addUnsignedPayload"))
+                                        .build()
+                        ).build(),
 
                 // Add signed payload middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -103,12 +119,11 @@ public class AssembleMiddlewareStack implements GoIntegration {
                             var noEventStream = EventStreamIndex.of(model).getInputInfo(operation).isEmpty();
                             return !operation.hasTrait(UnsignedPayloadTrait.class) && noEventStream;
                         })
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                                "AddComputePayloadSHA256Middleware", AwsGoDependency.AWS_SIGNER_V4)
-                                        .build())
-                                .build())
-                        .build(),
+                        .registerMiddleware(
+                                MiddlewareRegistrar.builder()
+                                        .resolvedFunction(buildPackageSymbol("addComputePayloadSHA256"))
+                                        .build()
+                        ).build(),
 
                 // Add content-sha256 payload header middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -120,12 +135,11 @@ public class AssembleMiddlewareStack implements GoIntegration {
                             var hasEventStream = EventStreamIndex.of(model).getInputInfo(operation).isPresent();
                             return operation.hasTrait(UnsignedPayloadTrait.class) || hasEventStream;
                         })
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                                "AddContentSHA256HeaderMiddleware", AwsGoDependency.AWS_SIGNER_V4)
-                                        .build())
-                                .build())
-                        .build(),
+                        .registerMiddleware(
+                                MiddlewareRegistrar.builder()
+                                        .resolvedFunction(buildPackageSymbol("addContentSHA256Header"))
+                                        .build()
+                        ).build(),
 
                 // Add retryer middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -139,21 +153,19 @@ public class AssembleMiddlewareStack implements GoIntegration {
 
                 // Add middleware to store raw response omn metadata
                 RuntimeClientPlugin.builder()
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                                "AddRawResponseToMetadata", AwsGoDependency.AWS_MIDDLEWARE)
-                                        .build())
-                                .build())
-                        .build(),
+                        .registerMiddleware(
+                                MiddlewareRegistrar.builder()
+                                        .resolvedFunction(buildPackageSymbol("addRawResponseToMetadata"))
+                                        .build()
+                        ).build(),
 
                 // Add recordResponseTiming middleware to operation stack
                 RuntimeClientPlugin.builder()
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                                "AddRecordResponseTiming", AwsGoDependency.AWS_MIDDLEWARE)
-                                        .build())
-                                .build())
-                        .build(),
+                        .registerMiddleware(
+                                MiddlewareRegistrar.builder()
+                                        .resolvedFunction(buildPackageSymbol("addRecordResponseTiming"))
+                                        .build()
+                        ).build(),
 
                 // Add Client UserAgent
                 RuntimeClientPlugin.builder()
@@ -186,5 +198,48 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 .build())
                         .build()
         );
+    }
+
+    @Override
+    public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
+        goDelegator.useFileWriter("api_client.go", settings.getModuleName(), addMiddleware());
+    }
+
+    // TODO symbols
+    private GoWriter.Writable addMiddleware() {
+        return goTemplate("""
+                func addClientRequestID(stack *middleware.Stack) error {
+                    return stack.Build.Add(&awsmiddleware.ClientRequestID{}, middleware.After)
+                }
+
+                func addComputeContentLength(stack *middleware.Stack) error {
+                    return stack.Build.Add(&smithyhttp.ComputeContentLength{}, middleware.After)
+                }
+
+                func addStreamingEventsPayload(stack *middleware.Stack) error {
+                    return stack.Finalize.Add(&v4.StreamingEventsPayload{}, middleware.Before)
+                }
+
+                func addUnsignedPayload(stack *middleware.Stack) error {
+                    return stack.Finalize.Insert(&v4.UnsignedPayload{}, "ResolveEndpointV2", middleware.After)
+                }
+
+                func addComputePayloadSHA256(stack *middleware.Stack) error {
+                    return stack.Finalize.Insert(&v4.ComputePayloadSHA256{}, "ResolveEndpointV2", middleware.After)
+                }
+
+                func addContentSHA256Header(stack *middleware.Stack) error {
+                    return stack.Finalize.Insert(&v4.ContentSHA256Header{}, (*v4.ComputePayloadSHA256)(nil).ID(), middleware.After)
+                }
+
+                func addRawResponseToMetadata(stack *middleware.Stack) error {
+                    return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
+                }
+
+                func addRecordResponseTiming(stack *middleware.Stack) error {
+                    return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
+                }
+                """,
+                MapUtils.of());
     }
 }

@@ -14,12 +14,13 @@ import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
 
+import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
+
 /**
  * Retrieves request id from response header of deserialized response shapes
  */
 public class AWSRequestIDRetriever implements GoIntegration {
     private static final String ADD_REQUEST_ID_RETRIEVER = "addRequestIDRetrieverMiddleware";
-    private static final String ADD_REQUEST_ID_RETRIEVER_INTERNAL = "AddRequestIDRetrieverMiddleware";
 
     /**
      * Gets the sort order of the customization from -128 to 127, with lowest
@@ -49,10 +50,9 @@ public class AWSRequestIDRetriever implements GoIntegration {
 
     private void writeMiddlewareHelper(GoWriter writer) {
         writer.openBlock("func $L(stack *middleware.Stack) error {", "}", ADD_REQUEST_ID_RETRIEVER, () -> {
-            writer.write("return $T(stack)",
-                    SymbolUtils.createValueSymbolBuilder(ADD_REQUEST_ID_RETRIEVER_INTERNAL,
-                            AwsGoDependency.AWS_MIDDLEWARE).build()
-            );
+            writer.write("""
+                    return stack.Deserialize.Insert(&awsmiddleware.RequestIDRetriever{}, "OperationDeserializer", middleware.Before)
+                    """);
         });
         writer.insertTrailingNewline();
     }
@@ -62,10 +62,11 @@ public class AWSRequestIDRetriever implements GoIntegration {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
                         .servicePredicate(((model, serviceShape) -> !requiresS3Customization(model,serviceShape)))
-                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_REQUEST_ID_RETRIEVER).build())
-                                .build())
-                        .build()
+                        .registerMiddleware(
+                                MiddlewareRegistrar.builder()
+                                        .resolvedFunction(buildPackageSymbol(ADD_REQUEST_ID_RETRIEVER))
+                                        .build()
+                        ).build()
         );
     }
 

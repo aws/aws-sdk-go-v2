@@ -51,7 +51,7 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			c := &computePayloadSHA256{}
+			c := &ComputePayloadSHA256{}
 
 			next := middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 				value := GetPayloadHash(ctx)
@@ -409,7 +409,7 @@ func (*nopResolveEndpoint) HandleFinalize(
 
 var (
 	_ middleware.FinalizeMiddleware = &unsignedPayload{}
-	_ middleware.FinalizeMiddleware = &computePayloadSHA256{}
+	_ middleware.FinalizeMiddleware = &ComputePayloadSHA256{}
 	_ middleware.FinalizeMiddleware = &contentSHA256Header{}
 	_ middleware.FinalizeMiddleware = &SignHTTPRequestMiddleware{}
 )

@@ -15,18 +15,18 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
-import software.amazon.smithy.codegen.core.Symbol;
+import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
+
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
 
 public class AwsRetryMiddlewareHelper implements GoIntegration {
-    public static final String ADD_RETRY_MIDDLEWARES_HELPER = "addRetryMiddlewares";
+    public static final String ADD_RETRY_MIDDLEWARES_HELPER = "addRetry";
 
     @Override
     public void writeAdditionalFiles(
@@ -39,23 +39,22 @@ public class AwsRetryMiddlewareHelper implements GoIntegration {
     }
 
     private void generateRetryMiddlewareHelpers(GoWriter writer) {
-        Symbol stackSymbol = SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE)
-                .build();
-        Symbol addRetryMiddlewares = SymbolUtils.createValueSymbolBuilder("AddRetryMiddlewares",
-                AwsGoDependency.AWS_RETRY).build();
-        Symbol addOptions = SymbolUtils.createValueSymbolBuilder("AddRetryMiddlewaresOptions",
-                AwsGoDependency.AWS_RETRY).build();
-
-        writer.openBlock("func $L(stack $P, o Options) error {", "}", ADD_RETRY_MIDDLEWARES_HELPER, stackSymbol,
-                () -> {
-                    writer.openBlock("mo := $T{", "}", addOptions, () -> {
-                        writer.write("$L: o.$L,", AddAwsConfigFields.RETRYER_CONFIG_NAME,
-                                AddAwsConfigFields.RETRYER_CONFIG_NAME);
-                        writer.write("LogRetryAttempts: o.$L.IsRetries(),",
-                                AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
-                    });
-
-                    writer.write("return $T(stack, mo)", addRetryMiddlewares);
-                });
+        writer
+                .addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE)
+                .addUseImports(SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
+                .addUseImports(AwsGoDependency.AWS_RETRY)
+                .write(goTemplate("""
+                        func addRetry(stack *middleware.Stack, o Options) error {
+                        attempt := retry.NewAttemptMiddleware(o.Retryer, smithyhttp.RequestCloner, func(m *retry.Attempt) {
+                            m.LogAttempts = o.ClientLogMode.IsRetries()
+                        })
+                        if err := stack.Finalize.Insert(attempt, "Signing", middleware.Before); err != nil {
+                            return err
+                        }
+                        if err := stack.Finalize.Insert(&retry.MetricsHeader{}, attempt.ID(), middleware.After); err != nil {
+                            return err
+                        }
+                        return nil
+                    }"""));
     }
 }
