@@ -7,17 +7,13 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 	"io/ioutil"
-	"math"
 	"net/http"
 	"testing"
 	"time"
@@ -226,19 +222,7 @@ func TestClient_XmlLists_awsAwsqueryDeserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			opts := cmp.Options{
-				cmpopts.IgnoreUnexported(
-					middleware.Metadata{},
-				),
-				cmp.FilterValues(func(x, y float64) bool {
-					return math.IsNaN(x) && math.IsNaN(y)
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmp.FilterValues(func(x, y float32) bool {
-					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
-			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
+			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})
