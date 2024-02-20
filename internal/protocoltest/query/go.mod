@@ -7,8 +7,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.0
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.0
 	github.com/aws/smithy-go v1.20.0
-	github.com/google/go-cmp v0.5.8
 )
+
+require github.com/google/go-cmp v0.5.8 // indirect
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 
