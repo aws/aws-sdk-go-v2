@@ -3998,7 +3998,7 @@
                 "DestinationConfig": {
                     "target": "com.amazonaws.lambda#DestinationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
+                        "smithy.api#documentation": "<p>(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka event sources only) A configuration object that specifies the destination of an event after Lambda processes it.</p>"
                     }
                 },
                 "Topics": {
@@ -8667,7 +8667,7 @@
                 "Destination": {
                     "target": "com.amazonaws.lambda#DestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination resource.</p>\n         <p>To retain records of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations\">asynchronous invocations</a>,\n      you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function,\n      or Amazon EventBridge event bus as the destination.</p>\n         <p>To retain records of failed invocations from <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#event-source-mapping-destinations\">Kinesis and\n      DynamoDB event sources</a>, you can configure an Amazon SNS topic or\n      Amazon SQS queue as the destination.</p>\n         <p>To retain records of failed invocations from <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination\">self-managed Kafka</a> or\n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination\">Amazon MSK</a>,\n      you can configure an Amazon SNS topic or Amazon SQS queue as the destination.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination resource.</p>\n         <p>To retain records of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations\">asynchronous invocations</a>,\n      you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function,\n      or Amazon EventBridge event bus as the destination.</p>\n         <p>To retain records of failed invocations from <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#event-source-mapping-destinations\">Kinesis and\n      DynamoDB event sources</a>, you can configure an Amazon SNS topic or\n      Amazon SQS queue as the destination.</p>\n         <p>To retain records of failed invocations from <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination\">self-managed Kafka</a> or\n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination\">Amazon MSK</a>,\n      you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.</p>"
                     }
                 }
             },
@@ -9997,6 +9997,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "dotnet6"
+                    }
+                },
+                "dotnet8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dotnet8"
                     }
                 },
                 "nodejs43edge": {
