@@ -1,3 +1,17 @@
+# Release (2024-02-20)
+
+## General Highlights
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.29.1](service/dynamodb/CHANGELOG.md#v1291-2024-02-20)
+  * **Documentation**: Publishing quick fix for doc only update.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.27.0](service/firehose/CHANGELOG.md#v1270-2024-02-20)
+  * **Feature**: This release updates a few Firehose related APIs.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.52.0](service/lambda/CHANGELOG.md#v1520-2024-02-20)
+  * **Feature**: Add .NET 8 (dotnet8) Runtime support to AWS Lambda.
+
 # Release (2024-02-19)
 
 ## General Highlights

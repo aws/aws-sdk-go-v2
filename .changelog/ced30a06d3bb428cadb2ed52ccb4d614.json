@@ -1,8 +1,0 @@
-{
-    "id": "ced30a06-d3bb-428c-adb2-ed52ccb4d614",
-    "type": "documentation",
-    "description": "Publishing quick fix for doc only update.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

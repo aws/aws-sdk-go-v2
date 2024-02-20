@@ -1,8 +1,0 @@
-{
-    "id": "e59e64e4-bfdc-4308-9474-d478bd8f0350",
-    "type": "feature",
-    "description": "This release updates a few Firehose related APIs.",
-    "modules": [
-        "service/firehose"
-    ]
-}

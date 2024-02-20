@@ -1,3 +1,8 @@
+# v1.29.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+* **Documentation**: Publishing quick fix for doc only update.
+
 # v1.29.0 (2024-02-16)
 
 * **Feature**: Add new ClientOptions field to waiter config which allows you to extend the config for operation calls made by waiters.
