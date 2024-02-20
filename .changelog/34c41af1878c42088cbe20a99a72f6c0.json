@@ -1,0 +1,8 @@
+{
+    "id": "34c41af1-878c-4208-8cbe-20a99a72f6c0",
+    "type": "feature",
+    "description": "Add .NET 8 (dotnet8) Runtime support to AWS Lambda.",
+    "modules": [
+        "service/lambda"
+    ]
+}

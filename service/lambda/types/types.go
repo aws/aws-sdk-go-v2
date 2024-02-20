@@ -321,8 +321,9 @@ type EventSourceMappingConfiguration struct {
 	// batch in two and retry. The default value is false.
 	BisectBatchOnFunctionError *bool
 
-	// (Kinesis and DynamoDB Streams only) An Amazon SQS queue or Amazon SNS topic
-	// destination for discarded records.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka event
+	// sources only) A configuration object that specifies the destination of an event
+	// after Lambda processes it.
 	DestinationConfig *DestinationConfig
 
 	// Specific configuration settings for a DocumentDB event source.
@@ -975,7 +976,8 @@ type OnFailure struct {
 	// , you can configure an Amazon SNS topic or Amazon SQS queue as the destination.
 	// To retain records of failed invocations from self-managed Kafka (https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination)
 	// or Amazon MSK (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination)
-	// , you can configure an Amazon SNS topic or Amazon SQS queue as the destination.
+	// , you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket
+	// as the destination.
 	Destination *string
 
 	noSmithyDocumentSerde

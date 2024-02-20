@@ -22,10 +22,10 @@ import (
 //   - Create a new global secondary index on the table. After the index begins
 //     backfilling, you can use UpdateTable to perform other operations.
 //
-// UpdateTable is an asynchronous operation; while it is executing, the table
-// status changes from ACTIVE to UPDATING . While it is UPDATING , you cannot issue
-// another UpdateTable request. When the table returns to the ACTIVE state, the
-// UpdateTable operation is complete.
+// UpdateTable is an asynchronous operation; while it's executing, the table
+// status changes from ACTIVE to UPDATING . While it's UPDATING , you can't issue
+// another UpdateTable request on the base table nor any replicas. When the table
+// returns to the ACTIVE state, the UpdateTable operation is complete.
 func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optFns ...func(*Options)) (*UpdateTableOutput, error) {
 	if params == nil {
 		params = &UpdateTableInput{}
