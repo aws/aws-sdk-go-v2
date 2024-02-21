@@ -1,3 +1,7 @@
+# v1.27.1 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2024-02-20)
 
 * **Feature**: This release updates a few Firehose related APIs.

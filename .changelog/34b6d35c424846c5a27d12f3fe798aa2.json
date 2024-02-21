@@ -1,8 +1,0 @@
-{
-    "id": "34b6d35c-4248-46c5-a27d-12f3fe798aa2",
-    "type": "feature",
-    "description": "Increase the maximum length of descriptions for Inputs, Detector Models, and Alarm Models",
-    "modules": [
-        "service/iotevents"
-    ]
-}

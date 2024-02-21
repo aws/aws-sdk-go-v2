@@ -1,3 +1,8 @@
+# v1.25.0 (2024-02-21)
+
+* **Feature**: This release adds a field exposing model quality to read APIs for models. It also adds a model quality field to the API response when creating an inference scheduler.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.2 (2024-02-20)
 
 * **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.

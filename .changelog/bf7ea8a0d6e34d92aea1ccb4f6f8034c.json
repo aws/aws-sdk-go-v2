@@ -1,8 +1,0 @@
-{
-    "id": "bf7ea8a0-d6e3-4d92-aea1-ccb4f6f8034c",
-    "type": "feature",
-    "description": "This release adds a field exposing model quality to read APIs for models. It also adds a model quality field to the API response when creating an inference scheduler.",
-    "modules": [
-        "service/lookoutequipment"
-    ]
-}

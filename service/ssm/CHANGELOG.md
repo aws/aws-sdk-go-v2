@@ -1,3 +1,8 @@
+# v1.48.0 (2024-02-21)
+
+* **Feature**: This release adds support for sharing Systems Manager parameters with other AWS accounts.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.1 (2024-02-20)
 
 * **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.

@@ -1,3 +1,7 @@
+# v1.52.1 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2024-02-20)
 
 * **Feature**: Add .NET 8 (dotnet8) Runtime support to AWS Lambda.

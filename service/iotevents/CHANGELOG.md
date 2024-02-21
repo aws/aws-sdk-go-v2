@@ -1,3 +1,8 @@
+# v1.22.0 (2024-02-21)
+
+* **Feature**: Increase the maximum length of descriptions for Inputs, Detector Models, and Alarm Models
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.1 (2024-02-20)
 
 * **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.

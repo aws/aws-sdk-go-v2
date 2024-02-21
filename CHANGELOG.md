@@ -1,3 +1,18 @@
+# Release (2024-02-21)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iotevents`: [v1.22.0](service/iotevents/CHANGELOG.md#v1220-2024-02-21)
+  * **Feature**: Increase the maximum length of descriptions for Inputs, Detector Models, and Alarm Models
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.25.0](service/lookoutequipment/CHANGELOG.md#v1250-2024-02-21)
+  * **Feature**: This release adds a field exposing model quality to read APIs for models. It also adds a model quality field to the API response when creating an inference scheduler.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.47.0](service/medialive/CHANGELOG.md#v1470-2024-02-21)
+  * **Feature**: MediaLive now supports the ability to restart pipelines in a running channel.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.48.0](service/ssm/CHANGELOG.md#v1480-2024-02-21)
+  * **Feature**: This release adds support for sharing Systems Manager parameters with other AWS accounts.
+
 # Release (2024-02-20)
 
 ## General Highlights
