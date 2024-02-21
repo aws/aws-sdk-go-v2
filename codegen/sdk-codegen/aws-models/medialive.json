@@ -2579,7 +2579,7 @@
                 "Accessibility": {
                     "target": "com.amazonaws.medialive#AccessibilityType",
                     "traits": {
-                        "smithy.api#documentation": "Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.",
+                        "smithy.api#documentation": "Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds. This signaling is added to HLS output group and MediaPackage output group.",
                         "smithy.api#jsonName": "accessibility"
                     }
                 },
@@ -3085,6 +3085,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for ChannelEgressEndpoint"
+            }
+        },
+        "com.amazonaws.medialive#ChannelPipelineIdToRestart": {
+            "type": "enum",
+            "members": {
+                "PIPELINE_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PIPELINE_0"
+                    }
+                },
+                "PIPELINE_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PIPELINE_1"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Property of RestartChannelPipelinesRequest"
             }
         },
         "com.amazonaws.medialive#ChannelState": {
@@ -16748,6 +16768,9 @@
                     "target": "com.amazonaws.medialive#RejectInputDeviceTransfer"
                 },
                 {
+                    "target": "com.amazonaws.medialive#RestartChannelPipelines"
+                },
+                {
                     "target": "com.amazonaws.medialive#StartChannel"
                 },
                 {
@@ -20638,6 +20661,213 @@
             },
             "traits": {
                 "smithy.api#documentation": "Video quality, e.g. 'STANDARD' (Outputs only)"
+            }
+        },
+        "com.amazonaws.medialive#RestartChannelPipelines": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#RestartChannelPipelinesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#RestartChannelPipelinesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Restart pipelines in one channel that is currently running.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/prod/channels/{ChannelId}/restartChannelPipelines",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.medialive#RestartChannelPipelinesRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "ID of channel",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PipelineIds": {
+                    "target": "com.amazonaws.medialive#__listOfChannelPipelineIdToRestart",
+                    "traits": {
+                        "smithy.api#documentation": "An array of pipelines to restart in this channel. Format PIPELINE_0 or PIPELINE_1.",
+                        "smithy.api#jsonName": "pipelineIds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Pipelines to restart.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#RestartChannelPipelinesResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique arn of the channel.",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "CdiInputSpecification": {
+                    "target": "com.amazonaws.medialive#CdiInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of CDI inputs for this channel",
+                        "smithy.api#jsonName": "cdiInputSpecification"
+                    }
+                },
+                "ChannelClass": {
+                    "target": "com.amazonaws.medialive#ChannelClass",
+                    "traits": {
+                        "smithy.api#documentation": "The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.",
+                        "smithy.api#jsonName": "channelClass"
+                    }
+                },
+                "Destinations": {
+                    "target": "com.amazonaws.medialive#__listOfOutputDestination",
+                    "traits": {
+                        "smithy.api#documentation": "A list of destinations of the channel. For UDP outputs, there is one\ndestination per output. For other types (HLS, for example), there is\none destination per packager.",
+                        "smithy.api#jsonName": "destinations"
+                    }
+                },
+                "EgressEndpoints": {
+                    "target": "com.amazonaws.medialive#__listOfChannelEgressEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "The endpoints where outgoing connections initiate from",
+                        "smithy.api#jsonName": "egressEndpoints"
+                    }
+                },
+                "EncoderSettings": {
+                    "target": "com.amazonaws.medialive#EncoderSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "encoderSettings"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique id of the channel.",
+                        "smithy.api#jsonName": "id"
+                    }
+                },
+                "InputAttachments": {
+                    "target": "com.amazonaws.medialive#__listOfInputAttachment",
+                    "traits": {
+                        "smithy.api#documentation": "List of input attachments for channel.",
+                        "smithy.api#jsonName": "inputAttachments"
+                    }
+                },
+                "InputSpecification": {
+                    "target": "com.amazonaws.medialive#InputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of network and file inputs for this channel",
+                        "smithy.api#jsonName": "inputSpecification"
+                    }
+                },
+                "LogLevel": {
+                    "target": "com.amazonaws.medialive#LogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "The log level being written to CloudWatch Logs.",
+                        "smithy.api#jsonName": "logLevel"
+                    }
+                },
+                "Maintenance": {
+                    "target": "com.amazonaws.medialive#MaintenanceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Maintenance settings for this channel.",
+                        "smithy.api#jsonName": "maintenance"
+                    }
+                },
+                "MaintenanceStatus": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The time in milliseconds by when the PVRE restart must occur.",
+                        "smithy.api#jsonName": "maintenanceStatus"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the channel. (user-mutable)",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "PipelineDetails": {
+                    "target": "com.amazonaws.medialive#__listOfPipelineDetail",
+                    "traits": {
+                        "smithy.api#documentation": "Runtime details for the pipelines of a running channel.",
+                        "smithy.api#jsonName": "pipelineDetails"
+                    }
+                },
+                "PipelinesRunningCount": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The number of currently healthy pipelines.",
+                        "smithy.api#jsonName": "pipelinesRunningCount"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Amazon Resource Name (ARN) of the role assumed when running the Channel.",
+                        "smithy.api#jsonName": "roleArn"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.medialive#ChannelState",
+                    "traits": {
+                        "smithy.api#jsonName": "state"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.medialive#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A collection of key-value pairs.",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Vpc": {
+                    "target": "com.amazonaws.medialive#VpcOutputSettingsDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for VPC output",
+                        "smithy.api#jsonName": "vpc"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for RestartChannelPipelinesResponse",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.medialive#RtmpAdMarkers": {
@@ -25986,6 +26216,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfChannelEgressEndpoint"
+            }
+        },
+        "com.amazonaws.medialive#__listOfChannelPipelineIdToRestart": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#ChannelPipelineIdToRestart"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfChannelPipelineIdToRestart"
             }
         },
         "com.amazonaws.medialive#__listOfChannelSummary": {

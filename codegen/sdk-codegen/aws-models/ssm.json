@@ -7252,7 +7252,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the parameter to delete.</p>",
+                        "smithy.api#documentation": "<p>The name of the parameter to delete.</p>\n         <note>\n            <p>You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name\n    itself.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7291,7 +7291,7 @@
                 "Names": {
                     "target": "com.amazonaws.ssm#ParameterNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the parameters to delete. After deleting a parameter, wait for at least 30\n   seconds to create a parameter with the same name.</p>",
+                        "smithy.api#documentation": "<p>The names of the parameters to delete. After deleting a parameter, wait for at least 30\n   seconds to create a parameter with the same name.</p>\n         <note>\n            <p>You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name\n    itself.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7433,14 +7433,23 @@
                     "target": "com.amazonaws.ssm#InternalServerError"
                 },
                 {
+                    "target": "com.amazonaws.ssm#MalformedResourcePolicyDocumentException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.ssm#ResourcePolicyConflictException"
                 },
                 {
                     "target": "com.amazonaws.ssm#ResourcePolicyInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ResourcePolicyNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. Currently,\n    <code>OpsItemGroup</code> is the only resource that supports Systems Manager resource policies. The\n   resource policy for <code>OpsItemGroup</code> enables Amazon Web Services accounts to view and interact with\n   OpsCenter operational work items (OpsItems).</p>"
+                "smithy.api#documentation": "<p>Deletes a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. The following\n   resources support Systems Manager resource policies.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OpsItemGroup</code> - The resource policy for <code>OpsItemGroup</code> enables\n     Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Parameter</code> - The resource policy is used to share a parameter with other\n     accounts using Resource Access Manager (RAM). For more information about\n     cross-account sharing of parameters, see <a href=\"systems-manager/latest/userguide/parameter-store-shared-parameters.html\">Working with\n      shared parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ssm#DeleteResourcePolicyRequest": {
@@ -8469,7 +8478,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document, and\n   can't be changed.</p>"
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document, and can't be\n   changed.</p>"
                     }
                 }
             },
@@ -9854,7 +9863,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get information about a parameter.</p>\n         <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code>\n   in the request, the response includes information up to the limit specified. The number of items\n   returned, however, can be between zero and the value of <code>MaxResults</code>. If the service\n   reaches an internal limit while processing the results, it stops the operation and returns the\n   matching values up to that point and a <code>NextToken</code>. You can specify the\n    <code>NextToken</code> in a subsequent call to get the next set of results.</p>\n         <important>\n            <p>If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must\n    also update the key alias the parameter uses to reference KMS. Otherwise,\n     <code>DescribeParameters</code> retrieves whatever the original key alias was\n    referencing.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Lists the parameters in your Amazon Web Services account or the parameters shared with you when you enable\n   the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html#systemsmanager-DescribeParameters-request-Shared\">Shared</a> option.</p>\n         <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code>\n   in the request, the response includes information up to the limit specified. The number of items\n   returned, however, can be between zero and the value of <code>MaxResults</code>. If the service\n   reaches an internal limit while processing the results, it stops the operation and returns the\n   matching values up to that point and a <code>NextToken</code>. You can specify the\n    <code>NextToken</code> in a subsequent call to get the next set of results.</p>\n         <important>\n            <p>If you change the KMS key alias for the KMS key used to encrypt a parameter,\n    then you must also update the key alias the parameter uses to reference KMS. Otherwise,\n     <code>DescribeParameters</code> retrieves whatever the original key alias was\n    referencing.</p>\n         </important>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -9887,6 +9896,13 @@
                     "target": "com.amazonaws.ssm#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n   call.)</p>"
+                    }
+                },
+                "Shared": {
+                    "target": "com.amazonaws.ssm#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Lists parameters that are shared with you.</p>\n         <note>\n            <p>By default when using this option, the command returns parameters that have been shared\n    using a standard Resource Access Manager Resource Share. In order for a parameter that was shared\n    using the <a>PutResourcePolicy</a> command to be returned, the associated\n      <code>RAM Resource Share Created From Policy</code> must have been promoted to\n    a standard Resource Share using the RAM\n    <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html\">PromoteResourceShareCreatedFromPolicy</a> API operation.</p>\n            <p>For more information about sharing parameters, see <a href=\"systems-manager/latest/userguide/parameter-store-shared-parameters.html\">Working with\n     shared parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>"
                     }
                 }
             },
@@ -10814,7 +10830,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document, and\n   can't be changed.</p>"
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document, and can't be\n   changed.</p>"
                     }
                 },
                 "PlatformTypes": {
@@ -11125,7 +11141,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document, and\n   can't be changed.</p>"
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document, and can't be\n   changed.</p>"
                     }
                 }
             },
@@ -11466,7 +11482,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.</p>"
+                        "smithy.api#documentation": "<p>The version of the artifact associated with the document. For example, 12.6. This value is\n   unique across all versions of a document, and can't be changed.</p>"
                     }
                 },
                 "CreatedDate": {
@@ -12418,7 +12434,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document and can't\n   be changed.</p>"
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For\n   example, 12.6. This value is unique across all versions of a document and can't be\n   changed.</p>"
                     }
                 },
                 "DocumentVersion": {
@@ -12462,7 +12478,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.</p>"
+                        "smithy.api#documentation": "<p>The version of the artifact associated with the document. For example, 12.6. This value is\n   unique across all versions of a document, and can't be changed.</p>"
                     }
                 },
                 "DocumentVersion": {
@@ -13647,7 +13663,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the history of all changes to a parameter.</p>\n         <important>\n            <p>If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must\n    also update the key alias the parameter uses to reference KMS. Otherwise,\n     <code>GetParameterHistory</code> retrieves whatever the original key alias was\n    referencing.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Retrieves the history of all changes to a parameter.</p>\n         <important>\n            <p>If you change the KMS key alias for the KMS key used to encrypt a parameter,\n    then you must also update the key alias the parameter uses to reference KMS. Otherwise,\n     <code>GetParameterHistory</code> retrieves whatever the original key alias was\n    referencing.</p>\n         </important>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -13661,7 +13677,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the parameter for which you want to review history.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the parameter for which you want to review\n   history. For parameters shared with you from another account, you must use the full ARN.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13715,7 +13731,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the parameter you want to query.</p>\n         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter\n   version, use <code>\"Name\": \"name:version\"</code>.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the parameter that you want to query. For\n   parameters shared with you from another account, you must use the full ARN.</p>\n         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter\n   version, use <code>\"Name\": \"name:version\"</code>.</p>\n         <p>For more information about shared parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html\">Working with shared parameters</a> in\n   the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13884,7 +13900,7 @@
                 "Names": {
                     "target": "com.amazonaws.ssm#ParameterNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Names of the parameters for which you want to query information.</p>\n         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter\n   version, use <code>\"Name\": \"name:version\"</code>.</p>",
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the parameters that you want to query. For\n   parameters shared with you from another account, you must use the full ARNs.</p>\n         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter\n   version, use <code>\"Name\": \"name:version\"</code>.</p>\n         <p>For more information about shared parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html\">Working with shared parameters</a> in\n   the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14132,6 +14148,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ResourceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.ssm#ResourcePolicyInvalidParameterException"
@@ -16782,7 +16801,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter name on which you want to attach one or more labels.</p>",
+                        "smithy.api#documentation": "<p>The parameter name on which you want to attach one or more labels.</p>\n         <note>\n            <p>You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name\n    itself.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -19359,6 +19378,22 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ssm#MaintenanceWindowIdentityForTarget"
+            }
+        },
+        "com.amazonaws.ssm#MalformedResourcePolicyDocumentException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MalformedResourcePolicyDocumentException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified policy document is malformed or invalid, or excessive\n    <code>PutResourcePolicy</code> or <code>DeleteResourcePolicy</code> calls have been made.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.ssm#ManagedInstanceId": {
@@ -22026,6 +22061,12 @@
                         "smithy.api#documentation": "<p>The parameter name.</p>"
                     }
                 },
+                "ARN": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The (ARN) of the last user to update the parameter.</p>"
+                    }
+                },
                 "Type": {
                     "target": "com.amazonaws.ssm#ParameterType",
                     "traits": {
@@ -22089,7 +22130,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata includes information like the ARN of the last user and the date/time the parameter\n   was last used.</p>"
+                "smithy.api#documentation": "<p>Metadata includes information like the Amazon Resource Name (ARN) of the last user to update\n   the parameter and the date and time the parameter was last used.</p>"
             }
         },
         "com.amazonaws.ssm#ParameterMetadataList": {
@@ -23664,7 +23705,7 @@
         "com.amazonaws.ssm#Policy": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^\\S+$"
+                "smithy.api#pattern": "^(?!\\s*$).+$"
             }
         },
         "com.amazonaws.ssm#PolicyHash": {
@@ -23970,7 +24011,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fully qualified name of the parameter that you want to add to the system. The fully\n   qualified name includes the complete hierarchy of the parameter path and name. For parameters in\n   a hierarchy, you must include a leading forward slash character (/) when you create or reference\n   a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code>\n         </p>\n         <p>Naming Constraints:</p>\n         <ul>\n            <li>\n               <p>Parameter names are case sensitive.</p>\n            </li>\n            <li>\n               <p>A parameter name must be unique within an Amazon Web Services Region</p>\n            </li>\n            <li>\n               <p>A parameter name can't be prefixed with \"<code>aws</code>\" or \"<code>ssm</code>\"\n     (case-insensitive).</p>\n            </li>\n            <li>\n               <p>Parameter names can include only the following symbols and letters:\n      <code>a-zA-Z0-9_.-</code>\n               </p>\n               <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter\n     names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code>\n               </p>\n            </li>\n            <li>\n               <p>A parameter name can't include spaces.</p>\n            </li>\n            <li>\n               <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p>\n            </li>\n         </ul>\n         <p>For additional information about valid values for parameter names, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>The maximum length constraint of 2048 characters listed below includes 1037 characters\n    reserved for internal use by Systems Manager. The maximum length for a parameter name that you create is\n    1011 characters. This includes the characters in the ARN that precede the name you specify, such\n    as <code>arn:aws:ssm:us-east-2:111122223333:parameter/</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The fully qualified name of the parameter that you want to add to the system.</p>\n         <note>\n            <p>You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name\n    itself.</p>\n         </note>\n         <p>The fully qualified name includes the complete hierarchy of the parameter path and name. For\n   parameters in a hierarchy, you must include a leading forward slash character (/) when you create\n   or reference a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code>\n         </p>\n         <p>Naming Constraints:</p>\n         <ul>\n            <li>\n               <p>Parameter names are case sensitive.</p>\n            </li>\n            <li>\n               <p>A parameter name must be unique within an Amazon Web Services Region</p>\n            </li>\n            <li>\n               <p>A parameter name can't be prefixed with \"<code>aws</code>\" or \"<code>ssm</code>\"\n     (case-insensitive).</p>\n            </li>\n            <li>\n               <p>Parameter names can include only the following symbols and letters:\n      <code>a-zA-Z0-9_.-</code>\n               </p>\n               <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter\n     names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code>\n               </p>\n            </li>\n            <li>\n               <p>A parameter name can't include spaces.</p>\n            </li>\n            <li>\n               <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p>\n            </li>\n         </ul>\n         <p>For additional information about valid values for parameter names, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>The maximum length constraint of 2048 characters listed below includes 1037 characters\n    reserved for internal use by Systems Manager. The maximum length for a parameter name that you create is\n    1011 characters. This includes the characters in the ARN that precede the name you specify, such\n    as <code>arn:aws:ssm:us-east-2:111122223333:parameter/</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -24075,6 +24116,12 @@
                     "target": "com.amazonaws.ssm#InternalServerError"
                 },
                 {
+                    "target": "com.amazonaws.ssm#MalformedResourcePolicyDocumentException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.ssm#ResourcePolicyConflictException"
                 },
                 {
@@ -24082,10 +24129,13 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#ResourcePolicyLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ResourcePolicyNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a Systems Manager resource policy. A resource policy helps you to define the\n    IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources.\n   Currently, <code>OpsItemGroup</code> is the only resource that supports Systems Manager resource policies.\n   The resource policy for <code>OpsItemGroup</code> enables Amazon Web Services accounts to view and interact\n   with OpsCenter operational work items (OpsItems).</p>"
+                "smithy.api#documentation": "<p>Creates or updates a Systems Manager resource policy. A resource policy helps you to define the\n    IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources.\n   The following resources support Systems Manager resource policies.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OpsItemGroup</code> - The resource policy for <code>OpsItemGroup</code> enables\n     Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Parameter</code> - The resource policy is used to share a parameter with other\n     accounts using Resource Access Manager (RAM). </p>\n               <p>To share a parameter, it must be in the advanced parameter tier. For information about\n     parameter tiers, see <a href=\"https://docs.aws.amazon.com/parameter-store-       advanced-parameters.html\">Managing parameter tiers</a>. For information about\n     changing an existing standard parameter to an advanced parameter, see <a href=\"https://docs.aws.amazon.com/parameter-store-advanced-parameters.html#parameter-       store-advanced-parameters-enabling\">Changing a standard parameter to an advanced\n      parameter</a>.</p>\n               <p>To share a <code>SecureString</code> parameter, it must be encrypted with a customer managed key, and you must share the key separately through Key Management Service. Amazon Web Services managed keys cannot be shared. Parameters encrypted with the default Amazon Web Services managed key can be updated to use a customer managed key instead. For KMS key definitions, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-mgmt\">KMS concepts</a> in\n     the <i>Key Management Service Developer Guide</i>.</p>\n               <important>\n                  <p>While you can share a parameter using the Systems Manager <code>PutResourcePolicy</code> operation,\n      we recommend using Resource Access Manager (RAM) instead. This is because using\n       <code>PutResourcePolicy</code> requires the extra step of promoting the parameter to a\n      standard RAM Resource Share using the RAM\n      <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html\">PromoteResourceShareCreatedFromPolicy</a> API operation. Otherwise, the parameter won't\n      be returned by the Systems Manager <a href=\"https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html\">DescribeParameters</a> API operation using the <code>--shared</code> option.</p>\n                  <p>For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html#share\">Sharing a\n       parameter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>\n                  </p>\n               </important>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ssm#PutResourcePolicyRequest": {
@@ -25402,6 +25452,22 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ssm#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFoundException",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified parameter to be shared could not be found.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ssm#ResourcePolicyConflictException": {
             "type": "structure",
             "members": {
@@ -25469,6 +25535,22 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.ssm#ResourcePolicyNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourcePolicyNotFoundException",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>No policies with the specified policy ID and hash could be found.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.ssm#ResourcePolicyParameterNamesList": {
@@ -27982,7 +28064,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the parameter from which you want to delete one or more labels.</p>",
+                        "smithy.api#documentation": "<p>The name of the parameter from which you want to delete one or more labels.</p>\n         <note>\n            <p>You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name\n    itself.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -28615,7 +28697,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact you are updating with the document.\n   For example, 12.6. This value is unique across all versions of a document, and\n   can't be changed.</p>"
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact you are updating with the document.\n   For example, 12.6. This value is unique across all versions of a document, and can't be\n   changed.</p>"
                     }
                 },
                 "DocumentVersion": {
