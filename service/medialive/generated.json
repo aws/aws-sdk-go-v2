@@ -57,6 +57,7 @@
         "api_op_PurchaseOffering.go",
         "api_op_RebootInputDevice.go",
         "api_op_RejectInputDeviceTransfer.go",
+        "api_op_RestartChannelPipelines.go",
         "api_op_StartChannel.go",
         "api_op_StartInputDevice.go",
         "api_op_StartInputDeviceMaintenanceWindow.go",

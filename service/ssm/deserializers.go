@@ -2919,11 +2919,20 @@ func awsAwsjson11_deserializeOpErrorDeleteResourcePolicy(response *smithyhttp.Re
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
 
+	case strings.EqualFold("MalformedResourcePolicyDocumentException", errorCode):
+		return awsAwsjson11_deserializeErrorMalformedResourcePolicyDocumentException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ResourcePolicyConflictException", errorCode):
 		return awsAwsjson11_deserializeErrorResourcePolicyConflictException(response, errorBody)
 
 	case strings.EqualFold("ResourcePolicyInvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorResourcePolicyInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("ResourcePolicyNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourcePolicyNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -9788,6 +9797,9 @@ func awsAwsjson11_deserializeOpErrorGetResourcePolicies(response *smithyhttp.Res
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ResourcePolicyInvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorResourcePolicyInvalidParameterException(response, errorBody)
 
@@ -12489,6 +12501,12 @@ func awsAwsjson11_deserializeOpErrorPutResourcePolicy(response *smithyhttp.Respo
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
 
+	case strings.EqualFold("MalformedResourcePolicyDocumentException", errorCode):
+		return awsAwsjson11_deserializeErrorMalformedResourcePolicyDocumentException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ResourcePolicyConflictException", errorCode):
 		return awsAwsjson11_deserializeErrorResourcePolicyConflictException(response, errorBody)
 
@@ -12497,6 +12515,9 @@ func awsAwsjson11_deserializeOpErrorPutResourcePolicy(response *smithyhttp.Respo
 
 	case strings.EqualFold("ResourcePolicyLimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorResourcePolicyLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ResourcePolicyNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourcePolicyNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -18865,6 +18886,41 @@ func awsAwsjson11_deserializeErrorItemSizeLimitExceededException(response *smith
 	return output
 }
 
+func awsAwsjson11_deserializeErrorMalformedResourcePolicyDocumentException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.MalformedResourcePolicyDocumentException{}
+	err := awsAwsjson11_deserializeDocumentMalformedResourcePolicyDocumentException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorMaxDocumentSizeExceeded(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -19915,6 +19971,41 @@ func awsAwsjson11_deserializeErrorResourceLimitExceededException(response *smith
 	return output
 }
 
+func awsAwsjson11_deserializeErrorResourceNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ResourceNotFoundException{}
+	err := awsAwsjson11_deserializeDocumentResourceNotFoundException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorResourcePolicyConflictException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -20005,6 +20096,41 @@ func awsAwsjson11_deserializeErrorResourcePolicyLimitExceededException(response 
 
 	output := &types.ResourcePolicyLimitExceededException{}
 	err := awsAwsjson11_deserializeDocumentResourcePolicyLimitExceededException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorResourcePolicyNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ResourcePolicyNotFoundException{}
+	err := awsAwsjson11_deserializeDocumentResourcePolicyNotFoundException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -32679,6 +32805,46 @@ func awsAwsjson11_deserializeDocumentMaintenanceWindowTaskParameterValueList(v *
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMalformedResourcePolicyDocumentException(v **types.MalformedResourcePolicyDocumentException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MalformedResourcePolicyDocumentException
+	if *v == nil {
+		sv = &types.MalformedResourcePolicyDocumentException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentMaxDocumentSizeExceeded(v **types.MaxDocumentSizeExceeded, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -35613,6 +35779,15 @@ func awsAwsjson11_deserializeDocumentParameterMetadata(v **types.ParameterMetada
 					return fmt.Errorf("expected AllowedPattern to be of type string, got %T instead", value)
 				}
 				sv.AllowedPattern = ptr.String(jtv)
+			}
+
+		case "ARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ARN = ptr.String(jtv)
 			}
 
 		case "DataType":
@@ -38742,6 +38917,46 @@ func awsAwsjson11_deserializeDocumentResourceLimitExceededException(v **types.Re
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourceNotFoundException
+	if *v == nil {
+		sv = &types.ResourceNotFoundException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResourcePolicyConflictException(v **types.ResourcePolicyConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -38871,6 +39086,46 @@ func awsAwsjson11_deserializeDocumentResourcePolicyLimitExceededException(v **ty
 				sv.LimitType = ptr.String(jtv)
 			}
 
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResourcePolicyNotFoundException(v **types.ResourcePolicyNotFoundException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourcePolicyNotFoundException
+	if *v == nil {
+		sv = &types.ResourcePolicyNotFoundException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)

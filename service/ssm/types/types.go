@@ -3905,9 +3905,12 @@ type ParameterInlinePolicy struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata includes information like the ARN of the last user and the date/time
-// the parameter was last used.
+// Metadata includes information like the Amazon Resource Name (ARN) of the last
+// user to update the parameter and the date and time the parameter was last used.
 type ParameterMetadata struct {
+
+	// The (ARN) of the last user to update the parameter.
+	ARN *string
 
 	// A parameter name can include only the following letters and symbols.
 	// a-zA-Z0-9_.-

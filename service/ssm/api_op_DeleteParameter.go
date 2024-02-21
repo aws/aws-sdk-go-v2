@@ -30,7 +30,8 @@ func (c *Client) DeleteParameter(ctx context.Context, params *DeleteParameterInp
 
 type DeleteParameterInput struct {
 
-	// The name of the parameter to delete.
+	// The name of the parameter to delete. You can't enter the Amazon Resource Name
+	// (ARN) for a parameter, only the parameter name itself.
 	//
 	// This member is required.
 	Name *string

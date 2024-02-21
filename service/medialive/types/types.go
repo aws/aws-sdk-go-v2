@@ -787,7 +787,8 @@ type CaptionDescription struct {
 	Name *string
 
 	// Indicates whether the caption track implements accessibility features such as
-	// written descriptions of spoken dialog, music, and sounds.
+	// written descriptions of spoken dialog, music, and sounds. This signaling is
+	// added to HLS output group and MediaPackage output group.
 	Accessibility AccessibilityType
 
 	// Additional settings for captions destination that depend on the destination

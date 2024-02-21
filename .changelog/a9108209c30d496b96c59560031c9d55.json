@@ -1,0 +1,8 @@
+{
+    "id": "a9108209-c30d-496b-96c5-9560031c9d55",
+    "type": "feature",
+    "description": "This release adds support for sharing Systems Manager parameters with other AWS accounts.",
+    "modules": [
+        "service/ssm"
+    ]
+}

@@ -212,6 +212,26 @@ func (ModelPromoteMode) Values() []ModelPromoteMode {
 	}
 }
 
+type ModelQuality string
+
+// Enum values for ModelQuality
+const (
+	ModelQualityQualityThresholdMet    ModelQuality = "QUALITY_THRESHOLD_MET"
+	ModelQualityCannotDetermineQuality ModelQuality = "CANNOT_DETERMINE_QUALITY"
+	ModelQualityPoorQualityDetected    ModelQuality = "POOR_QUALITY_DETECTED"
+)
+
+// Values returns all known values for ModelQuality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelQuality) Values() []ModelQuality {
+	return []ModelQuality{
+		"QUALITY_THRESHOLD_MET",
+		"CANNOT_DETERMINE_QUALITY",
+		"POOR_QUALITY_DETECTED",
+	}
+}
+
 type ModelStatus string
 
 // Enum values for ModelStatus

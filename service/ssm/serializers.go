@@ -12296,6 +12296,11 @@ func awsAwsjson11_serializeOpDocumentDescribeParametersInput(v *DescribeParamete
 		}
 	}
 
+	if v.Shared != nil {
+		ok := object.Key("Shared")
+		ok.Boolean(*v.Shared)
+	}
+
 	return nil
 }
 

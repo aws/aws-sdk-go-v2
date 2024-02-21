@@ -690,6 +690,26 @@ func (m *validateOpRejectInputDeviceTransfer) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRestartChannelPipelines struct {
+}
+
+func (*validateOpRestartChannelPipelines) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestartChannelPipelines) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestartChannelPipelinesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestartChannelPipelinesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartChannel struct {
 }
 
@@ -1144,6 +1164,10 @@ func addOpRebootInputDeviceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRejectInputDeviceTransferValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRejectInputDeviceTransfer{}, middleware.After)
+}
+
+func addOpRestartChannelPipelinesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestartChannelPipelines{}, middleware.After)
 }
 
 func addOpStartChannelValidationMiddleware(stack *middleware.Stack) error {
@@ -4166,6 +4190,21 @@ func validateOpRejectInputDeviceTransferInput(v *RejectInputDeviceTransferInput)
 	invalidParams := smithy.InvalidParamsError{Context: "RejectInputDeviceTransferInput"}
 	if v.InputDeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputDeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestartChannelPipelinesInput(v *RestartChannelPipelinesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestartChannelPipelinesInput"}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

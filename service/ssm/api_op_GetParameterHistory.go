@@ -33,7 +33,9 @@ func (c *Client) GetParameterHistory(ctx context.Context, params *GetParameterHi
 
 type GetParameterHistoryInput struct {
 
-	// The name of the parameter for which you want to review history.
+	// The name or Amazon Resource Name (ARN) of the parameter for which you want to
+	// review history. For parameters shared with you from another account, you must
+	// use the full ARN.
 	//
 	// This member is required.
 	Name *string

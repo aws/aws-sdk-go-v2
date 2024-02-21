@@ -715,6 +715,24 @@ func (ChannelClass) Values() []ChannelClass {
 	}
 }
 
+type ChannelPipelineIdToRestart string
+
+// Enum values for ChannelPipelineIdToRestart
+const (
+	ChannelPipelineIdToRestartPipeline0 ChannelPipelineIdToRestart = "PIPELINE_0"
+	ChannelPipelineIdToRestartPipeline1 ChannelPipelineIdToRestart = "PIPELINE_1"
+)
+
+// Values returns all known values for ChannelPipelineIdToRestart. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelPipelineIdToRestart) Values() []ChannelPipelineIdToRestart {
+	return []ChannelPipelineIdToRestart{
+		"PIPELINE_0",
+		"PIPELINE_1",
+	}
+}
+
 type ChannelState string
 
 // Enum values for ChannelState

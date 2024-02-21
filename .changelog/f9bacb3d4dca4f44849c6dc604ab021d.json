@@ -1,0 +1,8 @@
+{
+    "id": "f9bacb3d-4dca-4f44-849c-6dc604ab021d",
+    "type": "feature",
+    "description": "MediaLive now supports the ability to restart pipelines in a running channel.",
+    "modules": [
+        "service/medialive"
+    ]
+}

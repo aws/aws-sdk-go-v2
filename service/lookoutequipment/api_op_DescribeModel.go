@@ -138,6 +138,19 @@ type DescribeModelOutput struct {
 	// The name of the machine learning model being described.
 	ModelName *string
 
+	// Provides a quality assessment for a model that uses labels. If Lookout for
+	// Equipment determines that the model quality is poor based on training metrics,
+	// the value is POOR_QUALITY_DETECTED . Otherwise, the value is
+	// QUALITY_THRESHOLD_MET . If the model is unlabeled, the model quality can't be
+	// assessed and the value of ModelQuality is CANNOT_DETERMINE_QUALITY . In this
+	// situation, you can get a model quality assessment by adding labels to the input
+	// dataset and retraining the model. For information about using labels with your
+	// models, see Understanding labeling (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html)
+	// . For information about improving the quality of a model, see Best practices
+	// with Amazon Lookout for Equipment (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html)
+	// .
+	ModelQuality types.ModelQuality
+
 	// The date the active model version was activated.
 	ModelVersionActivatedAt *time.Time
 

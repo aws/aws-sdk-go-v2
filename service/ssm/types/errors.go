@@ -2210,6 +2210,35 @@ func (e *ItemSizeLimitExceededException) ErrorCode() string {
 }
 func (e *ItemSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified policy document is malformed or invalid, or excessive
+// PutResourcePolicy or DeleteResourcePolicy calls have been made.
+type MalformedResourcePolicyDocumentException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MalformedResourcePolicyDocumentException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MalformedResourcePolicyDocumentException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MalformedResourcePolicyDocumentException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MalformedResourcePolicyDocumentException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MalformedResourcePolicyDocumentException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The size limit of a document is 64 KB.
 type MaxDocumentSizeExceeded struct {
 	Message *string
@@ -3056,6 +3085,32 @@ func (e *ResourceLimitExceededException) ErrorCode() string {
 }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified parameter to be shared could not be found.
+type ResourceNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The hash provided in the call doesn't match the stored hash. This exception is
 // thrown when trying to update an obsolete policy version or when multiple
 // requests to update a policy are sent.
@@ -3147,6 +3202,32 @@ func (e *ResourcePolicyLimitExceededException) ErrorCode() string {
 func (e *ResourcePolicyLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// No policies with the specified policy ID and hash could be found.
+type ResourcePolicyNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourcePolicyNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourcePolicyNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourcePolicyNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourcePolicyNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourcePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified service setting wasn't found. Either the service name or the
 // setting hasn't been provisioned by the Amazon Web Services service team.

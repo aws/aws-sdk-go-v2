@@ -8399,6 +8399,15 @@ func awsAwsjson10_deserializeDocumentModelSummary(v **types.ModelSummary, value 
 				sv.ModelName = ptr.String(jtv)
 			}
 
+		case "ModelQuality":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelQuality to be of type string, got %T instead", value)
+				}
+				sv.ModelQuality = types.ModelQuality(jtv)
+			}
+
 		case "NextScheduledRetrainingStartDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8530,6 +8539,15 @@ func awsAwsjson10_deserializeDocumentModelVersionSummary(v **types.ModelVersionS
 					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
 				}
 				sv.ModelName = ptr.String(jtv)
+			}
+
+		case "ModelQuality":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelQuality to be of type string, got %T instead", value)
+				}
+				sv.ModelQuality = types.ModelQuality(jtv)
 			}
 
 		case "ModelVersion":
@@ -9436,6 +9454,15 @@ func awsAwsjson10_deserializeOpDocumentCreateInferenceSchedulerOutput(v **Create
 					return fmt.Errorf("expected InferenceSchedulerName to be of type string, got %T instead", value)
 				}
 				sv.InferenceSchedulerName = ptr.String(jtv)
+			}
+
+		case "ModelQuality":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelQuality to be of type string, got %T instead", value)
+				}
+				sv.ModelQuality = types.ModelQuality(jtv)
 			}
 
 		case "Status":
@@ -10691,6 +10718,15 @@ func awsAwsjson10_deserializeOpDocumentDescribeModelOutput(v **DescribeModelOutp
 				sv.ModelName = ptr.String(jtv)
 			}
 
+		case "ModelQuality":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelQuality to be of type string, got %T instead", value)
+				}
+				sv.ModelQuality = types.ModelQuality(jtv)
+			}
+
 		case "ModelVersionActivatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11127,6 +11163,15 @@ func awsAwsjson10_deserializeOpDocumentDescribeModelVersionOutput(v **DescribeMo
 					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
 				}
 				sv.ModelName = ptr.String(jtv)
+			}
+
+		case "ModelQuality":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelQuality to be of type string, got %T instead", value)
+				}
+				sv.ModelQuality = types.ModelQuality(jtv)
 			}
 
 		case "ModelVersion":
