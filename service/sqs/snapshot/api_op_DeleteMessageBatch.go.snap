@@ -1,6 +1,5 @@
 DeleteMessageBatch
 	Initialize stack step
-		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
