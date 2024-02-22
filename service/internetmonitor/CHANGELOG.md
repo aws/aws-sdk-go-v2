@@ -1,3 +1,8 @@
+# v1.12.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+* **Feature**: This release adds IPv4 prefixes to health events
+
 # v1.11.2 (2024-02-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

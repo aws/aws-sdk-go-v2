@@ -1,3 +1,7 @@
+# v1.26.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
 # v1.25.3 (2024-02-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

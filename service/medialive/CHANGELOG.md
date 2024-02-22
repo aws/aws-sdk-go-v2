@@ -1,3 +1,7 @@
+# v1.48.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
 # v1.47.0 (2024-02-21)
 
 * **Feature**: MediaLive now supports the ability to restart pipelines in a running channel.

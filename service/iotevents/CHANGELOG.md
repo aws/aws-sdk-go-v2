@@ -1,3 +1,7 @@
+# v1.23.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
 # v1.22.0 (2024-02-21)
 
 * **Feature**: Increase the maximum length of descriptions for Inputs, Detector Models, and Alarm Models

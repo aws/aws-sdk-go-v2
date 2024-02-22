@@ -1,3 +1,15 @@
+# Release (2024-02-22)
+
+## General Highlights
+* **Feature**: Add middleware stack snapshot tests.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.12.0](service/internetmonitor/CHANGELOG.md#v1120-2024-02-22)
+  * **Feature**: This release adds IPv4 prefixes to health events
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.23.0](service/kinesisvideo/CHANGELOG.md#v1230-2024-02-22)
+  * **Feature**: Increasing NextToken parameter length restriction for List APIs from 512 to 1024.
+
 # Release (2024-02-21)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.49.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
 # v1.48.0 (2024-02-21)
 
 * **Feature**: This release adds support for sharing Systems Manager parameters with other AWS accounts.

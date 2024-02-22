@@ -1,3 +1,8 @@
+# v1.23.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+* **Feature**: Increasing NextToken parameter length restriction for List APIs from 512 to 1024.
+
 # v1.22.2 (2024-02-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

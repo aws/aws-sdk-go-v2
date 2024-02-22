@@ -1,3 +1,7 @@
+# v1.26.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
 # v1.25.0 (2024-02-21)
 
 * **Feature**: This release adds a field exposing model quality to read APIs for models. It also adds a model quality field to the API response when creating an inference scheduler.
