@@ -1,0 +1,35 @@
+UpdateStorageSystem
+	Initialize stack step
+		RegisterServiceMetadata
+		legacyEndpointContextSetter
+		SetLogger
+		OperationInputValidation
+	Serialize stack step
+		setOperationInput
+		ResolveEndpoint
+		OperationSerializer
+	Build stack step
+		ClientRequestID
+		ComputeContentLength
+		UserAgent
+		RecursionDetection
+	Finalize stack step
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		EndpointHostPrefix
+		ComputePayloadHash
+		Retry
+		RetryMetricsHeader
+		setLegacyContextSigningOptions
+		Signing
+	Deserialize stack step
+		AddRawResponseToMetadata
+		ErrorCloseResponseBody
+		CloseResponseBody
+		ResponseErrorWrapper
+		RequestIDRetriever
+		OperationDeserializer
+		RecordResponseTiming
+		RequestResponseLogger

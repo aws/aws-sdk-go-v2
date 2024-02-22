@@ -7,6 +7,7 @@ package sqs
 import (
 	"context"
 	"errors"
+	"flag"
 	"fmt"
 	"github.com/aws/smithy-go/middleware"
 	"io"
@@ -14,6 +15,12 @@ import (
 	"os"
 	"testing"
 )
+
+var quiet bool
+
+func init() {
+	flag.BoolVar(&quiet, "quiet", false, "suppress full snapshot diffs")
+}
 
 const ssprefix = "snapshot"
 
@@ -58,6 +65,9 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 		return err
 	}
 	if actual := stack.String(); actual != string(expected) {
+		if quiet {
+			return fmt.Errorf("snapshot mismatch: %s", operation)
+		}
 		return fmt.Errorf("%s != %s", expected, actual)
 	}
 	return snapshotOK{}
