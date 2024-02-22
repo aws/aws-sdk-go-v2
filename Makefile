@@ -329,7 +329,7 @@ test-update-snapshot-%:
 test-ci-check-snapshot-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst test-ci-check-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
-		"go test ${SNAPSHOT_TAGS} -run TestCheckSnapshot -failfast -quiet ./..."
+		"go test ${SNAPSHOT_TAGS} -run TestCheckSnapshot -failfast ./..."
 
 cachedep: cachedep-modules-.
 
