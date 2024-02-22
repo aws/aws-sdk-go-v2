@@ -8,6 +8,7 @@ LINT_IGNORE_PRIVATE_METRICS='aws/middleware/private/metrics'
 
 UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
+SNAPSHOT_TAGS=-tags "snapshot"
 
 SMITHY_GO_SRC ?= $(shell pwd)/../smithy-go
 
@@ -314,6 +315,21 @@ test-modules-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst test-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test -timeout=2m ${UNIT_TEST_TAGS} ./..."
+
+test-check-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-check-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${SNAPSHOT_TAGS} -run TestCheckSnapshot ./..."
+
+test-update-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-update-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${SNAPSHOT_TAGS} -run TestUpdateSnapshot ./..."
+
+test-ci-check-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-ci-check-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${SNAPSHOT_TAGS} -run TestCheckSnapshot -failfast ./..."
 
 cachedep: cachedep-modules-.
 

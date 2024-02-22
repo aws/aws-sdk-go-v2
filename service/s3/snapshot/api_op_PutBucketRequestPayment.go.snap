@@ -1,0 +1,46 @@
+PutBucketRequestPayment
+	Initialize stack step
+		AWSChecksum:SetupInputContext
+		RegisterServiceMetadata
+		legacyEndpointContextSetter
+		S3Shared:ARNLookup
+		SetLogger
+		OperationInputValidation
+	Serialize stack step
+		putBucketContext
+		setOperationInput
+		ResolveEndpoint
+		S3:ProcessARNResource
+		S3:ObjectLambdaEndpoint
+		serializeImmutableHostnameBucket
+		OperationSerializer
+		S3:UpdateEndpoint
+		S3:RemoveBucketFromPathMiddleware
+	Build stack step
+		ClientRequestID
+		ComputeContentLength
+		UserAgent
+		RecursionDetection
+	Finalize stack step
+		DisableAcceptEncodingGzip
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		expressDefaultChecksum
+		AWSChecksum:ComputeInputPayloadChecksum
+		ComputePayloadHash
+		SigV4ContentSHA256Header
+		Retry
+		RetryMetricsHeader
+		setLegacyContextSigningOptions
+		Signing
+	Deserialize stack step
+		AddRawResponseToMetadata
+		ErrorCloseResponseBody
+		CloseResponseBody
+		ResponseErrorWrapper
+		S3MetadataRetriever
+		OperationDeserializer
+		RecordResponseTiming
+		RequestResponseLogger
