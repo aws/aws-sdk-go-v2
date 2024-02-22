@@ -1030,6 +1030,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The calculated health at a specific location.</p>"
                     }
+                },
+                "Ipv4Prefixes": {
+                    "target": "com.amazonaws.internetmonitor#Ipv4PrefixList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 prefixes at the client location that was impacted by the health event.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1795,6 +1801,12 @@
                 }
             }
         },
+        "com.amazonaws.internetmonitor#Ipv4PrefixList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.internetmonitor#LimitExceededException": {
             "type": "structure",
             "members": {
@@ -2088,7 +2100,7 @@
                     "target": "com.amazonaws.internetmonitor#Percentage",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The minimum percentage of overall traffic for an application that must be impacted by an issue before Internet Monitor creates an event when a\n\t\t\tthreshold is crossed for a local health score.</p>\n         <p>If you don't set a minimum traffic impact threshold, the default value is 0.01%.</p>"
+                        "smithy.api#documentation": "<p>The minimum percentage of overall traffic for an application that must be impacted by an issue before Internet Monitor creates an event when a\n\t\t\tthreshold is crossed for a local health score.</p>\n         <p>If you don't set a minimum traffic impact threshold, the default value is 0.1%.</p>"
                     }
                 }
             },
@@ -2671,7 +2683,7 @@
                 "QueryType": {
                     "target": "com.amazonaws.internetmonitor#QueryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of query to run. The following are the three types of queries that you can run using the Internet Monitor query interface:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MEASUREMENTS</code>: TBD definition</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOP_LOCATIONS</code>: TBD definition</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOP_LOCATION_DETAILS</code>: TBD definition</p>\n            </li>\n         </ul>\n         <p>For lists of the fields returned with each query type and more information about how each type of query is\n\t\t\tperformed, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html\">\n\t\t\t\tUsing the Amazon CloudWatch Internet Monitor query interface</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>",
+                        "smithy.api#documentation": "<p>The type of query to run. The following are the three types of queries that you can run using the Internet Monitor query interface:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MEASUREMENTS</code>: Provides availability score, performance score, total traffic, \n\t\t\t\tand round-trip times, at 5 minute intervals.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOP_LOCATIONS</code>: Provides availability score, performance score, total traffic, \n\t\t\t\tand time to first byte (TTFB) information, for the top location and ASN combinations that you're monitoring, by traffic volume.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOP_LOCATION_DETAILS</code>: Provides TTFB for Amazon CloudFront, your \n\t\t\t\tcurrent configuration, and the best performing EC2 configuration, at 1 hour intervals.</p>\n            </li>\n         </ul>\n         <p>For lists of the fields returned with each query type and more information about how each type of query is\n\t\t\tperformed, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html\">\n\t\t\t\tUsing the Amazon CloudWatch Internet Monitor query interface</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 },

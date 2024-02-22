@@ -3394,7 +3394,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 512
+                    "max": 1024
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9+/=]*$"
             }
