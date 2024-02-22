@@ -15,6 +15,7 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
+import static software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4.hasSigV4X;
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
 
@@ -81,7 +82,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add streaming events payload middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (!AwsSignatureVersion4.hasSigV4X(
+                            if (!hasSigV4X(
                                     model, service, operation)) {
                                 return false;
                             }
@@ -96,7 +97,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add unsigned payload middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (!AwsSignatureVersion4.hasSigV4X(
+                            if (!hasSigV4X(
                                     model, service, operation)) {
                                 return false;
                             }
@@ -112,7 +113,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add signed payload middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (!AwsSignatureVersion4.hasSigV4X(
+                            if (!hasSigV4X(
                                     model, service, operation)) {
                                 return false;
                             }
@@ -128,7 +129,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add content-sha256 payload header middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) -> {
-                            if (!AwsSignatureVersion4.hasSigV4X(
+                            if (!hasSigV4X(
                                     model, service, operation)) {
                                 return false;
                             }
@@ -202,12 +203,17 @@ public class AssembleMiddlewareStack implements GoIntegration {
 
     @Override
     public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
-        goDelegator.useFileWriter("api_client.go", settings.getModuleName(), addMiddleware());
+        goDelegator.useFileWriter("api_client.go", settings.getModuleName(), writer -> {
+            writer.write(addMiddleware());
+            if (hasSigV4X(model, settings.getService(model))) {
+                writer.write(addSigV4XMiddleware());
+            }
+        });
     }
 
-    // TODO symbols
     private GoWriter.Writable addMiddleware() {
         return goTemplate("""
+                $D $D $D
                 func addClientRequestID(stack *middleware.Stack) error {
                     return stack.Build.Add(&awsmiddleware.ClientRequestID{}, middleware.After)
                 }
@@ -216,6 +222,19 @@ public class AssembleMiddlewareStack implements GoIntegration {
                     return stack.Build.Add(&smithyhttp.ComputeContentLength{}, middleware.After)
                 }
 
+                func addRawResponseToMetadata(stack *middleware.Stack) error {
+                    return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
+                }
+
+                func addRecordResponseTiming(stack *middleware.Stack) error {
+                    return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
+                }
+                """, SmithyGoDependency.SMITHY_MIDDLEWARE, AwsGoDependency.AWS_MIDDLEWARE, SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
+    }
+
+    private GoWriter.Writable addSigV4XMiddleware() {
+        return goTemplate("""
+                $D
                 func addStreamingEventsPayload(stack *middleware.Stack) error {
                     return stack.Finalize.Add(&v4.StreamingEventsPayload{}, middleware.Before)
                 }
@@ -231,15 +250,6 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 func addContentSHA256Header(stack *middleware.Stack) error {
                     return stack.Finalize.Insert(&v4.ContentSHA256Header{}, (*v4.ComputePayloadSHA256)(nil).ID(), middleware.After)
                 }
-
-                func addRawResponseToMetadata(stack *middleware.Stack) error {
-                    return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
-                }
-
-                func addRecordResponseTiming(stack *middleware.Stack) error {
-                    return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
-                }
-                """,
-                MapUtils.of());
+                """, AwsGoDependency.AWS_SIGNER_V4);
     }
 }
