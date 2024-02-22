@@ -24,6 +24,7 @@ func (m *ResponseErrorWrapper) ID() string {
 	return "ResponseErrorWrapper"
 }
 
+// HandleDeserialize wraps the stack error with smithyhttp.ResponseError.
 func (m *ResponseErrorWrapper) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {

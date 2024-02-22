@@ -24,6 +24,8 @@ func (m *RequestIDRetriever) ID() string {
 	return "RequestIDRetriever"
 }
 
+// HandleDeserialize pulls the AWS request ID from the response, storing it in
+// operation metadata.
 func (m *RequestIDRetriever) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {

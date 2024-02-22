@@ -191,13 +191,13 @@ func (u *RequestUserAgent) AddUserAgentKeyValue(key, value string) {
 	u.userAgent.AddKeyValue(strings.Map(rules, key), strings.Map(rules, value))
 }
 
-// AddUserAgentKey adds the component identified by name to the User-Agent string.
+// AddSDKAgentKey adds the component identified by name to the User-Agent string.
 func (u *RequestUserAgent) AddSDKAgentKey(keyType SDKAgentKeyType, key string) {
 	// TODO: should target sdkAgent
 	u.userAgent.AddKey(keyType.string() + "/" + strings.Map(rules, key))
 }
 
-// AddUserAgentKeyValue adds the key identified by the given name and value to the User-Agent string.
+// AddSDKAgentKeyValue adds the key identified by the given name and value to the User-Agent string.
 func (u *RequestUserAgent) AddSDKAgentKeyValue(keyType SDKAgentKeyType, key, value string) {
 	// TODO: should target sdkAgent
 	u.userAgent.AddKeyValue(keyType.string(), strings.Map(rules, key)+"#"+strings.Map(rules, value))

@@ -368,10 +368,12 @@ func AddStreamingEventsPayload(stack *middleware.Stack) error {
 	return stack.Finalize.Add(&StreamingEventsPayload{}, middleware.Before)
 }
 
+// ID identifies the middleware.
 func (s *StreamingEventsPayload) ID() string {
 	return computePayloadHashMiddlewareID
 }
 
+// HandleFinalize marks the input stream to be signed with SigV4.
 func (s *StreamingEventsPayload) HandleFinalize(
 	ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler,
 ) (

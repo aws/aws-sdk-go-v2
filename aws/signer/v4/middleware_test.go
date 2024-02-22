@@ -408,8 +408,8 @@ func (*nopResolveEndpoint) HandleFinalize(
 }
 
 var (
-	_ middleware.FinalizeMiddleware = &unsignedPayload{}
+	_ middleware.FinalizeMiddleware = &UnsignedPayload{}
 	_ middleware.FinalizeMiddleware = &ComputePayloadSHA256{}
-	_ middleware.FinalizeMiddleware = &contentSHA256Header{}
+	_ middleware.FinalizeMiddleware = &ContentSHA256Header{}
 	_ middleware.FinalizeMiddleware = &SignHTTPRequestMiddleware{}
 )
