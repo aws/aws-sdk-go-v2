@@ -227,6 +227,9 @@ type ImpactedLocation struct {
 	// The calculated health at a specific location.
 	InternetHealth *InternetHealth
 
+	// The IPv4 prefixes at the client location that was impacted by the health event.
+	Ipv4Prefixes []string
+
 	// The latitude where the health event is located.
 	Latitude *float64
 
@@ -321,7 +324,7 @@ type LocalHealthEventsConfig struct {
 	// The minimum percentage of overall traffic for an application that must be
 	// impacted by an issue before Internet Monitor creates an event when a threshold
 	// is crossed for a local health score. If you don't set a minimum traffic impact
-	// threshold, the default value is 0.01%.
+	// threshold, the default value is 0.1%.
 	MinTrafficImpact float64
 
 	// The status of whether Internet Monitor creates a health event based on a

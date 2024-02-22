@@ -1,0 +1,8 @@
+{
+    "id": "f67756ad-45a3-465e-aaf4-4440cb47124e",
+    "type": "feature",
+    "description": "This release adds IPv4 prefixes to health events",
+    "modules": [
+        "service/internetmonitor"
+    ]
+}

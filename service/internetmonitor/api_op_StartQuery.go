@@ -50,9 +50,13 @@ type StartQueryInput struct {
 
 	// The type of query to run. The following are the three types of queries that you
 	// can run using the Internet Monitor query interface:
-	//   - MEASUREMENTS : TBD definition
-	//   - TOP_LOCATIONS : TBD definition
-	//   - TOP_LOCATION_DETAILS : TBD definition
+	//   - MEASUREMENTS : Provides availability score, performance score, total
+	//   traffic, and round-trip times, at 5 minute intervals.
+	//   - TOP_LOCATIONS : Provides availability score, performance score, total
+	//   traffic, and time to first byte (TTFB) information, for the top location and ASN
+	//   combinations that you're monitoring, by traffic volume.
+	//   - TOP_LOCATION_DETAILS : Provides TTFB for Amazon CloudFront, your current
+	//   configuration, and the best performing EC2 configuration, at 1 hour intervals.
 	// For lists of the fields returned with each query type and more information
 	// about how each type of query is performed, see Using the Amazon CloudWatch
 	// Internet Monitor query interface (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html)
