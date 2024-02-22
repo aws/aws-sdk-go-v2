@@ -435,6 +435,13 @@ func addComputeContentLength(stack *middleware.Stack) error {
 	return stack.Build.Add(&smithyhttp.ComputeContentLength{}, middleware.After)
 }
 
+func addRawResponseToMetadata(stack *middleware.Stack) error {
+	return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
+}
+
+func addRecordResponseTiming(stack *middleware.Stack) error {
+	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
+}
 func addStreamingEventsPayload(stack *middleware.Stack) error {
 	return stack.Finalize.Add(&v4.StreamingEventsPayload{}, middleware.Before)
 }
@@ -449,14 +456,6 @@ func addComputePayloadSHA256(stack *middleware.Stack) error {
 
 func addContentSHA256Header(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&v4.ContentSHA256Header{}, (*v4.ComputePayloadSHA256)(nil).ID(), middleware.After)
-}
-
-func addRawResponseToMetadata(stack *middleware.Stack) error {
-	return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
-}
-
-func addRecordResponseTiming(stack *middleware.Stack) error {
-	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
 }
 
 func resolveIdempotencyTokenProvider(o *Options) {

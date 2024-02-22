@@ -391,22 +391,6 @@ func addComputeContentLength(stack *middleware.Stack) error {
 	return stack.Build.Add(&smithyhttp.ComputeContentLength{}, middleware.After)
 }
 
-func addStreamingEventsPayload(stack *middleware.Stack) error {
-	return stack.Finalize.Add(&v4.StreamingEventsPayload{}, middleware.Before)
-}
-
-func addUnsignedPayload(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&v4.UnsignedPayload{}, "ResolveEndpointV2", middleware.After)
-}
-
-func addComputePayloadSHA256(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&v4.ComputePayloadSHA256{}, "ResolveEndpointV2", middleware.After)
-}
-
-func addContentSHA256Header(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&v4.ContentSHA256Header{}, (*v4.ComputePayloadSHA256)(nil).ID(), middleware.After)
-}
-
 func addRawResponseToMetadata(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
 }
