@@ -1,8 +1,0 @@
-{
-    "id": "2ef9d59a-6320-4810-a2d1-6f07d5db23f8",
-    "type": "bugfix",
-    "description": "Export all middleware structures such that service client modules can use them directly.",
-    "modules": [
-        "."
-    ]
-}

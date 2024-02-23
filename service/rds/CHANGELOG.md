@@ -1,3 +1,9 @@
+# v1.73.0 (2024-02-23)
+
+* **Feature**: Add pattern and length based validations for DBShardGroupIdentifier
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.72.0 (2024-02-22)
 
 * **Feature**: Add middleware stack snapshot tests.

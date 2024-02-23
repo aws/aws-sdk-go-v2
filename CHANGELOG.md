@@ -1,3 +1,21 @@
+# Release (2024-02-23)
+
+## General Highlights
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.25.2
+  * **Bug Fix**: Export all middleware structures such that service client modules can use them directly.
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.31.1](service/appsync/CHANGELOG.md#v1311-2024-02-23)
+  * **Documentation**: Documentation only updates for AppSync
+* `github.com/aws/aws-sdk-go-v2/service/qldb`: [v1.21.1](service/qldb/CHANGELOG.md#v1211-2024-02-23)
+  * **Documentation**: Clarify possible values for KmsKeyArn and EncryptionDescription.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.73.0](service/rds/CHANGELOG.md#v1730-2024-02-23)
+  * **Feature**: Add pattern and length based validations for DBShardGroupIdentifier
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.17.1](service/rum/CHANGELOG.md#v1171-2024-02-23)
+  * **Documentation**: Doc-only update for new RUM metrics that were added
+
 # Release (2024-02-22)
 
 ## General Highlights

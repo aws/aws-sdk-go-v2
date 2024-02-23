@@ -1,3 +1,8 @@
+# v1.0.0-preview.17 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.16 (2024-02-22)
 
 * **Feature**: Add middleware stack snapshot tests.
