@@ -157,6 +157,12 @@ public final class AwsSignatureVersion4 implements GoIntegration {
         return auth.containsKey(SigV4Trait.ID) && !operation.hasTrait(OptionalAuthTrait.class);
     }
 
+    public static boolean hasSigV4X(Model model, ServiceShape service) {
+        var auth = ServiceIndex.of(model)
+                .getEffectiveAuthSchemes(service.getId());
+        return auth.containsKey(SigV4Trait.ID) || auth.containsKey(SigV4ATrait.ID);
+    }
+
     public static boolean hasSigV4X(Model model, ServiceShape service, OperationShape operation) {
         var auth = ServiceIndex.of(model)
                 .getEffectiveAuthSchemes(service.getId(), operation.getId());

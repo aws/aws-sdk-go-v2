@@ -105,7 +105,7 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 				os.Setenv(k, v)
 			}
 
-			b := newRequestUserAgent()
+			b := NewRequestUserAgent()
 			_, _, err := b.HandleBuild(context.Background(), tt.In, tt.Next(t, tt.Expect))
 			if (err != nil) != tt.Err {
 				t.Errorf("error %v, want error %v", err, tt.Err)
@@ -148,7 +148,7 @@ func TestAddUserAgentKey(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			b := newRequestUserAgent()
+			b := NewRequestUserAgent()
 			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 			err := stack.Build.Add(b, middleware.After)
 			if err != nil {
@@ -201,7 +201,7 @@ func TestAddUserAgentKeyValue(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			b := newRequestUserAgent()
+			b := NewRequestUserAgent()
 			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 			err := stack.Build.Add(b, middleware.After)
 			if err != nil {
@@ -254,7 +254,7 @@ func TestAddSDKAgentKey(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			b := newRequestUserAgent()
+			b := NewRequestUserAgent()
 			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 			err := stack.Build.Add(b, middleware.After)
 			if err != nil {
@@ -310,7 +310,7 @@ func TestAddSDKAgentKeyValue(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			b := newRequestUserAgent()
+			b := NewRequestUserAgent()
 			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 			err := stack.Build.Add(b, middleware.After)
 			if err != nil {
