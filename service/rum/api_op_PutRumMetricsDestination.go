@@ -51,9 +51,13 @@ type PutRumMetricsDestinationInput struct {
 	DestinationArn *string
 
 	// This parameter is required if Destination is Evidently . If Destination is
-	// CloudWatch , do not use this parameter. This parameter specifies the ARN of an
+	// CloudWatch , don't use this parameter. This parameter specifies the ARN of an
 	// IAM role that RUM will assume to write to the Evidently experiment that you are
 	// sending metrics to. This role must have permission to write to that experiment.
+	// If you specify this parameter, you must be signed on to a role that has PassRole (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
+	// permissions attached to it, to allow the role to be passed. The
+	// CloudWatchAmazonCloudWatchRUMFullAccess (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html#managed-policies-cloudwatch-RUM)
+	// policy doesn't include PassRole permissions.
 	IamRoleArn *string
 
 	noSmithyDocumentSerde

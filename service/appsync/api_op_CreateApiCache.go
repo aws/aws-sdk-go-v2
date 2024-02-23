@@ -76,10 +76,12 @@ type CreateApiCacheInput struct {
 
 	// Controls how cache health metrics will be emitted to CloudWatch. Cache health
 	// metrics include:
-	//   - NetworkBandwidthOutAllowanceExceeded: The number of times a specified
-	//   GraphQL operation was called.
-	//   - EngineCPUUtilization: The number of GraphQL errors that occurred during a
-	//   specified GraphQL operation.
+	//   - NetworkBandwidthOutAllowanceExceeded: The network packets dropped because
+	//   the throughput exceeded the aggregated bandwidth limit. This is useful for
+	//   diagnosing bottlenecks in a cache configuration.
+	//   - EngineCPUUtilization: The CPU utilization (percentage) allocated to the
+	//   Redis process. This is useful for diagnosing bottlenecks in a cache
+	//   configuration.
 	// Metrics will be recorded by API ID. You can set the value to ENABLED or DISABLED
 	// .
 	HealthMetricsConfig types.CacheHealthMetricsConfig

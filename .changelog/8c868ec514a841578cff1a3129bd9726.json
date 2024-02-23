@@ -1,0 +1,8 @@
+{
+    "id": "8c868ec5-14a8-4157-8cff-1a3129bd9726",
+    "type": "documentation",
+    "description": "Documentation only updates for AppSync",
+    "modules": [
+        "service/appsync"
+    ]
+}

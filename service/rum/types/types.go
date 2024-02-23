@@ -77,7 +77,17 @@ type AppMonitorConfiguration struct {
 	FavoritePages []string
 
 	// The ARN of the guest IAM role that is attached to the Amazon Cognito identity
-	// pool that is used to authorize the sending of data to RUM.
+	// pool that is used to authorize the sending of data to RUM. It is possible that
+	// an app monitor does not have a value for GuestRoleArn . For example, this can
+	// happen when you use the console to create an app monitor and you allow
+	// CloudWatch RUM to create a new identity pool for Authorization. In this case,
+	// GuestRoleArn is not present in the GetAppMonitor (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_GetAppMonitor.html)
+	// response because it is not stored by the service. If this issue affects you, you
+	// can take one of the following steps:
+	//   - Use the Cloud Development Kit (CDK) to create an identity pool and the
+	//   associated IAM role, and use that for your app monitor.
+	//   - Make a separate GetIdentityPoolRoles (https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetIdentityPoolRoles.html)
+	//   call to Amazon Cognito to retrieve the GuestRoleArn .
 	GuestRoleArn *string
 
 	// The ID of the Amazon Cognito identity pool that is used to authorize the
@@ -273,14 +283,15 @@ type MetricDefinition struct {
 }
 
 // Use this structure to define one extended metric or custom metric that RUM will
-// send to CloudWatch or CloudWatch Evidently. For more information, see
-// Additional metrics that you can send to CloudWatch and CloudWatch Evidently (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html)
+// send to CloudWatch or CloudWatch Evidently. For more information, see Custom
+// metrics and extended metrics that you can send to CloudWatch and CloudWatch
+// Evidently (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-and-extended-metrics.html)
 // . This structure is validated differently for extended metrics and custom
 // metrics. For extended metrics that are sent to the AWS/RUM namespace, the
 // following validations apply:
 //   - The Namespace parameter must be omitted or set to AWS/RUM .
 //   - Only certain combinations of values for Name , ValueKey , and EventPattern
-//     are valid. In addition to what is displayed in the list below, the
+//     are valid. In addition to what is displayed in the following list, the
 //     EventPattern can also include information used by the DimensionKeys field.
 //   - If Name is PerformanceNavigationDuration , then ValueKey must be
 //     event_details.duration and the EventPattern must include
@@ -315,6 +326,16 @@ type MetricDefinition struct {
 //     must include {"event_type":["com.amazon.rum.http_event"]}
 //   - If Name is SessionCount , then ValueKey must be null and the EventPattern
 //     must include {"event_type":["com.amazon.rum.session_start_event"]}
+//   - If Name is PageViewCount , then ValueKey must be null and the EventPattern
+//     must include {"event_type":["com.amazon.rum.page_view_event"]}
+//   - If Name is Http4xxCount , then ValueKey must be null and the EventPattern
+//     must include {"event_type":
+//     ["com.amazon.rum.http_event"],"event_details":{"response":{"status":[{"numeric":[">=",400,"<",500]}]}}}
+//     }
+//   - If Name is Http5xxCount , then ValueKey must be null and the EventPattern
+//     must include {"event_type":
+//     ["com.amazon.rum.http_event"],"event_details":{"response":{"status":[{"numeric":[">=",500,"<=",599]}]}}}
+//     }
 //
 // For custom metrics, the following validation rules apply:
 //   - The namespace can't be omitted and can't be AWS/RUM . You can use the
@@ -398,7 +419,7 @@ type MetricDefinitionRequest struct {
 	//   - '{ "event_type": ["com.amazon.rum.performance_navigation_event"],
 	//   "metadata": { "browserName": [ "Chrome", "Safari" ], "countryCode": [ "US" ] },
 	//   "event_details": { "duration": [{ "numeric": [ ">=", 2000, "<", 8000 ] }] } }'
-	// If the metrics destination' is CloudWatch and the event also matches a value in
+	// If the metrics destination is CloudWatch and the event also matches a value in
 	// DimensionKeys , then the metric is published with the specified dimensions.
 	EventPattern *string
 
@@ -414,9 +435,9 @@ type MetricDefinitionRequest struct {
 
 	// The field within the event object that the metric value is sourced from. If you
 	// omit this field, a hardcoded value of 1 is pushed as the metric value. This is
-	// useful if you just want to count the number of events that the filter catches.
-	// If this metric is sent to CloudWatch Evidently, this field will be passed to
-	// Evidently raw and Evidently will handle data extraction from the event.
+	// useful if you want to count the number of events that the filter catches. If
+	// this metric is sent to CloudWatch Evidently, this field will be passed to
+	// Evidently raw. Evidently will handle data extraction from the event.
 	ValueKey *string
 
 	noSmithyDocumentSerde

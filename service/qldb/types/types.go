@@ -177,7 +177,9 @@ type LedgerEncryptionDescription struct {
 
 	// The Amazon Resource Name (ARN) of the customer managed KMS key that the ledger
 	// uses for encryption at rest. If this parameter is undefined, the ledger uses an
-	// Amazon Web Services owned KMS key for encryption.
+	// Amazon Web Services owned KMS key for encryption. It will display
+	// AWS_OWNED_KMS_KEY when updating the ledger's encryption configuration to the
+	// Amazon Web Services owned KMS key.
 	//
 	// This member is required.
 	KmsKeyArn *string

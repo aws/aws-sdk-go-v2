@@ -1,0 +1,8 @@
+{
+    "id": "4e202444-4088-45fb-8cb9-bd86cf0b2201",
+    "type": "feature",
+    "description": "Add pattern and length based validations for DBShardGroupIdentifier",
+    "modules": [
+        "service/rds"
+    ]
+}

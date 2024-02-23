@@ -58,7 +58,8 @@ type DescribeLedgerOutput struct {
 
 	// Information about the encryption of data at rest in the ledger. This includes
 	// the current status, the KMS key, and when the key became inaccessible (in the
-	// case of an error).
+	// case of an error). If this parameter is undefined, the ledger uses an Amazon Web
+	// Services owned KMS key for encryption.
 	EncryptionDescription *types.LedgerEncryptionDescription
 
 	// The name of the ledger.

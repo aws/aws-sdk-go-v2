@@ -551,7 +551,7 @@ type ElasticsearchDataSourceConfig struct {
 //   - FULL_REQUEST_RESOLVER_METRICS : Records and emits metric data for all
 //     resolvers in the request.
 //   - PER_RESOLVER_METRICS : Records and emits metric data for resolvers that have
-//     the metricConfig value set to ENABLED .
+//     the metricsConfig value set to ENABLED .
 //   - dataSourceLevelMetricsBehavior : Controls how data source metrics will be
 //     emitted to CloudWatch. Data source metrics include:
 //   - Requests: The number of invocations that occured during a request.
@@ -563,7 +563,7 @@ type ElasticsearchDataSourceConfig struct {
 //   - FULL_REQUEST_DATA_SOURCE_METRICS : Records and emits metric data for all
 //     data sources in the request.
 //   - PER_DATA_SOURCE_METRICS : Records and emits metric data for data sources
-//     that have the metricConfig value set to ENABLED .
+//     that have the metricsConfig value set to ENABLED .
 //   - operationLevelMetricsConfig : Controls how operation metrics will be emitted
 //     to CloudWatch. Operation metrics include:
 //   - Requests: The number of times a specified GraphQL operation was called.
@@ -583,7 +583,7 @@ type EnhancedMetricsConfig struct {
 	//   - FULL_REQUEST_DATA_SOURCE_METRICS : Records and emits metric data for all
 	//   data sources in the request.
 	//   - PER_DATA_SOURCE_METRICS : Records and emits metric data for data sources
-	//   that have the metricConfig value set to ENABLED .
+	//   that have the metricsConfig value set to ENABLED .
 	//
 	// This member is required.
 	DataSourceLevelMetricsBehavior DataSourceLevelMetricsBehavior
@@ -612,7 +612,7 @@ type EnhancedMetricsConfig struct {
 	//   - FULL_REQUEST_RESOLVER_METRICS : Records and emits metric data for all
 	//   resolvers in the request.
 	//   - PER_RESOLVER_METRICS : Records and emits metric data for resolvers that have
-	//   the metricConfig value set to ENABLED .
+	//   the metricsConfig value set to ENABLED .
 	//
 	// This member is required.
 	ResolverLevelMetricsBehavior ResolverLevelMetricsBehavior

@@ -53,7 +53,7 @@ type CreateAppMonitorInput struct {
 	// identity pool to use for authorization. If you don't include
 	// AppMonitorConfiguration , you must set up your own authorization method. For
 	// more information, see Authorize your application to send data to Amazon Web
-	// Services (https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html)
+	// Services (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html)
 	// . If you omit this argument, the sample rate used for RUM is set to 10% of the
 	// user sessions.
 	AppMonitorConfiguration *types.AppMonitorConfiguration

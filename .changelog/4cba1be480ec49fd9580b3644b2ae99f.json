@@ -1,0 +1,8 @@
+{
+    "id": "4cba1be4-80ec-49fd-9580-b3644b2ae99f",
+    "type": "documentation",
+    "description": "Doc-only update for new RUM metrics that were added",
+    "modules": [
+        "service/rum"
+    ]
+}

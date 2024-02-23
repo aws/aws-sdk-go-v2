@@ -1,0 +1,8 @@
+{
+    "id": "183ea753-6508-4891-a3fe-4986467171dc",
+    "type": "documentation",
+    "description": "Clarify possible values for KmsKeyArn and EncryptionDescription.",
+    "modules": [
+        "service/qldb"
+    ]
+}
