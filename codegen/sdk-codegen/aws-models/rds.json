@@ -10988,7 +10988,7 @@
                     }
                 },
                 "DBShardGroupIdentifier": {
-                    "target": "com.amazonaws.rds#String",
+                    "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the DB shard group.</p>"
                     }
@@ -11046,6 +11046,16 @@
                 "smithy.api#documentation": "<p>The specified DB shard group name must be unique in your Amazon Web Services account in the specified Amazon Web Services Region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rds#DBShardGroupIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
             }
         },
         "com.amazonaws.rds#DBShardGroupNotFoundFault": {
@@ -12588,7 +12598,7 @@
             "type": "structure",
             "members": {
                 "DBShardGroupIdentifier": {
-                    "target": "com.amazonaws.rds#String",
+                    "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Teh name of the DB shard group to delete.</p>",
@@ -15744,7 +15754,7 @@
             "type": "structure",
             "members": {
                 "DBShardGroupIdentifier": {
-                    "target": "com.amazonaws.rds#String",
+                    "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The user-supplied DB shard group identifier or the Amazon Resource Name (ARN) of the DB shard group. If this parameter is specified, \n            information for only the specific DB shard group is returned. This parameter isn't case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match an existing DB shard group identifier.</p>\n            </li>\n         </ul>"
                     }
@@ -22695,7 +22705,7 @@
             "type": "structure",
             "members": {
                 "DBShardGroupIdentifier": {
-                    "target": "com.amazonaws.rds#String",
+                    "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB shard group to modify.</p>",
@@ -25288,7 +25298,7 @@
             "type": "structure",
             "members": {
                 "DBShardGroupIdentifier": {
-                    "target": "com.amazonaws.rds#String",
+                    "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB shard group to reboot.</p>",
