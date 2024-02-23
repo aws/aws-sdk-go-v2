@@ -11,8 +11,8 @@ import (
 )
 
 var (
-	maxDepth int = 6
-	serviceDir string
+	maxDepth int
+	servicePath string
 )
 
 // Visit function passed to filepath.WalkDir. 
@@ -26,15 +26,16 @@ func extract(path string, d fs.DirEntry, err error) error {
 		return nil
 	}
 
-	currentDepth := strings.Count(path, string(os.PathSeparator))
-
 	isInternal := strings.Count(path, "/internal") > 0
 	if isInternal {
 		fmt.Printf("Skipping %v\n", path)
 		return nil
 	}
 
-	if currentDepth > maxDepth || isInternal {
+	currentDepth := strings.Count(path, string(os.PathSeparator))
+	serviceDepth := strings.Count(servicePath, string(os.PathSeparator))
+
+	if currentDepth > (serviceDepth + 1) || isInternal {
 		return fs.SkipDir
 	}
 
@@ -45,21 +46,23 @@ func extract(path string, d fs.DirEntry, err error) error {
 }
 
 func init() {
-	flag.StringVar(&serviceDir, "serviceDir", "",
+	flag.StringVar(&servicePath, "servicePath", "",
 		"Root directory that is direct parent of all service client directories")
 
 }
 
 func main() {
 	flag.Parse()
-	args := flag.Args()
-	serviceDir := args[0]
-	fmt.Println(serviceDir)
-	if serviceDir == "" {
-		log.Fatalf("no service directory specified")
+	if servicePath == "" {
+		log.Fatalf("need service dir and max depth")
 	}
 
-	err := filepath.WalkDir(serviceDir, extract)
+	log.Println(
+		fmt.Sprintf("Processing service path %v", servicePath),
+	)
+
+
+	err := filepath.WalkDir(servicePath, extract)
 	if err != nil {
 		log.Fatal(err)
 	}
