@@ -5,7 +5,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.27.4
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.16.6
 	github.com/aws/aws-sdk-go-v2/service/acm v1.25.1
-	github.com/aws/aws-sdk-go-v2/service/apigateway v1.23.1
+	github.com/aws/aws-sdk-go-v2/service/apigateway v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.34.1
@@ -61,7 +61,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/polly v1.39.1
-	github.com/aws/aws-sdk-go-v2/service/rds v1.73.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.74.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.43.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.39.1
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.40.1

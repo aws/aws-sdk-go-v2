@@ -1,3 +1,15 @@
+# Release (2024-02-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.23.2](service/apigateway/CHANGELOG.md#v1232-2024-02-26)
+  * **Documentation**: Documentation updates for Amazon API Gateway.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.25.0](service/drs/CHANGELOG.md#v1250-2024-02-26)
+  * **Feature**: Added volume status to DescribeSourceServer replicated volumes.
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.17.0](service/kafkaconnect/CHANGELOG.md#v1170-2024-02-26)
+  * **Feature**: Adds support for tagging, with new TagResource, UntagResource and ListTagsForResource APIs to manage tags and updates to existing APIs to allow tag on create. This release also adds support for the new DeleteWorkerConfiguration API.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.74.0](service/rds/CHANGELOG.md#v1740-2024-02-26)
+  * **Feature**: This release adds support for gp3 data volumes for Multi-AZ DB Clusters.
+
 # Release (2024-02-23)
 
 ## General Highlights

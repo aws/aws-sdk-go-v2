@@ -1,8 +1,0 @@
-{
-    "id": "24085502-21c6-4ce0-b008-d4d6c41c1aec",
-    "type": "feature",
-    "description": "Adds support for tagging, with new TagResource, UntagResource and ListTagsForResource APIs to manage tags and updates to existing APIs to allow tag on create. This release also adds support for the new DeleteWorkerConfiguration API.",
-    "modules": [
-        "service/kafkaconnect"
-    ]
-}
