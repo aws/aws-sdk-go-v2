@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes information about a model.
+// Changes information about a model. The maximum size of the model is 400 KB.
 func (c *Client) UpdateModel(ctx context.Context, params *UpdateModelInput, optFns ...func(*Options)) (*UpdateModelOutput, error) {
 	if params == nil {
 		params = &UpdateModelInput{}

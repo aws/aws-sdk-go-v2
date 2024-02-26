@@ -102,9 +102,8 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// in the Amazon RDS User Guide. This setting is required for RDS Custom.
 	CustomIamInstanceProfile *string
 
-	// The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore
-	// from. For more information on Multi-AZ DB clusters, see Multi-AZ DB cluster
-	// deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+	// The identifier for the Multi-AZ DB cluster snapshot to restore from. For more
+	// information on Multi-AZ DB clusters, see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 	// in the Amazon RDS User Guide. Constraints:
 	//   - Must match the identifier of an existing Multi-AZ DB cluster snapshot.
 	//   - Can't be specified when DBSnapshotIdentifier is specified.
@@ -112,8 +111,6 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	//   - If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the
 	//   DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.
 	//   - Can't be the identifier of an Aurora DB cluster snapshot.
-	//   - Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster
-	//   snapshot.
 	DBClusterSnapshotIdentifier *string
 
 	// The compute and memory capacity of the Amazon RDS DB instance, for example

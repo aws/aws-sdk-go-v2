@@ -122,6 +122,18 @@ func TestCheckSnapshot_DeleteCustomPlugin(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteWorkerConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWorkerConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteWorkerConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeConnector(context.Background(), nil, func(o *Options) {
@@ -182,11 +194,47 @@ func TestCheckSnapshot_ListCustomPlugins(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListWorkerConfigurations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListWorkerConfigurations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListWorkerConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UntagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UntagResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -265,6 +313,18 @@ func TestUpdateSnapshot_DeleteCustomPlugin(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteWorkerConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWorkerConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteWorkerConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeConnector(context.Background(), nil, func(o *Options) {
@@ -325,11 +385,47 @@ func TestUpdateSnapshot_ListCustomPlugins(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListWorkerConfigurations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListWorkerConfigurations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListWorkerConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UntagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UntagResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

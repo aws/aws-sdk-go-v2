@@ -43,6 +43,9 @@ type CreateWorkerConfigurationInput struct {
 	// A summary description of the worker configuration.
 	Description *string
 
+	// The tags you want to attach to the worker configuration.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -59,6 +62,9 @@ type CreateWorkerConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) that Amazon assigned to the worker configuration.
 	WorkerConfigurationArn *string
+
+	// The state of the worker configuration.
+	WorkerConfigurationState types.WorkerConfigurationState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

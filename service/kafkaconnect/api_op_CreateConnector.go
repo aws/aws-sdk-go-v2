@@ -66,7 +66,11 @@ type CreateConnectorInput struct {
 	// This member is required.
 	KafkaConnectVersion *string
 
-	// Specifies which plugins to use for the connector.
+	// Amazon MSK Connect does not currently support specifying multiple plugins as a
+	// list. To use more than one plugin for your connector, you can create a single
+	// custom plugin using a ZIP file that bundles multiple plugins together. Specifies
+	// which plugin to use for the connector. You must specify a single-element list
+	// containing one customPlugin object.
 	//
 	// This member is required.
 	Plugins []types.Plugin
@@ -85,6 +89,9 @@ type CreateConnectorInput struct {
 
 	// Details about log delivery.
 	LogDelivery *types.LogDelivery
+
+	// The tags you want to attach to the connector.
+	Tags map[string]string
 
 	// Specifies which worker configuration to use with the connector.
 	WorkerConfiguration *types.WorkerConfiguration

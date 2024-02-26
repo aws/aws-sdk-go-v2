@@ -32,6 +32,9 @@ type ListCustomPluginsInput struct {
 	// The maximum number of custom plugins to list in one response.
 	MaxResults int32
 
+	// Lists custom plugin names that start with the specified text string.
+	NamePrefix *string
+
 	// If the response of a ListCustomPlugins operation is truncated, it will include
 	// a NextToken. Send this NextToken in a subsequent request to continue listing
 	// from where the previous operation left off.

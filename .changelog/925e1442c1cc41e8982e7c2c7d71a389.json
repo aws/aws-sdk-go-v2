@@ -1,0 +1,8 @@
+{
+    "id": "925e1442-c1cc-41e8-982e-7c2c7d71a389",
+    "type": "feature",
+    "description": "Added volume status to DescribeSourceServer replicated volumes.",
+    "modules": [
+        "service/drs"
+    ]
+}

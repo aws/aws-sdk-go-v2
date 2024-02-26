@@ -107,3 +107,21 @@ func (KafkaClusterEncryptionInTransitType) Values() []KafkaClusterEncryptionInTr
 		"TLS",
 	}
 }
+
+type WorkerConfigurationState string
+
+// Enum values for WorkerConfigurationState
+const (
+	WorkerConfigurationStateActive   WorkerConfigurationState = "ACTIVE"
+	WorkerConfigurationStateDeleting WorkerConfigurationState = "DELETING"
+)
+
+// Values returns all known values for WorkerConfigurationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkerConfigurationState) Values() []WorkerConfigurationState {
+	return []WorkerConfigurationState{
+		"ACTIVE",
+		"DELETING",
+	}
+}

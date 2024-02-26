@@ -1,0 +1,8 @@
+{
+    "id": "1024c398-21b0-4fe1-b710-cd5b7dab6df1",
+    "type": "feature",
+    "description": "This release adds support for gp3 data volumes for Multi-AZ DB Clusters.",
+    "modules": [
+        "service/rds"
+    ]
+}

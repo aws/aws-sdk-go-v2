@@ -9,29 +9,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Returns information about a worker configuration.
-func (c *Client) DescribeWorkerConfiguration(ctx context.Context, params *DescribeWorkerConfigurationInput, optFns ...func(*Options)) (*DescribeWorkerConfigurationOutput, error) {
+// Deletes the specified worker configuration.
+func (c *Client) DeleteWorkerConfiguration(ctx context.Context, params *DeleteWorkerConfigurationInput, optFns ...func(*Options)) (*DeleteWorkerConfigurationOutput, error) {
 	if params == nil {
-		params = &DescribeWorkerConfigurationInput{}
+		params = &DeleteWorkerConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkerConfiguration", params, optFns, c.addOperationDescribeWorkerConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkerConfiguration", params, optFns, c.addOperationDeleteWorkerConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeWorkerConfigurationOutput)
+	out := result.(*DeleteWorkerConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeWorkerConfigurationInput struct {
+type DeleteWorkerConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) of the worker configuration that you want to get
-	// information about.
+	// The Amazon Resource Name (ARN) of the worker configuration that you want to
+	// delete.
 	//
 	// This member is required.
 	WorkerConfigurationArn *string
@@ -39,21 +38,10 @@ type DescribeWorkerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-type DescribeWorkerConfigurationOutput struct {
+type DeleteWorkerConfigurationOutput struct {
 
-	// The time that the worker configuration was created.
-	CreationTime *time.Time
-
-	// The description of the worker configuration.
-	Description *string
-
-	// The latest revision of the custom configuration.
-	LatestRevision *types.WorkerConfigurationRevisionDescription
-
-	// The name of the worker configuration.
-	Name *string
-
-	// The Amazon Resource Name (ARN) of the custom configuration.
+	// The Amazon Resource Name (ARN) of the worker configuration that you requested
+	// to delete.
 	WorkerConfigurationArn *string
 
 	// The state of the worker configuration.
@@ -65,19 +53,19 @@ type DescribeWorkerConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeWorkerConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWorkerConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeWorkerConfiguration{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkerConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeWorkerConfiguration{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkerConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkerConfiguration"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteWorkerConfiguration"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -120,10 +108,10 @@ func (c *Client) addOperationDescribeWorkerConfigurationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeWorkerConfigurationValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteWorkerConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkerConfiguration(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkerConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -144,10 +132,10 @@ func (c *Client) addOperationDescribeWorkerConfigurationMiddlewares(stack *middl
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeWorkerConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteWorkerConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkerConfiguration",
+		OperationName: "DeleteWorkerConfiguration",
 	}
 }

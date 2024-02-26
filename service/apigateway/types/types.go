@@ -1085,7 +1085,8 @@ type Stage struct {
 	// Settings for logging access in this stage.
 	AccessLogSettings *AccessLogSettings
 
-	// Specifies whether a cache cluster is enabled for the stage.
+	// Specifies whether a cache cluster is enabled for the stage. To activate a
+	// method-level cache, set CachingEnabled to true for a method.
 	CacheClusterEnabled bool
 
 	// The stage's cache capacity in GB. For more information about choosing a cache

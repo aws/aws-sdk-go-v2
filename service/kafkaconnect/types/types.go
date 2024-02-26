@@ -237,8 +237,8 @@ type ConnectorSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A plugin is an AWS resource that contains the code that defines a connector's
-// logic.
+// A plugin is an Amazon Web Services resource that contains the code that defines
+// a connector's logic.
 type CustomPlugin struct {
 
 	// The Amazon Resource Name (ARN) of the custom plugin.
@@ -465,8 +465,8 @@ type LogDeliveryDescription struct {
 	noSmithyDocumentSerde
 }
 
-// A plugin is an AWS resource that contains the code that defines your connector
-// logic.
+// A plugin is an Amazon Web Services resource that contains the code that defines
+// your connector logic.
 type Plugin struct {
 
 	// Details about a custom plugin.
@@ -786,6 +786,9 @@ type WorkerConfigurationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the worker configuration.
 	WorkerConfigurationArn *string
+
+	// The state of the worker configuration.
+	WorkerConfigurationState WorkerConfigurationState
 
 	noSmithyDocumentSerde
 }

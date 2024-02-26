@@ -32,6 +32,9 @@ type ListWorkerConfigurationsInput struct {
 	// The maximum number of worker configurations to list in one response.
 	MaxResults int32
 
+	// Lists worker configuration names that start with the specified text string.
+	NamePrefix *string
+
 	// If the response of a ListWorkerConfigurations operation is truncated, it will
 	// include a NextToken. Send this NextToken in a subsequent request to continue
 	// listing from where the previous operation left off.

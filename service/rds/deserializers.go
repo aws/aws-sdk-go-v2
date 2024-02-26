@@ -28335,6 +28335,23 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.StorageEncrypted = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("StorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageThroughput = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("StorageType", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -28741,6 +28758,23 @@ func awsAwsquery_deserializeDocumentDBClusterAutomatedBackup(v **types.DBCluster
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.StorageEncrypted = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("StorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageThroughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("StorageType", t.Name.Local):
@@ -30838,6 +30872,23 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.StorageEncrypted = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("StorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageThroughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("StorageType", t.Name.Local):

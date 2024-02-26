@@ -771,6 +771,11 @@ type DBCluster struct {
 	// Indicates whether the DB cluster is encrypted.
 	StorageEncrypted *bool
 
+	// The storage throughput for the DB cluster. The throughput is automatically set
+	// based on the IOPS that you provision, and is not configurable. This setting is
+	// only for non-Aurora Multi-AZ DB clusters.
+	StorageThroughput *int32
+
 	// The storage type associated with the DB cluster.
 	StorageType *string
 
@@ -869,6 +874,11 @@ type DBClusterAutomatedBackup struct {
 
 	// Indicates whether the source DB cluster is encrypted.
 	StorageEncrypted *bool
+
+	// The storage throughput for the automated backup. The throughput is
+	// automatically set based on the IOPS that you provision, and is not configurable.
+	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	StorageThroughput *int32
 
 	// The storage type associated with the DB cluster. This setting is only for
 	// non-Aurora Multi-AZ DB clusters.
@@ -1129,6 +1139,11 @@ type DBClusterSnapshot struct {
 
 	// Indicates whether the DB cluster snapshot is encrypted.
 	StorageEncrypted *bool
+
+	// The storage throughput for the DB cluster snapshot. The throughput is
+	// automatically set based on the IOPS that you provision, and is not configurable.
+	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	StorageThroughput *int32
 
 	// The storage type associated with the DB cluster snapshot. This setting is only
 	// for Aurora DB clusters.

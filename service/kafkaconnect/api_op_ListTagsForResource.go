@@ -6,58 +6,41 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Returns information about a worker configuration.
-func (c *Client) DescribeWorkerConfiguration(ctx context.Context, params *DescribeWorkerConfigurationInput, optFns ...func(*Options)) (*DescribeWorkerConfigurationOutput, error) {
+// Lists all the tags attached to the specified resource.
+func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
-		params = &DescribeWorkerConfigurationInput{}
+		params = &ListTagsForResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkerConfiguration", params, optFns, c.addOperationDescribeWorkerConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTagsForResource", params, optFns, c.addOperationListTagsForResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeWorkerConfigurationOutput)
+	out := result.(*ListTagsForResourceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeWorkerConfigurationInput struct {
+type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the worker configuration that you want to get
-	// information about.
+	// The Amazon Resource Name (ARN) of the resource for which you want to list all
+	// attached tags.
 	//
 	// This member is required.
-	WorkerConfigurationArn *string
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeWorkerConfigurationOutput struct {
+type ListTagsForResourceOutput struct {
 
-	// The time that the worker configuration was created.
-	CreationTime *time.Time
-
-	// The description of the worker configuration.
-	Description *string
-
-	// The latest revision of the custom configuration.
-	LatestRevision *types.WorkerConfigurationRevisionDescription
-
-	// The name of the worker configuration.
-	Name *string
-
-	// The Amazon Resource Name (ARN) of the custom configuration.
-	WorkerConfigurationArn *string
-
-	// The state of the worker configuration.
-	WorkerConfigurationState types.WorkerConfigurationState
+	// Lists the tags attached to the specified resource in the corresponding request.
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,19 +48,19 @@ type DescribeWorkerConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeWorkerConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeWorkerConfiguration{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTagsForResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeWorkerConfiguration{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTagsForResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkerConfiguration"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTagsForResource"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -120,10 +103,10 @@ func (c *Client) addOperationDescribeWorkerConfigurationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeWorkerConfigurationValidationMiddleware(stack); err != nil {
+	if err = addOpListTagsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkerConfiguration(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -144,10 +127,10 @@ func (c *Client) addOperationDescribeWorkerConfigurationMiddlewares(stack *middl
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeWorkerConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListTagsForResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkerConfiguration",
+		OperationName: "ListTagsForResource",
 	}
 }

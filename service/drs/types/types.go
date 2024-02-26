@@ -31,6 +31,10 @@ type ConversionProperties struct {
 	// A mapping between the volumes being converted and the converted snapshot ids
 	VolumeToConversionMap map[string]map[string]string
 
+	// A mapping between the volumes being converted and the product codes associated
+	// with them
+	VolumeToProductCodes map[string][]ProductCode
+
 	// A mapping between the volumes and their sizes
 	VolumeToVolumeSize map[string]int64
 
@@ -105,6 +109,9 @@ type DataReplicationInfoReplicatedDisk struct {
 
 	// The total amount of data to be replicated in bytes.
 	TotalStorageBytes int64
+
+	// The status of the volume.
+	VolumeStatus VolumeStatus
 
 	noSmithyDocumentSerde
 }
@@ -633,6 +640,18 @@ type PITPolicyRule struct {
 
 	// The ID of the rule.
 	RuleID int64
+
+	noSmithyDocumentSerde
+}
+
+// Properties of a product code associated with a volume.
+type ProductCode struct {
+
+	// Id of a product code associated with a volume.
+	ProductCodeId *string
+
+	// Mode of a product code associated with a volume.
+	ProductCodeMode ProductCodeMode
 
 	noSmithyDocumentSerde
 }

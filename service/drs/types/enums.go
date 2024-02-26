@@ -630,6 +630,24 @@ func (PITPolicyRuleUnits) Values() []PITPolicyRuleUnits {
 	}
 }
 
+type ProductCodeMode string
+
+// Enum values for ProductCodeMode
+const (
+	ProductCodeModeEnabled  ProductCodeMode = "ENABLED"
+	ProductCodeModeDisabled ProductCodeMode = "DISABLED"
+)
+
+// Values returns all known values for ProductCodeMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProductCodeMode) Values() []ProductCodeMode {
+	return []ProductCodeMode{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type RecoveryInstanceDataReplicationInitiationStepName string
 
 // Enum values for RecoveryInstanceDataReplicationInitiationStepName
@@ -963,5 +981,27 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"cannotParse",
 		"fieldValidationFailed",
 		"other",
+	}
+}
+
+type VolumeStatus string
+
+// Enum values for VolumeStatus
+const (
+	VolumeStatusRegular                                       VolumeStatus = "REGULAR"
+	VolumeStatusContainsMarketplaceProductCodes               VolumeStatus = "CONTAINS_MARKETPLACE_PRODUCT_CODES"
+	VolumeStatusMissingVolumeAttributes                       VolumeStatus = "MISSING_VOLUME_ATTRIBUTES"
+	VolumeStatusMissingVolumeAttributesAndPrecheckUnavailable VolumeStatus = "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+)
+
+// Values returns all known values for VolumeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VolumeStatus) Values() []VolumeStatus {
+	return []VolumeStatus{
+		"REGULAR",
+		"CONTAINS_MARKETPLACE_PRODUCT_CODES",
+		"MISSING_VOLUME_ATTRIBUTES",
+		"MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE",
 	}
 }

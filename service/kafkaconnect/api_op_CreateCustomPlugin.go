@@ -47,6 +47,9 @@ type CreateCustomPluginInput struct {
 	// A summary description of the custom plugin.
 	Description *string
 
+	// The tags you want to attach to the custom plugin.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
