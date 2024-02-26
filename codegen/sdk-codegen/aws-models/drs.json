@@ -310,6 +310,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A mapping between the volumes and their sizes</p>"
                     }
+                },
+                "volumeToProductCodes": {
+                    "target": "com.amazonaws.drs#VolumeToProductCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping between the volumes being converted and the product codes associated with them</p>"
+                    }
                 }
             },
             "traits": {
@@ -910,6 +916,12 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the replication backlog in bytes.</p>"
+                    }
+                },
+                "volumeStatus": {
+                    "target": "com.amazonaws.drs#VolumeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the volume.</p>"
                     }
                 }
             },
@@ -5729,6 +5741,57 @@
                 }
             }
         },
+        "com.amazonaws.drs#ProductCode": {
+            "type": "structure",
+            "members": {
+                "productCodeId": {
+                    "target": "com.amazonaws.drs#ProductCodeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Id of a product code associated with a volume.</p>"
+                    }
+                },
+                "productCodeMode": {
+                    "target": "com.amazonaws.drs#ProductCodeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Mode of a product code associated with a volume.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties of a product code associated with a volume.</p>"
+            }
+        },
+        "com.amazonaws.drs#ProductCodeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 25,
+                    "max": 25
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9])+$"
+            }
+        },
+        "com.amazonaws.drs#ProductCodeMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLED",
+                        "value": "ENABLED"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#ProductCodes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#ProductCode"
+            }
+        },
         "com.amazonaws.drs#PutLaunchAction": {
             "type": "operation",
             "input": {
@@ -9487,6 +9550,29 @@
                 ]
             }
         },
+        "com.amazonaws.drs#VolumeStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "REGULAR",
+                        "name": "REGULAR"
+                    },
+                    {
+                        "value": "CONTAINS_MARKETPLACE_PRODUCT_CODES",
+                        "name": "CONTAINS_MARKETPLACE_PRODUCT_CODES"
+                    },
+                    {
+                        "value": "MISSING_VOLUME_ATTRIBUTES",
+                        "name": "MISSING_VOLUME_ATTRIBUTES"
+                    },
+                    {
+                        "value": "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE",
+                        "name": "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.drs#VolumeToConversionMap": {
             "type": "map",
             "key": {
@@ -9494,6 +9580,15 @@
             },
             "value": {
                 "target": "com.amazonaws.drs#ConversionMap"
+            }
+        },
+        "com.amazonaws.drs#VolumeToProductCodes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.drs#LargeBoundedString"
+            },
+            "value": {
+                "target": "com.amazonaws.drs#ProductCodes"
             }
         },
         "com.amazonaws.drs#VolumeToSizeMap": {
