@@ -1,3 +1,9 @@
+# Release (2024-02-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.19.0](service/amplifyuibuilder/CHANGELOG.md#v1190-2024-02-27)
+  * **Feature**: We have added the ability to tag resources after they are created
+
 # Release (2024-02-26)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.19.0 (2024-02-27)
+
+* **Feature**: We have added the ability to tag resources after they are created
+
 # v1.18.1 (2024-02-23)
 
 * **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
