@@ -74,10 +74,19 @@
                     "target": "com.amazonaws.amplifyuibuilder#GetMetadata"
                 },
                 {
+                    "target": "com.amazonaws.amplifyuibuilder#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.amplifyuibuilder#PutMetadataFlag"
                 },
                 {
                     "target": "com.amazonaws.amplifyuibuilder#RefreshToken"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#UntagResource"
                 }
             ],
             "resources": [
@@ -100,6 +109,9 @@
                     "arnNamespace": "amplifyuibuilder",
                     "cloudFormationName": "AmplifyUIBuilder",
                     "cloudTrailEventSource": "amplifyuibuilder.amazonaws.com"
+                },
+                "aws.api#tagEnabled": {
+                    "tagOnCreate": true
                 },
                 "aws.auth#sigv4": {
                     "name": "amplifyuibuilder"
@@ -129,7 +141,7 @@
                 ],
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>The Amplify UI Builder API provides a programmatic interface for creating\n      and configuring user interface (UI) component libraries and themes for use in your Amplify applications. You can then connect these UI components to an application's\n      backend Amazon Web Services resources.</p>\n         <p>You can also use the Amplify Studio visual designer to create UI components\n      and model data for an app. For more information, see <a href=\"https://docs.amplify.aws/console/adminui/intro\">Introduction</a> in the\n        <i>Amplify Docs</i>.</p>\n         <p>The Amplify Framework is a comprehensive set of SDKs, libraries, tools, and\n      documentation for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework</a>. For more information about\n      deploying an Amplify application to Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>The Amplify UI Builder API provides a programmatic interface for creating\n      and configuring user interface (UI) component libraries and themes for use in your Amplify applications. You can then connect these UI components to an application's\n      backend Amazon Web Services resources.</p>\n         <p>You can also use the Amplify Studio visual designer to create UI components\n      and model data for an app. For more information, see <a href=\"https://docs.amplify.aws/console/adminui/intro\">Introduction</a> in the\n      <i>Amplify Docs</i>.</p>\n         <p>The Amplify Framework is a comprehensive set of SDKs, libraries, tools, and\n      documentation for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework</a>. For more information about\n      deploying an Amplify application to Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify User Guide</a>.</p>",
                 "smithy.api#title": "AWS Amplify UI Builder",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -173,7 +185,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -216,7 +227,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -229,7 +241,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -243,7 +254,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -266,7 +276,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -301,7 +310,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -312,14 +320,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -333,14 +343,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -349,11 +357,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -364,14 +372,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -385,7 +395,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -405,7 +414,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -416,14 +424,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -434,9 +444,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1608,12 +1620,6 @@
                 "aws.api#arn": {
                     "template": "app/{appId}/environment/{environmentName}/codegen-jobs/{id}"
                 },
-                "aws.cloudformation#cfnResource": {
-                    "name": "CodegenJob",
-                    "additionalSchemas": [
-                        "com.amazonaws.amplifyuibuilder#CodegenJob"
-                    ]
-                },
                 "aws.iam#conditionKeys": [
                     "aws:ResourceTag/${TagKey}"
                 ]
@@ -1786,7 +1792,7 @@
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "aws.cloudformation#cfnMutability": "read",
                         "smithy.api#documentation": "<p>The time that the component was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
@@ -1795,7 +1801,7 @@
                 "modifiedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "aws.cloudformation#cfnMutability": "read",
                         "smithy.api#documentation": "<p>The time that the component was modified.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -1803,7 +1809,6 @@
                 "tags": {
                     "target": "com.amazonaws.amplifyuibuilder#Tags",
                     "traits": {
-                        "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the component.</p>"
                     }
                 },
@@ -2304,6 +2309,9 @@
                 "aws.api#arn": {
                     "template": "app/{appId}/environment/{environmentName}/components/{id}"
                 },
+                "aws.api#taggable": {
+                    "property": "tags"
+                },
                 "aws.cloudformation#cfnResource": {
                     "name": "Component",
                     "additionalSchemas": [
@@ -2436,7 +2444,9 @@
                     "aws:RequestTag/${TagKey}"
                 ],
                 "aws.iam#requiredActions": [
-                    "amplify:GetApp"
+                    "amplify:GetApp",
+                    "amplifyuibuilder:GetComponent",
+                    "amplifyuibuilder:TagResource"
                 ],
                 "smithy.api#documentation": "<p>Creates a new component for an Amplify app.</p>",
                 "smithy.api#http": {
@@ -2610,9 +2620,14 @@
                     "aws:TagKeys",
                     "aws:RequestTag/${TagKey}"
                 ],
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp",
+                        "amplifyuibuilder:GetForm",
+                        "amplifyuibuilder:TagResource",
+                        "amplifyuibuilder:UntagResource"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Creates a new form for an Amplify app.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/forms",
@@ -2774,9 +2789,13 @@
                     "aws:TagKeys",
                     "aws:RequestTag/${TagKey}"
                 ],
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp",
+                        "amplifyuibuilder:GetTheme",
+                        "amplifyuibuilder:TagResource"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Creates a theme to apply to the components in an Amplify app.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/themes",
@@ -2898,7 +2917,8 @@
             ],
             "traits": {
                 "aws.iam#requiredActions": [
-                    "amplify:GetApp"
+                    "amplify:GetApp",
+                    "amplifyuibuilder:UntagResource"
                 ],
                 "smithy.api#documentation": "<p>Deletes a component from an Amplify app.</p>",
                 "smithy.api#http": {
@@ -2957,9 +2977,13 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp",
+                        "amplifyuibuilder:TagResource",
+                        "amplifyuibuilder:UntagResource"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Deletes a form from an Amplify app.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/forms/{id}",
@@ -3017,9 +3041,12 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp",
+                        "amplifyuibuilder:UntagResource"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Deletes a theme from an Amplify app.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/themes/{id}",
@@ -3648,14 +3675,14 @@
             }
         },
         "com.amazonaws.amplifyuibuilder#FixedPosition": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "first",
-                        "name": "FIRST"
+            "type": "enum",
+            "members": {
+                "FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "first"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.amplifyuibuilder#Form": {
@@ -3734,7 +3761,6 @@
                 "tags": {
                     "target": "com.amazonaws.amplifyuibuilder#Tags",
                     "traits": {
-                        "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the form.</p>"
                     }
                 },
@@ -3761,18 +3787,20 @@
             }
         },
         "com.amazonaws.amplifyuibuilder#FormActionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "create",
-                        "name": "CREATE"
-                    },
-                    {
-                        "value": "update",
-                        "name": "UPDATE"
+            "type": "enum",
+            "members": {
+                "CREATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "create"
                     }
-                ]
+                },
+                "UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "update"
+                    }
+                }
             }
         },
         "com.amazonaws.amplifyuibuilder#FormBindingElement": {
@@ -3833,22 +3861,26 @@
             }
         },
         "com.amazonaws.amplifyuibuilder#FormButtonsPosition": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "top",
-                        "name": "TOP"
-                    },
-                    {
-                        "value": "bottom",
-                        "name": "BOTTOM"
-                    },
-                    {
-                        "value": "top_and_bottom",
-                        "name": "TOP_AND_BOTTOM"
+            "type": "enum",
+            "members": {
+                "TOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "top"
                     }
-                ]
+                },
+                "BOTTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bottom"
+                    }
+                },
+                "TOP_AND_BOTTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "top_and_bottom"
+                    }
+                }
             }
         },
         "com.amazonaws.amplifyuibuilder#FormCTA": {
@@ -4070,6 +4102,9 @@
                 "aws.api#arn": {
                     "template": "app/{appId}/environment/{environmentName}/forms/{id}"
                 },
+                "aws.api#taggable": {
+                    "property": "tags"
+                },
                 "aws.cloudformation#cfnResource": {
                     "name": "Form",
                     "additionalSchemas": [
@@ -4229,9 +4264,11 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Returns an existing code generation job.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/codegen-jobs/{id}",
@@ -4381,9 +4418,11 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Returns an existing form for an Amplify app.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/forms/{id}",
@@ -4512,9 +4551,11 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Returns an existing theme for an Amplify app.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/themes/{id}",
@@ -4736,9 +4777,11 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of code generation jobs for a specified Amplify app and backend environment.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/codegen-jobs",
@@ -4856,16 +4899,6 @@
                 "smithy.api#readonly": {}
             }
         },
-        "com.amazonaws.amplifyuibuilder#ListComponentsLimit": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0,
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 100
-                }
-            }
-        },
         "com.amazonaws.amplifyuibuilder#ListComponentsRequest": {
             "type": "structure",
             "members": {
@@ -4893,9 +4926,9 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.amplifyuibuilder#ListComponentsLimit",
+                    "target": "com.amazonaws.amplifyuibuilder#ListEntityLimit",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of components to retrieve.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4920,6 +4953,15 @@
                 }
             }
         },
+        "com.amazonaws.amplifyuibuilder#ListEntityLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.amplifyuibuilder#ListForms": {
             "type": "operation",
             "input": {
@@ -4937,9 +4979,11 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of forms for a specified Amplify app and backend environment.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/forms",
@@ -4952,16 +4996,6 @@
                     "items": "entities"
                 },
                 "smithy.api#readonly": {}
-            }
-        },
-        "com.amazonaws.amplifyuibuilder#ListFormsLimit": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0,
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 100
-                }
             }
         },
         "com.amazonaws.amplifyuibuilder#ListFormsRequest": {
@@ -4991,9 +5025,9 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.amplifyuibuilder#ListFormsLimit",
+                    "target": "com.amazonaws.amplifyuibuilder#ListEntityLimit",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of forms to retrieve.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -5018,6 +5052,71 @@
                 }
             }
         },
+        "com.amazonaws.amplifyuibuilder#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of tags for a specified Amazon Resource Name (ARN).</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) to use to list tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.amplifyuibuilder#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag key value pairs for a specified Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.amplifyuibuilder#ListThemes": {
             "type": "operation",
             "input": {
@@ -5035,9 +5134,11 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of themes for a specified Amplify app and backend\n      environment.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/themes",
@@ -5050,16 +5151,6 @@
                     "items": "entities"
                 },
                 "smithy.api#readonly": {}
-            }
-        },
-        "com.amazonaws.amplifyuibuilder#ListThemesLimit": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0,
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 100
-                }
             }
         },
         "com.amazonaws.amplifyuibuilder#ListThemesRequest": {
@@ -5089,9 +5180,9 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.amplifyuibuilder#ListThemesLimit",
+                    "target": "com.amazonaws.amplifyuibuilder#ListEntityLimit",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of theme results to return in the response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -5235,7 +5326,8 @@
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/metadata/features/{featureName}",
                     "method": "PUT"
-                }
+                },
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.amplifyuibuilder#PutMetadataFlagBody": {
@@ -5542,16 +5634,20 @@
             }
         },
         "com.amazonaws.amplifyuibuilder#SortDirection": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASC"
-                    },
-                    {
-                        "value": "DESC"
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
                     }
-                ]
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
             }
         },
         "com.amazonaws.amplifyuibuilder#SortProperty": {
@@ -5602,9 +5698,11 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Starts a code generation job for a specified Amplify app and backend environment.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/codegen-jobs",
@@ -5709,22 +5807,26 @@
             }
         },
         "com.amazonaws.amplifyuibuilder#StorageAccessLevel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "public",
-                        "name": "PUBLIC"
-                    },
-                    {
-                        "value": "protected",
-                        "name": "PROTECTED"
-                    },
-                    {
-                        "value": "private",
-                        "name": "PRIVATE"
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "public"
                     }
-                ]
+                },
+                "PROTECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "protected"
+                    }
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "private"
+                    }
+                }
             }
         },
         "com.amazonaws.amplifyuibuilder#StrValues": {
@@ -5741,6 +5843,82 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tags the resource with a tag key and value.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) to use to tag a resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amplifyuibuilder#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag key value pairs for a specified Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amplifyuibuilder#TagValue": {
@@ -5795,7 +5973,7 @@
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "aws.cloudformation#cfnMutability": "read",
                         "smithy.api#documentation": "<p>The time that the theme was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
@@ -5804,7 +5982,7 @@
                 "modifiedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "aws.cloudformation#cfnMutability": "read",
                         "smithy.api#documentation": "<p>The time that the theme was modified.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -5825,7 +6003,6 @@
                 "tags": {
                     "target": "com.amazonaws.amplifyuibuilder#Tags",
                     "traits": {
-                        "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the theme.</p>"
                     }
                 }
@@ -5890,6 +6067,9 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "app/{appId}/environment/{environmentName}/themes/{id}"
+                },
+                "aws.api#taggable": {
+                    "property": "tags"
                 },
                 "aws.cloudformation#cfnResource": {
                     "name": "Theme",
@@ -6028,6 +6208,71 @@
                 "smithy.api#httpError": 401
             }
         },
+        "com.amazonaws.amplifyuibuilder#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Untags a resource with a specified Amazon Resource Name (ARN).</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) to use to untag a resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.amplifyuibuilder#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys to use to untag a resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.amplifyuibuilder#UpdateComponent": {
             "type": "operation",
             "input": {
@@ -6048,9 +6293,13 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp",
+                        "amplifyuibuilder:TagResource",
+                        "amplifyuibuilder:UntagResource"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Updates an existing component.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/components/{id}",
@@ -6218,9 +6467,14 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp",
+                        "amplifyuibuilder:GetForm",
+                        "amplifyuibuilder:TagResource",
+                        "amplifyuibuilder:UntagResource"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Updates an existing form.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/forms/{id}",
@@ -6370,9 +6624,14 @@
                 }
             ],
             "traits": {
-                "aws.iam#requiredActions": [
-                    "amplify:GetApp"
-                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "amplify:GetApp",
+                        "amplifyuibuilder:GetTheme",
+                        "amplifyuibuilder:TagResource",
+                        "amplifyuibuilder:UntagResource"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Updates an existing theme.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/themes/{id}",
