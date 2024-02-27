@@ -62,7 +62,7 @@ func TestClient_XmlIntEnums_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlIntEnumsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlIntEnumsRequest>
 			    <intEnum1>1</intEnum1>
 			    <intEnum2>2</intEnum2>
 			    <intEnum3>3</intEnum3>
@@ -84,7 +84,7 @@ func TestClient_XmlIntEnums_awsRestxmlSerialize(t *testing.T) {
 			            <value>2</value>
 			        </entry>
 			    </intEnumMap>
-			</XmlIntEnumsInputOutput>
+			</XmlIntEnumsRequest>
 			`))
 			},
 		},
@@ -168,7 +168,7 @@ func TestClient_XmlIntEnums_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlIntEnumsInputOutput>
+			Body: []byte(`<XmlIntEnumsResponse>
 			    <intEnum1>1</intEnum1>
 			    <intEnum2>2</intEnum2>
 			    <intEnum3>3</intEnum3>
@@ -190,7 +190,7 @@ func TestClient_XmlIntEnums_awsRestxmlDeserialize(t *testing.T) {
 			            <value>2</value>
 			        </entry>
 			    </intEnumMap>
-			</XmlIntEnumsInputOutput>
+			</XmlIntEnumsResponse>
 			`),
 			ExpectResult: &XmlIntEnumsOutput{
 				IntEnum1: 1,

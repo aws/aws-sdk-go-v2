@@ -28,13 +28,13 @@ func (c *Client) XmlAttributesOnPayload(ctx context.Context, params *XmlAttribut
 }
 
 type XmlAttributesOnPayloadInput struct {
-	Payload *types.XmlAttributesInputOutput
+	Payload *types.XmlAttributesPayloadRequest
 
 	noSmithyDocumentSerde
 }
 
 type XmlAttributesOnPayloadOutput struct {
-	Payload *types.XmlAttributesInputOutput
+	Payload *types.XmlAttributesPayloadResponse
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,6 +71,9 @@ func (c *Client) addOperationXmlAttributesOnPayloadMiddlewares(stack *middleware
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
 	if err = addRetry(stack, options); err != nil {

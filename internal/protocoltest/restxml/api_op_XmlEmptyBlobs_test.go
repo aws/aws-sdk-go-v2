@@ -30,9 +30,9 @@ func TestClient_XmlEmptyBlobs_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlBlobsInputOutput>
+			Body: []byte(`<XmlEmptyBlobsResponse>
 			    <data></data>
-			</XmlBlobsInputOutput>
+			</XmlEmptyBlobsResponse>
 			`),
 			ExpectResult: &XmlEmptyBlobsOutput{
 				Data: []byte(""),
@@ -45,9 +45,9 @@ func TestClient_XmlEmptyBlobs_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlBlobsInputOutput>
+			Body: []byte(`<XmlEmptyBlobsResponse>
 			    <data/>
-			</XmlBlobsInputOutput>
+			</XmlEmptyBlobsResponse>
 			`),
 			ExpectResult: &XmlEmptyBlobsOutput{
 				Data: []byte(""),

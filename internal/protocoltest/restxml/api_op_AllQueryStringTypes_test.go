@@ -220,6 +220,22 @@ func TestClient_AllQueryStringTypes_awsRestxmlSerialize(t *testing.T) {
 				return smithytesting.CompareReaderEmpty(actual)
 			},
 		},
+		// Query values of 0 and false are serialized
+		"RestXmlZeroAndFalseQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryInteger: ptr.Int32(0),
+				QueryBoolean: ptr.Bool(false),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Integer", Value: "0"},
+				{Key: "Boolean", Value: "false"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

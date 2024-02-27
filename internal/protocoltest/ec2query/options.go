@@ -3,7 +3,10 @@
 package ec2query
 
 import (
+	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	smithyauth "github.com/aws/smithy-go/auth"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
@@ -32,6 +35,9 @@ type Options struct {
 	// Configures the events that will be sent to the configured logger.
 	ClientLogMode aws.ClientLogMode
 
+	// The credentials object to use when signing requests.
+	Credentials aws.CredentialsProvider
+
 	// The configuration DefaultsMode that the SDK should use when constructing the
 	// clients initial default settings.
 	DefaultsMode aws.DefaultsMode
@@ -54,6 +60,9 @@ type Options struct {
 	// Resolves the endpoint used for a particular service operation. This should be
 	// used over the deprecated EndpointResolver.
 	EndpointResolverV2 EndpointResolverV2
+
+	// Signature Version 4 (SigV4) Signer
+	HTTPSignerV4 HTTPSignerV4
 
 	// Provides idempotency tokens values that will be automatically populated into
 	// idempotent API operations.
@@ -125,7 +134,9 @@ func (o Options) Copy() Options {
 }
 
 func (o Options) GetIdentityResolver(schemeID string) smithyauth.IdentityResolver {
-
+	if schemeID == "aws.auth#sigv4" {
+		return getSigV4IdentityResolver(o)
+	}
 	if schemeID == "smithy.api#noAuth" {
 		return &smithyauth.AnonymousIdentityResolver{}
 	}
@@ -156,5 +167,62 @@ func WithEndpointResolver(v EndpointResolver) func(*Options) {
 func WithEndpointResolverV2(v EndpointResolverV2) func(*Options) {
 	return func(o *Options) {
 		o.EndpointResolverV2 = v
+	}
+}
+
+func getSigV4IdentityResolver(o Options) smithyauth.IdentityResolver {
+	if o.Credentials != nil {
+		return &internalauthsmithy.CredentialsProviderAdapter{Provider: o.Credentials}
+	}
+	return nil
+}
+
+// WithSigV4SigningName applies an override to the authentication workflow to
+// use the given signing name for SigV4-authenticated operations.
+//
+// This is an advanced setting. The value here is FINAL, taking precedence over
+// the resolved signing name from both auth scheme resolution and endpoint
+// resolution.
+func WithSigV4SigningName(name string) func(*Options) {
+	fn := func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+		out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+	) {
+		return next.HandleInitialize(awsmiddleware.SetSigningName(ctx, name), in)
+	}
+	return func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(s *middleware.Stack) error {
+			return s.Initialize.Add(
+				middleware.InitializeMiddlewareFunc("withSigV4SigningName", fn),
+				middleware.Before,
+			)
+		})
+	}
+}
+
+// WithSigV4SigningRegion applies an override to the authentication workflow to
+// use the given signing region for SigV4-authenticated operations.
+//
+// This is an advanced setting. The value here is FINAL, taking precedence over
+// the resolved signing region from both auth scheme resolution and endpoint
+// resolution.
+func WithSigV4SigningRegion(region string) func(*Options) {
+	fn := func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+		out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+	) {
+		return next.HandleInitialize(awsmiddleware.SetSigningRegion(ctx, region), in)
+	}
+	return func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(s *middleware.Stack) error {
+			return s.Initialize.Add(
+				middleware.InitializeMiddlewareFunc("withSigV4SigningRegion", fn),
+				middleware.Before,
+			)
+		})
+	}
+}
+
+func ignoreAnonymousAuth(options *Options) {
+	if aws.IsCredentialsProvider(options.Credentials, (*aws.AnonymousCredentials)(nil)) {
+		options.Credentials = nil
 	}
 }

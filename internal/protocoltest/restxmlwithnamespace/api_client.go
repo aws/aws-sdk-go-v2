@@ -9,7 +9,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
@@ -18,12 +21,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
 	"net/http"
+	"time"
 )
 
 const ServiceID = "Rest Xml Protocol Namespace"
 const ServiceAPIVersion = "2019-12-16"
 
-// Client provides the API client to make operations call for the API.
+// Client provides the API client to make operations call for Sample Rest Xml
+// Protocol Service With Namespace.
 type Client struct {
 	options Options
 }
@@ -42,6 +47,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveHTTPClient(&options)
 
+	resolveHTTPSignerV4(&options)
+
 	resolveEndpointResolverV2(&options)
 
 	resolveAuthSchemeResolver(&options)
@@ -51,6 +58,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	}
 
 	finalizeRetryMaxAttempts(&options)
+
+	ignoreAnonymousAuth(&options)
 
 	wrapWithAnonymousAuth(&options)
 
@@ -156,7 +165,13 @@ func resolveAuthSchemeResolver(options *Options) {
 
 func resolveAuthSchemes(options *Options) {
 	if options.AuthSchemes == nil {
-		options.AuthSchemes = []smithyhttp.AuthScheme{}
+		options.AuthSchemes = []smithyhttp.AuthScheme{
+			internalauth.NewHTTPAuthScheme("aws.auth#sigv4", &internalauthsmithy.V4SignerAdapter{
+				Signer:     options.HTTPSignerV4,
+				Logger:     options.Logger,
+				LogSigning: options.ClientLogMode.IsSigning(),
+			}),
+		}
 	}
 }
 
@@ -219,6 +234,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		DefaultsMode:       cfg.DefaultsMode,
 		RuntimeEnvironment: cfg.RuntimeEnvironment,
 		HTTPClient:         cfg.HTTPClient,
+		Credentials:        cfg.Credentials,
 		APIOptions:         cfg.APIOptions,
 		Logger:             cfg.Logger,
 		ClientLogMode:      cfg.ClientLogMode,
@@ -377,6 +393,24 @@ func getOrAddRequestUserAgent(stack *middleware.Stack) (*awsmiddleware.RequestUs
 	return ua, nil
 }
 
+type HTTPSignerV4 interface {
+	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time, optFns ...func(*v4.SignerOptions)) error
+}
+
+func resolveHTTPSignerV4(o *Options) {
+	if o.HTTPSignerV4 != nil {
+		return
+	}
+	o.HTTPSignerV4 = newDefaultV4Signer(*o)
+}
+
+func newDefaultV4Signer(o Options) *v4.Signer {
+	return v4.NewSigner(func(so *v4.SignerOptions) {
+		so.Logger = o.Logger
+		so.LogSigning = o.ClientLogMode.IsSigning()
+	})
+}
+
 func addClientRequestID(stack *middleware.Stack) error {
 	return stack.Build.Add(&awsmiddleware.ClientRequestID{}, middleware.After)
 }
@@ -391,6 +425,21 @@ func addRawResponseToMetadata(stack *middleware.Stack) error {
 
 func addRecordResponseTiming(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
+}
+func addStreamingEventsPayload(stack *middleware.Stack) error {
+	return stack.Finalize.Add(&v4.StreamingEventsPayload{}, middleware.Before)
+}
+
+func addUnsignedPayload(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&v4.UnsignedPayload{}, "ResolveEndpointV2", middleware.After)
+}
+
+func addComputePayloadSHA256(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&v4.ComputePayloadSHA256{}, "ResolveEndpointV2", middleware.After)
+}
+
+func addContentSHA256Header(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&v4.ContentSHA256Header{}, (*v4.ComputePayloadSHA256)(nil).ID(), middleware.After)
 }
 
 func addRetry(stack *middleware.Stack, o Options) error {

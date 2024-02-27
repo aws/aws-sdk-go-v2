@@ -17,6 +17,8 @@
         "api_op_DatetimeOffsets.go",
         "api_op_DatetimeOffsets_test.go",
         "api_op_DocumentType.go",
+        "api_op_DocumentTypeAsMapValue.go",
+        "api_op_DocumentTypeAsMapValue_test.go",
         "api_op_DocumentTypeAsPayload.go",
         "api_op_DocumentTypeAsPayload_test.go",
         "api_op_DocumentType_test.go",

@@ -50,7 +50,7 @@ func TestClient_XmlMapWithXmlNamespace_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlMapWithXmlNamespaceInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlMapWithXmlNamespaceRequest>
 			    <KVP xmlns="https://the-member.example.com">
 			        <entry>
 			            <K xmlns="https://the-key.example.com">a</K>
@@ -61,7 +61,7 @@ func TestClient_XmlMapWithXmlNamespace_awsRestxmlSerialize(t *testing.T) {
 			            <V xmlns="https://the-value.example.com">B</V>
 			        </entry>
 			    </KVP>
-			</XmlMapWithXmlNamespaceInputOutput>`))
+			</XmlMapWithXmlNamespaceRequest>`))
 			},
 		},
 	}
@@ -144,7 +144,7 @@ func TestClient_XmlMapWithXmlNamespace_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlMapWithXmlNamespaceInputOutput>
+			Body: []byte(`<XmlMapWithXmlNamespaceResponse>
 			    <KVP xmlns="https://the-member.example.com">
 			        <entry>
 			            <K xmlns="https://the-key.example.com">a</K>
@@ -155,7 +155,7 @@ func TestClient_XmlMapWithXmlNamespace_awsRestxmlDeserialize(t *testing.T) {
 			            <V xmlns="https://the-value.example.com">B</V>
 			        </entry>
 			    </KVP>
-			</XmlMapWithXmlNamespaceInputOutput>`),
+			</XmlMapWithXmlNamespaceResponse>`),
 			ExpectResult: &XmlMapWithXmlNamespaceOutput{
 				MyMap: map[string]string{
 					"a": "A",

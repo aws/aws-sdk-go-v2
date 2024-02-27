@@ -120,7 +120,7 @@ func TestClient_XmlLists_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlListsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlListsRequest>
 			    <stringList>
 			        <member>foo</member>
 			        <member>bar</member>
@@ -185,7 +185,7 @@ func TestClient_XmlLists_awsRestxmlSerialize(t *testing.T) {
 			        <value>7</value>
 			        <other>8</other>
 			    </flattenedStructureList>
-			</XmlListsInputOutput>
+			</XmlListsRequest>
 			`))
 			},
 		},
@@ -269,7 +269,7 @@ func TestClient_XmlLists_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlListsInputOutput>
+			Body: []byte(`<XmlListsResponse>
 			    <stringList>
 			        <member>foo</member>
 			        <member>bar</member>
@@ -338,7 +338,7 @@ func TestClient_XmlLists_awsRestxmlDeserialize(t *testing.T) {
 			        <value>7</value>
 			        <other>8</other>
 			    </flattenedStructureList>
-			</XmlListsInputOutput>
+			</XmlListsResponse>
 			`),
 			ExpectResult: &XmlListsOutput{
 				StringList: []string{

@@ -47,9 +47,9 @@ func TestClient_XmlBlobs_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlBlobsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlBlobsRequest>
 			    <data>dmFsdWU=</data>
-			</XmlBlobsInputOutput>
+			</XmlBlobsRequest>
 			`))
 			},
 		},
@@ -133,9 +133,9 @@ func TestClient_XmlBlobs_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlBlobsInputOutput>
+			Body: []byte(`<XmlBlobsResponse>
 			    <data>dmFsdWU=</data>
-			</XmlBlobsInputOutput>
+			</XmlBlobsResponse>
 			`),
 			ExpectResult: &XmlBlobsOutput{
 				Data: []byte("value"),
