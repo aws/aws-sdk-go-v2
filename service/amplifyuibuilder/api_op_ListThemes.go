@@ -40,7 +40,7 @@ type ListThemesInput struct {
 	EnvironmentName *string
 
 	// The maximum number of theme results to return in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to request the next page of results.
 	NextToken *string
@@ -176,8 +176,8 @@ func NewListThemesPaginator(client ListThemesAPIClient, params *ListThemesInput,
 	}
 
 	options := ListThemesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -207,7 +207,11 @@ func (p *ListThemesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListThemes(ctx, &params, optFns...)
 	if err != nil {

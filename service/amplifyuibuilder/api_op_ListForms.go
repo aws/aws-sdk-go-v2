@@ -40,7 +40,7 @@ type ListFormsInput struct {
 	EnvironmentName *string
 
 	// The maximum number of forms to retrieve.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to request the next page of results.
 	NextToken *string
@@ -176,8 +176,8 @@ func NewListFormsPaginator(client ListFormsAPIClient, params *ListFormsInput, op
 	}
 
 	options := ListFormsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -207,7 +207,11 @@ func (p *ListFormsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListForms(ctx, &params, optFns...)
 	if err != nil {

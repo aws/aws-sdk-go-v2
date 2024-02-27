@@ -1,0 +1,8 @@
+{
+    "id": "77b19deb-f049-441b-8041-e708e26b671c",
+    "type": "feature",
+    "description": "We have added the ability to tag resources after they are created",
+    "modules": [
+        "service/amplifyuibuilder"
+    ]
+}

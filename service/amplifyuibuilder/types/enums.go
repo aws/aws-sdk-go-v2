@@ -260,6 +260,12 @@ func (LabelDecorator) Values() []LabelDecorator {
 
 type SortDirection string
 
+// Enum values for SortDirection
+const (
+	SortDirectionAsc  SortDirection = "ASC"
+	SortDirectionDesc SortDirection = "DESC"
+)
+
 // Values returns all known values for SortDirection. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
