@@ -1,3 +1,17 @@
+# Release (2024-02-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.34.0](service/batch/CHANGELOG.md#v1340-2024-02-28)
+  * **Feature**: This release adds Batch support for configuration of multicontainer jobs in ECS, Fargate, and EKS. This support is available for all types of jobs, including both array jobs and multi-node parallel jobs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.4.0](service/bedrockagentruntime/CHANGELOG.md#v140-2024-02-28)
+  * **Feature**: This release adds support to override search strategy performed by the Retrieve and RetrieveAndGenerate APIs for Amazon Bedrock Agents
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.36.0](service/costexplorer/CHANGELOG.md#v1360-2024-02-28)
+  * **Feature**: This release introduces the new API 'GetApproximateUsageRecords', which retrieves estimated usage records for hourly granularity or resource-level data at daily granularity.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.53.0](service/iot/CHANGELOG.md#v1530-2024-02-28)
+  * **Feature**: This release reduces the maximum results returned per query invocation from 500 to 100 for the SearchIndex API. This change has no implications as long as the API is invoked until the nextToken is NULL.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.47.0](service/wafv2/CHANGELOG.md#v1470-2024-02-28)
+  * **Feature**: AWS WAF now supports configurable time windows for request aggregation with rate-based rules. Customers can now select time windows of 1 minute, 2 minutes or 10 minutes, in addition to the previously supported 5 minutes.
+
 # Release (2024-02-27)
 
 ## Module Highlights

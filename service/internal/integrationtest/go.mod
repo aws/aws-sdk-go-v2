@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/athena v1.40.1
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.40.1
-	github.com/aws/aws-sdk-go-v2/service/batch v1.33.1
+	github.com/aws/aws-sdk-go-v2/service/batch v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.46.1
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.21.1
@@ -51,7 +51,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.21.1
-	github.com/aws/aws-sdk-go-v2/service/iot v1.52.1
+	github.com/aws/aws-sdk-go-v2/service/iot v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/kms v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.53.1
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/waf v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.21.1
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.46.1
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.47.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.38.1
 	github.com/aws/smithy-go v1.20.1
 	github.com/google/go-cmp v0.5.8

@@ -1,8 +1,0 @@
-{
-    "id": "1d767f99-6e4a-45aa-9f6e-0f0418f6f997",
-    "type": "feature",
-    "description": "This release introduces the new API 'GetApproximateUsageRecords', which retrieves estimated usage records for hourly granularity or resource-level data at daily granularity.",
-    "modules": [
-        "service/costexplorer"
-    ]
-}
