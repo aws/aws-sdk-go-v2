@@ -1,0 +1,8 @@
+{
+    "id": "81564e29-bacb-4d17-9e8c-dfdb0bc815d5",
+    "type": "feature",
+    "description": "This release adds support to override search strategy performed by the Retrieve and RetrieveAndGenerate APIs for Amazon Bedrock Agents",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

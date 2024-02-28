@@ -199,6 +199,9 @@ type KnowledgeBaseRetrieveAndGenerateConfiguration struct {
 	// This member is required.
 	ModelArn *string
 
+	// Search parameters for retrieving from knowledge base.
+	RetrievalConfiguration *KnowledgeBaseRetrievalConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -206,9 +209,10 @@ type KnowledgeBaseRetrieveAndGenerateConfiguration struct {
 type KnowledgeBaseVectorSearchConfiguration struct {
 
 	// Top-K results to retrieve from knowledge base.
-	//
-	// This member is required.
 	NumberOfResults *int32
+
+	// Override the type of query to be performed on data store
+	OverrideSearchType SearchType
 
 	noSmithyDocumentSerde
 }

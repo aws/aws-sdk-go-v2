@@ -11879,6 +11879,19 @@ func awsAwsjson11_deserializeDocumentRateBasedStatement(v **types.RateBasedState
 				return err
 			}
 
+		case "EvaluationWindowSec":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected EvaluationWindowSec to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EvaluationWindowSec = i64
+			}
+
 		case "ForwardedIPConfig":
 			if err := awsAwsjson11_deserializeDocumentForwardedIPConfig(&sv.ForwardedIPConfig, value); err != nil {
 				return err

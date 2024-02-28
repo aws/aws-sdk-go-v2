@@ -1,0 +1,8 @@
+{
+    "id": "79fd5495-07cc-4dd2-8737-aed634837c51",
+    "type": "feature",
+    "description": "This release increases the range of MaxResults for GetNetworkInsightsAccessScopeAnalysisFindings to 1,000.",
+    "modules": [
+        "service/ec2"
+    ]
+}

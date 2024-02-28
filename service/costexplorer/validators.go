@@ -170,6 +170,26 @@ func (m *validateOpGetAnomalies) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetApproximateUsageRecords struct {
+}
+
+func (*validateOpGetApproximateUsageRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetApproximateUsageRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetApproximateUsageRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetApproximateUsageRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCostAndUsage struct {
 }
 
@@ -680,6 +700,10 @@ func addOpDescribeCostCategoryDefinitionValidationMiddleware(stack *middleware.S
 
 func addOpGetAnomaliesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAnomalies{}, middleware.After)
+}
+
+func addOpGetApproximateUsageRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetApproximateUsageRecords{}, middleware.After)
 }
 
 func addOpGetCostAndUsageValidationMiddleware(stack *middleware.Stack) error {
@@ -1218,6 +1242,24 @@ func validateOpGetAnomaliesInput(v *GetAnomaliesInput) error {
 		if err := validateTotalImpactFilter(v.TotalImpact); err != nil {
 			invalidParams.AddNested("TotalImpact", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetApproximateUsageRecordsInput(v *GetApproximateUsageRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetApproximateUsageRecordsInput"}
+	if len(v.Granularity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
+	}
+	if len(v.ApproximationDimension) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ApproximationDimension"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

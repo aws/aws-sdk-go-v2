@@ -104,10 +104,6 @@ func validateKnowledgeBaseRetrievalConfiguration(v *types.KnowledgeBaseRetrieval
 	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseRetrievalConfiguration"}
 	if v.VectorSearchConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VectorSearchConfiguration"))
-	} else if v.VectorSearchConfiguration != nil {
-		if err := validateKnowledgeBaseVectorSearchConfiguration(v.VectorSearchConfiguration); err != nil {
-			invalidParams.AddNested("VectorSearchConfiguration", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -127,20 +123,10 @@ func validateKnowledgeBaseRetrieveAndGenerateConfiguration(v *types.KnowledgeBas
 	if v.ModelArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
 	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateKnowledgeBaseVectorSearchConfiguration(v *types.KnowledgeBaseVectorSearchConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseVectorSearchConfiguration"}
-	if v.NumberOfResults == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumberOfResults"))
+	if v.RetrievalConfiguration != nil {
+		if err := validateKnowledgeBaseRetrievalConfiguration(v.RetrievalConfiguration); err != nil {
+			invalidParams.AddNested("RetrievalConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

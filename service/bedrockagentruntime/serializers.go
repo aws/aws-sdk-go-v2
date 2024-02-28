@@ -375,6 +375,13 @@ func awsRestjson1_serializeDocumentKnowledgeBaseRetrieveAndGenerateConfiguration
 		ok.String(*v.ModelArn)
 	}
 
+	if v.RetrievalConfiguration != nil {
+		ok := object.Key("retrievalConfiguration")
+		if err := awsRestjson1_serializeDocumentKnowledgeBaseRetrievalConfiguration(v.RetrievalConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -385,6 +392,11 @@ func awsRestjson1_serializeDocumentKnowledgeBaseVectorSearchConfiguration(v *typ
 	if v.NumberOfResults != nil {
 		ok := object.Key("numberOfResults")
 		ok.Integer(*v.NumberOfResults)
+	}
+
+	if len(v.OverrideSearchType) > 0 {
+		ok := object.Key("overrideSearchType")
+		ok.String(string(v.OverrideSearchType))
 	}
 
 	return nil

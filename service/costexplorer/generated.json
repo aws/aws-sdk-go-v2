@@ -19,6 +19,7 @@
         "api_op_GetAnomalies.go",
         "api_op_GetAnomalyMonitors.go",
         "api_op_GetAnomalySubscriptions.go",
+        "api_op_GetApproximateUsageRecords.go",
         "api_op_GetCostAndUsage.go",
         "api_op_GetCostAndUsageWithResources.go",
         "api_op_GetCostCategories.go",

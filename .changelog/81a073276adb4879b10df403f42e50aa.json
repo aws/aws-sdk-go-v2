@@ -1,0 +1,8 @@
+{
+    "id": "81a07327-6adb-4879-b10d-f403f42e50aa",
+    "type": "feature",
+    "description": "AWS WAF now supports configurable time windows for request aggregation with rate-based rules. Customers can now select time windows of 1 minute, 2 minutes or 10 minutes, in addition to the previously supported 5 minutes.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

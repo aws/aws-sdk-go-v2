@@ -40,8 +40,10 @@ type SearchIndexInput struct {
 	// The search index name.
 	IndexName *string
 
-	// The maximum number of results to return per page at one time. The response
-	// might contain fewer results but will never contain more.
+	// The maximum number of results to return per page at one time. This maximum
+	// number cannot exceed 100. The response might contain fewer results but will
+	// never contain more. You can use nextToken (https://docs.aws.amazon.com/iot/latest/apireference/API_SearchIndex.html#iot-SearchIndex-request-nextToken)
+	// to retrieve the next set of results until nextToken returns NULL .
 	MaxResults *int32
 
 	// The token used to get the next set of results, or null if there are no

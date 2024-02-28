@@ -68,9 +68,9 @@ type SubmitJobInput struct {
 	// in the Batch User Guide.
 	ArrayProperties *types.ArrayProperties
 
-	// An object with various properties that override the defaults for the job
-	// definition that specify the name of a container in the specified job definition
-	// and the overrides it should receive. You can override the default command for a
+	// An object with properties that override the defaults for the job definition
+	// that specify the name of a container in the specified job definition and the
+	// overrides it should receive. You can override the default command for a
 	// container, which is specified in the job definition or the Docker image, with a
 	// command override. You can also override existing environment variables on a
 	// container or add new environment variables to it with an environment override.
@@ -84,8 +84,12 @@ type SubmitJobInput struct {
 	// index child of each dependency to complete before it can begin.
 	DependsOn []types.JobDependency
 
-	// An object that can only be specified for jobs that are run on Amazon EKS
-	// resources with various properties that override defaults for the job definition.
+	// An object, with properties that override defaults for the job definition, can
+	// only be specified for jobs that are run on Amazon ECS resources.
+	EcsPropertiesOverride *types.EcsPropertiesOverride
+
+	// An object, with properties that override defaults for the job definition, can
+	// only be specified for jobs that are run on Amazon EKS resources.
 	EksPropertiesOverride *types.EksPropertiesOverride
 
 	// A list of node overrides in JSON format that specify the node range to target

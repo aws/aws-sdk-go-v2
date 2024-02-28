@@ -1992,7 +1992,8 @@ type Job struct {
 	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
 	// notifications to MQTT topics that contain the value in the following format.
 	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
-	// namespaceId feature is in public preview.
+	// namespaceId feature is only supported by IoT Greengrass at this time. For more
+	// information, see Setting up IoT Greengrass core devices. (https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html)
 	NamespaceId *string
 
 	// Configuration for pre-signed S3 URLs.

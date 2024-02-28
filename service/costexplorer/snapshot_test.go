@@ -182,6 +182,18 @@ func TestCheckSnapshot_GetAnomalySubscriptions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetApproximateUsageRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetApproximateUsageRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetApproximateUsageRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCostAndUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCostAndUsage(context.Background(), nil, func(o *Options) {
@@ -630,6 +642,18 @@ func TestUpdateSnapshot_GetAnomalySubscriptions(t *testing.T) {
 	_, err := svc.GetAnomalySubscriptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAnomalySubscriptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetApproximateUsageRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetApproximateUsageRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetApproximateUsageRecords")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

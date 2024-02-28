@@ -4303,6 +4303,11 @@ func awsAwsjson11_serializeDocumentRateBasedStatement(v *types.RateBasedStatemen
 		}
 	}
 
+	if v.EvaluationWindowSec != 0 {
+		ok := object.Key("EvaluationWindowSec")
+		ok.Long(v.EvaluationWindowSec)
+	}
+
 	if v.ForwardedIPConfig != nil {
 		ok := object.Key("ForwardedIPConfig")
 		if err := awsAwsjson11_serializeDocumentForwardedIPConfig(v.ForwardedIPConfig, ok); err != nil {

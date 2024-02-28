@@ -1455,6 +1455,13 @@ func awsRestjson1_serializeOpDocumentRegisterJobDefinitionInput(v *RegisterJobDe
 		}
 	}
 
+	if v.EcsProperties != nil {
+		ok := object.Key("ecsProperties")
+		if err := awsRestjson1_serializeDocumentEcsProperties(v.EcsProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EksProperties != nil {
 		ok := object.Key("eksProperties")
 		if err := awsRestjson1_serializeDocumentEksProperties(v.EksProperties, ok); err != nil {
@@ -1611,6 +1618,13 @@ func awsRestjson1_serializeOpDocumentSubmitJobInput(v *SubmitJobInput, value smi
 	if v.DependsOn != nil {
 		ok := object.Key("dependsOn")
 		if err := awsRestjson1_serializeDocumentJobDependencyList(v.DependsOn, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EcsPropertiesOverride != nil {
+		ok := object.Key("ecsPropertiesOverride")
+		if err := awsRestjson1_serializeDocumentEcsPropertiesOverride(v.EcsPropertiesOverride, ok); err != nil {
 			return err
 		}
 	}
@@ -2740,6 +2754,101 @@ func awsRestjson1_serializeDocumentEc2ConfigurationList(v []types.Ec2Configurati
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEcsProperties(v *types.EcsProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TaskProperties != nil {
+		ok := object.Key("taskProperties")
+		if err := awsRestjson1_serializeDocumentListEcsTaskProperties(v.TaskProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEcsPropertiesOverride(v *types.EcsPropertiesOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TaskProperties != nil {
+		ok := object.Key("taskProperties")
+		if err := awsRestjson1_serializeDocumentListTaskPropertiesOverride(v.TaskProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEcsTaskProperties(v *types.EcsTaskProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Containers != nil {
+		ok := object.Key("containers")
+		if err := awsRestjson1_serializeDocumentListTaskContainerProperties(v.Containers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EphemeralStorage != nil {
+		ok := object.Key("ephemeralStorage")
+		if err := awsRestjson1_serializeDocumentEphemeralStorage(v.EphemeralStorage, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExecutionRoleArn != nil {
+		ok := object.Key("executionRoleArn")
+		ok.String(*v.ExecutionRoleArn)
+	}
+
+	if v.IpcMode != nil {
+		ok := object.Key("ipcMode")
+		ok.String(*v.IpcMode)
+	}
+
+	if v.NetworkConfiguration != nil {
+		ok := object.Key("networkConfiguration")
+		if err := awsRestjson1_serializeDocumentNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PidMode != nil {
+		ok := object.Key("pidMode")
+		ok.String(*v.PidMode)
+	}
+
+	if v.PlatformVersion != nil {
+		ok := object.Key("platformVersion")
+		ok.String(*v.PlatformVersion)
+	}
+
+	if v.RuntimePlatform != nil {
+		ok := object.Key("runtimePlatform")
+		if err := awsRestjson1_serializeDocumentRuntimePlatform(v.RuntimePlatform, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TaskRoleArn != nil {
+		ok := object.Key("taskRoleArn")
+		ok.String(*v.TaskRoleArn)
+	}
+
+	if v.Volumes != nil {
+		ok := object.Key("volumes")
+		if err := awsRestjson1_serializeDocumentVolumes(v.Volumes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEFSAuthorizationConfig(v *types.EFSAuthorizationConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2930,6 +3039,11 @@ func awsRestjson1_serializeDocumentEksContainerOverride(v *types.EksContainerOve
 	if v.Image != nil {
 		ok := object.Key("image")
 		ok.String(*v.Image)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	if v.Resources != nil {
@@ -3142,6 +3256,13 @@ func awsRestjson1_serializeDocumentEksPodProperties(v *types.EksPodProperties, v
 		ok.Boolean(*v.HostNetwork)
 	}
 
+	if v.InitContainers != nil {
+		ok := object.Key("initContainers")
+		if err := awsRestjson1_serializeDocumentEksContainers(v.InitContainers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Metadata != nil {
 		ok := object.Key("metadata")
 		if err := awsRestjson1_serializeDocumentEksMetadata(v.Metadata, ok); err != nil {
@@ -3152,6 +3273,11 @@ func awsRestjson1_serializeDocumentEksPodProperties(v *types.EksPodProperties, v
 	if v.ServiceAccountName != nil {
 		ok := object.Key("serviceAccountName")
 		ok.String(*v.ServiceAccountName)
+	}
+
+	if v.ShareProcessNamespace != nil {
+		ok := object.Key("shareProcessNamespace")
+		ok.Boolean(*v.ShareProcessNamespace)
 	}
 
 	if v.Volumes != nil {
@@ -3171,6 +3297,13 @@ func awsRestjson1_serializeDocumentEksPodPropertiesOverride(v *types.EksPodPrope
 	if v.Containers != nil {
 		ok := object.Key("containers")
 		if err := awsRestjson1_serializeDocumentEksContainerOverrideList(v.Containers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InitContainers != nil {
+		ok := object.Key("initContainers")
+		if err := awsRestjson1_serializeDocumentEksContainerOverrideList(v.InitContainers, ok); err != nil {
 			return err
 		}
 	}
@@ -3541,6 +3674,19 @@ func awsRestjson1_serializeDocumentLinuxParameters(v *types.LinuxParameters, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListEcsTaskProperties(v []types.EcsTaskProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEcsTaskProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentListJobsFilterList(v []types.KeyValuesPair, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3548,6 +3694,45 @@ func awsRestjson1_serializeDocumentListJobsFilterList(v []types.KeyValuesPair, v
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentKeyValuesPair(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListTaskContainerOverrides(v []types.TaskContainerOverrides, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTaskContainerOverrides(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListTaskContainerProperties(v []types.TaskContainerProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTaskContainerProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListTaskPropertiesOverride(v []types.TaskPropertiesOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTaskPropertiesOverride(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3692,6 +3877,20 @@ func awsRestjson1_serializeDocumentNodePropertyOverride(v *types.NodePropertyOve
 		}
 	}
 
+	if v.EcsPropertiesOverride != nil {
+		ok := object.Key("ecsPropertiesOverride")
+		if err := awsRestjson1_serializeDocumentEcsPropertiesOverride(v.EcsPropertiesOverride, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceTypes != nil {
+		ok := object.Key("instanceTypes")
+		if err := awsRestjson1_serializeDocumentStringList(v.InstanceTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetNodes != nil {
 		ok := object.Key("targetNodes")
 		ok.String(*v.TargetNodes)
@@ -3733,6 +3932,20 @@ func awsRestjson1_serializeDocumentNodeRangeProperty(v *types.NodeRangeProperty,
 	if v.Container != nil {
 		ok := object.Key("container")
 		if err := awsRestjson1_serializeDocumentContainerProperties(v.Container, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EcsProperties != nil {
+		ok := object.Key("ecsProperties")
+		if err := awsRestjson1_serializeDocumentEcsProperties(v.EcsProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceTypes != nil {
+		ok := object.Key("instanceTypes")
+		if err := awsRestjson1_serializeDocumentStringList(v.InstanceTypes, ok); err != nil {
 			return err
 		}
 	}
@@ -3948,6 +4161,190 @@ func awsRestjson1_serializeDocumentTagsMap(v map[string]string, value smithyjson
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaskContainerDependency(v *types.TaskContainerDependency, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Condition != nil {
+		ok := object.Key("condition")
+		ok.String(*v.Condition)
+	}
+
+	if v.ContainerName != nil {
+		ok := object.Key("containerName")
+		ok.String(*v.ContainerName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaskContainerDependencyList(v []types.TaskContainerDependency, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTaskContainerDependency(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaskContainerOverrides(v *types.TaskContainerOverrides, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Command != nil {
+		ok := object.Key("command")
+		if err := awsRestjson1_serializeDocumentStringList(v.Command, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Environment != nil {
+		ok := object.Key("environment")
+		if err := awsRestjson1_serializeDocumentEnvironmentVariables(v.Environment, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.ResourceRequirements != nil {
+		ok := object.Key("resourceRequirements")
+		if err := awsRestjson1_serializeDocumentResourceRequirements(v.ResourceRequirements, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaskContainerProperties(v *types.TaskContainerProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Command != nil {
+		ok := object.Key("command")
+		if err := awsRestjson1_serializeDocumentStringList(v.Command, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DependsOn != nil {
+		ok := object.Key("dependsOn")
+		if err := awsRestjson1_serializeDocumentTaskContainerDependencyList(v.DependsOn, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Environment != nil {
+		ok := object.Key("environment")
+		if err := awsRestjson1_serializeDocumentEnvironmentVariables(v.Environment, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Essential != nil {
+		ok := object.Key("essential")
+		ok.Boolean(*v.Essential)
+	}
+
+	if v.Image != nil {
+		ok := object.Key("image")
+		ok.String(*v.Image)
+	}
+
+	if v.LinuxParameters != nil {
+		ok := object.Key("linuxParameters")
+		if err := awsRestjson1_serializeDocumentLinuxParameters(v.LinuxParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LogConfiguration != nil {
+		ok := object.Key("logConfiguration")
+		if err := awsRestjson1_serializeDocumentLogConfiguration(v.LogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MountPoints != nil {
+		ok := object.Key("mountPoints")
+		if err := awsRestjson1_serializeDocumentMountPoints(v.MountPoints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Privileged != nil {
+		ok := object.Key("privileged")
+		ok.Boolean(*v.Privileged)
+	}
+
+	if v.ReadonlyRootFilesystem != nil {
+		ok := object.Key("readonlyRootFilesystem")
+		ok.Boolean(*v.ReadonlyRootFilesystem)
+	}
+
+	if v.RepositoryCredentials != nil {
+		ok := object.Key("repositoryCredentials")
+		if err := awsRestjson1_serializeDocumentRepositoryCredentials(v.RepositoryCredentials, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceRequirements != nil {
+		ok := object.Key("resourceRequirements")
+		if err := awsRestjson1_serializeDocumentResourceRequirements(v.ResourceRequirements, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Secrets != nil {
+		ok := object.Key("secrets")
+		if err := awsRestjson1_serializeDocumentSecretList(v.Secrets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Ulimits != nil {
+		ok := object.Key("ulimits")
+		if err := awsRestjson1_serializeDocumentUlimits(v.Ulimits, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.User != nil {
+		ok := object.Key("user")
+		ok.String(*v.User)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaskPropertiesOverride(v *types.TaskPropertiesOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Containers != nil {
+		ok := object.Key("containers")
+		if err := awsRestjson1_serializeDocumentListTaskContainerOverrides(v.Containers, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

@@ -94,6 +94,24 @@ func (RetrieveAndGenerateType) Values() []RetrieveAndGenerateType {
 	}
 }
 
+type SearchType string
+
+// Enum values for SearchType
+const (
+	SearchTypeHybrid   SearchType = "HYBRID"
+	SearchTypeSemantic SearchType = "SEMANTIC"
+)
+
+// Values returns all known values for SearchType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SearchType) Values() []SearchType {
+	return []SearchType{
+		"HYBRID",
+		"SEMANTIC",
+	}
+}
+
 type Source string
 
 // Enum values for Source
