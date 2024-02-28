@@ -5343,6 +5343,12 @@
         "com.amazonaws.wafv2#ErrorReason": {
             "type": "string"
         },
+        "com.amazonaws.wafv2#EvaluationWindowSec": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.wafv2#ExcludedRule": {
             "type": "structure",
             "members": {
@@ -9680,6 +9686,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The limit on requests per 5-minute period for a single aggregation instance for the rate-based rule. \n       If the rate-based statement includes a <code>ScopeDownStatement</code>, this limit is applied only to the\n         requests that match the statement.</p>\n         <p>Examples: </p>\n         <ul>\n            <li>\n               <p>If you aggregate on just the IP address, this is the limit on requests from any single IP address. </p>\n            </li>\n            <li>\n               <p>If you aggregate on the HTTP method and the query argument name \"city\", then this is the limit on\n             requests for any single method, city pair. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "EvaluationWindowSec": {
+                    "target": "com.amazonaws.wafv2#EvaluationWindowSec",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that WAF\n            should include in its request counts, looking back from the current time. For example, \n            for a setting of 120, when WAF checks the rate, it counts the requests for the 2 minutes immediately preceding \n            the current time. Valid settings are 60, 120, 300, and 600. </p>\n         <p>This setting doesn't determine how often WAF checks the rate, but how far back it looks each \n            time it checks. WAF checks the rate about every 10 seconds.</p>\n         <p>Default: <code>300</code> (5 minutes)</p>"
                     }
                 },
                 "AggregateKeyType": {

@@ -2787,7 +2787,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -7424,7 +7424,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>"
                     }
                 },
                 "jobTemplateArn": {
@@ -10587,7 +10587,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -10618,7 +10618,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -19141,7 +19141,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>"
                     }
                 },
                 "jobTemplateArn": {
@@ -22055,7 +22055,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 },
@@ -22266,7 +22266,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For\n                more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -29589,9 +29589,9 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.iot#QueryMaxResults",
+                    "target": "com.amazonaws.iot#SearchQueryMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return per page at one time. The response might\n      contain fewer results but will never contain more.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page at one time. This maximum number\n      cannot exceed 100. The response might contain fewer results but will never contain more. You\n      can use <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_SearchIndex.html#iot-SearchIndex-request-nextToken\">\n               <code>nextToken</code>\n            </a> to retrieve the next set of results until\n        <code>nextToken</code> returns <code>NULL</code>.</p>"
                     }
                 },
                 "queryVersion": {
@@ -29629,6 +29629,14 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#SearchQueryMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.iot#SearchableAttributes": {
@@ -34470,7 +34478,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 },

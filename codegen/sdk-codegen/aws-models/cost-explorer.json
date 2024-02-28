@@ -64,6 +64,9 @@
                     "target": "com.amazonaws.costexplorer#GetAnomalySubscriptions"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#GetApproximateUsageRecords"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#GetCostAndUsage"
                 },
                 {
@@ -1278,6 +1281,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.costexplorer#AnomalySubscription"
+            }
+        },
+        "com.amazonaws.costexplorer#ApproximateUsageRecordsPerService": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.costexplorer#GenericString"
+            },
+            "value": {
+                "target": "com.amazonaws.costexplorer#NonNegativeLong"
+            }
+        },
+        "com.amazonaws.costexplorer#ApproximationDimension": {
+            "type": "enum",
+            "members": {
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#Arn": {
@@ -3737,6 +3766,81 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.costexplorer#GetApproximateUsageRecords": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#GetApproximateUsageRecordsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#GetApproximateUsageRecordsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves estimated usage records for hourly granularity or resource-level data at daily\n      granularity.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#GetApproximateUsageRecordsRequest": {
+            "type": "structure",
+            "members": {
+                "Granularity": {
+                    "target": "com.amazonaws.costexplorer#Granularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How granular you want the data to be. You can enable data at hourly or daily\n      granularity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Services": {
+                    "target": "com.amazonaws.costexplorer#UsageServices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service metadata for the service or services you want to query. If not specified, all\n      elements are returned.</p>"
+                    }
+                },
+                "ApproximationDimension": {
+                    "target": "com.amazonaws.costexplorer#ApproximationDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service to evaluate for the usage records. You can choose resource-level data at daily\n      granularity, or hourly granularity with or without resource-level data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#GetApproximateUsageRecordsResponse": {
+            "type": "structure",
+            "members": {
+                "Services": {
+                    "target": "com.amazonaws.costexplorer#ApproximateUsageRecordsPerService",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service metadata for the service or services in the response.</p>"
+                    }
+                },
+                "TotalRecords": {
+                    "target": "com.amazonaws.costexplorer#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of usage records for all services in the services list.</p>"
+                    }
+                },
+                "LookbackPeriod": {
+                    "target": "com.amazonaws.costexplorer#DateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lookback period that's used for the estimation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.costexplorer#GetCostAndUsage": {
             "type": "operation",
             "input": {
@@ -6161,6 +6265,15 @@
         },
         "com.amazonaws.costexplorer#NonNegativeInteger": {
             "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#NonNegativeLong": {
+            "type": "long",
             "traits": {
                 "smithy.api#default": 0,
                 "smithy.api#range": {
@@ -9037,6 +9150,12 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.costexplorer#UsageServices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#GenericString"
             }
         },
         "com.amazonaws.costexplorer#UtilizationByTime": {

@@ -1326,6 +1326,9 @@
                     "traits": {
                         "smithy.api#required": {}
                     }
+                },
+                "retrievalConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalConfiguration"
                 }
             },
             "traits": {
@@ -1338,12 +1341,19 @@
                 "numberOfResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 5,
                         "smithy.api#documentation": "Top-K results to retrieve from knowledge base.",
                         "smithy.api#range": {
                             "min": 1,
-                            "max": 10
-                        },
-                        "smithy.api#required": {}
+                            "max": 25
+                        }
+                    }
+                },
+                "overrideSearchType": {
+                    "target": "com.amazonaws.bedrockagentruntime#SearchType",
+                    "traits": {
+                        "smithy.api#documentation": "Override the type of query to be performed on data store"
                     }
                 }
             },
@@ -1795,7 +1805,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Content of a retrieval result."
+                "smithy.api#documentation": "Content of a retrieval result.",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentruntime#RetrievalResultLocation": {
@@ -1812,7 +1823,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The source location of a retrieval result."
+                "smithy.api#documentation": "The source location of a retrieval result.",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentruntime#RetrievalResultLocationType": {
@@ -2151,6 +2163,26 @@
                 "smithy.api#documentation": "list of retrieved references"
             }
         },
+        "com.amazonaws.bedrockagentruntime#SearchType": {
+            "type": "enum",
+            "members": {
+                "HYBRID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HYBRID"
+                    }
+                },
+                "SEMANTIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEMANTIC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Query type to be performed on data store."
+            }
+        },
         "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -2297,7 +2329,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Text response part"
+                "smithy.api#documentation": "Text response part",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentruntime#ThrottlingException": {
