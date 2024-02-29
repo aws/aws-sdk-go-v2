@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all tags on a Elastic DocumentDB resource
+// Lists all tags on a elastic cluster resource
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -28,7 +28,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The arn of the Elastic DocumentDB resource.
+	// The ARN identifier of the elastic cluster resource.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -38,7 +38,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The list of tags for the specified Elastic DocumentDB resource.
+	// The list of tags for the specified elastic cluster resource.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

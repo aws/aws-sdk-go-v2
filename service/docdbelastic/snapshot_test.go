@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CopyClusterSnapshot(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CopyClusterSnapshot(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CopyClusterSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCluster(context.Background(), nil, func(o *Options) {
@@ -182,6 +194,30 @@ func TestCheckSnapshot_RestoreClusterFromSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -217,6 +253,18 @@ func TestCheckSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CopyClusterSnapshot(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CopyClusterSnapshot(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CopyClusterSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCluster(context.Background(), nil, func(o *Options) {
@@ -330,6 +378,30 @@ func TestUpdateSnapshot_RestoreClusterFromSnapshot(t *testing.T) {
 	_, err := svc.RestoreClusterFromSnapshot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RestoreClusterFromSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -30,12 +30,6 @@ func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput
 
 type CreateWorkflowInput struct {
 
-	// The configuration ID of the application configured in Application Discovery
-	// Service.
-	//
-	// This member is required.
-	ApplicationConfigurationId *string
-
 	// The input parameters required to create a migration workflow.
 	//
 	// This member is required.
@@ -50,6 +44,10 @@ type CreateWorkflowInput struct {
 	//
 	// This member is required.
 	TemplateId *string
+
+	// The configuration ID of the application configured in Application Discovery
+	// Service.
+	ApplicationConfigurationId *string
 
 	// The description of the migration workflow.
 	Description *string

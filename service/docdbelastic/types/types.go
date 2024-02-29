@@ -6,41 +6,41 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// Returns information about a specific Elastic DocumentDB cluster.
+// Returns information about a specific elastic cluster.
 type Cluster struct {
 
-	// The name of the Elastic DocumentDB cluster administrator.
+	// The name of the elastic cluster administrator.
 	//
 	// This member is required.
 	AdminUserName *string
 
-	// The authentication type for the Elastic DocumentDB cluster.
+	// The authentication type for the elastic cluster.
 	//
 	// This member is required.
 	AuthType Auth
 
-	// The arn of the Elastic DocumentDB cluster.
+	// The ARN identifier of the elastic cluster.
 	//
 	// This member is required.
 	ClusterArn *string
 
-	// The URL used to connect to the Elastic DocumentDB cluster.
+	// The URL used to connect to the elastic cluster.
 	//
 	// This member is required.
 	ClusterEndpoint *string
 
-	// The name of the Elastic DocumentDB cluster.
+	// The name of the elastic cluster.
 	//
 	// This member is required.
 	ClusterName *string
 
-	// The time when the Elastic DocumentDB cluster was created in Universal
-	// Coordinated Time (UTC).
+	// The time when the elastic cluster was created in Universal Coordinated Time
+	// (UTC).
 	//
 	// This member is required.
 	CreateTime *string
 
-	// The KMS key identifier to use to encrypt the Elastic DocumentDB cluster.
+	// The KMS key identifier to use to encrypt the elastic cluster.
 	//
 	// This member is required.
 	KmsKeyId *string
@@ -51,48 +51,65 @@ type Cluster struct {
 	// This member is required.
 	PreferredMaintenanceWindow *string
 
-	// The capacity of each shard in the Elastic DocumentDB cluster.
+	// The number of vCPUs assigned to each elastic cluster shard. Maximum is 64.
+	// Allowed values are 2, 4, 8, 16, 32, 64.
 	//
 	// This member is required.
 	ShardCapacity *int32
 
-	// The number of shards in the Elastic DocumentDB cluster.
+	// The number of shards assigned to the elastic cluster. Maximum is 32.
 	//
 	// This member is required.
 	ShardCount *int32
 
-	// The status of the Elastic DocumentDB cluster.
+	// The status of the elastic cluster.
 	//
 	// This member is required.
 	Status Status
 
-	// The Amazon EC2 subnet IDs for the Elastic DocumentDB cluster.
+	// The Amazon EC2 subnet IDs for the elastic cluster.
 	//
 	// This member is required.
 	SubnetIds []string
 
-	// A list of EC2 VPC security groups associated with this cluster.
+	// A list of EC2 VPC security groups associated with thie elastic cluster.
 	//
 	// This member is required.
 	VpcSecurityGroupIds []string
 
+	// The number of days for which automatic snapshots are retained.
+	BackupRetentionPeriod *int32
+
+	// The daily time range during which automated backups are created if automated
+	// backups are enabled, as determined by backupRetentionPeriod .
+	PreferredBackupWindow *string
+
+	// The number of replica instances applying to all shards in the cluster. A
+	// shardInstanceCount value of 1 means there is one writer instance, and any
+	// additional instances are replicas that can be used for reads and to improve
+	// availability.
+	ShardInstanceCount *int32
+
+	// The total number of shards in the cluster.
+	Shards []Shard
+
 	noSmithyDocumentSerde
 }
 
-// A list of Elastic DocumentDB cluster.
+// A list of Amazon DocumentDB elastic clusters.
 type ClusterInList struct {
 
-	// The arn of the Elastic DocumentDB cluster.
+	// The ARN identifier of the elastic cluster.
 	//
 	// This member is required.
 	ClusterArn *string
 
-	// The name of the Elastic DocumentDB cluster.
+	// The name of the elastic cluster.
 	//
 	// This member is required.
 	ClusterName *string
 
-	// The status of the Elastic DocumentDB cluster.
+	// The status of the elastic cluster.
 	//
 	// This member is required.
 	Status Status
@@ -100,90 +117,123 @@ type ClusterInList struct {
 	noSmithyDocumentSerde
 }
 
-// Returns information about a specific Elastic DocumentDB snapshot.
+// Returns information about a specific elastic cluster snapshot.
 type ClusterSnapshot struct {
 
-	// The name of the Elastic DocumentDB cluster administrator.
+	// The name of the elastic cluster administrator.
 	//
 	// This member is required.
 	AdminUserName *string
 
-	// The arn of the Elastic DocumentDB cluster.
+	// The ARN identifier of the elastic cluster.
 	//
 	// This member is required.
 	ClusterArn *string
 
-	// The time when the Elastic DocumentDB cluster was created in Universal
-	// Coordinated Time (UTC).
+	// The time when the elastic cluster was created in Universal Coordinated Time
+	// (UTC).
 	//
 	// This member is required.
 	ClusterCreationTime *string
 
-	// The KMS key identifier to use to encrypt the Elastic DocumentDB cluster.
+	// The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption
+	// key. If you are creating a cluster using the same Amazon account that owns this
+	// KMS encryption key, you can use the KMS key alias instead of the ARN as the KMS
+	// encryption key. If an encryption key is not specified here, Amazon DocumentDB
+	// uses the default encryption key that KMS creates for your account. Your account
+	// has a different default encryption key for each Amazon Region.
 	//
 	// This member is required.
 	KmsKeyId *string
 
-	// The arn of the Elastic DocumentDB snapshot
+	// The ARN identifier of the elastic cluster snapshot.
 	//
 	// This member is required.
 	SnapshotArn *string
 
-	// The time when the Elastic DocumentDB snapshot was created in Universal
-	// Coordinated Time (UTC).
+	// The time when the elastic cluster snapshot was created in Universal Coordinated
+	// Time (UTC).
 	//
 	// This member is required.
 	SnapshotCreationTime *string
 
-	// The name of the Elastic DocumentDB snapshot.
+	// The name of the elastic cluster snapshot.
 	//
 	// This member is required.
 	SnapshotName *string
 
-	// The status of the Elastic DocumentDB snapshot.
+	// The status of the elastic cluster snapshot.
 	//
 	// This member is required.
 	Status Status
 
-	// A list of the IDs of subnets associated with the DB cluster snapshot.
+	// The Amazon EC2 subnet IDs for the elastic cluster.
 	//
 	// This member is required.
 	SubnetIds []string
 
-	// A list of the IDs of the VPC security groups associated with the cluster
-	// snapshot.
+	// A list of EC2 VPC security groups to associate with the elastic cluster.
 	//
 	// This member is required.
 	VpcSecurityGroupIds []string
 
+	// The type of cluster snapshots to be returned. You can specify one of the
+	// following values:
+	//   - automated - Return all cluster snapshots that Amazon DocumentDB has
+	//   automatically created for your Amazon Web Services account.
+	//   - manual - Return all cluster snapshots that you have manually created for
+	//   your Amazon Web Services account.
+	SnapshotType SnapshotType
+
 	noSmithyDocumentSerde
 }
 
-// A list of Elastic DocumentDB snapshots.
+// A list of elastic cluster snapshots.
 type ClusterSnapshotInList struct {
 
-	// The arn of the Elastic DocumentDB cluster.
+	// The ARN identifier of the elastic cluster.
 	//
 	// This member is required.
 	ClusterArn *string
 
-	// The arn of the Elastic DocumentDB snapshot
+	// The ARN identifier of the elastic cluster snapshot.
 	//
 	// This member is required.
 	SnapshotArn *string
 
-	// The time when the Elastic DocumentDB snapshot was created in Universal
-	// Coordinated Time (UTC).
+	// The time when the elastic cluster snapshot was created in Universal Coordinated
+	// Time (UTC).
 	//
 	// This member is required.
 	SnapshotCreationTime *string
 
-	// The name of the Elastic DocumentDB snapshot.
+	// The name of the elastic cluster snapshot.
 	//
 	// This member is required.
 	SnapshotName *string
 
-	// The status of the Elastic DocumentDB snapshot.
+	// The status of the elastic cluster snapshot.
+	//
+	// This member is required.
+	Status Status
+
+	noSmithyDocumentSerde
+}
+
+// The name of the shard.
+type Shard struct {
+
+	// The time when the shard was created in Universal Coordinated Time (UTC).
+	//
+	// This member is required.
+	CreateTime *string
+
+	// The ID of the shard.
+	//
+	// This member is required.
+	ShardId *string
+
+	// The current status of the shard.
 	//
 	// This member is required.
 	Status Status

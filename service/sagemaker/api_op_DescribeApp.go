@@ -65,7 +65,12 @@ type DescribeAppOutput struct {
 	// The type of app.
 	AppType types.AppType
 
-	// The creation time.
+	// The creation time of the application. After an application has been shut down
+	// for 24 hours, SageMaker deletes all metadata for the application. To be
+	// considered an update and retain application metadata, applications must be
+	// restarted within 24 hours after the previous application has been shut down.
+	// After this time window, creation of an application is considered a new
+	// application rather than an update of the previous application.
 	CreationTime *time.Time
 
 	// The domain ID.

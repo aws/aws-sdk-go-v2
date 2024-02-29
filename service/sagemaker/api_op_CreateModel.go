@@ -19,17 +19,15 @@ import (
 // services or run a batch transform job. To host your model, you create an
 // endpoint configuration with the CreateEndpointConfig API, and then create an
 // endpoint with the CreateEndpoint API. SageMaker then deploys all of the
-// containers that you defined for the model in the hosting environment. For an
-// example that calls this method when deploying a model to SageMaker hosting
-// services, see Create a Model (Amazon Web Services SDK for Python (Boto 3)). (https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model)
-// To run a batch transform using your model, you start a job with the
-// CreateTransformJob API. SageMaker uses your model and your dataset to get
-// inferences which are then saved to a specified S3 location. In the request, you
-// also provide an IAM role that SageMaker can assume to access model artifacts and
-// docker image for deployment on ML compute hosting instances or for batch
-// transform jobs. In addition, you also use the IAM role to manage permissions the
-// inference code needs. For example, if the inference code access any other Amazon
-// Web Services resources, you grant necessary permissions via this role.
+// containers that you defined for the model in the hosting environment. To run a
+// batch transform using your model, you start a job with the CreateTransformJob
+// API. SageMaker uses your model and your dataset to get inferences which are then
+// saved to a specified S3 location. In the request, you also provide an IAM role
+// that SageMaker can assume to access model artifacts and docker image for
+// deployment on ML compute hosting instances or for batch transform jobs. In
+// addition, you also use the IAM role to manage permissions the inference code
+// needs. For example, if the inference code access any other Amazon Web Services
+// resources, you grant necessary permissions via this role.
 func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optFns ...func(*Options)) (*CreateModelOutput, error) {
 	if params == nil {
 		params = &CreateModelInput{}

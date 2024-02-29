@@ -1486,12 +1486,12 @@ type AutoMLJobObjective struct {
 	// you do not specify a metric name explicitly depend on the problem type.
 	//   - For tabular problem types:
 	//   - List of available metrics:
-	//   - Regression: InferenceLatency , MAE , MSE , R2 , RMSE
-	//   - Binary classification: Accuracy , AUC , BalancedAccuracy , F1 ,
-	//   InferenceLatency , LogLoss , Precision , Recall
+	//   - Regression: MAE , MSE , R2 , RMSE
+	//   - Binary classification: Accuracy , AUC , BalancedAccuracy , F1 , Precision ,
+	//   Recall
 	//   - Multiclass classification: Accuracy , BalancedAccuracy , F1macro ,
-	//   InferenceLatency , LogLoss , PrecisionMacro , RecallMacro For a description of
-	//   each metric, see Autopilot metrics for classification and regression (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics)
+	//   PrecisionMacro , RecallMacro For a description of each metric, see Autopilot
+	//   metrics for classification and regression (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics)
 	//   .
 	//   - Default objective metrics:
 	//   - Regression: MSE .
@@ -7896,7 +7896,7 @@ type IntegerParameterRangeSpecification struct {
 }
 
 // The configuration for the file system and kernels in a SageMaker image running
-// as a JupyterLab app.
+// as a JupyterLab app. The FileSystemConfig object is not supported.
 type JupyterLabAppImageConfig struct {
 
 	// The configuration used to run the application image container.
@@ -9282,7 +9282,7 @@ type ModelMetadataSummary struct {
 // Contains metrics captured from a model.
 type ModelMetrics struct {
 
-	// Metrics that measure bais in a model.
+	// Metrics that measure bias in a model.
 	Bias *Bias
 
 	// Metrics that help explain a model.
@@ -9390,6 +9390,9 @@ type ModelPackage struct {
 	// A list of algorithms that were used to create a model package.
 	SourceAlgorithmSpecification *SourceAlgorithmSpecification
 
+	// The URI of the source for the model package.
+	SourceUri *string
+
 	// A list of the tags associated with the model package. For more information, see
 	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 	// in the Amazon Web Services General Reference Guide.
@@ -9441,6 +9444,9 @@ type ModelPackageContainerDefinition struct {
 	// An MD5 hash of the training algorithm that identifies the Docker image used for
 	// training.
 	ImageDigest *string
+
+	// Specifies the location of ML model data to deploy during endpoint creation.
+	ModelDataSource *ModelDataSource
 
 	// The Amazon S3 path where the model artifacts, which result from model training,
 	// are stored. This path must point to a single gzip compressed tar archive (
@@ -13944,6 +13950,9 @@ type SourceAlgorithm struct {
 	// This member is required.
 	AlgorithmName *string
 
+	// Specifies the location of ML model data to deploy during endpoint creation.
+	ModelDataSource *ModelDataSource
+
 	// The Amazon S3 path where the model artifacts, which result from model training,
 	// are stored. This path must point to a single gzip compressed tar archive (
 	// .tar.gz suffix). The model artifacts must be in an S3 bucket that is in the same
@@ -16246,11 +16255,16 @@ type Vertex struct {
 	noSmithyDocumentSerde
 }
 
-// The list of key-value pairs that you specify for your resources.
+// The list of key-value pairs used to filter your search results. If a search
+// result contains a key from your list, it is included in the final search
+// response if the value associated with the key in the result matches the value
+// you specified. If the value doesn't match, the result is excluded from the
+// search response. Any resources that don't have a key from the list that you've
+// provided will also be included in the search response.
 type VisibilityConditions struct {
 
 	// The key that specifies the tag that you're using to filter the search results.
-	// It must be in the following format: Tags./EqualsIfExists .
+	// It must be in the following format: Tags. .
 	Key *string
 
 	// The value for the tag that you're using to filter the search results.

@@ -1245,6 +1245,13 @@ func awsRestjson1_serializeOpDocumentCreateIntentInput(v *CreateIntentInput, val
 		ok.String(*v.ParentIntentSignature)
 	}
 
+	if v.QnAIntentConfiguration != nil {
+		ok := object.Key("qnAIntentConfiguration")
+		if err := awsRestjson1_serializeDocumentQnAIntentConfiguration(v.QnAIntentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SampleUtterances != nil {
 		ok := object.Key("sampleUtterances")
 		if err := awsRestjson1_serializeDocumentSampleUtterancesList(v.SampleUtterances, ok); err != nil {
@@ -9664,6 +9671,13 @@ func awsRestjson1_serializeOpDocumentUpdateIntentInput(v *UpdateIntentInput, val
 		ok.String(*v.ParentIntentSignature)
 	}
 
+	if v.QnAIntentConfiguration != nil {
+		ok := object.Key("qnAIntentConfiguration")
+		if err := awsRestjson1_serializeDocumentQnAIntentConfiguration(v.QnAIntentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SampleUtterances != nil {
 		ok := object.Key("sampleUtterances")
 		if err := awsRestjson1_serializeDocumentSampleUtterancesList(v.SampleUtterances, ok); err != nil {
@@ -10886,6 +10900,18 @@ func awsRestjson1_serializeDocumentAudioSpecification(v *types.AudioSpecificatio
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBedrockKnowledgeStoreConfiguration(v *types.BedrockKnowledgeStoreConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockKnowledgeBaseArn != nil {
+		ok := object.Key("bedrockKnowledgeBaseArn")
+		ok.String(*v.BedrockKnowledgeBaseArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBedrockModelSpecification(v *types.BedrockModelSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11740,6 +11766,34 @@ func awsRestjson1_serializeDocumentDataPrivacy(v *types.DataPrivacy, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDataSourceConfiguration(v *types.DataSourceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockKnowledgeStoreConfiguration != nil {
+		ok := object.Key("bedrockKnowledgeStoreConfiguration")
+		if err := awsRestjson1_serializeDocumentBedrockKnowledgeStoreConfiguration(v.BedrockKnowledgeStoreConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KendraConfiguration != nil {
+		ok := object.Key("kendraConfiguration")
+		if err := awsRestjson1_serializeDocumentQnAKendraConfiguration(v.KendraConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OpensearchConfiguration != nil {
+		ok := object.Key("opensearchConfiguration")
+		if err := awsRestjson1_serializeDocumentOpensearchConfiguration(v.OpensearchConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDateRangeFilter(v *types.DateRangeFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11962,6 +12016,23 @@ func awsRestjson1_serializeDocumentEncryptionSetting(v *types.EncryptionSetting,
 	if v.KmsKeyArn != nil {
 		ok := object.Key("kmsKeyArn")
 		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExactResponseFields(v *types.ExactResponseFields, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnswerField != nil {
+		ok := object.Key("answerField")
+		ok.String(*v.AnswerField)
+	}
+
+	if v.QuestionField != nil {
+		ok := object.Key("questionField")
+		ok.String(*v.QuestionField)
 	}
 
 	return nil
@@ -12837,7 +12908,54 @@ func awsRestjson1_serializeDocumentObjectPrefixes(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOpensearchConfiguration(v *types.OpensearchConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainEndpoint != nil {
+		ok := object.Key("domainEndpoint")
+		ok.String(*v.DomainEndpoint)
+	}
+
+	if v.ExactResponse {
+		ok := object.Key("exactResponse")
+		ok.Boolean(v.ExactResponse)
+	}
+
+	if v.ExactResponseFields != nil {
+		ok := object.Key("exactResponseFields")
+		if err := awsRestjson1_serializeDocumentExactResponseFields(v.ExactResponseFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludeFields != nil {
+		ok := object.Key("includeFields")
+		if err := awsRestjson1_serializeDocumentOSIncludeFields(v.IncludeFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IndexName != nil {
+		ok := object.Key("indexName")
+		ok.String(*v.IndexName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOperationList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOSIncludeFields(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -13157,6 +13275,54 @@ func awsRestjson1_serializeDocumentPromptSpecification(v *types.PromptSpecificat
 		if err := awsRestjson1_serializeDocumentPromptAttemptsSpecificationMap(v.PromptAttemptsSpecification, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQnAIntentConfiguration(v *types.QnAIntentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockModelConfiguration != nil {
+		ok := object.Key("bedrockModelConfiguration")
+		if err := awsRestjson1_serializeDocumentBedrockModelSpecification(v.BedrockModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataSourceConfiguration != nil {
+		ok := object.Key("dataSourceConfiguration")
+		if err := awsRestjson1_serializeDocumentDataSourceConfiguration(v.DataSourceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQnAKendraConfiguration(v *types.QnAKendraConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExactResponse {
+		ok := object.Key("exactResponse")
+		ok.Boolean(v.ExactResponse)
+	}
+
+	if v.KendraIndex != nil {
+		ok := object.Key("kendraIndex")
+		ok.String(*v.KendraIndex)
+	}
+
+	if v.QueryFilterString != nil {
+		ok := object.Key("queryFilterString")
+		ok.String(*v.QueryFilterString)
+	}
+
+	if v.QueryFilterStringEnabled {
+		ok := object.Key("queryFilterStringEnabled")
+		ok.Boolean(v.QueryFilterStringEnabled)
 	}
 
 	return nil

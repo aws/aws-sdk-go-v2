@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds metadata tags to a Elastic DocumentDB resource
+// Adds metadata tags to an elastic cluster resource
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -28,12 +28,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The arn of the Elastic DocumentDB resource.
+	// The ARN identifier of the elastic cluster resource.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The tags to be assigned to the Elastic DocumentDB resource.
+	// The tags that are assigned to the elastic cluster resource.
 	//
 	// This member is required.
 	Tags map[string]string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a specific Elastic DocumentDB cluster.
+// Returns information about a specific elastic cluster.
 func (c *Client) GetCluster(ctx context.Context, params *GetClusterInput, optFns ...func(*Options)) (*GetClusterOutput, error) {
 	if params == nil {
 		params = &GetClusterInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetCluster(ctx context.Context, params *GetClusterInput, optFns
 
 type GetClusterInput struct {
 
-	// The arn of the Elastic DocumentDB cluster.
+	// The ARN identifier of the elastic cluster.
 	//
 	// This member is required.
 	ClusterArn *string
@@ -39,7 +39,7 @@ type GetClusterInput struct {
 
 type GetClusterOutput struct {
 
-	// Returns information about a specific Elastic DocumentDB cluster.
+	// Returns information about a specific elastic cluster.
 	//
 	// This member is required.
 	Cluster *types.Cluster

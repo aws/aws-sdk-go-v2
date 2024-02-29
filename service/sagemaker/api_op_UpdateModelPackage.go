@@ -51,8 +51,21 @@ type UpdateModelPackageInput struct {
 	// The metadata properties associated with the model package versions to remove.
 	CustomerMetadataPropertiesToRemove []string
 
+	// Specifies details about inference jobs that you can run with models based on
+	// this model package, including the following information:
+	//   - The Amazon ECR paths of containers that contain the inference code and
+	//   model artifacts.
+	//   - The instance types that the model package supports for transform jobs and
+	//   real-time endpoints used for inference.
+	//   - The input and output content formats that the model package supports for
+	//   inference.
+	InferenceSpecification *types.InferenceSpecification
+
 	// The approval status of the model.
 	ModelApprovalStatus types.ModelApprovalStatus
+
+	// The URI of the source for the model package.
+	SourceUri *string
 
 	noSmithyDocumentSerde
 }

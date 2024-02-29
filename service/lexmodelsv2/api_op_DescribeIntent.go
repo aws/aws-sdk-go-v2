@@ -111,6 +111,9 @@ type DescribeIntentOutput struct {
 	// The identifier of the built-in intent that this intent is derived from, if any.
 	ParentIntentSignature *string
 
+	// Details about the configuration of the built-in Amazon.QnAIntent .
+	QnAIntentConfiguration *types.QnAIntentConfiguration
+
 	// User utterances that trigger this intent.
 	SampleUtterances []types.SampleUtterance
 

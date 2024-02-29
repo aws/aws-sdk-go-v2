@@ -3166,6 +3166,21 @@ func validateAudioSpecification(v *types.AudioSpecification) error {
 	}
 }
 
+func validateBedrockKnowledgeStoreConfiguration(v *types.BedrockKnowledgeStoreConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockKnowledgeStoreConfiguration"}
+	if v.BedrockKnowledgeBaseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BedrockKnowledgeBaseArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBedrockModelSpecification(v *types.BedrockModelSpecification) error {
 	if v == nil {
 		return nil
@@ -3984,6 +3999,33 @@ func validateDataPrivacy(v *types.DataPrivacy) error {
 	}
 }
 
+func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceConfiguration"}
+	if v.OpensearchConfiguration != nil {
+		if err := validateOpensearchConfiguration(v.OpensearchConfiguration); err != nil {
+			invalidParams.AddNested("OpensearchConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KendraConfiguration != nil {
+		if err := validateQnAKendraConfiguration(v.KendraConfiguration); err != nil {
+			invalidParams.AddNested("KendraConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BedrockKnowledgeStoreConfiguration != nil {
+		if err := validateBedrockKnowledgeStoreConfiguration(v.BedrockKnowledgeStoreConfiguration); err != nil {
+			invalidParams.AddNested("BedrockKnowledgeStoreConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDateRangeFilter(v *types.DateRangeFilter) error {
 	if v == nil {
 		return nil
@@ -4158,6 +4200,24 @@ func validateElicitationCodeHookInvocationSetting(v *types.ElicitationCodeHookIn
 	invalidParams := smithy.InvalidParamsError{Context: "ElicitationCodeHookInvocationSetting"}
 	if v.EnableCodeHookInvocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnableCodeHookInvocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExactResponseFields(v *types.ExactResponseFields) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExactResponseFields"}
+	if v.QuestionField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuestionField"))
+	}
+	if v.AnswerField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnswerField"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4936,6 +4996,29 @@ func validateObfuscationSetting(v *types.ObfuscationSetting) error {
 	}
 }
 
+func validateOpensearchConfiguration(v *types.OpensearchConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpensearchConfiguration"}
+	if v.DomainEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainEndpoint"))
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if v.ExactResponseFields != nil {
+		if err := validateExactResponseFields(v.ExactResponseFields); err != nil {
+			invalidParams.AddNested("ExactResponseFields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOutputContext(v *types.OutputContext) error {
 	if v == nil {
 		return nil
@@ -5169,6 +5252,43 @@ func validatePromptSpecification(v *types.PromptSpecification) error {
 		if err := validatePromptAttemptsSpecificationMap(v.PromptAttemptsSpecification); err != nil {
 			invalidParams.AddNested("PromptAttemptsSpecification", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQnAIntentConfiguration(v *types.QnAIntentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QnAIntentConfiguration"}
+	if v.DataSourceConfiguration != nil {
+		if err := validateDataSourceConfiguration(v.DataSourceConfiguration); err != nil {
+			invalidParams.AddNested("DataSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BedrockModelConfiguration != nil {
+		if err := validateBedrockModelSpecification(v.BedrockModelConfiguration); err != nil {
+			invalidParams.AddNested("BedrockModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQnAKendraConfiguration(v *types.QnAKendraConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QnAKendraConfiguration"}
+	if v.KendraIndex == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KendraIndex"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6690,6 +6810,11 @@ func validateOpCreateIntentInput(v *CreateIntentInput) error {
 	if v.InitialResponseSetting != nil {
 		if err := validateInitialResponseSetting(v.InitialResponseSetting); err != nil {
 			invalidParams.AddNested("InitialResponseSetting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QnAIntentConfiguration != nil {
+		if err := validateQnAIntentConfiguration(v.QnAIntentConfiguration); err != nil {
+			invalidParams.AddNested("QnAIntentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8754,6 +8879,11 @@ func validateOpUpdateIntentInput(v *UpdateIntentInput) error {
 	if v.InitialResponseSetting != nil {
 		if err := validateInitialResponseSetting(v.InitialResponseSetting); err != nil {
 			invalidParams.AddNested("InitialResponseSetting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QnAIntentConfiguration != nil {
+		if err := validateQnAIntentConfiguration(v.QnAIntentConfiguration); err != nil {
+			invalidParams.AddNested("QnAIntentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

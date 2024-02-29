@@ -1073,6 +1073,17 @@ type AudioSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the configuration of a Amazon Bedrock knowledge base.
+type BedrockKnowledgeStoreConfiguration struct {
+
+	// The ARN of the knowledge base used.
+	//
+	// This member is required.
+	BedrockKnowledgeBaseArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the Amazon Bedrock model used to interpret the
 // prompt used in descriptive bot building.
 type BedrockModelSpecification struct {
@@ -2150,6 +2161,32 @@ type DataPrivacy struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the configuration of the knowledge store used for the
+// AMAZON.QnAIntent . You must have already created the knowledge store and indexed
+// the documents within it.
+type DataSourceConfiguration struct {
+
+	// Contains details about the configuration of the Amazon Bedrock knowledge base
+	// used for the AMAZON.QnAIntent . To set up a knowledge base, follow the steps at
+	// Building a knowledge base (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html)
+	// .
+	BedrockKnowledgeStoreConfiguration *BedrockKnowledgeStoreConfiguration
+
+	// Contains details about the configuration of the Amazon Kendra index used for
+	// the AMAZON.QnAIntent . To create a Amazon Kendra index, follow the steps at
+	// Creating an index (https://docs.aws.amazon.com/kendra/latest/dg/create-index.html)
+	// .
+	KendraConfiguration *QnAKendraConfiguration
+
+	// Contains details about the configuration of the Amazon OpenSearch Service
+	// database used for the AMAZON.QnAIntent . To create a domain, follow the steps at
+	// Creating and managing Amazon OpenSearch Service domains (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html)
+	// .
+	OpensearchConfiguration *OpensearchConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The object used for specifying the data range that the customer wants Amazon
 // Lex to read through in the input transcripts.
 type DateRangeFilter struct {
@@ -2330,6 +2367,24 @@ type EncryptionSetting struct {
 	// The KMS key ARN used to encrypt the metadata associated with the bot
 	// recommendation.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the names of the fields used for an exact response to the user.
+type ExactResponseFields struct {
+
+	// The name of the field that contains the answer to the query made to the
+	// OpenSearch Service database.
+	//
+	// This member is required.
+	AnswerField *string
+
+	// The name of the field that contains the query made to the OpenSearch Service
+	// database.
+	//
+	// This member is required.
+	QuestionField *string
 
 	noSmithyDocumentSerde
 }
@@ -3234,6 +3289,34 @@ type ObfuscationSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the configuration of the Amazon OpenSearch Service
+// database used for the AMAZON.QnAIntent .
+type OpensearchConfiguration struct {
+
+	// The endpoint of the Amazon OpenSearch Service domain.
+	//
+	// This member is required.
+	DomainEndpoint *string
+
+	// The name of the Amazon OpenSearch Service index.
+	//
+	// This member is required.
+	IndexName *string
+
+	// Specifies whether to return an exact response or to return an answer generated
+	// by the model using the fields you specify from the database.
+	ExactResponse bool
+
+	// Contains the names of the fields used for an exact response to the user.
+	ExactResponseFields *ExactResponseFields
+
+	// Contains a list of fields from the Amazon OpenSearch Service that the model can
+	// use to generate the answer to the query.
+	IncludeFields []string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a session context that is activated when an intent is fulfilled.
 type OutputContext struct {
 
@@ -3478,6 +3561,48 @@ type PromptSpecification struct {
 
 	// Specifies the advanced settings on each attempt of the prompt.
 	PromptAttemptsSpecification map[string]PromptAttemptSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Details about the the configuration of the built-in Amazon.QnAIntent .
+type QnAIntentConfiguration struct {
+
+	// Contains information about the Amazon Bedrock model used to interpret the
+	// prompt used in descriptive bot building.
+	BedrockModelConfiguration *BedrockModelSpecification
+
+	// Contains details about the configuration of the data source used for the
+	// AMAZON.QnAIntent .
+	DataSourceConfiguration *DataSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the configuration of the Amazon Kendra index used for
+// the AMAZON.QnAIntent .
+type QnAKendraConfiguration struct {
+
+	// The ARN of the Amazon Kendra index to use.
+	//
+	// This member is required.
+	KendraIndex *string
+
+	// Specifies whether to return an exact response from the Amazon Kendra index or
+	// to let the Amazon Bedrock model you select generate a response based on the
+	// results. To use this feature, you must first add FAQ questions to your index by
+	// following the steps at Adding frequently asked questions (FAQs) to an index (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html)
+	// .
+	ExactResponse bool
+
+	// Contains the Amazon Kendra filter string to use if enabled. For more
+	// information on the Amazon Kendra search filter JSON format, see Using document
+	// attributes to filter search results (https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering)
+	// .
+	QueryFilterString *string
+
+	// Specifies whether to enable an Amazon Kendra filter string or not.
+	QueryFilterStringEnabled bool
 
 	noSmithyDocumentSerde
 }

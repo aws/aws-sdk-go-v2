@@ -19616,6 +19616,11 @@ func awsRestjson1_serializeDocumentColumnTooltipItem(v *types.ColumnTooltipItem,
 		ok.String(*v.Label)
 	}
 
+	if len(v.TooltipTarget) > 0 {
+		ok := object.Key("TooltipTarget")
+		ok.String(string(v.TooltipTarget))
+	}
+
 	if len(v.Visibility) > 0 {
 		ok := object.Key("Visibility")
 		ok.String(string(v.Visibility))
@@ -23194,6 +23199,11 @@ func awsRestjson1_serializeDocumentFieldTooltipItem(v *types.FieldTooltipItem, v
 	if v.Label != nil {
 		ok := object.Key("Label")
 		ok.String(*v.Label)
+	}
+
+	if len(v.TooltipTarget) > 0 {
+		ok := object.Key("TooltipTarget")
+		ok.String(string(v.TooltipTarget))
 	}
 
 	if len(v.Visibility) > 0 {

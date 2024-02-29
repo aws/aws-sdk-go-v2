@@ -134,6 +134,12 @@ type CreateIntentInput struct {
 	// A unique identifier for the built-in intent to base this intent on.
 	ParentIntentSignature *string
 
+	// Specifies the configuration of the built-in Amazon.QnAIntent . The
+	// AMAZON.QnAIntent intent is called when Amazon Lex can't determine another intent
+	// to invoke. If you specify this field, you can't specify the kendraConfiguration
+	// field.
+	QnAIntentConfiguration *types.QnAIntentConfiguration
+
 	// An array of strings that a user might say to signal the intent. For example, "I
 	// want a pizza", or "I want a {PizzaSize} pizza". In an utterance, slot names are
 	// enclosed in curly braces ("{", "}") to indicate where they should be displayed
@@ -193,6 +199,9 @@ type CreateIntentOutput struct {
 
 	// The signature of the parent intent specified for the intent.
 	ParentIntentSignature *string
+
+	// Details about the the configuration of the built-in Amazon.QnAIntent .
+	QnAIntentConfiguration *types.QnAIntentConfiguration
 
 	// The sample utterances specified for the intent.
 	SampleUtterances []types.SampleUtterance

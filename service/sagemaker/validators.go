@@ -9743,6 +9743,11 @@ func validateModelPackageContainerDefinition(v *types.ModelPackageContainerDefin
 	if v.Image == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Image"))
 	}
+	if v.ModelDataSource != nil {
+		if err := validateModelDataSource(v.ModelDataSource); err != nil {
+			invalidParams.AddNested("ModelDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ModelInput != nil {
 		if err := validateModelInput(v.ModelInput); err != nil {
 			invalidParams.AddNested("ModelInput", err.(smithy.InvalidParamsError))
@@ -11440,6 +11445,11 @@ func validateSourceAlgorithm(v *types.SourceAlgorithm) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SourceAlgorithm"}
+	if v.ModelDataSource != nil {
+		if err := validateModelDataSource(v.ModelDataSource); err != nil {
+			invalidParams.AddNested("ModelDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AlgorithmName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AlgorithmName"))
 	}
@@ -17354,6 +17364,11 @@ func validateOpUpdateModelPackageInput(v *UpdateModelPackageInput) error {
 	if v.AdditionalInferenceSpecificationsToAdd != nil {
 		if err := validateAdditionalInferenceSpecifications(v.AdditionalInferenceSpecificationsToAdd); err != nil {
 			invalidParams.AddNested("AdditionalInferenceSpecificationsToAdd", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InferenceSpecification != nil {
+		if err := validateInferenceSpecification(v.InferenceSpecification); err != nil {
+			invalidParams.AddNested("InferenceSpecification", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -100,7 +100,7 @@ type DescribeModelPackageOutput struct {
 	// in the Amazon SageMaker Developer Guide.
 	DriftCheckBaselines *types.DriftCheckBaselines
 
-	// Details about inference jobs that can be run with models based on this model
+	// Details about inference jobs that you can run with models based on this model
 	// package.
 	InferenceSpecification *types.InferenceSpecification
 
@@ -140,6 +140,9 @@ type DescribeModelPackageOutput struct {
 
 	// Details about the algorithm that was used to create the model package.
 	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
+
+	// The URI of the source for the model package.
+	SourceUri *string
 
 	// The machine learning task you specified that your model package accomplishes.
 	// Common machine learning tasks include object detection and image classification.

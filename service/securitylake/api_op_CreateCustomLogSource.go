@@ -36,14 +36,16 @@ func (c *Client) CreateCustomLogSource(ctx context.Context, params *CreateCustom
 
 type CreateCustomLogSourceInput struct {
 
+	// The configuration for the third-party custom source.
+	//
+	// This member is required.
+	Configuration *types.CustomLogSourceConfiguration
+
 	// Specify the name for a third-party custom source. This must be a Regionally
 	// unique value.
 	//
 	// This member is required.
 	SourceName *string
-
-	// The configuration for the third-party custom source.
-	Configuration *types.CustomLogSourceConfiguration
 
 	// The Open Cybersecurity Schema Framework (OCSF) event classes which describes
 	// the type of data that the custom source will send to Security Lake. The

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a Elastic DocumentDB snapshot.
+// Delete an elastic cluster snapshot.
 func (c *Client) DeleteClusterSnapshot(ctx context.Context, params *DeleteClusterSnapshotInput, optFns ...func(*Options)) (*DeleteClusterSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteClusterSnapshotInput{}
@@ -29,7 +29,7 @@ func (c *Client) DeleteClusterSnapshot(ctx context.Context, params *DeleteCluste
 
 type DeleteClusterSnapshotInput struct {
 
-	// The arn of the Elastic DocumentDB snapshot that is to be deleted.
+	// The ARN identifier of the elastic cluster snapshot that is to be deleted.
 	//
 	// This member is required.
 	SnapshotArn *string
@@ -39,7 +39,7 @@ type DeleteClusterSnapshotInput struct {
 
 type DeleteClusterSnapshotOutput struct {
 
-	// Returns information about the newly deleted Elastic DocumentDB snapshot.
+	// Returns information about the newly deleted elastic cluster snapshot.
 	//
 	// This member is required.
 	Snapshot *types.ClusterSnapshot

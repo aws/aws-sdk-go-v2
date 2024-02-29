@@ -35,8 +35,6 @@ type DeleteDataLakeOrganizationConfigurationInput struct {
 
 	// Turns off automatic enablement of Security Lake for member accounts that are
 	// added to an organization.
-	//
-	// This member is required.
 	AutoEnableNewAccount []types.DataLakeAutoEnableNewAccountConfiguration
 
 	noSmithyDocumentSerde

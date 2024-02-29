@@ -173,6 +173,7 @@ type StepStatus string
 // Enum values for StepStatus
 const (
 	StepStatusAwaitingDependencies  StepStatus = "AWAITING_DEPENDENCIES"
+	StepStatusSkipped               StepStatus = "SKIPPED"
 	StepStatusReady                 StepStatus = "READY"
 	StepStatusInProgress            StepStatus = "IN_PROGRESS"
 	StepStatusCompleted             StepStatus = "COMPLETED"
@@ -187,6 +188,7 @@ const (
 func (StepStatus) Values() []StepStatus {
 	return []StepStatus{
 		"AWAITING_DEPENDENCIES",
+		"SKIPPED",
 		"READY",
 		"IN_PROGRESS",
 		"COMPLETED",
@@ -220,7 +222,11 @@ type TemplateStatus string
 
 // Enum values for TemplateStatus
 const (
-	TemplateStatusCreated TemplateStatus = "CREATED"
+	TemplateStatusCreated         TemplateStatus = "CREATED"
+	TemplateStatusReady           TemplateStatus = "READY"
+	TemplateStatusPendingCreation TemplateStatus = "PENDING_CREATION"
+	TemplateStatusCreating        TemplateStatus = "CREATING"
+	TemplateStatusCreationFailed  TemplateStatus = "CREATION_FAILED"
 )
 
 // Values returns all known values for TemplateStatus. Note that this can be
@@ -229,5 +235,9 @@ const (
 func (TemplateStatus) Values() []TemplateStatus {
 	return []TemplateStatus{
 		"CREATED",
+		"READY",
+		"PENDING_CREATION",
+		"CREATING",
+		"CREATION_FAILED",
 	}
 }

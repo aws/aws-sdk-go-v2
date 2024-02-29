@@ -67,8 +67,8 @@ type CreateModelPackageInput struct {
 	// in the Amazon SageMaker Developer Guide.
 	DriftCheckBaselines *types.DriftCheckBaselines
 
-	// Specifies details about inference jobs that can be run with models based on
-	// this model package, including the following:
+	// Specifies details about inference jobs that you can run with models based on
+	// this model package, including the following information:
 	//   - The Amazon ECR paths of containers that contain the inference code and
 	//   model artifacts.
 	//   - The instance types that the model package supports for transform jobs and
@@ -114,6 +114,11 @@ type CreateModelPackageInput struct {
 
 	// Details about the algorithm that was used to create the model package.
 	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
+
+	// The URI of the source for the model package. If you want to clone a model
+	// package, set it to the model package Amazon Resource Name (ARN). If you want to
+	// register a model, set it to the model ARN.
+	SourceUri *string
 
 	// A list of key value pairs associated with the model. For more information, see
 	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)

@@ -2477,6 +2477,9 @@ type ColumnTooltipItem struct {
 	// The label of the tooltip item.
 	Label *string
 
+	// Determines the target of the column tooltip item in a combo chart visual.
+	TooltipTarget TooltipTarget
+
 	// The visibility of the tooltip item.
 	Visibility Visibility
 
@@ -5323,6 +5326,9 @@ type FieldTooltipItem struct {
 
 	// The label of the tooltip item.
 	Label *string
+
+	// Determines the target of the field tooltip item in a combo chart visual.
+	TooltipTarget TooltipTarget
 
 	// The visibility of the tooltip item.
 	Visibility Visibility

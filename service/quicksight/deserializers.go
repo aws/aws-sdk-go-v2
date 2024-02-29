@@ -44280,6 +44280,15 @@ func awsRestjson1_deserializeDocumentColumnTooltipItem(v **types.ColumnTooltipIt
 				sv.Label = ptr.String(jtv)
 			}
 
+		case "TooltipTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TooltipTarget to be of type string, got %T instead", value)
+				}
+				sv.TooltipTarget = types.TooltipTarget(jtv)
+			}
+
 		case "Visibility":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -52854,6 +52863,15 @@ func awsRestjson1_deserializeDocumentFieldTooltipItem(v **types.FieldTooltipItem
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Label = ptr.String(jtv)
+			}
+
+		case "TooltipTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TooltipTarget to be of type string, got %T instead", value)
+				}
+				sv.TooltipTarget = types.TooltipTarget(jtv)
 			}
 
 		case "Visibility":

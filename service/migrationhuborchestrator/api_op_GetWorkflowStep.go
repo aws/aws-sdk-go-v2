@@ -35,7 +35,7 @@ type GetWorkflowStepInput struct {
 	// This member is required.
 	Id *string
 
-	// desThe ID of the step group.
+	// The ID of the step group.
 	//
 	// This member is required.
 	StepGroupId *string

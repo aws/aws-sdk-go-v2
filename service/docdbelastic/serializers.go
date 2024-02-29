@@ -13,6 +13,111 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpCopyClusterSnapshot struct {
+}
+
+func (*awsRestjson1_serializeOpCopyClusterSnapshot) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCopyClusterSnapshot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CopyClusterSnapshotInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/cluster-snapshot/{snapshotArn}/copy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCopyClusterSnapshotInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCopyClusterSnapshotInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCopyClusterSnapshotInput(v *CopyClusterSnapshotInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.SnapshotArn == nil || len(*v.SnapshotArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member snapshotArn must not be empty")}
+	}
+	if v.SnapshotArn != nil {
+		if err := encoder.SetURI("snapshotArn").String(*v.SnapshotArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCopyClusterSnapshotInput(v *CopyClusterSnapshotInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CopyTags != nil {
+		ok := object.Key("copyTags")
+		ok.Boolean(*v.CopyTags)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetSnapshotName != nil {
+		ok := object.Key("targetSnapshotName")
+		ok.String(*v.TargetSnapshotName)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateCluster struct {
 }
 
@@ -95,6 +200,11 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(string(v.AuthType))
 	}
 
+	if v.BackupRetentionPeriod != nil {
+		ok := object.Key("backupRetentionPeriod")
+		ok.Integer(*v.BackupRetentionPeriod)
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -110,6 +220,11 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.KmsKeyId)
 	}
 
+	if v.PreferredBackupWindow != nil {
+		ok := object.Key("preferredBackupWindow")
+		ok.String(*v.PreferredBackupWindow)
+	}
+
 	if v.PreferredMaintenanceWindow != nil {
 		ok := object.Key("preferredMaintenanceWindow")
 		ok.String(*v.PreferredMaintenanceWindow)
@@ -123,6 +238,11 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 	if v.ShardCount != nil {
 		ok := object.Key("shardCount")
 		ok.Integer(*v.ShardCount)
+	}
+
+	if v.ShardInstanceCount != nil {
+		ok := object.Key("shardInstanceCount")
+		ok.Integer(*v.ShardInstanceCount)
 	}
 
 	if v.SubnetIds != nil {
@@ -625,6 +745,10 @@ func awsRestjson1_serializeOpHttpBindingsListClusterSnapshotsInput(v *ListCluste
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.SnapshotType != nil {
+		encoder.SetQuery("snapshotType").String(*v.SnapshotType)
+	}
+
 	return nil
 }
 
@@ -783,6 +907,16 @@ func awsRestjson1_serializeOpDocumentRestoreClusterFromSnapshotInput(v *RestoreC
 		ok.String(*v.KmsKeyId)
 	}
 
+	if v.ShardCapacity != nil {
+		ok := object.Key("shardCapacity")
+		ok.Integer(*v.ShardCapacity)
+	}
+
+	if v.ShardInstanceCount != nil {
+		ok := object.Key("shardInstanceCount")
+		ok.Integer(*v.ShardInstanceCount)
+	}
+
 	if v.SubnetIds != nil {
 		ok := object.Key("subnetIds")
 		if err := awsRestjson1_serializeDocumentStringList(v.SubnetIds, ok); err != nil {
@@ -800,6 +934,136 @@ func awsRestjson1_serializeOpDocumentRestoreClusterFromSnapshotInput(v *RestoreC
 	if v.VpcSecurityGroupIds != nil {
 		ok := object.Key("vpcSecurityGroupIds")
 		if err := awsRestjson1_serializeDocumentStringList(v.VpcSecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartCluster struct {
+}
+
+func (*awsRestjson1_serializeOpStartCluster) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartClusterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/cluster/{clusterArn}/start")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartClusterInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartClusterInput(v *StartClusterInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("clusterArn").String(*v.ClusterArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStopCluster struct {
+}
+
+func (*awsRestjson1_serializeOpStopCluster) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStopCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopClusterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/cluster/{clusterArn}/stop")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStopClusterInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStopClusterInput(v *StopClusterInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("clusterArn").String(*v.ClusterArn); err != nil {
 			return err
 		}
 	}
@@ -1058,9 +1322,19 @@ func awsRestjson1_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 		ok.String(string(v.AuthType))
 	}
 
+	if v.BackupRetentionPeriod != nil {
+		ok := object.Key("backupRetentionPeriod")
+		ok.Integer(*v.BackupRetentionPeriod)
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.PreferredBackupWindow != nil {
+		ok := object.Key("preferredBackupWindow")
+		ok.String(*v.PreferredBackupWindow)
 	}
 
 	if v.PreferredMaintenanceWindow != nil {
@@ -1076,6 +1350,11 @@ func awsRestjson1_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 	if v.ShardCount != nil {
 		ok := object.Key("shardCount")
 		ok.Integer(*v.ShardCount)
+	}
+
+	if v.ShardInstanceCount != nil {
+		ok := object.Key("shardInstanceCount")
+		ok.Integer(*v.ShardInstanceCount)
 	}
 
 	if v.SubnetIds != nil {

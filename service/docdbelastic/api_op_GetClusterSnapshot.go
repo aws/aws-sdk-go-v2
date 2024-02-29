@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a specific Elastic DocumentDB snapshot
+// Returns information about a specific elastic cluster snapshot
 func (c *Client) GetClusterSnapshot(ctx context.Context, params *GetClusterSnapshotInput, optFns ...func(*Options)) (*GetClusterSnapshotOutput, error) {
 	if params == nil {
 		params = &GetClusterSnapshotInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetClusterSnapshot(ctx context.Context, params *GetClusterSnaps
 
 type GetClusterSnapshotInput struct {
 
-	// The arn of the Elastic DocumentDB snapshot.
+	// The ARN identifier of the elastic cluster snapshot.
 	//
 	// This member is required.
 	SnapshotArn *string
@@ -39,7 +39,7 @@ type GetClusterSnapshotInput struct {
 
 type GetClusterSnapshotOutput struct {
 
-	// Returns information about a specific Elastic DocumentDB snapshot.
+	// Returns information about a specific elastic cluster snapshot.
 	//
 	// This member is required.
 	Snapshot *types.ClusterSnapshot

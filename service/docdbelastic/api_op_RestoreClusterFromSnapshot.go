@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Restores a Elastic DocumentDB cluster from a snapshot.
+// Restores an elastic cluster from a snapshot.
 func (c *Client) RestoreClusterFromSnapshot(ctx context.Context, params *RestoreClusterFromSnapshotInput, optFns ...func(*Options)) (*RestoreClusterFromSnapshotOutput, error) {
 	if params == nil {
 		params = &RestoreClusterFromSnapshotInput{}
@@ -29,35 +29,44 @@ func (c *Client) RestoreClusterFromSnapshot(ctx context.Context, params *Restore
 
 type RestoreClusterFromSnapshotInput struct {
 
-	// The name of the Elastic DocumentDB cluster.
+	// The name of the elastic cluster.
 	//
 	// This member is required.
 	ClusterName *string
 
-	// The arn of the Elastic DocumentDB snapshot.
+	// The ARN identifier of the elastic cluster snapshot.
 	//
 	// This member is required.
 	SnapshotArn *string
 
-	// The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.
-	// The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption
-	// key. If you are creating a cluster using the same Amazon account that owns this
-	// KMS encryption key, you can use the KMS key alias instead of the ARN as the KMS
-	// encryption key. If an encryption key is not specified here, Elastic DocumentDB
-	// uses the default encryption key that KMS creates for your account. Your account
-	// has a different default encryption key for each Amazon Region.
+	// The KMS key identifier to use to encrypt the new Amazon DocumentDB elastic
+	// clusters cluster. The KMS key identifier is the Amazon Resource Name (ARN) for
+	// the KMS encryption key. If you are creating a cluster using the same Amazon
+	// account that owns this KMS encryption key, you can use the KMS key alias instead
+	// of the ARN as the KMS encryption key. If an encryption key is not specified
+	// here, Amazon DocumentDB uses the default encryption key that KMS creates for
+	// your account. Your account has a different default encryption key for each
+	// Amazon Region.
 	KmsKeyId *string
 
-	// The Amazon EC2 subnet IDs for the Elastic DocumentDB cluster.
+	// The capacity of each shard in the new restored elastic cluster.
+	ShardCapacity *int32
+
+	// The number of replica instances applying to all shards in the elastic cluster.
+	// A shardInstanceCount value of 1 means there is one writer instance, and any
+	// additional instances are replicas that can be used for reads and to improve
+	// availability.
+	ShardInstanceCount *int32
+
+	// The Amazon EC2 subnet IDs for the elastic cluster.
 	SubnetIds []string
 
-	// A list of the tag names to be assigned to the restored DB cluster, in the form
-	// of an array of key-value pairs in which the key is the tag name and the value is
-	// the key value.
+	// A list of the tag names to be assigned to the restored elastic cluster, in the
+	// form of an array of key-value pairs in which the key is the tag name and the
+	// value is the key value.
 	Tags map[string]string
 
-	// A list of EC2 VPC security groups to associate with the Elastic DocumentDB
-	// cluster.
+	// A list of EC2 VPC security groups to associate with the elastic cluster.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde
@@ -65,7 +74,7 @@ type RestoreClusterFromSnapshotInput struct {
 
 type RestoreClusterFromSnapshotOutput struct {
 
-	// Returns information about a the restored Elastic DocumentDB cluster.
+	// Returns information about a the restored elastic cluster.
 	//
 	// This member is required.
 	Cluster *types.Cluster

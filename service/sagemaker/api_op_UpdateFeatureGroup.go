@@ -20,7 +20,8 @@ import (
 // TtlDuration applies for all records added to the feature group after the feature
 // group is updated. If a record level TtlDuration exists from using the PutRecord
 // API, the record level TtlDuration applies to that record instead of the default
-// TtlDuration .
+// TtlDuration . To remove the default TtlDuration from an existing feature group,
+// use the UpdateFeatureGroup API and set the TtlDuration Unit and Value to null .
 func (c *Client) UpdateFeatureGroup(ctx context.Context, params *UpdateFeatureGroupInput, optFns ...func(*Options)) (*UpdateFeatureGroupOutput, error) {
 	if params == nil {
 		params = &UpdateFeatureGroupInput{}

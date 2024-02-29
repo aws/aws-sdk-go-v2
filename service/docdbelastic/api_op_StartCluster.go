@@ -11,25 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an elastic cluster.
-func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, optFns ...func(*Options)) (*DeleteClusterOutput, error) {
+// Restarts the stopped elastic cluster that is specified by clusterARN .
+func (c *Client) StartCluster(ctx context.Context, params *StartClusterInput, optFns ...func(*Options)) (*StartClusterOutput, error) {
 	if params == nil {
-		params = &DeleteClusterInput{}
+		params = &StartClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCluster", params, optFns, c.addOperationDeleteClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartCluster", params, optFns, c.addOperationStartClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteClusterOutput)
+	out := result.(*StartClusterOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteClusterInput struct {
+type StartClusterInput struct {
 
-	// The ARN identifier of the elastic cluster that is to be deleted.
+	// The ARN identifier of the elastic cluster.
 	//
 	// This member is required.
 	ClusterArn *string
@@ -37,9 +37,9 @@ type DeleteClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeleteClusterOutput struct {
+type StartClusterOutput struct {
 
-	// Returns information about the newly deleted elastic cluster.
+	// Returns information about a specific elastic cluster.
 	//
 	// This member is required.
 	Cluster *types.Cluster
@@ -50,19 +50,19 @@ type DeleteClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCluster{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCluster{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCluster{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartCluster{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteCluster"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "StartCluster"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -105,10 +105,10 @@ func (c *Client) addOperationDeleteClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteClusterValidationMiddleware(stack); err != nil {
+	if err = addOpStartClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCluster(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -129,10 +129,10 @@ func (c *Client) addOperationDeleteClusterMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteCluster(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opStartCluster(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeleteCluster",
+		OperationName: "StartCluster",
 	}
 }

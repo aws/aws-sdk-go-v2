@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about provisioned Elastic DocumentDB clusters.
+// Returns information about provisioned Amazon DocumentDB elastic clusters.
 func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, optFns ...func(*Options)) (*ListClustersOutput, error) {
 	if params == nil {
 		params = &ListClustersInput{}
@@ -29,10 +29,14 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 
 type ListClustersInput struct {
 
-	// The maximum number of entries to recieve in the response.
+	// The maximum number of elastic cluster snapshot results to receive in the
+	// response.
 	MaxResults *int32
 
-	// The nextToken which is used the get the next page of data.
+	// A pagination token provided by a previous request. If this parameter is
+	// specified, the response includes only records beyond this token, up to the value
+	// specified by max-results . If there is no more data in the responce, the
+	// nextToken will not be returned.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,12 +44,13 @@ type ListClustersInput struct {
 
 type ListClustersOutput struct {
 
-	// A list of Elastic DocumentDB cluster.
+	// A list of Amazon DocumentDB elastic clusters.
 	Clusters []types.ClusterInList
 
-	// The response will provide a nextToken if there is more data beyond the
-	// maxResults. If there is no more data in the responce, the nextToken will not be
-	// returned.
+	// A pagination token provided by a previous request. If this parameter is
+	// specified, the response includes only records beyond this token, up to the value
+	// specified by max-results . If there is no more data in the responce, the
+	// nextToken will not be returned.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -139,7 +144,8 @@ var _ ListClustersAPIClient = (*Client)(nil)
 
 // ListClustersPaginatorOptions is the paginator options for ListClusters
 type ListClustersPaginatorOptions struct {
-	// The maximum number of entries to recieve in the response.
+	// The maximum number of elastic cluster snapshot results to receive in the
+	// response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

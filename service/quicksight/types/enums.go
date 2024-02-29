@@ -4065,6 +4065,26 @@ func (TimeGranularity) Values() []TimeGranularity {
 	}
 }
 
+type TooltipTarget string
+
+// Enum values for TooltipTarget
+const (
+	TooltipTargetBoth TooltipTarget = "BOTH"
+	TooltipTargetBar  TooltipTarget = "BAR"
+	TooltipTargetLine TooltipTarget = "LINE"
+)
+
+// Values returns all known values for TooltipTarget. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TooltipTarget) Values() []TooltipTarget {
+	return []TooltipTarget{
+		"BOTH",
+		"BAR",
+		"LINE",
+	}
+}
+
 type TooltipTitleType string
 
 // Enum values for TooltipTitleType

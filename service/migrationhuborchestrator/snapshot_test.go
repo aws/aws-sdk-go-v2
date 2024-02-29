@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CreateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateWorkflow(context.Background(), nil, func(o *Options) {
@@ -91,6 +103,18 @@ func TestCheckSnapshot_CreateWorkflowStepGroup(t *testing.T) {
 	_, err := svc.CreateWorkflowStepGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateWorkflowStepGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -362,6 +386,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateWorkflow(context.Background(), nil, func(o *Options) {
@@ -397,6 +433,18 @@ func TestCheckSnapshot_UpdateWorkflowStepGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CreateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateWorkflow(context.Background(), nil, func(o *Options) {
@@ -426,6 +474,18 @@ func TestUpdateSnapshot_CreateWorkflowStepGroup(t *testing.T) {
 	_, err := svc.CreateWorkflowStepGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateWorkflowStepGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -690,6 +750,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

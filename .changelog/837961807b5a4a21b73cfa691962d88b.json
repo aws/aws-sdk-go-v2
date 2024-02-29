@@ -1,0 +1,8 @@
+{
+    "id": "83796180-7b5a-4a21-b73c-fa691962d88b",
+    "type": "feature",
+    "description": "This release makes AMAZON.QnAIntent generally available in Amazon Lex. This generative AI feature leverages large language models available through Amazon Bedrock to automate frequently asked questions (FAQ) experience for end-users.",
+    "modules": [
+        "service/lexmodelsv2"
+    ]
+}

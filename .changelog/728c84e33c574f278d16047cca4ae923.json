@@ -1,0 +1,8 @@
+{
+    "id": "728c84e3-3c57-4f27-8d16-047cca4ae923",
+    "type": "feature",
+    "description": "Adds new CreateTemplate, UpdateTemplate and DeleteTemplate APIs.",
+    "modules": [
+        "service/migrationhuborchestrator"
+    ]
+}

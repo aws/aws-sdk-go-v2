@@ -33,8 +33,6 @@ type CreateDataLakeOrganizationConfigurationInput struct {
 
 	// Enable Security Lake with the specified configuration settings, to begin
 	// collecting security data for new accounts in your organization.
-	//
-	// This member is required.
 	AutoEnableNewAccount []types.DataLakeAutoEnableNewAccountConfiguration
 
 	noSmithyDocumentSerde

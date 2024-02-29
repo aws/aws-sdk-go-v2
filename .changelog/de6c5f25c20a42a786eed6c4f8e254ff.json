@@ -1,0 +1,8 @@
+{
+    "id": "de6c5f25-c20a-42a7-86ee-d6c4f8e254ff",
+    "type": "feature",
+    "description": "Add capability to update the Data Lake's MetaStoreManager Role in order to perform required data lake updates to use Iceberg table format in their data lake or update the role for any other reason.",
+    "modules": [
+        "service/securitylake"
+    ]
+}

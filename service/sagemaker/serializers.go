@@ -23542,6 +23542,13 @@ func awsAwsjson11_serializeDocumentModelPackageContainerDefinition(v *types.Mode
 		ok.String(*v.ImageDigest)
 	}
 
+	if v.ModelDataSource != nil {
+		ok := object.Key("ModelDataSource")
+		if err := awsAwsjson11_serializeDocumentModelDataSource(v.ModelDataSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelDataUrl != nil {
 		ok := object.Key("ModelDataUrl")
 		ok.String(*v.ModelDataUrl)
@@ -26671,6 +26678,13 @@ func awsAwsjson11_serializeDocumentSourceAlgorithm(v *types.SourceAlgorithm, val
 	if v.AlgorithmName != nil {
 		ok := object.Key("AlgorithmName")
 		ok.String(*v.AlgorithmName)
+	}
+
+	if v.ModelDataSource != nil {
+		ok := object.Key("ModelDataSource")
+		if err := awsAwsjson11_serializeDocumentModelDataSource(v.ModelDataSource, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ModelDataUrl != nil {
@@ -30218,6 +30232,11 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 		if err := awsAwsjson11_serializeDocumentSourceAlgorithmSpecification(v.SourceAlgorithmSpecification, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SourceUri != nil {
+		ok := object.Key("SourceUri")
+		ok.String(*v.SourceUri)
 	}
 
 	if v.Tags != nil {
@@ -37725,6 +37744,13 @@ func awsAwsjson11_serializeOpDocumentUpdateModelPackageInput(v *UpdateModelPacka
 		}
 	}
 
+	if v.InferenceSpecification != nil {
+		ok := object.Key("InferenceSpecification")
+		if err := awsAwsjson11_serializeDocumentInferenceSpecification(v.InferenceSpecification, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ModelApprovalStatus) > 0 {
 		ok := object.Key("ModelApprovalStatus")
 		ok.String(string(v.ModelApprovalStatus))
@@ -37733,6 +37759,11 @@ func awsAwsjson11_serializeOpDocumentUpdateModelPackageInput(v *UpdateModelPacka
 	if v.ModelPackageArn != nil {
 		ok := object.Key("ModelPackageArn")
 		ok.String(*v.ModelPackageArn)
+	}
+
+	if v.SourceUri != nil {
+		ok := object.Key("SourceUri")
+		ok.String(*v.SourceUri)
 	}
 
 	return nil

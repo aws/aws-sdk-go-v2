@@ -2477,6 +2477,11 @@ func awsRestjson1_deserializeOpDocumentCreateIntentOutput(v **CreateIntentOutput
 				sv.ParentIntentSignature = ptr.String(jtv)
 			}
 
+		case "qnAIntentConfiguration":
+			if err := awsRestjson1_deserializeDocumentQnAIntentConfiguration(&sv.QnAIntentConfiguration, value); err != nil {
+				return err
+			}
+
 		case "sampleUtterances":
 			if err := awsRestjson1_deserializeDocumentSampleUtterancesList(&sv.SampleUtterances, value); err != nil {
 				return err
@@ -8859,6 +8864,11 @@ func awsRestjson1_deserializeOpDocumentDescribeIntentOutput(v **DescribeIntentOu
 					return fmt.Errorf("expected IntentSignature to be of type string, got %T instead", value)
 				}
 				sv.ParentIntentSignature = ptr.String(jtv)
+			}
+
+		case "qnAIntentConfiguration":
+			if err := awsRestjson1_deserializeDocumentQnAIntentConfiguration(&sv.QnAIntentConfiguration, value); err != nil {
+				return err
 			}
 
 		case "sampleUtterances":
@@ -19912,6 +19922,11 @@ func awsRestjson1_deserializeOpDocumentUpdateIntentOutput(v **UpdateIntentOutput
 				sv.ParentIntentSignature = ptr.String(jtv)
 			}
 
+		case "qnAIntentConfiguration":
+			if err := awsRestjson1_deserializeDocumentQnAIntentConfiguration(&sv.QnAIntentConfiguration, value); err != nil {
+				return err
+			}
+
 		case "sampleUtterances":
 			if err := awsRestjson1_deserializeDocumentSampleUtterancesList(&sv.SampleUtterances, value); err != nil {
 				return err
@@ -23321,6 +23336,46 @@ func awsRestjson1_deserializeDocumentAudioSpecification(v **types.AudioSpecifica
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBedrockKnowledgeStoreConfiguration(v **types.BedrockKnowledgeStoreConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BedrockKnowledgeStoreConfiguration
+	if *v == nil {
+		sv = &types.BedrockKnowledgeStoreConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bedrockKnowledgeBaseArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BedrockKnowledgeBaseArn to be of type string, got %T instead", value)
+				}
+				sv.BedrockKnowledgeBaseArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBedrockModelSpecification(v **types.BedrockModelSpecification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26704,6 +26759,52 @@ func awsRestjson1_deserializeDocumentDataPrivacy(v **types.DataPrivacy, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDataSourceConfiguration(v **types.DataSourceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataSourceConfiguration
+	if *v == nil {
+		sv = &types.DataSourceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bedrockKnowledgeStoreConfiguration":
+			if err := awsRestjson1_deserializeDocumentBedrockKnowledgeStoreConfiguration(&sv.BedrockKnowledgeStoreConfiguration, value); err != nil {
+				return err
+			}
+
+		case "kendraConfiguration":
+			if err := awsRestjson1_deserializeDocumentQnAKendraConfiguration(&sv.KendraConfiguration, value); err != nil {
+				return err
+			}
+
+		case "opensearchConfiguration":
+			if err := awsRestjson1_deserializeDocumentOpensearchConfiguration(&sv.OpensearchConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDateRangeFilter(v **types.DateRangeFilter, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27231,6 +27332,55 @@ func awsRestjson1_deserializeDocumentEncryptionSetting(v **types.EncryptionSetti
 					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExactResponseFields(v **types.ExactResponseFields, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExactResponseFields
+	if *v == nil {
+		sv = &types.ExactResponseFields{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "answerField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnswerField to be of type string, got %T instead", value)
+				}
+				sv.AnswerField = ptr.String(jtv)
+			}
+
+		case "questionField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuestionField to be of type string, got %T instead", value)
+				}
+				sv.QuestionField = ptr.String(jtv)
 			}
 
 		default:
@@ -29765,6 +29915,110 @@ func awsRestjson1_deserializeDocumentObjectPrefixes(v *[]string, value interface
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOpensearchConfiguration(v **types.OpensearchConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpensearchConfiguration
+	if *v == nil {
+		sv = &types.OpensearchConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domainEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainEndpoint to be of type string, got %T instead", value)
+				}
+				sv.DomainEndpoint = ptr.String(jtv)
+			}
+
+		case "exactResponse":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ExactResponse = jtv
+			}
+
+		case "exactResponseFields":
+			if err := awsRestjson1_deserializeDocumentExactResponseFields(&sv.ExactResponseFields, value); err != nil {
+				return err
+			}
+
+		case "includeFields":
+			if err := awsRestjson1_deserializeDocumentOSIncludeFields(&sv.IncludeFields, value); err != nil {
+				return err
+			}
+
+		case "indexName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OSIndexName to be of type string, got %T instead", value)
+				}
+				sv.IndexName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOSIncludeFields(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected IncludeField to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOutputContext(v **types.OutputContext, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -30500,6 +30754,114 @@ func awsRestjson1_deserializeDocumentPromptSpecification(v **types.PromptSpecifi
 		case "promptAttemptsSpecification":
 			if err := awsRestjson1_deserializeDocumentPromptAttemptsSpecificationMap(&sv.PromptAttemptsSpecification, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQnAIntentConfiguration(v **types.QnAIntentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QnAIntentConfiguration
+	if *v == nil {
+		sv = &types.QnAIntentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bedrockModelConfiguration":
+			if err := awsRestjson1_deserializeDocumentBedrockModelSpecification(&sv.BedrockModelConfiguration, value); err != nil {
+				return err
+			}
+
+		case "dataSourceConfiguration":
+			if err := awsRestjson1_deserializeDocumentDataSourceConfiguration(&sv.DataSourceConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQnAKendraConfiguration(v **types.QnAKendraConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QnAKendraConfiguration
+	if *v == nil {
+		sv = &types.QnAKendraConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "exactResponse":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ExactResponse = jtv
+			}
+
+		case "kendraIndex":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KendraIndexArn to be of type string, got %T instead", value)
+				}
+				sv.KendraIndex = ptr.String(jtv)
+			}
+
+		case "queryFilterString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueryFilterString to be of type string, got %T instead", value)
+				}
+				sv.QueryFilterString = ptr.String(jtv)
+			}
+
+		case "queryFilterStringEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.QueryFilterStringEnabled = jtv
 			}
 
 		default:

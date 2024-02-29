@@ -30,6 +30,8 @@ const (
 	AwsLogSourceNameCloudTrailMgmt  AwsLogSourceName = "CLOUD_TRAIL_MGMT"
 	AwsLogSourceNameLambdaExecution AwsLogSourceName = "LAMBDA_EXECUTION"
 	AwsLogSourceNameS3Data          AwsLogSourceName = "S3_DATA"
+	AwsLogSourceNameEksAudit        AwsLogSourceName = "EKS_AUDIT"
+	AwsLogSourceNameWaf             AwsLogSourceName = "WAF"
 )
 
 // Values returns all known values for AwsLogSourceName. Note that this can be
@@ -43,6 +45,8 @@ func (AwsLogSourceName) Values() []AwsLogSourceName {
 		"CLOUD_TRAIL_MGMT",
 		"LAMBDA_EXECUTION",
 		"S3_DATA",
+		"EKS_AUDIT",
+		"WAF",
 	}
 }
 

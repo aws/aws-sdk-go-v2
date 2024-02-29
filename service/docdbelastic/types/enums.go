@@ -20,6 +20,24 @@ func (Auth) Values() []Auth {
 	}
 }
 
+type SnapshotType string
+
+// Enum values for SnapshotType
+const (
+	SnapshotTypeManual    SnapshotType = "MANUAL"
+	SnapshotTypeAutomated SnapshotType = "AUTOMATED"
+)
+
+// Values returns all known values for SnapshotType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotType) Values() []SnapshotType {
+	return []SnapshotType{
+		"MANUAL",
+		"AUTOMATED",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -33,6 +51,16 @@ const (
 	StatusInvalidSecurityGroupId      Status = "INVALID_SECURITY_GROUP_ID"
 	StatusInvalidSubnetId             Status = "INVALID_SUBNET_ID"
 	StatusInaccessibleEncryptionCreds Status = "INACCESSIBLE_ENCRYPTION_CREDS"
+	StatusInaccessibleSecretArn       Status = "INACCESSIBLE_SECRET_ARN"
+	StatusInaccessibleVpcEndpoint     Status = "INACCESSIBLE_VPC_ENDPOINT"
+	StatusIncompatibleNetwork         Status = "INCOMPATIBLE_NETWORK"
+	StatusMerging                     Status = "MERGING"
+	StatusModifying                   Status = "MODIFYING"
+	StatusSplitting                   Status = "SPLITTING"
+	StatusCopying                     Status = "COPYING"
+	StatusStarting                    Status = "STARTING"
+	StatusStopping                    Status = "STOPPING"
+	StatusStopped                     Status = "STOPPED"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
@@ -49,6 +77,16 @@ func (Status) Values() []Status {
 		"INVALID_SECURITY_GROUP_ID",
 		"INVALID_SUBNET_ID",
 		"INACCESSIBLE_ENCRYPTION_CREDS",
+		"INACCESSIBLE_SECRET_ARN",
+		"INACCESSIBLE_VPC_ENDPOINT",
+		"INCOMPATIBLE_NETWORK",
+		"MERGING",
+		"MODIFYING",
+		"SPLITTING",
+		"COPYING",
+		"STARTING",
+		"STOPPING",
+		"STOPPED",
 	}
 }
 

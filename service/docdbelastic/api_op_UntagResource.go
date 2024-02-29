@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes metadata tags to a Elastic DocumentDB resource
+// Removes metadata tags from an elastic cluster resource
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,12 +28,12 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The arn of the Elastic DocumentDB resource.
+	// The ARN identifier of the elastic cluster resource.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The tag keys to be removed from the Elastic DocumentDB resource.
+	// The tag keys to be removed from the elastic cluster resource.
 	//
 	// This member is required.
 	TagKeys []string

@@ -58497,6 +58497,15 @@ func awsAwsjson11_deserializeDocumentModelPackage(v **types.ModelPackage, value 
 				return err
 			}
 
+		case "SourceUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelPackageSourceUri to be of type string, got %T instead", value)
+				}
+				sv.SourceUri = ptr.String(jtv)
+			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
@@ -58600,6 +58609,11 @@ func awsAwsjson11_deserializeDocumentModelPackageContainerDefinition(v **types.M
 					return fmt.Errorf("expected ImageDigest to be of type string, got %T instead", value)
 				}
 				sv.ImageDigest = ptr.String(jtv)
+			}
+
+		case "ModelDataSource":
+			if err := awsAwsjson11_deserializeDocumentModelDataSource(&sv.ModelDataSource, value); err != nil {
+				return err
 			}
 
 		case "ModelDataUrl":
@@ -71111,6 +71125,11 @@ func awsAwsjson11_deserializeDocumentSourceAlgorithm(v **types.SourceAlgorithm, 
 					return fmt.Errorf("expected ArnOrName to be of type string, got %T instead", value)
 				}
 				sv.AlgorithmName = ptr.String(jtv)
+			}
+
+		case "ModelDataSource":
+			if err := awsAwsjson11_deserializeDocumentModelDataSource(&sv.ModelDataSource, value); err != nil {
+				return err
 			}
 
 		case "ModelDataUrl":
@@ -86673,6 +86692,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelPackageOutput(v **DescribeMo
 		case "SourceAlgorithmSpecification":
 			if err := awsAwsjson11_deserializeDocumentSourceAlgorithmSpecification(&sv.SourceAlgorithmSpecification, value); err != nil {
 				return err
+			}
+
+		case "SourceUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelPackageSourceUri to be of type string, got %T instead", value)
+				}
+				sv.SourceUri = ptr.String(jtv)
 			}
 
 		case "Task":

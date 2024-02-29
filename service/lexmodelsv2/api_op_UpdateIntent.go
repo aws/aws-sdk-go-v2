@@ -92,6 +92,12 @@ type UpdateIntentInput struct {
 	// The signature of the new built-in intent to use as the parent of this intent.
 	ParentIntentSignature *string
 
+	// Specifies the configuration of the built-in Amazon.QnAIntent . The
+	// AMAZON.QnAIntent intent is called when Amazon Lex can't determine another intent
+	// to invoke. If you specify this field, you can't specify the kendraConfiguration
+	// field.
+	QnAIntentConfiguration *types.QnAIntentConfiguration
+
 	// New utterances used to invoke the intent.
 	SampleUtterances []types.SampleUtterance
 
@@ -159,6 +165,9 @@ type UpdateIntentOutput struct {
 
 	// The updated built-in intent that is the parent of this intent.
 	ParentIntentSignature *string
+
+	// Details about the configuration of the built-in Amazon.QnAIntent .
+	QnAIntentConfiguration *types.QnAIntentConfiguration
 
 	// The updated list of sample utterances for the intent.
 	SampleUtterances []types.SampleUtterance
