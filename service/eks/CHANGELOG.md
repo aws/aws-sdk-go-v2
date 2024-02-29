@@ -1,3 +1,7 @@
+# v1.41.0 (2024-02-29)
+
+* **Feature**: Added support for new AL2023 AMIs to the supported AMITypes.
+
 # v1.40.1 (2024-02-23)
 
 * **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.

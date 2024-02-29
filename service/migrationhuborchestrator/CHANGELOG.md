@@ -1,3 +1,7 @@
+# v1.9.0 (2024-02-29)
+
+* **Feature**: Adds new CreateTemplate, UpdateTemplate and DeleteTemplate APIs.
+
 # v1.8.1 (2024-02-23)
 
 * **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.

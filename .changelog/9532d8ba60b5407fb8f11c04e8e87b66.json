@@ -1,8 +1,0 @@
-{
-    "id": "9532d8ba-60b5-407f-b8f1-1c04e8e87b66",
-    "type": "feature",
-    "description": "TooltipTarget for Combo chart visuals; ColumnConfiguration limit increase to 2000; Documentation Update",
-    "modules": [
-        "service/quicksight"
-    ]
-}

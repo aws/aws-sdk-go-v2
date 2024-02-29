@@ -1,3 +1,21 @@
+# Release (2024-02-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.9.0](service/docdbelastic/CHANGELOG.md#v190-2024-02-29)
+  * **Feature**: Launched Elastic Clusters Readable Secondaries, Start/Stop, Configurable Shard Instance count, Automatic Backups and Snapshot Copying
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.41.0](service/eks/CHANGELOG.md#v1410-2024-02-29)
+  * **Feature**: Added support for new AL2023 AMIs to the supported AMITypes.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.43.0](service/lexmodelsv2/CHANGELOG.md#v1430-2024-02-29)
+  * **Feature**: This release makes AMAZON.QnAIntent generally available in Amazon Lex. This generative AI feature leverages large language models available through Amazon Bedrock to automate frequently asked questions (FAQ) experience for end-users.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator`: [v1.9.0](service/migrationhuborchestrator/CHANGELOG.md#v190-2024-02-29)
+  * **Feature**: Adds new CreateTemplate, UpdateTemplate and DeleteTemplate APIs.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.59.0](service/quicksight/CHANGELOG.md#v1590-2024-02-29)
+  * **Feature**: TooltipTarget for Combo chart visuals; ColumnConfiguration limit increase to 2000; Documentation Update
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.132.0](service/sagemaker/CHANGELOG.md#v11320-2024-02-29)
+  * **Feature**: Adds support for ModelDataSource in Model Packages to support unzipped models. Adds support to specify SourceUri for models which allows registration of models without mandating a container for hosting. Using SourceUri, customers can decouple the model from hosting information during registration.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.13.0](service/securitylake/CHANGELOG.md#v1130-2024-02-29)
+  * **Feature**: Add capability to update the Data Lake's MetaStoreManager Role in order to perform required data lake updates to use Iceberg table format in their data lake or update the role for any other reason.
+
 # Release (2024-02-28)
 
 ## Module Highlights

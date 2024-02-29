@@ -1,3 +1,7 @@
+# v1.59.0 (2024-02-29)
+
+* **Feature**: TooltipTarget for Combo chart visuals; ColumnConfiguration limit increase to 2000; Documentation Update
+
 # v1.58.1 (2024-02-23)
 
 * **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.

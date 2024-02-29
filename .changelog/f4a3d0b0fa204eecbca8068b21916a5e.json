@@ -1,8 +1,0 @@
-{
-    "id": "f4a3d0b0-fa20-4eec-bca8-068b21916a5e",
-    "type": "feature",
-    "description": "Added support for new AL2023 AMIs to the supported AMITypes.",
-    "modules": [
-        "service/eks"
-    ]
-}

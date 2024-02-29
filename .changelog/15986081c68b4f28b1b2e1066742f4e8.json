@@ -1,8 +1,0 @@
-{
-    "id": "15986081-c68b-4f28-b1b2-e1066742f4e8",
-    "type": "feature",
-    "description": "Launched Elastic Clusters Readable Secondaries, Start/Stop, Configurable Shard Instance count, Automatic Backups and Snapshot Copying",
-    "modules": [
-        "service/docdbelastic"
-    ]
-}
