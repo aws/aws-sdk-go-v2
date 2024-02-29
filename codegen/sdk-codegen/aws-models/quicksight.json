@@ -5091,7 +5091,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 200
+                    "max": 2000
                 }
             }
         },
@@ -5592,6 +5592,12 @@
                     "target": "com.amazonaws.quicksight#AggregationFunction",
                     "traits": {
                         "smithy.api#documentation": "<p>The aggregation function of the column tooltip item.</p>"
+                    }
+                },
+                "TooltipTarget": {
+                    "target": "com.amazonaws.quicksight#TooltipTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the target of the column tooltip item in a combo chart visual.</p>"
                     }
                 }
             },
@@ -21404,6 +21410,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The visibility of the tooltip item.</p>"
                     }
+                },
+                "TooltipTarget": {
+                    "target": "com.amazonaws.quicksight#TooltipTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the target of the field tooltip item in a combo chart visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23788,7 +23800,7 @@
                 "AuthorizedResourceArns": {
                     "target": "com.amazonaws.quicksight#ArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the user\n            is authorized to access during the lifetime of the session. If you choose\n                <code>Dashboard</code> embedding experience, pass the list of dashboard ARNs in the\n            account that you want the user to be able to view. Currently, you can pass up to 25\n            dashboard ARNs in each API call.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the user\n            is authorized to access during the lifetime of the session.</p>\n         <p>If you choose <code>Dashboard</code> embedding experience, pass the list of dashboard ARNs in the\n            account that you want the user to be able to view.</p>\n         <p>Currently, you can pass up to 25\n            dashboard ARNs in each API call.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -45990,6 +46002,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The display options for the visual tooltip.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TooltipTarget": {
+            "type": "enum",
+            "members": {
+                "BOTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTH"
+                    }
+                },
+                "BAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BAR"
+                    }
+                },
+                "LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINE"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#TooltipTitleType": {

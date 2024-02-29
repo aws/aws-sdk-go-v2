@@ -2079,6 +2079,9 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#AnswerField": {
+            "type": "string"
+        },
         "com.amazonaws.lexmodelsv2#AssociatedTranscript": {
             "type": "structure",
             "members": {
@@ -2626,10 +2629,35 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lexmodelsv2#BedrockKnowledgeBaseArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,40}:[0-9]{12}:knowledge-base\\/[A-Za-z0-9]{10}$|^[A-Za-z0-9]{10}$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BedrockKnowledgeStoreConfiguration": {
+            "type": "structure",
+            "members": {
+                "bedrockKnowledgeBaseArn": {
+                    "target": "com.amazonaws.lexmodelsv2#BedrockKnowledgeBaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the knowledge base used.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the configuration of a Amazon Bedrock knowledge base.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#BedrockModelArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model\\/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}$"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model\\/[a-z0-9-]{1,63}[.]{1}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}$"
             }
         },
         "com.amazonaws.lexmodelsv2#BedrockModelSpecification": {
@@ -4169,7 +4197,10 @@
                     }
                 },
                 "sampleUtteranceGeneration": {
-                    "target": "com.amazonaws.lexmodelsv2#SampleUtteranceGenerationSpecification"
+                    "target": "com.amazonaws.lexmodelsv2#SampleUtteranceGenerationSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains specifications for the sample utterance generation feature.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5883,6 +5914,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration settings for the response that is sent to the user at\n         the beginning of a conversation, before eliciting slot values.</p>"
                     }
+                },
+                "qnAIntentConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5992,6 +6029,12 @@
                     "target": "com.amazonaws.lexmodelsv2#InitialResponseSetting",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration settings for the response that is sent to the user at\n         the beginning of a conversation, before eliciting slot values.</p>"
+                    }
+                },
+                "qnAIntentConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the the configuration of the built-in <code>Amazon.QnAIntent</code>.</p>"
                     }
                 }
             },
@@ -6976,6 +7019,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>By default, data stored by Amazon Lex is encrypted. The\n            <code>DataPrivacy</code> structure provides settings that determine\n         how Amazon Lex handles special cases of securing the data for your bot.\n      </p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DataSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "opensearchConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#OpensearchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the configuration of the Amazon OpenSearch Service database used for the <code>AMAZON.QnAIntent</code>. To create a domain, follow the steps at <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html\">Creating and managing Amazon OpenSearch Service domains</a>.</p>"
+                    }
+                },
+                "kendraConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QnAKendraConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the configuration of the Amazon Kendra index used for the <code>AMAZON.QnAIntent</code>. To create a Amazon Kendra index, follow the steps at <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/create-index.html\">Creating an index</a>.</p>"
+                    }
+                },
+                "bedrockKnowledgeStoreConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#BedrockKnowledgeStoreConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the configuration of the Amazon Bedrock knowledge base used for the <code>AMAZON.QnAIntent</code>. To set up a knowledge base, follow the steps at <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html\">Building a knowledge base</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the configuration of the knowledge store used for the <code>AMAZON.QnAIntent</code>. You must have already created the knowledge store and indexed the documents within it.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#DateRangeFilter": {
@@ -10112,6 +10181,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration setting for a response sent to the user before Amazon Lex starts eliciting slots.</p>"
                     }
+                },
+                "qnAIntentConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the configuration of the built-in <code>Amazon.QnAIntent</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11179,6 +11254,12 @@
                 "smithy.api#documentation": "<p>The current state of the conversation with the user.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#DomainEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(http|https):\\/\\/+[^\\s]+[\\w]$"
+            }
+        },
         "com.amazonaws.lexmodelsv2#DraftBotVersion": {
             "type": "string",
             "traits": {
@@ -11290,6 +11371,28 @@
         },
         "com.amazonaws.lexmodelsv2#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.lexmodelsv2#ExactResponseFields": {
+            "type": "structure",
+            "members": {
+                "questionField": {
+                    "target": "com.amazonaws.lexmodelsv2#QuestionField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field that contains the query made to the OpenSearch Service database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "answerField": {
+                    "target": "com.amazonaws.lexmodelsv2#AnswerField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field that contains the answer to the query made to the OpenSearch Service database.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the names of the fields used for an exact response to the user.</p>"
+            }
         },
         "com.amazonaws.lexmodelsv2#ExceptionMessage": {
             "type": "string"
@@ -12457,6 +12560,9 @@
                 },
                 "smithy.api#pattern": "^([0-9a-zA-Z_])+$"
             }
+        },
+        "com.amazonaws.lexmodelsv2#IncludeField": {
+            "type": "string"
         },
         "com.amazonaws.lexmodelsv2#InitialResponseSetting": {
             "type": "structure",
@@ -17937,6 +18043,28 @@
                 "smithy.api#pattern": "^[0-9]+$"
             }
         },
+        "com.amazonaws.lexmodelsv2#OSIncludeFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#IncludeField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#OSIndexName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(?![_-])[a-z0-9][a-z0-9_\\-]{0,254}$"
+            }
+        },
         "com.amazonaws.lexmodelsv2#ObfuscationSetting": {
             "type": "structure",
             "members": {
@@ -17988,6 +18116,47 @@
                     "min": 1,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#OpensearchConfiguration": {
+            "type": "structure",
+            "members": {
+                "domainEndpoint": {
+                    "target": "com.amazonaws.lexmodelsv2#DomainEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint of the Amazon OpenSearch Service domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.lexmodelsv2#OSIndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon OpenSearch Service index.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "exactResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to return an exact response or to return an answer generated by the model using the fields you specify from the database.</p>"
+                    }
+                },
+                "exactResponseFields": {
+                    "target": "com.amazonaws.lexmodelsv2#ExactResponseFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the names of the fields used for an exact response to the user.</p>"
+                    }
+                },
+                "includeFields": {
+                    "target": "com.amazonaws.lexmodelsv2#OSIncludeFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a list of fields from the Amazon OpenSearch Service that the model can use to generate the answer to the query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the configuration of the Amazon OpenSearch Service database used for the <code>AMAZON.QnAIntent</code>.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#Operation": {
@@ -18501,6 +18670,58 @@
                 "smithy.api#documentation": "<p>Specifies a list of message groups that Amazon Lex sends to a user to\n         elicit a response.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#QnAIntentConfiguration": {
+            "type": "structure",
+            "members": {
+                "dataSourceConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#DataSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the configuration of the data source used for the <code>AMAZON.QnAIntent</code>.</p>"
+                    }
+                },
+                "bedrockModelConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#BedrockModelSpecification"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the the configuration of the built-in <code>Amazon.QnAIntent</code>.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#QnAKendraConfiguration": {
+            "type": "structure",
+            "members": {
+                "kendraIndex": {
+                    "target": "com.amazonaws.lexmodelsv2#KendraIndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Kendra index to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queryFilterStringEnabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to enable an Amazon Kendra filter string or not.</p>"
+                    }
+                },
+                "queryFilterString": {
+                    "target": "com.amazonaws.lexmodelsv2#QueryFilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the Amazon Kendra filter string to use if enabled. For more information on the Amazon Kendra search filter JSON format, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering\">Using document attributes to filter search results</a>.</p>"
+                    }
+                },
+                "exactResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to return an exact response from the Amazon Kendra index or to let the Amazon Bedrock model you select generate a response based on the results. To use this feature, you must first add FAQ questions to your index by following the steps at <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html\">Adding frequently asked questions (FAQs) to an index</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the configuration of the Amazon Kendra index used for the <code>AMAZON.QnAIntent</code>.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#QueryFilterString": {
             "type": "string",
             "traits": {
@@ -18509,6 +18730,9 @@
                     "max": 5000
                 }
             }
+        },
+        "com.amazonaws.lexmodelsv2#QuestionField": {
+            "type": "string"
         },
         "com.amazonaws.lexmodelsv2#RecommendedAction": {
             "type": "string"
@@ -23337,6 +23561,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration settings for a response sent to the user before Amazon Lex starts eliciting slots.</p>"
                     }
+                },
+                "qnAIntentConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23458,6 +23688,12 @@
                     "target": "com.amazonaws.lexmodelsv2#InitialResponseSetting",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration settings for a response sent to the user before Amazon Lex starts eliciting slots.</p>"
+                    }
+                },
+                "qnAIntentConfiguration": {
+                    "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the configuration of the built-in <code>Amazon.QnAIntent</code>.</p>"
                     }
                 }
             },

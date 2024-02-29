@@ -2883,7 +2883,7 @@
                     "target": "com.amazonaws.sagemaker#AutoMLMetricEnum",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine\n         learning system. During training, the model's parameters are updated iteratively to\n         optimize its performance based on the feedback provided by the objective metric when\n         evaluating the model on the validation dataset.</p>\n         <p>The list of available metrics supported by Autopilot and the default metric applied when you\n         do not specify a metric name explicitly depend on the problem type.</p>\n         <ul>\n            <li>\n               <p>For tabular problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: </p>\n                     <ul>\n                        <li>\n                           <p> Regression: <code>InferenceLatency</code>, <code>MAE</code>,\n                              <code>MSE</code>, <code>R2</code>, <code>RMSE</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p> Binary classification: <code>Accuracy</code>, <code>AUC</code>,\n                              <code>BalancedAccuracy</code>, <code>F1</code>,\n                              <code>InferenceLatency</code>, <code>LogLoss</code>,\n                              <code>Precision</code>, <code>Recall</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p> Multiclass classification: <code>Accuracy</code>,\n                              <code>BalancedAccuracy</code>, <code>F1macro</code>,\n                              <code>InferenceLatency</code>, <code>LogLoss</code>,\n                              <code>PrecisionMacro</code>, <code>RecallMacro</code>\n                           </p>\n                        </li>\n                     </ul>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics\">Autopilot metrics for classification and regression</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics:</p>\n                     <ul>\n                        <li>\n                           <p>Regression: <code>MSE</code>.</p>\n                        </li>\n                        <li>\n                           <p>Binary classification: <code>F1</code>.</p>\n                        </li>\n                        <li>\n                           <p>Multiclass classification: <code>Accuracy</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For image or text classification problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: <code>Accuracy</code>\n                     </p>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/text-classification-data-format-and-metric.html\">Autopilot metrics for text and image classification</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics: <code>Accuracy</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For time-series forecasting problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: <code>RMSE</code>, <code>wQL</code>,\n                        <code>Average wQL</code>, <code>MASE</code>, <code>MAPE</code>,\n                        <code>WAPE</code>\n                     </p>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-objective-metric.html\">Autopilot metrics for\n                        time-series forecasting</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics: <code>AverageWeightedQuantileLoss</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For text generation problem types (LLMs fine-tuning): \n                  Fine-tuning language models in Autopilot does not\n                  require setting the <code>AutoMLJobObjective</code> field. Autopilot fine-tunes LLMs\n                  without requiring multiple candidates to be trained and evaluated.                   \n                  Instead, using your dataset, Autopilot directly fine-tunes your target model to enhance a\n                  default objective metric, the cross-entropy loss. After fine-tuning a language model,\n                  you can evaluate the quality of its generated text using different metrics.                \n                  For a list of the available metrics, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-metrics.html\">Metrics for\n                        fine-tuning LLMs in Autopilot</a>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine\n         learning system. During training, the model's parameters are updated iteratively to\n         optimize its performance based on the feedback provided by the objective metric when\n         evaluating the model on the validation dataset.</p>\n         <p>The list of available metrics supported by Autopilot and the default metric applied when you\n         do not specify a metric name explicitly depend on the problem type.</p>\n         <ul>\n            <li>\n               <p>For tabular problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: </p>\n                     <ul>\n                        <li>\n                           <p> Regression: <code>MAE</code>,\n                              <code>MSE</code>, <code>R2</code>, <code>RMSE</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p> Binary classification: <code>Accuracy</code>, <code>AUC</code>,\n                              <code>BalancedAccuracy</code>, <code>F1</code>,\n                              <code>Precision</code>, <code>Recall</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p> Multiclass classification: <code>Accuracy</code>,\n                              <code>BalancedAccuracy</code>, <code>F1macro</code>,\n                              <code>PrecisionMacro</code>, <code>RecallMacro</code>\n                           </p>\n                        </li>\n                     </ul>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics\">Autopilot metrics for classification and regression</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics:</p>\n                     <ul>\n                        <li>\n                           <p>Regression: <code>MSE</code>.</p>\n                        </li>\n                        <li>\n                           <p>Binary classification: <code>F1</code>.</p>\n                        </li>\n                        <li>\n                           <p>Multiclass classification: <code>Accuracy</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For image or text classification problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: <code>Accuracy</code>\n                     </p>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/text-classification-data-format-and-metric.html\">Autopilot metrics for text and image classification</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics: <code>Accuracy</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For time-series forecasting problem types:</p>\n               <ul>\n                  <li>\n                     <p>List of available metrics: <code>RMSE</code>, <code>wQL</code>,\n                        <code>Average wQL</code>, <code>MASE</code>, <code>MAPE</code>,\n                        <code>WAPE</code>\n                     </p>\n                     <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-objective-metric.html\">Autopilot metrics for\n                        time-series forecasting</a>.</p>\n                  </li>\n                  <li>\n                     <p>Default objective metrics: <code>AverageWeightedQuantileLoss</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For text generation problem types (LLMs fine-tuning): \n                  Fine-tuning language models in Autopilot does not\n                  require setting the <code>AutoMLJobObjective</code> field. Autopilot fine-tunes LLMs\n                  without requiring multiple candidates to be trained and evaluated.                   \n                  Instead, using your dataset, Autopilot directly fine-tunes your target model to enhance a\n                  default objective metric, the cross-entropy loss. After fine-tuning a language model,\n                  you can evaluate the quality of its generated text using different metrics.                \n                  For a list of the available metrics, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-metrics.html\">Metrics for\n                        fine-tuning LLMs in Autopilot</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10421,7 +10421,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a model in SageMaker. In the request, you name the model and describe a primary\n            container. For the primary container, you specify the Docker image that\n            contains inference code, artifacts (from prior training), and a custom environment map\n            that the inference code uses when you deploy the model for predictions.</p>\n         <p>Use this API to create a model if you want to use SageMaker hosting services or run a batch\n            transform job.</p>\n         <p>To host your model, you create an endpoint configuration with the\n                <code>CreateEndpointConfig</code> API, and then create an endpoint with the\n                <code>CreateEndpoint</code> API. SageMaker then deploys all of the containers that you\n            defined for the model in the hosting environment. </p>\n         <p>For an example that calls this method when deploying a model to SageMaker hosting services,\n            see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model\">Create a Model (Amazon Web Services SDK for Python (Boto 3)).</a>\n         </p>\n         <p>To run a batch transform using your model, you start a job with the\n                <code>CreateTransformJob</code> API. SageMaker uses your model and your dataset to get\n            inferences which are then saved to a specified S3 location.</p>\n         <p>In the request, you also provide an IAM role that SageMaker can assume to access model\n            artifacts and docker image for deployment on ML compute hosting instances or for batch\n            transform jobs. In addition, you also use the IAM role to manage permissions the\n            inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.</p>"
+                "smithy.api#documentation": "<p>Creates a model in SageMaker. In the request, you name the model and describe a primary\n            container. For the primary container, you specify the Docker image that\n            contains inference code, artifacts (from prior training), and a custom environment map\n            that the inference code uses when you deploy the model for predictions.</p>\n         <p>Use this API to create a model if you want to use SageMaker hosting services or run a batch\n            transform job.</p>\n         <p>To host your model, you create an endpoint configuration with the\n                <code>CreateEndpointConfig</code> API, and then create an endpoint with the\n                <code>CreateEndpoint</code> API. SageMaker then deploys all of the containers that you\n            defined for the model in the hosting environment. </p>\n         <p>To run a batch transform using your model, you start a job with the\n                <code>CreateTransformJob</code> API. SageMaker uses your model and your dataset to get\n            inferences which are then saved to a specified S3 location.</p>\n         <p>In the request, you also provide an IAM role that SageMaker can assume to access model\n            artifacts and docker image for deployment on ML compute hosting instances or for batch\n            transform jobs. In addition, you also use the IAM role to manage permissions the\n            inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateModelBiasJobDefinition": {
@@ -10982,7 +10982,7 @@
                 "InferenceSpecification": {
                     "target": "com.amazonaws.sagemaker#InferenceSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies details about inference jobs that can be run with models based on this model\n            package, including the following:</p>\n         <ul>\n            <li>\n               <p>The Amazon ECR paths of containers that contain the inference code and model\n                    artifacts.</p>\n            </li>\n            <li>\n               <p>The instance types that the model package supports for transform jobs and\n                    real-time endpoints used for inference.</p>\n            </li>\n            <li>\n               <p>The input and output content formats that the model package supports for\n                    inference.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies details about inference jobs that you can run with models based on this model\n            package, including the following information:</p>\n         <ul>\n            <li>\n               <p>The Amazon ECR paths of containers that contain the inference code and model\n                    artifacts.</p>\n            </li>\n            <li>\n               <p>The instance types that the model package supports for transform jobs and\n                    real-time endpoints used for inference.</p>\n            </li>\n            <li>\n               <p>The input and output content formats that the model package supports for\n                    inference.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ValidationSpecification": {
@@ -11071,6 +11071,12 @@
                     "target": "com.amazonaws.sagemaker#SkipModelValidation",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates if you want to skip model validation.</p>"
+                    }
+                },
+                "SourceUri": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageSourceUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the source for the model package. If you want to clone a model package,\n                set it to the model package Amazon Resource Name (ARN). If you want to register a model,\n                set it to the model ARN.</p>"
                     }
                 }
             },
@@ -16241,7 +16247,7 @@
                 "CreationTime": {
                     "target": "com.amazonaws.sagemaker#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The creation time.</p>"
+                        "smithy.api#documentation": "<p>The creation time of the application.</p>\n         <note>\n            <p>After an application has been shut down for 24 hours, SageMaker deletes all metadata for the application. To be considered an update and retain application metadata, applications must be restarted within 24 hours after the previous application has been shut down. After this time window, creation of an application is considered a new application rather than an update of the previous application.</p>\n         </note>"
                     }
                 },
                 "FailureReason": {
@@ -21106,7 +21112,7 @@
                 "InferenceSpecification": {
                     "target": "com.amazonaws.sagemaker#InferenceSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about inference jobs that can be run with models based on this model\n            package.</p>"
+                        "smithy.api#documentation": "<p>Details about inference jobs that you can run with models based on this model\n            package.</p>"
                     }
                 },
                 "SourceAlgorithmSpecification": {
@@ -21216,6 +21222,12 @@
                     "target": "com.amazonaws.sagemaker#SkipModelValidation",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates if you want to skip model validation.</p>"
+                    }
+                },
+                "SourceUri": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageSourceUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the source for the model package.</p>"
                     }
                 }
             },
@@ -26115,7 +26127,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 16
+                    "max": 100
                 }
             }
         },
@@ -32698,7 +32710,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for the file system and kernels in a SageMaker image running as a JupyterLab app.</p>"
+                "smithy.api#documentation": "<p>The configuration for the file system and kernels in a SageMaker image running as a JupyterLab app. The <code>FileSystemConfig</code> object is not supported.</p>"
             }
         },
         "com.amazonaws.sagemaker#JupyterLabAppSettings": {
@@ -43035,7 +43047,7 @@
                 "Bias": {
                     "target": "com.amazonaws.sagemaker#Bias",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metrics that measure bais in a model.</p>"
+                        "smithy.api#documentation": "<p>Metrics that measure bias in a model.</p>"
                     }
                 },
                 "Explainability": {
@@ -43210,6 +43222,12 @@
                         "smithy.api#documentation": "<p>An array of additional Inference Specification objects.</p>"
                     }
                 },
+                "SourceUri": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageSourceUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the source for the model package.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
@@ -43288,6 +43306,12 @@
                     "target": "com.amazonaws.sagemaker#Url",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single <code>gzip</code> compressed tar archive\n            (<code>.tar.gz</code> suffix).</p>\n         <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same region as the\n                model package.</p>\n         </note>"
+                    }
+                },
+                "ModelDataSource": {
+                    "target": "com.amazonaws.sagemaker#ModelDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy during endpoint creation.</p>"
                     }
                 },
                 "ProductId": {
@@ -43541,6 +43565,16 @@
                         "smithy.api#enumValue": "CreationTime"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#ModelPackageSourceUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{N}\\p{P}]{0,1024}$"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageStatus": {
@@ -56729,6 +56763,12 @@
                         "smithy.api#documentation": "<p>The Amazon S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single <code>gzip</code> compressed tar archive\n                (<code>.tar.gz</code> suffix).</p>\n         <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same Amazon Web Services\n                region as the algorithm.</p>\n         </note>"
                     }
                 },
+                "ModelDataSource": {
+                    "target": "com.amazonaws.sagemaker#ModelDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy during endpoint creation.</p>"
+                    }
+                },
                 "AlgorithmName": {
                     "target": "com.amazonaws.sagemaker#ArnOrName",
                     "traits": {
@@ -63301,7 +63341,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the feature group by either adding features or updating the online store\n         configuration. Use one of the following request parameters at a time while using the\n            <code>UpdateFeatureGroup</code> API.</p>\n         <p>You can add features for your feature group using the <code>FeatureAdditions</code>\n         request parameter. Features cannot be removed from a feature group.</p>\n         <p>You can update the online store configuration by using the\n            <code>OnlineStoreConfig</code> request parameter. If a <code>TtlDuration</code> is\n         specified, the default <code>TtlDuration</code> applies for all records added to the\n         feature group <i>after the feature group is updated</i>. If a record level\n            <code>TtlDuration</code> exists from using the <code>PutRecord</code> API, the record\n         level <code>TtlDuration</code> applies to that record instead of the default\n            <code>TtlDuration</code>.</p>"
+                "smithy.api#documentation": "<p>Updates the feature group by either adding features or updating the online store\n         configuration. Use one of the following request parameters at a time while using the\n            <code>UpdateFeatureGroup</code> API.</p>\n         <p>You can add features for your feature group using the <code>FeatureAdditions</code>\n         request parameter. Features cannot be removed from a feature group.</p>\n         <p>You can update the online store configuration by using the\n            <code>OnlineStoreConfig</code> request parameter. If a <code>TtlDuration</code> is\n         specified, the default <code>TtlDuration</code> applies for all records added to the\n         feature group <i>after the feature group is updated</i>. If a record level\n            <code>TtlDuration</code> exists from using the <code>PutRecord</code> API, the record\n         level <code>TtlDuration</code> applies to that record instead of the default\n            <code>TtlDuration</code>. To remove the default <code>TtlDuration</code> from an\n         existing feature group, use the <code>UpdateFeatureGroup</code> API and set the\n            <code>TtlDuration</code>\n            <code>Unit</code> and <code>Value</code> to <code>null</code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#UpdateFeatureGroupRequest": {
@@ -63990,6 +64030,18 @@
                     "target": "com.amazonaws.sagemaker#AdditionalInferenceSpecifications",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of additional Inference Specification objects to be added to the \n    existing array additional Inference Specification. Total number of additional \n    Inference Specifications can not exceed 15. Each additional Inference Specification \n    specifies artifacts based on this model package that can be used on inference endpoints. \n    Generally used with SageMaker Neo to store the compiled artifacts.</p>"
+                    }
+                },
+                "InferenceSpecification": {
+                    "target": "com.amazonaws.sagemaker#InferenceSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies details about inference jobs that you can run with models based on this model\n            package, including the following information:</p>\n         <ul>\n            <li>\n               <p>The Amazon ECR paths of containers that contain the inference code and model\n                    artifacts.</p>\n            </li>\n            <li>\n               <p>The instance types that the model package supports for transform jobs and\n                    real-time endpoints used for inference.</p>\n            </li>\n            <li>\n               <p>The input and output content formats that the model package supports for\n                    inference.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SourceUri": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageSourceUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the source for the model package.</p>"
                     }
                 }
             },
@@ -65587,7 +65639,7 @@
                 "Key": {
                     "target": "com.amazonaws.sagemaker#VisibilityConditionsKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key that specifies the tag that you're using to filter the search results. It must be in the following format: <code>Tags.<key>/EqualsIfExists</code>.</p>"
+                        "smithy.api#documentation": "<p>The key that specifies the tag that you're using to filter the search results. It must be in the following format: <code>Tags.<key></code>.</p>"
                     }
                 },
                 "Value": {
@@ -65598,7 +65650,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The list of key-value pairs that you specify for your resources.</p>"
+                "smithy.api#documentation": "<p>The list of key-value pairs used to filter your search results. If a search result contains a key from your list, it is included in the final search response if the value associated with the key in the result matches the value you specified. \n      If the value doesn't match, the result is excluded from the search response. Any resources that don't have a key from the list that you've provided will also be included in the search response.</p>"
             }
         },
         "com.amazonaws.sagemaker#VisibilityConditionsKey": {

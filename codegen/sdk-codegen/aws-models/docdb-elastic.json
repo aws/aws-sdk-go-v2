@@ -47,6 +47,9 @@
             "version": "2022-11-28",
             "operations": [
                 {
+                    "target": "com.amazonaws.docdbelastic#CopyClusterSnapshot"
+                },
+                {
                     "target": "com.amazonaws.docdbelastic#CreateCluster"
                 },
                 {
@@ -75,6 +78,12 @@
                 },
                 {
                     "target": "com.amazonaws.docdbelastic#RestoreClusterFromSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#StartCluster"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#StopCluster"
                 },
                 {
                     "target": "com.amazonaws.docdbelastic#TagResource"
@@ -112,7 +121,7 @@
                     ],
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<p>The new Amazon Elastic DocumentDB service endpoint.</p>",
+                "smithy.api#documentation": "<fullname>Amazon DocumentDB elastic clusters</fullname>\n         <p>Amazon DocumentDB elastic-clusters support workloads with millions of reads/writes per second and petabytes of storage capacity. \n      Amazon DocumentDB elastic clusters also simplify how developers interact with Amazon DocumentDB elastic-clusters by eliminating the need to choose, manage or upgrade instances.</p>\n         <p>Amazon DocumentDB elastic-clusters were created to:</p>\n         <ul>\n            <li>\n               <p>provide a solution for customers looking for a database that provides virtually limitless scale with rich query capabilities and MongoDB API compatibility.</p>\n            </li>\n            <li>\n               <p>give customers higher connection limits, and to reduce downtime from patching.</p>\n            </li>\n            <li>\n               <p>continue investing in a cloud-native, elastic, and class leading architecture for JSON workloads.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon DocumentDB Elastic Clusters",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -156,7 +165,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -175,7 +183,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -203,13 +210,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -222,7 +230,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -236,7 +243,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -259,7 +265,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -294,11 +299,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -309,16 +312,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -332,14 +338,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -348,15 +352,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -367,16 +370,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -390,7 +396,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -410,11 +415,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -425,20 +428,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -449,18 +454,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -786,97 +795,121 @@
                 "clusterName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The name of the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clusterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.docdbelastic#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The status of the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clusterEndpoint": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL used to connect to the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The URL used to connect to the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createTime": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the Elastic DocumentDB cluster was created in Universal Coordinated Time (UTC).</p>",
+                        "smithy.api#documentation": "<p>The time when the elastic cluster was created in Universal Coordinated Time (UTC).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "adminUserName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster administrator.</p>",
+                        "smithy.api#documentation": "<p>The name of the elastic cluster administrator.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "authType": {
                     "target": "com.amazonaws.docdbelastic#Auth",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication type for the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The authentication type for the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "shardCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The capacity of each shard in the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The number of vCPUs assigned to each elastic cluster shard. Maximum is 64. \n      Allowed values are 2, 4, 8, 16, 32, 64.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "shardCount": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of shards in the  Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The number of shards assigned to the elastic cluster. Maximum is 32.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "vpcSecurityGroupIds": {
                     "target": "com.amazonaws.docdbelastic#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups associated with this cluster.</p>",
+                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups associated with thie elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "subnetIds": {
                     "target": "com.amazonaws.docdbelastic#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "preferredMaintenanceWindow": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur,\n      in Universal Coordinated Time (UTC).</p>\n         <p>\n            <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p>\n         <p>\n            <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "kmsKeyId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the elastic cluster.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "shards": {
+                    "target": "com.amazonaws.docdbelastic#ShardList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of shards in the cluster.</p>"
+                    }
+                },
+                "backupRetentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for which automatic snapshots are retained.</p>"
+                    }
+                },
+                "preferredBackupWindow": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The daily time range during which automated backups are created if automated backups are enabled, as determined by <code>backupRetentionPeriod</code>.</p>"
+                    }
+                },
+                "shardInstanceCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of replica instances applying to all shards in the cluster. \n      A <code>shardInstanceCount</code> value of 1 means there is one writer instance, and any additional instances are replicas that can be used for reads and to improve availability.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB cluster.</p>"
+                "smithy.api#documentation": "<p>Returns information about a specific elastic cluster.</p>"
             }
         },
         "com.amazonaws.docdbelastic#ClusterInList": {
@@ -885,27 +918,27 @@
                 "clusterName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The name of the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clusterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.docdbelastic#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The status of the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of Elastic DocumentDB cluster.</p>"
+                "smithy.api#documentation": "<p>A list of Amazon DocumentDB elastic clusters.</p>"
             }
         },
         "com.amazonaws.docdbelastic#ClusterList": {
@@ -920,76 +953,82 @@
                 "subnetIds": {
                     "target": "com.amazonaws.docdbelastic#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the IDs of subnets associated with the DB cluster snapshot.</p>",
+                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "snapshotName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#documentation": "<p>The name of the elastic cluster snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "snapshotArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB snapshot</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "snapshotCreationTime": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the Elastic DocumentDB snapshot was created in Universal Coordinated Time (UTC).</p>",
+                        "smithy.api#documentation": "<p>The time when the elastic cluster snapshot was created in Universal Coordinated Time (UTC).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clusterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clusterCreationTime": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the Elastic DocumentDB cluster was created in Universal Coordinated Time (UTC).</p>",
+                        "smithy.api#documentation": "<p>The time when the elastic cluster was created in Universal Coordinated Time (UTC).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.docdbelastic#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#documentation": "<p>The status of the elastic cluster snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "vpcSecurityGroupIds": {
                     "target": "com.amazonaws.docdbelastic#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the IDs of the VPC security groups associated with the cluster snapshot.</p>",
+                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups to associate with the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "adminUserName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster administrator.</p>",
+                        "smithy.api#documentation": "<p>The name of the elastic cluster administrator.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "kmsKeyId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. \n      If you are creating a cluster using the same Amazon account that owns this KMS encryption key, you can use the KMS key alias instead of the ARN as the KMS encryption key.\n      If an encryption key is not specified here, Amazon DocumentDB uses the default encryption key that KMS creates for your account. \n      Your account has a different default encryption key for each Amazon Region.\n    </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "snapshotType": {
+                    "target": "com.amazonaws.docdbelastic#SnapshotType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of cluster snapshots to be returned. \n      You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manual</code> - Return all cluster snapshots that you have manually created for your Amazon Web Services account.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB snapshot.</p>"
+                "smithy.api#documentation": "<p>Returns information about a specific elastic cluster snapshot.</p>"
             }
         },
         "com.amazonaws.docdbelastic#ClusterSnapshotInList": {
@@ -998,41 +1037,41 @@
                 "snapshotName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#documentation": "<p>The name of the elastic cluster snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "snapshotArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB snapshot</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clusterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.docdbelastic#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#documentation": "<p>The status of the elastic cluster snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "snapshotCreationTime": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the Elastic DocumentDB snapshot was created in Universal Coordinated Time (UTC).</p>",
+                        "smithy.api#documentation": "<p>The time when the elastic cluster snapshot was created in Universal Coordinated Time (UTC).</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of Elastic DocumentDB snapshots.</p>"
+                "smithy.api#documentation": "<p>A list of elastic cluster snapshots.</p>"
             }
         },
         "com.amazonaws.docdbelastic#ClusterSnapshotList": {
@@ -1071,6 +1110,138 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.docdbelastic#CopyClusterSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#CopyClusterSnapshotInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#CopyClusterSnapshotOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Copies a snapshot of an elastic cluster.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Basic Copy Cluster Snapshot Example",
+                        "documentation": "update applied",
+                        "input": {
+                            "snapshotArn": "arn:aws:docdb-elastic:us-east-1:$AWS_ACCOUNT_ID:cluster-snapshot/$SOURCE_SNAPSHOT_ID",
+                            "targetSnapshotName": "sampleSnapshotName"
+                        },
+                        "output": {
+                            "snapshot": {
+                                "subnetIds": [
+                                    "subnetId1",
+                                    "subnetId2"
+                                ],
+                                "snapshotName": "sampleSnapshotName",
+                                "snapshotArn": "arn:aws:docdb-elastic:us-east-1:$AWS_ACCOUNT_ID:cluster-snapshot/$TARGET_SNAPSHOT_ID",
+                                "snapshotCreationTime": "2000-01-01T00:00:00.000Z",
+                                "clusterArn": "arn:aws:docdb-elastic:us-east-1:$AWS_ACCOUNT_ID:cluster/$CLUSTER_ID",
+                                "clusterCreationTime": "2000-01-01T00:00:00.000Z",
+                                "status": "ACTIVE",
+                                "vpcSecurityGroupIds": [
+                                    "vpcSgId1, vpcSgId2"
+                                ],
+                                "adminUserName": "sampleAdminUser",
+                                "kmsKeyId": "AWS_OWNED_KMS_KEY",
+                                "snapshotType": "MANUAL"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cluster-snapshot/{snapshotArn}/copy"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#CopyClusterSnapshotInput": {
+            "type": "structure",
+            "members": {
+                "snapshotArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) identifier of the elastic cluster snapshot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "snapshotArn"
+                    }
+                },
+                "targetSnapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the new elastic cluster snapshot to create from the source cluster snapshot. \n      This parameter is not case sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>Example: <code>elastic-cluster-snapshot-5</code>\n         </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 63
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ID for an encrypted elastic cluster snapshot. \n      The Amazon Web Services KMS key ID is the Amazon Resource Name (ARN), Amazon Web Services KMS key identifier, or the Amazon Web Services KMS key alias for the Amazon Web Services KMS encryption key.</p>\n         <p>If you copy an encrypted elastic cluster snapshot from your Amazon Web Services account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new Amazon Web ServicesS KMS encryption key. \n      If you don't specify a value for <code>KmsKeyId</code>, then the copy of the elastic cluster snapshot is encrypted with the same <code>AWS</code> KMS key as the source elastic cluster snapshot.</p>\n         <p>To copy an encrypted elastic cluster snapshot to another Amazon Web Services region, set <code>KmsKeyId</code> to the Amazon Web Services KMS key ID that you want to use to encrypt the copy of the elastic cluster snapshot in the destination region. \n      Amazon Web Services KMS encryption keys are specific to the Amazon Web Services region that they are created in, and you can't use encryption keys from one Amazon Web Services region in another Amazon Web Services region.</p>\n         <p>If you copy an unencrypted elastic cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>"
+                    }
+                },
+                "copyTags": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to copy all tags from the source cluster snapshot to the target elastic cluster snapshot. \n      The default is <code>false</code>.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.docdbelastic#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be assigned to the elastic cluster snapshot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#CopyClusterSnapshotOutput": {
+            "type": "structure",
+            "members": {
+                "snapshot": {
+                    "target": "com.amazonaws.docdbelastic#ClusterSnapshot",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.docdbelastic#CreateCluster": {
             "type": "operation",
             "input": {
@@ -1100,7 +1271,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Elastic DocumentDB cluster and returns its Cluster structure.</p>",
+                "smithy.api#documentation": "<p>Creates a new Amazon DocumentDB elastic cluster and returns its cluster structure.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1115,67 +1286,67 @@
                 "clusterName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new Elastic DocumentDB cluster. This parameter is stored as\n      a lowercase string.</p>\n         <p>\n            <i>Constraints</i>:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>\n            <i>Example</i>: <code>my-cluster</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name of the new elastic cluster. This parameter is stored as\n      a lowercase string.</p>\n         <p>\n            <i>Constraints</i>:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>\n            <i>Example</i>: <code>my-cluster</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "authType": {
                     "target": "com.amazonaws.docdbelastic#Auth",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication type for the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The authentication type used to determine where to fetch the password used for accessing the elastic cluster. \n      Valid types are <code>PLAIN_TEXT</code> or <code>SECRET_ARN</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "adminUserName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster administrator.</p>\n         <p>\n            <i>Constraints</i>:</p>\n         <ul>\n            <li>\n               <p>Must be from 1 to 63 letters or numbers.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the Amazon DocumentDB elastic clusters administrator.</p>\n         <p>\n            <i>Constraints</i>:</p>\n         <ul>\n            <li>\n               <p>Must be from 1 to 63 letters or numbers.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "adminUserPassword": {
                     "target": "com.amazonaws.docdbelastic#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password for the Elastic DocumentDB cluster administrator and can\n      contain any printable ASCII characters.</p>\n         <p>\n            <i>Constraints</i>:</p>\n         <ul>\n            <li>\n               <p>Must contain from 8 to 100 characters.</p>\n            </li>\n            <li>\n               <p>Cannot contain a forward slash (/), double quote (\"), or the \"at\" symbol (@).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The password for the Amazon DocumentDB elastic clusters administrator. The password can contain any printable ASCII characters.</p>\n         <p>\n            <i>Constraints</i>:</p>\n         <ul>\n            <li>\n               <p>Must contain from 8 to 100 characters.</p>\n            </li>\n            <li>\n               <p>Cannot contain a forward slash (/), double quote (\"), or the \"at\" symbol (@).</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "shardCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The capacity of each shard in the new Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The number of vCPUs assigned to each elastic cluster shard. Maximum is 64. Allowed values are 2, 4, 8, 16, 32, 64.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "shardCount": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of shards to create in the new Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The number of shards assigned to the elastic cluster. Maximum is 32.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "vpcSecurityGroupIds": {
                     "target": "com.amazonaws.docdbelastic#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups to associate with the new\n      Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups to associate with the new\n      elastic cluster.</p>"
                     }
                 },
                 "subnetIds": {
                     "target": "com.amazonaws.docdbelastic#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the new Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the new elastic cluster.</p>"
                     }
                 },
                 "kmsKeyId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.</p>\n         <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS\n        encryption key. If you are creating a cluster using the same Amazon account\n        that owns this KMS encryption key, you can use the KMS key alias instead\n        of the ARN as the KMS encryption key.</p>\n         <p>If an encryption key is not specified, Elastic DocumentDB uses the\n        default encryption key that KMS creates for your account. Your account\n        has a different default encryption key for each Amazon Region.</p>"
+                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the new elastic cluster.</p>\n         <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS\n        encryption key. If you are creating a cluster using the same Amazon account\n        that owns this KMS encryption key, you can use the KMS key alias instead\n        of the ARN as the KMS encryption key.</p>\n         <p>If an encryption key is not specified, Amazon DocumentDB uses the\n        default encryption key that KMS creates for your account. Your account\n        has a different default encryption key for each Amazon Region.</p>"
                     }
                 },
                 "clientToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client token for the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The client token for the elastic cluster.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1188,7 +1359,25 @@
                 "tags": {
                     "target": "com.amazonaws.docdbelastic#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to be assigned to the new Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>The tags to be assigned to the new elastic cluster.</p>"
+                    }
+                },
+                "backupRetentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for which automatic snapshots are retained.</p>"
+                    }
+                },
+                "preferredBackupWindow": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The daily time range during which automated backups are created if automated backups are enabled, as determined by the <code>backupRetentionPeriod</code>.</p>"
+                    }
+                },
+                "shardInstanceCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of replica instances applying to all shards in the elastic cluster. \n      A <code>shardInstanceCount</code> value of 1 means there is one writer instance, and any additional instances are replicas that can be used for reads and to improve availability.</p>"
                     }
                 }
             }
@@ -1199,7 +1388,7 @@
                 "cluster": {
                     "target": "com.amazonaws.docdbelastic#Cluster",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new Elastic DocumentDB cluster that has been created.</p>",
+                        "smithy.api#documentation": "<p>The new elastic cluster that has been created.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1237,7 +1426,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a snapshot of a cluster.</p>",
+                "smithy.api#documentation": "<p>Creates a snapshot of an elastic cluster.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1252,14 +1441,14 @@
                 "clusterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster that the snapshot will be taken from.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster of which you want to create a snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "snapshotName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#documentation": "<p>The name of the new elastic cluster snapshot.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 63
@@ -1270,7 +1459,7 @@
                 "tags": {
                     "target": "com.amazonaws.docdbelastic#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to be assigned to the new Elastic DocumentDB snapshot.</p>"
+                        "smithy.api#documentation": "<p>The tags to be assigned to the new elastic cluster snapshot.</p>"
                     }
                 }
             }
@@ -1281,7 +1470,7 @@
                 "snapshot": {
                     "target": "com.amazonaws.docdbelastic#ClusterSnapshot",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns information about the new Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#documentation": "<p>Returns information about the new elastic cluster snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1316,7 +1505,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a Elastic DocumentDB cluster.</p>",
+                "smithy.api#documentation": "<p>Delete an elastic cluster.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -1331,7 +1520,7 @@
                 "clusterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster that is to be deleted.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster that is to be deleted.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "clusterArn"
@@ -1345,7 +1534,7 @@
                 "cluster": {
                     "target": "com.amazonaws.docdbelastic#Cluster",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns information about the newly deleted Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>Returns information about the newly deleted elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1380,7 +1569,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a Elastic DocumentDB snapshot.</p>",
+                "smithy.api#documentation": "<p>Delete an elastic cluster snapshot.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -1395,7 +1584,7 @@
                 "snapshotArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB snapshot that is to be deleted.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster snapshot that is to be deleted.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "snapshotArn"
@@ -1409,7 +1598,7 @@
                 "snapshot": {
                     "target": "com.amazonaws.docdbelastic#ClusterSnapshot",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns information about the newly deleted Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#documentation": "<p>Returns information about the newly deleted elastic cluster snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1441,7 +1630,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB cluster.</p>",
+                "smithy.api#documentation": "<p>Returns information about a specific elastic cluster.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1456,7 +1645,7 @@
                 "clusterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "clusterArn"
@@ -1470,7 +1659,7 @@
                 "cluster": {
                     "target": "com.amazonaws.docdbelastic#Cluster",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>Returns information about a specific elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1502,7 +1691,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB snapshot</p>",
+                "smithy.api#documentation": "<p>Returns information about a specific elastic cluster snapshot</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1517,7 +1706,7 @@
                 "snapshotArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster snapshot.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "snapshotArn"
@@ -1531,7 +1720,7 @@
                 "snapshot": {
                     "target": "com.amazonaws.docdbelastic#ClusterSnapshot",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#documentation": "<p>Returns information about a specific elastic cluster snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1577,7 +1766,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about Elastic DocumentDB snapshots for a specified cluster.</p>",
+                "smithy.api#documentation": "<p>Returns information about snapshots for a specified elastic cluster.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1598,14 +1787,14 @@
                 "clusterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster.</p>",
                         "smithy.api#httpQuery": "clusterArn"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.docdbelastic#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The nextToken which is used the get the next page of data.</p>",
+                        "smithy.api#documentation": "<p>A pagination token provided by a previous request. \n      If this parameter is specified, the response includes only records beyond this token, up to the value specified by <code>max-results</code>.</p>\n         <p>If there is no more data in the responce, the <code>nextToken</code> will not be returned.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -1613,12 +1802,19 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of entries to recieve in the response.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of elastic cluster snapshot results to receive in the response.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 20,
                             "max": 100
                         }
+                    }
+                },
+                "snapshotType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of cluster snapshots to be returned. You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manual</code> - Return all cluster snapshots that you have manually created for your Amazon Web Services account.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "snapshotType"
                     }
                 }
             }
@@ -1629,13 +1825,13 @@
                 "snapshots": {
                     "target": "com.amazonaws.docdbelastic#ClusterSnapshotList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Elastic DocumentDB snapshots for a specified cluster.</p>"
+                        "smithy.api#documentation": "<p>A list of snapshots for a specified elastic cluster.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.docdbelastic#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response will provide a nextToken if there is more data beyond the maxResults.</p>\n         <p>If there is no more data in the responce, the nextToken will not be returned.</p>"
+                        "smithy.api#documentation": "<p>A pagination token provided by a previous request. \n      If this parameter is specified, the response includes only records beyond this token, up to the value specified by <code>max-results</code>.</p>\n         <p>If there is no more data in the responce, the <code>nextToken</code> will not be returned.</p>"
                     }
                 }
             }
@@ -1663,7 +1859,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about provisioned Elastic DocumentDB clusters.</p>",
+                "smithy.api#documentation": "<p>Returns information about provisioned Amazon DocumentDB elastic clusters.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1684,7 +1880,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.docdbelastic#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The nextToken which is used the get the next page of data.</p>",
+                        "smithy.api#documentation": "<p>A pagination token provided by a previous request. \n      If this parameter is specified, the response includes only records beyond this token, up to the value specified by <code>max-results</code>.</p>\n         <p>If there is no more data in the responce, the <code>nextToken</code> will not be returned.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -1692,7 +1888,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of entries to recieve in the response.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of elastic cluster snapshot results to receive in the response.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -1708,13 +1904,13 @@
                 "clusters": {
                     "target": "com.amazonaws.docdbelastic#ClusterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>A list of Amazon DocumentDB elastic clusters.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.docdbelastic#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response will provide a nextToken if there is more data beyond the maxResults.</p>\n         <p>If there is no more data in the responce, the nextToken will not be returned.</p>"
+                        "smithy.api#documentation": "<p>A pagination token provided by a previous request. \n      If this parameter is specified, the response includes only records beyond this token, up to the value specified by <code>max-results</code>.</p>\n         <p>If there is no more data in the responce, the <code>nextToken</code> will not be returned.</p>"
                     }
                 }
             }
@@ -1742,7 +1938,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags on a Elastic DocumentDB resource</p>",
+                "smithy.api#documentation": "<p>Lists all tags on a elastic cluster resource</p>",
                 "smithy.api#http": {
                     "uri": "/tags/{resourceArn}",
                     "method": "GET"
@@ -1756,7 +1952,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.docdbelastic#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB resource.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1769,7 +1965,7 @@
                 "tags": {
                     "target": "com.amazonaws.docdbelastic#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tags for the specified Elastic DocumentDB resource.</p>"
+                        "smithy.api#documentation": "<p>The list of tags for the specified elastic cluster resource.</p>"
                     }
                 }
             }
@@ -1849,7 +2045,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restores a Elastic DocumentDB cluster from a snapshot.</p>",
+                "smithy.api#documentation": "<p>Restores an elastic cluster from a snapshot.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1864,14 +2060,14 @@
                 "clusterName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The name of the elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "snapshotArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster snapshot.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "snapshotArn"
@@ -1880,25 +2076,37 @@
                 "vpcSecurityGroupIds": {
                     "target": "com.amazonaws.docdbelastic#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups to associate with the\n      Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups to associate with the elastic cluster.</p>"
                     }
                 },
                 "subnetIds": {
                     "target": "com.amazonaws.docdbelastic#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the elastic cluster.</p>"
                     }
                 },
                 "kmsKeyId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.</p>\n         <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS\n        encryption key. If you are creating a cluster using the same Amazon account\n        that owns this KMS encryption key, you can use the KMS key alias instead\n        of the ARN as the KMS encryption key.</p>\n         <p>If an encryption key is not specified here, Elastic DocumentDB uses the\n        default encryption key that KMS creates for your account. Your account\n        has a different default encryption key for each Amazon Region.</p>"
+                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the new Amazon DocumentDB elastic clusters cluster.</p>\n         <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS\n        encryption key. If you are creating a cluster using the same Amazon account\n        that owns this KMS encryption key, you can use the KMS key alias instead\n        of the ARN as the KMS encryption key.</p>\n         <p>If an encryption key is not specified here, Amazon DocumentDB uses the\n        default encryption key that KMS creates for your account. Your account\n        has a different default encryption key for each Amazon Region.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.docdbelastic#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the tag names to be assigned to the restored DB cluster,\n      in the form of an array of key-value pairs in which the key\n      is the tag name and the value is the key value.</p>"
+                        "smithy.api#documentation": "<p>A list of the tag names to be assigned to the restored elastic cluster, in the form of an array of key-value pairs in which the key is the tag name and the value is the key value.</p>"
+                    }
+                },
+                "shardCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity of each shard in the new restored elastic cluster.</p>"
+                    }
+                },
+                "shardInstanceCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of replica instances applying to all shards in the elastic cluster. \n      A <code>shardInstanceCount</code> value of 1 means there is one writer instance, and any additional instances are replicas that can be used for reads and to improve availability.</p>"
                     }
                 }
             }
@@ -1909,7 +2117,7 @@
                 "cluster": {
                     "target": "com.amazonaws.docdbelastic#Cluster",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns information about a the restored Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>Returns information about a the restored elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1929,6 +2137,157 @@
                 "smithy.api#documentation": "<p>The service quota for the action was exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.docdbelastic#Shard": {
+            "type": "structure",
+            "members": {
+                "shardId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the shard.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the shard was created in Universal Coordinated Time (UTC).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.docdbelastic#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the shard.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the shard.</p>"
+            }
+        },
+        "com.amazonaws.docdbelastic#ShardList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.docdbelastic#Shard"
+            }
+        },
+        "com.amazonaws.docdbelastic#SnapshotType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MANUAL",
+                        "name": "MANUAL"
+                    },
+                    {
+                        "value": "AUTOMATED",
+                        "name": "AUTOMATED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.docdbelastic#StartCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#StartClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#StartClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Restarts the stopped elastic cluster that is specified by <code>clusterARN</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Basic Start Cluster Example",
+                        "documentation": "update applied",
+                        "input": {
+                            "clusterArn": "arn:aws:docdb-elastic:us-east-1:$AWS_ACCOUNT_ID:cluster/$CLUSTER_ID"
+                        },
+                        "output": {
+                            "cluster": {
+                                "clusterName": "sampleClusterName",
+                                "clusterArn": "arn:aws:docdb-elastic:us-east-1:$AWS_ACCOUNT_ID:cluster/$CLUSTER_ID",
+                                "status": "STARTING",
+                                "clusterEndpoint": "sampleClusterName.us-east-1.docdb-elastic.amazonaws.com",
+                                "createTime": "2000-01-01T00:00:00.000Z",
+                                "adminUserName": "sampleAdminUser",
+                                "authType": "PLAIN_TEXT",
+                                "shardCapacity": 2,
+                                "shardCount": 2,
+                                "vpcSecurityGroupIds": [
+                                    "vpcSgId1, vpcSgId2"
+                                ],
+                                "subnetIds": [
+                                    "subnetId1",
+                                    "subnetId2"
+                                ],
+                                "preferredMaintenanceWindow": "mon:00:00-mon:00:30",
+                                "kmsKeyId": "AWS_OWNED_KMS_KEY",
+                                "shards": [],
+                                "backupRetentionPeriod": 1,
+                                "preferredBackupWindow": "01:00-01:30",
+                                "shardInstanceCount": 1
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cluster/{clusterArn}/start"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#StartClusterInput": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "clusterArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#StartClusterOutput": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.docdbelastic#Cluster",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdbelastic#Status": {
@@ -1970,8 +2329,149 @@
                     {
                         "value": "INACCESSIBLE_ENCRYPTION_CREDS",
                         "name": "INACCESSIBLE_ENCRYPTION_CREDS"
+                    },
+                    {
+                        "value": "INACCESSIBLE_SECRET_ARN",
+                        "name": "INACCESSIBLE_SECRET_ARN"
+                    },
+                    {
+                        "value": "INACCESSIBLE_VPC_ENDPOINT",
+                        "name": "INACCESSIBLE_VPC_ENDPOINT"
+                    },
+                    {
+                        "value": "INCOMPATIBLE_NETWORK",
+                        "name": "INCOMPATIBLE_NETWORK"
+                    },
+                    {
+                        "value": "MERGING",
+                        "name": "MERGING"
+                    },
+                    {
+                        "value": "MODIFYING",
+                        "name": "MODIFYING"
+                    },
+                    {
+                        "value": "SPLITTING",
+                        "name": "SPLITTING"
+                    },
+                    {
+                        "value": "COPYING",
+                        "name": "COPYING"
+                    },
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.docdbelastic#StopCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#StopClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#StopClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops the running elastic cluster that is specified by <code>clusterArn</code>. \n      The elastic cluster must be in the <i>available</i> state. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Basic Stop Cluster Example",
+                        "documentation": "update applied",
+                        "input": {
+                            "clusterArn": "arn:aws:docdb-elastic:us-east-1:$AWS_ACCOUNT_ID:cluster/$CLUSTER_ID"
+                        },
+                        "output": {
+                            "cluster": {
+                                "clusterName": "sampleClusterName",
+                                "clusterArn": "arn:aws:docdb-elastic:us-east-1:$AWS_ACCOUNT_ID:cluster/$CLUSTER_ID",
+                                "status": "STOPPING",
+                                "clusterEndpoint": "sampleClusterName.us-east-1.docdb-elastic.amazonaws.com",
+                                "createTime": "2000-01-01T00:00:00.000Z",
+                                "adminUserName": "sampleAdminUser",
+                                "authType": "PLAIN_TEXT",
+                                "shardCapacity": 2,
+                                "shardCount": 2,
+                                "vpcSecurityGroupIds": [
+                                    "vpcSgId1, vpcSgId2"
+                                ],
+                                "subnetIds": [
+                                    "subnetId1",
+                                    "subnetId2"
+                                ],
+                                "preferredMaintenanceWindow": "mon:00:00-mon:00:30",
+                                "kmsKeyId": "AWS_OWNED_KMS_KEY",
+                                "shards": [],
+                                "backupRetentionPeriod": 1,
+                                "preferredBackupWindow": "01:00-01:30",
+                                "shardInstanceCount": 1
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cluster/{clusterArn}/stop"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#StopClusterInput": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "clusterArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#StopClusterOutput": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.docdbelastic#Cluster",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdbelastic#StringList": {
@@ -2034,7 +2534,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds metadata tags to a Elastic DocumentDB resource</p>",
+                "smithy.api#documentation": "<p>Adds metadata tags to an elastic cluster resource</p>",
                 "smithy.api#http": {
                     "uri": "/tags/{resourceArn}",
                     "method": "POST"
@@ -2047,7 +2547,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.docdbelastic#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB resource.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2055,7 +2555,7 @@
                 "tags": {
                     "target": "com.amazonaws.docdbelastic#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to be assigned to the Elastic DocumentDB resource.</p>",
+                        "smithy.api#documentation": "<p>The tags that are assigned to the elastic cluster resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2121,7 +2621,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes metadata tags to a Elastic DocumentDB resource</p>",
+                "smithy.api#documentation": "<p>Removes metadata tags from an elastic cluster resource</p>",
                 "smithy.api#http": {
                     "uri": "/tags/{resourceArn}",
                     "method": "DELETE"
@@ -2135,7 +2635,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.docdbelastic#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB resource.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2143,7 +2643,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.docdbelastic#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag keys to be removed from the Elastic DocumentDB resource.</p>",
+                        "smithy.api#documentation": "<p>The tag keys to be removed from the elastic cluster resource.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -2183,7 +2683,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies a Elastic DocumentDB cluster. This includes updating admin-username/password, \n    upgrading API version setting up a backup window and maintenance window</p>",
+                "smithy.api#documentation": "<p>Modifies an elastic cluster. This includes updating admin-username/password, \n    upgrading the API version, and setting up a backup window and maintenance window</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -2198,7 +2698,7 @@
                 "clusterArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The ARN identifier of the elastic cluster.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "clusterArn"
@@ -2207,50 +2707,68 @@
                 "authType": {
                     "target": "com.amazonaws.docdbelastic#Auth",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication type for the Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>The authentication type used to determine where to fetch the password used for accessing the elastic cluster. \n      Valid types are <code>PLAIN_TEXT</code> or <code>SECRET_ARN</code>.</p>"
                     }
                 },
                 "shardCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The capacity of each shard in the Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>The number of vCPUs assigned to each elastic cluster shard. \n      Maximum is 64. Allowed values are 2, 4, 8, 16, 32, 64.</p>"
                     }
                 },
                 "shardCount": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of shards to create in the Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>The number of shards assigned to the elastic cluster. Maximum is 32.</p>"
                     }
                 },
                 "vpcSecurityGroupIds": {
                     "target": "com.amazonaws.docdbelastic#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups to associate with the new\n      Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups to associate with the elastic cluster.</p>"
                     }
                 },
                 "subnetIds": {
                     "target": "com.amazonaws.docdbelastic#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of shards to create in the Elastic DocumentDB cluster.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the elastic cluster.</p>"
                     }
                 },
                 "adminUserPassword": {
                     "target": "com.amazonaws.docdbelastic#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password for the Elastic DocumentDB cluster administrator. This password can\n      contain any printable ASCII character except forward slash (/),\n      double quote (\"), or the \"at\" symbol (@).</p>\n         <p>\n            <i>Constraints</i>: Must contain from 8 to 100 characters.</p>"
+                        "smithy.api#documentation": "<p>The password associated with the elastic cluster administrator. \n      This password can contain any printable ASCII character except forward slash (/), double quote (\"), or the \"at\" symbol (@).</p>\n         <p>\n            <i>Constraints</i>: Must contain from 8 to 100 characters.</p>"
                     }
                 },
                 "clientToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client token for the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>The client token for the elastic cluster.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "preferredMaintenanceWindow": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur,\n      in Universal Coordinated Time (UTC).</p>\n         <p>\n            <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n         </p>\n         <p>\n            <i>Default</i>: a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week.</p>\n         <p>\n            <i>Valid days</i>: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n         <p>\n            <i>Constraints</i>: Minimum 30-minute window.</p>"
+                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p>\n         <p>\n            <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n         </p>\n         <p>\n            <i>Default</i>: a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week.</p>\n         <p>\n            <i>Valid days</i>: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n         <p>\n            <i>Constraints</i>: Minimum 30-minute window.</p>"
+                    }
+                },
+                "backupRetentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for which automatic snapshots are retained.</p>"
+                    }
+                },
+                "preferredBackupWindow": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The daily time range during which automated backups are created if automated backups are enabled, as determined by the <code>backupRetentionPeriod</code>.</p>"
+                    }
+                },
+                "shardInstanceCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of replica instances applying to all shards in the elastic cluster. \n      A <code>shardInstanceCount</code> value of 1 means there is one writer instance, and any additional instances are replicas that can be used for reads and to improve availability.</p>"
                     }
                 }
             }
@@ -2261,7 +2779,7 @@
                 "cluster": {
                     "target": "com.amazonaws.docdbelastic#Cluster",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns information about the updated Elastic DocumentDB cluster.</p>",
+                        "smithy.api#documentation": "<p>Returns information about the updated elastic cluster.</p>",
                         "smithy.api#required": {}
                     }
                 }
