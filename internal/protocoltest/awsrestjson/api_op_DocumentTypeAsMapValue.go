@@ -6,74 +6,55 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// The example tests how requests serialize different timestamp formats in the URI
-// path.
-func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, params *HttpRequestWithLabelsAndTimestampFormatInput, optFns ...func(*Options)) (*HttpRequestWithLabelsAndTimestampFormatOutput, error) {
+// This example serializes documents as the value of maps.
+func (c *Client) DocumentTypeAsMapValue(ctx context.Context, params *DocumentTypeAsMapValueInput, optFns ...func(*Options)) (*DocumentTypeAsMapValueOutput, error) {
 	if params == nil {
-		params = &HttpRequestWithLabelsAndTimestampFormatInput{}
+		params = &DocumentTypeAsMapValueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpRequestWithLabelsAndTimestampFormat", params, optFns, c.addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DocumentTypeAsMapValue", params, optFns, c.addOperationDocumentTypeAsMapValueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*HttpRequestWithLabelsAndTimestampFormatOutput)
+	out := result.(*DocumentTypeAsMapValueOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type HttpRequestWithLabelsAndTimestampFormatInput struct {
-
-	// This member is required.
-	DefaultFormat *time.Time
-
-	// This member is required.
-	MemberDateTime *time.Time
-
-	// This member is required.
-	MemberEpochSeconds *time.Time
-
-	// This member is required.
-	MemberHttpDate *time.Time
-
-	// This member is required.
-	TargetDateTime *time.Time
-
-	// This member is required.
-	TargetEpochSeconds *time.Time
-
-	// This member is required.
-	TargetHttpDate *time.Time
+type DocumentTypeAsMapValueInput struct {
+	DocValuedMap map[string]document.Interface
 
 	noSmithyDocumentSerde
 }
 
-type HttpRequestWithLabelsAndTimestampFormatOutput struct {
+type DocumentTypeAsMapValueOutput struct {
+	DocValuedMap map[string]document.Interface
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDocumentTypeAsMapValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithLabelsAndTimestampFormat{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDocumentTypeAsMapValue{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDocumentTypeAsMapValue{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpRequestWithLabelsAndTimestampFormat"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DocumentTypeAsMapValue"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -116,10 +97,7 @@ func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpHttpRequestWithLabelsAndTimestampFormatValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDocumentTypeAsMapValue(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -140,10 +118,10 @@ func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(
 	return nil
 }
 
-func newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDocumentTypeAsMapValue(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "HttpRequestWithLabelsAndTimestampFormat",
+		OperationName: "DocumentTypeAsMapValue",
 	}
 }

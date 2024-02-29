@@ -56,7 +56,7 @@ func TestClient_XmlMapsXmlName_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlMapsXmlNameInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlMapsXmlNameRequest>
 			    <myMap>
 			        <entry>
 			            <Attribute>foo</Attribute>
@@ -71,7 +71,7 @@ func TestClient_XmlMapsXmlName_awsRestxmlSerialize(t *testing.T) {
 			            </Setting>
 			        </entry>
 			    </myMap>
-			</XmlMapsXmlNameInputOutput>
+			</XmlMapsXmlNameRequest>
 			`))
 			},
 		},
@@ -155,7 +155,7 @@ func TestClient_XmlMapsXmlName_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlMapsXmlNameInputOutput>
+			Body: []byte(`<XmlMapsXmlNameResponse>
 			    <myMap>
 			        <entry>
 			            <Attribute>foo</Attribute>
@@ -170,7 +170,7 @@ func TestClient_XmlMapsXmlName_awsRestxmlDeserialize(t *testing.T) {
 			            </Setting>
 			        </entry>
 			    </myMap>
-			</XmlMapsXmlNameInputOutput>
+			</XmlMapsXmlNameResponse>
 			`),
 			ExpectResult: &XmlMapsXmlNameOutput{
 				MyMap: map[string]types.GreetingStruct{

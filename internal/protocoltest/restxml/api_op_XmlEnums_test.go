@@ -62,7 +62,7 @@ func TestClient_XmlEnums_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlEnumsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlEnumsRequest>
 			    <fooEnum1>Foo</fooEnum1>
 			    <fooEnum2>0</fooEnum2>
 			    <fooEnum3>1</fooEnum3>
@@ -84,7 +84,7 @@ func TestClient_XmlEnums_awsRestxmlSerialize(t *testing.T) {
 			            <value>0</value>
 			        </entry>
 			    </fooEnumMap>
-			</XmlEnumsInputOutput>
+			</XmlEnumsRequest>
 			`))
 			},
 		},
@@ -168,7 +168,7 @@ func TestClient_XmlEnums_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlEnumsInputOutput>
+			Body: []byte(`<XmlEnumsResponse>
 			    <fooEnum1>Foo</fooEnum1>
 			    <fooEnum2>0</fooEnum2>
 			    <fooEnum3>1</fooEnum3>
@@ -190,7 +190,7 @@ func TestClient_XmlEnums_awsRestxmlDeserialize(t *testing.T) {
 			            <value>0</value>
 			        </entry>
 			    </fooEnumMap>
-			</XmlEnumsInputOutput>
+			</XmlEnumsResponse>
 			`),
 			ExpectResult: &XmlEnumsOutput{
 				FooEnum1: types.FooEnum("Foo"),

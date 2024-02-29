@@ -50,7 +50,7 @@ func TestClient_FlattenedXmlMapWithXmlName_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<FlattenedXmlMapWithXmlNameInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<FlattenedXmlMapWithXmlNameRequest>
 			    <KVP>
 			        <K>a</K>
 			        <V>A</V>
@@ -59,7 +59,7 @@ func TestClient_FlattenedXmlMapWithXmlName_awsRestxmlSerialize(t *testing.T) {
 			        <K>b</K>
 			        <V>B</V>
 			    </KVP>
-			</FlattenedXmlMapWithXmlNameInputOutput>`))
+			</FlattenedXmlMapWithXmlNameRequest>`))
 			},
 		},
 	}
@@ -142,7 +142,7 @@ func TestClient_FlattenedXmlMapWithXmlName_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<FlattenedXmlMapWithXmlNameInputOutput>
+			Body: []byte(`<FlattenedXmlMapWithXmlNameResponse>
 			    <KVP>
 			        <K>a</K>
 			        <V>A</V>
@@ -151,7 +151,7 @@ func TestClient_FlattenedXmlMapWithXmlName_awsRestxmlDeserialize(t *testing.T) {
 			        <K>b</K>
 			        <V>B</V>
 			    </KVP>
-			</FlattenedXmlMapWithXmlNameInputOutput>`),
+			</FlattenedXmlMapWithXmlNameResponse>`),
 			ExpectResult: &FlattenedXmlMapWithXmlNameOutput{
 				MyMap: map[string]string{
 					"a": "A",

@@ -52,7 +52,7 @@ func TestClient_NestedXmlMaps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<NestedXmlMapsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<NestedXmlMapsRequest>
 			    <nestedMap>
 			        <entry>
 			            <key>foo</key>
@@ -64,7 +64,7 @@ func TestClient_NestedXmlMaps_awsRestxmlSerialize(t *testing.T) {
 			            </value>
 			        </entry>
 			    </nestedMap>
-			</NestedXmlMapsInputOutput>`))
+			</NestedXmlMapsRequest>`))
 			},
 		},
 		// Tests requests with nested flat maps. Since maps can only be flattened when
@@ -85,7 +85,7 @@ func TestClient_NestedXmlMaps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<NestedXmlMapsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<NestedXmlMapsRequest>
 			    <flatNestedMap>
 			        <key>foo</key>
 			        <value>
@@ -95,7 +95,7 @@ func TestClient_NestedXmlMaps_awsRestxmlSerialize(t *testing.T) {
 			            </entry>
 			        </value>
 			    </flatNestedMap>
-			</NestedXmlMapsInputOutput>`))
+			</NestedXmlMapsRequest>`))
 			},
 		},
 	}
@@ -178,7 +178,7 @@ func TestClient_NestedXmlMaps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<NestedXmlMapsInputOutput>
+			Body: []byte(`<NestedXmlMapsResponse>
 			    <nestedMap>
 			        <entry>
 			            <key>foo</key>
@@ -190,7 +190,7 @@ func TestClient_NestedXmlMaps_awsRestxmlDeserialize(t *testing.T) {
 			            </value>
 			        </entry>
 			    </nestedMap>
-			</NestedXmlMapsInputOutput>`),
+			</NestedXmlMapsResponse>`),
 			ExpectResult: &NestedXmlMapsOutput{
 				NestedMap: map[string]map[string]types.FooEnum{
 					"foo": {
@@ -207,7 +207,7 @@ func TestClient_NestedXmlMaps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<NestedXmlMapsInputOutput>
+			Body: []byte(`<NestedXmlMapsResponse>
 			    <flatNestedMap>
 			        <key>foo</key>
 			        <value>
@@ -217,7 +217,7 @@ func TestClient_NestedXmlMaps_awsRestxmlDeserialize(t *testing.T) {
 			            </entry>
 			        </value>
 			    </flatNestedMap>
-			</NestedXmlMapsInputOutput>`),
+			</NestedXmlMapsResponse>`),
 			ExpectResult: &NestedXmlMapsOutput{
 				FlatNestedMap: map[string]map[string]types.FooEnum{
 					"foo": {

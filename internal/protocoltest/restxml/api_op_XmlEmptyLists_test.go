@@ -48,10 +48,10 @@ func TestClient_XmlEmptyLists_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlListsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlEmptyListsRequest>
 			        <stringList></stringList>
 			        <stringSet></stringSet>
-			</XmlListsInputOutput>
+			</XmlEmptyListsRequest>
 			`))
 			},
 		},
@@ -135,10 +135,10 @@ func TestClient_XmlEmptyLists_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlListsInputOutput>
+			Body: []byte(`<XmlEmptyListsResponse>
 			        <stringList/>
 			        <stringSet></stringSet>
-			</XmlListsInputOutput>
+			</XmlEmptyListsResponse>
 			`),
 			ExpectResult: &XmlEmptyListsOutput{
 				StringList: []string{},

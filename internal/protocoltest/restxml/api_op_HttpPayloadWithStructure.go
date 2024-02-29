@@ -74,6 +74,9 @@ func (c *Client) addOperationHttpPayloadWithStructureMiddlewares(stack *middlewa
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addComputePayloadSHA256(stack); err != nil {
+		return err
+	}
 	if err = addRetry(stack, options); err != nil {
 		return err
 	}

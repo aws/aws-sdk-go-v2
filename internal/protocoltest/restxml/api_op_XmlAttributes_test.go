@@ -49,9 +49,9 @@ func TestClient_XmlAttributes_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlAttributesInputOutput test="test">
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlAttributesRequest test="test">
 			    <foo>hi</foo>
-			</XmlAttributesInputOutput>
+			</XmlAttributesRequest>
 			`))
 			},
 		},
@@ -69,9 +69,9 @@ func TestClient_XmlAttributes_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlAttributesInputOutput test="&lt;test&amp;mock&gt;">
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlAttributesRequest test="&lt;test&amp;mock&gt;">
 			    <foo>hi</foo>
-			</XmlAttributesInputOutput>
+			</XmlAttributesRequest>
 			`))
 			},
 		},
@@ -155,9 +155,9 @@ func TestClient_XmlAttributes_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlAttributesInputOutput test="test">
+			Body: []byte(`<XmlAttributesResponse test="test">
 			    <foo>hi</foo>
-			</XmlAttributesInputOutput>
+			</XmlAttributesResponse>
 			`),
 			ExpectResult: &XmlAttributesOutput{
 				Foo:  ptr.String("hi"),

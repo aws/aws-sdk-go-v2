@@ -59,7 +59,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
 			    <stringValue>string</stringValue>
 			    <trueBooleanValue>true</trueBooleanValue>
 			    <falseBooleanValue>false</falseBooleanValue>
@@ -69,7 +69,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			    <longValue>4</longValue>
 			    <floatValue>5.5</floatValue>
 			    <DoubleDribble>6.5</DoubleDribble>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesRequest>
 			`))
 			},
 		},
@@ -88,9 +88,9 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
 			    <stringValue>&lt;string&gt;</stringValue>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesRequest>
 			`))
 			},
 		},
@@ -109,9 +109,9 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
 			    <stringValue>  string with white    space  </stringValue>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesRequest>
 			`))
 			},
 		},
@@ -130,9 +130,9 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
 			    <stringValue>   </stringValue>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesRequest>
 			`))
 			},
 		},
@@ -150,10 +150,10 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
 			    <floatValue>NaN</floatValue>
 			    <DoubleDribble>NaN</DoubleDribble>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesRequest>
 			`))
 			},
 		},
@@ -171,10 +171,10 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
 			    <floatValue>Infinity</floatValue>
 			    <DoubleDribble>Infinity</DoubleDribble>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesRequest>
 			`))
 			},
 		},
@@ -192,10 +192,10 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesRequest>
 			    <floatValue>-Infinity</floatValue>
 			    <DoubleDribble>-Infinity</DoubleDribble>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesRequest>
 			`))
 			},
 		},
@@ -280,7 +280,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				"X-Foo":        []string{"Foo"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			Body: []byte(`<SimpleScalarPropertiesResponse>
 			    <stringValue>string</stringValue>
 			    <trueBooleanValue>true</trueBooleanValue>
 			    <falseBooleanValue>false</falseBooleanValue>
@@ -290,7 +290,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 			    <longValue>4</longValue>
 			    <floatValue>5.5</floatValue>
 			    <DoubleDribble>6.5</DoubleDribble>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				Foo:               ptr.String("Foo"),
@@ -317,9 +317,9 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				"X-Foo":        []string{"Foo"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			Body: []byte(`<SimpleScalarPropertiesResponse>
 			    <stringValue>escaped data: &amp;lt;&#xD;&#10;</stringValue>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				Foo:         ptr.String("Foo"),
@@ -334,9 +334,9 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				"X-Foo":        []string{"Foo"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			Body: []byte(`<SimpleScalarPropertiesResponse>
 			    <stringValue>&lt;string&gt;</stringValue>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				Foo:         ptr.String("Foo"),
@@ -352,11 +352,11 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			Body: []byte(`<?xml version = "1.0" encoding = "UTF-8"?>
-			<SimpleScalarPropertiesInputOutput>
+			<SimpleScalarPropertiesResponse>
 			    <![CDATA[characters representing CDATA]]>
 			    <stringValue>string</stringValue>
 			    <!--xml comment-->
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				Foo:         ptr.String("Foo"),
@@ -372,9 +372,9 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			Body: []byte(`<?xml version = "1.0" encoding = "UTF-8"?>
-			<SimpleScalarPropertiesInputOutput>
+			<SimpleScalarPropertiesResponse>
 			    <stringValue> string with white    space </stringValue>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				Foo:         ptr.String("Foo"),
@@ -390,9 +390,9 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			Body: []byte(`<?xml version = "1.0" encoding = "UTF-8"?>
-			<SimpleScalarPropertiesInputOutput>
+			<SimpleScalarPropertiesResponse>
 			    <stringValue>  </stringValue>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				Foo:         ptr.String("Foo"),
@@ -406,10 +406,10 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			Body: []byte(`<SimpleScalarPropertiesResponse>
 			    <floatValue>NaN</floatValue>
 			    <DoubleDribble>NaN</DoubleDribble>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				FloatValue:  ptr.Float32(float32(math.NaN())),
@@ -423,10 +423,10 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			Body: []byte(`<SimpleScalarPropertiesResponse>
 			    <floatValue>Infinity</floatValue>
 			    <DoubleDribble>Infinity</DoubleDribble>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				FloatValue:  ptr.Float32(float32(math.Inf(1))),
@@ -440,10 +440,10 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			Body: []byte(`<SimpleScalarPropertiesResponse>
 			    <floatValue>-Infinity</floatValue>
 			    <DoubleDribble>-Infinity</DoubleDribble>
-			</SimpleScalarPropertiesInputOutput>
+			</SimpleScalarPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				FloatValue:  ptr.Float32(float32(math.Inf(-1))),

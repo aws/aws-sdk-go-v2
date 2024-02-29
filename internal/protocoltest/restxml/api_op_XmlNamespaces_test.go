@@ -55,7 +55,7 @@ func TestClient_XmlNamespaces_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlNamespacesInputOutput xmlns="http://foo.com">
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlNamespacesRequest xmlns="http://foo.com">
 			    <nested>
 			        <foo xmlns:baz="http://baz.com">Foo</foo>
 			        <values xmlns="http://qux.com">
@@ -63,7 +63,7 @@ func TestClient_XmlNamespaces_awsRestxmlSerialize(t *testing.T) {
 			            <member xmlns="http://bux.com">Baz</member>
 			        </values>
 			    </nested>
-			</XmlNamespacesInputOutput>
+			</XmlNamespacesRequest>
 			`))
 			},
 		},
@@ -147,7 +147,7 @@ func TestClient_XmlNamespaces_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlNamespacesInputOutput xmlns="http://foo.com">
+			Body: []byte(`<XmlNamespacesResponse xmlns="http://foo.com">
 			    <nested>
 			        <foo xmlns:baz="http://baz.com">Foo</foo>
 			        <values xmlns="http://qux.com">
@@ -155,7 +155,7 @@ func TestClient_XmlNamespaces_awsRestxmlDeserialize(t *testing.T) {
 			            <member xmlns="http://bux.com">Baz</member>
 			        </values>
 			    </nested>
-			</XmlNamespacesInputOutput>
+			</XmlNamespacesResponse>
 			`),
 			ExpectResult: &XmlNamespacesOutput{
 				Nested: &types.XmlNamespaceNested{

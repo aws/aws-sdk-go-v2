@@ -58,7 +58,7 @@ func TestClient_XmlUnions_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlUnionsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlUnionsRequest>
 			    <unionValue>
 			       <structValue>
 			          <stringValue>string</stringValue>
@@ -71,7 +71,7 @@ func TestClient_XmlUnions_awsRestxmlSerialize(t *testing.T) {
 			          <doubleValue>6.5</doubleValue>
 			       </structValue>
 			    </unionValue>
-			</XmlUnionsInputOutput>
+			</XmlUnionsRequest>
 			`))
 			},
 		},
@@ -88,11 +88,11 @@ func TestClient_XmlUnions_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlUnionsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlUnionsRequest>
 			   <unionValue>
 			      <stringValue>some string</stringValue>
 			   </unionValue>
-			</XmlUnionsInputOutput>
+			</XmlUnionsRequest>
 			`))
 			},
 		},
@@ -109,11 +109,11 @@ func TestClient_XmlUnions_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlUnionsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlUnionsRequest>
 			   <unionValue>
 			      <booleanValue>true</booleanValue>
 			   </unionValue>
-			</XmlUnionsInputOutput>
+			</XmlUnionsRequest>
 			`))
 			},
 		},
@@ -130,13 +130,13 @@ func TestClient_XmlUnions_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlUnionsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlUnionsRequest>
 			   <unionValue>
 			      <unionValue>
 			         <booleanValue>true</booleanValue>
 			      </unionValue>
 			   </unionValue>
-			</XmlUnionsInputOutput>
+			</XmlUnionsRequest>
 			`))
 			},
 		},
@@ -220,7 +220,7 @@ func TestClient_XmlUnions_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlUnionsInputOutput>
+			Body: []byte(`<XmlUnionsResponse>
 			    <unionValue>
 			       <structValue>
 			          <stringValue>string</stringValue>
@@ -233,7 +233,7 @@ func TestClient_XmlUnions_awsRestxmlDeserialize(t *testing.T) {
 			          <doubleValue>6.5</doubleValue>
 			       </structValue>
 			    </unionValue>
-			</XmlUnionsInputOutput>
+			</XmlUnionsResponse>
 			`),
 			ExpectResult: &XmlUnionsOutput{
 				UnionValue: &types.XmlUnionShapeMemberStructValue{Value: types.XmlNestedUnionStruct{
@@ -255,11 +255,11 @@ func TestClient_XmlUnions_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlUnionsInputOutput>
+			Body: []byte(`<XmlUnionsResponse>
 			   <unionValue>
 			      <stringValue>some string</stringValue>
 			   </unionValue>
-			</XmlUnionsInputOutput>
+			</XmlUnionsResponse>
 			`),
 			ExpectResult: &XmlUnionsOutput{
 				UnionValue: &types.XmlUnionShapeMemberStringValue{Value: "some string"},
@@ -272,11 +272,11 @@ func TestClient_XmlUnions_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlUnionsInputOutput>
+			Body: []byte(`<XmlUnionsResponse>
 			   <unionValue>
 			      <booleanValue>true</booleanValue>
 			   </unionValue>
-			</XmlUnionsInputOutput>
+			</XmlUnionsResponse>
 			`),
 			ExpectResult: &XmlUnionsOutput{
 				UnionValue: &types.XmlUnionShapeMemberBooleanValue{Value: true},
@@ -289,13 +289,13 @@ func TestClient_XmlUnions_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlUnionsInputOutput>
+			Body: []byte(`<XmlUnionsResponse>
 			   <unionValue>
 			      <unionValue>
 			         <booleanValue>true</booleanValue>
 			      </unionValue>
 			   </unionValue>
-			</XmlUnionsInputOutput>
+			</XmlUnionsResponse>
 			`),
 			ExpectResult: &XmlUnionsOutput{
 				UnionValue: &types.XmlUnionShapeMemberUnionValue{Value: &types.XmlUnionShapeMemberBooleanValue{Value: true}},

@@ -60,7 +60,7 @@ func TestClient_RecursiveShapes_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<RecursiveShapesInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<RecursiveShapesRequest>
 			    <nested>
 			        <foo>Foo1</foo>
 			        <nested>
@@ -73,7 +73,7 @@ func TestClient_RecursiveShapes_awsRestxmlSerialize(t *testing.T) {
 			            </recursiveMember>
 			        </nested>
 			    </nested>
-			</RecursiveShapesInputOutput>
+			</RecursiveShapesRequest>
 			`))
 			},
 		},
@@ -157,7 +157,7 @@ func TestClient_RecursiveShapes_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<RecursiveShapesInputOutput>
+			Body: []byte(`<RecursiveShapesResponse>
 			    <nested>
 			        <foo>Foo1</foo>
 			        <nested>
@@ -170,7 +170,7 @@ func TestClient_RecursiveShapes_awsRestxmlDeserialize(t *testing.T) {
 			            </recursiveMember>
 			        </nested>
 			    </nested>
-			</RecursiveShapesInputOutput>
+			</RecursiveShapesResponse>
 			`),
 			ExpectResult: &RecursiveShapesOutput{
 				Nested: &types.RecursiveShapesInputOutputNested1{

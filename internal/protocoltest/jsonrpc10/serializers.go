@@ -709,6 +709,18 @@ func (m *awsAwsjson10_serializeOpSimpleScalarProperties) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentClientOptionalDefaults(v *types.ClientOptionalDefaults, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Member != nil {
+		ok := object.Key("member")
+		ok.Integer(*v.Member)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDefaults(v *types.Defaults, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -846,6 +858,77 @@ func awsAwsjson10_serializeDocumentDefaults(v *types.Defaults, value smithyjson.
 	if v.DefaultTimestamp != nil {
 		ok := object.Key("defaultTimestamp")
 		ok.Double(smithytime.FormatEpochSeconds(*v.DefaultTimestamp))
+	}
+
+	if v.EmptyBlob != nil {
+		ok := object.Key("emptyBlob")
+		ok.Base64EncodeBytes(v.EmptyBlob)
+	}
+
+	if v.EmptyString != nil {
+		ok := object.Key("emptyString")
+		ok.String(*v.EmptyString)
+	}
+
+	if v.FalseBoolean {
+		ok := object.Key("falseBoolean")
+		ok.Boolean(v.FalseBoolean)
+	}
+
+	if v.ZeroByte != 0 {
+		ok := object.Key("zeroByte")
+		ok.Byte(v.ZeroByte)
+	}
+
+	if v.ZeroDouble != 0 {
+		ok := object.Key("zeroDouble")
+		switch {
+		case math.IsNaN(v.ZeroDouble):
+			ok.String("NaN")
+
+		case math.IsInf(v.ZeroDouble, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.ZeroDouble, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.ZeroDouble)
+
+		}
+	}
+
+	if v.ZeroFloat != 0 {
+		ok := object.Key("zeroFloat")
+		switch {
+		case math.IsNaN(float64(v.ZeroFloat)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(v.ZeroFloat), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(v.ZeroFloat), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(v.ZeroFloat)
+
+		}
+	}
+
+	if v.ZeroInteger != 0 {
+		ok := object.Key("zeroInteger")
+		ok.Integer(v.ZeroInteger)
+	}
+
+	if v.ZeroLong != 0 {
+		ok := object.Key("zeroLong")
+		ok.Long(v.ZeroLong)
+	}
+
+	if v.ZeroShort != 0 {
+		ok := object.Key("zeroShort")
+		ok.Short(v.ZeroShort)
 	}
 
 	return nil
@@ -1120,11 +1203,23 @@ func awsAwsjson10_serializeOpDocumentOperationWithDefaultsInput(v *OperationWith
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientOptionalDefaults != nil {
+		ok := object.Key("clientOptionalDefaults")
+		if err := awsAwsjson10_serializeDocumentClientOptionalDefaults(v.ClientOptionalDefaults, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Defaults != nil {
 		ok := object.Key("defaults")
 		if err := awsAwsjson10_serializeDocumentDefaults(v.Defaults, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.OtherTopLevelDefault != 0 {
+		ok := object.Key("otherTopLevelDefault")
+		ok.Integer(v.OtherTopLevelDefault)
 	}
 
 	if v.TopLevelDefault != nil {

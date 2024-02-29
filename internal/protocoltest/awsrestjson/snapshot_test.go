@@ -122,6 +122,18 @@ func TestCheckSnapshot_DocumentType(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DocumentTypeAsMapValue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DocumentTypeAsMapValue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DocumentTypeAsMapValue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DocumentTypeAsPayload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DocumentTypeAsPayload(context.Background(), nil, func(o *Options) {
@@ -1218,6 +1230,18 @@ func TestUpdateSnapshot_DocumentType(t *testing.T) {
 	_, err := svc.DocumentType(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DocumentType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DocumentTypeAsMapValue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DocumentTypeAsMapValue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DocumentTypeAsMapValue")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

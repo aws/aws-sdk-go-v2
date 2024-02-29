@@ -121,6 +121,7 @@ final class AwsProtocolUtils {
                         .addTestName("AwsJson10ClientPopulatesDefaultValuesInInput")
                         .addTestName("AwsJson10ClientSkipsTopLevelDefaultValuesInInput")
                         .addTestName("AwsJson10ClientUsesExplicitlyProvidedMemberValuesOverDefaults")
+                        .addTestName("AwsJson10ClientUsesExplicitlyProvidedValuesInTopLevel")
                         .build(),
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))

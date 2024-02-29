@@ -49,9 +49,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <normal>2014-04-29T18:30:38Z</normal>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -68,9 +68,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <dateTime>2014-04-29T18:30:38Z</dateTime>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -88,9 +88,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -107,9 +107,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <epochSeconds>1398796238</epochSeconds>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -126,9 +126,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -145,9 +145,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -164,9 +164,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -250,9 +250,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <normal>2014-04-29T18:30:38Z</normal>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				Normal: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -265,9 +265,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <dateTime>2014-04-29T18:30:38Z</dateTime>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				DateTime: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -281,9 +281,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -296,9 +296,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <epochSeconds>1398796238</epochSeconds>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				EpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -311,9 +311,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -326,9 +326,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				HttpDate: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -341,9 +341,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),

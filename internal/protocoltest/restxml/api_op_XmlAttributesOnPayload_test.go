@@ -39,7 +39,7 @@ func TestClient_XmlAttributesOnPayload_awsRestxmlSerialize(t *testing.T) {
 		// Serializes XML attributes on the synthesized document
 		"XmlAttributesOnPayload": {
 			Params: &XmlAttributesOnPayloadInput{
-				Payload: &types.XmlAttributesInputOutput{
+				Payload: &types.XmlAttributesPayloadRequest{
 					Foo:  ptr.String("hi"),
 					Attr: ptr.String("test"),
 				},
@@ -52,9 +52,9 @@ func TestClient_XmlAttributesOnPayload_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlAttributesInputOutput test="test">
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlAttributesPayloadRequest test="test">
 			    <foo>hi</foo>
-			</XmlAttributesInputOutput>
+			</XmlAttributesPayloadRequest>
 			`))
 			},
 		},
@@ -138,12 +138,12 @@ func TestClient_XmlAttributesOnPayload_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlAttributesInputOutput test="test">
+			Body: []byte(`<XmlAttributesPayloadResponse test="test">
 			    <foo>hi</foo>
-			</XmlAttributesInputOutput>
+			</XmlAttributesPayloadResponse>
 			`),
 			ExpectResult: &XmlAttributesOnPayloadOutput{
-				Payload: &types.XmlAttributesInputOutput{
+				Payload: &types.XmlAttributesPayloadResponse{
 					Foo:  ptr.String("hi"),
 					Attr: ptr.String("test"),
 				},

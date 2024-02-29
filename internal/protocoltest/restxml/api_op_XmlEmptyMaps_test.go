@@ -48,9 +48,9 @@ func TestClient_XmlEmptyMaps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlMapsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlEmptyMapsRequest>
 			    <myMap></myMap>
-			</XmlMapsInputOutput>
+			</XmlEmptyMapsRequest>
 			`))
 			},
 		},
@@ -134,9 +134,9 @@ func TestClient_XmlEmptyMaps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlMapsInputOutput>
+			Body: []byte(`<XmlEmptyMapsResponse>
 			    <myMap></myMap>
-			</XmlMapsInputOutput>
+			</XmlEmptyMapsResponse>
 			`),
 			ExpectResult: &XmlEmptyMapsOutput{
 				MyMap: map[string]types.GreetingStruct{},
@@ -149,9 +149,9 @@ func TestClient_XmlEmptyMaps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlMapsInputOutput>
+			Body: []byte(`<XmlEmptyMapsResponse>
 			    <myMap/>
-			</XmlMapsInputOutput>
+			</XmlEmptyMapsResponse>
 			`),
 			ExpectResult: &XmlEmptyMapsOutput{
 				MyMap: map[string]types.GreetingStruct{},
