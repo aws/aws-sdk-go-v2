@@ -1,3 +1,13 @@
+# Release (2024-03-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.28.2](service/accessanalyzer/CHANGELOG.md#v1282-2024-03-01)
+  * **Documentation**: Fixed a typo in description field.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.40.2](service/autoscaling/CHANGELOG.md#v1402-2024-03-01)
+  * **Documentation**: With this release, Amazon EC2 Auto Scaling groups, EC2 Fleet, and Spot Fleet improve the default price protection behavior of attribute-based instance type selection of Spot Instances, to consistently select from a wide range of instance types.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.149.2](service/ec2/CHANGELOG.md#v11492-2024-03-01)
+  * **Documentation**: With this release, Amazon EC2 Auto Scaling groups, EC2 Fleet, and Spot Fleet improve the default price protection behavior of attribute-based instance type selection of Spot Instances, to consistently select from a wide range of instance types.
+
 # Release (2024-02-29)
 
 ## Module Highlights

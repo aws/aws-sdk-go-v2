@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/athena v1.40.1
-	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.40.1
+	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.40.2
 	github.com/aws/aws-sdk-go-v2/service/batch v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.46.1
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.35.1
@@ -32,7 +32,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.30.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.149.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.149.2
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.28.1

@@ -1,8 +1,0 @@
-{
-    "id": "77f31ee1-afb8-496e-8c00-07dcebf0ca0a",
-    "type": "documentation",
-    "description": "With this release, Amazon EC2 Auto Scaling groups, EC2 Fleet, and Spot Fleet improve the default price protection behavior of attribute-based instance type selection of Spot Instances, to consistently select from a wide range of instance types.",
-    "modules": [
-        "service/ec2"
-    ]
-}
