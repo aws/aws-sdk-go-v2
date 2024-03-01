@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Retrieves information about the specified finding.
+// Retrieves information about the specified finding. GetFinding and GetFindingV2
+// both use access-analyzer:GetFinding in the Action element of an IAM policy
+// statement. You must have permission to perform the access-analyzer:GetFinding
+// action.
 func (c *Client) GetFindingV2(ctx context.Context, params *GetFindingV2Input, optFns ...func(*Options)) (*GetFindingV2Output, error) {
 	if params == nil {
 		params = &GetFindingV2Input{}

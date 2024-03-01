@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the specified finding.
+// Retrieves information about the specified finding. GetFinding and GetFindingV2
+// both use access-analyzer:GetFinding in the Action element of an IAM policy
+// statement. You must have permission to perform the access-analyzer:GetFinding
+// action.
 func (c *Client) GetFinding(ctx context.Context, params *GetFindingInput, optFns ...func(*Options)) (*GetFindingOutput, error) {
 	if params == nil {
 		params = &GetFindingInput{}

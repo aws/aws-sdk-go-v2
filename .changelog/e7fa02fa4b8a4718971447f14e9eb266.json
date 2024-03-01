@@ -1,0 +1,8 @@
+{
+    "id": "e7fa02fa-4b8a-4718-9714-47f14e9eb266",
+    "type": "documentation",
+    "description": "Fixed a typo in description field.",
+    "modules": [
+        "service/accessanalyzer"
+    ]
+}

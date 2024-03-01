@@ -971,14 +971,16 @@ type InstanceRequirements struct {
 	// previous generation instance types that match your attributes. When Amazon EC2
 	// Auto Scaling selects instance types with your attributes, we will exclude
 	// instance types whose price exceeds your specified threshold. The parameter
-	// accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To
-	// indicate no price protection threshold, specify a high value, such as 999999 .
-	// If you set DesiredCapacityType to vcpu or memory-mib , the price protection
+	// accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. If
+	// you set DesiredCapacityType to vcpu or memory-mib , the price protection
 	// threshold is based on the per-vCPU or per-memory price instead of the per
 	// instance price. Only one of SpotMaxPricePercentageOverLowestPrice or
 	// MaxSpotPriceAsPercentageOfOptimalOnDemandPrice can be specified. If you don't
-	// specify either, then SpotMaxPricePercentageOverLowestPrice is used and the
-	// value for that parameter defaults to 100 .
+	// specify either, Amazon EC2 Auto Scaling will automatically apply optimal price
+	// protection to consistently select from a wide range of instance types. To
+	// indicate no price protection threshold for Spot Instances, meaning you want to
+	// consider all instance types that match your attributes, include one of these
+	// parameters and specify a high value, such as 999999 .
 	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *int32
 
 	// The minimum and maximum amount of memory per vCPU for an instance type, in GiB.
@@ -1022,12 +1024,16 @@ type InstanceRequirements struct {
 	// previous generation instance types that match your attributes. When Amazon EC2
 	// Auto Scaling selects instance types with your attributes, we will exclude
 	// instance types whose price exceeds your specified threshold. The parameter
-	// accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To
-	// turn off price protection, specify a high value, such as 999999 . If you set
-	// DesiredCapacityType to vcpu or memory-mib , the price protection threshold is
-	// based on the per-vCPU or per-memory price instead of the per instance price.
-	// Only one of SpotMaxPricePercentageOverLowestPrice or
-	// MaxSpotPriceAsPercentageOfOptimalOnDemandPrice can be specified. Default: 100
+	// accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. If
+	// you set DesiredCapacityType to vcpu or memory-mib , the price protection
+	// threshold is based on the per-vCPU or per-memory price instead of the per
+	// instance price. Only one of SpotMaxPricePercentageOverLowestPrice or
+	// MaxSpotPriceAsPercentageOfOptimalOnDemandPrice can be specified. If you don't
+	// specify either, Amazon EC2 Auto Scaling will automatically apply optimal price
+	// protection to consistently select from a wide range of instance types. To
+	// indicate no price protection threshold for Spot Instances, meaning you want to
+	// consider all instance types that match your attributes, include one of these
+	// parameters and specify a high value, such as 999999 .
 	SpotMaxPricePercentageOverLowestPrice *int32
 
 	// The minimum and maximum total local storage size for an instance type, in GB.

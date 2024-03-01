@@ -36,7 +36,7 @@ type CreateAnalyzerInput struct {
 	AnalyzerName *string
 
 	// The type of analyzer to create. Only ACCOUNT , ORGANIZATION ,
-	// ACCOUNT_UNUSED_ACCESS , and ORGANIZTAION_UNUSED_ACCESS analyzers are supported.
+	// ACCOUNT_UNUSED_ACCESS , and ORGANIZATION_UNUSED_ACCESS analyzers are supported.
 	// You can create only one analyzer per account per Region. You can create up to 5
 	// analyzers per organization per Region.
 	//

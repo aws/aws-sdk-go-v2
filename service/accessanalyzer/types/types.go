@@ -11,7 +11,8 @@ import (
 // policy.
 type Access struct {
 
-	// A list of actions for the access permissions.
+	// A list of actions for the access permissions. Any strings that can be used as
+	// an action in an IAM policy can be used in the list of actions to check.
 	//
 	// This member is required.
 	Actions []string
@@ -1610,7 +1611,8 @@ type S3BucketConfiguration struct {
 // new resource and you do not specify the Amazon S3 bucket policy, the access
 // preview assumes an directory bucket without a policy. To propose deletion of an
 // existing bucket policy, you can specify an empty string. For more information
-// about bucket policy limits, see Example bucket policies (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
+// about Amazon S3 directory bucket policies, see Example directory bucket
+// policies for S3 Express One Zone (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html)
 // .
 type S3ExpressDirectoryBucketConfiguration struct {
 
