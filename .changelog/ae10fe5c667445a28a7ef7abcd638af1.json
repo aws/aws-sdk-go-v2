@@ -1,0 +1,8 @@
+{
+    "id": "ae10fe5c-6674-45a2-8a7e-f7abcd638af1",
+    "type": "bugfix",
+    "description": "Correct a typo in internal AddAsIsPresigningMiddleware API.",
+    "modules": [
+        "service/internal/presigned-url"
+    ]
+}
