@@ -1,0 +1,8 @@
+{
+    "id": "cf6b73af-a1c3-4ff1-9ea1-31f6ded22a5b",
+    "type": "feature",
+    "description": "Add http.SameSite config in CookieOptions.",
+    "modules": [
+        "feature/cloudfront/sign"
+    ]
+}
