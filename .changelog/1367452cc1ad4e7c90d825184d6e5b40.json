@@ -1,0 +1,8 @@
+{
+    "id": "1367452c-c1ad-4e7c-90d8-25184d6e5b40",
+    "type": "feature",
+    "description": "Documentation update for AWS Organizations",
+    "modules": [
+        "service/organizations"
+    ]
+}

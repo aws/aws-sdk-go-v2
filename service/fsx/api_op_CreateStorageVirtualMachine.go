@@ -41,7 +41,7 @@ type CreateStorageVirtualMachineInput struct {
 
 	// Describes the self-managed Microsoft Active Directory to which you want to join
 	// the SVM. Joining an Active Directory provides user authentication and access
-	// control for SMB clients, including Microsoft Windows and macOS client accessing
+	// control for SMB clients, including Microsoft Windows and macOS clients accessing
 	// the file system.
 	ActiveDirectoryConfiguration *types.CreateSvmActiveDirectoryConfiguration
 
@@ -55,11 +55,11 @@ type CreateStorageVirtualMachineInput struct {
 	//   - UNIX if the file system is managed by a UNIX administrator, the majority of
 	//   users are NFS clients, and an application accessing the data uses a UNIX user as
 	//   the service account.
-	//   - NTFS if the file system is managed by a Windows administrator, the majority
-	//   of users are SMB clients, and an application accessing the data uses a Windows
-	//   user as the service account.
-	//   - MIXED if the file system is managed by both UNIX and Windows administrators
-	//   and users consist of both NFS and SMB clients.
+	//   - NTFS if the file system is managed by a Microsoft Windows administrator, the
+	//   majority of users are SMB clients, and an application accessing the data uses a
+	//   Microsoft Windows user as the service account.
+	//   - MIXED This is an advanced setting. For more information, see Volume
+	//   security style in the Amazon FSx for NetApp ONTAP User Guide.
 	RootVolumeSecurityStyle types.StorageVirtualMachineRootVolumeSecurityStyle
 
 	// The password to use when managing the SVM using the NetApp ONTAP CLI or REST

@@ -55,7 +55,7 @@ type CreateStackInput struct {
 	//   an InsufficientCapabilities error. If your stack template contains these
 	//   resources, we recommend that you review all permissions associated with them and
 	//   edit their permissions if necessary.
-	//   - AWS::IAM::AccessKey (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
+	//   - AWS::IAM::AccessKey AWS::IAM::AccessKey (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
 	//   - AWS::IAM::Group (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
 	//   - AWS::IAM::InstanceProfile (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
 	//   - AWS::IAM::Policy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html)
@@ -175,8 +175,8 @@ type CreateStackInput struct {
 
 	// Location of a file containing the stack policy. The URL must point to a policy
 	// (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack.
-	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
-	// not both.
+	// The location for an Amazon S3 bucket must start with https:// . You can specify
+	// either the StackPolicyBody or the StackPolicyURL parameter, but not both.
 	StackPolicyURL *string
 
 	// Key-value pairs to associate with this stack. CloudFormation also propagates
@@ -193,8 +193,9 @@ type CreateStackInput struct {
 	// Location of file containing the template body. The URL must point to a template
 	// (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems
 	// Manager document. For more information, go to the Template anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the CloudFormation User Guide. Conditional: You must specify either the
-	// TemplateBody or the TemplateURL parameter, but not both.
+	// in the CloudFormation User Guide. The location for an Amazon S3 bucket must
+	// start with https:// . Conditional: You must specify either the TemplateBody or
+	// the TemplateURL parameter, but not both.
 	TemplateURL *string
 
 	// The amount of time that can pass before the stack status becomes CREATE_FAILED ;

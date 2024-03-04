@@ -213,8 +213,9 @@ type CreateChangeSetInput struct {
 	// The location of the file that contains the revised template. The URL must point
 	// to a template (max size: 460,800 bytes) that's located in an Amazon S3 bucket or
 	// a Systems Manager document. CloudFormation generates the change set by comparing
-	// this template with the stack that you specified. Conditional: You must specify
-	// only TemplateBody or TemplateURL .
+	// this template with the stack that you specified. The location for an Amazon S3
+	// bucket must start with https:// . Conditional: You must specify only
+	// TemplateBody or TemplateURL .
 	TemplateURL *string
 
 	// Whether to reuse the template that's associated with the stack to create the

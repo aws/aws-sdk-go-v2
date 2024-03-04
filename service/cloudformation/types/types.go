@@ -651,7 +651,7 @@ type ResourceDefinition struct {
 	ResourceIdentifier map[string]string
 
 	// The type of the resource, such as AWS::DynamoDB::Table . For the list of
-	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html)
+	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html)
 	// in the CloudFormation User Guide
 	//
 	// This member is required.
@@ -691,7 +691,7 @@ type ResourceDetail struct {
 	ResourceStatusReason *string
 
 	// The type of the resource, such as AWS::DynamoDB::Table . For the list of
-	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html)
+	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html)
 	// In the CloudFormation User Guide
 	ResourceType *string
 
@@ -883,7 +883,7 @@ type ScannedResource struct {
 	ResourceIdentifier map[string]string
 
 	// The type of the resource, such as AWS::DynamoDB::Table . For the list of
-	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html)
+	// supported resources, see Resource type support (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html)
 	// In the CloudFormation User Guide
 	ResourceType *string
 
@@ -908,8 +908,8 @@ type ScannedResourceIdentifier struct {
 	ResourceIdentifier map[string]string
 
 	// The type of the resource, such as AWS::DynamoDB::Table . For the list of
-	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-supported-resources.html)
-	// In the CloudFormation User Guide
+	// supported resources, see IaC generator supported resource types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html)
+	// In the CloudFormation User Guide.
 	//
 	// This member is required.
 	ResourceType *string
@@ -946,6 +946,14 @@ type Stack struct {
 
 	// A user-defined description associated with the stack.
 	Description *string
+
+	// The detailed status of the resource or stack. If CONFIGURATION_COMPLETE is
+	// present, the resource or resource configuration phase has completed and the
+	// stabilization of the resources is in progress. The stack sets
+	// CONFIGURATION_COMPLETE when all of the resources in the stack have reached that
+	// event. For more information, see CloudFormation stack deployment (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html)
+	// in the CloudFormation User Guide.
+	DetailedStatus DetailedStatus
 
 	// Boolean to enable or disable rollback on stack creation failures:
 	//   - true : disable rollback.
@@ -1112,6 +1120,17 @@ type StackEvent struct {
 	// Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002 .
 	ClientRequestToken *string
 
+	// An optional field containing information about the detailed status of the stack
+	// event.
+	//   - CONFIGURATION_COMPLETE - all of the resources in the stack have reached that
+	//   event. For more information, see CloudFormation stack deployment (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html)
+	//   in the CloudFormation User Guide.
+	//
+	//   - VALIDATION_FAILED - template validation failed because of invalid properties
+	//   in the template. The ResourceStatusReason field shows what properties are
+	//   defined incorrectly.
+	DetailedStatus DetailedStatus
+
 	// Specify the hook failure mode for non-compliant resources in the followings
 	// ways.
 	//   - FAIL Stops provisioning resources.
@@ -1217,7 +1236,11 @@ type StackInstance struct {
 	//   in an unstable state. Stacks in this state are excluded from further
 	//   UpdateStackSet operations. You might need to perform a DeleteStackInstances
 	//   operation, with RetainStacks set to true , to delete the stack instance, and
-	//   then delete the stack manually.
+	//   then delete the stack manually. INOPERABLE can be returned here when the cause
+	//   is a failed import. If it's due to a failed import, the operation can be retried
+	//   once the failures are fixed. To see if this is due to a failed import, look at
+	//   the DetailedStatus member in the StackInstanceSummary member that is a peer to
+	//   this Status member.
 	//   - OUTDATED : The stack isn't currently up to date with the stack set because:
 	//   - The associated stack failed during a CreateStackSet or UpdateStackSet
 	//   operation.
@@ -1241,6 +1264,11 @@ type StackInstanceComprehensiveStatus struct {
 	//   because the failure tolerance of the stack set operation has been exceeded.
 	//   - FAILED : The operation in the specified account and Region failed. If the
 	//   stack set operation fails in enough accounts within a Region, the failure
+	//   tolerance for the stack set operation as a whole might be exceeded.
+	//   - FAILED_IMPORT : The import of the stack instance in the specified account
+	//   and Region failed and left the stack in an unstable state. Once the issues
+	//   causing the failure are fixed, the import operation can be retried. If enough
+	//   stack set operations fail in enough accounts within a Region, the failure
 	//   tolerance for the stack set operation as a whole might be exceeded.
 	//   - INOPERABLE : A DeleteStackInstances operation has failed and left the stack
 	//   in an unstable state. Stacks in this state are excluded from further
@@ -1383,7 +1411,11 @@ type StackInstanceSummary struct {
 	//   in an unstable state. Stacks in this state are excluded from further
 	//   UpdateStackSet operations. You might need to perform a DeleteStackInstances
 	//   operation, with RetainStacks set to true , to delete the stack instance, and
-	//   then delete the stack manually.
+	//   then delete the stack manually. INOPERABLE can be returned here when the cause
+	//   is a failed import. If it's due to a failed import, the operation can be retried
+	//   once the failures are fixed. To see if this is due to a failed import, call the
+	//   DescribeStackInstance API operation, look at the DetailedStatus member
+	//   returned in the StackInstanceSummary member.
 	//   - OUTDATED : The stack isn't currently up to date with the stack set because:
 	//   - The associated stack failed during a CreateStackSet or UpdateStackSet
 	//   operation.
@@ -2396,10 +2428,11 @@ type TypeConfigurationDetails struct {
 	LastUpdated *time.Time
 
 	// The Amazon Resource Name (ARN) for the extension, in this account and Region.
-	// For public extensions, this will be the ARN assigned when you activate the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
-	// in this account and Region. For private extensions, this will be the ARN
-	// assigned when you register the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html)
-	// in this account and Region.
+	// For public extensions, this will be the ARN assigned when you call the
+	// ActivateType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
+	// API operation in this account and Region. For private extensions, this will be
+	// the ARN assigned when you call the RegisterType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html)
+	// API operation in this account and Region.
 	TypeArn *string
 
 	// The name of the extension.
@@ -2415,10 +2448,11 @@ type TypeConfigurationIdentifier struct {
 	Type ThirdPartyType
 
 	// The Amazon Resource Name (ARN) for the extension, in this account and Region.
-	// For public extensions, this will be the ARN assigned when you activate the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
-	// in this account and Region. For private extensions, this will be the ARN
-	// assigned when you register the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html)
-	// in this account and Region.
+	// For public extensions, this will be the ARN assigned when you call the
+	// ActivateType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
+	// API operation in this account and Region. For private extensions, this will be
+	// the ARN assigned when you call the RegisterType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html)
+	// API operation in this account and Region.
 	TypeArn *string
 
 	// The alias specified for this configuration, if one was specified when the
@@ -2538,10 +2572,10 @@ type TypeSummary struct {
 	// The Amazon Resource Name (ARN) of the extension.
 	TypeArn *string
 
-	// The name of the extension. If you specified a TypeNameAlias when you activate
-	// this extension (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
-	// in your account and Region, CloudFormation considers that alias as the type
-	// name.
+	// The name of the extension. If you specified a TypeNameAlias when you call the
+	// ActivateType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
+	// API operation in your account and Region, CloudFormation considers that alias as
+	// the type name.
 	TypeName *string
 
 	noSmithyDocumentSerde

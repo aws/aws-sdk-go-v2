@@ -42,8 +42,9 @@ type SetStackPolicyInput struct {
 
 	// Location of a file containing the stack policy. The URL must point to a policy
 	// (maximum size: 16 KB) located in an Amazon S3 bucket in the same Amazon Web
-	// Services Region as the stack. You can specify either the StackPolicyBody or the
-	// StackPolicyURL parameter, but not both.
+	// Services Region as the stack. The location for an Amazon S3 bucket must start
+	// with https:// . You can specify either the StackPolicyBody or the StackPolicyURL
+	// parameter, but not both.
 	StackPolicyURL *string
 
 	noSmithyDocumentSerde

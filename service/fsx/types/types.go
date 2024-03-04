@@ -409,8 +409,8 @@ type CompletionReport struct {
 	noSmithyDocumentSerde
 }
 
-// Used to specify the configuration options for a volume's storage aggregate or
-// aggregates.
+// Used to specify the configuration options for an FSx for ONTAP volume's storage
+// aggregate or aggregates.
 type CreateAggregateConfiguration struct {
 
 	// Used to specify the names of aggregates on which the volume will be created.
@@ -659,13 +659,14 @@ type CreateFileSystemOntapConfiguration struct {
 	// administer your file system using the NetApp ONTAP CLI and REST API.
 	FsxAdminPassword *string
 
-	// Specifies how many high-availability (HA) pairs the file system will have. The
-	// default value is 1. The value of this property affects the values of
-	// StorageCapacity , Iops , and ThroughputCapacity . For more information, see
-	// High-availability (HA) pairs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html)
+	// Specifies how many high-availability (HA) pairs of file servers will power your
+	// file system. Scale-up file systems are powered by 1 HA pair. The default value
+	// is 1. FSx for ONTAP scale-out file systems are powered by up to 12 HA pairs. The
+	// value of this property affects the values of StorageCapacity , Iops , and
+	// ThroughputCapacity . For more information, see High-availability (HA) pairs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html)
 	// in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code
 	// 400 (Bad Request) for the following conditions:
-	//   - The value of HAPairs is less than 1 or greater than 6.
+	//   - The value of HAPairs is less than 1 or greater than 12.
 	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
 	//   SINGLE_AZ_1 or MULTI_AZ_1 .
 	HAPairs *int32
@@ -678,7 +679,11 @@ type CreateFileSystemOntapConfiguration struct {
 	// rules for routing traffic to the correct file server. You should specify all
 	// virtual private cloud (VPC) route tables associated with the subnets in which
 	// your clients are located. By default, Amazon FSx selects your VPC's default
-	// route table.
+	// route table. Amazon FSx manages these route tables for Multi-AZ file systems
+	// using tag-based authentication. These route tables are tagged with Key:
+	// AmazonFSx; Value: ManagedByAmazonFSx . When creating FSx for ONTAP Multi-AZ file
+	// systems using CloudFormation we recommend that you add the Key: AmazonFSx;
+	// Value: ManagedByAmazonFSx tag manually.
 	RouteTableIds []string
 
 	// Sets the throughput capacity for the file system that you're creating in
@@ -693,18 +698,19 @@ type CreateFileSystemOntapConfiguration struct {
 	ThroughputCapacity *int32
 
 	// Use to choose the throughput capacity per HA pair, rather than the total
-	// throughput for the file system. This field and ThroughputCapacity cannot be
-	// defined in the same API call, but one is required. This field and
-	// ThroughputCapacity are the same for file systems with one HA pair.
-	//   - For SINGLE_AZ_1 and MULTI_AZ_1 , valid values are 128, 256, 512, 1024, 2048,
-	//   or 4096 MBps.
-	//   - For SINGLE_AZ_2 , valid values are 3072 or 6144 MBps.
+	// throughput for the file system. You can define either the
+	// ThroughputCapacityPerHAPair or the ThroughputCapacity when creating a file
+	// system, but not both. This field and ThroughputCapacity are the same for
+	// scale-up file systems powered by one HA pair.
+	//   - For SINGLE_AZ_1 and MULTI_AZ_1 file systems, valid values are 128, 256, 512,
+	//   1024, 2048, or 4096 MBps.
+	//   - For SINGLE_AZ_2 file systems, valid values are 3072 or 6144 MBps.
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value for file systems with one HA pair.
 	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
-	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).
+	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 
@@ -966,7 +972,7 @@ type CreateOntapVolumeConfiguration struct {
 	// Specifies the security style for the volume. If a volume's security style is
 	// not specified, it is automatically set to the root volume's security style. The
 	// security style determines the type of permissions that FSx for ONTAP uses to
-	// control data access. For more information, see Volume security style (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-security-style)
+	// control data access. For more information, see Volume security style (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style)
 	// in the Amazon FSx for NetApp ONTAP User Guide. Specify one of the following
 	// values:
 	//   - UNIX if the file system is managed by a UNIX administrator, the majority of
@@ -975,14 +981,18 @@ type CreateOntapVolumeConfiguration struct {
 	//   - NTFS if the file system is managed by a Windows administrator, the majority
 	//   of users are SMB clients, and an application accessing the data uses a Windows
 	//   user as the service account.
-	//   - MIXED if the file system is managed by both UNIX and Windows administrators
-	//   and users consist of both NFS and SMB clients.
+	//   - MIXED This is an advanced setting. For more information, see the topic What
+	//   the security styles and their effects are (https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html)
+	//   in the NetApp Documentation Center.
+	// For more information, see Volume security style (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style.html)
+	// in the FSx for ONTAP User Guide.
 	SecurityStyle SecurityStyle
 
-	// The configured size of the volume, in bytes.
+	// Specifies the configured size of the volume, in bytes.
 	SizeInBytes *int64
 
-	// Specifies the size of the volume, in megabytes (MB), that you are creating.
+	// Use SizeInBytes instead. Specifies the size of the volume, in megabytes (MB),
+	// that you are creating.
 	//
 	// Deprecated: This property is deprecated, use SizeInBytes instead
 	SizeInMegabytes *int32
@@ -1006,8 +1016,9 @@ type CreateOntapVolumeConfiguration struct {
 	SnapshotPolicy *string
 
 	// Set to true to enable deduplication, compression, and compaction storage
-	// efficiency features on the volume, or set to false to disable them. This
-	// parameter is required.
+	// efficiency features on the volume, or set to false to disable them.
+	// StorageEfficiencyEnabled is required when creating a RW volume ( OntapVolumeType
+	// set to RW ).
 	StorageEfficiencyEnabled *bool
 
 	// Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx
@@ -1027,9 +1038,10 @@ type CreateOntapVolumeConfiguration struct {
 	//   being moved to the capacity pool tier.
 	TieringPolicy *TieringPolicy
 
-	// Use to specify the style of an ONTAP volume. For more information about
-	// FlexVols and FlexGroups, see Volume types (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types.html)
-	// in Amazon FSx for NetApp ONTAP User Guide.
+	// Use to specify the style of an ONTAP volume. FSx for ONTAP offers two styles of
+	// volumes that you can use for different purposes, FlexVol and FlexGroup volumes.
+	// For more information, see Volume styles (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-styles.html)
+	// in the Amazon FSx for NetApp ONTAP User Guide.
 	VolumeStyle VolumeStyle
 
 	noSmithyDocumentSerde
@@ -1139,7 +1151,7 @@ type CreateOpenZFSVolumeConfiguration struct {
 	// in the Amazon FSx for OpenZFS User Guide.
 	StorageCapacityReservationGiB *int32
 
-	// An object specifying how much storage users or groups can use on the volume.
+	// Configures how much storage users and groups can use on the volume.
 	UserAndGroupQuotas []OpenZFSUserOrGroupQuota
 
 	noSmithyDocumentSerde
@@ -1203,7 +1215,7 @@ type CreateSnaplockConfiguration struct {
 
 // The configuration that Amazon FSx uses to join the ONTAP storage virtual
 // machine (SVM) to your self-managed (including on-premises) Microsoft Active
-// Directory (AD) directory.
+// Directory directory.
 type CreateSvmActiveDirectoryConfiguration struct {
 
 	// The NetBIOS name of the Active Directory computer object that will be created
@@ -1768,7 +1780,7 @@ type DiskIopsConfiguration struct {
 	Iops *int64
 
 	// Specifies whether the file system is using the AUTOMATIC setting of SSD IOPS of
-	// 3 IOPS per GB of storage capacity, , or if it using a USER_PROVISIONED value.
+	// 3 IOPS per GB of storage capacity, or if it using a USER_PROVISIONED value.
 	Mode DiskIopsConfigurationMode
 
 	noSmithyDocumentSerde
@@ -2192,8 +2204,8 @@ type FileSystem struct {
 	SubnetIds []string
 
 	// The tags to associate with the file system. For more information, see Tagging
-	// your Amazon EC2 resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
-	// in the Amazon EC2 User Guide.
+	// your Amazon FSx resources (https://docs.aws.amazon.com/fsx/latest/LustreGuide/tag-resources.html)
+	// in the Amazon FSx for Lustre User Guide.
 	Tags []Tag
 
 	// The ID of the primary virtual private cloud (VPC) for the file system.
@@ -2529,7 +2541,7 @@ type OntapFileSystemConfiguration struct {
 	// High-availability (HA) pairs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html)
 	// in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code
 	// 400 (Bad Request) for the following conditions:
-	//   - The value of HAPairs is less than 1 or greater than 6.
+	//   - The value of HAPairs is less than 1 or greater than 12.
 	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
 	//   SINGLE_AZ_1 or MULTI_AZ_1 .
 	HAPairs *int32
@@ -2560,7 +2572,7 @@ type OntapFileSystemConfiguration struct {
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value.
 	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
-	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).
+	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 
@@ -2863,20 +2875,22 @@ type OpenZFSOriginSnapshotConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for how much storage a user or group can use on the volume.
+// Used to configure quotas that define how much storage a user or group can use
+// on an FSx for OpenZFS volume. For more information, see Volume properties (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties)
+// in the FSx for OpenZFS User Guide.
 type OpenZFSUserOrGroupQuota struct {
 
-	// The ID of the user or group.
+	// The ID of the user or group that the quota applies to.
 	//
 	// This member is required.
 	Id *int32
 
-	// The amount of storage that the user or group can use in gibibytes (GiB).
+	// The user or group's storage quota, in gibibytes (GiB).
 	//
 	// This member is required.
 	StorageCapacityQuotaGiB *int32
 
-	// A value that specifies whether the quota applies to a user or group.
+	// Specifies whether the quota applies to a user or group.
 	//
 	// This member is required.
 	Type OpenZFSQuotaType
@@ -3657,7 +3671,7 @@ type UpdateFileSystemOntapConfiguration struct {
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value for file systems with one HA pair.
 	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
-	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).
+	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 

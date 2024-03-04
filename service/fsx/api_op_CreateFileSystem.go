@@ -79,8 +79,8 @@ type CreateFileSystemInput struct {
 	//   increments of 3600 GiB.
 	// FSx for ONTAP file systems - The amount of storage capacity that you can
 	// configure depends on the value of the HAPairs property. The minimum value is
-	// calculated as 1,024 * HAPairs and the maxium is calculated as 524,288 * HAPairs
-	// .. FSx for OpenZFS file systems - The amount of storage capacity that you can
+	// calculated as 1,024 * HAPairs and the maximum is calculated as 524,288 * HAPairs
+	// . FSx for OpenZFS file systems - The amount of storage capacity that you can
 	// configure is from 64 GiB up to 524,288 GiB (512 TiB). FSx for Windows File
 	// Server file systems - The amount of storage capacity that you can configure
 	// depends on the value that you set for StorageType as follows:
@@ -152,7 +152,9 @@ type CreateFileSystemInput struct {
 
 	// A list of IDs specifying the security groups to apply to all network interfaces
 	// created for file system access. This list isn't returned in later requests to
-	// describe the file system.
+	// describe the file system. You must specify a security group if you are creating
+	// a Multi-AZ FSx for ONTAP file system in a VPC subnet that has been shared with
+	// you.
 	SecurityGroupIds []string
 
 	// Sets the storage type for the file system that you're creating. Valid values

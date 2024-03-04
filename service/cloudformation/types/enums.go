@@ -274,6 +274,24 @@ func (DeprecatedStatus) Values() []DeprecatedStatus {
 	}
 }
 
+type DetailedStatus string
+
+// Enum values for DetailedStatus
+const (
+	DetailedStatusConfigurationComplete DetailedStatus = "CONFIGURATION_COMPLETE"
+	DetailedStatusValidationFailed      DetailedStatus = "VALIDATION_FAILED"
+)
+
+// Values returns all known values for DetailedStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DetailedStatus) Values() []DetailedStatus {
+	return []DetailedStatus{
+		"CONFIGURATION_COMPLETE",
+		"VALIDATION_FAILED",
+	}
+}
+
 type DifferenceType string
 
 // Enum values for DifferenceType
@@ -1004,6 +1022,7 @@ const (
 	StackInstanceDetailedStatusCancelled               StackInstanceDetailedStatus = "CANCELLED"
 	StackInstanceDetailedStatusInoperable              StackInstanceDetailedStatus = "INOPERABLE"
 	StackInstanceDetailedStatusSkippedSuspendedAccount StackInstanceDetailedStatus = "SKIPPED_SUSPENDED_ACCOUNT"
+	StackInstanceDetailedStatusFailedImport            StackInstanceDetailedStatus = "FAILED_IMPORT"
 )
 
 // Values returns all known values for StackInstanceDetailedStatus. Note that this
@@ -1018,6 +1037,7 @@ func (StackInstanceDetailedStatus) Values() []StackInstanceDetailedStatus {
 		"CANCELLED",
 		"INOPERABLE",
 		"SKIPPED_SUSPENDED_ACCOUNT",
+		"FAILED_IMPORT",
 	}
 }
 

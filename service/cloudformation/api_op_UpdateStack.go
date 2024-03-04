@@ -165,8 +165,9 @@ type UpdateStackInput struct {
 
 	// Location of a file containing the temporary overriding stack policy. The URL
 	// must point to a policy (max size: 16KB) located in an S3 bucket in the same
-	// Region as the stack. You can specify either the StackPolicyDuringUpdateBody or
-	// the StackPolicyDuringUpdateURL parameter, but not both. If you want to update
+	// Region as the stack. The location for an Amazon S3 bucket must start with
+	// https:// . You can specify either the StackPolicyDuringUpdateBody or the
+	// StackPolicyDuringUpdateURL parameter, but not both. If you want to update
 	// protected resources, specify a temporary overriding stack policy during this
 	// update. If you don't specify a stack policy, the current policy that is
 	// associated with the stack will be used.
@@ -174,10 +175,11 @@ type UpdateStackInput struct {
 
 	// Location of a file containing the updated stack policy. The URL must point to a
 	// policy (max size: 16KB) located in an S3 bucket in the same Region as the stack.
-	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
-	// not both. You might update the stack policy, for example, in order to protect a
-	// new resource that you created during a stack update. If you don't specify a
-	// stack policy, the current policy that is associated with the stack is unchanged.
+	// The location for an Amazon S3 bucket must start with https:// . You can specify
+	// either the StackPolicyBody or the StackPolicyURL parameter, but not both. You
+	// might update the stack policy, for example, in order to protect a new resource
+	// that you created during a stack update. If you don't specify a stack policy, the
+	// current policy that is associated with the stack is unchanged.
 	StackPolicyURL *string
 
 	// Key-value pairs to associate with this stack. CloudFormation also propagates
@@ -197,9 +199,9 @@ type UpdateStackInput struct {
 	// Location of file containing the template body. The URL must point to a template
 	// that's located in an Amazon S3 bucket or a Systems Manager document. For more
 	// information, go to Template Anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the CloudFormation User Guide. Conditional: You must specify only one of the
-	// following parameters: TemplateBody , TemplateURL , or set the
-	// UsePreviousTemplate to true .
+	// in the CloudFormation User Guide. The location for an Amazon S3 bucket must
+	// start with https:// . Conditional: You must specify only one of the following
+	// parameters: TemplateBody , TemplateURL , or set the UsePreviousTemplate to true .
 	TemplateURL *string
 
 	// Reuse the existing template that is associated with the stack that you are

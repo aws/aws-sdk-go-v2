@@ -1,0 +1,8 @@
+{
+    "id": "c211fa8f-ea71-4bde-b522-d50514c4e81f",
+    "type": "feature",
+    "description": "Add DetailedStatus field to DescribeStackEvents and DescribeStacks APIs",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

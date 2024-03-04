@@ -15825,6 +15825,19 @@ func awsAwsquery_deserializeDocumentStack(v **types.Stack, decoder smithyxml.Nod
 				sv.Description = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DetailedStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DetailedStatus = types.DetailedStatus(xtv)
+			}
+
 		case strings.EqualFold("DisableRollback", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -16213,6 +16226,19 @@ func awsAwsquery_deserializeDocumentStackEvent(v **types.StackEvent, decoder smi
 			{
 				xtv := string(val)
 				sv.ClientRequestToken = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DetailedStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DetailedStatus = types.DetailedStatus(xtv)
 			}
 
 		case strings.EqualFold("EventId", t.Name.Local):
