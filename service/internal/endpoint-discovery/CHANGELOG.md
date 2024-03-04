@@ -1,3 +1,7 @@
+# v1.9.3 (2024-03-04)
+
+* **Bug Fix**: Fix misaligned struct member used in atomic operation. This fixes a panic caused by attempting to atomically access a struct member which is not 64-bit aligned when running on 32-bit arch, due to the smaller sync.Map struct.
+
 # v1.9.2 (2024-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

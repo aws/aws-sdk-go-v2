@@ -1,3 +1,7 @@
+# v1.43.0 (2024-03-04)
+
+* **Feature**: Added support for creating FSx for NetApp ONTAP file systems with up to 12 HA pairs, delivering up to 72 GB/s of read throughput and 12 GB/s of write throughput.
+
 # v1.42.1 (2024-02-23)
 
 * **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.

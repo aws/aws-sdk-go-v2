@@ -1,3 +1,36 @@
+# Release (2024-03-04)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`: [v1.7.0](feature/cloudfront/sign/CHANGELOG.md#v170-2024-03-04)
+  * **Feature**: Add http.SameSite config in CookieOptions.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.47.0](service/cloudformation/CHANGELOG.md#v1470-2024-03-04)
+  * **Feature**: Add DetailedStatus field to DescribeStackEvents and DescribeStacks APIs
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.33.2](service/docdb/CHANGELOG.md#v1332-2024-03-04)
+  * **Bug Fix**: Update internal/presigned-url dependency for corrected API name.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.149.3](service/ec2/CHANGELOG.md#v11493-2024-03-04)
+  * **Bug Fix**: Update internal/presigned-url dependency for corrected API name.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.43.0](service/fsx/CHANGELOG.md#v1430-2024-03-04)
+  * **Feature**: Added support for creating FSx for NetApp ONTAP file systems with up to 12 HA pairs, delivering up to 72 GB/s of read throughput and 12 GB/s of write throughput.
+* `github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery`: [v1.9.3](service/internal/endpoint-discovery/CHANGELOG.md#v193-2024-03-04)
+  * **Bug Fix**: Fix misaligned struct member used in atomic operation. This fixes a panic caused by attempting to atomically access a struct member which is not 64-bit aligned when running on 32-bit arch, due to the smaller sync.Map struct.
+* `github.com/aws/aws-sdk-go-v2/service/internal/presigned-url`: [v1.11.3](service/internal/presigned-url/CHANGELOG.md#v1113-2024-03-04)
+  * **Bug Fix**: Correct a typo in internal AddAsIsPresigningMiddleware API.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.31.2](service/neptune/CHANGELOG.md#v1312-2024-03-04)
+  * **Bug Fix**: Update internal/presigned-url dependency for corrected API name.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.26.0](service/organizations/CHANGELOG.md#v1260-2024-03-04)
+  * **Feature**: Documentation update for AWS Organizations
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.39.2](service/polly/CHANGELOG.md#v1392-2024-03-04)
+  * **Bug Fix**: Update internal/presigned-url dependency for corrected API name.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.74.1](service/rds/CHANGELOG.md#v1741-2024-03-04)
+  * **Bug Fix**: Update internal/presigned-url dependency for corrected API name.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.51.2](service/s3/CHANGELOG.md#v1512-2024-03-04)
+  * **Bug Fix**: Update internal/presigned-url dependency for corrected API name.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.28.2](service/sts/CHANGELOG.md#v1282-2024-03-04)
+  * **Bug Fix**: Update internal/presigned-url dependency for corrected API name.
+
 # Release (2024-03-01)
 
 ## Module Highlights

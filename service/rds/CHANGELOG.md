@@ -1,3 +1,8 @@
+# v1.74.1 (2024-03-04)
+
+* **Bug Fix**: Update internal/presigned-url dependency for corrected API name.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.74.0 (2024-02-26)
 
 * **Feature**: This release adds support for gp3 data volumes for Multi-AZ DB Clusters.

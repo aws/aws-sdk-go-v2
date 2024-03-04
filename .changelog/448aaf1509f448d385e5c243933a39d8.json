@@ -1,8 +1,0 @@
-{
-    "id": "448aaf15-09f4-48d3-85e5-c243933a39d8",
-    "type": "bugfix",
-    "description": "Fix misaligned struct member used in atomic operation. This fixes a panic caused by attempting to atomically access a struct member which is not 64-bit aligned when running on 32-bit arch, due to the smaller sync.Map struct.",
-    "modules": [
-        "service/internal/endpoint-discovery"
-    ]
-}

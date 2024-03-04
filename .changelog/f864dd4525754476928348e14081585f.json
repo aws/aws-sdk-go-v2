@@ -1,8 +1,0 @@
-{
-    "id": "f864dd45-2575-4476-9283-48e14081585f",
-    "type": "feature",
-    "description": "Added support for creating FSx for NetApp ONTAP file systems with up to 12 HA pairs, delivering up to 72 GB/s of read throughput and 12 GB/s of write throughput.",
-    "modules": [
-        "service/fsx"
-    ]
-}

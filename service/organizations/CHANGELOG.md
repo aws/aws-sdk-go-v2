@@ -1,3 +1,7 @@
+# v1.26.0 (2024-03-04)
+
+* **Feature**: Documentation update for AWS Organizations
+
 # v1.25.1 (2024-02-23)
 
 * **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.

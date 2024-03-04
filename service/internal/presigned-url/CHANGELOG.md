@@ -1,3 +1,7 @@
+# v1.11.3 (2024-03-04)
+
+* **Bug Fix**: Correct a typo in internal AddAsIsPresigningMiddleware API.
+
 # v1.11.2 (2024-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.7.0 (2024-03-04)
+
+* **Feature**: Add http.SameSite config in CookieOptions.
+
 # v1.6.2 (2024-02-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions
