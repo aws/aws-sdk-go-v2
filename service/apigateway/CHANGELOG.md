@@ -1,3 +1,7 @@
+# v1.23.3 (2024-03-05)
+
+* **Documentation**: Documentation updates for Amazon API Gateway
+
 # v1.23.2 (2024-02-26)
 
 * **Documentation**: Documentation updates for Amazon API Gateway.

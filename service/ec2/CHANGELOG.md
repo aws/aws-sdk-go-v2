@@ -1,3 +1,7 @@
+# v1.149.4 (2024-03-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.149.3 (2024-03-04)
 
 * **Bug Fix**: Update internal/presigned-url dependency for corrected API name.

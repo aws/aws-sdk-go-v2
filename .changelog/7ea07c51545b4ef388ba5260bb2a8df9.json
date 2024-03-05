@@ -1,8 +1,0 @@
-{
-    "id": "7ea07c51-545b-4ef3-88ba-5260bb2a8df9",
-    "type": "feature",
-    "description": "This release contains an endpoint addition",
-    "modules": [
-        "service/organizations"
-    ]
-}

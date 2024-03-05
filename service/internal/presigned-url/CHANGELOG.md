@@ -1,3 +1,7 @@
+# v1.11.4 (2024-03-05)
+
+* **Bug Fix**: Restore typo'd API `AddAsIsInternalPresigingMiddleware` as an alias for backwards compatibility.
+
 # v1.11.3 (2024-03-04)
 
 * **Bug Fix**: Correct a typo in internal AddAsIsPresigningMiddleware API.

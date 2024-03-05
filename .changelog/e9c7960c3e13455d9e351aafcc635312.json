@@ -1,8 +1,0 @@
-{
-    "id": "e9c7960c-3e13-455d-9e35-1aafcc635312",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon API Gateway",
-    "modules": [
-        "service/apigateway"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "1490e092-d1e5-494c-81a4-99acb54d453b",
-    "type": "documentation",
-    "description": "Minor update to documentation.",
-    "modules": [
-        "service/chatbot"
-    ]
-}

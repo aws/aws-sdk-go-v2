@@ -1,3 +1,20 @@
+# Release (2024-03-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.23.3](service/apigateway/CHANGELOG.md#v1233-2024-03-05)
+  * **Documentation**: Documentation updates for Amazon API Gateway
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.1.2](service/chatbot/CHANGELOG.md#v112-2024-03-05)
+  * **Documentation**: Minor update to documentation.
+* `github.com/aws/aws-sdk-go-v2/service/internal/presigned-url`: [v1.11.4](service/internal/presigned-url/CHANGELOG.md#v1114-2024-03-05)
+  * **Bug Fix**: Restore typo'd API `AddAsIsInternalPresigingMiddleware` as an alias for backwards compatibility.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.27.0](service/organizations/CHANGELOG.md#v1270-2024-03-05)
+  * **Feature**: This release contains an endpoint addition
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.27.0](service/sesv2/CHANGELOG.md#v1270-2024-03-05)
+  * **Feature**: Adds support for providing custom headers within SendEmail and SendBulkEmail for SESv2.
+
 # Release (2024-03-04)
 
 ## General Highlights

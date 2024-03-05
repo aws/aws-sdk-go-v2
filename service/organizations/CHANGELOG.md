@@ -1,3 +1,7 @@
+# v1.27.0 (2024-03-05)
+
+* **Feature**: This release contains an endpoint addition
+
 # v1.26.0 (2024-03-04)
 
 * **Feature**: Documentation update for AWS Organizations

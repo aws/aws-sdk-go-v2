@@ -1,8 +1,0 @@
-{
-    "id": "abe9966a-a543-4438-80fd-14f5573a50e7",
-    "type": "feature",
-    "description": "Adds support for providing custom headers within SendEmail and SendBulkEmail for SESv2.",
-    "modules": [
-        "service/sesv2"
-    ]
-}
