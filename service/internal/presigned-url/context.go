@@ -34,6 +34,14 @@ func AddAsIsPresigningMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(asIsPresigningMiddleware{}, middleware.Before)
 }
 
+// AddAsIsPresigingMiddleware is an alias for backwards compatibility.
+//
+// Deprecated: This API was released with a typo. Use
+// [AddAsIsPresigningMiddleware] instead.
+func AddAsIsPresigingMiddleware(stack *middleware.Stack) error {
+	return AddAsIsPresigningMiddleware(stack)
+}
+
 type asIsPresigningMiddleware struct{}
 
 func (asIsPresigningMiddleware) ID() string { return "AsIsPresigningMiddleware" }
