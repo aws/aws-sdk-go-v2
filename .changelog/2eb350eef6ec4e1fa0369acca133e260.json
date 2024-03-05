@@ -1,0 +1,8 @@
+{
+    "id": "2eb350ee-f6ec-4e1f-a036-9acca133e260",
+    "type": "bugfix",
+    "description": "Restore typo'd API `AddAsIsInternalPresigingMiddleware` as an alias for backwards compatibility.",
+    "modules": [
+        "service/internal/presigned-url"
+    ]
+}
