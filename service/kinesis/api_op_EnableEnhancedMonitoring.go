@@ -93,11 +93,11 @@ func (c *Client) addOperationEnableEnhancedMonitoringMiddlewares(stack *middlewa
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableEnhancedMonitoring{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpEnableEnhancedMonitoring{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableEnhancedMonitoring{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpEnableEnhancedMonitoring{}, middleware.After)
 	if err != nil {
 		return err
 	}

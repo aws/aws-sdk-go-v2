@@ -586,6 +586,66 @@ func addOpUpdateStreamModeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStreamMode{}, middleware.After)
 }
 
+func validateChildShard(v *types.ChildShard) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChildShard"}
+	if v.ShardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShardId"))
+	}
+	if v.ParentShards == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentShards"))
+	}
+	if v.HashKeyRange == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HashKeyRange"))
+	} else if v.HashKeyRange != nil {
+		if err := validateHashKeyRange(v.HashKeyRange); err != nil {
+			invalidParams.AddNested("HashKeyRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChildShardList(v []types.ChildShard) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChildShardList"}
+	for i := range v {
+		if err := validateChildShard(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHashKeyRange(v *types.HashKeyRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HashKeyRange"}
+	if v.StartingHashKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartingHashKey"))
+	}
+	if v.EndingHashKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndingHashKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePutRecordsRequestEntry(v *types.PutRecordsRequestEntry) error {
 	if v == nil {
 		return nil
@@ -611,6 +671,44 @@ func validatePutRecordsRequestEntryList(v []types.PutRecordsRequestEntry) error 
 	invalidParams := smithy.InvalidParamsError{Context: "PutRecordsRequestEntryList"}
 	for i := range v {
 		if err := validatePutRecordsRequestEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecord(v *types.Record) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Record"}
+	if v.SequenceNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SequenceNumber"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if v.PartitionKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecordList(v []types.Record) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecordList"}
+	for i := range v {
+		if err := validateRecord(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -658,6 +756,55 @@ func validateStreamModeDetails(v *types.StreamModeDetails) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StreamModeDetails"}
 	if len(v.StreamMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubscribeToShardEvent(v *types.SubscribeToShardEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubscribeToShardEvent"}
+	if v.Records == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Records"))
+	} else if v.Records != nil {
+		if err := validateRecordList(v.Records); err != nil {
+			invalidParams.AddNested("Records", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContinuationSequenceNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContinuationSequenceNumber"))
+	}
+	if v.MillisBehindLatest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MillisBehindLatest"))
+	}
+	if v.ChildShards != nil {
+		if err := validateChildShardList(v.ChildShards); err != nil {
+			invalidParams.AddNested("ChildShards", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubscribeToShardInputEventStream(v types.SubscribeToShardInputEventStream) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubscribeToShardInputEventStream"}
+	switch uv := v.(type) {
+	case *types.SubscribeToShardInputEventStreamMemberSubscribeToShardEvent:
+		if err := validateSubscribeToShardEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[SubscribeToShardEvent]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

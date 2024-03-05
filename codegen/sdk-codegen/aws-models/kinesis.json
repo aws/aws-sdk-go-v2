@@ -1754,7 +1754,7 @@
                 "aws.auth#sigv4": {
                     "name": "kinesis"
                 },
-                "aws.protocols#awsJson1_1": {
+                "smithy.protocols#rpcv2Cbor": {
                     "http": [
                         "http/1.1",
                         "h2"
@@ -7975,10 +7975,32 @@
                         "smithy.api#documentation": "<p>The starting position in the data stream from which to start streaming.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "FakeStream": {
+                    "target": "com.amazonaws.kinesis#SubscribeToShardInputEventStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>injected input event stream</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesis#SubscribeToShardInputEventStream": {
+            "type": "union",
+            "members": {
+                "SubscribeToShardEvent": {
+                    "target": "com.amazonaws.kinesis#SubscribeToShardEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>yes</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>input event stream union</p>",
+                "smithy.api#streaming": {}
             }
         },
         "com.amazonaws.kinesis#SubscribeToShardOutput": {
@@ -7989,6 +8011,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The event stream that your consumer can use to read records from the shard.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "initialResponseOne": {
+                    "target": "com.amazonaws.kinesis#ChildShardList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>After you call <a>SubscribeToShard</a>, Kinesis Data Streams sends events\n            of this type to your consumer. For an example of how to handle these events, see <a href=\"/streams/latest/dev/building-enhanced-consumers-api.html\">Enhanced Fan-Out\n                Using the Kinesis Data Streams API</a>.</p>"
                     }
                 }
             },

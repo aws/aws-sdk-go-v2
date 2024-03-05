@@ -81,11 +81,11 @@ func (c *Client) addOperationRegisterStreamConsumerMiddlewares(stack *middleware
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterStreamConsumer{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRegisterStreamConsumer{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterStreamConsumer{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRegisterStreamConsumer{}, middleware.After)
 	if err != nil {
 		return err
 	}

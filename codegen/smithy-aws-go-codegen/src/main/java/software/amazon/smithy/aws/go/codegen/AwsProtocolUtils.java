@@ -38,7 +38,7 @@ import software.amazon.smithy.utils.SetUtils;
 /**
  * Utility methods for generating AWS protocols.
  */
-final class AwsProtocolUtils {
+public final class AwsProtocolUtils {
     private AwsProtocolUtils() {
     }
 
@@ -47,7 +47,7 @@ final class AwsProtocolUtils {
      *
      * @param context The generation context.
      */
-    static void generateHttpProtocolTests(GenerationContext context) {
+    public static void generateHttpProtocolTests(GenerationContext context) {
         Set<HttpProtocolUnitTestGenerator.ConfigValue> configValues = new TreeSet<>(SetUtils.of(
                 HttpProtocolUnitTestGenerator.ConfigValue.builder()
                         .name(AddAwsConfigFields.REGION_CONFIG_NAME)

@@ -90,11 +90,11 @@ func (c *Client) addOperationStopStreamEncryptionMiddlewares(stack *middleware.S
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopStreamEncryption{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopStreamEncryption{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopStreamEncryption{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopStreamEncryption{}, middleware.After)
 	if err != nil {
 		return err
 	}

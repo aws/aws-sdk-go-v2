@@ -596,6 +596,25 @@ type SubscribeToShardEventStreamMemberSubscribeToShardEvent struct {
 
 func (*SubscribeToShardEventStreamMemberSubscribeToShardEvent) isSubscribeToShardEventStream() {}
 
+// input event stream union
+//
+// The following types satisfy this interface:
+//
+//	SubscribeToShardInputEventStreamMemberSubscribeToShardEvent
+type SubscribeToShardInputEventStream interface {
+	isSubscribeToShardInputEventStream()
+}
+
+// yes
+type SubscribeToShardInputEventStreamMemberSubscribeToShardEvent struct {
+	Value SubscribeToShardEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscribeToShardInputEventStreamMemberSubscribeToShardEvent) isSubscribeToShardInputEventStream() {
+}
+
 // Metadata assigned to the stream, consisting of a key-value pair.
 type Tag struct {
 
@@ -624,4 +643,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isSubscribeToShardEventStream() {}
+func (*UnknownUnionMember) isSubscribeToShardEventStream()      {}
+func (*UnknownUnionMember) isSubscribeToShardInputEventStream() {}

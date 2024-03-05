@@ -24,3 +24,21 @@ func ExampleSubscribeToShardEventStream_outputUsage() {
 }
 
 var _ *types.SubscribeToShardEvent
+
+func ExampleSubscribeToShardInputEventStream_outputUsage() {
+	var union types.SubscribeToShardInputEventStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SubscribeToShardInputEventStreamMemberSubscribeToShardEvent:
+		_ = v.Value // Value is types.SubscribeToShardEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SubscribeToShardEvent

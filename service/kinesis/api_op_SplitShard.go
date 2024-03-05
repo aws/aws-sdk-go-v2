@@ -108,11 +108,11 @@ func (c *Client) addOperationSplitShardMiddlewares(stack *middleware.Stack, opti
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSplitShard{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpSplitShard{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSplitShard{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpSplitShard{}, middleware.After)
 	if err != nil {
 		return err
 	}

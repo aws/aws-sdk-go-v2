@@ -112,6 +112,22 @@
           "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace"
         }
       }
+    },
+    "smithy-rpcv2-cbor": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.rpcv2Cbor#RpcV2Protocol"]
+          }
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.rpcv2Cbor#RpcV2Protocol",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor"
+        }
+      }
     }
   }
 }

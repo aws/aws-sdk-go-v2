@@ -6,11 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithysync "github.com/aws/smithy-go/sync"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"sync"
+	"time"
 )
 
 // This operation establishes an HTTP/2 connection between the consumer you
@@ -76,6 +79,12 @@ func (in *SubscribeToShardInput) bindEndpointParams(p *EndpointParameters) {
 }
 
 type SubscribeToShardOutput struct {
+
+	// After you call SubscribeToShard , Kinesis Data Streams sends events of this type
+	// to your consumer. For an example of how to handle these events, see Enhanced
+	// Fan-Out Using the Kinesis Data Streams API .
+	InitialResponseOne []types.ChildShard
+
 	eventStream *SubscribeToShardEventStream
 
 	// Metadata pertaining to the operation's result.
@@ -93,11 +102,11 @@ func (c *Client) addOperationSubscribeToShardMiddlewares(stack *middleware.Stack
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubscribeToShard{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpSubscribeToShard{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSubscribeToShard{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpSubscribeToShard{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -111,19 +120,22 @@ func (c *Client) addOperationSubscribeToShardMiddlewares(stack *middleware.Stack
 	if err = addEventStreamSubscribeToShardMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addComputePayloadSHA256(stack); err != nil {
+	if err = addStreamingEventsPayload(stack); err != nil {
+		return err
+	}
+	if err = addContentSHA256Header(stack); err != nil {
 		return err
 	}
 	if err = addRetry(stack, options); err != nil {
@@ -136,6 +148,9 @@ func (c *Client) addOperationSubscribeToShardMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
+		return err
+	}
+	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
@@ -179,6 +194,14 @@ func newServiceMetadataMiddleware_opSubscribeToShard(region string) *awsmiddlewa
 // the NewSubscribeToShardEventStream constructor function. Using the functional options
 // to pass in nested mock behavior.
 type SubscribeToShardEventStream struct {
+	// SubscribeToShardInputEventStreamWriter is the EventStream writer for the
+	// SubscribeToShardInputEventStream events. This value is automatically set by the
+	// SDK when the API call is made Use this member when unit testing your code with
+	// the SDK to mock out the EventStream Writer.
+	//
+	// Must not be nil.
+	Writer SubscribeToShardInputEventStreamWriter
+
 	// SubscribeToShardEventStreamReader is the EventStream reader for the
 	// SubscribeToShardEventStream events. This value is automatically set by the SDK
 	// when the API call is made Use this member when unit testing your code with the
@@ -196,6 +219,8 @@ type SubscribeToShardEventStream struct {
 // This function should only be used for testing and mocking the SubscribeToShardEventStream
 // stream within your application.
 //
+// The Writer member must be set before writing events to the stream.
+//
 // The Reader member must be set before reading events from the stream.
 func NewSubscribeToShardEventStream(optFns ...func(*SubscribeToShardEventStream)) *SubscribeToShardEventStream {
 	es := &SubscribeToShardEventStream{
@@ -206,6 +231,12 @@ func NewSubscribeToShardEventStream(optFns ...func(*SubscribeToShardEventStream)
 		fn(es)
 	}
 	return es
+}
+
+// Send writes the event to the stream blocking until the event is written.
+// Returns an error if the event was not written.
+func (es *SubscribeToShardEventStream) Send(ctx context.Context, event types.SubscribeToShardInputEventStream) error {
+	return es.Writer.Send(ctx, event)
 }
 
 // Events returns a channel to read events from.
@@ -227,6 +258,20 @@ func (es *SubscribeToShardEventStream) Close() error {
 func (es *SubscribeToShardEventStream) safeClose() {
 	close(es.done)
 
+	t := time.NewTicker(time.Second)
+	defer t.Stop()
+	writeCloseDone := make(chan error)
+	go func() {
+		if err := es.Writer.Close(); err != nil {
+			es.err.SetError(err)
+		}
+		close(writeCloseDone)
+	}()
+	select {
+	case <-t.C:
+	case <-writeCloseDone:
+	}
+
 	es.Reader.Close()
 }
 
@@ -234,6 +279,10 @@ func (es *SubscribeToShardEventStream) safeClose() {
 // from the service API's response. Returns nil if there were no errors.
 func (es *SubscribeToShardEventStream) Err() error {
 	if err := es.err.Err(); err != nil {
+		return err
+	}
+
+	if err := es.Writer.Err(); err != nil {
 		return err
 	}
 
@@ -249,6 +298,11 @@ func (es *SubscribeToShardEventStream) waitStreamClose() {
 		ErrorSet() <-chan struct{}
 	}
 
+	var inputErrCh <-chan struct{}
+	if v, ok := es.Writer.(errorSet); ok {
+		inputErrCh = v.ErrorSet()
+	}
+
 	var outputErrCh <-chan struct{}
 	if v, ok := es.Reader.(errorSet); ok {
 		outputErrCh = v.ErrorSet()
@@ -260,6 +314,10 @@ func (es *SubscribeToShardEventStream) waitStreamClose() {
 
 	select {
 	case <-es.done:
+	case <-inputErrCh:
+		es.err.SetError(es.Writer.Err())
+		es.Close()
+
 	case <-outputErrCh:
 		es.err.SetError(es.Reader.Err())
 		es.Close()

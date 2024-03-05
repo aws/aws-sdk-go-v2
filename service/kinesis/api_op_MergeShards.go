@@ -95,11 +95,11 @@ func (c *Client) addOperationMergeShardsMiddlewares(stack *middleware.Stack, opt
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeShards{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpMergeShards{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergeShards{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpMergeShards{}, middleware.After)
 	if err != nil {
 		return err
 	}

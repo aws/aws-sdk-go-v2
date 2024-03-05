@@ -3,11 +3,14 @@
 package kinesis
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -16,7 +19,18 @@ import (
 	"io"
 	"io/ioutil"
 	"sync"
+	"time"
 )
+
+// SubscribeToShardInputEventStreamWriter provides the interface for writing
+// events to a stream.
+//
+// The writer's Close method must allow multiple concurrent calls.
+type SubscribeToShardInputEventStreamWriter interface {
+	Send(context.Context, types.SubscribeToShardInputEventStream) error
+	Close() error
+	Err() error
+}
 
 // SubscribeToShardEventStreamReader provides the interface for reading events
 // from a stream.
@@ -26,6 +40,271 @@ type SubscribeToShardEventStreamReader interface {
 	Events() <-chan types.SubscribeToShardEventStream
 	Close() error
 	Err() error
+}
+
+type eventStreamSigner interface {
+	GetSignature(ctx context.Context, headers, payload []byte, signingTime time.Time, optFns ...func(*v4.StreamSignerOptions)) ([]byte, error)
+}
+
+type eventStreamInputKey struct{}
+
+func getEventStreamInput(ctx context.Context) interface{} {
+	return ctx.Value(eventStreamInputKey{})
+}
+
+func withEventStreamInput(ctx context.Context, value interface{}) context.Context {
+	return context.WithValue(ctx, eventStreamInputKey{}, value)
+}
+
+type eventStreamSerializerHelper struct {
+}
+
+func (*eventStreamSerializerHelper) ID() string {
+	return "OperationEventStreamSerializer"
+}
+
+func (m *eventStreamSerializerHelper) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	return next.HandleSerialize(withEventStreamInput(ctx, in.Parameters), in)
+}
+
+type asyncSubscribeToShardInputEventStream struct {
+	Event  subscribeToShardInputEventStreamWriteEvent
+	Result chan<- error
+}
+
+func (e asyncSubscribeToShardInputEventStream) ReportResult(cancel <-chan struct{}, err error) bool {
+	select {
+	case e.Result <- err:
+		return true
+
+	case <-cancel:
+		return false
+
+	}
+}
+
+type subscribeToShardInputEventStreamWriteEvent interface {
+	isSubscribeToShardInputEventStreamWriteEvent()
+}
+
+type subscribeToShardInputEventStreamWriteEventMessage struct {
+	Value types.SubscribeToShardInputEventStream
+}
+
+func (*subscribeToShardInputEventStreamWriteEventMessage) isSubscribeToShardInputEventStreamWriteEvent() {
+}
+
+type subscribeToShardInputEventStreamWriteEventInitialRequest struct {
+	Value interface{}
+}
+
+func (*subscribeToShardInputEventStreamWriteEventInitialRequest) isSubscribeToShardInputEventStreamWriteEvent() {
+}
+
+type subscribeToShardInputEventStreamWriter struct {
+	encoder             *eventstream.Encoder
+	signer              eventStreamSigner
+	stream              chan asyncSubscribeToShardInputEventStream
+	serializationBuffer *bytes.Buffer
+	signingBuffer       *bytes.Buffer
+	eventStream         io.WriteCloser
+	done                chan struct{}
+	closeOnce           sync.Once
+	err                 *smithysync.OnceErr
+
+	initialRequestSerializer func(interface{}, *eventstream.Message) error
+}
+
+func newSubscribeToShardInputEventStreamWriter(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner, irs func(interface{}, *eventstream.Message) error) *subscribeToShardInputEventStreamWriter {
+	w := &subscribeToShardInputEventStreamWriter{
+		encoder:             encoder,
+		signer:              signer,
+		stream:              make(chan asyncSubscribeToShardInputEventStream),
+		eventStream:         stream,
+		done:                make(chan struct{}),
+		err:                 smithysync.NewOnceErr(),
+		serializationBuffer: bytes.NewBuffer(nil),
+		signingBuffer:       bytes.NewBuffer(nil),
+
+		initialRequestSerializer: irs,
+	}
+
+	go w.writeStream()
+
+	return w
+
+}
+
+func (w *subscribeToShardInputEventStreamWriter) Send(ctx context.Context, event types.SubscribeToShardInputEventStream) error {
+	return w.send(ctx, &subscribeToShardInputEventStreamWriteEventMessage{Value: event})
+}
+
+func (w *subscribeToShardInputEventStreamWriter) send(ctx context.Context, event subscribeToShardInputEventStreamWriteEvent) error {
+	if err := w.err.Err(); err != nil {
+		return err
+	}
+
+	resultCh := make(chan error)
+
+	wrapped := asyncSubscribeToShardInputEventStream{
+		Event:  event,
+		Result: resultCh,
+	}
+
+	select {
+	case w.stream <- wrapped:
+	case <-ctx.Done():
+		return ctx.Err()
+	case <-w.done:
+		return fmt.Errorf("stream closed, unable to send event")
+
+	}
+
+	select {
+	case err := <-resultCh:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	case <-w.done:
+		return fmt.Errorf("stream closed, unable to send event")
+
+	}
+
+}
+
+func (w *subscribeToShardInputEventStreamWriter) writeStream() {
+	defer w.Close()
+
+	for {
+		select {
+		case wrapper := <-w.stream:
+			err := w.writeEvent(wrapper.Event)
+			wrapper.ReportResult(w.done, err)
+			if err != nil {
+				w.err.SetError(err)
+				return
+			}
+
+		case <-w.done:
+			if err := w.closeStream(); err != nil {
+				w.err.SetError(err)
+			}
+			return
+
+		}
+	}
+}
+
+func (w *subscribeToShardInputEventStreamWriter) writeEvent(event subscribeToShardInputEventStreamWriteEvent) error {
+	// serializedEvent returned bytes refers to an underlying byte buffer and must not
+	// escape this writeEvent scope without first copying. Any previous bytes stored in
+	// the buffer are cleared by this call.
+	serializedEvent, err := w.serializeEvent(event)
+	if err != nil {
+		return err
+	}
+
+	// signedEvent returned bytes refers to an underlying byte buffer and must not
+	// escape this writeEvent scope without first copying. Any previous bytes stored in
+	// the buffer are cleared by this call.
+	signedEvent, err := w.signEvent(serializedEvent)
+	if err != nil {
+		return err
+	}
+
+	// bytes are now copied to the underlying stream writer
+	_, err = io.Copy(w.eventStream, bytes.NewReader(signedEvent))
+	return err
+}
+
+func (w *subscribeToShardInputEventStreamWriter) serializeEvent(event subscribeToShardInputEventStreamWriteEvent) ([]byte, error) {
+	w.serializationBuffer.Reset()
+
+	eventMessage := eventstream.Message{}
+
+	switch ev := event.(type) {
+	case *subscribeToShardInputEventStreamWriteEventInitialRequest:
+		if err := w.initialRequestSerializer(ev.Value, &eventMessage); err != nil {
+			return nil, err
+		}
+	case *subscribeToShardInputEventStreamWriteEventMessage:
+		if err := smithyRpcv2cbor_serializeEventStreamSubscribeToShardInputEventStream(ev.Value, &eventMessage); err != nil {
+			return nil, err
+		}
+	default:
+		return nil, fmt.Errorf("unknown event wrapper type: %v", event)
+	}
+
+	if err := w.encoder.Encode(w.serializationBuffer, eventMessage); err != nil {
+		return nil, err
+	}
+
+	return w.serializationBuffer.Bytes(), nil
+}
+
+func (w *subscribeToShardInputEventStreamWriter) signEvent(payload []byte) ([]byte, error) {
+	w.signingBuffer.Reset()
+
+	date := time.Now().UTC()
+
+	var msg eventstream.Message
+	msg.Headers.Set(eventstreamapi.DateHeader, eventstream.TimestampValue(date))
+	msg.Payload = payload
+
+	var headers bytes.Buffer
+	if err := eventstream.EncodeHeaders(&headers, msg.Headers); err != nil {
+		return nil, err
+	}
+
+	sig, err := w.signer.GetSignature(context.Background(), headers.Bytes(), msg.Payload, date)
+	if err != nil {
+		return nil, err
+	}
+
+	msg.Headers.Set(eventstreamapi.ChunkSignatureHeader, eventstream.BytesValue(sig))
+
+	if err := w.encoder.Encode(w.signingBuffer, msg); err != nil {
+		return nil, err
+	}
+
+	return w.signingBuffer.Bytes(), nil
+}
+
+func (w *subscribeToShardInputEventStreamWriter) closeStream() (err error) {
+	defer func() {
+		if cErr := w.eventStream.Close(); cErr != nil && err == nil {
+			err = cErr
+		}
+	}()
+
+	// Per the protocol, a signed empty message is used to indicate the end of the stream,
+	// and that no subsequent events will be sent.
+	signedEvent, err := w.signEvent([]byte{})
+	if err != nil {
+		return err
+	}
+
+	_, err = io.Copy(w.eventStream, bytes.NewReader(signedEvent))
+	return err
+}
+
+func (w *subscribeToShardInputEventStreamWriter) ErrorSet() <-chan struct{} {
+	return w.err.ErrorSet()
+}
+
+func (w *subscribeToShardInputEventStreamWriter) Close() error {
+	w.closeOnce.Do(w.safeClose)
+	return w.Err()
+}
+
+func (w *subscribeToShardInputEventStreamWriter) safeClose() {
+	close(w.done)
+}
+
+func (w *subscribeToShardInputEventStreamWriter) Err() error {
+	return w.err.Err()
 }
 
 type subscribeToShardEventStreamReadEvent interface {
@@ -150,13 +429,13 @@ func (r *subscribeToShardEventStreamReader) deserializeEventMessage(msg *eventst
 		}
 
 		var v types.SubscribeToShardEventStream
-		if err := awsAwsjson11_deserializeEventStreamSubscribeToShardEventStream(&v, msg); err != nil {
+		if err := smithyRpcv2cbor_deserializeEventStreamSubscribeToShardEventStream(&v, msg); err != nil {
 			return nil, err
 		}
 		return &subscribeToShardEventStreamReadEventMessage{Value: v}, nil
 
 	case eventstreamapi.ExceptionMessageType:
-		return nil, awsAwsjson11_deserializeEventStreamExceptionSubscribeToShardEventStream(msg)
+		return nil, smithyRpcv2cbor_deserializeEventStreamExceptionSubscribeToShardEventStream(msg)
 
 	case eventstreamapi.ErrorMessageType:
 		errorCode := "UnknownError"
@@ -205,16 +484,16 @@ func (r *subscribeToShardEventStreamReader) Closed() <-chan struct{} {
 	return r.done
 }
 
-type awsAwsjson11_deserializeOpEventStreamSubscribeToShard struct {
+type smithyRpcv2cbor_deserializeOpEventStreamSubscribeToShard struct {
 	LogEventStreamWrites bool
 	LogEventStreamReads  bool
 }
 
-func (*awsAwsjson11_deserializeOpEventStreamSubscribeToShard) ID() string {
+func (*smithyRpcv2cbor_deserializeOpEventStreamSubscribeToShard) ID() string {
 	return "OperationEventStreamDeserializer"
 }
 
-func (m *awsAwsjson11_deserializeOpEventStreamSubscribeToShard) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *smithyRpcv2cbor_deserializeOpEventStreamSubscribeToShard) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	defer func() {
@@ -232,8 +511,84 @@ func (m *awsAwsjson11_deserializeOpEventStreamSubscribeToShard) HandleDeserializ
 	}
 	_ = request
 
+	if err := eventstreamapi.ApplyHTTPTransportFixes(request); err != nil {
+		return out, metadata, err
+	}
+
+	requestSignature, err := v4.GetSignedRequestSignature(request.Request)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to get event stream seed signature: %v", err)
+	}
+
+	identity := getIdentity(ctx)
+	if identity == nil {
+		return out, metadata, fmt.Errorf("no identity")
+	}
+
+	creds, ok := identity.(*internalauthsmithy.CredentialsAdapter)
+	if !ok {
+		return out, metadata, fmt.Errorf("identity is not sigv4 credentials")
+	}
+
+	rscheme := getResolvedAuthScheme(ctx)
+	if rscheme == nil {
+		return out, metadata, fmt.Errorf("no resolved auth scheme")
+	}
+
+	name, ok := smithyhttp.GetSigV4SigningName(&rscheme.SignerProperties)
+	if !ok {
+		return out, metadata, fmt.Errorf("no sigv4 signing name")
+	}
+
+	region, ok := smithyhttp.GetSigV4SigningRegion(&rscheme.SignerProperties)
+	if !ok {
+		return out, metadata, fmt.Errorf("no sigv4 signing region")
+	}
+
+	signer := v4.NewStreamSigner(creds.Credentials, name, region, requestSignature)
+
+	eventWriter := newSubscribeToShardInputEventStreamWriter(
+		eventstreamapi.GetInputStreamWriter(ctx),
+		eventstream.NewEncoder(func(options *eventstream.EncoderOptions) {
+			options.Logger = logger
+			options.LogMessages = m.LogEventStreamWrites
+
+		}),
+		signer,
+		smithyRpcv2cbor_serializeEventMessageRequestSubscribeToShardInput,
+	)
+	defer func() {
+		if err == nil {
+			return
+		}
+		_ = eventWriter.Close()
+	}()
+
+	params, ok := getEventStreamInput(ctx).(*SubscribeToShardInput)
+	if !ok || params == nil {
+		return out, metadata, fmt.Errorf("unexpected nil type: %T", params)
+	}
+
+	reqSend := make(chan error, 1)
+	go func() {
+		defer close(reqSend)
+		sErr := eventWriter.send(ctx, &subscribeToShardInputEventStreamWriteEventInitialRequest{Value: params})
+		reqSend <- sErr
+	}()
+
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
+		select {
+		case sErr := <-reqSend:
+			if sErr != nil {
+				err = fmt.Errorf("%v: %w", err, sErr)
+			}
+		default:
+		}
+		return out, metadata, err
+	}
+
+	if err := <-reqSend; err != nil {
 		return out, metadata, err
 	}
 
@@ -258,7 +613,7 @@ func (m *awsAwsjson11_deserializeOpEventStreamSubscribeToShard) HandleDeserializ
 			options.LogMessages = m.LogEventStreamReads
 
 		}),
-		awsAwsjson11_deserializeEventMessageResponseSubscribeToShardOutput,
+		smithyRpcv2cbor_deserializeEventMessageResponseSubscribeToShardOutput,
 	)
 	defer func() {
 		if err == nil {
@@ -275,6 +630,7 @@ func (m *awsAwsjson11_deserializeOpEventStreamSubscribeToShard) HandleDeserializ
 	*output = *irv
 
 	output.eventStream = NewSubscribeToShardEventStream(func(stream *SubscribeToShardEventStream) {
+		stream.Writer = eventWriter
 		stream.Reader = eventReader
 	})
 
@@ -283,7 +639,7 @@ func (m *awsAwsjson11_deserializeOpEventStreamSubscribeToShard) HandleDeserializ
 	return out, metadata, nil
 }
 
-func (*awsAwsjson11_deserializeOpEventStreamSubscribeToShard) closeResponseBody(out middleware.DeserializeOutput) {
+func (*smithyRpcv2cbor_deserializeOpEventStreamSubscribeToShard) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
 		_, _ = io.Copy(ioutil.Discard, resp.Body)
 		_ = resp.Body.Close()
@@ -291,7 +647,11 @@ func (*awsAwsjson11_deserializeOpEventStreamSubscribeToShard) closeResponseBody(
 }
 
 func addEventStreamSubscribeToShardMiddleware(stack *middleware.Stack, options Options) error {
-	if err := stack.Deserialize.Insert(&awsAwsjson11_deserializeOpEventStreamSubscribeToShard{
+	if err := stack.Serialize.Insert(&eventStreamSerializerHelper{}, "OperationSerializer", middleware.After); err != nil {
+		return err
+	}
+
+	if err := stack.Deserialize.Insert(&smithyRpcv2cbor_deserializeOpEventStreamSubscribeToShard{
 		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
 		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
 	}, "OperationDeserializer", middleware.Before); err != nil {
@@ -316,7 +676,7 @@ func (e *UnknownEventMessageError) Error() string {
 func setSafeEventStreamClientLogMode(o *Options, operation string) {
 	switch operation {
 	case "SubscribeToShard":
-		toggleEventStreamClientLogMode(o, false, true)
+		toggleEventStreamClientLogMode(o, true, true)
 		return
 
 	default:

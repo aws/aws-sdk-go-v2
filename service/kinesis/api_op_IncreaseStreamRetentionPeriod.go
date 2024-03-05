@@ -72,11 +72,11 @@ func (c *Client) addOperationIncreaseStreamRetentionPeriodMiddlewares(stack *mid
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpIncreaseStreamRetentionPeriod{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpIncreaseStreamRetentionPeriod{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpIncreaseStreamRetentionPeriod{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpIncreaseStreamRetentionPeriod{}, middleware.After)
 	if err != nil {
 		return err
 	}

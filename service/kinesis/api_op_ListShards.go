@@ -144,11 +144,11 @@ func (c *Client) addOperationListShardsMiddlewares(stack *middleware.Stack, opti
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListShards{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListShards{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListShards{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListShards{}, middleware.After)
 	if err != nil {
 		return err
 	}

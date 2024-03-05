@@ -66,11 +66,11 @@ func (c *Client) addOperationRemoveTagsFromStreamMiddlewares(stack *middleware.S
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTagsFromStream{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRemoveTagsFromStream{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveTagsFromStream{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRemoveTagsFromStream{}, middleware.After)
 	if err != nil {
 		return err
 	}
