@@ -2823,7 +2823,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "AWS Chatbot API",
-                "smithy.api#title": "chatbot",
+                "smithy.api#title": "AWS Chatbot",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://wheatley.amazonaws.com/orchestration/2017-10-11/"
                 },
