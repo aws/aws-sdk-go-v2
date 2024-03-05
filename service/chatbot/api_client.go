@@ -27,7 +27,7 @@ import (
 const ServiceID = "chatbot"
 const ServiceAPIVersion = "2017-10-11"
 
-// Client provides the API client to make operations call for chatbot.
+// Client provides the API client to make operations call for AWS Chatbot.
 type Client struct {
 	options Options
 }

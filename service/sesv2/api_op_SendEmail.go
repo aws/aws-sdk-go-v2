@@ -44,7 +44,7 @@ func (c *Client) SendEmail(ctx context.Context, params *SendEmailInput, optFns .
 type SendEmailInput struct {
 
 	// An object that contains the body of the message. You can send either a Simple
-	// message Raw message or a template Message.
+	// message, Raw message, or a Templated message.
 	//
 	// This member is required.
 	Content *types.EmailContent
@@ -111,9 +111,9 @@ type SendEmailOutput struct {
 
 	// A unique identifier for the message that is generated when the message is
 	// accepted. It's possible for Amazon SES to accept a message without sending it.
-	// This can happen when the message that you're trying to send has an attachment
-	// contains a virus, or when you send a templated email that contains invalid
-	// personalization content, for example.
+	// For example, this can happen when the message that you're trying to send has an
+	// attachment that contains a virus, or when you send a templated email that
+	// contains invalid personalization content.
 	MessageId *string
 
 	// Metadata pertaining to the operation's result.

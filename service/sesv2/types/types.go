@@ -1369,6 +1369,31 @@ type Message struct {
 	// This member is required.
 	Subject *Content
 
+	// The list of message headers that will be added to the email message.
+	Headers []MessageHeader
+
+	noSmithyDocumentSerde
+}
+
+// Contains the name and value of a message header that you add to an email.
+type MessageHeader struct {
+
+	// The name of the message header. The message header name has to meet the
+	// following criteria:
+	//   - Can contain any printable ASCII character (33 - 126) except for colon (:).
+	//   - Can contain no more than 126 characters.
+	//
+	// This member is required.
+	Name *string
+
+	// The value of the message header. The message header value has to meet the
+	// following criteria:
+	//   - Can contain any printable ASCII character.
+	//   - Can contain no more than 870 characters.
+	//
+	// This member is required.
+	Value *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1921,6 +1946,9 @@ type Tag struct {
 // type of message template that contains content that you want to define, save,
 // and reuse in email messages that you send.
 type Template struct {
+
+	// The list of message headers that will be added to the email message.
+	Headers []MessageHeader
 
 	// The Amazon Resource Name (ARN) of the template.
 	TemplateArn *string

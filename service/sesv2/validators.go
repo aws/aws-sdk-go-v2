@@ -1876,6 +1876,23 @@ func validateBody(v *types.Body) error {
 	}
 }
 
+func validateBulkEmailContent(v *types.BulkEmailContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BulkEmailContent"}
+	if v.Template != nil {
+		if err := validateTemplate(v.Template); err != nil {
+			invalidParams.AddNested("Template", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBulkEmailEntry(v *types.BulkEmailEntry) error {
 	if v == nil {
 		return nil
@@ -2016,6 +2033,11 @@ func validateEmailContent(v *types.EmailContent) error {
 	if v.Raw != nil {
 		if err := validateRawMessage(v.Raw); err != nil {
 			invalidParams.AddNested("Raw", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Template != nil {
+		if err := validateTemplate(v.Template); err != nil {
+			invalidParams.AddNested("Template", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2181,6 +2203,46 @@ func validateMessage(v *types.Message) error {
 			invalidParams.AddNested("Body", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Headers != nil {
+		if err := validateMessageHeaderList(v.Headers); err != nil {
+			invalidParams.AddNested("Headers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessageHeader(v *types.MessageHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageHeader"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessageHeaderList(v []types.MessageHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageHeaderList"}
+	for i := range v {
+		if err := validateMessageHeader(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2339,6 +2401,23 @@ func validateTagList(v []types.Tag) error {
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTemplate(v *types.Template) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Template"}
+	if v.Headers != nil {
+		if err := validateMessageHeaderList(v.Headers); err != nil {
+			invalidParams.AddNested("Headers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3564,6 +3643,10 @@ func validateOpSendBulkEmailInput(v *SendBulkEmailInput) error {
 	}
 	if v.DefaultContent == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DefaultContent"))
+	} else if v.DefaultContent != nil {
+		if err := validateBulkEmailContent(v.DefaultContent); err != nil {
+			invalidParams.AddNested("DefaultContent", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.BulkEmailEntries == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BulkEmailEntries"))

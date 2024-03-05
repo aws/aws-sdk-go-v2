@@ -8149,6 +8149,13 @@ func awsRestjson1_serializeDocumentMessage(v *types.Message, value smithyjson.Va
 		}
 	}
 
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsRestjson1_serializeDocumentMessageHeaderList(v.Headers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Subject != nil {
 		ok := object.Key("Subject")
 		if err := awsRestjson1_serializeDocumentContent(v.Subject, ok); err != nil {
@@ -8156,6 +8163,36 @@ func awsRestjson1_serializeDocumentMessage(v *types.Message, value smithyjson.Va
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageHeader(v *types.MessageHeader, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageHeaderList(v []types.MessageHeader, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMessageHeader(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -8471,6 +8508,13 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 func awsRestjson1_serializeDocumentTemplate(v *types.Template, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsRestjson1_serializeDocumentMessageHeaderList(v.Headers, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.TemplateArn != nil {
 		ok := object.Key("TemplateArn")
