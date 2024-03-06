@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
+	"reflect"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -12,7 +13,6 @@ import (
 
 	sdkrand "github.com/aws/aws-sdk-go-v2/internal/rand"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
-	"github.com/google/go-cmp/cmp"
 )
 
 type stubCredentialsProvider struct {
@@ -543,7 +543,7 @@ func TestCredentialsCache_cacheStrategies(t *testing.T) {
 			// Truncate expires time so its easy to compare
 			creds.Expires = creds.Expires.Truncate(time.Second)
 
-			if diff := cmp.Diff(c.expectCreds, creds); diff != "" {
+			if diff := cmpDiff(c.expectCreds, creds); diff != "" {
 				t.Errorf("expect creds match\n%s", diff)
 			}
 		})
@@ -611,7 +611,7 @@ func (m mockAdjustExpiryBy) AdjustExpiresBy(creds Credentials, dur time.Duration
 	Credentials, error,
 ) {
 	if m.expectInputCreds.HasKeys() {
-		if diff := cmp.Diff(m.expectInputCreds, creds); diff != "" {
+		if diff := cmpDiff(m.expectInputCreds, creds); diff != "" {
 			return Credentials{}, fmt.Errorf("expect creds match\n%s", diff)
 		}
 	}
@@ -660,3 +660,10 @@ func TestCredentialsCache_IsCredentialsProvider(t *testing.T) {
 }
 
 var _ isCredentialsProvider = (*CredentialsCache)(nil)
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
+}
