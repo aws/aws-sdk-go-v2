@@ -7,16 +7,16 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"io/ioutil"
+	"net/http"
+	"strings"
+	"testing"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/logging"
-	"github.com/google/go-cmp/cmp"
-	"io/ioutil"
-	"net/http"
-	"strings"
-	"testing"
 )
 
 type retryClient struct {
@@ -398,7 +398,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 						t.Fatalf("expect computed checksum metadata %t, got %t, %v", e, a, computedChecksums)
 					}
 					if c.expectComputedChecksums != nil {
-						if diff := cmp.Diff(*c.expectComputedChecksums, computedChecksums); diff != "" {
+						if diff := cmpDiff(*c.expectComputedChecksums, computedChecksums); diff != "" {
 							t.Errorf("expect computed checksum metadata match\n%s", diff)
 						}
 					}
@@ -426,7 +426,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 						return
 					}
 
-					if diff := cmp.Diff(string(c.expectPayload), string(actualPayload)); diff != "" {
+					if diff := cmpDiff(string(c.expectPayload), string(actualPayload)); diff != "" {
 						t.Errorf("expect payload match:\n%s", diff)
 					}
 
@@ -446,7 +446,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 						t.Fatalf("expect algorithms used metadata %t, got %t, %v", e, a, algorithmsUsed)
 					}
 					if c.expectAlgorithmsUsed != nil {
-						if diff := cmp.Diff(*c.expectAlgorithmsUsed, algorithmsUsed); diff != "" {
+						if diff := cmpDiff(*c.expectAlgorithmsUsed, algorithmsUsed); diff != "" {
 							t.Errorf("expect algorithms used to match\n%s", diff)
 						}
 					}

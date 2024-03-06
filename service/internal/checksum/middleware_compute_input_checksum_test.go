@@ -20,7 +20,6 @@ import (
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
 )
 
 // TODO test cases:
@@ -863,7 +862,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 						) {
 							request := input.(*smithyhttp.Request)
 
-							if diff := cmp.Diff(c.expectHeader, request.Header); diff != "" {
+							if diff := cmpDiff(c.expectHeader, request.Header); diff != "" {
 								t.Errorf("expect header to match:\n%s", diff)
 							}
 							if e, a := c.expectContentLength, request.ContentLength; e != a {
@@ -883,7 +882,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 								t.Fatalf("expected read error, got none")
 							}
 
-							if diff := cmp.Diff(string(c.expectPayload), string(actualPayload)); diff != "" {
+							if diff := cmpDiff(string(c.expectPayload), string(actualPayload)); diff != "" {
 								t.Errorf("expect payload match:\n%s", diff)
 							}
 
@@ -925,7 +924,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 						t.Fatalf("expect checksum metadata %t, got %t, %v", e, a, computedMetadata)
 					}
 					if c.expectChecksumMetadata != nil {
-						if diff := cmp.Diff(c.expectChecksumMetadata, computedMetadata); diff != "" {
+						if diff := cmpDiff(c.expectChecksumMetadata, computedMetadata); diff != "" {
 							t.Errorf("expect checksum metadata match\n%s", diff)
 						}
 					}
