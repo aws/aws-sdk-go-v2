@@ -1,9 +1,8 @@
 package config
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestEndpointMode_SetFromString(t *testing.T) {
@@ -43,8 +42,8 @@ func TestEndpointMode_SetFromString(t *testing.T) {
 			if err := em.SetFromString(tt.Value); (err != nil) != tt.WantErr {
 				t.Fatalf("WantErr=%v, got err=%v", tt.WantErr, err)
 			}
-			if diff := cmp.Diff(em, tt.Expect); len(diff) > 0 {
-				t.Errorf(diff)
+			if !reflect.DeepEqual(tt.Expect, em) {
+				t.Errorf("%v != %v", tt.Expect, em)
 			}
 		})
 	}
