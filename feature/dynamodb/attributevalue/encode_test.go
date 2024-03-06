@@ -7,12 +7,8 @@ import (
 	"testing"
 	"time"
 
-	smithydocument "github.com/aws/smithy-go/document"
-	"github.com/google/go-cmp/cmp/cmpopts"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestMarshalShared(t *testing.T) {
@@ -111,7 +107,7 @@ func TestMarshalListOmitEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
+	if diff := cmpDiff(expect, actual); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -147,7 +143,7 @@ func TestMarshalMapOmitEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
+	if diff := cmpDiff(expect, actual); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -177,7 +173,7 @@ func TestMarshalListNullEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
+	if diff := cmpDiff(expect, actual); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -215,7 +211,7 @@ func TestMarshalMapNullEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
+	if diff := cmpDiff(expect, actual); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -411,7 +407,7 @@ func TestMarshalTime_S(t *testing.T) {
 					}},
 				},
 			}
-			if diff := cmp.Diff(expectedValue, actual, getIgnoreAVUnexportedOptions()...); diff != "" {
+			if diff := cmpDiff(expectedValue, actual); diff != "" {
 				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
@@ -469,7 +465,7 @@ func TestMarshalTime_N(t *testing.T) {
 					}},
 				},
 			}
-			if diff := cmp.Diff(expectedValue, actual, getIgnoreAVUnexportedOptions()...); diff != "" {
+			if diff := cmpDiff(expectedValue, actual); diff != "" {
 				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
@@ -613,7 +609,7 @@ func TestMarshalMap_keyTypes(t *testing.T) {
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
 			}
-			if diff := cmp.Diff(c.expectAV, av, getIgnoreAVUnexportedOptions()...); diff != "" {
+			if diff := cmpDiff(c.expectAV, av); diff != "" {
 				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
