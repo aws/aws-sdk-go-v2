@@ -1,13 +1,12 @@
 package expression
 
 import (
+	"reflect"
 	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 // opeErrorMode will help with error cases and checking error types
@@ -320,21 +319,8 @@ func TestBuildOperand(t *testing.T) {
 				t.Fatalf("expect no error, got unexpected Error %q", err)
 			}
 
-			cmpOptions := cmp.Options{
-				cmp.AllowUnexported(exprNode{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberM{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberN{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberNS{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberBOOL{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberB{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberBS{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberL{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberS{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberSS{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberNULL{}),
-			}
-			if diff := cmp.Diff(c.expected, operand.exprNode, cmpOptions...); diff != "" {
-				t.Errorf("expect operand match\n%s", diff)
+			if !reflect.DeepEqual(c.expected, operand.exprNode) {
+				t.Errorf("expect operand match\n%v != %v", c.expected, operand.exprNode)
 			}
 		})
 	}
