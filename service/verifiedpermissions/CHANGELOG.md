@@ -1,3 +1,7 @@
+# v1.11.0 (2024-03-06)
+
+* **Feature**: Deprecating details in favor of configuration for GetIdentitySource and ListIdentitySources APIs.
+
 # v1.10.1 (2024-02-23)
 
 * **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.

@@ -1,8 +1,0 @@
-{
-    "id": "e9090eac-e4ba-4a4f-8998-81c3b15fb8c0",
-    "type": "feature",
-    "description": "Deprecating details in favor of configuration for GetIdentitySource and ListIdentitySources APIs.",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "5b1d46a4-ef2b-4344-a516-5b6a0cc41195",
-    "type": "documentation",
-    "description": "Update for documentation only. Covers port ranges, definition updates for data sharing, and definition updates to cluster-snapshot documentation.",
-    "modules": [
-        "service/redshift"
-    ]
-}

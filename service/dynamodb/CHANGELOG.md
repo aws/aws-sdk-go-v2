@@ -1,3 +1,7 @@
+# v1.30.3 (2024-03-06)
+
+* **Documentation**: Doc only updates for DynamoDB documentation
+
 # v1.30.2 (2024-03-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.26.2 (2024-03-06)
+
+* **Documentation**: Amazon MWAA adds support for Apache Airflow v2.8.1.
+
 # v1.26.1 (2024-02-23)
 
 * **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.

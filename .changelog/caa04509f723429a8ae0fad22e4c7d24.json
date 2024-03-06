@@ -1,8 +1,0 @@
-{
-    "id": "caa04509-f723-429a-8ae0-fad22e4c7d24",
-    "type": "feature",
-    "description": "Add PENDING status to Lifecycle Execution resource status. Add StartTime and EndTime to ListLifecycleExecutionResource API response.",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

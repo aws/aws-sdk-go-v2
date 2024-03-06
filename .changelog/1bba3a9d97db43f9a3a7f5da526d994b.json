@@ -1,8 +1,0 @@
-{
-    "id": "1bba3a9d-97db-43f9-a3a7-f5da526d994b",
-    "type": "feature",
-    "description": "Updated the input of CreateDBCluster and ModifyDBCluster to support setting CA certificates. Updated the output of DescribeDBCluster to show current CA certificate setting value.",
-    "modules": [
-        "service/rds"
-    ]
-}

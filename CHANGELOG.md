@@ -1,3 +1,22 @@
+# Release (2024-03-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.30.3](service/dynamodb/CHANGELOG.md#v1303-2024-03-06)
+  * **Documentation**: Doc only updates for DynamoDB documentation
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.33.0](service/imagebuilder/CHANGELOG.md#v1330-2024-03-06)
+  * **Feature**: Add PENDING status to Lifecycle Execution resource status. Add StartTime and EndTime to ListLifecycleExecutionResource API response.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.26.2](service/mwaa/CHANGELOG.md#v1262-2024-03-06)
+  * **Documentation**: Amazon MWAA adds support for Apache Airflow v2.8.1.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.75.0](service/rds/CHANGELOG.md#v1750-2024-03-06)
+  * **Feature**: Updated the input of CreateDBCluster and ModifyDBCluster to support setting CA certificates. Updated the output of DescribeDBCluster to show current CA certificate setting value.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.43.2](service/redshift/CHANGELOG.md#v1432-2024-03-06)
+  * **Documentation**: Update for documentation only. Covers port ranges, definition updates for data sharing, and definition updates to cluster-snapshot documentation.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.11.0](service/verifiedpermissions/CHANGELOG.md#v1110-2024-03-06)
+  * **Feature**: Deprecating details in favor of configuration for GetIdentitySource and ListIdentitySources APIs.
+
 # Release (2024-03-05)
 
 ## General Highlights
