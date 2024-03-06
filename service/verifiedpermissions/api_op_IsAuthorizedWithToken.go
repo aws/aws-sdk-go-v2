@@ -53,8 +53,9 @@ type IsAuthorizedWithTokenInput struct {
 
 	// Specifies an access token for the principal to be authorized. This token is
 	// provided to you by the identity provider (IdP) associated with the specified
-	// identity source. You must specify either an AccessToken , or an IdentityToken ,
-	// or both.
+	// identity source. You must specify either an accessToken , an identityToken , or
+	// both. Must be an access token. Verified Permissions returns an error if the
+	// token_use claim in the submitted token isn't access .
 	AccessToken *string
 
 	// Specifies the requested action to be authorized. Is the specified principal
@@ -75,8 +76,9 @@ type IsAuthorizedWithTokenInput struct {
 
 	// Specifies an identity token for the principal to be authorized. This token is
 	// provided to you by the identity provider (IdP) associated with the specified
-	// identity source. You must specify either an AccessToken or an IdentityToken , or
-	// both.
+	// identity source. You must specify either an accessToken , an identityToken , or
+	// both. Must be an ID token. Verified Permissions returns an error if the
+	// token_use claim in the submitted token isn't id .
 	IdentityToken *string
 
 	// Specifies the resource for which the authorization decision is made. For

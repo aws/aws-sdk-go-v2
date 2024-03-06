@@ -14,8 +14,8 @@ import (
 
 // Modifies the validation setting for a policy store. Verified Permissions is
 // eventually consistent (https://wikipedia.org/wiki/Eventual_consistency) . It can
-// take a few seconds for a new or changed element to be propagate through the
-// service and be visible in the results of other Verified Permissions operations.
+// take a few seconds for a new or changed element to propagate through the service
+// and be visible in the results of other Verified Permissions operations.
 func (c *Client) UpdatePolicyStore(ctx context.Context, params *UpdatePolicyStoreInput, optFns ...func(*Options)) (*UpdatePolicyStoreOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyStoreInput{}

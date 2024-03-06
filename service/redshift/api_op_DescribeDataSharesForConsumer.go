@@ -30,8 +30,8 @@ func (c *Client) DescribeDataSharesForConsumer(ctx context.Context, params *Desc
 
 type DescribeDataSharesForConsumerInput struct {
 
-	// The Amazon Resource Name (ARN) of the consumer that returns in the list of
-	// datashares.
+	// The Amazon Resource Name (ARN) of the consumer namespace that returns in the
+	// list of datashares.
 	ConsumerArn *string
 
 	// An optional parameter that specifies the starting point to return a set of

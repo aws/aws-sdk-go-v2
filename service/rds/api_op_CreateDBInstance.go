@@ -90,42 +90,42 @@ type CreateDBInstanceInput struct {
 	// following:
 	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40 to
 	//   65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.
-	//   - Provisioned IOPS storage (io1): Must be an integer from 40 to 65536 for RDS
-	//   Custom for Oracle, 16384 for RDS Custom for SQL Server.
+	//   - Provisioned IOPS storage (io1, io2): Must be an integer from 40 to 65536
+	//   for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.
 	// RDS for Db2 Constraints to the amount of storage for each storage type are the
 	// following:
-	//   - General Purpose (SSD) storage (gp3): Must be an integer from 20 to 64000.
-	//   - Provisioned IOPS storage (io1): Must be an integer from 100 to 64000.
+	//   - General Purpose (SSD) storage (gp3): Must be an integer from 20 to 65536.
+	//   - Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.
 	// RDS for MariaDB Constraints to the amount of storage for each storage type are
 	// the following:
 	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to
 	//   65536.
-	//   - Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//   - Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.
 	//   - Magnetic storage (standard): Must be an integer from 5 to 3072.
 	// RDS for MySQL Constraints to the amount of storage for each storage type are
 	// the following:
 	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to
 	//   65536.
-	//   - Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//   - Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.
 	//   - Magnetic storage (standard): Must be an integer from 5 to 3072.
 	// RDS for Oracle Constraints to the amount of storage for each storage type are
 	// the following:
 	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to
 	//   65536.
-	//   - Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//   - Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.
 	//   - Magnetic storage (standard): Must be an integer from 10 to 3072.
 	// RDS for PostgreSQL Constraints to the amount of storage for each storage type
 	// are the following:
 	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to
 	//   65536.
-	//   - Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//   - Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.
 	//   - Magnetic storage (standard): Must be an integer from 5 to 3072.
 	// RDS for SQL Server Constraints to the amount of storage for each storage type
 	// are the following:
 	//   - General Purpose (SSD) storage (gp2, gp3):
 	//   - Enterprise and Standard editions: Must be an integer from 20 to 16384.
 	//   - Web and Express editions: Must be an integer from 20 to 16384.
-	//   - Provisioned IOPS storage (io1):
+	//   - Provisioned IOPS storage (io1, io2):
 	//   - Enterprise and Standard editions: Must be an integer from 100 to 16384.
 	//   - Web and Express editions: Must be an integer from 100 to 16384.
 	//   - Magnetic storage (standard):
@@ -673,11 +673,11 @@ type CreateDBInstanceInput struct {
 	// DB instances.
 	StorageThroughput *int32
 
-	// The storage type to associate with the DB instance. If you specify io1 or gp3 ,
-	// you must also include a value for the Iops parameter. This setting doesn't
-	// apply to Amazon Aurora DB instances. Storage is managed by the DB cluster. Valid
-	// Values: gp2 | gp3 | io1 | standard Default: io1 , if the Iops parameter is
-	// specified. Otherwise, gp2 .
+	// The storage type to associate with the DB instance. If you specify io1 , io2 ,
+	// or gp3 , you must also include a value for the Iops parameter. This setting
+	// doesn't apply to Amazon Aurora DB instances. Storage is managed by the DB
+	// cluster. Valid Values: gp2 | gp3 | io1 | io2 | standard Default: io1 , if the
+	// Iops parameter is specified. Otherwise, gp2 .
 	StorageType *string
 
 	// Tags to assign to the DB instance.

@@ -63,6 +63,42 @@ func ExampleConfiguration_outputUsage() {
 
 var _ *types.CognitoUserPoolConfiguration
 
+func ExampleConfigurationDetail_outputUsage() {
+	var union types.ConfigurationDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConfigurationDetailMemberCognitoUserPoolConfiguration:
+		_ = v.Value // Value is types.CognitoUserPoolConfigurationDetail
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CognitoUserPoolConfigurationDetail
+
+func ExampleConfigurationItem_outputUsage() {
+	var union types.ConfigurationItem
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConfigurationItemMemberCognitoUserPoolConfiguration:
+		_ = v.Value // Value is types.CognitoUserPoolConfigurationItem
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CognitoUserPoolConfigurationItem
+
 func ExampleContextDefinition_outputUsage() {
 	var union types.ContextDefinition
 	// type switches can be used to check the union value

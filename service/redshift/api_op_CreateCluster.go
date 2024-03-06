@@ -245,7 +245,12 @@ type CreateClusterInput struct {
 	// The port number on which the cluster accepts incoming connections. The cluster
 	// is accessible only via the JDBC and ODBC connection strings. Part of the
 	// connection string requires the port on which the cluster will listen for
-	// incoming connections. Default: 5439 Valid Values: 1150-65535
+	// incoming connections. Default: 5439 Valid Values:
+	//   - For clusters with ra3 nodes - Select a port within the ranges 5431-5455 or
+	//   8191-8215 . (If you have an existing cluster with ra3 nodes, it isn't required
+	//   that you change the port to these ranges.)
+	//   - For clusters with ds2 or dc2 nodes - Select a port within the range
+	//   1150-65535 .
 	Port *int32
 
 	// The weekly time range (in UTC) during which automated cluster maintenance can

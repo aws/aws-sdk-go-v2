@@ -42,9 +42,13 @@ type AuthorizeSnapshotAccessInput struct {
 	// The Amazon Resource Name (ARN) of the snapshot to authorize access to.
 	SnapshotArn *string
 
-	// The identifier of the cluster the snapshot was created from. This parameter is
-	// required if your IAM user has a policy containing a snapshot resource element
-	// that specifies anything other than * for the cluster name.
+	// The identifier of the cluster the snapshot was created from.
+	//   - If the snapshot to access doesn't exist and the associated IAM policy
+	//   doesn't allow access to all (*) snapshots - This parameter is required.
+	//   Otherwise, permissions aren't available to check if the snapshot exists.
+	//   - If the snapshot to access exists - This parameter isn't required. Redshift
+	//   can retrieve the cluster identifier and use it to validate snapshot
+	//   authorization.
 	SnapshotClusterIdentifier *string
 
 	// The identifier of the snapshot the account is authorized to restore.

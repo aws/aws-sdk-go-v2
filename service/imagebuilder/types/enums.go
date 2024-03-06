@@ -313,6 +313,7 @@ const (
 	LifecycleExecutionStatusCancelling LifecycleExecutionStatus = "CANCELLING"
 	LifecycleExecutionStatusFailed     LifecycleExecutionStatus = "FAILED"
 	LifecycleExecutionStatusSuccess    LifecycleExecutionStatus = "SUCCESS"
+	LifecycleExecutionStatusPending    LifecycleExecutionStatus = "PENDING"
 )
 
 // Values returns all known values for LifecycleExecutionStatus. Note that this
@@ -325,6 +326,7 @@ func (LifecycleExecutionStatus) Values() []LifecycleExecutionStatus {
 		"CANCELLING",
 		"FAILED",
 		"SUCCESS",
+		"PENDING",
 	}
 }
 

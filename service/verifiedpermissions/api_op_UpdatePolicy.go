@@ -22,7 +22,7 @@ import (
 //     policy causes Verified Permissions to validate the policy against the schema in
 //     the policy store. If the updated static policy doesn't pass validation, the
 //     operation fails and the update isn't stored.
-//   - When you edit a static policy, You can change only certain elements of a
+//   - When you edit a static policy, you can change only certain elements of a
 //     static policy:
 //   - The action referenced by the policy.
 //   - A condition clause, such as when and unless. You can't change these
@@ -34,7 +34,7 @@ import (
 //   - To update a template-linked policy, you must update the template instead.
 //
 // Verified Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
-// . It can take a few seconds for a new or changed element to be propagate through
+// . It can take a few seconds for a new or changed element to propagate through
 // the service and be visible in the results of other Verified Permissions
 // operations.
 func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, optFns ...func(*Options)) (*UpdatePolicyOutput, error) {

@@ -28,7 +28,7 @@ type ArchivalSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an attribute for describing the key schema for the table and indexes.
+// Represents an attribute for describing the schema for the table and indexes.
 type AttributeDefinition struct {
 
 	// A name for the attribute.
@@ -1968,6 +1968,7 @@ type Projection struct {
 	//   - INCLUDE - In addition to the attributes described in KEYS_ONLY , the
 	//   secondary index will include other non-key attributes that you specify.
 	//   - ALL - All of the table attributes are projected into the index.
+	// When using the DynamoDB console, ALL is selected by default.
 	ProjectionType ProjectionType
 
 	noSmithyDocumentSerde

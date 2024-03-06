@@ -204,7 +204,12 @@ type ModifyClusterInput struct {
 	// than 0 .
 	NumberOfNodes *int32
 
-	// The option to change the port of an Amazon Redshift cluster.
+	// The option to change the port of an Amazon Redshift cluster. Valid Values:
+	//   - For clusters with ra3 nodes - Select a port within the ranges 5431-5455 or
+	//   8191-8215 . (If you have an existing cluster with ra3 nodes, it isn't required
+	//   that you change the port to these ranges.)
+	//   - For clusters with ds2 or dc2 nodes - Select a port within the range
+	//   1150-65535 .
 	Port *int32
 
 	// The weekly time range (in UTC) during which system maintenance can occur, if

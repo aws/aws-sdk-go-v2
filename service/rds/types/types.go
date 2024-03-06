@@ -286,6 +286,13 @@ type ClusterPendingModifiedValues struct {
 	// The number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod *int32
 
+	// Returns the details of the DB instance’s server certificate. For more
+	// information, see Using SSL/TLS to encrypt a connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and Using SSL/TLS to encrypt a connection to a DB
+	// cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
+	CertificateDetails *CertificateDetails
+
 	// The DBClusterIdentifier value for the DB cluster.
 	DBClusterIdentifier *string
 
@@ -508,6 +515,13 @@ type DBCluster struct {
 	// v1, see Using Amazon Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 	// in the Amazon Aurora User Guide.
 	Capacity *int32
+
+	// Returns the details of the DB instance’s server certificate. For more
+	// information, see Using SSL/TLS to encrypt a connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and Using SSL/TLS to encrypt a connection to a DB
+	// cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
+	CertificateDetails *CertificateDetails
 
 	// If present, specifies the name of the character set that this cluster is
 	// associated with.
@@ -4646,7 +4660,7 @@ type ValidStorageOptions struct {
 	// 0-0.25.
 	StorageThroughputToIopsRatio []DoubleRange
 
-	// The valid storage types for your DB instance. For example: gp2, gp3, io1.
+	// The valid storage types for your DB instance. For example: gp2, gp3, io1, io2.
 	StorageType *string
 
 	// Indicates whether or not Amazon RDS can automatically scale storage for DB

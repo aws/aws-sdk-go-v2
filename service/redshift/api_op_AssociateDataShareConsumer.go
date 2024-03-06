@@ -31,8 +31,7 @@ func (c *Client) AssociateDataShareConsumer(ctx context.Context, params *Associa
 
 type AssociateDataShareConsumerInput struct {
 
-	// The Amazon Resource Name (ARN) of the datashare that the consumer is to use
-	// with the account or the namespace.
+	// The Amazon Resource Name (ARN) of the datashare that the consumer is to use.
 	//
 	// This member is required.
 	DataShareArn *string
@@ -44,7 +43,7 @@ type AssociateDataShareConsumerInput struct {
 	// account.
 	AssociateEntireAccount *bool
 
-	// The Amazon Resource Name (ARN) of the consumer that is associated with the
+	// The Amazon Resource Name (ARN) of the consumer namespace associated with the
 	// datashare.
 	ConsumerArn *string
 
@@ -61,10 +60,7 @@ type AssociateDataShareConsumerOutput struct {
 	// accessible cluster.
 	AllowPubliclyAccessibleConsumers *bool
 
-	// An Amazon Resource Name (ARN) that references the datashare that is owned by a
-	// specific namespace of the producer cluster. A datashare ARN is in the
-	// arn:aws:redshift:{region}:{account-id}:{datashare}:{namespace-guid}/{datashare-name}
-	// format.
+	// The Amazon Resource Name (ARN) of the datashare that the consumer is to use.
 	DataShareArn *string
 
 	// A value that specifies when the datashare has an association between producer
@@ -74,7 +70,7 @@ type AssociateDataShareConsumerOutput struct {
 	// The identifier of a datashare to show its managing entity.
 	ManagedBy *string
 
-	// The Amazon Resource Name (ARN) of the producer.
+	// The Amazon Resource Name (ARN) of the producer namespace.
 	ProducerArn *string
 
 	// Metadata pertaining to the operation's result.

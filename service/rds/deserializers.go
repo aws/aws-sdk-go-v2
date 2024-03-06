@@ -26709,6 +26709,12 @@ func awsAwsquery_deserializeDocumentClusterPendingModifiedValues(v **types.Clust
 				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("CertificateDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentCertificateDetails(&sv.CertificateDetails, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -27578,6 +27584,12 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 					return err
 				}
 				sv.Capacity = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("CertificateDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentCertificateDetails(&sv.CertificateDetails, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("CharacterSetName", t.Name.Local):

@@ -43,10 +43,7 @@ type RejectDataShareOutput struct {
 	// accessible cluster.
 	AllowPubliclyAccessibleConsumers *bool
 
-	// An Amazon Resource Name (ARN) that references the datashare that is owned by a
-	// specific namespace of the producer cluster. A datashare ARN is in the
-	// arn:aws:redshift:{region}:{account-id}:{datashare}:{namespace-guid}/{datashare-name}
-	// format.
+	// The Amazon Resource Name (ARN) of the datashare that the consumer is to use.
 	DataShareArn *string
 
 	// A value that specifies when the datashare has an association between producer
@@ -56,7 +53,7 @@ type RejectDataShareOutput struct {
 	// The identifier of a datashare to show its managing entity.
 	ManagedBy *string
 
-	// The Amazon Resource Name (ARN) of the producer.
+	// The Amazon Resource Name (ARN) of the producer namespace.
 	ProducerArn *string
 
 	// Metadata pertaining to the operation's result.

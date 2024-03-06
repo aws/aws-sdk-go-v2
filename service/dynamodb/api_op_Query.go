@@ -137,7 +137,7 @@ type QueryInput struct {
 	// key attributes. You cannot define a filter expression based on a partition key
 	// or a sort key. A FilterExpression is applied after the items have already been
 	// read; the process of filtering does not consume any additional read capacity
-	// units. For more information, see Filter Expressions (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression)
+	// units. For more information, see Filter Expressions (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.FilterExpression.html)
 	// in the Amazon DynamoDB Developer Guide.
 	FilterExpression *string
 

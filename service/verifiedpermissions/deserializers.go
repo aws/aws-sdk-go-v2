@@ -3645,6 +3645,194 @@ func awsAwsjson10_deserializeDocumentClientIds(v *[]string, value interface{}) e
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationDetail(v **types.CognitoUserPoolConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CognitoUserPoolConfigurationDetail
+	if *v == nil {
+		sv = &types.CognitoUserPoolConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientIds":
+			if err := awsAwsjson10_deserializeDocumentClientIds(&sv.ClientIds, value); err != nil {
+				return err
+			}
+
+		case "issuer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Issuer to be of type string, got %T instead", value)
+				}
+				sv.Issuer = ptr.String(jtv)
+			}
+
+		case "userPoolArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserPoolArn to be of type string, got %T instead", value)
+				}
+				sv.UserPoolArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationItem(v **types.CognitoUserPoolConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CognitoUserPoolConfigurationItem
+	if *v == nil {
+		sv = &types.CognitoUserPoolConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientIds":
+			if err := awsAwsjson10_deserializeDocumentClientIds(&sv.ClientIds, value); err != nil {
+				return err
+			}
+
+		case "issuer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Issuer to be of type string, got %T instead", value)
+				}
+				sv.Issuer = ptr.String(jtv)
+			}
+
+		case "userPoolArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserPoolArn to be of type string, got %T instead", value)
+				}
+				sv.UserPoolArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentConfigurationDetail(v *types.ConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ConfigurationDetail
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "cognitoUserPoolConfiguration":
+			var mv types.CognitoUserPoolConfigurationDetail
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationDetail(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationDetailMemberCognitoUserPoolConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentConfigurationItem(v *types.ConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ConfigurationItem
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "cognitoUserPoolConfiguration":
+			var mv types.CognitoUserPoolConfigurationItem
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationItem(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationItemMemberCognitoUserPoolConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4044,6 +4232,11 @@ func awsAwsjson10_deserializeDocumentIdentitySourceItem(v **types.IdentitySource
 
 	for key, value := range shape {
 		switch key {
+		case "configuration":
+			if err := awsAwsjson10_deserializeDocumentConfigurationItem(&sv.Configuration, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5952,6 +6145,11 @@ func awsAwsjson10_deserializeOpDocumentGetIdentitySourceOutput(v **GetIdentitySo
 
 	for key, value := range shape {
 		switch key {
+		case "configuration":
+			if err := awsAwsjson10_deserializeDocumentConfigurationDetail(&sv.Configuration, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)

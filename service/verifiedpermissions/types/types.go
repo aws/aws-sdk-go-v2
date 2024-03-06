@@ -167,7 +167,7 @@ type BatchIsAuthorizedOutputItem struct {
 // The configuration for an identity source that represents a connection to an
 // Amazon Cognito user pool used as an identity provider for Verified Permissions.
 // This data type is used as a field that is part of an Configuration (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html)
-// structure that is used as a parameter to the Configuration (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html)
+// structure that is used as a parameter to CreateIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html)
 // . Example:
 // "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
 // ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
@@ -184,6 +184,72 @@ type CognitoUserPoolConfiguration struct {
 	// The unique application client IDs that are associated with the specified Amazon
 	// Cognito user pool. Example: "ClientIds": ["&ExampleCogClientId;"]
 	ClientIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an identity source that represents a connection to an
+// Amazon Cognito user pool used as an identity provider for Verified Permissions.
+// This data type is used as a field that is part of an ConfigurationDetail (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html)
+// structure that is part of the response to GetIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html)
+// . Example:
+// "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
+type CognitoUserPoolConfigurationDetail struct {
+
+	// The unique application client IDs that are associated with the specified Amazon
+	// Cognito user pool. Example: "clientIds": ["&ExampleCogClientId;"]
+	//
+	// This member is required.
+	ClientIds []string
+
+	// The OpenID Connect (OIDC) issuer ID of the Amazon Cognito user pool that
+	// contains the identities to be authorized. Example: "issuer":
+	// "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5"
+	//
+	// This member is required.
+	Issuer *string
+
+	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the Amazon Cognito user pool that contains the identities to be authorized.
+	// Example: "userPoolArn":
+	// "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"
+	//
+	// This member is required.
+	UserPoolArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an identity source that represents a connection to an
+// Amazon Cognito user pool used as an identity provider for Verified Permissions.
+// This data type is used as a field that is part of the ConfigurationItem (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html)
+// structure that is part of the response to ListIdentitySources (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html)
+// . Example:
+// "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
+type CognitoUserPoolConfigurationItem struct {
+
+	// The unique application client IDs that are associated with the specified Amazon
+	// Cognito user pool. Example: "clientIds": ["&ExampleCogClientId;"]
+	//
+	// This member is required.
+	ClientIds []string
+
+	// The OpenID Connect (OIDC) issuer ID of the Amazon Cognito user pool that
+	// contains the identities to be authorized. Example: "issuer":
+	// "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5"
+	//
+	// This member is required.
+	Issuer *string
+
+	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// of the Amazon Cognito user pool that contains the identities to be authorized.
+	// Example: "userPoolArn":
+	// "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"
+	//
+	// This member is required.
+	UserPoolArn *string
 
 	noSmithyDocumentSerde
 }
@@ -214,6 +280,56 @@ type ConfigurationMemberCognitoUserPoolConfiguration struct {
 }
 
 func (*ConfigurationMemberCognitoUserPoolConfiguration) isConfiguration() {}
+
+// Contains configuration information about an identity source. This data type is
+// a response parameter to the GetIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html)
+// operation.
+//
+// The following types satisfy this interface:
+//
+//	ConfigurationDetailMemberCognitoUserPoolConfiguration
+type ConfigurationDetail interface {
+	isConfigurationDetail()
+}
+
+// Contains configuration details of a Amazon Cognito user pool that Verified
+// Permissions can use as a source of authenticated identities as entities. It
+// specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+// of a Amazon Cognito user pool and one or more application client IDs. Example:
+// "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}}
+type ConfigurationDetailMemberCognitoUserPoolConfiguration struct {
+	Value CognitoUserPoolConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationDetailMemberCognitoUserPoolConfiguration) isConfigurationDetail() {}
+
+// Contains configuration information about an identity source. This data type is
+// a response parameter to the ListIdentitySources (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html)
+// operation.
+//
+// The following types satisfy this interface:
+//
+//	ConfigurationItemMemberCognitoUserPoolConfiguration
+type ConfigurationItem interface {
+	isConfigurationItem()
+}
+
+// Contains configuration details of a Amazon Cognito user pool that Verified
+// Permissions can use as a source of authenticated identities as entities. It
+// specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+// of a Amazon Cognito user pool and one or more application client IDs. Example:
+// "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}}
+type ConfigurationItemMemberCognitoUserPoolConfiguration struct {
+	Value CognitoUserPoolConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationItemMemberCognitoUserPoolConfiguration) isConfigurationItem() {}
 
 // Contains additional details about the context of the request. Verified
 // Permissions evaluates this information in an authorization request as part of
@@ -378,12 +494,16 @@ type EvaluationErrorItem struct {
 }
 
 // A structure that contains configuration of the identity source. This data type
-// is used as a response parameter for the CreateIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html)
-// operation.
+// was a response parameter for the GetIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html)
+// operation. Replaced by ConfigurationDetail (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html)
+// .
 type IdentitySourceDetails struct {
 
 	// The application client IDs associated with the specified Amazon Cognito user
 	// pool that are enabled for this identity source.
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.clientIds
 	ClientIds []string
 
 	// The well-known URL that points to this user pool's OIDC discovery endpoint.
@@ -391,23 +511,30 @@ type IdentitySourceDetails struct {
 	// for both the Amazon Web Services Region and the user pool identifier with those
 	// appropriate for this user pool.
 	// https://cognito-idp.<region>.amazonaws.com/<user-pool-id>/.well-known/openid-configuration
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.issuer
 	DiscoveryUrl *string
 
 	// A string that identifies the type of OIDC service represented by this identity
 	// source. At this time, the only valid value is cognito .
+	//
+	// Deprecated: This attribute has been replaced by configuration
 	OpenIdIssuer OpenIdIssuer
 
 	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the Amazon Cognito user pool whose identities are accessible to this Verified
 	// Permissions policy store.
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.userPoolArn
 	UserPoolArn *string
 
 	noSmithyDocumentSerde
 }
 
 // A structure that defines characteristics of an identity source that you can use
-// to filter. This data type is used as a request parameter for the
-// ListIdentityStores (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html)
+// to filter. This data type is a request parameter for the ListIdentityStores (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html)
 // operation.
 type IdentitySourceFilter struct {
 
@@ -418,8 +545,8 @@ type IdentitySourceFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that defines an identity source. This data type is used as a
-// request parameter for the ListIdentityStores (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html)
+// A structure that defines an identity source. This data type is a response
+// parameter to the ListIdentitySources (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html)
 // operation.
 type IdentitySourceItem struct {
 
@@ -427,11 +554,6 @@ type IdentitySourceItem struct {
 	//
 	// This member is required.
 	CreatedDate *time.Time
-
-	// A structure that contains the details of the associated identity provider (IdP).
-	//
-	// This member is required.
-	Details *IdentitySourceItemDetails
 
 	// The unique identifier of the identity source.
 	//
@@ -454,16 +576,29 @@ type IdentitySourceItem struct {
 	// This member is required.
 	PrincipalEntityType *string
 
+	// Contains configuration information about an identity source.
+	Configuration ConfigurationItem
+
+	// A structure that contains the details of the associated identity provider (IdP).
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration
+	Details *IdentitySourceItemDetails
+
 	noSmithyDocumentSerde
 }
 
 // A structure that contains configuration of the identity source. This data type
-// is used as a response parameter for the CreateIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html)
-// operation.
+// was a response parameter for the ListIdentitySources (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html)
+// operation. Replaced by ConfigurationItem (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html)
+// .
 type IdentitySourceItemDetails struct {
 
 	// The application client IDs associated with the specified Amazon Cognito user
 	// pool that are enabled for this identity source.
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.clientIds
 	ClientIds []string
 
 	// The well-known URL that points to this user pool's OIDC discovery endpoint.
@@ -471,14 +606,22 @@ type IdentitySourceItemDetails struct {
 	// for both the Amazon Web Services Region and the user pool identifier with those
 	// appropriate for this user pool.
 	// https://cognito-idp.<region>.amazonaws.com/<user-pool-id>/.well-known/openid-configuration
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.issuer
 	DiscoveryUrl *string
 
 	// A string that identifies the type of OIDC service represented by this identity
 	// source. At this time, the only valid value is cognito .
+	//
+	// Deprecated: This attribute has been replaced by configuration
 	OpenIdIssuer OpenIdIssuer
 
 	// The Amazon Cognito user pool whose identities are accessible to this Verified
 	// Permissions policy store.
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.userPoolArn
 	UserPoolArn *string
 
 	noSmithyDocumentSerde
@@ -824,7 +967,7 @@ type TemplateLinkedPolicyDefinition struct {
 }
 
 // Contains information about a policy that was created by instantiating a policy
-// template. This
+// template.
 type TemplateLinkedPolicyDefinitionDetail struct {
 
 	// The unique identifier of the policy template used to create this policy.
@@ -1006,6 +1149,8 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAttributeValue()         {}
 func (*UnknownUnionMember) isConfiguration()          {}
+func (*UnknownUnionMember) isConfigurationDetail()    {}
+func (*UnknownUnionMember) isConfigurationItem()      {}
 func (*UnknownUnionMember) isContextDefinition()      {}
 func (*UnknownUnionMember) isEntitiesDefinition()     {}
 func (*UnknownUnionMember) isEntityReference()        {}

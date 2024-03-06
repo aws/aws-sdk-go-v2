@@ -25,7 +25,7 @@ import (
 // 2019.11.21 (Current), see Updating global tables (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html)
 // . This operation only applies to Version 2017.11.29 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
 // of global tables. If you are using global tables Version 2019.11.21 (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
-// you can use DescribeTable (https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html)
+// you can use UpdateTable (https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html)
 // instead. Although you can use UpdateGlobalTable to add replicas and remove
 // replicas in a single request, for simplicity we recommend that you issue
 // separate requests for adding or removing replicas. If global secondary indexes

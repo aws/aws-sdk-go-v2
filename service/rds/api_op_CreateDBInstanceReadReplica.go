@@ -413,9 +413,10 @@ type CreateDBInstanceReadReplicaInput struct {
 	// doesn't apply to RDS Custom or Amazon Aurora DB instances.
 	StorageThroughput *int32
 
-	// The storage type to associate with the read replica. If you specify io1 or gp3 ,
-	// you must also include a value for the Iops parameter. Valid Values: gp2 | gp3 |
-	// io1 | standard Default: io1 if the Iops parameter is specified. Otherwise, gp2 .
+	// The storage type to associate with the read replica. If you specify io1 , io2 ,
+	// or gp3 , you must also include a value for the Iops parameter. Valid Values:
+	// gp2 | gp3 | io1 | io2 | standard Default: io1 if the Iops parameter is
+	// specified. Otherwise, gp2 .
 	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)

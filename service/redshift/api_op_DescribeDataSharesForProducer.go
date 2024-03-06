@@ -44,8 +44,8 @@ type DescribeDataSharesForProducerInput struct {
 	// records by retrying the command with the returned marker value.
 	MaxRecords *int32
 
-	// The Amazon Resource Name (ARN) of the producer that returns in the list of
-	// datashares.
+	// The Amazon Resource Name (ARN) of the producer namespace that returns in the
+	// list of datashares.
 	ProducerArn *string
 
 	// An identifier giving the status of a datashare in the producer. If this field

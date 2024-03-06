@@ -37,8 +37,8 @@ type AuthorizeDataShareInput struct {
 	// This member is required.
 	ConsumerIdentifier *string
 
-	// The Amazon Resource Name (ARN) of the datashare that producers are to authorize
-	// sharing for.
+	// The Amazon Resource Name (ARN) of the datashare namespace that producers are to
+	// authorize sharing for.
 	//
 	// This member is required.
 	DataShareArn *string
@@ -55,10 +55,7 @@ type AuthorizeDataShareOutput struct {
 	// accessible cluster.
 	AllowPubliclyAccessibleConsumers *bool
 
-	// An Amazon Resource Name (ARN) that references the datashare that is owned by a
-	// specific namespace of the producer cluster. A datashare ARN is in the
-	// arn:aws:redshift:{region}:{account-id}:{datashare}:{namespace-guid}/{datashare-name}
-	// format.
+	// The Amazon Resource Name (ARN) of the datashare that the consumer is to use.
 	DataShareArn *string
 
 	// A value that specifies when the datashare has an association between producer
@@ -68,7 +65,7 @@ type AuthorizeDataShareOutput struct {
 	// The identifier of a datashare to show its managing entity.
 	ManagedBy *string
 
-	// The Amazon Resource Name (ARN) of the producer.
+	// The Amazon Resource Name (ARN) of the producer namespace.
 	ProducerArn *string
 
 	// Metadata pertaining to the operation's result.

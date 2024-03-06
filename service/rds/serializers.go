@@ -11535,6 +11535,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.Integer(*v.BackupRetentionPeriod)
 	}
 
+	if v.CACertificateIdentifier != nil {
+		objectKey := object.Key("CACertificateIdentifier")
+		objectKey.String(*v.CACertificateIdentifier)
+	}
+
 	if v.CharacterSetName != nil {
 		objectKey := object.Key("CharacterSetName")
 		objectKey.String(*v.CharacterSetName)
@@ -15041,6 +15046,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 	if v.BackupRetentionPeriod != nil {
 		objectKey := object.Key("BackupRetentionPeriod")
 		objectKey.Integer(*v.BackupRetentionPeriod)
+	}
+
+	if v.CACertificateIdentifier != nil {
+		objectKey := object.Key("CACertificateIdentifier")
+		objectKey.String(*v.CACertificateIdentifier)
 	}
 
 	if v.CloudwatchLogsExportConfiguration != nil {

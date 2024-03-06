@@ -196,7 +196,9 @@ type RestoreFromClusterSnapshotInput struct {
 	OwnerAccount *string
 
 	// The port number on which the cluster accepts connections. Default: The same
-	// port as the original cluster. Constraints: Must be between 1115 and 65535 .
+	// port as the original cluster. Valid values: For clusters with ds2 or dc2 nodes,
+	// must be within the range 1150 - 65535 . For clusters with ra3 nodes, must be
+	// within the ranges 5431 - 5455 or 8191 - 8215 .
 	Port *int32
 
 	// The weekly time range (in UTC) during which automated cluster maintenance can

@@ -19,7 +19,7 @@ import (
 // dynamically linked to the template. If the template changes, then any policies
 // that are linked to that template are immediately updated as well. Verified
 // Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
-// . It can take a few seconds for a new or changed element to be propagate through
+// . It can take a few seconds for a new or changed element to propagate through
 // the service and be visible in the results of other Verified Permissions
 // operations.
 func (c *Client) CreatePolicyTemplate(ctx context.Context, params *CreatePolicyTemplateInput, optFns ...func(*Options)) (*CreatePolicyTemplateOutput, error) {
@@ -57,7 +57,10 @@ type CreatePolicyTemplateInput struct {
 	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
 	// . If you don't provide this value, then Amazon Web Services generates a random
 	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// different parameters, the retry fails with an ConflictException error. Verified
+	// Permissions recognizes a ClientToken for eight hours. After eight hours, the
+	// next request with the same parameters performs the operation again regardless of
+	// the value of ClientToken .
 	ClientToken *string
 
 	// Specifies a description for the policy template.

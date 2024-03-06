@@ -51,11 +51,6 @@ type GetIdentitySourceOutput struct {
 	// This member is required.
 	CreatedDate *time.Time
 
-	// A structure that describes the configuration of the identity source.
-	//
-	// This member is required.
-	Details *types.IdentitySourceDetails
-
 	// The ID of the identity source.
 	//
 	// This member is required.
@@ -76,6 +71,15 @@ type GetIdentitySourceOutput struct {
 	//
 	// This member is required.
 	PrincipalEntityType *string
+
+	// Contains configuration information about an identity source.
+	Configuration types.ConfigurationDetail
+
+	// A structure that describes the configuration of the identity source.
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration
+	Details *types.IdentitySourceDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

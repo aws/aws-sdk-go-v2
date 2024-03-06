@@ -30,7 +30,7 @@ func (c *Client) DescribeDataShares(ctx context.Context, params *DescribeDataSha
 
 type DescribeDataSharesInput struct {
 
-	// The identifier of the datashare to describe details of.
+	// The Amazon resource name (ARN) of the datashare to describe details of.
 	DataShareArn *string
 
 	// An optional parameter that specifies the starting point to return a set of

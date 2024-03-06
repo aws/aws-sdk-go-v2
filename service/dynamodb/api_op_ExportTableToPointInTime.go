@@ -72,7 +72,8 @@ type ExportTableToPointInTimeInput struct {
 	IncrementalExportSpecification *types.IncrementalExportSpecification
 
 	// The ID of the Amazon Web Services account that owns the bucket the export will
-	// be stored in.
+	// be stored in. S3BucketOwner is a required parameter when exporting to a S3
+	// bucket in another account.
 	S3BucketOwner *string
 
 	// The Amazon S3 bucket prefix to use as the file name and path of the exported

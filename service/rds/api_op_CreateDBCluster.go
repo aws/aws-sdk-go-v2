@@ -91,6 +91,10 @@ type CreateDBClusterInput struct {
 	//   - Must be a value from 1 to 35.
 	BackupRetentionPeriod *int32
 
+	// The CA certificate identifier to use for the DB cluster's server certificate.
+	// Valid for Cluster Type: Multi-AZ DB clusters
+	CACertificateIdentifier *string
+
 	// The name of the character set ( CharacterSet ) to associate the DB cluster with.
 	// Valid for Cluster Type: Aurora DB clusters only
 	CharacterSetName *string

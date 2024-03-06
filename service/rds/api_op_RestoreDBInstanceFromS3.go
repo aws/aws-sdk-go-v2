@@ -337,9 +337,9 @@ type RestoreDBInstanceFromS3Input struct {
 	StorageThroughput *int32
 
 	// Specifies the storage type to be associated with the DB instance. Valid Values:
-	// gp2 | gp3 | io1 | standard If you specify io1 or gp3 , you must also include a
-	// value for the Iops parameter. Default: io1 if the Iops parameter is specified;
-	// otherwise gp2
+	// gp2 | gp3 | io1 | io2 | standard If you specify io1 , io2 , or gp3 , you must
+	// also include a value for the Iops parameter. Default: io1 if the Iops parameter
+	// is specified; otherwise gp2
 	StorageType *string
 
 	// A list of tags to associate with this DB instance. For more information, see

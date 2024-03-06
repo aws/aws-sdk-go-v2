@@ -1587,6 +1587,9 @@ type LifecycleExecutionResource struct {
 	// The action to take for the identified resource.
 	Action *LifecycleExecutionResourceAction
 
+	// The ending timestamp from the lifecycle action that was applied to the resource.
+	EndTime *time.Time
+
 	// For an impacted container image, this identifies a list of URIs for associated
 	// container images distributed to ECR repositories.
 	ImageUris []string
@@ -1604,6 +1607,10 @@ type LifecycleExecutionResource struct {
 	// A list of associated resource snapshots for the impacted resource if it’s an
 	// AMI.
 	Snapshots []LifecycleExecutionSnapshotResource
+
+	// The starting timestamp from the lifecycle action that was applied to the
+	// resource.
+	StartTime *time.Time
 
 	// The runtime state for the lifecycle execution.
 	State *LifecycleExecutionResourceState
@@ -1774,7 +1781,7 @@ type LifecyclePolicyDetailExclusionRules struct {
 	Amis *LifecyclePolicyDetailExclusionRulesAmis
 
 	// Contains a list of tags that Image Builder uses to skip lifecycle actions for
-	// resources that have them.
+	// Image Builder image resources that have them.
 	TagMap map[string]string
 
 	noSmithyDocumentSerde
@@ -1860,8 +1867,8 @@ type LifecyclePolicyResourceSelection struct {
 	// that the lifecycle policy applies to.
 	Recipes []LifecyclePolicyResourceSelectionRecipe
 
-	// A list of tags that are used as selection criteria for the resources that the
-	// lifecycle policy applies to.
+	// A list of tags that are used as selection criteria for the Image Builder image
+	// resources that the lifecycle policy applies to.
 	TagMap map[string]string
 
 	noSmithyDocumentSerde

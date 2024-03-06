@@ -94,6 +94,10 @@ type ModifyDBClusterInput struct {
 	//   - Must be a value from 1 to 35.
 	BackupRetentionPeriod *int32
 
+	// The CA certificate identifier to use for the DB cluster's server certificate.
+	// Valid for Cluster Type: Multi-AZ DB clusters
+	CACertificateIdentifier *string
+
 	// The configuration setting for the log types to be enabled for export to
 	// CloudWatch Logs for a specific DB cluster. Valid for Cluster Type: Aurora DB
 	// clusters and Multi-AZ DB clusters The following values are valid for each DB
