@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"reflect"
 	"strings"
 	"testing"
 	"time"
@@ -18,7 +19,6 @@ import (
 	"github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
-	"github.com/google/go-cmp/cmp"
 )
 
 const credsRespTmpl = `{
@@ -298,7 +298,7 @@ func TestProvider_HandleFailToRetrieve(t *testing.T) {
 			// Truncate time so it can be easily compared.
 			creds.Expires = creds.Expires.Truncate(time.Second)
 
-			if diff := cmp.Diff(c.expectCreds, creds); diff != "" {
+			if diff := cmpDiff(c.expectCreds, creds); diff != "" {
 				t.Errorf("expect creds match\n%s", diff)
 			}
 		})
@@ -359,9 +359,16 @@ func TestProvider_AdjustExpiresBy(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.expectCreds, creds); diff != "" {
+			if diff := cmpDiff(c.expectCreds, creds); diff != "" {
 				t.Errorf("expect creds match\n%s", diff)
 			}
 		})
 	}
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }
