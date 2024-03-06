@@ -2,14 +2,16 @@ package endpoints_test
 
 import (
 	"bytes"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/endpoints/v2"
-	"github.com/aws/smithy-go/logging"
-	"github.com/google/go-cmp/cmp"
+	"fmt"
 	"log"
+	"reflect"
 	"regexp"
 	"strconv"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/endpoints/v2"
+	"github.com/aws/smithy-go/logging"
 )
 
 type testCase struct {
@@ -1172,7 +1174,7 @@ func TestResolveEndpoint(t *testing.T) {
 					if (err != nil) != (tt.WantErr) {
 						t.Errorf("WantErr=%v, got error: %v", tt.WantErr, err)
 					}
-					if diff := cmp.Diff(tt.Expected, endpoint); len(diff) > 0 {
+					if diff := cmpDiff(tt.Expected, endpoint); len(diff) > 0 {
 						t.Error(diff)
 					}
 				})
@@ -1300,7 +1302,7 @@ func TestLogDeprecated(t *testing.T) {
 				return &logging.StandardLogger{
 						Logger: log.New(buffer, "", 0),
 					}, func(t *testing.T) {
-						if diff := cmp.Diff("WARN endpoint identifier \"bar\", url \"https://foo.bar.bar.tld\" marked as deprecated\n", buffer.String()); len(diff) > 0 {
+						if diff := cmpDiff("WARN endpoint identifier \"bar\", url \"https://foo.bar.bar.tld\" marked as deprecated\n", buffer.String()); len(diff) > 0 {
 							t.Errorf(diff)
 						}
 					}
@@ -1323,7 +1325,7 @@ func TestLogDeprecated(t *testing.T) {
 				return &logging.StandardLogger{
 						Logger: log.New(buffer, "", 0),
 					}, func(t *testing.T) {
-						if diff := cmp.Diff("WARN endpoint identifier \"bar\", url \"https://foo-fips.bar.bar.tld\" marked as deprecated\n", buffer.String()); len(diff) > 0 {
+						if diff := cmpDiff("WARN endpoint identifier \"bar\", url \"https://foo-fips.bar.bar.tld\" marked as deprecated\n", buffer.String()); len(diff) > 0 {
 							t.Errorf(diff)
 						}
 					}
@@ -1349,7 +1351,7 @@ func TestLogDeprecated(t *testing.T) {
 				t.Errorf("WantErr(%v), got error %v", tt.WantErr, err)
 			}
 
-			if diff := cmp.Diff(tt.Expected, endpoint); len(diff) > 0 {
+			if diff := cmpDiff(tt.Expected, endpoint); len(diff) > 0 {
 				t.Errorf(diff)
 			}
 
@@ -1358,4 +1360,11 @@ func TestLogDeprecated(t *testing.T) {
 			}
 		})
 	}
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

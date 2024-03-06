@@ -1,13 +1,13 @@
 package defaults
 
 import (
+	"fmt"
+	"reflect"
 	"strconv"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestConfigV1(t *testing.T) {
@@ -55,9 +55,16 @@ func TestConfigV1(t *testing.T) {
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
 			}
-			if diff := cmp.Diff(tt.Expected, got); len(diff) > 0 {
+			if diff := cmpDiff(tt.Expected, got); len(diff) > 0 {
 				t.Error(diff)
 			}
 		})
 	}
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

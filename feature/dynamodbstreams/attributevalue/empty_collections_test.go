@@ -1,13 +1,10 @@
 package attributevalue
 
 import (
-	smithydocument "github.com/aws/smithy-go/document"
-	"github.com/google/go-cmp/cmp/cmpopts"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
-	"github.com/google/go-cmp/cmp"
 )
 
 type testEmptyCollectionsNumericalScalars struct {
@@ -915,7 +912,7 @@ func TestEmptyCollectionsSpecialCases(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expected no err got %v", err)
 	}
-	if diff := cmp.Diff(expectedEncode, actualEncode, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
+	if diff := cmpDiff(expectedEncode, actualEncode); len(diff) != 0 {
 		t.Errorf("expected encode match\n%s", diff)
 	}
 
@@ -925,7 +922,7 @@ func TestEmptyCollectionsSpecialCases(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expected no err got %v", err)
 	}
-	if diff := cmp.Diff(expectedDecode, actualDecode); len(diff) != 0 {
+	if diff := cmpDiff(expectedDecode, actualDecode); len(diff) != 0 {
 		t.Errorf("expected dencode match\n%s", diff)
 	}
 }

@@ -15,7 +15,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestMetricsHeaderMiddleware(t *testing.T) {
@@ -427,7 +426,7 @@ func TestAttemptMiddleware(t *testing.T) {
 					t.Errorf("expect %v, got %v", tt.Err, err)
 				}
 			}
-			if diff := cmp.Diff(recorded, tt.Expect); len(diff) > 0 {
+			if diff := cmpDiff(recorded, tt.Expect); len(diff) > 0 {
 				t.Error(diff)
 			}
 
@@ -492,4 +491,11 @@ type mockRawResponseKey struct{}
 
 func setMockRawResponse(m *middleware.Metadata, v interface{}) {
 	m.Set(mockRawResponseKey{}, v)
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

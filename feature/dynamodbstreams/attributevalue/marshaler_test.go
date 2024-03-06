@@ -6,7 +6,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
-	"github.com/google/go-cmp/cmp"
 )
 
 type simpleMarshalStruct struct {
@@ -512,7 +511,7 @@ func compareObjects(t *testing.T, expected interface{}, actual interface{}) {
 	if !reflect.DeepEqual(expected, actual) {
 		ev := reflect.ValueOf(expected)
 		av := reflect.ValueOf(actual)
-		if diff := cmp.Diff(expected, actual); len(diff) != 0 {
+		if diff := cmpDiff(expected, actual); len(diff) != 0 {
 			t.Errorf("expect kind(%s, %T) match actual kind(%s, %T)\n%s",
 				ev.Kind(), ev.Interface(), av.Kind(), av.Interface(), diff)
 		}

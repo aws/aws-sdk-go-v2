@@ -5,20 +5,21 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"reflect"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestAddRequestMiddleware(t *testing.T) {
@@ -116,23 +117,23 @@ func TestAddRequestMiddleware(t *testing.T) {
 				t.Fatalf("expect no error adding middleware, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.ExpectInitialize, stack.Initialize.List()); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectInitialize, stack.Initialize.List()); len(diff) != 0 {
 				t.Errorf("expect initialize middleware\n%s", diff)
 			}
 
-			if diff := cmp.Diff(c.ExpectSerialize, stack.Serialize.List()); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectSerialize, stack.Serialize.List()); len(diff) != 0 {
 				t.Errorf("expect serialize middleware\n%s", diff)
 			}
 
-			if diff := cmp.Diff(c.ExpectBuild, stack.Build.List()); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectBuild, stack.Build.List()); len(diff) != 0 {
 				t.Errorf("expect build middleware\n%s", diff)
 			}
 
-			if diff := cmp.Diff(c.ExpectFinalize, stack.Finalize.List()); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectFinalize, stack.Finalize.List()); len(diff) != 0 {
 				t.Errorf("expect finalize middleware\n%s", diff)
 			}
 
-			if diff := cmp.Diff(c.ExpectDeserialize, stack.Deserialize.List()); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectDeserialize, stack.Deserialize.List()); len(diff) != 0 {
 				t.Errorf("expect deserialize middleware\n%s", diff)
 			}
 		})
@@ -612,7 +613,7 @@ func TestRequestGetToken(t *testing.T) {
 					},
 				)
 			}
-			if diff := cmp.Diff(c.ExpectTrace, trace.requests); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectTrace, trace.requests); len(diff) != 0 {
 				t.Errorf("expect trace to match\n%s", diff)
 			}
 
@@ -645,4 +646,11 @@ func TestRequestGetToken(t *testing.T) {
 			}
 		})
 	}
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

@@ -8,8 +8,6 @@ import (
 	"strings"
 	"testing"
 	"time"
-
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestGetToken(t *testing.T) {
@@ -93,7 +91,7 @@ func TestGetToken(t *testing.T) {
 				t.Errorf("expect %v token TTL, got %v", e, a)
 			}
 
-			if diff := cmp.Diff(c.ExpectTrace, trace.requests); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectTrace, trace.requests); len(diff) != 0 {
 				t.Errorf("expect trace to match\n%s", diff)
 			}
 		})

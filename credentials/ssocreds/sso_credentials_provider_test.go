@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/sso"
 	"github.com/aws/aws-sdk-go-v2/service/sso/types"
-	"github.com/google/go-cmp/cmp"
 )
 
 type mockClient struct {
@@ -32,19 +31,19 @@ func (m mockClient) GetRoleCredentials(ctx context.Context, params *sso.GetRoleC
 	m.t.Helper()
 
 	if len(m.ExpectedAccountID) > 0 {
-		if diff := cmp.Diff(m.ExpectedAccountID, aws.ToString(params.AccountId)); len(diff) > 0 {
+		if diff := cmpDiff(m.ExpectedAccountID, aws.ToString(params.AccountId)); len(diff) > 0 {
 			m.t.Error(diff)
 		}
 	}
 
 	if len(m.ExpectedAccessToken) > 0 {
-		if diff := cmp.Diff(m.ExpectedAccessToken, aws.ToString(params.AccessToken)); len(diff) > 0 {
+		if diff := cmpDiff(m.ExpectedAccessToken, aws.ToString(params.AccessToken)); len(diff) > 0 {
 			m.t.Error(diff)
 		}
 	}
 
 	if len(m.ExpectedRoleName) > 0 {
-		if diff := cmp.Diff(m.ExpectedRoleName, aws.ToString(params.RoleName)); len(diff) > 0 {
+		if diff := cmpDiff(m.ExpectedRoleName, aws.ToString(params.RoleName)); len(diff) > 0 {
 			m.t.Error(diff)
 		}
 	}
@@ -187,7 +186,7 @@ func TestProvider(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(tt.ExpectedCredentials, credentials); len(diff) > 0 {
+			if diff := cmpDiff(tt.ExpectedCredentials, credentials); len(diff) > 0 {
 				t.Errorf(diff)
 			}
 		})
