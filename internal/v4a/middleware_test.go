@@ -15,7 +15,6 @@ import (
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
 )
 
 type stubCredentialsProviderFunc func(context.Context) (Credentials, error)
@@ -85,7 +84,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 						}
 
 						expectCreds, _ := tt.creds.RetrievePrivateKey(ctx)
-						if diff := cmp.Diff(expectCreds, credentials); len(diff) > 0 {
+						if diff := cmpDiff(expectCreds, credentials); len(diff) > 0 {
 							t.Error(diff)
 						}
 						if e, a := tt.hash, payloadHash; e != a {
@@ -94,7 +93,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 						if e, a := signingName, service; e != a {
 							t.Errorf("expected %v, got %v", e, a)
 						}
-						if diff := cmp.Diff([]string{signingRegion}, regionSet); len(diff) > 0 {
+						if diff := cmpDiff([]string{signingRegion}, regionSet); len(diff) > 0 {
 							t.Error(diff)
 						}
 						return nil
