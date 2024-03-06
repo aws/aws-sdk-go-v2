@@ -10,13 +10,13 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
-	"github.com/google/go-cmp/cmp"
 )
 
 var testCredentials = aws.Credentials{AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION"}
@@ -329,7 +329,7 @@ func TestSign_buildCanonicalHeaders(t *testing.T) {
 		`fooinnerspace;fooleadingspace;foomultiplespace;foonospace;footabspace;footrailingspace;foowrappedspace;host;x-amz-date`,
 		``,
 	}, "\n")
-	if diff := cmp.Diff(expectCanonicalString, build.CanonicalString); diff != "" {
+	if diff := cmpDiff(expectCanonicalString, build.CanonicalString); diff != "" {
 		t.Errorf("expect match, got\n%s", diff)
 	}
 }
@@ -353,4 +353,11 @@ func BenchmarkSignRequest(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		signer.SignHTTP(context.Background(), testCredentials, req, bodyHash, "dynamodb", "us-east-1", time.Now())
 	}
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }
