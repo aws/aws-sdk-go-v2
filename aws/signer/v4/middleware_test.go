@@ -19,7 +19,6 @@ import (
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestComputePayloadHashMiddleware(t *testing.T) {
@@ -303,7 +302,7 @@ func TestSwapComputePayloadSHA256ForUnsignedPayloadMiddleware(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.ExpectIDs, stack.Finalize.List()); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectIDs, stack.Finalize.List()); len(diff) != 0 {
 				t.Errorf("expect match\n%v", diff)
 			}
 		})
