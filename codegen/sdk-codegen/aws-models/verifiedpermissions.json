@@ -119,8 +119,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionName": "IsAuthorized",
-                "aws.iam#actionPermissionDescription": "Grants permission to make a batch authorization decision about a service request described in the parameters",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to make a batch authorization decision about a service request described in the parameters",
+                    "name": "IsAuthorized"
+                },
                 "smithy.api#documentation": "<p>Makes a series of decisions about multiple authorization requests for one principal or\n            resource. Each request contains the equivalent content of an <code>IsAuthorized</code>\n            request: principal, action, resource, and context. Either the <code>principal</code> or\n            the <code>resource</code> parameter must be identical across all requests. For example,\n            Verified Permissions won't evaluate a pair of requests where <code>bob</code> views\n                <code>photo1</code> and <code>alice</code> views <code>photo2</code>. Authorization\n            of <code>bob</code> to view <code>photo1</code> and <code>photo2</code>, or\n                <code>bob</code> and <code>alice</code> to view <code>photo1</code>, are valid\n            batches. </p>\n         <p>The request is evaluated against all policies in the specified policy store that match the\n            entities that you declare. The result of the decisions is a series of <code>Allow</code>\n            or <code>Deny</code> responses, along with the IDs of the policies that produced each\n            decision.</p>\n         <p>The <code>entities</code> of a <code>BatchIsAuthorized</code> API request can contain\n            up to 100 principals and up to 100 resources. The <code>requests</code> of a\n                <code>BatchIsAuthorized</code> API request can contain up to 30 requests.</p>\n         <note>\n            <p>The <code>BatchIsAuthorized</code> operation doesn't have its own IAM\n                permission. To authorize this operation for Amazon Web Services principals, include the permission\n                    <code>verifiedpermissions:IsAuthorized</code> in their IAM policies.</p>\n         </note>",
                 "smithy.api#readonly": {}
             }
@@ -300,7 +302,65 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure that is\n            used as a parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
+                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure that is\n            used as a parameter to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationDetail": {
+            "type": "structure",
+            "members": {
+                "userPoolArn": {
+                    "target": "com.amazonaws.verifiedpermissions#UserPoolArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of the Amazon Cognito user pool that contains the identities to be\n            authorized.</p>\n         <p>Example: <code>\"userPoolArn\":\n            \"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\"</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientIds": {
+                    "target": "com.amazonaws.verifiedpermissions#ClientIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique application client IDs that are associated with the specified Amazon Cognito user\n            pool.</p>\n         <p>Example: <code>\"clientIds\": [\"&amp;ExampleCogClientId;\"]</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "issuer": {
+                    "target": "com.amazonaws.verifiedpermissions#Issuer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OpenID Connect (OIDC) <code>issuer</code> ID of the Amazon Cognito user pool that contains the identities to be\n            authorized.</p>\n         <p>Example: <code>\"issuer\":\n            \"https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5\"</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html\">ConfigurationDetail</a> structure that is\n            part of the response to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n            [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationItem": {
+            "type": "structure",
+            "members": {
+                "userPoolArn": {
+                    "target": "com.amazonaws.verifiedpermissions#UserPoolArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of the Amazon Cognito user pool that contains the identities to be\n            authorized.</p>\n         <p>Example: <code>\"userPoolArn\":\n            \"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\"</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientIds": {
+                    "target": "com.amazonaws.verifiedpermissions#ClientIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique application client IDs that are associated with the specified Amazon Cognito user\n            pool.</p>\n         <p>Example: <code>\"clientIds\": [\"&amp;ExampleCogClientId;\"]</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "issuer": {
+                    "target": "com.amazonaws.verifiedpermissions#Issuer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OpenID Connect (OIDC) <code>issuer</code> ID of the Amazon Cognito user pool that contains the identities to be\n            authorized.</p>\n         <p>Example: <code>\"issuer\":\n            \"https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5\"</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html\">ConfigurationItem</a> structure that is\n            part of the response to <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n            [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#Configuration": {
@@ -315,6 +375,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains configuration information used when creating a new identity source.</p>\n         <note>\n            <p>At this time, the only valid member of this structure is a Amazon Cognito user pool\n                configuration.</p>\n            <p>You must specify a <code>userPoolArn</code>, and optionally, a\n                    <code>ClientId</code>.</p>\n         </note>\n         <p>This data type is used as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>\n            operation.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#ConfigurationDetail": {
+            "type": "union",
+            "members": {
+                "cognitoUserPoolConfiguration": {
+                    "target": "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool\n            and one or more application client IDs.</p>\n         <p>Example:\n            <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}}</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration information about an identity source.</p>\n         <p>This data type is a response parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>\n            operation.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#ConfigurationItem": {
+            "type": "union",
+            "members": {
+                "cognitoUserPoolConfiguration": {
+                    "target": "com.amazonaws.verifiedpermissions#CognitoUserPoolConfigurationItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool\n            and one or more application client IDs.</p>\n         <p>Example:\n            <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}}</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration information about an identity source.</p>\n         <p>This data type is a response parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>\n            operation.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#ConflictException": {
@@ -383,8 +471,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to create a reference to an external identity provider (IdP) that is compatible with OpenID Connect (OIDC) authentication protocol, such as Amazon Cognito",
-                "smithy.api#documentation": "<p>Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).\n            </p>\n         <p>After you create an identity source, you can use the identities provided by the IdP as proxies\n            for the principal in authorization queries that use the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>\n            operation. These identities take the form of tokens that contain claims about the user,\n            such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and\n            access tokens, and Verified Permissions can use either or both. Any combination of identity and access\n            tokens results in the same Cedar principal. Verified Permissions automatically translates the\n            information about the identities into the standard Cedar attributes that can be\n            evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain\n            different information, the tokens you choose to use determine which principal attributes\n            are available to access when evaluating Cedar policies.</p>\n         <important>\n            <p>If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.</p>\n         </important>\n         <note>\n            <p>To reference a user from this identity source in your Cedar policies, use the following\n                syntax.</p>\n            <p>\n               <i>IdentityType::\"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;</i>\n            </p>\n            <p>Where <code>IdentityType</code> is the string that you provide to the\n                    <code>PrincipalEntityType</code> parameter for this operation. The\n                    <code>CognitoUserPoolId</code> and <code>CognitoClientId</code> are defined by\n                the Amazon Cognito user pool.</p>\n         </note>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to be propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a reference to an external identity provider (IdP) that is compatible with OpenID Connect (OIDC) authentication protocol, such as Amazon Cognito"
+                },
+                "smithy.api#documentation": "<p>Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).\n            </p>\n         <p>After you create an identity source, you can use the identities provided by the IdP as proxies\n            for the principal in authorization queries that use the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>\n            operation. These identities take the form of tokens that contain claims about the user,\n            such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and\n            access tokens, and Verified Permissions can use either or both. Any combination of identity and access\n            tokens results in the same Cedar principal. Verified Permissions automatically translates the\n            information about the identities into the standard Cedar attributes that can be\n            evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain\n            different information, the tokens you choose to use determine which principal attributes\n            are available to access when evaluating Cedar policies.</p>\n         <important>\n            <p>If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.</p>\n         </important>\n         <note>\n            <p>To reference a user from this identity source in your Cedar policies, use the following\n                syntax.</p>\n            <p>\n               <i>IdentityType::\"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;</i>\n            </p>\n            <p>Where <code>IdentityType</code> is the string that you provide to the\n                    <code>PrincipalEntityType</code> parameter for this operation. The\n                    <code>CognitoUserPoolId</code> and <code>CognitoClientId</code> are defined by\n                the Amazon Cognito user pool.</p>\n         </note>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -394,7 +484,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.verifiedpermissions#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>ConflictException</code>\n             error.</p>\n         <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours,\n             the next request with the same parameters performs the operation again regardless of \n             the value of <code>ClientToken</code>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -479,8 +569,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to create a Cedar policy and save it in the specified policy store",
-                "smithy.api#documentation": "<p>Creates a Cedar policy and saves it in the specified policy store. You can create either a\n            static policy or a policy linked to a policy template.</p>\n         <ul>\n            <li>\n               <p>To create a static policy, provide the Cedar policy text in the\n                        <code>StaticPolicy</code> section of the\n                    <code>PolicyDefinition</code>.</p>\n            </li>\n            <li>\n               <p>To create a policy that is dynamically linked to a policy template, specify the policy template ID\n                    and the principal and resource to associate with this policy in the\n                        <code>templateLinked</code> section of the <code>PolicyDefinition</code>. If the\n                    policy template is ever updated, any policies linked to the policy template automatically use the\n                    updated template.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Creating a policy causes it to be validated against the schema in the policy store. If the\n                policy doesn't pass validation, the operation fails and the policy isn't\n                stored.</p>\n         </note>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to be propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a Cedar policy and save it in the specified policy store"
+                },
+                "smithy.api#documentation": "<p>Creates a Cedar policy and saves it in the specified policy store. You can create either a\n            static policy or a policy linked to a policy template.</p>\n         <ul>\n            <li>\n               <p>To create a static policy, provide the Cedar policy text in the\n                        <code>StaticPolicy</code> section of the\n                    <code>PolicyDefinition</code>.</p>\n            </li>\n            <li>\n               <p>To create a policy that is dynamically linked to a policy template, specify the policy template ID\n                    and the principal and resource to associate with this policy in the\n                        <code>templateLinked</code> section of the <code>PolicyDefinition</code>. If the\n                    policy template is ever updated, any policies linked to the policy template automatically use the\n                    updated template.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Creating a policy causes it to be validated against the schema in the policy store. If the\n                policy doesn't pass validation, the operation fails and the policy isn't\n                stored.</p>\n         </note>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -490,7 +582,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.verifiedpermissions#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>ConflictException</code>\n             error.</p>\n         <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours,\n             the next request with the same parameters performs the operation again regardless of \n             the value of <code>ClientToken</code>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -585,8 +677,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to create a Cedar policy and save it in the specified policy store",
-                "smithy.api#documentation": "<p>Creates a policy store. A policy store is a container for policy resources.</p>\n         <note>\n            <p>Although <a href=\"https://docs.cedarpolicy.com/schema/schema.html#namespace\">Cedar supports multiple namespaces</a>, Verified Permissions currently supports only one\n                namespace per policy store.</p>\n         </note>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to be propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a Cedar policy and save it in the specified policy store"
+                },
+                "smithy.api#documentation": "<p>Creates a policy store. A policy store is a container for policy resources.</p>\n         <note>\n            <p>Although <a href=\"https://docs.cedarpolicy.com/schema/schema.html#namespace\">Cedar supports multiple namespaces</a>, Verified Permissions currently supports only one\n                namespace per policy store.</p>\n         </note>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -596,7 +690,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.verifiedpermissions#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>ConflictException</code>\n             error.</p>\n         <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours,\n             the next request with the same parameters performs the operation again regardless of \n             the value of <code>ClientToken</code>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -674,8 +768,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to create a policy template",
-                "smithy.api#documentation": "<p>Creates a policy template. A template can use placeholders for the principal and resource. A\n            template must be instantiated into a policy by associating it with specific principals\n            and resources to use for the placeholders. That instantiated policy can then be\n            considered in authorization decisions. The instantiated policy works identically to any\n            other policy, except that it is dynamically linked to the template. If the template\n            changes, then any policies that are linked to that template are immediately updated as\n            well.</p>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to be propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a policy template"
+                },
+                "smithy.api#documentation": "<p>Creates a policy template. A template can use placeholders for the principal and resource. A\n            template must be instantiated into a policy by associating it with specific principals\n            and resources to use for the placeholders. That instantiated policy can then be\n            considered in authorization decisions. The instantiated policy works identically to any\n            other policy, except that it is dynamically linked to the template. If the template\n            changes, then any policies that are linked to that template are immediately updated as\n            well.</p>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -685,7 +781,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.verifiedpermissions#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>ConflictException</code>\n             error.</p>\n         <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours,\n             the next request with the same parameters performs the operation again regardless of \n             the value of <code>ClientToken</code>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -784,7 +880,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to delete an identity source that references an identity provider (IdP) such as Amazon Cognito",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an identity source that references an identity provider (IdP) such as Amazon Cognito"
+                },
                 "smithy.api#documentation": "<p>Deletes an identity source that references an identity provider (IdP) such as Amazon Cognito. After\n            you delete the identity source, you can no longer use tokens for identities from that identity source to\n            represent principals in authorization queries made using <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>.\n            operations.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -835,7 +933,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to delete the specified policy from the policy store",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete the specified policy from the policy store"
+                },
                 "smithy.api#documentation": "<p>Deletes the specified policy from the policy store.</p>\n         <p>This operation is idempotent; if you specify a policy that doesn't \n        exist, the request response returns a successful <code>HTTP 200</code> status code.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -878,7 +978,9 @@
                 "target": "com.amazonaws.verifiedpermissions#DeletePolicyStoreOutput"
             },
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to delete the specified policy store",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete the specified policy store"
+                },
                 "smithy.api#documentation": "<p>Deletes the specified policy store.</p>\n         <p>This operation is idempotent. If you specify a policy store that does not exist, the request\n            response will still return a successful HTTP 200 status code.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -922,7 +1024,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to delete the specified policy template from the policy store",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete the specified policy template from the policy store"
+                },
                 "smithy.api#documentation": "<p>Deletes the specified policy template from the policy store.</p>\n         <important>\n            <p>This operation also deletes any policies that were created from the specified\n                policy template. Those policies are immediately removed from all future API responses, and are\n                asynchronously deleted from the policy store.</p>\n         </important>",
                 "smithy.api#idempotent": {}
             }
@@ -1149,7 +1253,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to retrieve the details about the specified identity source",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve the details about the specified identity source"
+                },
                 "smithy.api#documentation": "<p>Retrieves the details about the specified identity source.</p>",
                 "smithy.api#readonly": {}
             }
@@ -1190,8 +1296,10 @@
                 "details": {
                     "target": "com.amazonaws.verifiedpermissions#IdentitySourceDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that describes the configuration of the identity source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "This attribute has been replaced by configuration.cognitoUserPoolConfiguration"
+                        },
+                        "smithy.api#documentation": "<p>A structure that describes the configuration of the identity source.</p>"
                     }
                 },
                 "identitySourceId": {
@@ -1222,6 +1330,13 @@
                         "smithy.api#documentation": "<p>The data type of principals generated for identities authenticated by this\n            identity source.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.verifiedpermissions#ConfigurationDetail",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Contains configuration information about an identity source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1242,7 +1357,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to retrieve information about the specified policy",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve information about the specified policy"
+                },
                 "smithy.api#documentation": "<p>Retrieves information about the specified policy.</p>",
                 "smithy.api#readonly": {}
             }
@@ -1348,7 +1465,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to retrieve details about a policy store",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve details about a policy store"
+                },
                 "smithy.api#documentation": "<p>Retrieves details about a policy store.</p>",
                 "smithy.api#readonly": {}
             }
@@ -1433,7 +1552,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to retrieve the details for the specified policy template in the specified policy store",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve the details for the specified policy template in the specified policy store"
+                },
                 "smithy.api#documentation": "<p>Retrieve the details for the specified policy template in the specified policy store.</p>",
                 "smithy.api#readonly": {}
             }
@@ -1525,7 +1646,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to retrieve the details for the specified schema in the specified policy store",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve the details for the specified schema in the specified policy store"
+                },
                 "smithy.api#documentation": "<p>Retrieve the details for the specified schema in the specified policy store.</p>",
                 "smithy.api#readonly": {}
             }
@@ -1633,30 +1756,45 @@
                 "clientIds": {
                     "target": "com.amazonaws.verifiedpermissions#ClientIds",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"
+                        },
                         "smithy.api#documentation": "<p>The application client IDs associated with the specified Amazon Cognito user pool that are\n            enabled for this identity source.</p>"
                     }
                 },
                 "userPoolArn": {
                     "target": "com.amazonaws.verifiedpermissions#UserPoolArn",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"
+                        },
                         "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of the Amazon Cognito user pool whose identities are accessible to this Verified Permissions\n            policy store.</p>"
                     }
                 },
                 "discoveryUrl": {
                     "target": "com.amazonaws.verifiedpermissions#DiscoveryUrl",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"
+                        },
                         "smithy.api#documentation": "<p>The well-known URL that points to this user pool's OIDC discovery endpoint. This is a\n            URL string in the following format. This URL replaces the placeholders for both the\n            Amazon Web Services Region and the user pool identifier with those appropriate for this user\n            pool.</p>\n         <p>\n            <code>https://cognito-idp.<i>&lt;region&gt;</i>.amazonaws.com/<i>&lt;user-pool-id&gt;</i>/.well-known/openid-configuration</code>\n         </p>"
                     }
                 },
                 "openIdIssuer": {
                     "target": "com.amazonaws.verifiedpermissions#OpenIdIssuer",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This attribute has been replaced by configuration"
+                        },
                         "smithy.api#documentation": "<p>A string that identifies the type of OIDC service represented by this identity source. </p>\n         <p>At this time, the only valid value is <code>cognito</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains configuration of the identity source.</p>\n         <p>This data type is used as a response parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>\n            operation.</p>"
+                "smithy.api#deprecated": {
+                    "message": "This shape has been replaced by ConfigurationDetail"
+                },
+                "smithy.api#documentation": "<p>A structure that contains configuration of the identity source.</p>\n         <p>This data type was a response parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html\">GetIdentitySource</a>\n            operation. Replaced by <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html\">ConfigurationDetail</a>.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#IdentitySourceFilter": {
@@ -1670,7 +1808,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines characteristics of an identity source that you can use to\n            filter.</p>\n         <p>This data type is used as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html\">ListIdentityStores</a>\n            operation.</p>"
+                "smithy.api#documentation": "<p>A structure that defines characteristics of an identity source that you can use to\n            filter.</p>\n         <p>This data type is a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html\">ListIdentityStores</a>\n            operation.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#IdentitySourceFilters": {
@@ -1708,8 +1846,10 @@
                 "details": {
                     "target": "com.amazonaws.verifiedpermissions#IdentitySourceItemDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the details of the associated identity provider\n            (IdP).</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "This attribute has been replaced by configuration.cognitoUserPoolConfiguration"
+                        },
+                        "smithy.api#documentation": "<p>A structure that contains the details of the associated identity provider\n            (IdP).</p>"
                     }
                 },
                 "identitySourceId": {
@@ -1739,10 +1879,16 @@
                         "smithy.api#documentation": "<p>The Cedar entity type of the principals returned from the IdP associated with this\n            identity source.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.verifiedpermissions#ConfigurationItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration information about an identity source.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines an identity source.</p>\n         <p>This data type is used as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html\">ListIdentityStores</a>\n            operation.</p>"
+                "smithy.api#documentation": "<p>A structure that defines an identity source.</p>\n         <p>This data type is a response parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>\n            operation.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#IdentitySourceItemDetails": {
@@ -1751,30 +1897,45 @@
                 "clientIds": {
                     "target": "com.amazonaws.verifiedpermissions#ClientIds",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"
+                        },
                         "smithy.api#documentation": "<p>The application client IDs associated with the specified Amazon Cognito user pool that are\n            enabled for this identity source.</p>"
                     }
                 },
                 "userPoolArn": {
                     "target": "com.amazonaws.verifiedpermissions#UserPoolArn",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"
+                        },
                         "smithy.api#documentation": "<p>The Amazon Cognito user pool whose identities are accessible to this Verified Permissions policy store.</p>"
                     }
                 },
                 "discoveryUrl": {
                     "target": "com.amazonaws.verifiedpermissions#DiscoveryUrl",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"
+                        },
                         "smithy.api#documentation": "<p>The well-known URL that points to this user pool's OIDC discovery endpoint. This is a\n            URL string in the following format. This URL replaces the placeholders for both the\n            Amazon Web Services Region and the user pool identifier with those appropriate for this user\n            pool.</p>\n         <p>\n            <code>https://cognito-idp.<i>&lt;region&gt;</i>.amazonaws.com/<i>&lt;user-pool-id&gt;</i>/.well-known/openid-configuration</code>\n         </p>"
                     }
                 },
                 "openIdIssuer": {
                     "target": "com.amazonaws.verifiedpermissions#OpenIdIssuer",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This attribute has been replaced by configuration"
+                        },
                         "smithy.api#documentation": "<p>A string that identifies the type of OIDC service represented by this identity source. </p>\n         <p>At this time, the only valid value is <code>cognito</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains configuration of the identity source.</p>\n         <p>This data type is used as a response parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html\">CreateIdentitySource</a>\n            operation.</p>"
+                "smithy.api#deprecated": {
+                    "message": "This shape has been replaced by ConfigurationItem"
+                },
+                "smithy.api#documentation": "<p>A structure that contains configuration of the identity source.</p>\n         <p>This data type was a response parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>\n            operation. Replaced by <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html\">ConfigurationItem</a>.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#IdentitySources": {
@@ -1814,7 +1975,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to make an authorization decision about a service request described in the parameters",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to make an authorization decision about a service request described in the parameters"
+                },
                 "smithy.api#documentation": "<p>Makes an authorization decision about a service request described in the parameters.\n            The information in the parameters can also define additional context that Verified Permissions can\n            include in the evaluation. The request is evaluated against all matching policies in the\n            specified policy store. The result of the decision is either <code>Allow</code> or\n                <code>Deny</code>, along with a list of the policies that resulted in the\n            decision.</p>",
                 "smithy.api#readonly": {}
             }
@@ -1907,7 +2070,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to make an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to make an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source"
+                },
                 "smithy.api#documentation": "<p>Makes an authorization decision about a service request described in the parameters.\n            The principal in this request comes from an external identity source in the form of an identity\n            token formatted as a <a href=\"https://wikipedia.org/wiki/JSON_Web_Token\">JSON web\n                token (JWT)</a>. The information in the parameters can also define additional\n            context that Verified Permissions can include in the evaluation. The request is evaluated against all\n            matching policies in the specified policy store. The result of the decision is either\n                <code>Allow</code> or <code>Deny</code>, along with a list of the policies that\n            resulted in the decision.</p>\n         <important>\n            <p>If you specify the <code>identityToken</code> parameter, then this operation\n                derives the principal from that token. You must not also include that principal in\n                the <code>entities</code> parameter or the operation fails and reports a conflict\n                between the two entity sources.</p>\n            <p>If you provide only an <code>accessToken</code>, then you can include the entity\n                as part of the <code>entities</code> parameter to provide additional\n                attributes.</p>\n         </important>\n         <p>At this time, Verified Permissions accepts tokens from only Amazon Cognito.</p>\n         <p>Verified Permissions validates each token that is specified in a request by checking its expiration\n            date and its signature.</p>\n         <important>\n            <p>If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.</p>\n         </important>",
                 "smithy.api#readonly": {}
             }
@@ -1925,13 +2090,13 @@
                 "identityToken": {
                     "target": "com.amazonaws.verifiedpermissions#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an identity token for the principal to be authorized. This token is provided\n            to you by the identity provider (IdP) associated with the specified identity source. You must\n            specify either an <code>AccessToken</code> or an <code>IdentityToken</code>, or\n            both.</p>"
+                        "smithy.api#documentation": "<p>Specifies an identity token for the principal to be authorized. This token is provided\n            to you by the identity provider (IdP) associated with the specified identity source. You must\n            specify either an <code>accessToken</code>, an <code>identityToken</code>, or\n            both.</p>\n         <p>Must be an ID token. Verified Permissions returns an error if the <code>token_use</code> claim in the\n            submitted token isn't <code>id</code>.</p>"
                     }
                 },
                 "accessToken": {
                     "target": "com.amazonaws.verifiedpermissions#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an access token for the principal to be authorized. This token is provided\n            to you by the identity provider (IdP) associated with the specified identity source. You must\n            specify either an <code>AccessToken</code>, or an <code>IdentityToken</code>, or\n            both.</p>"
+                        "smithy.api#documentation": "<p>Specifies an access token for the principal to be authorized. This token is provided\n            to you by the identity provider (IdP) associated with the specified identity source. You must\n            specify either an <code>accessToken</code>, an <code>identityToken</code>, or\n            both.</p>\n         <p>Must be an access token. Verified Permissions returns an error if the <code>token_use</code> claim in\n            the submitted token isn't <code>access</code>.</p>"
                     }
                 },
                 "action": {
@@ -1992,6 +2157,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.verifiedpermissions#Issuer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^https://.*$"
+            }
+        },
         "com.amazonaws.verifiedpermissions#ListIdentitySources": {
             "type": "operation",
             "input": {
@@ -2006,7 +2181,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to return a paginated list of all of the identity sources defined in the specified policy store",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to return a paginated list of all of the identity sources defined in the specified policy store"
+                },
                 "smithy.api#documentation": "<p>Returns a paginated list of all of the identity sources defined in the specified policy store.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -2094,7 +2271,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to return a paginated list of all policies stored in the specified policy store",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to return a paginated list of all policies stored in the specified policy store"
+                },
                 "smithy.api#documentation": "<p>Returns a paginated list of all policies stored in the specified policy store.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -2168,7 +2347,9 @@
                 "target": "com.amazonaws.verifiedpermissions#ListPolicyStoresOutput"
             },
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to return a paginated list of all policy stores in the calling Amazon Web Services account",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to return a paginated list of all policy stores in the calling Amazon Web Services account"
+                },
                 "smithy.api#documentation": "<p>Returns a paginated list of all policy stores in the calling Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -2234,7 +2415,9 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to return a paginated list of all policy templates in the specified policy store",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to return a paginated list of all policy templates in the specified policy store"
+                },
                 "smithy.api#documentation": "<p>Returns a paginated list of all policy templates in the specified policy store.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -2844,8 +3027,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to create or update the policy schema in the specified policy store",
-                "smithy.api#documentation": "<p>Creates or updates the policy schema in the specified policy store. The schema is used to\n            validate any Cedar policies and policy templates submitted to the policy store. Any changes to the schema\n            validate only policies and templates submitted after the schema change. Existing\n            policies and templates are not re-evaluated against the changed schema. If you later\n            update a policy, then it is evaluated against the new schema at that time.</p>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to be propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create or update the policy schema in the specified policy store"
+                },
+                "smithy.api#documentation": "<p>Creates or updates the policy schema in the specified policy store. The schema is used to\n            validate any Cedar policies and policy templates submitted to the policy store. Any changes to the schema\n            validate only policies and templates submitted after the schema change. Existing\n            policies and templates are not re-evaluated against the changed schema. If you later\n            update a policy, then it is evaluated against the new schema at that time.</p>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3213,7 +3398,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a policy that was </p>\n         <p/>\n         <p>created by instantiating a policy template. </p>\n         <p>This </p>"
+                "smithy.api#documentation": "<p>Contains information about a policy that was created by instantiating a policy template. </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#TemplateLinkedPolicyDefinitionItem": {
@@ -3343,8 +3528,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to update the specified identity source to use a new identity provider (IdP) source, or to change the mapping of identities from the IdP to a different principal entity type",
-                "smithy.api#documentation": "<p>Updates the specified identity source to use a new identity provider (IdP) source, or to change\n            the mapping of identities from the IdP to a different principal entity type.</p>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to be propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update the specified identity source to use a new identity provider (IdP) source, or to change the mapping of identities from the IdP to a different principal entity type"
+                },
+                "smithy.api#documentation": "<p>Updates the specified identity source to use a new identity provider (IdP) source, or to change\n            the mapping of identities from the IdP to a different principal entity type.</p>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3440,8 +3627,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to modify the specified Cedar static policy in the specified policy store",
-                "smithy.api#documentation": "<p>Modifies a Cedar static policy in the specified policy store. You can change only certain elements of\n            the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyInput.html#amazonverifiedpermissions-UpdatePolicy-request-UpdatePolicyDefinition\">UpdatePolicyDefinition</a> parameter. You can directly update only static policies. To\n            change a template-linked policy, you must update the template instead, using <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html\">UpdatePolicyTemplate</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>If policy validation is enabled in the policy store, then updating a static policy causes\n                        Verified Permissions to validate the policy against the schema in the policy store. If the updated\n                        static policy doesn't pass validation, the operation fails and the update isn't\n                        stored.</p>\n               </li>\n               <li>\n                  <p>When you edit a static policy, You can change only certain elements of a static\n                        policy:</p>\n                  <ul>\n                     <li>\n                        <p>The action referenced by the policy. </p>\n                     </li>\n                     <li>\n                        <p>A condition clause, such as when and unless. </p>\n                     </li>\n                  </ul>\n                  <p>You can't change these elements of a static policy: </p>\n                  <ul>\n                     <li>\n                        <p>Changing a policy from a static policy to a template-linked\n                                policy. </p>\n                     </li>\n                     <li>\n                        <p>Changing the effect of a static policy from permit or forbid.\n                            </p>\n                     </li>\n                     <li>\n                        <p>The principal referenced by a static policy. </p>\n                     </li>\n                     <li>\n                        <p>The resource referenced by a static policy. </p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>To update a template-linked policy, you must update the template instead. </p>\n               </li>\n            </ul>\n         </note>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to be propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to modify the specified Cedar static policy in the specified policy store"
+                },
+                "smithy.api#documentation": "<p>Modifies a Cedar static policy in the specified policy store. You can change only certain elements of\n            the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyInput.html#amazonverifiedpermissions-UpdatePolicy-request-UpdatePolicyDefinition\">UpdatePolicyDefinition</a> parameter. You can directly update only static policies. To\n            change a template-linked policy, you must update the template instead, using <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html\">UpdatePolicyTemplate</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>If policy validation is enabled in the policy store, then updating a static policy causes\n                        Verified Permissions to validate the policy against the schema in the policy store. If the updated\n                        static policy doesn't pass validation, the operation fails and the update isn't\n                        stored.</p>\n               </li>\n               <li>\n                  <p>When you edit a static policy, you can change only certain elements of a static\n                        policy:</p>\n                  <ul>\n                     <li>\n                        <p>The action referenced by the policy. </p>\n                     </li>\n                     <li>\n                        <p>A condition clause, such as when and unless. </p>\n                     </li>\n                  </ul>\n                  <p>You can't change these elements of a static policy: </p>\n                  <ul>\n                     <li>\n                        <p>Changing a policy from a static policy to a template-linked\n                                policy. </p>\n                     </li>\n                     <li>\n                        <p>Changing the effect of a static policy from permit or forbid.\n                            </p>\n                     </li>\n                     <li>\n                        <p>The principal referenced by a static policy. </p>\n                     </li>\n                     <li>\n                        <p>The resource referenced by a static policy. </p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>To update a template-linked policy, you must update the template instead. </p>\n               </li>\n            </ul>\n         </note>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3561,8 +3750,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to modify the validation setting for a policy store",
-                "smithy.api#documentation": "<p>Modifies the validation setting for a policy store.</p>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to be propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to modify the validation setting for a policy store"
+                },
+                "smithy.api#documentation": "<p>Modifies the validation setting for a policy store.</p>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3647,8 +3838,10 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to update the specified policy template",
-                "smithy.api#documentation": "<p>Updates the specified policy template. You can update only the description and the some elements\n            of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html#amazonverifiedpermissions-UpdatePolicyTemplate-request-policyBody\">policyBody</a>. </p>\n         <important>\n            <p>Changes you make to the policy template content are immediately (within the constraints of\n                eventual consistency) reflected in authorization decisions that involve all template-linked policies\n                instantiated from this template.</p>\n         </important>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to be propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update the specified policy template"
+                },
+                "smithy.api#documentation": "<p>Updates the specified policy template. You can update only the description and the some elements\n            of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html#amazonverifiedpermissions-UpdatePolicyTemplate-request-policyBody\">policyBody</a>. </p>\n         <important>\n            <p>Changes you make to the policy template content are immediately (within the constraints of\n                eventual consistency) reflected in authorization decisions that involve all template-linked policies\n                instantiated from this template.</p>\n         </important>\n         <note>\n            <p>Verified Permissions is <i>\n                  <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a>\n               </i>. It can take a few seconds for a new or changed element to propagate through\n    the service and be visible in the results of other Verified Permissions operations.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },

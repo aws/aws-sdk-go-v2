@@ -338,7 +338,7 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare that the consumer is to use with the account or the namespace.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare that the consumer is to use.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -351,7 +351,7 @@
                 "ConsumerArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the consumer that is associated with the\n            datashare.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the consumer namespace associated with the\n            datashare.</p>"
                     }
                 },
                 "ConsumerRegion": {
@@ -707,7 +707,7 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare that producers are to authorize\n            sharing for.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare namespace that producers are to authorize\n            sharing for.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -843,7 +843,7 @@
                 "SnapshotClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the cluster the snapshot was created from. This parameter is\n            required if your IAM user has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the cluster the snapshot was created from.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>If the snapshot to access doesn't exist and the associated IAM policy doesn't allow access to all (*) snapshots</i> -  This parameter is required. Otherwise, permissions \n                aren't available to check if the snapshot exists.</p>\n            </li>\n            <li>\n               <p>\n                  <i>If the snapshot to access exists</i> - This parameter isn't required. Redshift can retrieve the cluster identifier and use it to \n                validate snapshot authorization.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AccountWithRestoreAccess": {
@@ -2883,7 +2883,7 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on which the cluster accepts incoming connections.</p>\n         <p>The cluster is accessible only via the JDBC and ODBC connection strings. Part of\n            the connection string requires the port on which the cluster will listen for incoming\n            connections.</p>\n         <p>Default: <code>5439</code>\n         </p>\n         <p>Valid Values: <code>1150-65535</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The port number on which the cluster accepts incoming connections.</p>\n         <p>The cluster is accessible only via the JDBC and ODBC connection strings. Part of\n            the connection string requires the port on which the cluster will listen for incoming\n            connections.</p>\n         <p>Default: <code>5439</code>\n         </p>\n         <p>Valid Values:\n        </p>\n         <ul>\n            <li>\n               <p>For clusters with ra3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster \n                with ra3 nodes, it isn't required that you change the port to these ranges.)</p>\n            </li>\n            <li>\n               <p>For clusters with ds2 or dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClusterVersion": {
@@ -4406,13 +4406,13 @@
                 "DataShareArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that references the datashare that is owned by a specific namespace of the producer cluster. A datashare ARN is in the <code>arn:aws:redshift:{region}:{account-id}:{datashare}:{namespace-guid}/{datashare-name}</code> format.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare that the consumer is to use.</p>"
                     }
                 },
                 "ProducerArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the producer.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the producer namespace.</p>"
                     }
                 },
                 "AllowPubliclyAccessibleConsumers": {
@@ -4667,7 +4667,7 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare to remove authorization from.</p>",
+                        "smithy.api#documentation": "<p>The namespace Amazon Resource Name (ARN) of the datashare to remove authorization from.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6502,7 +6502,7 @@
                 "ConsumerArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the consumer that returns in the list of datashares.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the consumer namespace that returns in the list of datashares.</p>"
                     }
                 },
                 "Status": {
@@ -6577,7 +6577,7 @@
                 "ProducerArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the producer that returns in the list of datashares.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the producer namespace that returns in the list of datashares.</p>"
                     }
                 },
                 "Status": {
@@ -6629,7 +6629,7 @@
                 "DataShareArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the datashare to describe details of.</p>"
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the datashare to describe details of.</p>"
                     }
                 },
                 "MaxRecords": {
@@ -8350,7 +8350,7 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare to remove association for. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare to remove association for.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8363,7 +8363,7 @@
                 "ConsumerArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the consumer that association for\n            the datashare is removed from.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the consumer namespace that association for\n            the datashare is removed from.</p>"
                     }
                 },
                 "ConsumerRegion": {
@@ -11585,7 +11585,7 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The option to change the port of an Amazon Redshift cluster.</p>"
+                        "smithy.api#documentation": "<p>The option to change the port of an Amazon Redshift cluster.</p>\n         <p>Valid Values:\n        </p>\n         <ul>\n            <li>\n               <p>For clusters with ra3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster \n                with ra3 nodes, it isn't required that you change the port to these ranges.)</p>\n            </li>\n            <li>\n               <p>For clusters with ds2 or dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ManageMasterPassword": {
@@ -16187,7 +16187,7 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on which the cluster accepts connections.</p>\n         <p>Default: The same port as the original cluster.</p>\n         <p>Constraints: Must be between <code>1115</code> and <code>65535</code>.</p>"
+                        "smithy.api#documentation": "<p>The port number on which the cluster accepts connections.</p>\n         <p>Default: The same port as the original cluster.</p>\n         <p>Valid values: For clusters with ds2 or dc2 nodes, must be within the range <code>1150</code>-<code>65535</code>. For clusters with ra3 nodes, must be \n            within the ranges <code>5431</code>-<code>5455</code> or <code>8191</code>-<code>8215</code>.</p>"
                     }
                 },
                 "AvailabilityZone": {

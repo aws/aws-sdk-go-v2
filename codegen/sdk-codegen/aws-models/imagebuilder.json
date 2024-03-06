@@ -7304,6 +7304,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>For an impacted container image, this identifies a list of URIs for associated \n\t\t\tcontainer images distributed to ECR repositories.</p>"
                     }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting timestamp from the lifecycle action that was applied to the resource.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending timestamp from the lifecycle action that was applied to the resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7506,6 +7518,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
                 }
             }
@@ -7713,7 +7731,7 @@
                 "tagMap": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a list of tags that Image Builder uses to skip lifecycle actions for resources that have them.</p>"
+                        "smithy.api#documentation": "<p>Contains a list of tags that Image Builder uses to skip lifecycle actions for Image Builder image \n\t\t\tresources that have them.</p>"
                     }
                 },
                 "amis": {
@@ -7890,7 +7908,7 @@
                 "tagMap": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags that are used as selection criteria for the resources \n\t\t\tthat the lifecycle policy applies to.</p>"
+                        "smithy.api#documentation": "<p>A list of tags that are used as selection criteria for the Image Builder image \n\t\t\tresources that the lifecycle policy applies to.</p>"
                     }
                 }
             },
