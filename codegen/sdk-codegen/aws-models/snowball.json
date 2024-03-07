@@ -2758,7 +2758,7 @@
                 "EKSAnywhereVersion": {
                     "target": "com.amazonaws.snowball#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of EKS Anywhere on the Snow Family device.</p>"
+                        "smithy.api#documentation": "<p>The optional version of EKS Anywhere on the Snow Family device.</p>"
                     }
                 }
             },

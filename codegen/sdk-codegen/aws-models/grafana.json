@@ -113,7 +113,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -156,7 +155,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -169,7 +169,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -183,7 +182,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -206,7 +204,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -241,7 +238,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -252,14 +248,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -273,14 +271,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -289,11 +285,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -304,14 +300,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -325,7 +323,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -345,7 +342,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -356,14 +352,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -374,9 +372,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1003,9 +1003,16 @@
                 "licenseType": {
                     "target": "com.amazonaws.grafana#LicenseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of license to associate with the workspace.</p>",
+                        "smithy.api#documentation": "<p>The type of license to associate with the workspace.</p>\n         <note>\n            <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "grafanaToken": {
+                    "target": "com.amazonaws.grafana#GrafanaToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token from Grafana Labs that ties your Amazon Web Services account with a Grafana \n            Labs account. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Register with Grafana Labs</a>.</p>",
+                        "smithy.api#httpHeader": "Grafana-Token"
                     }
                 }
             }
@@ -1402,7 +1409,7 @@
                 "authenticationProviders": {
                     "target": "com.amazonaws.grafana#AuthenticationProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor to Single Sign-On), or both to\n            authenticate users for using the Grafana console within a workspace. For more\n            information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in\n                    Amazon Managed Grafana</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to\n            authenticate users for using the Grafana console within a workspace. For more\n            information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in\n                    Amazon Managed Grafana</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1433,7 +1440,7 @@
                 "grafanaVersion": {
                     "target": "com.amazonaws.grafana#GrafanaVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace.</p>\n         <p>To get a list of supported version, use the <code>ListVersions</code>\n            operation.</p>"
+                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace. If not specified, \n            defaults to the latest version (for example, 9.4).</p>\n         <p>To get a list of supported versions, use the <code>ListVersions</code>\n            operation.</p>"
                     }
                 }
             }
@@ -1913,6 +1920,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.grafana#GrafanaToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
                 }
             }
         },
@@ -3262,7 +3278,7 @@
                 "authenticationProviders": {
                     "target": "com.amazonaws.grafana#AuthenticationProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor to Single Sign-On), or both to\n            authenticate users for using the Grafana console within a workspace. For more\n            information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in\n                    Amazon Managed Grafana</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to\n            authenticate users for using the Grafana console within a workspace. For more\n            information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in\n                    Amazon Managed Grafana</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3344,7 +3360,7 @@
                 "grafanaVersion": {
                     "target": "com.amazonaws.grafana#GrafanaVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace.</p>\n         <p>Can only be used to upgrade (for example, from 8.4 to 9.4), not\n            downgrade (for example, from 9.4 to 8.4).</p>\n         <p>To know what versions are available to upgrade to for a specific workspace, see \n            the <code>ListVersions</code> operation.</p>"
+                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the workspace. If not specified, \n            keeps the current version of the workspace.</p>\n         <p>Can only be used to upgrade (for example, from 8.4 to 9.4), not\n            downgrade (for example, from 9.4 to 8.4).</p>\n         <p>To know what versions are available to upgrade to for a specific workspace, see \n            the <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html\">ListVersions</a> operation.</p>"
                     }
                 }
             }
@@ -3763,25 +3779,25 @@
                 "licenseType": {
                     "target": "com.amazonaws.grafana#LicenseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace has a full Grafana Enterprise license or a free trial\n            license.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this workspace has a full Grafana Enterprise license.</p>\n         <note>\n            <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p>\n         </note>"
                     }
                 },
                 "freeTrialConsumed": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this workspace has already fully used its free trial for Grafana\n            Enterprise.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this workspace has already fully used its free trial for Grafana\n            Enterprise.</p>\n         <note>\n            <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p>\n         </note>"
                     }
                 },
                 "licenseExpiration": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this workspace has a full Grafana Enterprise license, this specifies when the\n            license ends and will need to be renewed.</p>"
+                        "smithy.api#documentation": "<p>If this workspace has a full Grafana Enterprise license purchased through \n            Amazon Web Services Marketplace, this specifies when the\n            license ends and will need to be renewed. Purchasing the Enterprise plugins option \n            through Amazon Managed Grafana does not have an expiration. It is valid until the \n            license is removed.</p>"
                     }
                 },
                 "freeTrialExpiration": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this workspace is currently in the free trial period for Grafana Enterprise, this\n            value specifies when that free trial ends.</p>"
+                        "smithy.api#documentation": "<p>If this workspace is currently in the free trial period for Grafana Enterprise, this\n            value specifies when that free trial ends.</p>\n         <note>\n            <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p>\n         </note>"
                     }
                 },
                 "authentication": {
@@ -3807,6 +3823,12 @@
                     "target": "com.amazonaws.grafana#NetworkAccessConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration settings for network access to your workspace.</p>"
+                    }
+                },
+                "grafanaToken": {
+                    "target": "com.amazonaws.grafana#GrafanaToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, \n            see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Register with Grafana Labs</a>.</p>"
                     }
                 }
             },
@@ -3979,6 +4001,18 @@
                     "target": "com.amazonaws.grafana#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of tags associated with the workspace.</p>"
+                    }
+                },
+                "licenseType": {
+                    "target": "com.amazonaws.grafana#LicenseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this workspace has a full Grafana Enterprise license.</p>\n         <note>\n            <p>Amazon Managed Grafana workspaces no longer support Grafana Enterprise free trials.</p>\n         </note>"
+                    }
+                },
+                "grafanaToken": {
+                    "target": "com.amazonaws.grafana#GrafanaToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, \n            see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Register with Grafana Labs</a>.</p>"
                     }
                 }
             },

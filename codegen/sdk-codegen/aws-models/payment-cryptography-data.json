@@ -313,7 +313,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Decrypts ciphertext data to plaintext using symmetric, asymmetric, or DUKPT data encryption key. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/decrypt-data.html\">Decrypt data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>You can use an encryption key generated within Amazon Web Services Payment Cryptography, or you can import your own encryption key by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>. For this operation, the key must have <code>KeyModesOfUse</code> set to <code>Decrypt</code>. In asymmetric decryption, Amazon Web Services Payment Cryptography decrypts the ciphertext using the private component of the asymmetric encryption key pair. For data encryption outside of Amazon Web Services Payment Cryptography, you can export the public component of the asymmetric key pair by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html\">GetPublicCertificate</a>.</p>\n         <p>For symmetric and DUKPT decryption, Amazon Web Services Payment Cryptography supports <code>TDES</code> and <code>AES</code> algorithms. For asymmetric decryption, Amazon Web Services Payment Cryptography supports <code>RSA</code>. When you use DUKPT, for <code>TDES</code> algorithm, the ciphertext data length must be a multiple of 16 bytes. For <code>AES</code> algorithm, the ciphertext data length must be a multiple of 32 bytes.</p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>EncryptData</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html\">GetPublicCertificate</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Decrypts ciphertext data to plaintext using a symmetric (TDES, AES), asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/decrypt-data.html\">Decrypt data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>You can use an encryption key generated within Amazon Web Services Payment Cryptography, or you can import your own encryption key by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>. For this operation, the key must have <code>KeyModesOfUse</code> set to <code>Decrypt</code>. In asymmetric decryption, Amazon Web Services Payment Cryptography decrypts the ciphertext using the private component of the asymmetric encryption key pair. For data encryption outside of Amazon Web Services Payment Cryptography, you can export the public component of the asymmetric key pair by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html\">GetPublicCertificate</a>.</p>\n         <p>For symmetric and DUKPT decryption, Amazon Web Services Payment Cryptography supports <code>TDES</code> and <code>AES</code> algorithms. For EMV decryption, Amazon Web Services Payment Cryptography supports <code>TDES</code> algorithms. For asymmetric decryption, Amazon Web Services Payment Cryptography supports <code>RSA</code>. </p>\n         <p>When you use TDES or TDES DUKPT, the ciphertext data length must be a multiple of 8 bytes. For AES or AES DUKPT, the ciphertext data length must be a multiple of 16 bytes. For RSA, it sould be equal to the key size unless padding is enabled.</p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>EncryptData</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html\">GetPublicCertificate</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/keys/{KeyIdentifier}/decrypt",
@@ -364,14 +364,14 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PlainText": {
                     "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween16And4096",
                     "traits": {
-                        "smithy.api#documentation": "<p>The decrypted plaintext data.</p>",
+                        "smithy.api#documentation": "<p>The decrypted plaintext data in hexBinary format.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -498,7 +498,7 @@
                 "Mode": {
                     "target": "com.amazonaws.paymentcryptographydata#DukptEncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block cipher mode of operation. Block ciphers are designed to encrypt a block of data of fixed size, for example, 128 bits. The size of the input block is usually same as the size of the encrypted output block, while the key length can be different. A mode of operation describes how to repeatedly apply a cipher's single-block operation to securely transform amounts of data larger than a block.</p>\n         <p>The default is CBC.</p>"
+                        "smithy.api#documentation": "<p>The block cipher method to use for encryption.</p>\n         <p>The default is CBC.</p>"
                     }
                 },
                 "DukptKeyDerivationType": {
@@ -516,7 +516,7 @@
                 "InitializationVector": {
                     "target": "com.amazonaws.paymentcryptographydata#HexLength16Or32",
                     "traits": {
-                        "smithy.api#documentation": "<p>An input to cryptographic primitive used to provide the intial state. Typically the <code>InitializationVector</code> must have a random or psuedo-random value, but sometimes it only needs to be unpredictable or unique. If you don't provide a value, Amazon Web Services Payment Cryptography generates a random value.</p>"
+                        "smithy.api#documentation": "<p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>"
                     }
                 }
             },
@@ -630,6 +630,84 @@
                 "smithy.api#documentation": "<p>Parameters that are required to generate or verify Dynamic Card Verification Value (dCVV).</p>"
             }
         },
+        "com.amazonaws.paymentcryptographydata#EmvEncryptionAttributes": {
+            "type": "structure",
+            "members": {
+                "MajorKeyDerivationMode": {
+                    "target": "com.amazonaws.paymentcryptographydata#EmvMajorKeyDerivationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EMV derivation mode to use for ICC master key derivation as per EMV version 4.3 book 2.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PrimaryAccountNumber": {
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PanSequenceNumber": {
+                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionDerivationData": {
+                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals16",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The derivation value used to derive the ICC session key. It is typically the application transaction counter value padded with zeros or previous ARQC value padded with zeros as per EMV version 4.3 book 2.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.paymentcryptographydata#EmvEncryptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The block cipher method to use for encryption.</p>"
+                    }
+                },
+                "InitializationVector": {
+                    "target": "com.amazonaws.paymentcryptographydata#HexLength16Or32",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameters for plaintext encryption using EMV keys.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#EmvEncryptionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ECB",
+                        "name": "ECB"
+                    },
+                    {
+                        "value": "CBC",
+                        "name": "CBC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#EmvMajorKeyDerivationMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EMV_OPTION_A",
+                        "name": "EMV_OPTION_A"
+                    },
+                    {
+                        "value": "EMV_OPTION_B",
+                        "name": "EMV_OPTION_B"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.paymentcryptographydata#EncryptData": {
             "type": "operation",
             "input": {
@@ -656,7 +734,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Encrypts plaintext data to ciphertext using symmetric, asymmetric, or DUKPT data encryption key. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html\">Encrypt data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>You can generate an encryption key within Amazon Web Services Payment Cryptography by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html\">CreateKey</a>. You can import your own encryption key by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>. For this operation, the key must have <code>KeyModesOfUse</code> set to <code>Encrypt</code>. In asymmetric encryption, plaintext is encrypted using public component. You can import the public component of an asymmetric key pair created outside Amazon Web Services Payment Cryptography by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>). </p>\n         <p>for symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography supports <code>TDES</code> and <code>AES</code> algorithms. For asymmetric encryption, Amazon Web Services Payment Cryptography supports <code>RSA</code>. To encrypt using DUKPT, you must already have a DUKPT key in your account with <code>KeyModesOfUse</code> set to <code>DeriveKey</code>, or you can generate a new DUKPT key by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html\">CreateKey</a>.</p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DecryptData</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html\">GetPublicCertificate</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ReEncryptData</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Encrypts plaintext data to ciphertext using a symmetric (TDES, AES), asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html\">Encrypt data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>You can generate an encryption key within Amazon Web Services Payment Cryptography by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html\">CreateKey</a>. You can import your own encryption key by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>. For this operation, the key must have <code>KeyModesOfUse</code> set to <code>Encrypt</code>. In asymmetric encryption, plaintext is encrypted using public component. You can import the public component of an asymmetric key pair created outside Amazon Web Services Payment Cryptography by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>. </p>\n         <p>For symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography supports <code>TDES</code> and <code>AES</code> algorithms. For EMV encryption, Amazon Web Services Payment Cryptography supports <code>TDES</code> algorithms.For asymmetric encryption, Amazon Web Services Payment Cryptography supports <code>RSA</code>. </p>\n         <p>When you use TDES or TDES DUKPT, the plaintext data length must be a multiple of 8 bytes. For AES or AES DUKPT, the plaintext data length must be a multiple of 16 bytes. For RSA, it sould be equal to the key size unless padding is enabled.</p>\n         <p>To encrypt using DUKPT, you must already have a BDK (Base Derivation Key) key in your account with <code>KeyModesOfUse</code> set to <code>DeriveKey</code>, or you can generate a new DUKPT key by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html\">CreateKey</a>. To encrypt using EMV, you must already have an IMK (Issuer Master Key) key in your account with <code>KeyModesOfUse</code> set to <code>DeriveKey</code>.</p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DecryptData</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html\">GetPublicCertificate</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ReEncryptData</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/keys/{KeyIdentifier}/encrypt",
@@ -678,7 +756,7 @@
                 "PlainText": {
                     "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween16And4064",
                     "traits": {
-                        "smithy.api#documentation": "<p>The plaintext to be encrypted.</p>",
+                        "smithy.api#documentation": "<p>The plaintext to be encrypted.</p>\n         <note>\n            <p>For encryption using asymmetric keys, plaintext data length is constrained by encryption key strength that you define in <code>KeyAlgorithm</code> and padding type that you define in <code>AsymmetricEncryptionAttributes</code>. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html\">Encrypt data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -707,7 +785,7 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>"
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>"
                     }
                 },
                 "CipherText": {
@@ -736,6 +814,12 @@
                 },
                 "Dukpt": {
                     "target": "com.amazonaws.paymentcryptographydata#DukptEncryptionAttributes"
+                },
+                "Emv": {
+                    "target": "com.amazonaws.paymentcryptographydata#EmvEncryptionAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters for plaintext encryption using EMV keys.</p>"
+                    }
                 }
             },
             "traits": {
@@ -863,7 +947,7 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -905,7 +989,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a Message Authentication Code (MAC) cryptogram within Amazon Web Services Payment Cryptography. </p>\n         <p>You can use this operation when keys won't be shared but mutual data is present on both ends for validation. In this case, known data values are used to generate a MAC on both ends for comparision without sending or receiving data in ciphertext or plaintext. You can use this operation to generate a DUPKT, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. The MAC generation encryption key must have valid values for <code>KeyUsage</code> such as <code>TR31_M7_HMAC_KEY</code> for HMAC generation, and they key must have <code>KeyModesOfUse</code> set to <code>Generate</code> and <code>Verify</code>.</p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>VerifyMac</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Generates a Message Authentication Code (MAC) cryptogram within Amazon Web Services Payment Cryptography. </p>\n         <p>You can use this operation to authenticate card-related data by using known data values to generate MAC for data validation between the sending and receiving parties. This operation uses message data, a secret encryption key and MAC algorithm to generate a unique MAC value for transmission. The receiving party of the MAC must use the same message data, secret encryption key and MAC algorithm to reproduce another MAC value for comparision.</p>\n         <p>You can use this operation to generate a DUPKT, CMAC, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. The MAC generation encryption key must have valid values for <code>KeyUsage</code> such as <code>TR31_M7_HMAC_KEY</code> for HMAC generation, and they key must have <code>KeyModesOfUse</code> set to <code>Generate</code> and <code>Verify</code>.</p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>VerifyMac</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/mac/generate",
@@ -926,7 +1010,7 @@
                 "MessageData": {
                     "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween2And4096",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data for which a MAC is under generation.</p>",
+                        "smithy.api#documentation": "<p>The data for which a MAC is under generation. This value must be hexBinary.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -961,7 +1045,7 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1074,7 +1158,7 @@
                 "GenerationKeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1088,7 +1172,7 @@
                 "EncryptionKeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1494,7 +1578,6 @@
         "com.amazonaws.paymentcryptographydata#IntegerRangeBetween4And12": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 4,
                     "max": 12
@@ -1683,7 +1766,7 @@
                 "DukptIso9797Algorithm3": {
                     "target": "com.amazonaws.paymentcryptographydata#MacAlgorithmDukpt",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameters that are required for MAC generation or verification using DUKPT ISO 9797 algorithm2.</p>"
+                        "smithy.api#documentation": "<p>Parameters that are required for MAC generation or verification using DUKPT ISO 9797 algorithm3.</p>"
                     }
                 },
                 "DukptCmac": {
@@ -1899,7 +1982,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1918,7 +2000,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -1946,13 +2027,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1965,7 +2047,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -1979,7 +2060,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2002,7 +2082,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -2037,11 +2116,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -2052,16 +2129,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -2075,14 +2155,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -2091,15 +2169,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -2110,16 +2187,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -2133,7 +2213,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -2153,11 +2232,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -2168,20 +2245,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2192,18 +2271,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -2713,7 +2796,7 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2991,14 +3074,14 @@
                 "Mode": {
                     "target": "com.amazonaws.paymentcryptographydata#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block cipher mode of operation. Block ciphers are designed to encrypt a block of data of fixed size (for example, 128 bits). The size of the input block is usually same as the size of the encrypted output block, while the key length can be different. A mode of operation describes how to repeatedly apply a cipher's single-block operation to securely transform amounts of data larger than a block.</p>",
+                        "smithy.api#documentation": "<p>The block cipher method to use for encryption.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "InitializationVector": {
                     "target": "com.amazonaws.paymentcryptographydata#HexLength16Or32",
                     "traits": {
-                        "smithy.api#documentation": "<p>An input to cryptographic primitive used to provide the intial state. The <code>InitializationVector</code> is typically required have a random or psuedo-random value, but sometimes it only needs to be unpredictable or unique. If a value is not provided, Amazon Web Services Payment Cryptography generates a random value.</p>"
+                        "smithy.api#documentation": "<p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>"
                     }
                 },
                 "PaddingType": {
@@ -3051,7 +3134,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/translate-pin-data.html\">Translate PIN data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>PIN block translation involves changing the encrytion of PIN block from one encryption key to another encryption key and changing PIN block format from one to another without PIN block data leaving Amazon Web Services Payment Cryptography. The encryption key transformation can be from PEK (Pin Encryption Key) to BDK (Base Derivation Key) for DUKPT or from BDK for DUKPT to PEK. Amazon Web Services Payment Cryptography supports <code>TDES</code> and <code>AES</code> key derivation type for DUKPT tranlations. You can use this operation for P2PE (Point to Point Encryption) use cases where the encryption keys should change but the processing system either does not need to, or is not permitted to, decrypt the data.</p>\n         <p>The allowed combinations of PIN block format translations are guided by PCI. It is important to note that not all encrypted PIN block formats (example, format 1) require PAN (Primary Account Number) as input. And as such, PIN block format that requires PAN (example, formats 0,3,4) cannot be translated to a format (format 1) that does not require a PAN for generation. </p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <note>\n            <p>At this time, Amazon Web Services Payment Cryptography does not support translations to PIN format 4.</p>\n         </note>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GeneratePinData</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>VerifyPinData</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/translate-pin-data.html\">Translate PIN data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>PIN block translation involves changing the encrytion of PIN block from one encryption key to another encryption key and changing PIN block format from one to another without PIN block data leaving Amazon Web Services Payment Cryptography. The encryption key transformation can be from PEK (Pin Encryption Key) to BDK (Base Derivation Key) for DUKPT or from BDK for DUKPT to PEK. Amazon Web Services Payment Cryptography supports <code>TDES</code> and <code>AES</code> key derivation type for DUKPT translations. </p>\n         <p>The allowed combinations of PIN block format translations are guided by PCI. It is important to note that not all encrypted PIN block formats (example, format 1) require PAN (Primary Account Number) as input. And as such, PIN block format that requires PAN (example, formats 0,3,4) cannot be translated to a format (format 1) that does not require a PAN for generation. </p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <note>\n            <p>Amazon Web Services Payment Cryptography currently supports ISO PIN block 4 translation for PIN block built using legacy PAN length. That is, PAN is the right most 12 digits excluding the check digits.</p>\n         </note>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GeneratePinData</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>VerifyPinData</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/pindata/translate",
@@ -3079,14 +3162,14 @@
                 "IncomingTranslationAttributes": {
                     "target": "com.amazonaws.paymentcryptographydata#TranslationIsoFormats",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of the incoming PIN block data for tranlation within Amazon Web Services Payment Cryptography.</p>",
+                        "smithy.api#documentation": "<p>The format of the incoming PIN block data for translation within Amazon Web Services Payment Cryptography.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OutgoingTranslationAttributes": {
                     "target": "com.amazonaws.paymentcryptographydata#TranslationIsoFormats",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of the outgoing PIN block data after tranlation by Amazon Web Services Payment Cryptography.</p>",
+                        "smithy.api#documentation": "<p>The format of the outgoing PIN block data after translation by Amazon Web Services Payment Cryptography.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3100,7 +3183,7 @@
                 "IncomingDukptAttributes": {
                     "target": "com.amazonaws.paymentcryptographydata#DukptDerivationAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attributes and values to use for incoming DUKPT encryption key for PIN block tranlation.</p>"
+                        "smithy.api#documentation": "<p>The attributes and values to use for incoming DUKPT encryption key for PIN block translation.</p>"
                     }
                 },
                 "OutgoingDukptAttributes": {
@@ -3120,7 +3203,7 @@
                 "PinBlock": {
                     "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween16And32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ougoing encrypted PIN block data after tranlation.</p>",
+                        "smithy.api#documentation": "<p>The outgoing encrypted PIN block data after translation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3134,7 +3217,7 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3391,7 +3474,7 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3492,7 +3575,7 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3530,7 +3613,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Verifies a Message Authentication Code (MAC). </p>\n         <p>You can use this operation when keys won't be shared but mutual data is present on both ends for validation. In this case, known data values are used to generate a MAC on both ends for verification without sending or receiving data in ciphertext or plaintext. You can use this operation to verify a DUPKT, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. Use the same encryption key for MAC verification as you use for <a>GenerateMac</a>. </p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GenerateMac</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Verifies a Message Authentication Code (MAC). </p>\n         <p>You can use this operation to verify MAC for message data authentication such as . In this operation, you must use the same message data, secret encryption key and MAC algorithm that was used to generate MAC. You can use this operation to verify a DUPKT, CMAC, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. </p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GenerateMac</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/mac/verify",
@@ -3551,7 +3634,7 @@
                 "MessageData": {
                     "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween2And4096",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data on for which MAC is under verification.</p>",
+                        "smithy.api#documentation": "<p>The data on for which MAC is under verification. This value must be hexBinary.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3593,7 +3676,7 @@
                 "KeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3715,7 +3798,7 @@
                 "VerificationKeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3729,7 +3812,7 @@
                 "EncryptionKeyCheckValue": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyCheckValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#documentation": "<p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>\n         <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>",
                         "smithy.api#required": {}
                     }
                 }
