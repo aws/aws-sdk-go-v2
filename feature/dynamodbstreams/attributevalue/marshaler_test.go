@@ -1,6 +1,7 @@
 package attributevalue
 
 import (
+	"fmt"
 	"math"
 	"reflect"
 	"testing"
@@ -707,4 +708,11 @@ func Test_Encode_YAML_TagKey(t *testing.T) {
 	}
 
 	compareObjects(t, expected, actual)
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

@@ -951,7 +951,7 @@ func TestCustomDecodeSAndDefaultDecodeN(t *testing.T) {
 	}
 	expectedValue := A{
 		TimeFieldS: time.Unix(120, 0).UTC(),
-		TimeFieldN: time.Unix(123, 0), // will use system locale
+		TimeFieldN: time.Unix(123, 0), // will use system's locale
 	}
 
 	var actualValue A
@@ -985,7 +985,7 @@ func TestCustomDecodeNAndDefaultDecodeS(t *testing.T) {
 	}
 	expectedValue := A{
 		TimeFieldS: time.Unix(123, 10000000).UTC(),
-		TimeFieldN: time.Unix(123, 10000000), // will use system locale
+		TimeFieldN: time.Unix(123, 10000000), // will use system's locale
 	}
 
 	var actualValue A

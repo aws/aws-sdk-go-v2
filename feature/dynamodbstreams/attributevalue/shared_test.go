@@ -424,10 +424,3 @@ func ptrToValue(in interface{}) interface{} {
 	}
 	return v.Interface()
 }
-
-func cmpDiff(e, a interface{}) string {
-	if !reflect.DeepEqual(e, a) {
-		return fmt.Sprintf("%v != %v", e, a)
-	}
-	return ""
-}
