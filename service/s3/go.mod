@@ -13,7 +13,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.4
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.17.2
 	github.com/aws/smithy-go v1.20.1
-	github.com/google/go-cmp v0.5.8
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../

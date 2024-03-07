@@ -16,7 +16,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/ptr"
-	"github.com/google/go-cmp/cmp"
 )
 
 var _ regionProvider = (*SharedConfig)(nil)
@@ -754,7 +753,7 @@ func TestNewSharedConfig(t *testing.T) {
 			if c.Err != nil {
 				t.Errorf("expect error: %v, got none", c.Err)
 			}
-			if diff := cmp.Diff(c.Expected, cfg); len(diff) > 0 {
+			if diff := cmpDiff(c.Expected, cfg); len(diff) > 0 {
 				t.Error(diff)
 			}
 		})
@@ -895,7 +894,7 @@ func TestLoadSharedConfigFromSection(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.Expected, cfg); diff != "" {
+			if diff := cmpDiff(c.Expected, cfg); diff != "" {
 				t.Errorf("expect shared config match\n%s", diff)
 			}
 		})
@@ -1499,7 +1498,7 @@ func TestSharedConfigLoading(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.Expect, cfg); diff != "" {
+			if diff := cmpDiff(c.Expect, cfg); diff != "" {
 				t.Errorf("expect shared config match\n%s", diff)
 			}
 		})

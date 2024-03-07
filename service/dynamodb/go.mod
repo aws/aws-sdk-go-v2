@@ -9,7 +9,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.1
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.9.3
 	github.com/aws/smithy-go v1.20.1
-	github.com/google/go-cmp v0.5.8
 	github.com/jmespath/go-jmespath v0.4.0
 )
 

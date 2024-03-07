@@ -8,7 +8,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.3.6
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.27.1
 	github.com/aws/smithy-go v1.20.1
-	github.com/google/go-cmp v0.5.8
 )
 
 require (

@@ -6,8 +6,6 @@ import (
 	"strings"
 	"testing"
 	"time"
-
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestGetRegion(t *testing.T) {
@@ -68,11 +66,11 @@ func TestGetRegion(t *testing.T) {
 				t.Fatalf("expect resp, got none")
 			}
 
-			if diff := cmp.Diff(c.ExpectRegion, resp.Region); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectRegion, resp.Region); len(diff) != 0 {
 				t.Errorf("expect region to match\n%s", diff)
 			}
 
-			if diff := cmp.Diff(c.ExpectTrace, trace.requests); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectTrace, trace.requests); len(diff) != 0 {
 				t.Errorf("expect trace to match\n%s", diff)
 			}
 		})

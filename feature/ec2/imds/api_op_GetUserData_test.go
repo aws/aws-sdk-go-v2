@@ -9,8 +9,6 @@ import (
 	"strings"
 	"testing"
 	"time"
-
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestGetUserData(t *testing.T) {
@@ -88,7 +86,7 @@ func TestGetUserData(t *testing.T) {
 					hex.Dump(e), hex.Dump(a))
 			}
 
-			if diff := cmp.Diff(c.ExpectTrace, trace.requests); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectTrace, trace.requests); len(diff) != 0 {
 				t.Errorf("expect trace to match\n%s", diff)
 			}
 		})

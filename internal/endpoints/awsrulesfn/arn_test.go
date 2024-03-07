@@ -1,7 +1,8 @@
 package awsrulesfn
 
 import (
-	"github.com/google/go-cmp/cmp"
+	"fmt"
+	"reflect"
 	"testing"
 )
 
@@ -72,9 +73,16 @@ func TestParseARN(t *testing.T) {
 	for _, c := range cases {
 		t.Run(c.input, func(t *testing.T) {
 			actual := ParseARN(c.input)
-			if diff := cmp.Diff(c.expect, actual); diff != "" {
+			if diff := cmpDiff(c.expect, actual); diff != "" {
 				t.Errorf("expect ARN match\n%s", diff)
 			}
 		})
 	}
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

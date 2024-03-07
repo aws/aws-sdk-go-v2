@@ -7,6 +7,7 @@ import (
 	"math/big"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strconv"
 	"strings"
 	"testing"
@@ -15,7 +16,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/v4a/internal/crypto"
 	"github.com/aws/smithy-go/logging"
-	"github.com/google/go-cmp/cmp"
 )
 
 const (
@@ -289,7 +289,7 @@ func TestSign_buildCanonicalHeaders(t *testing.T) {
 		`fooinnerspace;fooleadingspace;foomultiplespace;foonospace;footabspace;footrailingspace;foowrappedspace;host;x-amz-date;x-amz-region-set`,
 		``,
 	}, "\n")
-	if diff := cmp.Diff(expectCanonicalString, build.CanonicalString); diff != "" {
+	if diff := cmpDiff(expectCanonicalString, build.CanonicalString); diff != "" {
 		t.Errorf("expect match, got\n%s", diff)
 	}
 }
@@ -419,4 +419,11 @@ func (s staticCredentialsProvider) Retrieve(_ context.Context) (aws.Credentials,
 	}
 
 	return v, nil
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

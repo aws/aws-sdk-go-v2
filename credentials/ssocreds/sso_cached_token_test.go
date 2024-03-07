@@ -9,12 +9,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/google/go-cmp/cmp"
 )
-
-var tokenCmpOptions = cmp.Options{
-	cmp.AllowUnexported(token{}, tokenKnownFields{}, rfc3339{}),
-}
 
 func TestStandardSSOCacheTokenFilepath(t *testing.T) {
 	origHomeDur := osUserHomeDur
@@ -125,7 +120,7 @@ func TestLoadCachedToken(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.expectToken, actualToken, tokenCmpOptions...); diff != "" {
+			if diff := cmpDiff(c.expectToken, actualToken); diff != "" {
 				t.Errorf("expect tokens match\n%s", diff)
 			}
 		})
@@ -181,7 +176,7 @@ func TestStoreCachedToken(t *testing.T) {
 				t.Fatalf("failed to load stored token, %v", err)
 			}
 
-			if diff := cmp.Diff(c.token, actual, tokenCmpOptions...); diff != "" {
+			if diff := cmpDiff(c.token, actual); diff != "" {
 				t.Errorf("expect tokens match\n%s", diff)
 			}
 		})

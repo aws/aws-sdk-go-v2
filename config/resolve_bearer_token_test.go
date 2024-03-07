@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/ssocreds"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	smithybearer "github.com/aws/smithy-go/auth/bearer"
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestResolveBearerAuthToken(t *testing.T) {
@@ -117,7 +116,7 @@ func TestResolveBearerAuthToken(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.expectToken, token); diff != "" {
+			if diff := cmpDiff(c.expectToken, token); diff != "" {
 				t.Errorf("expect token match\n%s", diff)
 			}
 		})
@@ -168,7 +167,7 @@ func TestWrapWithBearerAuthTokenProvider(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.expectToken, token); diff != "" {
+			if diff := cmpDiff(c.expectToken, token); diff != "" {
 				t.Errorf("expect token match\n%s", diff)
 			}
 		})

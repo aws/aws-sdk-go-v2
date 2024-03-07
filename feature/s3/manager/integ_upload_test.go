@@ -17,6 +17,7 @@ import (
 	"hash/crc32"
 	"io"
 	"log"
+	"reflect"
 	"regexp"
 	"strconv"
 	"testing"
@@ -25,11 +26,8 @@ import (
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/manager"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/middleware"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 var integBuf12MB = make([]byte, 1024*1024*12)
@@ -454,8 +452,8 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 						t.Fatalf("expect no error, got %v", err)
 					}
 
-					if diff := cmp.Diff(c.expectParts, out.CompletedParts, cmpopts.IgnoreUnexported(types.CompletedPart{})); diff != "" {
-						t.Errorf("expect parts match\n%s", diff)
+					if !reflect.DeepEqual(c.expectParts, out.CompletedParts) {
+						t.Errorf("expect parts match\n%v != %v", c.expectParts, out.CompletedParts)
 					}
 
 					if e, a := c.expectChecksumCRC32, aws.ToString(out.ChecksumCRC32); e != a {

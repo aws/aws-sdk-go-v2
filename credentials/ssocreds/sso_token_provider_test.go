@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"reflect"
 	"strings"
 	"testing"
 	"time"
@@ -17,8 +18,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/ssooidc"
 	smithybearer "github.com/aws/smithy-go/auth/bearer"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 func TestSSOTokenProvider(t *testing.T) {
@@ -110,7 +109,7 @@ func TestSSOTokenProvider(t *testing.T) {
 					},
 				}
 
-				if diff := cmp.Diff(expect, actual, tokenCmpOptions...); diff != "" {
+				if diff := cmpDiff(expect, actual); diff != "" {
 					return fmt.Errorf("expect token file match\n%s", diff)
 				}
 				return nil
@@ -160,7 +159,7 @@ func TestSSOTokenProvider(t *testing.T) {
 					},
 				}
 
-				if diff := cmp.Diff(expect, actual, tokenCmpOptions...); diff != "" {
+				if diff := cmpDiff(expect, actual); diff != "" {
 					return fmt.Errorf("expect token file match\n%s", diff)
 				}
 				return nil
@@ -196,7 +195,7 @@ func TestSSOTokenProvider(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.expectToken, token, tokenCmpOptions...); diff != "" {
+			if diff := cmpDiff(c.expectToken, token); diff != "" {
 				t.Errorf("expect token match\n%s", diff)
 			}
 
@@ -220,13 +219,17 @@ func (c *mockCreateTokenAPIClient) CreateToken(
 	*ssooidc.CreateTokenOutput, error,
 ) {
 	if c.expectInput != nil {
-		opts := cmp.Options{
-			cmpopts.IgnoreUnexported(ssooidc.CreateTokenInput{}),
-		}
-		if diff := cmp.Diff(c.expectInput, input, opts...); diff != "" {
+		if diff := cmpDiff(c.expectInput, input); diff != "" {
 			return nil, fmt.Errorf("expect input match\n%s", diff)
 		}
 	}
 
 	return c.output, c.err
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }
