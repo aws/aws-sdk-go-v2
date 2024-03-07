@@ -1,3 +1,9 @@
+# v1.150.0 (2024-03-07)
+
+* **Feature**: This release adds an optional parameter to RegisterImage and CopyImage APIs to support tagging AMIs at the time of creation.
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.149.4 (2024-03-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

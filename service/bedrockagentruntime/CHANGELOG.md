@@ -1,3 +1,8 @@
+# v1.4.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2024-02-28)
 
 * **Feature**: This release adds support to override search strategy performed by the Retrieve and RetrieveAndGenerate APIs for Amazon Bedrock Agents

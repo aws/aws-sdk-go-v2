@@ -1,3 +1,8 @@
+# v1.43.3 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.2 (2024-03-06)
 
 * **Documentation**: Update for documentation only. Covers port ranges, definition updates for data sharing, and definition updates to cluster-snapshot documentation.

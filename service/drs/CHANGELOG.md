@@ -1,3 +1,8 @@
+# v1.25.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2024-02-26)
 
 * **Feature**: Added volume status to DescribeSourceServer replicated volumes.

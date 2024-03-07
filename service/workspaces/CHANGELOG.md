@@ -1,3 +1,9 @@
+# v1.38.2 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Documentation**: Added note for user decoupling
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.1 (2024-02-23)
 
 * **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.

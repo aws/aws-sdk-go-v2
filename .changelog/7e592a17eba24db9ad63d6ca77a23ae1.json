@@ -1,8 +1,0 @@
-{
-    "id": "7e592a17-eba2-4db9-ad63-d6ca77a23ae1",
-    "type": "feature",
-    "description": "AWS AppConfig now supports dynamic parameters, which enhance the functionality of AppConfig Extensions by allowing you to provide parameter values to your Extensions at the time you deploy your configuration.",
-    "modules": [
-        "service/appconfig"
-    ]
-}

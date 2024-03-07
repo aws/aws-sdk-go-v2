@@ -1,8 +1,0 @@
-{
-    "id": "207323eb-8ccc-4345-acbe-2f15c7e7cd5d",
-    "type": "documentation",
-    "description": "Added note for user decoupling",
-    "modules": [
-        "service/workspaces"
-    ]
-}

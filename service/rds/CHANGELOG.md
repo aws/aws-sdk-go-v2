@@ -1,3 +1,9 @@
+# v1.75.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Documentation**: Updates Amazon RDS documentation for io2 storage for Multi-AZ DB clusters
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.75.0 (2024-03-06)
 
 * **Feature**: Updated the input of CreateDBCluster and ModifyDBCluster to support setting CA certificates. Updated the output of DescribeDBCluster to show current CA certificate setting value.

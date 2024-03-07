@@ -1,3 +1,8 @@
+# v1.59.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.0 (2024-02-29)
 
 * **Feature**: TooltipTarget for Combo chart visuals; ColumnConfiguration limit increase to 2000; Documentation Update

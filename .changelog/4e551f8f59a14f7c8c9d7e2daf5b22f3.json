@@ -1,8 +1,0 @@
-{
-    "id": "4e551f8f-59a1-4f7c-8c9d-7e2daf5b22f3",
-    "type": "bugfix",
-    "description": "Remove dependency on go-cmp.",
-    "modules": [
-        "."
-    ]
-}

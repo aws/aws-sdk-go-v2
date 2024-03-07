@@ -1,3 +1,31 @@
+# Release (2024-03-07)
+
+## General Highlights
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.25.3
+  * **Bug Fix**: Remove dependency on go-cmp.
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.29.0](service/appconfig/CHANGELOG.md#v1290-2024-03-07)
+  * **Feature**: AWS AppConfig now supports dynamic parameters, which enhance the functionality of AppConfig Extensions by allowing you to provide parameter values to your Extensions at the time you deploy your configuration.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.150.0](service/ec2/CHANGELOG.md#v11500-2024-03-07)
+  * **Feature**: This release adds an optional parameter to RegisterImage and CopyImage APIs to support tagging AMIs at the time of creation.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.21.0](service/grafana/CHANGELOG.md#v1210-2024-03-07)
+  * **Feature**: Adds support for the new GrafanaToken as part of the Amazon Managed Grafana Enterprise plugins upgrade to associate your AWS account with a Grafana Labs account.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.53.2](service/lambda/CHANGELOG.md#v1532-2024-03-07)
+  * **Documentation**: Documentation updates for AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.8.0](service/paymentcryptographydata/CHANGELOG.md#v180-2024-03-07)
+  * **Feature**: AWS Payment Cryptography EMV Decrypt Feature  Release
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.75.1](service/rds/CHANGELOG.md#v1751-2024-03-07)
+  * **Documentation**: Updates Amazon RDS documentation for io2 storage for Multi-AZ DB clusters
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.26.2](service/snowball/CHANGELOG.md#v1262-2024-03-07)
+  * **Documentation**: Doc-only update for change to EKS-Anywhere ordering.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.48.0](service/wafv2/CHANGELOG.md#v1480-2024-03-07)
+  * **Feature**: You can increase the max request body inspection size for some regional resources. The size setting is in the web ACL association config. Also, the AWSManagedRulesBotControlRuleSet EnableMachineLearning setting now takes a Boolean instead of a primitive boolean type, for languages like Java.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.38.2](service/workspaces/CHANGELOG.md#v1382-2024-03-07)
+  * **Documentation**: Added note for user decoupling
+
 # Release (2024-03-06)
 
 ## General Highlights

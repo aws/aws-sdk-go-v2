@@ -1,3 +1,8 @@
+# v1.30.4 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.3 (2024-03-06)
 
 * **Documentation**: Doc only updates for DynamoDB documentation

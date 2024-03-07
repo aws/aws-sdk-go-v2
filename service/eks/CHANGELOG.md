@@ -1,3 +1,8 @@
+# v1.41.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2024-02-29)
 
 * **Feature**: Added support for new AL2023 AMIs to the supported AMITypes.

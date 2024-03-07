@@ -1,8 +1,0 @@
-{
-    "id": "10a5345f-a68e-4df4-b187-783a86f75be9",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for io2 storage for Multi-AZ DB clusters",
-    "modules": [
-        "service/rds"
-    ]
-}

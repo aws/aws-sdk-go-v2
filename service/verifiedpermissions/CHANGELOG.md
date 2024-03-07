@@ -1,3 +1,8 @@
+# v1.11.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2024-03-06)
 
 * **Feature**: Deprecating details in favor of configuration for GetIdentitySource and ListIdentitySources APIs.

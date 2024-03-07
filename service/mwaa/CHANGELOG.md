@@ -1,3 +1,8 @@
+# v1.26.3 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.2 (2024-03-06)
 
 * **Documentation**: Amazon MWAA adds support for Apache Airflow v2.8.1.
